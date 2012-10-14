@@ -33,9 +33,8 @@
                 {
                     <tr>
                         <td class="btn-toolbar">
-                            <a class="btn btn-small" href="@Url.Action("Edit", new { id = a.Id })"><i class="icon-edit"></i>
-                            </a><a class="btn btn-small" href="@Url.Action("Index", "Employee", new { employeeGroupId = a.Id })"><i
-                                                                                                                                     class="icon-user-md"></i></a>
+                            <a class="btn btn-small" href="@Url.Action("Edit", new { id = a.Id })" title="修改雇员分组"><i class="icon-edit"></i>
+                            </a><a class="btn btn-small" title="为分组添加新雇员" href="@Url.Action("Index", "Employee", new { employeeGroupId = a.Id })"><i class="icon-user"></i></a>
                         </td>
                         <td>@a.Name
                         </td>
