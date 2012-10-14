@@ -1,13 +1,16 @@
 ﻿(function ($) {
 
-    $.fn.bootstrapMakeUp = function() {
-
-        $(this).each(function() {
-            bootstrapError.call(this);
-        });
-        bootstrapSummary();
+    $.fn.bootstrapMakeUp = function () {
+        try {
+            return $(this).each(function () {
+                bootstrapError.call(this);
+            });
+        }
+        finally {
+            bootstrapSummary();
+        }
     };
-    
+
     function bootstrapError() {
         $(this).find('div.control-group').each(function () {
             $(this).toggleClass('error', $(this).find('span.field-validation-error').length > 0);
