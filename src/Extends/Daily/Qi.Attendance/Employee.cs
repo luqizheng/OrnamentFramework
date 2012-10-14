@@ -4,6 +4,14 @@ using Qi.Domain;
 
 namespace Qi.Attendance
 {
+    public enum EmployeeState
+    {
+        [EnumDescription("在职")]
+        Employed,
+        [EnumDescription("离职")]
+        Dimission,
+        
+    }
     public class Employee : DomainObject<Employee, Guid>
     {
         /// <summary>
@@ -25,6 +33,8 @@ namespace Qi.Attendance
         [Display(Name = "雇员分组")]
         public virtual EmployeeGroup EmployeeGroup { get; set; }
 
+        [Display(Name="在职状态")]
+        public virtual EmployeeState State { get; set; }
         /// <summary>
         /// 
         /// </summary>
