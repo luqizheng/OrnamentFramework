@@ -28,10 +28,11 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(Employee employee)
         {
-            if(this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _attendanceFactory.GetEmployeeDao().SaveOrUpdate(employee);
                 return RedirectToAction("Create");
