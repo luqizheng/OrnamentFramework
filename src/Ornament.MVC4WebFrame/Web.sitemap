@@ -17,9 +17,13 @@
       <mvcSiteMapNode area="Projects" controller="Project" action="Index" title="Project List">
       </mvcSiteMapNode>
     </mvcSiteMapNode>
-    
+
     <mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="考勤" imageUrl="icon-time">
+
       <mvcSiteMapNode action="Index" controller="Employee" area="Attendance" title="雇员" imageUrl="icon-user">
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="雇员分组" imageUrl="icon-user">
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 
@@ -40,7 +44,7 @@
       <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" />
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" />
     </mvcSiteMapNode>
-    
+
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" controller="EventLog" area="Application">
       <mvcSiteMapNode resourceKey="eventLog"></mvcSiteMapNode>
       <mvcSiteMapNode resourceKey="dataInit" area="Settings" controller="Application" action="DatabaseInit"></mvcSiteMapNode>
