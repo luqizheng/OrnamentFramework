@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Qi.Attendance;
 using Qi.Attendance.Dao;
+using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
 {
@@ -43,6 +44,17 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         public ActionResult Edit(string id)
         {
             return View(_attendanceFactory.GetEmployeeDao().Get(new Guid(id)));
+        }
+
+        [Session(Transaction = true),HttpPost]
+        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                _attendanceFactory.GetEmployeeDao().SaveOrUpdate(employee);
+                return RedirectToAction("Index");
+            }
+            return View(employee);
         }
 
         public ActionResult Delete(string id)
