@@ -57,3 +57,7 @@
 /src/Ornament.MVC4WebFrame/obj
 /src/Ornament.MVC4WebFrame/bin
 /src/Extends/Daily/Qi.Attendance/bin
+/src/Extends/Daily/Qi.Attendance/obj
+/src/Extends/Daily/Qi.Attendance.Dao.NhImple/obj
+/src/Extends/Daily/Qi.Attendance.Dao.NhImple/bin
+/src/Ornament.MVC4WebFrame/Content/Combine/global.css
