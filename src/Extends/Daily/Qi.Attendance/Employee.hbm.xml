@@ -6,6 +6,7 @@
     </id>
     <many-to-one name="EmployeeGroup" class="EmployeeGroup"></many-to-one>
     <property name="Name" length="30" type="String"></property>
+    <property name="CardNo" length="19" type="String"></property>
    
   </class>
 </hibernate-mapping>
