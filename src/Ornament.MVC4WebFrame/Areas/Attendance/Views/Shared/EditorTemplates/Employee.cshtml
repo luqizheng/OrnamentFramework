@@ -1,0 +1,20 @@
+﻿@model Qi.Attendance.Employee
+<div class="control-group">
+    <label class="control-label">
+        @Html.LabelFor(s=>s.Name)
+    </label>
+    <div class="controls">
+        @Html.TextBoxFor(s=>s.Name,new{placeholder="雇员名称"})
+        @Html.ValidationMessageFor(s=>s.Name)
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">
+        @Html.LabelFor(s=>s.CardNo)
+    </label>
+    <div class="controls">
+        @Html.TextBoxFor(s => s.CardNo, new { placeholder = "1234567891011" })
+        @Html.ValidationMessageFor(s => s.CardNo)
+    </div>
+</div>
