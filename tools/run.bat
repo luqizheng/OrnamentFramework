@@ -1,1 +1,0 @@
-dotless.compiler.exe -w ..\Ornament\Ornament.MVC4WebFrame\Content\less\global.less ..\Ornament\Ornament.MVC4WebFrame\Content\combine\
