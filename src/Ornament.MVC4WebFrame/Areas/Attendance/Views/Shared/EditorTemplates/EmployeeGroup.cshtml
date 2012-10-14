@@ -1,0 +1,28 @@
+﻿@using Qi.Attendance
+@model Qi.Attendance.EmployeeGroup
+<legend>基本信息:</legend>
+<div class="control-group">
+    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(m => m.Remark, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(m => m.Remark)
+        @Html.ValidationMessageFor(m => m.Remark)
+    </div>
+</div>
+<legend>工作时间:</legend>
+@if (this.Model != null)
+{
+    @Html.Partial("EditorTemplates/EmployeeGroupOption", this.Model.Options)
+}
+else
+{
+    @Html.Partial("EditorTemplates/EmployeeGroupOption",new EmployeeGroupOption())
+}
+
+

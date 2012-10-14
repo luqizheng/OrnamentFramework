@@ -1,0 +1,29 @@
+﻿@using Resources
+@model QiProject.Product
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+<div class="page-header">
+    <h2>
+        @Basic.Edit @this.Model.Name</h2>
+</div>
+<div class="box">
+    <div class="content">
+        <form class="form-horizontal" action="@Url.Action("Save")">
+        @Html.EditorFor(s => s, "Product.cshtml")
+        <p class="form-actions">
+            <input type="submit" value="@Basic.Save" class="btn btn-primary"/>
+            <a type="button" class="btn" href="@Url.Action("Index")">@Basic.Cancel</a>
+        </p>
+        </form>
+    </div>
+</div>
+@section script
+{
+    <script type="text/javascript">
+        $(".form-actions a").click(function () {
+            return confirm("Unsave current works?");
+        })
+    </script>
+}

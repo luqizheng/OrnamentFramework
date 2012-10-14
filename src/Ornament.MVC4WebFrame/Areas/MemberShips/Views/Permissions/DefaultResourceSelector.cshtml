@@ -1,0 +1,29 @@
+﻿@using Ornament.MemberShip.Permissions
+@model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionWizard
+@{
+    ViewBag.Title = "Choice Ressource";
+    IList<string> resources = Ornament.Context.GetTypeResource();
+
+    //找出已经选择的
+    string selectedResourceId = resources[0];
+    Permission thePermission = Model.GetPermission();
+    if (thePermission.Resource != null)
+    {
+        if (thePermission.Resource is string)
+        {
+            selectedResourceId = (string) thePermission.Resource;
+        }
+    }
+}
+
+@foreach (string resourceInfo in resources)
+{
+    string checkedTag = selectedResourceId == resourceInfo ? "checked='checked'" : "";
+    <div>
+        
+        <label for="@resourceInfo">
+            <input type="radio" value="@resourceInfo" id="@resourceInfo" name="ResourceId" @checkedTag/>
+            @resourceInfo
+        </label>
+    </div>
+}

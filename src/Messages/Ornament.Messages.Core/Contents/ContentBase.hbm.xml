@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"  assembly="Ornament.Messages.Core" namespace="Ornament.Messages.Contents">
+  <class name="Content" table="Msgs_Content">
+    <id name="Id" type="guid">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <property name="Value" column="msgContent"  length="2000"></property>
+  </class>
+</hibernate-mapping>

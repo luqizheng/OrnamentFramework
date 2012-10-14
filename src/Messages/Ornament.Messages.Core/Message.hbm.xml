@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ornament.Messages.Core" namespace="Ornament.Messages">
+
+  <class name="Message" table="Msgs_Message">
+    <id name="Id">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <property name="Priority" type="Ornament.Messages.Priority,Ornament.Messages.Core"></property>
+    <many-to-one name="Type" class="MessageType"></many-to-one>
+    <property name="Subject" length="255"></property>
+    <property name="CreateTime" update="false"></property>
+    <property name="EffectTime"></property>
+    <property name="StoreType" length="32"></property>
+    <many-to-one name="Publisher" class="Ornament.MemberShip.User,Ornament.MemberShip.Core"></many-to-one>
+    <property name="State" type="Ornament.Messages.MessageState,Ornament.Messages.Core"></property>
+    <property name="PublishTime" type="DateTime"></property>
+    <map name="Contents" access="nosetter.camelcase-underscore" cascade="all">
+      <key column="InfoId"></key>
+      <map-key column="Language" type="String"></map-key>
+      <one-to-many class="Ornament.Messages.Contents.Content,Ornament.Messages.Core"/>
+    </map>
+    <set name="Readers" access="nosetter.camelcase-underscore" cascade="all">
+      <key column="InfoId"></key>
+      <one-to-many class="MessageReader"/>
+    </set>
+  </class>
+</hibernate-mapping>

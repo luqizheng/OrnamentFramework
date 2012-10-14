@@ -1,0 +1,29 @@
+﻿@using Ornament.Web
+@using Resources
+@{
+    bool isLogin = Request.IsAuthenticated && HttpContext.Current.User != null && OrnamentContext.Current.CurrentUser != null;
+}
+@if (isLogin)
+{
+    <ul class="pull-right nav">
+        <li><a href="@Url.Action("Index", "Account", new { area = "" })" title="@(Basic.Configuration + Html.Encode(OrnamentContext.Current.CurrentUser.Name))">@Basic.Configuration
+            <i class="icon-wrench"></i></a></li>
+        <li><a href="@Url.Action("LogOff", "Account", new { area = "" })" title="<@Html.GetResourceString("LogoutTitle")" id="logout">
+            @MemberShip.Logout<b class="icon-off icon-white"></b> </a></li>
+    </ul>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#logout").click(function () {
+                return confirm("@MemberShip.LogoutWarning");
+            });
+        });
+    </script>
+}
+else
+{
+    <ul class="pull-right nav">
+        <li><a href="@Url.Action("Logon", "Account", new { area = "" })"><i class="icon-user-md">
+        </i>@Basic.Logon</a></li>
+    </ul>
+}

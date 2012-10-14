@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="Ornament.MemberShip"
+                   assembly="Ornament.MemberShip.Core">
+  <subclass name="User" discriminator-value="User" extends="IPerformer">
+    <join  table="MBS_User">
+      <key column="Id" ></key>
+      <!--<property name="UpdateTime" not-null="false"/>-->
+      <property name="Name" length="50" type="String" ></property>
+      <property name="LoginId"  length="20" type="String" not-null="true" unique="true"></property>
+
+
+      <property name="Password" access="nosetter.camelcase-underscore" length="40" type="String" ></property>
+      <property name="PasswordAnswer" length="100" type="String"  access="nosetter.camelcase-underscore"></property>
+      <property name="PasswordQuestion" length="100" type="String"  access="nosetter.camelcase-underscore"></property>
+
+      <set name="Roles" table="MBS_UserRoleRelation" access="nosetter.camelcase-underscore">
+        <key column="UserId" foreign-key="FK_UserID_UserRoleRelation"/>
+        <many-to-many class="Role" column="RoleId" unique="true"></many-to-many>
+      </set>
+      <property name="CreateTime" type="DateTime"  update="false" ></property>
+      <property name="IsLockout" type="Boolean" length="1" access="nosetter.camelcase-underscore"></property>
+      <property name="LastLockoutDate"  type="DateTime" ></property>
+      <property name="LastLoginDate"  type="DateTime"></property>
+      <property name="LastActivityDate"  insert="false" type="DateTime"></property>
+      <property name="LastPasswordChangedDate"  insert="false" type="DateTime" ></property>
+      <property name="IsApproved"></property>
+      <property name="Remark" length="200" type="String" ></property>
+      <set name="UserGroups" access="nosetter.camelcase-underscore" table="MBS_UserGroupUserRelation">
+        <key column="UserId" foreign-key="FK_UserID_UserUserGroupRelation"></key>
+        <many-to-many class="UserGroup" column="UserGroupId" foreign-key="FK_MBS_USERGROUP"/>
+      </set>
+
+      <!--<component class="Ornament.MemberShip.User+UserInformation,Ornament.MemberShip.Core" name="Information" access="nosetter.camelcase-underscore" >-->
+      <property  name="Email" length="30" type="String" unique="true" access="nosetter.camelcase-underscore"></property>
+      <property name="Phone" type="String" length="20"  access="nosetter.camelcase-underscore"></property>
+      <!--<one-to-one name="User" class="User"></one-to-one>-->
+      <!--</component>-->
+
+    </join>
+
+
+  </subclass >
+
+
+</hibernate-mapping>

@@ -1,0 +1,99 @@
+﻿@using System.Text
+@{
+    ViewBag.Title = "Typography";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+<fieldset class="cssform">
+    <legend>网站信息</legend>
+    <p>
+        <label for="a">
+            服务器计算机名:</label>
+        @Server.MachineName.ToString()
+    </p>
+    <p>
+        <label for="b">
+            服务器IP地址</label>
+        @Request.ServerVariables["LOCAL_ADDR"]
+    </p>
+    <p>
+        <label for="a">
+            服务器域名:</label>
+        @base.Request.ServerVariables["SERVER_NAME"]
+    </p>
+    <p>
+        <label for="a">
+            服务器端口</label>
+        @base.Request.ServerVariables["SERVER_PORT"]
+    </p>
+    <p>
+        <label for="a">
+            服务器IIS版本</label>
+        @base.Request.ServerVariables["SERVER_SOFTWARE"]
+    </p>
+    <p>
+        <label for="a">
+            本文件路径</label>
+        @base.Request.ServerVariables["PATH_TRANSLATED"]
+    </p>
+    <p>
+        <label for="a">
+            服务器操作系统</label>
+        @Environment.OSVersion.ToString()
+    </p>
+    <p>
+        <label for="a">
+            服务器操作系统安装目录</label>
+        @Environment.SystemDirectory
+    </p>
+    <p>
+        <label for="a">
+            服务器脚本超时时间</label>
+        @base.Server.ScriptTimeout.ToString()
+        seconds;
+    </p>
+    <p>
+        <label for="a">
+            服务器的语言种类</label>
+        @base.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"]
+    </p>
+    <p>
+        <label for="a">
+            .NET Framework 版本</label>
+        @Environment.Version.ToString()
+    </p>
+    <p>
+        <label for="a">
+            服务器当前时间</label>
+        @DateTime.Now
+    </p>
+    <p>
+        <label for="a">
+            服务器上次启动到现在已运行</label>
+        @(((((double)Environment.TickCount) / 3600000.0)).ToString("N2") + " 小时")
+    </p>
+    <p>
+        <label for="a">
+            逻辑驱动器</label>
+        @{
+            StringBuilder s = new StringBuilder();
+            foreach (string str in Environment.GetLogicalDrives())
+            {
+                s.Append(" " + str.TrimEnd(new char[] {'\\'}));
+            }
+        }
+    </p>
+    <p>
+        <label for="a">
+            CPU 总数</label>
+        @Environment.GetEnvironmentVariable("NUMBER_OF_PROCESSORS")
+    </p>
+</fieldset>
+@section head
+{
+    <style type="text/css">
+        .cssform label
+        {
+            width: 15em
+        }
+    </style>
+}

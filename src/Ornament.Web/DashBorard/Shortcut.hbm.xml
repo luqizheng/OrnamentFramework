@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"  assembly="Ornament.Web.Core" namespace="Ornament.Web.DashBoard">
+  <class  name="Shortcut" table="Web_Shortcut">
+    <id name="Id" type="Guid" unsaved-value="00000000-0000-0000-0000-000000000000">
+      <generator class="guid"></generator>
+    </id>
+    <property name="Image"></property>
+    <property name="Tooltip"></property>
+    <property name="Text"></property>
+    <property name="Url"></property>
+  </class>
+</hibernate-mapping>

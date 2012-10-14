@@ -1,0 +1,11 @@
+﻿@using System.Web.Optimization
+@using Resources
+@model Ornament.MVCWebFrame.Models.Editor
+@Styles.Render("~/Content/Editor")
+@Scripts.Render("~/Scripts/Editor")
+<div class="form-horizontal">
+</div>
+<textarea id="@this.Model.EditorName" name="@this.Model.EditorName" style="width:100%;height: @Model.Height">@Html.Raw(this.Model.Content)</textarea>
+<script type="text/ecmascript">
+    $('#@this.Model.EditorName').wysiwyg();    
+</script>

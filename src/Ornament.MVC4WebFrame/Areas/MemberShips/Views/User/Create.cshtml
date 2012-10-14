@@ -1,0 +1,108 @@
+﻿@using Ornament.Web
+
+@model Ornament.MVCWebFrame.Areas.MemberShips.Models.CreateUserModel
+@{
+    ViewBag.Title = Resources.Basic.Create + Resources.MemberShip.User;
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+@using (Html.BeginForm("Create", "User", null, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(false)
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#base" data-toggle="tab">
+            @Html.GetResourceString("tab_basicInfo") </a></li>
+        <li><a href="#choose" data-toggle="tab">
+            @Html.GetResourceString("tab_option") </a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="base" class="tab-pane active">
+            <div class="control-group">
+                @Html.LabelFor(model => model.LoginId, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.LoginId)
+                    @Html.ValidationMessageFor(model => model.LoginId)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Name)
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.ConfirmPassword)
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+            @if (Membership.RequiresQuestionAndAnswer)
+            {
+                <div class="control-group">
+                    @Html.LabelFor(m => m.PasswordQuestion, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => Model.PasswordQuestion)
+                        @Html.ValidationMessageFor(m => Model.PasswordQuestion)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.PasswordAnswer, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(m => Model.PasswordAnswer)
+                        @Html.ValidationMessageFor(m => Model.PasswordAnswer)
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="choose" class="tab-pane form-horizontal">
+            <div class="control-group">
+                @Html.LabelFor(m => m.Phone, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Phone)
+                    @Html.ValidationMessageFor(m => m.Phone)
+                </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Remark, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.Remark)
+                    @Html.ValidationMessageFor(m => m.Remark)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions">
+        <a id="saveButton" class="btn btn-primary"><i class="icon-pencil icon-white"></i>@Resources.Basic.Create</a>
+        <a id="backButton" type="button" href="@Url.Action("Index")" class="btn btn-warning">
+            <i class="icon-warning-sign icon-white"></i>@Resources.Basic.Cancel</a>
+    </div>
+}
+@section script
+{
+    <script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            $("#saveButton").click(function () {
+                if ($("#Name").val().length == 0) {
+                    $("#Name").val($("#LoginId").val());
+                }
+                $("form").submit();
+            });
+        });
+    </script>
+}

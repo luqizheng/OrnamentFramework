@@ -1,0 +1,90 @@
+﻿@model Ornament.MemberShip.UserGroup
+@{
+    
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/lib/jquery.doubleSelectBox.js")" type="text/javascript"></script>
+@Resources.MemberShip.AssignUserGroup : @Model.Name
+<form method="POST" class="form-horizontal" action="@Url.Action("AssignUser")" id="assign">
+<div class="btn-toolbar form-actions">
+    <button type="submit" class="btn btn-primary">
+        <i class="icon-white icon-pencil"></i>
+        @Resources.Basic.Save</button>
+    <button type="button" id="cancel" class="btn" >
+        <i class="icon-remove-sign"></i>
+        @Resources.Basic.Cancel
+    </button>
+</div>
+<input type="hidden" name="Id" value="@Model.Id" />
+<div id="table" class="row" style="margin: 0 auto;">
+    <div class="span4">
+        @this.Html.Partial("UserSearch")
+    </div>
+    <div class="span1" style="height: 386px; display: inline">
+        <div style="position: relative; top: 50%;">
+            <div>
+                <button id="add" type="button">
+                    <i class="icon-chevron-right"></i>
+                </button>
+            </div>
+            <div>
+                <button id="remove" type="button">
+                    <i class="icon-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <select name="loginIds" multiple="multiple" id="loginIds">
+            @foreach (var user in (IList<Ornament.MemberShip.User>)ViewData["Users"])
+            {
+                <option value="@user.LoginId">@String.Format("{0}({1})", user.Name, user.LoginId)</option>
+            }
+        </select>
+    </div>
+</div>
+</form>
+@section head{
+    <style type="text/css">
+        #userSearcher
+        {
+            height: 350px;
+            width: 263px;
+        }
+        #loginIds
+        {
+            height: 386px;
+            width: 263px;
+        }
+    </style>
+}
+@section script
+{
+<script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#cancel").click(function () {
+                document.location = '@Url.Action("Typography")';
+            });
+            $("#assign").submit(function () {
+                $("#loginIds").children().each(function () {
+                    this.selected = true;
+                });
+            });
+
+            $("#table").doubleSelectBox();
+        });
+        $("#remove,#add").live('click',function() {
+            $("#table").doubleSelectBox($(this).attr("id"));
+        });
+        function AddToSelector(data) {
+            $("#userSearcher option").remove();
+            $("#table").doubleSelectBox("addLeft", data, function (a) {
+                return {
+                    name: String.format("{0}({1})", a.Name, a.LoginId),
+                    value: a.LoginId
+                };
+            });
+        }
+    </script>
+}

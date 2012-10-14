@@ -1,0 +1,163 @@
+﻿@using System.Configuration
+@using System.Web.Profile
+@using Ornament.Web
+@model Ornament.MemberShip.User
+@{
+    ViewBag.Title = Resources.Basic.Edit + this.Model.Name;
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+@section script
+{
+}
+<div class="box">
+    <div class="content">
+        <header>
+            <h2>
+                @this.Model.LoginId
+            </h2>
+        </header>
+        @{ Html.EnableUnobtrusiveJavaScript(); }
+        @{ Html.EnableClientValidation(); }
+        @using (Html.BeginForm("edit", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <input type="hidden" name="Id" value="@Model.Id" />
+ 
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#editUser">@Html.GetResourceString("tab_userInfo")</a></li>
+                <li><a data-toggle="tab" href="#Profile">@Html.GetResourceString("tab_profile")</a></li>
+                <li><a data-toggle="tab" href="#permissions">@Html.GetResourceString("tab_permission")</a></li>
+                <li><a data-toggle="tab" href="#anotherInfo">@Html.GetResourceString("tab_anotherInfo")</a></li>
+            </ul>
+ 
+            <div class="tab-content">
+                <div id="editUser" class="tab-pane active">
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Phone, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.Phone)
+                            @Html.ValidationMessageFor(model => model.Phone)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.TextAreaFor(model => model.Remark)
+                            @Html.ValidationMessageFor(model => model.Remark)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.IsApproved, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.CheckBoxFor(model => model.IsApproved)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.IsLockout, new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.CheckBoxFor(model => model.IsLockout)
+                        </div>
+                    </div>
+                </div>
+                <div id="Profile" class="tab-pane">
+                    @{
+            var emu = ProfileBase.Properties.GetEnumerator();
+            if (emu != null)
+            {
+                while (emu.MoveNext())
+                {
+                    var property = emu.Current as SettingsProperty;
+                        <div class="control-group">
+                            <label class="control-label">@property.Name</label>
+                            <div class="controls">
+                                @Html.TextBox(property.Name, property.DefaultValue)
+                            </div>
+                        </div>
+                }
+            }
+                    }
+                </div>
+                <div id="permissions" class="tab-pane">
+                    @foreach (var per in Model.Permissions)
+                    {
+            
+                        <div class="control-group">
+                            <label title="@per.Remark" class="control-label">@per.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+                <div id="anotherInfo" class="tab-pane">
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.UpdateTime, new { @class = "control-label" })
+                        <div class="controls">
+                            <label id="UpdateTime" class="checkbox">
+                                @Model.UpdateTime
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.CreateTime, new { @class = "control-label" })
+                        <div class="controls">
+                            <label id="CreateTime" class="checkbox">
+                                @Model.CreateTime
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.LastPasswordChangedDate, new { @class = "control-label" })
+                        <div class="controls">
+                            <label id="LastPasswordChangedDate" class="checkbox">
+                                @Model.LastPasswordChangedDate
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.LastLockoutDate, new { @class = "control-label" })
+                        <div class="controls">
+                            <label id="LastLockoutDate" class="checkbox">
+                                @Model.LastLockoutDate
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.LastLoginDate, new { @class = "control-label" })
+                        <div class="controls">
+                            <label id="LastLoginDate" class="checkbox">
+                                @Model.LastLoginDate
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        @Html.LabelFor(model => model.LastActivityDate, new { @class = "control-label" })
+                        <div class="controls">
+                            <label id="LastActivityDate" class="checkbox">
+                                @Model.LastActivityDate
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <p class="form-actions">
+                <button id="submitButton" class="btn btn-primary" type="submit">
+                    <i class="icon-pencil"></i>@Resources.Basic.Save</button>
+                <a id="cancelButton" class="btn" href="@this.Url.Action("Index")"><i class="icon-warning-sign icon-white">
+                </i>@Resources.Basic.Cancel</a>
+            </p>
+        }
+    </div>
+</div>

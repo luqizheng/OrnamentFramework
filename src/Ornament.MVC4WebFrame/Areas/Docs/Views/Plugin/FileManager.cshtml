@@ -1,0 +1,386 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Ornament.MVCWebFrame.Models
+@using Resources
+@model dynamic
+@{
+    ViewBag.Title = "title";
+    Layout = "../Shared/_codeLayout.cshtml";
+}
+<div class="page-header">
+    <h2>
+        title</h2>
+</div>
+<div class="modal hide" id="uploadForm">
+    <div class="modal-header">
+        <h3>
+            Upload file</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            @Html.Partial("_swfupload", new SwfuploadFile()
+                {
+                    UploadFileUrl = Url.Action("Save", "FileManager", new { area = "" }),
+                    FileSizeKB = 1024,
+                    UploadSuccessCallbackFuncName = "uploadSuccess"
+                })
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary"><i class="icon-check"></i>@Basic.OK</a>
+    </div>
+</div>
+<div class="modal hide" id="createFolder">
+    <div class="modal-header">
+        <h3>
+            Create Folder</h3>
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="control-group">
+            <label class="control-label">
+                Folder Name</label>
+            <div class="controls">
+                <input type="text"></input>
+                <span class="help-inline ">Please input Folder name</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary"><i class="icon-check"></i>@Basic.OK</a> <a class="btn"><i
+            class="icon-remove-sign"></i>@Basic.Cancel</a>
+    </div>
+</div>
+<div class="box">
+    <div class="content">
+        <div class="fileManager">
+        </div>
+        <h4>
+            Init FileManager</h4>
+        <pre class="prettyprint lang-vb">
+            @{
+                var code = @"
+  $("".fileManager"").fileManager({
+            listUrl:""http://localhost/FileManager/ListFile"",
+            uploadUrl:""http://localhost/FileManager/uploadUrl"",
+            deleteFolderUrl:""http://localhost/FileManager/deleteFolderUrl"",
+            createFolderUrl:""http://localhost/FileManager/createFolderUrl"",
+            deleteFileUrl:""http://localhost/FileManager/deleteFileUrl"",
+            downloadUrl:""http://localhost/FileManager/downloadFileUrl"",
+            modals:{
+                createFolder:function () {
+                    $(""#createFolder"").modal(""show"");
+                },
+                upload:function () {
+                    var folder = $("".fileManager"").fileManager(""curFolder"");
+                    $(""#uploadForm"").modal(""show"");
+                    setTimeout(function() {//delay to load the swf file.
+                        var url = '@Url.Action(""Save"", ""FileManager"", new { area = """" })';
+                        swfu.setUploadURL(url+""?folder="" + folder);
+                    } , 400);
+            }
+        }
+        });
+ $(""#createFolder a:first"").click(function () {
+            var v=$(""#createFolder input"").val();
+            if(v=="""") {
+                $(""#createFolder .control-group"").addClass(""error"");
+                $(""#createFolder input"").next().show();
+                return;
+            }
+            $("".fileManager"").fileManager(""createFolder"",v);
+            $(""#createFolder"").modal(""hide"");
+        }).next(""a"").click(function () {
+            $(""#createFolder .control-group"").removeClass(""error"");
+            $(""#createFolder input"").next().hide();
+            $(""#createFolder"").modal(""hide"");
+        });
+
+";
+            }
+@code
+        </pre>
+        <h4>
+            API</h4>
+        <div>
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a data-toggle="tab" href="#Property">Property</a></li>
+                <li><a href="#Method" data-toggle="tab">Method</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="Property">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    listUrl
+                                </td>
+                                <td>
+                                    <p>list file URL. it use getJSON 
+                                    URL is http://domain.com/fileManager/listAPI?folder=folderName
+                                    </p>
+                                </td>
+                                <td>
+                                    url is 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    deleteUrl
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    deleteFolderUrl
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    createFolderUrl
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    curFolder
+                                </td>
+                                <td>
+                                    get the current filemanager
+                                </td>
+                                <td>
+                                    <pre class="prettyprint lang-js">
+$(".fileManager").fileManager("curFolder");
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    itemClick
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    modals
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    modals.createFolder
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    modals.upload
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="Method">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    createFolder
+                                </td>
+                                <td>
+                                    create a new folder in the current folder.
+                                </td>
+                                <td>
+                                    <pre class="prettyprint lang-js">
+                                        $(".fileManager").fileManager("createFolder","New folder");
+                                    </pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    deleteUrl
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    deleteFolderUrl
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    createFolderUrl
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    curFolder
+                                </td>
+                                <td>
+                                    get the current filemanager
+                                </td>
+                                <td>
+                                    <pre class="prettyprint lang-js">
+$(".fileManager").fileManager("curFolder");
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    itemClick
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    modals
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    modals.createFolder
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    modals.upload
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    Exmaple
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script
+{
+    <script src="@Url.Content("~/Scripts/jQuery.fileManager.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.dotdotdot-1.5.1.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(".fileManager").fileManager({
+            listUrl:"@Url.Action("Index", "FileManager", new { area = "" })",
+            uploadUrl:"@Url.Action("Save", "FileManager", new { area = "" })",
+            deleteFolderUrl:"@Url.Action("DeleteFolder", "FileManager", new { area = "" })",
+            createFolderUrl:"@Url.Action("CreateFolder", "FileManager", new { area = "" })",
+            deleteFileUrl:"@Url.Action("Delete", "FileManager", new { area = "" })",
+            downloadUrl:"@Url.Action("Download", "FileManager", new { area = "" })",
+            modals:{
+                createFolder:function () {
+                    $("#createFolder").modal("show");
+                },
+                upload:function () {
+                    var folder = $(".fileManager").fileManager("curFolder");
+                    $("#uploadForm").modal("show");
+                    setTimeout(function() {//delay to load the swf file.
+                        var url = '@Url.Action("Save", "FileManager", new { area = "" })';
+                        swfu.setUploadURL(url+"?folder=" + folder);
+                    } , 400);
+            }
+        }
+        });
+
+        $("#createFolder a:first").click(function () {
+            var v=$("#createFolder input").val();
+            if(v=="") {
+                $("#createFolder .control-group").addClass("error");
+                $("#createFolder input").next().show();
+                return;
+            }
+            $(".fileManager").fileManager("createFolder",v);
+            $("#createFolder").modal("hide");
+        }).next("a").click(function () {
+            $("#createFolder .control-group").removeClass("error");
+            $("#createFolder input").next().hide();
+            $("#createFolder").modal("hide");
+        });
+      
+    </script>
+}

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Qi.Attendance" assembly="Qi.Attendance">
+  <class name="DayOfWeekWorkTime" table="Attendance_DayOfWeekWorkTime">
+    <id name="Id" type="Guid">
+      <generator class="guid"></generator>
+    </id>
+    <bag name="WorkTimes" access="nosetter.camelcase-underscore" table="Attendance_DayOfWeekWorkTime_Period">
+      <key column="DayOfWeekWorkTimeId">
+      </key>
+      <composite-element class="Period">
+        <property name="Start" type="Qi.NHibernate.Types.TimeType,Qi.NHibernateExtender" column="TimeStart"></property>
+        <property name="End" type="Qi.NHibernate.Types.TimeType, Qi.NHibernateExtender" column="TimeEnd" ></property>
+      </composite-element>
+    </bag>
+
+  </class>
+</hibernate-mapping>

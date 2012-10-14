@@ -1,0 +1,828 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5CEAC12F-9B4C-4077-984A-002FF9C4A610}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ornament.MVCWebFrame</RootNamespace>
+    <AssemblyName>Ornament.MVCWebFrame</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.ClientOnly, Version=1.3.1.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotlessClientOnly.1.3.1.0\lib\dotless.ClientOnly.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.3.1.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcSiteMapProvider">
+      <HintPath>..\packages\MvcSiteMapProvider.3.3.3.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi, Version=1.3.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Qi4net.1.3.1.2\lib\net40\Qi.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi.NHibernateExtender, Version=1.3.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Qi4net.nhibernateExtender.1.3.2.4\lib\net40\Qi.NHibernateExtender.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi.Web, Version=1.1.7.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Qi4net.web.1.1.7.8\lib\net40\Qi.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\Basic.Designer.cs">
+      <DependentUpon>Basic.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Basic.zh-cn.designer.cs">
+      <DependentUpon>Basic.zh-cn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Basic.zh.designer.cs">
+      <DependentUpon>Basic.zh.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\MemberShip.Designer.cs">
+      <DependentUpon>MemberShip.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\MemberShip.zh-cn.designer.cs">
+      <DependentUpon>MemberShip.zh-cn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\MemberShip.zh.designer.cs">
+      <DependentUpon>MemberShip.zh.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Web.sitemap.designer.cs">
+      <DependentUpon>Web.sitemap.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Web.sitemap.zh-CN.designer.cs">
+      <DependentUpon>Web.sitemap.zh-CN.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\Web.sitemap.zh.designer.cs">
+      <DependentUpon>Web.sitemap.zh.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CastleRegistry.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
+    <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
+    <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\EmployeeGroupController.cs" />
+    <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UsergroupsController.cs" />
+    <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
+    <Compile Include="Areas\MemberShips\Models\CreateUserModel.cs" />
+    <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
+    <Compile Include="Areas\Projects\Controllers\DefectsController.cs" />
+    <Compile Include="Areas\Projects\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Projects\Controllers\ProjectController.cs" />
+    <Compile Include="Areas\Projects\Models\ProjectModel.cs" />
+    <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
+    <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
+    <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
+    <Compile Include="Areas\Docs\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
+    <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
+    <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
+    <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountMembershipService.cs" />
+    <Compile Include="Controllers\FileManagerController.cs" />
+    <Compile Include="Controllers\FormsAuthenticationService.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HttpErrorsController.cs" />
+    <Compile Include="Controllers\IFormsAuthentication.cs" />
+    <Compile Include="Controllers\IMembershipService.cs" />
+    <Compile Include="Controllers\MembershipServiceController.cs" />
+    <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Models\DaoFactory.cs" />
+    <Compile Include="Models\DataInit\MembershipInit.cs" />
+    <Compile Include="Models\DataInit\ProjectDataInit.cs" />
+    <Compile Include="Models\Editor.cs" />
+    <Compile Include="Models\LogonModel.cs" />
+    <Compile Include="Models\Membership\AccountOperator.cs" />
+    <Compile Include="Models\Membership\OrgOperator.cs" />
+    <Compile Include="Models\Membership\RoleOperator.cs" />
+    <Compile Include="Models\Membership\UserOperator.cs" />
+    <Compile Include="Models\RegistAccountModel.cs" />
+    <Compile Include="Models\ResourceSetting.cs" />
+    <Compile Include="Models\swfuploadFile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\App_LocalResources\MemberShipModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberShipModel.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App_LocalResources\MemberShipModel.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberShipModel.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App_LocalResources\MemberShipModel.zh.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MemberShipModel.zh.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App_LocalResources\Message.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Message.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App_LocalResources\Message.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Message.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App_LocalResources\Message.zh.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Message.zh.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\MemberShips\Views\Shared\RolesSelector.ascx" />
+    <Content Include="Areas\Docs\Views\Web.config" />
+    <Content Include="Areas\Docs\Views\BaseCss\Typography.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Table.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Form.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Buttons.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Image.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Icons.cshtml" />
+    <Content Include="Areas\Projects\Views\Web.config" />
+    <Content Include="Areas\Projects\Views\Project\Index.cshtml" />
+    <Content Include="Areas\Docs\Views\Component\Dropdowns.cshtml" />
+    <Content Include="Areas\Docs\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Docs\Views\Dashboard\Bootstrap.cshtml" />
+    <Content Include="Areas\Projects\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Projects\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Product.cshtml" />
+    <Content Include="Areas\Projects\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Components.cshtml" />
+    <Content Include="Areas\Projects\Views\Project\Create.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Code.cshtml" />
+    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Areas\Projects\Views\Defects\Index.cshtml" />
+    <Content Include="Areas\Projects\Views\Defects\Create.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Project.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Defect.cshtml" />
+    <Content Include="Areas\Projects\Views\Shared\DisplayTemplates\_dashboard_DefectIndex.cshtml" />
+    <Content Include="Areas\Attendance\Views\Web.config" />
+    <Content Include="Areas\Attendance\Views\EmployeeGroup\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeGroup\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\EmployeeGroup.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\EmployeeGroupOption.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\YearMarkers.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\PeriodDailog.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\DailyDailog.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeGroup\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\Employee.cshtml" />
+    <Content Include="Areas\Attendance\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\Employee\Edit.cshtml" />
+    <None Include="Content\less\box.less" />
+    <None Include="Content\less\datepicker.less" />
+    <None Include="Content\less\bootstrap\accordion.less" />
+    <None Include="Content\less\bootstrap\alerts.less" />
+    <None Include="Content\less\bootstrap\breadcrumbs.less" />
+    <None Include="Content\less\bootstrap\button-groups.less" />
+    <None Include="Content\less\bootstrap\buttons.less" />
+    <None Include="Content\less\bootstrap\carousel.less" />
+    <None Include="Content\less\bootstrap\close.less" />
+    <None Include="Content\less\bootstrap\code.less" />
+    <None Include="Content\less\bootstrap\component-animations.less" />
+    <None Include="Content\less\bootstrap\dropdowns.less" />
+    <None Include="Content\less\bootstrap\forms.less" />
+    <None Include="Content\less\bootstrap\grid.less" />
+    <None Include="Content\less\bootstrap\hero-unit.less" />
+    <None Include="Content\less\bootstrap\labels-badges.less" />
+    <None Include="Content\less\bootstrap\layouts.less" />
+    <None Include="Content\less\bootstrap\mixins.less" />
+    <None Include="Content\less\bootstrap\modals.less" />
+    <None Include="Content\less\bootstrap\navbar.less" />
+    <None Include="Content\less\bootstrap\navs.less" />
+    <None Include="Content\less\bootstrap\pager.less" />
+    <None Include="Content\less\bootstrap\pagination.less" />
+    <None Include="Content\less\bootstrap\popovers.less" />
+    <None Include="Content\less\bootstrap\progress-bars.less" />
+    <None Include="Content\less\bootstrap\reset.less" />
+    <None Include="Content\less\bootstrap\responsive-1200px-min.less" />
+    <None Include="Content\less\bootstrap\responsive-767px-max.less" />
+    <None Include="Content\less\bootstrap\responsive-768px-979px.less" />
+    <None Include="Content\less\bootstrap\responsive-navbar.less" />
+    <None Include="Content\less\bootstrap\responsive-utilities.less" />
+    <None Include="Content\less\bootstrap\responsive.less" />
+    <None Include="Content\less\bootstrap\scaffolding.less" />
+    <None Include="Content\less\bootstrap\sprites.less" />
+    <None Include="Content\less\bootstrap\tables.less" />
+    <None Include="Content\less\bootstrap\thumbnails.less" />
+    <None Include="Content\less\bootstrap\tooltip.less" />
+    <None Include="Content\less\bootstrap\type.less" />
+    <None Include="Content\less\bootstrap\utilities.less" />
+    <None Include="Content\less\bootstrap\wells.less" />
+    <None Include="Content\less\common.less" />
+    <Content Include="Content\wysiwyg\ajax-loader.gif" />
+    <Content Include="Content\wysiwyg\jquery.wysiwyg.bg.png" />
+    <Content Include="Content\wysiwyg\jquery.wysiwyg.css" />
+    <Content Include="Content\wysiwyg\jquery.wysiwyg.gif" />
+    <Content Include="Content\wysiwyg\jquery.wysiwyg.jpg" />
+    <Content Include="bin\Qi.dll" />
+    <Content Include="bin\Qi.NHibernateExtender.dll" />
+    <Content Include="bin\Qi.NHibernateExtender.pdb" />
+    <Content Include="bin\Qi.NHibernateExtender.XML" />
+    <Content Include="bin\Qi.pdb" />
+    <Content Include="bin\Qi.Web.dll" />
+    <Content Include="bin\Qi.Web.pdb" />
+    <Content Include="bin\Qi.xml" />
+    <Content Include="Content\Combine\global.css" />
+    <Content Include="Content\media\swfupload.swf" />
+    <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\Prettify\prettify.css" />
+    <Content Include="Content\Prettify\Themes\desert.css" />
+    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
+    <Content Include="Content\Prettify\Themes\sunburst.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\FileTypes\accdb.png" />
+    <Content Include="Images\FileTypes\avi.png" />
+    <Content Include="Images\FileTypes\bm.png" />
+    <Content Include="Images\FileTypes\css.png" />
+    <Content Include="Images\FileTypes\docx mac.png" />
+    <Content Include="Images\FileTypes\docx win.png" />
+    <Content Include="Images\FileTypes\eml.png" />
+    <Content Include="Images\FileTypes\eps.png" />
+    <Content Include="Images\FileTypes\fla.png" />
+    <Content Include="Images\FileTypes\Folder-Blank-icon.png" />
+    <Content Include="Images\FileTypes\gif.png" />
+    <Content Include="Images\FileTypes\html.png" />
+    <Content Include="Images\FileTypes\ind.png" />
+    <Content Include="Images\FileTypes\ini.png" />
+    <Content Include="Images\FileTypes\jpeg.png" />
+    <Content Include="Images\FileTypes\jsf.png" />
+    <Content Include="Images\FileTypes\midi.png" />
+    <Content Include="Images\FileTypes\mov.png" />
+    <Content Include="Images\FileTypes\mp3.png" />
+    <Content Include="Images\FileTypes\mpeg.png" />
+    <Content Include="Images\FileTypes\pdf.png" />
+    <Content Include="Images\FileTypes\png.png" />
+    <Content Include="Images\FileTypes\pptx mac.png" />
+    <Content Include="Images\FileTypes\pptx win.png" />
+    <Content Include="Images\FileTypes\proj.png" />
+    <Content Include="Images\FileTypes\psd.png" />
+    <Content Include="Images\FileTypes\pst.png" />
+    <Content Include="Images\FileTypes\pub.png" />
+    <Content Include="Images\FileTypes\rar.png" />
+    <Content Include="Images\FileTypes\readme.png" />
+    <Content Include="Images\FileTypes\settings.png" />
+    <Content Include="Images\FileTypes\text.png" />
+    <Content Include="Images\FileTypes\tiff.png" />
+    <Content Include="Images\FileTypes\unknow.png" />
+    <Content Include="Images\FileTypes\url.png" />
+    <Content Include="Images\FileTypes\vsd.png" />
+    <Content Include="Images\FileTypes\wav.png" />
+    <Content Include="Images\FileTypes\wma.png" />
+    <Content Include="Images\FileTypes\wmv.png" />
+    <Content Include="Images\FileTypes\xlsx mac.png" />
+    <Content Include="Images\FileTypes\xlsx win.png" />
+    <Content Include="Images\FileTypes\zip.png" />
+    <Content Include="Images\Upload.png" />
+    <Content Include="Scripts\combine\bootstrap.js" />
+    <Content Include="Scripts\combine\compatibleBootStrap.js" />
+    <Content Include="Scripts\combine\dialog.js" />
+    <Content Include="Scripts\combine\globle.js" />
+    <Content Include="Scripts\combine\Permission.js" />
+    <Content Include="Scripts\combine\start.js" />
+    <Content Include="Scripts\combine\String.js" />
+    <Content Include="Scripts\datePicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\combine\confirm.js" />
+    <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Scripts\inputMasker\jquery.inputmask.date.extensions.js" />
+    <Content Include="Scripts\inputMasker\jquery.inputmask.extensions.js" />
+    <Content Include="Scripts\inputMasker\jquery.inputmask.js" />
+    <Content Include="Scripts\inputMasker\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery.dotdotdot-1.5.1.js" />
+    <Content Include="Scripts\jQuery.multiChoice.js" />
+    <Content Include="Scripts\jQuery.tmpl.js" />
+    <Content Include="Scripts\jQuery.tmpl.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jQuery.endless-scroll.js" />
+    <Content Include="Scripts\jQuery.fileManager.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Prettify\lang-apollo.js" />
+    <Content Include="Scripts\Prettify\lang-clj.js" />
+    <Content Include="Scripts\Prettify\lang-css.js" />
+    <Content Include="Scripts\Prettify\lang-go.js" />
+    <Content Include="Scripts\Prettify\lang-hs.js" />
+    <Content Include="Scripts\Prettify\lang-lisp.js" />
+    <Content Include="Scripts\Prettify\lang-lua.js" />
+    <Content Include="Scripts\Prettify\lang-ml.js" />
+    <Content Include="Scripts\Prettify\lang-n.js" />
+    <Content Include="Scripts\Prettify\lang-proto.js" />
+    <Content Include="Scripts\Prettify\lang-scala.js" />
+    <Content Include="Scripts\Prettify\lang-sql.js" />
+    <Content Include="Scripts\Prettify\lang-tex.js" />
+    <Content Include="Scripts\Prettify\lang-vb.js" />
+    <Content Include="Scripts\Prettify\lang-vhdl.js" />
+    <Content Include="Scripts\Prettify\lang-wiki.js" />
+    <Content Include="Scripts\Prettify\lang-xq.js" />
+    <Content Include="Scripts\Prettify\lang-yaml.js" />
+    <Content Include="Scripts\Prettify\prettify.js" />
+    <Content Include="Scripts\selectivizr-min.js" />
+    <Content Include="Scripts\swfupload.js" />
+    <Content Include="Scripts\wysiwyg\controls\wysiwyg.colorpicker.js" />
+    <Content Include="Scripts\wysiwyg\controls\wysiwyg.cssWrap.js" />
+    <Content Include="Scripts\wysiwyg\controls\wysiwyg.image.js" />
+    <Content Include="Scripts\wysiwyg\controls\wysiwyg.link.js" />
+    <Content Include="Scripts\wysiwyg\controls\wysiwyg.table.js" />
+    <Content Include="Scripts\wysiwyg\jquery.wysiwyg.js" />
+    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.autoload.js" />
+    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.fileManager.js" />
+    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.fullscreen.js" />
+    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.i18n.js" />
+    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.rmFormat.js" />
+    <Content Include="Scripts\_swfuploadHandler.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_multiLangChoice.cshtml" />
+    <Content Include="Views\Shared\_appLayout.cshtml" />
+    <Content Include="Views\Shared\_topMenu.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <None Include="Content\less\components\todolist.less" />
+    <None Include="Content\less\jquery.wysiwyg.less" />
+    <None Include="Content\less\fileManager.less" />
+    <None Include="Content\less\multiChoice.less" />
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Shared\EditorTemplates\PerformerSelector.cshtml" />
+    <Content Include="Views\Shared\_swfupload.cshtml" />
+    <Content Include="Views\Shared\_editor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
+    <Content Include="Views\Account\BaseInfo.cshtml" />
+    <Content Include="Views\Account\_changePassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Application\Models\" />
+    <Folder Include="Areas\Attendance\Models\" />
+    <Folder Include="Areas\MemberShips\Views\Shared\EditTemplates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Basic.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Basic.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Web.sitemap.zh.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Web.sitemap.zh.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Basic.zh-cn.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Basic.zh-cn.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Basic.zh.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Basic.zh.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\MemberShip.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>MemberShip.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\MemberShip.zh-cn.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>MemberShip.zh-cn.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\MemberShip.zh.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>MemberShip.zh.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Web.sitemap.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Web.sitemap.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Web.sitemap.zh-CN.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Web.sitemap.zh-CN.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Extends\Daily\Qi.Attendance.Dao.NhImple\Qi.Attendance.Dao.NhImple.csproj">
+      <Project>{60DA740D-75F7-46D2-976B-D2DB22768333}</Project>
+      <Name>Qi.Attendance.Dao.NhImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\Daily\Qi.Attendance\Qi.Attendance.csproj">
+      <Project>{04B993CF-3A5C-4227-ADB4-77A119B12EA5}</Project>
+      <Name>Qi.Attendance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\Projects\QiPorject\QiProject.csproj">
+      <Project>{E3E9AE4E-34BA-4E8D-ACEA-94F90B319AF4}</Project>
+      <Name>QiProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\Projects\QiProject.Dao.NhImple\QiProject.Dao.NhImple.csproj">
+      <Project>{71BBA53C-0FBA-4B59-A4A1-7CAF15F41104}</Project>
+      <Name>QiProject.Dao.NhImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
+      <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
+      <Name>Ornament.Messages.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Dao.NHibernateImple\Ornament.Messages.Dao.NHibernateImple.csproj">
+      <Project>{65B35676-172D-4C01-BA1E-02D99083C155}</Project>
+      <Name>Ornament.Messages.Dao.NHibernateImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
+      <Name>Ornament.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
+      <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
+      <Name>Ornament.MemberShip.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.MemberShip.DataAccess.NHibernate\Ornament.MemberShip.Dao.NHibernateImple.csproj">
+      <Project>{6C6439C4-0EA1-44F9-B406-664512594A1B}</Project>
+      <Name>Ornament.MemberShip.Dao.NHibernateImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.Web\Ornament.Web.Core.csproj">
+      <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
+      <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.zh-CN.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.zh.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-CN.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.zh-CN.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.zh.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-cn.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-cn.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-CN.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-CN.resx" />
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh.resx" />
+    <EmbeddedResource Include="Models\App_LocalResources\MemberShipModel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MemberShipModel.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\App_LocalResources\MemberShipModel.zh.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MemberShipModel.zh.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\App_LocalResources\MemberShipModel.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MemberShipModel.zh-CN.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\App_LocalResources\Message.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Message.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\App_LocalResources\Message.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Message.zh-CN.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\App_LocalResources\Message.zh.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Message.zh.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <Content Include="Views\Account\App_LocalResources\Index.resx" />
+    <Content Include="Views\Account\App_LocalResources\Index.zh-cn.resx" />
+    <Content Include="Views\Account\App_LocalResources\Index.zh.resx" />
+    <Content Include="Views\Account\App_LocalResources\Logon.resx" />
+    <Content Include="Views\Account\App_LocalResources\Logon.zh-CN.resx" />
+    <Content Include="Views\Account\App_LocalResources\Logon.zh.resx" />
+    <Content Include="Views\Account\App_LocalResources\Regist.resx" />
+    <Content Include="Views\Account\App_LocalResources\Regist.zh-CN.resx" />
+    <Content Include="Views\Account\App_LocalResources\Regist.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\DaoFactory.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\hibernate.cfg.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\hibernate_ora.cfg.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\initData.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\Message.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\WebCfg.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Logon.cshtml" />
+    <Content Include="Views\Account\Permissions.cshtml" />
+    <Content Include="Views\Account\PersonalInfo.cshtml" />
+    <Content Include="Views\Account\Regist.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\HttpErrors\NotFound.cshtml" />
+    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Operators.cshtml" />
+    <Content Include="Views\Shared\Empty.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\LogOnUserControl.cshtml" />
+    <Content Include="Views\Shared\_mainMenu.cshtml" />
+    <Content Include="Views\Shared\Master.cshtml" />
+    <Content Include="Views\Shared\NavPagination.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Application\Views\Web.config" />
+    <Content Include="Areas\Application\Views\EventLog\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Orgs\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Orgs\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResourceType.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\DefaultResourceSelector.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\EditPermission.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\PermissionWizardDataView.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
+    <Content Include="Areas\MemberShips\Views\User\Assign.cshtml" />
+    <Content Include="Areas\MemberShips\Views\User\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\User\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\User\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\UserGroups\AssignRole.cshtml" />
+    <Content Include="Areas\MemberShips\Views\UserGroups\AssignUser.cshtml" />
+    <Content Include="Areas\MemberShips\Views\UserGroups\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\UserGroups\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\UserGroups\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Web.config" />
+    <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
+    <Content Include="Areas\Settings\Views\Application\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Application\ResetPasswrodFormat.cshtml" />
+    <Content Include="Areas\Settings\Views\Application\Success.cshtml" />
+    <Content Include="Areas\Settings\Views\Web.config" />
+    <None Include="Content\font\fontawesome-webfont.eot" />
+    <None Include="Content\font\fontawesome-webfont.ttf" />
+    <None Include="Content\font\fontawesome-webfont.woff" />
+    <None Include="Content\less\global.less" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Content\less\font-awesome\font-awesome.less" />
+    <None Include="Content\less\variables.less" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>37037</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:37037/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>-->
+  <Target Name="AfterBuild">
+    <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
+  </Target>
+</Project>

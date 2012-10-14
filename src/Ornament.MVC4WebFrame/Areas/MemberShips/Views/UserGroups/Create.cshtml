@@ -1,0 +1,44 @@
+﻿@using Resources
+@using Qi.Web.Mvc
+@model Ornament.MemberShip.UserGroup
+@{
+    ViewBag.Title = Basic.Create + MemberShip.UserGroup;
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    Html.EnableClientValidation();
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset class="form-horizontal">
+        <legend>@Resources.Basic.Create @Resources.MemberShip.UserGroup</legend>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(model => model.Remark)
+                @Html.ValidationMessageFor(model => model.Remark)
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">
+                <i class="icon-plus icon-white"></i>@Basic.Create</button>
+            <button href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i> @Basic.Cancel</button>
+        </div>
+    </fieldset>
+}
+@section script{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".form-actions button:eq(1)").click(function () {
+                document.location = $(this).attr("href");
+            });
+        });
+    </script>
+}

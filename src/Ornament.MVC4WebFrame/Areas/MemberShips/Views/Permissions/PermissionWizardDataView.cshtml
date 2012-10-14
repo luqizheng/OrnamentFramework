@@ -1,0 +1,20 @@
+﻿@model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionWizard
+@*
+如果是在选中Resource的Step，这个有PartyView负责
+*@
+@if (!this.Model.IsChoiceResource)
+{
+    <input name="ResourceId" value="@this.Model.ResourceId" id="ResourceId" type="hidden" />
+}
+@if (!this.Model.IsChoiceResourceType)
+{
+    @Html.HiddenFor(s => s.DescriptionResourceName)
+}
+@Html.HiddenFor(s => s.Id)
+@if (!this.Model.IsEditPermission)
+{
+    @Html.HiddenFor(s => s.Name)
+    @Html.HiddenFor(s => s.Remark)
+    @Html.HiddenFor(s => s.Operator)
+}
+<input type="hidden" name="CurrentStep"  value="@this.Model.CurrentStep" />

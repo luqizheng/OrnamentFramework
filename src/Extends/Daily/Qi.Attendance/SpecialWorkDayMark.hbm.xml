@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Qi.Attendance" assembly="Qi.Attendance">
+  <class name="SpecialWorkDayMark" table="Attendance_SpecialWorkDayMark">
+    <id name="Id">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <property name="Date"></property>
+    <bag name="Periods" access="nosetter.camelcase-underscore" table="Attendance_SpecialWorkDayMark_Period">
+      <key column="DayMarkerId">
+      </key>
+      <composite-element class="Period">
+        <property name="Start" type="Qi.NHibernate.Types.TimeType,Qi.NHibernateExtender" column="TimeStart"></property>
+        <property name="End" type="Qi.NHibernate.Types.TimeType, Qi.NHibernateExtender" column="TimeEnd"></property>
+      </composite-element>
+    </bag>
+
+  </class>
+</hibernate-mapping>

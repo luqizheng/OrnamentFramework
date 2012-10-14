@@ -1,0 +1,90 @@
+﻿@using Ornament.MVCWebFrame.Models
+@using Ornament.MVCWebFrame.Models.Membership
+@using Ornament.MemberShip
+@using Ornament.Web
+@model Ornament.MemberShip.Org
+@{
+    ViewBag.Title = "Organization";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var parentId = this.Model != null ? this.Model.Id.ToString() : "";
+    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
+    var editPermission = OrnamentContext.Current.HasRight(ResourceSetting.Org, OrgOperator.Modify);
+}
+<div class="box">
+    <div class="content">
+        <div class="btn-toolbar">
+            <a  class="btn btn-primary" href="@Url.Action("Create", new { id = parentId })"><i
+                class="icon-white icon-plus"></i>@Resources.Basic.Create
+            </a>
+        </div>
+        @Html.Partial("OrgNavigator", this.Model)
+        <div class="row">
+            @if (childOrgs.Count() != 0)
+            {
+                <div class="span4">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                    @Html.LabelFor(s => s.Name)
+                                </th>
+                                <th>
+                                    @Html.LabelFor(s => s.Remark)
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in childOrgs)
+                        {
+                            <tr>
+                                <th>
+                                    <a href="@Url.Action("index", new { id = item.Id })" class="btn btn-info btn-mini"><i
+                                        class="icon-arrow-right icon-white"></i></a>
+                                </th>
+                                <td>@item.Name
+                                </td>
+                                <td>@item.Remark
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                </div>
+            }
+            @if (this.Model != null)
+            {
+        
+                <form method="post" class="form-horizontal span6 offset2" action="@Url.Action("Edit")">
+                @if (this.Model.Parent != null)
+                {
+                    <input type="hidden" value="@this.Model.Parent.Id" name="parentId"/>
+                }
+                <input type="hidden" name="Id" value="@this.Model.Id"/>
+                <div class="control-group">
+                    @Html.LabelFor(s => s.Name, new { @class = "control-label" })
+                    <div class="controls">
+                        @(editPermission ? Html.TextBoxFor(s => s.Name) : Html.TextBoxFor(s => s.Name, new { disabled = "disabled" }))
+                        @Html.ValidationMessageFor(s => s.Name)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
+                    <div class="controls">
+                        @(editPermission ? Html.TextAreaFor(s => s.Remark) : Html.TextAreaFor(s => s.Remark, new { disabled = "disabled" }))
+                        @Html.ValidationMessageFor(s => s.Remark)
+                    </div>
+                </div>
+                @if (editPermission)
+                {
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon-pencil icon-white"></i>@Resources.Basic.Save</button>
+                    </div>
+                }
+                </form>
+        
+            }
+        </div>
+    </div>
+</div>

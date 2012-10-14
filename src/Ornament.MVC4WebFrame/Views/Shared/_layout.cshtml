@@ -1,0 +1,43 @@
+﻿@using System.Globalization
+@using System.Web.Optimization
+@using Resources
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/global")" rel="stylesheet" type="text/css" />
+    <!--[if (gte IE 6)&(lte IE 8)]>
+            <script type="text/javascript" src="@Url.Content("~/Scripts/selectivizr-min.js")"></script>
+        <![endif]-->
+    <!--[if lt IE 9]>
+            <script  type="text/javascript" src="@Url.Content("~/Scripts/html5shiv.js")"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/component")
+    @RenderSection("head", false)
+</head>
+<body>
+    @Html.Partial("_topMenu")
+    <header class="container">
+        <div class="logo">
+            <h1>
+                Oranment</h1>
+            <p>
+                Integrated NHibernate,Castle and a smpale rbac permission framework</p>
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+    <footer class="container" id="footer">
+        <hr />
+        Ornament 1.01 under the MIT lisence
+    </footer>
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("script", false)
+</body>
+</html>

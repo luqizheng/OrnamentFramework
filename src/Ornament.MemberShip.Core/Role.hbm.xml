@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Ornament.MemberShip" assembly="Ornament.MemberShip.Core">
+  <subclass name="Role"  lazy="false" extends="IPerformer" discriminator-value="role">
+    <join  table="MBS_Role">
+      <key column="Id"></key>
+      <property name="Remark" length="100" type="String"></property>
+      <property name="Name" length="100" type="String"></property>
+      <set name="Permissions" access="nosetter.camelcase-underscore"
+           table="MBS_PermissionRoleRelation" cascade="save-update">
+        <key column="roleId" foreign-key="FK_ROLEID_PermissionRoleRelation"></key>
+        <many-to-many class="Ornament.MemberShip.Permissions.Permission,Ornament.MemberShip.Core"
+                      column="PermissionId" foreign-key="FK_PermisonID_PermissionRoleRelation"></many-to-many>
+      </set>
+    </join>
+  </subclass>
+
+</hibernate-mapping>

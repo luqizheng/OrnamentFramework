@@ -1,0 +1,29 @@
+﻿@using Ornament.MemberShip
+@model Ornament.MemberShip.Org
+           
+@if (Model != null)
+{
+    Org current = Model;
+    <ul class="breadcrumb">
+        <li>
+            @Html.ActionLink("root", "Typography", new {id = ""})
+            <span class="divider">/</span> </li>
+        @{
+            while (current != null)
+            {
+                bool hasParent = current.Parent != null;
+                Org item = current;
+                current = current.Parent;
+
+
+                <li @(!hasParent ? "class=active" : "")>
+                    @Html.ActionLink(item.Name, "Typography", new {id = item.Id})
+                    @if (current != null)
+                    {
+                        <span class="divider">/</span>
+                    }
+                </li>
+            }
+        }
+    </ul>
+}

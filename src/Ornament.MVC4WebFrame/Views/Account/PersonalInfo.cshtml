@@ -1,0 +1,68 @@
+﻿@model Ornament.MemberShip.User
+
+@{
+    ViewBag.Title = "BasicInfo";
+    Layout = "~/Views/Shared/Empty.cshtml";
+}
+<style type="text/css">
+    #Pinfo .control-group .control-label
+    {
+        width: 250px;
+    }
+    #Pinfo .control-group .controls .control-label
+    {
+        width: 160px;
+        text-align: left;
+        padding-left: 8px;
+    }
+</style>
+<fieldset class="form-horizontal" id="Pinfo">
+    <div class="control-group">
+        @Html.LabelFor(s => s.UpdateTime, new { @class = "control-label" })
+        <div class="controls">
+            <label class="control-label">
+                @this.Model.UpdateTime
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(s => s.CreateTime, new { @class = "control-label" })
+        <div class="controls">
+            <label class="control-label">
+                @Model.CreateTime
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(s => s.LastPasswordChangedDate, new { @class = "control-label" })
+        <div class="controls">
+            <label class="control-label">
+                @Model.LastPasswordChangedDate
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(s => s.LastLockoutDate, new { @class = "control-label" })
+        <div class="controls">
+            <label class="control-label">
+                @Model.LastLockoutDate
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(s => s.LastLoginDate, new { @class = "control-label" })
+        <div class="controls">
+            <label class="control-label">
+                @Model.LastLoginDate
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        @Html.LabelFor(s => s.LastActivityDate, new { @class = "control-label" })
+        <div class="controls">
+            <label class="control-label">
+                @Model.LastActivityDate
+            </label>
+        </div>
+    </div>
+</fieldset>

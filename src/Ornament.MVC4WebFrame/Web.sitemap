@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0 MvcSiteMapSchema.xsd"
+            enableLocalization="true">
+
+  <mvcSiteMapNode resourceKey="home" controller="Home" action="Index" title="Home" imageUrl="icon-home"
+                   userOperator="Ornament.MVCWebFrame.Models.Membership.UserOperator,Ornament.MVCWebFrame"
+                   roleOperator="Ornament.MVCWebFrame.Models.Membership.RoleOperator,Ornament.MVCWebFrame"
+                   userGroupOperator="Ornament.MVCWebFrame.Models.Membership.UserGroupOperator,Ornament.MVCWebFrame">
+    <!-- Main -->
+    <mvcSiteMapNode action="Index" controller="Product" title="Projects" area="Projects" imageUrl="icon-comments">
+      <mvcSiteMapNode area="Projects" controller="Product" action="Index" title="Product List">
+        <mvcSiteMapNode area="Projects" controller="Product" action="Edit" title="Edit Product" clickable="false">
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode area="Projects" controller="Project" action="Index" title="Project List">
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="考勤" imageUrl="icon-time">
+      <mvcSiteMapNode action="Index" controller="Employee" area="Attendance" title="雇员" imageUrl="icon-user">
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+
+
+    <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-user">
+      <!--<mvcSiteMapNode controller="User" action="index" area="MemberShips" resourceKey="createUser" operator="@userOperator.Modify" />
+      <mvcSiteMapNode controller="Role" action="index" area="MemberShips" resourceKey="createRole" operator="@roleOperator.Modify" />
+      <mvcSiteMapNode controller="UserGroups" action="index" area="MemberShips" resourceKey="createUserGroup" operator="@userGroupOperator.Modify" />-->
+
+      <!--<mvcSiteMapNode resourceKey="createOrg" area="MemberShips" controller="Orgs" action="Create"
+                   operator="Ornament.MVCWebFrame.Models.Membership.OrgOperator,Ornament.MVCWebFrame:Read" />-->
+      <mvcSiteMapNode  area="MemberShips" action="Index" controller="User"
+         resourceKey="userList" operator="@userOperator.Read">
+      </mvcSiteMapNode>
+      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" operator="@roleOperator.Read" />
+      <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Index" resourceKey="userGroupList" />
+      <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" />
+      <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" />
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" controller="EventLog" area="Application">
+      <mvcSiteMapNode resourceKey="eventLog"></mvcSiteMapNode>
+      <mvcSiteMapNode resourceKey="dataInit" area="Settings" controller="Application" action="DatabaseInit"></mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+
+    <mvcSiteMapNode  title="Document" area="Docs" action="Index" controller="Dashboard" imageUrl="icon-thumbs-up">
+      <mvcSiteMapNode title="Configuration" area="Docs" controller="Configuration" imageUrl="icon-cogs">
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="UI" area="Docs" action="Bootstrap" controller="Dashboard" imageUrl="icon-eye-open">
+        <mvcSiteMapNode title="BaseCss" area="Docs" action="Typography" controller="BaseCss">
+          <mvcSiteMapNode title="Typography" area="Docs" action="Typography" controller="BaseCss"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Code" area="Docs" action="Code" controller="BaseCss"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Table" area="Docs" action="Table" controller="BaseCss"></mvcSiteMapNode>
+
+          <mvcSiteMapNode title="Form" area="Docs" action="Form" controller="BaseCss"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Buttons" area="Docs" action="Buttons" controller="BaseCss"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Images" area="Docs" action="Image" controller="BaseCss"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Icons" area="Docs" action="Icons" controller="BaseCss"></mvcSiteMapNode>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Component" area="Docs" action="Dropdowns" controller="Component">
+          <mvcSiteMapNode title="Dropdowns" area="Docs" action="Dropdowns" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Buttons group" area="Docs" action="ButtonGroup" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Buttons dropdowns" area="Docs" action="ButtonsDropdowns" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Navs" area="Docs" action="Navs" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Navbar" area="Docs" action="Navbar" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Breadcrumbs" area="Docs" action="Breadcrumbs" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Pagination" area="Docs" action="Pagination" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Typography" area="Docs" action="Typography" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Thumbnails" area="Docs" action="Thumbnails" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Alerts" area="Docs" action="Alerts" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Progress bars" area="Docs" action="ProgressBar" controller="Component"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Misc" area="Docs" action="Misc" controller="Component"></mvcSiteMapNode>
+        </mvcSiteMapNode>
+        <mvcSiteMapNode title="Javascript" area="Docs" controller="Javascript"></mvcSiteMapNode>
+
+        <mvcSiteMapNode title="Plugin" area="Docs" controller="Plugin" action="FileManager">
+          <mvcSiteMapNode title="FileManager" area="Docs" controller="Plugin" action="FileManager"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Richer Editor" area="Docs" controller="Plugin" action="Editor"></mvcSiteMapNode>
+          <mvcSiteMapNode title="Date Picker" area="Docs" controller="Plugin" action="DatePicker"></mvcSiteMapNode>
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+
+  </mvcSiteMapNode>
+
+
+
+</mvcSiteMap>

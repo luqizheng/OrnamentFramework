@@ -1,0 +1,110 @@
+﻿@using Ornament.MemberShip
+@using Ornament.MemberShip.Dao
+@using Ornament.MemberShip.Permissions
+@using Ornament.Web
+@using Qi.Web
+@using Resources
+@model Ornament.MemberShip.User
+@{
+    ViewBag.Title = MemberShip.AssignRoles + ":" + Model.Name;
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    IList<UserGroup> allUserGroups = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().GetAll();
+    IList<Role> allRoles = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao().GetAll();
+
+    IOrderedQueryable<Permission> allPermissions = from a in OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().Permissions
+                                                   orderby a.Name
+                                                   select a;
+}
+<div class="box">
+    <div class="content">
+        @using (Html.BeginForm())
+        {
+            <div class="btn-toolbar">
+                <button type="submit" class="btn btn-primary">
+                    <i class="icon-pencil icon-white"></i>@Basic.Save</button>
+                <a id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+            </div>
+       
+            <input type="hidden"  value="@Model.LoginId" name="LoginId"/>
+            <div class="row-fluid">
+                <fieldset class="form-horizontal span4" id="UserGroups">
+                    <legend>@MemberShip.UserGroup</legend>
+                    @foreach (UserGroup ug in allUserGroups)
+                    {
+                        <label for="@ug.Id" class="checkbox" title="@ug.Remark">
+                            <input id="@ug.Id" name="UserGroups"  value="@ug.Id" type="checkbox" checked="@Model.GetUserGroups().Contains(ug)"/>@ug.Name</label>
+                    }
+                </fieldset>
+                <fieldset class="form-horizontal span4 highlight" id="Roles">
+                    <legend>@MemberShip.Role</legend>
+                    @foreach (Role role in allRoles)
+                    {
+                        string check = Model.InRole(role, false) ? "checked=\"checked\"" : "";
+
+                        <label for="@role.Id" class="checkbox" title="@role.Remark">
+                            <input id="@role.Id" name="Roles"  value="@role.Id"  type="checkbox" @check/>@role.Name</label>
+                    }
+                </fieldset>
+                <fieldset class="form-horizontal span4" id="permissionPanel">
+                    <legend>@MemberShip.Permission</legend>
+                    <ul class="nav-list nav">
+                        @{
+                    object resourceId = null;
+                    foreach (Permission bag in allPermissions)
+                    {
+                        if (resourceId != bag.Resource)
+                        {
+                            <li class="nav-header">@bag.Resource.ToString()</li>
+                            resourceId = bag.Resource;
+                        }
+                            <li id="@bag.Id"><a title="@bag.Remark"><i></i>@bag.Name</a></li>
+                    }
+
+                        }
+                    </ul>
+                </fieldset>
+            </div>
+        }
+    </div>
+</div>
+@section head{
+    <style type="text/css">
+        .highlight
+        {
+            color: blue;
+        }
+    </style>
+}
+@section script
+{
+    <script type="text/javascript">
+        var userGroupMap = @MvcHtmlString.Create(JsonHelper.ToJson(ViewData["userGroupRoleMap"]));
+        var roleGroupMap = @MvcHtmlString.Create(JsonHelper.ToJson(ViewData["rolePermissionMap"]));
+
+        $("#UserGroups input").change(function() {
+            $("#Roles label").removeClass("active");
+            $("#UserGroups input:checked").each(function() {
+                var groupId = $(this).attr("id");
+                $.each(userGroupMap[groupId], function() {
+                    var roleId = $("#Roles label[for=" + this + "]").addClass("highlight").children().attr("id");
+                    $.each(roleGroupMap[roleId], function() {
+                        $("#permissionPanel li[id=" + this + "]").addClass("active");
+                    });
+                });
+            });
+        }).change();
+
+        $("#Roles input").change(function() {
+
+            $("#permissionPanel li").removeClass("active");
+
+            $("#Roles input:checked").each(function() {
+                var roleId = $(this).attr("id");
+                $.each(roleGroupMap[roleId], function() {
+                    $("#permissionPanel li[id=" + this + "]").addClass("active");
+                });
+            });
+        }).change();
+
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@using System.Globalization
+@using System.Web.Profile
+@using MvcSiteMapProvider
+@using Ornament.Web
+@using Ornament.Web.MemberShips
+@{
+    SiteMapNodeCollection topMenus = SiteMap.RootNode.ChildNodes;
+
+    SiteMapNode activedNode;
+    if (!Html.CurrentNodeMatchParent(topMenus, out activedNode))
+    {
+        activedNode = SiteMap.RootNode;
+    }
+
+    var siteMapPermission = new SiteMapPermission(OrnamentContext.Current, Ornament.Context.OperatorResourceManager);
+    ProfileBase profile = Profile;
+    if (String.IsNullOrEmpty((string)profile["Language"]))
+    {
+        profile["Language"] = "en-US";
+    }
+    var languate = new CultureInfo(profile["Language"].ToString().Substring(0, 2), true);
+}
+
+@helper RenderMenu(MvcSiteMapNode node, SiteMapPermission site, SiteMapNode currentNode)
+    {
+    if (site.IsAccessibleToUser(node))
+    {
+        string clz = node == currentNode ? "class=active" : "";
+    <li @clz><a href="@node.Url">
+        @if (node.ImageUrl != null)
+        {
+            <i class="@node.ImageUrl"></i>
+        }
+        @node.Title
+    </a></li>
+    }
+}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <ul class="nav">
+                @RenderMenu((MvcSiteMapNode)SiteMap.RootNode, siteMapPermission, activedNode)
+                @for (int i = 0; i < SiteMap.RootNode.ChildNodes.Count; i++)
+                {
+                    SiteMapNode node = SiteMap.RootNode.ChildNodes[i];
+                    @RenderMenu((MvcSiteMapNode)node, siteMapPermission, activedNode)
+                }
+            </ul>
+            @Html.Partial("LogOnUserControl")
+            <ul class="nav pull-right">
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    <i class="icon-globe"></i>@languate.NativeName<i class="icon-chevron-down"></i></a>
+                    @Html.Partial("_multiLangChoice")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

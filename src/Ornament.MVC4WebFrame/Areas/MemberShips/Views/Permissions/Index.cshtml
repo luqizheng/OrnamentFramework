@@ -1,0 +1,80 @@
+﻿@using Ornament.MemberShip.Permissions
+@using Ornament.Web;
+@model IEnumerable<Ornament.MemberShip.Permissions.Permission>
+@{
+    ViewBag.Title = "Permissions";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+@section script{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $(".delete").live('click', function () {
+                if (confirm("@Html.GetResourceString("warnning_deleting_msg")")) {
+                    var target = $(this);
+                    $.getJSON('@Url.Action("Delete")/' + target.attr("href"), {}, function (result) {
+                        oAlert(result.Message);
+                        if (result.Success) {
+                            target.parent().parent().remove();
+                        }
+                    });
+                }
+                return false;
+            });
+
+            $("#add").button({icons:{primary:"ui-icon-plus"}});
+        });
+      
+    </script>
+}
+<div class="page-header">
+    <h1>
+        Permission list</h1>
+    <p>
+        Maintain the permission
+    </p>
+</div>
+<div class="box">
+    <div class="content">
+        <div class="btn-toolbar">
+            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white">
+            </i>@Resources.Basic.Create</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 100px">
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => ((Permission)null).Name)
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => ((Permission)null).Remark)
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => ((Permission)null).Operator)
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(Resources.Basic.Edit, "Edit", new { id = item.Id }) |
+                        @Html.ActionLink(Resources.Basic.Delete, "Delete", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item, "Operators")
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

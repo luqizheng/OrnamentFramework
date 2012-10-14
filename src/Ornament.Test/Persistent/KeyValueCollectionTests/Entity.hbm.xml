@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ornament.Core.NHibernateTest" namespace="Ornament.Core.NHibernateTest.KeyValueCollectionTests">
+  <class  table="CoreTest_Entity" name="Entity">
+    <id type="Guid" name="Id" unsaved-value="00000000-0000-0000-0000-000000000000">
+      <generator class="guid"></generator>
+    </id>
+    <property name="Collection"  access="nosetter.camelcase"
+              type="Ornament.NHibernates.Extends.KeyValueCollectionType,Ornament.Core"></property>
+
+
+  </class>
+
+  <class table="CoreTest_B" name="A">
+    <id name="Id">
+      <generator class="assigned"></generator>
+    </id>
+    <property name="Name"></property>
+    <property name="RefId"></property>
+
+  </class>
+
+  <class table="CoreTest_A" name="B">
+    <id name="Id">
+      <generator class="assigned"></generator>
+    </id>
+    <property name="Name"></property>
+    <property name="RefId"></property>
+  </class>
+
+
+</hibernate-mapping>

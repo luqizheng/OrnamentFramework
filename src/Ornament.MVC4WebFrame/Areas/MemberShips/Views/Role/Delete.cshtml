@@ -1,0 +1,66 @@
+﻿@using Ornament.MemberShip
+@using Ornament.Web
+@using Resources
+@model Ornament.MemberShip.Role
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var members = (IList<IMember>) ViewData["members"];
+    int index = 0;
+}
+@section script
+{
+    <script type="text/javascript">
+        $(".btn-toolbar a:first")
+            .click(function() {
+                if (confirm("@Html.GetResourceString("waring_deleting_role")")) {
+                    $("form").submit();
+                }
+            });
+    </script>
+}
+<div class="box">
+    <div class="content">
+        <div class="btn-toolbar">
+            <a class="btn btn-danger"><i class="icon-warning-sign icon-white"></i>@Basic.Delete</a>
+            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            @Html.HiddenFor(s => s.Id)
+        }
+        <h4>
+            @Html.Label(Html.GetResourceString("info_role_in_using"))
+        </h4>
+        <fieldset class="ui-corner-all" style="float: left; width: 240px">
+            <legend>@MemberShip.User</legend>
+            <ul>
+                @foreach (IMember member in members)
+                {
+                    if (member is User)
+                    {
+                        <li title="@member.Remark">@member.Name</li>
+                        index++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            </ul>
+        </fieldset>
+        <fieldset class="ui-corner-all" style="float: left; width: 240px">
+            <legend>@MemberShip.User</legend>
+            <ul>
+                @for (int i = index; i < members.Count; i++)
+                {
+                    IMember member = members[i];
+                    <li title="@member.Remark">@member.Name</li>
+                }
+            </ul>
+        </fieldset>
+        <div style="clear: both">
+        </div>
+    </div>
+</div>

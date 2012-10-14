@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ornament.Messages.Core" namespace="Ornament.Messages.Stores">
+  <class name="Store" table="Msgs_Store">
+    <id name="Name" length="32">
+      <generator class="assigned"></generator>
+    </id>
+    <discriminator formula="Name" type="String"></discriminator>
+
+  </class>
+  <subclass name="MemoryStore" discriminator-value="Memory" extends="Store">
+
+  </subclass>
+  <subclass name="FileStore" discriminator-value="File" extends="Store">
+
+  </subclass>
+</hibernate-mapping>

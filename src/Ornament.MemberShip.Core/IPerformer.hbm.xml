@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Ornament.MemberShip" assembly="Ornament.MemberShip.Core">
+  <class name="IPerformer" table="MBS_Performer" abstract="true" >
+    <id name="Id" length="32">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <discriminator column="PerformerType" type="String" length="10"></discriminator>
+    <property name="Name" length="30" type="String"></property>
+  </class>
+</hibernate-mapping>

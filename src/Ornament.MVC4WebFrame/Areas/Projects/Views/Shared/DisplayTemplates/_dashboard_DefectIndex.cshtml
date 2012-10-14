@@ -1,0 +1,50 @@
+﻿@using Qi.Web.Mvc
+@using QiProject.Defects
+@model IEnumerable<QiProject.Defects.Defect>
+@{
+}
+<section>
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <select class="multiChoice" multiple="multiple">
+                <option value="11">SchoolConnects-schools</option>
+            </select>
+            <a href="@Url.Action("Create", "Defects", new {Area = "Projects"})" class="btn btn-small" id="btnAddDefect" data-toggle="modal">
+                <i class="icon-hand-right"></i>Add Defect</a>
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th>
+                </th>
+                <th>
+                    @Html.ContentFor(model => ((Defect) null).Summary)
+                </th>
+                <tr>
+            </thead>
+            <tbody>
+                @foreach (Defect defect in Model)
+                {
+                    <tr>
+                        <td>@defect.Summary
+                        </td>
+                        <td>@defect.Owener.ToString()
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <div class="alert alert-block">
+        <h5>
+            Can't find any Defects.
+        </h5>
+        <p>
+            It may be not a project belong to you....balabala-
+        </p>
+    </div>
+</section>
+<script type="text/javascript"> </script>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ornament.Messages.Core" namespace="Ornament.Messages">
+  <class name="Template" table="Msgs_Template">
+    <composite-id>
+      <key-property  name="Name" length="128">      </key-property>
+      <key-many-to-one name="MessageType" class="MessageType"></key-many-to-one>
+    </composite-id>
+    <version name="Version" type="Int32" unsaved-value="0"></version>
+    <property name="Path" length="50" type="String"></property>
+  </class>
+
+</hibernate-mapping>

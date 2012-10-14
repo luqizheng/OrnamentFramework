@@ -1,0 +1,58 @@
+﻿@using Qi
+@model MembershipPasswordFormat
+@{
+    ViewBag.Title = "ResetPasswrodFormat";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+@section head
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var formater = "@Model";
+            $("form").submit(function () {
+                var text = $("#format [value=" + $("#format").val() + "]").text();
+
+                var msg = "Do you want to changed password format from " + formater + " to " + text;
+
+                if (formater == "@MembershipPasswordFormat.Hashed" && text != "@MembershipPasswordFormat.Hashed") {
+                    msg += ",if yes, user have to retrieval password by himeself?";
+                }
+                else {
+                    msg += "?";
+                }
+
+                return confirm(msg);
+            });
+        });
+    </script>
+}
+<p>
+    <a href="http://msdn.microsoft.com/en-us/library/system.web.security.membershippasswordformat.aspx">
+        Password format</a>
+    <ul style="list-style-type: circle">
+        <li><em>Hashed</em> format,Passwords are encrypted one-way using the SHA1 hashing algorithm.
+            If you want to change the Hashed to another format,all users have to retrieval password.
+        </li>
+        <li><em>Encrypted</em> format, it can be switched to Clear format or Hashed.</li>
+        <li><em>Clear</em> Passwords are not encrypted.<b>Suggest don't use that, it isn't safe.</b>
+        </li>
+    </ul>
+</p>
+<fieldset>
+    <legend>Switch Password:</legend>
+    <form class="cssform" method="post">
+    <p>
+        <label for="passwordFormat">
+            Password Format
+        </label>
+        @{
+            var select = from s in EnumHelper.GetObjects<MembershipPasswordFormat>()
+                         select new SelectListItem() { Text = s.ToString(), Value = Convert.ToInt32(s).ToString(), Selected = Model.ToString() == s.ToString() };
+        }
+        @Html.DropDownList("format", select)
+    </p>
+    <p>
+        <input type="submit" value="Rebuid" />
+    </p>
+    </form>
+</fieldset>

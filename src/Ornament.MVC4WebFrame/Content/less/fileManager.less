@@ -1,0 +1,61 @@
+.fileManager{	
+	.border-radius(@inputBorderRadius);
+	background-color:@white;
+	border:solid 1px @inputBorder;
+	 display: inline-block;
+  padding: 4px 6px;
+  margin-bottom: 9px;
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  color: @gray;
+  width:100%;
+}
+.fileManager ul{
+	list-style:none;
+	margin-top:15px;
+}
+.fileManager li .item{
+	display: inline-block;
+	border:dotted 1px @white;	
+	box-shadow:none;
+	list-style:none;
+	float: left;
+	padding:21px 0px 10px 0px;
+	*display:inline;
+	*zoom:1px;
+	margin-right:15px;
+	width:120px;
+	cursor: pointer;
+}
+.fileManager li .curState{		
+	background-color:@warningBackground
+	 
+}
+
+.fileManager li .item > img{
+	display: block;
+	margin:0 auto;	
+	
+}
+.fileManager li .item .btn-toolbar{	
+	display: block;
+	height:11px;	  
+    margin-bottom: 10px;
+	position: relative;
+	top:-10px;
+	margin-top: 0px
+}
+
+.fileManager .fileName{	
+	margin:10px auto 0 auto;	
+	text-align: center;
+	height:30px;
+}
+.fileManager a.item{
+	display:block;
+}
+.fileManager li a.item:hover{
+	padding-top:0px;
+	border:dotted 1px @inputBorder;
+	 .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+}

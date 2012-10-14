@@ -1,0 +1,21 @@
+﻿@using Resources
+@model QiProject.Defects.Defect
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div class="page-header">
+    <h2>
+        Create Defect for @ViewBag.Project</h2>
+</div>
+<div class="box">
+    <div class="content">
+        <form class="form-horizontal" action="@Url.Action("Save")" method="POST">
+        <div class="btn-toolbar form-actions">
+            <input type="submit" value="@Basic.Create" class="btn btn-primary"/>
+        </div>
+        @Html.ValidationSummary(true)
+        @Html.Partial("EditorTemplates/Defect", this.Model, new ViewDataDictionary(this.ViewData))
+        </form>
+    </div>
+</div>

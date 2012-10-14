@@ -1,0 +1,136 @@
+﻿@using Ornament.Web
+@using Qi
+@model Ornament.MVCWebFrame.Areas.Docs.Models.DateTimePickerModel
+@{
+    ViewBag.Title = "DatePicker";
+    Layout = "../Shared/_codeLayout.cshtml";
+}
+<div class="page-header">
+    <h2>
+        DatePicker
+    </h2>
+</div>
+<div class="box">
+    <div class="content">
+        <h4>
+            Pure Html for DatePicker and input mask for Date
+        </h4>
+        <div class="text-info">
+            <ul>
+                <li>DatePicker is https://github.com/eternicode/bootstrap-datepicker </li>
+                <li>InputMask is https://github.com/RobinHerbots/jquery.inputmask </li>
+            </ul>
+        </div>
+        <form>
+        <div class="control-group">
+            <label>
+                Time Picker & input mask</label>
+            <div class="controls">
+                <div class="input-append date" id="example1" data-date="@DateTime.Now.ToString("yyyy-MM-dd")" data-date-format="yyyy-mm-dd">
+                    <input size="16" type="text" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <pre class="prettyprint lang-html">
+            @{
+                var code = @"
+ <div class=""controls"">
+        <div class=""input-append date"" id=""example1"" data-date=""@DateTime.Now.ToString(""yyyy-MM-dd"")"" data-date-format=""yyyy-mm-dd"">
+            <input size=""16"" type=""text"" value=""@DateTime.Now.ToString(""yyyy-MM-dd"")"">
+            <span class=""add-on""><i class=""icon-calendar""></i></span>
+        </div>
+</div>
+ @Scripts.Render(""~/Scripts/DatePicker"")
+<script type=""text/javascript"">
+        $('#example1').children().first().inputmask('y-m-d');
+</script>
+";
+            }
+@code
+        </pre>
+        </form>
+    </div>
+</div>
+<div class="box">
+    <div class="content">
+        <h4>
+            Html.Helper for DateTime type
+        </h4>
+        <form>
+        @{
+            var code2 = @"
+<div class=""control-group"">
+            <label>
+                Time Picker using HTMLHelper</label>
+            <div class=""controls"">
+                @Html.DatePickerFor(f => f.Now,""yyyy/MM/dd"")
+            </div>
+        </div>";
+        }
+        <div class="control-group">
+            <label>
+                Date Picker using HTMLHelper</label>
+            <div class="controls">
+                @Html.DatePickerFor(f => f.Now,"yyyy/MM/dd")
+            </div>
+        </div>
+        <pre class="prettyprint lang-html">
+@code2
+</pre>
+        </form>
+    </div>
+</div>
+<div class="box">
+    <div class="content">
+        <form>
+        <div class="control-group">
+            <label>
+                Time Picker & input mask</label>
+            <div class="controls">
+                <div class="input-append" id="example2">
+                    <input size="16" type="text" value="@DateTime.Now.ToString("HH:mm:ss")">
+                    <span class="add-on"><i class="icon-time"></i></span>
+                </div>
+            </div>
+        </div>
+        </form>
+        <pre class="prettyprint lang-html">
+@{var code3 = @"
+ <div class=""controls"">
+        <div class=""input-append"" id=""example2"">
+            <input size=""16"" type=""text"" value=""@DateTime.Now.ToString(""HH:mm:ss"")"">
+            <span class=""add-on""><i class=""icon-calendar""></i></span>
+        </div>
+</div>
+ @Scripts.Render(""~/Scripts/DatePicker"")
+<script type=""text/javascript"">
+          $('#example2').children().first().inputmask('h:s:s');
+</script>
+";
+}
+@code3
+</pre>
+    </div>
+</div>
+<div class="box">
+    <div class="content">
+        <from>
+        <div class="control-group">
+            <label class="control-label">Date Picker using HTMLHelper</label>
+            <div class="controls">
+                @Html.TimeInputFor(f => f.TimeNow)
+            </div>
+        </div>
+        </from>
+    </div>
+</div>
+@section script
+{
+    <!--https://github.com/RobinHerbots/jquery.inputmask-->
+    @Scripts.Render("~/Scripts/InputMasker")
+    <script type="text/javascript">
+        $('#example1').children().first().inputmask("y-m-d");
+        $('#example2').children().first().inputmask('h:s:s');
+    </script>
+}

@@ -1,0 +1,41 @@
+﻿@using Ornament.Web
+@model Ornament.MVCWebFrame.Models.RegistAccountModel
+@{
+    ViewBag.Title = Html.GetResourceString("title");
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+<fieldset class="cssform">
+    <legend>@Html.GetResourceString("title")</legend>
+    @Html.ValidationSummary()
+    @using (Html.BeginForm())
+    {
+        <p>
+            @Html.LabelFor(s => s.LoginId)
+            @Html.TextBoxFor(s => s.LoginId)
+            @Html.ValidationMessageFor(s => s.LoginId)
+        </p>
+        
+        <p>
+            @Html.LabelFor(s => s.Email)
+            @Html.TextBoxFor(s => s.Email)
+            @Html.ValidationMessageFor(s => s.Email)
+        </p>
+            
+        <p>
+            @Html.LabelFor(s => s.Password)
+            @Html.TextBoxFor(s => s.Password)
+            @Html.ValidationMessageFor(s => s.Password)
+        </p>    
+        <p>
+            @Html.LabelFor(s => s.ConfirmPassword)
+            @Html.TextBoxFor(s => s.ConfirmPassword)
+            @Html.ValidationMessageFor(s => s.ConfirmPassword)
+        </p>            
+        <p>
+            <input type="submit" value="@Resources.Basic.Regist" />
+        </p>
+            
+            
+            
+    }
+</fieldset>

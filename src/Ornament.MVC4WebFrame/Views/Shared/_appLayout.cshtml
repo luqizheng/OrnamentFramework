@@ -1,0 +1,23 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Ornament Application";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@section head
+{
+    @RenderSection("head", false)
+}
+<div class="row">
+    <div class="span2 affix-top">
+        @Html.Partial("_mainMenu")
+    </div>
+    <div class="span10">
+        @Html.MvcSiteMap().SiteMapPath("SiteMapPathHelperModel")
+        @RenderBody()
+    </div>
+</div>
+@section script
+{
+    
+    @RenderSection("script", false)
+}

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ornament.Core.NHibernateTest" namespace="Ornament.Core.NHibernateTest.TimeTypeTests">
+  <class  table="CoreTest_Tips" name="Tips">
+    <id type="Guid" name="Id" unsaved-value="00000000-0000-0000-0000-000000000000">
+      <generator class="guid"></generator>
+    </id>
+    <property name="PerformTime" type="Ornament.NHibernates.Extends.TimeType,Ornament.Core"></property>
+    <property name="PopupTime" type="Ornament.NHibernates.Extends.TimeStringType,Ornament.Core"></property>
+
+  </class>
+</hibernate-mapping>

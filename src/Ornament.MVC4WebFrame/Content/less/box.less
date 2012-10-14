@@ -1,0 +1,42 @@
+﻿/*box
+-------------------------------------------------------*/
+.box {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 4px 0 -3px #FFFFFF, 0 4px 0 -2px #BEC2C8, 0 8px 0 -5px #FFFFFF, 0 8px 0 -4px #BEC2C8;    
+    margin-bottom: 20px;
+    position: relative;
+	color:@black;
+}
+.box .content:after {
+    clear: both;
+}
+.box .content:before, .box .content:after {
+    content: "";
+    display: table;
+}
+.box .content:before, .box .content:after {
+    content: "";
+    display: table;
+}
+.box .content {
+    -moz-box-sizing: border-box;
+    background-color: @white;
+    border: 1px solid #BEC2C8;
+    border-radius: 2px 2px 0 0;
+    padding: 23px 23px 3px;
+}
+.box header {
+    border-bottom: 1px solid @hrBorder;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.box footer {
+    color: #A4A5AA;
+    font-size: 10px;
+    margin: 23px 0 20px;
+    text-transform: uppercase;
+	border-bottom:1px solid @hrBorder
+}
+.box .content h2, .box .content h3{
+	line-height:0;
+}

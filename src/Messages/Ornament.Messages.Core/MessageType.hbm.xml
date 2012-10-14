@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Ornament.Messages.Core" namespace="Ornament.Messages">
+  
+  <class name="MessageType" table="Msgs_MessageType">
+    <id name="Id">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <property name="Name" length="50" type="String"></property>
+    <property name="Remark" length="200" type="String"></property>
+    <property name="OrderId" length="150" type="String"></property>
+    <many-to-one name="Parent" class="MessageType" column="ParentId"></many-to-one>
+    <set name="Childs" access="nosetter.camelcase-underscore">
+      <key column="ParentId"></key>
+      <one-to-many class="MessageType"/>
+    </set>  
+  </class>
+
+
+
+</hibernate-mapping>
