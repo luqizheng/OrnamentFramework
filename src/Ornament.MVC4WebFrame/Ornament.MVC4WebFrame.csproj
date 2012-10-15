@@ -202,6 +202,7 @@
     <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeGroupController.cs" />
+    <Compile Include="Areas\Attendance\Models\CardsModel.cs" />
     <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
@@ -326,6 +327,8 @@
     <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\Employee.cshtml" />
     <Content Include="Areas\Attendance\Views\Employee\Create.cshtml" />
     <Content Include="Areas\Attendance\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\CardsEditor.cshtml" />
+    <Content Include="Areas\Attendance\Views\Employee\Cards.cshtml" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />
     <None Include="Content\less\bootstrap\accordion.less" />
@@ -535,7 +538,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Application\Models\" />
-    <Folder Include="Areas\Attendance\Models\" />
     <Folder Include="Areas\MemberShips\Views\Shared\EditTemplates\" />
   </ItemGroup>
   <ItemGroup>

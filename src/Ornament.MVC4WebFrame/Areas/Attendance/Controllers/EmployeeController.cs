@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.MVCWebFrame.Areas.Attendance.Models;
 using Qi.Attendance;
 using Qi.Attendance.Dao;
 using Qi.Web.Mvc;
@@ -34,7 +35,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         [HttpPost, Session(Transaction = true)]
         public ActionResult Create(Employee employee)
         {
-            
+
             if (ModelState.IsValid)
             {
                 _attendanceFactory.GetEmployeeDao().SaveOrUpdate(employee);
@@ -65,6 +66,17 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         public ActionResult Delete(string id)
         {
             return View();
+        }
+
+        public ActionResult Cards(Guid id)
+        {
+            var employee = _attendanceFactory.GetEmployeeDao().Get(id);
+            var cards = _attendanceFactory.GetCardDao().GetEmployeeCards(employee);
+            return View(new CardsModel()
+                {
+                    Cards = cards,
+                    Employee = employee
+                });
         }
     }
 }

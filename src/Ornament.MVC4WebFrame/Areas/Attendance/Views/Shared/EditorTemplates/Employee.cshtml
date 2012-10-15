@@ -1,5 +1,6 @@
 ﻿@using System.Linq;
 @using System.Linq.Expressions;
+@using Ornament.MVCWebFrame.Areas.Attendance.Models
 @using Qi
 @using Qi.Attendance
 @model Qi.Attendance.Employee
@@ -30,12 +31,6 @@
                 }
             }
         </select>
-    </div>
-</div>
-<div class="control-group">
-    @Html.LabelFor(s => s.CardNo, new { @class = "control-label" })
-    <div class="controls">
-        @Html.TextBoxFor(s => s.CardNo, new { placeholder = "请输入卡号" }) @Html.ValidationMessageFor(s => s.CardNo)
     </div>
 </div>
 <div class="control-group">

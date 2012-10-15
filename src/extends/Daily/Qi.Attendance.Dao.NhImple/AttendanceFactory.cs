@@ -7,10 +7,10 @@ namespace Qi.Attendance.Dao.NhImple
         //    return new EquipmentDao();
         //}
 
+        #region IAttendanceFactory Members
+
         public IEmployeeDao GetEmployeeDao()
         {
-            
-
             return new EmployeeDao();
         }
 
@@ -18,5 +18,17 @@ namespace Qi.Attendance.Dao.NhImple
         {
             return new EmployeeGroupDao();
         }
+
+        public ICheckHistoryDao GetCheckHistoryDao()
+        {
+            return new CheckHistoryDao();
+        }
+
+        public ICardDao GetCardDao()
+        {
+            return new CardDao();
+        }
+
+        #endregion
     }
 }

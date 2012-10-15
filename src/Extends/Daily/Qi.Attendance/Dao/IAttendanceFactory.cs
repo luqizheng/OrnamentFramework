@@ -5,5 +5,7 @@ namespace Qi.Attendance.Dao
      
         IEmployeeDao GetEmployeeDao();
         IEmployeeGroupDao GetEmployeeGroup();
+        ICheckHistoryDao GetCheckHistoryDao();
+        ICardDao GetCardDao();
     }
 }

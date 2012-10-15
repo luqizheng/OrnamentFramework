@@ -27,23 +27,19 @@
                     <th>
                         状态
                     </th>
-                    <th>
-                        卡号
-                    </th>
                 </tr>
             </thead>
             @foreach (Employee employee in Model)
             {
                 <tr>
                     <td>
-                        <a href="@Url.Action("Edit", "Employee", new {id = employee.Id})" class="btn btn-small" title="编辑雇员 @employee.Name"><i class="icon-edit"></i></a>
+                        <a href="@Url.Action("Edit", "Employee", new {id = employee.Id})" class="btn btn-mini" title="编辑雇员 @employee.Name"><i class="icon-edit"></i> @Basic.Edit</a>
+                        <a href="@Url.Action("Cards", "Employee", new {id = employee.Id})" class="btn btn-mini" title="编辑雇员 @employee.Name"><i class="icon-edit"></i> 卡管理</a>
                     </td>
                     <td>@employee.Name
                     </td>
                     <td>
                         @employee.State.ToDescription()
-                    </td>
-                    <td>@employee.CardNo
                     </td>
                 </tr>
             }

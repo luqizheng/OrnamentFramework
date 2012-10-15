@@ -1,6 +1,6 @@
 namespace Qi.Attendance
 {
-    public enum AttendanceType
+    public enum CheckType
     {
         /// <summary>
         /// Starting working
@@ -11,9 +11,12 @@ namespace Qi.Attendance
         /// </summary>
         Out,
         /// <summary>
-        /// 
+        /// ²¹Ç©µ½
         /// </summary>
         RemedyIn,
+        /// <summary>
+        /// ²¹Ç©
+        /// </summary>
         RemedyOut
     }
 }

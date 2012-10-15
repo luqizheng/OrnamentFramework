@@ -11,7 +11,12 @@ namespace Qi.Attendance.Dao.NhImple
 
         private IProjection CardNumberProperty
         {
-            get { return _initialization.Once(() => Projections.Property<Employee>(s => s.CardNo)); }
+            get { return _initialization.Once(() => Projections.Property<Card>(s => s.Number)); }
+        }
+
+        private IProjection EmployeeInCardProperty
+        {
+            get { return _initialization.Once(() => Projections.Property<Card>(s => s.Employee)); }
         }
 
         private IProjection TerminationId
@@ -30,10 +35,13 @@ namespace Qi.Attendance.Dao.NhImple
                 .CreateCriteria("Equipments", "eqList")
                 .Add(Property.ForName("eqList.Id").In(equipmentListCri));
 
-            var cri = CreateDetachedCriteria()
+            var cri = DetachedCriteria.For<Card>()
+                .SetProjection(EmployeeInCardProperty)
                 .Add(Restrictions.Eq(CardNumberProperty, cardNumber))
-                .Add(Property.ForName("EquipmentGroup").In(groupCri))
+                .CreateAlias("Employee", "e")
+                .Add(Property.ForName("e.EquipmentGroup").In(groupCri))
                 .GetExecutableCriteria(this.CurrentSession);
+                
             return cri.UniqueResult<Employee>();
 
         }

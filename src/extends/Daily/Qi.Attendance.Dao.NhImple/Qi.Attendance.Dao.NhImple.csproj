@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttendanceFactory.cs" />
+    <Compile Include="CardDao.cs" />
+    <Compile Include="CheckHistoryDao.cs" />
     <Compile Include="EmployeeDao.cs" />
     <Compile Include="EmployeeGroupDao.cs" />
     <Compile Include="EquipmentDao.cs" />
