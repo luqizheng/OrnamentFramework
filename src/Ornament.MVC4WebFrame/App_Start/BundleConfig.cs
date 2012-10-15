@@ -100,8 +100,9 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             /*
              * First time, I want complie Less file on fly, 
-             * but it's havn'e any intellisences in vs.net 2010, because 2010 can't support
+             * but it's havn'e any intellisences in vs.net 2010, because 2010 can't support LESS
              * Now, I have to use MSBuild to compile Less file after build.
+             * Please run watch.bat in tools folder.
              */
 
             //following code disabled .
