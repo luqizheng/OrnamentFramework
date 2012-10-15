@@ -41,7 +41,7 @@ namespace Qi.Attendance
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("{0}({1}", Name, CardNo);
+            return string.Format("{0}({1})", Name, CardNo);
         }
     }
 }

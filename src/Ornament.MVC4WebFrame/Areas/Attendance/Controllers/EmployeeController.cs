@@ -27,26 +27,30 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, Session(Transaction = true)]
         public ActionResult Create(Employee employee)
         {
+            
             if (ModelState.IsValid)
             {
                 _attendanceFactory.GetEmployeeDao().SaveOrUpdate(employee);
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
+            ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
             return View(employee);
         }
 
         public ActionResult Edit(string id)
         {
+            ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
             return View(_attendanceFactory.GetEmployeeDao().Get(new Guid(id)));
         }
 
-        [Session(Transaction = true),HttpPost]
+        [Session(Transaction = true), HttpPost]
         public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] Employee employee)
         {
             if (ModelState.IsValid)
@@ -54,6 +58,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
                 _attendanceFactory.GetEmployeeDao().SaveOrUpdate(employee);
                 return RedirectToAction("Index");
             }
+            ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
             return View(employee);
         }
 
