@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_appLayout.cshtml";
+    
 }
 
 
+@Scripts.Render("~/bundles/ko")
 <div class="box">
     <div class="content">
+        
         @Html.Partial("EditorTemplates/CardsEditor",this.Model.Cards)
     </div>
 </div>

@@ -6,6 +6,9 @@
     <label class="control-label">
         卡列表:</label>
     <div class="controls">
+        <div>
+            <a data-bind='click: addCard ' class="btn btn-small" href="#">@Basic.Create</a>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -19,20 +22,19 @@
                     </td>
                 </tr>
             </thead>
-            <tbody data-bind="foreach:Cards">
+            <tbody data-bind="foreach:cards">
                 <tr>
                     <td>
-                        <a class="btn btn-small" role="edit-card">@Basic.Edit</a> <a class="btn btn-small"
-                            role="delete-card">@Basic.Delete</a>
+                        <a class="btn btn-small" role="delete-card">@Basic.Delete</a>
                     </td>
                     <td>
                         <input type="text" name="Card.Number" data-bind="value:Number" />
                         <input type="hidden" name="Card.Id" data-bind="value:Id" />
                     </td>
                     <td>
-                        <select name="Card.State">
+                        <select name="Card.State" class="span2" data-bind="value:State">
                             <option value="@CardState.Normal">@EnumHelper.ToDescription(CardState.Normal)</option>
-                            <option value="@CardState.Normal">@EnumHelper.ToDescription(CardState.Cancel)</option>
+                            <option value="@CardState.Cancel">@EnumHelper.ToDescription(CardState.Cancel)</option>
                         </select>
                     </td>
                 </tr>
@@ -41,9 +43,21 @@
     </div>
 </div>
 <script type="text/javascript">
-    var cards=@Qi.Web.JsonHelper.ToJson(this.Model);
-    var cardsModel = function(items) {
-        ko.observableArray(items);
+    var myCards = [{
+        Number: "a",
+        Id: "dkjfkdjfkdjf",
+        State: "@CardState.Normal"
+    }, {
+        Number: "12312312312",
+        Id: "dkjfkdjfk4ddjf",
+        State: "@CardState.Cancel"
+    }];
+    var CardsModel = function (items) {
+        this.cards = ko.observableArray(items);
+
+        this.addCard = function () {
+            this.cards.push({ Number: "", Id: "", State: "@CardState.Normal" });
+        };
     };
-    ko.applyBindings(cardsModel);
+    ko.applyBindings(new CardsModel(myCards));
 </script>

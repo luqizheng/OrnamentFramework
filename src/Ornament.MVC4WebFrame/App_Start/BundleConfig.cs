@@ -51,6 +51,8 @@ namespace Ornament.MVCWebFrame.App_Start
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ko").Include("~/Scripts/knockout-{version}.js"));
          
         }
 
