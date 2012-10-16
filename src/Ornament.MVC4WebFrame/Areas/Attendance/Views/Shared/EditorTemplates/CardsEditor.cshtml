@@ -1,14 +1,13 @@
-﻿@using Qi
+﻿@using Ornament.MVCWebFrame.Areas.Attendance.Models
+@using Qi
+@using Qi.Web
 @using Resources
 @using Qi.Attendance
-@model IList<Card>
+@model Ornament.MVCWebFrame.Areas.Attendance.Models.CardsModel
 <div class="control-group">
-    <label class="control-label">
-        卡列表:</label>
+    @* <label class="control-label">
+        卡列表:</label>*@
     <div class="controls">
-        <div>
-            <a data-bind='click: addCard ' class="btn btn-small" href="#">@Basic.Create</a>
-        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -28,35 +27,35 @@
                         <a class="btn btn-small" role="delete-card">@Basic.Delete</a>
                     </td>
                     <td>
-                        <input type="text" name="Card.Number" data-bind="value:Number" />
-                        <input type="hidden" name="Card.Id" data-bind="value:Id" />
+                        <input  type="text" name="Cards.Number" data-bind="value:Number"/>
+                        @Html.ValidationMessageFor(m => ((CardModel)null).Number)
+                        <input type="hidden" name="Cards.Id" data-bind="value:Id" />
                     </td>
                     <td>
-                        <select name="Card.State" class="span2" data-bind="value:State">
+                        <select name="Cards.State" class="span2" data-bind="value:State">
                             <option value="@CardState.Normal">@EnumHelper.ToDescription(CardState.Normal)</option>
                             <option value="@CardState.Cancel">@EnumHelper.ToDescription(CardState.Cancel)</option>
                         </select>
                     </td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <a data-bind='click: addCard ' class="btn btn-small" href="#">@Basic.Create</a>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
 <script type="text/javascript">
-    var myCards = [{
-        Number: "a",
-        Id: "dkjfkdjfkdjf",
-        State: "@CardState.Normal"
-    }, {
-        Number: "12312312312",
-        Id: "dkjfkdjfk4ddjf",
-        State: "@CardState.Cancel"
-    }];
+    var myCards = @JsonHelper.ToJson(this.Model.Cards);
+   
     var CardsModel = function (items) {
         this.cards = ko.observableArray(items);
-
         this.addCard = function () {
-            this.cards.push({ Number: "", Id: "", State: "@CardState.Normal" });
+            this.cards.push({ Number: "", Id: "@Guid.Empty", State: "@CardState.Normal" });
         };
     };
     ko.applyBindings(new CardsModel(myCards));

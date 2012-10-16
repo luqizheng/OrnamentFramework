@@ -13,9 +13,7 @@
     <!--[if lt IE 9]>
             <script  type="text/javascript" src="@Url.Content("~/Scripts/html5shiv.js")"></script>
     <![endif]-->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/component")
+    @Scripts.Render("~/bundles/jquery", "~/bundles/modernizr", "~/bundles/component")
     @RenderSection("head", false)
 </head>
 <body>

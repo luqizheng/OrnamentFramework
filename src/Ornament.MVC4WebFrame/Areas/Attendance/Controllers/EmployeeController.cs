@@ -63,11 +63,6 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
             return View(employee);
         }
 
-        public ActionResult Delete(string id)
-        {
-            return View();
-        }
-
         public ActionResult Cards(Guid id)
         {
             var employee = _attendanceFactory.GetEmployeeDao().Get(id);
@@ -77,6 +72,11 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
                     Cards = cards,
                     Employee = employee
                 });
+        }
+        [HttpPost, Session(Transaction = true)]
+        public ActionResult Cards(CardsModel cardsModel)
+        {
+            return View(cardsModel);
         }
     }
 }
