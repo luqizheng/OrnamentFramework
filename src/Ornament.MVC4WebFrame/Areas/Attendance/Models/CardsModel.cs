@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Qi.Attendance;
 using Qi.Attendance.Dao;
 using Qi.Web.Mvc.Founders;
@@ -10,11 +11,22 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Models
     {
         public string Id { get; set; }
 
+        public CardModel()
+        {
+
+        }
+
+        public CardModel(Card card)
+        {
+            this.Id = card.Id;
+            this.Number = card.Number;
+            this.State = card.State;
+        }
         [Display(Name = "卡号")]
-        public virtual string Number { get; set; }
+        public string Number { get; set; }
 
         [Display(Name = "卡状态")]
-        public virtual CardState State { get; set; }
+        public CardState State { get; set; }
 
         public Card ToCard(ICardDao dao, Employee employee)
         {
@@ -24,21 +36,25 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Models
             card.Employee = employee;
             return card;
         }
+        public static IList<CardModel> ToCards(IList<Card> cards)
+        {
+            var result = new List<CardModel>();
+            foreach (var card in cards)
+            {
+                result.Add(new CardModel(card));
+            }
+            return result;
+        }
     }
 
     public class CardsModel
     {
-        private IList<CardModel> _cards;
+        private Card[] _cards;
 
-        public IList<CardModel> Cards
+        public Card[] Cards
         {
-            get
-            {
-                if (_cards == null)
-                    return new List<CardModel>();
-                return _cards;
-            }
-            set { _cards = value; }
+            get;
+            set;
         }
 
         [IdFounder]

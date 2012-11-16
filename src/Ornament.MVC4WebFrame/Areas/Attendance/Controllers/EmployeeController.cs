@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Ornament.MVCWebFrame.Areas.Attendance.Models;
 using Qi.Attendance;
@@ -69,14 +70,15 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
             var cards = _attendanceFactory.GetCardDao().GetEmployeeCards(employee);
             return View(new CardsModel()
                 {
-                    Cards = cards,
+                    Cards = cards.ToArray(),
                     Employee = employee
                 });
         }
+        
         [HttpPost, Session(Transaction = true)]
-        public ActionResult Cards(CardsModel cardsModel)
+        public ActionResult Cards([ModelBinder(typeof(NHModelBinder))]CardsModel cardsModel)
         {
-            return View(cardsModel);
+            return Json("ok");
         }
     }
 }

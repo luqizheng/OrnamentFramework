@@ -54,6 +54,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.Attendance", "Extends\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.Attendance.Dao.NhImple", "Extends\Daily\Qi.Attendance.Dao.NhImple\Qi.Attendance.Dao.NhImple.csproj", "{60DA740D-75F7-46D2-976B-D2DB22768333}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.NHibernateExtender", "..\..\Qi4Net\src\Qi\Qi.NHibernateExtender\Qi.NHibernateExtender.csproj", "{310038D7-CC1C-49EC-A560-8CF2370A0DA7}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi
@@ -197,6 +199,16 @@ Global
 		{60DA740D-75F7-46D2-976B-D2DB22768333}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{60DA740D-75F7-46D2-976B-D2DB22768333}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{60DA740D-75F7-46D2-976B-D2DB22768333}.Release|x86.ActiveCfg = Release|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{310038D7-CC1C-49EC-A560-8CF2370A0DA7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
