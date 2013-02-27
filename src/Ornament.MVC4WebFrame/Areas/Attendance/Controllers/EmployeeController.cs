@@ -69,7 +69,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
             var cards = _attendanceFactory.GetCardDao().GetEmployeeCards(employee);
             return View(new CardsModel()
                 {
-                    Cards = cards,
+                    Cards = CardModel.Paser(cards),
                     Employee = employee
                 });
         }

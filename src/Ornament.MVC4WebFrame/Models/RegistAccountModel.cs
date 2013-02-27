@@ -45,7 +45,7 @@ namespace Ornament.MVCWebFrame.Models
         [Display(Name = "ConfirmPassword", ResourceType = typeof (MembershipCommon))]
         [DataType(DataType.Password)]
         [Required(ErrorMessageResourceType = typeof (Message), ErrorMessageResourceName = "error_MissPassword")]
-        [Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
+        [System.Web.Mvc.Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
             ErrorMessageResourceType = typeof (Message))]
         public string ConfirmPassword { get; set; }
 

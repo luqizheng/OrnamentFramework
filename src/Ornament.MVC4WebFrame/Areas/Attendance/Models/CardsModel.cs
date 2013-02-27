@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Qi.Attendance;
 using Qi.Attendance.Dao;
 using Qi.Web.Mvc.Founders;
@@ -23,6 +24,14 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Models
             card.State = State;
             card.Employee = employee;
             return card;
+        }
+
+        public static IList<CardModel> Paser(IList<Card> cards)
+        {
+            return cards.Select(card => new CardModel
+                {
+                    Id = card.Id, Number = card.Number, State = card.State
+                }).ToList();
         }
     }
 
