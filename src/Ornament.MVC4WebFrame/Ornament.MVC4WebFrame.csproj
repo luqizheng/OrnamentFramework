@@ -809,9 +809,6 @@
     <None Include="Content\font\fontawesome-webfont.ttf" />
     <None Include="Content\font\fontawesome-webfont.woff" />
     <None Include="Content\less\global.less" />
-    <Content Include="Web.sitemap">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Content\less\font-awesome\font-awesome.less" />
     <None Include="Content\less\variables.less" />
   </ItemGroup>
