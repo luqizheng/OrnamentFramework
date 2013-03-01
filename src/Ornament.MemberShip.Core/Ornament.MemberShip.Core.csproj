@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MemberShipProviders\MembershipContext.cs" />
     <Compile Include="PasswordResetToken.cs" />
     <Compile Include="IMember.cs" />
     <Compile Include="Dao\IMemberDao.cs" />
@@ -95,7 +96,7 @@
     <Compile Include="Member.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IMemberShipProvider.cs" />
+    <Compile Include="MemberShipProviders\IMemberShipProvider.cs" />
     <Compile Include="MemberShipException.cs" />
     <Compile Include="MemberShipPermissionException.cs" />
     <Compile Include="Org.cs" />
@@ -175,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppStart\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

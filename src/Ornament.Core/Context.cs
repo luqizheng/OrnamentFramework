@@ -5,6 +5,7 @@ using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
 
 namespace Ornament

@@ -7,6 +7,7 @@ using System.Text;
 using System.Web.Security;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.MemberShipProviders;
 
 namespace Ornament.Web.MemberShips
 {

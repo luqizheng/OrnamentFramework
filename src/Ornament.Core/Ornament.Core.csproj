@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ornament</RootNamespace>
     <AssemblyName>Ornament.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppStart\OnStart.cs" />
+    <Compile Include="AppStart\IInitialization.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Messages\OrnamentMessageManager.cs" />
     <Compile Include="Messages\UserMessageManager.cs" />

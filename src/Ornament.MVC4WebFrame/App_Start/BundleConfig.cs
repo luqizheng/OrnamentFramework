@@ -42,18 +42,17 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(
                 new ScriptBundle("~/bundles/jquery", "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js").
                     Include("~/Scripts/jquery-{version}.js"));
-           
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-               "~/Scripts/jquery.unobtrusive*",
-               "~/Scripts/jquery.validate*"));
+                "~/Scripts/jquery.unobtrusive*",
+                "~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/ko").Include("~/Scripts/knockout-{version}.js"));
-         
         }
 
 
@@ -71,7 +70,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             //Richer editor
             bundles.Add(new ScriptBundle("~/Scripts/Editor")
-                .IncludeDirectory("~/Scripts/wysiwyg/", "*.js", true)
+                            .IncludeDirectory("~/Scripts/wysiwyg/", "*.js", true)
                 );
 
             bundles.Add(new StyleBundle("~/Content/Editor")
@@ -81,19 +80,19 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void CommonComponent(BundleCollection bundles)
         {
             bundles.Add(new Bundle("~/bundles/component", new JsMinify())
-                           .Include(
-                               "~/scripts/combine/global.js",
-                               "~/scripts/combine/permission.js",
-                               "~/scripts/combine/compatibleBootStrap.js",
-                               "~/scripts/combine/dialog.js",
-                               "~/scripts/combine/string.js",
-                               "~/scripts/combine/bootstrap.js",
-                               "~/Scripts/datePicker/bootstrap-datepicker.js",
-                               "~/Scripts/jQuery.multiChoice.js",
-                               "~/Scripts/jQuery.tmpl.js",
-                               "~/scripts/combine/start.js"
-                           )
-               );
+                            .Include(
+                                "~/scripts/combine/global.js",
+                                "~/scripts/combine/permission.js",
+                                "~/scripts/combine/compatibleBootStrap.js",
+                                "~/scripts/combine/dialog.js",
+                                "~/scripts/combine/string.js",
+                                "~/scripts/combine/bootstrap.js",
+                                "~/Scripts/datePicker/bootstrap-datepicker.js",
+                                "~/Scripts/jQuery.multiChoice.js",
+                                "~/Scripts/jQuery.tmpl.js",
+                                "~/scripts/combine/start.js"
+                            )
+                );
         }
 
         private static void GlobalStyle(BundleCollection bundles)

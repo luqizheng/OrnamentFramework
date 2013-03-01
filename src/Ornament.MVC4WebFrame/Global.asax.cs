@@ -7,10 +7,12 @@ using System.Web.Optimization;
 using System.Web.Profile;
 using System.Web.Routing;
 using System.Web.Security;
+using Ornament.AppStart;
 using Ornament.MVCWebFrame.App_Start;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
 using Ornament.Web.Models;
 using Qi.NHibernate;
@@ -32,13 +34,15 @@ namespace Ornament.MVCWebFrame
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            CastleRegistry.Register(GlobalConfiguration.Configuration);
-
+            //AppStart
+            OnStart.Start(OrnamentContext.Current, AppDomain.CurrentDomain.GetAssemblies());
+            DaoRegistry.Register(GlobalConfiguration.Configuration);
             //Ornament setting
-            XmlConfigurator.Configure(); //Log4net registry.
+
             //Registry the Provider to use Membership rule of asp.net.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
             ChangeControllerFacotry();
+            XmlConfigurator.Configure(); //Log4net registry.
             UpdateDatabase();
         }
 
@@ -113,8 +117,8 @@ namespace Ornament.MVCWebFrame
 
         protected void Application_BeginRequest()
         {
-            var Request = HttpContext.Current.Request;
-            var Response = HttpContext.Current.Response;
+            HttpRequest Request = HttpContext.Current.Request;
+            HttpResponse Response = HttpContext.Current.Response;
             /* Fix for the Flash Player Cookie bug in Non-IE browsers.
              * Since Flash Player always sends the IE cookies even in FireFox
              * we have to bypass the cookies by sending the values as part of the POST or GET
@@ -158,7 +162,6 @@ namespace Ornament.MVCWebFrame
                 {
                     UpdateCookie(auth_cookie_name, HttpContext.Current.Request.QueryString[auth_param_name]);
                 }
-
             }
             catch (Exception)
             {
@@ -167,7 +170,7 @@ namespace Ornament.MVCWebFrame
             }
         }
 
-        static void UpdateCookie(string cookie_name, string cookie_value)
+        private static void UpdateCookie(string cookie_name, string cookie_value)
         {
             HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(cookie_name);
             if (cookie == null)

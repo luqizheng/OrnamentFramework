@@ -197,7 +197,7 @@
             }
         };
 
-        $("a[role=modifyPeriod]").live("click", function () {
+        $("a[role=modifyPeriod]").on("click", function () {
 
             var $this = $(this), period = $this.closest(".btn-group").find("input"),
                     dateData = {
@@ -213,7 +213,7 @@
             $("#@dailogId").periodDailog("show", false, dateData);
         });
 
-        $("a[role=addPeriod]").live("click", function () {
+        $("a[role=addPeriod]").on("click", function () {
 
             var $this = $(this);
             dailogModal.prefix = $this.attr("prefix");
@@ -229,7 +229,7 @@
             }
         });
 
-        $("a[role=removePeriod]").live("click", function () {
+        $("a[role=removePeriod]").on("click", function () {
             var item = $(this).closest(".btn-group");
             var parent = item.parent();
             item.remove();

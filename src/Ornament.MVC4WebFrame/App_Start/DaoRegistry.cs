@@ -9,7 +9,7 @@ using QiProject.Operators;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
-    public class CastleRegistry
+    public class DaoRegistry
     {
         public static void Register(HttpConfiguration config)
         {
@@ -17,9 +17,11 @@ namespace Ornament.MVCWebFrame.App_Start
                 Component.For<IProjectDaoFactory>().ImplementedBy<ProjectDaoFactory>());
             OrnamentContext.Current.Container.Register(
                Component.For<IAttendanceFactory>().ImplementedBy<AttendanceFactory>());
+         
             //Project operator registry
             Context.OperatorResourceManager
                 .TypeResourceMapping.Add("Product", typeof(ProductOperator));
+
         }
     }
 }

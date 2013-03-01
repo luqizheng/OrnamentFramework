@@ -6,6 +6,7 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
 using Qi;
 using Qi.Secret;

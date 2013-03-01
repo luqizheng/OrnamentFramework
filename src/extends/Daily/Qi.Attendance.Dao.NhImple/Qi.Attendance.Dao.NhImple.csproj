@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\..\packages\Castle.Windsor.3.2.0\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -54,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppStart\DaoRegistry.cs" />
     <Compile Include="AttendanceFactory.cs" />
     <Compile Include="CardDao.cs" />
     <Compile Include="CheckHistoryDao.cs" />
@@ -63,6 +70,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>
+      <Name>Ornament.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Qi.Attendance\Qi.Attendance.csproj">
       <Project>{04B993CF-3A5C-4227-ADB4-77A119B12EA5}</Project>
       <Name>Qi.Attendance</Name>
