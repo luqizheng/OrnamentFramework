@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Criterion;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {

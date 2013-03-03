@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NHibernate.Linq;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
+
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {

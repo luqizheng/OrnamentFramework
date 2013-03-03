@@ -9,8 +9,8 @@
       <key column="DayMarkerId">
       </key>
       <composite-element class="Period">
-        <property name="Start" type="Qi.NHibernate.Types.TimeType,Qi.NHibernateExtender" column="TimeStart"></property>
-        <property name="End" type="Qi.NHibernate.Types.TimeType, Qi.NHibernateExtender" column="TimeEnd"></property>
+        <property name="Start" type="Qi.NHibernateExtender.Types.TimeType,Qi.NHibernateExtender" column="TimeStart"></property>
+        <property name="End" type="Qi.NHibernateExtender.Types.TimeType, Qi.NHibernateExtender" column="TimeEnd"></property>
       </composite-element>
     </bag>
 

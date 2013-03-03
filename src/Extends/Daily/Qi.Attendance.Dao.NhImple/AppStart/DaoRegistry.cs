@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Ornament;
+using Ornament.AppStart;
 
 namespace Qi.Attendance.Dao.NhImple.AppStart
 {
-    class DaoRegistry:Ornament.AppStart.IInitialization
+    public class DaoRegistry : IInitialization
     {
         public void OnStart(Context context)
         {
-            context.Container.Register(
-                Component.For<IAttendanceFactory>().ImplementedBy<AttendanceFactory>());
+            context.NhAssemblies.Add(typeof (AbsentApplication).Assembly);
+            context.Container.Register(Component.For<IAttendanceFactory>().ImplementedBy<AttendanceFactory>());
         }
     }
 }

@@ -15,7 +15,7 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
 using Ornament.Web.Models;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
 using log4net;
 using log4net.Config;
 
@@ -33,15 +33,19 @@ namespace Ornament.MVCWebFrame
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ChangeControllerFacotry();
 
+            //Init database setting
+            NhConfig.Config();
             //AppStart
             OnStart.Start(OrnamentContext.Current, AppDomain.CurrentDomain.GetAssemblies());
-            DaoRegistry.Register(GlobalConfiguration.Configuration);
+
+
             //Ornament setting
 
             //Registry the Provider to use Membership rule of asp.net.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-            ChangeControllerFacotry();
+            
             XmlConfigurator.Configure(); //Log4net registry.
             UpdateDatabase();
         }

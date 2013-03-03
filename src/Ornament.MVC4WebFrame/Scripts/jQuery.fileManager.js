@@ -33,10 +33,10 @@
 
         fileManager.toolbar.bind('click', eventData, raiseEvent);
 
-        $(".item", element).live("hover",
+        $(".item", element).on("hover",
             function (e) {
                 $(this).find(".btn-toolbar").toggle(e.type == "mouseenter");
-            }).live("click", eventData, raiseEvent);
+            }).on("click", eventData, raiseEvent);
 
         this.refresh();
 

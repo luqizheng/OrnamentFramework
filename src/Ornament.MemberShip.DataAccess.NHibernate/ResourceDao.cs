@@ -4,8 +4,8 @@ using NHibernate.Criterion;
 using NHibernate.Mapping;
 using NHibernate.Type;
 using Ornament.MemberShip.Permissions;
-using Qi.NHibernate;
-using Qi.NHibernate.Criterion;
+using Qi.NHibernateExtender;
+using Qi.NHibernateExtender.Criterion;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
@@ -107,10 +107,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         private IType GetIdType(Type resourceType)
         {
             IType idType = null;
-            foreach (string key in NhConfigManager.SessionFactoryNames)
+            foreach (string key in SessionManager.SessionFactoryNames)
             {
-                PersistentClass mappingClass =
-                    NhConfigManager.GetNhConfig(key).NHConfiguration.GetClassMapping(resourceType);
+                PersistentClass mappingClass = SessionManager.GetSessionWrapper(key).Configuration.GetClassMapping(resourceType);
                 if (mappingClass != null)
                 {
                     idType = mappingClass.Identifier.Type;

@@ -59,6 +59,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotlessClientOnly.1.3.1.0\lib\dotless.ClientOnly.dll</HintPath>
     </Reference>
+    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
@@ -82,7 +86,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.NHibernateExtender, Version=1.3.2.4, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qi.NHibernateExtender, Version=1.3.2.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
@@ -206,11 +210,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\DaoRegistry.cs" />
+    <Compile Include="App_Start\NhConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
     <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\Controllers\EmployeeCheckedController.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeGroupController.cs" />
     <Compile Include="Areas\Attendance\Models\CardsModel.cs" />
@@ -382,6 +387,11 @@
     <None Include="Content\less\bootstrap\utilities.less" />
     <None Include="Content\less\bootstrap\wells.less" />
     <None Include="Content\less\common.less" />
+    <Content Include="Content\Prettify\prettify.css" />
+    <Content Include="Content\Prettify\Themes\desert.css" />
+    <Content Include="Content\Prettify\Themes\doxy.css" />
+    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
+    <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="Content\wysiwyg\ajax-loader.gif" />
     <Content Include="Content\wysiwyg\jquery.wysiwyg.bg.png" />
     <Content Include="Content\wysiwyg\jquery.wysiwyg.css" />
@@ -398,10 +408,6 @@
     <Content Include="Content\Combine\global.css" />
     <Content Include="Content\media\swfupload.swf" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
-    <Content Include="Content\Prettify\prettify.css" />
-    <Content Include="Content\Prettify\Themes\desert.css" />
-    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
-    <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\FileTypes\accdb.png" />
@@ -470,7 +476,7 @@
     <Content Include="Scripts\jQuery.tmpl.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -483,17 +489,26 @@
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Prettify\lang-apollo.js" />
+    <Content Include="Scripts\Prettify\lang-basic.js" />
     <Content Include="Scripts\Prettify\lang-clj.js" />
     <Content Include="Scripts\Prettify\lang-css.js" />
+    <Content Include="Scripts\Prettify\lang-dart.js" />
+    <Content Include="Scripts\Prettify\lang-erlang.js" />
     <Content Include="Scripts\Prettify\lang-go.js" />
     <Content Include="Scripts\Prettify\lang-hs.js" />
     <Content Include="Scripts\Prettify\lang-lisp.js" />
+    <Content Include="Scripts\Prettify\lang-llvm.js" />
     <Content Include="Scripts\Prettify\lang-lua.js" />
     <Content Include="Scripts\Prettify\lang-ml.js" />
+    <Content Include="Scripts\Prettify\lang-mumps.js" />
     <Content Include="Scripts\Prettify\lang-n.js" />
+    <Content Include="Scripts\Prettify\lang-pascal.js" />
     <Content Include="Scripts\Prettify\lang-proto.js" />
+    <Content Include="Scripts\Prettify\lang-r.js" />
+    <Content Include="Scripts\Prettify\lang-rd.js" />
     <Content Include="Scripts\Prettify\lang-scala.js" />
     <Content Include="Scripts\Prettify\lang-sql.js" />
+    <Content Include="Scripts\Prettify\lang-tcl.js" />
     <Content Include="Scripts\Prettify\lang-tex.js" />
     <Content Include="Scripts\Prettify\lang-vb.js" />
     <Content Include="Scripts\Prettify\lang-vhdl.js" />
@@ -501,6 +516,7 @@
     <Content Include="Scripts\Prettify\lang-xq.js" />
     <Content Include="Scripts\Prettify\lang-yaml.js" />
     <Content Include="Scripts\Prettify\prettify.js" />
+    <Content Include="Scripts\Prettify\run_prettify.js" />
     <Content Include="Scripts\selectivizr-min.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Scripts\wysiwyg\controls\wysiwyg.colorpicker.js" />

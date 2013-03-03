@@ -99,12 +99,11 @@ namespace Ornament.MVCWebFrame.Models
 
             try
             {
-                MembershipCreateStatus memberstate;
                 user = new User(LoginId, Password)
-                           {
-                               IsApproved = IsApproved,
-                           };
-                user.Email = Email;
+                    {
+                        IsApproved = IsApproved,
+                        Email = Email,
+                    };
                 if (System.Web.Security.Membership.RequiresQuestionAndAnswer)
                 {
                     user.SetQuestionAndAnswer(PasswordQuestion, PasswordAnswer);

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
+using FluentNHibernate.Cfg;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
@@ -16,20 +18,29 @@ namespace Ornament
         {
         }
 
+        private IList<Assembly> _hhAssemblies;
         /// <summary>
-        /// 获取当前用户
+        ///     获取当前用户
         /// </summary>
         public virtual User CurrentUser { get; protected set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual IMemberShipProvider MemberShipContext
         {
             get { return MembershipContext.Provider; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IWindsorContainer Container
         {
             get { return Inner.Instance.GetContainer(); }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<Assembly> NhAssemblies { get { return _hhAssemblies ?? (_hhAssemblies = new List<Assembly>()); } }
 
         public static OperatorResourceMapping OperatorResourceManager
         {
@@ -37,7 +48,7 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 检查当前用户是否有资源的操作权限
+        ///     检查当前用户是否有资源的操作权限
         /// </summary>
         /// <param name="resType">资源类型</param>
         /// <param name="id">资源的Id</param>
@@ -63,7 +74,6 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="resource"></param>
         /// <param name="operators"></param>
@@ -85,7 +95,6 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="resType"></param>
         /// <param name="id"></param>
@@ -111,7 +120,6 @@ namespace Ornament
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -121,7 +129,7 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 根据resource获取operator's type
+        ///     根据resource获取operator's type
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
@@ -137,7 +145,6 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public static IList<string> GetTypeResource()
@@ -147,7 +154,6 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="resourceType"></param>
         /// <param name="operatorVal"></param>
@@ -171,7 +177,6 @@ namespace Ornament
         #region Nested type: Inner
 
         /// <summary>
-        /// 
         /// </summary>
         protected class Inner
         {

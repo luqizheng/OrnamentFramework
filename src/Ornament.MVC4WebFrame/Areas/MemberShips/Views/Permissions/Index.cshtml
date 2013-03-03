@@ -10,7 +10,7 @@
 
         $(document).ready(function () {
 
-            $(".delete").live('click', function () {
+            $(".delete").on('click', function () {
                 if (confirm("@Html.GetResourceString("warnning_deleting_msg")")) {
                     var target = $(this);
                     $.getJSON('@Url.Action("Delete")/' + target.attr("href"), {}, function (result) {

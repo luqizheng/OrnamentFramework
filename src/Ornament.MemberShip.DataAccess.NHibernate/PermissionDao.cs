@@ -7,7 +7,8 @@ using NHibernate.Linq;
 using Ornament.MemberShip.Permissions;
 using Qi;
 using Qi.Domain.NHibernates;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
+
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {

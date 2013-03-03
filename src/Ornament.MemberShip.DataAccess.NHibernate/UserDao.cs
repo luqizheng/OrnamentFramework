@@ -6,7 +6,8 @@ using NHibernate.Criterion;
 using NHibernate.Linq;
 using Qi;
 using Qi.Domain.NHibernates;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
+
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
