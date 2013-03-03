@@ -4,7 +4,7 @@ using Castle.Windsor.Configuration.Interpreters;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Qi;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
 
 namespace Ornament.Web.Models
 {
@@ -13,7 +13,7 @@ namespace Ornament.Web.Models
         private const string LoggerName = "Initializer";
 
         /// <summary>
-        /// 获取说有website的初始化器，但是并不包括MembershipInit
+        ///     获取说有website的初始化器，但是并不包括MembershipInit
         /// </summary>
         public static IDataInitializer[] AllDataInitializers
         {
@@ -32,14 +32,13 @@ namespace Ornament.Web.Models
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="sessionFactoryName"></param>
         public void UpdateStructure(string sessionFactoryName)
         {
             try
             {
-                Configuration config = NhConfigManager.GetNhConfig(sessionFactoryName).NHConfiguration;
+                Configuration config = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
                 var cc = new SchemaUpdate(config);
                 cc.Execute(true, true);
             }
@@ -50,11 +49,11 @@ namespace Ornament.Web.Models
         }
 
         /// <summary>
-        /// Update all database structure.
+        ///     Update all database structure.
         /// </summary>
         public void UpdateAllSturcture()
         {
-            foreach (string sessionFactory in NhConfigManager.SessionFactoryNames)
+            foreach (string sessionFactory in SessionManager.SessionFactoryNames)
             {
                 UpdateStructure(sessionFactory);
             }
@@ -64,18 +63,18 @@ namespace Ornament.Web.Models
         {
             if (sessionFactoryName == null)
                 throw new ArgumentNullException("sessionFactoryName");
-            Configuration nhConfiguration = NhConfigManager.GetNhConfig(sessionFactoryName).NHConfiguration;
+            Configuration nhConfiguration = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
             var cc = new SchemaExport(nhConfiguration);
             cc.Drop(true, true);
             cc.Create(true, true);
         }
 
         /// <summary>
-        /// Drop all table and recreate them.
+        ///     Drop all table and recreate them.
         /// </summary>
         public void RecreateAllSturcture()
         {
-            foreach (string sessionFactory in NhConfigManager.SessionFactoryNames)
+            foreach (string sessionFactory in SessionManager.SessionFactoryNames)
             {
                 RecreateStructure(sessionFactory);
             }
@@ -83,7 +82,7 @@ namespace Ornament.Web.Models
 
         public void BuildData()
         {
-            foreach (var init in AllDataInitializers)
+            foreach (IDataInitializer init in AllDataInitializers)
             {
                 init.CreateData();
             }

@@ -7,7 +7,7 @@ using System.Configuration.Provider;
 using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
 
 namespace Ornament.Web.MemberShips
 {

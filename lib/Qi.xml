@@ -6,11 +6,12 @@
     <members>
         <member name="T:Qi.ApplicationHelper">
             <summary>
-                Application extend methods
+            Application extend methods
             </summary>
         </member>
         <member name="M:Qi.ApplicationHelper.MapPath(System.String)">
             <summary>
+            
             </summary>
             <param name="path"></param>
             <returns></returns>
@@ -18,12 +19,13 @@
         </member>
         <member name="M:Qi.ApplicationHelper.MapPath(System.IO.DirectoryInfo,System.String)">
             <summary>
+            
             </summary>
             <param name="rootDirectory">以这个路基为开始</param>
             <param name="mapPath"></param>
             <returns></returns>
             <remarks>
-                <code>
+            <code>
             var rootDirect="a/b/c";
             var result=MapPath(new DirectoryInfo(rootDirect),"../b/b2"); //result is /a/b/b2
             </code>
@@ -31,12 +33,12 @@
         </member>
         <member name="P:Qi.ApplicationHelper.PhysicalApplicationPath">
             <summary>
-                Get the PhysicalApplication
+            Get the PhysicalApplication
             </summary>
         </member>
         <member name="P:Qi.ApplicationHelper.IsWeb">
             <summary>
-                Gets a value indecate is web context or not
+            Gets a value indecate is web context or not
             </summary>
         </member>
         <member name="T:Qi.ArrayHelper">
@@ -69,6 +71,21 @@
             <param name="start"></param>
             <returns></returns>
         </member>
+        <member name="M:Qi.ArrayHelper.ToStringEx(System.Byte[],System.String)">
+            <summary>
+            Convert byte to string
+            </summary>
+            <param name="bytes"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.ArrayHelper.ToStringEx(System.Byte[])">
+            <summary>
+            use x2 format to conver byte;
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
         <member name="M:Qi.ArrayHelper.Split``1(``0[],System.Int32)">
             <summary>
             把ary 按照每份拥有多个来分组数据
@@ -95,33 +112,6 @@
             <typeparam name="T"></typeparam>
             <param name="ary"></param>
             <param name="dividEquallyNumber"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Qi.ByteHelper">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Qi.ByteHelper.ToStringEx(System.Byte[],System.String)">
-            <summary>
-            Convert byte to string
-            </summary>
-            <param name="bytes"></param>
-            <param name="format"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Qi.ByteHelper.ToStringEx(System.Byte[])">
-            <summary>
-            use x2 format to conver byte;
-            </summary>
-            <param name="bytes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Qi.ByteHelper.ToBytes(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="binary"></param>
             <returns></returns>
         </member>
         <member name="T:Qi.Draw.ResizePic">
@@ -1618,7 +1608,7 @@
         </member>
         <member name="M:Qi.Text.NamedFormatterHelper.Replace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
-            use replacePatten to replace Variables those in ormatString, 
+            use replacePatten to replace Variables those in <seealso cref="!:formatString"/>, 
             Variable need to defined in  square brackets, such as like that "[var]"
             </summary>
             <param name="formatString"></param>
@@ -1627,7 +1617,7 @@
         </member>
         <member name="M:Qi.Text.NamedFormatterHelper.CollectVariable(System.String)">
             <summary>
-            Collect variable express in content, such as "I am a [varName]"
+            Collect variable express in <seealso cref="!:content"/>, such as "I am a [varName]"
             </summary>
             <param name="content"></param>
             <returns></returns>

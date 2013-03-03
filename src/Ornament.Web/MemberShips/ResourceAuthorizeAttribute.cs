@@ -7,7 +7,7 @@ using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Qi.Domain;
-using Qi.NHibernate;
+using Qi.NHibernateExtender;
 
 namespace Ornament.Web.MemberShips
 {
