@@ -6,7 +6,7 @@
     </id>
     <property name="Remark" length="200" type="String"></property>
     <property name="Name" length="30" type="String"></property>
-    <set name="Equipments" table="EmployeeGroupEquipmentRelative"
+    <set name="Equipments" table="Attendance_EmployeeGroupEquipmentRelative"
          lazy="true" cascade="none" access="nosetter.camelcase-underscore">
       <key column="EmployeeGroupId"/>
       <many-to-many class="Equipment" column="EquipmentId"></many-to-many>

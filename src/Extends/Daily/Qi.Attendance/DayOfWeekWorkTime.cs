@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Qi.Domain;
 
 namespace Qi.Attendance
 {
-    public class DayOfWeekWorkTime:DomainObject<DayOfWeekWorkTime,Guid>
+    public class DayOfWeekWorkTime : DomainObject<DayOfWeekWorkTime, Guid>
     {
         private IList<Period> _workTimes;
+        public virtual DayOfWeek DateOfWeek { get; set; }
 
         public virtual IList<Period> WorkTimes
         {
@@ -18,17 +17,16 @@ namespace Qi.Attendance
                     {
                         new Period
                             {
-                                Start = new Time(9, 0, 0),
-                                End = new Time(12, 0, 0)
+                                StartTime = new Time(9, 0, 0),
+                                EndTime = new Time(12, 0, 0)
                             },
                         new Period
                             {
-                                Start = new Time(13, 0, 0),
-                                End = new Time(18, 0, 0)
+                                StartTime = new Time(13, 0, 0),
+                                EndTime = new Time(18, 0, 0)
                             }
                     });
             }
         }
-
     }
 }

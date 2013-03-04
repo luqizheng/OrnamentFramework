@@ -70,7 +70,14 @@
     <Compile Include="EmployeeDao.cs" />
     <Compile Include="EmployeeGroupDao.cs" />
     <Compile Include="EquipmentDao.cs" />
-    <Compile Include="Mapping\AttendanceApplicationMapping.cs" />
+    <Compile Include="Mapping\AbsentApplicationMapping.cs" />
+    <Compile Include="Mapping\CardMapping.cs" />
+    <Compile Include="Mapping\CheckHistoryMapping.cs" />
+    <Compile Include="Mapping\DayOfWeekWorkTimeMapping.cs" />
+    <Compile Include="Mapping\EmployeeGroupMapping.cs" />
+    <Compile Include="Mapping\EmployeeMapping.cs" />
+    <Compile Include="Mapping\EquipmentMapping.cs" />
+    <Compile Include="Mapping\SepcialWorkDayMarkMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

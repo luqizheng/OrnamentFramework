@@ -8,7 +8,7 @@ namespace Qi.Attendance.Dao.NhImple.AppStart
     {
         public void OnStart(Context context)
         {
-            context.NhAssemblies.Add(typeof (AbsentApplication).Assembly);
+            context.NhAssemblies.Add(this.GetType().Assembly);
             context.Container.Register(Component.For<IAttendanceFactory>().ImplementedBy<AttendanceFactory>());
         }
     }

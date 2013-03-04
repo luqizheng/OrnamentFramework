@@ -42,8 +42,8 @@
                                 foreach (var period in this.Model.WeekSetting[time].WorkTimes)
                                 {
                                 <div class="btn-group" prefix="@time">
-                                    <input type="hidden" name="@(time + "Start")" value="@period.Start.ToString("HH:mm")"/>
-                                    <input type="hidden" name="@(time + "End")" value="@period.End.ToString("HH:mm")"/>
+                                    <input type="hidden" name="@(time + "Start")" value="@period.StartTime.ToString("HH:mm")"/>
+                                    <input type="hidden" name="@(time + "End")" value="@period.EndTime.ToString("HH:mm")"/>
                                     <input type="hidden" name="@(time + "Remarks")" value="@period.Remarks" />
                                     <a class="btn" role="modifyPeriod">@period.ToString()</a>
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -97,11 +97,11 @@
                             @foreach (var period in workday.Periods)
                             {
                                 <div class="btn-group" prefix="workday">
-                                    <input type="hidden" name="workdayStart" value="@period.Start.ToString("HH:mm")"/>
-                                    <input type="hidden" name="workdayEnd" value="@period.End.ToString("HH:mm")"/>
+                                    <input type="hidden" name="workdayStart" value="@period.StartTime.ToString("HH:mm")"/>
+                                    <input type="hidden" name="workdayEndTime" value="@period.EndTime.ToString("HH:mm")"/>
                                     <input type="hidden" name="workdayDate" value="@workday.Date.ToString("yyyy-MM-dd")"/>
                                     <a class="btn" role="modifyPeriod">
-                                        @String.Format("{0}~{1}", period.Start.ToString("HH:mm"), period.End.ToString("HH:mm"))</a>
+                                        @String.Format("{0}~{1}", period.StartTime.ToString("HH:mm"), period.EndTime.ToString("HH:mm"))</a>
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                     </button>
@@ -125,7 +125,7 @@
 <script id="periodTmp" type="text/x-jquery-tmpl">
     <div class="btn-group" prefix="${prefix}">
         <input type="hidden" name="${prefix}Start" value="${start}"/>
-        <input type="hidden" name="${prefix}End" value="${end}"/>
+        <input type="hidden" name="${prefix}EndTime" value="${end}"/>
         <input type="hidden" name="${prefix}Remarks" value="${remarks}"/>
         <a class="btn" role="modifyPeriod">
             ${start}~${end}</a>
@@ -150,7 +150,7 @@
         <td>
             <div class="btn-group" prefix="${prefix}">
                 <input type="hidden" name="${prefix}Start" value="${start}"/>
-                <input type="hidden" name="${prefix}End" value="${end}"/>
+                <input type="hidden" name="${prefix}EndTime" value="${end}"/>
                 <input type="hidden" name="${prefix}Date" value="${date}"/>
                 <a class="btn" role="modifyPeriod">
                     ${start}~${end}</a>
@@ -168,7 +168,7 @@
 <script id="workDayPeriod" type="text/x-jquery-tmpl">
      <div class="btn-group" prefix="${prefix}">
                 <input type="hidden" name="${prefix}Start" value="${start}"/>
-                <input type="hidden" name="${prefix}End" value="${end}"/>
+                <input type="hidden" name="${prefix}EndTime" value="${end}"/>
                 <input type="hidden" name="${prefix}Date" value="${date}"/>
                 <a class="btn" role="modifyPeriod">
                     ${start}~${end}</a>

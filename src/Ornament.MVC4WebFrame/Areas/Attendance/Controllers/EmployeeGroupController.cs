@@ -67,8 +67,8 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
                 {
                     option.WeekSetting[dayOfWeek].WorkTimes.Add(new Period
                         {
-                            End = ConverToTime(endTimes[i]),
-                            Start = ConverToTime(startTimes[i]),
+                            EndTime = ConverToTime(endTimes[i]),
+                            StartTime = ConverToTime(startTimes[i]),
                             Remarks = remarks[i]
                         });
                 }
@@ -99,8 +99,8 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
                 SpecialWorkDayMark mark = mergeWorkDayMark[date];
                 mark.Periods.Add(new Period
                     {
-                        Start = startTime,
-                        End = endTime
+                        StartTime = startTime,
+                        EndTime = endTime
                     });
             }
             option.SpecialWorkDay.Clear();

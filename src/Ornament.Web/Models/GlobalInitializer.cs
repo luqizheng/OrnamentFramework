@@ -40,13 +40,15 @@ namespace Ornament.Web.Models
             {
                 Configuration config = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
                 var cc = new SchemaUpdate(config);
-                cc.Execute(true, true);
+                cc.Execute(true,true);
             }
             catch (Exception ex)
             {
                 throw new OrnamentException("Init " + sessionFactoryName + " fail, so the website can't be run. ", ex);
             }
         }
+
+     
 
         /// <summary>
         ///     Update all database structure.

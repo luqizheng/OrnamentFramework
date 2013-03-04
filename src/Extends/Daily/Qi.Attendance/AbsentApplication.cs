@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Qi.Domain;
 
 namespace Qi.Attendance
@@ -7,19 +8,23 @@ namespace Qi.Attendance
     {
         /// <summary>
         /// </summary>
-        public Employee Employee { get; set; }
+        [Display(Name = "雇员")]
+        public virtual Employee Employee { get; set; }
 
         /// <summary>
         /// </summary>
-        public DateTime CreateTime { get; set; }
+        [Display(Name = "创建时间")]
+        public virtual DateTime CreateTime { get; set; }
 
         /// <summary>
         /// </summary>
-        public DateTime Date { get; set; }
+        [Display(Name = "请假时间")]
+        public virtual DateTime Date { get; set; }
 
         /// <summary>
         ///     if null,it means all day.
         /// </summary>
-        public Period Period { get; set; }
+        [Display(Name = "请假时段")]
+        public virtual Period Period { get; set; }
     }
 }

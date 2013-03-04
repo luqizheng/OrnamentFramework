@@ -45,7 +45,7 @@ namespace Ornament.MVCWebFrame
 
             //Registry the Provider to use Membership rule of asp.net.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-            
+
             XmlConfigurator.Configure(); //Log4net registry.
             UpdateDatabase();
         }

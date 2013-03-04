@@ -18,13 +18,13 @@ namespace Qi.Attendance
                 {
                     _weekSetting = new Dictionary<DayOfWeek, DayOfWeekWorkTime>
                         {
-                            {DayOfWeek.Sunday, new DayOfWeekWorkTime()},
-                            {DayOfWeek.Monday, new DayOfWeekWorkTime()},
-                            {DayOfWeek.Tuesday, new DayOfWeekWorkTime()},
-                            {DayOfWeek.Wednesday, new DayOfWeekWorkTime()},
-                            {DayOfWeek.Thursday, new DayOfWeekWorkTime()},
-                            {DayOfWeek.Friday, new DayOfWeekWorkTime()},
-                            {DayOfWeek.Saturday, new DayOfWeekWorkTime()},
+                            {DayOfWeek.Sunday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Sunday}},
+                            {DayOfWeek.Monday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Monday}},
+                            {DayOfWeek.Tuesday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Tuesday}},
+                            {DayOfWeek.Wednesday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Wednesday}},
+                            {DayOfWeek.Thursday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Thursday}},
+                            {DayOfWeek.Friday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Friday}},
+                            {DayOfWeek.Saturday, new DayOfWeekWorkTime(){DateOfWeek = DayOfWeek.Saturday}},
                         };
                     _weekSetting[DayOfWeek.Sunday].WorkTimes.Clear();
                     _weekSetting[DayOfWeek.Saturday].WorkTimes.Clear();
