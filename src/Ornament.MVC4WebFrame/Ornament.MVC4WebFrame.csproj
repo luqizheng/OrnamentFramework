@@ -483,8 +483,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jQuery.endless-scroll.js" />
     <Content Include="Scripts\jQuery.fileManager.js" />
-    <Content Include="Scripts\knockout-2.1.0.debug.js" />
-    <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -517,6 +515,7 @@
     <Content Include="Scripts\Prettify\lang-yaml.js" />
     <Content Include="Scripts\Prettify\prettify.js" />
     <Content Include="Scripts\Prettify\run_prettify.js" />
+    <Content Include="Scripts\seajs-2.0.0.js" />
     <Content Include="Scripts\selectivizr-min.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Scripts\wysiwyg\controls\wysiwyg.colorpicker.js" />
@@ -785,7 +784,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\LogOnUserControl.cshtml" />
     <Content Include="Views\Shared\_mainMenu.cshtml" />
-    <Content Include="Views\Shared\Master.cshtml" />
     <Content Include="Views\Shared\NavPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>

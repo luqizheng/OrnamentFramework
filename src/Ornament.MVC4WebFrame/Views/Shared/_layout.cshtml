@@ -13,17 +13,28 @@
     <!--[if lt IE 9]>
             <script  type="text/javascript" src="@Url.Content("~/Scripts/html5shiv.js")"></script>
     <![endif]-->
-    @Scripts.Render("~/bundles/jquery", "~/bundles/modernizr", "~/bundles/component")
+    @Scripts.Render("~/bundles/modernizr", "~/bundles/seajs")
+    <script type="text/javascript">
+        seajs.config({
+            alias: {
+                "jquery": "@Url.Content("~/bundles/jquery")"
+            }
+        });
+        seajs.modify('jquery', function(require, exports) {
+            window.jQuery = window.$ = exports;
+        });
+    </script>
+
     @RenderSection("head", false)
 </head>
 <body>
     @Html.Partial("_topMenu")
     <header class="container">
         <div class="logo">
-            <h1>
-                Oranment</h1>
+            <h1>Oranment</h1>
             <p>
-                Integrated NHibernate,Castle and a smpale rbac permission framework</p>
+                Integrated NHibernate,Castle and a smpale rbac permission framework
+            </p>
         </div>
     </header>
     <section>

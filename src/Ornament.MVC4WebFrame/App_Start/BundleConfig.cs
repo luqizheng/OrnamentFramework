@@ -43,6 +43,8 @@ namespace Ornament.MVCWebFrame.App_Start
                 new ScriptBundle("~/bundles/jquery", "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js").
                     Include("~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/seajs").Include("~/Scripts/seajs-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
@@ -52,7 +54,7 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/ko").Include("~/Scripts/knockout-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ko").Include("~/Scripts/knockout-{version}.js", "~/Scripts/jquery.tmpl.js"));
         }
 
 
