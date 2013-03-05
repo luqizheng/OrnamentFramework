@@ -54,7 +54,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
 
         private void FillWeekDay(EmployeeGroupOption option, FormCollection form)
         {
-            foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
+            foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof (DayOfWeek)))
             {
                 if (form[dayOfWeek + "Start"] == null)
                     continue;
@@ -65,12 +65,13 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
                 option.WeekSetting[dayOfWeek].WorkTimes.Clear();
                 for (int i = 0; i < startTimes.Length; i++)
                 {
-                    option.WeekSetting[dayOfWeek].WorkTimes.Add(new Period
+                    var period = new Period
                         {
                             EndTime = ConverToTime(endTimes[i]),
                             StartTime = ConverToTime(startTimes[i]),
                             Remarks = remarks[i]
-                        });
+                        };
+                    option.WeekSetting[dayOfWeek].WorkTimes.Add(period);
                 }
             }
         }
@@ -114,7 +115,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         }
 
         [HttpPost, Session(Transaction = true)]
-        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))]EmployeeGroup group, FormCollection form)
+        public ActionResult Edit([ModelBinder(typeof (NHModelBinder))] EmployeeGroup group, FormCollection form)
         {
             if (ModelState.IsValid)
             {

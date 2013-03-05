@@ -7,6 +7,8 @@
     
 }
 <script src="@Url.Content("~/scripts/combine/confirm.js")" type="text/javascript"></script>
+@Registr
+
 <div class="control-group">
     @Html.Label("每星期工作日", new { @class = "control-label" })
     <div class="controls">
@@ -168,7 +170,7 @@
 <script id="workDayPeriod" type="text/x-jquery-tmpl">
      <div class="btn-group" prefix="${prefix}">
                 <input type="hidden" name="${prefix}Start" value="${start}"/>
-                <input type="hidden" name="${prefix}EndTime" value="${end}"/>
+                <input type="hidden" name="${prefix}End" value="${end}"/>
                 <input type="hidden" name="${prefix}Date" value="${date}"/>
                 <a class="btn" role="modifyPeriod">
                     ${start}~${end}</a>
