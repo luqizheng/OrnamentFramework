@@ -486,6 +486,13 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\plugin-combo.js" />
+    <Content Include="Scripts\plugin-debug.js" />
+    <Content Include="Scripts\plugin-flush.js" />
+    <Content Include="Scripts\plugin-nocache.js" />
+    <Content Include="Scripts\plugin-shim.js" />
+    <Content Include="Scripts\plugin-text.js" />
+    <Content Include="Scripts\plugin-warning.js" />
     <Content Include="Scripts\Prettify\lang-apollo.js" />
     <Content Include="Scripts\Prettify\lang-basic.js" />
     <Content Include="Scripts\Prettify\lang-clj.js" />

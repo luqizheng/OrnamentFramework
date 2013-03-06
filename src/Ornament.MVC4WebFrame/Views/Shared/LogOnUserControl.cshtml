@@ -13,9 +13,12 @@
     </ul>
     
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#logout").click(function () {
-                return confirm("@MemberShip.LogoutWarning");
+        seajs.use('jquery', function () {
+            alert('ok');
+            $(document).ready(function () {
+                $("#logout").click(function () {
+                    return confirm("@MemberShip.LogoutWarning");
+                });
             });
         });
     </script>
@@ -23,7 +26,6 @@
 else
 {
     <ul class="pull-right nav">
-        <li><a href="@Url.Action("Logon", "Account", new { area = "" })"><i class="icon-user-md">
-        </i>@Basic.Logon</a></li>
+        <li><a href="@Url.Action("Logon", "Account", new { area = "" })"><i class="icon-user-md"></i>@Basic.Logon</a></li>
     </ul>
 }

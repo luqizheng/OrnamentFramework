@@ -11,49 +11,50 @@ namespace Ornament.MVCWebFrame.App_Start
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
                     GlobalStyle,
-                    GlobalJavascript,
+                    JQueryRelative,
                     CommonComponent,
                     CodeStyle,
                     InputMask,
-                    RichEditor
+                    RichEditor,
+                    SeaJs,
                 };
 
             foreach (var item in registryParty)
             {
                 item.Invoke(bundles);
             }
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
             bundles.UseCdn = true;
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
         }
 
-        private static void InputMask(BundleCollection bundles)
+        private static void SeaJs(BundleCollection bundles)
         {
-            bundles.Add(new Bundle("~/Scripts/InputMasker", new JsMinify())
-                            .Include("~/Scripts/InputMasker/jquery.inputmask.js",
-                                     "~/Scripts/InputMasker/jquery.inputmask.extensions.js",
-                                     "~/Scripts/InputMasker/jquery.inputmask.date.extensions.js",
-                                     "~/Scripts/InputMasker/jquery.inputmask.numeric.extensions.js"
-                            ));
+            bundles.Add(new ScriptBundle("~/bundles/seajs").Include("~/Scripts/seajs-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/plugin-shim.js").Include("~/Scripts/plugin-shim.js"));
         }
 
-        private static void GlobalJavascript(BundleCollection bundles)
+        private static void InputMask(BundleCollection bundles)
+        {
+            
+            bundles.Add(new ScriptBundle("~/bundles/InputMasker")
+                            .Include("~/Scripts/InputMasker/*.js"));
+        }
+
+        private static void JQueryRelative(BundleCollection bundles)
         {
             bundles.Add(
                 new ScriptBundle("~/bundles/jquery", "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js").
                     Include("~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/seajs").Include("~/Scripts/seajs-{version}.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.unobtrusive*",
-                "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/ubo").Include("~/Scripts/jquery.unobtrusive*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                "~/Scripts/modernizr-*"));
-
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
             bundles.Add(new ScriptBundle("~/bundles/ko").Include("~/Scripts/knockout-{version}.js", "~/Scripts/jquery.tmpl.js"));
         }
 
