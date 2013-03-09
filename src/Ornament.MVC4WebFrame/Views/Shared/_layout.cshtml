@@ -19,20 +19,22 @@
             baseUrl: '/bundles',
             paths: {
                 'valid': "jqueryval",
-                'ko': "kockout",
+                'ko': "kockout"
             },
             shim: {
                 'jquery': { exports: 'jQuery' },
-                'inputMasker': {
+                'inputmask': {
                     deps: ['jquery'],
                     exports: "jQuery.fn.inputmask"
                 },
+                'tmpl': ['jquery'],
                 'jqValid': ['jquery'],
                 'valid': ['jquery'],
                 bootstrap: ['jquery'],
                 ornament: ['jquery', 'bootstrap'],
-                multiChoice: ['jquery'],
-                datepicker:['jquery']
+                multiChoice: { deps: ['tmpl'] },
+                datepicker: ['jquery'],
+                periodDailog: { deps: ['jquery'], exports: "jQuery.fn.periodDailog" }
             }
 
         });
@@ -60,7 +62,7 @@
         Ornament 1.01 under the MIT lisence
     </footer>
     <script type="text/javascript">
-        require(['jquery', 'ornament'], function ($) { });
+        require(['jquery', 'ornament']);
     </script>
     @RenderSection("script", false)
 </body>

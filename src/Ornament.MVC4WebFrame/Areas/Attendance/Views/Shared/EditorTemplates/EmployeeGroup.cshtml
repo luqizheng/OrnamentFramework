@@ -16,13 +16,7 @@
     </div>
 </div>
 <legend>工作时间:</legend>
-@if (this.Model != null)
-{
-    @Html.Partial("EditorTemplates/EmployeeGroupOption", this.Model.Options)
-}
-else
-{
-    @Html.Partial("EditorTemplates/EmployeeGroupOption",new EmployeeGroupOption())
-}
+
+@Html.Partial("EditorTemplates/EmployeeGroupOption", this.Model != null ? this.Model.Options : new EmployeeGroupOption())
 
 
