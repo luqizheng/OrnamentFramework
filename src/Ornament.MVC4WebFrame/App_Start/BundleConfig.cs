@@ -12,11 +12,9 @@ namespace Ornament.MVCWebFrame.App_Start
                 {
                     GlobalStyle,
                     JQueryRelative,
-                    CommonComponent,
                     CodeStyle,
-                    InputMask,
                     RichEditor,
-                    SeaJs,
+                    RequireJsLib,
                 };
 
             foreach (var item in registryParty)
@@ -28,34 +26,36 @@ namespace Ornament.MVCWebFrame.App_Start
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
         }
 
-        private static void SeaJs(BundleCollection bundles)
+        private static void RequireJsLib(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/seajs").Include("~/Scripts/seajs-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/plugin-shim.js").Include("~/Scripts/plugin-shim.js"));
-        }
-
-        private static void InputMask(BundleCollection bundles)
-        {
-            
-            bundles.Add(new ScriptBundle("~/bundles/InputMasker")
-                            .Include("~/Scripts/InputMasker/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/requirejs").Include("~/Scripts/require.js"));
+            bundles.Add(new Bundle("~/bundles/ornament.js", new JsMinify())
+                           .Include(
+                               "~/scripts/combine/global.js",
+                               "~/scripts/combine/permission.js",
+                               "~/scripts/combine/compatibleBootStrap.js",
+                               "~/scripts/combine/dialog.js",
+                               "~/scripts/combine/string.js",
+                               "~/scripts/combine/start.js"
+                           )
+               );
         }
 
         private static void JQueryRelative(BundleCollection bundles)
         {
-            bundles.Add(
-                new ScriptBundle("~/bundles/jquery", "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js").
-                    Include("~/Scripts/jquery-{version}.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
+            bundles.Add(new ScriptBundle("~/bundles/InputMasker.js").Include("~/Scripts/InputMasker/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval.js").Include("~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
+            bundles.Add(new ScriptBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));
+            bundles.Add(new ScriptBundle("~/bundles/multiChoice.js").Include("~/scripts/jQuery.multiChoice.js"));
             
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/ubo").Include("~/Scripts/jquery.unobtrusive*"));
-
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
-            bundles.Add(new ScriptBundle("~/bundles/ko").Include("~/Scripts/knockout-{version}.js", "~/Scripts/jquery.tmpl.js"));
+            bundles.Add(new ScriptBundle("~/bundles/knockout.js").Include("~/Scripts/knockout-{version}.js", "~/Scripts/jquery.tmpl.js"));
         }
 
 
@@ -80,23 +80,7 @@ namespace Ornament.MVCWebFrame.App_Start
                             .Include("~/Content/wysiwyg/jquery.wysiwyg.css"));
         }
 
-        private static void CommonComponent(BundleCollection bundles)
-        {
-            bundles.Add(new Bundle("~/bundles/component", new JsMinify())
-                            .Include(
-                                "~/scripts/combine/global.js",
-                                "~/scripts/combine/permission.js",
-                                "~/scripts/combine/compatibleBootStrap.js",
-                                "~/scripts/combine/dialog.js",
-                                "~/scripts/combine/string.js",
-                                "~/scripts/combine/bootstrap.js",
-                                "~/Scripts/datePicker/bootstrap-datepicker.js",
-                                "~/Scripts/jQuery.multiChoice.js",
-                                "~/Scripts/jQuery.tmpl.js",
-                                "~/scripts/combine/start.js"
-                            )
-                );
-        }
+
 
         private static void GlobalStyle(BundleCollection bundles)
         {

@@ -1,5 +1,4 @@
 ﻿
-
     $.fn.bootstrapMakeUp = function() {
         try {
             return $(this).each(function() {
@@ -20,4 +19,3 @@
     function bootstrapSummary() {
         $(".validation-summary-errors ul li[style!='display:none']").closest(".validation-summary-errors").addClass("alert alert-error");
     }
-

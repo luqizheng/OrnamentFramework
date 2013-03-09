@@ -453,7 +453,8 @@
     <Content Include="Images\FileTypes\xlsx win.png" />
     <Content Include="Images\FileTypes\zip.png" />
     <Content Include="Images\Upload.png" />
-    <Content Include="Scripts\combine\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\combine\compatibleBootStrap.js" />
     <Content Include="Scripts\combine\dialog.js" />
     <Content Include="Scripts\combine\globle.js" />
@@ -486,13 +487,6 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\plugin-combo.js" />
-    <Content Include="Scripts\plugin-debug.js" />
-    <Content Include="Scripts\plugin-flush.js" />
-    <Content Include="Scripts\plugin-nocache.js" />
-    <Content Include="Scripts\plugin-shim.js" />
-    <Content Include="Scripts\plugin-text.js" />
-    <Content Include="Scripts\plugin-warning.js" />
     <Content Include="Scripts\Prettify\lang-apollo.js" />
     <Content Include="Scripts\Prettify\lang-basic.js" />
     <Content Include="Scripts\Prettify\lang-clj.js" />
@@ -522,7 +516,7 @@
     <Content Include="Scripts\Prettify\lang-yaml.js" />
     <Content Include="Scripts\Prettify\prettify.js" />
     <Content Include="Scripts\Prettify\run_prettify.js" />
-    <Content Include="Scripts\seajs-2.0.0.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\selectivizr-min.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Scripts\wysiwyg\controls\wysiwyg.colorpicker.js" />
@@ -585,7 +579,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Application\Models\" />
     <Folder Include="Areas\MemberShips\Views\Shared\EditTemplates\" />
-    <Folder Include="Content\Components\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

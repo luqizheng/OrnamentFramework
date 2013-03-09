@@ -4,7 +4,7 @@
 * Copyright 2008，hee123
 * Dual licensed under the MIT or GPL Version 2 licenses.
 */
-/// <reference path="jquery-1.8.0.js" />
+/// <reference path="~/Scripts/jquery-1.9.1" />
 
 (function ($) {
 

@@ -13,31 +13,30 @@
     <!--[if lt IE 9]>
             <script  type="text/javascript" src="@Url.Content("~/Scripts/html5shiv.js")"></script>
     <![endif]-->
-    @Scripts.Render("~/bundles/modernizr", "~/bundles/seajs")
-    @Scripts.Render("~/bundles/InputMasker")
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/bundles/requirejs")" type="text/javascript"></script>
     <script type="text/javascript">
-        seajs.config({
-            plugins: ['shim'],
-            alias: {
-                'jquery': "@Url.Content("~/bundles/jquery")#",
-                'inputMasker': "@Url.Content("~/Scripts/InputMasker")#",
-                'jquery-val': "@Url.Content("~/bundles/jqueryval")#",
-                'jquery-ubo': "@Url.Content("~/bundles/ubo")#"
+        require.config({
+            baseUrl: '/bundles',
+            paths: {
+                'valid': "jqueryval",
+                'ko': "kockout",
             },
             shim: {
-                'jquery': {
-                    exports: 'jQuery'
+                'jquery': { exports: 'jQuery' },
+                'inputMasker': {
+                    deps: ['jquery'],
+                    exports: "jQuery.fn.inputmask"
                 },
-                'jq-valid': {
-                    depts:['jquery','jquery-ubo'],
-                    exports:'jQuery'
-                }
+                'jqValid': ['jquery'],
+                'valid': ['jquery'],
+                bootstrap: ['jquery'],
+                ornament: ['jquery', 'bootstrap'],
+                multiChoice: ['jquery'],
+                datepicker:['jquery']
             }
-        });
-        
-    </script>
 
+        });
+    </script>
     @RenderSection("head", false)
 </head>
 <body>
@@ -60,7 +59,9 @@
         <hr />
         Ornament 1.01 under the MIT lisence
     </footer>
-
+    <script type="text/javascript">
+        require(['jquery', 'ornament'], function ($) { });
+    </script>
     @RenderSection("script", false)
 </body>
 </html>

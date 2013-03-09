@@ -13,8 +13,7 @@
     </ul>
     
     <script type="text/javascript">
-        seajs.use('jquery', function () {
-            alert('ok');
+        require(['jquery'], function ($) {
             $(document).ready(function () {
                 $("#logout").click(function () {
                     return confirm("@MemberShip.LogoutWarning");

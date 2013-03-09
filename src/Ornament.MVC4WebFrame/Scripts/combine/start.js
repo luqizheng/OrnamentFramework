@@ -1,6 +1,5 @@
 ﻿// boot strap error mearge for mvc
 $(document).ready(function() {
-
     $('form').bootstrapMakeUp().submit(function() {
 
         try {
