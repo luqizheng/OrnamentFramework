@@ -1,4 +1,4 @@
-﻿seajs.use('jquery', function($) {
+﻿
 
     $.fn.bootstrapMakeUp = function() {
         try {
@@ -20,4 +20,4 @@
     function bootstrapSummary() {
         $(".validation-summary-errors ul li[style!='display:none']").closest(".validation-summary-errors").addClass("alert alert-error");
     }
-});
+

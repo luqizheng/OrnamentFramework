@@ -1,18 +1,18 @@
 ﻿// boot strap error mearge for mvc
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $('form').bootstrapMakeUp().submit(function () {
+    $('form').bootstrapMakeUp().submit(function() {
 
         try {
             $(this).valid();
             $(this).bootstrapMakeUp();
-        } catch (e) { }
+        } catch(e) {
+        }
     });
 
     if ($.fn.inputmask) {
-        $("[inputMask-format]").each(function () {
+        $("[inputMask-format]").each(function() {
             $(this).inputmask($(this).attr("inputMask-format"));
         });
     }
 });
-
