@@ -16,6 +16,7 @@ using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
 using Ornament.Web.Models;
 using Qi.NHibernateExtender;
+using Qi.Web.Mvc;
 using log4net;
 using log4net.Config;
 
@@ -28,6 +29,7 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            ValueProviderFactories.Factories.Add(new NHFormValueProviderFactory());
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -40,7 +42,7 @@ namespace Ornament.MVCWebFrame
             //AppStart
             OnStart.Start(OrnamentContext.Current, AppDomain.CurrentDomain.GetAssemblies());
 
-
+            ModelBinders.Binders.DefaultBinder = new NHModelBinder();
             //Ornament setting
 
             //Registry the Provider to use Membership rule of asp.net.
@@ -48,6 +50,8 @@ namespace Ornament.MVCWebFrame
 
             XmlConfigurator.Configure(); //Log4net registry.
             UpdateDatabase();
+
+
         }
 
         private void ChangeControllerFacotry()
@@ -58,7 +62,7 @@ namespace Ornament.MVCWebFrame
                 ////change the default controller.
                 ControllerBuilder.Current.SetControllerFactory(new OrnamentControllerFactory(controllerTypes)
                     {
-                        ErrorController = typeof (HttpErrorsController)
+                        ErrorController = typeof(HttpErrorsController)
                     });
             }
             catch (Exception ex)
@@ -110,7 +114,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof (GlobalContext));
+                ILog log = LogManager.GetLogger(typeof(GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally

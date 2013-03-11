@@ -1,13 +1,13 @@
-﻿@using System.Linq;
-@using System.Linq.Expressions;
-@using Ornament.MVCWebFrame.Areas.Attendance.Models
-@using Qi
+﻿@using Qi
 @using Qi.Attendance
 @model Qi.Attendance.Employee
 @Html.HiddenFor(model => model.Id)
 @{
-    var groups = (System.Collections.Generic.IEnumerable<Qi.Attendance.EmployeeGroup>)ViewBag.Groups;
+    var groups = (IEnumerable<EmployeeGroup>)ViewBag.Groups;
 }
+<script type="text/javascript">
+    require(['valid']);
+</script>
 <div class="control-group">
     @Html.LabelFor(s => s.Name, new { @class = "control-label" })
     <div class="controls">
@@ -37,12 +37,11 @@
     @Html.LabelFor(s => s.EmployeeGroup, new { @class = "control-label" })
     <div class="controls">
         @Html.DropDownListFor(s => s.EmployeeGroup, from eg in groups
-                                                    select new SelectListItem()
+                                                    select new SelectListItem
                                                         {
                                                             Text = eg.Name,
                                                             Value = eg.Id.ToString(),
-                                                            Selected = this.Model != null && eg.Equals(this.Model.EmployeeGroup)
-
-                                                        })
+                                                            Selected = Model != null && eg.Equals(Model.EmployeeGroup)
+                                                        },new Dictionary<string, object>{{"name","EmployeeGroup.Id"}})
     </div>
 </div>

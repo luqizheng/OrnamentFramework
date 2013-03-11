@@ -19,7 +19,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
 
         //
         // GET: /Attendance/Employee/employeeGroupId
-
+        [Session]
         public ActionResult Index(string employeeGroupId)
         {
             IList<Employee> all = _attendanceFactory.GetEmployeeDao().GetAll();
@@ -33,9 +33,8 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         }
 
         [HttpPost, Session(Transaction = true)]
-        public ActionResult Create(Employee employee)
+        public ActionResult Create([ModelBinder(typeof(NHModelBinder))]Employee employee)
         {
-
             if (ModelState.IsValid)
             {
                 _attendanceFactory.GetEmployeeDao().SaveOrUpdate(employee);
