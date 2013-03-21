@@ -86,6 +86,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.dll</HintPath>
     </Reference>
+    <Reference Include="Qi.NHibernateExtender, Version=1.3.3.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ornament.MemberShip.DataAccess.NHibernate\bin\Debug\Qi.NHibernateExtender.dll</HintPath>
+    </Reference>
     <Reference Include="Qi.Web, Version=1.1.7.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.Web.dll</HintPath>
@@ -211,10 +215,12 @@
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
     <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\Controllers\CheckHistoryController.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeCheckedController.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Attendance\Controllers\EmployeeGroupController.cs" />
-    <Compile Include="Areas\Attendance\Models\CardsModel.cs" />
+    <Compile Include="Areas\Attendance\Models\CardModel.cs" />
+    <Compile Include="Areas\Attendance\Models\CardModelList.cs" />
     <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
@@ -341,6 +347,7 @@
     <Content Include="Areas\Attendance\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\CardsEditor.cshtml" />
     <Content Include="Areas\Attendance\Views\Employee\Cards.cshtml" />
+    <Content Include="Areas\Attendance\Views\CheckHistory\Index.cshtml" />
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />
@@ -679,10 +686,6 @@
     <ProjectReference Include="..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
       <Name>Ornament.Web.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\Qi4net\src\Qi_src\Qi.NHibernateExtender\Qi.NHibernateExtender.csproj">
-      <Project>{310038d7-cc1c-49ec-a560-8cf2370a0da7}</Project>
-      <Name>Qi.NHibernateExtender</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

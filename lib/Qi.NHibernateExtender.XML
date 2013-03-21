@@ -699,6 +699,32 @@
             </code>
             </remarks>
         </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProvider">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHFormValueProviderFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHQueryValuePrivoderFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult.#ctor(System.Web.Mvc.ValueProviderResult,Qi.NHibernateExtender.SessionWrapper)">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <param name="sessionWrapper"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
         <member name="T:Qi.Web.Mvc.SessionAttribute">
             <summary>
             </summary>

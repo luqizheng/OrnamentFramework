@@ -21,14 +21,9 @@
         <select name="EmployeeState">
             @foreach (var val in EnumHelper.GetDescriptionList<EmployeeState>())
             {
-                if (val.Value == EmployeeState.Employed)
-                {
-                <option value="@val.Value" selected="selected">@val.Key</option>
-                }
-                else
-                {
-                <option value="@val.Value">@val.Key</option>
-                }
+                
+                <option value="@val.Value" @(val.Value == EmployeeState.Employed ? "selected=\"selected\"" : "")>@val.Key</option>
+                
             }
         </select>
     </div>
@@ -42,6 +37,6 @@
                                                             Text = eg.Name,
                                                             Value = eg.Id.ToString(),
                                                             Selected = Model != null && eg.Equals(Model.EmployeeGroup)
-                                                        },new Dictionary<string, object>{{"name","EmployeeGroup.Id"}})
+                                                        }, new Dictionary<string, object> { { "name", "EmployeeGroup.Id" } })
     </div>
 </div>

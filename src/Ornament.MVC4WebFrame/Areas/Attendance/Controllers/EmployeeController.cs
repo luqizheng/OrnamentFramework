@@ -66,16 +66,16 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         {
             var employee = _attendanceFactory.GetEmployeeDao().Get(id);
             var cards = _attendanceFactory.GetCardDao().GetEmployeeCards(employee);
-            return View(new CardsModel()
+            return View(new CardModelList()
                 {
                     Cards = CardModel.Paser(cards),
                     Employee = employee
                 });
         }
         [HttpPost, Session(Transaction = true)]
-        public ActionResult Cards(CardsModel cardsModel)
+        public ActionResult Cards(CardModelList cardModelList)
         {
-            return View(cardsModel);
+            return View(cardModelList);
         }
     }
 }

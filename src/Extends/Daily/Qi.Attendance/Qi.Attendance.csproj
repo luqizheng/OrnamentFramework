@@ -53,6 +53,7 @@
     <Compile Include="AbsentApplication.cs" />
     <Compile Include="Analizers\AttendanceType.cs" />
     <Compile Include="Analizers\CheckHistoryReport.cs" />
+    <Compile Include="Analizers\CheckStatus.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="CheckType.cs" />
     <Compile Include="Dao\IAttendanceFactory.cs" />

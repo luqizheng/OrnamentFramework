@@ -8,5 +8,7 @@ namespace Qi.Attendance.Dao
 {
     public interface ICheckHistoryDao : IDao<string, CheckHistory>
     {
+        IList<CheckHistory> GetList(DateTime dateTime, EmployeeGroup employeeGroup);
+        IList<CheckHistory> GetList(EmployeeGroup employee, DateTime start, DateTime end);
     }
 }

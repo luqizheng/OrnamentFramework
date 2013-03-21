@@ -17,6 +17,7 @@ using Ornament.Web;
 using Ornament.Web.Models;
 using Qi.NHibernateExtender;
 using Qi.Web.Mvc;
+using Qi.Web.Mvc.NHMvcExtender;
 using log4net;
 using log4net.Config;
 
@@ -29,7 +30,11 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            ValueProviderFactories.Factories.Add(new NHFormValueProviderFactory());
+
+            ValueProviderFactories.Factories.RemoveAt(1);
+            ValueProviderFactories.Factories[1]=new NHFormValueProviderFactory();
+            ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
+
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
