@@ -126,12 +126,10 @@
         </member>
         <member name="T:Qi.Draw.ResizePic">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.Draw.ResizePic.Resize(System.String,System.String)">
             <summary>
-            
             </summary>
             <param name="originalImagePath"></param>
             <param name="thumNailPath"></param>
@@ -139,12 +137,10 @@
         </member>
         <member name="P:Qi.Draw.ResizePic.MaxWidth">
             <summary>
-            
             </summary>
         </member>
         <member name="P:Qi.Draw.ResizePic.MaxHeight">
             <summary>
-            
             </summary>
         </member>
         <member name="T:Qi.SharePools.Stores.CallStore">
@@ -647,81 +643,80 @@
             <summary>
             </summary>
             <typeparam name="TId">
-            Id of the TReturn;
+                Id of the TReturn;
             </typeparam>
             <typeparam name="TReturn">Domain object's typel</typeparam>
         </member>
         <member name="M:Qi.Domain.IDao`2.GetAll">
             <summary>
-            Get All object 
+                Get All object
             </summary>
             <returns></returns>
         </member>
         <member name="M:Qi.Domain.IDao`2.Get(`0)">
             <summary>
-            Return the persistent instance of the given entity class with the given identifier, or null if there is no such persistent instance. (If the instance, or a proxy for the instance, is already associated with the session, return that instance or proxy.)
+                Return the persistent instance of the given entity class with the given identifier, or null if there is no such persistent instance. (If the instance, or a proxy for the instance, is already associated with the session, return that instance or proxy.)
             </summary>
             <param name="id">
             </param>
             <returns>
-            a persistent instance or null
+                a persistent instance or null
             </returns>
         </member>
         <member name="M:Qi.Domain.IDao`2.Load(`0)">
             <summary>
-            Return the persistent instance of the given entity class with the given identifier, assuming that the instance exists.
+                Return the persistent instance of the given entity class with the given identifier, assuming that the instance exists.
             </summary>
             <param name="id">
             </param>
             <returns>
-            The persistent instance or proxy
+                The persistent instance or proxy
             </returns>
             <remarks>
-            You should not use this method to determine if an instance exists (use a query or NHibernate.ISession.Get(System.Type,System.Object) instead). Use this only to retrieve an instance that you assume exists, where non-existence would be an actual error.
+                You should not use this method to determine if an instance exists (use a query or NHibernate.ISession.Get(System.Type,System.Object) instead). Use this only to retrieve an instance that you assume exists, where non-existence would be an actual error.
             </remarks>
         </member>
         <member name="M:Qi.Domain.IDao`2.Delete(`1)">
             <summary>
-            Delete the record of an entity from Database and thus the entity becomes transient
+                Delete the record of an entity from Database and thus the entity becomes transient
             </summary>
             <param name="t">
             </param>
         </member>
         <member name="M:Qi.Domain.IDao`2.Refresh(`1)">
             <summary>
-            Re-read the state of the entity from the database
+                Re-read the state of the entity from the database
             </summary>
             <param name="t">
             </param>
         </member>
         <member name="M:Qi.Domain.IDao`2.SaveOrUpdate(`1)">
             <summary>
-            Persist the entity <paramref name="t"/> to DB if it has not been persisted before 
+                Persist the entity <paramref name="t" /> to DB if it has not been persisted before
             </summary>
             <param name="t">
             </param>
             <remarks>
-            By default the instance is always saved. 
-            This behaviour may be adjusted by specifying an unsaved-value attribute of the identifier property mapping 
+                By default the instance is always saved.
+                This behaviour may be adjusted by specifying an unsaved-value attribute of the identifier property mapping
             </remarks>
         </member>
         <member name="M:Qi.Domain.IDao`2.Save(`1)">
             <summary>
-            Persist the given transient instance, first assigning a generated identifier.  
+                Persist the given transient instance, first assigning a generated identifier.
             </summary>
             <param name="t">
-            the given transient instance
+                the given transient instance
             </param>
             <returns>
-            The generated identifier
+                The generated identifier
             </returns>
             <remarks>
-            Save will use the current value of the identifier property if the Assigned generator is used.
+                Save will use the current value of the identifier property if the Assigned generator is used.
             </remarks>
         </member>
         <member name="M:Qi.Domain.IDao`2.Update(`1)">
             <summary>
-            
             </summary>
             <param name="t"></param>
         </member>
@@ -729,17 +724,16 @@
             <summary>
             </summary>
             <param name="exampleInstance">
-            The example instance.
+                The example instance.
             </param>
             <param name="propertiesToExclude">
-            The properties to exclude.
+                The properties to exclude.
             </param>
             <returns>
             </returns>
         </member>
         <member name="M:Qi.Domain.IDao`2.Flush">
             <summary>
-            
             </summary>
         </member>
         <member name="T:Qi.EnumDescriptionAttribute">
