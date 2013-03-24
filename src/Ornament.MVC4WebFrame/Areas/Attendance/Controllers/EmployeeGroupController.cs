@@ -108,6 +108,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
             option.SpecialWorkDay.AddAll(mergeWorkDayMark.Values);
         }
 
+        [Session]
         public ActionResult Edit(string id)
         {
             EmployeeGroup group = _attendanceFactory.GetEmployeeGroup().Get(new Guid(id));

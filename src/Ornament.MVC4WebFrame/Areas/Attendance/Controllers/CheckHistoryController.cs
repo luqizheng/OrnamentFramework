@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Qi.Attendance;
 using Qi.Attendance.Dao;
+using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
 {
+    [SessionAttribute]
     public class CheckHistoryController : Controller
     {
         private readonly IAttendanceFactory _checkHistoryDao;

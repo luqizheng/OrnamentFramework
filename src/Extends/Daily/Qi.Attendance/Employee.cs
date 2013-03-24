@@ -6,8 +6,10 @@ namespace Qi.Attendance
 {
     public enum EmployeeState
     {
-        [EnumDescription("在职")] Employed,
-        [EnumDescription("离职")] Dimission,
+        [EnumDescription("在职")]
+        Employed,
+        [EnumDescription("离职")]
+        Dimission,
     }
 
     public class Employee : DomainObject<Employee, Guid>
@@ -34,7 +36,7 @@ namespace Qi.Attendance
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("{0}", Name);
+            return Name;
         }
     }
 }

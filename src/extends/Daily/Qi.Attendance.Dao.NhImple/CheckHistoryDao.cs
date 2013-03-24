@@ -40,6 +40,6 @@ namespace Qi.Attendance.Dao.NhImple
                 .List<CheckHistory>();
         }
 
-        public IList<CheckStatus> 
+     
     }
 }
