@@ -27,6 +27,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
     {
         private readonly IMemberShipFactory _memberShipFactory;
         private readonly IUserDao _userDao;
+       
         public UserController(IMemberShipFactory memberShipFactory)
         {
             _memberShipFactory = memberShipFactory;
@@ -45,7 +46,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [ResourceAuthorize(UserOperator.Modify, "User")]
         public ActionResult Edit(string id)
         {
-            var user = _memberShipFactory.CreateUserDao().GetByLoginId(id);
+            User user = _memberShipFactory.CreateUserDao().GetByLoginId(id);
             if (user == null)
                 throw new MemberShipException("Not found user.");
             return View(user);

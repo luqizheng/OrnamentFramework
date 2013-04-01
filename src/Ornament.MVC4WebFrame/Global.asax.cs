@@ -17,6 +17,7 @@ using Ornament.Web;
 using Ornament.Web.Models;
 using Qi.NHibernateExtender;
 using Qi.Web.Mvc;
+using Qi.Web.Mvc.NHMvcExtender;
 using log4net;
 using log4net.Config;
 
