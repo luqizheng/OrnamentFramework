@@ -3,89 +3,103 @@
 @using Qi.Attendance
 @using Qi.Web
 @using Resources
-@model Ornament.MVCWebFrame.Areas.Attendance.Models.CardsModel
+@model Ornament.MVCWebFrame.Areas.Attendance.Models.CardModelList
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "雇员:" + this.Model.Employee.Name + " 卡管理";
     Layout = "~/Views/Shared/_appLayout.cshtml";
     
 }
-@Scripts.Render("~/bundles/ko")
+
+<div class="page-header">
+    <h2>"雇员:"@this.Model.Employee.Name</h2>
+</div>
+
 <div class="box">
     <div class="content">
         <form method="POST">
-        @Html.Hidden("Employee", Model.Employee.Id)
-        <div class="control-group">
-            <label class="control-label">
-                卡列表:</label>
-            <div class="controls">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                卡号
-                            </td>
-                            <td>
-                                卡状态
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach:cards">
-                        <tr>
-                            <td>
-                                <a class="btn btn-small" role="delete-card">@Basic.Delete</a>
-                            </td>
-                            <td>
-                                <input type="text" name="Cards.Number" data-bind="value:Number" />
-                                @Html.ValidationMessageFor(m => ((CardModel)null).Number)
-                                <input type="hidden" name="Cards.Id" data-bind="value:Id" />
-                            </td>
-                            <td>
-                                <select name="Cards.State" class="span2" data-bind="value:State">
-                                    <option value="@CardState.Normal">@EnumHelper.ToDescription(CardState.Normal)</option>
-                                    <option value="@CardState.Cancel">@EnumHelper.ToDescription(CardState.Cancel)</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3">
-                                <a data-bind='click: addCard ' class="btn btn-small" href="#">@Basic.Create</a>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+            @Html.Hidden("Employee", Model.Employee.Id)
+            <div class="control-group">
+                <label class="control-label">
+                    卡列表:</label>
+                <div class="controls">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>卡号
+                                </td>
+                                <td>卡状态
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: { data: cards, as: 'card' }">
+                            <tr>
+                                <td>
+                                    <a class="btn btn-small" role="delete-card" data-bind="click:function(){removeCard(viewModel.cards,card)}">@Basic.Delete</a>
+                                </td>
+                                <td>
+                                    <input type="text" name="Cards.Number" data-bind="value:Number" />
+                                    @Html.ValidationMessageFor(m => ((CardModel)null).Number)
+                                    <input type="hidden" name="Cards.Id" data-bind="value:Id" />
+                                </td>
+                                <td>
+                                    <select name="Cards.State" class="span2" data-bind="value:State">
+                                        <option value="@CardState.Normal">@EnumHelper.ToDescription(CardState.Normal)</option>
+                                        <option value="@CardState.Cancel">@EnumHelper.ToDescription(CardState.Cancel)</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <a data-bind='click: addCard' class="btn btn-small" href="#">@Basic.Create</a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="form-actions">
-            <input type="button" value="@Basic.Save" class="btn btn-primary" />
-        </div>
+            <div class="form-actions">
+                <input type="button" value="@Basic.Save" class="btn btn-primary" />
+                <input type="button" value="@Basic.Cancel" class="btn btn-danger"/>
+            </div>
         </form>
     </div>
 </div>
-@section script
-{
-    <script type="text/javascript">
-        var myCards = {
-           Employee:$("#Employee").val(),
-           Cards:@JsonHelper.ToJson(this.Model.Cards)         
-        }; 
-   
-    var CardsModel = function (items) {
-        this.cards = ko.observableArray(items);
-        this.addCard = function () {
-            this.cards.push({ Number: "", Id: "@Guid.Empty", State: "@CardState.Normal" });
-        };
-    };
-   
-    ko.applyBindings(new CardsModel(myCards.Cards));
 
-    $(".form-actions input").click(function() {
-        $.post("@Url.Action("Cards")",myCards,function (e) {
-            alert("ok");
-        });
-    });
+@section script
+    {
+
+    <script type="text/javascript">
+        require(['ko', 'json2','toDict'], function(ko) {
+            
+            removeCard = function(cards,item) {
+                cards.remove(item);
+            };
+            var existItem = {
+                Employee: $("#Employee").val(),
+                Cards: @Html.Raw(JsonHelper.ToJson(this.Model.Cards))
+                };
+
+            var CardsModel = function(items) {
+                this.cards = ko.observableArray(items);
+                this.addCard = function() {
+                    this.cards.push({ Number: "", Id: "@Guid.Empty", State: "@CardState.Normal" });
+                };
+            };
+            viewModel = new CardsModel(existItem.Cards);
+            ko.applyBindings(viewModel);
+
+            $(".form-actions input:first").click(function() {
+                $.post("@Url.Action("Cards")", $.toDictionary({ cards: existItem }), function(e) {
+                    alert(e.message);
+                });
+            }).next().click(function() {
+                location = "@Url.Action("Index")";
+            });
+
+        })
+
     </script>
 }

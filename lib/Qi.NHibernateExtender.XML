@@ -98,6 +98,22 @@
             <summary>
             </summary>
         </member>
+        <member name="M:Qi.NHibernateExtender.Criterion.BitwiseFlags.IsSet(System.String,System.Enum)">
+            <summary>
+            
+            </summary>
+            <param name="propertyName"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.NHibernateExtender.Criterion.BitwiseFlags.IsSet(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="propertyName"></param>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
         <member name="T:Qi.NHibernateExtender.SessionManager">
             <summary>
             </summary>
@@ -632,6 +648,15 @@
             <param name="bindingContext">The context within which the model is bound. The context includes information such as the model object, model name, model type, property filter, and value provider.</param>
             <param name="modelType">The type of the model object to return.</param>
         </member>
+        <member name="M:Qi.Web.Mvc.NHModelBinder.GetPropertyValue(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext,System.ComponentModel.PropertyDescriptor,System.Web.Mvc.IModelBinder)">
+            <summary>
+            Returns the value of a property using the specified controller context, binding context, property descriptor, and property binder.
+            </summary>
+            <returns>
+            An object that represents the property value.
+            </returns>
+            <param name="controllerContext">The context within which the controller operates. The context information includes the controller, HTTP content, request context, and route data.</param><param name="bindingContext">The context within which the model is bound. The context includes information such as the model object, model name, model type, property filter, and value provider.</param><param name="propertyDescriptor">The descriptor for the property to access. The descriptor provides information such as the component type, property type, and property value. It also provides methods to get or set the property value.</param><param name="propertyBinder">An object that provides a way to bind the property.</param>
+        </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.IsPersistentType(System.Type)">
             <summary>
                 get a value to indecate the modelType or it's child element  is mapping class which defined in nhibernate.
@@ -641,6 +666,7 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.IsMappingClass(System.Type)">
             <summary>
+            return value  this modelType is belong to Mappling class or not.
             </summary>
             <param name="modelType"></param>
             <returns></returns>
@@ -698,6 +724,85 @@
              ModelBinderProviders.BinderProviders.Regist(new NHModelBinderProvider());
             </code>
             </remarks>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHModelBinderProvider.GetBinder(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="modelType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHModelBindingContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHModelBindingContext.#ctor(System.Web.Mvc.ModelBindingContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:Qi.Web.Mvc.NHModelBindingContext.Context">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Qi.Web.Mvc.NHModelBindingContext.Wrapper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProvider">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProvider.#ctor(System.Web.Mvc.ControllerContext,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            </summary>
+            <param name="controllerContext"></param>
+            <param name="collection"></param>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHFormValueProviderFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHQueryValueProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHQueryValueProvider.#ctor(System.Web.Mvc.ControllerContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHQueryValuePrivoderFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult.#ctor(System.Web.Mvc.ValueProviderResult,Qi.NHibernateExtender.SessionWrapper)">
+            <summary>
+            
+            </summary>
+            <param name="result"></param>
+            <param name="sessionWrapper"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult.ConvertTo(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="culture"></param>
+            <returns></returns>
         </member>
         <member name="T:Qi.Web.Mvc.SessionAttribute">
             <summary>

@@ -19,22 +19,25 @@
             baseUrl: '/bundles',
             paths: {
                 'valid': "jqueryval",
-                'ko': "kockout"
+                'ko': "knockout",
+                'json': "json2",
+                'toDict': "toDictionary"
             },
             shim: {
-                'jquery': { exports: 'jQuery' },
-                'inputmask': {
+                jquery: { exports: '$' },
+                inputmask: {
                     deps: ['jquery'],
                     exports: "jQuery.fn.inputmask"
                 },
-                'tmpl': ['jquery'],
-                'jqValid': ['jquery'],
-                'valid': ['jquery'],
+                tmpl: ['jquery'],
+                jqValid: ['jquery'],
+                valid: ['jquery'],
                 bootstrap: ['jquery'],
                 ornament: ['jquery', 'bootstrap'],
                 multiChoice: { deps: ['tmpl'] },
                 datepicker: ['jquery'],
-                periodDailog: { deps: ['jquery'], exports: "jQuery.fn.periodDailog" }
+                periodDailog: { deps: ['jquery'], exports: "jQuery.fn.periodDailog" },
+                toDict:['jquery']
             }
 
         });
@@ -63,6 +66,7 @@
     </footer>
     <script type="text/javascript">
         require(['jquery', 'ornament']);
+
     </script>
     @RenderSection("script", false)
 </body>

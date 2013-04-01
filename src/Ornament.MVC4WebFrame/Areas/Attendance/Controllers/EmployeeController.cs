@@ -5,7 +5,7 @@ using Ornament.MVCWebFrame.Areas.Attendance.Models;
 using Qi.Attendance;
 using Qi.Attendance.Dao;
 using Qi.Web.Mvc;
-
+using System.Linq;
 namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
 {
     public class EmployeeController : Controller
@@ -43,7 +43,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
             ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
             return View(employee);
         }
-
+        [Session]
         public ActionResult Edit(string id)
         {
             ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
@@ -51,7 +51,7 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
         }
 
         [Session(Transaction = true), HttpPost]
-        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] Employee employee)
+        public ActionResult Edit(Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -61,21 +61,39 @@ namespace Ornament.MVCWebFrame.Areas.Attendance.Controllers
             ViewBag.Groups = _attendanceFactory.GetEmployeeGroup().GetAll();
             return View(employee);
         }
-
+        [Session]
         public ActionResult Cards(Guid id)
         {
             var employee = _attendanceFactory.GetEmployeeDao().Get(id);
             var cards = _attendanceFactory.GetCardDao().GetEmployeeCards(employee);
-            return View(new CardsModel()
+            return View(new CardModelList()
                 {
                     Cards = CardModel.Paser(cards),
                     Employee = employee
                 });
         }
         [HttpPost, Session(Transaction = true)]
-        public ActionResult Cards(CardsModel cardsModel)
+        public ActionResult Cards(CardModelList cards)
         {
-            return View(cardsModel);
+            var dao = _attendanceFactory.GetCardDao();
+            var localCards = dao.GetEmployeeCards(cards.Employee).ToDictionary(s => s.Number);
+
+            foreach (var a in cards.Cards)
+            {
+                if (localCards.ContainsKey(a.Number))
+                {
+                    localCards.Remove(a.Number);
+                    continue;
+                }
+                var card = a.ToCard(dao, cards.Employee);
+                dao.SaveOrUpdate(card);
+            }
+            foreach (var card in localCards.Values)
+            {
+                dao.Delete(card);
+            }
+
+            return Json(new {message = "保存成功."});
         }
     }
 }
