@@ -1,73 +1,31 @@
 ﻿@using System.Globalization
 @using System.Web.Optimization
 @using Resources
+
+@{
+   ViewBag.BodyClass = "no-background";
+}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
-    <link href="@Url.Content("~/Content/global")" rel="stylesheet" type="text/css" />
-    <!--[if (gte IE 6)&(lte IE 8)]>
-            <script type="text/javascript" src="@Url.Content("~/Scripts/selectivizr-min.js")"></script>
-        <![endif]-->
-    <!--[if lt IE 9]>
-            <script  type="text/javascript" src="@Url.Content("~/Scripts/html5shiv.js")"></script>
-    <![endif]-->
-    <script src="@Url.Content("~/bundles/requirejs")" type="text/javascript"></script>
-    <script type="text/javascript">
-        require.config({
-            baseUrl: '/bundles',
-            paths: {
-                'valid': "jqueryval",
-                'ko': "knockout",
-                'json': "json2",
-                'toDict': "toDictionary"
-            },
-            shim: {
-                jquery: { exports: '$' },
-                inputmask: {
-                    deps: ['jquery'],
-                    exports: "jQuery.fn.inputmask"
-                },
-                tmpl: ['jquery'],
-                jqValid: ['jquery'],
-                valid: ['jquery'],
-                bootstrap: ['jquery'],
-                ornament: ['jquery', 'bootstrap'],
-                multiChoice: { deps: ['tmpl'] },
-                datepicker: ['jquery'],
-                periodDailog: { deps: ['jquery'], exports: "jQuery.fn.periodDailog" },
-                toDict:['jquery']
-            }
+    
+    <link href="@Url.Content("~/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/scripts/seajs/sea.js" data-config="/scripts/config" data-main="/scripts/main"></script>
 
-        });
-    </script>
     @RenderSection("head", false)
 </head>
-<body>
 
-    @Html.Partial("_topMenu")
-    <header class="container">
-        <div class="logo">
-            <h1>Oranment</h1>
-            <p>
-                Integrated NHibernate,Castle and a smpale rbac permission framework
-            </p>
+<body class="no-background">
+    <div id="top">
+        <div class="fixed">
+            <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
+            @Html.Partial("_topMenu")
         </div>
-    </header>
-    <section>
-        <div class="container">
-            @RenderBody()
-        </div>
-    </section>
-    <footer class="container" id="footer">
-        <hr />
-        Ornament 1.01 under the MIT lisence
-    </footer>
-    <script type="text/javascript">
-        require(['jquery', 'ornament']);
-
-    </script>
+    </div>
+    @RenderBody()
+    <div id="footer"></div>
     @RenderSection("script", false)
 </body>
 </html>

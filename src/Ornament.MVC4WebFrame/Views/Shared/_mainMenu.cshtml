@@ -7,48 +7,57 @@
     var site = new SiteMapPermission(OrnamentContext.Current, Ornament.Context.OperatorResourceManager);
 }
 @helper RenderMenu(SiteMapNodeCollection rootNode)
+{
+    if (rootNode == null)
     {
-        if (rootNode == null)
-        {
-            return;
-        }
-        for (int i = 0; i < rootNode.Count; i++)
-        {
-            var node = (MvcSiteMapNode)rootNode[i];
-            var clz = node.Equals(Html.MvcSiteMap().Provider.CurrentNode) ? "class=active" : "";
+        return;
+    }
+    for (int i = 0; i < rootNode.Count; i++)
+    {
+        var node = (MvcSiteMapNode)rootNode[i];
+        var clz = node.Equals(Html.MvcSiteMap().Provider.CurrentNode) ? "class=active" : "";
         
     <li @clz >
-        @RenderHref(node,true)
+        @RenderHref(node, true, true)
+
         @if (node.HasChildNodes)
         {
             <ul>
                 @for (int j = 0; j < node.ChildNodes.Count; j++)
                 {
                     var cNode = (MvcSiteMapNode)node.ChildNodes[j];
-                    var border = j == node.ChildNodes.Count - 1 ? "style=border:none" : "";
-                    <li @border>
-                        @RenderHref(cNode,true)
+                    <li>
+                        @RenderHref(cNode, true, false)
                     </li>
                 }
             </ul>
         }
     </li>
-        }
+    }
 }
-<ul class="leftMenu">
+<ul class="navigation widget">
     @RenderMenu(Html.GetChildMenus(site))
 </ul>
-@helper RenderHref(MvcSiteMapNode node,bool defaultStyle)
-    {
-    <a href="@node.Url">
+
+@helper RenderHref(MvcSiteMapNode node, bool defaultStyle, bool firstLevel)
+{
+
+    var href = node.Clickable ? node.Url : "#";
+    var hasChild = firstLevel && node.HasChildNodes;
+    var extendClass = hasChild ? "class='expand'" : "";
+    <a href="@href" @Html.Raw(extendClass)>
         @if (!String.IsNullOrEmpty(node.ImageUrl))
         {
             <i class="@node.ImageUrl"></i>
         }
-        else if(defaultStyle)
+        else if (defaultStyle)
         {
-            <i class="icon-chevron-right"></i>
+            <i></i>
         }
         @node.Title
+        @if (firstLevel && node.HasChildNodes)
+        {
+            <strong>@node.ChildNodes.Count</strong>
+        }
     </a>
 }

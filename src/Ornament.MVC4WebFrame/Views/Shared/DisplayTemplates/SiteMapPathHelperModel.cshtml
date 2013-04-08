@@ -2,16 +2,17 @@
 @using System.Web.Mvc.Html
 @using System.Linq
 @using MvcSiteMapProvider.Web.Html.Models
-<ul class="breadcrumb">
+<ul class="breadcrumb" id="breadcrumbs">
     @foreach (var node in Model)
     {
         if (node != Model.Last())
         {
         <li>@Html.DisplayFor(m => node)</li>
-        <span class="divider">/</span>
+        <!--span class="divider">/</!--span-->
         }
         else
         {
-        <li class="active">@node.Title</li>
+        <li class="active"><a>@node.Title</a></li>
         }
-    }</ul>
+    }
+</ul>
