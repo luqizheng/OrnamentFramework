@@ -1,0 +1,15 @@
+﻿@model Ornament.MVCWebFrame.Areas.MemberShips.Models.CreateUserModel
+<div class="control-group">
+    @Html.LabelFor(m => m.Phone, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(m => m.Phone,new {@class="span12"})
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(m => m.Remark, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextAreaFor(m => m.Remark,new {@class="span12"})
+        @Html.ValidationMessageFor(m => m.Remark)
+    </div>
+</div>
