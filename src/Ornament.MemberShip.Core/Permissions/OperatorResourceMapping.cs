@@ -35,7 +35,10 @@ namespace Ornament.MemberShip.Permissions
         {
             get { return _nResourceOperator; }
         }
-
+        public string[] AllTypeResource
+        {
+            get { return this.TypeResourcesOperator.Resources; }
+        }
         /// <summary>
         ///     Get the operatorType use the resourceType.
         /// </summary>

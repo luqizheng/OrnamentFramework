@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ornament.MemberShip.Permissions
 {
@@ -9,6 +10,15 @@ namespace Ornament.MemberShip.Permissions
         ///     Key is the resource, value is operatorType;
         /// </summary>
         private readonly Dictionary<T, Type> _resOperatorMapping = new Dictionary<T, Type>();
+
+        public T[] Resources
+        {
+            get
+            {
+                return _resOperatorMapping.Keys
+                                          .ToArray();
+            }
+        }
 
         public virtual Type this[T res]
         {

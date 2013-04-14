@@ -148,10 +148,10 @@ namespace Ornament
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public static IList<string> GetTypeResource()
+        public static string[] GetTypeResource()
         {
             var mapping = Inner.Instance.GetContainer().Resolve<OperatorResourceMapping>();
-            return mapping.TypeResourceMapping.Keys.ToList();
+            return mapping.AllTypeResource;
         }
 
         /// <summary>

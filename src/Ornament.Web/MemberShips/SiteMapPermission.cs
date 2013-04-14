@@ -77,7 +77,7 @@ namespace Ornament.Web.MemberShips
                 }
 
                 Enum operatorVal = GetOperatorType(operatorExpress);
-                string typeResource = _mapping.GetTypeResource(operatorVal);
+                string typeResource = _mapping.getoperatorVal);
                 if (typeResource != null)
                 {
                     return _context.HasRight(typeResource, operatorVal);
