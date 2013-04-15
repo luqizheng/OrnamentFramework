@@ -45,10 +45,12 @@
     </ul>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".pagination li[class!=active] a").click(function () {
-            $("#CurrentPage").val($(this).attr("href").substr(1));
-            $("form").submit();
+    seajs.use(["jquery"], function() {
+        $(document).ready(function() {
+            $(".pagination li[class!=active] a").click(function() {
+                $("#CurrentPage").val($(this).attr("href").substr(1));
+                $("form").submit();
+            });
         });
     });
 </script>

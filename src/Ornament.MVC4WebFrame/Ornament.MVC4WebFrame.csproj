@@ -348,6 +348,11 @@
     <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\CardsEditor.cshtml" />
     <Content Include="Areas\Attendance\Views\Employee\Cards.cshtml" />
     <Content Include="Areas\Attendance\Views\CheckHistory\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserActionMenus.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserBasicInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserOptionInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserPassword.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserQuestionAnswer.cshtml" />
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />

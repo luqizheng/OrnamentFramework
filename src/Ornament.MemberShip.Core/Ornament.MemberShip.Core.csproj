@@ -104,10 +104,14 @@
     <Compile Include="MemberShipPermissionException.cs" />
     <Compile Include="Org.cs" />
     <Compile Include="Permissions\IPermissionDao.cs" />
+    <Compile Include="Permissions\IResourceOperatorManager.cs" />
+    <Compile Include="Permissions\NHibernateResource.cs" />
     <Compile Include="Permissions\NotFindOperatorTypeException.cs" />
     <Compile Include="Permissions\NotFindResourceDefinedException.cs" />
     <Compile Include="Permissions\OperatorResourceMapping.cs" />
     <Compile Include="Permissions\Permission.cs" />
+    <Compile Include="Permissions\ResourceOperatorManager.cs" />
+    <Compile Include="Permissions\TypeResourceMapping.cs" />
     <Compile Include="ProfileValue.cs" />
     <Compile Include="UserGroup.cs" />
     <Compile Include="User.cs" />

@@ -3,6 +3,7 @@
 @using MvcSiteMapProvider
 @using Ornament.Web
 @using Ornament.Web.MemberShips
+@using Resources
 @{
     SiteMapNodeCollection topMenus = SiteMap.RootNode.ChildNodes;
 
@@ -22,7 +23,7 @@
 }
 
 @helper RenderMenu(MvcSiteMapNode node, SiteMapPermission site, SiteMapNode currentNode)
-    {
+{
     if (site.IsAccessibleToUser(node))
     {
         string clz = node == currentNode ? "class=active" : "";
@@ -35,7 +36,7 @@
     </a></li>
     }
 }
-<div class="navbar navbar-inverse navbar-fixed-top">
+@*<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
@@ -55,4 +56,20 @@
             </ul>
         </div>
     </div>
-</div>
+</div>*@
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <ul class="top-menu">
+        <li><a href="#" title="" class="messages"><i class="new-message"></i></a></li>
+        <li class="dropdown">
+            <a class="user-menu" data-toggle="dropdown">
+                <img src="/templates/pannonia/img/userpic.png" alt="" /><span style="min-width: 90px">@OrnamentContext.Current.CurrentUser.Name<b class="caret"></b></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
+                <li><a href="#" title=""><i class="icon-inbox"></i>@Basic.Messages<span class="badge badge-info">9</span></a></li>
+                <li><a href="#" title=""><i class="icon-cog"></i>@Basic.Setting</a></li>
+                <li><a href="#" title=""><i class="icon-remove"></i>@Basic.Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+}
