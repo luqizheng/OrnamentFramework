@@ -20,16 +20,24 @@ namespace Ornament.MemberShip.Permissions
             }
         }
 
-        public virtual Type this[T res]
+        /// <summary>
+        /// Gets the OperatorType from Resources
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundOperatorTypeException">Can not find OperatorType base on resource</exception>
+        public virtual Type GetOperatorType(T res)
         {
-            get
+            if (_resOperatorMapping.ContainsKey(res))
             {
-                if (_resOperatorMapping.ContainsKey(res))
-                {
-                    return _resOperatorMapping[res];
-                }
-                return null;
+                return _resOperatorMapping[res];
             }
+            var s = res as string;
+            if (s != null)
+                throw new NotFoundOperatorTypeException(s);
+            else
+                throw new NotFoundOperatorTypeException(typeof(T));
+
         }
 
         public virtual IResourceOperatorManager<T> Add(T resourceInstance, Type enumType)

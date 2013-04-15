@@ -207,4 +207,13 @@
   <data name="SaveSuccess" xml:space="preserve">
     <value>保存成功.</value>
   </data>
+  <data name="Messages" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>设置</value>
+  </data>
 </root>

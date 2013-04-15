@@ -178,6 +178,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        internal static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Messages.
+        /// </summary>
+        internal static string Messages {
+            get {
+                return ResourceManager.GetString("Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monday.
         /// </summary>
         internal static string Monday {
@@ -291,6 +309,15 @@ namespace Resources {
         internal static string SaveSuccess {
             get {
                 return ResourceManager.GetString("SaveSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        internal static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
             }
         }
         
