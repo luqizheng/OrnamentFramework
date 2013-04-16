@@ -118,12 +118,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FolderManager.cs" />
     <Compile Include="HtmlExtender.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
     <Compile Include="MemberShips\Models\RegistAccount.cs" />
+    <Compile Include="MemberShips\Models\Users\CreateUserAccount.cs" />
     <Compile Include="Properties\Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
