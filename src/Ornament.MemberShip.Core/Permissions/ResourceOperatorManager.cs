@@ -55,21 +55,18 @@ namespace Ornament.MemberShip.Permissions
             return this;
         }
 
-        //public T[] GetResourceByType(Type operatorType)
-        //{
-        //    var result = new List<T>();
-        //    foreach (T resName in _resOperatorMapping.Keys)
-        //    {
-        //        Type enumType = _typeResourceTypeOperator[resName];
-        //        if (enumType == operatorType.GetType())
-        //        {
-        //            result.Add(resName);
-        //        }
-        //    }
-        //    if (result.Count == 0)
-        //        throw new NotFindResourceDefinedException(operatorType.GetType());
+        public T GetResourceByType(Type operatorType)
+        {
+            foreach (T resName in Resources)
+            {
+                Type enumType = GetOperatorType(resName);
+                if (enumType == operatorType)
+                {
+                    return resName;
+                }
+            }
 
-        //    return result.ToArray();
-        //}
+            throw new NotFindResourceDefinedException(operatorType);
+        }
     }
 }

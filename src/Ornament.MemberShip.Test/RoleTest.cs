@@ -6,16 +6,16 @@ using Ornament.MemberShip;
 namespace MemberShip.Test
 {
     /// <summary>
-    ///This is a test class for RoleTest and is intended
-    ///to contain all RoleTest Unit Tests
-    ///</summary>
+    ///     This is a test class for RoleTest and is intended
+    ///     to contain all RoleTest Unit Tests
+    /// </summary>
     [TestClass]
     public class RoleTest
     {
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext { get; set; }
 
         #region Additional test attributes
@@ -51,8 +51,8 @@ namespace MemberShip.Test
         #endregion
 
         /// <summary>
-        ///A test for Name
-        ///</summary>
+        ///     A test for Name
+        /// </summary>
         [TestMethod]
         public void NameTest()
         {
@@ -119,8 +119,8 @@ namespace MemberShip.Test
 
 
         /// <summary>
-        ///A test for Comment
-        ///</summary>
+        ///     A test for Comment
+        /// </summary>
         [TestMethod]
         public void CommentTest_SetEmptyString()
         {
@@ -132,8 +132,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for Comment
-        ///</summary>
+        ///     A test for Comment
+        /// </summary>
         [TestMethod]
         public void CommentTest()
         {
@@ -146,8 +146,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for Comment
-        ///</summary>
+        ///     A test for Comment
+        /// </summary>
         [TestMethod, ExpectedException(typeof (ArgumentOutOfRangeException))]
         public void CommentTest_OverLength()
         {
@@ -166,8 +166,8 @@ namespace MemberShip.Test
 
 
         /// <summary>
-        ///A test for Role Constructor
-        ///</summary>
+        ///     A test for Role Constructor
+        /// </summary>
         [TestMethod]
         public void RoleConstructorTest1()
         {
@@ -177,8 +177,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for Role Constructor
-        ///</summary>
+        ///     A test for Role Constructor
+        /// </summary>
         [TestMethod]
         public void RoleConstructorTest()
         {

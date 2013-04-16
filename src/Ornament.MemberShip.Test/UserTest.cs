@@ -52,18 +52,7 @@ namespace MemberShip.Test
 
         #endregion
 
-        /// <summary>
-        ///A test for UserGroups
-        ///</summary>
-        [TestMethod]
-        [DeploymentItem("Ornament.MemberShip.Core.dll")]
-        public void UserGroupsTest()
-        {
-            var target = new User_Accessor();
-            Iesi.Collections.Generic.ISet<UserGroup> actual;
-            actual = target.UserGroups;
-            Assert.IsTrue(actual is HashedSet<UserGroup>);
-        }
+      
 
         /// <summary>
         ///A test for UpdateTime
@@ -78,31 +67,7 @@ namespace MemberShip.Test
         }
 
 
-        /// <summary>
-        ///A test for PKID
-        ///</summary>
-        [TestMethod]
-        [DeploymentItem("Ornament.MemberShip.Core.dll")]
-        public void LoginIdTest1()
-        {
-            var target = new User_Accessor();
-            target.LoginId = "okss";
-            string actual;
-            actual = target.LoginId;
-            Assert.AreEqual("okss", actual);
-        }
 
-        /// <summary>
-        ///A test for PKID
-        ///</summary>
-        [TestMethod]
-        [DeploymentItem("Ornament.MemberShip.Core.dll")]
-        [ExpectedException(typeof (ArgumentException), "LoginId's format is not correct.")]
-        public void LoginIdTest2()
-        {
-            var target = new User_Accessor();
-            target.LoginId = "okss$";
-        }
 
         /// <summary>
         ///A test for Phone
@@ -178,20 +143,7 @@ namespace MemberShip.Test
             Assert.AreEqual(expected, actual);
         }
 
-        /// <summary>
-        ///A test for LoginId
-        ///</summary>
-        [TestMethod]
-        [DeploymentItem("Ornament.MemberShip.Core.dll")]
-        public void LoginIdTest()
-        {
-            var target = new User_Accessor();
-            string expected = "loginid";
-            string actual;
-            target.LoginId = expected;
-            actual = target.LoginId;
-            Assert.AreEqual(expected, actual);
-        }
+      
 
         /// <summary>
         ///A test for LastPasswordChangedDate
@@ -540,16 +492,7 @@ namespace MemberShip.Test
             target.AddRole(null);
         }
 
-        /// <summary>
-        ///A test for User Constructor
-        ///</summary>
-        [TestMethod]
-        [DeploymentItem("Ornament.MemberShip.Core.dll")]
-        public void UserConstructorTest2()
-        {
-            var target = new User_Accessor();
-        }
-
+       
         /// <summary>
         ///A test for User Constructor
         ///</summary>

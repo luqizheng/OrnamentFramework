@@ -30,12 +30,6 @@ use permission for checking permission like @user:Read, user is the string type 
 
 
     <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-user">
-      <!--<mvcSiteMapNode controller="User" action="index" area="MemberShips" resourceKey="createUser" operator="@userOperator.Modify" />
-      <mvcSiteMapNode controller="Role" action="index" area="MemberShips" resourceKey="createRole" operator="@roleOperator.Modify" />
-      <mvcSiteMapNode controller="UserGroups" action="index" area="MemberShips" resourceKey="createUserGroup" operator="@userGroupOperator.Modify" />-->
-
-      <!--<mvcSiteMapNode resourceKey="createOrg" area="MemberShips" controller="Orgs" action="Create"
-                   operator="Ornament.MVCWebFrame.Models.Membership.OrgOperator,Ornament.MVCWebFrame:Read" />-->
       <mvcSiteMapNode  area="MemberShips" action="Index" controller="User"
          resourceKey="userList" permission="user:Read">
       </mvcSiteMapNode>

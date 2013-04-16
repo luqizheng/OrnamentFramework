@@ -106,7 +106,6 @@
     <None Include="App.config" />
     <None Include="hibernate.cfg.config" />
     <None Include="packages.config" />
-    <Shadow Include="Test References\Ornament.MemberShip.Core.accessor" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ornament.MemberShip.DataAccess.NHibernate\Ornament.MemberShip.Dao.NHibernateImple.csproj">
@@ -139,6 +138,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

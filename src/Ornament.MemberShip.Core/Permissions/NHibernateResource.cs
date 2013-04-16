@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ornament.MemberShip.Permissions
 {
@@ -9,32 +10,11 @@ namespace Ornament.MemberShip.Permissions
 
         private readonly TypeResourceOperatorMapping _typeMapping = new TypeResourceOperatorMapping();
 
-        //public override ResourceOperatorManager<Type> Add(Type resourceInstance, Type enumType)
-        //{
-
-        //    return base.Add(resourceInstance, enumType);
-        //}
-
-        //public void AddTypes(Type resType, Type enumType)
-        //{
-        //    string proxyTypeName = String.Format(NHProxyType, resType.Name);
-        //    _nhProxyTypeMapping.Add(proxyTypeName, enumType);
-        //}
-        ///// <summary>
-        ///// Get the Operator
-        ///// </summary>
-        ///// <param name="resType"></param>
-        ///// <returns></returns>
-        //public Type this[Type resType]
-        //{
-        //    get
-        //    {
-        //        var key = String.Format(NHProxyType, resType.Name);
-        //        if (_nhProxyTypeMapping.ContainsKey(key))
-        //            return _nhProxyTypeMapping[key];
-        //        return null;
-        //    }
-        //}
+        /// <summary>
+        ///     Key is the actual type, and the the value is the prosxytyp.
+        /// </summary>
+        /// <returns></returns>
+        private readonly IDictionary<string, Type> _proxyTypeAndActualTypeMapping = new Dictionary<string, Type>();
 
         public Type GetOperatorType(Type res)
         {
@@ -44,9 +24,17 @@ namespace Ornament.MemberShip.Permissions
 
         public IResourceOperatorManager<Type> Add(Type resourceInstance, Type enumType)
         {
+
             string key = string.Format(NHProxyType, resourceInstance.Name);
             _typeMapping.Add(key, enumType);
+            _proxyTypeAndActualTypeMapping.Add(key, resourceInstance);
             return this;
+        }
+
+        public Type GetResourceByType(Type operatorType)
+        {
+            string proxyName = _typeMapping.GetResourceByType(operatorType);
+            return _proxyTypeAndActualTypeMapping[proxyName];
         }
     }
 }
