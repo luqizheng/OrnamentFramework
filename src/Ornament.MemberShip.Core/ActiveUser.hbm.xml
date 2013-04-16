@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="Ornament.MemberShip"
+                   assembly="Ornament.MemberShip.Core">
+  <class name="ActiveUser" table="MBS_ActiveUser">
+    <id name="Id" length="32">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <many-to-one name="User"></many-to-one>
+    <property name="CreateTime" type="DateTime"  update="false" ></property>
+    <property name="PrivateKey" type="DateTime"  update="false" ></property>
+  </class>
+</hibernate-mapping>

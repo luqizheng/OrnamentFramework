@@ -229,7 +229,6 @@
     <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UsergroupsController.cs" />
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
-    <Compile Include="Areas\MemberShips\Models\CreateUserModel.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
     <Compile Include="Areas\Projects\Controllers\DefectsController.cs" />

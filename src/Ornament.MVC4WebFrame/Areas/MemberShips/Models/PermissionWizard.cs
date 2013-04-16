@@ -7,42 +7,43 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
     public class PermissionWizard
     {
         private readonly string[] _wizardDirect = new[]
-                                                      {
-                                                          "ChoiceResourceType", //选择资源的类型
-                                                          "ChoiceResource", //选择资源
-                                                          "EditPermission", //编辑许可证的内容
-                                                          "Typography",
-                                                      };
+            {
+                "ChoiceResourceType", //选择资源的类型
+                "ChoiceResource", //选择资源
+                "EditPermission", //编辑许可证的内容
+                "Typography",
+            };
 
         private string _descriptionResourceName;
+
         public PermissionWizard(Permission permission)
             : this()
         {
             if (permission == null) throw new ArgumentNullException("permission");
-            var operatorType = OrnamentContext.GetOperatorType(permission.Resource);
+            Type operatorType = Context.GetOperatorType(permission.Resource);
             Name = permission.Name;
             Remark = permission.Remark;
             Operator = Permission.FindValues(permission.Operator, operatorType);
             DescriptionResourceName =
                 OrnamentContext.Configuration.GetResourceSettingByType(permission.Resource.GetType()).Name;
         }
+
         public PermissionWizard()
         {
             CurrentStep = -1;
         }
 
         /// <summary>
-        /// 当前Wizard的位置
+        ///     当前Wizard的位置
         /// </summary>
         public int CurrentStep { get; set; }
 
         /// <summary>
-        /// Gets or sets the resource's id
+        ///     Gets or sets the resource's id
         /// </summary>
         public string ResourceId { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         public Type ResourceType
         {
@@ -50,7 +51,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         }
 
         /// <summary>
-        /// 资源描述的名称，定义在配置文件中，一般是在Config/WebCfg.config中的
+        ///     资源描述的名称，定义在配置文件中，一般是在Config/WebCfg.config中的
         /// </summary>
         public string DescriptionResourceName
         {
@@ -61,7 +62,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the PermissionId
+        ///     Gets or sets the PermissionId
         /// </summary>
         public string Remark { get; set; }
 
@@ -70,7 +71,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         public int[] Operator { get; set; }
 
         /// <summary>
-        /// 表示现在是否在选择资源
+        ///     表示现在是否在选择资源
         /// </summary>
         public bool IsChoiceResource
         {
@@ -88,7 +89,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         }
 
         /// <summary>
-        /// Indecate is last step or not
+        ///     Indecate is last step or not
         /// </summary>
         public bool IsLast
         {
@@ -96,7 +97,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         }
 
         /// <summary>
-        /// 上一步
+        ///     上一步
         /// </summary>
         /// <returns></returns>
         public string Previous()
@@ -106,7 +107,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         }
 
         /// <summary>
-        /// 下一步
+        ///     下一步
         /// </summary>
         /// <returns></returns>
         public string Next()
