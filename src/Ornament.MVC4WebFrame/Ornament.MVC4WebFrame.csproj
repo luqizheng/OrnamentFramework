@@ -454,8 +454,6 @@
     <Content Include="Images\FileTypes\xlsx win.png" />
     <Content Include="Images\FileTypes\zip.png" />
     <Content Include="Images\Upload.png" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\combine\compatibleBootStrap.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\dialogs\alert.js" />

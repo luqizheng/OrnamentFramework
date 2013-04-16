@@ -137,20 +137,5 @@ public class MemberTest
         Assert.IsFalse(m.InRole(role1));
         Assert.IsFalse(m.InRole(role2));
     }
-
-    [TestMethod]
-    public void TestMember_Constructor_input_not_empty_guid()
-    {
-        var guid = "123456789abcdef123456789abcdef";
-        var m = new ImpleMember(guid);
-        Assert.AreEqual(guid, m.Id);
-    }
-
-    [TestMethod, ExpectedException(typeof(ArgumentOutOfRangeException), "Id should not be Guid.Empty")]
-    public void TestMember_Constructor_input_empty_id()
-    {
-        var guid = "123456789abcdef123456789abcdef";
-        var m = new ImpleMember(guid);
-        Assert.AreEqual(guid, m.Id);
-    }
+    
 }

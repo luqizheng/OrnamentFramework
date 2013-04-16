@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.Remoting.Contexts;
 using Iesi.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ornament.MemberShip;
+using Ornament.MemberShip.MemberShipProviders;
 
 namespace MemberShip.Test
 {
@@ -19,17 +21,29 @@ namespace MemberShip.Test
         ///information about and functionality for the current test run.
         ///</summary>
         public TestContext TestContext { get; set; }
+        public class MembershipContextProvider : IMemberShipProvider
+        {
+            public string Encrypt(string content)
+            {
+                return content;
+            }
 
+            public string Decrypt(string content)
+            {
+                return content;
+            }
+        }
         #region Additional test attributes
 
         // 
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            MembershipContext.Provider = new MembershipContextProvider();
+        }
         //
         //Use ClassCleanup to run code after all tests in a class have run
         //[ClassCleanup()]
@@ -52,7 +66,7 @@ namespace MemberShip.Test
 
         #endregion
 
-      
+
 
         /// <summary>
         ///A test for UpdateTime
@@ -108,7 +122,7 @@ namespace MemberShip.Test
             Assert.IsTrue(target.AnswertIsCorrect(expected));
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void AnswertIsCorrect_Test_nullException()
         {
             var target = new User("kkkkk");
@@ -143,7 +157,7 @@ namespace MemberShip.Test
             Assert.AreEqual(expected, actual);
         }
 
-      
+
 
         /// <summary>
         ///A test for LastPasswordChangedDate
@@ -244,17 +258,7 @@ namespace MemberShip.Test
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ArgumentException), "a2cabc.com isn't a available e-mail")]
-        public void EmailTest_Exception()
-        {
-            var target = new User("kkkkk");
-            string expected = "a2cabc.com";
-            string actual;
-            target.Email = expected;
-            actual = target.Email;
-            Assert.AreEqual(expected, actual);
-        }
+       
 
         /// <summary>
         ///A test for CreateTime
@@ -285,7 +289,7 @@ namespace MemberShip.Test
         /// <summary>
         ///A test for Remove
         ///</summary>
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Remove_Null_UserGroup_Test()
         {
             var target = new User("kkkkk");
@@ -293,7 +297,7 @@ namespace MemberShip.Test
             target.Remove(ug);
         }
 
-  
+
 
         /// <summary>
         ///A test for GetUserGroups
@@ -337,7 +341,7 @@ namespace MemberShip.Test
             Assert.AreEqual("654321", target.Password);
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentNullException), "Password Answer is requested")]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException), "Password Answer is requested")]
         public void ChangePasswordByAnswer_AnswerIsNull()
         {
             var target = new User("kkkkk", "123456");
@@ -346,7 +350,7 @@ namespace MemberShip.Test
             target.ChangePasswordByAnswer(answer, newPassword);
         }
 
-        [TestMethod, ExpectedException(typeof (MemberShipPermissionException), "answer is not correct")]
+        [TestMethod, ExpectedException(typeof(MemberShipPermissionException), "answer is not correct")]
         public void ChangePasswordByAnswer_AnswerIsNotCorrect()
         {
             var target = new User("kkkkk", "123456");
@@ -356,7 +360,7 @@ namespace MemberShip.Test
             target.ChangePasswordByAnswer(answer, newPassword);
         }
 
-        [TestMethod, ExpectedException(typeof (MemberShipPermissionException), "Password Answer of user is not setting")
+        [TestMethod, ExpectedException(typeof(MemberShipPermissionException), "Password Answer of user is not setting")
         ]
         public void ChangePasswordByAnswer_NotInitAnswerAndQuestion()
         {
@@ -412,7 +416,7 @@ namespace MemberShip.Test
             Assert.IsFalse(target.ValidateUser("error_password"));
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void SetQuestionAndAsnwerTest_Answer_null()
         {
             var target = new User("kkkkk", "123456");
@@ -421,7 +425,7 @@ namespace MemberShip.Test
             target.SetQuestionAndAnswer(answer, password);
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void SetQuestionAndAsnwerTest_Question_null()
         {
             var target = new User("kkkkk", "123456");
@@ -431,10 +435,10 @@ namespace MemberShip.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof (MemberShipException), "User is locked.")]
+        [ExpectedException(typeof(MemberShipException), "User is locked.")]
         public void CanLoginTest_Lockout()
         {
-            var target = new User("kkkkk", "123456") {IsLockout = true};
+            var target = new User("kkkkk", "123456") { IsLockout = true };
 
             string inputPassword = "123456";
 
@@ -445,17 +449,17 @@ namespace MemberShip.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof (MemberShipException), "User isn't approved.")]
+        [ExpectedException(typeof(MemberShipException), "User isn't approved.")]
         public void CanLoginTest_Unapproved()
         {
-            var target = new User("kkkkk", "123456") {IsApproved = false};
+            var target = new User("kkkkk", "123456") { IsApproved = false };
             const string inputPassword = "123456";
             const bool expected = false;
             bool actual = target.ValidateUser(inputPassword);
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void CanLoginTest_checking_password_is_empty()
         {
             var target = new User("kkkkk", "123456");
@@ -485,14 +489,14 @@ namespace MemberShip.Test
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod, ExpectedException(typeof (ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Add_Null_UserGroup()
         {
             var target = new User("kkkkk");
             target.AddRole(null);
         }
 
-       
+
         /// <summary>
         ///A test for User Constructor
         ///</summary>

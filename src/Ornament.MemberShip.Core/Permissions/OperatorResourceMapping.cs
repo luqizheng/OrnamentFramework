@@ -8,33 +8,36 @@ namespace Ornament.MemberShip.Permissions
     /// </summary>
     public class OperatorResourceMapping
     {
-        private readonly NHibernateResourceOperator _nResourceOperator = new NHibernateResourceOperator();
+        private readonly NHibernateResourceManager _nhResourceManager = new NHibernateResourceManager();
 
-        private readonly TypeResourceOperatorMapping _typeResourcesOperator = new TypeResourceOperatorMapping();
-
-        /// <summary>
-        ///     Key is the resourceType, value is operator Type,
-        /// </summary>
-        public Dictionary<Type, Type> ResourceMapping { get; set; }
+        private readonly TypeResourceManager _typeResourcesOperator = new TypeResourceManager();
 
         /// <summary>
         ///     Key is the resource, value is operatorType;
         /// </summary>
-        private TypeResourceOperatorMapping TypeResourcesOperator
+        private TypeResourceManager TypeResourcesOperator
         {
             get { return _typeResourcesOperator; }
         }
-
-        private NHibernateResourceOperator NHibernateResourceOperator
+        /// <summary>
+        /// 
+        /// </summary>
+        private NHibernateResourceManager NHibernateResourceManager
         {
-            get { return _nResourceOperator; }
+            get { return _nhResourceManager; }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string[] AllTypeResource
         {
             get { return TypeResourcesOperator.Resources; }
         }
 
+        public Type[] AllNHibernateResources
+        {
+            get { return NHibernateResourceManager.Resources; }
+        }
 
         /// <summary>
         ///     Get the operatorType use the resourceType.
@@ -52,31 +55,35 @@ namespace Ornament.MemberShip.Permissions
                 if (resourceType is string)
                     result = TypeResourcesOperator.GetOperatorType(resourceType.ToString());
                 else
-                    result = NHibernateResourceOperator.GetOperatorType(resourceType.GetType());
+                    result = NHibernateResourceManager.GetOperatorType(resourceType.GetType());
                 if (result == null)
                     throw new NotFoundOperatorTypeException(resourceType.GetType());
                 return result;
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resType"></param>
+        /// <returns></returns>
         public Type GetOperator(Type resType)
         {
-            return NHibernateResourceOperator.GetOperatorType(resType);
+            return NHibernateResourceManager.GetOperatorType(resType);
         }
 
         /// <summary>
         /// </summary>
-        /// <param name="typeResources"></param>
+        /// <param name="resources"></param>
         /// <returns></returns>
-        public Type GetOperator(string typeResources)
+        public Type GetOperator(string resources)
         {
-            return TypeResourcesOperator.GetOperatorType(typeResources);
+            return TypeResourcesOperator.GetOperatorType(resources);
         }
 
-        public OperatorResourceMapping Add(string user, Type operatorType)
+        public OperatorResourceMapping Add(string resource, Type operatorType)
         {
-            this.TypeResourcesOperator.Add(user, operatorType);
+            this.TypeResourcesOperator.Add(resource, operatorType);
             return this;
         }
     }

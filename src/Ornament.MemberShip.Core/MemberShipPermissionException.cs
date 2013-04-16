@@ -9,5 +9,11 @@ namespace Ornament.MemberShip
             : base(message)
         {
         }
+
+        public MemberShipPermissionException(string message,Exception innerException)
+            :base(message,innerException)
+        {
+            
+        }
     }
 }

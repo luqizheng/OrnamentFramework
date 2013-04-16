@@ -76,7 +76,7 @@ namespace MemberShip.Test
             target.Name = sb.ToString();
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentOutOfRangeException), "Name's lenght over than 20")]
+        [TestMethod, ExpectedException(typeof(ArgumentOutOfRangeException), "Name's lenght over than 20")]
         public void Name_More_Than_Max_Length()
         {
             var sb = new StringBuilder(20);
@@ -88,20 +88,20 @@ namespace MemberShip.Test
             target.Name = sb.ToString();
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentNullException), "Name can't be empty")]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException), "Name can't be empty")]
         public void Name_Null()
         {
-            var target = new Role {Name = null};
+            var target = new Role { Name = null };
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentException))]
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void NameOnlySetOnce_SetByConstructor()
         {
             var target = new Role("name");
             target.Name = "ok";
         }
 
-        [TestMethod, ExpectedException(typeof (ArgumentException))]
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void NameOnlySetOnce_SetByProperty()
         {
             var target = new Role();
@@ -148,7 +148,7 @@ namespace MemberShip.Test
         /// <summary>
         ///     A test for Comment
         /// </summary>
-        [TestMethod, ExpectedException(typeof (ArgumentOutOfRangeException))]
+        [TestMethod, ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void CommentTest_OverLength()
         {
             var target = new Role();
@@ -185,6 +185,16 @@ namespace MemberShip.Test
             string roleName = "ok";
             var target = new Role(roleName);
             Assert.AreEqual(roleName, target.Name);
+        }
+
+        [TestMethod]
+        public void Permforer_Role_NameTest()
+        {
+            string roleName = "ok";
+            var role = new Role(roleName);
+            var target = (IPerformer)role;
+            target.Name = "aName";
+            Assert.AreEqual("aName", role.Name);
         }
     }
 }

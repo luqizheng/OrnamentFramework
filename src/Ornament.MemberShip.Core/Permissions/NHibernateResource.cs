@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ornament.MemberShip.Permissions
 {
-    public class NHibernateResourceOperator : IResourceOperatorManager<Type>
+    /// <summary>
+    /// </summary>
+    public class NHibernateResourceManager : IResourceOperatorManager<Type>
     {
         private const string NHProxyType =
             "{0}Proxy, {0}ProxyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
-
-        private readonly TypeResourceOperatorMapping _typeMapping = new TypeResourceOperatorMapping();
 
         /// <summary>
         ///     Key is the actual type, and the the value is the prosxytyp.
@@ -16,24 +17,63 @@ namespace Ornament.MemberShip.Permissions
         /// <returns></returns>
         private readonly IDictionary<string, Type> _proxyTypeAndActualTypeMapping = new Dictionary<string, Type>();
 
-        public Type GetOperatorType(Type res)
+        private readonly TypeResourceManager _typeMapping = new TypeResourceManager();
+
+        /// <summary>
+        /// </summary>
+        public Type[] Resources
         {
-            string key = string.Format(NHProxyType, res.Name);
-            return _typeMapping.GetOperatorType(key);
+            get { return _proxyTypeAndActualTypeMapping.Values.ToArray(); }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundOperatorTypeException">Can't find the res type.</exception>
+        public Type GetOperatorType(Type res)
+        {
+            try
+            {
+                if (res == null)
+                    throw new ArgumentNullException("res");
+                string key = string.Format(NHProxyType, res.Name);
+                return _typeMapping.GetOperatorType(key);
+            }
+            catch (NotFoundOperatorTypeException ex)
+            {
+                throw new NotFoundOperatorTypeException(res, ex);
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="resourceInstance"></param>
+        /// <param name="enumType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">resourceInstance is null or enumType is null</exception>
         public IResourceOperatorManager<Type> Add(Type resourceInstance, Type enumType)
         {
-
+            if (resourceInstance == null)
+                throw new ArgumentNullException("resourceInstance");
+            if (enumType == null)
+                throw new ArgumentNullException("enumType");
             string key = string.Format(NHProxyType, resourceInstance.Name);
             _typeMapping.Add(key, enumType);
             _proxyTypeAndActualTypeMapping.Add(key, resourceInstance);
             return this;
         }
 
-        public Type GetResourceByType(Type operatorType)
+        /// <summary>
+        /// </summary>
+        /// <param name="operatorType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">operatorType is null</exception>
+        public Type GetResource(Type operatorType)
         {
-            string proxyName = _typeMapping.GetResourceByType(operatorType);
+            if (operatorType == null)
+                throw new ArgumentNullException("operatorType");
+            string proxyName = _typeMapping.GetResource(operatorType);
             return _proxyTypeAndActualTypeMapping[proxyName];
         }
     }

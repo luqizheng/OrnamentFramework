@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Permission.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   许可对象。用于定义角色(&lt;see cref="Role" /&gt;)是否有权对资源(通过ResourceId属性定义)进行某种操作(&lt;see cref="Operator" /&gt;)
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;

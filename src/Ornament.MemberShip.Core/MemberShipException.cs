@@ -9,20 +9,11 @@ namespace Ornament.MemberShip
             : base(message)
         {
         }
-    }
 
-    public class PasswordFormatException : MemberShipException
-    {
-        public PasswordFormatException()
-            : base("Password's format isn't right.")
+        public MemberShipException(string message, Exception innerException)
+            :base(message,innerException)
         {
-
-        }
-
-        public PasswordFormatException(string message)
-            : base(message)
-        {
-
+            
         }
     }
 }

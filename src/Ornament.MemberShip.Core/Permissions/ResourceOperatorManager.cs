@@ -55,7 +55,7 @@ namespace Ornament.MemberShip.Permissions
             return this;
         }
 
-        public T GetResourceByType(Type operatorType)
+        public T GetResource(Type operatorType)
         {
             foreach (T resName in Resources)
             {

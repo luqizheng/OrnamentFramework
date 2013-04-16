@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MemberShipProviders\MembershipContext.cs" />
+    <Compile Include="PasswordFormatException.cs" />
     <Compile Include="PasswordResetToken.cs" />
     <Compile Include="IMember.cs" />
     <Compile Include="Dao\IMemberDao.cs" />
