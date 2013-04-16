@@ -1,24 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
-using System.Text;
 using System.Web.Mvc;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
-using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Permissions;
-using Ornament.Messages;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
-using Qi.Web;
+using Ornament.Web.MemberShips.Models;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
     /// <summary>
-    /// account controller.
+    ///     account controller.
     /// </summary>
     [HandleError, Session]
     public class AccountController : Controller
@@ -27,7 +21,7 @@ namespace Ornament.MVCWebFrame.Controllers
         // the default forms authentication and membership providers.
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        ///     Initializes a new instance of the <see cref="AccountController" /> class.
         /// </summary>
         public AccountController()
             : this(null, null)
@@ -38,13 +32,13 @@ namespace Ornament.MVCWebFrame.Controllers
         // of unit testing this type. See the comments at the end of this file for more
         // information.
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        ///     Initializes a new instance of the <see cref="AccountController" /> class.
         /// </summary>
         /// <param name="formsAuth">
-        /// The forms auth.
+        ///     The forms auth.
         /// </param>
         /// <param name="service">
-        /// The service.
+        ///     The service.
         /// </param>
         public AccountController(IFormsAuthentication formsAuth, IMembershipService service)
         {
@@ -53,19 +47,18 @@ namespace Ornament.MVCWebFrame.Controllers
         }
 
         /// <summary>
-        /// Gets FormsAuth.
+        ///     Gets FormsAuth.
         /// </summary>
         public IFormsAuthentication FormsAuth { get; private set; }
 
         /// <summary>
-        /// Gets MembershipService.
+        ///     Gets MembershipService.
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
 
 
-
         /// <summary>
-        /// change password.
+        ///     change password.
         /// </summary>
         /// <param name="model"> </param>
         /// <returns>
@@ -73,18 +66,17 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
         {
-
             if (ModelState.IsValid)
             {
-                model.Change(this.ModelState);
+                model.Change(ModelState);
             }
             return PartialView("_changePassword", model);
         }
 
         /// <summary>
-        /// log off.
+        ///     log off.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -95,7 +87,7 @@ namespace Ornament.MVCWebFrame.Controllers
         }
 
         /// <summary>
-        /// log on.
+        ///     log on.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -107,7 +99,6 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         public ActionResult Index()
         {
-
             return View(OrnamentContext.Current.CurrentUser);
         }
 
@@ -127,18 +118,17 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 return Json("false");
             }
-
         }
 
         /// <summary>
-        /// log on.
+        ///     log on.
         /// </summary>
         /// <returns>
         /// </returns>
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn([ModelBinder(typeof(NHModelBinder))] LogonModel model)
+        public ActionResult LogOn([ModelBinder(typeof (NHModelBinder))] LogonModel model)
         {
             if (!ModelState.IsValid || !model.Validate(FormsAuth, ModelState))
             {
@@ -146,7 +136,7 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             model.ReturnUrl = Request["ReturnUrl"];
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult)Redirect(model.ReturnUrl)
+                       ? (ActionResult) Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 
@@ -154,8 +144,9 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             return View();
         }
+
         /// <summary>
-        /// register.
+        ///     register.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -166,28 +157,27 @@ namespace Ornament.MVCWebFrame.Controllers
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Regist(RegistAccountModel model)
+        public ActionResult Regist(RegistAccount model)
         {
             if (ModelState.IsValid)
             {
-                if (model.Regist(FormsAuth, ModelState))
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                MembershipService.CreateUser(model.UserBasicInfo.LoginId, model.Password.Password,
+                                             model.UserBasicInfo.Email);
+
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }
 
         /// <summary>
-        /// on action executing.
+        ///     on action executing.
         /// </summary>
         /// <param name="filterContext">
-        /// The filter context.
+        ///     The filter context.
         /// </param>
         /// <exception cref="InvalidOperationException">
         /// </exception>

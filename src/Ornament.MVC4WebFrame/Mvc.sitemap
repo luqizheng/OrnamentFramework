@@ -3,7 +3,7 @@
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0"
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0 MvcSiteMapSchema.xsd"
             enableLocalization="true">
-<!--
+  <!--
 use permission for checking permission like @user:Read, user is the string type Resources, the Read is the Enum's Value.
 
 -->
@@ -30,10 +30,10 @@ use permission for checking permission like @user:Read, user is the string type 
 
 
     <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-user">
-      <mvcSiteMapNode  area="MemberShips" action="Index" controller="User"
-         resourceKey="userList" permission="user:Read">
+      <mvcSiteMapNode  area="MemberShips" action="Index" controller="User" resourceKey="userList" permission="User:Read">
+        <mvcSiteMapNode area="MemberShips" action="Create" controller="User" resourceKey="createUser" permission="User:Modify"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="role:Read" />
+      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="Role:Read" />
       <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Index" resourceKey="userGroupList" />
       <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" />
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" />
@@ -86,6 +86,6 @@ use permission for checking permission like @user:Read, user is the string type 
 
 
   </mvcSiteMapNode>
-  
+
 
 </mvcSiteMap>

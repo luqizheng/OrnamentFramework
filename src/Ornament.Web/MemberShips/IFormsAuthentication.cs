@@ -1,4 +1,4 @@
-namespace Ornament.MVCWebFrame.Controllers
+namespace Ornament.Web.MemberShips
 {
     /// <summary>
     /// i forms authentication.

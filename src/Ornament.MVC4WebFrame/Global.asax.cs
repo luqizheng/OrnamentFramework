@@ -30,7 +30,7 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            ValueProviderFactories.Factories[1]=new NHFormValueProviderFactory();
+            ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
             ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
 
 
@@ -38,6 +38,7 @@ namespace Ornament.MVCWebFrame
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            PermissionConfig.Regist();
             ChangeControllerFacotry();
 
             //Init database setting

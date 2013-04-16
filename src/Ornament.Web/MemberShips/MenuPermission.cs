@@ -22,12 +22,7 @@ namespace Ornament.Web.MemberShips
                 Type enmType = Context.OperatorResourceManager.GetOperator(ary[0]);
                 OperatorValue = (Enum)Enum.Parse(enmType, ary[1], true);
             }
-            catch (NotFoundOperatorTypeException)
-            {
-                throw new FormatException(String.Format(
-                    "{0} is not oen of operator value which belong to resource {1}", ary[1], ary[0]));
-            }
-            catch (FormatException)
+            catch (ArgumentException)
             {
                 throw new FormatException(String.Format("{0} is not recognized in the {1}", ary[1],
                                                         Context.OperatorResourceManager.GetOperator(ary[0]).Name));

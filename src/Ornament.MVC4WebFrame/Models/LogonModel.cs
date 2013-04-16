@@ -5,6 +5,7 @@ using Ornament.MVCWebFrame.Controllers;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
 using Ornament.Web;
+using Ornament.Web.MemberShips;
 
 namespace Ornament.MVCWebFrame.Models
 {

@@ -140,9 +140,11 @@ namespace Ornament
             if (resource == null)
                 throw new ArgumentNullException("resource");
             OperatorResourceMapping mapping = OperatorResourceManager;
-            if (resource is string)
-                return mapping[resource.ToString()];
-            return mapping[resource.GetType()];
+
+            var typeRes = resource as string;
+            if (typeRes != null)
+                return mapping.GetOperator(typeRes);
+            return mapping.GetOperator(resource.GetType());
         }
 
         /// <summary>
