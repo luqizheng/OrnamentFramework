@@ -9,12 +9,12 @@ namespace Ornament.MemberShip.Permissions
         /// </summary>
         /// <param name="operatorType"></param>
         /// <returns></returns>
-        /// <exception cref="NotFindResourceDefinedException"></exception>
+        /// <exception cref="NotFindResourceDefinedException">Can't find the resources</exception>
         public string GetResourceByType(Type operatorType)
         {
             foreach (string resName in base.Resources)
             {
-                Type enumType = this[resName];
+                Type enumType = GetOperatorType(resName);
                 if (enumType == operatorType)
                 {
                     return resName;

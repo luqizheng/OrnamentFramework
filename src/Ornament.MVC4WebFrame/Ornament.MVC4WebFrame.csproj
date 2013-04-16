@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NhConfig.cs" />
+    <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Application\Controllers\EventLogController.cs" />

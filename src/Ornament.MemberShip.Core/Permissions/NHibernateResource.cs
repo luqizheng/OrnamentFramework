@@ -35,13 +35,11 @@ namespace Ornament.MemberShip.Permissions
         //        return null;
         //    }
         //}
-        public Type this[Type res]
+
+        public Type GetOperatorType(Type res)
         {
-            get
-            {
-                string key = string.Format(NHProxyType, res.Name);
-                return _typeMapping[key];
-            }
+            string key = string.Format(NHProxyType, res.Name);
+            return _typeMapping.GetOperatorType(key);
         }
 
         public IResourceOperatorManager<Type> Add(Type resourceInstance, Type enumType)

@@ -3,11 +3,11 @@
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0"
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0 MvcSiteMapSchema.xsd"
             enableLocalization="true">
+<!--
+use permission for checking permission like @user:Read, user is the string type Resources, the Read is the Enum's Value.
 
-  <mvcSiteMapNode resourceKey="home" controller="Home" action="Index" title="Home" imageUrl="icon-home"
-                   userOperator="Ornament.MVCWebFrame.Models.Membership.UserOperator,Ornament.MVCWebFrame"
-                   roleOperator="Ornament.MVCWebFrame.Models.Membership.RoleOperator,Ornament.MVCWebFrame"
-                   userGroupOperator="Ornament.MVCWebFrame.Models.Membership.UserGroupOperator,Ornament.MVCWebFrame">
+-->
+  <mvcSiteMapNode resourceKey="home" controller="Home" action="Index" title="Home" imageUrl="icon-home">
     <!-- Main -->
     <mvcSiteMapNode action="Index" controller="Product" title="Projects" area="Projects" imageUrl="icon-comments">
       <mvcSiteMapNode area="Projects" controller="Product" action="Index" title="Product List">
@@ -37,9 +37,9 @@
       <!--<mvcSiteMapNode resourceKey="createOrg" area="MemberShips" controller="Orgs" action="Create"
                    operator="Ornament.MVCWebFrame.Models.Membership.OrgOperator,Ornament.MVCWebFrame:Read" />-->
       <mvcSiteMapNode  area="MemberShips" action="Index" controller="User"
-         resourceKey="userList" operator="@userOperator.Read">
+         resourceKey="userList" permission="user:Read">
       </mvcSiteMapNode>
-      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" operator="@roleOperator.Read" />
+      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="role:Read" />
       <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Index" resourceKey="userGroupList" />
       <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" />
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" />

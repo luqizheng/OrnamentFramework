@@ -4,7 +4,7 @@ namespace Ornament.MemberShip.Permissions
 {
     public interface IResourceOperatorManager<T>
     {
-        Type this[T res] { get; }
+        Type GetOperatorType(T res);
         IResourceOperatorManager<T> Add(T resourceInstance, Type enumType);
     }
 }

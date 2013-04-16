@@ -10,12 +10,6 @@ namespace Ornament.MemberShip.Permissions
     {
         private readonly NHibernateResourceOperator _nResourceOperator = new NHibernateResourceOperator();
 
-        /// <summary>
-        ///     Key is operator Type, value is the resource's type.
-        /// </summary>
-        private readonly Dictionary<Type, Type> _operatorResourceTypeMapping = new Dictionary<Type, Type>();
-
-
         private readonly TypeResourceOperatorMapping _typeResourcesOperator = new TypeResourceOperatorMapping();
 
         /// <summary>
@@ -35,16 +29,19 @@ namespace Ornament.MemberShip.Permissions
         {
             get { return _nResourceOperator; }
         }
+
         public string[] AllTypeResource
         {
-            get { return this.TypeResourcesOperator.Resources; }
+            get { return TypeResourcesOperator.Resources; }
         }
+
+
         /// <summary>
         ///     Get the operatorType use the resourceType.
         /// </summary>
         /// <param name="resourceType"></param>
         /// <returns></returns>
-        /// <exception cref="NotFindOperatorTypeException"></exception>
+        /// <exception cref="NotFoundOperatorTypeException"></exception>
         public Type this[object resourceType]
         {
             get
@@ -53,39 +50,34 @@ namespace Ornament.MemberShip.Permissions
                     throw new ArgumentNullException("resourceType");
                 Type result;
                 if (resourceType is string)
-                    result = TypeResourcesOperator[resourceType.ToString()];
+                    result = TypeResourcesOperator.GetOperatorType(resourceType.ToString());
                 else
-                    result = NHibernateResourceOperator[resourceType.GetType()];
+                    result = NHibernateResourceOperator.GetOperatorType(resourceType.GetType());
                 if (result == null)
-                    throw new NotFindOperatorTypeException(resourceType.GetType());
+                    throw new NotFoundOperatorTypeException(resourceType.GetType());
                 return result;
             }
         }
 
 
+        public Type GetOperator(Type resType)
+        {
+            return NHibernateResourceOperator.GetOperatorType(resType);
+        }
+
         /// <summary>
         /// </summary>
-        /// <param name="operatorVal"></param>
+        /// <param name="typeResources"></param>
         /// <returns></returns>
-        /// <exception cref="NotFindResourceDefinedException">if can't find resource which has this operator.</exception>
-        public Type GetResource(Enum operatorVal)
+        public Type GetOperator(string typeResources)
         {
-            if (_operatorResourceTypeMapping.Count == 0)
-            {
-                lock (_operatorResourceTypeMapping)
-                {
-                    foreach (Type key in ResourceMapping.Keys)
-                    {
-                        _operatorResourceTypeMapping.Add(ResourceMapping[key], key);
-                    }
-                }
-            }
-            Type type = operatorVal.GetType();
-            if (_operatorResourceTypeMapping.ContainsKey(type))
-            {
-                return _operatorResourceTypeMapping[type];
-            }
-            throw new NotFindResourceDefinedException(type);
+            return TypeResourcesOperator.GetOperatorType(typeResources);
+        }
+
+        public OperatorResourceMapping Add(string user, Type operatorType)
+        {
+            this.TypeResourcesOperator.Add(user, operatorType);
+            return this;
         }
     }
 }
