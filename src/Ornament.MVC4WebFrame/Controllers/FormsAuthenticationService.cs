@@ -1,4 +1,5 @@
 using System.Web.Security;
+using Ornament.Web.MemberShips;
 
 namespace Ornament.MVCWebFrame.Controllers
 {

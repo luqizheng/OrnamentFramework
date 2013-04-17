@@ -8,49 +8,51 @@ namespace Ornament.MVCWebFrame.App_Start
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = false;
+            bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
                     GlobalStyle,
                     JQueryRelative,
                     CodeStyle,
                     RichEditor,
-                    RequireJsLib,
+                    SeajsLib,
                 };
 
             foreach (var item in registryParty)
             {
                 item.Invoke(bundles);
             }
-            BundleTable.EnableOptimizations = false;
-            bundles.UseCdn = false;
+
             //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
         }
 
-        private static void RequireJsLib(BundleCollection bundles)
+        private static void SeajsLib(BundleCollection bundles)
         {
+            bundles.Add(new ScriptBundle("~/bundles/main.js").Include("~/Scripts/main.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/bundles/requirejs").Include("~/Scripts/require.js"));
-            bundles.Add(new Bundle("~/bundles/ornament.js", new JsMinify())
-                           .Include(
-                               "~/scripts/combine/global.js",
-                               "~/scripts/combine/permission.js",
-                               "~/scripts/combine/compatibleBootStrap.js",
-                               "~/scripts/combine/string.js",
-                               "~/scripts/combine/start.js"
-                           )
-               );
+            bundles.Add(new Bundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
+
+            //bundles.Add(new Bundle("~/bundles/ornament.js", new JsMinify())
+            //               .Include(
+            //                   "~/scripts/combine/global.js",
+            //                   "~/scripts/combine/permission.js",
+            //                   "~/scripts/combine/compatibleBootStrap.js",
+            //                   "~/scripts/combine/string.js",
+            //                   "~/scripts/combine/start.js"
+            //               )
+            //   );
 
         }
 
         private static void JQueryRelative(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
-            bundles.Add(new Bundle("~/bundles/inputmask.js", new JsMinify()).Include("~/Scripts/InputMasker/*.js"));
+            bundles.Add(new Bundle("~/bundles/inputmask", new JsMinify()).Include("~/Scripts/InputMasker/*.js"));
             bundles.Add(new Bundle("~/bundles/jqueryval.js", new JsMinify()).Include("~/Scripts/jquery.validate*"));
             bundles.Add(new ScriptBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
             bundles.Add(new ScriptBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));
-            bundles.Add(new ScriptBundle("~/bundles/multiChoice.js").Include("~/scripts/jQuery.multiChoice.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/multiChoice.js").Include("~/scripts/jQuery.multiChoice.js"));
             bundles.Add(new ScriptBundle("~/bundles/periodDailog.js").Include("~/scripts/periodDailog/*.js"));
             bundles.Add(new Bundle("~/bundles/dialog.js", new JsMinify()).Include("~/scripts/dialogs/*.js"));
 
@@ -60,6 +62,16 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new ScriptBundle("~/bundles/knockout.js").Include("~/Scripts/knockout-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/json2.js").Include("~/Scripts/json2.js"));
             bundles.Add(new Bundle("~/bundles/toDictionary.js", new JsMinify()).Include("~/scripts/jquery.toDictionary.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/easytabs.js").Include("~/Scripts/plugins/ui/jquery.easytabs.js"));
+            //form
+            bundles.Add(new ScriptBundle("~/bundles/form.js").Include("~/Scripts/plugins/forms/jquery.form.js"));
+
+            bundles.Add(
+                new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
+
+
         }
 
 

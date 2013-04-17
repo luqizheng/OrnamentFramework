@@ -15,7 +15,6 @@
 * for informational purposes only and are not the license terms under
 * which Microsoft distributed this file.
 *
-.
 * jQuery validation plugin 1.8.0
 *
 * http://bassistance.de/jquery-plugins/jquery-plugin-validation/

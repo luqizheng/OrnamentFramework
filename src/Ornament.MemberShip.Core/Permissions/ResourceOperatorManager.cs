@@ -35,9 +35,7 @@ namespace Ornament.MemberShip.Permissions
             var s = res as string;
             if (s != null)
                 throw new NotFoundOperatorTypeException(s);
-            else
-                throw new NotFoundOperatorTypeException(typeof(T));
-
+            throw new NotFoundOperatorTypeException(typeof(T));
         }
 
         public virtual IResourceOperatorManager<T> Add(T resourceInstance, Type enumType)

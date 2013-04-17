@@ -11,7 +11,7 @@ define(function (require) {
             });
         } finally {
             //summary
-            $(".validation-summary-errors ul li[style!='display:none']").closest(".validation-summary-errors").addClass("alert alert-error").prepend('<button type="button" class="close" data-dismiss="alert">×</button>');
+            $(".validation-summary-errors ul li[style!='display:none']").closest(".validation-summary-errors").addClass("alert alert-error margin").prepend('<button type="button" class="close" data-dismiss="alert">×</button>');
         }
     };
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ornament.Web.Languages {
+namespace MultiLanguage {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace Ornament.Web.Languages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Common {
+    public class MemberShipModel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Common() {
+        internal MemberShipModel() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ornament.Web.Languages.Common", typeof(Common).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ornament.Web.Properties.MemberShipModel", typeof(MemberShipModel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Ornament.Web.Languages {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,38 +61,11 @@ namespace Ornament.Web.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create all schema.
+        ///   Looks up a localized string similar to Current Password isn&apos;t right..
         /// </summary>
-        internal static string CreateSchema {
+        public static string alertMsg_OldPasswordNotRight {
             get {
-                return ResourceManager.GetString("CreateSchema", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Drop all db tables.
-        /// </summary>
-        internal static string DropAndRecreateSchema {
-            get {
-                return ResourceManager.GetString("DropAndRecreateSchema", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Inser or update init data in db.
-        /// </summary>
-        internal static string UpdateData {
-            get {
-                return ResourceManager.GetString("UpdateData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update db tables.
-        /// </summary>
-        internal static string UpdateSchema {
-            get {
-                return ResourceManager.GetString("UpdateSchema", resourceCulture);
+                return ResourceManager.GetString("alertMsg_OldPasswordNotRight", resourceCulture);
             }
         }
     }

@@ -30,7 +30,7 @@ namespace Ornament.Web.Languages
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication)sender;
+            var context = (HttpApplication) sender;
             HttpCookie cookie = context.Request.Cookies["_multiCookie"];
             if (cookie == null || string.IsNullOrEmpty(cookie.Value))
             {

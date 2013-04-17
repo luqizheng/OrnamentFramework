@@ -39,7 +39,7 @@ namespace MultiLanguage {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ornament.MVCWebFrame.Models.App_LocalResources.Message", typeof(Message).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ornament.Web.Properties.Message", typeof(Message).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

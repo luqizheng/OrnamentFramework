@@ -42,5 +42,12 @@
 
   </subclass >
 
-
+  <class name="ActiveUser" table="MBS_ActiveUser">
+    <id name="Id" length="32">
+      <generator class="uuid.hex"></generator>
+    </id>
+    <many-to-one name="User"></many-to-one>
+    <property name="CreateTime" type="DateTime"  update="false" ></property>
+    <property name="PrivateKey" type="DateTime"  update="false" ></property>
+  </class>
 </hibernate-mapping>

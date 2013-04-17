@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveUser.cs" />
     <Compile Include="MemberShipProviders\MembershipContext.cs" />
     <Compile Include="PasswordFormatException.cs" />
     <Compile Include="PasswordResetToken.cs" />
@@ -187,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppStart\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ActiveUser.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
