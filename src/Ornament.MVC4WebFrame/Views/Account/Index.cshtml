@@ -2,11 +2,12 @@
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip.Dao
 @using Ornament.MemberShip.Permissions
+@using Ornament.Web.MemberShips.Models.Users
 @using Resources
 @using Ornament.Web
 @model Ornament.MemberShip.User
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = Basic.Index;
     Layout = "~/Views/Shared/_appLayout.cshtml";
     IList<Permission> permissions =
               OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreatePermissionDao().GetPermissionByLoginId
@@ -55,56 +56,60 @@
                             
                     };
 }
-<div class="box">
-    <div class="content">
-        <ul class="nav nav-tabs">
-            @foreach (var item in menus)
+@section pageTitle
+{
+    <h5>@Basic.Setting</h5>
+}
+
+<ul class="nav nav-tabs">
+    @foreach (var item in menus)
+    {
+        if (item.skipChecked || OrnamentContext.Current.HasRight(ResourceSetting.Account, item.Operator))
+        {
+            if (isFirst)
             {
-                if (item.skipChecked || OrnamentContext.Current.HasRight(ResourceSetting.Account, item.Operator))
-                {
-                    if (isFirst)
-                    {
-                        isFirst = false;
-                <li class="active"><a href="#@item.url" data-toggle="tab">@item.text</a></li>
-                    }
-                    else
-                    {
-                <li><a href="#@item.url" data-toggle="tab">@item.text</a></li>
-                    }
-                }
+                isFirst = false;
+        <li class="active"><a href="#@item.url" data-toggle="tab">@item.text</a></li>
             }
-        </ul>
-        <div class="tab-content">
-            @{
-                isFirst = true;
-            }
-            @foreach (var item in menus)
+            else
             {
-                if (item.skipChecked || OrnamentContext.Current.HasRight(ResourceSetting.Account, item.Operator))
-                {
-                    if (isFirst)
-                    {
-                        isFirst = false;
-                <div id="@item.url" class="tab-pane active">
-                    @Html.Partial(item.url, item.Model)
-                </div>
-                    }
-                    else
-                    {
-                <div id="@item.url" class="tab-pane">
-                    @Html.Partial(item.url, item.Model)
-                </div>
-                    }
-                }
+        <li><a href="#@item.url" data-toggle="tab">@item.text</a></li>
             }
+        }
+    }
+</ul>
+<div class="tab-content">
+    @{
+        isFirst = true;
+    }
+    @foreach (var item in menus)
+    {
+        if (item.skipChecked || OrnamentContext.Current.HasRight(ResourceSetting.Account, item.Operator))
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+        <div id="@item.url" class="tab-pane active">
+            @Html.Partial(item.url, item.Model)
         </div>
-    </div>
+            }
+            else
+            {
+        <div id="@item.url" class="tab-pane">
+            @Html.Partial(item.url, item.Model)
+        </div>
+            }
+        }
+    }
 </div>
+
 @section script
 {
-<script type="text/javascript">
-    $('a[data-toggle="tab"]').on('shown', function (e) {
-        $($(this).attr("href")).find("input:first").focus();
-    })
+    <script type="text/javascript">
+        seajs.use(['jquery'], function () {
+            $('a[data-toggle="tab"]').on('shown', function (e) {
+                $($(this).attr("href")).find("input:first").focus();
+            })
+        });
     </script>
 }

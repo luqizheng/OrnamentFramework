@@ -1,22 +1,22 @@
-﻿@model Ornament.MVCWebFrame.Areas.MemberShips.Models.CreateUserModel
+﻿@model Ornament.Web.Models.Users.Partials.UserBasicInfoModel
 <div class="control-group">
     @Html.LabelFor(model => model.LoginId, new { @class = "control-label" })
     <div class="controls">
-        @Html.TextBoxFor(model => model.LoginId,new {@class="span12"})
+        @Html.TextBoxFor(model => model.LoginId, new { @class = "span12" })
         @Html.ValidationMessageFor(model => model.LoginId)
     </div>
 </div>
-<div class="control-group">
+@*<div class="control-group">
     @Html.LabelFor(m => m.Name, new { @class = "control-label" })
     <div class="controls">
-        @Html.TextBoxFor(m => m.Name,new {@class="span12"})
+        @Html.TextBoxFor(m => m.Name, new { @class = "span12" })
         @Html.ValidationMessageFor(m => m.Name)
     </div>
-</div>
+</div>*@
 <div class="control-group">
     @Html.LabelFor(model => model.Email, new { @class = "control-label" })
     <div class="controls">
-        @Html.TextBoxFor(model => model.Email,new {@class="span12"})
+        @Html.TextBoxFor(model => model.Email, new { @class = "span12" })
         @Html.ValidationMessageFor(model => model.Email)
     </div>
 </div>

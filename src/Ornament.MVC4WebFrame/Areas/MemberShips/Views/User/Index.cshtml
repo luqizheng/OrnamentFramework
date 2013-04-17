@@ -2,6 +2,8 @@
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
 @using Ornament.Web
+@using Ornament.Web.MemberShips.Models.Users
+@using Ornament.Web.Models.Users
 @using Resources
 @model IList<Ornament.MemberShip.User>
 @{
@@ -13,8 +15,7 @@
 @section script
 {
     <script type="text/javascript">
-
-        seajs.use(['jquery', 'uniform', 'bootstrap'], function () {
+        seajs.use(['valid'], function () {
 
             $("#unlockButton,#Lock,#approvedButton").click(function () {
                 submitAction(this);
@@ -24,13 +25,9 @@
                 if (confirm("Do you want to delete user(s)?"))
                     submitAction(this);
             });
-
-            $("#Create").click(function () {
-                document.location = "@Url.Action("Create")";
-            });
-
+         
             var submitAction = function (button) {
-                $("form").attr("action", $(button).val()).submit();
+                /*$("form").attr("action", $(button).val()).submit();*/
             };
 
             $("input[name=loginIds]").change(function () {
@@ -38,8 +35,12 @@
                 $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
             });
 
-        });
+            $("#btnCreateUser").click(function () {
+                $("#createUserModel form").submit();
+                //$('#createUserModel').modal('hide');
+            });
 
+        });
 
     </script>
 }
@@ -51,7 +52,7 @@
 <ul class="toolbar">
     @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
     {
-        <li><a id="create" a href="#" title=""><i class="icon-plus"></i><span>@Basic.Create</span></a></li>
+        <li><a id="create" href="#createUserModel" title="" data-toggle="modal"><i class="icon-plus"></i><span>@Basic.Create</span></a></li>
     }
     @if (OrnamentContext.Current.HasRight("User", UserOperator.Lock))
     {
@@ -60,7 +61,7 @@
     }
     @if (OrnamentContext.Current.HasRight("User", UserOperator.Approve))
     {
-        <li class="disabled"><a href="#@Url.Action("Approve")"  id="Lock"  title=""><i class="icon-download-alt"></i><span>@Html.GetResourceString("Approve")</span></a></li>
+        <li class="disabled"><a href="#@Url.Action("Approve")"  id="Approve"  title=""><i class="icon-download-alt"></i><span>@Html.GetResourceString("Approve")</span></a></li>
     }
     @if (OrnamentContext.Current.HasRight("User", UserOperator.Delete))
     {
@@ -155,7 +156,7 @@
     <tfoot>
         <tr>
             <td colspan="8">
-                <form>
+                <form id="navbar">
                     @Html.Partial("NavPagination", ViewData["Nav"])
                 </form>
             </td>
@@ -164,3 +165,17 @@
 </table>
 
 
+<!-- place holder for dialog -->
+<div id="createUserModel" class="modal hide fade" id="createUserForm">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>@Resources.Basic.Create@Resources.MemberShip.User</h3>
+    </div>
+    <div class="modal-body">
+        @Html.Partial("Create",new CreateUserModel())
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn"  data-dismiss="modal" aria-hidden="true">@Basic.Cancel</a>
+        <a href="#" class="btn btn-primary"  id="btnCreateUser">@Basic.Save</a>
+    </div>
+</div>

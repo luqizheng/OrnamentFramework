@@ -1,10 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
-using MultiLanguage;
-using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
+﻿using Ornament.Web.Models.Users.Partials;
 
-namespace Ornament.Web.MemberShips.Models
+namespace Ornament.Web.MemberShips.Models.Users
 {
     public class RegistAccount
     {

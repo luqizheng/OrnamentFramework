@@ -1,67 +1,30 @@
 ﻿@using Ornament.Web
+@using Ornament.Web.Models.Users
+@using Ornament.Web.Models.Users.Partials
 
-@model Ornament.MVCWebFrame.Areas.MemberShips.Models.CreateUserModel
+@model Ornament.Web.Models.Users.CreateUserModel
 @{
     ViewBag.Title = Resources.Basic.Create + Resources.MemberShip.User;
-    Layout = "~/Views/Shared/_appLayout.cshtml";
-}
-
-
-@section pageTitle
-{
-    <h5>@Resources.Basic.Create@Resources.MemberShip.User</h5>
-}
-<div class="widget row-fluid">
-    @using (Html.BeginForm("Create", "User", null, FormMethod.Post, new { @class = "form-horizontal span6 offset3" }))
+  
+    var ajaxOptions = new AjaxOptions()
     {
-        
-        <!-- General form elements -->
-        <div class="widget row-fluid">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <h6>@Html.GetResourceString("tab_basicInfo")</h6>
-                    @* <ul class="navbar-icons">
-                            <li><a title="" class="tip" href="#" data-original-title="Add new option"><i class="icon-plus"></i></a></li>
-                            <li><a title="" class="tip" href="#" data-original-title="View statistics"><i class="icon-reorder"></i></a></li>
-                            <li><a title="" class="tip" href="#" data-original-title="Parameters"><i class="icon-cogs"></i></a></li>
-                        </ul>*@
-                </div>
-            </div>
+        UpdateTargetId = "createUserForm",
+        OnComplete = "ResetErrorState",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "post"
+    };
+    var formStyle = new
+    {
+        @class = "form-horizontal",
+        autocomplete = "off",
+        id = "createUserForm"
+    };
+}
 
-            <div class="well">
-                @Html.ValidationSummary(false)
-                @Html.Partial("DisplayTemplates/UserBasicInfo", this.Model)
-                @Html.Partial("DisplayTemplates/UserPassword", this.Model)
-                @if (Membership.RequiresQuestionAndAnswer)
-                {
-                    @Html.Partial("DisplayTemplates/UserQuestionAnswer", this.Model)
-                }
-                @Html.Partial("DisplayTemplates/UserOptionInfo", this.Model)
-                <div class="form-actions">
-                    <a id="saveButton" class="btn btn-primary" href="javascript::void">@Resources.Basic.Create</a>
-                    <a id="backButton" type="button" href="@Url.Action("Index")" class="btn">
-                        @Resources.Basic.Cancel</a>
-                </div>
-            </div>
-        </div>
-        <!-- /general form elements -->
-        
-       
-    }
-
-</div>
-
-@section script
+@using (Ajax.BeginForm("Create","User",ajaxOptions, formStyle))
 {
-    <script type="text/javascript">
-        seajs.use(["jquery", "/scripts/compatibles/valid.js"], function () {
-
-            $("#saveButton").click(function () {
-                if ($("#Name").val().length == 0) {
-                    $("#Name").val($("#LoginId").val());
-                }
-                $("form").submit();
-            });
-        });
-    </script>
+    @Html.ValidationSummary(false)
+    @Html.Partial("DisplayTemplates/UserBasicInfo", this.Model!=null?this.Model.BasicInfo:new UserBasicInfoModel())
+    @Html.Partial("DisplayTemplates/UserOptionInfo",this.Model!=null?this.Model.OptionInfo:new UserOptionInformation())
+    @Html.HiddenFor(s=>s.State.IsApproved);
 }

@@ -245,7 +245,6 @@
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
-    <Compile Include="Controllers\FileManagerController.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpErrorsController.cs" />
@@ -255,7 +254,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\DaoFactory.cs" />
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\ProjectDataInit.cs" />
@@ -422,8 +420,6 @@
     <Content Include="Images\FileTypes\xlsx win.png" />
     <Content Include="Images\FileTypes\zip.png" />
     <Content Include="Images\Upload.png" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -982,6 +978,10 @@
     <Content Include="templates\pannonia\img\elements\lightbox\.DS_Store" />
     <Content Include="templates\pannonia\img\elements\loaders\.DS_Store" />
     <Content Include="templates\pannonia\img\elements\uploader\.DS_Store" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\PasswordRetrieve.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1149,7 +1149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Logon.cshtml" />
     <Content Include="Views\Account\Permissions.cshtml" />

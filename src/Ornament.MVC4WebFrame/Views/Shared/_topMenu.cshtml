@@ -36,27 +36,6 @@
     </a></li>
     }
 }
-@*<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <ul class="nav">
-                @RenderMenu((MvcSiteMapNode)SiteMap.RootNode, siteMapPermission, activedNode)
-                @for (int i = 0; i < SiteMap.RootNode.ChildNodes.Count; i++)
-                {
-                    SiteMapNode node = SiteMap.RootNode.ChildNodes[i];
-                    @RenderMenu((MvcSiteMapNode)node, siteMapPermission, activedNode)
-                }
-            </ul>
-            @Html.Partial("LogOnUserControl")
-            <ul class="nav pull-right">
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                    <i class="icon-globe"></i>@languate.NativeName<i class="icon-chevron-down"></i></a>
-                    @Html.Partial("_multiLangChoice")
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>*@
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     <ul class="top-menu">
@@ -67,8 +46,8 @@
             <ul class="dropdown-menu">
                 <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
                 <li><a href="#" title=""><i class="icon-inbox"></i>@Basic.Messages<span class="badge badge-info">9</span></a></li>
-                <li><a href="#" title=""><i class="icon-cog"></i>@Basic.Setting</a></li>
-                <li><a href="#" title=""><i class="icon-remove"></i>@Basic.Logout</a></li>
+                <li><a href="@Url.Action("Index","Account",new{area=""})" title=""><i class="icon-cog"></i>@Basic.Setting</a></li>
+                <li><a href="@Url.Action("LogOff", "Account", new { area = "" })" title=""><i class="icon-remove"></i>@Basic.Logout</a></li>
             </ul>
         </li>
     </ul>

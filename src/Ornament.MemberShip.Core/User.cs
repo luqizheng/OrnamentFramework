@@ -19,7 +19,7 @@ namespace Ornament.MemberShip
     public partial class User : Member<User>, IPerformer
     {
         /// <summary>
-        /// god of the system login id
+        ///     god of the system login id
         /// </summary>
         public static readonly string AdminLoginId = "admin";
 
@@ -33,21 +33,20 @@ namespace Ornament.MemberShip
         private Iesi.Collections.Generic.ISet<UserGroup> _userGroups;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="User"/> class. 
+        ///     Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
         protected User()
         {
-           
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="User"/> class. 
+        ///     Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
         /// <param name="loginId">
-        /// The login id.
+        ///     The login id.
         /// </param>
         /// <param name="password">
-        /// The password.
+        ///     The password.
         /// </param>
         public User(string loginId, string password)
         {
@@ -57,14 +56,13 @@ namespace Ornament.MemberShip
             _password = MembershipContext.Provider.Encrypt(password);
             CreateTime = DateTime.Now;
             IsApproved = true;
-
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="User"/> class. 
+        ///     Initializes a new instance of the <see cref="User" /> class.
         /// </summary>
         /// <param name="loginId">
-        /// The login id.
+        ///     The login id.
         /// </param>
         public User(string loginId)
         {
@@ -74,16 +72,16 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 获取用户创建时间
+        ///     获取用户创建时间
         /// </summary>
         [Display(Name = "CreateTime", ResourceType = typeof (MembershipCommon))]
         public virtual DateTime CreateTime { get; protected set; }
 
         /// <summary>
-        /// Gets or sets IsLockout.
+        ///     Gets or sets IsLockout.
         /// </summary>
         /// <value>
-        /// The is lockout.
+        ///     The is lockout.
         /// </value>
         [Display(Name = "IsLockout", ResourceType = typeof (MembershipCommon))]
         public virtual bool IsLockout
@@ -98,50 +96,50 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 获取或设定用户是否已经获准使用
+        ///     获取或设定用户是否已经获准使用
         /// </summary>
         [Display(Name = "IsApproved", ResourceType = typeof (MembershipCommon))]
         public virtual bool IsApproved { get; set; }
 
         /// <summary>
-        /// 获取用户最后改变时间
+        ///     获取用户最后改变时间
         /// </summary>
         [Display(Name = "LastPasswordChangedTime", ResourceType = typeof (MembershipCommon))]
         public virtual DateTime? LastPasswordChangedDate { get; set; }
 
         /// <summary>
-        /// 获取用户被锁定的时间
+        ///     获取用户被锁定的时间
         /// </summary>
         [Display(Name = "LastLockTime", ResourceType = typeof (MembershipCommon))]
         public virtual DateTime? LastLockoutDate { get; protected set; }
 
         /// <summary>
-        /// 获取用户最后登录时间
+        ///     获取用户最后登录时间
         /// </summary>
         [Display(Name = "LastLoginTime", ResourceType = typeof (MembershipCommon))]
         public virtual DateTime? LastLoginDate { get; protected set; }
 
         /// <summary>
-        /// 获取或设定用户最后活跃时间
+        ///     获取或设定用户最后活跃时间
         /// </summary>
         [Display(Name = "LastActivityTime", ResourceType = typeof (MembershipCommon))]
         public virtual DateTime? LastActivityDate { get; set; }
 
         /// <summary>
-        /// Gets or sets UpdateTime.
+        ///     Gets or sets UpdateTime.
         /// </summary>
         /// <value>
-        /// The update time.
+        ///     The update time.
         /// </value>
         [Display(Name = "LastUpdateTime", ResourceType = typeof (MembershipCommon))]
         public virtual DateTime? UpdateTime { get; protected set; }
 
 
         /// <summary>
-        /// Gets Password.
+        ///     Gets Password.
         /// </summary>
         /// <value>
-        /// The password.
+        ///     The password.
         /// </value>
         [Display(Name = "Password", ResourceType = typeof (MembershipCommon)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePassword",
@@ -153,10 +151,10 @@ namespace Ornament.MemberShip
 
 
         /// <summary>
-        /// Gets or sets LoginId.
+        ///     Gets or sets LoginId.
         /// </summary>
         /// <value>
-        /// The login id.
+        ///     The login id.
         /// </value>
         [Display(Name = "LoginId", ResourceType = typeof (MembershipCommon)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
@@ -178,10 +176,10 @@ namespace Ornament.MemberShip
 
 
         /// <summary>
-        /// Gets PasswordQuestion.
+        ///     Gets PasswordQuestion.
         /// </summary>
         /// <value>
-        /// The password question.
+        ///     The password question.
         /// </value>
         [Display(Name = "PasswordQuestion", ResourceType = typeof (MembershipCommon)),
          Required(AllowEmptyStrings = false,
@@ -197,7 +195,7 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// Gets the answer of <see cref="PasswordQuestion"/>. It alwasy entrypted by md5
+        ///     Gets the answer of <see cref="PasswordQuestion" />. It alwasy entrypted by md5
         /// </summary>
         [Display(Name = "PasswordAnswer", ResourceType = typeof (MembershipCommon)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
@@ -243,7 +241,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="role">
-        /// The role.
+        ///     The role.
         /// </param>
         /// <returns>
         /// </returns>
@@ -253,8 +251,8 @@ namespace Ornament.MemberShip
         {
             return InRole(role, true);
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="role"></param>
         /// <param name="forAll">true在Roles,UserGroup,false,只在for中查找</param>
@@ -270,7 +268,7 @@ namespace Ornament.MemberShip
             {
                 return false;
             }
-           
+
             return UserGroups.Any(ug => ug.InRole(role));
         }
 
@@ -279,10 +277,10 @@ namespace Ornament.MemberShip
         #region UserGroup Method
 
         /// <summary>
-        /// Gets UserGroups.
+        ///     Gets UserGroups.
         /// </summary>
         /// <value>
-        /// The user groups.
+        ///     The user groups.
         /// </value>
         protected virtual Iesi.Collections.Generic.ISet<UserGroup> UserGroups
         {
@@ -292,7 +290,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="ug">
-        /// The ug.
+        ///     The ug.
         /// </param>
         /// <returns>
         /// </returns>
@@ -311,7 +309,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="ug">
-        /// The ug.
+        ///     The ug.
         /// </param>
         /// <returns>
         /// </returns>
@@ -348,9 +346,12 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
+        [Display(Name = "Org", ResourceType = typeof (MembershipCommon))]
+        public virtual Org Org { get; set; }
+
         string IPerformer.Id
         {
-            get { return this.Id; }
+            get { return Id; }
             set { throw new NotImplementedException("Can't set the User's Id"); }
         }
 
@@ -358,7 +359,8 @@ namespace Ornament.MemberShip
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
         [Display(Name = "Name", ResourceType = typeof (MembershipCommon)),
-         RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",ErrorMessageResourceType = typeof (ErrorMessage))]
+         RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public override string Name
         {
             get
@@ -369,8 +371,6 @@ namespace Ornament.MemberShip
             }
             set { base.Name = value; }
         }
-        [Display(Name="Org",ResourceType = typeof(MembershipCommon))]
-        public virtual Org Org { get; set; }
 
 
         IList<User> IPerformer.GetUsers(IMemberShipFactory memberShip)
@@ -394,7 +394,7 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// Gets all Rols those this user can use
+        ///     Gets all Rols those this user can use
         /// </summary>
         /// <returns></returns>
         public override IEnumerable<Role> GetAllRoles()
@@ -411,14 +411,14 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// set Question and Answer. This function always set answer never check old answer and question.
+        ///     set Question and Answer. This function always set answer never check old answer and question.
         /// </summary>
         /// <param name="answer">
         /// </param>
         /// <param name="question">
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// answer or question is null or empty
+        ///     answer or question is null or empty
         /// </exception>
         public virtual void SetQuestionAndAnswer(string question, string answer)
         {
@@ -436,7 +436,7 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 直接改变密码
+        ///     直接改变密码
         /// </summary>
         /// <param name="newPassword">
         /// </param>
@@ -454,12 +454,12 @@ namespace Ornament.MemberShip
             }
             return false;
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="newPassword"></param>
-        ///<exception cref="ArgumentNullException">Password is null or empty</exception>
-        ///<exception cref="PasswordFormatException">ArgumentException's length is too short</exception>
+        /// <exception cref="ArgumentNullException">Password is null or empty</exception>
+        /// <exception cref="PasswordFormatException">ArgumentException's length is too short</exception>
         public virtual void ChangePassword(string newPassword)
         {
             if (String.IsNullOrEmpty(newPassword))
@@ -475,11 +475,12 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="answer">
-        /// The answer.
+        ///     The answer.
         /// </param>
         /// <returns>
         /// </returns>
-        /// <exception cref="ArgumentNullException">answer is null or 
+        /// <exception cref="ArgumentNullException">
+        ///     answer is null or
         /// </exception>
         public virtual bool AnswertIsCorrect(string answer)
         {
@@ -495,10 +496,10 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="answer">
-        /// The answer.
+        ///     The answer.
         /// </param>
         /// <param name="newPassword">
-        /// The new password.
+        ///     The new password.
         /// </param>
         /// <exception cref="ArgumentNullException">
         /// </exception>
@@ -528,7 +529,7 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 该用户是否能够登录
+        ///     该用户是否能够登录
         /// </summary>
         /// <param name="inputPassword">
         /// </param>

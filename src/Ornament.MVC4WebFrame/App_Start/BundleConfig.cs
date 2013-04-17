@@ -9,7 +9,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
-            bundles.UseCdn = false;
+            bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
                     GlobalStyle,
@@ -29,9 +29,8 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void SeajsLib(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/main.js").Include("~/Scripts/main.js"));
             bundles.Add(new ScriptBundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
-            bundles.Add(new Bundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
 
             //bundles.Add(new Bundle("~/bundles/ornament.js", new JsMinify())
             //               .Include(

@@ -8,6 +8,7 @@ using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Ornament.Web.MemberShips.Models;
+using Ornament.Web.MemberShips.Models.Users;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
@@ -67,11 +68,12 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
-                model.Change(ModelState);
+                this.MembershipService.ChangePassword(OrnamentContext.Current.CurrentUser.LoginId, model.CurrentPassword,
+                                                      model.NewPassword);
             }
             return PartialView("_changePassword", model);
         }
@@ -129,7 +131,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn([ModelBinder(typeof (NHModelBinder))] LogonModel model)
+        public ActionResult LogOn([ModelBinder(typeof(NHModelBinder))] LogonModel model)
         {
             if (!ModelState.IsValid || !model.Validate(FormsAuth, ModelState))
             {
@@ -137,15 +139,25 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             model.ReturnUrl = Request["ReturnUrl"];
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult) Redirect(model.ReturnUrl)
+                       ? (ActionResult)Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// Send emial and try to get account
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ForgetPassword()
         {
             return View();
         }
-
+        /// <summary>
+        /// Re enter password,
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PasswordRetrieve()
+        {
+            return View();
+        }
         /// <summary>
         ///     register.
         /// </summary>
@@ -166,17 +178,14 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipService.CreateUser(model.UserBasicInfo.LoginId, model.PasswordModel.Password,
+                MembershipService.CreateUser(model.UserBasicInfo.LoginId, model.Password.Password,
                                              model.UserBasicInfo.Email);
 
                 return RedirectToAction("Index", "Home");
             }
             return View();
         }
-        public View PasswordRetrieve()
-        {
-            
-        }
+        
         /// <summary>
         ///     on action executing.
         /// </summary>

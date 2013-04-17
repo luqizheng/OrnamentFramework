@@ -105,12 +105,34 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WebGrease">
@@ -119,11 +141,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlExtender.cs" />
+    <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
-    <Compile Include="MemberShips\Models\RegistAccount.cs" />
-    <Compile Include="MemberShips\Models\Users\CreateUserAccount.cs" />
+    <Compile Include="Models\Users\ChangePasswordModel.cs" />
+    <Compile Include="Models\Users\EditUserModel.cs" />
+    <Compile Include="Models\Users\RegistAccount.cs" />
     <Compile Include="Properties\Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -161,11 +185,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="MemberShips\MenuPermission.cs" />
-    <Compile Include="MemberShips\Models\Users\PasswordModel.cs" />
-    <Compile Include="MemberShips\Models\Users\QuestionAnswerModel.cs" />
-    <Compile Include="MemberShips\Models\Users\UserBasicInfoModel.cs" />
-    <Compile Include="MemberShips\Models\Users\UserOptionInformation.cs" />
-    <Compile Include="MemberShips\Models\Users\UserStateModel.cs" />
+    <Compile Include="Models\Users\Partials\PasswordModel.cs" />
+    <Compile Include="Models\Users\Partials\QuestionAnswerModel.cs" />
+    <Compile Include="Models\Users\Partials\UserBasicInfoModel.cs" />
+    <Compile Include="Models\Users\Partials\UserOptionInformation.cs" />
+    <Compile Include="Models\Users\Partials\UserStateModel.cs" />
     <Compile Include="MemberShips\OrnamentProfile.cs" />
     <Compile Include="MemberShips\SiteMapException.cs" />
     <Compile Include="MemberShips\SiteMapPermission.cs" />

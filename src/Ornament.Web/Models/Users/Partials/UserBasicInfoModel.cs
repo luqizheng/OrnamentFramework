@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using MultiLanguage;
 using Ornament.MemberShip.Languages;
 
-namespace Ornament.Web.MemberShips.Models
+namespace Ornament.Web.Models.Users.Partials
 {
     public class UserBasicInfoModel
     {

@@ -1,15 +1,17 @@
 ﻿@using Resources
+@using Ornament.Web.HtmlExtends;
 @model Ornament.MemberShip.User
 @using (Ajax.BeginForm("SaveBaseInfo", new AjaxOptions() { HttpMethod = "post", OnSuccess = "SaveSuccess" }))
 {
     <div class="form-horizontal">
-        <div class="control-group">
+        @this.Html.LabelTextBoxFor(s => s.Name)
+        @* <div class="control-group">
             @Html.LabelFor(s => s.Name, new { @class = " control-label" })
             <div class="controls">
                 @Html.TextBoxFor(s => s.Name)
                 @Html.ValidationMessageFor(s => s.Name)
             </div>
-        </div>
+        </div>*@
         <div class="control-group">
             @Html.LabelFor(s => s.Email, new { @class = "control-label" })
             <div class="controls">
@@ -35,6 +37,6 @@
         function SaveSuccess(e) {
             alert("@Basic.SaveSuccess");
         }
-    }
+        }
 
 </script>

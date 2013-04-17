@@ -3,7 +3,7 @@ mvc和bootstrap的报错
 */
 
 define(function (require) {
-   require("uniform")
+    require("uniform");
     $.fn.bootstrapMakeUp = function () {
         try {
             return $(this).each(function () {

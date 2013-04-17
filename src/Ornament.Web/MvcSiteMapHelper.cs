@@ -29,7 +29,7 @@ namespace Ornament.Web
 
         public static SiteMapNodeCollection GetChildMenus(this HtmlHelper helper, SiteMapPermission siteMapPermission)
         {
-            var currentNode = helper.MvcSiteMap().Provider.CurrentNode;
+            var currentNode = helper.MvcSiteMap().Provider.RootNode;
             if (currentNode == null)
                 return null;
 

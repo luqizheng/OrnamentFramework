@@ -1,14 +1,11 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Profile;
 using System.Web.Security;
-using Ornament.MVCWebFrame.Areas.MemberShips.Models;
-using Ornament.MVCWebFrame.Controllers;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.MemberShip;
@@ -16,6 +13,8 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.MemberShips.Models.Users;
+using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
@@ -27,7 +26,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
     {
         private readonly IMemberShipFactory _memberShipFactory;
         private readonly IUserDao _userDao;
-       
+
         public UserController(IMemberShipFactory memberShipFactory)
         {
             _memberShipFactory = memberShipFactory;
@@ -55,16 +54,16 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [AcceptVerbs(HttpVerbs.Post), ResourceAuthorize(UserOperator.Modify, "User")]
         public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] User user, FormCollection collection)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 IUserDao dao = _memberShipFactory.CreateUserDao();
                 dao.SaveOrUpdate(user);
-                var profile = ProfileBase.Create(user.LoginId, true);
-                var properites = ProfileBase.Properties.GetEnumerator();
+                ProfileBase profile = ProfileBase.Create(user.LoginId, true);
+                IEnumerator properites = ProfileBase.Properties.GetEnumerator();
                 while (properites.MoveNext())
                 {
                     var property = properites.Current as SettingsProperty;
-                    var v = collection[property.Name];
+                    string v = collection[property.Name];
                     profile[property.Name] = v;
                 }
                 profile.Save();
@@ -72,8 +71,6 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             }
             return View(user);
         }
-
-
 
 
         public ActionResult Assign(string id)
@@ -85,7 +82,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             }
             var userGroupRoleMap = new Dictionary<string, List<string>>();
             var rolePermissionsMap = new Dictionary<string, List<string>>();
-            foreach (var ug in _memberShipFactory.CreateUserGroupDao().GetAll())
+            foreach (UserGroup ug in _memberShipFactory.CreateUserGroupDao().GetAll())
             {
                 userGroupRoleMap.Add(ug.Id, new List<string>());
                 foreach (Role role in ug.GetAllRoles())
@@ -141,10 +138,18 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(CreateUserModel createUser)
         {
-            if (ModelState.IsValid && createUser.Regist(new FormsAuthenticationService(), ModelState))
+            if (ModelState.IsValid)
             {
-                User user = _memberShipFactory.CreateUserDao().GetByLoginId(createUser.LoginId);
-                return RedirectToAction("Assign", new { id = user.LoginId });
+                string errormessage;
+                if (createUser.Create(_memberShipFactory, out errormessage))
+                {
+
+                    return RedirectToAction("Assign", new { id = createUser.BasicInfo.LoginId });
+                }
+                else
+                {
+                    this.ModelState.AddModelError("_form", errormessage);
+                }
             }
             return View(createUser);
         }
@@ -214,7 +219,9 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int pageIndex, string loginId)
         {
-            var result = from u in _userDao.Users.Take(30).Skip(pageIndex * 30) where u.LoginId.Contains(loginId) select new { LoginId = u.LoginId, Name = u.Name };
+            var result = from u in _userDao.Users.Take(30).Skip(pageIndex * 30)
+                         where u.LoginId.Contains(loginId)
+                         select new { u.LoginId, u.Name };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

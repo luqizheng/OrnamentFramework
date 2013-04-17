@@ -1,5 +1,5 @@
 ﻿seajs.config({
-    plugins: ['text', 'shim'],
+    plugins: ['shim'],
     alias: {
         jquery: {
             src: "/bundles/jquery.js",
@@ -42,7 +42,8 @@
             src: "/scripts/compatibles/valid.js",
             deps: ["validation"]
         },
-        periodDailog: { exports: "$" }
+        periodDailog: { exports: "$" },
+        preload: ["jquery"]
     }
 });
 
