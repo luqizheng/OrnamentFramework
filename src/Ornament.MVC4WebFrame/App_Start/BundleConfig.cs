@@ -31,17 +31,6 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
-
-            //bundles.Add(new Bundle("~/bundles/ornament.js", new JsMinify())
-            //               .Include(
-            //                   "~/scripts/combine/global.js",
-            //                   "~/scripts/combine/permission.js",
-            //                   "~/scripts/combine/compatibleBootStrap.js",
-            //                   "~/scripts/combine/string.js",
-            //                   "~/scripts/combine/start.js"
-            //               )
-            //   );
-
         }
 
         private static void JQueryRelative(BundleCollection bundles)
@@ -53,7 +42,7 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new ScriptBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));
             //bundles.Add(new ScriptBundle("~/bundles/multiChoice.js").Include("~/scripts/jQuery.multiChoice.js"));
             bundles.Add(new ScriptBundle("~/bundles/periodDailog.js").Include("~/scripts/periodDailog/*.js"));
-            bundles.Add(new Bundle("~/bundles/dialog.js", new JsMinify()).Include("~/scripts/dialogs/*.js"));
+            //bundles.Add(new Bundle("~/bundles/dialog.js", new JsMinify()).Include("~/scripts/dialogs/*.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

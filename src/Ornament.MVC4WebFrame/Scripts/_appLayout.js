@@ -1,30 +1,38 @@
-﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform'], function () {
-    $(document).ready(function() {
-        $("form.uniform").children("select, input").uniform();
-        $('.tip').tooltip();
-        $('.focustip').tooltip({ 'trigger': 'focus' });
+﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform'], function (require) {
 
-        $('.sidebar-tabs').easytabs({
-            animationSpeed: 150,
-            collapsible: false,
-            tabActiveClass: "active"
-        });
+    $ = require("valid");
+    $("form.uniform select, input").uniform();
 
 
-        // ==== Action Wizard ===
-        $('.actions').easytabs({
-            animationSpeed: 300,
-            collapsible: false,
-            tabActiveClass: "current"
-        });
+    $('.tip').tooltip();
+    $('.focustip').tooltip({ 'trigger': 'focus' });
 
-        //===== Collapsible plugin for main nav =====//
-        $('.expand').collapsible({
-            defaultOpen: 'current,third',
-            cookieName: 'navAct',
-            cssOpen: 'subOpened',
-            cssClose: 'subClosed',
-            speed: 200
-        });
+    $('.sidebar-tabs').easytabs({
+        animationSpeed: 150,
+        collapsible: false,
+        tabActiveClass: "active"
     });
+    //form for boostratp
+    $('form').bootstrapMakeUp().submit(function () {
+        $(this).valid(); $(this).bootstrapMakeUp();
+    });
+
+    // ==== Action Wizard ===
+    $('.actions').easytabs({
+        animationSpeed: 300,
+        collapsible: false,
+        tabActiveClass: "current"
+    });
+
+    //===== Collapsible plugin for main nav =====//
+    $('.expand').collapsible({
+        defaultOpen: 'current,third',
+        cookieName: 'navAct',
+        cssOpen: 'subOpened',
+        cssClose: 'subClosed',
+        speed: 200
+    });
+
+
+
 });
