@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
 using Ornament.Messages.Contents;
 using Ornament.Messages.Stores;
 using Qi.Domain;
@@ -20,7 +19,6 @@ namespace Ornament.Messages
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="publisher"></param>
         /// <param name="type"></param>
@@ -53,18 +51,17 @@ namespace Ornament.Messages
         private int Version { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         public virtual Priority Priority { set; get; }
 
 
         /// <summary>
-        /// 标题
+        ///     标题
         /// </summary>
         public virtual string Subject { get; set; }
 
         /// <summary>
-        /// Gets or sets the Message State.
+        ///     Gets or sets the Message State.
         /// </summary>
         public virtual MessageState State
         {
@@ -85,7 +82,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// Gets or sets the type
+        ///     Gets or sets the type
         /// </summary>
         public virtual MessageType Type
         {
@@ -100,27 +97,24 @@ namespace Ornament.Messages
 
 
         /// <summary>
-        /// 获取创建Info的时间
         /// </summary>
         public virtual DateTime CreateTime { get; protected set; }
 
         /// <summary>
-        /// 发布人
+        ///     发布人
         /// </summary>
         public virtual User Publisher { get; protected set; }
 
         /// <summary>
-        /// 获取或设定信息发生时间
+        ///     获取或设定信息发生时间
         /// </summary>
         public virtual DateTime? EffectTime { get; set; }
 
         /// <summary>
-        /// 获取或设定发布时间
         /// </summary>
         public virtual DateTime? PublishTime { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         public virtual IDictionary<string, Content> Contents
         {
@@ -128,7 +122,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// Gets the the MessageReader.
+        ///     Gets the the MessageReader.
         /// </summary>
         public virtual Iesi.Collections.Generic.ISet<MessageReader> Readers
         {
@@ -136,7 +130,6 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="addReaders"></param>
         public virtual void AddReaders(params IPerformer[] addReaders)
@@ -151,7 +144,6 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="language"></param>
         /// <param name="manager"> </param>
@@ -167,7 +159,6 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="key"></param>
         /// <param name="manager"> </param>
@@ -176,7 +167,7 @@ namespace Ornament.Messages
         public virtual string Show(StoreManager manager)
         {
             string lang = CultureInfo.CurrentUICulture.Name;
-            return Show(Contents.ContainsKey(lang) ? lang : Contents.Values.First().Language??"", manager);
+            return Show(Contents.ContainsKey(lang) ? lang : Contents.Values.First().Language ?? "", manager);
         }
 
         public override int GetHashCode()

@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.MemberShip;
@@ -182,7 +183,10 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             return View();
         }
-
+        public View PasswordRetrieve()
+        {
+            
+        }
         /// <summary>
         /// on action executing.
         /// </summary>
