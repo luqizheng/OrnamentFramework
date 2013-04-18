@@ -9,5 +9,6 @@
     <many-to-one name="User"></many-to-one>
     <property name="CreateTime" type="DateTime"  update="false" ></property>
     <property name="PrivateKey" type="DateTime"  update="false" ></property>
+    <property name="Action" type="Ornament.MemberShip.ActiveUserAction,Ornament.MemberShip.Core"></property>
   </class>
 </hibernate-mapping>

@@ -6,6 +6,14 @@ using Qi.Secret;
 
 namespace Ornament.MemberShip
 {
+    public enum ActiveUserAction
+    {
+        ChangePassword,
+        Verify,
+    }
+    /// <summary>
+    /// 
+    /// </summary>
     public class ActiveUser : DomainObject<ActiveUser, string>
     {
         public ActiveUser()
@@ -13,6 +21,8 @@ namespace Ornament.MemberShip
             CreateTime = DateTime.Now;
             PrivateKey = Guid.NewGuid().ToString("N");
         }
+
+        public virtual ActiveUserAction Action { get; set; }
 
         /// <summary>
         /// </summary>
@@ -23,8 +33,23 @@ namespace Ornament.MemberShip
         public virtual DateTime CreateTime { get; protected set; }
 
         /// <summary>
+        ///     Gets the PrivateKey of this token, it's auto create
         /// </summary>
         public virtual string PrivateKey { get; protected set; }
+
+        /// <summary>
+        ///     this AtciveUser token expire time, unit is minis
+        /// </summary>
+        public virtual int ExpireTime { get; set; }
+
+        public virtual bool IsExpire
+        {
+            get
+            {
+                TimeSpan now = DateTime.Now - CreateTime;
+                return now.TotalMinutes > ExpireTime;
+            }
+        }
 
         /// <summary>
         /// </summary>
@@ -36,9 +61,19 @@ namespace Ornament.MemberShip
             if (user == null)
                 throw new ArgumentNullException("user");
             string createtime = CreateTime.ToString("yyyy-MM-dd");
-            var singup = (user.LoginId + createtime + PrivateKey).Sha1Unicode().ToStringEx();
+            string singup = (user.LoginId + createtime + PrivateKey).Sha1Unicode().ToStringEx();
 
             return string.Format("id={0}&token={1}", Id, singup);
+        }
+
+        public static ActiveUser RetrievePassword(User user, int expireMins)
+        {
+            return new ActiveUser
+                {
+                    User = user,
+                    ExpireTime = expireMins,
+                    Action = ActiveUserAction.ChangePassword
+                };
         }
     }
 }

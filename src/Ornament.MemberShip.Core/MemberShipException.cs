@@ -16,4 +16,19 @@ namespace Ornament.MemberShip
             
         }
     }
+
+    [Serializable]
+    public class NotFoundUserShipException : MemberShipException
+    {
+        public NotFoundUserShipException(string message)
+            : base(message)
+        {
+        }
+
+        public NotFoundUserShipException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+
+        }
+    }
 }

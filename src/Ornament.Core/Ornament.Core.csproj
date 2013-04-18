@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Messages\Announce\" />
+    <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">

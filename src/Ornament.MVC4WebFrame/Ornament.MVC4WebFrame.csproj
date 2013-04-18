@@ -1206,6 +1206,9 @@
     <None Include="Content\less\font-awesome\font-awesome.less" />
     <None Include="Content\less\variables.less" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
