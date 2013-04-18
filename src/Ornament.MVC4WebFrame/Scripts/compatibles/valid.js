@@ -1,10 +1,8 @@
 ﻿/*
 mvc和bootstrap的报错
 */
+(function ($) {
 
-define(function (require) {
-    
-    
     $.fn.bootstrapMakeUp = function () {
         try {
             return $(this).each(function () {
@@ -31,7 +29,6 @@ define(function (require) {
             $(element).closest(".control-group").removeClass("error");
         }
     });
-    
 
-});
+})($)
 

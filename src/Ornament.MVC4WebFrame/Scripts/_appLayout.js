@@ -1,8 +1,6 @@
-﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform'], function (require) {
-
-    $ = require("valid");
+﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform', 'valid'], function (require) {
+    
     $("form.uniform select, input").uniform();
-
 
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
@@ -12,6 +10,7 @@
         collapsible: false,
         tabActiveClass: "active"
     });
+
     //form for boostratp
     $('form').bootstrapMakeUp().submit(function () {
         $(this).valid(); $(this).bootstrapMakeUp();

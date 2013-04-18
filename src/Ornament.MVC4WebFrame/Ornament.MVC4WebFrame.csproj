@@ -71,12 +71,13 @@
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MvcSiteMapProvider, Version=3.3.4.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+    <Reference Include="MvcSiteMapProvider, Version=3.3.6.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcSiteMapProvider.3.3.4.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
+      <HintPath>..\packages\MvcSiteMapProvider.3.3.6.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -659,14 +660,9 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
-    <Content Include="Scripts\combine\compatibleBootStrap.js" />
     <Content Include="Scripts\compatibles\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\dialogs\alert.js" />
-    <Content Include="Scripts\combine\globle.js" />
-    <Content Include="Scripts\combine\Permission.js" />
-    <Content Include="Scripts\combine\start.js" />
-    <Content Include="Scripts\combine\String.js" />
     <Content Include="Scripts\datePicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\dialogs\confirm.js" />
     <Content Include="Scripts\html5shiv.js" />
@@ -930,6 +926,12 @@
     <Content Include="templates\pannonia\img\logo.png" />
     <Content Include="templates\pannonia\img\up_arrow.png" />
     <Content Include="templates\pannonia\img\userpic.png" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -961,11 +963,7 @@
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Shared\_crumbs.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ActionMenus.cshtml" />
@@ -982,6 +980,10 @@
     <Content Include="Views\Account\PasswordRetrieve.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

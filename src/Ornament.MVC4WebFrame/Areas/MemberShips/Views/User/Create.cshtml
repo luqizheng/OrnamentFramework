@@ -1,30 +1,29 @@
-﻿@using Ornament.Web
-@using Ornament.Web.Models.Users
-@using Ornament.Web.Models.Users.Partials
-
+﻿@using Ornament.Web.Models.Users.Partials
+@using Resources
 @model Ornament.Web.Models.Users.CreateUserModel
 @{
-    ViewBag.Title = Resources.Basic.Create + Resources.MemberShip.User;
-  
-    var ajaxOptions = new AjaxOptions()
-    {
-        UpdateTargetId = "createUserForm",
-        OnComplete = "ResetErrorState",
-        InsertionMode = InsertionMode.Replace,
-        HttpMethod = "post"
-    };
+    ViewBag.Title = Basic.Create + MemberShip.User;
+
+    var ajaxOptions = new AjaxOptions
+        {
+            UpdateTargetId = "createUserForm",
+            OnComplete = "ResetErrorState",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "post"
+        };
     var formStyle = new
-    {
-        @class = "form-horizontal",
-        autocomplete = "off",
-        id = "createUserForm"
-    };
+        {
+            @class = "form-horizontal row-fluid ",
+            autocomplete = "off",
+            id = "createUserForm"
+        };
 }
 
-@using (Ajax.BeginForm("Create","User",ajaxOptions, formStyle))
+@using (Ajax.BeginForm("Create", "User", null, ajaxOptions, formStyle))
 {
-    @Html.ValidationSummary(false)
-    @Html.Partial("DisplayTemplates/UserBasicInfo", this.Model!=null?this.Model.BasicInfo:new UserBasicInfoModel())
-    @Html.Partial("DisplayTemplates/UserOptionInfo",this.Model!=null?this.Model.OptionInfo:new UserOptionInformation())
-    @Html.HiddenFor(s=>s.State.IsApproved);
+    @Html.ValidationSummary(true)
+    @Html.Partial("DisplayTemplates/UserBasicInfo", Model != null ? Model.BasicInfo : new UserBasicInfoModel())
+    @Html.Partial("DisplayTemplates/UserOptionInfo", Model != null ? Model.OptionInfo : new UserOptionInformation())
+    @Html.HiddenFor(s => s.State.IsApproved)
+    ;
 }
