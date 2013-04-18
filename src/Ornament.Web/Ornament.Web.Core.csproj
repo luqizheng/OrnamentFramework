@@ -149,11 +149,6 @@
     <Compile Include="Models\Users\ChangePasswordModel.cs" />
     <Compile Include="Models\Users\EditUserModel.cs" />
     <Compile Include="Models\Users\RegistAccount.cs" />
-    <Compile Include="Properties\Common.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Common.resx</DependentUpon>
-    </Compile>
     <Compile Include="Languages\LanguageManager.cs" />
     <Compile Include="Properties\MemberShipModel.Designer.cs">
       <DependentUpon>MemberShipModel.resx</DependentUpon>
@@ -202,6 +197,11 @@
     <Compile Include="Optimization\DotLessBundle\LessMinify.cs" />
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="Pagination.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ResourceDescriptionManager.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="MemberShips\MemberShipProvider.cs" />
@@ -256,10 +256,6 @@
     <None Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Common.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Common.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\MemberShipModel.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MemberShipModel.Designer.cs</LastGenOutput>
@@ -289,6 +285,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Message.zh.Designer.cs</LastGenOutput>
       <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

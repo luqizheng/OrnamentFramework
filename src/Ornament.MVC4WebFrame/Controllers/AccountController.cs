@@ -9,6 +9,7 @@ using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Ornament.Web.MemberShips.Models;
 using Ornament.Web.MemberShips.Models.Users;
+using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers

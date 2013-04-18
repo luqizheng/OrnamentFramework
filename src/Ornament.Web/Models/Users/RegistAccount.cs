@@ -1,6 +1,6 @@
 ﻿using Ornament.Web.Models.Users.Partials;
 
-namespace Ornament.Web.MemberShips.Models.Users
+namespace Ornament.Web.Models.Users
 {
     public class RegistAccount
     {
