@@ -120,4 +120,10 @@
   <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
     <value>Current Password isn't right.</value>
   </data>
+  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
+    <value>Please input login ID or email address.</value>
+  </data>
+  <data name="label_AccountOrEmail" xml:space="preserve">
+    <value>Account Or Email</value>
+  </data>
 </root>

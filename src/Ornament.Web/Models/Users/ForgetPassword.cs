@@ -1,5 +1,8 @@
-﻿using Ornament.MemberShip;
+﻿using System.ComponentModel.DataAnnotations;
+using MultiLanguage;
+using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Languages;
 
 namespace Ornament.Web.Models.Users
 {
@@ -8,6 +11,9 @@ namespace Ornament.Web.Models.Users
         /// <summary>
         /// 
         /// </summary>
+        [Display(Name = "label_AccountOrEmail", ResourceType = typeof(MemberShipModel))]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "alertMsg_RequireAccountOrEmail")]
         public string AccountOrEmail { get; set; }
         /// <summary>
         /// 

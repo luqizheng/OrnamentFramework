@@ -120,4 +120,10 @@
   <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
     <value>当前密码不正确，请输入正确的密码.</value>
   </data>
+  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
+    <value>请输入登录名或者电子邮件</value>
+  </data>
+  <data name="label_AccountOrEmail" xml:space="preserve">
+    <value>登录名或电子邮件</value>
+  </data>
 </root>

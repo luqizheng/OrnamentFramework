@@ -68,5 +68,23 @@ namespace MultiLanguage {
                 return ResourceManager.GetString("alertMsg_OldPasswordNotRight", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please input login ID or email address..
+        /// </summary>
+        public static string alertMsg_RequireAccountOrEmail {
+            get {
+                return ResourceManager.GetString("alertMsg_RequireAccountOrEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Or Email.
+        /// </summary>
+        public static string label_AccountOrEmail {
+            get {
+                return ResourceManager.GetString("label_AccountOrEmail", resourceCulture);
+            }
+        }
     }
 }

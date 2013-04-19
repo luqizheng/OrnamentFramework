@@ -120,4 +120,10 @@
   <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
     <value>當前密碼不正確,請輸入正確的密碼</value>
   </data>
+  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
+    <value>請輸入登錄名或電子郵件</value>
+  </data>
+  <data name="label_AccountOrEmail" xml:space="preserve">
+    <value>登錄名或電子郵件</value>
+  </data>
 </root>
