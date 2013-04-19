@@ -74,7 +74,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveUser.cs" />
+    <Compile Include="UsersecretToken.cs" />
+    <Compile Include="Dao\IUserSecretTokenDao.cs" />
     <Compile Include="MemberShipProviders\MembershipContext.cs" />
     <Compile Include="PasswordFormatException.cs" />
     <Compile Include="PasswordResetToken.cs" />

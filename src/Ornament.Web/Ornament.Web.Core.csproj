@@ -148,6 +148,7 @@
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
     <Compile Include="Models\Users\ChangePasswordModel.cs" />
     <Compile Include="Models\Users\EditUserModel.cs" />
+    <Compile Include="Models\Users\ForgetPassword.cs" />
     <Compile Include="Models\Users\RegistAccount.cs" />
     <Compile Include="Languages\LanguageManager.cs" />
     <Compile Include="Properties\MemberShipModel.Designer.cs">

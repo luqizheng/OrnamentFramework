@@ -13,7 +13,6 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
-using Ornament.Web.MemberShips.Models.Users;
 using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
 
@@ -52,7 +51,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post), ResourceAuthorize(UserOperator.Modify, "User")]
-        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] User user, FormCollection collection)
+        public ActionResult Edit([ModelBinder(typeof (NHModelBinder))] User user, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
@@ -143,12 +142,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 string errormessage;
                 if (createUser.Create(_memberShipFactory, out errormessage))
                 {
-
-                    return RedirectToAction("Assign", new { id = createUser.BasicInfo.LoginId });
+                    return RedirectToAction("Assign", new {id = createUser.BasicInfo.LoginId});
                 }
                 else
                 {
-                    this.ModelState.AddModelError("_form", errormessage);
+                    ModelState.AddModelError("_form", errormessage);
                 }
             }
             return View(createUser);
@@ -219,9 +217,9 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int pageIndex, string loginId)
         {
-            var result = from u in _userDao.Users.Take(30).Skip(pageIndex * 30)
+            var result = from u in _userDao.Users.Take(30).Skip(pageIndex*30)
                          where u.LoginId.Contains(loginId)
-                         select new { u.LoginId, u.Name };
+                         select new {u.LoginId, u.Name};
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

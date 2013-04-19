@@ -10,6 +10,10 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
+    public sealed class UserSecretTokenDao:DaoBase<string,UserSecretToken>,IUserSecretTokenDao
+    {
+        
+    }
     public sealed class RoleDao : DaoBase<string, Role>, IRoleDao
     {
         #region IRoleDao Members

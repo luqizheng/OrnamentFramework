@@ -2,12 +2,10 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
-using Ornament.Web.MemberShips.Models;
 using Ornament.Web.MemberShips.Models.Users;
 using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
@@ -69,12 +67,12 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
-                this.MembershipService.ChangePassword(OrnamentContext.Current.CurrentUser.LoginId, model.CurrentPassword,
-                                                      model.NewPassword);
+                MembershipService.ChangePassword(OrnamentContext.Current.CurrentUser.LoginId, model.CurrentPassword,
+                                                 model.NewPassword);
             }
             return PartialView("_changePassword", model);
         }
@@ -132,7 +130,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn([ModelBinder(typeof(NHModelBinder))] LogonModel model)
+        public ActionResult LogOn([ModelBinder(typeof (NHModelBinder))] LogonModel model)
         {
             if (!ModelState.IsValid || !model.Validate(FormsAuth, ModelState))
             {
@@ -140,25 +138,34 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             model.ReturnUrl = Request["ReturnUrl"];
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult)Redirect(model.ReturnUrl)
+                       ? (ActionResult) Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
+
         /// <summary>
-        /// Send emial and try to get account
+        ///     Send emial and try to get account
         /// </summary>
         /// <returns></returns>
         public ActionResult ForgetPassword()
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ForgetPassword(ForgetPassword forget)
+        {
+            return View();
+        }
+
         /// <summary>
-        /// Re enter password,
+        ///     Re enter password,
         /// </summary>
         /// <returns></returns>
         public ActionResult PasswordRetrieve()
         {
             return View();
         }
+
         /// <summary>
         ///     register.
         /// </summary>
@@ -186,7 +193,7 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             return View();
         }
-        
+
         /// <summary>
         ///     on action executing.
         /// </summary>

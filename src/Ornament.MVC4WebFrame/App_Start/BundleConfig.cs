@@ -29,7 +29,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void SeajsLib(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
+            bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
         }
 

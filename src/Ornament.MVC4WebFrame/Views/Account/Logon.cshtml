@@ -7,50 +7,63 @@
     Html.EnableUnobtrusiveJavaScript(true);
     Html.EnableClientValidation(true);
 }
-<div style="min-height: 450px">
-    <div class="modal ">
-        <form method="post" class="form-horizontal uniform">
-            <div class="modal-header">
-                <h4>@Html.GetResourceString("logonTitle")</h4>
+@section script
+{
+    <script type="text/javascript">
+        seajs.use(['uniform', 'bootstrap'], function () {
+            $(".styled").uniform({ radioClass: 'choice' });
+        })
+
+    </script>
+}
+
+<div class="login">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h6><i class="icon-user"></i>@Html.GetResourceString("logonTitle")</h6>
+            <div class="nav pull-right">
+                <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#"><i class="icon-plus"></i>Register</a></li>
+                    <li><a href="@Url.Action("ForgetPassword","Account")"><i class="icon-refresh"></i>@Html.GetResourceString("ForgetPassword")</a></li>
+                    <li><a href="#"><i class="icon-cog"></i>Settings</a></li>
+                </ul>
             </div>
-            <div class="modal-body">
-                <p>
-                    @Html.ValidationSummary(false)
-                </p>
-                <div class="control-group">
-                    @Html.LabelFor(m => m.User, new { @class = "control-label" })
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-user"></i></span>
-                            @Html.TextBoxFor(m => m.User)
-                            @Html.ValidationMessageFor(m => m.User)
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-                    <div class="controls">
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-key"></i></span>
-                            @Html.PasswordFor(m => m.Password)
-                            @Html.ValidationMessageFor(m => m.Password)
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <label class="checkbox">
-                            <input name="@Html.GetResourceString("RemeberMe")" type="checkbox" />
-                            @Html.GetResourceString("RemeberMe")
-                        </label>
-                    </div>
+        </div>
+    </div>
+    <div class="well">
+        <form class="row-fluid uniform" method="POST" action="@Url.Action("LogOn")">
+
+            @Html.ValidationSummary(false)
+
+            <div class="control-group">
+                @Html.LabelFor(m => m.User, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.User, new { @class = "span12" })
+                    @Html.ValidationMessageFor(m => m.User)
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">@Basic.OK</button>
-                @Html.HiddenFor(m => m.ReturnUrl)
+
+            <div class="control-group">
+                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.PasswordFor(m => m.Password, new { @class = "span12" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox inline">
+                        <input name="@Html.GetResourceString("RemeberMe")" type="checkbox" />
+                        @Html.GetResourceString("RemeberMe")
+                    </label>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.ReturnUrl)
+            <div class="login-btn">
+                <input type="submit" value="@Basic.OK" class="btn btn-danger btn-block" />
             </div>
         </form>
     </div>
 </div>
-

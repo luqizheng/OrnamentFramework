@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MultiLanguage;
-using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 
-namespace Ornament.Web.MemberShips.Models.Users
+namespace Ornament.Web.Models.Users
 {
     public class ChangePasswordModel
     {
@@ -31,16 +29,5 @@ namespace Ornament.Web.MemberShips.Models.Users
         public string ConfirmPassword { get; set; }
     }
 
-    public class ForgetPassword
-    {
-        public string AccountOrEmail { get; set; }
-        public void Retrieve(IMemberShipFactory dao)
-        {
-            var user=dao.CreateUserDao().GetByLoginId(AccountOrEmail) ??
-                     dao.CreateUserDao().GetUserByEmail(AccountOrEmail);
-            if(user==null)
-                throw new MemberShipException("Cannot find the account.");
-            ActiveUser.RetrievePassword(user,)
-        }
-    }
+   
 }

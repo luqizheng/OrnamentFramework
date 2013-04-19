@@ -12,6 +12,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return CreateProfileDao().Profiles; }
         }
 
+        public IQueryable<UserSecretToken> UserSecretTokens { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,6 +40,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IOrgDao CreateOrgDao()
         {
             return new OrgDao();
+        }
+
+        public IUserSecretTokenDao CreateUserSecortTokeDao()
+        {
+            return new UserSecretTokenDao();
         }
 
 

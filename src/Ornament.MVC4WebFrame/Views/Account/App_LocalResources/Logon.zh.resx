@@ -123,4 +123,7 @@
   <data name="RemeberMe" xml:space="preserve">
     <value>記住密碼</value>
   </data>
+  <data name="ForgetPassword" xml:space="preserve">
+    <value>忘記密碼</value>
+  </data>
 </root>

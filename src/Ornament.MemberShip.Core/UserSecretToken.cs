@@ -14,9 +14,9 @@ namespace Ornament.MemberShip
     /// <summary>
     /// 
     /// </summary>
-    public class ActiveUser : DomainObject<ActiveUser, string>
+    public class UserSecretToken : DomainObject<UserSecretToken, string>
     {
-        public ActiveUser()
+        public UserSecretToken()
         {
             CreateTime = DateTime.Now;
             PrivateKey = Guid.NewGuid().ToString("N");
@@ -66,9 +66,9 @@ namespace Ornament.MemberShip
             return string.Format("id={0}&token={1}", Id, singup);
         }
 
-        public static ActiveUser RetrievePassword(User user, int expireMins)
+        public static UserSecretToken RetrievePassword(User user, int expireMins)
         {
-            return new ActiveUser
+            return new UserSecretToken
                 {
                     User = user,
                     ExpireTime = expireMins,
