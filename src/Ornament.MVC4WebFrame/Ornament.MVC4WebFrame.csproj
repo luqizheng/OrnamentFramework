@@ -977,9 +977,6 @@
     <Content Include="templates\pannonia\img\elements\loaders\.DS_Store" />
     <Content Include="templates\pannonia\img\elements\uploader\.DS_Store" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
-    <Content Include="Views\Account\PasswordRetrieve.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
@@ -1210,6 +1207,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh-cn.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
