@@ -6,12 +6,12 @@ namespace Ornament.Web.Models.Users
     public class CreateUserModel : EditUserModel
     {
         /// <summary>
-        /// Create a user and send a active email to user.
+        ///     Create a user and send a active email to user.
         /// </summary>
         public bool Create(IMemberShipFactory dao, out string errorMessage)
         {
             errorMessage = null;
-            var createUser = new User(this.BasicInfo.LoginId, "123456")
+            var createUser = new User(BasicInfo.LoginId, "123456")
                 {
                     IsApproved = false,
                     Email = BasicInfo.Email,
