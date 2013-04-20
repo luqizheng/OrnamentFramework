@@ -1,5 +1,6 @@
 using System.Linq;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Secret;
 
 namespace Ornament.MemberShip.Dao
 {

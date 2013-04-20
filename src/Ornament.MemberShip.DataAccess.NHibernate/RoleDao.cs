@@ -10,10 +10,6 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
-    public sealed class UserSecretTokenDao:DaoBase<string,UserSecretToken>,IUserSecretTokenDao
-    {
-        
-    }
     public sealed class RoleDao : DaoBase<string, Role>, IRoleDao
     {
         #region IRoleDao Members
@@ -121,7 +117,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<Role> Find(int pageSize, int currentPage)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize*currentPage).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize * currentPage).
                     GetExecutableCriteria(CurrentSession).List<Role>();
         }
 

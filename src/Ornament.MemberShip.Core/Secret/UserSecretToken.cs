@@ -4,13 +4,8 @@ using Qi;
 using Qi.Domain;
 using Qi.Secret;
 
-namespace Ornament.MemberShip
+namespace Ornament.MemberShip.Secret
 {
-    public enum ActiveUserAction
-    {
-        ChangePassword,
-        Verify,
-    }
     /// <summary>
     /// 
     /// </summary>
@@ -26,7 +21,7 @@ namespace Ornament.MemberShip
 
         /// <summary>
         /// </summary>
-        public virtual User User { get; protected set; }
+        public virtual User Account { get; protected set; }
 
         /// <summary>
         /// </summary>
@@ -56,7 +51,7 @@ namespace Ornament.MemberShip
         /// <returns></returns>
         public virtual string CreateQueryString(User user)
         {
-            if (Id != null)
+            if (this.IsTransient())
                 throw new PersistentObjectException("Please save the object after to build the QueryString.");
             if (user == null)
                 throw new ArgumentNullException("user");
@@ -70,10 +65,15 @@ namespace Ornament.MemberShip
         {
             return new UserSecretToken
                 {
-                    User = user,
+                    Account = user,
                     ExpireTime = expireMins,
                     Action = ActiveUserAction.ChangePassword
                 };
+        }
+
+        public virtual void Renew()
+        {
+            this.CreateTime = DateTime.Now;
         }
     }
 }

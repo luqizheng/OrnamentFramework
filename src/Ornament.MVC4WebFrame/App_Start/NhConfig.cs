@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using System.Web;
 using System.Web.Hosting;
 using FluentNHibernate.Cfg;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 using Ornament.Web;
 using Qi.NHibernateExtender;
 
@@ -23,12 +23,12 @@ namespace Ornament.MVCWebFrame.App_Start
                         Assembly assembly1 = OrnamentContext.Current.NhAssemblies[i];
                         result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly1));
                     }
-                    foreach (var type in OrnamentContext.Current.NHTypes)
+                    foreach (Type type in OrnamentContext.Current.NHTypes)
                     {
                         Type type1 = type;
                         result.Mappings(s => s.FluentMappings.Add(type1));
                     }
-                    
+
                     return result.BuildConfiguration();
                 });
         }

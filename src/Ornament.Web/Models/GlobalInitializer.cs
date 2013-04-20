@@ -40,7 +40,11 @@ namespace Ornament.Web.Models
             {
                 Configuration config = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
                 var cc = new SchemaUpdate(config);
-                cc.Execute(true,true);
+                cc.Execute(true, true);
+                foreach (var a in cc.Exceptions)
+                {
+                    log4net.LogManager.GetLogger(LoggerName).Error(a.Message, a);
+                }
             }
             catch (Exception ex)
             {
@@ -48,7 +52,7 @@ namespace Ornament.Web.Models
             }
         }
 
-     
+
 
         /// <summary>
         ///     Update all database structure.

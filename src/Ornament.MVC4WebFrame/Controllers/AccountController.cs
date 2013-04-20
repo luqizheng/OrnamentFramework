@@ -151,12 +151,12 @@ namespace Ornament.MVCWebFrame.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, Session]
         public ActionResult ForgetPassword(ForgetPassword forget)
         {
             if (this.ModelState.IsValid)
             {
-                forget.Retrieve(OrnamentContext.Current.MemberShipFactory());
+                forget.Retrieve(OrnamentContext.Current.MemberShipFactory(), "test[url]", "http://aaa.com");
                 this.RedirectToAction("ForgetPasswordSucccess");
             }
             return View();
