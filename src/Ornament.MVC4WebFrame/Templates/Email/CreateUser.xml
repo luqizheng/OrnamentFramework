@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<emailTemplate>
+  <subject>新注册用户</subject>
+  <body>
+    <![CDATA[
+    亲爱的[Name]用户
+
+    你已经在XXX系统成功注册了一个新账号，为了请点击下面的连接验证。
+
+    [URL]
+
+
+    账号信息
+    登录Id:[LoginId]
+    Email:[Email]
+
+
+    管理员
+]]>
+  </body>
+
+</emailTemplate>

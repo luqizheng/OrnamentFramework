@@ -111,6 +111,8 @@
     <Compile Include="OrnamentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceContextExtender.cs" />
+    <Compile Include="Templates\EmailTemplate.cs" />
+    <Compile Include="Templates\TemplateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
