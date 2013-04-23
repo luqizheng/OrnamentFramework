@@ -70,10 +70,14 @@ namespace Ornament.MemberShip.Secret
                     Action = ActiveUserAction.ChangePassword
                 };
         }
-
         public virtual void Renew()
         {
             this.CreateTime = DateTime.Now;
+        }
+
+        public static UserSecretToken VerifyUser(User user, int expireMinis)
+        {
+            throw new NotImplementedException();
         }
     }
 }

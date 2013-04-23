@@ -2,8 +2,9 @@
 
 namespace Ornament.Templates
 {
-    public class EmailTempalgeManager
+    public class EmailTemplateManager
     {
+        
         private const string _path = "~/Templates/Email/";
 
         public EmailTemplate GetCreateUser()

@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Web;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -12,8 +13,9 @@ namespace Ornament.Web
 
         private OrnamentContext()
         {
-        }
 
+        }
+        public string SupportEmail { get { return ConfigurationManager.AppSettings["SupportEmail"]; } }
         /// <summary>
         /// 
         /// </summary>
