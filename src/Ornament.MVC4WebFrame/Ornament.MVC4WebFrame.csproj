@@ -243,6 +243,7 @@
     <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
+    <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />

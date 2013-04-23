@@ -35,5 +35,8 @@ namespace Ornament.Templates
             var result = new MailMessage(from, to, Subject, body);
             return result;
         }
+
+
+
     }
 }

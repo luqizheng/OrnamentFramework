@@ -38,5 +38,10 @@ namespace Ornament.Templates
                 fs.Close();
             }
         }
+
+        public static EmailTemplate GetEmail(string path)
+        {
+            return Get<EmailTemplate>(path);
+        }
     }
 }
