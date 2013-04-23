@@ -6,7 +6,6 @@ using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
-using Ornament.Web.MemberShips.Models.Users;
 using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
 
@@ -67,7 +66,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +129,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn([ModelBinder(typeof(NHModelBinder))] LogonModel model)
+        public ActionResult LogOn([ModelBinder(typeof (NHModelBinder))] LogonModel model)
         {
             if (!ModelState.IsValid || !model.Validate(FormsAuth, ModelState))
             {
@@ -138,7 +137,7 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             model.ReturnUrl = Request["ReturnUrl"];
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult)Redirect(model.ReturnUrl)
+                       ? (ActionResult) Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 
@@ -154,16 +153,16 @@ namespace Ornament.MVCWebFrame.Controllers
         [HttpPost, Session]
         public ActionResult ForgetPassword(ForgetPassword forget)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 forget.Retrieve(OrnamentContext.Current.MemberShipFactory(), "test[url]", "http://aaa.com");
-                this.RedirectToAction("ForgetPasswordSucccess");
+                RedirectToAction("ForgetPasswordSucccess");
             }
             return View();
         }
+
         public ActionResult ForgetPasswordSucccess()
         {
-
             return View();
         }
 

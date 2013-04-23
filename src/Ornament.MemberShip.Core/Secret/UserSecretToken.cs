@@ -36,7 +36,9 @@ namespace Ornament.MemberShip.Secret
         ///     this AtciveUser token expire time, unit is minis
         /// </summary>
         public virtual int ExpireTime { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual bool IsExpire
         {
             get
@@ -75,7 +77,7 @@ namespace Ornament.MemberShip.Secret
             this.CreateTime = DateTime.Now;
         }
 
-        public static UserSecretToken VerifyUser(User user, int expireMinis)
+        public static UserSecretToken VerifyEmail(User user, int expireMinis)
         {
             throw new NotImplementedException();
         }

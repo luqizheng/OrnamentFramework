@@ -13,11 +13,22 @@ namespace Ornament.Web
 
         private OrnamentContext()
         {
-
         }
-        public string SupportEmail { get { return ConfigurationManager.AppSettings["SupportEmail"]; } }
+
+        public string SupportEmail
+        {
+            get { return ConfigurationManager.AppSettings["SupportEmail"]; }
+        }
+
+        public string WebDomainUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DomainUrl"];
+            }
+        }
+
         /// <summary>
-        /// 
         /// </summary>
         public override User CurrentUser
         {
@@ -38,7 +49,6 @@ namespace Ornament.Web
 
 
         /// <summary>
-        /// 
         /// </summary>
         public static ResourceDescriptionManager Configuration
         {
