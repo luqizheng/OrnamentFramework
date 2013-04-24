@@ -253,7 +253,7 @@
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\MembershipServiceController.cs" />
     <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
-    <Compile Include="Controllers\SecrityController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

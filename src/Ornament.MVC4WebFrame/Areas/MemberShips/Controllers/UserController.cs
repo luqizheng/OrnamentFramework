@@ -11,9 +11,9 @@ using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
+using Ornament.Models.Memberships;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
-using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers

@@ -2,7 +2,7 @@
 using MultiLanguage;
 using Ornament.MemberShip.Languages;
 
-namespace Ornament.Web.Models.Users.Partials
+namespace Ornament.Models.Memberships.Partials
 {
     public class PasswordModel
     {
@@ -18,7 +18,7 @@ namespace Ornament.Web.Models.Users.Partials
         [Display(Name = "ConfirmPassword", ResourceType = typeof(MembershipCommon))]
         [DataType(DataType.Password)]
         [Required(ErrorMessageResourceType = typeof(Message), ErrorMessageResourceName = "error_MissPassword")]
-        [System.Web.Mvc.Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
+        [Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
             ErrorMessageResourceType = typeof(Message))]
         public string ConfirmPassword { get; set; }
     }

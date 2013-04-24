@@ -5,6 +5,7 @@ using System.Reflection;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using FluentNHibernate.Cfg;
+using Ornament.Configurations;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
@@ -18,6 +19,11 @@ namespace Ornament
         {
         }
 
+        private static ApplicationSetting _setting;
+        public static ApplicationSetting Setting
+        {
+            get { return _setting ?? (_setting = new ApplicationSetting()); }
+        }
         private IList<Assembly> _hhAssemblies;
         private IList<Type> _nhTyhpes;
         /// <summary>

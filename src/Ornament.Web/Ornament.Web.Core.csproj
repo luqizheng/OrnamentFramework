@@ -146,48 +146,8 @@
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
-    <Compile Include="Models\Users\ChangePasswordModel.cs" />
-    <Compile Include="Models\Users\CreateUserModel.cs" />
-    <Compile Include="Models\Users\EditUserModel.cs" />
-    <Compile Include="Models\Users\ForgetPassword.cs" />
-    <Compile Include="Models\Users\RegistAccount.cs" />
     <Compile Include="Languages\LanguageManager.cs" />
-    <Compile Include="Properties\MemberShipModel.Designer.cs">
-      <DependentUpon>MemberShipModel.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\MemberShipModel.zh-CN.Designer.cs">
-      <DependentUpon>MemberShipModel.zh-CN.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\MemberShipModel.zh.Designer.cs">
-      <DependentUpon>MemberShipModel.zh.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Message.Designer.cs">
-      <DependentUpon>Message.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Message.zh-CN.Designer.cs">
-      <DependentUpon>Message.zh-CN.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Message.zh.Designer.cs">
-      <DependentUpon>Message.zh.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="MemberShips\MenuPermission.cs" />
-    <Compile Include="Models\Users\Partials\PasswordModel.cs" />
-    <Compile Include="Models\Users\Partials\QuestionAnswerModel.cs" />
-    <Compile Include="Models\Users\Partials\UserBasicInfoModel.cs" />
-    <Compile Include="Models\Users\Partials\UserOptionInformation.cs" />
-    <Compile Include="Models\Users\Partials\UserStateModel.cs" />
     <Compile Include="MemberShips\OrnamentProfile.cs" />
     <Compile Include="MemberShips\SiteMapException.cs" />
     <Compile Include="MemberShips\SiteMapPermission.cs" />
@@ -258,36 +218,6 @@
     <None Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\MemberShipModel.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MemberShipModel.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\MemberShipModel.zh-CN.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MemberShipModel.zh-CN.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\MemberShipModel.zh.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MemberShipModel.zh.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Message.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Message.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Message.zh-CN.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Message.zh-CN.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Message.zh.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Message.zh.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Languages;
 
-namespace Ornament.Web.Models.Users.Partials
+namespace Ornament.Models.Memberships.Partials
 {
     public class QuestionAnswerModel
     {
