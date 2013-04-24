@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
-    public class SecrityController : Controller
+    public class SecurityController : Controller
     {
         //
         // GET: /Secrity/
