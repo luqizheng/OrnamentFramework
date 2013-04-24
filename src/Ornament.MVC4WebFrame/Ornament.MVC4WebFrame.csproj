@@ -1218,6 +1218,9 @@
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmailAndChangePassword.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

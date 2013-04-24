@@ -7,7 +7,6 @@ using Qi.Secret;
 namespace Ornament.MemberShip.Secret
 {
     /// <summary>
-    /// 
     /// </summary>
     public class UserSecretToken : DomainObject<UserSecretToken, string>
     {
@@ -36,8 +35,8 @@ namespace Ornament.MemberShip.Secret
         ///     this AtciveUser token expire time, unit is minis
         /// </summary>
         public virtual int ExpireTime { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual bool IsExpire
         {
@@ -48,19 +47,26 @@ namespace Ornament.MemberShip.Secret
             }
         }
 
+        public virtual bool Verify(string token)
+        {
+            return CreateToken(Account) == token;
+        }
+
+        private string CreateToken(User user)
+        {
+            return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();
+        }
+
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public virtual string CreateQueryString(User user)
+        public virtual string CreateQueryString()
         {
-            if (this.IsTransient())
+            if (IsTransient())
                 throw new PersistentObjectException("Please save the object after to build the QueryString.");
-            if (user == null)
-                throw new ArgumentNullException("user");
-            string createtime = CreateTime.ToString("yyyy-MM-dd");
-            string singup = (user.LoginId + createtime + PrivateKey).Sha1Unicode().ToStringEx();
 
-            return string.Format("id={0}&token={1}", Id, singup);
+
+            return string.Format("id={0}&token={1}", Id, CreateToken(Account));
         }
 
         public static UserSecretToken RetrievePassword(User user, int expireMins)
@@ -72,9 +78,10 @@ namespace Ornament.MemberShip.Secret
                     Action = ActiveUserAction.ChangePassword
                 };
         }
+
         public virtual void Renew()
         {
-            this.CreateTime = DateTime.Now;
+            CreateTime = DateTime.Now;
         }
 
         public static UserSecretToken VerifyEmail(User user, int expireMinis)
