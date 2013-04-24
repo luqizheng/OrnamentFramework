@@ -1,4 +1,4 @@
-﻿namespace Ornament.Web.MemberShips.Models.Users
+﻿namespace Ornament.Models.Memberships.Partials
 {
     public class UserStateModel
     {

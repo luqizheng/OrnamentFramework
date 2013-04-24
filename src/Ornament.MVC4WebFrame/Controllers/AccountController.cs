@@ -4,9 +4,9 @@ using System.Security.Principal;
 using System.Web.Mvc;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
+using Ornament.Models.Memberships;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
-using Ornament.Web.Models.Users;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers

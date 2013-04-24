@@ -2,11 +2,10 @@
 using MultiLanguage;
 using Ornament.MemberShip.Languages;
 
-namespace Ornament.Web.Models.Users
+namespace Ornament.Models.Memberships
 {
     public class ChangePasswordModel
     {
-       
         [Required(ErrorMessageResourceName = "alertMsg_Require_OldPassword",
             ErrorMessageResourceType = typeof (Message))]
         [Display(Name = "CurrentPassword", ResourceType = typeof (MembershipCommon))]
@@ -28,6 +27,4 @@ namespace Ornament.Web.Models.Users
             ErrorMessageResourceType = typeof (Message))]
         public string ConfirmPassword { get; set; }
     }
-
-   
 }

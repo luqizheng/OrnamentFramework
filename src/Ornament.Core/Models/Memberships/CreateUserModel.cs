@@ -6,7 +6,7 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Secret;
 using Ornament.Templates;
 
-namespace Ornament.Web.Models.Users
+namespace Ornament.Models.Memberships
 {
     public class CreateUserModel : EditUserModel
     {
@@ -42,10 +42,10 @@ namespace Ornament.Web.Models.Users
             var manager = new EmailTemplateManager();
             IDictionary<string, string> variable =
                 manager.GetValues(createUser, userSecretToken, Password,
-                                  Path.Combine(OrnamentContext.Current.WebDomainUrl, CreateVerifyUser));
+                                  Path.Combine(Context.Setting.WebDomainUrl, CreateVerifyUser));
 
             EmailTemplate email = manager.GetCreateUser();
-            MailMessage a = email.CreateEmail(OrnamentContext.Current.SupportEmail, createUser.Email, variable);
+            MailMessage a = email.CreateEmail(Context.Setting.SupportEmail, createUser.Email, variable);
             var ss = new SmtpClient();
             ss.Send(a);
             return true;

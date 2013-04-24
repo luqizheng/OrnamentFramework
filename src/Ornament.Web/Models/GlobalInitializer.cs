@@ -5,6 +5,7 @@ using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Qi;
 using Qi.NHibernateExtender;
+using log4net;
 
 namespace Ornament.Web.Models
 {
@@ -41,9 +42,9 @@ namespace Ornament.Web.Models
                 Configuration config = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
                 var cc = new SchemaUpdate(config);
                 cc.Execute(true, true);
-                foreach (var a in cc.Exceptions)
+                foreach (Exception a in cc.Exceptions)
                 {
-                    log4net.LogManager.GetLogger(LoggerName).Error(a.Message, a);
+                    LogManager.GetLogger(LoggerName).Error(a.Message, a);
                 }
             }
             catch (Exception ex)
@@ -51,7 +52,6 @@ namespace Ornament.Web.Models
                 throw new OrnamentException("Init " + sessionFactoryName + " fail, so the website can't be run. ", ex);
             }
         }
-
 
 
         /// <summary>

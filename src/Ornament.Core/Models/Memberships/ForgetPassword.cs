@@ -5,7 +5,7 @@ using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Secret;
 
-namespace Ornament.Web.Models.Users
+namespace Ornament.Models.Memberships
 {
     public class ForgetPassword
     {

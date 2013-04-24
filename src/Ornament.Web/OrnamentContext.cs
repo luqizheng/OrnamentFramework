@@ -15,18 +15,7 @@ namespace Ornament.Web
         {
         }
 
-        public string SupportEmail
-        {
-            get { return ConfigurationManager.AppSettings["SupportEmail"]; }
-        }
-
-        public string WebDomainUrl
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["DomainUrl"];
-            }
-        }
+        
 
         /// <summary>
         /// </summary>
