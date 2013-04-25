@@ -13,27 +13,27 @@
 @section script
 {
     <script type="text/javascript">
-        seajs.use(['valid'], function() {
+        seajs.use(['valid'], function () {
 
-            $("#unlockButton,#Lock,#approvedButton").click(function() {
+            $("#unlockButton,#Lock,#approvedButton").click(function () {
                 submitAction(this);
             });
 
-            $("#delete").click(function() {
+            $("#delete").click(function () {
                 if (confirm("Do you want to delete user(s)?"))
                     submitAction(this);
             });
 
-            var submitAction = function(button) {
+            var submitAction = function (button) {
                 /*$("form").attr("action", $(button).val()).submit();*/
             };
 
-            $("input[name=loginIds]").change(function() {
+            $("input[name=loginIds]").change(function () {
                 var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
                 $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
             });
 
-            $("#btnCreateUser").click(function() {
+            $("#btnCreateUser").click(function () {
                 $("#createUserModel form").submit();
                 //$('#createUserModel').modal('hide');
             });
@@ -79,23 +79,23 @@
             <th></th>
             <th style="width: 80px"></th>
             <th style="width: 100px">
-                @Html.LabelFor(item => ((User) null).LoginId)
+                @Html.LabelFor(item => ((User)null).LoginId)
             </th>
 
             <th style="width: 100px">
-                @Html.LabelFor(item => ((User) null).Name)
+                @Html.LabelFor(item => ((User)null).Name)
             </th>
             <th>
-                @Html.LabelFor(item => ((User) null).Email)
+                @Html.LabelFor(item => ((User)null).Email)
             </th>
             <th>
-                @Html.LabelFor(item => ((User) null).IsLockout)
+                @Html.LabelFor(item => ((User)null).IsLockout)
             </th>
             <th>
-                @Html.LabelFor(item => ((User) null).IsApproved)
+                @Html.LabelFor(item => ((User)null).IsApproved)
             </th>
             <th>
-                @Html.LabelFor(item => ((User) null).LastActivityDate)
+                @Html.LabelFor(item => ((User)null).LastActivityDate)
             </th>
         </tr>
     </thead>
@@ -119,10 +119,10 @@
                 {
                     <td>
                         <ul class="table-controls">
-                            <li><a href="@Url.Action("Edit", new {id = user.LoginId})" class="btn tip" title="@Basic.Edit">
-                                    <i class="icon-edit icon-white"></i></a></li>
+                            <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
+                                <i class="icon-edit icon-white"></i></a></li>
                             <li>
-                                <a  href="@Url.Action("Assign", new {id = user.LoginId})" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
                                     <i class="icon-user icon-white"></i></a>
                             </li>
                         </ul>
@@ -164,7 +164,7 @@
 
 
 <!-- place holder for dialog -->
-<div id="createUserModel" class="modal hide fade" id="createUserForm">
+<div id="createUserModel" class="modal hide fade" id="createUserForm" style="width: 600px">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>@Basic.Create@(MemberShip.User)</h3>
@@ -173,7 +173,7 @@
         @Html.Partial("Create", new CreateUserModel())
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn"  data-dismiss="modal" aria-hidden="true">@Basic.Cancel</a>
-        <a href="#" class="btn btn-primary"  id="btnCreateUser">@Basic.Save</a>
+        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">@Basic.Cancel</a>
+        <a href="#" class="btn btn-primary" id="btnCreateUser">@Basic.Save</a>
     </div>
 </div>

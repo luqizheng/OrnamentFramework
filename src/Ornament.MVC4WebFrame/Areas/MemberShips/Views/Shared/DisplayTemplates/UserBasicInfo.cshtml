@@ -1,4 +1,9 @@
-﻿@model Ornament.Models.Memberships.Partials.UserBasicInfoModel
+﻿@using Ornament.Web
+@model Ornament.Models.Memberships.Partials.UserBasicInfoModel
+@{
+    var roles = from role in OrnamentContext.Current.MemberShipFactory().Roles select role;
+    var ugs = from ug in OrnamentContext.Current.MemberShipFactory().UserGroups select ug;
+}
 <div class="control-group">
     @Html.LabelFor(model => model.LoginId, new { @class = "control-label" })
     <div class="controls">
@@ -6,13 +11,6 @@
         @Html.ValidationMessageFor(model => model.LoginId)
     </div>
 </div>
-@*<div class="control-group">
-    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-    <div class="controls">
-        @Html.TextBoxFor(m => m.Name, new { @class = "span12" })
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-</div>*@
 <div class="control-group">
     @Html.LabelFor(model => model.Email, new { @class = "control-label" })
     <div class="controls">
@@ -20,4 +18,35 @@
         @Html.ValidationMessageFor(model => model.Email)
     </div>
 </div>
+<div class="control-group">
+    @Html.LabelFor(model => model.Roles, new { @class = "control-label" })
+    <div class="controls">
+        <select name="Roles" multiple="multiple" class="select" tabindex="6">
+            @foreach (var a in roles)
+            {
+                <option value="@a.Id">@a.Name</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(model => model.Roles)
+    </div>
+</div>
 
+<div class="control-group">
+    @Html.LabelFor(model => model.Roles, new { @class = "control-label" })
+    <div class="controls">
+        <select name="UserGroups" multiple="multiple" class="select" tabindex="6">
+            @foreach (var a in ugs)
+            {
+                <option value="@a.Id">@a.Name</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(model => model.UserGroups)
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    seajs.use(["select2"], function () {
+        $(".select").select2();
+    });
+</script>

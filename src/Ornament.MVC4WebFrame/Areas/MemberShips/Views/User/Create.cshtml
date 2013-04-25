@@ -21,9 +21,20 @@
 
 @using (Ajax.BeginForm("Create", "User", null, ajaxOptions, formStyle))
 {
-    @Html.ValidationSummary(true)
-    @Html.Partial("DisplayTemplates/UserBasicInfo", Model != null ? Model.BasicInfo : new UserBasicInfoModel())
-    @Html.Partial("DisplayTemplates/UserOptionInfo", Model != null ? Model.OptionInfo : new UserOptionInformation())
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab3" data-toggle="tab"><i class="icon-cog"></i>Section 1</a></li>
+        <li><a href="#tab4" data-toggle="tab"><i class="icon-heart"></i>Section 2</a></li>
+    </ul>
     @Html.HiddenFor(s => s.State.IsApproved)
-    ;
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab3">
+            @Html.ValidationSummary(true)
+            @Html.Partial("DisplayTemplates/UserBasicInfo", Model != null ? Model.BasicInfo : new UserBasicInfoModel())
+        </div>
+        <div class="tab-pane" id="tab4">
+            @Html.Partial("DisplayTemplates/UserOptionInfo", Model != null ? Model.OptionInfo : new UserOptionInformation())
+        </div>
+    </div>
+
 }
+

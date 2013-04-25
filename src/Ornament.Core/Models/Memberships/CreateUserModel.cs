@@ -41,9 +41,8 @@ namespace Ornament.Models.Memberships
 
             var manager = new EmailTemplateManager();
             IDictionary<string, string> variable =
-                manager.GetValues(createUser, userSecretToken, Password,
-                                  Path.Combine(Context.Setting.WebDomainUrl, CreateVerifyUser));
-
+                manager.GetValues(userSecretToken, Path.Combine(Context.Setting.WebDomainUrl, CreateVerifyUser));
+            variable.Add("Password", Password);
             EmailTemplate email = manager.GetCreateUser();
             MailMessage a = email.CreateEmail(Context.Setting.SupportEmail, createUser.Email, variable);
             var ss = new SmtpClient();

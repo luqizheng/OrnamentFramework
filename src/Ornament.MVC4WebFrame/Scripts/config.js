@@ -8,7 +8,7 @@
         bootstrap: {
             src: "/bundles/bootstrap.js",
             deps: ['jquery'],
-            exports:"$"
+            exports: "$"
         },
         easytabs: {
             src: "/scripts/plugins/ui/jquery.easytabs.js",
@@ -42,6 +42,18 @@
             src: "/scripts/compatibles/valid.js",
             deps: ["validation"]
         },
+        
+        tagsInput: {
+            src: "/scripts/plugins/forms/jquery.tagsinput.min.js",
+            deps: ["jquery"],
+            exports: "$"
+        },
+        select2: {
+            src: "/scripts/plugins/forms/jquery.select2.min.js",
+            deps: ["jquery"],
+            exports: "$"
+        },
+        
         periodDailog: { exports: "$" },
         preload: ["jquery"]
     }

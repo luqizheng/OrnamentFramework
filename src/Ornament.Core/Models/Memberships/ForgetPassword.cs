@@ -41,7 +41,7 @@ namespace Ornament.Models.Memberships
             //send email
             var mail = new MailMessage("fantasylu@126.com", user.Email, "取回密码", "")
                 {
-                    Body = domainUrl + "/ChangedPassword?" + token.CreateQueryString(user)
+                    Body = domainUrl + "/ChangedPassword?" + token.CreateQueryString()
                 };
             var smtp = new SmtpClient();
             smtp.Send(mail);

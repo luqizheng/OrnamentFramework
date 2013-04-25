@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MultiLanguage;
+using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
 
 namespace Ornament.Models.Memberships.Partials
@@ -26,6 +27,9 @@ namespace Ornament.Models.Memberships.Partials
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+
+        public Role[] Roles { get; set; }
+        public UserGroup[] UserGroups { get; set; }
        
     }
 }
