@@ -19,14 +19,14 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void RegistrySettingPage()
         {
-            OrnamentContext.Configuration.ResourceSettings.Add(new ResourceDescription
+            OrnamentContext.ResourcesConfiguration.ResourceSettings.Add(new ResourceDescription
                 {
                     ValueType = typeof (string),
                     Name = "类型资源",
                     Path = " /Areas/MemberShips/Views/Permissions/DefaultResourceSelector.cshtml"
                 });
 
-            OrnamentContext.Configuration.ResourceSettings.Add(new ResourceDescription
+            OrnamentContext.ResourcesConfiguration.ResourceSettings.Add(new ResourceDescription
                 {
                     Name = "信息资源",
                     Path = "/Areas/Infos/Views/Shared/InfoTypeChoice.cshtml",

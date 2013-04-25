@@ -3,7 +3,7 @@
 @model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionWizard
 @{
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    ResourceDescription resourceDescription = OrnamentContext.Configuration.Get(Model.DescriptionResourceName);
+    ResourceDescription resourceDescription = OrnamentContext.ResourcesConfiguration.Get(Model.DescriptionResourceName);
 }
 <div class="page-header">
     <h1>

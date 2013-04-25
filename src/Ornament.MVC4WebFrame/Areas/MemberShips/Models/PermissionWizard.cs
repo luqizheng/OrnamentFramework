@@ -25,7 +25,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
             Remark = permission.Remark;
             Operator = Permission.FindValues(permission.Operator, operatorType);
             DescriptionResourceName =
-                OrnamentContext.Configuration.GetResourceSettingByType(permission.Resource.GetType()).Name;
+                OrnamentContext.ResourcesConfiguration.GetResourceSettingByType(permission.Resource.GetType()).Name;
         }
 
         public PermissionWizard()
@@ -47,7 +47,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         /// </summary>
         public Type ResourceType
         {
-            get { return OrnamentContext.Configuration.Get(_descriptionResourceName).ValueType; }
+            get { return OrnamentContext.ResourcesConfiguration.Get(_descriptionResourceName).ValueType; }
         }
 
         /// <summary>

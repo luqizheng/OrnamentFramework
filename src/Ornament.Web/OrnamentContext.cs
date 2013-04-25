@@ -39,7 +39,7 @@ namespace Ornament.Web
 
         /// <summary>
         /// </summary>
-        public static ResourceDescriptionManager Configuration
+        public static ResourceDescriptionManager ResourcesConfiguration
         {
             get { return Inner.Instance.GetContainer().Resolve<ResourceDescriptionManager>("Configuration"); }
         }

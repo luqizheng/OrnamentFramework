@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
-using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.Models.Memberships;
 using Ornament.Web;
@@ -131,11 +130,18 @@ namespace Ornament.MVCWebFrame.Controllers
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
         public ActionResult LogOn([ModelBinder(typeof (NHModelBinder))] LogonModel model)
         {
-            if (!ModelState.IsValid || !model.Validate(FormsAuth, ModelState))
+            string errorMessage = null;
+            if (!ModelState.IsValid ||
+                !model.Validate(out errorMessage, OrnamentContext.Current.MemberShipFactory().CreateUserDao()))
             {
+                if (errorMessage != null)
+                {
+                    ModelState.AddModelError("_form", errorMessage);
+                }
                 return View(model);
             }
             model.ReturnUrl = Request["ReturnUrl"];
+            FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
                        ? (ActionResult) Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
@@ -155,8 +161,8 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                forget.Retrieve(OrnamentContext.Current.MemberShipFactory(), "test[url]", "http://aaa.com");
-                RedirectToAction("ForgetPasswordSucccess");
+                forget.Retrieve(OrnamentContext.Current.MemberShipFactory(), "test[url]", Context.Setting.WebDomainUrl);
+                return Redirect("ForgetPasswordSucccess");
             }
             return View();
         }
@@ -217,9 +223,4 @@ namespace Ornament.MVCWebFrame.Controllers
             return View(OrnamentContext.Current.CurrentUser);
         }
     }
-
-    // The FormsAuthentication type is sealed and contains static members, so it is difficult to
-    // unit test code that calls its members. The interface and helper class below demonstrate
-    // how to create an abstract wrapper around such a type in order to make the AccountController
-    // code unit testable.
 }

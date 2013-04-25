@@ -7,24 +7,24 @@ namespace Ornament.Models.Memberships
     public class ChangePasswordModel
     {
         [Required(ErrorMessageResourceName = "alertMsg_Require_OldPassword",
-            ErrorMessageResourceType = typeof (Message))]
+            ErrorMessageResourceType = typeof(MemberShipModel))]
         [Display(Name = "CurrentPassword", ResourceType = typeof (MembershipCommon))]
         [DataType(DataType.Password)]
         public string CurrentPassword { get; set; }
 
         [Display(Name = "NewPassword", ResourceType = typeof (MembershipCommon))]
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
-            ErrorMessageResourceType = typeof (Message))]
+            ErrorMessageResourceType = typeof(MemberShipModel))]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
 
         [Display(Name = "ConfirmPassword", ResourceType = typeof (MembershipCommon))]
         [DataType(DataType.Password)]
-        [Required(ErrorMessageResourceType = typeof (Message),
+        [Required(ErrorMessageResourceType = typeof(MemberShipModel),
             ErrorMessageResourceName = "alert_Require_ConfirmPassword")]
         [Compare("NewPassword", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
-            ErrorMessageResourceType = typeof (Message))]
+            ErrorMessageResourceType = typeof(MemberShipModel))]
         public string ConfirmPassword { get; set; }
     }
 }

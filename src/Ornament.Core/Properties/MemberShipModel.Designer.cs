@@ -39,7 +39,7 @@ namespace MultiLanguage {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ornament.Web.Properties.MemberShipModel", typeof(MemberShipModel).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ornament.Properties.MemberShipModel", typeof(MemberShipModel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,74 @@ namespace MultiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please input confirm password..
+        /// </summary>
+        public static string alert_Require_ConfirmPassword {
+            get {
+                return ResourceManager.GetString("alert_Require_ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password doesn&apos;t match the confirmation..
+        /// </summary>
+        public static string alertMsg_Confirm_Password_Not_Equal_New_password {
+            get {
+                return ResourceManager.GetString("alertMsg_Confirm_Password_Not_Equal_New_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This email has been used by another user..
+        /// </summary>
+        public static string alertMsg_duplicate_Email {
+            get {
+                return ResourceManager.GetString("alertMsg_duplicate_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logind is exist, please choice another one..
+        /// </summary>
+        public static string alertMsg_duplicate_loginId {
+            get {
+                return ResourceManager.GetString("alertMsg_duplicate_loginId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Password isn&apos;t right..
         /// </summary>
         public static string alertMsg_OldPasswordNotRight {
             get {
                 return ResourceManager.GetString("alertMsg_OldPasswordNotRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is too short (minimum is {0} characters)..
+        /// </summary>
+        public static string alertMsg_Password_length_not_right {
+            get {
+                return ResourceManager.GetString("alertMsg_Password_length_not_right", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password can&apos;t be blank..
+        /// </summary>
+        public static string alertMsg_Require_NewPassword {
+            get {
+                return ResourceManager.GetString("alertMsg_Require_NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Password can&apos;t be blank..
+        /// </summary>
+        public static string alertMsg_Require_OldPassword {
+            get {
+                return ResourceManager.GetString("alertMsg_Require_OldPassword", resourceCulture);
             }
         }
         
@@ -79,11 +142,92 @@ namespace MultiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please input correct email address..
+        /// </summary>
+        public static string altMessage_EmailFormatNotCorrect {
+            get {
+                return ResourceManager.GetString("altMessage_EmailFormatNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login id or Password is not match..
+        /// </summary>
+        public static string error_LoginError {
+            get {
+                return ResourceManager.GetString("error_LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please input email..
+        /// </summary>
+        public static string error_missingEmailAddress {
+            get {
+                return ResourceManager.GetString("error_missingEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please input login id..
+        /// </summary>
+        public static string error_MissLoginId {
+            get {
+                return ResourceManager.GetString("error_MissLoginId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please input password..
+        /// </summary>
+        public static string error_MissPassword {
+            get {
+                return ResourceManager.GetString("error_MissPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User is lockout..
+        /// </summary>
+        public static string error_UserIsLockout {
+            get {
+                return ResourceManager.GetString("error_UserIsLockout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User is not approved..
+        /// </summary>
+        public static string error_UserIsNotApproved {
+            get {
+                return ResourceManager.GetString("error_UserIsNotApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm can&apos;t be blank..
+        /// </summary>
+        public static string input_password_again {
+            get {
+                return ResourceManager.GetString("input_password_again", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account Or Email.
         /// </summary>
         public static string label_AccountOrEmail {
             get {
                 return ResourceManager.GetString("label_AccountOrEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
     }

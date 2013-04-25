@@ -113,6 +113,7 @@
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
     <Compile Include="Models\Memberships\EditUserModel.cs" />
     <Compile Include="Models\Memberships\ForgetPassword.cs" />
+    <Compile Include="Models\Memberships\LogonModel.cs" />
     <Compile Include="Models\Memberships\Partials\PasswordModel.cs" />
     <Compile Include="Models\Memberships\Partials\QuestionAnswerModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserBasicInfoModel.cs" />
@@ -133,21 +134,6 @@
     </Compile>
     <Compile Include="Properties\MemberShipModel.zh.Designer.cs">
       <DependentUpon>MemberShipModel.zh.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Message.Designer.cs">
-      <DependentUpon>Message.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Message.zh-CN.Designer.cs">
-      <DependentUpon>Message.zh-CN.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Properties\Message.zh.Designer.cs">
-      <DependentUpon>Message.zh.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -208,21 +194,6 @@
     <EmbeddedResource Include="Properties\MemberShipModel.zh.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MemberShipModel.zh.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Message.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Message.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Message.zh-CN.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Message.zh-CN.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Message.zh.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Message.zh.Designer.cs</LastGenOutput>
       <CustomToolNamespace>MultiLanguage</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

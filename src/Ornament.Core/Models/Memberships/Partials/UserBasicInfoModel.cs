@@ -10,7 +10,7 @@ namespace Ornament.Models.Memberships.Partials
         /// 
         /// </summary>
         [Display(Name = "LoginId", ResourceType = typeof(MembershipCommon))]
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Message))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(MemberShipModel))]
         [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof(ErrorMessage))]
         public string LoginId { get; set; }
@@ -19,7 +19,7 @@ namespace Ornament.Models.Memberships.Partials
         /// 
         /// </summary>
         [Display(Name = "Email", ResourceType = typeof(MembershipCommon))]
-        [Required(ErrorMessageResourceName = "error_missingEmailAddress", ErrorMessageResourceType = typeof(Message))]
+        [Required(ErrorMessageResourceName = "error_missingEmailAddress", ErrorMessageResourceType = typeof(MemberShipModel))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
             ErrorMessageResourceName = "EmailNotRightFormat",
             ErrorMessageResourceType = typeof(ErrorMessage))]

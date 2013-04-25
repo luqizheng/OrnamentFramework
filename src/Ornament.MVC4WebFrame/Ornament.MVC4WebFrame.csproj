@@ -261,7 +261,6 @@
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\ProjectDataInit.cs" />
     <Compile Include="Models\Editor.cs" />
-    <Compile Include="Models\LogonModel.cs" />
     <Compile Include="Models\Membership\AccountOperator.cs" />
     <Compile Include="Models\Membership\OrgOperator.cs" />
     <Compile Include="Models\Membership\RoleOperator.cs" />
@@ -929,12 +928,6 @@
     <Content Include="Content\templates\pannonia\img\up_arrow.png" />
     <Content Include="Content\templates\pannonia\img\userpic.png" />
     <Content Include="Templates\Email\CreateUser.xml" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -985,6 +978,7 @@
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Secrity\VerifyEmailAndChangePassword.cshtml" />
+    <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1063,20 +1057,20 @@
       <Name>Qi.Attendance</Name>
     </ProjectReference>
     <ProjectReference Include="..\Extends\Projects\QiPorject\QiProject.csproj">
-      <Project>{E3E9AE4E-34BA-4E8D-ACEA-94F90B319AF4}</Project>
+      <Project>{e3e9ae4e-34ba-4e8d-acea-94f90b319af4}</Project>
       <Name>QiProject</Name>
     </ProjectReference>
     <ProjectReference Include="..\Extends\Projects\QiProject.Dao.NhImple\QiProject.Dao.NhImple.csproj">
-      <Project>{71BBA53C-0FBA-4B59-A4A1-7CAF15F41104}</Project>
+      <Project>{71bba53c-0fba-4b59-a4a1-7caf15f41104}</Project>
       <Name>QiProject.Dao.NhImple</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
-      <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
-      <Name>Ornament.Messages.Core</Name>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Core.Test\Ornament.Messages.Core.Test.csproj">
+      <Project>{ce0e4ba4-8a0d-48ec-810a-3d0109336ee5}</Project>
+      <Name>Ornament.Messages.Core.Test</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Messages\Ornament.Messages.Dao.NHibernateImple\Ornament.Messages.Dao.NHibernateImple.csproj">
-      <Project>{65B35676-172D-4C01-BA1E-02D99083C155}</Project>
-      <Name>Ornament.Messages.Dao.NHibernateImple</Name>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
+      <Project>{c8cdafc3-3071-4246-91ef-c9e8dfbdbae4}</Project>
+      <Name>Ornament.Messages.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>

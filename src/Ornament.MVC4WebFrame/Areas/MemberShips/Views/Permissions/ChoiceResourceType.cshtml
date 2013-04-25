@@ -17,7 +17,7 @@
                 @{
             var i = -1;
             bool foundSelected = false;
-            foreach (var resourceType in OrnamentContext.Configuration.ResourceSettings)
+            foreach (var resourceType in OrnamentContext.ResourcesConfiguration.ResourceSettings)
             {
                 foundSelected = resourceType.Name == this.Model.DescriptionResourceName;
                 i++;

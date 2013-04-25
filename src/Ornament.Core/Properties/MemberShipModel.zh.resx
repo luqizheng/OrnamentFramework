@@ -117,13 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
+    <value>兩次密碼不一致.</value>
+  </data>
+  <data name="alertMsg_duplicate_Email" xml:space="preserve">
+    <value>Email地址已經被使用，請選擇其他.</value>
+  </data>
+  <data name="alertMsg_duplicate_loginId" xml:space="preserve">
+    <value>登錄名已經存在，請選擇其他的登錄名.</value>
+  </data>
   <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
     <value>當前密碼不正確,請輸入正確的密碼</value>
+  </data>
+  <data name="alertMsg_Password_length_not_right" xml:space="preserve">
+    <value>密碼至少需要{0}字符.</value>
   </data>
   <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
     <value>請輸入登錄名或電子郵件</value>
   </data>
+  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
+    <value>請填寫新密碼.</value>
+  </data>
+  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
+    <value>請填寫當前密碼.</value>
+  </data>
+  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
+    <value>請輸入確認密碼.</value>
+  </data>
+  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
+    <value>請輸入正確的Email.</value>
+  </data>
+  <data name="error_LoginError" xml:space="preserve">
+    <value>登錄名或密碼錯誤.</value>
+  </data>
+  <data name="error_missingEmailAddress" xml:space="preserve">
+    <value>請輸入Email.</value>
+  </data>
+  <data name="error_MissLoginId" xml:space="preserve">
+    <value>請輸入登錄名.</value>
+  </data>
+  <data name="error_MissPassword" xml:space="preserve">
+    <value>請輸入密碼.</value>
+  </data>
+  <data name="error_UserIsLockout" xml:space="preserve">
+    <value>用戶被鎖定.</value>
+  </data>
+  <data name="error_UserIsNotApproved" xml:space="preserve">
+    <value>用戶審批沒有通過.</value>
+  </data>
+  <data name="input_password_again" xml:space="preserve">
+    <value>請填寫多一次密碼.</value>
+  </data>
   <data name="label_AccountOrEmail" xml:space="preserve">
     <value>登錄名或電子郵件</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>記住密碼.</value>
   </data>
 </root>
