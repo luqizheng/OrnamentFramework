@@ -160,4 +160,13 @@
   <data name="userList.title" xml:space="preserve">
     <value>用户列表</value>
   </data>
+  <data name="Emails.title" xml:space="preserve">
+    <value>邮件通知</value>
+  </data>
+  <data name="settings.title" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="createUserNotify.title" xml:space="preserve">
+    <value>Create User </value>
+  </data>
 </root>

@@ -216,4 +216,7 @@
   <data name="Setting" xml:space="preserve">
     <value>設置</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>設置</value>
+  </data>
 </root>

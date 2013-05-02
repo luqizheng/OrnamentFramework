@@ -1,0 +1,26 @@
+﻿@using Ornament.Web.HtmlExtends
+@using Resources
+@model Ornament.Templates.EmailTemplate
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+<h5 class="widget-name"><i class="icon-th"></i>Inputs grid</h5>
+<div class="row-fluid">
+    <div class="well span8 offset2">
+
+        <form class="form-horizontal uniform" method="POST">
+            @Html.ValidationSummary(true)
+            <div>
+                @Html.LabelTextBoxFor(ts => ts.Subject)
+            </div>
+            <div>
+                @Html.LabelTextAreaFor(ts => ts.Content, new { @class = "span12", rows = "28" })
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-info">@Basic.OK</button>
+            </div>
+        </form>
+
+    </div>
+</div>

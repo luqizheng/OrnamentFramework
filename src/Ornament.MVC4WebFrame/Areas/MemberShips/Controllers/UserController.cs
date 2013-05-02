@@ -146,7 +146,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("_form", errormessage);
+                    ModelState.AddModelError("BasicInfo.LoginId", errormessage);
                 }
             }
             return View(createUser);

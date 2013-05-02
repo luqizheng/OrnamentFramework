@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Ornament.MemberShip;
 using Ornament.MemberShip.Secret;
 using Qi;
 
@@ -7,32 +6,34 @@ namespace Ornament.Templates
 {
     public class EmailTemplateManager
     {
-        private const string _path = "~/Templates/Email/";
+        private const string Path = "~/Templates/Email/";
+        public void SaveCreateUser(EmailTemplate template)
+        {
+            TemplateManager.Set(ApplicationHelper.MapPath(Path + "CreateUser.xml"), template);
+        }
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public EmailTemplate GetCreateUser()
         {
-            return TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(_path + "Createuser.xml"));
+            return TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(Path + "CreateUser.xml"));
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public EmailTemplate ForgetPassword()
         {
-            return TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(_path + "ForgetPassword.xml"));
+            return TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(Path + "ForgetPassword.xml"));
         }
-        
-        
+
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="token"></param>
         /// <param name="domainUrl"></param>
         /// <returns></returns>
-        public IDictionary<string, string> GetValues(UserSecretToken token,string domainUrl)
+        public IDictionary<string, string> GetValues(UserSecretToken token, string domainUrl)
         {
             var result = new Dictionary<string, string>
                 {

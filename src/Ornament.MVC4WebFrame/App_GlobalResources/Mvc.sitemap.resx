@@ -133,6 +133,9 @@
   <data name="dataInit.title" xml:space="preserve">
     <value>Data Initialization</value>
   </data>
+  <data name="Emails.title" xml:space="preserve">
+    <value>Email Notify</value>
+  </data>
   <data name="eventLog.title" xml:space="preserve">
     <value>Event Log</value>
   </data>
@@ -151,6 +154,9 @@
   <data name="roleList.title" xml:space="preserve">
     <value>Role list</value>
   </data>
+  <data name="settings.title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="system.title" xml:space="preserve">
     <value>System</value>
   </data>
@@ -159,5 +165,8 @@
   </data>
   <data name="userList.title" xml:space="preserve">
     <value>User list</value>
+  </data>
+  <data name="createUserNotify.title" xml:space="preserve">
+    <value>Create User </value>
   </data>
 </root>

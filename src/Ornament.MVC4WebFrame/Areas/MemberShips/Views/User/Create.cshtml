@@ -23,6 +23,7 @@
 
 @using (Ajax.BeginForm("Create", "User", null, ajaxOptions, formStyle))
 {
+     @Html.ValidationSummary(true)
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab3" data-toggle="tab"><i class="icon-cog"></i>@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
         <li><a href="#tab4" data-toggle="tab"><i class="icon-heart"></i>@Html.GetResourceString("Create", "tab_option")</a></li>
@@ -30,7 +31,6 @@
     @Html.HiddenFor(s => s.State.IsApproved)
     <div class="tab-content">
         <div class="tab-pane active" id="tab3">
-            @Html.ValidationSummary(true)
             @Html.PartialFor(s => s.BasicInfo,"DisplayTemplates/UserBasicInfo")
         </div>
         <div class="tab-pane" id="tab4">

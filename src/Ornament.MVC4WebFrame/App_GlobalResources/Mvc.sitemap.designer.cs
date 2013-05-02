@@ -88,6 +88,15 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create User .
+        /// </summary>
+        internal static string createUserNotify_title {
+            get {
+                return ResourceManager.GetString("createUserNotify.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New User.
         /// </summary>
         internal static string createUser_title {
@@ -102,6 +111,15 @@ namespace Resources.Mvc {
         internal static string dataInit_title {
             get {
                 return ResourceManager.GetString("dataInit.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Notify.
+        /// </summary>
+        internal static string Emails_title {
+            get {
+                return ResourceManager.GetString("Emails.title", resourceCulture);
             }
         }
         
@@ -156,6 +174,15 @@ namespace Resources.Mvc {
         internal static string roleList_title {
             get {
                 return ResourceManager.GetString("roleList.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string settings_title {
+            get {
+                return ResourceManager.GetString("settings.title", resourceCulture);
             }
         }
         

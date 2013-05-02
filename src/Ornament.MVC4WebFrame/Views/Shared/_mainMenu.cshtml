@@ -6,37 +6,32 @@
     //var nodeList = SiteMap.RootNode.ChildNodes[0].ChildNodes;
     var site = new SiteMapPermission(OrnamentContext.Current, Ornament.Context.OperatorResourceManager);
 }
-@helper RenderMenu(SiteMapNodeCollection rootNode)
+@helper RenderMenu(SiteMapNodeCollection nodeCollection, int level, int maxLevel)
 {
-    if (rootNode == null)
+    if (nodeCollection == null)
     {
         return;
     }
-    for (int i = 0; i < rootNode.Count; i++)
+    for (int i = 0; i < nodeCollection.Count; i++)
     {
-        var node = (MvcSiteMapNode)rootNode[i];
+        var node = (MvcSiteMapNode)nodeCollection[i];
         var clz = node.Equals(Html.MvcSiteMap().Provider.CurrentNode) ? "class=active" : "";
         
-    <li @clz >
-        @RenderHref(node, true, true)
+    <li @clz>
+        @RenderHref(node, true, level == 0)
 
-        @if (node.HasChildNodes)
+        @if (node.HasChildNodes && (level + 1) < maxLevel)
         {
             <ul>
-                @for (int j = 0; j < node.ChildNodes.Count; j++)
-                {
-                    var cNode = (MvcSiteMapNode)node.ChildNodes[j];
-                    <li>
-                        @RenderHref(cNode, true, false)
-                    </li>
-                }
+                @RenderMenu(node.ChildNodes, level + 1, maxLevel)
             </ul>
         }
     </li>
     }
 }
 <ul class="navigation widget">
-    @RenderMenu(Html.GetChildMenus(site))
+    @*Html.GetChildMenus(site)*@
+    @RenderMenu(SiteMap.RootNode.ChildNodes, 0, 10)
 </ul>
 
 @helper RenderHref(MvcSiteMapNode node, bool defaultStyle, bool firstLevel)

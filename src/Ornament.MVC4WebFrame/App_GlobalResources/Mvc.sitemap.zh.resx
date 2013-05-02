@@ -133,6 +133,9 @@
   <data name="dataInit.title" xml:space="preserve">
     <value>數據初始化</value>
   </data>
+  <data name="Emails.title" xml:space="preserve">
+    <value>郵件通知</value>
+  </data>
   <data name="eventLog.title" xml:space="preserve">
     <value>日誌記錄</value>
   </data>
@@ -151,6 +154,9 @@
   <data name="roleList.title" xml:space="preserve">
     <value>角色列表</value>
   </data>
+  <data name="settings.title" xml:space="preserve">
+    <value>設置</value>
+  </data>
   <data name="system.title" xml:space="preserve">
     <value>系統列表</value>
   </data>
@@ -159,5 +165,8 @@
   </data>
   <data name="userList.title" xml:space="preserve">
     <value>用戶列表</value>
+  </data>
+  <data name="createUserNotify.title" xml:space="preserve">
+    <value>Create User </value>
   </data>
 </root>

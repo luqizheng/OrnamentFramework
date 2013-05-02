@@ -322,6 +322,7 @@
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserOptionInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserPassword.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserQuestionAnswer.cshtml" />
+    <Content Include="Areas\Settings\Views\EmailSetting\CreateUser.cshtml" />
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />
