@@ -129,6 +129,12 @@
   <data name="Lock" xml:space="preserve">
     <value>锁定</value>
   </data>
+  <data name="tab_basicInfo" xml:space="preserve">
+    <value>基础信息</value>
+  </data>
+  <data name="tab_option" xml:space="preserve">
+    <value>选填项</value>
+  </data>
   <data name="Unlock" xml:space="preserve">
     <value>解锁</value>
   </data>

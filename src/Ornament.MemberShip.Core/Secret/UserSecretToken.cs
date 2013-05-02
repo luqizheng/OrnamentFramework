@@ -69,6 +69,11 @@ namespace Ornament.MemberShip.Secret
             return string.Format("id={0}&token={1}", Id, CreateToken(Account));
         }
 
+        public virtual void Renew()
+        {
+            CreateTime = DateTime.Now;
+        }
+
         public static UserSecretToken RetrievePassword(User user, int expireMins)
         {
             return new UserSecretToken
@@ -79,14 +84,15 @@ namespace Ornament.MemberShip.Secret
                 };
         }
 
-        public virtual void Renew()
-        {
-            CreateTime = DateTime.Now;
-        }
 
         public static UserSecretToken VerifyEmail(User user, int expireMinis)
         {
-            throw new NotImplementedException();
+            return new UserSecretToken
+                {
+                    Account = user,
+                    Action = ActiveUserAction.Verify,
+                    ExpireTime = expireMinis
+                };
         }
     }
 }

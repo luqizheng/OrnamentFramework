@@ -48,7 +48,13 @@ namespace Ornament
         /// 
         /// </summary>
         public IList<Assembly> NhAssemblies { get { return _hhAssemblies ?? (_hhAssemblies = new List<Assembly>()); } }
+        /// <summary>
+        /// 
+        /// </summary>
         public IList<Type> NHTypes { get { return _nhTyhpes ?? (_nhTyhpes = new List<Type>()); } }
+        /// <summary>
+        /// 
+        /// </summary>
         public static OperatorResourceMapping OperatorResourceManager
         {
             get { return Inner.Instance.GetContainer().Resolve<OperatorResourceMapping>(); }

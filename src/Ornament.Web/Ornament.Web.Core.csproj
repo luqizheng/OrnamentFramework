@@ -144,6 +144,7 @@
     <Compile Include="HtmlExtender.cs" />
     <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
+    <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
     <Compile Include="Languages\LanguageManager.cs" />

@@ -1064,13 +1064,13 @@
       <Project>{71bba53c-0fba-4b59-a4a1-7caf15f41104}</Project>
       <Name>QiProject.Dao.NhImple</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Messages\Ornament.Messages.Core.Test\Ornament.Messages.Core.Test.csproj">
-      <Project>{ce0e4ba4-8a0d-48ec-810a-3d0109336ee5}</Project>
-      <Name>Ornament.Messages.Core.Test</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{c8cdafc3-3071-4246-91ef-c9e8dfbdbae4}</Project>
       <Name>Ornament.Messages.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Dao.NHibernateImple\Ornament.Messages.Dao.NHibernateImple.csproj">
+      <Project>{65b35676-172d-4c01-ba1e-02d99083c155}</Project>
+      <Name>Ornament.Messages.Dao.NHibernateImple</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>

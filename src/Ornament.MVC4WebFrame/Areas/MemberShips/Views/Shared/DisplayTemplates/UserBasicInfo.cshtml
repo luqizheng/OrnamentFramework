@@ -4,6 +4,7 @@
     var roles = from role in OrnamentContext.Current.MemberShipFactory().Roles select role;
     var ugs = from ug in OrnamentContext.Current.MemberShipFactory().UserGroups select ug;
 }
+
 <div class="control-group">
     @Html.LabelFor(model => model.LoginId, new { @class = "control-label" })
     <div class="controls">
