@@ -219,4 +219,10 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Submitting" xml:space="preserve">
+    <value>Submitting...</value>
+  </data>
 </root>

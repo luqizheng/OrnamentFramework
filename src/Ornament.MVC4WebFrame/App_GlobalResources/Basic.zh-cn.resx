@@ -219,4 +219,10 @@
   <data name="Settings" xml:space="preserve">
     <value>设置</value>
   </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="Submitting" xml:space="preserve">
+    <value>提交中...</value>
+  </data>
 </root>
