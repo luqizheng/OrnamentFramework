@@ -129,6 +129,12 @@
   <data name="Lock" xml:space="preserve">
     <value>Lock</value>
   </data>
+  <data name="QuickActions" xml:space="preserve">
+    <value>QuickActions</value>
+  </data>
+  <data name="quickAction_CreateUser" xml:space="preserve">
+    <value>Add new user</value>
+  </data>
   <data name="Unlock" xml:space="preserve">
     <value>Unlock</value>
   </data>

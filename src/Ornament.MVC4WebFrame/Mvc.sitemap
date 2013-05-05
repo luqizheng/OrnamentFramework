@@ -9,14 +9,14 @@ use permission for checking permission like @user:Read, user is the string type 
 -->
   <mvcSiteMapNode resourceKey="home" controller="Home" action="Index" title="Home" imageUrl="icon-home">
     <!-- Main -->
-    <mvcSiteMapNode action="Index" controller="Product" title="Projects" area="Projects" imageUrl="icon-comments">
+    <!--<mvcSiteMapNode action="Index" controller="Product" title="Projects" area="Projects" imageUrl="icon-comments">
       <mvcSiteMapNode area="Projects" controller="Product" action="Index" title="Product List">
         <mvcSiteMapNode area="Projects" controller="Product" action="Edit" title="Edit Product" clickable="false">
         </mvcSiteMapNode>
       </mvcSiteMapNode>
       <mvcSiteMapNode area="Projects" controller="Project" action="Index" title="Project List">
       </mvcSiteMapNode>
-    </mvcSiteMapNode>
+    </mvcSiteMapNode>-->
 
     <mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="考勤" imageUrl="icon-time">
 

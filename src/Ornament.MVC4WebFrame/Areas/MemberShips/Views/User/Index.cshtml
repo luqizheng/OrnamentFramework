@@ -45,7 +45,50 @@
 @section pageTitle{
     <h5>@String.Format("{0}{1}", MemberShip.User, "列表")</h5>
 }
-@Html.Partial("DisplayTemplates/UserActionMenus")
+<div class="actions-wrapper">
+    <div class="actions">
+
+        <div id="user-stats">
+            <ul class="round-buttons">
+                <li>
+                    <div class="depth"><a href="#createUserModel" title="" data-toggle="modal" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="View statement" class="tip"><i class="icon-search"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Media posts" class="tip"><i class="icon-reorder"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="RSS feed" class="tip"><i class="icon-rss"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Create new task" class="tip"><i class="icon-tasks"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div>
+                </li>
+
+            </ul>
+        </div>
+        <ul class="action-tabs">
+            <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
+        </ul>
+    </div>
+</div>
+
+<form action="#" class="search widget">
+    <div class="autocomplete-append">
+        <ul class="search-options">
+            <li><a class="go-option tip" title="" href="#" data-original-title="Go to search page"></a></li>
+            <li><a class="advanced-option tip" title="" href="#" data-original-title="Advanced search"></a></li>
+            <li><a class="settings-option tip" title="" href="#" data-original-title="Settings"></a></li>
+        </ul>
+        <input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        <input type="submit" value="Search" class="btn btn-info">
+        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul>
+    </div>
+</form>
 
 <ul class="toolbar">
     @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
@@ -120,10 +163,10 @@
                     <td>
                         <ul class="table-controls">
                             <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
-                                <i class="icon-edit icon-white"></i></a></li>
+                                <i class="fam-user-edit"></i></a></li>
                             <li>
                                 <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
-                                    <i class="icon-user icon-white"></i></a>
+                                    <i class="fam-group-gear"></i></a>
                             </li>
                         </ul>
                     </td>

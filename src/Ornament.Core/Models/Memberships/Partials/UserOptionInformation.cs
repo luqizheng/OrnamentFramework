@@ -1,10 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
 
 namespace Ornament.Models.Memberships.Partials
 {
     public class UserOptionInformation
     {
+        public UserOptionInformation()
+        {
+
+        }
+
+        public UserOptionInformation(User user)
+        {
+            this.Phone = user.Phone;
+            this.Name = user.Name;
+            this.Remark = user.Remark;
+        }
         [Display(Name = "Phone", ResourceType = typeof(MembershipCommon))]
         public string Phone { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
@@ -7,6 +8,18 @@ namespace Ornament.Models.Memberships.Partials
 {
     public class UserBasicInfoModel
     {
+        public UserBasicInfoModel()
+        {
+        }
+
+        public UserBasicInfoModel(User user)
+        {
+            LoginId = user.LoginId;
+            Email = user.Email;
+            UserGroups = user.GetUserGroups().ToArray();
+            Roles = user.GetRoles().ToArray();
+        }
+
         /// <summary>
         /// </summary>
         [Display(Name = "LoginId", ResourceType = typeof (MembershipCommon))]

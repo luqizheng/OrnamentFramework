@@ -8,7 +8,37 @@ namespace Ornament.Web
 {
     public static class MvcSiteMapHelper
     {
-        public static bool CurrentNodeMatchParent(this HtmlHelper helper, SiteMapNodeCollection nodes, out SiteMapNode matchParentNode)
+        /// <summary>
+        /// Find the Match Second Level Menun by currentNode.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns></returns>
+        public static SiteMapNode GetFirstLevelMenuByCurrentNode(this HtmlHelper helper)
+        {
+            SiteMapNode currentNode = helper.MvcSiteMap().Provider.CurrentNode;
+            if (currentNode == null)
+                return null;
+            SiteMapNode rootNode = helper.MvcSiteMap().Provider.RootNode;
+            if (rootNode == null)
+                return null;
+            if (rootNode.Equals(currentNode))
+                return null;
+
+            while (!rootNode.Equals(currentNode))
+            {
+                for (int i = 0; i < rootNode.ChildNodes.Count; i++)
+                {
+                    if (rootNode.ChildNodes[i].Equals(currentNode))
+                        return currentNode;
+                }
+                currentNode = currentNode.ParentNode;
+            }
+            return null;
+        }
+
+
+        public static bool CurrentNodeMatchParent(this HtmlHelper helper, SiteMapNodeCollection nodes,
+                                                  out SiteMapNode matchParentNode)
         {
             matchParentNode = helper.MvcSiteMap().Provider.CurrentNode;
             if (matchParentNode == null)
@@ -29,11 +59,11 @@ namespace Ornament.Web
 
         public static SiteMapNodeCollection GetChildMenus(this HtmlHelper helper, SiteMapPermission siteMapPermission)
         {
-            var currentNode = helper.MvcSiteMap().Provider.RootNode;
+            SiteMapNode currentNode = helper.MvcSiteMap().Provider.RootNode;
             if (currentNode == null)
                 return null;
 
-            var col = GetChildMenus(helper, currentNode, siteMapPermission);
+            SiteMapNodeCollection col = GetChildMenus(helper, currentNode, siteMapPermission);
             while (col.Count == 0)
             {
                 currentNode = currentNode.ParentNode;
@@ -42,9 +72,9 @@ namespace Ornament.Web
             return col;
         }
 
-        private static SiteMapNodeCollection GetChildMenus(HtmlHelper helper, SiteMapNode currentNode, SiteMapPermission siteMapPermission)
+        private static SiteMapNodeCollection GetChildMenus(HtmlHelper helper, SiteMapNode currentNode,
+                                                           SiteMapPermission siteMapPermission)
         {
-
             var col = new SiteMapNodeCollection();
             if (currentNode == null || currentNode.Equals(helper.MvcSiteMap().Provider.RootNode))
             {
@@ -52,7 +82,6 @@ namespace Ornament.Web
             }
             if (currentNode.HasChildNodes)
             {
-
                 for (int i = 0; i < currentNode.ChildNodes.Count; i++)
                 {
                     var node = (MvcSiteMapNode)currentNode.ChildNodes[i];
@@ -64,6 +93,5 @@ namespace Ornament.Web
             }
             return col;
         }
-
     }
 }

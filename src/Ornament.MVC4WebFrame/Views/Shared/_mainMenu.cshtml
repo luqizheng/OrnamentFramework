@@ -1,38 +1,111 @@
 ﻿@using MvcSiteMapProvider
 @using Ornament.Web
 @using Ornament.Web.MemberShips
+
 @{
 
     //var nodeList = SiteMap.RootNode.ChildNodes[0].ChildNodes;
     var site = new SiteMapPermission(OrnamentContext.Current, Ornament.Context.OperatorResourceManager);
+    var matchedFirstLevelMenu = Html.GetFirstLevelMenuByCurrentNode();
 }
-@helper RenderMenu(SiteMapNodeCollection nodeCollection, int level, int maxLevel)
+@helper RenderChildMenu(SiteMapNodeCollection nodeCollection, int level, int maxLevel, SiteMapPermission site)
 {
     if (nodeCollection == null)
     {
         return;
     }
+
     for (int i = 0; i < nodeCollection.Count; i++)
     {
         var node = (MvcSiteMapNode)nodeCollection[i];
-        var clz = node.Equals(Html.MvcSiteMap().Provider.CurrentNode) ? "class=active" : "";
+        if (!site.IsAccessibleToUser(node))
+        {
+            continue;
+        }
+        var selected = node.Equals(Html.MvcSiteMap().Provider.CurrentNode);
+        var clz = selected ? "class=\"active\"" : "";
         
-    <li @clz>
-        @RenderHref(node, true, level == 0)
+    <li @Html.Raw(clz)>
+        @RenderHrefChildMenus(node, true, level + 1, selected)
 
         @if (node.HasChildNodes && (level + 1) < maxLevel)
         {
             <ul>
-                @RenderMenu(node.ChildNodes, level + 1, maxLevel)
+                @RenderChildMenu(node.ChildNodes, level + 1, maxLevel, site)
             </ul>
         }
     </li>
     }
 }
-<ul class="navigation widget">
-    @*Html.GetChildMenus(site)*@
-    @RenderMenu(SiteMap.RootNode.ChildNodes, 0, 10)
+<ul class="navigation widget" id="mainMenu">
+
+    @if (!SiteMap.RootNode.Equals(SiteMap.CurrentNode))
+    {
+        <li>
+            <a href="@SiteMap.RootNode.Url"><i class="icon-home"></i>@SiteMap.RootNode.Title</a>
+        </li>
+    }
+    else
+    {
+        <li class="active">
+            <a href="@SiteMap.RootNode.Url" ><i class="icon-home"></i>@SiteMap.RootNode.Title</a>
+        </li>
+    }
+    @FirstLevelMenu(SiteMap.RootNode.ChildNodes, matchedFirstLevelMenu, site)
 </ul>
+
+@helper FirstLevelMenu(SiteMapNodeCollection nodeCollection, SiteMapNode secondLevel, SiteMapPermission site)
+{
+    
+    for (int i = 0; i < nodeCollection.Count; i++)
+    {
+        var node = (MvcSiteMapNode)nodeCollection[i];
+        if (!site.IsAccessibleToUser(node))
+        {
+            continue;
+        }
+        var clz = node.Equals(secondLevel) ? "class=\"active\"" : "";
+        
+    <li @Html.Raw(clz)>
+        @RenderHref(node, true, true)
+        @if (node.HasChildNodes)
+        {
+            <ul>
+                @RenderChildMenu(node.ChildNodes, 1, 2, site)
+            </ul>
+        }
+    </li>
+    }
+}
+@helper RenderHrefChildMenus(MvcSiteMapNode node, bool defaultStyle, int level, bool selected)
+{
+    var hasChild = node.HasChildNodes;
+    var href = node.Clickable ? node.Url : "#";
+    var extendClass = selected ? "current" : "";
+    if (level < 2 && hasChild)
+    {
+        extendClass = "expand";
+    }
+    if (extendClass.Length != 0)
+    {
+        extendClass = string.Format("class='{0}'", extendClass);
+    }
+    <a href="@href" @Html.Raw(extendClass)>
+        @if (!String.IsNullOrEmpty(node.ImageUrl))
+        {
+            <i class="@node.ImageUrl"></i>
+        }
+        else if (defaultStyle)
+        {
+            <i></i>
+        }
+        @node.Title
+        @if (node.HasChildNodes)
+        {
+            <strong>@node.ChildNodes.Count</strong>
+        }
+    </a>
+}
 
 @helper RenderHref(MvcSiteMapNode node, bool defaultStyle, bool firstLevel)
 {
@@ -56,3 +129,11 @@
         }
     </a>
 }
+
+<script type="text/javascript">
+    seajs.use(["jquery"], function () {
+        $(document).ready(function () {
+            $("#mainMenu a[href='@matchedFirstLevelMenu.Url']").click();
+        });
+    })
+</script>

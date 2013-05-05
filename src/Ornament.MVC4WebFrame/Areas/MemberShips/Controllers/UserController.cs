@@ -47,15 +47,15 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(id);
             if (user == null)
                 throw new MemberShipException("Not found user.");
-            return View(user);
+            return View(new EditUserModel(user));
         }
 
         [AcceptVerbs(HttpVerbs.Post), ResourceAuthorize(UserOperator.Modify, "User")]
-        public ActionResult Edit([ModelBinder(typeof (NHModelBinder))] User user, FormCollection collection)
+        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] EditUserModel user, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                IUserDao dao = _memberShipFactory.CreateUserDao();
+                /*IUserDao dao = _memberShipFactory.CreateUserDao();
                 dao.SaveOrUpdate(user);
                 ProfileBase profile = ProfileBase.Create(user.LoginId, true);
                 IEnumerator properites = ProfileBase.Properties.GetEnumerator();
@@ -65,7 +65,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                     string v = collection[property.Name];
                     profile[property.Name] = v;
                 }
-                profile.Save();
+                profile.Save();*/
                 return RedirectToAction("Index");
             }
             return View(user);
@@ -142,7 +142,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 string errormessage;
                 if (createUser.Create(_memberShipFactory, out errormessage))
                 {
-                    return RedirectToAction("Assign", new {id = createUser.BasicInfo.LoginId});
+                    return RedirectToAction("Assign", new { id = createUser.BasicInfo.LoginId });
                 }
                 else
                 {
@@ -217,9 +217,9 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int pageIndex, string loginId)
         {
-            var result = from u in _userDao.Users.Take(30).Skip(pageIndex*30)
+            var result = from u in _userDao.Users.Take(30).Skip(pageIndex * 30)
                          where u.LoginId.Contains(loginId)
-                         select new {u.LoginId, u.Name};
+                         select new { u.LoginId, u.Name };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

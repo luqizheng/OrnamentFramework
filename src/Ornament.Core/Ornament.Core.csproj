@@ -118,6 +118,7 @@
     <Compile Include="Models\Memberships\Partials\QuestionAnswerModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserBasicInfoModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserOptionInformation.cs" />
+    <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserStateModel.cs" />
     <Compile Include="Models\Memberships\RegistAccount.cs" />
     <Compile Include="OrnamentException.cs" />

@@ -4,14 +4,26 @@ using System.Net.Mail;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Secret;
+using Ornament.Models.Memberships.Partials;
 using Ornament.Templates;
 
 namespace Ornament.Models.Memberships
 {
-    public class CreateUserModel : EditUserModel
+    public class CreateUserModel
     {
         private const string Password = "123456";
         private const string CreateVerifyUser = "/Secrity/VerifyEmailAndChangePassword";
+
+        public CreateUserModel()
+        {
+            BasicInfo = new UserBasicInfoModel();
+            State = new UserStateModel();
+            OptionInfo = new UserOptionInformation();
+        }
+
+        public UserBasicInfoModel BasicInfo { get; set; }
+        public UserStateModel State { get; set; }
+        public UserOptionInformation OptionInfo { get; set; }
 
         /// <summary>
         ///     Create a user and send a active email to user.
