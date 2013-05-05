@@ -23,7 +23,7 @@ namespace Ornament.Templates
         /// <returns></returns>
         public MailMessage CreateEmail(string from, string to, IDictionary<string, string> templateVariable)
         {
-            if (!string.IsNullOrEmpty(@from))
+            if (string.IsNullOrEmpty(@from))
                 throw new ArgumentNullException("from");
             if (to == null)
                 throw new ArgumentNullException("to");
@@ -35,8 +35,5 @@ namespace Ornament.Templates
             var result = new MailMessage(from, to, Subject, body);
             return result;
         }
-
-
-
     }
 }

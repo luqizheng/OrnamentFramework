@@ -17,14 +17,14 @@ namespace Ornament.MVCWebFrame.App_Start
                     CodeStyle,
                     RichEditor,
                     SeajsLib,
+                    BizRelative,
                 };
 
             foreach (var item in registryParty)
             {
                 item.Invoke(bundles);
             }
-
-            //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+           
         }
 
         private static void SeajsLib(BundleCollection bundles)
@@ -60,6 +60,11 @@ namespace Ornament.MVCWebFrame.App_Start
                 new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
 
 
+        }
+
+        private static void BizRelative(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/bundles/user.js").Include("~/Scripts/Memberships/user-{version}.js"));
         }
 
 

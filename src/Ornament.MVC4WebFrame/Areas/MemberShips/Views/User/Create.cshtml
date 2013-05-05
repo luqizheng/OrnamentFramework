@@ -1,29 +1,11 @@
-﻿@using Ornament.Models.Memberships.Partials
-@using Ornament.Web
+﻿@using Ornament.Web
 @using Ornament.Web.HtmlExtends
 @using Resources
 @model Ornament.Models.Memberships.CreateUserModel
-@{
-    ViewBag.Title = Basic.Create + MemberShip.User;
 
-    var ajaxOptions = new AjaxOptions
-        {
-            UpdateTargetId = "createUserForm",
-            OnComplete = "ResetErrorState",
-            InsertionMode = InsertionMode.Replace,
-            HttpMethod = "post"
-        };
-    var formStyle = new
-        {
-            @class = "form-horizontal row-fluid ",
-            autocomplete = "off",
-            id = "createUserForm"
-        };
-}
 
-@using (Ajax.BeginForm("Create", "User", null, ajaxOptions, formStyle))
-{
-     @Html.ValidationSummary(true)
+
+    @Html.ValidationSummary(true)
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tab3" data-toggle="tab"><i class="icon-cog"></i>@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
         <li><a href="#tab4" data-toggle="tab"><i class="icon-heart"></i>@Html.GetResourceString("Create", "tab_option")</a></li>
@@ -31,12 +13,11 @@
     @Html.HiddenFor(s => s.State.IsApproved)
     <div class="tab-content">
         <div class="tab-pane active" id="tab3">
-            @Html.PartialFor(s => s.BasicInfo,"DisplayTemplates/UserBasicInfo")
+            @Html.PartialFor(s => s.BasicInfo, "DisplayTemplates/UserBasicInfo")
         </div>
         <div class="tab-pane" id="tab4">
-            @Html.PartialFor(s=> s.OptionInfo ,"DisplayTemplates/UserOptionInfo")
+            @Html.PartialFor(s => s.OptionInfo, "DisplayTemplates/UserOptionInfo")
         </div>
     </div>
 
-}
 

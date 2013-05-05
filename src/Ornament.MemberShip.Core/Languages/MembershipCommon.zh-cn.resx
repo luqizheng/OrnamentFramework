@@ -139,7 +139,7 @@
     <value>锁定</value>
   </data>
   <data name="LastActivityTime" xml:space="preserve">
-    <value>最後修改時間</value>
+    <value>最後活动時間</value>
   </data>
   <data name="LastLockTime" xml:space="preserve">
     <value>锁定时间</value>

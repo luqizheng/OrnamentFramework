@@ -11,7 +11,15 @@ namespace Ornament.Configurations
 
         public string WebDomainUrl
         {
-            get { return ConfigurationManager.AppSettings["DomainUrl"]; }
+            get
+            {
+                var result = ConfigurationManager.AppSettings["DomainUrl"];
+                if (result.EndsWith("/"))
+                {
+                    return result.TrimEnd('/');
+                }
+                return result;
+            }
         }
     }
 }

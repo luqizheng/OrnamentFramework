@@ -13,7 +13,8 @@
 @section script
 {
     <script type="text/javascript">
-        seajs.use(['valid'], function () {
+        var updateTable;
+        seajs.use(['valid', 'user', '/scripts/jquery.tmpl.js'], function () {
 
             $("#unlockButton,#Lock,#approvedButton").click(function () {
                 submitAction(this);
@@ -35,9 +36,21 @@
 
             $("#btnCreateUser").click(function () {
                 $("#createUserModel form").submit();
-                //$('#createUserModel').modal('hide');
+                
             });
 
+            $("#createUserModel").on("hidden", function () {
+                $(this).userEditor('reset');
+            }).userEditor();
+            
+            updateTable = function (user) {
+                if (user.success) {
+                    $("#userTableTmpl").tmpl(user).prepend($("#userListBody"));
+                    $('#createUserModel').modal('hide');
+                    return;
+                }
+                
+            };
         });
 
     </script>
@@ -51,7 +64,7 @@
         <div id="user-stats">
             <ul class="round-buttons">
                 <li>
-                    <div class="depth"><a href="#createUserModel" title="" data-toggle="modal" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
+                    <div class="depth"><a href="#createUserModel" data-toggle="modal" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
                 </li>
                 <li>
                     <div class="depth"><a href="" title="View statement" class="tip"><i class="icon-search"></i></a></div>
@@ -84,7 +97,8 @@
             <li><a class="advanced-option tip" title="" href="#" data-original-title="Advanced search"></a></li>
             <li><a class="settings-option tip" title="" href="#" data-original-title="Settings"></a></li>
         </ul>
-        <input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        <input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off">
+        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" value="Search" class="btn btn-info">
         <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul>
     </div>
@@ -120,8 +134,8 @@
     <thead>
         <tr>
             <th></th>
-            <th style="width: 80px"></th>
-            <th style="width: 100px">
+            <th class="span1"></th>
+            <th class="span1">
                 @Html.LabelFor(item => ((User)null).LoginId)
             </th>
 
@@ -142,7 +156,7 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="userListBody">
         @foreach (User user in Model)
         {
             string clz = "";
@@ -185,7 +199,7 @@
                     </div>
                 </td>
                 <td style="text-align: center">
-                    <div class="ui-icon @(user.IsApproved ? "icon-ok" : "icon-remove")">
+                    <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
                     </div>
                 </td>
                 <td>
@@ -205,18 +219,83 @@
     </tfoot>
 </table>
 
+<script id="userTableTmpl" type="text/x-jquery-tmpl">
+    {{if(State.IsLockout)}}
+        <tr class="warning">
+            {{else (IsApproved==false)}}
+        <tr class="info">
+            {{else}}
+        <tr>
+            {{/if}}
+                <td>
+                    <input type="checkbox" name="loginIds" value="${BasicInfo.LoginId}}" class="styled" />
+                </td>
+            @if (editPermission)
+            {
+                <td>
+                    <ul class="table-controls">
+                        <li><a href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Basic.Edit">
+                            <i class="fam-user-edit"></i></a></li>
+                        <li>
+                            <a  href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                <i class="fam-group-gear"></i></a>
+                        </li>
+                    </ul>
+                </td>
+            }
+            <td>${BasicInfo.LoginId}
+            </td>
+            <td>${BasicInfo.Name}
+            </td>
+            <td>${BasicInfo.Email}
+            </td>
+            <td style="text-align: center">{{if(State.IsLockout)}}
+                <div class="icon-ok"></div>
+                {{else}}
+                <div class="icon-remove"></div>
+                {{/if}}
+
+            </td>
+            <td style="text-align: center">{{if(State.IsApproved)}}
+                <div class="icon-ok"></div>
+                {{else}}
+                <div class="icon-remove"></div>
+                {{/if}}
+            </td>
+            <td>${OtherInfo.LastActivityDate}
+            </td>
+        </tr>
+</script>
 
 <!-- place holder for dialog -->
-<div id="createUserModel" class="modal hide fade" id="createUserForm" style="width: 600px">
+@{
+    ViewBag.Title = Basic.Create + MemberShip.User;
+
+    var ajaxOptions = new AjaxOptions
+        {
+            HttpMethod = "post",
+            OnSuccess = "updateTable",
+        };
+    var formStyle = new
+        {
+            @class = "form-horizontal row-fluid ",
+            autocomplete = "off",
+        };
+}
+<div id="createUserModel" class="modal hide fade" style="width: 600px">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>@Basic.Create@(MemberShip.User)</h3>
     </div>
     <div class="modal-body">
-        @Html.Partial("Create", new CreateUserModel())
+        @using (Ajax.BeginForm("Create", "User", null, ajaxOptions, formStyle))
+        {
+            @Html.Partial("Create", new CreateUserModel())
+        }
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">@Basic.Cancel</a>
         <a href="#" class="btn btn-primary" id="btnCreateUser">@Basic.Save</a>
     </div>
 </div>
+

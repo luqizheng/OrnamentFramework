@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Profile;
 using System.Web.Security;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
@@ -142,14 +139,16 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 string errormessage;
                 if (createUser.Create(_memberShipFactory, out errormessage))
                 {
-                    return RedirectToAction("Assign", new { id = createUser.BasicInfo.LoginId });
+                    var user = _memberShipFactory.CreateUserDao().GetByLoginId(createUser.BasicInfo.LoginId);
+                    return Json(new
+                        {
+                            success = true,
+                            user = new EditUserModel(user)
+                        });
                 }
-                else
-                {
-                    ModelState.AddModelError("BasicInfo.LoginId", errormessage);
-                }
+                ModelState.AddModelError("BasicInfo.LoginId", errormessage);
             }
-            return View(createUser);
+            return Json(new { success = false });
         }
 
 

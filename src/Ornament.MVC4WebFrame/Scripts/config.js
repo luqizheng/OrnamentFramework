@@ -15,6 +15,11 @@
             deps: ['jquery'],
             exports: "$"
         },
+        tmpl: {
+            src: "/bundles/tmpl.js",
+            deps: ['jquery'],
+            exports: "$"
+        },
         unobtrusive: {
             src: "/bundles/unobtrusive.js",
             deps: ['jquery'],
@@ -42,7 +47,7 @@
             src: "/scripts/compatibles/valid.js",
             deps: ["validation"]
         },
-        
+
         tagsInput: {
             src: "/scripts/plugins/forms/jquery.tagsinput.min.js",
             deps: ["jquery"],
@@ -53,7 +58,11 @@
             deps: ["jquery"],
             exports: "$"
         },
-        
+        user: {
+            src: "/bundles/user.js",
+            deps: ["jquery"], exports: "$"
+        },
+
         periodDailog: { exports: "$" },
         preload: ["jquery"]
     }
