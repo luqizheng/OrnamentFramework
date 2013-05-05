@@ -129,11 +129,13 @@
         }
     </a>
 }
-
-<script type="text/javascript">
-    seajs.use(["jquery"], function () {
-        $(document).ready(function () {
-            $("#mainMenu a[href='@matchedFirstLevelMenu.Url']").click();
-        });
-    })
-</script>
+@if (matchedFirstLevelMenu != null)
+{
+    <script type="text/javascript">
+        seajs.use(["jquery"], function () {
+            $(document).ready(function () {
+                $("#mainMenu a[href='@matchedFirstLevelMenu.Url']").click();
+            });
+        })
+    </script>
+}
