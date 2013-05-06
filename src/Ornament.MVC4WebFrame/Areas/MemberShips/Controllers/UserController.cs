@@ -219,7 +219,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
             var result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
                          where u.LoginId.Contains(loginIdOrEmail) || u.Email.Contains(loginIdOrEmail)
-                         select new { u.LoginId, u.Name };
+                         select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

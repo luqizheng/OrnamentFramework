@@ -14,7 +14,7 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', 'user', 'tmpl'], function () {
+        seajs.use(['valid', 'user', 'tmpl', "/scripts/json2.js"], function () {
 
             $("#unlockButton,#Lock,#approvedButton").click(function () {
                 submitAction(this);
@@ -52,15 +52,18 @@
             };
             $("#search :submit").click(function () {
                 var searchData = {
-                    loginIdOrEmail: $("input:text", this).val()
+                    loginIdOrEmail: $("#searchContent").val()
                 };
-                $.post("@Url.Action("Search")", ,
+                $.post("@Url.Action("Search")", searchData,
                     function (user) {
-                        $("#userTableTmpl").tmpl(user).prepend($("#userListBody").children().remove());
+                        $("#userListBody").empty().append($("#userTableTmpl").tmpl(user));
                     });
             });
         });
-
+        function GetDate(jsonDate) {
+            var value = new Date(parseInt(jsonDate.substr(6)));
+            return value.getFullYear() + "-" + (value.getMonth() + 1) + "-" + value.getDate() + " " + value.getHours() + ":" + value.getMinutes() + ":" + value.getSeconds();
+        }
     </script>
 }
 @section pageTitle{
@@ -100,7 +103,7 @@
 
 <form action="#" class="search widget" id="search">
     <div class="autocomplete-append">
-        <input type="text" id="autocomplete" placeholder="" class="ui-autocomplete-input" autocomplete="off">
+        <input type="text" id="searchContent" placeholder="" class="ui-autocomplete-input" autocomplete="off">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" value="@Basic.Search" class="btn btn-info">
         <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="searchTextBox" tabindex="0" style="z-index: 1; display: none;"></ul>
@@ -225,7 +228,7 @@
 <script id="userTableTmpl" type="text/x-jquery-tmpl">
     {{if(State.IsLockout)}}
         <tr class="warning">
-            {{else (IsApproved==false)}}
+            {{else (State.IsApproved==false)}}
         <tr class="info">
             {{else}}
         <tr>
@@ -265,7 +268,7 @@
                 <div class="icon-remove"></div>
                 {{/if}}
             </td>
-            <td>${OtherInfo.LastActivityDate}
+            <td>${GetDate(OtherInfo.LastActivityDate)}
             </td>
         </tr>
 </script>

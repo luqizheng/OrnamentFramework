@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading;
 using Ornament.MemberShip;
@@ -7,6 +7,7 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Secret;
 using Ornament.Models.Memberships.Partials;
 using Ornament.Templates;
+using log4net;
 
 namespace Ornament.Models.Memberships
 {
@@ -40,7 +41,7 @@ namespace Ornament.Models.Memberships
                     Phone = OptionInfo.Phone
                 };
             //Check duplicate account.
-            var userDao = dao.CreateUserDao();
+            IUserDao userDao = dao.CreateUserDao();
             User user = userDao.GetByLoginId(createUser.LoginId);
             if (user != null)
             {
@@ -63,27 +64,28 @@ namespace Ornament.Models.Memberships
         private void SendEmail(UserSecretToken userSecretToken, User createUser)
         {
             ThreadPool.QueueUserWorkItem(s =>
-            {
-                try
                 {
-                    var manager = new EmailTemplateManager();
-                    IDictionary<string, string> variable =
-                        manager.GetValues(userSecretToken, Context.Setting.WebDomainUrl + CreateVerifyUser);
-                    variable.Add("Password", Password);
-                    EmailTemplate email = manager.GetCreateUser();
-                    MailMessage mailMessage = email.CreateEmail(Context.Setting.SupportEmail, createUser.Email, variable);
-                    using (var ss = new SmtpClient())
+                    try
                     {
-                        ss.Send(mailMessage);
-                        ss.Dispose();
+                        var manager = new EmailTemplateManager();
+                        IDictionary<string, string> variable =
+                            manager.GetValues(userSecretToken, Context.Setting.WebDomainUrl + CreateVerifyUser);
+                        variable.Add("Password", Password);
+                        EmailTemplate email = manager.GetCreateUser();
+                        MailMessage mailMessage = email.CreateEmail(Context.Setting.SupportEmail, createUser.Email,
+                                                                    variable);
+                        using (var ss = new SmtpClient())
+                        {
+                            ss.Send(mailMessage);
+                            ss.Dispose();
+                        }
                     }
-                }
-                catch (System.Exception ex)
-                {
-                    log4net.LogManager.GetLogger(this.GetType()).Error("Send verify email fail for user " + createUser.LoginId, ex);
-                }
-            });
+                    catch (Exception ex)
+                    {
+                        LogManager.GetLogger(GetType())
+                                  .Error("Send verify email fail for user " + createUser.LoginId, ex);
+                    }
+                });
         }
-
     }
 }

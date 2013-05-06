@@ -7,9 +7,8 @@ namespace Ornament.MemberShip.Dao
 {
     public interface IUserDao : IDao<string, User>
     {
-
+        IQueryable<User> Users { get; }
         User GetByLoginId(string loginId);
-        IQueryable<User> Users { get;  }
         int Count();
         IList<User> GetUsers(string[] loginIds);
 
@@ -22,8 +21,8 @@ namespace Ornament.MemberShip.Dao
         int GetActivityDateNumber(DateTime time);
 
         IList<User> FindUsersByLoginId(string matchLoginId, int pageIndex, int pageSize);
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="emailToMatch"></param>
         /// <param name="pageIndex"></param>
@@ -38,7 +37,6 @@ namespace Ornament.MemberShip.Dao
 
         IList<User> Search(string searchProperty, string searchValue, bool isSortAsc, string sortProperty, int pageIndex,
                            int pageSize, out int total);
-
 
 
         IList<User> GetUsers(UserGroup userGroup);
