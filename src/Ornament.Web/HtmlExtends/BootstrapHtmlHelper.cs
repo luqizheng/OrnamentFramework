@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Routing;
 
 namespace Ornament.Web.HtmlExtends
 {
@@ -81,6 +82,25 @@ namespace Ornament.Web.HtmlExtends
 
 
             return new MvcHtmlString(result.ToString());
+        }
+
+        public static MvcHtmlString AlertMessage(this HtmlHelper helper, string message,bool show, object htmlAttributes)
+        {
+            /*
+            <div class="alert widget">
+		    		<button data-dismiss="alert" class="close" type="button">×</button>
+		    		This page contains all UI elements, including bootstrap components and custom elements
+		    	</div>*/
+            var tag = new TagBuilder("div");
+            tag.AddCssClass("alert");
+            tag.AddCssClass("widget");
+            if (!show)
+            {
+                tag.AddCssClass("hide");
+            }
+            tag.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+            tag.SetInnerText(message);
+            return new MvcHtmlString(tag.ToString());
         }
     }
 }

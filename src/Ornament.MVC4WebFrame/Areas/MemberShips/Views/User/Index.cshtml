@@ -3,6 +3,7 @@
 @using Ornament.MemberShip
 @using Ornament.Models.Memberships
 @using Ornament.Web
+@using Ornament.Web.HtmlExtends;
 @using Resources
 @model IList<Ornament.MemberShip.User>
 @{
@@ -56,10 +57,22 @@
                 };
                 $.post("@Url.Action("Search")", searchData,
                     function (user) {
-                        $("#userListBody").empty().append($("#userTableTmpl").tmpl(user));
+                        var target = $("#userListBody").empty();
+                        alert(user.length);
+                        if (user.lenght > 0) {
+                            target.append($("#userTableTmpl").tmpl(user));
+                            $("table").show();
+                        } else {
+                            $("table").hide();
+                        }
+
+                        $("#alertMsg").toggle(user.length == 0);
+
+
                     });
             });
         });
+
         function GetDate(jsonDate) {
             var value = new Date(parseInt(jsonDate.substr(6)));
             return value.getFullYear() + "-" + (value.getMonth() + 1) + "-" + value.getDate() + " " + value.getHours() + ":" + value.getMinutes() + ":" + value.getSeconds();
@@ -163,6 +176,7 @@
         </tr>
     </thead>
     <tbody id="userListBody">
+
         @foreach (User user in Model)
         {
             string clz = "";
@@ -224,7 +238,9 @@
         </tr>
     </tfoot>
 </table>
-
+<p>
+    @Html.AlertMessage(Html.GetResourceString("UserNotFound"), false, new { id = "alertMsg" })
+</p>
 <script id="userTableTmpl" type="text/x-jquery-tmpl">
     {{if(State.IsLockout)}}
         <tr class="warning">

@@ -2,12 +2,25 @@
     ViewBag.Title = "NotFound";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
-<p>
-    <div class="alert alert-error">
-        <h1>
-            404
-        </h1>
-        The page you requested could not be found on this server.<br/>
-        You request: @Request.Url
-    </div>
-</p>
+
+<div class="error-page">
+	    <span class="reason">404</span>
+		<div class="error-content">
+		    <span class="reason-title">- Oops, an error has occurred. Page not found! -</span>
+            You request: @Request.Url
+
+	    	@*<!-- Search widget -->
+	    	<form action="#" class="search">
+	    		<div class="autocomplete-append">
+		    		<input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+		    		<input type="submit" value="Search" class="btn btn-info">
+		    	<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul></div>
+	    	</form>
+	    	<!-- /search widget -->
+
+	        <div class="row-fluid error-buttons">
+	            <a class="btn btn-info span6" title="" href="index.html">Back to dashboard</a>
+	            <a class="btn btn-success span6" title="" href="index.html">Back to the website</a>
+	        </div>*@
+	    </div>
+	</div>

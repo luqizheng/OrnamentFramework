@@ -138,4 +138,7 @@
   <data name="Unlock" xml:space="preserve">
     <value>Unlock</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Cannot find match user</value>
+  </data>
 </root>

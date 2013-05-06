@@ -138,4 +138,7 @@
   <data name="Unlock" xml:space="preserve">
     <value>解鎖</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>找不到匹配的用戶</value>
+  </data>
 </root>
