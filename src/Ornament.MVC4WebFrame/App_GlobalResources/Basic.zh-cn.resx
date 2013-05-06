@@ -225,4 +225,7 @@
   <data name="Submitting" xml:space="preserve">
     <value>提交中...</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>查询</value>
+  </data>
 </root>

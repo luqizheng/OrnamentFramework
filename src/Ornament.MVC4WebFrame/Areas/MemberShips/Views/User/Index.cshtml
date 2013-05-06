@@ -14,7 +14,7 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', 'user', '/scripts/jquery.tmpl.js'], function () {
+        seajs.use(['valid', 'user', 'tmpl'], function () {
 
             $("#unlockButton,#Lock,#approvedButton").click(function () {
                 submitAction(this);
@@ -36,21 +36,29 @@
 
             $("#btnCreateUser").click(function () {
                 $("#createUserModel form").submit();
-                
+
             });
 
             $("#createUserModel").on("hidden", function () {
                 $(this).userEditor('reset');
             }).userEditor();
-            
+
             updateTable = function (user) {
                 if (user.success) {
                     $("#userTableTmpl").tmpl(user).prepend($("#userListBody"));
                     $('#createUserModel').modal('hide');
                     return;
                 }
-                
             };
+            $("#search :submit").click(function () {
+                var searchData = {
+                    loginIdOrEmail: $("input:text", this).val()
+                };
+                $.post("@Url.Action("Search")", ,
+                    function (user) {
+                        $("#userTableTmpl").tmpl(user).prepend($("#userListBody").children().remove());
+                    });
+            });
         });
 
     </script>
@@ -90,17 +98,12 @@
     </div>
 </div>
 
-<form action="#" class="search widget">
+<form action="#" class="search widget" id="search">
     <div class="autocomplete-append">
-        <ul class="search-options">
-            <li><a class="go-option tip" title="" href="#" data-original-title="Go to search page"></a></li>
-            <li><a class="advanced-option tip" title="" href="#" data-original-title="Advanced search"></a></li>
-            <li><a class="settings-option tip" title="" href="#" data-original-title="Settings"></a></li>
-        </ul>
-        <input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off">
+        <input type="text" id="autocomplete" placeholder="" class="ui-autocomplete-input" autocomplete="off">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-        <input type="submit" value="Search" class="btn btn-info">
-        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul>
+        <input type="submit" value="@Basic.Search" class="btn btn-info">
+        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="searchTextBox" tabindex="0" style="z-index: 1; display: none;"></ul>
     </div>
 </form>
 

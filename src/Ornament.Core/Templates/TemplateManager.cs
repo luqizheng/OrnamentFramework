@@ -12,9 +12,9 @@ namespace Ornament.Templates
             fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             try
             {
-                var xs = new XmlSerializer(typeof (T));
+                var xs = new XmlSerializer(typeof(T));
 
-                return (T) xs.Deserialize(fs);
+                return (T)xs.Deserialize(fs);
             }
             finally
             {
@@ -25,12 +25,12 @@ namespace Ornament.Templates
         public static void Set<T>(string path, T tempalteObject) where T : class
         {
             if (tempalteObject == null)
-                throw new ArgumentNullException("tempalteObject", "Parameter tempalteObject is null!");
+                throw new ArgumentNullException("tempalteObject");
 
             var fs = new FileStream(path, FileMode.Create, FileAccess.Write);
             try
             {
-                var xs = new XmlSerializer(typeof (T));
+                var xs = new XmlSerializer(typeof(T));
                 xs.Serialize(fs, tempalteObject);
             }
             finally

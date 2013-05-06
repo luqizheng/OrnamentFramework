@@ -3,45 +3,45 @@
     alias: {
         jquery: {
             src: "/bundles/jquery.js",
-            exports: "$"
+            exports: "jQuery "
         },
         bootstrap: {
             src: "/bundles/bootstrap.js",
             deps: ['jquery'],
-            exports: "$"
+            exports: "jQuery "
         },
         easytabs: {
             src: "/scripts/plugins/ui/jquery.easytabs.js",
             deps: ['jquery'],
-            exports: "$"
+            exports: "jQuery "
         },
         tmpl: {
             src: "/bundles/tmpl.js",
             deps: ['jquery'],
-            exports: "$"
+            exports: "jQuery "
         },
         unobtrusive: {
             src: "/bundles/unobtrusive.js",
             deps: ['jquery'],
-            exports: "$"
+            exports: "jQuery "
         },
         collapsible: {
             src: "/bundles/collapsible.js",
             deps: ['jquery'],
-            exports: "$"
+            exports: "jQuery "
         },
         inputmask: {
             src: "/bundles/inputmask#",//make sure it's endwith "#"
-            exports: "$"
+            exports: "jQuery "
         },
         uniform: {
             src: "/scripts/plugins/forms/jquery.uniform.min.js",
             deps: ['jquery'],
-            exports: "$"
+            exports: "jQuery "
         },
         validation: {
             src: "/bundles/jqueryval.js",
-            deps: ["unobtrusive"], exports: "$"
+            deps: ["unobtrusive"], exports: "jQuery "
         },
         valid: {
             src: "/scripts/compatibles/valid.js",
@@ -51,19 +51,19 @@
         tagsInput: {
             src: "/scripts/plugins/forms/jquery.tagsinput.min.js",
             deps: ["jquery"],
-            exports: "$"
+            exports: "jQuery "
         },
         select2: {
             src: "/scripts/plugins/forms/jquery.select2.min.js",
             deps: ["jquery"],
-            exports: "$"
+            exports: "jQuery "
         },
         user: {
             src: "/bundles/user.js",
-            deps: ["jquery"], exports: "$"
+            deps: ["jquery"], exports: "jQuery "
         },
 
-        periodDailog: { exports: "$" },
+        periodDailog: { exports: "jQuery " },
         preload: ["jquery"]
     }
 });

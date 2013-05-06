@@ -225,4 +225,7 @@
   <data name="Submitting" xml:space="preserve">
     <value>Submitting...</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>
