@@ -153,4 +153,7 @@
   <data name="ApplyAction" xml:space="preserve">
     <value>操作</value>
   </data>
+  <data name="BtnApply" xml:space="preserve">
+    <value>应用</value>
+  </data>
 </root>

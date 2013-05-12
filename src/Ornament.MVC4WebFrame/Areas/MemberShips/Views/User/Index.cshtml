@@ -29,7 +29,10 @@
             var submitAction = function (button) {
                 /*$("form").attr("action", $(button).val()).submit();*/
             };
-
+            $("#BtnApply").click(function() {
+                var action=$("#selApplyAction").val();
+                $("#tableForm").attr("action", "User/" + action).submit();
+            });
             $("input[name=loginIds]").change(function () {
                 var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
                 $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
@@ -37,7 +40,6 @@
 
             $("#btnCreateUser").click(function () {
                 $("#createUserModel form").submit();
-
             });
 
             $("#createUserModel").on("hidden", function () {
@@ -125,7 +127,7 @@
 
 
 <ul class="options-bar">
-    @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
+   @* @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
     {
         <li style="width: 80px">
             <div class="bulk">
@@ -135,7 +137,7 @@
                 </div>
             </div>
         </li>
-    }
+    }*@
     <li>
 
         <form class="uniform">
@@ -143,7 +145,7 @@
                 <div class="bar-select">
                     <span>@Html.GetResourceString("ApplyAction")</span>
 
-                    <select name="select2">
+                    <select id="selApplyAction">
                         @if (OrnamentContext.Current.HasRight("User", UserOperator.Lock))
                         {
                             <option value="Lock">@Html.GetResourceString("Lock")</option>
@@ -166,7 +168,7 @@
                 </div>
 
                 <div class="bar-button">
-                    <button class="btn btn-info" type="button">Apply</button>
+                    <button class="btn btn-info" type="button" id="BtnApply">@Html.GetResourceString("BtnApply")</button>
                 </div>
             </div>
         </form>
@@ -174,7 +176,7 @@
 </ul>
 
 
-
+<form method="POST" id="tableForm">
 
 <table class="table table-condensed table-striped table-bordered table-checks">
     <thead>
@@ -224,7 +226,7 @@
                     <td>
                         <ul class="table-controls">
                             <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
-                                <i class="fam-user-edit"></i></a></li>
+                                    <i class="fam-user-edit"></i></a></li>
                             <li>
                                 <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
                                     <i class="fam-group-gear"></i></a>
@@ -265,6 +267,7 @@
         </tr>
     </tfoot>
 </table>
+</form>
 <p>
     @Html.AlertMessage(Html.GetResourceString("UserNotFound"), false, new { id = "alertMsg" })
 </p>

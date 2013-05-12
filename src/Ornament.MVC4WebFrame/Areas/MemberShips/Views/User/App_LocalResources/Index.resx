@@ -147,4 +147,7 @@
   <data name="ApplyAction" xml:space="preserve">
     <value>Apply action:</value>
   </data>
+  <data name="BtnApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
 </root>
