@@ -61,7 +61,6 @@
                     function (user) {
                         var target = $("#userListBody").empty();
                         if (user.length > 0) {
-                            alert($("#userTableTmpl").tmpl(user));
                             target.append($("#userTableTmpl").tmpl(user));
                         }
                         $("table").toggle(user.length > 0);
