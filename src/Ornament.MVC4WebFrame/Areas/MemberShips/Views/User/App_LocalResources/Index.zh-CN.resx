@@ -147,4 +147,10 @@
   <data name="UserNotFound" xml:space="preserve">
     <value>找不到匹配的用户</value>
   </data>
+  <data name="selectActions" xml:space="preserve">
+    <value>选择...</value>
+  </data>
+  <data name="ApplyAction" xml:space="preserve">
+    <value>操作</value>
+  </data>
 </root>

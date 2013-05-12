@@ -15,12 +15,12 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', 'user', 'tmpl', "/scripts/json2.js"], function () {
+        seajs.use(['valid', 'user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
 
             $("#unlockButton,#Lock,#approvedButton").click(function () {
                 submitAction(this);
             });
-
+            $(".actionCheckbox").uniform();
             $("#delete").click(function () {
                 if (confirm("Do you want to delete user(s)?"))
                     submitAction(this);
@@ -58,22 +58,19 @@
                 $.post("@Url.Action("Search")", searchData,
                     function (user) {
                         var target = $("#userListBody").empty();
-                        alert(user.length);
-                        if (user.lenght > 0) {
+                        if (user.length > 0) {
+                            alert($("#userTableTmpl").tmpl(user));
                             target.append($("#userTableTmpl").tmpl(user));
-                            $("table").show();
-                        } else {
-                            $("table").hide();
                         }
-
+                        $("table").toggle(user.length > 0);
                         $("#alertMsg").toggle(user.length == 0);
-
-
                     });
             });
         });
 
         function GetDate(jsonDate) {
+            if (jsonDate == null)
+                return "";
             var value = new Date(parseInt(jsonDate.substr(6)));
             return value.getFullYear() + "-" + (value.getMonth() + 1) + "-" + value.getDate() + " " + value.getHours() + ":" + value.getMinutes() + ":" + value.getSeconds();
         }
@@ -87,9 +84,12 @@
 
         <div id="user-stats">
             <ul class="round-buttons">
-                <li>
-                    <div class="depth"><a href="#createUserModel" data-toggle="modal" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
-                </li>
+                @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
+                {
+                    <li>
+                        <div class="depth"><a href="#createUserModel" data-toggle="modal" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
+                    </li>
+                }
                 <li>
                     <div class="depth"><a href="" title="View statement" class="tip"><i class="icon-search"></i></a></div>
                 </li>
@@ -123,30 +123,57 @@
     </div>
 </form>
 
-<ul class="toolbar">
+
+<ul class="options-bar">
     @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
     {
-        <li><a id="create" href="#createUserModel" title="" data-toggle="modal"><i class="icon-plus"></i><span>@Basic.Create</span></a></li>
-    }
-    @if (OrnamentContext.Current.HasRight("User", UserOperator.Lock))
-    {
-        <li class="disabled"><a href="#@Url.Action("Lock")"  id="Lock"  title=""><i class="icon-download-alt"></i><span>@Html.GetResourceString("Lock")</span></a></li>
-        <li class="disabled"><a href="#@Url.Action("Unlock")"  id="unLock"  title=""><i class="icon-download-alt"></i><span>@Html.GetResourceString("Unlock")</span></a></li>
-    }
-    @if (OrnamentContext.Current.HasRight("User", UserOperator.Approve))
-    {
-        <li class="disabled"><a href="#@Url.Action("Approve")"  id="Approve"  title=""><i class="icon-download-alt"></i><span>@Html.GetResourceString("Approve")</span></a></li>
-    }
-    @if (OrnamentContext.Current.HasRight("User", UserOperator.Delete))
-    {
-        <li class="disabled">
-            <a id="delete" href="#@Url.Action("Delete")">
-                <i class="icon-trash"></i>
-                @Basic.Delete
-            </a>
+        <li style="width: 80px">
+            <div class="bulk">
+                <div class="bar-button">
+                    <a id="create" href="#createUserModel" title="" data-toggle="modal" class="btn"><span>@Basic.Create</span>
+                    </a>
+                </div>
+            </div>
         </li>
     }
+    <li>
+
+        <form class="uniform">
+            <div class="bulk">
+                <div class="bar-select">
+                    <span>@Html.GetResourceString("ApplyAction")</span>
+
+                    <select name="select2">
+                        @if (OrnamentContext.Current.HasRight("User", UserOperator.Lock))
+                        {
+                            <option value="Lock">@Html.GetResourceString("Lock")</option>
+                            <option value="unLock">@Html.GetResourceString("Unlock")</option>
+                        }
+
+                        @if (OrnamentContext.Current.HasRight("User", UserOperator.Approve))
+                        {
+                            <option value="Approve">@Html.GetResourceString("Approve")</option>
+                        }
+                        @if (OrnamentContext.Current.HasRight("User", UserOperator.Delete))
+                        {
+
+                            <option value="delete">
+                                @Basic.Delete
+                            </option>
+                        }
+                    </select>
+
+                </div>
+
+                <div class="bar-button">
+                    <button class="btn btn-info" type="button">Apply</button>
+                </div>
+            </div>
+        </form>
+    </li>
 </ul>
+
+
 
 
 <table class="table table-condensed table-striped table-bordered table-checks">
@@ -241,58 +268,60 @@
 <p>
     @Html.AlertMessage(Html.GetResourceString("UserNotFound"), false, new { id = "alertMsg" })
 </p>
+
 <script id="userTableTmpl" type="text/x-jquery-tmpl">
     {{if(State.IsLockout)}}
-        <tr class="warning">
-            {{else (State.IsApproved==false)}}
-        <tr class="info">
-            {{else}}
-        <tr>
-            {{/if}}
-                <td>
-                    <input type="checkbox" name="loginIds" value="${BasicInfo.LoginId}}" class="styled" />
-                </td>
-            @if (editPermission)
+    <tr class="warning">
+        {{else (State.IsApproved==false)}}
+    <tr class="info">
+        {{else}}
+    <tr>
+        {{/if}}
+        <td>
+            @if (OrnamentContext.Current.HasRight("User", UserOperator.Lock) || OrnamentContext.Current.HasRight("User", UserOperator.Delete) || OrnamentContext.Current.HasRight("User", UserOperator.Approve))
             {
-                <td>
-                    <ul class="table-controls">
-                        <li><a href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Basic.Edit">
-                            <i class="fam-user-edit"></i></a></li>
-                        <li>
-                            <a  href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Html.GetResourceString("Assignment")">
-                                <i class="fam-group-gear"></i></a>
-                        </li>
-                    </ul>
-                </td>
+                <input type="checkbox" name="loginIds" value="${BasicInfo.LoginId}}" class="actionCheckbox" />
             }
-            <td>${BasicInfo.LoginId}
+        </td>
+        @if (editPermission)
+        {
+            <td>
+                <ul class="table-controls">
+                    <li><a href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Basic.Edit">
+                        <i class="fam-user-edit"></i></a></li>
+                    <li>
+                        <a  href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                            <i class="fam-group-gear"></i></a>
+                    </li>
+                </ul>
             </td>
-            <td>${BasicInfo.Name}
-            </td>
-            <td>${BasicInfo.Email}
-            </td>
-            <td style="text-align: center">{{if(State.IsLockout)}}
+        }
+        <td>${BasicInfo.LoginId}
+        </td>
+        <td>${BasicInfo.Name}
+        </td>
+        <td>${BasicInfo.Email}
+        </td>
+        <td style="text-align: center">{{if(State.IsLockout)}}
                 <div class="icon-ok"></div>
-                {{else}}
+            {{else}}
                 <div class="icon-remove"></div>
-                {{/if}}
+            {{/if}}
 
-            </td>
-            <td style="text-align: center">{{if(State.IsApproved)}}
+        </td>
+        <td style="text-align: center">{{if(State.IsApproved)}}
                 <div class="icon-ok"></div>
-                {{else}}
+            {{else}}
                 <div class="icon-remove"></div>
-                {{/if}}
-            </td>
-            <td>${GetDate(OtherInfo.LastActivityDate)}
-            </td>
-        </tr>
+            {{/if}}
+        </td>
+        <td>${GetDate(OtherInfo.LastActivityDate)}
+        </td>
+    </tr>
 </script>
 
 <!-- place holder for dialog -->
 @{
-    ViewBag.Title = Basic.Create + MemberShip.User;
-
     var ajaxOptions = new AjaxOptions
         {
             HttpMethod = "post",

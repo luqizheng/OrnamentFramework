@@ -141,4 +141,10 @@
   <data name="UserNotFound" xml:space="preserve">
     <value>Cannot find match user</value>
   </data>
+  <data name="selectActions" xml:space="preserve">
+    <value>Select action...</value>
+  </data>
+  <data name="ApplyAction" xml:space="preserve">
+    <value>Apply action:</value>
+  </data>
 </root>

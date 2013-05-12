@@ -1,8 +1,8 @@
 ﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform', 'valid'], function (require) {
 
 
-    $("form.uniform select, :checkbox ,:text ,:reset,:password,:radio").uniform();
-
+    $("select, :checkbox ,:text ,:reset,:password,:radio", $("form.uniform")).uniform({ radioClass: 'choice' });
+   
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
 
