@@ -981,6 +981,8 @@
     <Content Include="Views\Secrity\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
     <Content Include="Scripts\Memberships\user-1.0.js" />
+    <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
+    <Content Include="Views\HttpErrors\501.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1155,7 +1157,7 @@
     <Content Include="Views\Account\Regist.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\HttpErrors\NotFound.cshtml" />
+    <Content Include="Views\HttpErrors\404.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Operators.cshtml" />
     <Content Include="Views\Shared\Empty.cshtml" />
@@ -1213,6 +1215,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmailAndChangePassword.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

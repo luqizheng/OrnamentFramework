@@ -11,13 +11,13 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult NotFound()
         {
             Response.StatusCode = 404;
-            return View();
+            return View("404");
         }
 
         public ActionResult Error()
         {
             Response.StatusCode = 501;
-            return View();
+            return View("501");
         }
         
     }
