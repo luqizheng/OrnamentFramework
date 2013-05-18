@@ -119,7 +119,6 @@
   </resheader>
   <data name="createOrg.title" xml:space="preserve">
     <value>New Org</value>
-    <comment>q</comment>
   </data>
   <data name="createRole.title" xml:space="preserve">
     <value>New Role</value>
@@ -168,5 +167,11 @@
   </data>
   <data name="createUserNotify.title" xml:space="preserve">
     <value>Create User </value>
+  </data>
+  <data name="assign.title" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="editUser.title" xml:space="preserve">
+    <value>Edit User</value>
   </data>
 </root>

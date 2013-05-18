@@ -169,4 +169,10 @@
   <data name="createUserNotify.title" xml:space="preserve">
     <value>Create User </value>
   </data>
+  <data name="assign.title" xml:space="preserve">
+    <value>分配</value>
+  </data>
+  <data name="editUser.title" xml:space="preserve">
+    <value>用戶編輯</value>
+  </data>
 </root>

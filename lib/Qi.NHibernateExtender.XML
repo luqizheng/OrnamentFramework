@@ -637,6 +637,24 @@
                 The <paramref name="bindingContext " />parameter is null.
             </exception>
         </member>
+        <member name="M:Qi.Web.Mvc.NHModelBinder.SetWrapper(System.Web.Mvc.ControllerContext,Qi.NHibernateExtender.SessionWrapper)">
+            <summary>
+            </summary>
+            <param name="controllerContext"></param>
+            <param name="wrapper"></param>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHModelBinder.RemoveWrapper(System.Web.Mvc.ControllerContext)">
+            <summary>
+            </summary>
+            <param name="controllerContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHModelBinder.GetWrapper(System.Web.Mvc.ControllerContext)">
+            <summary>
+            </summary>
+            <param name="controllerContext"></param>
+            <returns></returns>
+        </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.CreateModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext,System.Type)">
             <summary>
                 Creates the specified model type by using the specified controller context and binding context.
@@ -650,12 +668,15 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.GetPropertyValue(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext,System.ComponentModel.PropertyDescriptor,System.Web.Mvc.IModelBinder)">
             <summary>
-            Returns the value of a property using the specified controller context, binding context, property descriptor, and property binder.
+                Returns the value of a property using the specified controller context, binding context, property descriptor, and property binder.
             </summary>
             <returns>
-            An object that represents the property value.
+                An object that represents the property value.
             </returns>
-            <param name="controllerContext">The context within which the controller operates. The context information includes the controller, HTTP content, request context, and route data.</param><param name="bindingContext">The context within which the model is bound. The context includes information such as the model object, model name, model type, property filter, and value provider.</param><param name="propertyDescriptor">The descriptor for the property to access. The descriptor provides information such as the component type, property type, and property value. It also provides methods to get or set the property value.</param><param name="propertyBinder">An object that provides a way to bind the property.</param>
+            <param name="controllerContext">The context within which the controller operates. The context information includes the controller, HTTP content, request context, and route data.</param>
+            <param name="bindingContext">The context within which the model is bound. The context includes information such as the model object, model name, model type, property filter, and value provider.</param>
+            <param name="propertyDescriptor">The descriptor for the property to access. The descriptor provides information such as the component type, property type, and property value. It also provides methods to get or set the property value.</param>
+            <param name="propertyBinder">An object that provides a way to bind the property.</param>
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.IsPersistentType(System.Type)">
             <summary>
@@ -666,7 +687,7 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.IsMappingClass(System.Type)">
             <summary>
-            return value  this modelType is belong to Mappling class or not.
+                return value  this modelType is belong to Mappling class or not.
             </summary>
             <param name="modelType"></param>
             <returns></returns>
