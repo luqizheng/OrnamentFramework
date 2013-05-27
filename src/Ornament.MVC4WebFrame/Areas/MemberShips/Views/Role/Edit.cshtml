@@ -46,9 +46,11 @@
 
 {
     <script type="text/javascript">
+        sea.use('jquery', function () {
+            $("#toolbar a:first").click(function () {
+                $("form").submit();
+            });
 
-        $("#toolbar a:first").click(function () {
-            $("form").submit();
         });
         
     </script>

@@ -21,5 +21,7 @@ namespace Ornament.Models.Memberships.Partials
         [Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
             ErrorMessageResourceType = typeof(MemberShipModel))]
         public string ConfirmPassword { get; set; }
+
+        
     }
 }

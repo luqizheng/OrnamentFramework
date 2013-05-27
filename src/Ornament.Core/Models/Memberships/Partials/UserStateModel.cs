@@ -21,5 +21,18 @@ namespace Ornament.Models.Memberships.Partials
         /// 
         /// </summary>
         public bool? IsLock { get; set; }
+
+        public void UpdateOn(User user)
+        {
+            if (IsLock != null)
+            {
+                user.IsLockout = this.IsLock.Value;
+            }
+            if (IsApproved != null)
+            {
+                user.IsApproved = this.IsApproved.Value;
+            }
+
+        }
     }
 }

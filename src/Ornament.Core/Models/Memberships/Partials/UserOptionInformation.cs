@@ -8,26 +8,33 @@ namespace Ornament.Models.Memberships.Partials
     {
         public UserOptionInformation()
         {
-
         }
 
         public UserOptionInformation(User user)
         {
-            this.Phone = user.Phone;
-            this.Name = user.Name;
-            this.Remark = user.Remark;
+            Phone = user.Phone;
+            Name = user.Name;
+            Remark = user.Remark;
         }
-        [Display(Name = "Phone", ResourceType = typeof(MembershipCommon))]
+
+        [Display(Name = "Phone", ResourceType = typeof (MembershipCommon))]
         public string Phone { get; set; }
 
-        [Display(Name = "Name", ResourceType = typeof(MembershipCommon)),
+        [Display(Name = "Name", ResourceType = typeof (MembershipCommon)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Name { get; set; }
 
-        [Display(Name = "Remark", ResourceType = typeof(MembershipCommon)),
+        [Display(Name = "Remark", ResourceType = typeof (MembershipCommon)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Remark { get; set; }
+
+        public void UpdateOn(User user)
+        {
+            user.Remark = Remark;
+            user.Name = Name;
+            user.Phone = Phone;
+        }
     }
 }

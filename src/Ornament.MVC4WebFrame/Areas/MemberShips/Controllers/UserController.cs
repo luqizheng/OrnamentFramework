@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Profile;
 using System.Web.Security;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
@@ -48,21 +50,23 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post), ResourceAuthorize(UserOperator.Modify, "User")]
-        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] EditUserModel user, FormCollection collection)
+        public ActionResult Edit(EditUserModel user, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                /*IUserDao dao = _memberShipFactory.CreateUserDao();
-                dao.SaveOrUpdate(user);
-                ProfileBase profile = ProfileBase.Create(user.LoginId, true);
-                IEnumerator properites = ProfileBase.Properties.GetEnumerator();
-                while (properites.MoveNext())
+                var actualUser=user.Save(_memberShipFactory);
+                ProfileBase profile = ProfileBase.Create(actualUser.LoginId, true);
+                var properites = ProfileBase.Properties.GetEnumerator();
+                if (properites != null)
                 {
-                    var property = properites.Current as SettingsProperty;
-                    string v = collection[property.Name];
-                    profile[property.Name] = v;
+                    while (properites.MoveNext())
+                    {
+                        var property = properites.Current as SettingsProperty;
+                        string v = collection[property.Name];
+                        profile[property.Name] = v;
+                    }
+                    profile.Save();
                 }
-                profile.Save();*/
                 return RedirectToAction("Index");
             }
             return View(user);

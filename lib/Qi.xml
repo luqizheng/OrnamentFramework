@@ -99,12 +99,11 @@
         </member>
         <member name="T:Qi.ByteHelper">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.ByteHelper.ToStringEx(System.Byte[],System.String)">
             <summary>
-            Convert byte to string
+                Convert byte to string
             </summary>
             <param name="bytes"></param>
             <param name="format"></param>
@@ -112,14 +111,13 @@
         </member>
         <member name="M:Qi.ByteHelper.ToStringEx(System.Byte[])">
             <summary>
-            use x2 format to conver byte;
+                use x2 format to conver byte;
             </summary>
             <param name="bytes"></param>
             <returns></returns>
         </member>
         <member name="M:Qi.ByteHelper.ToBytes(System.String)">
             <summary>
-            
             </summary>
             <param name="binary"></param>
             <returns></returns>
@@ -1831,26 +1829,23 @@
         </member>
         <member name="T:Qi.Web.ReflectiveHttpContext">
             <summary>
-            This class allows access to the HttpContext without referring to HttpContext at compile time.
-            The accessors are cached as delegates for performance.
+                This class allows access to the HttpContext without referring to HttpContext at compile time.
+                The accessors are cached as delegates for performance.
             </summary>
             <remarks>
-            Code from NHibernate
+                Code from NHibernate
             </remarks>
         </member>
         <member name="P:Qi.Web.ReflectiveHttpContext.HttpContextCurrentGetter">
             <summary>
-            
             </summary>
         </member>
         <member name="P:Qi.Web.ReflectiveHttpContext.HttpContextItemsGetter">
             <summary>
-            
             </summary>
         </member>
         <member name="P:Qi.Web.ReflectiveHttpContext.HttpContextCurrentItems">
             <summary>
-            
             </summary>
         </member>
     </members>

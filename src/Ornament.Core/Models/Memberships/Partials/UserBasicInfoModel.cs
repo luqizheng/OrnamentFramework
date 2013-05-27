@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MultiLanguage;
 using Ornament.MemberShip;
@@ -45,10 +46,7 @@ namespace Ornament.Models.Memberships.Partials
         [Display(Name = "Role", ResourceType = typeof(MembershipCommon))]
         public Role[] Roles
         {
-            get
-            {
-                return _roles ?? new Role[0];
-            }
+            get { return _roles ?? new Role[0]; }
             set { _roles = value; }
         }
 
@@ -57,6 +55,25 @@ namespace Ornament.Models.Memberships.Partials
         {
             get { return _userGroups ?? new UserGroup[0]; }
             set { _userGroups = value; }
+        }
+
+       
+        public void UpdateOn(User user)
+        {
+            if (user == null) 
+                throw new ArgumentNullException("user");
+            user.Email = this.Email;
+            user.ClearRole();
+            foreach (var role in Roles)
+            {
+                user.AddRole(role);
+            }
+            user.ClearUserGroup();
+            foreach (var ug in UserGroups)
+            {
+                user.AddToUserGroup(ug);
+            }
+
         }
     }
 }

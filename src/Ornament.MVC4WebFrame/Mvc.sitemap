@@ -18,14 +18,14 @@ use permission for checking permission like @user:Read, user is the string type 
       </mvcSiteMapNode>
     </mvcSiteMapNode>-->
 
-    <mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="考勤" imageUrl="icon-time">
+    <!--<mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="考勤" imageUrl="icon-time">
 
       <mvcSiteMapNode action="Index" controller="Employee" area="Attendance" title="雇员" imageUrl="icon-user">
       </mvcSiteMapNode>
 
       <mvcSiteMapNode action="Index" controller="EmployeeGroup" area="Attendance" title="雇员分组" imageUrl="icon-user">
       </mvcSiteMapNode>
-    </mvcSiteMapNode>
+    </mvcSiteMapNode>-->
 
 
 

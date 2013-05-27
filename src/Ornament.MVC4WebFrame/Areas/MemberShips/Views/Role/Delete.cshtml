@@ -5,18 +5,21 @@
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var members = (IList<IMember>) ViewData["members"];
+    var members = (IList<IMember>)ViewData["members"];
     int index = 0;
 }
 @section script
 {
     <script type="text/javascript">
-        $(".btn-toolbar a:first")
-            .click(function() {
-                if (confirm("@Html.GetResourceString("waring_deleting_role")")) {
-                    $("form").submit();
-                }
-            });
+        seajs.use('jquery', function () {
+            $(".btn-toolbar a:first")
+                .click(function () {
+                    if (confirm("@Html.GetResourceString("waring_deleting_role")")) {
+                        $("form").submit();
+                    }
+                });
+        });
+
     </script>
 }
 <div class="box">
@@ -40,7 +43,7 @@
                 {
                     if (member is User)
                     {
-                        <li title="@member.Remark">@member.Name</li>
+                    <li title="@member.Remark">@member.Name</li>
                         index++;
                     }
                     else

@@ -34,5 +34,7 @@ namespace Ornament.Models.Memberships.Partials
         public DateTime? LastLoginDate { get; set; }
 
         public DateTime? LastActivityDate { get; set; }
+
+        
     }
 }

@@ -16,7 +16,7 @@
 
       <set name="Roles" table="MBS_UserRoleRelation" access="nosetter.camelcase-underscore">
         <key column="UserId" foreign-key="FK_UserID_UserRoleRelation"/>
-        <many-to-many class="Role" column="RoleId" unique="true"></many-to-many>
+        <many-to-many class="Role" column="RoleId"></many-to-many>
       </set>
       <property name="CreateTime" type="DateTime"  update="false" ></property>
       <property name="IsLockout" type="Boolean" length="1" access="nosetter.camelcase-underscore"></property>
