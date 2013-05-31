@@ -75,6 +75,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvcSiteMapProvider.3.3.6.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.6.5\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.5.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -323,6 +326,9 @@
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserQuestionAnswer.cshtml" />
     <Content Include="Areas\Settings\Views\EmailSetting\CreateUser.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserOtherInfo.cshtml" />
+    <Content Include="Config\hibernate_mysql.cfg.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />
