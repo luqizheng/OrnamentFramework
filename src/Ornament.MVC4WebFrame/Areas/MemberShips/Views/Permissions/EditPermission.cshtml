@@ -64,9 +64,9 @@
         {
             width: 100%;
         }
-        
+
         /* clear cssform label effective*/
-        
+
         #OperatorsList
         {
             margin: 0;
@@ -78,13 +78,12 @@
 @section script
 {
     <script type="text/javascript">
-
-        $(document).ready(function () {
-            $("#cancel").click(function() {
+        seajs.use(['jquery'], function () {
+            $("#cancel").click(function () {
                 return confirm("@Html.GetResourceString("message", "warnning_leave_without_saving")");
             });
-            
-            $(":checkbox",$("#OperatorsList")).click(function () {
+
+            $(":checkbox", $("#OperatorsList")).click(function () {
 
                 var check = this.checked;
                 var beCheckValue = $(this).val();
@@ -108,7 +107,7 @@
                     }
                 });
             });
-            
+
 
             (function (permissions) {
                 $("#OperatorsList :checkbox").each(function () {
@@ -117,9 +116,9 @@
                     this.checked = (value == theValue) && (permissions > theValue) && (theValue != 0);
                 });
             })("@permission.Operator");
+
         });
 
 
-       
     </script>
 }

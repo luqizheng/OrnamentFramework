@@ -46,13 +46,9 @@ namespace Ornament.MemberShip
             get { return _name; }
             set
             {
-                if (!String.IsNullOrEmpty(_name) && value != _name)
-                    throw new ArgumentException("Name only set once");
-                if (String.IsNullOrEmpty(value))
-                    throw new ArgumentNullException("value", "Name can't be empty");
-                if (value.Length > 20)
+                if (value != null && value.Length > 20)
                     throw new ArgumentOutOfRangeException("value", value.Length, "Name's lenght over than 20");
-                _name = value.ToLower();
+                _name = value;
             }
         }
 

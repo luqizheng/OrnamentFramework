@@ -34,8 +34,7 @@
                 </div>
                 <div class="form-actions">
                     <a class="btn btn-primary" id="submit"><i class="icon-pencil icon-white"></i>@Basic.Save</a>
-                    <a href="@Url.Action("Index")" class="btn btn-warning"><i class="icon-warning-sign icon-white">
-                    </i>@Basic.Cancel</a>
+                    <a href="@Url.Action("Index")" class="btn"><i class="icon-warning-sign icon-white"></i>@Basic.Cancel</a>
                 </div>
             </fieldset>
         }
@@ -44,10 +43,13 @@
 @section script
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+
+        seajs.use(['jquery'], function () {
             $("#submit").click(function () {
                 $("form").submit();
             });
         });
+
+
     </script>
 }
