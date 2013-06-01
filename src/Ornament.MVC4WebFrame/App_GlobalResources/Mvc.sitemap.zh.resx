@@ -117,17 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="createOrg.title" xml:space="preserve">
+  <data name="orgCreate.title" xml:space="preserve">
     <value>創建組織單元</value>
-    <comment>q</comment>
   </data>
-  <data name="createRole.title" xml:space="preserve">
-    <value>創建角色</value>
-  </data>
-  <data name="createUser.title" xml:space="preserve">
+  <data name="userCreate.title" xml:space="preserve">
     <value>創建用戶</value>
   </data>
-  <data name="createUserGroup.title" xml:space="preserve">
+  <data name="groupCreate.title" xml:space="preserve">
     <value>創建用戶組</value>
   </data>
   <data name="dataInit.title" xml:space="preserve">
@@ -160,19 +156,37 @@
   <data name="system.title" xml:space="preserve">
     <value>系統列表</value>
   </data>
-  <data name="userGroupList.title" xml:space="preserve">
+  <data name="groupList.title" xml:space="preserve">
     <value>用戶組列表</value>
   </data>
   <data name="userList.title" xml:space="preserve">
     <value>用戶列表</value>
   </data>
-  <data name="createUserNotify.title" xml:space="preserve">
-    <value>Create User </value>
-  </data>
   <data name="assign.title" xml:space="preserve">
     <value>分配</value>
   </data>
-  <data name="editUser.title" xml:space="preserve">
+  <data name="userEdit.title" xml:space="preserve">
     <value>用戶編輯</value>
+  </data>
+  <data name="roleEdit.title" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="roleDelete.title" xml:space="preserve">
+    <value>刪除</value>
+  </data>
+  <data name="groupEdit.title" xml:space="preserve">
+    <value>編輯</value>
+  </data>
+  <data name="groupAssignRole.title" xml:space="preserve">
+    <value>分配角色</value>
+  </data>
+  <data name="groupAssignUser.title" xml:space="preserve">
+    <value>分配用戶</value>
+  </data>
+  <data name="orgEdit.title" xml:space="preserve">
+    <value>編輯</value>
+  </data>
+  <data name="roleCreate.title" xml:space="preserve">
+    <value>創建</value>
   </data>
 </root>

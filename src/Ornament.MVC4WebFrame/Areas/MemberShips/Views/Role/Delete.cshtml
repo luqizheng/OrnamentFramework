@@ -22,48 +22,70 @@
 
     </script>
 }
-<div class="box">
-    <div class="content">
-        <div class="btn-toolbar">
-            <a class="btn btn-danger"><i class="icon-warning-sign icon-white"></i>@Basic.Delete</a>
-            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
-        </div>
-        @using (Html.BeginForm())
-        {
-            @Html.HttpMethodOverride(HttpVerbs.Delete)
-            @Html.HiddenFor(s => s.Id)
-        }
-        <h4>
-            @Html.Label(Html.GetResourceString("info_role_in_using"))
-        </h4>
-        <fieldset class="ui-corner-all" style="float: left; width: 240px">
-            <legend>@MemberShip.User</legend>
-            <ul>
-                @foreach (IMember member in members)
-                {
-                    if (member is User)
+
+<div class="btn-toolbar">
+    <a class="btn btn-danger">@Basic.Delete</a>
+    <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    @Html.HiddenFor(s => s.Id)
+}
+<h4>
+    @Html.Label(Html.GetResourceString("info_role_in_using"))
+</h4>
+<div class="row-fluid">
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@MemberShip.User</h6>
+                </div>
+            </div>
+
+            <div class="well body">
+                <ul>
+                    @foreach (IMember member in members)
                     {
-                    <li title="@member.Remark">@member.Name</li>
-                        index++;
+                        if (member is User)
+                        {
+                        <li title="@member.Remark">@member.Name</li>
+                            index++;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        break;
-                    }
-                }
-            </ul>
-        </fieldset>
-        <fieldset class="ui-corner-all" style="float: left; width: 240px">
-            <legend>@MemberShip.User</legend>
-            <ul>
-                @for (int i = index; i < members.Count; i++)
-                {
-                    IMember member = members[i];
-                    <li title="@member.Remark">@member.Name</li>
-                }
-            </ul>
-        </fieldset>
-        <div style="clear: both">
+                </ul>
+            </div>
         </div>
     </div>
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@MemberShip.UserGroup</h6>
+                </div>
+            </div>
+            <div class="well body">
+                <ul>
+                    @for (int i = index; i < members.Count; i++)
+                    {
+                        IMember member = members[i];
+                        if (member is User)
+                        {
+                            continue;
+                        }
+                        <li title="@member.Remark">@member.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+
+

@@ -117,16 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="createOrg.title" xml:space="preserve">
+  <data name="orgCreate.title" xml:space="preserve">
     <value>New Org</value>
   </data>
-  <data name="createRole.title" xml:space="preserve">
+  <data name="roleCreate.title" xml:space="preserve">
     <value>New Role</value>
   </data>
-  <data name="createUser.title" xml:space="preserve">
-    <value>New User</value>
-  </data>
-  <data name="createUserGroup.title" xml:space="preserve">
+  <data name="groupCreate.title" xml:space="preserve">
     <value>New Usergroup</value>
   </data>
   <data name="dataInit.title" xml:space="preserve">
@@ -159,19 +156,37 @@
   <data name="system.title" xml:space="preserve">
     <value>System</value>
   </data>
-  <data name="userGroupList.title" xml:space="preserve">
+  <data name="groupList.title" xml:space="preserve">
     <value>Usergroup list</value>
   </data>
   <data name="userList.title" xml:space="preserve">
     <value>User list</value>
   </data>
-  <data name="createUserNotify.title" xml:space="preserve">
+  <data name="userCreate.title" xml:space="preserve">
     <value>Create User </value>
   </data>
   <data name="assign.title" xml:space="preserve">
     <value>Assign</value>
   </data>
-  <data name="editUser.title" xml:space="preserve">
+  <data name="userEdit.title" xml:space="preserve">
     <value>Edit User</value>
+  </data>
+  <data name="roleEdit.title" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="orgEdit.title" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="roleDelete.Title" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="groupEdit.title" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="groupAssignRole.title" xml:space="preserve">
+    <value>Assign Roles</value>
+  </data>
+  <data name="groupAssignUser.title" xml:space="preserve">
+    <value>Assign Users</value>
   </data>
 </root>

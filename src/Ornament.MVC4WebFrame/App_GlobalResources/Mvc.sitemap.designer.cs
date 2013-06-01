@@ -70,65 +70,11 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
-        ///   查找类似 New Org 的本地化字符串。
-        /// </summary>
-        internal static string createOrg_title {
-            get {
-                return ResourceManager.GetString("createOrg.title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 New Role 的本地化字符串。
-        /// </summary>
-        internal static string createRole_title {
-            get {
-                return ResourceManager.GetString("createRole.title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 New Usergroup 的本地化字符串。
-        /// </summary>
-        internal static string createUserGroup_title {
-            get {
-                return ResourceManager.GetString("createUserGroup.title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Create User  的本地化字符串。
-        /// </summary>
-        internal static string createUserNotify_title {
-            get {
-                return ResourceManager.GetString("createUserNotify.title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 New User 的本地化字符串。
-        /// </summary>
-        internal static string createUser_title {
-            get {
-                return ResourceManager.GetString("createUser.title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Data Initialization 的本地化字符串。
         /// </summary>
         internal static string dataInit_title {
             get {
                 return ResourceManager.GetString("dataInit.title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Edit User 的本地化字符串。
-        /// </summary>
-        internal static string editUser_title {
-            get {
-                return ResourceManager.GetString("editUser.title", resourceCulture);
             }
         }
         
@@ -151,6 +97,51 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
+        ///   查找类似 Assign Roles 的本地化字符串。
+        /// </summary>
+        internal static string groupAssignRole_title {
+            get {
+                return ResourceManager.GetString("groupAssignRole.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Assign Users 的本地化字符串。
+        /// </summary>
+        internal static string groupAssignUser_title {
+            get {
+                return ResourceManager.GetString("groupAssignUser.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 New Usergroup 的本地化字符串。
+        /// </summary>
+        internal static string groupCreate_title {
+            get {
+                return ResourceManager.GetString("groupCreate.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Edit 的本地化字符串。
+        /// </summary>
+        internal static string groupEdit_title {
+            get {
+                return ResourceManager.GetString("groupEdit.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Usergroup list 的本地化字符串。
+        /// </summary>
+        internal static string groupList_title {
+            get {
+                return ResourceManager.GetString("groupList.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Home 的本地化字符串。
         /// </summary>
         internal static string home_title {
@@ -169,6 +160,24 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
+        ///   查找类似 New Org 的本地化字符串。
+        /// </summary>
+        internal static string orgCreate_title {
+            get {
+                return ResourceManager.GetString("orgCreate.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Edit 的本地化字符串。
+        /// </summary>
+        internal static string orgEdit_title {
+            get {
+                return ResourceManager.GetString("orgEdit.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Org list 的本地化字符串。
         /// </summary>
         internal static string orgIndex_title {
@@ -183,6 +192,33 @@ namespace Resources.Mvc {
         internal static string permissionList_title {
             get {
                 return ResourceManager.GetString("permissionList.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 New Role 的本地化字符串。
+        /// </summary>
+        internal static string roleCreate_title {
+            get {
+                return ResourceManager.GetString("roleCreate.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Delete 的本地化字符串。
+        /// </summary>
+        internal static string roleDelete_Title {
+            get {
+                return ResourceManager.GetString("roleDelete.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Edit 的本地化字符串。
+        /// </summary>
+        internal static string roleEdit_title {
+            get {
+                return ResourceManager.GetString("roleEdit.title", resourceCulture);
             }
         }
         
@@ -214,11 +250,20 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
-        ///   查找类似 Usergroup list 的本地化字符串。
+        ///   查找类似 Create User  的本地化字符串。
         /// </summary>
-        internal static string userGroupList_title {
+        internal static string userCreate_title {
             get {
-                return ResourceManager.GetString("userGroupList.title", resourceCulture);
+                return ResourceManager.GetString("userCreate.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Edit User 的本地化字符串。
+        /// </summary>
+        internal static string userEdit_title {
+            get {
+                return ResourceManager.GetString("userEdit.title", resourceCulture);
             }
         }
         

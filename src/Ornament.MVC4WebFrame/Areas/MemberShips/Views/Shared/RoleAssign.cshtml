@@ -12,16 +12,16 @@
                                                 select permission;
 
     Dictionary<string, object> mapping = roles.ToDictionary<Role, string, object>(a => a.Id, a => new List<string>(from s in a.Permissions select s.Id));
-
-
 }
 <style type="text/css">
-    #permissionPanel ul { list-style: none; }
+    #permissionPanel ul {
+        list-style: none;
+    }
 </style>
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        var mapping = @Html.Raw(JsonHelper.ToJson(mapping));
+    seajs.use(['jquery'], function() {
+        var mapping = @Html.Raw(mapping.ToJson());
         $("#roles input").change(function() {
             var permissions = mapping[$(this).val()].join(",#");
             var tag = $("#" + permissions);
@@ -34,41 +34,54 @@
         }).change();
     });
 </script>
-<div class="row">
-    <section class="span4">
-        <header>
-            <h3>@MemberShip.Role</h3>
-        </header>
-        <section class="form-horizontal" id="roles">
-            @foreach (Role role in roles)
-            {
-                string checkeds = "";
-                if (Model != null)
+<div class="row-fluid">
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@MemberShip.Role</h6>
+                </div>
+            </div>
+            <div class="well body" id="roles">
+                @foreach (Role role in roles)
                 {
-                    if (Model.Any(a => a.Id == role.Id))
+                    string checkeds = "";
+                    if (Model != null)
                     {
-                        checkeds = mapping.ContainsKey(role.Id) ? "checked=\"checked\"" : "";
+                        if (Model.Any(a => a.Id == role.Id))
+                        {
+                            checkeds = mapping.ContainsKey(role.Id) ? "checked=\"checked\"" : "";
+                        }
                     }
+                    <label for="@role.Id">
+                        <input name="roles" id="@role.Id" type="checkbox" value="@role.Id"  @Html.Raw(checkeds)/>
+                        @role.Name
+                    </label>
                 }
-                <label for="@role.Id">
-                    <input name="roles" id="@role.Id" type="checkbox" value="@role.Id"  @Html.Raw(checkeds)/>
-                    @role.Name
-                </label>
-            }
-        </section>
-    </section>
-    <section class="span4 offset1 well" id="permissionPanel">
-        <header>
-            <h3>@MemberShip.Permission</h3>
-        </header>
-        <section>
-            <ul>
-                @foreach (Permission permission in permissions)
-                {
-                    <li><i id="@permission.Id" class="icon-check-empty"></i>@permission.Name
-                    </li>
-                }
-            </ul>
-        </section>
-    </section>
+            </div>
+        </div>
+    </div>
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@MemberShip.Permission</h6>
+                </div>
+            </div>
+            <div class="body well" id="permissionPanel">
+
+
+                <ul>
+                    @foreach (Permission permission in permissions)
+                    {
+                        <li><i id="@permission.Id" class="icon-check-empty"></i>@permission.Name
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
 </div>

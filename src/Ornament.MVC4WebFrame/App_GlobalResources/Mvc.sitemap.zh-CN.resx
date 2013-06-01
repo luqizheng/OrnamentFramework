@@ -117,17 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="createOrg.title" xml:space="preserve">
+  <data name="orgCreate.title" xml:space="preserve">
     <value>创建组织</value>
-    <comment>q</comment>
   </data>
-  <data name="createRole.title" xml:space="preserve">
+  <data name="roleCreate.title" xml:space="preserve">
     <value>创建角色</value>
   </data>
-  <data name="createUser.title" xml:space="preserve">
+  <data name="userCreate.title" xml:space="preserve">
     <value>创建用户</value>
   </data>
-  <data name="createUserGroup.title" xml:space="preserve">
+  <data name="groupCreate.title" xml:space="preserve">
     <value>创建用户组</value>
   </data>
   <data name="dataInit.title" xml:space="preserve">
@@ -136,7 +135,7 @@
   <data name="eventLog.title" xml:space="preserve">
     <value>日志记录</value>
   </data>
-  <data name="Home" xml:space="preserve">
+  <data name="home.title" xml:space="preserve">
     <value>首页</value>
   </data>
   <data name="membership.title" xml:space="preserve">
@@ -154,7 +153,7 @@
   <data name="system.title" xml:space="preserve">
     <value>系统</value>
   </data>
-  <data name="userGroupList.title" xml:space="preserve">
+  <data name="groupList.title" xml:space="preserve">
     <value>用户组列表</value>
   </data>
   <data name="userList.title" xml:space="preserve">
@@ -166,13 +165,28 @@
   <data name="settings.title" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="createUserNotify.title" xml:space="preserve">
-    <value>Create User </value>
-  </data>
   <data name="assign.title" xml:space="preserve">
     <value>分配</value>
   </data>
-  <data name="editUser.title" xml:space="preserve">
+  <data name="userEdit.title" xml:space="preserve">
     <value>用户编辑</value>
+  </data>
+  <data name="roleEdit.title" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="roleDelete" xml:space="preserve">
+    <value>刪除</value>
+  </data>
+  <data name="groupEdit.title" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="groupAssignRole.title" xml:space="preserve">
+    <value>分配角色</value>
+  </data>
+  <data name="groupAssignUser.title" xml:space="preserve">
+    <value>分配用户</value>
+  </data>
+  <data name="orgEdit.title" xml:space="preserve">
+    <value>编辑</value>
   </data>
 </root>

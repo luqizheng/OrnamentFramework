@@ -31,14 +31,25 @@ use permission for checking permission like @user:Read, user is the string type 
 
     <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-user">
       <mvcSiteMapNode  area="MemberShips" action="Index" controller="User" resourceKey="userList" permission="User:Read">
-        <mvcSiteMapNode area="MemberShips" action="Create" controller="User" resourceKey="createUser" permission="User:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" action="Create" controller="User" resourceKey="userCreate" permission="User:Modify"></mvcSiteMapNode>
         <mvcSiteMapNode area="MemberShips" action="Edit" controller="User" resourceKey="editUser" permission="User:Modify"></mvcSiteMapNode>
         <mvcSiteMapNode area="MemberShips" action="Assign" controller="User" resourceKey="assign" permission="User:Modify"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="Role:Read" />
-      <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Index" resourceKey="userGroupList" />
-      <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" />
-      <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" />
+      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="Role:Read">
+        <mvcSiteMapNode area="MemberShips" controller="Role" action="Edit" resourceKey="roleEdit" permission="Role:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="Role" action="Create" resourceKey="roleEdit" permission="Role:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="Role" action="Delete" resourceKey="roleDelete" permission="Role:Delete"></mvcSiteMapNode>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Index" resourceKey="groupList" permission="UserGroup:Read">
+        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Edit" resourceKey="groupEdit" permission="UserGroup:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Create" resourceKey="groupCreate" permission="UserGroup:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="AssignUser" resourceKey="groupAssignUser" permission="UserGroup:Assign"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="AssignRole" resourceKey="groupAssignRole" permission="UserGroup:Assign"></mvcSiteMapNode>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" >
+        
+      </mvcSiteMapNode>
+      <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
     </mvcSiteMapNode>
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" controller="EventLog" area="Application">
