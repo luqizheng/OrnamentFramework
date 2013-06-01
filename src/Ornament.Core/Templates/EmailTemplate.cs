@@ -15,6 +15,8 @@ namespace Ornament.Templates
         [XmlElement("Content")]
         public string Content { get; set; }
 
+        public string FilePath { get; set; }
+
         /// <summary>
         /// </summary>
         /// <param name="from"></param>

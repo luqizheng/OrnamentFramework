@@ -7,10 +7,12 @@ namespace Ornament.Templates
     public class EmailTemplateManager
     {
         private const string Path = "~/Templates/Email/";
+
         public void SaveCreateUser(EmailTemplate template)
         {
             TemplateManager.Set(ApplicationHelper.MapPath(Path + "CreateUser.xml"), template);
         }
+
         /// <summary>
         /// </summary>
         /// <returns></returns>
@@ -25,6 +27,11 @@ namespace Ornament.Templates
         public EmailTemplate ForgetPassword()
         {
             return TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(Path + "ForgetPassword.xml"));
+        }
+
+        public void SaveForgetPassword(EmailTemplate temp)
+        {
+            TemplateManager.Set(ApplicationHelper.MapPath(Path + "ForgetPassword.xml"), temp);
         }
 
 
