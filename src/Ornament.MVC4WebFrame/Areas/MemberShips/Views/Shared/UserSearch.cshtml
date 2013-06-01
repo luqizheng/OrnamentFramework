@@ -1,15 +1,16 @@
-﻿<script src="@Url.Content("~/Scripts/jquery.endless-scroll.js")" type="text/javascript"></script>
-<div class="form-search" style="margin: 0px 5px 5px 0">
-    <input id="loginid" type="text" class="input-medium" style="width: 200px" />
-    <a id="searchUser" class="btn"><i class="icon-search"></i></a>
-</div>
-<select id="userSearcher" multiple="multiple">
+﻿
+
+<input id="loginid" type="text" class="box-filter" />
+<button type="button" id="box1Clear" class="filter">x</button>
+@*    <a id="searchUser" class="btn"><i class="icon-search"></i></a>*@
+
+<select id="userSearcher" multiple="multiple" class="multiple">
 </select>
 <script type="text/javascript">
     var pageIndex = 0;
     var searchContent = "";
 
-    $(document).ready(function () {
+    seajs.use(['jquery'], function () {
 
         $("#userSearcher").endlessScroll({
             fireOnce: true,
@@ -26,14 +27,15 @@
             pageIndex = 0;
             InvokeSearch();
         });
+        function InvokeSearch() {
+            var data = {
+                loginId: searchContent,
+                pageIndex: pageIndex
+            };
+            $.getJSON('@this.Url.Action("Search", "User", new { area = "MemberShips" })', data, AddToSelector);
+    }
+
     });
 
-    function InvokeSearch() {
-        var data = {
-            loginId: searchContent,
-            pageIndex: pageIndex
-        };
-        $.getJSON('@this.Url.Action("Search", "User", new { area = "MemberShips" })', data, AddToSelector);
-    }
 
 </script>

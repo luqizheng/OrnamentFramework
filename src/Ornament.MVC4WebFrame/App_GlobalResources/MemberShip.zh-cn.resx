@@ -124,7 +124,7 @@
     <value>分配角色</value>
   </data>
   <data name="AssignUserGroup" xml:space="preserve">
-    <value>分配用户组</value>
+    <value>分配用户</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>修改密码</value>

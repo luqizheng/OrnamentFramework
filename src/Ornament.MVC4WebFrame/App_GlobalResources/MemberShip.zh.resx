@@ -27,7 +27,7 @@
         <comment>This is a comment</comment>
     </data>
                 
-    There are any number of "bootstrap/resheader" rows that contain simple 
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
     
     Each data row contains a name, and value. The row also contains a 
@@ -124,7 +124,7 @@
     <value>分配角色</value>
   </data>
   <data name="AssignUserGroup" xml:space="preserve">
-    <value>分配用戶組</value>
+    <value>分配用戶</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>修改密碼</value>

@@ -62,7 +62,10 @@
             src: "/bundles/user.js",
             deps: ["jquery"], exports: "jQuery "
         },
-
+        endlessScroll: {
+            src: "/Scripts/jquery.endless-scroll.js",
+            deps: ["jquery"], exports: "jQuery"
+        },
         periodDailog: { exports: "jQuery " },
         preload: ["jquery"]
     }
