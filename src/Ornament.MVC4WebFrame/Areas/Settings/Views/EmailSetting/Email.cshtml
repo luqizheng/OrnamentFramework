@@ -1,0 +1,41 @@
+﻿@using Ornament.Web.HtmlExtends
+@using Resources
+@model Ornament.Templates.EmailTemplate
+@{
+    var ajaxOptions = new AjaxOptions()
+        {
+            HttpMethod = "Post",
+            UpdateTargetId = "msgBox",
+            OnBegin = "onSubmit",
+            OnComplete = "onComplete",
+        };
+    var formStyle = new
+        {
+            @class = "form-horizontal",
+            autocomplete = "off",
+            id = "createUserForm"
+        };
+}
+<div class="row-fluid">
+
+    @using (Ajax.BeginForm("Save", "EmailSetting", null, ajaxOptions, formStyle))
+    {
+        <div class="alert margin alert-success hide">
+            <button data-dismiss="alert" class="close" type="button">×</button>
+            <div id="msgBox"></div>
+        </div>
+            
+        @Html.ValidationSummary(true)
+        <div>
+            @Html.LabelTextBoxFor(ts => ts.Subject)
+        </div>
+        <div>
+            @Html.LabelTextAreaFor(ts => ts.Content, new { @class = "span12", rows = "28" })
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-info" data-loading-text="@Basic.Submitting">@Basic.Submit</button>
+        </div>
+    }
+
+
+</div>

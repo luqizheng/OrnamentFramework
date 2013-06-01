@@ -6,6 +6,7 @@ using Qi.Web.Mvc;
 namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
 {
     [Session]
+    [Authorize(Roles = "admin")]
     public class EmailSettingController : Controller
     {
         //
@@ -14,8 +15,20 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
         public ActionResult CreateUser()
         {
             var t = new EmailTemplateManager();
-            return View(t.GetCreateUser());
+            return View("Email", t.GetCreateUser());
         }
+
+        public ActionResult ForgetPassword()
+        {
+            var t = new EmailTemplateManager();
+            return View("Email", t.ForgetPassword());
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult Save(EmailTemplate template)
@@ -30,11 +43,6 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
             {
                 return Json(ex.Message);
             }
-        }
-
-        public ActionResult ForgetPassword()
-        {
-            return View();
         }
     }
 }

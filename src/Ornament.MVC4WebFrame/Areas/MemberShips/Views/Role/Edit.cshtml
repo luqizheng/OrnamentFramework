@@ -1,46 +1,47 @@
 ﻿@using Resources
 @model Ornament.MemberShip.Role
 @{
-    string subject = Basic.Edit +Resources.MemberShip.Role + Model.Name;
+    string subject = Basic.Edit + Resources.MemberShip.Role + Model.Name;
     ViewBag.Title = subject;
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
-<div class="box">
-    <div class="content">
-        @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary(true)
-            <fieldset class="form-horizontal">
-                <legend>@subject</legend>
-                <div class="control-group">
-                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.EditorFor(model => model.Name)
-                        @Html.ValidationMessageFor(model => model.Name)
-                    </div>
-                </div>
-                <div class="control-group">
-                    @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextAreaFor(model => model.Remark)
-                        @Html.ValidationMessageFor(model => model.Remark)
-                    </div>
-                </div>
-                @Html.HiddenFor(model => model.Id)
-                <div class="control-group">
-                    <label class="control-label">@MemberShip.Permission</label>
-                    <div class="controls">
-                        @Html.Partial("ChoicePermissions", Model)
-                    </div>
-                </div>
-                <div class="form-actions" id="toolbar">
-                    <a class="btn btn-primary"><i class="icon-pencil icon-white"></i>@Basic.Save</a>
-                    <a href="@Url.Action("Index")" class="btn btn-warning"><i class="icon-warning-sign icon-white">
-                    </i>@Basic.Cancel</a>
-                </div>
-            </fieldset>
-        }
-    </div>
+
+@section pageTitle
+{
+    <h6>@subject</h6>
+}
+<div class="well form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(model => model.Remark)
+                @Html.ValidationMessageFor(model => model.Remark)
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.Id)
+        <div class="control-group">
+            <label class="control-label">@MemberShip.Permission</label>
+            <div class="controls">
+                @Html.Partial("ChoicePermissions", Model)
+            </div>
+        </div>
+        <div class="form-actions" id="toolbar">
+            <a class="btn btn-primary">@Basic.Save</a>
+            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+        </div>
+         
+    }
 </div>
 @section script
 
@@ -52,6 +53,6 @@
             });
 
         });
-        
+
     </script>
 }

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "/Views/Shared/_appLayout.cshtml";
+}
+
+<h2>title</h2>
+<div class="tabbable tabs-left">
+    <ul class="nav nav-tabs" id="nav">
+        <li class="active">
+            <a href="#tab7" data-toggle="tab" load="@Url.Action("CreateUser")"><i class="fam-layout-content"></i>Section 1</a>
+        </li>
+        <li>
+            <a href="#tab8" data-toggle="tab"><i class="fam-date"></i>Section 2</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab7">
+            
+        </div>
+        <div class="tab-pane" id="tab8">Howdy, I'm in Section 2.</div>
+    </div>
+</div>
+
+@section script
+{
+    <script type="text/javascript">
+        seajs.use(['jquery'], function() {
+            $("a[data-toggle=tab]").on("show", function() {
+                var tar = $(this).attr("href");
+                $(tar).load($(this).attr("load"));
+            });
+        });
+    </script>
+    
+}

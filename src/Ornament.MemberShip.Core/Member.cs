@@ -9,7 +9,6 @@ using Qi.Domain;
 namespace Ornament.MemberShip
 {
     /// <summary>
-    /// 
     /// </summary>
     [Serializable]
     public abstract class Member<T> : DomainObject<T, string>, IMember where T : DomainObject<T, string>
@@ -27,14 +26,13 @@ namespace Ornament.MemberShip
         private Iesi.Collections.Generic.ISet<Role> _roles;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Member"/> class. 
+        ///     Initializes a new instance of the <see cref="Member" /> class.
         /// </summary>
         protected Member()
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="name"></param>
         protected Member(string name)
@@ -43,10 +41,10 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// Gets Roles belong to user only.
+        ///     Gets Roles belong to user only.
         /// </summary>
         /// <value>
-        /// The roles.
+        ///     The roles.
         /// </value>
         protected virtual Iesi.Collections.Generic.ISet<Role> Roles
         {
@@ -58,10 +56,10 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof(MembershipCommon)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(ErrorMessage)),
+        [Display(Name = "Name", ResourceType = typeof (MembershipCommon)),
+         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (ErrorMessage)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string Name
         {
             get { return _name; }
@@ -78,16 +76,16 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// Gets or sets Comment.
+        ///     Gets or sets Comment.
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
         /// </exception>
         /// <value>
-        /// The comment.
+        ///     The comment.
         /// </value>
-        [Display(Name = "Remark", ResourceType = typeof(MembershipCommon)),
+        [Display(Name = "Remark", ResourceType = typeof (MembershipCommon)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string Remark
         {
             get { return _remark; }
@@ -104,10 +102,10 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// Gets Count.
+        ///     Gets Count.
         /// </summary>
         /// <value>
-        /// The count.
+        ///     The count.
         /// </value>
         public virtual int RoleCount
         {
@@ -115,7 +113,7 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 清楚所有Member与Role的关联
+        ///     清楚所有Member与Role的关联
         /// </summary>
         public virtual void ClearRole()
         {
@@ -134,7 +132,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="role">
-        /// The role.
+        ///     The role.
         /// </param>
         /// <returns>
         /// </returns>
@@ -153,7 +151,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="role">
-        /// The role.
+        ///     The role.
         /// </param>
         /// <returns>
         /// </returns>
@@ -172,7 +170,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <param name="role">
-        /// The role.
+        ///     The role.
         /// </param>
         /// <returns>
         /// </returns>
@@ -191,9 +189,9 @@ namespace Ornament.MemberShip
         public virtual bool OneOf(Role[] roles, Func<Role, bool> matchRoleHandler)
         {
             bool found = false;
-            foreach (var role in this.GetAllRoles())
+            foreach (Role role in GetAllRoles())
             {
-                foreach (var inputRole in roles)
+                foreach (Role inputRole in roles)
                 {
                     if (role == inputRole)
                     {
@@ -210,10 +208,11 @@ namespace Ornament.MemberShip
         }
 
         #endregion
-        public virtual bool OneOf(params 
-            Role[] roles)
+
+        public virtual bool OneOf(params
+                                      Role[] roles)
         {
-            return (from role1 in this.GetAllRoles() from role2 in roles where role1.Id == role2.Id select role1).Any();
+            return (from role1 in GetAllRoles() from role2 in roles where role1.Id == role2.Id select role1).Any();
         }
 
         /// <summary>

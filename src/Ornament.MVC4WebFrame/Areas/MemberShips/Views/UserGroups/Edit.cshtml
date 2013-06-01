@@ -27,8 +27,8 @@
                 </div>
                 @Html.HiddenFor(model => model.Id)
                 <div class="btn-toolbar form-actions">
-                    <a id="submit" class="btn btn-primary"><i class="icon-pencil icon-white"></i>@Basic.OK</a>
-                    <a  id="cancel" href="@Url.Action("Index")" class="btn"><i class="icon-warning-sign icon-white"></i>@Basic.Cancel</a>
+                    <a id="submit" class="btn btn-primary">@Basic.OK</a>
+                    <a  id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
                 </div>
             </fieldset>
         }

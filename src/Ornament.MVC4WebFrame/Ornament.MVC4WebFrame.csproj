@@ -329,6 +329,7 @@
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />
@@ -984,7 +985,6 @@
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
-    <Content Include="Views\Secrity\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
     <Content Include="Scripts\Memberships\user-1.0.js" />
     <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
