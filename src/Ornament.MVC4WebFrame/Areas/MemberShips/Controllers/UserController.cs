@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -54,9 +55,9 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             if (ModelState.IsValid)
             {
-                var actualUser=user.Save(_memberShipFactory);
+                User actualUser = user.Save(_memberShipFactory);
                 ProfileBase profile = ProfileBase.Create(actualUser.LoginId, true);
-                var properites = ProfileBase.Properties.GetEnumerator();
+                IEnumerator properites = ProfileBase.Properties.GetEnumerator();
                 if (properites != null)
                 {
                     while (properites.MoveNext())
@@ -143,7 +144,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 string errormessage;
                 if (createUser.Create(_memberShipFactory, out errormessage))
                 {
-                    var user = _memberShipFactory.CreateUserDao().GetByLoginId(createUser.BasicInfo.LoginId);
+                    User user = _memberShipFactory.CreateUserDao().GetByLoginId(createUser.BasicInfo.LoginId);
                     return Json(new
                         {
                             success = true,
@@ -152,7 +153,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 }
                 ModelState.AddModelError("BasicInfo.LoginId", errormessage);
             }
-            return Json(new { success = false });
+            return Json(new {success = false});
         }
 
 
@@ -220,10 +221,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-
-            var result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
-                         where u.LoginId.Contains(loginIdOrEmail) || u.Email.Contains(loginIdOrEmail)
-                         select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+                                               where
+                                                   u.LoginId.Contains(loginIdOrEmail) ||
+                                                   u.Email.Contains(loginIdOrEmail)
+                                               select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

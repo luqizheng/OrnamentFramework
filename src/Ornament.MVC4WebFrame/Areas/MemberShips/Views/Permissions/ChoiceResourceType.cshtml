@@ -15,20 +15,20 @@
             <fieldset class="form-horizontal">
                 @Html.Partial("PermissionWizardDataView", this.Model)
                 @{
-            var i = -1;
-            bool foundSelected = false;
-            foreach (var resourceType in OrnamentContext.ResourcesConfiguration.ResourceSettings)
-            {
-                foundSelected = resourceType.Name == this.Model.DescriptionResourceName;
-                i++;
+                    var i = -1;
+                    bool foundSelected = false;
+                    foreach (var resourceType in OrnamentContext.ResourcesConfiguration.ResourceSettings)
+                    {
+                        foundSelected = resourceType.Name == this.Model.DescriptionResourceName;
+                        i++;
 
-                    <div>
-                        <label for="@("ResourceType" + i)">
-                            @Html.RadioButton("DescriptionResourceName", resourceType.Name, foundSelected, new { id = "ResourceType" + i })
-                            @resourceType.Name
-                        </label>
-                    </div>
-            }
+                        <div>
+                            <label for="@("ResourceType" + i)">
+                                @Html.RadioButton("DescriptionResourceName", resourceType.Name, foundSelected, new { id = "ResourceType" + i })
+                                @resourceType.Name
+                            </label>
+                        </div>
+                    }
                 }
                 @if (!foundSelected)
                 {

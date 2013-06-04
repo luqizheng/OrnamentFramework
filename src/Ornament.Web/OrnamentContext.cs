@@ -1,5 +1,6 @@
 using System.Configuration;
 using System.Web;
+using Castle.MicroKernel.Registration;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 
@@ -10,12 +11,17 @@ namespace Ornament.Web
     public class OrnamentContext : Context
     {
         public static readonly OrnamentContext Current = new OrnamentContext();
-
+        static OrnamentContext()
+        {
+            Inner.Instance.GetContainer()
+                .Register(Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
+        }
         private OrnamentContext()
         {
+           
         }
 
-        
+
 
         /// <summary>
         /// </summary>
@@ -41,7 +47,10 @@ namespace Ornament.Web
         /// </summary>
         public static ResourceDescriptionManager ResourcesConfiguration
         {
-            get { return Inner.Instance.GetContainer().Resolve<ResourceDescriptionManager>("Configuration"); }
+            get
+            {
+                return Inner.Instance.GetContainer().Resolve<ResourceDescriptionManager>();
+            }
         }
     }
 }

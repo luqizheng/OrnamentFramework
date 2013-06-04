@@ -1150,11 +1150,6 @@
     <Content Include="Config\Message.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\WebCfg.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Logon.cshtml" />
