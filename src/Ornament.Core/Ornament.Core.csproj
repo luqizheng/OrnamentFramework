@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="AppStart\OnStart.cs" />
     <Compile Include="AppStart\IInitialization.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Configurations\WebSettings.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Messages\OrnamentMessageManager.cs" />

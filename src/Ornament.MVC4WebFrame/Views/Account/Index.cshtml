@@ -3,8 +3,6 @@
 @using Ornament.MemberShip.Dao
 @using Ornament.MemberShip.Permissions
 @using Ornament.Models.Memberships
-@using Ornament.Web.MemberShips.Models.Users
-@using Ornament.Web.Models.Users
 @using Resources
 @using Ornament.Web
 @model Ornament.MemberShip.User
@@ -19,7 +17,7 @@
     var menus = new[]
                     {
                         new
-                            {
+                            {  
                                 id="BaseInfo",
                                 url = "BaseInfo",
                                 text = Html.GetResourceString("Menu_BasicInfo"),
@@ -111,7 +109,7 @@
         seajs.use(['jquery'], function () {
             $('a[data-toggle="tab"]').on('shown', function (e) {
                 $($(this).attr("href")).find("input:first").focus();
-            })
+            });
         });
     </script>
 }

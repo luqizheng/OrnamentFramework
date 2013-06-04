@@ -17,20 +17,12 @@
         var updateTable;
         seajs.use(['valid', 'user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
 
-            $("#unlockButton,#Lock,#approvedButton").click(function () {
-                submitAction(this);
-            });
-            $(".actionCheckbox").uniform();
-            $("#delete").click(function () {
-                if (confirm("Do you want to delete user(s)?"))
-                    submitAction(this);
-            });
+            $(".actionCheckbox").uniform().click(function () {
+                $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
+            }).click();
 
-            var submitAction = function (button) {
-                /*$("form").attr("action", $(button).val()).submit();*/
-            };
-            $("#BtnApply").click(function() {
-                var action=$("#selApplyAction").val();
+            $("#BtnApply").click(function () {
+                var action = $("#selApplyAction").val();
                 $("#tableForm").attr("action", "User/" + action).submit();
             });
             $("input[name=loginIds]").change(function () {
@@ -126,7 +118,7 @@
 
 
 <ul class="options-bar">
-   @* @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
+    @* @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
     {
         <li style="width: 80px">
             <div class="bulk">
@@ -139,7 +131,7 @@
     }*@
     <li>
 
-        <form class="uniform">
+        <form>
             <div class="bulk">
                 <div class="bar-select">
                     <span>@Html.GetResourceString("ApplyAction")</span>
@@ -167,7 +159,7 @@
                 </div>
 
                 <div class="bar-button">
-                    <button class="btn btn-info" type="button" id="BtnApply">@Html.GetResourceString("BtnApply")</button>
+                    <button class="btn btn-info" type="button" id="BtnApply" disabled="disabled">@Html.GetResourceString("BtnApply")</button>
                 </div>
             </div>
         </form>
@@ -177,95 +169,95 @@
 
 <form method="POST" id="tableForm">
 
-<table class="table table-condensed table-striped table-bordered table-checks">
-    <thead>
-        <tr>
-            <th></th>
-            <th class="span1"></th>
-            <th class="span1">
-                @Html.LabelFor(item => ((User)null).LoginId)
-            </th>
+    <table class="table table-condensed table-striped table-bordered table-checks">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="span1"></th>
+                <th class="span1">
+                    @Html.LabelFor(item => ((User)null).LoginId)
+                </th>
 
-            <th style="width: 100px">
-                @Html.LabelFor(item => ((User)null).Name)
-            </th>
-            <th>
-                @Html.LabelFor(item => ((User)null).Email)
-            </th>
-            <th>
-                @Html.LabelFor(item => ((User)null).IsLockout)
-            </th>
-            <th>
-                @Html.LabelFor(item => ((User)null).IsApproved)
-            </th>
-            <th>
-                @Html.LabelFor(item => ((User)null).LastActivityDate)
-            </th>
-        </tr>
-    </thead>
-    <tbody id="userListBody">
+                <th style="width: 100px">
+                    @Html.LabelFor(item => ((User)null).Name)
+                </th>
+                <th>
+                    @Html.LabelFor(item => ((User)null).Email)
+                </th>
+                <th>
+                    @Html.LabelFor(item => ((User)null).IsLockout)
+                </th>
+                <th>
+                    @Html.LabelFor(item => ((User)null).IsApproved)
+                </th>
+                <th>
+                    @Html.LabelFor(item => ((User)null).LastActivityDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody id="userListBody">
 
-        @foreach (User user in Model)
-        {
-            string clz = "";
-            if (user.IsApproved == false)
+            @foreach (User user in Model)
             {
-                clz = "class=info";
-            }
-            if (user.IsLockout)
-            {
-                clz = "class=Warning";
-            }
-            <tr @clz>
-                <td>
-                    <input type="checkbox" name="loginIds" value="@user.LoginId" class="styled"/>
-                </td>
-                @if (editPermission)
+                string clz = "";
+                if (user.IsApproved == false)
                 {
-                    <td>
-                        <ul class="table-controls">
-                            <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
-                                    <i class="fam-user-edit"></i></a></li>
-                            <li>
-                                <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
-                                    <i class="fam-group-gear"></i></a>
-                            </li>
-                        </ul>
-                    </td>
+                    clz = "class=info";
                 }
-                <td>
-                    @user.LoginId
-                </td>
-                <td>
-                    @user.Name
-                </td>
-                <td>
-                    @user.Email
-                </td>
-                <td style="text-align: center">
-                    <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
-                    </div>
-                </td>
-                <td style="text-align: center">
-                    <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
-                    </div>
-                </td>
-                <td>
-                    @user.LastActivityDate
+                if (user.IsLockout)
+                {
+                    clz = "class=Warning";
+                }
+                <tr @clz>
+                    <td>
+                        <input type="checkbox" name="loginIds" value="@user.LoginId" class="actionCheckbox"/>
+                    </td>
+                    @if (editPermission)
+                    {
+                        <td>
+                            <ul class="table-controls">
+                                <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
+                                    <i class="fam-user-edit"></i></a></li>
+                                <li>
+                                    <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                        <i class="fam-group-gear"></i></a>
+                                </li>
+                            </ul>
+                        </td>
+                    }
+                    <td>
+                        @user.LoginId
+                    </td>
+                    <td>
+                        @user.Name
+                    </td>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td style="text-align: center">
+                        <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
+                        </div>
+                    </td>
+                    <td style="text-align: center">
+                        <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
+                        </div>
+                    </td>
+                    <td>
+                        @user.LastActivityDate
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <form id="navbar">
+                        @Html.Partial("NavPagination", ViewData["Nav"])
+                    </form>
                 </td>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="8">
-                <form id="navbar">
-                    @Html.Partial("NavPagination", ViewData["Nav"])
-                </form>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+        </tfoot>
+    </table>
 </form>
 <p>
     @Html.AlertMessage(Html.GetResourceString("UserNotFound"), false, new { id = "alertMsg" })

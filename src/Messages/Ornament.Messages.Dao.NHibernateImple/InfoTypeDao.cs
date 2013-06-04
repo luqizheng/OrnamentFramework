@@ -8,11 +8,12 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     public class InfoTypeDao : DaoBase<string, MessageType>, IInfoTypeDao
     {
+        IProjection Parent { get { return Projections.Property<MessageType>(x => x.Parent); } }
         #region IInfoTypeDao Members
 
         public IList<MessageType> GetFirstLevel()
         {
-            return CreateCriteria().Add(Restrictions.IsNull("OrderId")).List<MessageType>();
+            return CreateCriteria().Add(Restrictions.IsNull(Parent)).List<MessageType>();
         }
 
         public MessageType GetByName(string name)
@@ -26,6 +27,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 return null;
             }
             return list[0];
+        }
+
+        public IList<MessageType> GetList(MessageType parent)
+        {
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+            return CreateDetachedCriteria()
+                .Add(Restrictions.Eq(Parent, parent))
+                .GetExecutableCriteria(this.CurrentSession)
+                .List<MessageType>();
         }
 
         #endregion

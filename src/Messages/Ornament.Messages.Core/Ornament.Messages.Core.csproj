@@ -73,13 +73,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageManager.cs" />
     <Compile Include="MessageTypeException.cs" />
     <Compile Include="MssageOperator.cs" />
-    <Compile Include="Stores\FileStore.cs" />
-    <Compile Include="Stores\Store.cs" />
-    <Compile Include="Stores\MemoryStore.cs" />
-    <Compile Include="Dao\IDaoFactory.cs" />
+    <Compile Include="Dao\IMessageDaoFactory.cs" />
     <Compile Include="Dao\IInfoDao.cs" />
     <Compile Include="Dao\IInfoReaderDao.cs" />
     <Compile Include="Dao\IInfoReadStateDao.cs" />
@@ -93,14 +89,8 @@
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadStatus.cs" />
-    <Compile Include="Stores\StoreManager.cs" />
     <Compile Include="Contents\Content.cs" />
     <Compile Include="UserReadState.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MessageType.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Contents\ContentBase.hbm.xml">
@@ -129,24 +119,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Message.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MessageReader.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ReaderReadStatus.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="MessageTypePermission.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

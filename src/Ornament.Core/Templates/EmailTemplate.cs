@@ -14,7 +14,8 @@ namespace Ornament.Templates
 
         [XmlElement("Content")]
         public string Content { get; set; }
-
+        
+        [XmlIgnore]
         public string FilePath { get; set; }
 
         /// <summary>

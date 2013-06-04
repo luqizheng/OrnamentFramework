@@ -1,7 +1,6 @@
 ﻿using Ornament.MemberShip.Dao;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
-using Ornament.Messages.Stores;
 using QiProject.Dao;
 
 // ReSharper disable CheckNamespace
@@ -16,19 +15,14 @@ namespace Ornament.Web //扩展类，减少生成DaoFactory的代码。把它反
             return ornament.GetDaoFactory<IMemberShipFactory>();
         }
 
-        public static IDaoFactory MessageFactory(this OrnamentContext ornament)
+        public static IMessageDaoFactory MessageFactory(this OrnamentContext ornament)
         {
-            return ornament.GetDaoFactory<IDaoFactory>();
+            return ornament.GetDaoFactory<IMessageDaoFactory>();
         }
 
         public static OrnamentMessageManager GetMessageManager(this OrnamentContext ornament)
         {
             return new OrnamentMessageManager(ornament.MessageFactory(), ornament.MemberShipFactory());
-        }
-
-        public static StoreManager GetStoreManager(this OrnamentContext context)
-        {
-            return context.GetDaoFactory<StoreManager>();
         }
 
         public static IProjectDaoFactory GetProjectDao(this OrnamentContext context)

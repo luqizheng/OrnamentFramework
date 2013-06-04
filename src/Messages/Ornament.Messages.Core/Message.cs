@@ -5,7 +5,6 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip;
 using Ornament.Messages.Contents;
-using Ornament.Messages.Stores;
 using Qi.Domain;
 
 namespace Ornament.Messages
@@ -22,8 +21,7 @@ namespace Ornament.Messages
         /// </summary>
         /// <param name="publisher"></param>
         /// <param name="type"></param>
-        /// <param name="store"></param>
-        public Message(User publisher, MessageType type, Store store)
+        public Message(User publisher, MessageType type)
             : this()
         {
             if (publisher == null)
@@ -34,8 +32,6 @@ namespace Ornament.Messages
 
             Publisher = publisher;
             Type = type;
-
-            StoreType = store.Name;
         }
 
         protected Message()
@@ -46,7 +42,7 @@ namespace Ornament.Messages
             State = MessageState.Draft;
         }
 
-        public virtual string StoreType { get; set; }
+        
 
         private int Version { get; set; }
 
@@ -148,26 +144,20 @@ namespace Ornament.Messages
         /// <param name="language"></param>
         /// <param name="manager"> </param>
         /// <returns></returns>
-        public virtual string Show(string language, StoreManager manager)
+        public virtual string Show(string language)
         {
             Content content = Contents[language];
-            if (content.Value == null)
-            {
-                manager.Get(StoreType).ReadIn(content, this);
-            }
             return content.Value;
         }
 
         /// <summary>
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="manager"> </param>
         /// <para name="manager"></para>
         /// <returns></returns>
-        public virtual string Show(StoreManager manager)
+        public virtual string Show()
         {
             string lang = CultureInfo.CurrentUICulture.Name;
-            return Show(Contents.ContainsKey(lang) ? lang : Contents.Values.First().Language ?? "", manager);
+            return Show(Contents.ContainsKey(lang) ? lang : Contents.Values.First().Language ?? "");
         }
 
         public override int GetHashCode()

@@ -47,9 +47,16 @@ use permission for checking permission like @user:Read, user is the string type 
         <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="AssignRole" resourceKey="groupAssignRole" permission="UserGroup:Assign"></mvcSiteMapNode>
       </mvcSiteMapNode>
       <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" >
-        
+
       </mvcSiteMapNode>
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Message Type" clickable="false">
+      <mvcSiteMapNode controller="MessageType" area="Settings" action="Index" title="Message Type">
+
+      </mvcSiteMapNode>
+
     </mvcSiteMapNode>
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" controller="EventLog" area="Application">
@@ -60,47 +67,6 @@ use permission for checking permission like @user:Read, user is the string type 
 
       <mvcSiteMapNode resourceKey="dataInit" area="Settings" controller="Application" action="DatabaseInit"></mvcSiteMapNode>
     </mvcSiteMapNode>
-
-
-    <mvcSiteMapNode  title="Document" area="Docs" action="Index" controller="Dashboard" imageUrl="icon-thumbs-up">
-      <mvcSiteMapNode title="Configuration" area="Docs" controller="Configuration" imageUrl="icon-cogs">
-      </mvcSiteMapNode>
-
-      <mvcSiteMapNode title="UI" area="Docs" action="Bootstrap" controller="Dashboard" imageUrl="icon-eye-open">
-        <mvcSiteMapNode title="BaseCss" area="Docs" action="Typography" controller="BaseCss">
-          <mvcSiteMapNode title="Typography" area="Docs" action="Typography" controller="BaseCss"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Code" area="Docs" action="Code" controller="BaseCss"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Table" area="Docs" action="Table" controller="BaseCss"></mvcSiteMapNode>
-
-          <mvcSiteMapNode title="Form" area="Docs" action="Form" controller="BaseCss"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Buttons" area="Docs" action="Buttons" controller="BaseCss"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Images" area="Docs" action="Image" controller="BaseCss"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Icons" area="Docs" action="Icons" controller="BaseCss"></mvcSiteMapNode>
-        </mvcSiteMapNode>
-        <mvcSiteMapNode title="Component" area="Docs" action="Dropdowns" controller="Component">
-          <mvcSiteMapNode title="Dropdowns" area="Docs" action="Dropdowns" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Buttons group" area="Docs" action="ButtonGroup" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Buttons dropdowns" area="Docs" action="ButtonsDropdowns" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Navs" area="Docs" action="Navs" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Navbar" area="Docs" action="Navbar" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Breadcrumbs" area="Docs" action="Breadcrumbs" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Pagination" area="Docs" action="Pagination" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Typography" area="Docs" action="Typography" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Thumbnails" area="Docs" action="Thumbnails" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Alerts" area="Docs" action="Alerts" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Progress bars" area="Docs" action="ProgressBar" controller="Component"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Misc" area="Docs" action="Misc" controller="Component"></mvcSiteMapNode>
-        </mvcSiteMapNode>
-        <mvcSiteMapNode title="Javascript" area="Docs" controller="Javascript"></mvcSiteMapNode>
-
-        <mvcSiteMapNode title="Plugin" area="Docs" controller="Plugin" action="FileManager">
-          <mvcSiteMapNode title="FileManager" area="Docs" controller="Plugin" action="FileManager"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Richer Editor" area="Docs" controller="Plugin" action="Editor"></mvcSiteMapNode>
-          <mvcSiteMapNode title="Date Picker" area="Docs" controller="Plugin" action="DatePicker"></mvcSiteMapNode>
-        </mvcSiteMapNode>
-      </mvcSiteMapNode>
-    </mvcSiteMapNode>
-
 
   </mvcSiteMapNode>
 

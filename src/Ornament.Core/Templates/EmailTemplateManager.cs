@@ -20,7 +20,11 @@ namespace Ornament.Templates
         {
             return TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(Path + "CreateUser.xml"));
         }
+        public void Save(EmailTemplate template, string fileName)
+        {
+            TemplateManager.Get<EmailTemplate>(ApplicationHelper.MapPath(Path + fileName));
 
+        }
         /// <summary>
         /// </summary>
         /// <returns></returns>

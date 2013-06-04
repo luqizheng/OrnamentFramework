@@ -16,8 +16,8 @@ namespace Ornament.MVCWebFrame.Areas.Application.Controllers
             MessageType type;
             type = id == null
                        ? OrnamentContext.Current.GetMessageManager().SystemMessageType
-                       : OrnamentContext.Current.GetMessageManager().InfoDaoFactory.InfoTypeDao.Get(id);
-            IList<Message> res = OrnamentContext.Current.MessageFactory().InfoDao.FindMessage(50, 0, type, true);
+                       : OrnamentContext.Current.GetMessageManager().InfoDaoFactory.MessageTypeDao.Get(id);
+            IList<Message> res = OrnamentContext.Current.MessageFactory().MessageDao.FindMessage(50, 0, type, true);
             ViewData["currentInfo"] = type;
             return View(res);
         }

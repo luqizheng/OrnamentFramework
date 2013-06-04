@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"  namespace="Ornament.MemberShip.Permissions" assembly="Ornament.MemberShip.Core">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"  
+                   namespace="Ornament.MemberShip.Permissions" assembly="Ornament.MemberShip.Core">
 
-  <subclass name="Ornament.MemberShip.Permissions.GenericPermission`1[Ornament.Messages.MessageType,Ornament.Messages.Core]"
+  <subclass 
+    name="Ornament.MemberShip.Permissions.GenericPermission`1[Ornament.Messages.MessageType,Ornament.Messages.Core]"
             extends="Permission" discriminator-value="Info">
 
     <many-to-one name="Resource"
