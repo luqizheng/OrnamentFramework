@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
+using Ornament.AppStart;
 
 namespace Ornament.Messages.Dao.NHibernateImple.AppStart
 {
-    class DaoRegistry:Ornament.AppStart.IInitialization
+    internal class DaoRegistry : IInitialization
     {
         public void OnStart(Context context)
         {
+            context.NhAssemblies.Add(GetType().Assembly);
             context.Container.Register(
-               Component.For<IDaoFactory>().ImplementedBy<MessageDaoFactory>());
+                Component.For<IMessageDaoFactory>().ImplementedBy<MessageMessageDaoFactory>());
         }
     }
 }

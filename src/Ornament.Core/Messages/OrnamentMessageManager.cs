@@ -10,19 +10,19 @@ namespace Ornament.Messages
         private readonly IInfoTypeDao _infoTypeDao;
 
 
-        public OrnamentMessageManager(IDaoFactory messageFacotry, IMemberShipFactory memberShipFactory)
+        public OrnamentMessageManager(IMessageDaoFactory messageFacotry, IMemberShipFactory memberShipFactory)
         {
             if (messageFacotry == null) throw new ArgumentNullException("messageFacotry");
             InfoDaoFactory = messageFacotry;
             MemberShipFactory = memberShipFactory;
-            _infoTypeDao = InfoDaoFactory.InfoTypeDao;
+            _infoTypeDao = InfoDaoFactory.MessageTypeDao;
         }
 
-        public IDaoFactory InfoDaoFactory { get; set; }
+        public IMessageDaoFactory InfoDaoFactory { get; set; }
         public IMemberShipFactory MemberShipFactory { get; private set; }
 
         /// <summary>
-        /// 公告，权限是任何人
+        ///     公告，权限是任何人
         /// </summary>
         public MessageType Announcement
         {
@@ -30,7 +30,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 系统
+        ///     系统
         /// </summary>
         public MessageType SystemMessageType
         {
@@ -38,7 +38,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 应用程序信息
+        ///     应用程序信息
         /// </summary>
         public MessageType ApplicationMessageType
         {
@@ -46,7 +46,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 系统信息下的权限信息
+        ///     系统信息下的权限信息
         /// </summary>
         public MessageType MemberShipType
         {
@@ -54,7 +54,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 系统信息->权限信息->改变密码
+        ///     系统信息->权限信息->改变密码
         /// </summary>
         public MessageType ChangePasswordMessageType
         {
@@ -62,7 +62,7 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 系统信息->权限信息->注册新用户
+        ///     系统信息->权限信息->注册新用户
         /// </summary>
         public MessageType RegistryUserMessageType
         {
@@ -85,25 +85,25 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 系统信息->权限信息->创建新用户
+        ///     系统信息->权限信息->创建新用户
         /// </summary>
         public MessageType CreateUserMessageType
         {
             get { return GetOrCreate(MemberShipType, "CreateUser"); }
         }
 
-
+        /// <summary>
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="infoName"></param>
+        /// <returns></returns>
         private MessageType GetOrCreate(MessageType parent, string infoName)
         {
             MessageType messageType = _infoTypeDao.Get(infoName);
             if (messageType == null)
             {
-                messageType = new MessageType(infoName);
+                messageType = new MessageType(infoName, parent);
                 _infoTypeDao.Save(messageType);
-                if (parent != null)
-                {
-                    parent.Add(messageType);
-                }
             }
             return messageType;
         }

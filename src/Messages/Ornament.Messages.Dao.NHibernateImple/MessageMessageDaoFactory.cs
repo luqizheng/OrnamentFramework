@@ -5,14 +5,14 @@ using Qi.NHibernateExtender;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class MessageDaoFactory : IDaoFactory
+    public class MessageMessageDaoFactory : IMessageDaoFactory
     {
         #region IDaoFactory Members
 
         /// <summary>
         /// 
         /// </summary>
-        public IInfoDao InfoDao
+        public IInfoDao MessageDao
         {
             get { return new InfoDao(); }
         }
@@ -20,7 +20,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// 
         /// </summary>
-        public IInfoTypeDao InfoTypeDao
+        public IInfoTypeDao MessageTypeDao
         {
             get { return new InfoTypeDao(); }
         }
@@ -28,7 +28,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// /
         /// </summary>
-        public IQueryable<Message> Infos
+        public IQueryable<Message> Messages
         {
             get { return SessionManager.Instance.GetCurrentSession().Query<Message>(); }
         }
@@ -44,7 +44,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// 
         /// </summary>
-        public IQueryable<MessageType> InfoTypes
+        public IQueryable<MessageType> MessageTypes
         {
             get { return SessionManager.Instance.GetCurrentSession().Query<MessageType>(); }
         }
@@ -52,7 +52,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// 
         /// </summary>
-        public IInfoReaderDao InfoReaderDao
+        public IInfoReaderDao MessageReaderDao
         {
             get { return new InfoReaderDao(); }
         }
@@ -60,7 +60,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// 
         /// </summary>
-        public IInfoReadStateDao InfoReadStateDao
+        public IInfoReadStateDao MessageReadStateDao
         {
             get { return new InfoReadStateDao(); }
         }

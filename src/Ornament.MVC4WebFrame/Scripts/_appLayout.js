@@ -32,7 +32,14 @@
         cssClose: 'subClosed',
         speed: 200
     });
-
+    $('.showmenu').click(function () {
+        $('.actions-wrapper').slideToggle(100);
+    });
+    $('.fullview').click(function () {
+        $("body").toggleClass("clean");
+        $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
+        $('#content').toggleClass("full-content");
+    });
 
 
 });

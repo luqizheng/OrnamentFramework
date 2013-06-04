@@ -219,14 +219,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
-    <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
-    <Compile Include="Areas\Attendance\Controllers\CheckHistoryController.cs" />
-    <Compile Include="Areas\Attendance\Controllers\EmployeeCheckedController.cs" />
-    <Compile Include="Areas\Attendance\Controllers\EmployeeController.cs" />
-    <Compile Include="Areas\Attendance\Controllers\EmployeeGroupController.cs" />
-    <Compile Include="Areas\Attendance\Models\CardModel.cs" />
-    <Compile Include="Areas\Attendance\Models\CardModelList.cs" />
-    <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
@@ -235,18 +227,10 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
-    <Compile Include="Areas\Projects\Controllers\DefectsController.cs" />
-    <Compile Include="Areas\Projects\Controllers\ProductController.cs" />
-    <Compile Include="Areas\Projects\Controllers\ProjectController.cs" />
-    <Compile Include="Areas\Projects\Models\ProjectModel.cs" />
-    <Compile Include="Areas\Projects\ProjectsAreaRegistration.cs" />
-    <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
-    <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
-    <Compile Include="Areas\Docs\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
-    <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
+    <Compile Include="Areas\Settings\Controllers\MessageController.cs" />
+    <Compile Include="Areas\Settings\Controllers\MessageTypeController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
@@ -255,7 +239,6 @@
     <Compile Include="Controllers\HttpErrorsController.cs" />
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\MembershipServiceController.cs" />
-    <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -276,50 +259,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Areas\MemberShips\Views\Shared\RolesSelector.ascx" />
-    <Content Include="Areas\Docs\Views\Web.config" />
-    <Content Include="Areas\Docs\Views\BaseCss\Typography.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Table.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Form.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Buttons.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Image.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Icons.cshtml" />
-    <Content Include="Areas\Projects\Views\Web.config" />
-    <Content Include="Areas\Projects\Views\Project\Index.cshtml" />
-    <Content Include="Areas\Docs\Views\Component\Dropdowns.cshtml" />
-    <Content Include="Areas\Docs\Views\Dashboard\Index.cshtml" />
-    <Content Include="Areas\Docs\Views\Dashboard\Bootstrap.cshtml" />
-    <Content Include="Areas\Projects\Views\Product\Index.cshtml" />
-    <Content Include="Areas\Projects\Views\Product\Create.cshtml" />
-    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Product.cshtml" />
-    <Content Include="Areas\Projects\Views\Product\Edit.cshtml" />
-    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Components.cshtml" />
-    <Content Include="Areas\Projects\Views\Project\Create.cshtml" />
-    <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
-    <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Code.cshtml" />
-    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
-    <Content Include="Areas\Projects\Views\Defects\Index.cshtml" />
-    <Content Include="Areas\Projects\Views\Defects\Create.cshtml" />
-    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Project.cshtml" />
-    <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
-    <Content Include="Areas\Projects\Views\Shared\EditorTemplates\Defect.cshtml" />
-    <Content Include="Areas\Projects\Views\Shared\DisplayTemplates\_dashboard_DefectIndex.cshtml" />
-    <Content Include="Areas\Attendance\Views\Web.config" />
-    <Content Include="Areas\Attendance\Views\EmployeeGroup\Index.cshtml" />
-    <Content Include="Areas\Attendance\Views\EmployeeGroup\Create.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\EmployeeGroup.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\EmployeeGroupOption.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\YearMarkers.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\PeriodDailog.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\DailyDailog.cshtml" />
-    <Content Include="Areas\Attendance\Views\EmployeeGroup\Edit.cshtml" />
-    <Content Include="Areas\Attendance\Views\Employee\Index.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\Employee.cshtml" />
-    <Content Include="Areas\Attendance\Views\Employee\Create.cshtml" />
-    <Content Include="Areas\Attendance\Views\Employee\Edit.cshtml" />
-    <Content Include="Areas\Attendance\Views\Shared\EditorTemplates\CardsEditor.cshtml" />
-    <Content Include="Areas\Attendance\Views\Employee\Cards.cshtml" />
-    <Content Include="Areas\Attendance\Views\CheckHistory\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserBasicInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserOptionInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserPassword.cshtml" />
@@ -330,6 +269,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\MessageType\Index.cshtml" />
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />
@@ -1131,9 +1071,6 @@
     <Content Include="Views\Account\App_LocalResources\Regist.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\DaoFactory.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Config\hibernate.cfg.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1145,9 +1082,6 @@
     <Content Include="Config\initData.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Config\Message.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\ChangePassword.cshtml" />
