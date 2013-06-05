@@ -3,7 +3,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IInfoTypeDao : IDao<string, MessageType>
+    public interface IMessageTypeDao : IDao<string, MessageType>
     {
         /// <summary>
         /// 

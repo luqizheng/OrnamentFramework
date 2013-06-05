@@ -4,7 +4,7 @@
 @using (Ajax.BeginForm("SaveBaseInfo", new AjaxOptions() { HttpMethod = "post", OnSuccess = "SaveSuccess" }))
 {
     <div class="form-horizontal">
-        @this.Html.LabelTextBoxFor(s => s.Name)
+        @this.Html.oLabelTextBoxFor(s => s.Name)
         @* <div class="control-group">
             @Html.LabelFor(s => s.Name, new { @class = " control-label" })
             <div class="controls">

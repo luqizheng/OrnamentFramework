@@ -1,0 +1,54 @@
+﻿@using System.Web.UI.WebControls
+@using Ornament.Messages
+@using Resources
+@using Ornament.Web.HtmlExtends
+@model Ornament.Messages.Message
+
+
+@{
+    ViewBag.Title = "Create new message";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var types = ViewData["types"] as IEnumerable<MessageType>;
+}
+@section pageTitle
+{
+    <h5>Create new message</h5>
+}
+
+<form method="POST">
+    <div class="widget">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <button class="btn btn-info" type="submit">@Basic.Submit</button>
+            </div>
+        </div>
+        <div class="well body">
+            <div class="row-fluid">
+                @Html.BootstrapLabelTextBoxFor(s => s.Subject)
+                <div class="control-group">
+                    <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
+                    <div class="controls">
+                        <select name="Type" class="bulk" id="Type">
+                            @foreach (var type in types)
+                            {
+                                <option value="@type.Id">@type.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <textarea name="editor"></textarea>
+    </div>
+</form>
+@section script
+{
+    <script type="text/javascript">
+        seajs.use(['ckeditor/ckeditor.js', "/Scripts/plugins/forms/jquery.select2.min.js"], function () {
+
+            CKEDITOR.replace('editor');
+            $("#Type").select2();
+        });
+    </script>
+}

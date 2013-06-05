@@ -12,7 +12,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
     /// <summary>
     /// 
     /// </summary>
-    public class InfoDao : DaoBase<string, Message>, IInfoDao
+    public class MessageDao : DaoBase<string, Message>, IMessageDao
     {
         private const string maxGuid = ".ffffffffffffffffffffffffffffffff";
         private const string minGuid = ".00000000000000000000000000000000";
@@ -46,7 +46,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 IQuery query;
                 if (cacasde)
                 {
-                    var typeDao = new InfoTypeDao();
+                    var typeDao = new MessageTypeDao();
                     MessageType type;
 
                     type = typeDao.Get(typeName);
@@ -124,7 +124,7 @@ and Message.State=? order by Message.CreateTime desc");
             IQuery query;
             if (cacasde)
             {
-                var typeDao = new InfoTypeDao();
+                var typeDao = new MessageTypeDao();
                 MessageType type = typeDao.Get(typeName);
                 if (type == null)
                     return new List<Message>();
@@ -158,7 +158,7 @@ and Message.State=? and Message.PublishTime>=? and Message.PublishTime<=? order 
 
         public IList<Message> Find(User user, int pageSize, int pageIndex, params string[] typeNames)
         {
-            var s = new InfoSearcher
+            var s = new MessageSearcher
                         {
                             RelivateUser = user,
                             PageIndex = pageIndex,
@@ -170,7 +170,7 @@ and Message.State=? and Message.PublishTime>=? and Message.PublishTime<=? order 
         }
 
 
-        public IList<Message> Find(InfoSearcher search)
+        public IList<Message> Find(MessageSearcher search)
         {
             DetachedCriteria userReadStateCriteria = DetachedCriteria.For<ReaderReadStatus>();
 

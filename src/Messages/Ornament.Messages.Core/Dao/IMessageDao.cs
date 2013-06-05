@@ -5,7 +5,7 @@ using Ornament.MemberShip;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IInfoDao : IDao<string, Message>
+    public interface IMessageDao : IDao<string, Message>
     {
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace Ornament.Messages.Dao
         /// </summary>
         /// <param name="search"></param>
         /// <returns></returns>
-        IList<Message> Find(InfoSearcher search);
+        IList<Message> Find(MessageSearcher search);
 
         IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type,bool includeSubType);
 

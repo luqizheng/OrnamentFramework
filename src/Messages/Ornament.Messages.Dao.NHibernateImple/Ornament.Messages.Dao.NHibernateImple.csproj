@@ -102,10 +102,10 @@
     <Compile Include="Mapping\PermissionMapping.cs" />
     <Compile Include="MessageMessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
-    <Compile Include="InfoDao.cs" />
+    <Compile Include="MessageDao.cs" />
     <Compile Include="InfoReaderDao.cs" />
     <Compile Include="InfoReadStateDao.cs" />
-    <Compile Include="InfoTypeDao.cs" />
+    <Compile Include="MessageTypeDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@
             $(".actionCheckbox").uniform().click(function () {
                 $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
             }).click();
-
+            $("#selApplyAction").uniform();
             $("#BtnApply").click(function () {
                 var action = $("#selApplyAction").val();
                 $("#tableForm").attr("action", "User/" + action).submit();

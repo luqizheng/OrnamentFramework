@@ -12,9 +12,9 @@ namespace Ornament.Messages.Dao
 
         IQueryable<MessageType> MessageTypes { get; }
 
-        IInfoDao MessageDao { get; }
+        IMessageDao MessageDao { get; }
 
-        IInfoTypeDao MessageTypeDao { get; }
+        IMessageTypeDao MessageTypeDao { get; }
 
         IInfoReaderDao MessageReaderDao { get; }
 

@@ -42,9 +42,8 @@ namespace Ornament.Messages
             State = MessageState.Draft;
         }
 
-        
 
-        private int Version { get; set; }
+        public virtual int Version { get; protected set; }
 
         /// <summary>
         /// </summary>

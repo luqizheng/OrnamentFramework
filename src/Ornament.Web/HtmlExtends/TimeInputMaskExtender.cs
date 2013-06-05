@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -15,6 +16,18 @@ namespace Ornament.Web
 {
     public static class TimeInputMaskExtender
     {
+        internal static string ToInputMask(string dateTimeformat)
+        {
+            string result = dateTimeformat.ToLower();
+            return Regex.Replace(result, "\\w+", s =>
+                {
+                    string f = s.Value.Substring(0, 1);
+                    if (f == "m")
+                        return "s";
+                    return f;
+                });
+        }
+
         public static IHtmlString TimeInputFor<TModel>(this HtmlHelper<TModel> helper,
                                                        Expression<Func<TModel, Time>> expression)
         {
@@ -64,7 +77,7 @@ namespace Ornament.Web
             var input = new TagBuilder("input");
             input.Attributes.Add("type", "text");
             input.Attributes.Add("name", name);
-            input.Attributes.Add("inputMask-format", HtmlExtender.ToInputMask(format));
+            input.Attributes.Add("inputMask-format", ToInputMask(format));
             input.Attributes.Add("value", value.ToString(format));
 
 

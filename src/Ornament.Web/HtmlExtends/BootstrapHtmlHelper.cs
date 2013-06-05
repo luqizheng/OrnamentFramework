@@ -9,7 +9,7 @@ namespace Ornament.Web.HtmlExtends
 {
     public static class BootstrapHtmlHelper
     {
-        public static MvcHtmlString LabelTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
+        public static MvcHtmlString BootstrapLabelTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
                                                           Expression<Func<TModel, TValue>> expression)
         {
             /*div class="control-group">
@@ -34,7 +34,7 @@ namespace Ornament.Web.HtmlExtends
             return new MvcHtmlString(result.ToString());
         }
 
-        public static MvcHtmlString LabelTextAreaFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
+        public static MvcHtmlString BootstrapLabelTextAreaFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
                                                         Expression<Func<TModel, TValue>> expression)
         {
             /*div class="control-group">
@@ -59,7 +59,7 @@ namespace Ornament.Web.HtmlExtends
             return new MvcHtmlString(result.ToString());
         }
 
-        public static MvcHtmlString LabelTextAreaFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
+        public static MvcHtmlString BootstrapLabelTextAreaFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
                                                        Expression<Func<TModel, TValue>> expression, object httpAtts)
         {
             /*div class="control-group">

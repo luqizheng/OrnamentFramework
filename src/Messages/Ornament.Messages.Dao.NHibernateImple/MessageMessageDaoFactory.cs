@@ -12,17 +12,17 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// 
         /// </summary>
-        public IInfoDao MessageDao
+        public IMessageDao MessageDao
         {
-            get { return new InfoDao(); }
+            get { return new MessageDao(); }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public IInfoTypeDao MessageTypeDao
+        public IMessageTypeDao MessageTypeDao
         {
-            get { return new InfoTypeDao(); }
+            get { return new MessageTypeDao(); }
         }
 
         /// <summary>

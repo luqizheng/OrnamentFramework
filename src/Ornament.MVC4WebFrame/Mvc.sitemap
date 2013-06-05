@@ -52,11 +52,22 @@ use permission for checking permission like @user:Read, user is the string type 
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="Message Type" clickable="false">
+    <mvcSiteMapNode title="Message Type" controller="MessageType" area="Settings" action="Index">
       <mvcSiteMapNode controller="MessageType" area="Settings" action="Index" title="Message Type">
+        <mvcSiteMapNode controller="MessageType" area="Settings" action="Edit" title="Edit">
 
+        </mvcSiteMapNode>
+        <mvcSiteMapNode controller="MessageType" area="Settings" action="Create" title="Create">
+
+        </mvcSiteMapNode>
       </mvcSiteMapNode>
 
+      <mvcSiteMapNode controller="Message" area="Settings" action="Index" title="Messages">
+        <mvcSiteMapNode controller="Message" area="Settings" action="Edit" title="Edit">
+        </mvcSiteMapNode>
+        <mvcSiteMapNode controller="Message" area="Settings" action="Create" title="Create">
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
     </mvcSiteMapNode>
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" controller="EventLog" area="Application">

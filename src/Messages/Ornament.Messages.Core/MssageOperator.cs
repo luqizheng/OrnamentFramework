@@ -6,7 +6,7 @@ using System.Text;
 namespace Ornament.Messages
 {
     [Flags]
-    public enum InfoOperator
+    public enum MessageOperator
     {
         None = 0,
         Read = 1,

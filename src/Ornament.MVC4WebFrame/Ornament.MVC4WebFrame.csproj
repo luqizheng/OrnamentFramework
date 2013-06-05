@@ -270,6 +270,11 @@
     </Content>
     <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
     <Content Include="Areas\Settings\Views\MessageType\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\MessageType\Edit.cshtml" />
+    <Content Include="Areas\Settings\Views\MessageType\_messageTypeEditor.cshtml" />
+    <Content Include="Areas\Settings\Views\MessageType\Create.cshtml" />
+    <Content Include="Areas\Settings\Views\Message\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Message\Create.cshtml" />
     <None Include="Content\less\bootstrap\media.less" />
     <None Include="Content\less\box.less" />
     <None Include="Content\less\datepicker.less" />

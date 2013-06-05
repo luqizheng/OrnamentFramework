@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Models.Messages;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
@@ -23,16 +25,59 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
                 msgType = _messageDao.MessageTypeDao.GetFirstLevel();
             else
             {
-                var parent = _messageDao.MessageTypeDao.Get(parentId);
+                MessageType parent = _messageDao.MessageTypeDao.Get(parentId);
                 msgType = _messageDao.MessageTypeDao.GetList(parent);
+                ViewData["parent"] = parent;
             }
+
             return View(msgType);
         }
 
         public ActionResult Edit(string id)
         {
-            _messageDao.MessageDao.Get(id);
-            return View();
+            var result = new MessageTypeModel(_messageDao.MessageTypeDao.Get(id));
+            return View(result);
+        }
+
+        [HttpPost, Session(true, Transaction = true)]
+        public ActionResult Edit(MessageTypeModel type)
+        {
+            if (ModelState.IsValid)
+            {
+                type.Save(_messageDao);
+                return RedirectToAction("Index");
+            }
+            return View(type);
+        }
+
+        public ActionResult Create(string parentId)
+        {
+            var result = new MessageTypeModel();
+            if (parentId != null)
+            {
+                var parent = _messageDao.MessageTypeDao.Get(parentId);
+                result.Parent = parent;
+            }
+            result.Name = "new message type";
+
+            return View(result);
+
+        }
+
+        [HttpPost, Session(true, Transaction = true)]
+        public ActionResult Create(MessageTypeModel type)
+        {
+            if (ModelState.IsValid)
+            {
+                type.Save(_messageDao);
+                return RedirectToAction("Index");
+            }
+            return View(type);
+        }
+        [HttpPost, ResourceAuthorize(MessageOperator.Delete, "Message")]
+        public ActionResult Delete(string id)
+        {
+            return Json("Delete success.");
         }
     }
 }

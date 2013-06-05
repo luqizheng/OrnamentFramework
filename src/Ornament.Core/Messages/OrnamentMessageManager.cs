@@ -7,7 +7,7 @@ namespace Ornament.Messages
 {
     public class OrnamentMessageManager
     {
-        private readonly IInfoTypeDao _infoTypeDao;
+        private readonly IMessageTypeDao _messageTypeDao;
 
 
         public OrnamentMessageManager(IMessageDaoFactory messageFacotry, IMemberShipFactory memberShipFactory)
@@ -15,7 +15,7 @@ namespace Ornament.Messages
             if (messageFacotry == null) throw new ArgumentNullException("messageFacotry");
             InfoDaoFactory = messageFacotry;
             MemberShipFactory = memberShipFactory;
-            _infoTypeDao = InfoDaoFactory.MessageTypeDao;
+            _messageTypeDao = InfoDaoFactory.MessageTypeDao;
         }
 
         public IMessageDaoFactory InfoDaoFactory { get; set; }
@@ -99,11 +99,11 @@ namespace Ornament.Messages
         /// <returns></returns>
         private MessageType GetOrCreate(MessageType parent, string infoName)
         {
-            MessageType messageType = _infoTypeDao.Get(infoName);
+            MessageType messageType = _messageTypeDao.Get(infoName);
             if (messageType == null)
             {
                 messageType = new MessageType(infoName, parent);
-                _infoTypeDao.Save(messageType);
+                _messageTypeDao.Save(messageType);
             }
             return messageType;
         }

@@ -1,14 +1,12 @@
 ﻿using System;
 using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
 using Qi.Domain;
 
 namespace Ornament.Messages
 {
     /// <summary>
-    /// 
     /// </summary>
-    public class MessageReader : DomainObject<MessageReader,string>
+    public class MessageReader : DomainObject<MessageReader, string>
     {
         protected MessageReader()
         {
@@ -24,12 +22,11 @@ namespace Ornament.Messages
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public virtual Message Message { get; set; }
 
         /// <summary>
-        /// Gets or sets MessageReader
+        ///     Gets or sets MessageReader
         /// </summary>
         public virtual IPerformer Reader { get; protected set; }
 

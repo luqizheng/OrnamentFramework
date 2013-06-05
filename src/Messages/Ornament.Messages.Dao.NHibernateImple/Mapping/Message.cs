@@ -13,6 +13,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         {
             this.Table("Msgs_Message");
             Id(x => x.Id).GeneratedBy.UuidHex("N");
+            this.Version(s => s.Version).Generated.Always();
             this.Map(x => x.CreateTime);
             this.Map(x => x.Priority);
             this.Map(x => x.EffectTime);

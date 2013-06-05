@@ -76,11 +76,11 @@
     <Compile Include="MessageTypeException.cs" />
     <Compile Include="MssageOperator.cs" />
     <Compile Include="Dao\IMessageDaoFactory.cs" />
-    <Compile Include="Dao\IInfoDao.cs" />
+    <Compile Include="Dao\IMessageDao.cs" />
     <Compile Include="Dao\IInfoReaderDao.cs" />
     <Compile Include="Dao\IInfoReadStateDao.cs" />
-    <Compile Include="Dao\IInfoTypeDao.cs" />
-    <Compile Include="Dao\InfoSearcher.cs" />
+    <Compile Include="Dao\IMessageTypeDao.cs" />
+    <Compile Include="Dao\MessageSearcher.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageReader.cs" />
     <Compile Include="MessageState.cs" />

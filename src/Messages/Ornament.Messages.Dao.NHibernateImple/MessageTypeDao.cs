@@ -6,7 +6,7 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class InfoTypeDao : DaoBase<string, MessageType>, IInfoTypeDao
+    public class MessageTypeDao : DaoBase<string, MessageType>, IMessageTypeDao
     {
         IProjection Parent { get { return Projections.Property<MessageType>(x => x.Parent); } }
         #region IInfoTypeDao Members

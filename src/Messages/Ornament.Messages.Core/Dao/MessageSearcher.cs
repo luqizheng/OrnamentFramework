@@ -6,14 +6,14 @@ using Ornament.MemberShip.Dao;
 
 namespace Ornament.Messages.Dao
 {
-    public class InfoSearcher
+    public class MessageSearcher
     {
         private IList<IPerformer> _performers;
         
 
-        public InfoSearcher()
+        public MessageSearcher()
         {
-            PageSize = 10;
+            PageSize = 40;
             PageIndex = 0;
         }
 
