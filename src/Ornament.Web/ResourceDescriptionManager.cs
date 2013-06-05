@@ -15,6 +15,10 @@ namespace Ornament.Web
 
         private readonly IList<ResourceDescription> _resourcesSelector;
 
+        public ResourceDescriptionManager()
+        {
+            _resourcesSelector = new List<ResourceDescription>();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -48,7 +52,7 @@ namespace Ornament.Web
                 throw new ResourceException(String.Format("can't find the {0} from setting.", name));
             return result;
         }
-      
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,7 +61,7 @@ namespace Ornament.Web
         /// <returns></returns>
         public ResourceDescription GetResourceSettingByType(Type valueOfResource)
         {
-            if (valueOfResource == null) 
+            if (valueOfResource == null)
                 throw new ArgumentNullException("valueOfResource");
             foreach (ResourceDescription resDesc in _resourcesSelector)
             {

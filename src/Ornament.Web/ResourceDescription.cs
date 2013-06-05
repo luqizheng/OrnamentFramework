@@ -3,6 +3,9 @@ using Ornament.MemberShip.Permissions;
 
 namespace Ornament.Web
 {
+    /// <summary>
+    /// Resource Setting for Web 
+    /// </summary>
     public class ResourceDescription
     {
         /// <summary>

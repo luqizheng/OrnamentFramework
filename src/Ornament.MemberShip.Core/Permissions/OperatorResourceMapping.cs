@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ornament.MemberShip.Permissions
 {
@@ -19,15 +18,15 @@ namespace Ornament.MemberShip.Permissions
         {
             get { return _typeResourcesOperator; }
         }
+
         /// <summary>
-        /// 
         /// </summary>
         private NHibernateResourceManager NHibernateResourceManager
         {
             get { return _nhResourceManager; }
         }
+
         /// <summary>
-        /// 
         /// </summary>
         public string[] AllTypeResource
         {
@@ -39,16 +38,14 @@ namespace Ornament.MemberShip.Permissions
             get { return NHibernateResourceManager.Resources; }
         }
 
-      
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="resType"></param>
         /// <returns></returns>
         public Type GetOperator(Type resType)
         {
-            if (resType == null) 
+            if (resType == null)
                 throw new ArgumentNullException("resType");
             return NHibernateResourceManager.GetOperatorType(resType);
         }
@@ -64,7 +61,7 @@ namespace Ornament.MemberShip.Permissions
 
         public OperatorResourceMapping Add(string resource, Type operatorType)
         {
-            this.TypeResourcesOperator.Add(resource, operatorType);
+            TypeResourcesOperator.Add(resource, operatorType);
             return this;
         }
     }

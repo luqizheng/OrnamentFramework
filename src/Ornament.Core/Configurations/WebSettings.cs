@@ -13,7 +13,7 @@ namespace Ornament.Configurations
         {
             get
             {
-                var result = ConfigurationManager.AppSettings["DomainUrl"];
+                string result = ConfigurationManager.AppSettings["DomainUrl"];
                 if (result.EndsWith("/"))
                 {
                     return result.TrimEnd('/');

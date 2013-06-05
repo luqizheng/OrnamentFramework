@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Secret;
+using Ornament.Models.Security;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
@@ -19,15 +20,19 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult VerifyEmailAndChangePassword(string id, string token)
         {
             UserSecretToken userToken = _factory.CreateUserSecortTokeDao().Get(id);
+            var result = new VerifyEmailAndChangePasswordResutl();
+
             if (userToken == null)
             {
-                ViewData["resource"] = "NotFoundToken";
+                result.Type = VerifyEmailAndChangePasswordResutlType.NotFoundTokenId;
             }
             else
             {
-                userToken.Verify(token);
+                result.Type = userToken.Verify(token)
+                    ? VerifyEmailAndChangePasswordResutlType.Success
+                    : VerifyEmailAndChangePasswordResutlType.Failed;
             }
-            return View();
+            return View(result);
         }
     }
 }
