@@ -1,4 +1,5 @@
 ﻿using Ornament.MVCWebFrame.Models.Membership;
+using Ornament.MemberShip.Permissions;
 using Ornament.Messages;
 using Ornament.Web;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using FluentNHibernate.Cfg;
@@ -15,10 +16,17 @@ namespace Ornament
 {
     public class Context
     {
+        static Context()
+        {
+            
+            Inner.Instance.GetContainer()
+                .Register(Component.For<OperatorResourceMapping>());
+        
+        }
         protected Context()
         {
         }
-
+        
         private static ApplicationSetting _setting;
         public static ApplicationSetting Setting
         {
