@@ -15,40 +15,110 @@
     <h5>Create new message</h5>
 }
 
-<form method="POST">
+<form method="POST" action="@Url.Action("Save")">
     <div class="widget">
         <div class="navbar">
             <div class="navbar-inner">
-                <button class="btn btn-info" type="submit">@Basic.Submit</button>
+                <button id="submitButton" class="btn btn-info" type="button">@Basic.Submit</button>
+                <a href="@Url.Action("Index")" class="btn">Back</a>
             </div>
         </div>
         <div class="well body">
-            <div class="row-fluid">
-                @Html.BootstrapLabelTextBoxFor(s => s.Subject)
-                <div class="control-group">
-                    <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
-                    <div class="controls">
-                        <select name="Type" class="bulk" id="Type">
-                            @foreach (var type in types)
-                            {
-                                <option value="@type.Id">@type.Name</option>
-                            }
-                        </select>
+
+
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>Basic</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab8"><i class="fam-date"></i>Content</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab7" class="tab-pane active">
+                        <div class="form-horizontal row-fluid">
+                            @Html.BootstrapLabelTextBoxFor(s => s.Subject)
+                            <div class="control-group">
+                                <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
+                                <div class="controls">
+                                    <select name="Type" class="bulk" id="Type">
+                                        @foreach (var type in types ?? (new List<MessageType>()))
+                                        {
+                                            <option value="@type.Id">@type.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab8" class="tab-pane">
+                        <div>
+                            <div class="control-group">
+                                <select id="Language">
+                                    <option value="EN-us">En-us</option>
+                                </select>
+                                <a type="button" class="btn btn-info" href="#myModal" role="button" data-toggle="modal">Add</a>
+                                <a type="button" class="btn btn-info" href="#myModal" role="button" data-toggle="modal">Edit</a>
+                            </div>
+                            <div class="control-group">
+                                <textarea name="editor" id="editor"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <textarea name="editor"></textarea>
+
     </div>
 </form>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Input Language</h3>
+    </div>
+    <div class="modal-body">
+        <input id="LanguageName" value="" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="saveChanged">Save changes</button>
+    </div>
+</div>
+
 @section script
 {
     <script type="text/javascript">
-        seajs.use(['ckeditor/ckeditor.js', "/Scripts/plugins/forms/jquery.select2.min.js"], function () {
+        var content = { "en-Us": "" };
+        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap"], function () {
 
-            CKEDITOR.replace('editor');
+            var editor = CKEDITOR.replace('editor');
+            editor.on("blur", function () {
+                content[$("#Language").val()] = editor.getData();
+            });
             $("#Type").select2();
+            $("#Language").select2().change(function () {
+                var cont = content[$(this).val()];
+                editor.setData(cont ? cont : "");
+            }).change().next().click(function () {
+                $("#LanguageName").val("");
+            }).next().click(function () {
+                $("#LanguageName").val($("#Language").val());
+            });
+
+            $("#saveChanged").click(function () {
+                $("#myModal").modal("hide");
+                var langCode = $("#LanguageName").val();
+                content[langCode] = $("#editor").val();
+                $("#Language").append("<option value='" + langCode + "'>" + langCode + "<option>");
+            });
+            $("#submitButton").click(function () {
+                var ary = [];
+                for (var key in content) {
+                    var v = content[key];
+                    ary.push("<input type='hidden' value='" + v + "' name='Contents[" + key + "]'/>");
+                }
+                $("form").append(ary.join("")).submit();
+
+            });
         });
     </script>
 }

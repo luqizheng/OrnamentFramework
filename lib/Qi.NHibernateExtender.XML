@@ -645,6 +645,7 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.RemoveWrapper(System.Web.Mvc.ControllerContext)">
             <summary>
+            Remvoe NH Session, but it nevery close the session.
             </summary>
             <param name="controllerContext"></param>
             <returns></returns>

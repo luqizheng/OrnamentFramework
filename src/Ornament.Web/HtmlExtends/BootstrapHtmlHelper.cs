@@ -34,6 +34,32 @@ namespace Ornament.Web.HtmlExtends
             return new MvcHtmlString(result.ToString());
         }
 
+        public static MvcHtmlString BootstrapLabelTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
+                                                         Expression<Func<TModel, TValue>> expression, object labelAttrs, object inputAttrs)
+        {
+            /*div class="control-group">
+            @Html.LabelFor(s => s.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(s => s.Email)
+                @Html.ValidationMessageFor(s => s.Email)
+            </div>
+        </div>*/
+            var result = new TagBuilder("div");
+            result.AddCssClass("control-group");
+
+            var controls = new TagBuilder("div");
+            controls.AddCssClass("controls");
+            controls.InnerHtml = (htmlHelper.TextBoxFor(expression, inputAttrs).ToHtmlString()) +
+                                 htmlHelper.ValidationMessageFor(expression).ToHtmlString();
+
+            var labelAttr = new RouteValueDictionary(labelAttrs) {{"class", "control-label"}};
+
+            result.InnerHtml = htmlHelper.LabelFor(expression, labelAttr).ToHtmlString() + controls.ToString();
+
+
+            return new MvcHtmlString(result.ToString());
+        }
+
         public static MvcHtmlString BootstrapLabelTextAreaFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,
                                                         Expression<Func<TModel, TValue>> expression)
         {
@@ -84,7 +110,7 @@ namespace Ornament.Web.HtmlExtends
             return new MvcHtmlString(result.ToString());
         }
 
-        public static MvcHtmlString AlertMessage(this HtmlHelper helper, string message,bool show, object htmlAttributes)
+        public static MvcHtmlString AlertMessage(this HtmlHelper helper, string message, bool show, object htmlAttributes)
         {
             /*
             <div class="alert widget">

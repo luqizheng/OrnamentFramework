@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Qi.Web.Mvc;
 
@@ -25,15 +20,21 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
         {
             if (searcher != null)
                 searcher = new MessageSearcher();
-            var result = _messageDao.MessageDao.Find(searcher);
+            IList<Message> result = _messageDao.MessageDao.Find(searcher);
             return View(result);
         }
 
         public ActionResult Create()
         {
-            var types = _messageDao.MessageTypeDao.GetAll();
+            IList<MessageType> types = _messageDao.MessageTypeDao.GetAll();
             ViewData["types"] = types;
             return View();
+        }
+
+        [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
+        public ActionResult Save(Message message, IDictionary<string, string> contents)
+        {
+            return RedirectToAction("Index");
         }
     }
 }
