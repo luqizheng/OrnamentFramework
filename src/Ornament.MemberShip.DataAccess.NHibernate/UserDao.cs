@@ -124,7 +124,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
                     .List<User>();
         }
 
@@ -140,7 +140,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.InsensitiveLike(EmailProperty, emailToMatch))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageSize*pageIndex)
+                .SetFirstResult(pageSize * pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -155,15 +155,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <param name="startRow"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IList<User> Search(string loginId, string email, string phone, bool islockout, bool isApproved,
-                                  int startRow, int pageSize)
+        public IList<User> Search(string loginId, string email, string phone, bool? islockout, bool? isApproved, int? startRow, int? pageSize)
         {
-            ICriterion tion = CreateSearchCondition(loginId, email, phone, islockout, isApproved);
+            ICriterion tion = CreateSearchCondition(loginId, email, phone, islockout ?? false, isApproved ?? true);
 
             return CreateDetachedCriteria()
                 .Add(tion)
-                .SetMaxResults(pageSize)
-                .SetFirstResult(startRow)
+                .SetMaxResults(pageSize ?? 40)
+                .SetFirstResult(startRow ?? 0)
                 .GetExecutableCriteria(CurrentSession).List<User>();
             ;
         }
@@ -177,7 +176,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
                     pageSize)
                     .GetExecutableCriteria(CurrentSession)
                     .List<User>();
@@ -224,7 +223,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> FindAll(int pageIndex, int pageSize)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
                     GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -240,8 +239,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                                  string phone, bool islockout,
                                                  bool isApproved)
         {
-            ICriterion tion = Restrictions.Eq("Information.IsLockout", islockout);
-            tion = Restrictions.Or(tion, Restrictions.Eq("Information.IsApproved", isApproved));
+            ICriterion tion = Restrictions.Eq("IsLockout", islockout);
+            tion = Restrictions.Or(tion, Restrictions.Eq("IsApproved", isApproved));
 
 
             if (!String.IsNullOrEmpty(loginId))

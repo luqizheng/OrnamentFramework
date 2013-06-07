@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Messages;
+using Ornament.Messages.Contents;
 using Ornament.Messages.Dao;
+using Ornament.Web;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
@@ -32,8 +34,18 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
         }
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
-        public ActionResult Save(Message message, IDictionary<string, string> contents)
+        public ActionResult Save(Message message, IDictionary<string, string> newContents)
         {
+            message.Contents.Clear();
+            foreach (var key in newContents.Keys)
+            {
+                message.Contents.Add(key, new Content()
+                    {
+                        Language = key,
+                        Value = newContents[key]
+                    });
+            }
+            _messageDao.MessageDao.SaveOrUpdate(message);
             return RedirectToAction("Index");
         }
     }

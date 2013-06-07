@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Profile;
@@ -33,7 +34,7 @@ namespace Ornament.MVCWebFrame
             ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
             ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
 
-
+            
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -55,7 +56,10 @@ namespace Ornament.MVCWebFrame
             XmlConfigurator.Configure(); //Log4net registry.
             UpdateDatabase();
 
-
+            //Web API
+            OrnamentWebApiFactory httpDependencyResolver = new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(Assembly.GetExecutingAssembly()));
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator),httpDependencyResolver);
+            
         }
 
         private void ChangeControllerFacotry()
@@ -63,11 +67,13 @@ namespace Ornament.MVCWebFrame
             try
             {
                 Type[] controllerTypes = OrnamentControllerFactory.FilterController(Assembly.GetExecutingAssembly());
+
                 ////change the default controller.
                 ControllerBuilder.Current.SetControllerFactory(new OrnamentControllerFactory(controllerTypes)
                     {
                         ErrorController = typeof(HttpErrorsController)
                     });
+
             }
             catch (Exception ex)
             {

@@ -58,7 +58,7 @@
             deps: ["jquery"],
             exports: "jQuery "
         },
-        user: {
+        user: { //User model
             src: "/bundles/user.js",
             deps: ["jquery"], exports: "jQuery "
         },

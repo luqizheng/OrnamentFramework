@@ -32,8 +32,7 @@ namespace Ornament.MemberShip.Dao
 
         int Count(string loginId, string email, string phone, bool islockout, bool isApproved);
 
-        IList<User> Search(string loginId, string email, string phone, bool islockout, bool isApproved, int startRow,
-                           int pageSize);
+        IList<User> Search(string loginId, string email, string phone, bool? islockout, bool? isApproved, int? startRow, int? pageSize);
 
         IList<User> Search(string searchProperty, string searchValue, bool isSortAsc, string sortProperty, int pageIndex,
                            int pageSize, out int total);

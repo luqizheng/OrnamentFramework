@@ -4,20 +4,20 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
 namespace Ornament.Web
 {
     /// <summary>
-    /// 
     /// </summary>
     public class OrnamentControllerFactory : DefaultControllerFactory
     {
         private readonly WindsorContainer _container;
 
         /// <summary>
-        /// Create defaultFacotryy
+        ///     Create defaultFacotryy
         /// </summary>
         /// <param name="controllers">a set type, it will auto to filer the</param>
         public OrnamentControllerFactory(params Type[] controllers)
@@ -38,7 +38,6 @@ namespace Ornament.Web
         public Type ErrorController { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="assemblies"></param>
         /// <returns></returns>
