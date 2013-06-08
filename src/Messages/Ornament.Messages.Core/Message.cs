@@ -36,7 +36,6 @@ namespace Ornament.Messages
 
         protected Message()
         {
-
             CreateTime = DateTime.Now;
             EffectTime = null;
             State = MessageState.Draft;

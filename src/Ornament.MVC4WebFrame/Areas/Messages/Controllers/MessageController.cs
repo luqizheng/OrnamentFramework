@@ -3,10 +3,9 @@ using System.Web.Mvc;
 using Ornament.Messages;
 using Ornament.Messages.Contents;
 using Ornament.Messages.Dao;
-using Ornament.Web;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
+namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
     public class MessageController : Controller
@@ -36,7 +35,7 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
             {
                 var c = message.Contents[a];
             }
-            return View("Create", message);
+            return View("Edit", message);
         }
 
 
@@ -44,7 +43,7 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
         {
             IList<MessageType> types = _daoFactory.MessageTypeDao.GetAll();
             ViewData["types"] = types;
-            return View();
+            return View("Edit");
         }
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]

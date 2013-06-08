@@ -15,8 +15,8 @@ namespace Ornament.Web
 {
     public static class DateTimePickerExtender
     {
-        public static IHtmlString DatePickerFor<TModel>(this HtmlHelper<TModel> htmlHelper,
-                                                        Expression<Func<TModel, DateTime>> expression, string format)
+        public static IHtmlString DatePickerFor<TModel,TProperty>(this HtmlHelper<TModel> htmlHelper,
+                                                        Expression<Func<TModel, TProperty>> expression, string format)
         {
             ModelMetadata modelMetadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
             string name = ExpressionHelper.GetExpressionText(expression);

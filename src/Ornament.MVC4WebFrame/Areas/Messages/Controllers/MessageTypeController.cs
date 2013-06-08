@@ -6,7 +6,7 @@ using Ornament.Models.Messages;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
+namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
     public class MessageTypeController : Controller

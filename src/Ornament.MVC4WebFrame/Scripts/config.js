@@ -62,6 +62,11 @@
             src: "/Scripts/jquery.endless-scroll.js",
             deps: ["jquery"], exports: "jQuery"
         },
+        datePicker: {
+            src: "/bundles/datePicker.js",
+            deps: ["bootstrap"], exports: "jQuery"
+        },
+        //following is model
         user: { //User model
             src: "/bundles/user.js",
             deps: ["jquery"], exports: "jQuery "

@@ -234,10 +234,11 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
+    <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
-    <Compile Include="Areas\Settings\Controllers\MessageController.cs" />
-    <Compile Include="Areas\Settings\Controllers\MessageTypeController.cs" />
+    <Compile Include="Areas\Messages\Controllers\MessageController.cs" />
+    <Compile Include="Areas\Messages\Controllers\MessageTypeController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
@@ -276,67 +277,15 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\Edit.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\_messageTypeEditor.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\Create.cshtml" />
-    <Content Include="Areas\Settings\Views\Message\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\Message\Create.cshtml" />
-    <None Include="Content\less\bootstrap\media.less" />
-    <None Include="Content\less\box.less" />
-    <None Include="Content\less\datepicker.less" />
-    <None Include="Content\less\bootstrap\accordion.less" />
-    <None Include="Content\less\bootstrap\alerts.less" />
-    <None Include="Content\less\bootstrap\breadcrumbs.less" />
-    <None Include="Content\less\bootstrap\button-groups.less" />
-    <None Include="Content\less\bootstrap\buttons.less" />
-    <None Include="Content\less\bootstrap\carousel.less" />
-    <None Include="Content\less\bootstrap\close.less" />
-    <None Include="Content\less\bootstrap\code.less" />
-    <None Include="Content\less\bootstrap\component-animations.less" />
-    <None Include="Content\less\bootstrap\dropdowns.less" />
-    <None Include="Content\less\bootstrap\forms.less" />
-    <None Include="Content\less\bootstrap\grid.less" />
-    <None Include="Content\less\bootstrap\hero-unit.less" />
-    <None Include="Content\less\bootstrap\labels-badges.less" />
-    <None Include="Content\less\bootstrap\layouts.less" />
-    <None Include="Content\less\bootstrap\mixins.less" />
-    <None Include="Content\less\bootstrap\modals.less" />
-    <None Include="Content\less\bootstrap\navbar.less" />
-    <None Include="Content\less\bootstrap\navs.less" />
-    <None Include="Content\less\bootstrap\pager.less" />
-    <None Include="Content\less\bootstrap\pagination.less" />
-    <None Include="Content\less\bootstrap\popovers.less" />
-    <None Include="Content\less\bootstrap\progress-bars.less" />
-    <None Include="Content\less\bootstrap\reset.less" />
-    <None Include="Content\less\bootstrap\responsive-1200px-min.less" />
-    <None Include="Content\less\bootstrap\responsive-767px-max.less" />
-    <None Include="Content\less\bootstrap\responsive-768px-979px.less" />
-    <None Include="Content\less\bootstrap\responsive-navbar.less" />
-    <None Include="Content\less\bootstrap\responsive-utilities.less" />
-    <None Include="Content\less\bootstrap\responsive.less" />
-    <None Include="Content\less\bootstrap\scaffolding.less" />
-    <None Include="Content\less\bootstrap\sprites.less" />
-    <None Include="Content\less\bootstrap\tables.less" />
-    <None Include="Content\less\bootstrap\thumbnails.less" />
-    <None Include="Content\less\bootstrap\tooltip.less" />
-    <None Include="Content\less\bootstrap\type.less" />
-    <None Include="Content\less\bootstrap\utilities.less" />
-    <None Include="Content\less\bootstrap\wells.less" />
-    <None Include="Content\less\common.less" />
-    <Content Include="Content\Prettify\prettify.css" />
-    <Content Include="Content\Prettify\Themes\desert.css" />
-    <Content Include="Content\Prettify\Themes\doxy.css" />
-    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
-    <Content Include="Content\Prettify\Themes\sunburst.css" />
-    <Content Include="Content\wysiwyg\ajax-loader.gif" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.bg.png" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.css" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.gif" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.jpg" />
-    <Content Include="Content\Combine\global.css" />
+    <Content Include="Areas\Messages\Views\MessageType\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\MessageType\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\MessageType\_messageTypeEditor.cshtml" />
+    <Content Include="Areas\Messages\Views\MessageType\Create.cshtml" />
+    <Content Include="Areas\Messages\Views\Message\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\Message\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\Web.config" />
     <Content Include="Content\media\swfupload.swf" />
-    <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\FileTypes\accdb.png" />
@@ -632,6 +581,9 @@
     <Content Include="Scripts\inputMasker\jquery.inputmask.extensions.js" />
     <Content Include="Scripts\inputMasker\1jquery.inputmask.js" />
     <Content Include="Scripts\inputMasker\jquery.inputmask.numeric.extensions.js" />
+    <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.dotdotdot-1.5.1.js" />
     <Content Include="Scripts\jQuery.multiChoice.js" />
     <Content Include="Scripts\jQuery.tmpl.js" />
@@ -643,6 +595,7 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -740,17 +693,6 @@
     <Content Include="Scripts\jquery.toDictionary.js" />
     <Content Include="Scripts\util\Permission.js" />
     <Content Include="Scripts\util\String.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.colorpicker.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.cssWrap.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.image.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.link.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.table.js" />
-    <Content Include="Scripts\wysiwyg\jquery.wysiwyg.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.autoload.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.fileManager.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.fullscreen.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.i18n.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.rmFormat.js" />
     <Content Include="Scripts\_appLayout.js" />
     <Content Include="Scripts\_swfuploadHandler.js" />
     <Content Include="Content\templates\pannonia\css\elfinder.css" />
@@ -903,10 +845,6 @@
     <Content Include="Views\Shared\_appLayout.cshtml" />
     <Content Include="Views\Shared\_topMenu.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
-    <None Include="Content\less\components\todolist.less" />
-    <None Include="Content\less\jquery.wysiwyg.less" />
-    <None Include="Content\less\fileManager.less" />
-    <None Include="Content\less\multiChoice.less" />
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
     </Content>
@@ -946,6 +884,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Application\Models\" />
     <Folder Include="Areas\MemberShips\Views\Shared\EditTemplates\" />
+    <Folder Include="Areas\Messages\Models\" />
+    <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
     <Folder Include="Models\App_LocalResources\" />
   </ItemGroup>
@@ -1147,12 +1087,6 @@
     <Content Include="Areas\Settings\Views\Application\ResetPasswrodFormat.cshtml" />
     <Content Include="Areas\Settings\Views\Application\Success.cshtml" />
     <Content Include="Areas\Settings\Views\Web.config" />
-    <None Include="Content\font\fontawesome-webfont.eot" />
-    <None Include="Content\font\fontawesome-webfont.ttf" />
-    <None Include="Content\font\fontawesome-webfont.woff" />
-    <None Include="Content\less\global.less" />
-    <None Include="Content\less\font-awesome\font-awesome.less" />
-    <None Include="Content\less\variables.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />
@@ -1199,8 +1133,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
-  <Target Name="AfterBuild">
+  <!--Target Name="AfterBuild">
     <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
-  </Target>
+  </Target-->
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
 </Project>

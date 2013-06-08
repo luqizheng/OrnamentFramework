@@ -5,8 +5,6 @@
 @using Ornament.Web.HtmlExtends
 @using Ornament;
 @model Ornament.Messages.Message
-
-
 @{
     ViewBag.Title = "Create new message";
     Layout = "~/Views/Shared/_appLayout.cshtml";
@@ -71,13 +69,13 @@
                             <div class="control-group">
                                 <label class="control-label">Roles:</label>
                                 <div class="controls">
-                                    <input name="Roles" id="Roles" class="bulk"></input>
+                                    <input name="Roles" id="Roles" class="bulk" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">UserGroup:</label>
                                 <div class="controls">
-                                    <input name="UserGroups" id="UserGroups"></input>
+                                    <input name="UserGroups" id="UserGroups" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -86,15 +84,24 @@
                                     <input name="Orgs" id="Orgs"></input>
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <label class="control-label">Publish Time:</label>
+                                <div class="controls">
+                                    @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "PublishName", null)
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="tab8" class="tab-pane">
                         <div>
                             <div class="control-group">
                                 <select id="Language">
-                                    @foreach (var key in this.Model.Contents.Keys)
+                                    @if (this.Model != null)
                                     {
+                                        foreach (var key in this.Model.Contents.Keys)
+                                        {
                                         <option value="@key">@OrnamentContext.Current.Languages()[key]</option>
+                                        }
                                     }
                                 </select>
                                 <a class="btn btn-info" href="#myModal" role="button" data-toggle="modal">@Basic.Add</a>
@@ -144,7 +151,7 @@
     <script type="text/javascript">
         var content = @Html.Raw(contents) ;
 
-        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap", "user","org","role","usergroup"], function () {
+        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap","datePicker", "user","org","role","usergroup"], function () {
 
             var editor = CKEDITOR.replace('editor');
             editor.on("blur", function () {
@@ -161,8 +168,7 @@
             $.roles.select2("#Roles");
             $.usergroups.select2("#UserGroups");
             $.orgs.select2("#Orgs");
-            
-
+            $('.date').datepicker();
 
             $("#Language").select2().change(function () {
                 var cont = content[$(this).val()];

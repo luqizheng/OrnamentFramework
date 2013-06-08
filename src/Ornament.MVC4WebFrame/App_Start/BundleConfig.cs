@@ -83,13 +83,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void RichEditor(BundleCollection bundles)
         {
-            //Richer editor
-            bundles.Add(new ScriptBundle("~/Scripts/Editor")
-                            .IncludeDirectory("~/Scripts/wysiwyg/", "*.js", true)
-                );
-
-            bundles.Add(new StyleBundle("~/Content/Editor")
-                            .Include("~/Content/wysiwyg/jquery.wysiwyg.css"));
+          
         }
 
 
@@ -116,7 +110,7 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(bundler);*/
 
             //Now use pre-compiler
-            bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
+            //bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
         }
     }
 }
