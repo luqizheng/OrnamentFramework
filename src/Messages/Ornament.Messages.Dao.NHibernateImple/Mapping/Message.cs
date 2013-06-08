@@ -26,7 +26,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                         x.Map(a => a.Language, "language2");
                     }
                 );
-            HasMany(x => x.Readers).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+            this.DynamicUpdate();
+            HasMany(x => x.Readers).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.None();
         }
     }
 }

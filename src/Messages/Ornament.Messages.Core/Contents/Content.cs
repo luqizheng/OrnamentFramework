@@ -5,7 +5,7 @@ namespace Ornament.Messages.Contents
 {
     public class Content
     {
-        public string Subject { get; set; }
+        public virtual string Subject { get; set; }
 
         /// <summary>
         /// </summary>

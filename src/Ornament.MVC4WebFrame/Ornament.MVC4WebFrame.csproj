@@ -585,7 +585,6 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.dotdotdot-1.5.1.js" />
-    <Content Include="Scripts\jQuery.multiChoice.js" />
     <Content Include="Scripts\jQuery.tmpl.js" />
     <Content Include="Scripts\jQuery.tmpl.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -602,7 +601,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jQuery.endless-scroll.js" />
-    <Content Include="Scripts\jQuery.fileManager.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />

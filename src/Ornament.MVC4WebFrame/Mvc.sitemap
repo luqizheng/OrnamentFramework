@@ -52,17 +52,13 @@ use permission for checking permission like @user:Read, user is the string type 
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="Message Type" controller="MessageType" area="Messages" action="Index">
+    <mvcSiteMapNode title="Messages" controller="MessageType" area="Messages" action="Index" imageUrl="icon-comments">
       <mvcSiteMapNode controller="MessageType" area="Messages" action="Index" title="Message Type">
-        <mvcSiteMapNode controller="MessageType" area="Messages" action="Edit" title="Edit">
-
-        </mvcSiteMapNode>
-        <mvcSiteMapNode controller="MessageType" area="Messages" action="Create" title="Create">
-
-        </mvcSiteMapNode>
+        <mvcSiteMapNode controller="MessageType" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="MessageType" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
 
-      <mvcSiteMapNode controller="Message" area="Messages" action="Index" title="Messages">
+      <mvcSiteMapNode controller="Message" area="Messages" action="Index" title="Messages" >
         <mvcSiteMapNode controller="Message" area="Messages" action="Edit" title="Edit">
         </mvcSiteMapNode>
         <mvcSiteMapNode controller="Message" area="Messages" action="Create" title="Create">

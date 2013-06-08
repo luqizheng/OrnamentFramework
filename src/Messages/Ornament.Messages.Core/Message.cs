@@ -57,15 +57,6 @@ namespace Ornament.Messages
             get { return _state; }
             set
             {
-                if (_state == MessageState.Published)
-                {
-                    if (Readers.Count == 0)
-                    {
-                        throw new ApplicationException("Please set the Message's reader");
-                    }
-
-                    PublishTime = DateTime.Now;
-                }
                 _state = value;
             }
         }
