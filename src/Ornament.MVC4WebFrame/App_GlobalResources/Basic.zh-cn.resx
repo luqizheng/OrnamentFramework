@@ -228,4 +228,7 @@
   <data name="Search" xml:space="preserve">
     <value>查询</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Ornament.MemberShip.Dao;
 
 namespace Ornament
@@ -30,6 +31,18 @@ namespace Ornament
             if (resourceType == typeof (string))
                 return resourceId;
             return context.GetDaoFactory<IMemberShipFactory>().CreateResourceDao().Get(resourceType, resourceId);
+        }
+    }
+
+    public static class MessageContextExtender
+    {
+        private static readonly Dictionary<string, string> _languages = new Dictionary<string, string>
+            {
+            };
+
+        public static Dictionary<string, string> Languages(this Context context)
+        {
+            return _languages;
         }
     }
 }

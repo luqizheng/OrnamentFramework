@@ -73,7 +73,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
                     query.SetEnum(1, state);
                 }
 
-                query.SetFirstResult(pageIndex*pageSize);
+                query.SetFirstResult(pageIndex * pageSize);
                 query.SetMaxResults(pageSize);
 
                 return query.List<Message>();
@@ -110,7 +110,7 @@ and Message.State=? order by Message.CreateTime desc");
                 query.SetEnum(1, state);
             }
 
-            query.SetFirstResult(pageIndex*pageSize);
+            query.SetFirstResult(pageIndex * pageSize);
             query.SetMaxResults(pageSize);
             query.SetGuid(0, typeId);
 
@@ -217,21 +217,24 @@ and Message.State=? and Message.PublishTime>=? and Message.PublishTime<=? order 
         public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type, bool includeSubType)
         {
             DetachedCriteria crit = CreateDetachedCriteria()
-                .SetFirstResult(pageSize*pageIndex)
+                .SetFirstResult(pageSize * pageIndex)
                 .SetMaxResults(pageSize);
 
-
-            if (includeSubType)
+            if (type != null)
             {
-                ;
-                Junction join = Restrictions.Disjunction()
-                    .Add(Restrictions.Eq("Type", type))
-                    .Add(Restrictions.Between("type.OrderId", CreateSubMinOrderId(type), CreateSubMaxOrderId(type)));
-                crit.CreateAlias("Type", "type").Add(join);
-            }
-            else
-            {
-                crit.Add(Restrictions.Eq(MessageTypeProperty, type));
+                if (includeSubType)
+                {
+                    ;
+                    Junction join = Restrictions.Disjunction()
+                                                .Add(Restrictions.Eq("Type", type))
+                                                .Add(Restrictions.Between("type.OrderId", CreateSubMinOrderId(type),
+                                                                          CreateSubMaxOrderId(type)));
+                    crit.CreateAlias("Type", "type").Add(join);
+                }
+                else
+                {
+                    crit.Add(Restrictions.Eq(MessageTypeProperty, type));
+                }
             }
 
             return crit.GetExecutableCriteria(CurrentSession).List<Message>();

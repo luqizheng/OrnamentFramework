@@ -1,0 +1,232 @@
+﻿@using System.Web.UI.WebControls
+@using Ornament.Messages
+@using Ornament.Web
+@using Resources
+@using Ornament.Web.HtmlExtends
+@using Ornament;
+@model Ornament.Messages.Message
+@{
+    ViewBag.Title = "Create new message";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var types = ViewData["types"] as IEnumerable<MessageType>;
+    string contents = "{}";
+    if (this.Model != null)
+    {
+        var content = from a in this.Model.Contents.Values
+                      select new
+                          {
+                              subject = a.Subject,
+                              content = a.Value,
+                              language = a.Language
+                          };
+        contents = Qi.Web.JsonHelper.ToJson(content.ToDictionary(s => s.language));
+    }
+    
+}
+@section pageTitle
+{
+    <h5>Create new message</h5>
+}
+
+<form method="POST" action="@Url.Action("Save")">
+    @if (this.Model != null)
+    {
+        <input name="Id" value="@this.Model.Id" type="hidden"/>
+    }
+    <div class="widget">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <button id="submitButton" class="btn btn-info" type="button">@Basic.Submit</button>
+                <a href="@Url.Action("Index")" class="btn">Back</a>
+            </div>
+        </div>
+        <div class="well body">
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>Basic</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab8"><i class="fam-date"></i>Content</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab7" class="tab-pane active">
+                        <div class="form-horizontal row-fluid">
+                            <div class="control-group">
+                                <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
+                                <div class="controls">
+                                    <select name="Type" class="bulk" id="Type">
+                                        @foreach (var type in types ?? (new List<MessageType>()))
+                                        {
+                                            <option value="@type.Id">@type.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">User:</label>
+                                <div class="controls">
+                                    <input type="hidden" name="Users" id="Users" value="edit" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Roles:</label>
+                                <div class="controls">
+                                    <input name="Roles" id="Roles" class="bulk" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">UserGroup:</label>
+                                <div class="controls">
+                                    <input name="UserGroups" id="UserGroups" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Orgs:</label>
+                                <div class="controls">
+                                    <input name="Orgs" id="Orgs"></input>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Publish Time:</label>
+                                <div class="controls">
+                                    @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "PublishTime", null)
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Publish Time:</label>
+                                <div class="controls">
+                                    <select name="State" class="styled">
+                                        @{
+                                            var selected = this.Model != null ? this.Model.State : MessageState.Published;
+                                        }
+                                        @foreach (var a in Enum.GetValues(typeof(MessageState)))
+                                        {
+                                            if (a.Equals(selected))
+                                            {
+                                                <option value="@a">@a</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@a" selected="selected">@a</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab8" class="tab-pane">
+                        <div>
+                            <div class="control-group">
+                                <select id="Language">
+                                    @if (this.Model != null)
+                                    {
+                                        foreach (var key in this.Model.Contents.Keys)
+                                        {
+                                        <option value="@key">@OrnamentContext.Current.Languages()[key]</option>
+                                        }
+                                    }
+                                </select>
+                                <a class="btn btn-info" href="#myModal" role="button" data-toggle="modal">@Basic.Add</a>
+                                <a class="btn btn-danger">@Basic.Delete</a>
+
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Subject</label>
+                                <div class="controls">
+                                    <input id="subject" class="styled" type="text" style="width: 100%" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <textarea name="editor" id="editor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Input Language</h3>
+    </div>
+    <div class="modal-body">
+        <select id="LanguageName" class="styled">
+            @foreach (var lang in OrnamentContext.Current.Languages().Keys)
+            {
+                <option value="lang">@OrnamentContext.Current.Languages()[lang]</option>
+            }
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="saveChanged">Save changes</button>
+    </div>
+</div>
+
+@section script
+{
+    <script type="text/javascript">
+        var content = @Html.Raw(contents) ;
+
+        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap","datePicker", "user","org","role","usergroup"], function () {
+
+            var editor = CKEDITOR.replace('editor');
+            editor.on("blur", function () {
+                content[$("#Language").val()] = {
+                    content: editor.getData(),
+                    subject: $("#subject").val()
+                };
+            });
+            
+            $("#Type").select2();
+            
+            $.users.select2("#Users");
+
+            $.roles.select2("#Roles");
+            $.usergroups.select2("#UserGroups");
+            $.orgs.select2("#Orgs");
+            $('.date').datepicker();
+
+            $("#Language").select2().change(function () {
+                var cont = content[$(this).val()];
+                editor.setData(cont ? cont.content : "");
+                $("#subject").val(cont.subject);
+            }).change().next().click(function () {
+                $("#LanguageName").val("");
+            }).next().click(function () {
+                var langCode = $("#LanguageName").val();
+                content[langCode] = "";
+            });
+
+            $("#saveChanged").click(function () {
+                $("#myModal").modal("hide");
+                var $lang = $("#LanguageName");
+                var langCode = $lang.val();
+                var lang = $lang.find("option:selected").text();
+                $lang.find("option:selected").remove();
+                $("#Language").append("<option value='" + langCode + "'>" + lang + "<option>");
+            });
+            $("#submitButton").click(function () {
+                //Make sure the editor save to content.
+
+                content[$("#Language").val()] = {
+                    content: editor.getData(),
+                    subject: $("#subject").val()
+                };
+
+                var ary = [];
+                for (var key in content) {
+                    ary.push("<input type='hidden' value='" + content[key].content + "' name='NewContents[" + key + "]'/>");
+                    ary.push("<input type='hidden' value='" + content[key].subject + "' name='NewSubjects[" + key + "]'/>");
+                }
+                $("form").append(ary.join("")).submit();
+            });
+        });
+
+    </script>
+}

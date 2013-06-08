@@ -1,0 +1,39 @@
+﻿@model Ornament.MemberShip.UserGroup
+@{
+    ViewBag.Title = "分配角色:" + this.Model.Name;
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+
+   
+}
+@section script{
+    <script type="text/javascript">
+        seajs.use(['jquery'], function () {
+            $("#cancel").click(function () { location = '@Url.Action("Index")'; });
+        });
+    </script>
+}
+@section pageTitle
+{
+    <h2>@Resources.MemberShip.AssignRoles:@this.Model.Name</h2>
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <header>
+        <button type="submit" id="submit" class="btn btn-primary">
+            <i class="icon-ok icon-white"></i>
+            @Resources.Basic.Save
+        </button>
+        <button type="button" id="cancel" class="btn">@Resources.Basic.Cancel</button>
+    </header>
+    <section>
+        <input id="Id" name="Id" value="@this.Model.Id"  type="hidden"/>
+        @Html.Partial("RoleAssign", this.Model.GetAllRoles())
+    </section>
+                    
+                
+}
+
+

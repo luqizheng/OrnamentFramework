@@ -26,6 +26,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<User>(u => u.Email)); }
         }
 
+        private IProjection NameProperty
+        {
+            get { return _pools.Once(() => Projections.Property<User>(u => u.Name)); }
+        }
+
         #region IUserDao Members
 
         public override IList<User> GetAll()
@@ -42,6 +47,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return CreateDetachedCriteria().SetProjection(Projections.RowCount()).SetCacheMode(CacheMode.Normal)
                 .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+        }
+
+        public IList<User> QuickSearch(string name, string loginid, string email, int pageIndex, int pageSize)
+        {
+            var result = CreateDetachedCriteria();
+            var a = Restrictions.Disjunction();
+            if (!string.IsNullOrEmpty(loginid))
+                a.Add(Restrictions.InsensitiveLike(LoginProperty, loginid));
+            if (!string.IsNullOrEmpty(email))
+                a.Add(Restrictions.InsensitiveLike(EmailProperty, email));
+            if (!string.IsNullOrEmpty(name))
+                a.Add(Restrictions.InsensitiveLike(NameProperty, name));
+            result.Add(a);
+            return result.SetFirstResult(pageIndex * pageSize).SetMaxResults(pageSize).GetExecutableCriteria(this.CurrentSession).List<User>();
         }
 
         /// <summary>
@@ -124,7 +143,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
                     .List<User>();
         }
 
@@ -140,7 +159,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.InsensitiveLike(EmailProperty, emailToMatch))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageSize*pageIndex)
+                .SetFirstResult(pageSize * pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -155,15 +174,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <param name="startRow"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IList<User> Search(string loginId, string email, string phone, bool islockout, bool isApproved,
-                                  int startRow, int pageSize)
+        public IList<User> Search(string loginId, string email, string phone, bool? islockout, bool? isApproved, int? startRow, int? pageSize)
         {
             ICriterion tion = CreateSearchCondition(loginId, email, phone, islockout, isApproved);
 
             return CreateDetachedCriteria()
                 .Add(tion)
-                .SetMaxResults(pageSize)
-                .SetFirstResult(startRow)
+                .SetMaxResults(pageSize ?? 40)
+                .SetFirstResult(startRow ?? 0)
                 .GetExecutableCriteria(CurrentSession).List<User>();
             ;
         }
@@ -177,7 +195,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
                     pageSize)
                     .GetExecutableCriteria(CurrentSession)
                     .List<User>();
@@ -224,7 +242,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> FindAll(int pageIndex, int pageSize)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
                     GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -237,19 +255,36 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         private ICriterion CreateSearchCondition(string loginId,
                                                  string email,
-                                                 string phone, bool islockout,
-                                                 bool isApproved)
+                                                 string phone, bool? islockout,
+                                                 bool? isApproved)
         {
-            ICriterion tion = Restrictions.Eq("Information.IsLockout", islockout);
-            tion = Restrictions.Or(tion, Restrictions.Eq("Information.IsApproved", isApproved));
+            ICriterion tion = null;
+            if (islockout != null)
+            {
+                tion = Restrictions.Eq("IsLockout", islockout);
+            }
+            if (isApproved != null)
+            {
+                SimpleExpression iro = Restrictions.Eq("IsApproved", isApproved);
+                tion = tion != null ? Restrictions.And(tion, iro) : iro;
+            }
 
 
             if (!String.IsNullOrEmpty(loginId))
-                tion = Restrictions.And(tion, Restrictions.InsensitiveLike("LoginId", loginId));
+            {
+                var iro = Restrictions.InsensitiveLike("LoginId", loginId);
+                tion = tion != null ? Restrictions.And(tion, iro) : iro;
+            }
             if (!String.IsNullOrEmpty(phone))
-                tion = Restrictions.And(tion, Restrictions.InsensitiveLike("Phone", phone));
+            {
+                var iro = Restrictions.InsensitiveLike("Phone", phone);
+                tion = tion != null ? Restrictions.And(tion, iro) : iro;
+            }
             if (!String.IsNullOrEmpty(email))
-                tion = Restrictions.And(tion, Restrictions.InsensitiveLike("Email", email));
+            {
+                var iro = Restrictions.InsensitiveLike("Email", email);
+                tion = tion != null ? Restrictions.And(tion, iro) : iro;
+            }
             return tion;
         }
     }

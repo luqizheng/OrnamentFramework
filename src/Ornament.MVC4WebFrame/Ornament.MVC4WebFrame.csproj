@@ -59,13 +59,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotlessClientOnly.1.3.1.0\lib\dotless.ClientOnly.dll</HintPath>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate, Version=1.3.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
+      <HintPath>..\..\lib\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\lib\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -80,11 +80,11 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
+      <HintPath>..\..\lib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Qi, Version=1.3.1.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,20 +102,58 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -123,43 +161,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -214,23 +215,30 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\MessageConfig.cs" />
+    <Compile Include="App_Start\MvcExtender.cs" />
     <Compile Include="App_Start\NhConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\RolesController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\UsergroupsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UserGroupsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UsersController.cs" />
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
+    <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
-    <Compile Include="Areas\Settings\Controllers\MessageController.cs" />
-    <Compile Include="Areas\Settings\Controllers\MessageTypeController.cs" />
+    <Compile Include="Areas\Messages\Controllers\MessageController.cs" />
+    <Compile Include="Areas\Messages\Controllers\MessageTypeController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
@@ -269,67 +277,15 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\Edit.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\_messageTypeEditor.cshtml" />
-    <Content Include="Areas\Settings\Views\MessageType\Create.cshtml" />
-    <Content Include="Areas\Settings\Views\Message\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\Message\Create.cshtml" />
-    <None Include="Content\less\bootstrap\media.less" />
-    <None Include="Content\less\box.less" />
-    <None Include="Content\less\datepicker.less" />
-    <None Include="Content\less\bootstrap\accordion.less" />
-    <None Include="Content\less\bootstrap\alerts.less" />
-    <None Include="Content\less\bootstrap\breadcrumbs.less" />
-    <None Include="Content\less\bootstrap\button-groups.less" />
-    <None Include="Content\less\bootstrap\buttons.less" />
-    <None Include="Content\less\bootstrap\carousel.less" />
-    <None Include="Content\less\bootstrap\close.less" />
-    <None Include="Content\less\bootstrap\code.less" />
-    <None Include="Content\less\bootstrap\component-animations.less" />
-    <None Include="Content\less\bootstrap\dropdowns.less" />
-    <None Include="Content\less\bootstrap\forms.less" />
-    <None Include="Content\less\bootstrap\grid.less" />
-    <None Include="Content\less\bootstrap\hero-unit.less" />
-    <None Include="Content\less\bootstrap\labels-badges.less" />
-    <None Include="Content\less\bootstrap\layouts.less" />
-    <None Include="Content\less\bootstrap\mixins.less" />
-    <None Include="Content\less\bootstrap\modals.less" />
-    <None Include="Content\less\bootstrap\navbar.less" />
-    <None Include="Content\less\bootstrap\navs.less" />
-    <None Include="Content\less\bootstrap\pager.less" />
-    <None Include="Content\less\bootstrap\pagination.less" />
-    <None Include="Content\less\bootstrap\popovers.less" />
-    <None Include="Content\less\bootstrap\progress-bars.less" />
-    <None Include="Content\less\bootstrap\reset.less" />
-    <None Include="Content\less\bootstrap\responsive-1200px-min.less" />
-    <None Include="Content\less\bootstrap\responsive-767px-max.less" />
-    <None Include="Content\less\bootstrap\responsive-768px-979px.less" />
-    <None Include="Content\less\bootstrap\responsive-navbar.less" />
-    <None Include="Content\less\bootstrap\responsive-utilities.less" />
-    <None Include="Content\less\bootstrap\responsive.less" />
-    <None Include="Content\less\bootstrap\scaffolding.less" />
-    <None Include="Content\less\bootstrap\sprites.less" />
-    <None Include="Content\less\bootstrap\tables.less" />
-    <None Include="Content\less\bootstrap\thumbnails.less" />
-    <None Include="Content\less\bootstrap\tooltip.less" />
-    <None Include="Content\less\bootstrap\type.less" />
-    <None Include="Content\less\bootstrap\utilities.less" />
-    <None Include="Content\less\bootstrap\wells.less" />
-    <None Include="Content\less\common.less" />
-    <Content Include="Content\Prettify\prettify.css" />
-    <Content Include="Content\Prettify\Themes\desert.css" />
-    <Content Include="Content\Prettify\Themes\doxy.css" />
-    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
-    <Content Include="Content\Prettify\Themes\sunburst.css" />
-    <Content Include="Content\wysiwyg\ajax-loader.gif" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.bg.png" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.css" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.gif" />
-    <Content Include="Content\wysiwyg\jquery.wysiwyg.jpg" />
-    <Content Include="Content\Combine\global.css" />
+    <Content Include="Areas\Messages\Views\MessageType\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\MessageType\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\MessageType\_messageTypeEditor.cshtml" />
+    <Content Include="Areas\Messages\Views\MessageType\Create.cshtml" />
+    <Content Include="Areas\Messages\Views\Message\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\Message\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\Web.config" />
     <Content Include="Content\media\swfupload.swf" />
-    <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\FileTypes\accdb.png" />
@@ -625,7 +581,7 @@
     <Content Include="Scripts\inputMasker\jquery.inputmask.extensions.js" />
     <Content Include="Scripts\inputMasker\1jquery.inputmask.js" />
     <Content Include="Scripts\inputMasker\jquery.inputmask.numeric.extensions.js" />
-    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
+    <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.dotdotdot-1.5.1.js" />
@@ -639,6 +595,7 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -650,6 +607,9 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\Memberships\role-1.0.js" />
+    <Content Include="Scripts\Memberships\org-1.0.js" />
+    <Content Include="Scripts\Memberships\userGroup-1.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\periodDailog\jquery.periodDailog.js" />
     <Content Include="Scripts\plugins\charts\excanvas.min.js" />
@@ -699,6 +659,7 @@
     <Content Include="Scripts\Prettify\lang-lisp.js" />
     <Content Include="Scripts\Prettify\lang-llvm.js" />
     <Content Include="Scripts\Prettify\lang-lua.js" />
+    <Content Include="Scripts\Prettify\lang-matlab.js" />
     <Content Include="Scripts\Prettify\lang-ml.js" />
     <Content Include="Scripts\Prettify\lang-mumps.js" />
     <Content Include="Scripts\Prettify\lang-n.js" />
@@ -732,17 +693,6 @@
     <Content Include="Scripts\jquery.toDictionary.js" />
     <Content Include="Scripts\util\Permission.js" />
     <Content Include="Scripts\util\String.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.colorpicker.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.cssWrap.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.image.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.link.js" />
-    <Content Include="Scripts\wysiwyg\controls\wysiwyg.table.js" />
-    <Content Include="Scripts\wysiwyg\jquery.wysiwyg.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.autoload.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.fileManager.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.fullscreen.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.i18n.js" />
-    <Content Include="Scripts\wysiwyg\plugin\wysiwyg.rmFormat.js" />
     <Content Include="Scripts\_appLayout.js" />
     <Content Include="Scripts\_swfuploadHandler.js" />
     <Content Include="Content\templates\pannonia\css\elfinder.css" />
@@ -895,10 +845,6 @@
     <Content Include="Views\Shared\_appLayout.cshtml" />
     <Content Include="Views\Shared\_topMenu.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
-    <None Include="Content\less\components\todolist.less" />
-    <None Include="Content\less\jquery.wysiwyg.less" />
-    <None Include="Content\less\fileManager.less" />
-    <None Include="Content\less\multiChoice.less" />
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
     </Content>
@@ -913,7 +859,6 @@
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <None Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Shared\_crumbs.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ActionMenus.cshtml" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.eot" />
@@ -939,8 +884,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Application\Models\" />
     <Folder Include="Areas\MemberShips\Views\Shared\EditTemplates\" />
+    <Folder Include="Areas\Messages\Models\" />
+    <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
-    <Folder Include="Models\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1109,8 +1055,8 @@
   <ItemGroup>
     <Content Include="Areas\Application\Views\Web.config" />
     <Content Include="Areas\Application\Views\EventLog\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Orgs\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Orgs\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResourceType.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\DefaultResourceSelector.cshtml" />
@@ -1129,23 +1075,17 @@
     <Content Include="Areas\MemberShips\Views\User\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\User\Edit.cshtml" />
     <Content Include="Areas\MemberShips\Views\User\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\AssignRole.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\AssignUser.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
     <Content Include="Areas\Settings\Views\Application\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Application\ResetPasswrodFormat.cshtml" />
     <Content Include="Areas\Settings\Views\Application\Success.cshtml" />
     <Content Include="Areas\Settings\Views\Web.config" />
-    <None Include="Content\font\fontawesome-webfont.eot" />
-    <None Include="Content\font\fontawesome-webfont.ttf" />
-    <None Include="Content\font\fontawesome-webfont.woff" />
-    <None Include="Content\less\global.less" />
-    <None Include="Content\less\font-awesome\font-awesome.less" />
-    <None Include="Content\less\variables.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />
@@ -1192,7 +1132,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
-  <Target Name="AfterBuild">
+  <!--Target Name="AfterBuild">
     <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
-  </Target>
+  </Target-->
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
 </Project>

@@ -121,8 +121,19 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     GetExecutableCriteria(CurrentSession).List<Role>();
         }
 
-        #endregion
+        public IList<Role> Find(string roleName, int pageIndex, int pageSize)
+        {
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+                .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
+                .GetExecutableCriteria(CurrentSession).List<Role>();
 
+        }
+
+        #endregion
+        IProjection NameProperty
+        {
+            get { return Projections.Property<Role>(s => s.Name); }
+        }
         public void Delete(string[] roleName)
         {
             SimpleExpression ros = Restrictions.Eq("Name", roleName[0]);

@@ -6,5 +6,6 @@
     </id>
     <discriminator column="PerformerType" type="String" length="10"></discriminator>
     <property name="Name" length="30" type="String"></property>
+ 
   </class>
 </hibernate-mapping>

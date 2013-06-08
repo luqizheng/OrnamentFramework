@@ -30,6 +30,7 @@
         <key column="UserId" foreign-key="FK_UserID_UserUserGroupRelation"></key>
         <many-to-many class="UserGroup" column="UserGroupId" foreign-key="FK_MBS_USERGROUP"/>
       </set>
+      <many-to-one name="Org" column="OrgId" foreign-key="FK_MBS_ORG"></many-to-one>
 
       <!--<component class="Ornament.MemberShip.User+UserInformation,Ornament.MemberShip.Core" name="Information" access="nosetter.camelcase-underscore" >-->
       <property  name="Email" length="30" type="String" unique="true" access="nosetter.camelcase-underscore"></property>
@@ -42,5 +43,5 @@
 
   </subclass >
 
-  
+
 </hibernate-mapping>

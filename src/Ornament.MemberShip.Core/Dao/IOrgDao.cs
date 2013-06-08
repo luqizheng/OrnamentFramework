@@ -14,5 +14,7 @@ namespace Ornament.MemberShip.Dao
         /// <param name="orgId"></param>
         /// <returns></returns>
         bool InUse(string orgId);
+
+        IEnumerable<Org> Find(string name, int pageIndex, int pageSize);
     }
 }

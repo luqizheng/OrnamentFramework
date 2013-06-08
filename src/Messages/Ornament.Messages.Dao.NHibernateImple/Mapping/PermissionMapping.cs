@@ -7,7 +7,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
     {
         public PermissionMapping()
         {
-            
+            this.Table("Msgs_Permission");
             this.DiscriminatorValue("Info");
             this.References(x => x.Resource)
                 .Column("InfoTypeId");

@@ -33,7 +33,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return oo > 0;
         }
 
+        public IEnumerable<Org> Find(string name, int pageIndex, int pageSize)
+        {
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+                .Add(Restrictions.InsensitiveLike(NameProperty, name))
+                .GetExecutableCriteria(CurrentSession).List<Org>();
+        }
 
-
+        protected IProjection NameProperty { get { return Projections.Property<Org>(s => s.Name); } }
     }
 }

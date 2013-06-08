@@ -645,6 +645,7 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.RemoveWrapper(System.Web.Mvc.ControllerContext)">
             <summary>
+            Remvoe NH Session, but it nevery close the session.
             </summary>
             <param name="controllerContext"></param>
             <returns></returns>
@@ -801,6 +802,16 @@
             <param name="controllerContext"></param>
         </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHQueryValuePrivoderFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHRouterDataValueProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHRouterDataProviderFactory">
             <summary>
             
             </summary>

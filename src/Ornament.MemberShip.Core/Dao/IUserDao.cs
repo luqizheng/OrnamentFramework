@@ -10,7 +10,9 @@ namespace Ornament.MemberShip.Dao
         IQueryable<User> Users { get; }
         User GetByLoginId(string loginId);
         int Count();
-        IList<User> GetUsers(string[] loginIds);
+        IList<User> QuickSearch(string name, string loginid, string email, int pageIndex, int pageSize);
+
+            IList<User> GetUsers(string[] loginIds);
 
         IList<User> GetUsersInRole(string roleId);
 
@@ -32,8 +34,7 @@ namespace Ornament.MemberShip.Dao
 
         int Count(string loginId, string email, string phone, bool islockout, bool isApproved);
 
-        IList<User> Search(string loginId, string email, string phone, bool islockout, bool isApproved, int startRow,
-                           int pageSize);
+        IList<User> Search(string loginId, string email, string phone, bool? islockout, bool? isApproved, int? startRow, int? pageSize);
 
         IList<User> Search(string searchProperty, string searchValue, bool isSortAsc, string sortProperty, int pageIndex,
                            int pageSize, out int total);

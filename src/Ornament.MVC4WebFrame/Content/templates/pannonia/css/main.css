@@ -4,6 +4,7 @@
 @import "icons.css";
 @import "jquery.custom.css";
 @import "elfinder.css";
+@import "datepicker.css";
 
 /* ========================================================
 *
@@ -2006,7 +2007,7 @@ span.green
     display: inline-block;
     float: left;
     margin-right: 10px;
-    margin-top: -1px;
+    margin-top: -5px;
 }
 
 .user-menu > span
