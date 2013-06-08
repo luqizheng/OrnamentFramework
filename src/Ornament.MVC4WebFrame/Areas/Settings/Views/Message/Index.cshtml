@@ -22,9 +22,7 @@
 
             <table class="table table-condensed table-striped table-bordered">
                 <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.Subject)
+                    <th>Subject
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Type.Name)
@@ -45,7 +43,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Subject)
+                            @Html.DisplayFor(modelItem => item.Show().Subject)
                         </td>
                         <th>
                             @Html.DisplayFor(modelItem => item.Type.Name)

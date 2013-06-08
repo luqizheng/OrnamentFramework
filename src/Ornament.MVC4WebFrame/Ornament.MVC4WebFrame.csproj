@@ -215,6 +215,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\MessageConfig.cs" />
+    <Compile Include="App_Start\MvcExtender.cs" />
     <Compile Include="App_Start\NhConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

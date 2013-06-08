@@ -36,24 +36,19 @@ namespace Ornament.Messages
 
         protected Message()
         {
-            Version = 0;
+
             CreateTime = DateTime.Now;
             EffectTime = null;
             State = MessageState.Draft;
         }
 
 
-        public virtual int Version { get; protected set; }
+
 
         /// <summary>
         /// </summary>
         public virtual Priority Priority { set; get; }
 
-
-        /// <summary>
-        ///     БъЬт
-        /// </summary>
-        public virtual string Subject { get; set; }
 
         /// <summary>
         ///     Gets or sets the Message State.
@@ -133,7 +128,7 @@ namespace Ornament.Messages
                 throw new ArgumentException("could not set reader to null or emtpy", "addReaders");
             foreach (IPerformer member in addReaders)
             {
-                var infReader = new MessageReader(member) {Message = this};
+                var infReader = new MessageReader(member) { Message = this };
                 Readers.Add(infReader);
             }
         }
@@ -141,27 +136,34 @@ namespace Ornament.Messages
         /// <summary>
         /// </summary>
         /// <param name="language"></param>
-        /// <param name="manager"> </param>
         /// <returns></returns>
-        public virtual string Show(string language)
+        public virtual Content Show(string language)
         {
+            if (!this.Contents.ContainsKey(language))
+                throw new ArgumentOutOfRangeException("language", "can't find language(" + language + ") defined.");
             Content content = Contents[language];
-            return content.Value;
+            return content;
         }
 
         /// <summary>
         /// </summary>
         /// <para name="manager"></para>
         /// <returns></returns>
-        public virtual string Show()
+        public virtual Content Show()
         {
+            if (this.Contents.Count == 0)
+                throw new ArgumentOutOfRangeException("Message do not have any content");
             string lang = CultureInfo.CurrentUICulture.Name;
-            return Show(Contents.ContainsKey(lang) ? lang : Contents.Values.First().Language ?? "");
+            if (Contents.ContainsKey(lang))
+                return Show(lang);
+            if (lang.IndexOf("-", System.StringComparison.Ordinal) != -1)
+            {
+                lang = lang.Substring(2);
+                if (Contents.ContainsKey(lang))
+                    return Show(lang);
+            }
+            return this.Contents.Values.First();
         }
 
-        public override int GetHashCode()
-        {
-            return Version.GetHashCode();
-        }
     }
 }

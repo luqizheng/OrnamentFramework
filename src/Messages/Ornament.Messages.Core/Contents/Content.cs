@@ -3,8 +3,10 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Contents
 {
-    public class Content : DomainObject<Content, Guid>
+    public class Content
     {
+        public string Subject { get; set; }
+
         /// <summary>
         /// </summary>
         public virtual string Language { get; set; }

@@ -10,7 +10,9 @@ namespace Ornament.MemberShip.Dao
         IQueryable<User> Users { get; }
         User GetByLoginId(string loginId);
         int Count();
-        IList<User> GetUsers(string[] loginIds);
+        IList<User> QuickSearch(string name, string loginid, string email, int pageIndex, int pageSize);
+
+            IList<User> GetUsers(string[] loginIds);
 
         IList<User> GetUsersInRole(string roleId);
 

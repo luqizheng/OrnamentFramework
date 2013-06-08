@@ -22,7 +22,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         public IEnumerable<object> Match(string nameOrEmailOrLoginId, int? pageIndex)
         {
             var page = pageIndex ?? 0;
-            var result = _factory.CreateUserDao().Search(nameOrEmailOrLoginId, nameOrEmailOrLoginId, null, null, null, pageIndex, 40);
+            var result = _factory.CreateUserDao().QuickSearch(nameOrEmailOrLoginId, nameOrEmailOrLoginId, nameOrEmailOrLoginId, 0, 40);
 
             var c = from user in result
 

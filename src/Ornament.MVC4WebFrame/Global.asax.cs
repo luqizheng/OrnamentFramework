@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Profile;
@@ -10,7 +8,6 @@ using System.Web.Routing;
 using System.Web.Security;
 using Ornament.AppStart;
 using Ornament.MVCWebFrame.App_Start;
-using Ornament.MVCWebFrame.Controllers;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
@@ -30,76 +27,28 @@ namespace Ornament.MVCWebFrame
     {
         protected void Application_Start()
         {
+            XmlConfigurator.Configure(); //Log4net registry.
+
+
             AreaRegistration.RegisterAllAreas();
             ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
             ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
 
-            
+            MvcExtender.Register();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             PermissionConfig.Regist();
-            ChangeControllerFacotry();
-
-            //Init database setting
-            NhConfig.Config();
-            //AppStart
-            OnStart.Start(OrnamentContext.Current, AppDomain.CurrentDomain.GetAssemblies());
-
-            ModelBinders.Binders.DefaultBinder = new NHModelBinder();
+            MessageConfig.Register(OrnamentContext.Current);
             //Ornament setting
-
             //Registry the Provider to use Membership rule of asp.net.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-
-            XmlConfigurator.Configure(); //Log4net registry.
-            UpdateDatabase();
-
-            //Web API
-            OrnamentWebApiFactory httpDependencyResolver = new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(Assembly.GetExecutingAssembly()));
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator),httpDependencyResolver);
-            
+            NhConfig.Config();
         }
 
-        private void ChangeControllerFacotry()
-        {
-            try
-            {
-                Type[] controllerTypes = OrnamentControllerFactory.FilterController(Assembly.GetExecutingAssembly());
 
-                ////change the default controller.
-                ControllerBuilder.Current.SetControllerFactory(new OrnamentControllerFactory(controllerTypes)
-                    {
-                        ErrorController = typeof(HttpErrorsController)
-                    });
-
-            }
-            catch (Exception ex)
-            {
-                LogManager.GetLogger(GetType()).Error("ChangeControllerFacotry fail", ex);
-            }
-        }
-
-        private void UpdateDatabase()
-        {
-            try
-            {
-                //Update db 
-                MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-                var init = (new GlobalInitializer());
-                init.UpdateAllSturcture();
-                var initMemberShip = GlobalInitializer.GetContainer().Resolve<IDataInitializer>("MembershipInit");
-                if (initMemberShip.IsFirstApplicationStart)
-                {
-                    initMemberShip.CreateData();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.GetLogger(GetType()).Error("global fails.", ex);
-            }
-        }
+      
 
 
         private void Profile_MigrateAnonymous(object sender, ProfileMigrateEventArgs args)
@@ -124,7 +73,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof(GlobalContext));
+                ILog log = LogManager.GetLogger(typeof (GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally
