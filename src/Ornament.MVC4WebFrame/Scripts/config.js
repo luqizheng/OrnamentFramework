@@ -58,13 +58,25 @@
             deps: ["jquery"],
             exports: "jQuery "
         },
+        endlessScroll: {
+            src: "/Scripts/jquery.endless-scroll.js",
+            deps: ["jquery"], exports: "jQuery"
+        },
         user: { //User model
             src: "/bundles/user.js",
             deps: ["jquery"], exports: "jQuery "
         },
-        endlessScroll: {
-            src: "/Scripts/jquery.endless-scroll.js",
-            deps: ["jquery"], exports: "jQuery"
+        role: { //User model
+            src: "/bundles/role.js",
+            deps: ["jquery"], exports: "jQuery "
+        },
+        usergroup: { //User model
+            src: "/bundles/usergroup.js",
+            deps: ["jquery"], exports: "jQuery "
+        },
+        org: { //User model
+            src: "/bundles/org.js",
+            deps: ["jquery"], exports: "jQuery "
         },
         periodDailog: { exports: "jQuery " },
         preload: ["jquery"]

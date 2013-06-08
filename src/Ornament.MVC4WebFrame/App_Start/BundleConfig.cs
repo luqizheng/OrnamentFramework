@@ -65,6 +65,9 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void BizRelative(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/user.js").Include("~/Scripts/Memberships/user-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/role.js").Include("~/Scripts/Memberships/role-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/userGroup.js").Include("~/Scripts/Memberships/userGroup-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/org.js").Include("~/Scripts/Memberships/org-{version}.js"));
         }
 
 

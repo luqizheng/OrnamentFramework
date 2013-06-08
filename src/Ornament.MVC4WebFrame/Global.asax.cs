@@ -31,8 +31,8 @@ namespace Ornament.MVCWebFrame
 
 
             AreaRegistration.RegisterAllAreas();
-            ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
-            ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
+            
+            
 
             MvcExtender.Register();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
@@ -46,9 +46,6 @@ namespace Ornament.MVCWebFrame
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
             NhConfig.Config();
         }
-
-
-      
 
 
         private void Profile_MigrateAnonymous(object sender, ProfileMigrateEventArgs args)

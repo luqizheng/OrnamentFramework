@@ -94,6 +94,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                         CurrentSession).List<UserGroup>();
         }
 
+        public IEnumerable<UserGroup> Find(string name, int pageIndex, int pageSize)
+        {
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+                .Add(Restrictions.InsensitiveLike(NameProperty, name))
+                .GetExecutableCriteria(CurrentSession).List<UserGroup>();
+        }
+
         #endregion
     }
 }

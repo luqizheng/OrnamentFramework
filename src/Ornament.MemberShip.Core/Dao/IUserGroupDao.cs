@@ -38,6 +38,9 @@ namespace Ornament.MemberShip.Dao
         void Delete(string[] ids);
 
         UserGroup GetByName(string groupName);
+
         IList<UserGroup> FindAll(int pageIndex, int pageSize);
+
+        IEnumerable<UserGroup> Find(string name, int pageIndex, int pageSize);
     }
 }

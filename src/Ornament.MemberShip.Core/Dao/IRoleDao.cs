@@ -57,5 +57,7 @@ namespace Ornament.MemberShip.Dao
         /// <param name="currentPage">start 0</param>
         /// <returns></returns>
         IList<Role> Find(int pageSize, int currentPage);
+
+        IList<Role> Find(string roleName, int pageIndex, int pageSize);
     }
 }

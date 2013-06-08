@@ -222,11 +222,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\RolesController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\UsergroupsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UserGroupsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UsersController.cs" />
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
@@ -651,6 +654,9 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\Memberships\role-1.0.js" />
+    <Content Include="Scripts\Memberships\org-1.0.js" />
+    <Content Include="Scripts\Memberships\userGroup-1.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\periodDailog\jquery.periodDailog.js" />
     <Content Include="Scripts\plugins\charts\excanvas.min.js" />
@@ -1110,8 +1116,8 @@
   <ItemGroup>
     <Content Include="Areas\Application\Views\Web.config" />
     <Content Include="Areas\Application\Views\EventLog\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Orgs\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Orgs\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResourceType.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\DefaultResourceSelector.cshtml" />
@@ -1130,11 +1136,11 @@
     <Content Include="Areas\MemberShips\Views\User\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\User\Edit.cshtml" />
     <Content Include="Areas\MemberShips\Views\User\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\AssignRole.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\AssignUser.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\UserGroups\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
     <Content Include="Areas\Settings\Views\Application\Index.cshtml" />

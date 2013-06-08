@@ -806,6 +806,16 @@
             
             </summary>
         </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHRouterDataValueProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHRouterDataProviderFactory">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult">
             <summary>
             </summary>
