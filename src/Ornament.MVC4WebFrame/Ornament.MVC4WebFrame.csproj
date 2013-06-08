@@ -887,7 +887,6 @@
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
-    <Folder Include="Models\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

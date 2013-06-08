@@ -21,19 +21,19 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
         public ActionResult Index(MessageSearcher searcher)
         {
-            var result = _messageDao.FindMessage(40, 0, null, false);
+            IList<Message> result = _messageDao.FindMessage(40, 0, null, false);
             return View(result);
         }
 
         public ActionResult Edit(string id)
         {
-            var message = _messageDao.Get(id);
-            IList<MessageType> types = _daoFactory.MessageTypeDao.GetAll();
-            ViewData["types"] = types;
+            Message message = _messageDao.Get(id);
+            ViewData["types"] = _daoFactory.MessageTypeDao.GetAll();
 
-            foreach (var a in message.Contents.Keys)
+
+            foreach (string a in message.Contents.Keys)
             {
-                var c = message.Contents[a];
+                Content c = message.Contents[a];
             }
             return View("Edit", message);
         }
@@ -41,18 +41,19 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
         public ActionResult Create()
         {
-            IList<MessageType> types = _daoFactory.MessageTypeDao.GetAll();
-            ViewData["types"] = types;
+            ViewData["types"] = _daoFactory.MessageTypeDao.GetAll();
+
             return View("Edit");
         }
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
-        public ActionResult Save(Message message, IDictionary<string, string> newContents, IDictionary<string, string> newSubjects)
+        public ActionResult Save(Message message, IDictionary<string, string> newContents,
+                                 IDictionary<string, string> newSubjects)
         {
             message.Contents.Clear();
-            foreach (var key in newContents.Keys)
+            foreach (string key in newContents.Keys)
             {
-                message.Contents.Add(key, new Content()
+                message.Contents.Add(key, new Content
                     {
                         Language = key,
                         Value = newContents[key],

@@ -87,7 +87,29 @@
                             <div class="control-group">
                                 <label class="control-label">Publish Time:</label>
                                 <div class="controls">
-                                    @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "PublishName", null)
+                                    @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "PublishTime", null)
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Publish Time:</label>
+                                <div class="controls">
+                                    <select name="State" class="styled">
+                                        @{
+                                            var selected = this.Model != null ? this.Model.State : MessageState.Published;
+                                        }
+                                        @foreach (var a in Enum.GetValues(typeof(MessageState)))
+                                        {
+                                            if (a.Equals(selected))
+                                            {
+                                                <option value="@a">@a</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@a" selected="selected">@a</option>
+                                            }
+                                        }
+                                    </select>
                                 </div>
                             </div>
                         </div>
