@@ -247,6 +247,8 @@
     <Compile Include="Controllers\HttpErrorsController.cs" />
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\MembershipServiceController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

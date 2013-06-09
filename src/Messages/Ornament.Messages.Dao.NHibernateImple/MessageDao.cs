@@ -10,7 +10,6 @@ using Qi.Domain.NHibernates;
 namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
-    /// 
     /// </summary>
     public class MessageDao : DaoBase<string, Message>, IMessageDao
     {
@@ -31,18 +30,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         #region IInfoDao Members
 
-        public Message GetNoLazyMessage(string id)
-        {
-            return CreateDetachedCriteria().Add(Restrictions.Eq("Id", id))
-                                           .SetFetchMode("Contents", FetchMode.Select)
-                                           .SetFetchMode("Readers",FetchMode.Select)
-                                           .GetExecutableCriteria(this.CurrentSession)
-                                           .UniqueResult<Message>();
-
-        }
-
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="typeName"></param>
         /// <param name="pageIndex"></param>
@@ -166,16 +154,16 @@ and Message.State=? and Message.PublishTime>=? and Message.PublishTime<=? order 
             return query.List<Message>();
         }
 
-        public IList<Message> Find(User user, int pageSize, int pageIndex, params string[] typeNames)
+        public IList<Message> GetUserMessages(User user, int pageSize, int pageIndex, params string[] typeNames)
         {
             var s = new MessageSearcher
-                        {
-                            RelivateUser = user,
-                            PageIndex = pageIndex,
-                            PageSize = pageSize,
-                            ReadStatus = ReadStatus.Read,
-                            TypeNames = typeNames
-                        };
+                {
+                    RelivateUser = user,
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    ReadStatus = ReadStatus.Read,
+                    TypeNames = typeNames
+                };
             return Find(s);
         }
 
@@ -212,29 +200,54 @@ and Message.State=? and Message.PublishTime>=? and Message.PublishTime<=? order 
             search.GetPerformers(out users, out roles, out usergroups);
 
             Junction allPerformers = Restrictions.Disjunction()
-                .Add(CreatePerformersRestriction(users))
-                .Add(CreatePerformersRestriction(roles))
-                .Add(CreatePerformersRestriction(usergroups));
+                                                 .Add(CreatePerformersRestriction(users))
+                                                 .Add(CreatePerformersRestriction(roles))
+                                                 .Add(CreatePerformersRestriction(usergroups));
 
             cri.CreateCriteria("Readers").Add(allPerformers);
             return
                 cri.GetExecutableCriteria(CurrentSession).SetMaxResults(search.PageSize).SetFirstResult(
                     search.GetFirstResult())
-                    .List<Message>
+                   .List<Message>
                     ();
+        }
+
+        public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type, bool includeSubType,
+                                          out int total)
+        {
+            DetachedCriteria crit = CreateDetachedCriteria();
+            DetachedCriteria pageCount = CreateDetachedCriteria();
+            if (type != null)
+            {
+                if (includeSubType)
+                {
+                    Junction join = Restrictions.Disjunction()
+                                                .Add(Restrictions.Eq("Type", type))
+                                                .Add(Restrictions.Between("type.OrderId", CreateSubMinOrderId(type),
+                                                                          CreateSubMaxOrderId(type)));
+                    crit.CreateAlias("Type", "type").Add(join);
+                    pageCount.CreateAlias("Type", "type").Add(join);
+                }
+                else
+                {
+                    crit.Add(Restrictions.Eq(MessageTypeProperty, type));
+                    pageCount.Add(Restrictions.Eq(MessageTypeProperty, type));
+                }
+            }
+            total = pageCount.SetProjection(Projections.Count<Message>(s => s.Id)).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+            return crit.SetFirstResult(pageSize * pageIndex)
+                       .SetMaxResults(pageSize).GetExecutableCriteria(CurrentSession).List<Message>();
         }
 
         public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type, bool includeSubType)
         {
-            DetachedCriteria crit = CreateDetachedCriteria()
-                .SetFirstResult(pageSize * pageIndex)
-                .SetMaxResults(pageSize);
+            DetachedCriteria crit = CreateDetachedCriteria();
 
             if (type != null)
             {
                 if (includeSubType)
                 {
-                    ;
+
                     Junction join = Restrictions.Disjunction()
                                                 .Add(Restrictions.Eq("Type", type))
                                                 .Add(Restrictions.Between("type.OrderId", CreateSubMinOrderId(type),
@@ -247,7 +260,8 @@ and Message.State=? and Message.PublishTime>=? and Message.PublishTime<=? order 
                 }
             }
 
-            return crit.GetExecutableCriteria(CurrentSession).List<Message>();
+            return crit.SetFirstResult(pageSize * pageIndex)
+                       .SetMaxResults(pageSize).GetExecutableCriteria(CurrentSession).List<Message>();
         }
 
         #endregion

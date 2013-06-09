@@ -189,4 +189,7 @@
   <data name="groupAssignUser.title" xml:space="preserve">
     <value>Assign Users</value>
   </data>
+  <data name="personal.title" xml:space="preserve">
+    <value>Personal</value>
+  </data>
 </root>

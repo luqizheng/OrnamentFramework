@@ -1,4 +1,4 @@
-﻿
+﻿@using Ornament.Web
 @using Resources
 @model IEnumerable<Ornament.Messages.Message>
 
@@ -17,7 +17,7 @@
             <a href="@Url.Action("Create")" class="btn btn-info">@Basic.Create</a>
         </div>
     </div>
-    <div class="well body">
+    <div class="table-overflow">
         @if (Model.Count() != 0)
         {
 
@@ -51,7 +51,7 @@
                             @Html.DisplayFor(modelItem => item.Type.Name)
                         </th>
                         <th>
-                            @Html.DisplayFor(modeItem=>item.State)
+                            @Html.DisplayFor(modeItem => item.State)
                         </th>
                         <td>
                             @Html.DisplayFor(modelItem => item.CreateTime)
@@ -63,12 +63,13 @@
                             @Html.DisplayFor(modelItem => item.PublishTime)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn" })
+                            <a data-toggle="popover" data-val="@item.Id"
+                                class="btn btn-danger" href="#" data-original-title="A Title">Delete</a>
                         </td>
                     </tr>
                 }
-
+                <tfoot></tfoot>
             </table>
         }
         else
@@ -78,6 +79,43 @@
                 </h6>
             </div>
         }
+
     </div>
+    <div class="table-footer">
+        <form method="POST">
+            @Html.Partial("NavPagination", (Pagination)ViewData["nav"])
+        </form>
+    </div>
+</div>
+<div id="warning" class="hide">
+    <p>Do you want to delete this message?</p>
+    <button class="btn btn-primary deleteYes">Yes</button>
+    <button class="btn btn-danger deleteNo">No</button>
 
 </div>
+
+@section script
+{
+    <script type="text/javascript">
+        seajs.use(["bootstrap"], function () {
+            var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
+            $(document)
+                .delegate("button.deleteYes", "click", function () {
+                    $("[data-toggle=popover]").popover("hide");
+                    $td = $(this).closest("td");
+                    var id = $td.find("a:eq(1)").attr("data-val");
+                    $.get("@Url.Action("Delete")/" + id, function (data) {
+                        if (data.success) {
+                            $td.closest("tr").remove();
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+                    $popver.popover("hide");
+                })
+                .delegate("button.deleteNo", "click", function () {
+                    $popver.popover("hide");
+                });
+        });
+    </script>
+}

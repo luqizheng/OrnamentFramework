@@ -5,7 +5,7 @@ namespace Ornament.Web
     public class Pagination
     {
         public Pagination()
-            : this(50, 0)
+            : this(10, 0)
         {
 
         }
@@ -24,7 +24,7 @@ namespace Ornament.Web
         /// <summary>
         /// /
         /// </summary>
-        public int TotalPage { get; private set; }
+        public int TotalPage { get; set; }
         /// <summary>
         /// Gets or sets
         /// </summary>

@@ -24,9 +24,4 @@ namespace Ornament.MemberShip
 
         PerformerType Type { get; }
     }
-
-    public enum PerformerType
-    {
-        User,Role,UserGroup,Org
-    }
 }
