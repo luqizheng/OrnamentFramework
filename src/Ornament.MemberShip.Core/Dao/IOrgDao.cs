@@ -16,5 +16,6 @@ namespace Ornament.MemberShip.Dao
         bool InUse(string orgId);
 
         IEnumerable<Org> Find(string name, int pageIndex, int pageSize);
+        IEnumerable<Org> GetOrgs(string[] ids);
     }
 }

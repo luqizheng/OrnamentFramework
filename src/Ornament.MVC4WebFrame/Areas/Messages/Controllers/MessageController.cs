@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Web.Mvc;
 using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
 using Ornament.Messages;
 using Ornament.Messages.Contents;
 using Ornament.Messages.Dao;
@@ -13,11 +14,13 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
     public class MessageController : Controller
     {
         private readonly IMessageDaoFactory _daoFactory;
+        private readonly IMemberShipFactory _memberShipFactory;
         private readonly IMessageDao _messageDao;
 
-        public MessageController(IMessageDaoFactory daoFactory)
+        public MessageController(IMessageDaoFactory daoFactory, IMemberShipFactory memberShipFactory)
         {
             _daoFactory = daoFactory;
+            _memberShipFactory = memberShipFactory;
             _messageDao = daoFactory.MessageDao;
         }
 
@@ -29,14 +32,8 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
         public ActionResult Edit(string id)
         {
-            Message message = _messageDao.Get(id);
+            Message message = _messageDao.GetNoLazyMessage(id);
             ViewData["types"] = _daoFactory.MessageTypeDao.GetAll();
-
-
-            //foreach (string a in message.Contents.Keys)
-            //{
-            //    Content c = message.Contents[a];
-            //}
             return View("Edit", message);
         }
 
@@ -44,13 +41,13 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         public ActionResult Create()
         {
             ViewData["types"] = _daoFactory.MessageTypeDao.GetAll();
-
             return View("Edit");
         }
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
         public ActionResult Save(Message message, IDictionary<string, string> newContents,
-                                 IDictionary<string, string> newSubjects, IList<Role> roles, IList<User> users, IList<Org> orgs, IList<UserGroup> userGroups)
+                                 IDictionary<string, string> newSubjects, string users, string userGroups, string roles,
+                                 string orgs)
         {
             message.Contents.Clear();
             foreach (string key in newContents.Keys)
@@ -64,36 +61,33 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             }
             if (roles != null)
             {
-                foreach (var a in roles)
+                foreach (Role a in _memberShipFactory.CreateRoleDao().GetRolesByIds(roles.Split(',')))
                 {
-                    if (a != null)
-                        message.AddReaders(a);
+                    message.AddReaders(a);
                 }
             }
             if (users != null)
             {
-                foreach (var user in users)
+                foreach (User user in _memberShipFactory.CreateUserDao().GetUsersByIds(users.Split(',')))
                 {
-                    if (user != null)
-                        message.AddReaders(user);
+                    message.AddReaders(user);
                 }
             }
 
             if (orgs != null)
             {
-                foreach (var org in orgs)
+
+                foreach (var org in _memberShipFactory.CreateOrgDao().GetOrgs(orgs.Split(',')))
                 {
-                    if (org != null)
-                        message.AddReaders(org);
+                    message.AddReaders(org);
                 }
             }
 
             if (userGroups != null)
             {
-                foreach (var ug in userGroups)
+                foreach (var ug in _memberShipFactory.CreateUserGroupDao().GetByIds(userGroups.Split(',')))
                 {
-                    if (ug != null)
-                        message.AddReaders(ug);
+                    message.AddReaders(ug);
                 }
             }
 

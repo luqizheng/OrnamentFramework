@@ -21,5 +21,12 @@ namespace Ornament.MemberShip
         /// <param name="memberShipFactory"></param>
         /// <returns></returns>
         IList<User> GetUsers(IMemberShipFactory memberShipFactory);
+
+        PerformerType Type { get; }
+    }
+
+    public enum PerformerType
+    {
+        User,Role,UserGroup,Org
     }
 }

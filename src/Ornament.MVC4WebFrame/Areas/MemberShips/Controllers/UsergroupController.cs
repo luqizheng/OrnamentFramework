@@ -92,7 +92,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             UserGroup user =
                 OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
             user.ClearRole();
-            foreach (Role role in roleDao.GetRoles(roles))
+            foreach (Role role in roleDao.GetRolesByName(roles))
             {
                 user.AddRole(role);
             }

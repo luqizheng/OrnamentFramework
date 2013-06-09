@@ -3,7 +3,7 @@
    /* for user ajax search */
 
     $.orgs = {
-        select2: function (selector) {
+        select2: function (selector, initFunc) {
             $(selector).select2({
                 minimumInputLength: 1,
                 multiple: true,
@@ -24,6 +24,9 @@
                         });
                         return { results: r, more: more };
                     }
+                },
+                initSelection: function (ele, callback) {
+                    callback(initFunc());
                 }
             });
         }

@@ -159,7 +159,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 ReadOnlyCollection<Role> roles =
-                    OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao().GetRoles(roleNames);
+                    OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao().GetRolesByName(roleNames);
 
                 if (roleNames.Length != roleNames.Length)
                 {
@@ -203,7 +203,7 @@ namespace Ornament.Web.MemberShips
             {
                 IUserDao userDao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserDao();
                 ReadOnlyCollection<Role> roles =
-                    OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao().GetRoles(roleNames);
+                    OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao().GetRolesByName(roleNames);
                 IList<User> users = userDao.GetUsers(usernames);
                 foreach (User u in users)
                 {

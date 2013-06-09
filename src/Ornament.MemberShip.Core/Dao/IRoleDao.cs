@@ -17,11 +17,9 @@ namespace Ornament.MemberShip.Dao
         /// <remarks>
         /// 如果没有匹配的集合，返回Count为0的集合
         /// </remarks>
-        ReadOnlyCollection<Role> GetRoles(string[] roleIds);
+        ReadOnlyCollection<Role> GetRolesByName(string[] roleIds);
 
-        
-
-
+        IEnumerable<Role> GetRolesByIds(string[] ids);
         /// <summary>
         /// 在<see cref="roleIds"/>中找到没有使用的role,被使用的role会存放在inUseRole中
         /// </summary>
@@ -45,7 +43,7 @@ namespace Ornament.MemberShip.Dao
         /// </summary>
         /// <param name="loginId"></param>
         /// <returns></returns>
-        ReadOnlyCollection<Role> GetRoles(string loginId);
+        ReadOnlyCollection<Role> GetRolesByName(string loginId);
 
 
 

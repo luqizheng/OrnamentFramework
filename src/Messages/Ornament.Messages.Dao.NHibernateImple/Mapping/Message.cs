@@ -27,7 +27,11 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                     }
                 );
             this.DynamicUpdate();
-            HasMany(x => x.Readers).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.None();
+            HasManyToMany(x => x.Readers)
+                .Table("Msgs_Readers")
+                .ParentKeyColumn("messageId")
+                .ChildKeyColumn("performerId")
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.None();
         }
     }
 }

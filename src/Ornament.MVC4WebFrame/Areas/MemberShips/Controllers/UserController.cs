@@ -114,7 +114,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 _memberShipFactory.CreateUserGroupDao();
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
             user.ClearRole();
-            foreach (Role role in roleDao.GetRoles(roles))
+            foreach (Role role in roleDao.GetRolesByName(roles))
             {
                 user.AddRole(role);
             }

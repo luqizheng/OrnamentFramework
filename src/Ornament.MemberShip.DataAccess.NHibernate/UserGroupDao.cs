@@ -89,7 +89,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<UserGroup> FindAll(int pageIndex, int pageSize)
         {
             return
-                CreateDetachedCriteria().SetFirstResult(pageIndex*pageSize).SetMaxResults(pageSize).
+                CreateDetachedCriteria().SetFirstResult(pageIndex * pageSize).SetMaxResults(pageSize).
                     GetExecutableCriteria(
                         CurrentSession).List<UserGroup>();
         }
@@ -99,6 +99,19 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<UserGroup>();
+        }
+
+        public IEnumerable<UserGroup> GetByIds(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return new UserGroup[0];
+            Disjunction disJunction = Restrictions.Disjunction();
+            foreach (string id in ids)
+            {
+                disJunction.Add(Restrictions.Eq(Projections.Property<UserGroup>(s => s.Id), id).IgnoreCase());
+            }
+
+            return CreateDetachedCriteria().Add(disJunction).GetExecutableCriteria(CurrentSession).List<UserGroup>();
         }
 
         #endregion

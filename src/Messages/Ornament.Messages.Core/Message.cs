@@ -12,9 +12,13 @@ namespace Ornament.Messages
     public class Message : DomainObject<Message, string>
     {
         private IDictionary<string, Content> _contents;
-        private Iesi.Collections.Generic.ISet<MessageReader> _readers;
-        private MessageState _state;
+        private List<IPerformer> _orgs;
+        private Iesi.Collections.Generic.ISet<IPerformer> _readers;
+        private List<IPerformer> _roles;
         private MessageType _type;
+        private List<IPerformer> _userGroups;
+        private List<IPerformer> _users;
+        private bool loopAllPerformer;
 
 
         /// <summary>
@@ -42,8 +46,6 @@ namespace Ornament.Messages
         }
 
 
-
-
         /// <summary>
         /// </summary>
         public virtual Priority Priority { set; get; }
@@ -52,14 +54,7 @@ namespace Ornament.Messages
         /// <summary>
         ///     Gets or sets the Message State.
         /// </summary>
-        public virtual MessageState State
-        {
-            get { return _state; }
-            set
-            {
-                _state = value;
-            }
-        }
+        public virtual MessageState State { get; set; }
 
         /// <summary>
         ///     Gets or sets the type
@@ -104,9 +99,29 @@ namespace Ornament.Messages
         /// <summary>
         ///     Gets the the MessageReader.
         /// </summary>
-        public virtual Iesi.Collections.Generic.ISet<MessageReader> Readers
+        public virtual Iesi.Collections.Generic.ISet<IPerformer> Readers
         {
-            get { return _readers ?? (_readers = new HashedSet<MessageReader>()); }
+            get { return _readers ?? (_readers = new HashedSet<IPerformer>()); }
+        }
+
+        private List<IPerformer> Roles
+        {
+            get { return _roles ?? (_roles = new List<IPerformer>()); }
+        }
+
+        private List<IPerformer> Users
+        {
+            get { return _users ?? (_users = new List<IPerformer>()); }
+        }
+
+        private List<IPerformer> UserGroups
+        {
+            get { return _userGroups ?? (_userGroups = new List<IPerformer>()); }
+        }
+
+        private List<IPerformer> Orgs
+        {
+            get { return _orgs ?? (_orgs = new List<IPerformer>()); }
         }
 
         /// <summary>
@@ -118,8 +133,7 @@ namespace Ornament.Messages
                 throw new ArgumentException("could not set reader to null or emtpy", "addReaders");
             foreach (IPerformer member in addReaders)
             {
-                var infReader = new MessageReader(member) { Message = this };
-                Readers.Add(infReader);
+                Readers.Add(member);
             }
         }
 
@@ -129,7 +143,7 @@ namespace Ornament.Messages
         /// <returns></returns>
         public virtual Content Show(string language)
         {
-            if (!this.Contents.ContainsKey(language))
+            if (!Contents.ContainsKey(language))
                 throw new ArgumentOutOfRangeException("language", "can't find language(" + language + ") defined.");
             Content content = Contents[language];
             return content;
@@ -141,19 +155,77 @@ namespace Ornament.Messages
         /// <returns></returns>
         public virtual Content Show()
         {
-            if (this.Contents.Count == 0)
+            if (Contents.Count == 0)
                 throw new ArgumentOutOfRangeException("Message do not have any content");
             string lang = CultureInfo.CurrentUICulture.Name;
             if (Contents.ContainsKey(lang))
                 return Show(lang);
-            if (lang.IndexOf("-", System.StringComparison.Ordinal) != -1)
+            if (lang.IndexOf("-", StringComparison.Ordinal) != -1)
             {
                 lang = lang.Substring(2);
                 if (Contents.ContainsKey(lang))
                     return Show(lang);
             }
-            return this.Contents.Values.First();
+            return Contents.Values.First();
         }
 
+
+        public virtual IPerformer[] GetUsers()
+        {
+            if (!loopAllPerformer)
+            {
+                Assing();
+                loopAllPerformer = true;
+            }
+            return Users.ToArray();
+        }
+
+        public virtual IPerformer[] GetUserGroups()
+        {
+            if (!loopAllPerformer)
+            {
+                Assing();
+                loopAllPerformer = true;
+            }
+            return UserGroups.ToArray();
+        }
+        public virtual IPerformer[] GetOrgs()
+        {
+            if (!loopAllPerformer)
+            {
+                Assing();
+                loopAllPerformer = true;
+            }
+            return Orgs.ToArray();
+        }
+
+        public virtual IPerformer[] GetRoles()
+        {
+            if (!loopAllPerformer)
+            {
+                Assing();
+                loopAllPerformer = true;
+            }
+            return Roles.ToArray();
+        }
+
+        private void Assing()
+        {
+            foreach (var reader in Readers)
+            {
+                
+                if (reader.Type == PerformerType.Role)
+                    Roles.Add(reader);
+
+                if (reader.Type == PerformerType.UserGroup)
+                    UserGroups.Add(reader);
+
+                if (reader.Type == PerformerType.User)
+                    Users.Add(reader);
+
+                if (reader.Type == PerformerType.Org)
+                    Orgs.Add(reader);
+            }
+        }
     }
 }

@@ -21,7 +21,10 @@ namespace Ornament.MemberShip
             : base(name)
         {
         }
-
+        PerformerType IPerformer.Type
+        {
+            get { return PerformerType.UserGroup; }
+        }
         public virtual IEnumerable<Permission> Permissions
         {
             get

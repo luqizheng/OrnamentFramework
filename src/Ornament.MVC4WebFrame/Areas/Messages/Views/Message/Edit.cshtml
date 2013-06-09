@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using Ornament.MemberShip
 @using Ornament.Messages
 @using Ornament.Web
 @using Resources
@@ -10,6 +11,9 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
     var types = ViewData["types"] as IEnumerable<MessageType>;
     string contents = "{}";
+    string users, roles, usergroups, orgs;
+    users = roles = usergroups = orgs = "{}";
+
     if (this.Model != null)
     {
         var content = from a in this.Model.Contents.Values
@@ -20,7 +24,16 @@
                               language = a.Language
                           };
         contents = Qi.Web.JsonHelper.ToJson(content.ToDictionary(s => s.language));
+
+        users = Qi.Web.JsonHelper.ToJson(from a in this.Model.GetUsers() select new { id = a.Id, text = a.Name });
+        roles = Qi.Web.JsonHelper.ToJson(from a in this.Model.GetRoles() select new { id = a.Id, text = a.Name });
+        usergroups = Qi.Web.JsonHelper.ToJson(from a in this.Model.GetUserGroups() select new { id = a.Id, text = a.Name });
+        orgs = Qi.Web.JsonHelper.ToJson(from a in this.Model.GetOrgs() select new { id = a.Id, text = a.Name });
     }
+    
+    
+    
+    
     
 }
 @section pageTitle
@@ -63,25 +76,58 @@
                             <div class="control-group">
                                 <label class="control-label">User:</label>
                                 <div class="controls">
-                                    <input type="hidden" name="Users" id="Users" value="" />
+                                    @if (this.Model != null)
+                                    {
+                                        <input type="hidden" name="Users" id="Users" value="@String.Join(",", (from user in this.Model.GetUsers() select user.Id))"/>
+                                    }
+                                    else
+                                    {
+                                        <input type="hidden" name="Users" id="Users" />
+                                    }
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Roles:</label>
                                 <div class="controls">
-                                    <input name="Roles" id="Roles" class="bulk" />
+                                    @if (this.Model != null)
+                                    {
+                                        <input name="Roles" id="Roles" type="hidden" value="@String.Join(",", (from user in this.Model.GetRoles() select user.Id))"/>
+                                    }
+                                    else
+                                    {
+                                        <input name="Roles" id="Roles" type="hidden" />
+                                    }
+
+
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">UserGroup:</label>
                                 <div class="controls">
-                                    <input name="UserGroups" id="UserGroups" />
+
+                                    @if (this.Model != null)
+                                    {
+                                        <input name="userGroups" id="UserGroups" value="@String.Join(",", (from user in this.Model.GetUserGroups() select user.Id))" type="hidden"/>
+                                    }
+                                    else
+                                    {
+                                        <input name="userGroups" id="UserGroups" type="hidden" />
+                                    }
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Orgs:</label>
                                 <div class="controls">
-                                    <input name="Orgs" id="Orgs" />
+
+
+                                    @if (this.Model != null)
+                                    {
+                                        <input name="Orgs" id="Orgs"  type="hidden" value="@String.Join(",", (from user in this.Model.GetOrgs() select user.Id))"/>
+                                    }
+                                    else
+                                    {
+                                        <input name="Orgs" id="Orgs" type="hidden" />
+                                    }
                                 </div>
                             </div>
                             <div class="control-group">
@@ -196,11 +242,18 @@
 
             $("#Type").select2();
 
-            $.users.select2("#Users");
-
-            $.roles.select2("#Roles");
-            $.usergroups.select2("#UserGroups");
-            $.orgs.select2("#Orgs");
+            $.users.select2("#Users",function() {
+                return @Html.Raw(users);
+            });
+            $.roles.select2("#Roles",function() {
+                return @Html.Raw(roles);
+            });
+            $.usergroups.select2("#UserGroups",function() {
+                return @Html.Raw(usergroups);
+            });
+            $.orgs.select2("#Orgs",function() {
+                return @Html.Raw(orgs);
+            });
             $('.date').datepicker();
 
             $("#Language").select2().change(function() {

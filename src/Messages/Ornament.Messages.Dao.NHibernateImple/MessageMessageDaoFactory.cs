@@ -49,14 +49,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
             get { return SessionManager.Instance.GetCurrentSession().Query<MessageType>(); }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public IInfoReaderDao MessageReaderDao
-        {
-            get { return new InfoReaderDao(); }
-        }
-
+      
         /// <summary>
         /// 
         /// </summary>

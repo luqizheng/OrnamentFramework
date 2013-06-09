@@ -16,7 +16,7 @@ namespace Ornament.Messages.Dao
 
         IMessageTypeDao MessageTypeDao { get; }
 
-        IInfoReaderDao MessageReaderDao { get; }
+       
 
         IInfoReadStateDao MessageReadStateDao { get; }
     }

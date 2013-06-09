@@ -31,6 +31,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<User>(u => u.Name)); }
         }
 
+        private IProjection IdProperty
+        {
+            get { return _pools.Once(() => Projections.Property<User>(u => u.Id)); }
+        }
+
         #region IUserDao Members
 
         public override IList<User> GetAll()
@@ -79,6 +84,19 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria().Add(disJunction).GetExecutableCriteria(CurrentSession).List<User>();
         }
 
+        public IList<User> GetUsersByIds(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return new List<User>();
+            Disjunction disJunction = Restrictions.Disjunction();
+            foreach (string loginid in ids)
+            {
+                disJunction.Add(Restrictions.Eq(IdProperty, loginid).IgnoreCase());
+            }
+
+            return CreateDetachedCriteria().Add(disJunction).GetExecutableCriteria(CurrentSession).List<User>();
+        }
+
         /// <summary>
         /// 根据角色Id获取用户
         /// </summary>
@@ -88,7 +106,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return CreateDetachedCriteria()
                 .CreateCriteria("Roles")
-                .Add(Restrictions.Eq("Name", roleId).IgnoreCase())
+                .Add(Restrictions.Eq("Id", roleId).IgnoreCase())
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 

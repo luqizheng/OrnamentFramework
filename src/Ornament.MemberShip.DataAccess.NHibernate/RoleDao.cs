@@ -24,7 +24,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns></returns>
-        public ReadOnlyCollection<Role> GetRoles(string[] roleName)
+        public ReadOnlyCollection<Role> GetRolesByName(string[] roleName)
         {
             if (roleName == null || roleName.Length == 0)
                 return new ReadOnlyCollection<Role>(new List<Role>());
@@ -38,7 +38,21 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new ReadOnlyCollection<Role>(result);
         }
 
-        public ReadOnlyCollection<Role> GetRoles(Guid[] roleIds)
+        public IEnumerable<Role> GetRolesByIds(string[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return new ReadOnlyCollection<Role>(new List<Role>());
+            Disjunction disJunction = Restrictions.Disjunction();
+            foreach (string a in ids)
+            {
+                disJunction.Add(Restrictions.Eq(Projections.Property<Role>(s => s.Id), a));
+            }
+            IList<Role> result =
+                CreateDetachedCriteria().Add(disJunction).GetExecutableCriteria(CurrentSession).List<Role>();
+            return new ReadOnlyCollection<Role>(result);
+        }
+
+        public ReadOnlyCollection<Role> GetRolesByName(Guid[] roleIds)
         {
             if (roleIds == null || roleIds.Length == 0)
                 return new ReadOnlyCollection<Role>(new List<Role>());
@@ -75,7 +89,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
 
-        public ReadOnlyCollection<Role> GetRoles(string loginId)
+        public ReadOnlyCollection<Role> GetRolesByName(string loginId)
         {
             const string foundOrgId = "Select u.Org.Id From User u where u.LoginId=?";
             IList guid = CurrentSession.CreateQuery(foundOrgId).SetString(0, loginId).List();

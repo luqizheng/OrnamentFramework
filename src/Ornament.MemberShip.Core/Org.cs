@@ -21,7 +21,10 @@ namespace Ornament.MemberShip
         private Iesi.Collections.Generic.ISet<Org> _childs;
         private string _orderId;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
-
+         PerformerType IPerformer.Type
+        {
+            get { return PerformerType.Org; }
+        }
 
         protected Org()
         {

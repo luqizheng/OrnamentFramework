@@ -98,14 +98,12 @@
   <ItemGroup>
     <Compile Include="AppStart\DaoRegistry.cs" />
     <Compile Include="Mapping\Message.cs" />
-    <Compile Include="Mapping\MessageReaderMapping.cs" />
     <Compile Include="Mapping\MessageReadStatus.cs" />
     <Compile Include="Mapping\MessageTypeMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
     <Compile Include="MessageMessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
     <Compile Include="MessageDao.cs" />
-    <Compile Include="InfoReaderDao.cs" />
     <Compile Include="InfoReadStateDao.cs" />
     <Compile Include="MessageTypeDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,7 +22,6 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="roleName"></param>
         /// <exception cref="ArgumentNullException">roleName is null or length is 0</exception>
@@ -35,28 +34,10 @@ namespace Ornament.MemberShip
 
 
         /// <summary>
-        /// Gets or sets the name of role.
+        ///     Gets or sets remark
         /// </summary>
-        [Display(Name = "Name", ResourceType = typeof(MembershipCommon))]
-        [Required(ErrorMessageResourceType = typeof(ErrorMessage), ErrorMessageResourceName = "RequireRoleName")]
-        [StringLength(20, ErrorMessageResourceType = typeof(ErrorMessage),
-            ErrorMessageResourceName = "RoleNameOverMaxLength")]
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value != null && value.Length > 20)
-                    throw new ArgumentOutOfRangeException("value", value.Length, "Name's lenght over than 20");
-                _name = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets remark
-        /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof(MembershipCommon))]
-        [StringLength(100, ErrorMessageResourceType = typeof(ErrorMessage),
+        [Display(Name = "Remark", ResourceType = typeof (MembershipCommon))]
+        [StringLength(100, ErrorMessageResourceType = typeof (ErrorMessage),
             ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
         public string Remark
         {
@@ -96,10 +77,33 @@ namespace Ornament.MemberShip
         string IPerformer.Name
         {
             get { return Name; }
-            set { this.Name = value; }
+            set { Name = value; }
         }
 
         #endregion
+
+        PerformerType IPerformer.Type
+        {
+            get { return PerformerType.Role; }
+        }
+
+        /// <summary>
+        ///     Gets or sets the name of role.
+        /// </summary>
+        [Display(Name = "Name", ResourceType = typeof (MembershipCommon))]
+        [Required(ErrorMessageResourceType = typeof (ErrorMessage), ErrorMessageResourceName = "RequireRoleName")]
+        [StringLength(20, ErrorMessageResourceType = typeof (ErrorMessage),
+            ErrorMessageResourceName = "RoleNameOverMaxLength")]
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != null && value.Length > 20)
+                    throw new ArgumentOutOfRangeException("value", value.Length, "Name's lenght over than 20");
+                _name = value;
+            }
+        }
 
         public override int GetHashCode()
         {

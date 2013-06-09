@@ -7,6 +7,7 @@ namespace Ornament.Messages.Dao
 {
     public interface IMessageDao : IDao<string, Message>
     {
+        Message GetNoLazyMessage(string id);
         /// <summary>
         /// 
         /// </summary>
@@ -56,10 +57,6 @@ namespace Ornament.Messages.Dao
         IList<Message> Find(MessageSearcher search);
 
         IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type,bool includeSubType);
-
-
-
-
 
     }
 }

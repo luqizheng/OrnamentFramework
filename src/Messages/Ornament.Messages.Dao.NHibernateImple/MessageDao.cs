@@ -31,6 +31,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         #region IInfoDao Members
 
+        public Message GetNoLazyMessage(string id)
+        {
+            return CreateDetachedCriteria().Add(Restrictions.Eq("Id", id))
+                                           .SetFetchMode("Contents", FetchMode.Select)
+                                           .SetFetchMode("Readers",FetchMode.Select)
+                                           .GetExecutableCriteria(this.CurrentSession)
+                                           .UniqueResult<Message>();
+
+        }
+
         /// <summary>
         /// 
         /// </summary>
