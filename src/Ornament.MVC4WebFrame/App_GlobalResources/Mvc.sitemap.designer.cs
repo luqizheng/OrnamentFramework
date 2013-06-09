@@ -196,6 +196,15 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
+        ///   查找类似 Personal 的本地化字符串。
+        /// </summary>
+        internal static string personal_title {
+            get {
+                return ResourceManager.GetString("personal.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 New Role 的本地化字符串。
         /// </summary>
         internal static string roleCreate_title {

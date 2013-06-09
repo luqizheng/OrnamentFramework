@@ -16,7 +16,8 @@
 
 }
 @Html.HiddenFor(s => s.PageSize)
-@Html.Hidden("CurrentPage", 0)
+@Html.HiddenFor(s => s.CurrentPage)
+@Html.HiddenFor(s => s.TotalPage)
 <div class="pagination pagination-right">
     <ul>
         @if (this.Model.CurrentPage != 0)
@@ -45,12 +46,10 @@
     </ul>
 </div>
 <script type="text/javascript">
-    seajs.use(["jquery"], function() {
-        $(document).ready(function() {
-            $(".pagination li[class!=active] a").click(function() {
-                $("#CurrentPage").val($(this).attr("href").substr(1));
-                $("form").submit();
-            });
+    seajs.use(["jquery"], function () {
+        $(".pagination li[class!=active] a").click(function () {
+            $("#CurrentPage").val($(this).attr("href").substr(1));
+            $("form").submit();
         });
     });
 </script>
