@@ -6,16 +6,12 @@ using System.Web.Optimization;
 using System.Web.Profile;
 using System.Web.Routing;
 using System.Web.Security;
-using Ornament.AppStart;
 using Ornament.MVCWebFrame.App_Start;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
-using Ornament.Web.Models;
 using Qi.NHibernateExtender;
-using Qi.Web.Mvc;
-using Qi.Web.Mvc.NHMvcExtender;
 using log4net;
 using log4net.Config;
 
@@ -28,18 +24,14 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
-
-
             AreaRegistration.RegisterAllAreas();
-            
-            
-
             MvcExtender.Register();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             PermissionConfig.Regist();
+           
             MessageConfig.Register(OrnamentContext.Current);
             //Ornament setting
             //Registry the Provider to use Membership rule of asp.net.
@@ -70,7 +62,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof (GlobalContext));
+                ILog log = LogManager.GetLogger(typeof(GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally

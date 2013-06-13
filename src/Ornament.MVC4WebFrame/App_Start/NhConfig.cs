@@ -50,22 +50,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void UpdateDatabase()
         {
-            try
-            {
-                //Update db 
-                MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-                var init = (new GlobalInitializer());
-                init.UpdateAllSturcture();
-                var initMemberShip = GlobalInitializer.GetContainer().Resolve<IDataInitializer>("MembershipInit");
-                if (initMemberShip.IsFirstApplicationStart)
-                {
-                    initMemberShip.CreateData();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogManager.GetLogger(typeof(NhConfig)).Error("global fails.", ex);
-            }
+            InitData.Initialize();
         }
     }
 }
