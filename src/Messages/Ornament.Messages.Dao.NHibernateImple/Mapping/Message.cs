@@ -32,6 +32,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                 .ParentKeyColumn("messageId")
                 .ChildKeyColumn("performerId")
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.None();
+
+            
         }
     }
 }

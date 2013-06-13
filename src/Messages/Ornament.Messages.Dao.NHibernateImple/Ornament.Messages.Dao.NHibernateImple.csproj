@@ -104,7 +104,7 @@
     <Compile Include="MessageMessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
     <Compile Include="MessageDao.cs" />
-    <Compile Include="InfoReadStateDao.cs" />
+    <Compile Include="MessageReadStateDao.cs" />
     <Compile Include="MessageTypeDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip;
-using Ornament.Messages.Contents;
 using Qi.Domain;
 
 namespace Ornament.Messages

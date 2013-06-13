@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Messages;
-using Ornament.Messages.Contents;
 using Ornament.Messages.Dao;
 using Ornament.Web;
 using Ornament.Web.MemberShips;

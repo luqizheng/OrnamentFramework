@@ -262,6 +262,7 @@
     <Compile Include="Models\Membership\OrgOperator.cs" />
     <Compile Include="Models\Membership\RoleOperator.cs" />
     <Compile Include="Models\Membership\UserOperator.cs" />
+    <Compile Include="Models\MessageExtender.cs" />
     <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="Models\swfuploadFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

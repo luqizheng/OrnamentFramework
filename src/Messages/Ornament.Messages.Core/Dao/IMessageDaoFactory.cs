@@ -18,6 +18,6 @@ namespace Ornament.Messages.Dao
 
        
 
-        IInfoReadStateDao MessageReadStateDao { get; }
+        IMessageReadStateDao MessageReadStateDao { get; }
     }
 }
