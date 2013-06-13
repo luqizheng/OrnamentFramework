@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PerformerType.cs" />
+    <Compile Include="Permissions\GenericPermission.cs" />
     <Compile Include="Secret\ActiveUserAction.cs" />
     <Compile Include="Secret\UserSecretToken.cs" />
     <Compile Include="Dao\IUserSecretTokenDao.cs" />

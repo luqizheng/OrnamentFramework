@@ -104,10 +104,5 @@ namespace Ornament.MemberShip
                 _name = value;
             }
         }
-
-        public override int GetHashCode()
-        {
-            return (Name + Remark).GetHashCode();
-        }
     }
 }

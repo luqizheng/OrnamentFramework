@@ -4,6 +4,7 @@ using Ornament.Messages.Dao;
 using Ornament.Web.Models;
 
 // ReSharper disable CheckNamespace
+
 namespace Ornament.Web
 // ReSharper restore CheckNamespace
 {
@@ -26,27 +27,32 @@ namespace Ornament.Web
         public void CreateData()
         {
             InitMessageType();
+            InitDemo();
+        }
+
+        private void InitDemo()
+        {
+            User admin = OrnamentContext.Current.MemberShipFactory().CreateUserDao().GetByLoginId("admin");
+            IMessageDao msgDao = OrnamentContext.Current.MessageFactory().MessageDao;
+
+
+            var m = new Message(admin, OrnamentContext.Current.TaskMessageType());
+            m.Contents.Add("zh-CN", new Content
+                {
+                    Subject = "请修改初始化密码",
+                    Language = "zh-CN",
+                    Value = "请修改初始化密码，如果已经修改过，请忽略这条信息"
+                });
+            m.AddReaders(admin);
+            msgDao.SaveOrUpdate(m);
+            msgDao.Flush();
         }
 
         private void InitMessageType()
         {
-            var personal = new MessageType(MessageExtender.PersonalMesssage);
-            IMessageTypeDao typeMessageDao =
-                OrnamentContext.Current.MessageFactory().MessageTypeDao;
-            typeMessageDao.SaveOrUpdate(personal);
-            typeMessageDao.Flush();
-            MessageExtender.NotificationId = personal.Id;
-
-
-            var taskMsgType = new MessageType(MessageExtender.WorkItem, personal);
-            typeMessageDao.SaveOrUpdate(taskMsgType);
-            MessageExtender.TaskId = taskMsgType.Id;
-            typeMessageDao.Flush();
-
-            var notificationMsg = new MessageType(MessageExtender.Notification, personal);
-            typeMessageDao.SaveOrUpdate(notificationMsg);
-            MessageExtender.NotificationId = notificationMsg.Id;
-            typeMessageDao.Flush();
+            //init message type.
+            OrnamentContext.Current.TaskMessageType();
+            OrnamentContext.Current.NotificationMessageType();
         }
     }
 }

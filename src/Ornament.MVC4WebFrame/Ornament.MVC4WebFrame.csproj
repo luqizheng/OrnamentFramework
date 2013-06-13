@@ -881,6 +881,7 @@
     <Content Include="Scripts\Memberships\user-1.0.js" />
     <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\HttpErrors\501.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

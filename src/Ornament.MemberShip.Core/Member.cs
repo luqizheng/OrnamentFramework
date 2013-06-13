@@ -215,15 +215,7 @@ namespace Ornament.MemberShip
             return (from role1 in GetAllRoles() from role2 in roles where role1.Id == role2.Id select role1).Any();
         }
 
-        /// <summary>
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return (Name + Remark).GetHashCode();
-        }
-
+      
         public override string ToString()
         {
             return Name;

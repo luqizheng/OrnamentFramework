@@ -6,7 +6,7 @@ namespace Ornament.Web
     public static class MessageExtender
     {
         public const string PersonalMesssage = "Personal";
-        public const string WorkItem = "Task";
+        public const string TaskMessage = "Task";
         public const string Notification = "Notification";
         public static string PersonalMessageId;
         public static string TaskId;
@@ -17,8 +17,13 @@ namespace Ornament.Web
             IMessageTypeDao dao = ornamentContext.MessageFactory().MessageTypeDao;
             if (PersonalMessageId == null)
             {
-                PersonalMessageId =
-                    dao.GetByName(PersonalMesssage).Id;
+                MessageType personal = dao.GetByName(PersonalMesssage) ?? new MessageType(PersonalMesssage);
+                if (string.IsNullOrEmpty(personal.Id))
+                {
+                    dao.SaveOrUpdate(personal);
+                    dao.Flush();
+                }
+                PersonalMessageId = personal.Id;
             }
             return dao.Get(PersonalMessageId);
         }
@@ -28,8 +33,15 @@ namespace Ornament.Web
             IMessageTypeDao dao = ornamentContext.MessageFactory().MessageTypeDao;
             if (NotificationId == null)
             {
-                NotificationId =
-                    dao.GetByName(Notification).Id;
+                MessageType notifi = dao.GetByName(Notification) ??
+                                     new MessageType(Notification, PersonalMessageType(ornamentContext));
+                if (string.IsNullOrEmpty(notifi.Id))
+                {
+                    dao.SaveOrUpdate(notifi);
+                    dao.Flush();
+                }
+
+                NotificationId = notifi.Id;
             }
             return dao.Get(NotificationId);
         }
@@ -39,8 +51,16 @@ namespace Ornament.Web
             IMessageTypeDao dao = ornamentContext.MessageFactory().MessageTypeDao;
             if (TaskId == null)
             {
-                PersonalMessageId =
-                    dao.GetByName(WorkItem).Id;
+                MessageType taskMessageType = dao.GetByName(TaskMessage) ??
+                                              new MessageType(TaskMessage, PersonalMessageType(ornamentContext));
+
+                if (string.IsNullOrEmpty(taskMessageType.Id))
+                {
+                    dao.SaveOrUpdate(taskMessageType);
+                    dao.Flush();
+                }
+
+                TaskId = taskMessageType.Id;
             }
             return dao.Get(TaskId);
         }
