@@ -14,17 +14,27 @@ namespace Ornament.Web
             PageSize = pageSize;
             CurrentPage = currentPage;
         }
-        public void SetTotalPage(int rowNumber)
+        public void SetTotalPage(int totalNumber)
         {
-            int remarider;
-            TotalPage = Math.DivRem(rowNumber, PageSize, out remarider);
-            if (remarider != 0)
-                TotalPage++;
+            this.TotalNumber = totalNumber;
+
         }
+
+        private int _totalPage;
         /// <summary>
         /// /
         /// </summary>
-        public int TotalPage { get; set; }
+        public int TotalPage
+        {
+            get
+            {
+                int remarider;
+                _totalPage = Math.DivRem(this.TotalNumber, PageSize, out remarider);
+                if (remarider != 0)
+                    _totalPage++;
+                return _totalPage;
+            }
+        }
         /// <summary>
         /// Gets or sets
         /// </summary>
@@ -37,6 +47,6 @@ namespace Ornament.Web
         /// <summary>
         /// 
         /// </summary>
-        public int ActualNumber { get; set; }
+        public int TotalNumber { get; set; }
     }
 }

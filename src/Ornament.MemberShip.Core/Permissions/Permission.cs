@@ -7,17 +7,6 @@ using Qi.Domain;
 
 namespace Ornament.MemberShip.Permissions
 {
-    public class GenericPermission<T> : Permission
-    {
-        public GenericPermission() { }
-        public GenericPermission(T res)
-            : base(res)
-        {
-        }
-
-        public virtual new T Resource { get { return (T)base.Resource; } set { base.Resource = value; } }
-    }
-
     /// <summary>
     /// 许可对象。用于定义角色(<see cref="Role"/>)是否有权对资源(通过ResourceId属性定义)进行某种操作(<see cref="Operator"/>)
     /// </summary>  
@@ -134,11 +123,6 @@ namespace Ornament.MemberShip.Permissions
         public virtual bool HasOperator(Enum @operator)
         {
             return HasOperator(this.Operator, @operator);
-        }
-
-        public override int GetHashCode()
-        {
-            return (Name + Operator).GetHashCode();
         }
 
         public override string ToString()

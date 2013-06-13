@@ -1,7 +1,4 @@
-﻿using System;
-using Qi.Domain;
-
-namespace Ornament.Messages.Contents
+﻿namespace Ornament.Messages
 {
     public class Content
     {

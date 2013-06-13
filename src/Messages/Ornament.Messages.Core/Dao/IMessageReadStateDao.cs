@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
-using Qi.Domain;
 using Ornament.MemberShip;
+using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IInfoReadStateDao : IDao<object[],ReaderReadStatus>
+    public interface IMessageReadStateDao : IDao<object[], ReaderReadStatus>
     {
         ReaderReadStatus Get(User user, Message message);
 
         IList<ReaderReadStatus> GetReadState(Message message);
-        
-            
-        
-
     }
 }

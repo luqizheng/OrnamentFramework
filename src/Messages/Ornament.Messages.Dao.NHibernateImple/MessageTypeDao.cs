@@ -20,13 +20,13 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             if (String.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name");
-            ICriteria criteria = CreateCriteria();
-            IList<MessageType> list = criteria.Add(Restrictions.Eq("Name", name)).List<MessageType>();
-            if (list.Count == 0)
-            {
-                return null;
-            }
-            return list[0];
+
+            return
+                CreateDetachedCriteria()
+                    .Add(Restrictions.Eq(Projections.Property<MessageType>(type => type.Name), name))
+                    .GetExecutableCriteria(this.CurrentSession)
+                    .UniqueResult<MessageType>();
+
         }
 
         public IList<MessageType> GetList(MessageType parent)

@@ -20,7 +20,7 @@ namespace Ornament.MVCWebFrame.Models.DataInit
             get { return "Initialze Membership"; }
         }
 
-        public bool IsFirstApplicationStart
+        public bool IsNeedInitialize
         {
             get
             {

@@ -5,7 +5,7 @@ using Ornament.MemberShip;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class InfoReadStateDao : DaoMultiId<ReaderReadStatus>, IInfoReadStateDao
+    public class MessageReadStateDao : DaoMultiId<ReaderReadStatus>, IMessageReadStateDao
     {
        
         #region IInfoReadStateDao Members

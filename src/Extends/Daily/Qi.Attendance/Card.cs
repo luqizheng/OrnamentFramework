@@ -26,24 +26,24 @@ namespace Qi.Attendance
                    Equals(Employee, other.Employee);
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int hashCode = base.GetHashCode();
-                hashCode = (hashCode*397) ^ (Number != null ? Number.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) State;
-                hashCode = (hashCode*397) ^ (Employee != null ? Employee.GetHashCode() : 0);
-                return hashCode;
-            }
-        }
+        //public override int GetHashCode()
+        //{
+        //    unchecked
+        //    {
+        //        int hashCode = base.GetHashCode();
+        //        hashCode = (hashCode*397) ^ (Number != null ? Number.GetHashCode() : 0);
+        //        hashCode = (hashCode*397) ^ (int) State;
+        //        hashCode = (hashCode*397) ^ (Employee != null ? Employee.GetHashCode() : 0);
+        //        return hashCode;
+        //    }
+        //}
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((Card) obj);
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    if (ReferenceEquals(null, obj)) return false;
+        //    if (ReferenceEquals(this, obj)) return true;
+        //    if (obj.GetType() != GetType()) return false;
+        //    return Equals((Card) obj);
+        //}
     }
 }

@@ -5,7 +5,6 @@
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var defects = ((IEnumerable<Defect>)ViewData["Defects"]) ?? new List<Defect>();
 }
 @section pageTitle{
     <h5>@Html.GetResourceString("Home")</h5>

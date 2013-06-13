@@ -1,6 +1,5 @@
 ﻿using System;
 using Ornament.MemberShip;
-using Ornament.Messages.Contents;
 
 namespace Ornament.Messages
 {

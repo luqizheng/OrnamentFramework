@@ -13,7 +13,7 @@ namespace Ornament.Web.Models
         /// <summary>
         /// Indeciate the 
         /// </summary>
-        bool IsFirstApplicationStart { get; }
+        bool IsNeedInitialize { get; }
 
         /// <summary>
         /// 

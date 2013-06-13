@@ -217,7 +217,7 @@ namespace Ornament
 
             private Inner()
             {
-                _container = new WindsorContainer(new XmlInterpreter());
+                _container = new WindsorContainer();
             }
 
             public IWindsorContainer GetContainer()

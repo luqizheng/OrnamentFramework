@@ -40,22 +40,7 @@ namespace Ornament.Messages
         /// <summary>
         /// </summary>
         public virtual ReadStatus Status { get; set; }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            return obj.GetHashCode() == GetHashCode();
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            return (Message.Id + Reader.LoginId + Reader.Id).GetHashCode();
-        }
+     
+     
     }
 }

@@ -208,6 +208,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\InitData.cs" />
     <Compile Include="App_Start\MessageConfig.cs" />
     <Compile Include="App_Start\MvcExtender.cs" />
     <Compile Include="App_Start\NhConfig.cs" />
@@ -248,12 +249,13 @@
     </Compile>
     <Compile Include="Models\DaoFactory.cs" />
     <Compile Include="Models\DataInit\MembershipInit.cs" />
-    <Compile Include="Models\DataInit\ProjectDataInit.cs" />
+    <Compile Include="Models\DataInit\MessageInit.cs" />
     <Compile Include="Models\Editor.cs" />
     <Compile Include="Models\Membership\AccountOperator.cs" />
     <Compile Include="Models\Membership\OrgOperator.cs" />
     <Compile Include="Models\Membership\RoleOperator.cs" />
     <Compile Include="Models\Membership\UserOperator.cs" />
+    <Compile Include="Models\MessageExtender.cs" />
     <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="Models\swfuploadFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -872,6 +874,7 @@
     <Content Include="Scripts\Memberships\user-1.0.js" />
     <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\HttpErrors\501.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1021,11 +1024,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\hibernate_ora.cfg.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Config\initData.config">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\ChangePassword.cshtml" />

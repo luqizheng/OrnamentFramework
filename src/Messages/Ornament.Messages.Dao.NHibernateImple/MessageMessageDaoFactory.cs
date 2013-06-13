@@ -53,9 +53,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <summary>
         /// 
         /// </summary>
-        public IInfoReadStateDao MessageReadStateDao
+        public IMessageReadStateDao MessageReadStateDao
         {
-            get { return new InfoReadStateDao(); }
+            get { return new MessageReadStateDao(); }
         }
 
         #endregion
