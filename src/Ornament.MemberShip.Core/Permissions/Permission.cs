@@ -136,11 +136,6 @@ namespace Ornament.MemberShip.Permissions
             return HasOperator(this.Operator, @operator);
         }
 
-        public override int GetHashCode()
-        {
-            return (Name + Operator).GetHashCode();
-        }
-
         public override string ToString()
         {
             return this.Name;
