@@ -35,7 +35,7 @@ use permission for checking permission like @user:Read, user is the string type 
     <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-group">
       <mvcSiteMapNode  area="MemberShips" action="Index" controller="User" resourceKey="userList" permission="User:Read">
         <mvcSiteMapNode area="MemberShips" action="Create" controller="User" resourceKey="userCreate" permission="User:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" action="Edit" controller="User" resourceKey="editUser" permission="User:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" action="Edit" controller="User" resourceKey="userEdit" permission="User:Modify"></mvcSiteMapNode>
         <mvcSiteMapNode area="MemberShips" action="Assign" controller="User" resourceKey="assign" permission="User:Modify"></mvcSiteMapNode>
       </mvcSiteMapNode>
       <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="Role:Read">

@@ -78,8 +78,9 @@
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.6.5\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,8 +103,14 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.DynamicData" />
@@ -215,7 +222,13 @@
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
-    <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
+    <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
+    <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
+    <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
+    <Compile Include="Areas\Docs\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
+    <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
+    <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
@@ -228,6 +241,7 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
+    <Compile Include="Areas\Messages\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
@@ -241,9 +255,9 @@
     <Compile Include="Controllers\HttpErrorsController.cs" />
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\MembershipServiceController.cs" />
-    <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\PersonalMessageController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -281,6 +295,7 @@
     <Content Include="Areas\Messages\Views\Message\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Message\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Web.config" />
+    <Content Include="Content\Combine\global.css" />
     <Content Include="Content\media\swfupload.swf" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
@@ -578,6 +593,64 @@
     <Content Include="Scripts\inputMasker\jquery.inputmask.extensions.js" />
     <Content Include="Scripts\inputMasker\1jquery.inputmask.js" />
     <Content Include="Scripts\inputMasker\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Content\less\bootstrap\accordion.less" />
+    <Content Include="Content\less\bootstrap\alerts.less" />
+    <Content Include="Content\less\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\less\bootstrap\button-groups.less" />
+    <Content Include="Content\less\bootstrap\buttons.less" />
+    <Content Include="Content\less\bootstrap\carousel.less" />
+    <Content Include="Content\less\bootstrap\close.less" />
+    <Content Include="Content\less\bootstrap\code.less" />
+    <Content Include="Content\less\bootstrap\component-animations.less" />
+    <Content Include="Content\less\bootstrap\dropdowns.less" />
+    <Content Include="Content\less\bootstrap\forms.less" />
+    <Content Include="Content\less\bootstrap\grid.less" />
+    <Content Include="Content\less\bootstrap\hero-unit.less" />
+    <Content Include="Content\less\bootstrap\labels-badges.less" />
+    <Content Include="Content\less\bootstrap\layouts.less" />
+    <Content Include="Content\less\bootstrap\media.less" />
+    <Content Include="Content\less\bootstrap\mixins.less" />
+    <Content Include="Content\less\bootstrap\modals.less" />
+    <Content Include="Content\less\bootstrap\navbar.less" />
+    <Content Include="Content\less\bootstrap\navs.less" />
+    <Content Include="Content\less\bootstrap\pager.less" />
+    <Content Include="Content\less\bootstrap\pagination.less" />
+    <Content Include="Content\less\bootstrap\popovers.less" />
+    <Content Include="Content\less\bootstrap\progress-bars.less" />
+    <Content Include="Content\less\bootstrap\reset.less" />
+    <Content Include="Content\less\bootstrap\responsive-1200px-min.less" />
+    <Content Include="Content\less\bootstrap\responsive-767px-max.less" />
+    <Content Include="Content\less\bootstrap\responsive-768px-979px.less" />
+    <Content Include="Content\less\bootstrap\responsive-navbar.less" />
+    <Content Include="Content\less\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\less\bootstrap\responsive.less" />
+    <Content Include="Content\less\bootstrap\scaffolding.less" />
+    <Content Include="Content\less\bootstrap\sprites.less" />
+    <Content Include="Content\less\bootstrap\tables.less" />
+    <Content Include="Content\less\bootstrap\thumbnails.less" />
+    <Content Include="Content\less\bootstrap\tooltip.less" />
+    <Content Include="Content\less\bootstrap\type.less" />
+    <Content Include="Content\less\bootstrap\utilities.less" />
+    <Content Include="Content\less\bootstrap\wells.less" />
+    <Content Include="Content\less\datepicker.less" />
+    <Content Include="Content\less\font-awesome\font-awesome.less" />
+    <Content Include="Content\less\global.less" />
+    <Content Include="Content\less\variables.less" />
+    <Content Include="Areas\Docs\Views\BaseCss\Buttons.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Code.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Form.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Icons.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Image.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Table.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Typography.cshtml" />
+    <Content Include="Areas\Docs\Views\Component\Dropdowns.cshtml" />
+    <Content Include="Areas\Docs\Views\Dashboard\Bootstrap.cshtml" />
+    <Content Include="Areas\Docs\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
+    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Areas\Docs\Views\Web.config" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -602,9 +675,13 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
-    <Content Include="Scripts\Memberships\role-1.0.js" />
-    <Content Include="Scripts\Memberships\org-1.0.js" />
-    <Content Include="Scripts\Memberships\userGroup-1.0.js" />
+    <Content Include="Scripts\Models\Messages\chat-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\role-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\org-1.0.js" />
+    <Content Include="Scripts\Models\Messages\msg-1.0.js" />
+    <Content Include="Scripts\Models\Messages\notify-1.0.js" />
+    <Content Include="Scripts\Models\Messages\task-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\userGroup-1.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\periodDailog\jquery.periodDailog.js" />
     <Content Include="Scripts\plugins\charts\excanvas.min.js" />
@@ -825,7 +902,9 @@
     <Content Include="Content\templates\pannonia\img\logo.png" />
     <Content Include="Content\templates\pannonia\img\up_arrow.png" />
     <Content Include="Content\templates\pannonia\img\userpic.png" />
-    <Content Include="Templates\Email\CreateUser.xml" />
+    <Content Include="Templates\Email\CreateUser.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -871,10 +950,10 @@
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
-    <Content Include="Scripts\Memberships\user-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\user-1.0.js" />
     <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\HttpErrors\501.cshtml" />
-    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\PersonalMessage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1045,7 +1124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Application\Views\Web.config" />
-    <Content Include="Areas\Application\Views\EventLog\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
@@ -1106,7 +1184,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>14500</DevelopmentServerPort>
+          <DevelopmentServerPort>14501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:37037/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -1123,8 +1201,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
-  <!--Target Name="AfterBuild">
+  <Target Name="AfterBuild">
     <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
-  </Target-->
+  </Target>
   <!--Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" /-->
 </Project>

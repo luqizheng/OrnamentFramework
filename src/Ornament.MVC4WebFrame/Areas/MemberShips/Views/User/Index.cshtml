@@ -17,9 +17,9 @@
         var updateTable;
         seajs.use(['valid', 'user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
 
-            $(".actionCheckbox").uniform().click(function () {
+            $(".actionCheckbox").uniform().change(function() {
                 $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
-            }).click();
+            }).change();
             $("#selApplyAction").uniform();
             $("#BtnApply").click(function () {
                 var action = $("#selApplyAction").val();

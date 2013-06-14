@@ -83,6 +83,10 @@
             src: "/bundles/org.js",
             deps: ["jquery"], exports: "jQuery "
         },
+        // message relative
+        message: {
+            src: "/bundles/message.js"
+        },
         periodDailog: { exports: "jQuery " },
         preload: ["jquery"]
     }

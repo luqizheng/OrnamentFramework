@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.SqlCommand;
 using Ornament.MemberShip;
 using Qi;
 using Qi.Domain.NHibernates;
@@ -16,20 +16,10 @@ namespace Ornament.Messages.Dao.NHibernateImple
         private const string MinGuid = ".00000000000000000000000000000000";
         private readonly ObjectInitialization pools = new ObjectInitialization();
 
-        private IProjection CreateTimeProperty
-        {
-            get { return pools.Once(() => Projections.Property<Message>(s => s.CreateTime)); }
-        }
-
 
         private IProjection MessageTypeProperty
         {
             get { return pools.Once(() => Projections.Property<Message>(s => s.Type)); }
-        }
-
-        private IProjection UserLoginidProperty
-        {
-            get { return Projections.Property<User>(s => s.LoginId); }
         }
 
         #region IInfoDao Members
@@ -107,43 +97,61 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             if (search == null)
                 throw new ArgumentNullException("search");
-            DetachedCriteria crit = CreateDetachedCriteria();
+            DetachedCriteria crit = CreateDetachedCriteria()
+                .AddOrder(Order.Desc(Projections.Property<Message>(s => s.Priority)))
+                .AddOrder(Order.Asc(Projections.Property<Message>(s => s.PublishTime)))
+                .AddOrder(Order.Asc(Projections.Property<Message>(s => s.CreateTime)))
+                .Add(Restrictions.Eq(Projections.Property<Message>(s => s.State), MessageState.Published));
+
             if (search.IncludeSubType)
                 crit = SubType(crit, search.MessageType);
             else
                 crit.Add(Restrictions.Eq(MessageTypeProperty, search.MessageType));
-            
-            crit.CreateAlias("Readers", "readers");
-
-            var con = new Disjunction();
-            con.Add(Restrictions.Eq("readers.Id", search.User.Id));
-            if (search.User.Org != null)
-                con.Add(Restrictions.Eq("readers.Id", search.User.Org.Id));
-            crit.Add(con);
-
-
-            DetachedCriteria ug = DetachedCriteria.For<User>()
-                                                  .Add(Restrictions.Eq("Id", search.User.Id))
-                                                  .CreateAlias("UserGroups", "ug")
-                                                  .SetProjection(Projections.Property("ug.Id"));
-            crit.Add(Subqueries.PropertyIn("readers.Id", ug));
-
-            DetachedCriteria role = DetachedCriteria.For<User>()
-                                                    .Add(Restrictions.Eq("Id", search.User.Id))
-                                                    .CreateAlias("Roles", "role")
-                                                    .SetProjection(Projections.Property("role.Id"));
+            // filter read start=readed.
             DetachedCriteria readed = DetachedCriteria.For<ReaderReadStatus>()
                                                       .Add(
                                                           Restrictions.Eq(
                                                               Projections.Property<ReaderReadStatus>(s => s.Reader),
                                                               search.User))
-                                                      .Add(Restrictions.Eq(Projections.Property<ReaderReadStatus>(s => s.Status),search.ReadStatus))
+                                                      .Add(
+                                                          Restrictions.Eq(
+                                                              Projections.Property<ReaderReadStatus>(s => s.Status),
+                                                              search.ReadStatus))
                                                       .SetProjection(Projections.Property("Message.Id"));
 
-            return crit.Add(Subqueries.PropertyIn("readers.Id", role)).Add(Subqueries.PropertyNotIn("Id", readed));
+
+            crit.Add(Subqueries.PropertyNotIn("Id", readed));
+
+            crit.CreateAlias("Readers", "readers", JoinType.None);
+            this.BuildPerfomrer(search.User, "readers");
+
+            return crit;
         }
 
         #endregion
+
+        private Disjunction BuildPerfomrer(User user, string readerAlis)
+        {
+            DetachedCriteria ug = DetachedCriteria.For<User>()
+                                                  .Add(Restrictions.Eq("Id", user.Id))
+                                                  .CreateAlias("UserGroups", "ug")
+                                                  .SetProjection(Projections.Property("ug.Id"));
+
+
+            DetachedCriteria role = DetachedCriteria.For<User>()
+                                                    .Add(Restrictions.Eq("Id", user.Id))
+                                                    .CreateAlias("Roles", "role")
+                                                    .SetProjection(Projections.Property("role.Id"));
+            var performer = new Disjunction();
+            performer
+                .Add(Subqueries.PropertyIn(readerAlis + ".Id", ug))
+                .Add(Subqueries.PropertyIn(readerAlis + ".Id", role))
+                .Add(Restrictions.Eq(readerAlis + ".Id", user.Id));
+
+            if (user.Org != null)
+                performer.Add(Restrictions.Eq(readerAlis + ".Id", user.Org.Id));
+            return performer;
+        }
 
         public IList<int> GetYear(string typeName, bool cacasde)
         {
@@ -157,7 +165,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             ica.CreateAlias("Type", "type");
             return ica.Add(Restrictions.Ge("type.OrderId", CreateSubMinOrderId(type)))
-                      .Add(Restrictions.Ge("type.OrderId", CreateSubMaxOrderId(type)));
+                      .Add(Restrictions.Le("type.OrderId", CreateSubMaxOrderId(type)));
         }
 
         private static string CreateSubMaxOrderId(MessageType type)

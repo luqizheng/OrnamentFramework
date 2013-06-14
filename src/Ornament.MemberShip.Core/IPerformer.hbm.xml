@@ -8,4 +8,5 @@
     <property name="Name" length="30" type="String"></property>
  
   </class>
+  
 </hibernate-mapping>

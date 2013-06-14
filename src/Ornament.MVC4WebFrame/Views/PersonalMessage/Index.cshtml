@@ -1,0 +1,43 @@
+﻿@using Ornament.Messages
+@using Ornament.Web
+@model Ornament.Messages.Message
+
+@{
+    ViewBag.Title = "Message Index";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var messages = (IList<Message>)ViewData["notify"];
+}
+
+@section pageTitle
+{
+    <h5>Personal Messages</h5>
+}
+
+<div class="row-fluid">
+    <div class="span8">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>Notify message</h6>
+                </div>
+            </div>
+            <div class="well body">
+                @foreach (var a in messages)
+                {
+                    var content = a.Show();
+                    <div class="semi-widget">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <h6>@content.Subject</h6>
+                                <button class="btn pull-right btn-info">知道了</button>
+                            </div>
+                        </div>
+                        <div class="body well">
+                            @content.Value
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

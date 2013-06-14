@@ -8,14 +8,14 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         {
             Table("Msgs_Message");
             Id(x => x.Id).GeneratedBy.UuidHex("N");
-
+            this.DynamicUpdate();
             Map(x => x.CreateTime);
             Map(x => x.Priority).Column("msgPriority");
             Map(x => x.EffectTime);
             Map(x => x.State);
             Map(x => x.PublishTime);
-            References(x => x.Publisher);
-            References(x => x.Type);
+            References(x => x.Publisher).LazyLoad(Laziness.Proxy);
+            References(x => x.Type).LazyLoad(Laziness.Proxy);
             HasMany(x => x.Contents)
                 .AsMap(s => s.Language).Cascade.AllDeleteOrphan()
                 .Table("Msgs_Content")
@@ -26,13 +26,14 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                         x.Map(a => a.Language, "language2");
                     }
                 );
-            this.DynamicUpdate();
+            
             HasManyToMany(x => x.Readers)
                 .Table("Msgs_Readers")
                 .ParentKeyColumn("messageId")
                 .ChildKeyColumn("performerId")
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.None();
 
+           
             
         }
     }
