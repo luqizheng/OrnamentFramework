@@ -83,11 +83,11 @@
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
+    <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Ornament.MemberShip.DataAccess.NHibernate\Ornament.MemberShip.Dao.NHibernateImple.csproj">
+    <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Dao.NHibernateImple\Ornament.MemberShip.Dao.NHibernateImple.csproj">
       <Project>{6C6439C4-0EA1-44F9-B406-664512594A1B}</Project>
       <Name>Ornament.MemberShip.Dao.NHibernateImple</Name>
     </ProjectReference>

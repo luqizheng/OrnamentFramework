@@ -1,5 +1,4 @@
 ﻿using System;
-using NHibernate;
 using Qi;
 using Qi.Domain;
 using Qi.Secret;
@@ -63,7 +62,7 @@ namespace Ornament.MemberShip.Secret
         public virtual string CreateQueryString()
         {
             if (IsTransient())
-                throw new PersistentObjectException("Please save the object after to build the QueryString.");
+                throw new Exception("Please save the object after to build the QueryString.");
 
 
             return string.Format("id={0}&token={1}", Id, CreateToken(Account));

@@ -123,7 +123,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
             crit.Add(Subqueries.PropertyNotIn("Id", readed));
 
             crit.CreateAlias("Readers", "readers", JoinType.None);
-            this.BuildPerfomrer(search.User, "readers");
+            crit.Add(BuildPerfomrer(search.User, "readers"));
 
             return crit;
         }
