@@ -18,7 +18,7 @@ namespace Ornament.Web
         }
         private OrnamentContext()
         {
-           
+
         }
 
 
@@ -50,6 +50,17 @@ namespace Ornament.Web
             get
             {
                 return Inner.Instance.GetContainer().Resolve<ResourceDescriptionManager>();
+            }
+        }
+
+        public string Language
+        {
+            get
+            {
+                var a = HttpContext.Current.Profile["language"];
+                if (a == null)
+                    return System.Globalization.CultureInfo.CurrentUICulture.EnglishName;
+                return a.ToString();
             }
         }
     }

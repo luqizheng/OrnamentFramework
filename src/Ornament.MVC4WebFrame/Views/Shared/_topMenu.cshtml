@@ -49,17 +49,17 @@
         <li><a class="fullview"></a></li>
         <li><a class="showmenu"></a></li>
         <li><a href="#" title="" class="messages">
-                 @if (unReadCout != 0)
-                 {
-                     <i class="new-message"></i>
-                 }
-            </a></li>
+            @if (unReadCout != 0)
+            {
+                <i class="new-message"></i>
+            }
+        </a></li>
         <li class="dropdown">
             <a class="user-menu" data-toggle="dropdown">
                 <img src="/Content/templates/pannonia/img/userpic.png" alt="" /><span style="min-width: 90px">@OrnamentContext.Current.CurrentUser.Name<b class="caret"></b></span></a>
             <ul class="dropdown-menu">
                 <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
-                <li><a href="#" title=""><i class="icon-inbox"></i>@Basic.Messages</a>
+                <li><a href="@Url.Action("Index", "PersonalMessage", new { area = "" })" title=""><i class="icon-inbox"></i>@Basic.Messages</a>
                     @if (unReadCout != 0)
                     {
                         <span class="badge badge-info">@unReadCout</span>

@@ -11,7 +11,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Map(x => x.Name).Length(50);
             Map(x => x.Remark).Length(200);
             Map(x => x.OrderId).Length(150);
-            References(x => x.Parent);
+            References(x => x.Parent).LazyLoad();
         }
     }
 }

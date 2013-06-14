@@ -222,7 +222,13 @@
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
-    <Compile Include="Areas\Application\Controllers\EventLogController.cs" />
+    <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
+    <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
+    <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
+    <Compile Include="Areas\Docs\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
+    <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
+    <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
@@ -235,6 +241,7 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
+    <Compile Include="Areas\Messages\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
@@ -248,10 +255,9 @@
     <Compile Include="Controllers\HttpErrorsController.cs" />
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\MembershipServiceController.cs" />
-    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\PersonalMessageController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -630,6 +636,21 @@
     <Content Include="Content\less\font-awesome\font-awesome.less" />
     <Content Include="Content\less\global.less" />
     <Content Include="Content\less\variables.less" />
+    <Content Include="Areas\Docs\Views\BaseCss\Buttons.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Code.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Form.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Icons.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Image.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Table.cshtml" />
+    <Content Include="Areas\Docs\Views\BaseCss\Typography.cshtml" />
+    <Content Include="Areas\Docs\Views\Component\Dropdowns.cshtml" />
+    <Content Include="Areas\Docs\Views\Dashboard\Bootstrap.cshtml" />
+    <Content Include="Areas\Docs\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
+    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Areas\Docs\Views\Web.config" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -654,9 +675,13 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
-    <Content Include="Scripts\Memberships\role-1.0.js" />
-    <Content Include="Scripts\Memberships\org-1.0.js" />
-    <Content Include="Scripts\Memberships\userGroup-1.0.js" />
+    <Content Include="Scripts\Models\Messages\chat-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\role-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\org-1.0.js" />
+    <Content Include="Scripts\Models\Messages\msg-1.0.js" />
+    <Content Include="Scripts\Models\Messages\notify-1.0.js" />
+    <Content Include="Scripts\Models\Messages\task-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\userGroup-1.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\periodDailog\jquery.periodDailog.js" />
     <Content Include="Scripts\plugins\charts\excanvas.min.js" />
@@ -923,10 +948,10 @@
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
-    <Content Include="Scripts\Memberships\user-1.0.js" />
+    <Content Include="Scripts\Models\Memberships\user-1.0.js" />
     <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\HttpErrors\501.cshtml" />
-    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\PersonalMessage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1097,7 +1122,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Application\Views\Web.config" />
-    <Content Include="Areas\Application\Views\EventLog\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
@@ -1158,7 +1182,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>14500</DevelopmentServerPort>
+          <DevelopmentServerPort>14501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:37037/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

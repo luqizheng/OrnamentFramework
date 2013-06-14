@@ -69,6 +69,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                                  string orgs)
         {
             message.Contents.Clear();
+            
             foreach (string key in newContents.Keys)
             {
                 message.Contents.Add(key, new Content
@@ -78,6 +79,8 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                         Subject = newSubjects[key]
                     });
             }
+            message.Readers.Clear();
+            
             if (roles != null)
             {
                 foreach (Role a in _memberShipFactory.CreateRoleDao().GetRolesByIds(roles.Split(',')))

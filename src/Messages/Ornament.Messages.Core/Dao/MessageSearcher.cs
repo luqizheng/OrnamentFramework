@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ornament.MemberShip;
 
 namespace Ornament.Messages.Dao
@@ -40,16 +41,31 @@ namespace Ornament.Messages.Dao
 
     public class PersonalSearcher
     {
+        private int _pageSize;
 
         public PersonalSearcher(User user, MessageType messageType)
         {
             User = user;
             MessageType = messageType;
-            this.ReadStatus = ReadStatus.UnRead;
+            ReadStatus = ReadStatus.UnRead;
+            PageSize = 10;
+            PageIndex = 0;
         }
 
         public bool IncludeSubType { get; set; }
-        public int PageSize { get; set; }
+
+        public int PageSize
+        {
+            get { return _pageSize; }
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException("value", "PageSize cannot be less than 0");
+
+                _pageSize = value;
+            }
+        }
+
         public ReadStatus ReadStatus { get; set; }
         public int PageIndex { get; set; }
 

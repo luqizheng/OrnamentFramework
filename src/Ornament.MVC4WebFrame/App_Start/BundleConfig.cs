@@ -64,10 +64,11 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void BizRelative(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/user.js").Include("~/Scripts/Memberships/user-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/role.js").Include("~/Scripts/Memberships/role-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/userGroup.js").Include("~/Scripts/Memberships/userGroup-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/org.js").Include("~/Scripts/Memberships/org-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
         }
 
 

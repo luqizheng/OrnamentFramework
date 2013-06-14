@@ -1,5 +1,5 @@
 ﻿//jquery.js
-define(function (require, exports, module) {
+define("chat", function (require, exports, module) {
 
     var myTask = {
         pageIndex: 0,
@@ -7,12 +7,8 @@ define(function (require, exports, module) {
     };
     var innerFunction = {
         myTask: function (opts, func) {
-
             $.post("/Api/Tasks/MyTask", $.extends({}, myTask, opts), func);
-
-
         }
-
     };
     module.exports = innerFunction;
 
