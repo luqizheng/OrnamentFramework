@@ -249,8 +249,9 @@
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\MembershipServiceController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
-    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +289,7 @@
     <Content Include="Areas\Messages\Views\Message\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Message\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Web.config" />
+    <Content Include="Content\Combine\global.css" />
     <Content Include="Content\media\swfupload.swf" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
@@ -585,6 +587,49 @@
     <Content Include="Scripts\inputMasker\jquery.inputmask.extensions.js" />
     <Content Include="Scripts\inputMasker\1jquery.inputmask.js" />
     <Content Include="Scripts\inputMasker\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Content\less\bootstrap\accordion.less" />
+    <Content Include="Content\less\bootstrap\alerts.less" />
+    <Content Include="Content\less\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\less\bootstrap\button-groups.less" />
+    <Content Include="Content\less\bootstrap\buttons.less" />
+    <Content Include="Content\less\bootstrap\carousel.less" />
+    <Content Include="Content\less\bootstrap\close.less" />
+    <Content Include="Content\less\bootstrap\code.less" />
+    <Content Include="Content\less\bootstrap\component-animations.less" />
+    <Content Include="Content\less\bootstrap\dropdowns.less" />
+    <Content Include="Content\less\bootstrap\forms.less" />
+    <Content Include="Content\less\bootstrap\grid.less" />
+    <Content Include="Content\less\bootstrap\hero-unit.less" />
+    <Content Include="Content\less\bootstrap\labels-badges.less" />
+    <Content Include="Content\less\bootstrap\layouts.less" />
+    <Content Include="Content\less\bootstrap\media.less" />
+    <Content Include="Content\less\bootstrap\mixins.less" />
+    <Content Include="Content\less\bootstrap\modals.less" />
+    <Content Include="Content\less\bootstrap\navbar.less" />
+    <Content Include="Content\less\bootstrap\navs.less" />
+    <Content Include="Content\less\bootstrap\pager.less" />
+    <Content Include="Content\less\bootstrap\pagination.less" />
+    <Content Include="Content\less\bootstrap\popovers.less" />
+    <Content Include="Content\less\bootstrap\progress-bars.less" />
+    <Content Include="Content\less\bootstrap\reset.less" />
+    <Content Include="Content\less\bootstrap\responsive-1200px-min.less" />
+    <Content Include="Content\less\bootstrap\responsive-767px-max.less" />
+    <Content Include="Content\less\bootstrap\responsive-768px-979px.less" />
+    <Content Include="Content\less\bootstrap\responsive-navbar.less" />
+    <Content Include="Content\less\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\less\bootstrap\responsive.less" />
+    <Content Include="Content\less\bootstrap\scaffolding.less" />
+    <Content Include="Content\less\bootstrap\sprites.less" />
+    <Content Include="Content\less\bootstrap\tables.less" />
+    <Content Include="Content\less\bootstrap\thumbnails.less" />
+    <Content Include="Content\less\bootstrap\tooltip.less" />
+    <Content Include="Content\less\bootstrap\type.less" />
+    <Content Include="Content\less\bootstrap\utilities.less" />
+    <Content Include="Content\less\bootstrap\wells.less" />
+    <Content Include="Content\less\datepicker.less" />
+    <Content Include="Content\less\font-awesome\font-awesome.less" />
+    <Content Include="Content\less\global.less" />
+    <Content Include="Content\less\variables.less" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -1130,8 +1175,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
-  <!--Target Name="AfterBuild">
+  <Target Name="AfterBuild">
     <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
-  </Target-->
+  </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
 </Project>
