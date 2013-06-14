@@ -101,7 +101,7 @@
     <Compile Include="Mapping\MessageReadStatus.cs" />
     <Compile Include="Mapping\MessageTypeMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
-    <Compile Include="MessageMessageDaoFactory.cs" />
+    <Compile Include="MessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
     <Compile Include="MessageDao.cs" />
     <Compile Include="MessageReadStateDao.cs" />

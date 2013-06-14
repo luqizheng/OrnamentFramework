@@ -9,7 +9,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.AppStart
         {
             context.NhAssemblies.Add(GetType().Assembly);
             context.Container.Register(
-                Component.For<IMessageDaoFactory>().ImplementedBy<MessageMessageDaoFactory>());
+                Component.For<IMessageDaoFactory>().ImplementedBy<MessageDaoFactory>());
         }
     }
 }

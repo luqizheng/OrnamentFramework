@@ -7,7 +7,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     public class MessageReadStateDao : DaoMultiId<ReaderReadStatus>, IMessageReadStateDao
     {
-       
+
         #region IInfoReadStateDao Members
 
         public ReaderReadStatus Get(User user, Message message)
@@ -37,6 +37,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
         protected override object[] CreateIdsFromObject(ReaderReadStatus t)
         {
             return new object[] { t.Reader, t.Message };
+        }
+
+        public static IProjection Reader
+        {
+            get { return Projections.Property<ReaderReadStatus>(s => s.Reader); }
+        }
+
+        public static IProjection State
+        {
+            get { return Projections.Property<ReaderReadStatus>(s => s.Status); }
         }
     }
 }

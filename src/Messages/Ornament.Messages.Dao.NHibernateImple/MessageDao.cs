@@ -80,28 +80,35 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         public int CountReadStateMessage(PersonalSearcher searcher)
         {
-            DetachedCriteria cri = BuildReadStateMessage(searcher);
-            return cri.SetProjection(Projections.Count("Id"))
-                      .GetExecutableCriteria(CurrentSession)
-                      .UniqueResult<int>();
+            DetachedCriteria cri = BuildReadStateMessage(searcher,
+                                                         CreateDetachedCriteria()
+                                                             .SetProjection(Projections.Count(Projections.Id())), false);
+            return cri
+                .GetExecutableCriteria(CurrentSession)
+                .UniqueResult<int>();
         }
 
         public IList<Message> ReadStateMessage(PersonalSearcher searcher)
         {
-            DetachedCriteria cri = BuildReadStateMessage(searcher);
+            DetachedCriteria cri = BuildReadStateMessage(searcher, CreateDetachedCriteria(), true);
             return cri.SetFirstResult(searcher.PageIndex * searcher.PageSize).SetMaxResults(searcher.PageSize)
                       .GetExecutableCriteria(CurrentSession).List<Message>();
         }
 
-        private DetachedCriteria BuildReadStateMessage(PersonalSearcher search)
+        private DetachedCriteria BuildReadStateMessage(PersonalSearcher search, DetachedCriteria crit, bool needOrder)
         {
             if (search == null)
                 throw new ArgumentNullException("search");
-            DetachedCriteria crit = CreateDetachedCriteria()
-                .AddOrder(Order.Desc(Projections.Property<Message>(s => s.Priority)))
-                .AddOrder(Order.Asc(Projections.Property<Message>(s => s.PublishTime)))
-                .AddOrder(Order.Asc(Projections.Property<Message>(s => s.CreateTime)))
-                .Add(Restrictions.Eq(Projections.Property<Message>(s => s.State), MessageState.Published));
+
+            crit.Add(Restrictions.Eq(Projections.Property<Message>(s => s.State), MessageState.Published));
+            if (needOrder)
+            {
+                crit.AddOrder(Order.Desc(Projections.Property<Message>(s => s.Priority)))
+                    .AddOrder(Order.Asc(Projections.Property<Message>(s => s.PublishTime)))
+                    .AddOrder(Order.Asc(Projections.Property<Message>(s => s.CreateTime)));
+            }
+            crit.CreateAlias("Readers", "readers", JoinType.None);
+            crit.Add(BuildPerfomrer(search.User, "readers"));
 
             if (search.IncludeSubType)
                 crit = SubType(crit, search.MessageType);
@@ -111,19 +118,19 @@ namespace Ornament.Messages.Dao.NHibernateImple
             DetachedCriteria readed = DetachedCriteria.For<ReaderReadStatus>()
                                                       .Add(
                                                           Restrictions.Eq(
-                                                              Projections.Property<ReaderReadStatus>(s => s.Reader),
+                                                              MessageReadStateDao.Reader,
                                                               search.User))
                                                       .Add(
                                                           Restrictions.Eq(
-                                                              Projections.Property<ReaderReadStatus>(s => s.Status),
+                                                              MessageReadStateDao.State,
                                                               search.ReadStatus))
                                                       .SetProjection(Projections.Property("Message.Id"));
 
 
             crit.Add(Subqueries.PropertyNotIn("Id", readed));
 
-            crit.CreateAlias("Readers", "readers", JoinType.None);
-            crit.Add(BuildPerfomrer(search.User, "readers"));
+
+
 
             return crit;
         }
