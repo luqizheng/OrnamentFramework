@@ -1,24 +1,23 @@
 ﻿using FluentNHibernate.Mapping;
+using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping
 {
-    public class MessageMapping : ClassMap<Message>
+    public class NotifyMessageMapping : ClassMap<NotifyMessage>
     {
-        public MessageMapping()
+        public NotifyMessageMapping()
         {
-            Table("Msgs_Message");
+            Table("Msgs_NotifyMessage");
             Id(x => x.Id).GeneratedBy.UuidHex("N");
-            this.DynamicUpdate();
+            DynamicUpdate();
             Map(x => x.CreateTime);
-            Map(x => x.Priority).Column("msgPriority");
-            
             Map(x => x.State);
-            
+
             References(x => x.Publisher).LazyLoad(Laziness.Proxy);
-            References(x => x.Type).LazyLoad(Laziness.Proxy);
+
             HasMany(x => x.Contents)
                 .AsMap(s => s.Language).Cascade.AllDeleteOrphan()
-                .Table("Msgs_Content")
+                .Table("Msgs_NotifyContent")
                 .Component(x =>
                     {
                         x.Map(a => a.Value);
@@ -26,15 +25,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                         x.Map(a => a.Language, "language2");
                     }
                 );
-            
-            HasManyToMany(x => x.Readers)
-                .Table("Msgs_Readers")
-                .ParentKeyColumn("messageId")
-                .ChildKeyColumn("performerId")
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.None();
+            //HasMany(x => x.Readers).KeyColumn("notifyMessageId");
 
-           
-            
         }
     }
 }

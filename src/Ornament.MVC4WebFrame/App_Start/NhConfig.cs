@@ -15,7 +15,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             var Assemblies = new[]
                 {
-                    typeof (MessageDao).Assembly,
+                    typeof (NotifyMessageDao).Assembly,
                     typeof (UserDao).Assembly
                 };
             NHConfig(Assemblies);

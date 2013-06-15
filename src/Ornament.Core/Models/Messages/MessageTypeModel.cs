@@ -1,6 +1,7 @@
 ﻿using System;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Newses;
 
 namespace Ornament.Models.Messages
 {
@@ -10,7 +11,7 @@ namespace Ornament.Models.Messages
         {
         }
 
-        public MessageTypeModel(MessageType type)
+        public MessageTypeModel(NewsType type)
         {
             if (type == null) throw new ArgumentNullException("type");
             Id = type.Id;
@@ -19,20 +20,20 @@ namespace Ornament.Models.Messages
         }
 
         public string Id { get; set; }
-        public MessageType Parent { get; set; }
+        public NewsType Parent { get; set; }
         public string Name { get; set; }
         public string Remark { get; set; }
 
         public void Save(IMessageDaoFactory dao)
         {
-            MessageType type;
+            NewsType type;
             if (Id != null)
             {
                 type = dao.MessageTypeDao.Get(Id);
             }
             else
             {
-                type =new MessageType(Name);
+                type =new NewsType(Name);
             }
             type.Remark = Remark;
             dao.MessageTypeDao.SaveOrUpdate(type);

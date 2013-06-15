@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ornament.Messages.Newses;
+using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
     public class MessageDaoFactory : IMessageDaoFactory
     {
-        public IQueryable<Message> Messages { get { return MessageDao.Messages; } }
-        public IQueryable<ReaderReadStatus> ReadStates { get { return MessageReadStateDao.ReaderReadStatus; } }
-        public IQueryable<MessageType> MessageTypes { get { return MessageTypeDao.MessageTypes; } }
-        public IMessageDao MessageDao
+        public IQueryable<NotifyMessage> Messages { get { return NotifyMessageDao.Messages; } }
+        public IQueryable<Reader> ReadStates { get { return MessageReadStateDao.ReaderReadStatus; } }
+        public IQueryable<NewsType> MessageTypes { get { return MessageTypeDao.MessageTypes; } }
+        public INotifyMessageDao NotifyMessageDao
         {
             get
             {
-                return new MessageDao();
+                return new NotifyMessageDao();
             }
         }
         public IMessageTypeDao MessageTypeDao
@@ -25,6 +27,8 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 return new MessageTypeDao();
             }
         }
+
+        public IPersonalMessageDao PersonalMessageDao { get { return new PersonalMessageDao(); } }
         public IMessageReadStateDao MessageReadStateDao { get { return new MessageReadStateDao(); } }
     }
 }

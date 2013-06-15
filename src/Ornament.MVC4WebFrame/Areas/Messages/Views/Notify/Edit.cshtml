@@ -1,15 +1,16 @@
 ﻿@using System.Web.UI.WebControls
 @using Ornament.MemberShip
 @using Ornament.Messages
+@using Ornament.Messages.Newses
 @using Ornament.Web
 @using Resources
 @using Ornament.Web.HtmlExtends
 @using Ornament;
-@model Ornament.Messages.Message
+@model Ornament.Messages.Notification.NotifyMessage
 @{
     ViewBag.Title = "Create new message";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var types = ViewData["types"] as IEnumerable<MessageType>;
+    var types = ViewData["types"] as IEnumerable<NewsType>;
     string contents = "{}";
     string users, roles, usergroups, orgs;
     users = roles = usergroups = orgs = "{}";
@@ -66,7 +67,7 @@
                                 <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
                                 <div class="controls">
                                     <select name="Type" class="bulk" id="Type">
-                                        @foreach (var type in types ?? (new List<MessageType>()))
+                                        @foreach (var type in types ?? (new List<NewsType>()))
                                         {
                                             <option value="@type.Id">@type.Name</option>
                                         }
@@ -142,9 +143,9 @@
                                 <div class="controls">
 
                                     @{
-                                        var selected = this.Model != null ? this.Model.State : MessageState.Published;
+                                        var selected = this.Model != null ? this.Model.State : EditState.Published;
                                     }
-                                    @foreach (var state in Enum.GetValues(typeof(MessageState)))
+                                    @foreach (var state in Enum.GetValues(typeof(EditState)))
                                     {
                                         <label class="radio inline">
                                             @if (state.Equals(selected))

@@ -10,22 +10,22 @@
       <property name="LoginId"  length="20" type="String" not-null="true" unique="true"></property>
 
 
-      <property name="Password" access="nosetter.camelcase-underscore" length="40" type="String" lazy="true"></property>
-      <property name="PasswordAnswer" length="100" type="String"  access="nosetter.camelcase-underscore" lazy="true"></property>
-      <property name="PasswordQuestion" length="100" type="String"  access="nosetter.camelcase-underscore" lazy="true"></property>
+      <property name="Password" access="nosetter.camelcase-underscore" length="40" type="String"></property>
+      <property name="PasswordAnswer" length="100" type="String"  access="nosetter.camelcase-underscore" ></property>
+      <property name="PasswordQuestion" length="100" type="String"  access="nosetter.camelcase-underscore"></property>
 
       <set name="Roles" table="MBS_UserRoleRelation" access="nosetter.camelcase-underscore">
         <key column="UserId" foreign-key="FK_UserID_UserRoleRelation"/>
         <many-to-many class="Role" column="RoleId"></many-to-many>
       </set>
-      <property name="CreateTime" type="DateTime"  update="false" lazy="true"></property>
+      <property name="CreateTime" type="DateTime"  update="false" ></property>
       <property name="IsLockout" type="Boolean" length="1" access="nosetter.camelcase-underscore"></property>
-      <property name="LastLockoutDate"  type="DateTime" lazy="true"></property>
-      <property name="LastLoginDate"  type="DateTime" lazy="true"></property>
-      <property name="LastActivityDate"  insert="false" type="DateTime" lazy="true"></property>
-      <property name="LastPasswordChangedDate"  insert="false" type="DateTime" lazy="true"></property>
+      <property name="LastLockoutDate"  type="DateTime" ></property>
+      <property name="LastLoginDate"  type="DateTime" ></property>
+      <property name="LastActivityDate"  insert="false" type="DateTime" ></property>
+      <property name="LastPasswordChangedDate"  insert="false" type="DateTime"></property>
       <property name="IsApproved"></property>
-      <property name="Remark" length="200" type="String" lazy="true"></property>
+      <property name="Remark" length="200" type="String"></property>
       <set name="UserGroups" access="nosetter.camelcase-underscore" table="MBS_UserGroupUserRelation">
         <key column="UserId" foreign-key="FK_UserID_UserUserGroupRelation"></key>
         <many-to-many class="UserGroup" column="UserGroupId" foreign-key="FK_MBS_USERGROUP"/>
@@ -33,8 +33,8 @@
       <many-to-one name="Org" column="OrgId" foreign-key="FK_MBS_ORG"></many-to-one>
 
       <!--<component class="Ornament.MemberShip.User+UserInformation,Ornament.MemberShip.Core" name="Information" access="nosetter.camelcase-underscore" >-->
-      <property  name="Email" length="30" type="String" unique="true" access="nosetter.camelcase-underscore" lazy="true"></property>
-      <property name="Phone" type="String" length="20"  access="nosetter.camelcase-underscore" lazy="true"></property>
+      <property  name="Email" length="30" type="String" unique="true" access="nosetter.camelcase-underscore" ></property>
+      <property name="Phone" type="String" length="20"  access="nosetter.camelcase-underscore"></property>
       <!--<one-to-one name="User" class="User"></one-to-one>-->
       <!--</component>-->
 

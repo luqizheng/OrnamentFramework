@@ -5,6 +5,7 @@ using Ornament.MVCWebFrame.Models;
 using Ornament.MemberShip.Dao;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Notification;
 using Ornament.Web;
 
 namespace Ornament.MVCWebFrame.Controllers
@@ -35,9 +36,8 @@ namespace Ornament.MVCWebFrame.Controllers
                 pagination = new Pagination(10, 0);
             }
             int totalPage;
-            IList<Message> result = _messageDaoFactory.MessageDao.FindMessage(pagination.CurrentPage,
-                                                                              pagination.PageSize,
-                                                                              OrnamentContext.Configuration.MessagesConfig.TaskMessageType, out totalPage);
+            IList<NotifyMessage> result = _messageDaoFactory.NotifyMessageDao.GetNewNotifyMessages(pagination.CurrentPage,
+                                                                              pagination.PageSize,out totalPage);
 
             var r = new List<object>();
             foreach (var msg in result)

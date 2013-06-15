@@ -43,8 +43,7 @@
 }
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    var searcher = new PersonalSearcher(OrnamentContext.MemberShip.CurrentUser(), OrnamentContext.Configuration.MessagesConfig.PersonalMessageType);
-    var unReadCout = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao.CountReadStateMessage(searcher);
+    var unReadCout = OrnamentContext.DaoFactory.MessageDaoFactory.PersonalMessageDao.CountNewMessage(OrnamentContext.MemberShip.CurrentUser());
     <ul class="top-menu">
         <li><a class="fullview"></a></li>
         <li><a class="showmenu"></a></li>

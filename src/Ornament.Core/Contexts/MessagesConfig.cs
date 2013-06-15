@@ -1,5 +1,6 @@
 ﻿using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Newses;
 
 namespace Ornament.Contexts
 {
@@ -12,14 +13,14 @@ namespace Ornament.Contexts
         public static string TaskId;
         public static string NotificationId;
 
-        public MessageType PersonalMessageType
+        public NewsType PersonalNewsType
         {
             get
             {
                 IMessageTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageTypeDao;
                 if (PersonalMessageId == null)
                 {
-                    MessageType personal = dao.GetByName(PersonalMesssage) ?? new MessageType(PersonalMesssage);
+                    NewsType personal = dao.GetByName(PersonalMesssage) ?? new NewsType(PersonalMesssage);
                     if (string.IsNullOrEmpty(personal.Id))
                     {
                         dao.SaveOrUpdate(personal);
@@ -31,15 +32,15 @@ namespace Ornament.Contexts
             }
         }
 
-        public MessageType NotificationMessageType
+        public NewsType NotificationNewsType
         {
             get
             {
                 IMessageTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageTypeDao;
                 if (NotificationId == null)
                 {
-                    MessageType notifi = dao.GetByName(Notification) ??
-                                         new MessageType(Notification);
+                    NewsType notifi = dao.GetByName(Notification) ??
+                                         new NewsType(Notification);
                     if (string.IsNullOrEmpty(notifi.Id))
                     {
                         dao.SaveOrUpdate(notifi);
@@ -52,23 +53,23 @@ namespace Ornament.Contexts
             }
         }
 
-        public MessageType TaskMessageType
+        public NewsType TaskNewsType
         {
             get
             {
                 IMessageTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageTypeDao;
                 if (TaskId == null)
                 {
-                    MessageType taskMessageType = dao.GetByName(TaskMessage) ??
-                                                  new MessageType(TaskMessage);
+                    NewsType taskNewsType = dao.GetByName(TaskMessage) ??
+                                                  new NewsType(TaskMessage);
 
-                    if (string.IsNullOrEmpty(taskMessageType.Id))
+                    if (string.IsNullOrEmpty(taskNewsType.Id))
                     {
-                        dao.SaveOrUpdate(taskMessageType);
+                        dao.SaveOrUpdate(taskNewsType);
                         dao.Flush();
                     }
 
-                    TaskId = taskMessageType.Id;
+                    TaskId = taskNewsType.Id;
                 }
                 return dao.Get(TaskId);
             }

@@ -2,6 +2,7 @@
 using Ornament.MemberShip;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Notification;
 using Ornament.Web.Models;
 
 // ReSharper disable CheckNamespace
@@ -18,15 +19,7 @@ namespace Ornament.Web
 
         public bool IsNeedInitialize
         {
-            get
-            {
-                User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-                IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
-                return
-                    msgDao.CountReadStateMessage(new PersonalSearcher(admin,
-                                                                      OrnamentContext.Configuration.MessagesConfig.PersonalMessageType)) <
-                    1;
-            }
+            get { return false; }
         }
 
         public void CreateData()
@@ -39,33 +32,35 @@ namespace Ornament.Web
         private void InitTask()
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
+            INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
+            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageReadStateDao;
 
-
-            var m = new Message(admin, OrnamentContext.Configuration.MessagesConfig.TaskMessageType);
-            m.State = MessageState.Published;
+            var m = new NotifyMessage(admin) { State = EditState.Published };
             m.Contents.Add("zh-CN", new Content
                 {
                     Subject = "请修改初始化密码",
                     Language = "zh-CN",
                     Value = "请修改初始化密码，如果已经修改过，请忽略这条信息"
                 });
-            m.AddReaders(admin);
+
             msgDao.SaveOrUpdate(m);
+            var reader = new Reader(admin, m);
+            readerDao.SaveOrUpdate(reader);
             msgDao.Flush();
         }
 
         private void InitNotify()
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
-            Array ary = Enum.GetValues(typeof (Priority));
+            INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
+            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageReadStateDao;
+
+
             for (int i = 0; i < 30; i++)
             {
-                var m = new Message(admin, OrnamentContext.Configuration.MessagesConfig.NotificationMessageType)
+                var m = new NotifyMessage(admin)
                     {
-                        State = MessageState.Published,
-                        Priority = (Priority) ary.GetValue(i%ary.Length)
+                        State = EditState.Published
                     };
 
                 m.Contents.Add("zh-CN", new Content
@@ -75,8 +70,12 @@ namespace Ornament.Web
                         Value =
                             "Demo 请修改初始化密码，如果已经修改过，请忽略这条信息.在直角三角形中，∠A（非直角）的对边与斜边的比叫做∠A的正弦，记作sinA，即sinA porta lacus fringilla vel.d"
                     });
-                m.AddReaders(admin);
+
+
                 msgDao.SaveOrUpdate(m);
+                var reader = new Reader(admin, m);
+                readerDao.SaveOrUpdate(reader);
+
             }
             msgDao.Flush();
         }

@@ -45,7 +45,8 @@ namespace Ornament.MemberShip.Dao
 
         IList<User> GetUsers(UserGroup userGroup);
 
+        IList<User> GetUsers(Org org);
 
-        IList<User> FindAll(int pageIndex, int pageSize);
+            IList<User> FindAll(int pageIndex, int pageSize);
     }
 }

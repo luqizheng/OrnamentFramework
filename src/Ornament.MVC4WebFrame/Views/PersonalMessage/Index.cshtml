@@ -1,11 +1,12 @@
 ﻿@using Ornament.Messages
+@using Ornament.Messages.Notification
 @using Ornament.Web
-@model Ornament.Messages.Message
+@model Ornament.Messages.Notification.NotifyMessage
 
 @{
     ViewBag.Title = "Message Index";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var messages = (IList<Message>)ViewData["notify"];
+    var messages = (IList<NotifyMessage>)ViewData["notify"];
 }
 
 @section pageTitle

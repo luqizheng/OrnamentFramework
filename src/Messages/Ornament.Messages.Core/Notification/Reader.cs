@@ -2,40 +2,40 @@
 using Ornament.MemberShip;
 using Qi.Domain;
 
-namespace Ornament.Messages
+namespace Ornament.Messages.Notification
 {
-    public class ReaderReadStatus : DomainObject<ReaderReadStatus, object[]>
+    public class Reader : DomainObject<Reader, object[]>
     {
-        protected ReaderReadStatus()
+        protected Reader()
         {
         }
 
         /// <summary>
         /// </summary>
         /// <param name="reader"></param>
-        /// <param name="message"></param>
-        public ReaderReadStatus(User reader, Message message)
+        /// <param name="notifyMessage"></param>
+        public Reader(User reader, NotifyMessage notifyMessage)
         {
             if (reader == null)
                 throw new ArgumentNullException("reader");
-            if (message == null)
-                throw new ArgumentNullException("message");
+            if (notifyMessage == null)
+                throw new ArgumentNullException("notifyMessage");
 
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
-            Reader = reader;
+            Member = reader;
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
-            Message = message;
+            NotifyMessage = notifyMessage;
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
         /// <summary>
         /// </summary>
-        public virtual User Reader { get; set; }
+        public virtual User Member { get; set; }
 
         /// <summary>
         /// </summary>
-        public virtual Message Message { get; set; }
+        public virtual NotifyMessage NotifyMessage { get; set; }
 
         /// <summary>
         /// </summary>

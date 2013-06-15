@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Newses;
 using Ornament.Models.Messages;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
@@ -20,7 +21,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
         public ActionResult Index(string parentId)
         {
-            IList<MessageType>
+            IList<NewsType>
                 msgType = _messageDao.MessageTypeDao.GetAll();
 
             return View(msgType);
@@ -48,7 +49,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             var result = new MessageTypeModel();
             if (parentId != null)
             {
-                MessageType parent = _messageDao.MessageTypeDao.Get(parentId);
+                NewsType parent = _messageDao.MessageTypeDao.Get(parentId);
                 result.Parent = parent;
             }
             result.Name = "new message type";

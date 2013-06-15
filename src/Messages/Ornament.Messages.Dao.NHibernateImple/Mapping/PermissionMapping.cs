@@ -1,9 +1,10 @@
 ﻿using FluentNHibernate.Mapping;
 using Ornament.MemberShip.Permissions;
+using Ornament.Messages.Newses;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping
 {
-    public class PermissionMapping : SubclassMap<GenericPermission<MessageType>>
+    public class PermissionMapping : SubclassMap<GenericPermission<NewsType>>
     {
         public PermissionMapping()
         {

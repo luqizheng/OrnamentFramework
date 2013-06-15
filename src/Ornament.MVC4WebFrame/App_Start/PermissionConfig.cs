@@ -1,5 +1,6 @@
 ﻿using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.Messages;
+using Ornament.Messages.Newses;
 using Ornament.Web;
 
 namespace Ornament.MVCWebFrame.App_Start
@@ -30,7 +31,7 @@ namespace Ornament.MVCWebFrame.App_Start
                 {
                     Name = "信息资源",
                     Path = "/Areas/Infos/Views/Shared/InfoTypeChoice.cshtml",
-                    ValueType = typeof (MessageType)
+                    ValueType = typeof (NewsType)
                 });
         }
     }

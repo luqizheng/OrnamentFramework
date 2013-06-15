@@ -1,20 +1,20 @@
 ﻿using System;
 using Qi.Domain;
 
-namespace Ornament.Messages
+namespace Ornament.Messages.Newses
 {
     [Serializable]
-    public class MessageType : DomainObject<MessageType, string>
+    public class NewsType : DomainObject<NewsType, string>
     {
     
-        protected MessageType()
+        protected NewsType()
         {
         }
 
         /// <summary>
         /// </summary>
         /// <param name="name"></param>
-        public MessageType(string name)
+        public NewsType(string name)
         {
             Name = name;
         }

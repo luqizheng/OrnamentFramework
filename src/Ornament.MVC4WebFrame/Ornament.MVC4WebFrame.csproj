@@ -241,11 +241,11 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
-    <Compile Include="Areas\Messages\Controllers\MessagesController.cs" />
+    <Compile Include="Areas\Messages\Controllers\PersonalMessagesController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
-    <Compile Include="Areas\Messages\Controllers\MessageController.cs" />
+    <Compile Include="Areas\Messages\Controllers\NotifyController.cs" />
     <Compile Include="Areas\Messages\Controllers\MessageTypeController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -290,8 +290,8 @@
     <Content Include="Areas\Messages\Views\MessageType\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\MessageType\_messageTypeEditor.cshtml" />
     <Content Include="Areas\Messages\Views\MessageType\Create.cshtml" />
-    <Content Include="Areas\Messages\Views\Message\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\Message\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\Notify\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\Notify\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Web.config" />
     <Content Include="Content\Combine\global.css" />
     <Content Include="Content\media\swfupload.swf" />

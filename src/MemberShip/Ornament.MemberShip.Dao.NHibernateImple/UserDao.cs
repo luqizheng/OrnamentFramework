@@ -68,7 +68,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 a.Add(Restrictions.InsensitiveLike(NameProperty, name));
             result.Add(a);
             return
-                result.SetFirstResult(pageIndex*pageSize)
+                result.SetFirstResult(pageIndex * pageSize)
                       .SetMaxResults(pageSize)
                       .GetExecutableCriteria(CurrentSession)
                       .List<User>();
@@ -164,7 +164,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
                    .List<User>();
         }
 
@@ -179,7 +179,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.InsensitiveLike(EmailProperty, emailToMatch))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageSize*pageIndex)
+                .SetFirstResult(pageSize * pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -215,7 +215,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
                     pageSize)
                                         .GetExecutableCriteria(CurrentSession)
                                         .List<User>();
@@ -258,10 +258,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .Add(Restrictions.Eq("Id", userGroup.Id)).GetExecutableCriteria(CurrentSession).List<User>();
         }
 
+        public IList<User> GetUsers(Org org)
+        {
+            return CreateDetachedCriteria()
+                .Add(Restrictions.Eq(Projections.Property<User>(s => s.Org), org))
+                .GetExecutableCriteria(this.CurrentSession).List<User>();
+        }
+
         public IList<User> FindAll(int pageIndex, int pageSize)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
                                          GetExecutableCriteria(CurrentSession).List<User>();
         }
 

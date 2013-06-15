@@ -19,11 +19,7 @@ namespace Ornament.MVCWebFrame.Controllers
 
         public ActionResult Index()
         {
-            var searcher =
-                new PersonalSearcher(OrnamentContext.MemberShip.CurrentUser(),
-                                     OrnamentContext.Configuration.MessagesConfig.NotificationMessageType);
-            ViewData["notify"] = _messageDaoFactory.MessageDao.ReadStateMessage(searcher);
-
+            ViewData["notify"] = _messageDaoFactory.PersonalMessageDao.GetNewMessage(OrnamentContext.MemberShip.CurrentUser(), 0, 40);
             return View();
         }
     }

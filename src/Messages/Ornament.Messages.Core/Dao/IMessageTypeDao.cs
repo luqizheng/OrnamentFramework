@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
+using Ornament.Messages.Newses;
 using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IMessageTypeDao : IDao<string, MessageType>
+    public interface IMessageTypeDao : IDao<string, NewsType>
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        MessageType GetByName(string name);
+        NewsType GetByName(string name);
         /// <summary>
         /// 
         /// </summary>
-        IQueryable<MessageType> MessageTypes { get; }
+        IQueryable<NewsType> MessageTypes { get; }
     }
 }

@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Win32;
+using Ornament.Messages.Newses;
+using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao
 {
     public interface IMessageDaoFactory
     {
-        IQueryable<Message> Messages { get; }
+        IQueryable<NotifyMessage> Messages { get; }
 
-        IQueryable<ReaderReadStatus> ReadStates { get; }
+        IQueryable<Reader> ReadStates { get; }
 
-        IQueryable<MessageType> MessageTypes { get; }
+        IQueryable<NewsType> MessageTypes { get; }
 
-        IMessageDao MessageDao { get; }
+        INotifyMessageDao NotifyMessageDao { get; }
 
         IMessageTypeDao MessageTypeDao { get; }
 
-       
+        IPersonalMessageDao PersonalMessageDao { get; }
 
         IMessageReadStateDao MessageReadStateDao { get; }
     }

@@ -3,40 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using Ornament.Messages.Newses;
 using Qi.Domain.NHibernates;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class MessageTypeDao : DaoBase<string, MessageType>, IMessageTypeDao
+    public class MessageTypeDao : DaoBase<string, NewsType>, IMessageTypeDao
     {
         #region IInfoTypeDao Members
 
        
 
-        public MessageType GetByName(string name)
+        public NewsType GetByName(string name)
         {
             if (String.IsNullOrEmpty(name))
                 throw new ArgumentNullException("name");
 
             return
                 CreateDetachedCriteria()
-                    .Add(Restrictions.Eq(Projections.Property<MessageType>(type => type.Name), name))
+                    .Add(Restrictions.Eq(Projections.Property<NewsType>(type => type.Name), name))
                     .GetExecutableCriteria(CurrentSession)
-                    .UniqueResult<MessageType>();
+                    .UniqueResult<NewsType>();
         }
 
-        public IList<MessageType> GetList(MessageType parent)
+        public IList<NewsType> GetList(NewsType parent)
         {
             if (parent == null)
                 throw new ArgumentNullException("parent");
             return CreateDetachedCriteria()
                 .GetExecutableCriteria(CurrentSession)
-                .List<MessageType>();
+                .List<NewsType>();
         }
 
-        public IQueryable<MessageType> MessageTypes
+        public IQueryable<NewsType> MessageTypes
         {
-            get { return CurrentSession.Query<MessageType>(); }
+            get { return CurrentSession.Query<NewsType>(); }
         }
 
         #endregion

@@ -96,15 +96,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mapping\Message.cs" />
-    <Compile Include="Mapping\MessageReadStatus.cs" />
-    <Compile Include="Mapping\MessageTypeMapping.cs" />
+    <Compile Include="Mapping\NewsMapping.cs" />
+    <Compile Include="Mapping\NewsTypeMapping.cs" />
+    <Compile Include="Mapping\NotifyMessageMapping.cs" />
+    <Compile Include="Mapping\NotifyMessageReadStatusMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
+    <Compile Include="Mapping\PersonalMessageMapping.cs" />
     <Compile Include="MessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
-    <Compile Include="MessageDao.cs" />
+    <Compile Include="NotifyMessageDao.cs" />
     <Compile Include="MessageReadStateDao.cs" />
     <Compile Include="MessageTypeDao.cs" />
+    <Compile Include="PersonalMessageDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

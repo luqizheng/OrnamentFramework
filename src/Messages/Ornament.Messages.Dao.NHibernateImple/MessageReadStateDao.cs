@@ -3,57 +3,58 @@ using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
 using Ornament.MemberShip;
+using Ornament.Messages.Notification;
 
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class MessageReadStateDao : DaoMultiId<ReaderReadStatus>, IMessageReadStateDao
+    public class MessageReadStateDao : DaoMultiId<Reader>, IMessageReadStateDao
     {
 
         #region IInfoReadStateDao Members
 
-        public ReaderReadStatus Get(User user, Message message)
+        public Reader Get(User user, NotifyMessage notifyMessage)
         {
-            return base.Get(new object[] { user, message });
+            return base.Get(new object[] { user, notifyMessage });
         }
 
-        public IList<ReaderReadStatus> GetReadState(Message message)
+        public IList<Reader> GetReadState(NotifyMessage notifyMessage)
         {
-            return CreateCriteria().Add(Restrictions.Eq("Message", message)).List<ReaderReadStatus>();
+            return CreateCriteria().Add(Restrictions.Eq("Message", notifyMessage)).List<Reader>();
         }
 
-        public IQueryable<ReaderReadStatus> ReaderReadStatus { get
+        public IQueryable<Reader> ReaderReadStatus { get
         {
-            return CurrentSession.Query<ReaderReadStatus>();
+            return CurrentSession.Query<Reader>();
         } }
 
         #endregion
 
-        protected override ReaderReadStatus CreateObjectForLoad(object[] ids)
+        protected override Reader CreateObjectForLoad(object[] ids)
         {
             var user = ids[0] as User;
-            var info = ids[1] as Message;
+            var info = ids[1] as NotifyMessage;
             if (user == null)
             {
                 user = ids[1] as User;
-                info = ids[0] as Message;
+                info = ids[0] as NotifyMessage;
             }
-            return new ReaderReadStatus(user, info);
+            return new Reader(user, info);
         }
 
-        protected override object[] CreateIdsFromObject(ReaderReadStatus t)
+        protected override object[] CreateIdsFromObject(Reader t)
         {
-            return new object[] { t.Reader, t.Message };
+            return new object[] { t.Member, t.NotifyMessage };
         }
 
         public static IProjection Reader
         {
-            get { return Projections.Property<ReaderReadStatus>(s => s.Reader); }
+            get { return Projections.Property<Reader>(s => s.Member); }
         }
 
         public static IProjection State
         {
-            get { return Projections.Property<ReaderReadStatus>(s => s.Status); }
+            get { return Projections.Property<Reader>(s => s.Status); }
         }
     }
 }
