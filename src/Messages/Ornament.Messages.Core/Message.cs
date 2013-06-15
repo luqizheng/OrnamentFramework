@@ -11,19 +11,20 @@ namespace Ornament.Messages
     public class Message : DomainObject<Message, string>
     {
         private IDictionary<string, Content> _contents;
+        private bool _loopAllPerformer;
         private List<IPerformer> _orgs;
         private Iesi.Collections.Generic.ISet<IPerformer> _readers;
         private List<IPerformer> _roles;
         private MessageType _type;
         private List<IPerformer> _userGroups;
         private List<IPerformer> _users;
-        private bool loopAllPerformer;
 
 
         /// <summary>
         /// </summary>
         /// <param name="publisher"></param>
         /// <param name="type"></param>
+        /// <exception cref="ArgumentNullException">type or publisher are null</exception>
         public Message(User publisher, MessageType type)
             : this()
         {
@@ -161,48 +162,48 @@ namespace Ornament.Messages
 
         public virtual IPerformer[] GetUsers()
         {
-            if (!loopAllPerformer)
+            if (!_loopAllPerformer)
             {
                 Assing();
-                loopAllPerformer = true;
+                _loopAllPerformer = true;
             }
             return Users.ToArray();
         }
 
         public virtual IPerformer[] GetUserGroups()
         {
-            if (!loopAllPerformer)
+            if (!_loopAllPerformer)
             {
                 Assing();
-                loopAllPerformer = true;
+                _loopAllPerformer = true;
             }
             return UserGroups.ToArray();
         }
+
         public virtual IPerformer[] GetOrgs()
         {
-            if (!loopAllPerformer)
+            if (!_loopAllPerformer)
             {
                 Assing();
-                loopAllPerformer = true;
+                _loopAllPerformer = true;
             }
             return Orgs.ToArray();
         }
 
         public virtual IPerformer[] GetRoles()
         {
-            if (!loopAllPerformer)
+            if (!_loopAllPerformer)
             {
                 Assing();
-                loopAllPerformer = true;
+                _loopAllPerformer = true;
             }
             return Roles.ToArray();
         }
 
         private void Assing()
         {
-            foreach (var reader in Readers)
+            foreach (IPerformer reader in Readers)
             {
-                
                 if (reader.Type == PerformerType.Role)
                     Roles.Add(reader);
 

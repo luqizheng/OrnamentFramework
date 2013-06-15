@@ -12,13 +12,20 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
     [Session]
     public class UsergroupController : Controller
     {
+        private readonly IMemberShipFactory _factory;
+
+        public UsergroupController(IMemberShipFactory factory)
+        {
+            _factory = factory;
+        }
+
         //
         // GET: /Usergroups/
 
         public ActionResult Index(int? pageIndex)
         {
             int page = pageIndex ?? 0;
-            IUserGroupDao dao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao();
+            IUserGroupDao dao =  _factory.CreateUserGroupDao();
             return View(dao.FindAll(page, 30));
         }
 
@@ -27,7 +34,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         // GET: /Usergroups/Details/5
         public ActionResult Details(string id)
         {
-            UserGroup ug = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
+            UserGroup ug =  _factory.CreateUserGroupDao().Get(id);
             return Json(ug);
         }
 
@@ -46,7 +53,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             if (ModelState.IsValid)
             {
-                OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().SaveOrUpdate(userGroup);
+                 _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
                 return RedirectToAction("Index");
             }
             return View(userGroup);
@@ -57,7 +64,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             UserGroup ug;
             if (id == null)
                 return Redirect("index");
-            ug = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
+            ug =  _factory.CreateUserGroupDao().Get(id);
             return View(ug);
         }
 
@@ -70,7 +77,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             if (ModelState.IsValid)
             {
-                OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().SaveOrUpdate(userGroup);
+                 _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
                 return RedirectToAction("Index");
             }
             return View(userGroup);
@@ -81,16 +88,16 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             if (id == null)
                 return Redirect("index");
-            UserGroup ug = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
+            UserGroup ug =  _factory.CreateUserGroupDao().Get(id);
             return View(ug);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AssignRole(string[] roles, string id)
         {
-            IRoleDao roleDao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao();
+            IRoleDao roleDao =  _factory.CreateRoleDao();
             UserGroup user =
-                OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
+                 _factory.CreateUserGroupDao().Get(id);
             user.ClearRole();
             foreach (Role role in roleDao.GetRolesByName(roles))
             {
@@ -103,8 +110,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             if (id == null)
                 return RedirectToAction("index");
-            UserGroup ug = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
-            ViewData["Users"] = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserDao().GetUsers(ug);
+            UserGroup ug =  _factory.CreateUserGroupDao().Get(id);
+            ViewData["Users"] =  _factory.CreateUserDao().GetUsers(ug);
             return View(ug);
         }
 
@@ -114,8 +121,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             if (id == null)
                 return RedirectToAction("index");
 
-            UserGroup ug = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().Get(id);
-            IUserDao dao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserDao();
+            UserGroup ug =  _factory.CreateUserGroupDao().Get(id);
+            IUserDao dao =  _factory.CreateUserDao();
 
             foreach (User user in dao.GetUsers(loginIds))
             {

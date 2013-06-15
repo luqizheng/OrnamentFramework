@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ornament.MVCWebFrame.Models;
 using Ornament.MemberShip.Dao;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
@@ -36,8 +37,7 @@ namespace Ornament.MVCWebFrame.Controllers
             int totalPage;
             IList<Message> result = _messageDaoFactory.MessageDao.FindMessage(pagination.CurrentPage,
                                                                               pagination.PageSize,
-                                                                              OrnamentContext.Current.TaskMessageType(),
-                                                                              false, out totalPage);
+                                                                              OrnamentContext.Configuration.MessagesConfig.TaskMessageType, out totalPage);
 
             var r = new List<object>();
             foreach (var msg in result)

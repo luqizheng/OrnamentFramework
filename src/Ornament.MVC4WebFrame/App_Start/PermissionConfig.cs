@@ -9,7 +9,7 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Regist()
         {
-            Context.OperatorResourceManager
+            OrnamentContext.ResourceManager
                    .Add("User", typeof (UserOperator))
                    .Add("Role", typeof (RoleOperator))
                    .Add("Account", typeof (AccountOperator))
@@ -20,14 +20,14 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void RegistrySettingPage()
         {
-            OrnamentContext.ResourcesConfiguration.ResourceSettings.Add(new ResourceDescription
+            OrnamentContext.ResourceManager.Configuration().ResourceSettings.Add(new ResourceDescription
                 {
                     ValueType = typeof (string),
                     Name = "类型资源",
                     Path = " /Areas/MemberShips/Views/Permissions/DefaultResourceSelector.cshtml"
                 });
 
-            OrnamentContext.ResourcesConfiguration.ResourceSettings.Add(new ResourceDescription
+            OrnamentContext.ResourceManager.Configuration().ResourceSettings.Add(new ResourceDescription
                 {
                     Name = "信息资源",
                     Path = "/Areas/Infos/Views/Shared/InfoTypeChoice.cshtml",

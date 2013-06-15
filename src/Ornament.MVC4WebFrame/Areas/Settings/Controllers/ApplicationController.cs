@@ -78,7 +78,7 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
 
         //        //Reset all user's Password
         //        IQueryable<User> allUsers =
-        //            from user in OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().Users
+        //            from user in  OrnamentContext.DaoFactory.MemberShipFactory.Users
         //            select user;
         //        bool srcFormatIsHashed = srcSetting != MembershipPasswordFormat.Hashed;
         //        foreach (User user in allUsers)

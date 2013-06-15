@@ -1,14 +1,15 @@
 ﻿using Castle.MicroKernel.Registration;
 using Ornament.AppStart;
+using Ornament.Contexts;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple.AppStart
 {
     public class DaoRegistry : IInitialization
     {
-        public void OnStart(Context context)
+        public void OnStart(OrnamentConfiguration config)
         {
-            context.Container
-                .Register(Component.For<IMemberShipFactory>().ImplementedBy<MemberShipFactory>());
+            OrnamentContext.IocContainer
+                           .Register(Component.For<IMemberShipFactory>().ImplementedBy<MemberShipFactory>());
         }
     }
 }

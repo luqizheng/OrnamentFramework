@@ -2,7 +2,7 @@
 
 namespace Ornament.Configurations
 {
-    public class ApplicationSetting
+    public class EmailSetting
     {
         public string SupportEmail
         {

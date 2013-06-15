@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
-using NHibernate.SqlCommand;
 using Ornament.MemberShip;
 using Qi;
 using Qi.Domain.NHibernates;
@@ -26,27 +25,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         #region IInfoDao Members
 
-        public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type, bool includeSubType,
-                                          out int total)
+        public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type, out int total)
         {
             DetachedCriteria crit = CreateDetachedCriteria();
             DetachedCriteria pageCount = CreateDetachedCriteria();
             if (type != null)
             {
-                if (includeSubType)
-                {
-                    Junction join = Restrictions.Disjunction()
-                                                .Add(Restrictions.Eq("Type", type))
-                                                .Add(Restrictions.Between("type.OrderId", CreateSubMinOrderId(type),
-                                                                          CreateSubMaxOrderId(type)));
-                    crit.CreateAlias("Type", "type").Add(join);
-                    pageCount.CreateAlias("Type", "type").Add(join);
-                }
-                else
-                {
+                
                     crit.Add(Restrictions.Eq(MessageTypeProperty, type));
                     pageCount.Add(Restrictions.Eq(MessageTypeProperty, type));
-                }
+               
             }
             total =
                 pageCount.SetProjection(Projections.Count<Message>(s => s.Id))
@@ -56,24 +44,15 @@ namespace Ornament.Messages.Dao.NHibernateImple
                        .SetMaxResults(pageSize).GetExecutableCriteria(CurrentSession).List<Message>();
         }
 
-        public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type, bool includeSubType)
+        public IList<Message> FindMessage(int pageSize, int pageIndex, MessageType type)
         {
             DetachedCriteria crit = CreateDetachedCriteria();
 
             if (type != null)
             {
-                if (includeSubType)
-                {
-                    Junction join = Restrictions.Disjunction()
-                                                .Add(Restrictions.Eq("Type", type))
-                                                .Add(Restrictions.Between("type.OrderId", CreateSubMinOrderId(type),
-                                                                          CreateSubMaxOrderId(type)));
-                    crit.CreateAlias("Type", "type").Add(join);
-                }
-                else
-                {
+              
                     crit.Add(Restrictions.Eq(MessageTypeProperty, type));
-                }
+               
             }
 
             return crit.SetFirstResult(pageSize*pageIndex)
@@ -84,7 +63,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             DetachedCriteria cri = BuildReadStateMessage(searcher,
                                                          CreateDetachedCriteria()
-                                                             .SetProjection(Projections.Count(Projections.Id())), false);
+                                                             .SetProjection(Projections.RowCount()), false);
             return cri
                 .GetExecutableCriteria(CurrentSession)
                 .UniqueResult<int>();
@@ -113,13 +92,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 crit.AddOrder(Order.Desc(Projections.Property<Message>(s => s.Priority)))
                     .AddOrder(Order.Asc(Projections.Property<Message>(s => s.CreateTime)));
             }
-            crit.CreateAlias("Readers", "readers", JoinType.None);
-            crit.Add(BuildPerfomrer(search.User, "readers"));
 
-            if (search.IncludeSubType)
-                crit = SubType(crit, search.MessageType);
-            else
-                crit.Add(Restrictions.Eq(MessageTypeProperty, search.MessageType));
+
+            crit.Add(Restrictions.Eq(MessageTypeProperty, search.MessageType));
             // filter read start=readed.
             DetachedCriteria readed = DetachedCriteria.For<ReaderReadStatus>()
                                                       .Add(
@@ -131,9 +106,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
                                                               MessageReadStateDao.State,
                                                               search.ReadStatus))
                                                       .SetProjection(Projections.Property("Message.Id"));
-
-
             crit.Add(Subqueries.PropertyNotIn("Id", readed));
+            crit.CreateAlias("Readers", "readers")
+                .Add(Subqueries.PropertyIn("readers.Id", BuildPerfomrer(search.User)));
 
 
             return crit;
@@ -141,7 +116,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         #endregion
 
-        private Disjunction BuildPerfomrer(User user, string readerAlis)
+        private DetachedCriteria BuildPerfomrer(User user)
         {
             DetachedCriteria ug = DetachedCriteria.For<User>()
                                                   .Add(Restrictions.Eq("Id", user.Id))
@@ -153,15 +128,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
                                                     .Add(Restrictions.Eq("Id", user.Id))
                                                     .CreateAlias("Roles", "role")
                                                     .SetProjection(Projections.Property("role.Id"));
-            var performer = new Disjunction();
-            performer
-                .Add(Subqueries.PropertyIn(readerAlis + ".Id", ug))
-                .Add(Subqueries.PropertyIn(readerAlis + ".Id", role))
-                .Add(Restrictions.Eq(readerAlis + ".Id", user.Id));
+            DetachedCriteria performerQueue =
+                DetachedCriteria.For<IPerformer>().SetProjection(Projections.Id()).Add(
+                    (new Disjunction()).Add(Subqueries.PropertyIn("Id", role))
+                                       .Add(Subqueries.PropertyIn("Id", ug))
+                                       .Add(Restrictions.Eq(Projections.Id(), user.Id))
+                    );
 
             if (user.Org != null)
-                performer.Add(Restrictions.Eq(readerAlis + ".Id", user.Org.Id));
-            return performer;
+                performerQueue.Add(Restrictions.Eq("Id", user.Org.Id));
+            return performerQueue;
         }
 
         public IList<int> GetYear(string typeName, bool cacasde)
@@ -170,27 +146,6 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 CreateQuery(
                     "select distinct year(Message.PublishTime) From Message Message where Message.PublishTime not is null")
                     .List<int>();
-        }
-
-        private DetachedCriteria SubType(DetachedCriteria ica, MessageType type)
-        {
-            ica.CreateAlias("Type", "type");
-            return ica.Add(Restrictions.Ge("type.OrderId", CreateSubMinOrderId(type)))
-                      .Add(Restrictions.Le("type.OrderId", CreateSubMaxOrderId(type)));
-        }
-
-        private static string CreateSubMaxOrderId(MessageType type)
-        {
-            if (type.Parent == null)
-                return type.Id + MaxGuid;
-            return string.Format("{0}.{1}.{2}", type.OrderId, type.Id, MaxGuid);
-        }
-
-        private static string CreateSubMinOrderId(MessageType type)
-        {
-            if (type.Parent == null)
-                return type.Id + MinGuid;
-            return string.Format("{0}.{1}.{2}", type.OrderId, type.Id, MinGuid);
         }
     }
 }

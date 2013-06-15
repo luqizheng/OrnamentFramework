@@ -10,7 +10,7 @@ namespace Ornament.MVCWebFrame.Controllers
     {
         public ActionResult Index()
         {
-            //var prjects = _projectDaoFactory.ProjectDao.List(OrnamentContext.Current.CurrentUser);
+            //var prjects = _projectDaoFactory.ProjectDao.List(OrnamentContext.Current.CurrentUser());
             return View();
         }
 

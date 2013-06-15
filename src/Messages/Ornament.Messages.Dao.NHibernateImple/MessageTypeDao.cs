@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
 using Qi.Domain.NHibernates;
@@ -10,13 +9,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     public class MessageTypeDao : DaoBase<string, MessageType>, IMessageTypeDao
     {
-        IProjection Parent { get { return Projections.Property<MessageType>(x => x.Parent); } }
         #region IInfoTypeDao Members
 
-        public IList<MessageType> GetFirstLevel()
-        {
-            return CreateCriteria().Add(Restrictions.IsNull(Parent)).List<MessageType>();
-        }
+       
 
         public MessageType GetByName(string name)
         {
@@ -26,9 +21,8 @@ namespace Ornament.Messages.Dao.NHibernateImple
             return
                 CreateDetachedCriteria()
                     .Add(Restrictions.Eq(Projections.Property<MessageType>(type => type.Name), name))
-                    .GetExecutableCriteria(this.CurrentSession)
+                    .GetExecutableCriteria(CurrentSession)
                     .UniqueResult<MessageType>();
-
         }
 
         public IList<MessageType> GetList(MessageType parent)
@@ -36,12 +30,14 @@ namespace Ornament.Messages.Dao.NHibernateImple
             if (parent == null)
                 throw new ArgumentNullException("parent");
             return CreateDetachedCriteria()
-                .Add(Restrictions.Eq(Parent, parent))
-                .GetExecutableCriteria(this.CurrentSession)
+                .GetExecutableCriteria(CurrentSession)
                 .List<MessageType>();
         }
 
-        public IQueryable<MessageType> MessageTypes { get { return CurrentSession.Query<MessageType>(); } }
+        public IQueryable<MessageType> MessageTypes
+        {
+            get { return CurrentSession.Query<MessageType>(); }
+        }
 
         #endregion
     }

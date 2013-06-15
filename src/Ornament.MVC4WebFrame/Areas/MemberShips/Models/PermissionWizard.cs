@@ -20,12 +20,12 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
             : this()
         {
             if (permission == null) throw new ArgumentNullException("permission");
-            Type operatorType = Context.GetOperatorType(permission.Resource);
+            Type operatorType = OrnamentContext.ResourceManager.GetOperatorType(permission.Resource);
             Name = permission.Name;
             Remark = permission.Remark;
             Operator = Permission.FindValues(permission.Operator, operatorType);
             DescriptionResourceName =
-                OrnamentContext.ResourcesConfiguration.GetResourceSettingByType(permission.Resource.GetType()).Name;
+                OrnamentContext.ResourceManager.Configuration().GetResourceSettingByType(permission.Resource.GetType()).Name;
         }
 
         public PermissionWizard()
@@ -47,7 +47,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         /// </summary>
         public Type ResourceType
         {
-            get { return OrnamentContext.ResourcesConfiguration.Get(_descriptionResourceName).ValueType; }
+            get { return OrnamentContext.ResourceManager.Configuration().Get(_descriptionResourceName).ValueType; }
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
         public Permission GetPermission()
         {
             Permission result = Id != null
-                                    ? OrnamentContext.Current.MemberShipFactory().CreatePermissionDao().Load(Id)
+                                    ? OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().Load(Id)
                                     : Permission.CreatePermission(ResourceType);
             if (result.Resource == null && ResourceId != null)
             {

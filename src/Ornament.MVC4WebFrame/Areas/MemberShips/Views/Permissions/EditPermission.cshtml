@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
 
     Permission permission = Model.GetPermission();
-    Type type = Ornament.Context.GetOperatorType(permission.Resource);
+    Type type = Ornament.OrnamentContext.GetOperatorType(permission.Resource);
     SortedDictionary<string, object> operatorKeyMaping = EnumHelper.GetDescriptionList(type);
 }
 <div class="box">

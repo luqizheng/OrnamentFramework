@@ -20,9 +20,12 @@ namespace Ornament.Web
         {
             get
             {
-                User admin = OrnamentContext.Current.MemberShipFactory().CreateUserDao().GetByLoginId("admin");
-                IMessageDao msgDao = OrnamentContext.Current.MessageFactory().MessageDao;
-                return msgDao.CountReadStateMessage(new PersonalSearcher(admin, OrnamentContext.Current.PersonalMessageType())) < 1;
+                User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
+                IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
+                return
+                    msgDao.CountReadStateMessage(new PersonalSearcher(admin,
+                                                                      OrnamentContext.Configuration.MessagesConfig.PersonalMessageType)) <
+                    1;
             }
         }
 
@@ -35,11 +38,11 @@ namespace Ornament.Web
 
         private void InitTask()
         {
-            User admin = OrnamentContext.Current.MemberShipFactory().CreateUserDao().GetByLoginId("admin");
-            IMessageDao msgDao = OrnamentContext.Current.MessageFactory().MessageDao;
+            User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
+            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
 
 
-            var m = new Message(admin, OrnamentContext.Current.TaskMessageType());
+            var m = new Message(admin, OrnamentContext.Configuration.MessagesConfig.TaskMessageType);
             m.State = MessageState.Published;
             m.Contents.Add("zh-CN", new Content
                 {
@@ -54,15 +57,15 @@ namespace Ornament.Web
 
         private void InitNotify()
         {
-            User admin = OrnamentContext.Current.MemberShipFactory().CreateUserDao().GetByLoginId("admin");
-            IMessageDao msgDao = OrnamentContext.Current.MessageFactory().MessageDao;
-            var ary = Enum.GetValues(typeof(Priority));
+            User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
+            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
+            Array ary = Enum.GetValues(typeof (Priority));
             for (int i = 0; i < 30; i++)
             {
-                var m = new Message(admin, OrnamentContext.Current.NotificationMessageType())
+                var m = new Message(admin, OrnamentContext.Configuration.MessagesConfig.NotificationMessageType)
                     {
                         State = MessageState.Published,
-                        Priority = (Priority)ary.GetValue(i % ary.Length)
+                        Priority = (Priority) ary.GetValue(i%ary.Length)
                     };
 
                 m.Contents.Add("zh-CN", new Content
@@ -76,13 +79,6 @@ namespace Ornament.Web
                 msgDao.SaveOrUpdate(m);
             }
             msgDao.Flush();
-        }
-
-        private void InitMessageType()
-        {
-            //init message type.
-            OrnamentContext.Current.TaskMessageType();
-            OrnamentContext.Current.NotificationMessageType();
         }
     }
 }

@@ -1,67 +1,49 @@
-using System.Configuration;
+using System.Globalization;
 using System.Web;
 using Castle.MicroKernel.Registration;
+using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Permissions;
 
 namespace Ornament.Web
 {
     /// <summary>
     /// </summary>
-    public class OrnamentContext : Context
+    public static class WebOrnamentContextExtender
     {
-        public static readonly OrnamentContext Current = new OrnamentContext();
-        static OrnamentContext()
+        static WebOrnamentContextExtender()
         {
-            Inner.Instance.GetContainer()
-                .Register(Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
-        }
-        private OrnamentContext()
-        {
-
-        }
-
-
-
-        /// <summary>
-        /// </summary>
-        public override User CurrentUser
-        {
-            get
-            {
-                if (HttpContext.Current == null || HttpContext.Current.User == null ||
-                    !HttpContext.Current.User.Identity.IsAuthenticated)
-                    return null;
-                IUserDao a = GetDaoFactory<IMemberShipFactory>().CreateUserDao();
-                User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
-                if (user != null)
-                {
-                    base.CurrentUser = user;
-                }
-                return base.CurrentUser;
-            }
+            OrnamentContext.IocContainer
+                           .Register(
+                               Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
 
 
         /// <summary>
         /// </summary>
-        public static ResourceDescriptionManager ResourcesConfiguration
+        public static ResourceDescriptionManager Configuration(this ResourceManager manager)
         {
-            get
-            {
-                return Inner.Instance.GetContainer().Resolve<ResourceDescriptionManager>();
-            }
+            return OrnamentContext.IocContainer.Resolve<ResourceDescriptionManager>();
         }
 
-        public string Language
+        /// <summary>
+        /// </summary>
+        public static User CurrentUser(this UserContext context)
         {
-            get
-            {
-                var a = HttpContext.Current.Profile["language"];
-                if (a == null)
-                    return System.Globalization.CultureInfo.CurrentUICulture.EnglishName;
-                return a.ToString();
-            }
+            if (HttpContext.Current == null || HttpContext.Current.User == null ||
+                !HttpContext.Current.User.Identity.IsAuthenticated)
+                return null;
+            IUserDao a = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+            return a.GetByLoginId(HttpContext.Current.User.Identity.Name);
+        }
+
+        public static string GetLanguage(this UserContext context)
+        {
+            object a = HttpContext.Current.Profile["language"];
+            if (a == null)
+                return CultureInfo.CurrentUICulture.EnglishName;
+            return a.ToString();
         }
     }
 }

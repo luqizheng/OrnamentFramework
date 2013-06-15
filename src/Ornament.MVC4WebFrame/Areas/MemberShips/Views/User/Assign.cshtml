@@ -8,10 +8,10 @@
 @{
     ViewBag.Title = MemberShip.AssignRoles + ":" + Model.Name;
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    IList<UserGroup> allUserGroups = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao().GetAll();
-    IList<Role> allRoles = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao().GetAll();
+    IList<UserGroup> allUserGroups =  OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao().GetAll();
+    IList<Role> allRoles =  OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
 
-    IOrderedQueryable<Permission> allPermissions = from a in OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().Permissions
+    IOrderedQueryable<Permission> allPermissions = from a in  OrnamentContext.DaoFactory.MemberShipFactory.Permissions
                                                    orderby a.Name
                                                    select a;
 }

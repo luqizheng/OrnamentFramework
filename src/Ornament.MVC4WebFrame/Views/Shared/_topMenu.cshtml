@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using System.Web.Profile
 @using MvcSiteMapProvider
+@using Ornament.MVCWebFrame.Models
 @using Ornament.Messages.Dao
 @using Ornament.Web
 @using Ornament.Web.MemberShips
@@ -14,7 +15,7 @@
         activedNode = SiteMap.RootNode;
     }
 
-    var siteMapPermission = new SiteMapPermission(OrnamentContext.Current, Ornament.Context.OperatorResourceManager);
+    var siteMapPermission = new SiteMapPermission(OrnamentContext.Current, Ornament.OrnamentContext.ResourceManager);
     ProfileBase profile = Profile;
     if (String.IsNullOrEmpty((string)profile["Language"]))
     {
@@ -41,9 +42,7 @@
 }
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    var searcher = new PersonalSearcher(OrnamentContext.Current.CurrentUser, OrnamentContext.Current.PersonalMessageType());
-    searcher.IncludeSubType = true;
-
+    var searcher = new PersonalSearcher(OrnamentContext.Current.CurrentUser(), OrnamentContext.Current.PersonalMessageType());
     var unReadCout = OrnamentContext.Current.MessageFactory().MessageDao.CountReadStateMessage(searcher);
     <ul class="top-menu">
         <li><a class="fullview"></a></li>
@@ -56,7 +55,7 @@
         </a></li>
         <li class="dropdown">
             <a class="user-menu" data-toggle="dropdown">
-                <img src="/Content/templates/pannonia/img/userpic.png" alt="" /><span style="min-width: 90px">@OrnamentContext.Current.CurrentUser.Name<b class="caret"></b></span></a>
+                <img src="/Content/templates/pannonia/img/userpic.png" alt="" /><span style="min-width: 90px">@OrnamentContext.Current.CurrentUser().Name<b class="caret"></b></span></a>
             <ul class="dropdown-menu">
                 <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
                 <li><a href="@Url.Action("Index", "PersonalMessage", new { area = "" })" title=""><i class="icon-inbox"></i>@Basic.Messages</a>

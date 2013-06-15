@@ -86,7 +86,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             }
 
             IPermissionDao permissionDao =
-                OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreatePermissionDao();
+                 OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
             role.Permissions.Clear();
             foreach (var id in permissionIds)
             {

@@ -5,36 +5,20 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    MessageType parent = ViewData["parent"] as MessageType;
-    string parentParentId = "";
-    if (parent != null && parent.Parent != null)
-    {
-        parentParentId = parent.Parent.Id;
-    }
 }
 
 
 
 @section pageTitle
 {
-
-    @if (parent != null)
-    {
-        <h6>
-            <a href="@Url.Action("Index", new { parentId = parentParentId })">@parent.Name</a>(@this.Model.Count())
-        </h6>
-    }
-    else
-    {
-        <h6>Message Type(@this.Model.Count())</h6>
-    }
+    <h5>Message Type(@this.Model.Count())</h5>
 }
 <div class="widget">
 
     <div class="navbar">
         <div class="navbar-inner">
 
-            <a class="btn btn-info" href="@Url.Action("Create", new { ParentId = parent != null ? parent.Id : "" })">@Basic.Create</a>
+            <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
         </div>
     </div>
 
@@ -45,7 +29,6 @@
             <table class="table table-condensed table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 30px"></th>
                         <th>
                             @Html.DisplayNameFor(model => model.Name)
                         </th>
@@ -59,10 +42,6 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                <a class="btn btn-small btn-info" href="@Url.Action("Index", new { parentId = item.Id })"><i class="ico-chevron-right"></i>
-                                </a>
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>

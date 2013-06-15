@@ -32,7 +32,7 @@ namespace Ornament.MVCWebFrame
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             PermissionConfig.Regist();
            
-            MessageConfig.Register(OrnamentContext.Current);
+            MessageConfig.Register(OrnamentContext.Configuration);
             //Ornament setting
             //Registry the Provider to use Membership rule of asp.net.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
@@ -46,7 +46,7 @@ namespace Ornament.MVCWebFrame
             wrapper.InitSession();
             try
             {
-                IUserProfileDao profileDao = OrnamentContext.Current.MemberShipFactory().CreateProfileDao();
+                IUserProfileDao profileDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateProfileDao();
                 ProfileValue anonymous = profileDao.FindByLoginId(args.AnonymousID);
                 if (anonymous != null)
                 {

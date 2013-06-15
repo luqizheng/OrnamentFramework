@@ -10,8 +10,8 @@
     ViewBag.Title = Basic.Index;
     Layout = "~/Views/Shared/_appLayout.cshtml";
     IList<Permission> permissions =
-              OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreatePermissionDao().GetPermissionByLoginId
-                  (OrnamentContext.Current.CurrentUser.LoginId);
+               OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().GetPermissionByLoginId
+                  (OrnamentContext.Current.CurrentUser().LoginId);
     var isFirst = true;
 
     var menus = new[]
@@ -23,7 +23,7 @@
                                 text = Html.GetResourceString("Menu_BasicInfo"),
                                 skipChecked = true,
                                 Operator = AccountOperator.None,
-                                Model=(object)OrnamentContext.Current.CurrentUser
+                                Model=(object)OrnamentContext.Current.CurrentUser()
                             },
                                new
                             {
@@ -41,7 +41,7 @@
                                 text = Html.GetResourceString("Menu_PersonalInfo"),
                                 skipChecked = true,
                                 Operator = AccountOperator.None,
-                                Model=(object)OrnamentContext.Current.CurrentUser
+                                Model=(object)OrnamentContext.Current.CurrentUser()
                             },
                      
                         new

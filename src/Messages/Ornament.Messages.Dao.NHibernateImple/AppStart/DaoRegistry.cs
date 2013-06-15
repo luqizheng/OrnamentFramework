@@ -1,14 +1,15 @@
 ﻿using Castle.MicroKernel.Registration;
 using Ornament.AppStart;
+using Ornament.Contexts;
 
 namespace Ornament.Messages.Dao.NHibernateImple.AppStart
 {
     internal class DaoRegistry : IInitialization
     {
-        public void OnStart(Context context)
+        public void OnStart(OrnamentConfiguration config)
         {
-            context.NhAssemblies.Add(GetType().Assembly);
-            context.Container.Register(
+            OrnamentContext.Configuration.NhibernateCfg.NhAssemblies.Add(GetType().Assembly);
+            OrnamentContext.IocContainer.Register(
                 Component.For<IMessageDaoFactory>().ImplementedBy<MessageDaoFactory>());
         }
     }

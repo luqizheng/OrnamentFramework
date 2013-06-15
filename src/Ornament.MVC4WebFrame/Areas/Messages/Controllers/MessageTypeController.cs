@@ -20,15 +20,8 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
         public ActionResult Index(string parentId)
         {
-            IList<MessageType> msgType;
-            if (parentId == null)
-                msgType = _messageDao.MessageTypeDao.GetFirstLevel();
-            else
-            {
-                MessageType parent = _messageDao.MessageTypeDao.Get(parentId);
-                msgType = _messageDao.MessageTypeDao.GetList(parent);
-                ViewData["parent"] = parent;
-            }
+            IList<MessageType>
+                msgType = _messageDao.MessageTypeDao.GetAll();
 
             return View(msgType);
         }
@@ -55,13 +48,12 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             var result = new MessageTypeModel();
             if (parentId != null)
             {
-                var parent = _messageDao.MessageTypeDao.Get(parentId);
+                MessageType parent = _messageDao.MessageTypeDao.Get(parentId);
                 result.Parent = parent;
             }
             result.Name = "new message type";
 
             return View(result);
-
         }
 
         [HttpPost, Session(true, Transaction = true)]
@@ -74,6 +66,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             }
             return View(type);
         }
+
         [HttpPost, ResourceAuthorize(MessageOperator.Delete, "Message")]
         public ActionResult Delete(string id)
         {

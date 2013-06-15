@@ -106,7 +106,7 @@ namespace Ornament.Web.MemberShips
             if (context.User == null || !context.User.Identity.IsAuthenticated)
                 return false;
 
-            IUserDao userdao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserDao();
+            IUserDao userdao =  Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
 
             User user = userdao.GetByLoginId(context.User.Identity.Name);
 
@@ -117,13 +117,13 @@ namespace Ornament.Web.MemberShips
                 return true;
 
 
-            IPermissionDao dao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreatePermissionDao();
+            IPermissionDao dao =  Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
 
             IList<Permission> result;
             if (ResourceType != typeof(string))
             {
                 var res =
-                    OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateResourceDao().Load(
+                     Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateResourceDao().Load(
                         ResourceType, ResourceId) as IDomainObject;
                 if (res == null)
                     throw new MemberShipException(ResourceType.FullName +

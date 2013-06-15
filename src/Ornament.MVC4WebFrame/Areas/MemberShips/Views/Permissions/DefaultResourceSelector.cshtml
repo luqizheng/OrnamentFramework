@@ -2,7 +2,7 @@
 @model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionWizard
 @{
     ViewBag.Title = "Choice Ressource";
-    IList<string> resources = Ornament.Context.GetTypeResource();
+    IList<string> resources = Ornament.OrnamentContext.GetTypeResource();
 
     //找出已经选择的
     string selectedResourceId = resources[0];

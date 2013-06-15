@@ -52,8 +52,6 @@ namespace Ornament.Messages.Dao
             PageIndex = 0;
         }
 
-        public bool IncludeSubType { get; set; }
-
         public int PageSize
         {
             get { return _pageSize; }

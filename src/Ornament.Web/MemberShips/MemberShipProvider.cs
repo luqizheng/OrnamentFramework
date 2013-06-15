@@ -122,7 +122,7 @@ namespace Ornament.Web.MemberShips
             get
             {
                 if (_facotry == null)
-                    _facotry = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>();
+                    _facotry =  OrnamentContext.DaoFactory.MemberShipFactory;
                 return _facotry;
             }
             set { _facotry = value; }

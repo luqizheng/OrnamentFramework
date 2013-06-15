@@ -1,13 +1,14 @@
 ﻿using Ornament;
 using Ornament.AppStart;
+using Ornament.Contexts;
 
 namespace QiProject.Dao.NhImple.AppStart
 {
     public class DaoRegistry : IInitialization
     {
-        public void OnStart(Context context)
+        public void OnStart(OrnamentConfiguration config)
         {
-            context.Container.Register(
+            OrnamentContext.IocContainer.Register(
                 Castle.MicroKernel.Registration.Component.For<IProjectDaoFactory>().ImplementedBy<ProjectDaoFactory>());
         }
     }

@@ -7,7 +7,7 @@
     //style is write gloabal.css,please search RolesSelector.ascx.
 
     int pageSize = 40;
-    IRoleDao roleDao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao();
+    IRoleDao roleDao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
     IOrderedQueryable<Role> roles = from role in
                                         roleDao.Roles
                                         .Skip(0 * pageSize)

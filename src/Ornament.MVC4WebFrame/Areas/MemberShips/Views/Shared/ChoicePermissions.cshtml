@@ -3,7 +3,7 @@
 @model Ornament.MemberShip.Role
 @{
 
-    var permissions = from a in OrnamentContext.Current.MemberShipFactory().CreatePermissionDao().Permissions select a;
+    var permissions = from a in OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().Permissions select a;
 }
 
 <table class="table table-condensed table-striped">

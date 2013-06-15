@@ -2,8 +2,8 @@
 @using Ornament.Web
 @model Ornament.Models.Memberships.Partials.UserBasicInfoModel
 @{
-    var roles = from role in OrnamentContext.Current.MemberShipFactory().Roles select role;
-    var ugs = from ug in OrnamentContext.Current.MemberShipFactory().UserGroups select ug;
+    var roles = from role in OrnamentContext.DaoFactory.MemberShipFactory.Roles select role;
+    var ugs = from ug in OrnamentContext.DaoFactory.MemberShipFactory.UserGroups select ug;
     var selectedRoles = this.Model != null ? this.Model.Roles.ToDictionary(s => s.Id) : new Dictionary<string, Role>();
     var selectUgs = this.Model != null ? this.Model.UserGroups.ToDictionary(s => s.Id) : new Dictionary<string, UserGroup>();
         

@@ -24,7 +24,7 @@ namespace Ornament.Web
         {
             if (controllers == null)
                 throw new ArgumentNullException("controllers");
-            _container = (WindsorContainer) OrnamentContext.Current.Container;
+            _container = (WindsorContainer) OrnamentContext.IocContainer;
             foreach (Type t in controllers)
             {
                 _container.Register(Component.For(t).LifestyleTransient());

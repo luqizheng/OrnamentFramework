@@ -1,31 +1,32 @@
 ﻿using System;
+using Ornament.Contexts;
 using Ornament.MemberShip;
-using Ornament.MemberShip.Permissions;
 
 namespace Ornament.Web.MemberShips
 {
     public class MenuPermission
     {
         private readonly string _express;
-        private readonly Context _context;
+        private readonly UserContext _context;
 
-        public MenuPermission(string express, Context context)
+        public MenuPermission(string express, UserContext context)
         {
             _express = express;
             _context = context;
+
             string[] ary = _express.Split(':');
             if (ary.Length < 0)
                 throw new FormatException("expression is not a right format, it should be [resource]:[operator]");
             Resource = ary[0];
             try
             {
-                Type enmType = Context.OperatorResourceManager.GetOperator(ary[0]);
-                OperatorValue = (Enum)Enum.Parse(enmType, ary[1], true);
+                Type enmType = OrnamentContext.ResourceManager.GetOperator(ary[0]);
+                OperatorValue = (Enum) Enum.Parse(enmType, ary[1], true);
             }
             catch (ArgumentException)
             {
                 throw new FormatException(String.Format("{0} is not recognized in the {1}", ary[1],
-                                                        Context.OperatorResourceManager.GetOperator(ary[0]).Name));
+                                                        OrnamentContext.ResourceManager.GetOperator(ary[0]).Name));
             }
         }
 
@@ -34,7 +35,7 @@ namespace Ornament.Web.MemberShips
 
         public bool HasRight(User user)
         {
-            return _context.HasRight(this.Resource, this.OperatorValue);
+            return _context.HasRight(user,Resource, OperatorValue);
         }
     }
 }

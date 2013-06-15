@@ -69,7 +69,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipService.ChangePassword(OrnamentContext.Current.CurrentUser.LoginId, model.CurrentPassword,
+                MembershipService.ChangePassword(OrnamentContext.Current.CurrentUser().LoginId, model.CurrentPassword,
                                                  model.NewPassword);
             }
             return PartialView("_changePassword", model);
@@ -99,7 +99,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(OrnamentContext.Current.CurrentUser);
+            return View(OrnamentContext.Current.CurrentUser());
         }
 
 
@@ -109,9 +109,9 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             try
             {
-                OrnamentContext.Current.CurrentUser.Name = data["Name"];
-                OrnamentContext.Current.CurrentUser.Email = data["Email"];
-                OrnamentContext.Current.CurrentUser.Phone = data["Phone"];
+                OrnamentContext.Current.CurrentUser().Name = data["Name"];
+                OrnamentContext.Current.CurrentUser().Email = data["Email"];
+                OrnamentContext.Current.CurrentUser().Phone = data["Phone"];
                 return Json("true");
             }
             catch
@@ -132,7 +132,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             string errorMessage = null;
             if (!ModelState.IsValid ||
-                !model.Validate(out errorMessage, OrnamentContext.Current.MemberShipFactory().CreateUserDao()))
+                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao()))
             {
                 if (errorMessage != null)
                 {
@@ -161,7 +161,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                forget.Retrieve(OrnamentContext.Current.MemberShipFactory(), "test[url]", Context.Setting.WebDomainUrl);
+                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory, "test[url]", OrnamentContext.Configuration.EmailSetting.WebDomainUrl);
                 return Redirect("ForgetPasswordSucccess");
             }
             return View();
@@ -220,7 +220,7 @@ namespace Ornament.MVCWebFrame.Controllers
 
         public ActionResult PersonalInfo()
         {
-            return View(OrnamentContext.Current.CurrentUser);
+            return View(OrnamentContext.Current.CurrentUser());
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         {
             ViewData["nav"] = (pagination ?? (pagination = new Pagination()));
             int totalNumber;
-            IList<Message> result = _messageDao.FindMessage(pagination.PageSize, pagination.CurrentPage, null, false, out totalNumber);
+            IList<Message> result = _messageDao.FindMessage(pagination.PageSize, pagination.CurrentPage, null, out totalNumber);
             pagination.SetTotalPage(totalNumber);
             return View(result);
         }

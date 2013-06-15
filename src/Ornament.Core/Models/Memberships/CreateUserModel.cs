@@ -69,10 +69,10 @@ namespace Ornament.Models.Memberships
                     {
                         var manager = new EmailTemplateManager();
                         IDictionary<string, string> variable =
-                            manager.GetValues(userSecretToken, Context.Setting.WebDomainUrl + CreateVerifyUser);
+                            manager.GetValues(userSecretToken, OrnamentContext.Configuration.EmailSetting.WebDomainUrl + CreateVerifyUser);
                         variable.Add("Password", Password);
                         EmailTemplate email = manager.GetCreateUser();
-                        MailMessage mailMessage = email.CreateEmail(Context.Setting.SupportEmail, createUser.Email,
+                        MailMessage mailMessage = email.CreateEmail(OrnamentContext.Configuration.EmailSetting.SupportEmail, createUser.Email,
                                                                     variable);
                         using (var ss = new SmtpClient())
                         {

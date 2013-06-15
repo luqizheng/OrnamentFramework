@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Web;
 
@@ -24,11 +20,11 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult Index()
         {
             var searcher =
-                new PersonalSearcher(OrnamentContext.Current.CurrentUser, OrnamentContext.Current.NotificationMessageType());
+                new PersonalSearcher(OrnamentContext.Current.CurrentUser(),
+                                     OrnamentContext.Configuration.MessagesConfig.NotificationMessageType);
             ViewData["notify"] = _messageDaoFactory.MessageDao.ReadStateMessage(searcher);
 
             return View();
         }
-
     }
 }

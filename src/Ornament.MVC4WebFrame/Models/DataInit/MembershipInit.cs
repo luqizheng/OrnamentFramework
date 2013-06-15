@@ -24,7 +24,7 @@ namespace Ornament.MVCWebFrame.Models.DataInit
         {
             get
             {
-                User user = OrnamentContext.Current.MemberShipFactory().CreateUserDao().GetByLoginId("admin");
+                User user = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
                 return user == null;
             }
         }
@@ -59,19 +59,19 @@ namespace Ornament.MVCWebFrame.Models.DataInit
 
             UserGroup adminGroup = CreateOrGetUserGroup("administrators");
             adminGroup.AddRole(admin);
-            IUserGroupDao ugDao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao();
+            IUserGroupDao ugDao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             ugDao.SaveOrUpdate(adminGroup);
 
             User adminUser = CreateUser("admin", AdminPassword, "admin@admin.com", "admin", "123456");
             adminUser.AddRole(admin);
             adminUser.AddToUserGroup(adminGroup);
-            OrnamentContext.Current.MemberShipFactory().CreateUserDao().SaveOrUpdate(adminUser);
+            OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
         }
 
         private User CreateUser(string username, string password, string email
                                 , string question, string answord)
         {
-            IUserDao userDao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserDao();
+            IUserDao userDao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
             User user = userDao.GetByLoginId(username);
             if (user == null)
             {
@@ -84,7 +84,7 @@ namespace Ornament.MVCWebFrame.Models.DataInit
 
         protected UserGroup CreateOrGetUserGroup(string name)
         {
-            IUserGroupDao dao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateUserGroupDao();
+            IUserGroupDao dao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             UserGroup ug = dao.GetByName(name);
             if (ug != null)
             {
@@ -95,7 +95,7 @@ namespace Ornament.MVCWebFrame.Models.DataInit
 
         protected Role CreateRole(string name, string remark)
         {
-            IRoleDao roleDao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreateRoleDao();
+            IRoleDao roleDao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
 
             Role role = roleDao.GetByName(name) ?? new Role(name) {Remark = remark};
             roleDao.SaveOrUpdate(role);
@@ -105,7 +105,7 @@ namespace Ornament.MVCWebFrame.Models.DataInit
 
         protected Permission CreatePermission<T>(T resObj, string permisionName, string remark, Enum eEnum)
         {
-            IPermissionDao dao = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>().CreatePermissionDao();
+            IPermissionDao dao =  OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
 
             Permission permission = dao.GetPermission(permisionName) ?? new GenericPermission<T>(resObj)
                 {

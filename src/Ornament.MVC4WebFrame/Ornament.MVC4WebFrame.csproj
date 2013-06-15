@@ -260,7 +260,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DaoFactory.cs" />
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\MessageInit.cs" />
     <Compile Include="Models\Editor.cs" />
@@ -268,7 +267,6 @@
     <Compile Include="Models\Membership\OrgOperator.cs" />
     <Compile Include="Models\Membership\RoleOperator.cs" />
     <Compile Include="Models\Membership\UserOperator.cs" />
-    <Compile Include="Models\MessageExtender.cs" />
     <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="Models\swfuploadFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

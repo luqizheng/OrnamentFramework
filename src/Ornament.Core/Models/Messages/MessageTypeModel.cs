@@ -14,7 +14,6 @@ namespace Ornament.Models.Messages
         {
             if (type == null) throw new ArgumentNullException("type");
             Id = type.Id;
-            Parent = type.Parent;
             Name = type.Name;
             Remark = type.Remark;
         }
@@ -33,7 +32,7 @@ namespace Ornament.Models.Messages
             }
             else
             {
-                type = Parent != null ? new MessageType(Name, Parent) : new MessageType(Name);
+                type =new MessageType(Name);
             }
             type.Remark = Remark;
             dao.MessageTypeDao.SaveOrUpdate(type);

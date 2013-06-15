@@ -1,14 +1,15 @@
-﻿using Ornament.Web;
+﻿using Ornament.Contexts;
+using Ornament.Web;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
     public static class MessageConfig
     {
-        public static void Register(OrnamentContext context)
+        public static void Register(OrnamentConfiguration context)
         {
-            context.Languages().Add("en", "English");
+            /*OrnamentContext.Current.Languages().Add("en", "English");
             context.Languages().Add("zh", "中文繁體");
-            context.Languages().Add("zh-CN", "中文简体");
+            context.Languages().Add("zh-CN", "中文简体");*/
 
         }
     }

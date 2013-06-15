@@ -28,7 +28,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
             var type = _messageDaoFactory.MessageTypeDao.Get(typeId);
 
-            var searcher = new PersonalSearcher(OrnamentContext.Current.CurrentUser, type)
+            var searcher = new PersonalSearcher(OrnamentContext.Current.CurrentUser(), type)
                 {
                     PageIndex = pagination.CurrentPage,
                     PageSize = pagination.PageSize,

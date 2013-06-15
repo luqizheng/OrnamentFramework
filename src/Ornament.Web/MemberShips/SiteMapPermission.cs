@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Web;
+using Ornament.Contexts;
 using Ornament.MemberShip.Permissions;
 
 namespace Ornament.Web.MemberShips
 {
     public class SiteMapPermission
     {
-        private readonly Context _context;
+        private readonly UserContext _userContext;
 
-
-        public SiteMapPermission(Context memberContext, OperatorResourceMapping mapping)
+        ///
+        public SiteMapPermission(UserContext userContext, ResourceManager manager)
         {
-            if (memberContext == null)
-                throw new ArgumentNullException("memberContext");
-            if (mapping == null) throw new ArgumentNullException("mapping");
-            _context = memberContext;
+            if (userContext == null)
+                throw new ArgumentNullException("userContext");
+            if (manager == null) throw new ArgumentNullException("manager");
+            _userContext = userContext;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public bool IsAccessibleToUser(SiteMapNode node)
         {
             string operatorExpress = node["permission"];
@@ -24,9 +29,9 @@ namespace Ornament.Web.MemberShips
             {
                 return node.IsAccessibleToUser(HttpContext.Current);
             }
-            var permission = new MenuPermission(operatorExpress, _context);
+            var permission = new MenuPermission(operatorExpress, _userContext);
 
-            return permission.HasRight(OrnamentContext.Current.CurrentUser);
+            return permission.HasRight(OrnamentContext.Current.CurrentUser());
         }
     }
 }

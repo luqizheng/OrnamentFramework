@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ornament.Contexts;
 
 namespace Ornament.AppStart
 {
@@ -22,7 +23,7 @@ namespace Ornament.AppStart
                 "Iesi.Collection"
             };
 
-        public static void Start(Context context, params Assembly[] assemblies)
+        public static void Start(OrnamentConfiguration ornamentContext, params Assembly[] assemblies)
         {
             foreach (Assembly assembly in assemblies)
             {
@@ -37,7 +38,7 @@ namespace Ornament.AppStart
                     if (type == typeof (IInitialization))
                         continue;
                     var obj = Activator.CreateInstance(type) as IInitialization;
-                    obj.OnStart(context);
+                    obj.OnStart(ornamentContext);
                 }
             }
         }

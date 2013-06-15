@@ -24,7 +24,7 @@ namespace Ornament.Web.MemberShips
 
         private IMemberShipFactory MemberShipFactory
         {
-            get { return _memberShip ?? (_memberShip = OrnamentContext.Current.GetDaoFactory<IMemberShipFactory>()); }
+            get { return _memberShip ?? (_memberShip = OrnamentContext.DaoFactory.MemberShipFactory); }
             set { _memberShip = value; }
         }
 

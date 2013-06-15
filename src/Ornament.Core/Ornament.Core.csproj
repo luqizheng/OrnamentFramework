@@ -102,7 +102,13 @@
     <Compile Include="AppStart\OnStart.cs" />
     <Compile Include="AppStart\IInitialization.cs" />
     <Compile Include="Configurations\WebSettings.cs" />
-    <Compile Include="Context.cs" />
+    <Compile Include="OrnamentContext.cs" />
+    <Compile Include="Contexts\NhConfiguration.cs" />
+    <Compile Include="Contexts\OrnamentConfiguration.cs" />
+    <Compile Include="Contexts\ResourcesSetting.cs" />
+    <Compile Include="Contexts\UserContext.cs" />
+    <Compile Include="Contexts\DaoFactory.cs" />
+    <Compile Include="MessageContextExtender.cs" />
     <Compile Include="Messages\OrnamentMessageManager.cs" />
     <Compile Include="Messages\UserMessageManager.cs" />
     <Compile Include="DateTimeHelper.cs" />
