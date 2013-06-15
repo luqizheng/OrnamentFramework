@@ -1,11 +1,12 @@
 ﻿@using MvcSiteMapProvider
+@using Ornament
 @using Ornament.Web
 @using Ornament.Web.MemberShips
 
 @{
 
     //var nodeList = SiteMap.RootNode.ChildNodes[0].ChildNodes;
-    var site = new SiteMapPermission(OrnamentContext.Current, Ornament.OrnamentContext.ResourceManager);
+    var site = new SiteMapPermission(OrnamentContext.MemberShip, Ornament.OrnamentContext.ResourceManager);
     var matchedFirstLevelMenu = Html.GetFirstLevelMenuByCurrentNode();
 }
 @helper RenderChildMenu(SiteMapNodeCollection nodeCollection, int level, int maxLevel, SiteMapPermission site)

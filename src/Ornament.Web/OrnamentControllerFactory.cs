@@ -30,9 +30,9 @@ namespace Ornament.Web
                 _container.Register(Component.For(t).LifestyleTransient());
             }
 
-            _container.Register(
-                Component.For(typeof (OrnamentContext)).LifestyleSingleton().Instance(OrnamentContext.Current)
-                );
+            //_container.Register(
+            //    Component.For(typeof (OrnamentContext)).LifestyleSingleton().Instance(OrnamentContext.MemberShip)
+            //    );
         }
 
         public Type ErrorController { get; set; }

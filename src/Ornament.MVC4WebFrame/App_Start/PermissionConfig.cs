@@ -1,5 +1,4 @@
 ﻿using Ornament.MVCWebFrame.Models.Membership;
-using Ornament.MemberShip.Permissions;
 using Ornament.Messages;
 using Ornament.Web;
 
@@ -10,11 +9,11 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void Regist()
         {
             OrnamentContext.ResourceManager
-                   .Add("User", typeof (UserOperator))
-                   .Add("Role", typeof (RoleOperator))
-                   .Add("Account", typeof (AccountOperator))
-                   .Add("Org", typeof (OrgOperator))
-                   .Add("UserGroup", typeof (UserGroupOperator));
+                           .Add("User", typeof (UserOperator))
+                           .Add("Role", typeof (RoleOperator))
+                           .Add("Account", typeof (AccountOperator))
+                           .Add("Org", typeof (OrgOperator))
+                           .Add("UserGroup", typeof (UserGroupOperator));
             RegistrySettingPage();
         }
 

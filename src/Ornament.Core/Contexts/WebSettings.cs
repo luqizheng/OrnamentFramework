@@ -1,8 +1,8 @@
 ﻿using System.Configuration;
 
-namespace Ornament.Configurations
+namespace Ornament.Contexts
 {
-    public class EmailSetting
+    public class ApplicationSetting
     {
         public string SupportEmail
         {

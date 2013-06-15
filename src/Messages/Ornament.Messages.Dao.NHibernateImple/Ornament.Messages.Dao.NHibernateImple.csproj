@@ -96,7 +96,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppStart\DaoRegistry.cs" />
     <Compile Include="Mapping\Message.cs" />
     <Compile Include="Mapping\MessageReadStatus.cs" />
     <Compile Include="Mapping\MessageTypeMapping.cs" />

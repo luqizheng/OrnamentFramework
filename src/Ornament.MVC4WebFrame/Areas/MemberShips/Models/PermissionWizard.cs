@@ -123,7 +123,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Models
                                     : Permission.CreatePermission(ResourceType);
             if (result.Resource == null && ResourceId != null)
             {
-                result.Resource = OrnamentContext.Current.GetResource(ResourceType, ResourceId);
+                result.Resource = OrnamentContext.MemberShip.GetResource(ResourceType, ResourceId);
             }
             if (Operator != null)
             {

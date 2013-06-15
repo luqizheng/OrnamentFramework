@@ -29,7 +29,7 @@ namespace Ornament.Web
 
         /// <summary>
         /// </summary>
-        public static User CurrentUser(this UserContext context)
+        public static User CurrentUser(this MemberShipContext context)
         {
             if (HttpContext.Current == null || HttpContext.Current.User == null ||
                 !HttpContext.Current.User.Identity.IsAuthenticated)
@@ -38,7 +38,7 @@ namespace Ornament.Web
             return a.GetByLoginId(HttpContext.Current.User.Identity.Name);
         }
 
-        public static string GetLanguage(this UserContext context)
+        public static string GetLanguage(this MemberShipContext context)
         {
             object a = HttpContext.Current.Profile["language"];
             if (a == null)

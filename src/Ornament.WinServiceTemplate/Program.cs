@@ -4,6 +4,10 @@ using System.IO;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Dao.NHibernateImple;
+using Ornament.Messages.Dao;
+using Ornament.Messages.Dao.NHibernateImple;
 using log4net.Config;
 
 namespace Ornament.WinServiceTemplate
@@ -16,6 +20,7 @@ namespace Ornament.WinServiceTemplate
         static void Main()
         {
             IniLogger();
+            InitDao();
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
@@ -29,6 +34,19 @@ namespace Ornament.WinServiceTemplate
             var settingfile = System.Configuration.ConfigurationManager.AppSettings["log4net"] ?? "log4net.config";
             var file = Qi.ApplicationHelper.MapPath(settingfile);
             XmlConfigurator.ConfigureAndWatch(new FileInfo(file));
+        }
+
+        private static void InitDao()
+        {
+            var dao = new Dictionary<Type, Type>
+                {
+                    {typeof (IMemberShipFactory), typeof (MemberShipFactory)},
+                    {typeof (IMessageDaoFactory), typeof (MessageDaoFactory)}
+                };
+            foreach (Type key in dao.Keys)
+            {
+                OrnamentContext.DaoFactory.Regist(key, dao[key]);
+            }
         }
     }
 }

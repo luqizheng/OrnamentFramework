@@ -53,7 +53,9 @@ namespace Ornament.Web
         /// </summary>
         /// <value>The message.</value>
         public string Message { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<string, object> Data
         {
             get { return _data ?? (_data = new Dictionary<string, object>()); }

@@ -70,7 +70,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppStart\AssemblyLoaded.cs" />
     <Compile Include="ComponentDao.cs" />
     <Compile Include="DefectDao.cs" />
     <Compile Include="ProductDao.cs" />

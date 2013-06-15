@@ -172,9 +172,9 @@
                                     {
                                         foreach (var key in this.Model.Contents.Keys)
                                         {
-                                            if (MessageContextExtender.Languages(OrnamentContext.Current).ContainsKey(key))
+                                            if (MessageContextExtender.Languages(OrnamentContext.MemberShip).ContainsKey(key))
                                             {
-                                        <option value="@key">@MessageContextExtender.Languages(OrnamentContext.Current)[key]</option>
+                                        <option value="@key">@MessageContextExtender.Languages(OrnamentContext.MemberShip)[key]</option>
                                             }
                                             else
                                             {
@@ -213,9 +213,9 @@
     </div>
     <div class="modal-body">
         <select id="dialogLanguageName" class="styled">
-            @foreach (var lang in MessageContextExtender.Languages(OrnamentContext.Current).Keys)
+            @foreach (var lang in MessageContextExtender.Languages(OrnamentContext.MemberShip).Keys)
             {
-                <option value="@lang">@MessageContextExtender.Languages(OrnamentContext.Current)[lang]</option>
+                <option value="@lang">@MessageContextExtender.Languages(OrnamentContext.MemberShip)[lang]</option>
             }
         </select>
     </div>

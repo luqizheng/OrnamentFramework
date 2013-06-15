@@ -93,7 +93,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppStart\DaoRegistry.cs" />
     <Compile Include="MemberDao.cs" />
     <Compile Include="MemberShipFactory.cs" />
     <Compile Include="OrgDao.cs" />

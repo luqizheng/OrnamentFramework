@@ -7,9 +7,9 @@ namespace Ornament.Web.MemberShips
     public class MenuPermission
     {
         private readonly string _express;
-        private readonly UserContext _context;
+        private readonly MemberShipContext _context;
 
-        public MenuPermission(string express, UserContext context)
+        public MenuPermission(string express, MemberShipContext context)
         {
             _express = express;
             _context = context;

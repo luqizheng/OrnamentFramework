@@ -10,7 +10,6 @@ using Ornament.MVCWebFrame.App_Start;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
-using Ornament.Web;
 using Qi.NHibernateExtender;
 using log4net;
 using log4net.Config;
@@ -30,12 +29,14 @@ namespace Ornament.MVCWebFrame
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
             PermissionConfig.Regist();
-           
-            MessageConfig.Register(OrnamentContext.Configuration);
+            ApplicationConfig.Register(OrnamentContext.Configuration);
             //Ornament setting
             //Registry the Provider to use Membership rule of asp.net.
+            //Assembly auto config.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
+            DaoFactoryConfig.Config();
             NhConfig.Config();
         }
 
@@ -62,7 +63,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof(GlobalContext));
+                ILog log = LogManager.GetLogger(typeof (GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally

@@ -7,15 +7,15 @@ namespace Ornament.Web.MemberShips
 {
     public class SiteMapPermission
     {
-        private readonly UserContext _userContext;
+        private readonly MemberShipContext _memberShipContext;
 
         ///
-        public SiteMapPermission(UserContext userContext, ResourceManager manager)
+        public SiteMapPermission(MemberShipContext memberShipContext, ResourceManager manager)
         {
-            if (userContext == null)
-                throw new ArgumentNullException("userContext");
+            if (memberShipContext == null)
+                throw new ArgumentNullException("memberShipContext");
             if (manager == null) throw new ArgumentNullException("manager");
-            _userContext = userContext;
+            _memberShipContext = memberShipContext;
         }
         /// <summary>
         /// 
@@ -29,9 +29,9 @@ namespace Ornament.Web.MemberShips
             {
                 return node.IsAccessibleToUser(HttpContext.Current);
             }
-            var permission = new MenuPermission(operatorExpress, _userContext);
+            var permission = new MenuPermission(operatorExpress, _memberShipContext);
 
-            return permission.HasRight(OrnamentContext.Current.CurrentUser());
+            return permission.HasRight(OrnamentContext.MemberShip.CurrentUser());
         }
     }
 }

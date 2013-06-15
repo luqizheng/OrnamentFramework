@@ -69,7 +69,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipService.ChangePassword(OrnamentContext.Current.CurrentUser().LoginId, model.CurrentPassword,
+                MembershipService.ChangePassword(OrnamentContext.MemberShip.CurrentUser().LoginId, model.CurrentPassword,
                                                  model.NewPassword);
             }
             return PartialView("_changePassword", model);
@@ -99,7 +99,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(OrnamentContext.Current.CurrentUser());
+            return View(OrnamentContext.MemberShip.CurrentUser());
         }
 
 
@@ -109,9 +109,9 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             try
             {
-                OrnamentContext.Current.CurrentUser().Name = data["Name"];
-                OrnamentContext.Current.CurrentUser().Email = data["Email"];
-                OrnamentContext.Current.CurrentUser().Phone = data["Phone"];
+                OrnamentContext.MemberShip.CurrentUser().Name = data["Name"];
+                OrnamentContext.MemberShip.CurrentUser().Email = data["Email"];
+                OrnamentContext.MemberShip.CurrentUser().Phone = data["Phone"];
                 return Json("true");
             }
             catch
@@ -161,7 +161,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory, "test[url]", OrnamentContext.Configuration.EmailSetting.WebDomainUrl);
+                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory, "test[url]", OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl);
                 return Redirect("ForgetPasswordSucccess");
             }
             return View();
@@ -220,7 +220,7 @@ namespace Ornament.MVCWebFrame.Controllers
 
         public ActionResult PersonalInfo()
         {
-            return View(OrnamentContext.Current.CurrentUser());
+            return View(OrnamentContext.MemberShip.CurrentUser());
         }
     }
 }

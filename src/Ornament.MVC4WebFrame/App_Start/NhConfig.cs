@@ -1,11 +1,10 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Hosting;
 using FluentNHibernate.Cfg;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Ornament.AppStart;
-using Ornament.Web;
+using Ornament.MemberShip.Dao.NHibernateImple;
+using Ornament.Messages.Dao.NHibernateImple;
 using Qi.NHibernateExtender;
 
 namespace Ornament.MVCWebFrame.App_Start
@@ -14,30 +13,31 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Config()
         {
-            //Assembly auto config.
-            OnStart.Start(OrnamentContext.Configuration, AppDomain.CurrentDomain.GetAssemblies());
-            NHConfig();
-
+            var Assemblies = new[]
+                {
+                    typeof (MessageDao).Assembly,
+                    typeof (UserDao).Assembly
+                };
+            NHConfig(Assemblies);
             UpdateDatabase();
         }
 
-        private static void NHConfig()
+        private static void NHConfig(Assembly[] Assemblies)
         {
             SessionManager.Regist("default", () =>
                 {
                     var config = new Configuration();
                     config.Configure(HostingEnvironment.MapPath("~/config/hibernate_mysql.cfg.config"));
                     FluentConfiguration result = Fluently.Configure(config);
-                    for (int i = 0; i < OrnamentContext.Configuration.NhibernateCfg.NhAssemblies.Count; i++)
+
+// ReSharper disable ForCanBeConvertedToForeach
+                    for (int index = 0; index < Assemblies.Length; index++)
+// ReSharper restore ForCanBeConvertedToForeach
                     {
-                        Assembly assembly1 = OrnamentContext.Configuration.NhibernateCfg.NhAssemblies[i];
-                        result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly1));
+                        Assembly assembly = Assemblies[index];
+                        result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly));
                     }
-                    foreach (Type type in OrnamentContext.Configuration.NhibernateCfg.NHTypes)
-                    {
-                        Type type1 = type;
-                        result.Mappings(s => s.FluentMappings.Add(type1));
-                    }
+
 
                     return result.BuildConfiguration();
                 });
