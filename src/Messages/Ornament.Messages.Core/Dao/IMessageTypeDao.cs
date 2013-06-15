@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Qi.Domain;
 
 namespace Ornament.Messages.Dao
@@ -22,5 +23,7 @@ namespace Ornament.Messages.Dao
         /// <param name="parent"></param>
         /// <returns></returns>
         IList<MessageType> GetList(MessageType parent);
+
+        IQueryable<MessageType> MessageTypes { get; }
     }
 }

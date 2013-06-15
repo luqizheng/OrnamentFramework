@@ -40,7 +40,6 @@ namespace Ornament.Messages
         protected Message()
         {
             CreateTime = DateTime.Now;
-            EffectTime = null;
             State = MessageState.Draft;
         }
 
@@ -78,15 +77,6 @@ namespace Ornament.Messages
         ///     发布人
         /// </summary>
         public virtual User Publisher { get; protected set; }
-
-        /// <summary>
-        ///     获取或设定信息发生时间
-        /// </summary>
-        public virtual DateTime? EffectTime { get; set; }
-
-        /// <summary>
-        /// </summary>
-        public virtual DateTime? PublishTime { get; set; }
 
         /// <summary>
         /// </summary>

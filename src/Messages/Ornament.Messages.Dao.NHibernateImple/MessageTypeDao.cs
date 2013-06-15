@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Qi.Domain.NHibernates;
 
 namespace Ornament.Messages.Dao.NHibernateImple
@@ -38,6 +40,8 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 .GetExecutableCriteria(this.CurrentSession)
                 .List<MessageType>();
         }
+
+        public IQueryable<MessageType> MessageTypes { get { return CurrentSession.Query<MessageType>(); } }
 
         #endregion
     }

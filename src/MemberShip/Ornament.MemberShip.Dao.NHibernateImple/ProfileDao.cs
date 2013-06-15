@@ -10,7 +10,7 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
-    public class ProfileDao : DaoBase<string, ProfileValue>, IUserProfileDao, IDisposable
+    public class ProfileDao : DaoBase<string, ProfileValue>, IUserProfileDao
     {
         private readonly ObjectInitialization _pools = new ObjectInitialization();
 
@@ -30,14 +30,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<ProfileValue>(s => s.IsAnonymous)); }
         }
 
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-        }
-
-        #endregion
-
+      
         #region IUserProfileDao Members
 
         public int Delete(string[] userName)

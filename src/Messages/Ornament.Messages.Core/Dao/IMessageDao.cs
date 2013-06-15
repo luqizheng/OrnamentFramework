@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ornament.MemberShip;
 using Qi.Domain;
 
@@ -31,7 +32,7 @@ namespace Ornament.Messages.Dao
         /// 
         /// </summary>
         /// <param name="search"></param>
-        
+
         /// <returns></returns>
         int CountReadStateMessage(PersonalSearcher search);
         /// <summary>
@@ -40,5 +41,7 @@ namespace Ornament.Messages.Dao
         /// <param name="search"></param>
         /// <returns></returns>
         IList<Message> ReadStateMessage(PersonalSearcher search);
+
+        IQueryable<Message> Messages { get; }
     }
 }

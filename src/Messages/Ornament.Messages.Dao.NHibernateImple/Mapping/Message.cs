@@ -11,9 +11,9 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             this.DynamicUpdate();
             Map(x => x.CreateTime);
             Map(x => x.Priority).Column("msgPriority");
-            Map(x => x.EffectTime);
+            
             Map(x => x.State);
-            Map(x => x.PublishTime);
+            
             References(x => x.Publisher).LazyLoad(Laziness.Proxy);
             References(x => x.Type).LazyLoad(Laziness.Proxy);
             HasMany(x => x.Contents)

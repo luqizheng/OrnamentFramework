@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Ornament.MemberShip;
 
 
@@ -19,6 +21,11 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             return CreateCriteria().Add(Restrictions.Eq("Message", message)).List<ReaderReadStatus>();
         }
+
+        public IQueryable<ReaderReadStatus> ReaderReadStatus { get
+        {
+            return CurrentSession.Query<ReaderReadStatus>();
+        } }
 
         #endregion
 

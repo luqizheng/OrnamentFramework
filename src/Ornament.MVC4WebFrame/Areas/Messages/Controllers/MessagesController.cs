@@ -46,7 +46,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                         content.Subject,
                         Content = content.Value,
                         msg.CreateTime,
-                        msg.PublishTime
+                      
                     });
             }
             return result;
