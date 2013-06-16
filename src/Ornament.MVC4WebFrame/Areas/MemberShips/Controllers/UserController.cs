@@ -36,7 +36,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         public ActionResult Index(Pagination pagination)
         {
             IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
-            pagination.SetTotalPage(_userDao.Count());
+            pagination.TotalNumber = _userDao.Count();
             ViewData["Nav"] = pagination;
             return View(result);
         }
@@ -153,7 +153,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 }
                 ModelState.AddModelError("BasicInfo.LoginId", errormessage);
             }
-            return Json(new {success = false});
+            return Json(new { success = false });
         }
 
 
@@ -221,7 +221,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
                                                    u.Email.Contains(loginIdOrEmail)
