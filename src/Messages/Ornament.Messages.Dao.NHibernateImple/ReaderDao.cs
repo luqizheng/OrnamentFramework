@@ -8,7 +8,7 @@ using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class MessageReadStateDao : DaoMultiId<Reader>, IMessageReadStateDao
+    public class ReaderDao : DaoMultiId<Reader>, IReaderDao
     {
 
         #region IInfoReadStateDao Members

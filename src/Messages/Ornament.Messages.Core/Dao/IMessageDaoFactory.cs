@@ -16,10 +16,10 @@ namespace Ornament.Messages.Dao
 
         INotifyMessageDao NotifyMessageDao { get; }
 
-        IMessageTypeDao MessageTypeDao { get; }
+        INewsTypeDao NewsTypeDao { get; }
 
         IPersonalMessageDao PersonalMessageDao { get; }
 
-        IMessageReadStateDao MessageReadStateDao { get; }
+        IReaderDao ReaderDao { get; }
     }
 }

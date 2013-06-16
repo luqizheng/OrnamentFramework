@@ -8,7 +8,7 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class MessageTypeDao : DaoBase<string, NewsType>, IMessageTypeDao
+    public class NewsTypeDao : DaoBase<string, NewsType>, INewsTypeDao
     {
         #region IInfoTypeDao Members
 

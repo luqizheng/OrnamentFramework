@@ -6,7 +6,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IMessageReadStateDao : IDao<object[], Reader>
+    public interface IReaderDao : IDao<object[], Reader>
     {
         Reader Get(User user, NotifyMessage notifyMessage);
 

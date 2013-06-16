@@ -5,7 +5,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IMessageTypeDao : IDao<string, NewsType>
+    public interface INewsTypeDao : IDao<string, NewsType>
     {
         /// <summary>
         /// 
