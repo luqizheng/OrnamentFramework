@@ -10,11 +10,11 @@ using Qi.Web.Mvc;
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
-    public class MessageTypeController : Controller
+    public class NewsTypeController : Controller
     {
         private readonly IMessageDaoFactory _messageDao;
 
-        public MessageTypeController(IMessageDaoFactory messageDao)
+        public NewsTypeController(IMessageDaoFactory messageDao)
         {
             _messageDao = messageDao;
         }
@@ -22,19 +22,19 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         public ActionResult Index(string parentId)
         {
             IList<NewsType>
-                msgType = _messageDao.MessageTypeDao.GetAll();
+                msgType = _messageDao.NewsTypeDao.GetAll();
 
             return View(msgType);
         }
 
         public ActionResult Edit(string id)
         {
-            var result = new MessageTypeModel(_messageDao.MessageTypeDao.Get(id));
+            var result = new NewsTypeModel(_messageDao.NewsTypeDao.Get(id));
             return View(result);
         }
 
         [HttpPost, Session(true, Transaction = true)]
-        public ActionResult Edit(MessageTypeModel type)
+        public ActionResult Edit(NewsTypeModel type)
         {
             if (ModelState.IsValid)
             {
@@ -44,21 +44,15 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             return View(type);
         }
 
-        public ActionResult Create(string parentId)
+        public ActionResult Create()
         {
-            var result = new MessageTypeModel();
-            if (parentId != null)
-            {
-                NewsType parent = _messageDao.MessageTypeDao.Get(parentId);
-                result.Parent = parent;
-            }
-            result.Name = "new message type";
+            var result = new NewsTypeModel { Name = "new message type" };
 
             return View(result);
         }
 
         [HttpPost, Session(true, Transaction = true)]
-        public ActionResult Create(MessageTypeModel type)
+        public ActionResult Create(NewsTypeModel type)
         {
             if (ModelState.IsValid)
             {
@@ -68,10 +62,12 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             return View(type);
         }
 
-        [HttpPost, ResourceAuthorize(MessageOperator.Delete, "Message")]
+        [HttpPost]
         public ActionResult Delete(string id)
         {
-            return Json("Delete success.");
+            var dao = _messageDao.NewsTypeDao;
+            dao.Delete(dao.Get(id));
+            return Json(new { success = true });
         }
     }
 }

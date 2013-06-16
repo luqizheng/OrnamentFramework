@@ -1,6 +1,6 @@
 ﻿@using Ornament.Web
 @using Resources
-@model IEnumerable<Ornament.Messages.Notification.NotifyMessage>
+@model IEnumerable<Ornament.Messages.Newses.News>
 
 @{
     ViewBag.Title = "Index";
@@ -41,7 +41,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Show().Subject)
                         </td>
-                        
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Type.Name)
+                        </th>
                         <th>
                             @Html.DisplayFor(modeItem => item.State)
                         </th>

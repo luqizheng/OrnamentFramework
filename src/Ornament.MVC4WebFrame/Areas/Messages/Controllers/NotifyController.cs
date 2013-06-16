@@ -9,6 +9,7 @@ using Ornament.Messages.Notification;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
+using log4net;
 
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
@@ -26,11 +27,12 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             _notifyMessageDao = daoFactory.NotifyMessageDao;
         }
 
-        public ActionResult Index(MessageSearcher searcher, Pagination pagination)
+        public ActionResult Index(Pagination pagination)
         {
             ViewData["nav"] = (pagination ?? (pagination = new Pagination()));
             int totalNumber;
-            IList<NotifyMessage> result = _notifyMessageDao.GetNewNotifyMessages(pagination.PageSize, pagination.CurrentPage,  out totalNumber);
+            IList<NotifyMessage> result = _notifyMessageDao.GetNewNotifyMessages(pagination.PageSize,
+                                                                                 pagination.CurrentPage, out totalNumber);
             pagination.SetTotalPage(totalNumber);
             return View(result);
         }
@@ -38,30 +40,30 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         public ActionResult Edit(string id)
         {
             NotifyMessage notifyMessage = _notifyMessageDao.Get(id);
-            ViewData["types"] = _daoFactory.MessageTypeDao.GetAll();
+            ViewData["types"] = _daoFactory.NewsTypeDao.GetAll();
             return View("Edit", notifyMessage);
         }
 
 
         public ActionResult Create()
         {
-            ViewData["types"] = _daoFactory.MessageTypeDao.GetAll();
+            ViewData["types"] = _daoFactory.NewsTypeDao.GetAll();
             return View("Edit");
         }
+
         [ResourceAuthorize(MessageOperator.Delete, "Message")]
         public ActionResult Delete(string id)
         {
             try
             {
                 _notifyMessageDao.Delete(_notifyMessageDao.Get(id));
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                return Json(new {success = true}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                log4net.LogManager.GetLogger(this.GetType()).Error(ex.Message, ex);
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                LogManager.GetLogger(GetType()).Error(ex.Message, ex);
+                return Json(new {success = false, message = ex.Message}, JsonRequestBehavior.AllowGet);
             }
-
         }
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
@@ -80,14 +82,13 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                         Subject = newSubjects[key]
                     });
             }
-           
-            var userDao = _memberShipFactory.CreateUserDao();
+
+            IUserDao userDao = _memberShipFactory.CreateUserDao();
             if (roles != null)
             {
-
-                foreach (var role in roles.Split(','))
+                foreach (string role in roles.Split(','))
                 {
-                    foreach (var a in userDao.GetUsersInRole(role))
+                    foreach (User a in userDao.GetUsersInRole(role))
                     {
                         notifyMessage.Readers.Add(new Reader(a, notifyMessage));
                     }
@@ -105,12 +106,10 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             {
                 foreach (Org org in _memberShipFactory.CreateOrgDao().GetOrgs(orgs.Split(',')))
                 {
-
-                    foreach (var a in userDao.GetUsers(org))
+                    foreach (User a in userDao.GetUsers(org))
                     {
                         notifyMessage.Readers.Add(new Reader(a, notifyMessage));
                     }
-
                 }
             }
 
@@ -118,7 +117,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             {
                 foreach (UserGroup ug in _memberShipFactory.CreateUserGroupDao().GetByIds(userGroups.Split(',')))
                 {
-                    foreach (var a in userDao.GetUsers(ug))
+                    foreach (User a in userDao.GetUsers(ug))
                     {
                         notifyMessage.Readers.Add(new Reader(a, notifyMessage));
                     }

@@ -8,11 +8,11 @@ using Ornament.Web;
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Authorize]
-    public class PersonalMessagesController : Controller
+    public class PersonalController : Controller
     {
         private readonly IMessageDaoFactory _messageDaoFactory;
 
-        public PersonalMessagesController(IMessageDaoFactory messageDaoFactory)
+        public PersonalController(IMessageDaoFactory messageDaoFactory)
         {
             _messageDaoFactory = messageDaoFactory;
         }
@@ -27,7 +27,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                 pagination = new Pagination(10, 0);
             }
 
-            var type = _messageDaoFactory.MessageTypeDao.Get(typeId);
+            var type = _messageDaoFactory.NewsTypeDao.Get(typeId);
 
 
             var result =
