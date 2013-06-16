@@ -1,7 +1,6 @@
 ﻿@using Ornament.Web
 @using Qi.Web.Mvc
 @using Ornament;
-@using OrnamentContext = Ornament.Web.OrnamentContext
 @model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionWizard
 @{
     Layout = "~/Views/Shared/_appLayout.cshtml";
@@ -18,7 +17,7 @@
                 @{
                     var i = -1;
                     bool foundSelected = false;
-                    foreach (var resourceType in OrnamentContext.ResourcesConfiguration.ResourceSettings)
+                    foreach (var resourceType in OrnamentContext.ResourceManager.Configuration().ResourceSettings)
                     {
                         foundSelected = resourceType.Name == this.Model.DescriptionResourceName;
                         i++;

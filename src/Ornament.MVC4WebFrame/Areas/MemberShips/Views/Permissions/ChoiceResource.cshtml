@@ -1,9 +1,10 @@
-﻿@using Ornament.Web
+﻿@using Ornament
+@using Ornament.Web
 @using Resources
 @model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionWizard
 @{
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    ResourceDescription resourceDescription = OrnamentContext.ResourcesConfiguration.Get(Model.DescriptionResourceName);
+    ResourceDescription resourceDescription = OrnamentContext.ResourceManager.Configuration().Get(Model.DescriptionResourceName);
 }
 @section pageTitle
 {

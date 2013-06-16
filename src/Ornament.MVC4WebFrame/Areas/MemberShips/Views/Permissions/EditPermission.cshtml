@@ -1,4 +1,5 @@
-﻿@using Ornament.MemberShip.Permissions
+﻿@using Ornament
+@using Ornament.MemberShip.Permissions
 @using Ornament.Web
 @using Resources
 @using Qi
@@ -8,7 +9,7 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
 
     Permission permission = Model.GetPermission();
-    Type type = Ornament.OrnamentContext.GetOperatorType(permission.Resource);
+    Type type = OrnamentContext.ResourceManager.GetOperatorType(permission.Resource);
     SortedDictionary<string, object> operatorKeyMaping = EnumHelper.GetDescriptionList(type);
 }
 <div class="box">
