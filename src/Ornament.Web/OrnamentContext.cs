@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Web;
 using Castle.MicroKernel.Registration;
@@ -38,12 +39,26 @@ namespace Ornament.Web
             return a.GetByLoginId(HttpContext.Current.User.Identity.Name);
         }
 
-        public static string GetLanguage(this MemberShipContext context)
+        public static string ProfileLanguage(this MemberShipContext context)
         {
             object a = HttpContext.Current.Profile["language"];
             if (a == null)
                 return CultureInfo.CurrentUICulture.EnglishName;
             return a.ToString();
         }
+
+        public static bool HasRight(this MemberShipContext context,Type resType,string id,Enum resOperator)
+        {
+            return context.HasRight(context.CurrentUser(), resType, id, resOperator);
+        }
+        public static bool HasRight(this MemberShipContext context, Type resType, object id, Enum resOperator)
+        {
+            return context.HasRight(context.CurrentUser(), resType, id, resOperator);
+        }
+        public static bool HasRight(this MemberShipContext context, object resource, Enum resOperator)
+        {
+            return context.HasRight(context.CurrentUser(), resource, resOperator);
+        }
+
     }
 }

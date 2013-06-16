@@ -21,5 +21,6 @@ namespace Ornament.Messages.Dao
         IPersonalMessageDao PersonalMessageDao { get; }
 
         IReaderDao ReaderDao { get; }
+        INewsDao NewsDao { get;  }
     }
 }

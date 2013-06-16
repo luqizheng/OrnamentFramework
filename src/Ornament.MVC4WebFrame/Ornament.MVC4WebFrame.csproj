@@ -241,12 +241,12 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
-    <Compile Include="Areas\Messages\Controllers\PersonalMessagesController.cs" />
+    <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
-    <Compile Include="Areas\Messages\Controllers\NotifyController.cs" />
-    <Compile Include="Areas\Messages\Controllers\MessageTypeController.cs" />
+    <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
@@ -286,10 +286,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\MessageType\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\MessageType\Edit.cshtml" />
-    <Content Include="Areas\Messages\Views\MessageType\_messageTypeEditor.cshtml" />
-    <Content Include="Areas\Messages\Views\MessageType\Create.cshtml" />
+    <Content Include="Areas\Messages\Views\NewsType\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\NewsType\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
+    <Content Include="Areas\Messages\Views\NewsType\Create.cshtml" />
     <Content Include="Areas\Messages\Views\Notify\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Notify\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Web.config" />
@@ -649,6 +649,8 @@
     <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
+    <Content Include="Areas\Messages\Views\News\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />

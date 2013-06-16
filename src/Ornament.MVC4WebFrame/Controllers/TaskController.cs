@@ -31,26 +31,26 @@ namespace Ornament.MVCWebFrame.Controllers
 
         public IEnumerable<object>  MyTask(Pagination pagination, string language)
         {
-            if (pagination == null)
-            {
-                pagination = new Pagination(10, 0);
-            }
-            int totalPage;
-            IList<NotifyMessage> result = _messageDaoFactory.NotifyMessageDao.GetNewNotifyMessages(pagination.CurrentPage,
-                                                                              pagination.PageSize,out totalPage);
+            //if (pagination == null)
+            //{
+            //    pagination = new Pagination(10, 0);
+            //}
+            //int totalPage;
+            //IList<NotifyMessage> result = _messageDaoFactory.NotifyMessageDao.GetNewNotifyMessages(pagination.CurrentPage,
+            //                                                                  pagination.PageSize,out totalPage);
 
-            var r = new List<object>();
-            foreach (var msg in result)
-            {
-                var content = msg.Show(language);
-                r.Add(new
-                    {
-                        Subject = content.Subject,
-                        Content = content.Value,
-                        CreateTime=msg.CreateTime
-                    });
-            }
-            return result;
+            //var r = new List<object>();
+            //foreach (var msg in result)
+            //{
+            //    var content = msg.Show(language);
+            //    r.Add(new
+            //        {
+            //            Subject = content.Subject,
+            //            Content = content.Value,
+            //            CreateTime=msg.CreateTime
+            //        });
+            //}
+            return null;
         }
     }
 }

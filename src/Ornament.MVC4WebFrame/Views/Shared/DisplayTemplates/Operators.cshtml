@@ -1,9 +1,10 @@
-﻿@using Ornament.MemberShip.Permissions
+﻿@using Ornament
+@using Ornament.MemberShip.Permissions
 @using Ornament.Web
 @using Qi
 @model Permission
 @{
-    Type enumType = OrnamentContext.GetOperatorType(this.Model.Resource);
+    Type enumType = OrnamentContext.ResourceManager.GetOperatorType(this.Model.Resource);
     SortedDictionary<string, object> directory = EnumHelper.GetDescriptionList(enumType);
     var list = new List<string>();
 }

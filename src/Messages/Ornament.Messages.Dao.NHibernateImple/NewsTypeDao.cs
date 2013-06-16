@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
@@ -11,8 +10,6 @@ namespace Ornament.Messages.Dao.NHibernateImple
     public class NewsTypeDao : DaoBase<string, NewsType>, INewsTypeDao
     {
         #region IInfoTypeDao Members
-
-       
 
         public NewsType GetByName(string name)
         {
@@ -26,19 +23,11 @@ namespace Ornament.Messages.Dao.NHibernateImple
                     .UniqueResult<NewsType>();
         }
 
-        public IList<NewsType> GetList(NewsType parent)
-        {
-            if (parent == null)
-                throw new ArgumentNullException("parent");
-            return CreateDetachedCriteria()
-                .GetExecutableCriteria(CurrentSession)
-                .List<NewsType>();
-        }
-
         public IQueryable<NewsType> MessageTypes
         {
             get { return CurrentSession.Query<NewsType>(); }
         }
+
 
         #endregion
     }

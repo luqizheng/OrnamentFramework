@@ -33,13 +33,12 @@ namespace Ornament.Web
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
             INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
-            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageReadStateDao;
+            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
             var m = new NotifyMessage(admin) { State = EditState.Published };
-            m.Contents.Add("zh-CN", new Content
+            m.Contents.Add("zh-CN", new Content("zh-CN")
                 {
                     Subject = "请修改初始化密码",
-                    Language = "zh-CN",
                     Value = "请修改初始化密码，如果已经修改过，请忽略这条信息"
                 });
 
@@ -53,7 +52,7 @@ namespace Ornament.Web
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
             INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
-            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageReadStateDao;
+            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
 
             for (int i = 0; i < 30; i++)
@@ -63,10 +62,9 @@ namespace Ornament.Web
                         State = EditState.Published
                     };
 
-                m.Contents.Add("zh-CN", new Content
+                m.Contents.Add("zh-CN", new Content("zh-CN")
                     {
                         Subject = "[Demo]请修改初始化密码",
-                        Language = "zh-CN",
                         Value =
                             "Demo 请修改初始化密码，如果已经修改过，请忽略这条信息.在直角三角形中，∠A（非直角）的对边与斜边的比叫做∠A的正弦，记作sinA，即sinA porta lacus fringilla vel.d"
                     });

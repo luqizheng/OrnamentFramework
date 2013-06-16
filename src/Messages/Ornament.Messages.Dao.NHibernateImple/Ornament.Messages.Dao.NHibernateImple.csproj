@@ -104,9 +104,10 @@
     <Compile Include="Mapping\PersonalMessageMapping.cs" />
     <Compile Include="MessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
+    <Compile Include="NewsDao.cs" />
     <Compile Include="NotifyMessageDao.cs" />
-    <Compile Include="MessageReadStateDao.cs" />
-    <Compile Include="MessageTypeDao.cs" />
+    <Compile Include="ReaderDao.cs" />
+    <Compile Include="NewsTypeDao.cs" />
     <Compile Include="PersonalMessageDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

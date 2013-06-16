@@ -15,6 +15,7 @@ namespace Ornament.Models
         }
         public string Name { get; set; }
         public string Key { get; set; }
+        public bool IsDefault { get; set; }
     }
 
     public class LanguageCollection:System.Collections.ObjectModel.KeyedCollection<string,Language>

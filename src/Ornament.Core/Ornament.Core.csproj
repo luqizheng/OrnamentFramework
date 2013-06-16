@@ -123,7 +123,7 @@
     <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserStateModel.cs" />
     <Compile Include="Models\Memberships\RegistAccount.cs" />
-    <Compile Include="Models\Messages\MessageTypeModel.cs" />
+    <Compile Include="Models\Messages\NewsTypeModel.cs" />
     <Compile Include="Models\Security\VerifyEmailAndChangePassword.cs" />
     <Compile Include="OrnamentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

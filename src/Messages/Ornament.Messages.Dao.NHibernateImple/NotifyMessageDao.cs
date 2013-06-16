@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
 using Ornament.MemberShip;
-using Ornament.Messages.Newses;
 using Ornament.Messages.Notification;
-using Qi;
 using Qi.Domain.NHibernates;
 
 namespace Ornament.Messages.Dao.NHibernateImple
@@ -15,11 +12,20 @@ namespace Ornament.Messages.Dao.NHibernateImple
     /// </summary>
     public class NotifyMessageDao : DaoBase<string, NotifyMessage>, INotifyMessageDao
     {
-        public IQueryable<NotifyMessage> Messages { get { return CurrentSession.Query<NotifyMessage>(); } }
-
-        public IList<NotifyMessage> GetNewNotifyMessages(int pageSize, int pageIndex, out int total)
+        public IQueryable<NotifyMessage> Messages
         {
-            throw new NotImplementedException();
+            get { return CurrentSession.Query<NotifyMessage>(); }
+        }
+
+        public IList<NotifyMessage> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total)
+        {
+            total = NewNotifyMsg(user);
+            return
+                BuildNewNotifyMsg(user)
+                    .SetMaxResults(pageSize)
+                    .SetFirstResult(pageSize*pageIndex)
+                    .GetExecutableCriteria(CurrentSession)
+                    .List<NotifyMessage>();
         }
 
         public int NewNotifyMsg(User user)
@@ -27,9 +33,11 @@ namespace Ornament.Messages.Dao.NHibernateImple
             return 0;
         }
 
-        public IList<NotifyMessage> ReadStateMessage(PersonalSearcher search)
+        private DetachedCriteria BuildNewNotifyMsg(User user)
         {
-            throw new NotImplementedException();
+            DetachedCriteria cri = CreateDetachedCriteria();
+
+            return cri;
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Ornament.Messages.Dao.NHibernateImple
     public class MessageDaoFactory : IMessageDaoFactory
     {
         public IQueryable<NotifyMessage> Messages { get { return NotifyMessageDao.Messages; } }
-        public IQueryable<Reader> ReadStates { get { return MessageReadStateDao.ReaderReadStatus; } }
-        public IQueryable<NewsType> MessageTypes { get { return MessageTypeDao.MessageTypes; } }
+        public IQueryable<Reader> ReadStates { get { return ReaderDao.ReaderReadStatus; } }
+        public IQueryable<NewsType> MessageTypes { get { return NewsTypeDao.MessageTypes; } }
         public INotifyMessageDao NotifyMessageDao
         {
             get
@@ -20,15 +20,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 return new NotifyMessageDao();
             }
         }
-        public IMessageTypeDao MessageTypeDao
+        public INewsTypeDao NewsTypeDao
         {
             get
             {
-                return new MessageTypeDao();
+                return new NewsTypeDao();
             }
         }
 
         public IPersonalMessageDao PersonalMessageDao { get { return new PersonalMessageDao(); } }
-        public IMessageReadStateDao MessageReadStateDao { get { return new MessageReadStateDao(); } }
+        public IReaderDao ReaderDao { get { return new ReaderDao(); } }
+        public INewsDao NewsDao { get { return new NewsDao(); } }
     }
 }

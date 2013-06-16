@@ -22,7 +22,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                     {
                         x.Map(a => a.Value);
                         x.Map(a => a.Subject);
-                        x.Map(a => a.Language, "language2");
+                        //x.Map(a => a.Language, "language2");
                     }
                 );
             //HasMany(x => x.Readers).KeyColumn("notifyMessageId");

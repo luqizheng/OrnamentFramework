@@ -17,7 +17,7 @@ namespace Ornament.Contexts
         {
             get
             {
-                IMessageTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageTypeDao;
+                INewsTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao;
                 if (PersonalMessageId == null)
                 {
                     NewsType personal = dao.GetByName(PersonalMesssage) ?? new NewsType(PersonalMesssage);
@@ -36,7 +36,7 @@ namespace Ornament.Contexts
         {
             get
             {
-                IMessageTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageTypeDao;
+                INewsTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao;
                 if (NotificationId == null)
                 {
                     NewsType notifi = dao.GetByName(Notification) ??
@@ -57,7 +57,7 @@ namespace Ornament.Contexts
         {
             get
             {
-                IMessageTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageTypeDao;
+                INewsTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao;
                 if (TaskId == null)
                 {
                     NewsType taskNewsType = dao.GetByName(TaskMessage) ??

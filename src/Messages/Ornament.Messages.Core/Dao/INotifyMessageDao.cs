@@ -12,7 +12,7 @@ namespace Ornament.Messages.Dao
         IQueryable<NotifyMessage> Messages { get; }
 
         
-        IList<NotifyMessage> GetNewNotifyMessages(int pageSize, int pageIndex, out int total);
+        IList<NotifyMessage> GetNewNotifyMessages(User User,int pageSize, int pageIndex, out int total);
         
         /// <summary>
         /// </summary>
@@ -20,10 +20,6 @@ namespace Ornament.Messages.Dao
         /// <returns></returns>
         int NewNotifyMsg(User user);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="search"></param>
-        /// <returns></returns>
-        IList<NotifyMessage> ReadStateMessage(PersonalSearcher search);
+       
     }
 }

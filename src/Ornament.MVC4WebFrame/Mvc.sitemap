@@ -32,7 +32,7 @@ use permission for checking permission like @user:Read, user is the string type 
 
 
 
-    <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-group">
+    <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-group" clickable="false">
       <mvcSiteMapNode  area="MemberShips" action="Index" controller="User" resourceKey="userList" permission="User:Read">
         <mvcSiteMapNode area="MemberShips" action="Create" controller="User" resourceKey="userCreate" permission="User:Modify"></mvcSiteMapNode>
         <mvcSiteMapNode area="MemberShips" action="Edit" controller="User" resourceKey="userEdit" permission="User:Modify"></mvcSiteMapNode>
@@ -55,16 +55,16 @@ use permission for checking permission like @user:Read, user is the string type 
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="Messages" controller="MessageType" area="Messages" action="Index" imageUrl="icon-comments">
-      <mvcSiteMapNode controller="MessageType" area="Messages" action="Index" title="Message Type">
-        <mvcSiteMapNode controller="MessageType" area="Messages" action="Edit" title="Edit"/>
-        <mvcSiteMapNode controller="MessageType" area="Messages" action="Create" title="Create"/>
+    <mvcSiteMapNode title="News" controller="News" area="Messages" action="Index" imageUrl="icon-comments">
+      <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
+        <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
 
-      <mvcSiteMapNode controller="Message" area="Messages" action="Index" title="Messages" >
-        <mvcSiteMapNode controller="Message" area="Messages" action="Edit" title="Edit">
+      <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" >
+        <mvcSiteMapNode controller="News" area="Messages" action="Edit" title="Edit">
         </mvcSiteMapNode>
-        <mvcSiteMapNode controller="Message" area="Messages" action="Create" title="Create">
+        <mvcSiteMapNode controller="News" area="Messages" action="Create" title="Create">
         </mvcSiteMapNode>
       </mvcSiteMapNode>
     </mvcSiteMapNode>

@@ -8,9 +8,9 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Register(OrnamentConfiguration context)
         {
-            context.Languages.Add(new Language("en", "English"));
-            context.Languages.Add(new Language("zh", "中文繁體"));
-            context.Languages.Add(new Language("zh-CN", "中文简体"));
+            context.Languages.Add(new Language("English", "en") { IsDefault = true });
+            context.Languages.Add(new Language("中文繁體", "zh"));
+            context.Languages.Add(new Language("中文简体", "zh-CN"));
 
         }
     }

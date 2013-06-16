@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using Ornament.Models;
 
 namespace Ornament.Contexts
@@ -22,9 +23,33 @@ namespace Ornament.Contexts
         }
 
 
+
         public LanguageCollection Languages
         {
             get { return _languages; }
+        }
+
+        private Language _language;
+        public Language DefaultLanguage
+        {
+            get
+            {
+                if (_language != null)
+                    return _language;
+                if (_languages.Count == 0)
+                    throw new OrnamentException("Please set the language");
+                _language = Languages[0];
+                foreach (var lang in _languages)
+                {
+                    if (lang.IsDefault)
+                    {
+                        _language = lang;
+                        break;
+                    }
+
+                }
+                return _language;
+            }
         }
     }
 }
