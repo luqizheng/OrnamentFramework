@@ -1,8 +1,6 @@
-﻿(function () {
-
-   /* for user ajax search */
-
-    $.roles = {
+﻿define(function (require) {
+    /* for user ajax search */
+    return {
         select2: function (selector, initFunc) {
             $(selector).select2({
                 minimumInputLength: 1,
@@ -25,12 +23,13 @@
                         return { results: r, more: more };
                     }
                 },
-                initSelection: function (ele,callback) {
-                    callback(initFunc());
+                initSelection: function (ele, callback) {
+                    if (initFunc) {
+                        callback(initFunc());
+                    }
                 }
             });
         }
     };
-    return $;
-})($)
+});
 

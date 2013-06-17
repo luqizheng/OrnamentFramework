@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
@@ -19,22 +17,25 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match(string nameOrEmailOrLoginId, int? pageIndex)
+        public IEnumerable<object> Match(string name,
+            string email, string loginId,string phone, int? pageIndex, int? pageSize)
         {
-            var page = pageIndex ?? 0;
-            var result = _factory.CreateUserDao().QuickSearch(nameOrEmailOrLoginId, nameOrEmailOrLoginId, nameOrEmailOrLoginId, 0, 10);
+            if (pageIndex == null)
+                pageIndex = 0;
+            if (pageSize == 0)
+                pageSize = 10;
+            IList<User> result = _factory.CreateUserDao()
+                .QuickSearch(name, loginId, email, phone, pageSize.Value, pageIndex.Value);
 
             var c = from user in result
-
                     select new
                         {
                             id = user.Id,
-                            Name = user.Name,
-                            Email = user.Email,
-                            LoginId = user.LoginId
+                            user.Name,
+                            user.Email,
+                            user.LoginId
                         };
             return c;
-
         }
     }
 }

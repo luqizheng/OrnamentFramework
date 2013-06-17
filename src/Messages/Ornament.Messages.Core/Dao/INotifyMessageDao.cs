@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Ornament.MemberShip;
-using Ornament.Messages.Newses;
 using Ornament.Messages.Notification;
 using Qi.Domain;
 
@@ -9,17 +8,23 @@ namespace Ornament.Messages.Dao
 {
     public interface INotifyMessageDao : IDao<string, NotifyMessage>
     {
-        IQueryable<NotifyMessage> Messages { get; }
-
-        
-        IList<NotifyMessage> GetNewNotifyMessages(User User,int pageSize, int pageIndex, out int total);
-        
         /// <summary>
         /// </summary>
-        /// <param name="search"></param>
+        IQueryable<NotifyMessage> Messages { get; }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        IList<NotifyMessage> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="user"></param>
         /// <returns></returns>
         int NewNotifyMsg(User user);
-
-       
     }
 }

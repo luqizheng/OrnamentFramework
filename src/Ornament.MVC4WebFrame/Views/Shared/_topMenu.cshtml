@@ -41,6 +41,17 @@
     </a></li>
     } 
 }
+<style type="text/css">
+    .mlang{}
+    .mlang a{
+        height: 16px;
+        padding: 12px 14px;
+        width: 18px;
+    }
+    .mlang #uld:after {
+        left: 20%;
+    }
+</style>
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     var unReadCout = OrnamentContext.DaoFactory.MessageDaoFactory.PersonalMessageDao.CountNewMessage(OrnamentContext.MemberShip.CurrentUser());
@@ -53,6 +64,15 @@
                 <i class="new-message"></i>
             }
         </a></li>
+        <li class="dropdown mlang">
+            <a data-toggle="dropdown"><i class="icon-flag" style="color: white"></i></a>
+            <ul class="dropdown-menu" id="uld">
+                @foreach (var lang in OrnamentContext.Configuration.Languages)
+                {
+                    <li><a href="@Url.Action("SwitchLanguage","Home",new{id=lang.Key})">@lang.Name</a></li>
+                }
+            </ul>
+        </li>
         <li class="dropdown">
             <a class="user-menu" data-toggle="dropdown">
                 <img src="/Content/templates/pannonia/img/userpic.png" alt="" /><span style="min-width: 90px">@OrnamentContext.MemberShip.CurrentUser().Name<b class="caret"></b></span></a>

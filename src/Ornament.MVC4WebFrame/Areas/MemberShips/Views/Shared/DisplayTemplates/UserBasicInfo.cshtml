@@ -27,8 +27,8 @@
 <div class="control-group">
     @Html.LabelFor(model => model.Roles, new { @class = "control-label" })
     <div class="controls">
-        <select name="BasicInfo.Roles" multiple="multiple" tabindex="6" id="userRoles">
-            @foreach (var a in roles)
+        <input type="hidden" name="BasicInfo.Roles" tabindex="6" id="userRoles">
+            @*foreach (var a in roles)
             {
                 if (selectedRoles.ContainsKey(a.Id))
                 {
@@ -38,8 +38,8 @@
                 {
                 <option value="@a.Id">@a.Name</option>
                 }
-            }
-        </select>
+            }*@
+        </input>
         @Html.ValidationMessageFor(model => model.Roles)
     </div>
 </div>
@@ -47,8 +47,8 @@
 <div class="control-group">
     @Html.LabelFor(model => model.UserGroups, new { @class = "control-label" })
     <div class="controls">
-        <select name="BasicInfo.UserGroups" multiple="multiple" tabindex="6" id="userGroups">
-            @foreach (var a in ugs)
+        <input name="BasicInfo.UserGroups" tabindex="6" id="userGroups" type="hidden" />
+            @*foreach (var a in ugs)
             {
                 if (selectUgs.ContainsKey(a.Id))
                 {
@@ -58,15 +58,17 @@
                 {
                 <option value="@a.Id">@a.Name</option>
                 }
-            }
-        </select>
+            }*@
+        
         @Html.ValidationMessageFor(model => model.UserGroups)
     </div>
 </div>
 
 
 <script type="text/javascript">
-    seajs.use(["select2"], function () {
-        $("#userGroups,#userRoles").select2();
+    seajs.use(["/models/role", "/models/usergroup","select2"], function (role, ug) {
+        role.select2("#userRoles");
+        ug.select2("#userGroups");
+
     });
 </script>

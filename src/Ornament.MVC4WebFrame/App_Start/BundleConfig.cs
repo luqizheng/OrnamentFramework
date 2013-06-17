@@ -64,11 +64,11 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void BizRelative(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
+            bundles.Add(new Bundle("~/models/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
+            bundles.Add(new Bundle("~/models/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
+            bundles.Add(new Bundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
+            bundles.Add(new Bundle("~/models/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
+            bundles.Add(new Bundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
         }
 
 

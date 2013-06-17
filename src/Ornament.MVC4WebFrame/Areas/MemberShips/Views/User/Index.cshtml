@@ -4,7 +4,7 @@
 @using Ornament.MemberShip
 @using Ornament.Models.Memberships
 @using Ornament.Web
-@using Ornament.Web.HtmlExtends;
+@using Ornament.Web.HtmlExtends
 @using Resources
 @model IList<Ornament.MemberShip.User>
 @{
@@ -16,7 +16,7 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', 'user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
+        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
 
             $(".actionCheckbox").uniform().change(function () {
                 $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
@@ -36,12 +36,14 @@
             });
 
             $("#createUserModel").on("hidden", function () {
-                $(this).userEditor('reset');
-            }).userEditor();
+                $("input", $(this)).val("");
+                $(this).bootstrapMakeUp("clear");
+            });
 
             updateTable = function (user) {
                 if (user.success) {
-                    $("#userTableTmpl").tmpl(user).prepend($("#userListBody"));
+                    var $tar = $("#userTableTmpl").tmpl(user.user).prependTo($("#userListBody"));
+                    $("input", $tar).uniform();
                     $('#createUserModel').modal('hide');
                     return;
                 }
@@ -113,23 +115,13 @@
         <input type="text" id="searchContent" placeholder="" class="ui-autocomplete-input" autocomplete="off">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" value="@Basic.Search" class="btn btn-info">
-        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="searchTextBox" tabindex="0" style="z-index: 1; display: none;"></ul>
+        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="searchTextBox" tabindex="0" style="display: none; z-index: 1;"></ul>
     </div>
 </form>
 
 
 <ul class="options-bar">
-    @* @if (OrnamentContext.Current.HasRight("User", UserOperator.Modify))
-    {
-        <li style="width: 80px">
-            <div class="bulk">
-                <div class="bar-button">
-                    <a id="create" href="#createUserModel" title="" data-toggle="modal" class="btn"><span>@Basic.Create</span>
-                    </a>
-                </div>
-            </div>
-        </li>
-    }*@
+
     <li>
 
         <form>
@@ -150,7 +142,6 @@
                         }
                         @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Delete))
                         {
-
                             <option value="delete">
                                 @Basic.Delete
                             </option>
@@ -168,98 +159,98 @@
 </ul>
 
 
-<form method="POST" id="tableForm">
 
-    <table class="table table-condensed table-striped table-bordered table-checks">
-        <thead>
-            <tr>
-                <th></th>
-                <th class="span1"></th>
-                <th class="span1">
-                    @Html.LabelFor(item => ((User)null).LoginId)
-                </th>
 
-                <th style="width: 100px">
-                    @Html.LabelFor(item => ((User)null).Name)
-                </th>
-                <th>
-                    @Html.LabelFor(item => ((User)null).Email)
-                </th>
-                <th>
-                    @Html.LabelFor(item => ((User)null).IsLockout)
-                </th>
-                <th>
-                    @Html.LabelFor(item => ((User)null).IsApproved)
-                </th>
-                <th>
-                    @Html.LabelFor(item => ((User)null).LastActivityDate)
-                </th>
-            </tr>
-        </thead>
-        <tbody id="userListBody">
+<table class="table table-condensed table-striped table-bordered table-checks">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="span1"></th>
+            <th class="span1">
+                @Html.LabelFor(item => ((User)null).LoginId)
+            </th>
 
-            @foreach (User user in Model)
+            <th style="width: 100px">
+                @Html.LabelFor(item => ((User)null).Name)
+            </th>
+            <th>
+                @Html.LabelFor(item => ((User)null).Email)
+            </th>
+            <th>
+                @Html.LabelFor(item => ((User)null).IsLockout)
+            </th>
+            <th>
+                @Html.LabelFor(item => ((User)null).IsApproved)
+            </th>
+            <th>
+                @Html.LabelFor(item => ((User)null).LastActivityDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody id="userListBody">
+
+        @foreach (User user in Model)
+        {
+            string clz = "";
+            if (user.IsApproved == false)
             {
-                string clz = "";
-                if (user.IsApproved == false)
-                {
-                    clz = "class=info";
-                }
-                if (user.IsLockout)
-                {
-                    clz = "class=Warning";
-                }
-                <tr @clz>
-                    <td>
-                        <input type="checkbox" name="loginIds" value="@user.LoginId" class="actionCheckbox"/>
-                    </td>
-                    @if (editPermission)
-                    {
-                        <td>
-                            <ul class="table-controls">
-                                <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
-                                    <i class="fam-user-edit"></i></a></li>
-                                <li>
-                                    <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
-                                        <i class="fam-group-gear"></i></a>
-                                </li>
-                            </ul>
-                        </td>
-                    }
-                    <td>
-                        @user.LoginId
-                    </td>
-                    <td>
-                        @user.Name
-                    </td>
-                    <td>
-                        @user.Email
-                    </td>
-                    <td style="text-align: center">
-                        <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
-                        </div>
-                    </td>
-                    <td>
-                        @user.LastActivityDate
-                    </td>
-                </tr>
+                clz = "class=info";
             }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="8">
-                    <form id="navbar">
-                        @Html.Partial("NavPagination", ViewData["Nav"])
-                    </form>
+            if (user.IsLockout)
+            {
+                clz = "class=Warning";
+            }
+            <tr @clz>
+                <td>
+                    <input type="checkbox" name="loginIds" value="@user.LoginId" class="actionCheckbox"/>
+                </td>
+                @if (editPermission)
+                {
+                    <td>
+                        <ul class="table-controls">
+                            <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
+                                <i class="fam-user-edit"></i></a></li>
+                            <li>
+                                <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                    <i class="fam-group-gear"></i></a>
+                            </li>
+                        </ul>
+                    </td>
+                }
+                <td>
+                    @user.LoginId
+                </td>
+                <td>
+                    @user.Name
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td style="text-align: center">
+                    <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
+                    </div>
+                </td>
+                <td style="text-align: center">
+                    <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
+                    </div>
+                </td>
+                <td>
+                    @user.LastActivityDate
                 </td>
             </tr>
-        </tfoot>
-    </table>
-</form>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8">
+                <form id="navbar">
+                    @Html.Partial("NavPagination", ViewData["Nav"])
+                </form>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
 <p>
     @Html.AlertMessage(Html.GetResourceString("UserNotFound"), false, new { id = "alertMsg" })
 </p>
@@ -275,7 +266,7 @@
         <td>
             @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Lock) || OrnamentContext.MemberShip.HasRight("User", UserOperator.Delete) || OrnamentContext.MemberShip.HasRight("User", UserOperator.Approve))
             {
-                <input type="checkbox" name="loginIds" value="${BasicInfo.LoginId}}" class="actionCheckbox" />
+                <input type="checkbox" name="loginIds" value="${BasicInfo.LoginId}" class="actionCheckbox" />
             }
         </td>
         @if (editPermission)
@@ -298,16 +289,16 @@
         <td>${BasicInfo.Email}
         </td>
         <td style="text-align: center">{{if(State.IsLockout)}}
-                <div class="icon-ok"></div>
+            <div class="icon-ok"></div>
             {{else}}
-                <div class="icon-remove"></div>
+            <div class="icon-remove"></div>
             {{/if}}
 
         </td>
         <td style="text-align: center">{{if(State.IsApproved)}}
-                <div class="icon-ok"></div>
+            <div class="icon-ok"></div>
             {{else}}
-                <div class="icon-remove"></div>
+            <div class="icon-remove"></div>
             {{/if}}
         </td>
         <td>${GetDate(OtherInfo.LastActivityDate)}
@@ -344,4 +335,3 @@
         <a href="#" class="btn btn-primary" id="btnCreateUser">@Basic.Save</a>
     </div>
 </div>
-

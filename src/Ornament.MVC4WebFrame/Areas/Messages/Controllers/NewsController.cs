@@ -26,19 +26,30 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         {
             if (pagination == null)
                 pagination = new Pagination(40, 0);
-            NewsType type = _factory.NewsTypeDao.GetAll().First();
-            int total;
-            IList<News> news = _factory.NewsDao.GetNews(pagination.CurrentPage, pagination.PageSize, type, out total);
-            pagination.TotalNumber = total;
+            NewsType type = _factory.NewsTypeDao.GetAll().FirstOrDefault();
+            IList<News> news;
+            if (type != null)
+            {
+                int total;
+                news = _factory.NewsDao.GetNews(pagination.CurrentPage, pagination.PageSize, type, out total);
+                pagination.TotalNumber = total;
+            }
+            else
+            {
+                news = new List<News>();
+            }
+
+
             ViewData["nav"] = pagination;
             ViewData["newsType"] = type;
             ViewData["types"] = _factory.NewsTypeDao.GetAll();
             return View(news);
         }
+
         [Session]
         public ActionResult Delete(string id)
         {
-            var dao = _factory.NewsDao;
+            INewsDao dao = _factory.NewsDao;
             dao.Delete(dao.Get(id));
             return Json(new {success = true});
         }
@@ -75,7 +86,6 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             }
             if (ModelState.IsValid)
             {
-
                 foreach (string key in NewContents.Keys)
                 {
                     if (string.IsNullOrEmpty(NewSubjects[key]) && string.IsNullOrEmpty(NewContents[key]))

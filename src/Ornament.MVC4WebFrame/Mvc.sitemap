@@ -55,7 +55,7 @@ use permission for checking permission like @user:Read, user is the string type 
       <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="News" controller="News" area="Messages" action="Index" imageUrl="icon-comments">
+    <mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" clickable="false">
       <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>

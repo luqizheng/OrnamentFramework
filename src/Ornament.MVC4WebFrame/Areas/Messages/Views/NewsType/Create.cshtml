@@ -4,7 +4,6 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var parentId = this.Model.Parent != null ? this.Model.Parent.Id : "";
 }
 
 @section pageTitle
@@ -18,7 +17,7 @@
             
             <div class="form-actions">
                 <input type="submit" class="btn btn-info"  value="@Resources.Basic.Submit"/>
-                  <a href="@Url.Action("Index", new { parentId = parentId })" class="btn">@Resources.Basic.Cancel</a>
+                  <a href="@Url.Action("Index")" class="btn">@Resources.Basic.Cancel</a>
             </div>
         </form>
     </div>

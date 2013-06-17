@@ -15,5 +15,7 @@ namespace Ornament.Messages.Dao
         /// <param name="name"></param>
         /// <returns></returns>
         NewsType GetByName(string name);
+
+        System.Collections.Generic.IDictionary<NewsType, int> GetStatmemnt();
     }
 }

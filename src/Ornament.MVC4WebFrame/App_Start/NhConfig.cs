@@ -27,7 +27,7 @@ namespace Ornament.MVCWebFrame.App_Start
             SessionManager.Regist("default", () =>
                 {
                     var config = new Configuration();
-                    config.Configure(HostingEnvironment.MapPath("~/config/hibernate.cfg.config"));
+                    config.Configure(HostingEnvironment.MapPath("~/config/hibernate_mysql.cfg.config"));
                     FluentConfiguration result = Fluently.Configure(config);
 
 // ReSharper disable ForCanBeConvertedToForeach
