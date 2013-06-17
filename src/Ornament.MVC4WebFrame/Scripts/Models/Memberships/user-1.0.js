@@ -1,24 +1,6 @@
-﻿(function () {
-
-    /* for editor */
-    $.fn.userEditor = function (cmd) {
-        if (typeof cmd == "string") {
-            inner[cmd].call(this);
-        }
-        return this;
-    };
-
-    var inner = {
-        reset: function () {
-            $("input", $(this)).val("");
-            $(this).bootstrapMakeUp("clear");
-        }
-    };
-
-    /* for user ajax search */
-
-    $.users = {
-        select2: function (selector,initFunc) {
+﻿define(function () {
+    return {
+        select2: function (selector, initFunc) {
             $(selector).select2({
                 minimumInputLength: 1,
                 multiple: true,
@@ -26,7 +8,10 @@
                     url: "/api/Users/Match",
                     data: function (term, page) { // page is the one-based page number tracked by Select2
                         return {
-                            nameOrEmailOrLoginId: term + "%",
+                            name: term + "%",
+                            email: term + "%",
+                            loginId: term + "%",
+                            pageSize: 10,
                             pageIndex: (page - 1), // page number
                         };
                     },
@@ -40,12 +25,16 @@
                         return { results: r, more: more };
                     }
                 },
-                initSelection:function(ele,callback) {
+                initSelection: function (ele, callback) {
                     callback(initFunc());
                 }
             });
-        }
+        },
+        quickSearch: function (search, func) {
+            var a = $.extend({}, { pageSize: 30, pageIndex: 0 }, search);
+            $.post("/api/Users/Match", a, func);
+        },
     };
-    return $;
-})($)
+});
+
 
