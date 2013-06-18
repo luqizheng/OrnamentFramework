@@ -33,7 +33,7 @@
       <many-to-one name="Org" column="OrgId" foreign-key="FK_MBS_ORG"></many-to-one>
 
       <!--<component class="Ornament.MemberShip.User+UserInformation,Ornament.MemberShip.Core" name="Information" access="nosetter.camelcase-underscore" >-->
-      <property  name="Email" length="30" type="String" unique="true" access="nosetter.camelcase-underscore" ></property>
+      <property name="Email" length="64" type="String" access="nosetter.camelcase-underscore" ></property>
       <property name="Phone" type="String" length="20"  access="nosetter.camelcase-underscore"></property>
       <!--<one-to-one name="User" class="User"></one-to-one>-->
       <!--</component>-->

@@ -71,17 +71,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\WebCfg.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Config\Message.config" />
     <Content Include="Config\initData.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Config\hibernate.cfg.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Config\DaoFactory.config" />
     <None Include="App.config" />
     <None Include="log4net.config" />
     <None Include="packages.config" />

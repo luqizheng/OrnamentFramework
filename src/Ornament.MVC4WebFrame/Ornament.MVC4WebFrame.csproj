@@ -263,7 +263,6 @@
     </Compile>
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\MessageInit.cs" />
-    <Compile Include="Models\Editor.cs" />
     <Compile Include="Models\Membership\AccountOperator.cs" />
     <Compile Include="Models\Membership\OrgOperator.cs" />
     <Compile Include="Models\Membership\RoleOperator.cs" />
