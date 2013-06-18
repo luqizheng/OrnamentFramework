@@ -18,9 +18,9 @@
     </div>
 </div>*@
 
-@Html.EditorFor(model => model.LoginId, "String")
-@Html.EditorFor(model => model.Email, "String")
-
+@Html.EditorFor(model => model.LoginId)
+@Html.EditorFor(model => model.Email)
+@Html.EditorFor(model => model.IsApprove)
+@Html.EditorFor(model => model.IsLock)
 @Html.EditorFor(model => model.Roles)
-
 @Html.EditorFor(model => model.UserGroups)

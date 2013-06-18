@@ -276,12 +276,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Areas\MemberShips\Views\Shared\RolesSelector.ascx" />
-    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserBasicInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserOptionInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserPassword.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserQuestionAnswer.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserBasicInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOptionInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
     <Content Include="Areas\Settings\Views\EmailSetting\Email.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\DisplayTemplates\UserOtherInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
@@ -675,6 +675,7 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\Models\Util\select2Helper-1.0.js" />
     <Content Include="Scripts\Models\Messages\chat-1.0.js" />
     <Content Include="Scripts\Models\Memberships\role-1.0.js" />
     <Content Include="Scripts\Models\Memberships\org-1.0.js" />
@@ -925,11 +926,8 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Shared\EditorTemplates\PerformerSelector.cshtml" />
     <Content Include="Views\Shared\_swfupload.cshtml" />
     <Content Include="Views\Shared\_editor.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\tinymce_jquery_full.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
@@ -954,11 +952,19 @@
     <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\HttpErrors\501.cshtml" />
     <Content Include="Views\PersonalMessage\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RichText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RoleMultiSelect.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UsergroupMultiSelect.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmumRadio.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Bool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Application\Models\" />
-    <Folder Include="Areas\MemberShips\Views\Shared\EditTemplates\" />
+    <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
@@ -1167,6 +1173,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Security\App_LocalResources\VerifyEmailAndChangePassword.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Index.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Index.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Index.zh.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

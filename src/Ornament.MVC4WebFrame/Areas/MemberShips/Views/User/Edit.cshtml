@@ -29,7 +29,7 @@
 
         <div class="tab-content">
             <div id="editUser" class="tab-pane active">
-                @Html.PartialFor(s => s.BasicInfo, "DisplayTemplates/UserBasicInfo")
+                @Html.EditorFor(s => s.BasicInfo)
             </div>
             <div id="Profile" class="tab-pane">
                 @{
@@ -50,17 +50,9 @@
                 }
             </div>
             <div id="permissions" class="tab-pane">
-                @*foreach (var per in Model.Permissions)
-            {
-            
-                <div class="control-group">
-                    <label title="@per.Remark" class="control-label">@per.Name
-                    </label>
-                </div>
-            }*@
             </div>
             <div id="anotherInfo" class="tab-pane">
-                @Html.PartialFor(s => s.OtherInfo, "DisplayTemplates/UserOtherInfo")
+                @Html.EditorFor(s => s.OtherInfo)
             </div>
         </div>
 

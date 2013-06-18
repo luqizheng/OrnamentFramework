@@ -69,6 +69,11 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new Bundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
             bundles.Add(new Bundle("~/models/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
             bundles.Add(new Bundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
+
+            //Util
+
+            bundles.Add(new Bundle("~/models/util/select2Helper.js")
+                .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
         }
 
 

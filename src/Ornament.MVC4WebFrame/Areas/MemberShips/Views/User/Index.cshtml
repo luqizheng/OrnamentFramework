@@ -83,7 +83,7 @@
                 @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Modify))
                 {
                     <li>
-                        <div class="depth"><a href="#createUserModel" data-toggle="modal" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
+                        <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
                     </li>
                 }
                 <li>
@@ -104,8 +104,40 @@
 
             </ul>
         </div>
+        <div id="quick-actions">
+            @{
+                var userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+                var totalUser = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Count();
+            }
+            <ul class="statistics">
+                <li>
+                    <div class="top-info">
+                        <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
+                        <strong>@OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Count()</strong>
+                    </div>
+                    <div class="progress progress-micro">
+                        <div class="bar" style="width: 60%;"></div>
+                    </div>
+                    <span>User registrations today</span>
+                </li>
+
+
+                <li>
+                    <div class="top-info">
+                        <a href="#" title="" class="sea-square"><i class="icon-group"></i></a>
+                        <strong>@totalUser</strong>
+                    </div>
+                    <div class="progress progress-micro">
+                        <div class="bar" style="width: 50%;"></div>
+                    </div>
+                    <span>Total users</span>
+                </li>
+
+            </ul>
+        </div>
         <ul class="action-tabs">
             <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
+            <li><a href="#quick-actions" title="">Website statistics</a></li>
         </ul>
     </div>
 </div>
@@ -319,19 +351,3 @@
             autocomplete = "off",
         };
 }
-<div id="createUserModel" class="modal hide fade" style="width: 600px">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>@Basic.Create@(MemberShip.User)</h3>
-    </div>
-    <div class="modal-body">
-        @using (Ajax.BeginForm("Create", "User", null, ajaxOptions, formStyle))
-        {
-            @Html.Partial("Create", new CreateUserModel())
-        }
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">@Basic.Cancel</a>
-        <a href="#" class="btn btn-primary" id="btnCreateUser">@Basic.Save</a>
-    </div>
-</div>

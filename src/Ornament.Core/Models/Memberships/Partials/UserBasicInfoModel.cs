@@ -30,6 +30,7 @@ namespace Ornament.Models.Memberships.Partials
         [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(MemberShipModel))]
         [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof(ErrorMessage))]
+        [UIHint("String")]
         public string LoginId { get; set; }
 
         /// <summary>
@@ -41,8 +42,10 @@ namespace Ornament.Models.Memberships.Partials
             ErrorMessageResourceName = "EmailNotRightFormat",
             ErrorMessageResourceType = typeof(ErrorMessage))]
         [DataType(DataType.EmailAddress)]
+        [UIHint("String")]
         public string Email { get; set; }
 
+        [UIHint("RoleMultiSelect")]
         [Display(Name = "Role", ResourceType = typeof(MembershipCommon))]
         public Role[] Roles
         {
@@ -50,30 +53,40 @@ namespace Ornament.Models.Memberships.Partials
             set { _roles = value; }
         }
 
+        [UIHint("UsergroupMultiSelect")]
         [Display(Name = "UserGroup", ResourceType = typeof(MembershipCommon))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }
             set { _userGroups = value; }
         }
+        
+        [UIHint("bool")]
+        public bool IsApprove { get; set; }
+        [UIHint("bool")]
+        public bool IsLock { get; set; }
 
-       
         public void UpdateOn(User user)
         {
-            if (user == null) 
+            if (user == null)
                 throw new ArgumentNullException("user");
-            user.Email = this.Email;
+            user.Email = Email;
             user.ClearRole();
-            foreach (var role in Roles)
+            user.IsApproved = this.IsApprove;
+            user.IsLockout = this.IsLock;
+            foreach (Role role in Roles)
             {
+                if (role == null)
+                    continue;
                 user.AddRole(role);
             }
             user.ClearUserGroup();
-            foreach (var ug in UserGroups)
+            foreach (UserGroup ug in UserGroups)
             {
+                if(ug==null)
+                    continue;
                 user.AddToUserGroup(ug);
             }
-
         }
     }
 }

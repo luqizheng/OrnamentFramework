@@ -1,4 +1,5 @@
-﻿using Ornament.MemberShip;
+﻿using System.ComponentModel.DataAnnotations;
+using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Models.Memberships.Partials;
 
@@ -9,7 +10,7 @@ namespace Ornament.Models.Memberships
         public EditUserModel()
         {
             BasicInfo = new UserBasicInfoModel();
-            State = new UserStateModel();
+
             OptionInfo = new UserOptionInformation();
             OtherInfo = new UserOtherInfoModel();
         }
@@ -18,18 +19,20 @@ namespace Ornament.Models.Memberships
         {
             Id = user.Id;
             BasicInfo = new UserBasicInfoModel(user);
-            State = new UserStateModel(user);
+
             OptionInfo = new UserOptionInformation(user);
             OtherInfo = new UserOtherInfoModel(user);
         }
 
         public string Id { get; set; }
 
-
+        [UIHint("UserBasicInfo")]
         public UserBasicInfoModel BasicInfo { get; set; }
-        public UserStateModel State { get; set; }
+
+        [UIHint("UserOptionInfo")]
         public UserOptionInformation OptionInfo { get; set; }
 
+        [UIHint("UserOtherInfo")]
         public UserOtherInfoModel OtherInfo { get; set; }
 
         public User Save(IMemberShipFactory memberShipFactory)
@@ -37,8 +40,8 @@ namespace Ornament.Models.Memberships
             User user = memberShipFactory.CreateUserDao().Get(Id);
             BasicInfo.UpdateOn(user);
             OptionInfo.UpdateOn(user);
-            State.UpdateOn(user);
-            
+
+
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             return user;
         }

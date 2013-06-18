@@ -1,0 +1,27 @@
+﻿@using System.Web.UI.WebControls
+@using Ornament.MemberShip
+@using Qi.Web
+@model Ornament.MemberShip.UserGroup[]
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var ugs = this.Model ?? new UserGroup[0];
+    var selected = from a in ugs
+                   select new
+                   {
+                       id = a.Id,
+                       text = a.Name
+                   };
+}
+<div class="control-group">
+    @Html.Label("", display,new { @class = "control-label" })
+    <div class="controls">
+       @Html.Hidden("", String.Join(",", from role in ugs select role.Id))        
+    </div>
+
+    <script type="text/javascript">
+        seajs.use("/models/userGroup", function(r) {
+            var d = @Html.Raw(JsonHelper.ToJson(selected));
+            r.select2("#@Html.Id("")", d);
+        });
+    </script>
+</div>

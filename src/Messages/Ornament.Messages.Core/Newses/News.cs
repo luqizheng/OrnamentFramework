@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using Ornament.MemberShip;
@@ -14,6 +15,7 @@ namespace Ornament.Messages.Newses
         public News()
         {
             CreateTime = DateTime.Now;
+        
         }
 
         public virtual NewsType Type { get; set; }
@@ -25,8 +27,9 @@ namespace Ornament.Messages.Newses
 
         /// <summary>
         /// </summary>
+        [UIHint("Date")]
         public virtual DateTime CreateTime { get; protected set; }
-
+        
         /// <summary>
         ///     发布人
         /// </summary>

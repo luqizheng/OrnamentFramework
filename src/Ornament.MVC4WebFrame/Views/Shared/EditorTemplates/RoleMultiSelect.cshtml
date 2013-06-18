@@ -1,0 +1,28 @@
+﻿@using System.Web.UI.WebControls
+@using Ornament.MemberShip
+@using Qi.Web
+@model Ornament.MemberShip.Role[]
+@{
+
+    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var roles = this.Model ?? (new Role[0]);
+    var selected = from role in roles
+                   select new
+                       {
+                           id = role.Id,
+                           text = role.Name
+                       };
+}
+<div class="control-group">
+    @Html.Label("", display, new { @class = "control-label" })
+    <div class="controls">
+        @Html.Hidden("", String.Join(",", from role in roles select role.Id))        
+    </div>
+</div>
+
+<script type="text/javascript">
+    seajs.use("/models/role", function(r) {
+        var d = @Html.Raw(JsonHelper.ToJson(selected));
+        r.select2("#@Html.Id("")",d);
+    });
+</script>

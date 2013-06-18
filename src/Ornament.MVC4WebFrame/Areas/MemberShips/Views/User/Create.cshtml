@@ -3,20 +3,38 @@
 @using Ornament.Web.HtmlExtends
 @using Resources
 @model Ornament.Models.Memberships.CreateUserModel
+@{
+    Layout = "~/views/shared/_applayout.cshtml";
+}
+@section pageTitle
+{
+    <h5>Create a new User</h5>
+}
+<div class="widget">
+    <form method="POST" class="form-horizontal">
+        <div class="well">
+            @Html.ValidationSummary(true)
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
+                <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_option")</a></li>
+            </ul>
+          
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab3">
+                    @Html.EditorFor(s => s.BasicInfo)
+                </div>
+                <div class="tab-pane" id="tab4">
+                    @Html.EditorFor(s => s.OptionInfo)
+                </div>
+            </div>
+            <div class="form-actions">
+                <input type="submit" value="@Basic.Create" class="btn btn-info"/>
+                <a href="@Url.Action("Index", "User", new { area = "" })" class="btn">@Basic.Cancel</a>
+            </div>
 
-@Html.ValidationSummary(true)
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
-    <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_option")</a></li>
-</ul>
-@Html.HiddenFor(s => s.State.IsApproved)
-<div class="tab-content">
-    <div class="tab-pane active" id="tab3">
-        @Html.PartialFor(s => s.BasicInfo, "DisplayTemplates/UserBasicInfo")
-    </div>
-    <div class="tab-pane" id="tab4">
-        @Html.PartialFor(s => s.OptionInfo, "DisplayTemplates/UserOptionInfo")
-    </div>
+        </div>
+    </form>
+
 </div>
 
 

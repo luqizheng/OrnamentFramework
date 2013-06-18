@@ -34,8 +34,6 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IList<User> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize);
 
-        int Count(string loginId, string email, string phone, bool islockout, bool isApproved);
-
         IList<User> Search(string loginId, string email, string phone, bool? islockout, bool? isApproved, int? startRow,
                            int? pageSize);
 

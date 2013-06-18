@@ -1,0 +1,19 @@
+﻿@model DateTime
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var inputName = "";
+    var inputId = "";
+}
+<div class="control-group">
+    @Html.Label(inputName, display, new { @class = "control-label" })
+    <div class="controls">
+        <div data-date-format="yyyy-mm-dd" data-date="@this.Model.ToString("yyyy-MM-dd")" class="date input-append">
+            @Html.TextBox("", this.Model.ToString("yyyy-MM-dd"), new Dictionary<string, object>()
+                {
+                    {"inputmask-format","y-s-d"}
+                })
+            <span class="add-on"><i class="icon-calendar"></i></span>
+        </div>
+    </div>
+</div>
+

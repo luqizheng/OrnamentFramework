@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using System.Threading;
 using Ornament.MemberShip;
@@ -19,12 +20,16 @@ namespace Ornament.Models.Memberships
         public CreateUserModel()
         {
             BasicInfo = new UserBasicInfoModel();
-            State = new UserStateModel();
+        
             OptionInfo = new UserOptionInformation();
         }
 
+        [UIHint("UserBasicInfo")]
         public UserBasicInfoModel BasicInfo { get; set; }
-        public UserStateModel State { get; set; }
+
+    
+
+        [UIHint("UserOptionInfo")]
         public UserOptionInformation OptionInfo { get; set; }
 
         /// <summary>
@@ -56,7 +61,7 @@ namespace Ornament.Models.Memberships
             UserSecretToken userSecretToken = UserSecretToken.VerifyEmail(createUser, 180);
             dao.CreateUserSecortTokeDao().SaveOrUpdate(userSecretToken);
 
-            SendEmail(userSecretToken, createUser);
+            //SendEmail(userSecretToken, createUser);
 
             return true;
         }
@@ -69,11 +74,15 @@ namespace Ornament.Models.Memberships
                     {
                         var manager = new EmailTemplateManager();
                         IDictionary<string, string> variable =
-                            manager.GetValues(userSecretToken, OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + CreateVerifyUser);
+                            manager.GetValues(userSecretToken,
+                                              OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl +
+                                              CreateVerifyUser);
                         variable.Add("Password", Password);
                         EmailTemplate email = manager.GetCreateUser();
-                        MailMessage mailMessage = email.CreateEmail(OrnamentContext.Configuration.ApplicationSetting.SupportEmail, createUser.Email,
-                                                                    variable);
+                        MailMessage mailMessage =
+                            email.CreateEmail(OrnamentContext.Configuration.ApplicationSetting.SupportEmail,
+                                              createUser.Email,
+                                              variable);
                         using (var ss = new SmtpClient())
                         {
                             ss.Send(mailMessage);

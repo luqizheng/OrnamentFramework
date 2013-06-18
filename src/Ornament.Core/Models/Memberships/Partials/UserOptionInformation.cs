@@ -17,14 +17,17 @@ namespace Ornament.Models.Memberships.Partials
             Remark = user.Remark;
         }
 
+        [UIHint("String")]
         [Display(Name = "Phone", ResourceType = typeof (MembershipCommon))]
         public string Phone { get; set; }
 
+        [UIHint("String")]
         [Display(Name = "Name", ResourceType = typeof (MembershipCommon)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Name { get; set; }
 
+        [UIHint("Textarea")]
         [Display(Name = "Remark", ResourceType = typeof (MembershipCommon)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage))]

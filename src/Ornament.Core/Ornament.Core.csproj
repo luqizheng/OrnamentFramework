@@ -121,7 +121,6 @@
     <Compile Include="Models\Memberships\Partials\UserBasicInfoModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserOptionInformation.cs" />
     <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
-    <Compile Include="Models\Memberships\Partials\UserStateModel.cs" />
     <Compile Include="Models\Memberships\RegistAccount.cs" />
     <Compile Include="Models\Messages\NewsTypeModel.cs" />
     <Compile Include="Models\Security\VerifyEmailAndChangePassword.cs" />

@@ -144,16 +144,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 string errormessage;
                 if (createUser.Create(_memberShipFactory, out errormessage))
                 {
-                    User user = _memberShipFactory.CreateUserDao().GetByLoginId(createUser.BasicInfo.LoginId);
-                    return Json(new
-                        {
-                            success = true,
-                            user = new EditUserModel(user)
-                        });
+                    return RedirectToAction("Index");
                 }
                 ModelState.AddModelError("BasicInfo.LoginId", errormessage);
             }
-            return Json(new { success = false });
+            return View(createUser);
         }
 
 
@@ -221,7 +216,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
                                                    u.Email.Contains(loginIdOrEmail)
