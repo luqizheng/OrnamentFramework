@@ -163,20 +163,6 @@ namespace Ornament.MemberShip
                  ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string LoginId { get; set; }
 
-
-        ///// <summary>
-        ///// Gets Information.
-        ///// </summary>
-        ///// <value>
-        ///// The information.
-        ///// </value>
-        //public virtual UserInformation Information
-        //{
-        //    get { return _information ?? (_information = new UserInformation(this)); }
-        //}
-
-        private string TimeZoneId { get; set; }
-
         /// <summary>
         ///     Gets PasswordQuestion.
         /// </summary>
@@ -238,28 +224,7 @@ namespace Ornament.MemberShip
             }
         }
 
-        /// <summary>
-        ///     Gets or sets the TimeZone
-        /// </summary>
-        public virtual TimeZoneInfo TimeZone
-        {
-            get
-            {
-                if (_timeZone != null)
-                    return _timeZone;
-                if (String.IsNullOrEmpty(TimeZoneId))
-                {
-                    TimeZoneId = TimeZoneInfo.Local.Id;
-                }
-                _timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
-                return _timeZone;
-            }
-            set
-            {
-                TimeZoneId = value.Id;
-                _timeZone = value;
-            }
-        }
+     
 
         #region Member
 

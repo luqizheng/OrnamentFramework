@@ -17,7 +17,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     CodeStyle,
                     RichEditor,
                     SeajsLib,
-                    BizRelative,
+                    BizRelative,Utility
                 };
 
             foreach (var item in registryParty)

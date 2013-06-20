@@ -223,7 +223,6 @@
     <Compile Include="App_Start\NhConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Application\ApplicationAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
     <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
@@ -246,7 +245,6 @@
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
-    <Compile Include="Areas\Settings\Controllers\ApplicationController.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
@@ -968,7 +966,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Application\Models\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="Areas\Messages\Views\Shared\" />
@@ -1134,7 +1131,6 @@
     <Content Include="Views\Shared\NavPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Application\Views\Web.config" />
     <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />

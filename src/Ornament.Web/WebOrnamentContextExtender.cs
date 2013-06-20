@@ -6,7 +6,7 @@ using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.Web.Languages;
+using Ornament.Web.HttpModel;
 
 namespace Ornament.Web
 {
@@ -58,25 +58,16 @@ namespace Ornament.Web
         /// <returns></returns>
         private static int OffSetHour(this MemberShipContext context)
         {
-            int? clientSetting = LanguageManager.GetOffSetHour();
-
+            int? clientSetting = OrnamentModule.GetOffSetHour();
             if (clientSetting == null)
-            {
-                TimeZoneInfo timeZone = CurrentUser(context) != null
-                                            ? CurrentUser(context).TimeZone
-                                            : TimeZoneInfo.Local;
-                DateTime serverTime = DateTime.Now;
-                clientSetting = timeZone.GetUtcOffset(serverTime).Hours -
-                                TimeZoneInfo.Local.GetUtcOffset(serverTime).Hours;
-                LanguageManager.SetClientOffsetHour(clientSetting.Value);
-            }
+                return 0;
             return clientSetting.Value;
         }
 
         public static int CorrectClientUtcTime(this MemberShipContext context, int clientUtcOfficeHour)
         {
             DateTime serverTime = DateTime.Now;
-            return clientUtcOfficeHour-Convert.ToInt32(TimeZoneInfo.Local.GetUtcOffset(serverTime).Hours));
+            return clientUtcOfficeHour - Convert.ToInt32(TimeZoneInfo.Local.GetUtcOffset(serverTime).Hours);
         }
 
         /// <summary>

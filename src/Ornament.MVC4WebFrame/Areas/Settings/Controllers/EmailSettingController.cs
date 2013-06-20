@@ -37,11 +37,11 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
             {
                 var t = new EmailTemplateManager();
                 t.SaveCreateUser(template);
-                return Json("成功");
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {
-                return Json(ex.Message);
+                return Json(new { scuccess = false, message = ex.Message });
             }
         }
     }

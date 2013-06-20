@@ -20,7 +20,7 @@ namespace Ornament.Messages
         /// <summary>
         /// </summary>
         public virtual string Language { get; set; }
-
+      
         public virtual string Value { get; set; }
 
         public override int GetHashCode()

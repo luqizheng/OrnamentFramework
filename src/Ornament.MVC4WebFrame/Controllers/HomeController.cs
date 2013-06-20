@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Profile;
-using Ornament.Web.Languages;
+using Ornament.Web.HttpModel;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
@@ -26,7 +26,7 @@ namespace Ornament.MVCWebFrame.Controllers
             ProfileBase profile = HttpContext.Profile;
             profile["Language"] = id;
             profile.Save();
-            LanguageManager.SiwtchTo(id);
+            OrnamentModule.SiwtchTo(id);
             if (Request.UrlReferrer != null)
                 return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Index");

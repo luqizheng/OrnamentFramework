@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using System.Web.Optimization
+@using Ornament.Web
 @using Resources
 
 @{
@@ -30,5 +31,6 @@
     @RenderBody()
     <div id="footer"></div>
     @RenderSection("script", false)
+    @Html.CorrectTimeZone(false)
 </body>
 </html>

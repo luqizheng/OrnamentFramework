@@ -148,7 +148,7 @@
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
-    <Compile Include="Languages\LanguageManager.cs" />
+    <Compile Include="HttpModel\OrnamentModule.cs" />
     <Compile Include="MemberShips\MenuPermission.cs" />
     <Compile Include="MemberShips\OrnamentProfile.cs" />
     <Compile Include="MemberShips\SiteMapException.cs" />
@@ -157,8 +157,6 @@
     <Compile Include="Models\IDataInitializer.cs" />
     <Compile Include="Models\InitData.cs" />
     <Compile Include="MvcSiteMapHelper.cs" />
-    <Compile Include="Optimization\DotLessBundle\ImportedFilePathResolver.cs" />
-    <Compile Include="Optimization\DotLessBundle\LessMinify.cs" />
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="OrnamentWebApiFactory.cs" />
     <Compile Include="Pagination.cs" />
@@ -176,6 +174,7 @@
     <Compile Include="ResourceDescription.cs" />
     <Compile Include="ReturnResult.cs" />
     <Compile Include="SiteMapResolveUrl.cs" />
+    <Compile Include="TimeZoneHtmlExtender.cs" />
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>

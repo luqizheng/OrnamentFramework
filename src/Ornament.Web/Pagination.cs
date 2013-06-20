@@ -36,14 +36,17 @@ namespace Ornament.Web
                 return _totalPage;
             }
         }
+
         public int ShowsNumberStart
         {
             get { return PageSize*CurrentPage; }
         }
+
         public int ShowNumberEnd
         {
             get { return ShowsNumberStart + PageSize; }
         }
+
         /// <summary>
         ///     Gets or sets
         /// </summary>
@@ -56,6 +59,5 @@ namespace Ornament.Web
         /// <summary>
         /// </summary>
         public int TotalNumber { get; set; }
-
     }
 }

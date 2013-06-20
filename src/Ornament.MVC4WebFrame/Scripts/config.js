@@ -66,6 +66,10 @@
             src: "/bundles/datePicker.js",
             deps: ["bootstrap"], exports: "jQuery"
         },
+        util: {
+            src: "/Scripts/Utils.js",
+            deps:["jquery"]
+        },
         periodDailog: { exports: "jQuery " },
         preload: ["jquery"]
     }

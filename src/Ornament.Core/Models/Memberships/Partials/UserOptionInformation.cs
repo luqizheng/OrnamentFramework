@@ -16,7 +16,7 @@ namespace Ornament.Models.Memberships.Partials
             Phone = user.Phone;
             Name = user.Name;
             Remark = user.Remark;
-            this.TimeZone = user.TimeZone.Id;
+         
         }
 
         [UIHint("String")]
@@ -43,7 +43,7 @@ namespace Ornament.Models.Memberships.Partials
             user.Remark = Remark;
             user.Name = Name;
             user.Phone = Phone;
-            user.TimeZone = TimeZoneInfo.FindSystemTimeZoneById(this.TimeZone);
+           
         }
     }
 }

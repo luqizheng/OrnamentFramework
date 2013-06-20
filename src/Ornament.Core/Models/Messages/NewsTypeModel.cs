@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
@@ -20,7 +21,9 @@ namespace Ornament.Models.Messages
         }
 
         public string Id { get; set; }
+        [UIHint("string")]
         public string Name { get; set; }
+        [UIHint("Textarea")]
         public string Remark { get; set; }
 
         public void Save(IMessageDaoFactory dao)

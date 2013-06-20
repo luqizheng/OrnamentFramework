@@ -69,7 +69,7 @@ use permission for checking permission like @user:Read, user is the string type 
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" controller="EventLog" area="Application">
+    <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false">
       <mvcSiteMapNode resourceKey="eventLog"></mvcSiteMapNode>
       <mvcSiteMapNode resourceKey="Emails" controller="EmailSetting" area="Settings" action="Index">
         <mvcSiteMapNode resourceKey="createUser" controller="EmailSetting" area="Settings" action="CreateUser"></mvcSiteMapNode>

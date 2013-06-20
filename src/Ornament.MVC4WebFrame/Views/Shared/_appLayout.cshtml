@@ -1,8 +1,12 @@
 ﻿@using System.Web.Optimization
+@using Ornament
+@using Ornament.Web
+@using Ornament.Web.HttpModel
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     @Html.CorrectTimeZone(true);
     <title>@ViewBag.Title</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link href="@Url.Content("~/content/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
@@ -36,7 +40,6 @@
                 </div>
 
                 <div id="stuff">
-
                 </div>
 
             </div>
@@ -61,5 +64,6 @@
     <div id="footer"></div>
 
     @RenderSection("script", false)
+
 </body>
 </html>
