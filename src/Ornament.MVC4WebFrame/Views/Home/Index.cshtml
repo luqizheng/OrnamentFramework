@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using Ornament
 @using Ornament.Web
 @using Qi.Web.Mvc
 @using QiProject.Defects
@@ -10,10 +11,8 @@
     <h5>@Html.GetResourceString("Home")</h5>
     <span>@Html.GetResourceString("Home_subtitle")</span>
 }
-@section head{
-}
-@section script{}
 
+@OrnamentContext.MemberShip.ToClientDateTime(DateTime.Now);
 <div class="actions-wrapper">
     <div class="actions">
 

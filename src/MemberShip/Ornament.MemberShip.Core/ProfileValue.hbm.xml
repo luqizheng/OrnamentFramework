@@ -8,8 +8,7 @@
     <property name="LoginId"></property>
     <property name="LastActivityDate"></property>
 
-    <property name="Properities" type="Qi.NHibernateExtender.Types.KeyValueCollectionType,Qi.NHibernateExtender"
-              access="nosetter.camelcase-underscore">
+    <property name="StreamValues">
 
     </property>
   </class>

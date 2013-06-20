@@ -76,6 +76,12 @@ namespace Ornament.MVCWebFrame.App_Start
                 .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
         }
 
+        private static void Utility(BundleCollection bundles)
+        {
+              //Code style registry
+            bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
+                            .Include("~/Scripts/Util/*.js"));
+        }
 
         private static void CodeStyle(BundleCollection bundles)
         {

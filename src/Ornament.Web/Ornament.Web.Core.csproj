@@ -172,11 +172,11 @@
     <Compile Include="MemberShips\MemberShipProvider.cs" />
     <Compile Include="MemberShips\ResourceAuthorizeAttribute.cs" />
     <Compile Include="MemberShips\RoleProvider.cs" />
-    <Compile Include="OrnamentContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceDescription.cs" />
     <Compile Include="ReturnResult.cs" />
     <Compile Include="SiteMapResolveUrl.cs" />
+    <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">

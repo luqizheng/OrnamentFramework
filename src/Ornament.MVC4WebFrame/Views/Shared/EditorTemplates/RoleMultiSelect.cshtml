@@ -16,7 +16,14 @@
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        @Html.Hidden("", String.Join(",", from role in roles select role.Id))        
+        @if (this.Model != null)
+        {
+            @Html.Hidden("", String.Join(",", from role in this.Model select role.Id))
+        }
+        else
+        {
+            @Html.Hidden("")
+        }
     </div>
 </div>
 

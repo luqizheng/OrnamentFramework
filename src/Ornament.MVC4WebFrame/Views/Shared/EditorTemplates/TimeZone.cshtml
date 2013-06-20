@@ -1,20 +1,27 @@
 ﻿@using System.Net.Mime
-@model TimeZoneInfo
+@model string
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var inputName = string.Empty;// ViewData.TemplateInfo.HtmlFieldPrefix;    
+    var zoneId = this.Model ?? TimeZoneInfo.Local.Id;
     var timeZones = from a in TimeZoneInfo.GetSystemTimeZones()
                     select new SelectListItem()
                         {
                             Text = a.ToString(),
                             Value = a.Id,
-                            Selected = this.Model != null && this.Model.Id == a.Id
+                            Selected = zoneId == a.Id
                         };
 }
 <div class="control-group">
-    @Html.Label(inputName, display, new { @class = "control-label" })
+    
+    @Html.Label(inputName, display, new { @class = "control-label"})
     <div class="controls">
-        @Html.DropDownList("", timeZones, new { @class = "styled" })
+        @Html.DropDownList("", timeZones)
         @Html.ValidationMessage(inputName)
     </div>
 </div>
+<script type="text/javascript">
+    seajs.use(["select2"], function() {
+        $("#@ViewData.TemplateInfo.HtmlFieldPrefix.Replace(".","_")").select2({width:"350px"});
+    });
+</script>

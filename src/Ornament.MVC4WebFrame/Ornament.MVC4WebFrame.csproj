@@ -33,6 +33,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -250,6 +252,7 @@
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpErrorsController.cs" />
@@ -650,6 +653,7 @@
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Areas\Messages\Views\News\Index.cshtml" />
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -763,6 +767,7 @@
     <Content Include="Scripts\selectivizr-min.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Scripts\jquery.toDictionary.js" />
+    <Content Include="Scripts\util\DateTime.js" />
     <Content Include="Scripts\util\Permission.js" />
     <Content Include="Scripts\util\String.js" />
     <Content Include="Scripts\_appLayout.js" />
@@ -959,6 +964,7 @@
     <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmumRadio.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Bool.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1196,7 +1202,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>14501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -2,7 +2,7 @@
 
 
     $(".styled").uniform({ radioClass: 'choice' });
-
+    
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
 

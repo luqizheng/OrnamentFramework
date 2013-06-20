@@ -120,6 +120,9 @@
   <data name="tab_anotherInfo" xml:space="preserve">
     <value>其他信息</value>
   </data>
+  <data name="tab_options" xml:space="preserve">
+    <value>可選項</value>
+  </data>
   <data name="tab_permission" xml:space="preserve">
     <value>許可證</value>
   </data>

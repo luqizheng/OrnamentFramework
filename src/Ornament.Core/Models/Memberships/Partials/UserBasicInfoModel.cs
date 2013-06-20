@@ -22,6 +22,8 @@ namespace Ornament.Models.Memberships.Partials
             Email = user.Email;
             UserGroups = user.GetUserGroups().ToArray();
             Roles = user.GetRoles().ToArray();
+            this.IsApprove = user.IsApproved;
+            this.IsLock = user.IsLockout;
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace Ornament.Models.Memberships.Partials
             get { return _userGroups ?? new UserGroup[0]; }
             set { _userGroups = value; }
         }
-        
+
         [UIHint("bool")]
         public bool IsApprove { get; set; }
         [UIHint("bool")]
@@ -83,7 +85,7 @@ namespace Ornament.Models.Memberships.Partials
             user.ClearUserGroup();
             foreach (UserGroup ug in UserGroups)
             {
-                if(ug==null)
+                if (ug == null)
                     continue;
                 user.AddToUserGroup(ug);
             }

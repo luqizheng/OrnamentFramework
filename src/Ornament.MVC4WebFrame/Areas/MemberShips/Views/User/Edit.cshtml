@@ -22,6 +22,7 @@
 
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#editUser">@Html.GetResourceString("tab_userInfo")</a></li>
+            <li><a data-toggle="tab" href="#Options">@Html.GetResourceString("tab_options")</a></li>
             <li><a data-toggle="tab" href="#Profile">@Html.GetResourceString("tab_profile")</a></li>
             <li><a data-toggle="tab" href="#permissions">@Html.GetResourceString("tab_permission")</a></li>
             <li><a data-toggle="tab" href="#anotherInfo">@Html.GetResourceString("tab_anotherInfo")</a></li>
@@ -30,6 +31,9 @@
         <div class="tab-content">
             <div id="editUser" class="tab-pane active">
                 @Html.EditorFor(s => s.BasicInfo)
+            </div>
+            <div id="Options" class="tab-pane">
+                @Html.EditorFor(s => s.OptionInfo)
             </div>
             <div id="Profile" class="tab-pane">
                 @{

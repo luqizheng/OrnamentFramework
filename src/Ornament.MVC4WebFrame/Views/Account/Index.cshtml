@@ -1,4 +1,5 @@
-﻿@using Ornament.MVCWebFrame.Models
+﻿@using Ornament
+@using Ornament.MVCWebFrame.Models
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip.Dao
 @using Ornament.MemberShip.Permissions
@@ -11,7 +12,7 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
     IList<Permission> permissions =
                OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().GetPermissionByLoginId
-                  (OrnamentContext.Current.CurrentUser().LoginId);
+                  (OrnamentContext.MemberShip.CurrentUser().LoginId);
     var isFirst = true;
 
     var menus = new[]
@@ -23,7 +24,7 @@
                                 text = Html.GetResourceString("Menu_BasicInfo"),
                                 skipChecked = true,
                                 Operator = AccountOperator.None,
-                                Model=(object)OrnamentContext.Current.CurrentUser()
+                                Model=(object)OrnamentContext.MemberShip.CurrentUser()
                             },
                                new
                             {
@@ -41,7 +42,7 @@
                                 text = Html.GetResourceString("Menu_PersonalInfo"),
                                 skipChecked = true,
                                 Operator = AccountOperator.None,
-                                Model=(object)OrnamentContext.Current.CurrentUser()
+                                Model=(object)OrnamentContext.MemberShip.CurrentUser()
                             },
                      
                         new
@@ -64,7 +65,7 @@
 <ul class="nav nav-tabs">
     @foreach (var item in menus)
     {
-        if (item.skipChecked || OrnamentContext.Current.HasRight(ResourceSetting.Account, item.Operator))
+        if (item.skipChecked || OrnamentContext.MemberShip.HasRight(ResourceSetting.Account, item.Operator))
         {
             if (isFirst)
             {
@@ -84,7 +85,7 @@
     }
     @foreach (var item in menus)
     {
-        if (item.skipChecked || OrnamentContext.Current.HasRight(ResourceSetting.Account, item.Operator))
+        if (item.skipChecked || OrnamentContext.MemberShip.HasRight(ResourceSetting.Account, item.Operator))
         {
             if (isFirst)
             {

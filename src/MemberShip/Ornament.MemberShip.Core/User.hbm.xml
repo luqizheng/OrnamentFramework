@@ -13,6 +13,7 @@
       <property name="Password" access="nosetter.camelcase-underscore" length="40" type="String"></property>
       <property name="PasswordAnswer" length="100" type="String"  access="nosetter.camelcase-underscore" ></property>
       <property name="PasswordQuestion" length="100" type="String"  access="nosetter.camelcase-underscore"></property>
+      <property name="TimeZoneId" length="32" type="String"></property>
 
       <set name="Roles" table="MBS_UserRoleRelation" access="nosetter.camelcase-underscore">
         <key column="UserId" foreign-key="FK_UserID_UserRoleRelation"/>

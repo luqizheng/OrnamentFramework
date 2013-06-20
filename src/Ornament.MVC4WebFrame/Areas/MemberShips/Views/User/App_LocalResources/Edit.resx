@@ -120,6 +120,9 @@
   <data name="tab_anotherInfo" xml:space="preserve">
     <value>More Info</value>
   </data>
+  <data name="tab_options" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="tab_permission" xml:space="preserve">
     <value>Permission</value>
   </data>
