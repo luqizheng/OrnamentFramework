@@ -43,11 +43,11 @@ use permission for checking permission like @user:Read, user is the string type 
         <mvcSiteMapNode area="MemberShips" controller="Role" action="Create" resourceKey="roleEdit" permission="Role:Modify"></mvcSiteMapNode>
         <mvcSiteMapNode area="MemberShips" controller="Role" action="Delete" resourceKey="roleDelete" permission="Role:Delete"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Index" resourceKey="groupList" permission="UserGroup:Read">
-        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Edit" resourceKey="groupEdit" permission="UserGroup:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="Create" resourceKey="groupCreate" permission="UserGroup:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="AssignUser" resourceKey="groupAssignUser" permission="UserGroup:Assign"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="UserGroups" action="AssignRole" resourceKey="groupAssignRole" permission="UserGroup:Assign"></mvcSiteMapNode>
+      <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="Index" resourceKey="groupList" permission="UserGroup:Read">
+        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="Edit" resourceKey="groupEdit" permission="UserGroup:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="Create" resourceKey="groupCreate" permission="UserGroup:Modify"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="AssignUser" resourceKey="groupAssignUser" permission="UserGroup:Assign"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="AssignRole" resourceKey="groupAssignRole" permission="UserGroup:Assign"></mvcSiteMapNode>
       </mvcSiteMapNode>
       <mvcSiteMapNode  area="MemberShips" controller="Orgs" resourceKey="orgIndex" >
 
