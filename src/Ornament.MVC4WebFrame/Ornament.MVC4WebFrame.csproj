@@ -652,6 +652,7 @@
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Areas\Messages\Views\News\Index.cshtml" />
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
