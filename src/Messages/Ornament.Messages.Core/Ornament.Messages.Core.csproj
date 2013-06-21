@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\INewsDao.cs" />
+    <Compile Include="Dao\INotifyTypeDao.cs" />
     <Compile Include="Dao\IPersonalMessageDao.cs" />
     <Compile Include="Dao\PersonalSearcher.cs" />
     <Compile Include="MssageOperator.cs" />

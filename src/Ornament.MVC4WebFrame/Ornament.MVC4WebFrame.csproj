@@ -243,6 +243,7 @@
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Settings\Controllers\EmailSettingController.cs" />

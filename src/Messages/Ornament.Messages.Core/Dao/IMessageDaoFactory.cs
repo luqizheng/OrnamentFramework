@@ -17,7 +17,7 @@ namespace Ornament.Messages.Dao
         INotifyMessageDao NotifyMessageDao { get; }
 
         INewsTypeDao NewsTypeDao { get; }
-
+        INotifyTypeDao NotifyTypeDao { get; }
         IPersonalMessageDao PersonalMessageDao { get; }
 
         IReaderDao ReaderDao { get; }

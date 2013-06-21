@@ -28,6 +28,8 @@ namespace Ornament.Messages.Dao.NHibernateImple
             }
         }
 
+        public INotifyTypeDao NotifyTypeDao { get { return new NotifyTypeDao(); } }
+
         public IPersonalMessageDao PersonalMessageDao { get { return new PersonalMessageDao(); } }
         public IReaderDao ReaderDao { get { return new ReaderDao(); } }
         public INewsDao NewsDao { get { return new NewsDao(); } }

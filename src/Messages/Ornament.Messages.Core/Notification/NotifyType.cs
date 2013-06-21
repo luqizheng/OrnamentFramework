@@ -9,7 +9,7 @@ namespace Ornament.Messages.Notification
         Sms = 4
     }
 
-    public class NotifyType:DomainObject<NotifyType,int>
+    public class NotifyType : DomainObject<NotifyType, string>
     {
         public virtual string Name { get; set; }
         public virtual string Remark { get; set; }
