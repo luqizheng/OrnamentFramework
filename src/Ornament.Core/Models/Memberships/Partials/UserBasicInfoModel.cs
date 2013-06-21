@@ -6,30 +6,9 @@ using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
 
+
 namespace Ornament.Models.Memberships.Partials
 {
-    public class LoginIdModel
-    {
-        public LoginIdModel()
-        {
-        }
-
-        public LoginIdModel(User user)
-        {
-            LoginId = user.LoginId;
-        }
-
-        /// <summary>
-        /// </summary>
-        [Display(Name = "LoginId", ResourceType = typeof (MembershipCommon))]
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (MemberShipModel))]
-        [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
-            ErrorMessageResourceType = typeof (ErrorMessage))]
-        [UIHint("String")]
-        [Remote("NotDuplicate", "User")]
-        public string LoginId { get; set; }
-    }
-
     public class UserBasicInfoModel
     {
         private Role[] _roles;
@@ -51,7 +30,7 @@ namespace Ornament.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Email", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "Email", ResourceType = typeof (MemberShipModel))]
         [Required(ErrorMessageResourceName = "error_missingEmailAddress",
             ErrorMessageResourceType = typeof (MemberShipModel))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
@@ -63,7 +42,7 @@ namespace Ornament.Models.Memberships.Partials
         public string Email { get; set; }
 
         [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "Role", ResourceType = typeof (MemberShipModel))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
@@ -71,7 +50,7 @@ namespace Ornament.Models.Memberships.Partials
         }
 
         [UIHint("UsergroupMultiSelect")]
-        [Display(Name = "UserGroup", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "UserGroup", ResourceType = typeof (MemberShipModel))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }

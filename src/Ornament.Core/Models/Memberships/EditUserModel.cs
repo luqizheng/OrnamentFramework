@@ -17,7 +17,7 @@ namespace Ornament.Models.Memberships
 
         public EditUserModel(User user)
         {
-            this.LoginId = user.LoginId;
+            LoginId = user.LoginId;
             Id = user.Id;
             BasicInfo = new UserBasicInfoModel(user);
             OptionInfo = new UserOptionInformation(user);
@@ -42,7 +42,7 @@ namespace Ornament.Models.Memberships
             User user = memberShipFactory.CreateUserDao().Get(Id);
             BasicInfo.UpdateOn(user);
             OptionInfo.UpdateOn(user);
-            
+
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             return user;
         }

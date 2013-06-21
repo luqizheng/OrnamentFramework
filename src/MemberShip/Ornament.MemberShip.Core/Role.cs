@@ -5,6 +5,7 @@ using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Properties;
 using Qi.Domain;
 
 namespace Ornament.MemberShip
@@ -36,7 +37,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets remark
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "Remark", ResourceType = typeof (Resources))]
         [StringLength(100, ErrorMessageResourceType = typeof (ErrorMessage),
             ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
         public string Remark
@@ -90,7 +91,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets the name of role.
         /// </summary>
-        [Display(Name = "Name", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "Name", ResourceType = typeof (Resources))]
         [Required(ErrorMessageResourceType = typeof (ErrorMessage), ErrorMessageResourceName = "RequireRoleName")]
         [StringLength(20, ErrorMessageResourceType = typeof (ErrorMessage),
             ErrorMessageResourceName = "RoleNameOverMaxLength")]

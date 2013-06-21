@@ -2,11 +2,12 @@
 using MultiLanguage;
 using Ornament.MemberShip.Languages;
 
+
 namespace Ornament.Models.Memberships.Partials
 {
     public class PasswordModel
     {
-        [Display(Name = "Password", ResourceType = typeof(MembershipCommon))]
+        [Display(Name = "Password", ResourceType = typeof(MemberShipModel))]
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
             ErrorMessageResourceType = typeof(MemberShipModel))]
         [DataType(DataType.Password)]
@@ -15,7 +16,7 @@ namespace Ornament.Models.Memberships.Partials
         /// <summary>
         /// 
         /// </summary>
-        [Display(Name = "ConfirmPassword", ResourceType = typeof(MembershipCommon))]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(MemberShipModel))]
         [DataType(DataType.Password)]
         [Required(ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "error_MissPassword")]
         [Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",

@@ -61,6 +61,8 @@ namespace Ornament.Messages.Notification
             get { return _readers ?? (_readers = new HashedSet<Reader>()); }
         }
 
+        public NotifyType Type { get; set; }
+
 
         /// <summary>
         /// </summary>

@@ -4,6 +4,7 @@ using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 
+
 namespace Ornament.Models.Memberships
 {
     public class LogonModel
@@ -11,11 +12,11 @@ namespace Ornament.Models.Memberships
         public string ReturnUrl { get; set; }
 
         [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (MemberShipModel))]
-        [Display(Name = "LoginId", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "LoginId", ResourceType = typeof (MemberShipModel))]
         public string User { get; set; }
 
         [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof(MemberShipModel))]
-        [Display(Name = "Password", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "Password", ResourceType = typeof (MemberShipModel))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

@@ -13,7 +13,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Map(x => x.CreateTime);
             Map(x => x.State);
 
-            References(x => x.Publisher).LazyLoad(Laziness.Proxy);
+            References(x => x.Publisher);
+            References(x => x.Type)
 
             HasMany(x => x.Contents)
                 .AsMap(s => s.Language).Cascade.AllDeleteOrphan()
@@ -26,7 +27,18 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                     }
                 );
             //HasMany(x => x.Readers).KeyColumn("notifyMessageId");
+        }
+    }
 
+    public class NotifyTypeMapping : ClassMap<NotifyType>
+    {
+        public NotifyTypeMapping()
+        {
+            Table("Msgs_notifyType");
+            Id(x => x.Id).GeneratedBy.UuidHex("N");
+            Map(x => x.Name).Length(32);
+            Map(x => x.Remark).Length(256);
+            Map(x => x.CommunicationType).Length(16);
         }
     }
 }

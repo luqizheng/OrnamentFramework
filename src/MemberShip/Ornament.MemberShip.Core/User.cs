@@ -8,6 +8,7 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Properties;
 using Qi;
 using Qi.Secret;
 
@@ -30,7 +31,6 @@ namespace Ornament.MemberShip
         private string _passwordAnswer;
         private string _passwordQuestion;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
-        private TimeZoneInfo _timeZone;
         private Iesi.Collections.Generic.ISet<UserGroup> _userGroups;
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     获取用户创建时间
         /// </summary>
-        [Display(Name = "CreateTime", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "CreateTime", ResourceType = typeof (Resources))]
         public virtual DateTime CreateTime { get; protected set; }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The is lockout.
         /// </value>
-        [Display(Name = "IsLockout", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "IsLockout", ResourceType = typeof (Resources))]
         public virtual bool IsLockout
         {
             get { return _isLockout; }
@@ -99,31 +99,31 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     获取或设定用户是否已经获准使用
         /// </summary>
-        [Display(Name = "IsApproved", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
         public virtual bool IsApproved { get; set; }
 
         /// <summary>
         ///     获取用户最后改变时间
         /// </summary>
-        [Display(Name = "LastPasswordChangedTime", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "LastPasswordChangedTime", ResourceType = typeof (Resources))]
         public virtual DateTime? LastPasswordChangedDate { get; set; }
 
         /// <summary>
         ///     获取用户被锁定的时间
         /// </summary>
-        [Display(Name = "LastLockTime", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "LastLockTime", ResourceType = typeof (Resources))]
         public virtual DateTime? LastLockoutDate { get; protected set; }
 
         /// <summary>
         ///     获取用户最后登录时间
         /// </summary>
-        [Display(Name = "LastLoginTime", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "LastLoginTime", ResourceType = typeof (Resources))]
         public virtual DateTime? LastLoginDate { get; protected set; }
 
         /// <summary>
         ///     获取或设定用户最后活跃时间
         /// </summary>
-        [Display(Name = "LastActivityTime", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "LastActivityTime", ResourceType = typeof (Resources))]
         public virtual DateTime? LastActivityDate { get; set; }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The update time.
         /// </value>
-        [Display(Name = "LastUpdateTime", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "LastUpdateTime", ResourceType = typeof (Resources))]
         public virtual DateTime? UpdateTime { get; protected set; }
 
 
@@ -142,7 +142,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The password.
         /// </value>
-        [Display(Name = "Password", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "Password", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePassword",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string Password
@@ -157,7 +157,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The login id.
         /// </value>
-        [Display(Name = "LoginId", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "LoginId", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
              ErrorMessageResourceType = typeof (ErrorMessage)), RegularExpression(@"^[a-zA-z1-9_-]{1,20}",
                  ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
@@ -169,7 +169,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The password question.
         /// </value>
-        [Display(Name = "PasswordQuestion", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "PasswordQuestion", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false,
              ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string PasswordQuestion
@@ -185,7 +185,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets the answer of <see cref="PasswordQuestion" />. It alwasy entrypted by md5
         /// </summary>
-        [Display(Name = "PasswordAnswer", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "PasswordAnswer", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
              ErrorMessageResourceType = typeof (ErrorMessage)),
          StringLength(50, MinimumLength = 0, ErrorMessageResourceName = "PasswordQuestionAnswerOverMaxLength",
@@ -336,7 +336,7 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
-        [Display(Name = "Org", ResourceType = typeof (MembershipCommon))]
+        [Display(Name = "Org", ResourceType = typeof (Resources))]
         public virtual Org Org { get; set; }
 
         string IPerformer.Id
@@ -348,7 +348,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public override string Name

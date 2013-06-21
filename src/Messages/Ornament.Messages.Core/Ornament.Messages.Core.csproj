@@ -87,6 +87,7 @@
     <Compile Include="Notification\NotifyMessage.cs" />
     <Compile Include="EditState.cs" />
     <Compile Include="Newses\NewsType.cs" />
+    <Compile Include="Notification\NotifyType.cs" />
     <Compile Include="PersonalMessages\PersonalMessage.cs" />
     <Compile Include="Notification\Reader.cs" />
     <Compile Include="Priority.cs" />

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip
 {
@@ -38,7 +39,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The phone.
         /// </value>
-        [Display(Name = "Phone", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "Phone", ResourceType = typeof (Resources)),
          StringLength(30, MinimumLength = 0, ErrorMessage = "长度必须在1至30之间")]
         public virtual string Phone
         {
@@ -61,7 +62,7 @@ namespace Ornament.MemberShip
         /// </value>
         [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
             ErrorMessageResourceType = typeof (ErrorMessage)),
-         Display(Name = "Email", ResourceType = typeof (MembershipCommon)),
+         Display(Name = "Email", ResourceType = typeof (Resources)),
          RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
              ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
         [MaxLength(64)]

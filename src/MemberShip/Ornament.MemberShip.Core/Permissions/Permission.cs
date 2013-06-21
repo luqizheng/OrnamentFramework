@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using Ornament.MemberShip.Properties;
 using Qi;
 using Qi.Domain;
 
@@ -77,14 +78,14 @@ namespace Ornament.MemberShip.Permissions
         /// Gets or sets permission's name .
         /// </summary>
         /// <value>The name.</value>
-        [Display(ResourceType = typeof(Languages.MembershipCommon), Name = "PermissionName")]
+        [Display(ResourceType = typeof(Resources), Name = "PermissionName")]
         public virtual string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the remark.
         /// </summary>
         /// <value>The comment.</value>
-        [Display(ResourceType = typeof(Languages.MembershipCommon), Name = "Remark")]
+        [Display(ResourceType = typeof(Resources), Name = "Remark")]
         public virtual string Remark { get; set; }
 
         /// <summary>
@@ -99,7 +100,7 @@ namespace Ornament.MemberShip.Permissions
         /// <value>
         /// The operator values.
         /// </value>
-        [Display(ResourceType = typeof(Languages.MembershipCommon), Name = "Operator")]
+        [Display(ResourceType = typeof(Resources), Name = "Operator")]
         public virtual int Operator { get; set; }
 
 

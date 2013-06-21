@@ -8,6 +8,7 @@ using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
+
 using Ornament.MemberShip.Secret;
 using Ornament.Models.Memberships.Partials;
 using Ornament.Templates;
@@ -33,7 +34,7 @@ namespace Ornament.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "LoginId", ResourceType = typeof(MembershipCommon))]
+        [Display(Name = "LoginId", ResourceType = typeof(MemberShipModel))]
         [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(MemberShipModel))]
         [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof(ErrorMessage))]

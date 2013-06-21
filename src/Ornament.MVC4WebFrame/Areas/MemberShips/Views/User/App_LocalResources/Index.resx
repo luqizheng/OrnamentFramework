@@ -150,4 +150,7 @@
   <data name="BtnApply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="QuickActions_MemberState" xml:space="preserve">
+    <value>Member statistics</value>
+  </data>
 </root>

@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip
 {
     /// <summary>
-    /// 组织单元，越上层的组织单元，自动继承下级单元的角色
+    ///     组织单元，越上层的组织单元，自动继承下级单元的角色
     /// </summary>
     [Serializable]
     public class Org : Member<Org>, IPerformer
@@ -21,10 +21,6 @@ namespace Ornament.MemberShip
         private Iesi.Collections.Generic.ISet<Org> _childs;
         private string _orderId;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
-         PerformerType IPerformer.Type
-        {
-            get { return PerformerType.Org; }
-        }
 
         protected Org()
         {
@@ -35,14 +31,12 @@ namespace Ornament.MemberShip
         {
         }
 
-      
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual Org Parent { get; protected set; }
 
         /// <summary>
-        /// 
         /// </summary>
         protected virtual Iesi.Collections.Generic.ISet<Org> Childs
         {
@@ -54,14 +48,14 @@ namespace Ornament.MemberShip
             }
             set { _childs = value; }
         }
-        [Display(ResourceType = typeof (MembershipCommon), Name = "Org_OrgCount_Child_Org_s_Count")]
+
+        [Display(ResourceType = typeof (Resources), Name = "Org_OrgCount_Child_Org_s_Count")]
         public virtual int OrgCount
         {
             get { return Childs.Count; }
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public virtual string OrderId
         {
@@ -97,7 +91,7 @@ namespace Ornament.MemberShip
 
         string IPerformer.Id
         {
-            get { return this.Id; }
+            get { return Id; }
             set { throw new NotImplementedException("Can't set the Org's Id"); }
         }
 
@@ -110,8 +104,12 @@ namespace Ornament.MemberShip
 
         #endregion
 
+        PerformerType IPerformer.Type
+        {
+            get { return PerformerType.Org; }
+        }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="childOrg"></param>
         public virtual void Add(Org childOrg)
@@ -122,13 +120,13 @@ namespace Ornament.MemberShip
              * 4 创建当前的Orderid
              * */
             //1
-            if (childOrg.Id == this.Id)
+            if (childOrg.Id == Id)
                 throw new ArgumentException("Org can not add self");
             if (childOrg == null)
                 throw new ArgumentNullException("childOrg");
             if (string.IsNullOrEmpty(childOrg.Id))
                 throw new ArgumentNullException("childOrg", "org's Id must have value before being added");
-            if (childOrg.Parent != null && childOrg.Parent.Id != this.Id)
+            if (childOrg.Parent != null && childOrg.Parent.Id != Id)
                 throw new ArgumentException("org must not be belong to some parent");
             //if childOrg is current org's parent ,it throw exception;
             if (OrderId != null && OrderId.IndexOf(childOrg.Id) != -1)
@@ -158,7 +156,6 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="org"></param>
         public virtual void Remove(Org org)
@@ -177,7 +174,6 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="org"></param>
         /// <returns></returns>
@@ -190,7 +186,6 @@ namespace Ornament.MemberShip
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public virtual bool LevelUp()
@@ -210,7 +205,6 @@ namespace Ornament.MemberShip
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="newParent"></param>
         /// <returns></returns>
@@ -234,7 +228,6 @@ namespace Ornament.MemberShip
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public static void CreateGetChildCondition(Org org, out string maxOrderId, out string minOrderid)

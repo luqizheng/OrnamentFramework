@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.Properties;
 using Qi.Domain;
 
 namespace Ornament.MemberShip
@@ -56,7 +57,7 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (ErrorMessage)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage))]
@@ -83,7 +84,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The comment.
         /// </value>
-        [Display(Name = "Remark", ResourceType = typeof (MembershipCommon)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string Remark

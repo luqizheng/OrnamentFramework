@@ -1,37 +1,33 @@
 ﻿@using Resources
-@model Ornament.MemberShip.UserGroup
+@model Ornament.Models.Memberships.UserGroupModel
 @{
     ViewBag.Title = Basic.Edit + ":" + Model.Name;
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
-<div class="box">
-    <div class="content">
-        @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary()
-            <fieldset class="form-horizontal">
-                <legend>@Model.Name</legend>
-                <div class="control-group">
-                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextBoxFor(model => model.Name)
-                        @Html.ValidationMessageFor(model => model.Name)
-                    </div>
-                </div>
-                <div class="control-group">
-                    @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextAreaFor(model => model.Remark)
-                        @Html.ValidationMessageFor(model => model.Remark)
-                    </div>
-                </div>
+@section pageTitle
+{
+    <h5>Edit UserGroup @Model.Name</h5>
+}
+<div class="widget">
+
+    <div class="well">
+        <div class="form-horizontal">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+    
+                @Html.EditorFor(s => s.Name)
+                @Html.EditorFor(s => s.Remark)
+                @Html.EditorFor(s=>s.Roles)
                 @Html.HiddenFor(model => model.Id)
+
                 <div class="btn-toolbar form-actions">
                     <a id="submit" class="btn btn-primary">@Basic.OK</a>
                     <a  id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
                 </div>
-            </fieldset>
-        }
+    
+            }
+        </div>
     </div>
 </div>
 @section script{

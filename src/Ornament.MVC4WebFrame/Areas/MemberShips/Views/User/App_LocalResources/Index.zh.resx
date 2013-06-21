@@ -150,4 +150,7 @@
   <data name="BtnApply" xml:space="preserve">
     <value>應用</value>
   </data>
+  <data name="QuickActions_MemberState" xml:space="preserve">
+    <value>成員狀態</value>
+  </data>
 </root>

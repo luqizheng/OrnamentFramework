@@ -103,14 +103,13 @@
     <Compile Include="Contexts\MessagesConfig.cs" />
     <Compile Include="Contexts\WebSettings.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Memberships\UserGroupModel.cs" />
     <Compile Include="OrnamentContext.cs" />
     <Compile Include="Contexts\NhConfiguration.cs" />
     <Compile Include="Contexts\OrnamentConfiguration.cs" />
     <Compile Include="Contexts\ResourcesSetting.cs" />
     <Compile Include="Contexts\MemberShipContext.cs" />
     <Compile Include="Contexts\DaoFactory.cs" />
-    <Compile Include="Messages\OrnamentMessageManager.cs" />
-    <Compile Include="Messages\UserMessageManager.cs" />
     <Compile Include="DateTimeHelper.cs" />
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
@@ -168,7 +167,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Messages\Announce\" />
+    <Folder Include="Messages\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">

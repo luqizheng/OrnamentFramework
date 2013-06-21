@@ -76,6 +76,11 @@
   <ItemGroup>
     <Compile Include="PerformerType.cs" />
     <Compile Include="Permissions\GenericPermission.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Secret\ActiveUserAction.cs" />
     <Compile Include="Secret\UserSecretToken.cs" />
     <Compile Include="Dao\IUserSecretTokenDao.cs" />
@@ -96,11 +101,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessage.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Languages\MembershipCommon.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MembershipCommon.resx</DependentUpon>
     </Compile>
     <Compile Include="Member.cs">
       <SubType>Code</SubType>
@@ -132,12 +132,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\ErrorMessage.zh-cn.resx" />
     <EmbeddedResource Include="Languages\ErrorMessage.zh.resx" />
-    <EmbeddedResource Include="Languages\MembershipCommon.resx">
+    <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MembershipCommon.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Languages\MembershipCommon.zh-cn.resx" />
-    <EmbeddedResource Include="Languages\MembershipCommon.zh.resx" />
+    <EmbeddedResource Include="Properties\Resource.zh-CN.resx" />
+    <EmbeddedResource Include="Properties\Resource.zh.resx" />
     <EmbeddedResource Include="Role.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -189,9 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppStart\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Secret\UserSecretToken.hbm.xml" />

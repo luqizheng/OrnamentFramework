@@ -1,4 +1,5 @@
-﻿@using Ornament
+﻿@using System.Text.RegularExpressions
+@using Ornament
 @using Ornament.MVCWebFrame.Models
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
@@ -83,7 +84,7 @@
                 @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Modify))
                 {
                     <li>
-                        <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-user"></i></a></div>
+                        <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
                     </li>
                 }
                 <li>
@@ -107,7 +108,8 @@
         <div id="quick-actions">
             @{
                 var userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
-                var totalUser = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Count();
+                var totalUser = Convert.ToDouble(userDao.Count());
+                var onlineUser = Membership.GetNumberOfUsersOnline();
             }
             <ul class="statistics">
                 <li>
@@ -124,20 +126,23 @@
 
                 <li>
                     <div class="top-info">
-                        <a href="#" title="" class="sea-square"><i class="icon-group"></i></a>
+                        <a href="#" title="" class="sea-square"><i class=" icon-globe"></i></a>
                         <strong>@totalUser</strong>
                     </div>
                     <div class="progress progress-micro">
-                        <div class="bar" style="width: 50%;"></div>
+                        @{
+                            var onlineRate = (Convert.ToDouble(onlineUser) / totalUser).ToString("p");
+                        }
+                        <div class="bar" style="width: @onlineRate;"></div>
                     </div>
-                    <span>Total users</span>
+                    <span class="tip" title="@onlineUser/@totalUser ">Online users</span>
                 </li>
 
             </ul>
         </div>
         <ul class="action-tabs">
             <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
-            <li><a href="#quick-actions" title="">Website statistics</a></li>
+            <li><a href="#quick-actions" title="">@Html.GetResourceString("QuickActions_MemberState")</a></li>
         </ul>
     </div>
 </div>

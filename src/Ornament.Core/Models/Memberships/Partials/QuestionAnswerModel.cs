@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MultiLanguage;
 using Ornament.MemberShip.Languages;
+
 
 namespace Ornament.Models.Memberships.Partials
 {
@@ -8,7 +10,7 @@ namespace Ornament.Models.Memberships.Partials
         /// <summary>
         /// 
         /// </summary>
-        [Display(Name = "PasswordQuestion", ResourceType = typeof(MembershipCommon)),
+        [Display(Name = "PasswordQuestion", ResourceType = typeof(MemberShipModel)),
          Required(AllowEmptyStrings = false,
              ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof(ErrorMessage))]
         public string PasswordQuestion { get; set; }
@@ -16,7 +18,7 @@ namespace Ornament.Models.Memberships.Partials
         /// <summary>
         /// 
         /// </summary>
-        [Display(Name = "PasswordAnswer", ResourceType = typeof(MembershipCommon)),
+        [Display(Name = "PasswordAnswer", ResourceType = typeof(MemberShipModel)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
              ErrorMessageResourceType = typeof(ErrorMessage)),
          StringLength(50, MinimumLength = 0, ErrorMessageResourceName = "PasswordQuestionAnswerOverMaxLength",

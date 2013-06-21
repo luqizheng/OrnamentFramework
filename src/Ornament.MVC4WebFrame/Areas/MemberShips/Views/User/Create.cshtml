@@ -31,8 +31,8 @@
             </div>
             <div class="form-actions">
                 <input type="submit" value="@Basic.Create" class="btn btn-info"/>
-                <a href="@Url.Action("Index", "User", new { area = "" })" class="btn">@Basic.Cancel</a>
-            </div>
+                            <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
+
 
         </div>
     </form>

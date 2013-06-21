@@ -156,4 +156,7 @@
   <data name="BtnApply" xml:space="preserve">
     <value>应用</value>
   </data>
+  <data name="QuickActions_MemberState" xml:space="preserve">
+    <value>成员状态</value>
+  </data>
 </root>

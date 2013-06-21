@@ -62,7 +62,7 @@
 
         <p class="form-actions">
             <button id="submitButton" class="btn btn-info" type="submit">@Resources.Basic.Save</button>
-            <a id="cancelButton" class="btn" href="@this.Url.Action("Index")">@Resources.Basic.Cancel</a>
+            <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
         </p>
     </div>
 }
