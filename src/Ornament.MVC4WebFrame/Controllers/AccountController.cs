@@ -193,7 +193,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipService.CreateUser(model.UserBasicInfo.LoginId, model.Password.Password,
+                MembershipService.CreateUser(model.LoginId, model.Password.Password,
                                              model.UserBasicInfo.Email);
 
                 return RedirectToAction("Index", "Home");

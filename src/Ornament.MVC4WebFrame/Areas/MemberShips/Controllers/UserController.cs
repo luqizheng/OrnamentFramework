@@ -32,6 +32,24 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             _userDao = _memberShipFactory.CreateUserDao();
         }
 
+        [System.Web.Http.HttpGet]
+        public JsonResult NotDuplicate(string loginId)
+        {
+            loginId = Request.QueryString[0];
+            return Json(_memberShipFactory.CreateUserDao().Count(loginId) == 0, JsonRequestBehavior.AllowGet);
+        }
+
+        [System.Web.Http.HttpGet]
+        public JsonResult NotDuplicateEmail(string email)
+        {
+            if (Membership.Provider.RequiresUniqueEmail)
+            {
+                email = Request.QueryString[0];
+                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email) == 0, JsonRequestBehavior.AllowGet);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
         [ResourceAuthorize(UserOperator.Read, "User")]
         public ActionResult Index(Pagination pagination)
         {

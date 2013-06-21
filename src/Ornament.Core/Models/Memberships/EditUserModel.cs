@@ -17,6 +17,7 @@ namespace Ornament.Models.Memberships
 
         public EditUserModel(User user)
         {
+            this.LoginId = user.LoginId;
             Id = user.Id;
             BasicInfo = new UserBasicInfoModel(user);
             OptionInfo = new UserOptionInformation(user);
@@ -33,6 +34,8 @@ namespace Ornament.Models.Memberships
 
         [UIHint("UserOtherInfo")]
         public UserOtherInfoModel OtherInfo { get; set; }
+
+        public string LoginId { get; set; }
 
         public User Save(IMemberShipFactory memberShipFactory)
         {

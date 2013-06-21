@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using System.Threading;
+using System.Web.Mvc;
+using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Secret;
 using Ornament.Models.Memberships.Partials;
 using Ornament.Templates;
@@ -27,6 +30,17 @@ namespace Ornament.Models.Memberships
         [UIHint("UserBasicInfo")]
         public UserBasicInfoModel BasicInfo { get; set; }
 
+
+        /// <summary>
+        /// </summary>
+        [Display(Name = "LoginId", ResourceType = typeof(MembershipCommon))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(MemberShipModel))]
+        [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
+            ErrorMessageResourceType = typeof(ErrorMessage))]
+        [UIHint("String")]
+        [Remote("NotDuplicate", "User", "MemberShips", ErrorMessageResourceName = "alertMsg_duplicate_loginId", ErrorMessageResourceType = typeof(MemberShipModel))]
+        public string LoginId { get; set; }
+
     
 
         [UIHint("UserOptionInfo")]
@@ -38,7 +52,7 @@ namespace Ornament.Models.Memberships
         public bool Create(IMemberShipFactory dao, out string errorMessage)
         {
             errorMessage = null;
-            var createUser = new User(BasicInfo.LoginId, Password)
+            var createUser = new User(LoginId, Password)
                 {
                     IsApproved = false,
                     Email = BasicInfo.Email,

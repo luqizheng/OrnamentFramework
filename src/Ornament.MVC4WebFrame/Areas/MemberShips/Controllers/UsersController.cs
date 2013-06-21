@@ -14,18 +14,22 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             _factory = factory;
         }
-
+        [HttpGet]
+        public bool IsDuplicateUser(string loginId)
+        {
+            return _factory.CreateUserDao().Count(loginId)!=0;
+        }
         // GET api/usersapi
         [HttpGet]
         public IEnumerable<object> Match(string name,
-            string email, string loginId,string phone, int? pageIndex, int? pageSize)
+                                         string email, string loginId, string phone, int? pageIndex, int? pageSize)
         {
             if (pageIndex == null)
                 pageIndex = 0;
             if (pageSize == 0)
                 pageSize = 10;
             IList<User> result = _factory.CreateUserDao()
-                .QuickSearch(name, loginId, email, phone, pageSize.Value, pageIndex.Value);
+                                         .QuickSearch(name, loginId, email, phone, pageSize.Value, pageIndex.Value);
 
             var c = from user in result
                     select new

@@ -4,12 +4,12 @@
 @using Ornament.Web.HtmlExtends
 @model Ornament.Models.Memberships.EditUserModel
 @{
-    ViewBag.Title = Resources.Basic.Edit + this.Model.BasicInfo.LoginId;
+    ViewBag.Title = Resources.Basic.Edit + this.Model.LoginId;
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
 @section pageTitle{
     <h5>
-        @this.Model.BasicInfo.LoginId
+        @this.Model.LoginId
     </h5>
 }
 

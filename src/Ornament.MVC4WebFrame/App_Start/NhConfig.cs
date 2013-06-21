@@ -13,16 +13,16 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Config()
         {
-            var Assemblies = new[]
+            var assemblies = new[]
                 {
                     typeof (NotifyMessageDao).Assembly,
                     typeof (UserDao).Assembly
                 };
-            NHConfig(Assemblies);
+            NHConfig(assemblies, new Assembly[0]);
             UpdateDatabase();
         }
 
-        private static void NHConfig(Assembly[] Assemblies)
+        private static void NHConfig(Assembly[] fluentAssemblies, Assembly[] nhAssembilies)
         {
             SessionManager.Regist("default", () =>
                 {
@@ -30,15 +30,17 @@ namespace Ornament.MVCWebFrame.App_Start
                     config.Configure(HostingEnvironment.MapPath("~/config/hibernate_mysql.cfg.config"));
                     FluentConfiguration result = Fluently.Configure(config);
 
-// ReSharper disable ForCanBeConvertedToForeach
-                    for (int index = 0; index < Assemblies.Length; index++)
-// ReSharper restore ForCanBeConvertedToForeach
+                    // ReSharper disable ForCanBeConvertedToForeach
+                    for (int index = 0; index < fluentAssemblies.Length; index++)
+                    // ReSharper restore ForCanBeConvertedToForeach
                     {
-                        Assembly assembly = Assemblies[index];
+                        Assembly assembly = fluentAssemblies[index];
                         result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly));
                     }
-
-
+                    for (int i = 0; i < nhAssembilies.Length; i++)
+                    {
+                        result.Mappings(s => s.HbmMappings.AddFromAssembly(nhAssembilies[i]));
+                    }
                     return result.BuildConfiguration();
                 });
         }
