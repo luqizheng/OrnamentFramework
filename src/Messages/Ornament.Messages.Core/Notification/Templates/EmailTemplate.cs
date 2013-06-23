@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Xml.Serialization;
 using Qi.Text;
 
-namespace Ornament.Templates
+namespace Ornament.Messages.Notification.Templates
 {
     [XmlRoot("EmailTemplate")]
     public class EmailTemplate

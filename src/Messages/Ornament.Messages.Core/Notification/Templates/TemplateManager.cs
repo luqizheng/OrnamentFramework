@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Ornament.Templates
+namespace Ornament.Messages.Notification.Templates
 {
     public static class TemplateManager
     {

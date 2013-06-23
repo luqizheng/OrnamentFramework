@@ -143,9 +143,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ResourceContextExtender.cs" />
-    <Compile Include="Templates\EmailTemplateManager.cs" />
-    <Compile Include="Templates\EmailTemplate.cs" />
-    <Compile Include="Templates\TemplateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -169,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Messages\" />
+    <Folder Include="nhibernateExtenders\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">

@@ -2,7 +2,7 @@
 using Ornament.MemberShip.Secret;
 using Qi;
 
-namespace Ornament.Templates
+namespace Ornament.Messages.Notification.Templates
 {
     public class EmailTemplateManager
     {

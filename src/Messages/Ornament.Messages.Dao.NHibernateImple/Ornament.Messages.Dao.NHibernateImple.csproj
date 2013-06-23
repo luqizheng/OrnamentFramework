@@ -106,6 +106,7 @@
     <Compile Include="MessageDaoFactory.cs" />
     <Compile Include="DaoMultiId.cs" />
     <Compile Include="NewsDao.cs" />
+    <Compile Include="nhExtender\NotifyContent.cs" />
     <Compile Include="NotifyMessageDao.cs" />
     <Compile Include="NotifyTypeDao.cs" />
     <Compile Include="ReaderDao.cs" />

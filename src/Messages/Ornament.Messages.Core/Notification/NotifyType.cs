@@ -1,11 +1,12 @@
-﻿using Qi;
+﻿using Ornament.Messages.Notification.Templates;
+using Qi;
 using Qi.Domain;
 
 namespace Ornament.Messages.Notification
 {
     public enum CommunicationType
     {
-        
+
         None,
         Client = 1,
         Email = 2,
@@ -16,6 +17,8 @@ namespace Ornament.Messages.Notification
     {
         public virtual string Name { get; set; }
         public virtual string Remark { get; set; }
+        public virtual string FilePath { get; set; }
         public virtual CommunicationType CommunicationType { get; set; }
+        public virtual EmailTemplate Content { get; set; }
     }
 }

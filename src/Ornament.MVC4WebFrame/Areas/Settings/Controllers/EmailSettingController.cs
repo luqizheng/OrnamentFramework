@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Ornament.Templates;
+using Ornament.Messages.Notification.Templates;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.Settings.Controllers

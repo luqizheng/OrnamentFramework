@@ -1,0 +1,41 @@
+﻿@model Ornament.Models.Messages.NotifyTypeModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+
+@section pageTitle
+{
+    <h5>Edit</h5>
+}
+
+<div class="widget">
+    <div class="body well">
+        @using (Html.BeginForm("Save", "NotifyType", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.EditorFor(model => model.Name)
+            @Html.EditorFor(model => model.Remark)
+            @Html.EditorFor(model => model.CommunicationType)
+            @Html.ValidationMessageFor(model => model.Remark)
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-actions">
+                <input type="submit" value="Save" />
+            </div>
+    
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+</div>
+
+
+
+@section Script {
+    @Scripts.Render("~/bundles/jqueryval")
+}

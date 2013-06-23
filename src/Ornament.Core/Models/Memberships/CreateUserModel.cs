@@ -10,8 +10,8 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 
 using Ornament.MemberShip.Secret;
+using Ornament.Messages.Notification.Templates;
 using Ornament.Models.Memberships.Partials;
-using Ornament.Templates;
 using log4net;
 
 namespace Ornament.Models.Memberships
