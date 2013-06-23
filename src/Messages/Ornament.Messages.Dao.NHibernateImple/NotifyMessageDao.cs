@@ -10,7 +10,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
     /// </summary>
-    public class NotifyMessageDao : DaoBase<string, NotifyMessage>, INotifyMessageDao
+    public class NotifyMessageDao : DaoBase<int, NotifyMessage>, INotifyMessageDao
     {
         public IQueryable<NotifyMessage> Messages
         {

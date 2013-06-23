@@ -8,7 +8,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Notification
 {
-    public class NotifyMessage : DomainObject<NotifyMessage, string>
+    public class NotifyMessage : DomainObject<NotifyMessage, int>
     {
         private IDictionary<string, Content> _contents;
         private Iesi.Collections.Generic.ISet<Reader> _readers;
@@ -61,7 +61,7 @@ namespace Ornament.Messages.Notification
             get { return _readers ?? (_readers = new HashedSet<Reader>()); }
         }
 
-        public NotifyType Type { get; set; }
+        public virtual NotifyType Type { get; set; }
 
 
         /// <summary>

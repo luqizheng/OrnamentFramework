@@ -60,7 +60,6 @@ use permission for checking permission like @user:Read, user is the string type 
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
-
       <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" >
         <mvcSiteMapNode controller="News" area="Messages" action="Edit" title="Edit">
         </mvcSiteMapNode>
@@ -71,11 +70,12 @@ use permission for checking permission like @user:Read, user is the string type 
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false">
       <mvcSiteMapNode resourceKey="eventLog"></mvcSiteMapNode>
-      <mvcSiteMapNode resourceKey="Emails" controller="EmailSetting" area="Settings" action="Index">
+      <mvcSiteMapNode controller="NotifyType" area="Messages" action="Index" title="NotifyType Setting">
+      </mvcSiteMapNode>
+      <mvcSiteMapNode resourceKey="Emails" controller="EmailSetting" area="Settings" action="Index" title="EmailsSetting">
         <mvcSiteMapNode resourceKey="createUser" controller="EmailSetting" area="Settings" action="CreateUser"></mvcSiteMapNode>
       </mvcSiteMapNode>
-
-      <mvcSiteMapNode resourceKey="dataInit" area="Settings" controller="Application" action="DatabaseInit"></mvcSiteMapNode>
+      <mvcSiteMapNode area="Messages" controller="Messages" action="Index" title="NotifyType"></mvcSiteMapNode>
     </mvcSiteMapNode>
 
   </mvcSiteMapNode>

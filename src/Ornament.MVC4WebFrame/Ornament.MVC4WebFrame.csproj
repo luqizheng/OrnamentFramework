@@ -653,6 +653,8 @@
     <Content Include="Areas\Messages\Views\News\Index.cshtml" />
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\NotifyType\Create.cshtml" />
+    <Content Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -944,7 +946,6 @@
     <Content Include="Content\templates\pannonia\img\elements\.DS_Store" />
     <Content Include="Content\templates\pannonia\img\elements\interface\.DS_Store" />
     <Content Include="Content\templates\pannonia\img\elements\lightbox\.DS_Store" />
-    <Content Include="Content\templates\pannonia\img\elements\loaders\.DS_Store" />
     <Content Include="Content\templates\pannonia\img\elements\uploader\.DS_Store" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
@@ -965,6 +966,7 @@
     <Content Include="Views\Shared\EditorTemplates\EmumRadio.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Bool.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

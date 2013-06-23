@@ -5,7 +5,7 @@
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        @Html.TextArea("", this.Model)
+        @Html.TextArea("", this.Model, ViewData)
         @Html.ValidationMessage("")
     </div>
 </div>

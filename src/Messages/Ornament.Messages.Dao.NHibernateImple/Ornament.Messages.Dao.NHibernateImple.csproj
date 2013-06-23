@@ -100,6 +100,7 @@
     <Compile Include="Mapping\NewsTypeMapping.cs" />
     <Compile Include="Mapping\NotifyMessageMapping.cs" />
     <Compile Include="Mapping\NotifyMessageReadStatusMapping.cs" />
+    <Compile Include="Mapping\NotifyTypeMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
     <Compile Include="Mapping\PersonalMessageMapping.cs" />
     <Compile Include="MessageDaoFactory.cs" />

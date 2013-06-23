@@ -14,7 +14,10 @@ namespace Ornament.Models.Memberships
             OptionInfo = new UserOptionInformation();
             OtherInfo = new UserOtherInfoModel();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
         public EditUserModel(User user)
         {
             LoginId = user.LoginId;
@@ -23,7 +26,9 @@ namespace Ornament.Models.Memberships
             OptionInfo = new UserOptionInformation(user);
             OtherInfo = new UserOtherInfoModel(user);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string Id { get; set; }
 
         [UIHint("UserBasicInfo")]

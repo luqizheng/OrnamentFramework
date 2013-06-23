@@ -8,7 +8,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         public NotifyMessageMapping()
         {
             Table("Msgs_NotifyMessage");
-            Id(x => x.Id).GeneratedBy.UuidHex("N");
+            Id(x => x.Id).GeneratedBy.Increment();
             DynamicUpdate();
             Map(x => x.CreateTime);
             Map(x => x.State);
@@ -27,18 +27,6 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                     }
                 );
             //HasMany(x => x.Readers).KeyColumn("notifyMessageId");
-        }
-    }
-
-    public class NotifyTypeMapping : ClassMap<NotifyType>
-    {
-        public NotifyTypeMapping()
-        {
-            Table("Msgs_notifyType");
-            Id(x => x.Id).GeneratedBy.UuidHex("N");
-            Map(x => x.Name).Length(32);
-            Map(x => x.Remark).Length(256);
-            Map(x => x.CommunicationType).Length(16);
         }
     }
 }

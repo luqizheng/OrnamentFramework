@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
 using System.Xml.Serialization;
 using Qi.Text;
@@ -10,12 +11,15 @@ namespace Ornament.Templates
     public class EmailTemplate
     {
         [XmlElement("Subject")]
+        [UIHint("string")]
         public string Subject { get; set; }
 
         [XmlElement("Content")]
+        [UIHint("Textarea")]
         public string Content { get; set; }
         
         [XmlIgnore]
+        [UIHint("string")]
         public string FilePath { get; set; }
 
         /// <summary>

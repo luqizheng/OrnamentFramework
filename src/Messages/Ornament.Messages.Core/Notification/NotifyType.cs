@@ -1,10 +1,13 @@
-﻿using Qi.Domain;
+﻿using Qi;
+using Qi.Domain;
 
 namespace Ornament.Messages.Notification
 {
     public enum CommunicationType
     {
-        Client = 0,
+        
+        None,
+        Client = 1,
         Email = 2,
         Sms = 4
     }

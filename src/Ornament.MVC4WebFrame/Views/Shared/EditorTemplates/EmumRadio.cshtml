@@ -14,13 +14,13 @@
             <label class="checkbox inline">
                 @if (!dict[key].Equals(current))
                 {
-                    <input type="checkbox" value="@dict[key]"name="@inputName" />
+                    <input type="radio" value="@dict[key]"name="@inputName" />
                 }
                 else
                 {
-                    <input type="checkbox" value="@dict[key]" checked="checked" name="@inputName" />
+                    <input type="radio" value="@dict[key]" checked="checked" name="@inputName" />
                 }
-                @key;
+                @key
             </label>
         }
     </div>

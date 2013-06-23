@@ -6,7 +6,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface INotifyMessageDao : IDao<string, NotifyMessage>
+    public interface INotifyMessageDao : IDao<int, NotifyMessage>
     {
         /// <summary>
         /// </summary>

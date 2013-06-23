@@ -7,8 +7,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
     {
         public PersonalMessageMapping()
         {
-            Table("msgs_PersonalMessage");
-            Id(x => x.Id).GeneratedBy.UuidHex("N");
+            Table("Msgs_PersonalMessage");
+            Id(x => x.Id).GeneratedBy.Increment();
             Map(x => x.CreateTime).Insert();
             Map(x => x.Content).Length(5000);
             Map(x => x.ReadStatus);

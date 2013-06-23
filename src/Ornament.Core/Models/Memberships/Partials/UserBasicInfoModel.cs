@@ -6,7 +6,6 @@ using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
 
-
 namespace Ornament.Models.Memberships.Partials
 {
     public class UserBasicInfoModel
@@ -25,8 +24,10 @@ namespace Ornament.Models.Memberships.Partials
             Roles = user.GetRoles().ToArray();
             IsApprove = user.IsApproved;
             IsLock = user.IsLockout;
+            LoginId = user.LoginId;
         }
 
+        public string LoginId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -38,7 +39,8 @@ namespace Ornament.Models.Memberships.Partials
             ErrorMessageResourceType = typeof (ErrorMessage))]
         [DataType(DataType.EmailAddress)]
         [UIHint("String")]
-        [Remote("NotDuplicateEmail", "User", "MemberShips", ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
+        [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "LoginId",
+            ErrorMessageResourceType = typeof (MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
 
         [UIHint("RoleMultiSelect")]

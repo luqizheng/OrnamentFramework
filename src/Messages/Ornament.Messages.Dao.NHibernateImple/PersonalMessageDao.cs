@@ -6,7 +6,7 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
-    public class PersonalMessageDao : DaoBase<string, PersonalMessage>, IPersonalMessageDao
+    public class PersonalMessageDao : DaoBase<int, PersonalMessage>, IPersonalMessageDao
     {
         IProjection ReceiverProperty
         {

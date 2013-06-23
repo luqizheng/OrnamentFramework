@@ -14,11 +14,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             _factory = factory;
         }
-        [HttpGet]
-        public bool IsDuplicateUser(string loginId)
-        {
-            return _factory.CreateUserDao().Count(loginId)!=0;
-        }
+      
         // GET api/usersapi
         [HttpGet]
         public IEnumerable<object> Match(string name,

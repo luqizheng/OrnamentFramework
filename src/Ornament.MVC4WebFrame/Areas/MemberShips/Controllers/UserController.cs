@@ -40,12 +40,13 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        public JsonResult NotDuplicateEmail(string email)
+        public JsonResult NotDuplicateEmail(string email, string id)
         {
             if (Membership.Provider.RequiresUniqueEmail)
             {
                 email = Request.QueryString[0];
-                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email) == 0, JsonRequestBehavior.AllowGet);
+                id = Request.QueryString[1];
+                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email,id) == 0, JsonRequestBehavior.AllowGet);
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -234,7 +235,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
                                                    u.Email.Contains(loginIdOrEmail)

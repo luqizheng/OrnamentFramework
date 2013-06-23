@@ -9,7 +9,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface IPersonalMessageDao : IDao<string, PersonalMessage>
+    public interface IPersonalMessageDao : IDao<int, PersonalMessage>
     {
         IList<PersonalMessage> GetNewMessage(User user, int pageIndex, int pageSize);
         int CountNewMessage(User user);

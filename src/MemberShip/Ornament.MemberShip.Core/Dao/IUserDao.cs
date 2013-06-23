@@ -48,6 +48,6 @@ namespace Ornament.MemberShip.Dao
         IList<User> FindAll(int pageIndex, int pageSize);
 
         int Count(string loginId);
-        int CountByEmail(string email);
+        int CountByEmail(string email,string loginIdForExclude);
     }
 }

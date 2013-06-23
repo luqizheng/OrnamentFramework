@@ -78,7 +78,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
             result.Add(a);
             return
-                result.SetFirstResult(pageIndex * pageSize)
+                result.SetFirstResult(pageIndex*pageSize)
                       .SetMaxResults(pageSize)
                       .GetExecutableCriteria(CurrentSession)
                       .List<User>();
@@ -174,7 +174,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
                    .List<User>();
         }
 
@@ -189,7 +189,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.InsensitiveLike(EmailProperty, emailToMatch))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageSize * pageIndex)
+                .SetFirstResult(pageSize*pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -225,29 +225,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
                     pageSize)
                                         .GetExecutableCriteria(CurrentSession)
                                         .List<User>();
-        }
-
-
-        /// <summary>
-        /// </summary>
-        /// <param name="loginId"></param>
-        /// <param name="email"></param>
-        /// <param name="phone"></param>
-        /// <param name="islockout"></param>
-        /// <param name="isApproved"></param>
-        /// <returns></returns>
-        public int Count(string loginId, string email, string phone, bool islockout, bool isApproved)
-        {
-            ICriterion tion = CreateSearchCondition(loginId, email, phone, islockout, isApproved);
-
-            ICriteria ica = CreateCriteria();
-            ica.Add(tion);
-            ica.SetProjection(Projections.Count(LoginProperty));
-            return ica.UniqueResult<int>();
         }
 
 
@@ -278,7 +259,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> FindAll(int pageIndex, int pageSize)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
                                          GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -288,16 +269,44 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 CreateDetachedCriteria()
                     .SetProjection(Projections.RowCount())
                     .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase())
-                    .GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+                    .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
-        public int CountByEmail(string email)
+        /// <summary>
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="loginIdForExclude"></param>
+        /// <returns></returns>
+        public int CountByEmail(string email, string loginIdForExclude)
         {
-            return
-              CreateDetachedCriteria()
-                  .SetProjection(Projections.RowCount())
-                  .Add(Restrictions.Eq(EmailProperty, email).IgnoreCase())
-                  .GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+            DetachedCriteria a =
+                CreateDetachedCriteria()
+                    .SetProjection(Projections.RowCount())
+                    .Add(Restrictions.Eq(EmailProperty, email).IgnoreCase());
+            if (!String.IsNullOrEmpty(loginIdForExclude))
+            {
+                a.Add(Restrictions.Not(Restrictions.Eq(LoginProperty, loginIdForExclude).IgnoreCase()));
+            }
+
+            return a.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="loginId"></param>
+        /// <param name="email"></param>
+        /// <param name="phone"></param>
+        /// <param name="islockout"></param>
+        /// <param name="isApproved"></param>
+        /// <returns></returns>
+        public int Count(string loginId, string email, string phone, bool islockout, bool isApproved)
+        {
+            ICriterion tion = CreateSearchCondition(loginId, email, phone, islockout, isApproved);
+
+            ICriteria ica = CreateCriteria();
+            ica.Add(tion);
+            ica.SetProjection(Projections.Count(LoginProperty));
+            return ica.UniqueResult<int>();
         }
 
         #endregion

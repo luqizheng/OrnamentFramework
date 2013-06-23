@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Newses;
 using Ornament.Messages.PersonalMessages;
 using Ornament.Web;
 
@@ -20,17 +21,17 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         //
         // GET: /Tasks/
         public IEnumerable<object> GetNewMessages(Pagination pagination, string language,
-            string typeId, ReadStatus? readStates)
+                                                  string typeId, ReadStatus? readStates)
         {
             if (pagination == null)
             {
                 pagination = new Pagination(10, 0);
             }
 
-            var type = _messageDaoFactory.NewsTypeDao.Get(typeId);
+            NewsType type = _messageDaoFactory.NewsTypeDao.Get(typeId);
 
 
-            var result =
+            IList<PersonalMessage> result =
                 _messageDaoFactory.PersonalMessageDao.GetNewMessage(OrnamentContext.MemberShip.CurrentUser(),
                                                                     pagination.CurrentPage, pagination.PageSize);
 
@@ -40,18 +41,17 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             {
                 r.Add(new
                     {
-                        Content = msg.Content,
+                        msg.Content,
                         relative = msg.Publisher
-
                     });
             }
             return result;
         }
-        [HttpGet,]
-        public object Get(string id)
-        {
-            return _messageDaoFactory.NotifyMessageDao.Get(id);
-        }
 
+        [HttpGet,]
+        public object Get(int? id)
+        {
+            return _messageDaoFactory.NotifyMessageDao.Get(id.Value);
+        }
     }
 }

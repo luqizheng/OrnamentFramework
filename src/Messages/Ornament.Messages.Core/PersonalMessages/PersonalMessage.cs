@@ -5,7 +5,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.PersonalMessages
 {
-    public class PersonalMessage : DomainObject<PersonalMessage, string>
+    public class PersonalMessage : DomainObject<PersonalMessage, int>
     {
         public virtual ReadStatus  ReadStatus { get; set; }
 

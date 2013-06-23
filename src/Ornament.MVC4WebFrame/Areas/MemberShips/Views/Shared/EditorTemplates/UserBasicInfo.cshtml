@@ -17,7 +17,7 @@
         @Html.ValidationMessageFor(model => model.Email)
     </div>
 </div>*@
-
+@Html.HiddenFor(model => model.LoginId)
 @Html.EditorFor(model => model.Email)
 @Html.EditorFor(model => model.IsApprove)
 @Html.EditorFor(model => model.IsLock)
