@@ -258,4 +258,10 @@
   <data name="VerifyCode" xml:space="preserve">
     <value>验证码</value>
   </data>
+  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
+    <value>请输入验证码</value>
+  </data>
+  <data name="error_notMatchVerifyCode" xml:space="preserve">
+    <value>验证码不正确</value>
+  </data>
 </root>

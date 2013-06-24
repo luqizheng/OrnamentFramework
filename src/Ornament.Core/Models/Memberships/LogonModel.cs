@@ -9,26 +9,33 @@ namespace Ornament.Models.Memberships
     {
         public string ReturnUrl { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (MemberShipModel))]
-        [Display(Name = "LoginId", ResourceType = typeof (MemberShipModel))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(MemberShipModel))]
+        [Display(Name = "LoginId", ResourceType = typeof(MemberShipModel))]
         public string User { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof (MemberShipModel))]
-        [Display(Name = "Password", ResourceType = typeof (MemberShipModel))]
+        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof(MemberShipModel))]
+        [Display(Name = "Password", ResourceType = typeof(MemberShipModel))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "RememberMe", ResourceType = typeof(MemberShipModel))]
         public bool RememberMe { get; set; }
 
-        [Display(Name = "VerifyCode", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "VerifyCode", ResourceType = typeof(MemberShipModel))]
+        [Required(ErrorMessageResourceName = "alertMsg_requireVerifyCode", ErrorMessageResourceType = typeof(MemberShipModel))]
         [UIHint("VerifyCode")]
         public string VerifyCodde { get; set; }
 
-        public bool Validate(out string errorMessage, IUserDao userDao)
+        public bool Validate(out string errorMessage, IUserDao userDao, string expectVerifyCode)
         {
             if (OrnamentContext.Configuration.ApplicationSetting.EnableVerifyCode)
             {
+                if (expectVerifyCode.ToLower() != VerifyCodde.ToLower())
+                {
+                    errorMessage = MemberShipModel.error_notMatchVerifyCode;
+                    return false;
+
+                }
             }
 
             errorMessage = null;

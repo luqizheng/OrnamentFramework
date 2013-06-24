@@ -16,7 +16,7 @@ namespace Ornament.MVCWebFrame.Controllers
 
     public class VerifyCodeController : Controller
     {
-
+        [Session]
         public FileResult Index(int? fontSize)
         {
             var builder = new VerifyCodeBuilder { FontSize = fontSize ?? 16, EnableNoise = false };

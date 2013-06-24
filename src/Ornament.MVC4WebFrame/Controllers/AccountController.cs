@@ -65,7 +65,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
@@ -128,11 +128,11 @@ namespace Ornament.MVCWebFrame.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn([ModelBinder(typeof (NHModelBinder))] LogonModel model)
+        public ActionResult LogOn([ModelBinder(typeof(NHModelBinder))] LogonModel model)
         {
             string errorMessage = null;
             if (!ModelState.IsValid ||
-                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao()))
+                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao(), OrnamentContext.MemberShip.CurrentVerifyCode()))
             {
                 if (errorMessage != null)
                 {
@@ -143,7 +143,7 @@ namespace Ornament.MVCWebFrame.Controllers
             model.ReturnUrl = Request["ReturnUrl"];
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult) Redirect(model.ReturnUrl)
+                       ? (ActionResult)Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 
