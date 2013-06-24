@@ -261,4 +261,7 @@
   <data name="UserGroup" xml:space="preserve">
     <value>User Group</value>
   </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>Verify Code</value>
+  </data>
 </root>

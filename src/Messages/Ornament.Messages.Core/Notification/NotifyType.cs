@@ -13,10 +13,19 @@ namespace Ornament.Messages.Notification
 
     public class NotifyType : DomainObject<NotifyType, string>
     {
+        
         private IDictionary<string, Content> _contents;
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual string Remark { get; set; }
-      
+      /// <summary>
+      /// 
+      /// </summary>
         public virtual CommunicationType CommunicationType { get; set; }
 
         /// <summary>

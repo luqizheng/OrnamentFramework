@@ -1,0 +1,22 @@
+﻿@model string
+
+<div class="control-group" id="verifyCode">
+    <div class="hide">
+        <img src="@Url.Action("Index", "VerifyCode", new { area = "" })" style="border: none" alt="" onclick=" this.src " />
+    </div>
+    <div class="controls">
+        @Html.Label("", new { @class = "control-label" })
+        @Html.TextBox("", "", new { @class = "span12" })
+        @Html.ValidationMessage("")
+    </div>
+</div>
+
+<script type="text/javascript">
+    seajs.use(["bootstrap"], function () {
+        var $tag = $("#verifyCode");
+        $tag.find("input").popover({
+            html: true, placement: "top",
+            content: $tag.find("div:first").html()
+        });
+    });
+</script>

@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
-<EmailTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Subject>新注册用户</Subject>
-  <Content>亲爱的[Name]用户
+  <Value>
+    亲爱的[Name]用户:
 
     你已经在XXX系统成功注册了一个新账号，为了请点击下面的连接验证。
 
@@ -14,5 +15,6 @@
     Email:[Email]
 
 
-    管理员</Content>
-</EmailTemplate>
+    管理员
+  </Value>
+</Content>

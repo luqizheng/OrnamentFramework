@@ -491,5 +491,14 @@ namespace MultiLanguage {
                 return ResourceManager.GetString("UserGroup", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Verify Code 的本地化字符串。
+        /// </summary>
+        public static string VerifyCode {
+            get {
+                return ResourceManager.GetString("VerifyCode", resourceCulture);
+            }
+        }
     }
 }

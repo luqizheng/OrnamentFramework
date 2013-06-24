@@ -100,6 +100,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
@@ -156,6 +157,7 @@
     <Compile Include="Models\GlobalInitializer.cs" />
     <Compile Include="Models\IDataInitializer.cs" />
     <Compile Include="Models\InitData.cs" />
+    <Compile Include="Models\VerifyCodeBuilder.cs" />
     <Compile Include="MvcSiteMapHelper.cs" />
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="OrnamentWebApiFactory.cs" />

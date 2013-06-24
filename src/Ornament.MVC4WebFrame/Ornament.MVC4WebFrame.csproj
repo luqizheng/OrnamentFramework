@@ -259,6 +259,7 @@
     <Compile Include="Controllers\PersonalMessageController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\VerifyCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -965,6 +966,7 @@
     <Content Include="Views\Shared\EditorTemplates\Bool.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

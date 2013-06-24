@@ -22,6 +22,11 @@ namespace Ornament.Models.Memberships
 
         [Display(Name = "RememberMe", ResourceType = typeof(MemberShipModel))]
         public bool RememberMe { get; set; }
+        [Display(Name = "VerifyCode", ResourceType = typeof(MemberShipModel))]
+        [UIHint("VerifyCode")]
+        public string VerifyCodde
+        {
+            get; set; }
 
         public bool Validate(out string errorMessage, IUserDao userDao)
         {

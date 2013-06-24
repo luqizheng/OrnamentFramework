@@ -25,7 +25,7 @@
                 <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
                 <ul class="dropdown-menu pull-right">
                     <li><a href="#"><i class="icon-plus"></i>Register</a></li>
-                    <li><a href="@Url.Action("ForgetPassword","Account")"><i class="icon-refresh"></i>@Html.GetResourceString("ForgetPassword")</a></li>
+                    <li><a href="@Url.Action("ForgetPassword", "Account")"><i class="icon-refresh"></i>@Html.GetResourceString("ForgetPassword")</a></li>
                     <li><a href="#"><i class="icon-cog"></i>Settings</a></li>
                 </ul>
             </div>
@@ -51,7 +51,7 @@
                     @Html.ValidationMessageFor(m => m.Password)
                 </div>
             </div>
-
+            @Html.EditorFor(m => m.VerifyCodde)
             <div class="control-group">
                 <div class="controls">
                     <label class="checkbox inline">
