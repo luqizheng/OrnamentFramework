@@ -1,11 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ornament.Models.Messages
 {
     public class NotifyTypeModel
     {
+        private IDictionary<string, Content> _contents;
+
         public NotifyTypeModel()
         {
         }
@@ -15,6 +19,7 @@ namespace Ornament.Models.Messages
             Name = type.Name;
             Remark = type.Remark;
             CommunicationType = type.CommunicationType;
+            this.Contents = type.Contents;
         }
 
         /// <summary>
@@ -34,8 +39,17 @@ namespace Ornament.Models.Messages
 
         /// <summary>
         /// </summary>
-        [UIHint("EnumCheckBox")]
+        [UIHint("EnumCheckBox"), Required()]
         public CommunicationType CommunicationType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [System.Web.Mvc.AllowHtml]
+        public virtual IDictionary<string, Content> Contents
+        {
+            get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
+            set { _contents = value; }
+        }
 
         public void Save(INotifyTypeDao dao)
         {
@@ -43,7 +57,11 @@ namespace Ornament.Models.Messages
             type.Name = Name;
             type.Remark = Remark;
             type.CommunicationType = CommunicationType;
-
+            type.Contents.Clear();
+            foreach (var key in Contents.Keys)
+            {
+                type.Contents.Add(key, Contents[key]);
+            }
             dao.SaveOrUpdate(type);
             dao.Flush();
         }

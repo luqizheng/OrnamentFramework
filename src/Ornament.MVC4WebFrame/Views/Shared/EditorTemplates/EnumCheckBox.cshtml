@@ -2,9 +2,9 @@
 @model Enum
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var inputName = ViewData.TemplateInfo.GetFullHtmlFieldName(ViewData.TemplateInfo.HtmlFieldPrefix);
-    var dict = EnumHelper.GetDescriptionList(this.Model.GetType());
-    object current = this.Model ?? Enum.GetValues(this.Model.GetType()).GetValue(0);
+    var inputName = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var dict = EnumHelper.GetDescriptionList(ViewData.ModelMetadata.ModelType);
+    object current = this.Model ?? Enum.GetValues(ViewData.ModelMetadata.ModelType).GetValue(0);
 }
 <div class="control-group">
     <label class="control-label">@display</label>

@@ -72,6 +72,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +91,6 @@
     <Compile Include="EditState.cs" />
     <Compile Include="Newses\NewsType.cs" />
     <Compile Include="Notification\NotifyType.cs" />
-    <Compile Include="Notification\Templates\EmailTemplate.cs" />
-    <Compile Include="Notification\Templates\EmailTemplateManager.cs" />
-    <Compile Include="Notification\Templates\TemplateManager.cs" />
     <Compile Include="PersonalMessages\PersonalMessage.cs" />
     <Compile Include="Notification\Reader.cs" />
     <Compile Include="Priority.cs" />

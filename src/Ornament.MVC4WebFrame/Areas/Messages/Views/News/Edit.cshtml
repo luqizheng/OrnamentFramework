@@ -99,8 +99,7 @@
                                 <div class="controls">
 
                                     <select id="Language">
-                                        @if (Model != null)
-                                        {
+                                        @{
                                             var langs = OrnamentContext.Configuration.Languages;
                                             foreach (var lang in langs)
                                             {
@@ -138,7 +137,8 @@
     <script type="text/javascript">
         var content = @Html.Raw(contents)
 
-        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap", "datePicker", "user", "org", "role", "usergroup"], function () {
+        seajs.use(['ckeditor/ckeditor.js', "select2",
+                "bootstrap", "datePicker", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
 
             var editor = CKEDITOR.replace('editor');
             editor.on("blur", function () {
@@ -161,7 +161,7 @@
             });
 
 
-            $("#submitButton").click(function () {
+            $("form").submit(function () {
                 //Make sure the editor save to content.
 
                 content[$("#Language").val()] = {
@@ -174,7 +174,7 @@
                     ary.push("<input type='hidden' value='" + content[key].content + "' name='NewContents[" + key + "]'/>");
                     ary.push("<input type='hidden' value='" + content[key].subject + "' name='NewSubjects[" + key + "]'/>");
                 }
-                $("form").append(ary.join("")).submit();
+                $("form").append(ary.join(""));
             });
         });
 

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Web.Mvc;
 
 namespace Ornament.Messages
 {
     public class Content
     {
-        protected Content()
+        public Content()
         {
-            
+
         }
 
         public Content(string language)
@@ -20,7 +21,7 @@ namespace Ornament.Messages
         /// <summary>
         /// </summary>
         public virtual string Language { get; set; }
-      
+        [AllowHtml]
         public virtual string Value { get; set; }
 
         public override int GetHashCode()

@@ -9,6 +9,7 @@
     <div class="controls">
         <label class="checkbox">
             @Html.CheckBox("", this.Model ?? false, new { @class = "styled" })
+            @Html.ValidationMessage("")
         </label>
     </div>
 </div>

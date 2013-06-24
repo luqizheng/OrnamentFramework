@@ -164,10 +164,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Messages\" />
-    <Folder Include="nhibernateExtenders\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>

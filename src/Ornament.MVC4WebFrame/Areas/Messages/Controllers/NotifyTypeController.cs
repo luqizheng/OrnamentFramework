@@ -38,7 +38,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         public ActionResult Edit(string id)
         {
             var result = new NotifyTypeModel(_notifyTypeDao.Get(id));
-            return View(result);
+            return View("Edit", result);
         }
 
         /// <summary>
@@ -46,6 +46,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpPost, Session(true, Transaction = true), ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Save(NotifyTypeModel type)
         {
             if (ModelState.IsValid)
@@ -53,8 +54,6 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                 type.Save(_notifyTypeDao);
                 return RedirectToAction("Index");
             }
-            if (type.Id == null)
-                return View("Create", type);
             return View("Edit", type);
         }
 
@@ -63,7 +62,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            return View();
+            return View("Edit");
         }
 
 
@@ -72,7 +71,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         {
             INotifyTypeDao dao = _notifyTypeDao;
             dao.Delete(dao.Get(id));
-            return Json(new {success = true});
+            return Json(new { success = true });
         }
     }
 }

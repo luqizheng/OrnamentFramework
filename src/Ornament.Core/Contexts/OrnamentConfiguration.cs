@@ -10,26 +10,35 @@ namespace Ornament.Contexts
         private MessagesConfig _messagesConfig;
 
         private ApplicationSetting _setting;
-
+        /// <summary>
+        /// 
+        /// </summary>
 
         public ApplicationSetting ApplicationSetting
         {
             get { return _setting ?? (_setting = new ApplicationSetting()); }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public MessagesConfig MessagesConfig
         {
             get { return _messagesConfig ?? (_messagesConfig = new MessagesConfig()); }
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public LanguageCollection Languages
         {
             get { return _languages; }
         }
 
         private Language _language;
+        /// <summary>
+        /// 
+        /// </summary>
         public Language DefaultLanguage
         {
             get
