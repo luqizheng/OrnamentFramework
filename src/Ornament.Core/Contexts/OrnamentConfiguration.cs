@@ -26,7 +26,7 @@ namespace Ornament.Contexts
             get { return _messagesConfig ?? (_messagesConfig = new MessagesConfig()); }
         }
 
-
+        
         /// <summary>
         /// 
         /// </summary>

@@ -256,6 +256,6 @@
     <value>用户分组</value>
   </data>
   <data name="VerifyCode" xml:space="preserve">
-    <value>Verify Code</value>
+    <value>验证码</value>
   </data>
 </root>

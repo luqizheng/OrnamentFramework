@@ -1,22 +1,28 @@
 ﻿@model string
 
 <div class="control-group" id="verifyCode">
-    <div class="hide">
-        <img src="@Url.Action("Index", "VerifyCode", new { area = "" })" style="border: none" alt="" onclick=" this.src " />
-    </div>
     <div class="controls">
-        @Html.Label("", new { @class = "control-label" })
+        @Html.Label("", new { @class = "control-label", autocomplete = "off" })
         @Html.TextBox("", "", new { @class = "span12" })
         @Html.ValidationMessage("")
     </div>
 </div>
 
 <script type="text/javascript">
+    var tmp = '<img src="@Url.Action("Index", "VerifyCode", new { area = "" })" onclick="fresh(this)" class="verifyCode"/>';
     seajs.use(["bootstrap"], function () {
-        var $tag = $("#verifyCode");
-        $tag.find("input").popover({
-            html: true, placement: "top",
-            content: $tag.find("div:first").html()
+        var ca, $tag = $("#verifyCode");
+        $("a.verifyCode").on("click", function () {
+            this.src = $(this).first().attr("src") + "?" + Math.random();
+        });
+
+        ca = $tag.find("input").popover({
+            html: true, placement: "top", title: "Please input Verify Code",
+            content: tmp
         });
     });
+    function fresh(tag) {
+        var $tag = $(".verifyCode");
+        tag.src = $tag.attr("src") + "?" + Math.random();
+    }
 </script>

@@ -14,6 +14,7 @@ namespace Ornament.Web
     /// </summary>
     public static class WebOrnamentContextExtender
     {
+        public static readonly string VerifyCodeKey = "VerifyCode";
         /// <summary>
         /// </summary>
         static WebOrnamentContextExtender()
@@ -22,7 +23,11 @@ namespace Ornament.Web
                            .Register(
                                Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
-
+        
+        public static string CurrentVerifyCode(this MemberShipContext context)
+        {
+            return HttpContext.Current.Session[VerifyCodeKey] as string;
+        }
 
         /// <summary>
         /// </summary>

@@ -172,22 +172,22 @@
     <value>登錄名或電子郵件</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>記住密碼.</value>
+    <value>記住密碼</value>
   </data>
   <data name="AssignRoles" xml:space="preserve">
     <value>分配角色</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>在一次密码</value>
+    <value>再一次密碼</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
-    <value>创建时间</value>
+    <value>創建時間</value>
   </data>
   <data name="CurrentPassword" xml:space="preserve">
-    <value>当前密码</value>
+    <value>當前密碼</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>电子邮件</value>
+    <value>電子郵件</value>
   </data>
   <data name="IsApproved" xml:space="preserve">
     <value>是否批准使用</value>
@@ -214,46 +214,40 @@
     <value>登录名</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="Name1" xml:space="preserve">
     <value>名稱</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
-    <value>新密码</value>
+    <value>新密碼</value>
   </data>
   <data name="Operator" xml:space="preserve">
     <value>操作</value>
   </data>
   <data name="Org" xml:space="preserve">
-    <value>组织</value>
+    <value>組織</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>密码</value>
+    <value>密碼</value>
   </data>
   <data name="PasswordAnswer" xml:space="preserve">
-    <value>密码答案</value>
+    <value>取回密碼答案</value>
   </data>
   <data name="PasswordQuestion" xml:space="preserve">
-    <value>密码问题</value>
+    <value>取回密碼問題</value>
   </data>
   <data name="Permission" xml:space="preserve">
-    <value>许可证</value>
-  </data>
-  <data name="Permission1" xml:space="preserve">
     <value>許可證</value>
   </data>
   <data name="PermissionName" xml:space="preserve">
-    <value>许可证名称</value>
+    <value>許可證名稱</value>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>电话</value>
+    <value>電話</value>
   </data>
   <data name="Phone1" xml:space="preserve">
     <value>電話</value>
   </data>
   <data name="RegistryTime" xml:space="preserve">
-    <value>注册时间</value>
+    <value>註冊時間</value>
   </data>
   <data name="Remark" xml:space="preserve">
     <value>备注</value>
@@ -262,12 +256,12 @@
     <value>角色</value>
   </data>
   <data name="User" xml:space="preserve">
-    <value>用户</value>
+    <value>用戶</value>
   </data>
   <data name="UserGroup" xml:space="preserve">
-    <value>用户分组</value>
+    <value>用戶分組</value>
   </data>
   <data name="VerifyCode" xml:space="preserve">
-    <value>Verify Code</value>
+    <value>驗證碼</value>
   </data>
 </root>

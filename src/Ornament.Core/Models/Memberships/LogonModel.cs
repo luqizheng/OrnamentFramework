@@ -2,8 +2,6 @@
 using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
-
 
 namespace Ornament.Models.Memberships
 {
@@ -15,21 +13,24 @@ namespace Ornament.Models.Memberships
         [Display(Name = "LoginId", ResourceType = typeof (MemberShipModel))]
         public string User { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof(MemberShipModel))]
+        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof (MemberShipModel))]
         [Display(Name = "Password", ResourceType = typeof (MemberShipModel))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof(MemberShipModel))]
+        [Display(Name = "RememberMe", ResourceType = typeof (MemberShipModel))]
         public bool RememberMe { get; set; }
-        [Display(Name = "VerifyCode", ResourceType = typeof(MemberShipModel))]
+
+        [Display(Name = "VerifyCode", ResourceType = typeof (MemberShipModel))]
         [UIHint("VerifyCode")]
-        public string VerifyCodde
-        {
-            get; set; }
+        public string VerifyCodde { get; set; }
 
         public bool Validate(out string errorMessage, IUserDao userDao)
         {
+            if (OrnamentContext.Configuration.ApplicationSetting.EnableVerifyCode)
+            {
+            }
+
             errorMessage = null;
             User u = userDao.GetByLoginId(User);
             if (u == null)
@@ -48,6 +49,7 @@ namespace Ornament.Models.Memberships
                 errorMessage = MemberShipModel.error_UserIsNotApproved;
                 return false;
             }
+
 
             bool result = u.ValidateUser(Password);
             if (!result)

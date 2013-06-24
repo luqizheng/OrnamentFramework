@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Ornament.Contexts
 {
@@ -8,7 +9,10 @@ namespace Ornament.Contexts
         {
             get { return ConfigurationManager.AppSettings["SupportEmail"]; }
         }
-
+        public bool EnableVerifyCode
+        {
+            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyCode"] ?? "false"); }
+        }
         public string WebDomainUrl
         {
             get
