@@ -1,78 +1,76 @@
-﻿using Ornament.Messages;
+﻿using System.Collections.Generic;
+using Ornament.Messages;
 using Ornament.Messages.Dao;
-using Ornament.Messages.Newses;
+using Ornament.Messages.Notification;
 
 namespace Ornament.Contexts
 {
     public class MessagesConfig
     {
-        public const string PersonalMesssage = "Personal";
-        public const string TaskMessage = "Task";
-        public const string Notification = "Notification";
-        public static string PersonalMessageId;
-        public static string TaskId;
-        public static string NotificationId;
+        public const string AccountNotifyChangeName = "Account changed(Inside)";
+        public const string RegistUserName = "Regist New Account(Inside)";
+        public const string VerifyEmailAddress = "Verify Email Address(Inside)";
+        private static string _personalMessageId;
+        private static string _registId;
+        private static string _verifyEmailAddressId;
 
-        public NewsType PersonalNewsType
+        /// <summary>
+        /// </summary>
+        public NotifyType RegistAccountName
         {
             get
             {
-                INewsTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao;
-                if (PersonalMessageId == null)
+                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
+                if (_personalMessageId == null)
                 {
-                    NewsType personal = dao.GetByName(PersonalMesssage) ?? new NewsType(PersonalMesssage);
-                    if (string.IsNullOrEmpty(personal.Id))
-                    {
-                        dao.SaveOrUpdate(personal);
-                        dao.Flush();
-                    }
-                    PersonalMessageId = personal.Id;
+                    _personalMessageId = CreateNotifyType(AccountNotifyChangeName, dao,
+                                                          new Dictionary<string, Content>());
                 }
-                return dao.Get(PersonalMessageId);
+                return dao.Get(_personalMessageId);
             }
         }
 
-        public NewsType NotificationNewsType
+        public NotifyType VerifyEmailAddressName
         {
             get
             {
-                INewsTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao;
-                if (NotificationId == null)
+                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
+                if (_verifyEmailAddressId == null)
                 {
-                    NewsType notifi = dao.GetByName(Notification) ??
-                                         new NewsType(Notification);
-                    if (string.IsNullOrEmpty(notifi.Id))
-                    {
-                        dao.SaveOrUpdate(notifi);
-                        dao.Flush();
-                    }
-
-                    NotificationId = notifi.Id;
+                    _verifyEmailAddressId = CreateNotifyType(VerifyEmailAddress, dao, new Dictionary<string, Content>());
                 }
-                return dao.Get(NotificationId);
+                return dao.Get(_verifyEmailAddressId);
             }
         }
 
-        public NewsType TaskNewsType
+        /// <summary>
+        /// </summary>
+        public NotifyType RegistUser
         {
             get
             {
-                INewsTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao;
-                if (TaskId == null)
+                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
+                if (_registId == null)
                 {
-                    NewsType taskNewsType = dao.GetByName(TaskMessage) ??
-                                                  new NewsType(TaskMessage);
-
-                    if (string.IsNullOrEmpty(taskNewsType.Id))
-                    {
-                        dao.SaveOrUpdate(taskNewsType);
-                        dao.Flush();
-                    }
-
-                    TaskId = taskNewsType.Id;
+                    _registId = CreateNotifyType(RegistUserName, dao, new Dictionary<string, Content>());
                 }
-                return dao.Get(TaskId);
+                return dao.Get(_registId);
             }
+        }
+
+
+        public string CreateNotifyType(string name, INotifyTypeDao dao, IDictionary<string, Content> contents)
+        {
+            NotifyType personal = dao.GetByName(name) ?? new NotifyType();
+            personal.Name = name;
+            if (string.IsNullOrEmpty(personal.Id))
+            {
+                dao.SaveOrUpdate(personal);
+                dao.Flush();
+            }
+
+
+            return personal.Id;
         }
     }
 }
