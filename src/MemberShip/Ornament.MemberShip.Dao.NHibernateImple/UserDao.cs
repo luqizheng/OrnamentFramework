@@ -4,6 +4,7 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using NHibernate.Type;
 using Qi;
 using Qi.Domain.NHibernates;
 using Qi.NHibernateExtender;
@@ -35,20 +36,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return _pools.Once(() => Projections.Property<User>(u => u.Id)); }
         }
-
-        #endregion
-
-        #region IUserDao Members
-
         private IProjection PhoneProperty
         {
             get { return Projections.Property<User>(s => s.Phone); }
         }
+        #endregion
 
-        public override IList<User> GetAll()
-        {
-            return CreateDetachedCriteria().GetExecutableCriteria(CurrentSession).List<User>();
-        }
+        #region IUserDao Members
+
+
+
+        //public override IList<User> GetAll()
+        //{
+        //    return CreateDetachedCriteria().GetExecutableCriteria(CurrentSession).List<User>();
+        //}
 
         public IQueryable<User> Users
         {
@@ -78,7 +79,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
             result.Add(a);
             return
-                result.SetFirstResult(pageIndex*pageSize)
+                result.SetFirstResult(pageIndex * pageSize)
                       .SetMaxResults(pageSize)
                       .GetExecutableCriteria(CurrentSession)
                       .List<User>();
@@ -174,7 +175,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
                    .List<User>();
         }
 
@@ -189,7 +190,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.InsensitiveLike(EmailProperty, emailToMatch))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageSize*pageIndex)
+                .SetFirstResult(pageSize * pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -225,7 +226,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
                     pageSize)
                                         .GetExecutableCriteria(CurrentSession)
                                         .List<User>();
@@ -259,7 +260,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> FindAll(int pageIndex, int pageSize)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
                                          GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -291,6 +292,31 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return a.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
+        public IDictionary<DateTime, int> CountNewUser(DateTime start, DateTime end)
+        {
+            var startTime = new DateTime(start.Year, start.Month, start.Day);
+            var endTime = new DateTime(end.Year, end.Month, end.Day, 23, 59, 59, 999);
+            var count = DetachedCriteria.For<User>("user")
+                .SetProjection(
+                    Projections.ProjectionList()
+                    .Add(Projections.SqlGroupProjection("year(CreateTime)", "year(CreateTime)", new[] { "year" }, new IType[] { NHibernateUtil.Int32 }))
+                    .Add(Projections.SqlGroupProjection("Month(CreateTime)", "Month(CreateTime)", new[] { "Month" }, new IType[] { NHibernateUtil.Int32 }))
+                    .Add(Projections.SqlGroupProjection("day(CreateTime)", "day(CreateTime)", new[] { "day" }, new IType[] { NHibernateUtil.Int32 }))
+                    .Add(Projections.RowCount())
+                    )
+                .Add(Restrictions.Gt(Projections.Property<User>(s => s.CreateTime), startTime))
+                .Add(Restrictions.Le(Projections.Property<User>(s => s.CreateTime), endTime))
+                .GetExecutableCriteria(this.CurrentSession)
+                .List();
+            Dictionary<DateTime, int> dictionary = new Dictionary<DateTime, int>();
+            foreach (object[] objects in count)
+            {
+                dictionary.Add(new DateTime((int) objects[0], (int) objects[1], (int) objects[2]), (int) objects[3]);
+            }
+            return dictionary;
+
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="loginId"></param>
@@ -313,7 +339,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         private int Count(SimpleExpression countCondition)
         {
-            return CreateCriteria().Add(countCondition).SetProjection(Projections.Count("Id")).UniqueResult<Int32>();
+            return CreateCriteria().Add(countCondition).SetProjection(Projections.RowCount()).UniqueResult<Int32>();
         }
 
         private ICriterion CreateSearchCondition(string loginId,

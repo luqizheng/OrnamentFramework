@@ -24,7 +24,7 @@ namespace Ornament.MemberShip
         /// </summary>
         public static readonly string AdminLoginId = "admin";
 
-        protected DateTime _createTime;
+     
         //private UserInformation _information;
         private bool _isLockout;
         private string _password;

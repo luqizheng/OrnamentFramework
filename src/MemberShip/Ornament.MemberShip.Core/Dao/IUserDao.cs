@@ -5,6 +5,7 @@ using Qi.Domain;
 
 namespace Ornament.MemberShip.Dao
 {
+    
     public interface IUserDao : IDao<string, User>
     {
         IQueryable<User> Users { get; }
@@ -48,6 +49,11 @@ namespace Ornament.MemberShip.Dao
         IList<User> FindAll(int pageIndex, int pageSize);
 
         int Count(string loginId);
+
         int CountByEmail(string email,string loginIdForExclude);
+
+        IDictionary<DateTime, int> CountNewUser(DateTime start, DateTime end);
+
+
     }
 }
