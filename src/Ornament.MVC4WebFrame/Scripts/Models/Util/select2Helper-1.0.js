@@ -23,29 +23,33 @@
     };
     return {
         select2: function (selector, opts) {
-            var $roleTag = $(selector),
-                $form = $roleTag.closest("form"), options = $.extend({},defaults);
+            var $tag = $(selector),
+                $form = $tag.closest("form"), options = $.extend({}, defaults);
             options.ajax.url = opts.url;
             //options.data = opts.data;
             options.initSelection = function (ele, callback) {
                 callback(opts.data);
                 //callback({ id: "f61ac372fb534f3fb003baed8bea44b5", text: "aaa" });
             };
-            $roleTag.select2(options);
+            $tag.select2(options);
+            $tag.on("change", function (e) {
+                var a =  $tag.val().replace(e.val, "");
+                $tag.val(a);
+            });
             $(document).ready(function () {
                 $form.submit(function () {
-                    var roles = $roleTag.val().split(","),
+                    var roles = $tag.val().split(","),
                         ary = [],
-                        tmp = "<input type='hidden' name='" + $roleTag.attr("name") + "'/>";
+                        tmp = "<input type='hidden' name='" + $tag.attr("name") + "'/>";
 
-                    $roleTag.val(roles.shift());
+                    $tag.val(roles.shift());
                     $(roles).each(function () {
                         var $hid = $(tmp).removeAttr("id").val(this);
                         ary.push($hid);
                     });
                     $form.append(ary);
                 });
-                return $roleTag;
+                return $tag;
             });
         }
     };
