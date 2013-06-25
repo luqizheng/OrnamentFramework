@@ -3,22 +3,31 @@
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
 @using Ornament.Web
+@using Resources
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = "Organization";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var parentId = this.Model != null ? this.Model.Id.ToString() : "";
-    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
-    var editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Modify);
+    string parentId = Model != null ? Model.Id : "";
+    var childOrgs = ((IEnumerable<Org>) ViewData["Orgs"]);
+    bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Modify);
 }
-<div class="box">
-    <div class="content">
-        <div class="btn-toolbar">
-            <a  class="btn btn-primary" href="@Url.Action("Create", new { id = parentId })"><i
-                class="icon-white icon-plus"></i>@Resources.Basic.Create
+@section pageTitle
+{
+    <h5>Org List </h5>
+}
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a  class="btn btn-primary" href="@Url.Action("Create", new {id = parentId})"><i
+                                                                                              class="icon-white icon-plus"></i>@Basic.Create
             </a>
         </div>
-        @Html.Partial("OrgNavigator", this.Model)
+    </div>
+
+    <div class="body">
+
+        @Html.Partial("OrgNavigator", Model)
         <div class="row">
             @if (childOrgs.Count() != 0)
             {
@@ -26,8 +35,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>
-                                </th>
+                                <th></th>
                                 <th>
                                     @Html.LabelFor(s => s.Name)
                                 </th>
@@ -36,55 +44,52 @@
                                 </th>
                             </tr>
                         </thead>
-                        @foreach (var item in childOrgs)
+                        @foreach (Org item in childOrgs)
                         {
                             <tr>
                                 <th>
-                                    <a href="@Url.Action("index", new { id = item.Id })" class="btn btn-info btn-mini"><i
-                                        class="icon-arrow-right icon-white"></i></a>
+                                    <a href="@Url.Action("index", new {id = item.Id})" class="btn btn-info btn-mini"><i
+                                                                                                                         class="icon-arrow-right icon-white"></i></a>
                                 </th>
                                 <td>@item.Name
                                 </td>
                                 <td>@item.Remark
                                 </td>
                             </tr>
-
                         }
                     </table>
                 </div>
             }
-            @if (this.Model != null)
+            @if (Model != null)
             {
-        
                 <form method="post" class="form-horizontal span6 offset2" action="@Url.Action("Edit")">
-                @if (this.Model.Parent != null)
-                {
-                    <input type="hidden" value="@this.Model.Parent.Id" name="parentId"/>
-                }
-                <input type="hidden" name="Id" value="@this.Model.Id"/>
-                <div class="control-group">
-                    @Html.LabelFor(s => s.Name, new { @class = "control-label" })
-                    <div class="controls">
-                        @(editPermission ? Html.TextBoxFor(s => s.Name) : Html.TextBoxFor(s => s.Name, new { disabled = "disabled" }))
-                        @Html.ValidationMessageFor(s => s.Name)
+                    @if (Model.Parent != null)
+                    {
+                        <input type="hidden" value="@Model.Parent.Id" name="parentId"/>
+                    }
+                    <input type="hidden" name="Id" value="@Model.Id"/>
+                    <div class="control-group">
+                        @Html.LabelFor(s => s.Name, new {@class = "control-label"})
+                        <div class="controls">
+                            @(editPermission ? Html.TextBoxFor(s => s.Name) : Html.TextBoxFor(s => s.Name, new {disabled = "disabled"}))
+                            @Html.ValidationMessageFor(s => s.Name)
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
-                    <div class="controls">
-                        @(editPermission ? Html.TextAreaFor(s => s.Remark) : Html.TextAreaFor(s => s.Remark, new { disabled = "disabled" }))
-                        @Html.ValidationMessageFor(s => s.Remark)
+                    <div class="control-group">
+                        @Html.LabelFor(s => s.Remark, new {@class = "control-label"})
+                        <div class="controls">
+                            @(editPermission ? Html.TextAreaFor(s => s.Remark) : Html.TextAreaFor(s => s.Remark, new {disabled = "disabled"}))
+                            @Html.ValidationMessageFor(s => s.Remark)
+                        </div>
                     </div>
-                </div>
-                @if (editPermission)
-                {
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="icon-pencil icon-white"></i>@Resources.Basic.Save</button>
-                    </div>
-                }
+                    @if (editPermission)
+                    {
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="icon-pencil icon-white"></i>@Basic.Save</button>
+                        </div>
+                    }
                 </form>
-        
             }
         </div>
     </div>

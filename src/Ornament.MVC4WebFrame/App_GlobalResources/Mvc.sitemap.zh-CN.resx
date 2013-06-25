@@ -141,7 +141,7 @@
   <data name="membership.title" xml:space="preserve">
     <value>用户管理</value>
   </data>
-  <data name="orgIndex.title" xml:space="preserve">
+  <data name="orgList.title" xml:space="preserve">
     <value>组织单元列表</value>
   </data>
   <data name="permissionList.title" xml:space="preserve">

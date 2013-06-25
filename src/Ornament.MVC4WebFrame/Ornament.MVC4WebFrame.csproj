@@ -1134,7 +1134,7 @@
     <Content Include="Views\Shared\NavPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResourceType.cshtml" />

@@ -3,11 +3,13 @@ using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Models.Messages;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
+    [Authorize(Roles = "admin", Users = "admin")]
     public class NewsTypeController : Controller
     {
         private readonly IMessageDaoFactory _messageDao;
@@ -44,7 +46,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
         public ActionResult Create()
         {
-            var result = new NewsTypeModel {Name = "new message type"};
+            var result = new NewsTypeModel { Name = "new message type" };
 
             return View(result);
         }
@@ -60,12 +62,12 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             return View(type);
         }
 
-        [HttpPost]
+     
         public ActionResult Delete(string id)
         {
             INewsTypeDao dao = _messageDao.NewsTypeDao;
             dao.Delete(dao.Get(id));
-            return Json(new {success = true});
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

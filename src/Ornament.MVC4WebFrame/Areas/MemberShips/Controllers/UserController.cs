@@ -46,7 +46,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             {
                 email = Request.QueryString[0];
                 id = Request.QueryString[1];
-                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email,id) == 0, JsonRequestBehavior.AllowGet);
+                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
+                            JsonRequestBehavior.AllowGet);
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -235,7 +236,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
                                                    u.Email.Contains(loginIdOrEmail)

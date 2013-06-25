@@ -1,0 +1,43 @@
+﻿@using Ornament.MemberShip
+@using Qi.Web.Mvc
+@using Resources
+@model Ornament.Models.Memberships.OrgModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var parent = ViewData["ParentOrg"] as Org;
+}
+@Html.Partial("OrgNavigator", parent)
+<div class="widget">
+
+    <div class="well">
+        <div class="form-horizontal">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+    
+                @Html.EditorFor(s => s.Name)
+                @Html.EditorFor(s => s.Remark)
+                @Html.EditorFor(s=>s.Roles)
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="btn-toolbar form-actions">
+                    <a id="submit" class="btn btn-primary">@Basic.OK</a>
+                    <a  id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                </div>
+    
+            }
+        </div>
+    </div>
+</div>
+@section script{
+    <script type="text/javascript">
+        seajs.use(['jquery'], function () {
+
+            $(".btn-toolbar a:first").click(function () {
+                $("form").submit();
+            });
+        });
+
+    </script>
+}

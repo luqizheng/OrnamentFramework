@@ -8,32 +8,29 @@ using Ornament.MemberShip.Languages;
 
 namespace Ornament.Models.Memberships
 {
-    public class UserGroupModel
+    public class OrgModel
     {
-        private readonly UserGroup _ug;
-
-        public UserGroupModel()
+        public OrgModel()
         {
         }
 
-        public UserGroupModel(UserGroup ug)
+        public OrgModel(Org org)
         {
-            _ug = ug;
-            Id = ug.Id;
-            Name = ug.Name;
-            Remark = ug.Remark;
-            Roles = ug.GetAllRoles().ToArray();
+            Id = org.Id;
+            Name = org.Name;
+            Remark = org.Remark;
+            Roles = org.GetAllRoles().ToArray();
         }
+
         /// <summary>
-        /// 
-        /// </summary>
-        public string Id { get; set; }
-        /// <summary>
-        /// 
         /// </summary>
         [UIHint("RoleMultiSelect")]
         [Display(Name = "Role", ResourceType = typeof (MemberShipModel))]
         public Role[] Roles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        public string Id { get; set; }
 
         /// <summary>
         /// </summary>
@@ -43,18 +40,18 @@ namespace Ornament.Models.Memberships
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("string")]
         public string Name { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         [Display(Name = "Remark", ResourceType = typeof (MemberShipModel)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }
 
-        public void Save(IUserGroupDao dao)
+        public void Save(IOrgDao dao,string parentId)
         {
             string id = Id.Trim();
-            UserGroup ug = dao.Get(id);
+            Org ug = dao.Get(id);
             ug.Name = Name;
             ug.Remark = Remark;
             dao.SaveOrUpdate(ug);

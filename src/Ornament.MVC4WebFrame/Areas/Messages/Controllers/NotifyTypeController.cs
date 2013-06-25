@@ -8,6 +8,7 @@ using Qi.Web.Mvc;
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
+    [Authorize(Roles = "admin", Users = "admin")]
     public class NotifyTypeController : Controller
     {
         private readonly INotifyTypeDao _notifyTypeDao;
@@ -66,12 +67,11 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         }
 
 
-        [HttpPost]
         public ActionResult Delete(string id)
         {
             INotifyTypeDao dao = _notifyTypeDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true });
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

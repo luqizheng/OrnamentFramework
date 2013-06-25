@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Models.Memberships;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
@@ -39,31 +39,24 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Create(string id)
         {
-
             ViewData["ParentOrg"] = id != null ? _factory.CreateOrgDao().Get(id) : null;
-            return View();
+            return View("Edit");
         }
 
         //
         // POST: /Orgs/Create
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create([ModelBinder(typeof(NHModelBinder))] Org org, string parentId)
+        public ActionResult Save(OrgModel org, string parentId)
         {
             if (ModelState.IsValid)
             {
-
-                var orgDao = _factory.CreateOrgDao();
-                orgDao.SaveOrUpdate(org);
-                if (parentId != null)
-                {
-                    var parent = orgDao.Get(parentId);
-                    parent.Add(org);
-
-                }
+                IOrgDao orgDao = _factory.CreateOrgDao();
+                orgDao.Save(orgDao,parentId);
+               
                 return RedirectToAction("Index");
             }
-            return View(org);
+            return View("Edit", org);
         }
 
         //
@@ -81,7 +74,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 ViewData["Orgs"] = org.GetAllChilds();
             }
 
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (parentId != null)
                 {
@@ -94,7 +87,6 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 return RedirectToAction("Index", new { id = parentId });
             else
                 return RedirectToAction("Index");
-
         }
     }
 }
