@@ -10,11 +10,11 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             var init = new IDataInitializer[]
                 {
+                    new MessageInit(),
                     new MembershipInit
                         {
                             AdminPassword = "123456"
-                        },
-                    new MessageInit()
+                        }
                 };
             foreach (IDataInitializer initializer in init)
             {

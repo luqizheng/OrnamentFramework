@@ -1,5 +1,4 @@
-﻿using System;
-using Ornament.MemberShip;
+﻿using Ornament.MemberShip;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
@@ -19,23 +18,32 @@ namespace Ornament.Web
 
         public bool IsNeedInitialize
         {
-            get { return false; }
+            get
+            {
+                User user = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
+                return user == null;
+            }
         }
 
         public void CreateData()
         {
+            NotifyType a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
+            NotifyType b = OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress;
+            NotifyType c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
+
+
             //InitMessageType();
-            InitTask();
-            InitNotify();
+            //InitTask();
+            // InitNotify();
         }
 
         private void InitTask()
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
             INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
-            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
+            IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
-            var m = new NotifyMessage(admin) { State = EditState.Published };
+            var m = new NotifyMessage(admin) {State = EditState.Published};
             m.Contents.Add("zh-CN", new Content("zh-CN")
                 {
                     Subject = "请修改初始化密码",
@@ -52,7 +60,7 @@ namespace Ornament.Web
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
             INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
-            var readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
+            IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
 
             for (int i = 0; i < 30; i++)
@@ -73,7 +81,6 @@ namespace Ornament.Web
                 msgDao.SaveOrUpdate(m);
                 var reader = new Reader(admin, m);
                 readerDao.SaveOrUpdate(reader);
-
             }
             msgDao.Flush();
         }
