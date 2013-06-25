@@ -103,7 +103,7 @@
     <Compile Include="RoleDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="UserGroupDao.cs" />
-    <Compile Include="UserSecretTokenDao.cs" />
+    <Compile Include="UserSecurityTokenDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Messages\Ornament.Messages.Dao.NHibernateImple\Ornament.Messages.Dao.NHibernateImple.csproj">

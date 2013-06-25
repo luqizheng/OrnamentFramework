@@ -5,33 +5,11 @@ using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip
 {
-
-    #region
-
-    #endregion
-
     public partial class User
     {
-        #region Nested type: UserInformation
-
-        ///// <summary>
-        ///// </summary>
-        //[Serializable]
-        //public class UserInformation
-        //{
         private string _email;
         private string _phone;
 
-        //protected UserInformation()
-        //{
-        //}
-
-        //internal UserInformation(User user)
-        //{
-        //    User = user;
-        //}
-
-        //private User User { get; set; }
 
         /// <summary>
         ///     Gets or sets Phone.
@@ -40,7 +18,7 @@ namespace Ornament.MemberShip
         ///     The phone.
         /// </value>
         [Display(Name = "Phone", ResourceType = typeof (Resources)),
-         StringLength(30, MinimumLength = 0, ErrorMessage = "长度必须在1至30之间")]
+         StringLength(30)]
         public virtual string Phone
         {
             get { return _phone; }
@@ -75,17 +53,8 @@ namespace Ornament.MemberShip
                 {
                     ModifyUpdateTime();
                 }
-                //const string pattern = @"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b";
-                //if (!Regex.IsMatch(value, pattern))
-                //    throw new ArgumentException("Available e-mail");
-
                 _email = value;
             }
-            
         }
-
-        //}
-
-        #endregion
     }
 }

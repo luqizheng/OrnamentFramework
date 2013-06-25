@@ -13,7 +13,7 @@ namespace Ornament.Messages.Notification
         private IDictionary<string, Content> _contents;
         private Iesi.Collections.Generic.ISet<Reader> _readers;
 
-
+        
         /// <summary>
         /// </summary>
         /// <param name="publisher"></param>
@@ -27,7 +27,7 @@ namespace Ornament.Messages.Notification
                 throw new ArgumentNullException("publisher");
         }
 
-        protected NotifyMessage()
+        public NotifyMessage()
         {
             CreateTime = DateTime.Now;
             State = EditState.Draft;

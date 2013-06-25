@@ -38,7 +38,7 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IOrgDao CreateOrgDao();
 
-        IUserSecretTokenDao CreateUserSecortTokeDao();
+        IUserSecurityTokenDao CreateUserSecurityTokenDao();
 
         /// <summary>
         /// </summary>

@@ -46,11 +46,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
 
 
-        //public override IList<User> GetAll()
-        //{
-        //    return CreateDetachedCriteria().GetExecutableCriteria(CurrentSession).List<User>();
-        //}
-
         public IQueryable<User> Users
         {
             get { return SessionManager.Instance.GetCurrentSession().Query<User>(); }

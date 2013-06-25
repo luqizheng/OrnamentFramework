@@ -12,11 +12,16 @@
                 @Html.ValidationMessageFor(s => s.Name)
             </div>
         </div>
+
         <div class="control-group">
             @Html.LabelFor(s => s.Email, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(s => s.Email)
+                <div class="input-append">
+                    @Html.TextBoxFor(s => s.Email)
+                    <button id="VerifyEmail" class="btn" type="button">@Basic.Validate</button>
+                </div>
                 @Html.ValidationMessageFor(s => s.Email)
+
             </div>
         </div>
         <div class="control-group">
@@ -34,8 +39,22 @@
 <script type="text/javascript">
     if (typeof SaveSuccess == "undefined") {
         function SaveSuccess(e) {
-            alert("@Basic.SaveSuccess");
+            if (e.success) {
+                if (!e.emailChanged)
+                    alert("@Basic.SaveSuccess");
+            }
+
         }
     }
-
+    seajs.use(["jquery"], function () {
+        $("#VerifyEmail").click(function () {
+            $.get("@Url.Action("VarifyEmail")", { email: $("#Email").val() }, function (d) {
+                if (d.success) {
+                    alert("Verify eMail has sent,Please check your eMail.");
+                } else {
+                    alert(d.message);
+                }
+            });
+        });
+    })
 </script>

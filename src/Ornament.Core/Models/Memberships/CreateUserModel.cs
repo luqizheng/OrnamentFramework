@@ -58,6 +58,8 @@ namespace Ornament.Models.Memberships
                     Name = OptionInfo.Name,
                     Phone = OptionInfo.Phone
                 };
+            
+            
             //Check duplicate account.
             IUserDao userDao = dao.CreateUserDao();
             User user = userDao.GetByLoginId(createUser.LoginId);
@@ -72,7 +74,7 @@ namespace Ornament.Models.Memberships
 
             //Create Verify token
             UserSecretToken userSecretToken = UserSecretToken.VerifyEmail(createUser, 180);
-            dao.CreateUserSecortTokeDao().SaveOrUpdate(userSecretToken);
+            dao.CreateUserSecurityTokenDao().SaveOrUpdate(userSecretToken);
 
             //SendEmail(userSecretToken, createUser);
 

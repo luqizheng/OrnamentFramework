@@ -4,7 +4,7 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
-    public sealed class UserSecretTokenDao : DaoBase<string, UserSecretToken>, IUserSecretTokenDao
+    public sealed class UserSecurityTokenDao : DaoBase<string, UserSecretToken>, IUserSecurityTokenDao
     {
         public UserSecretToken Get(User user, ActiveUserAction action)
         {

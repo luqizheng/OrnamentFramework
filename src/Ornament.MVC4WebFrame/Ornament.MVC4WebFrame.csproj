@@ -909,9 +909,6 @@
     <Content Include="Content\templates\pannonia\img\logo.png" />
     <Content Include="Content\templates\pannonia\img\up_arrow.png" />
     <Content Include="Content\templates\pannonia\img\userpic.png" />
-    <Content Include="Templates\Email\CreateUser.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -954,7 +951,6 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
     <Content Include="Scripts\Models\Memberships\user-1.0.js" />
-    <Content Include="Views\Security\VerifyEmailAndChangePassword.cshtml" />
     <Content Include="Views\HttpErrors\501.cshtml" />
     <Content Include="Views\PersonalMessage\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
@@ -968,6 +964,7 @@
     <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
+    <Content Include="Views\Security\VerifyEmailResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1179,9 +1176,6 @@
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Security\App_LocalResources\VerifyEmailAndChangePassword.resx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\App_LocalResources\Index.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -1189,6 +1183,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\App_LocalResources\Index.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmailResult.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmailResult.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmailResult.zh-CN.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

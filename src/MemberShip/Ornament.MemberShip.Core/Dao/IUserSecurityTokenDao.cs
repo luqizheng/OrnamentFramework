@@ -3,7 +3,7 @@ using Qi.Domain;
 
 namespace Ornament.MemberShip.Dao
 {
-    public interface IUserSecretTokenDao:IDao<string,UserSecretToken>
+    public interface IUserSecurityTokenDao:IDao<string,UserSecretToken>
     {
         UserSecretToken Get(User user, ActiveUserAction action);
     }

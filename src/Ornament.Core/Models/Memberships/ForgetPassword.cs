@@ -27,7 +27,7 @@ namespace Ornament.Models.Memberships
             if (user == null)
                 throw new MemberShipException("Cannot find the account.");
             UserSecretToken s = UserSecretToken.RetrievePassword(user, 30);
-            UserSecretToken token = daoFactory.CreateUserSecortTokeDao().Get(s.Account, s.Action);
+            UserSecretToken token = daoFactory.CreateUserSecurityTokenDao().Get(s.Account, s.Action);
             if (token != null)
             {
                 token.Renew();
@@ -36,7 +36,7 @@ namespace Ornament.Models.Memberships
             {
                 token = s;
             }
-            daoFactory.CreateUserSecortTokeDao().Save(token);
+            daoFactory.CreateUserSecurityTokenDao().Save(token);
 
             //send email
             var mail = new MailMessage("fantasylu@126.com", user.Email, "取回密码", "")

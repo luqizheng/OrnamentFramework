@@ -7,13 +7,12 @@ namespace Ornament.Messages
     {
         public Content()
         {
-
         }
 
         public Content(string language)
         {
             if (language == null) throw new ArgumentNullException("language");
-            this.Language = language;
+            Language = language;
         }
 
         public virtual string Subject { get; set; }
@@ -21,6 +20,7 @@ namespace Ornament.Messages
         /// <summary>
         /// </summary>
         public virtual string Language { get; set; }
+
         [AllowHtml]
         public virtual string Value { get; set; }
 

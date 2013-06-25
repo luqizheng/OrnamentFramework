@@ -1,8 +1,11 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Mail;
 using System.Security.Principal;
 using System.Web.Mvc;
+using System.Web.Security;
 using Ornament.MVCWebFrame.Models.Membership;
+using Ornament.MemberShip.Dao;
 using Ornament.Models.Memberships;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
@@ -16,15 +19,17 @@ namespace Ornament.MVCWebFrame.Controllers
     [HandleError, Session]
     public class AccountController : Controller
     {
+        private readonly IMemberShipFactory _memberShipFactory;
         // This constructor is used by the MVC framework to instantiate the controller using
         // the default forms authentication and membership providers.
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccountController" /> class.
         /// </summary>
-        public AccountController()
+        public AccountController(IMemberShipFactory memberShipFactory)
             : this(null, null)
         {
+            _memberShipFactory = memberShipFactory;
         }
 
         // This constructor is not used by the MVC framework but is instead provided for ease
@@ -54,6 +59,36 @@ namespace Ornament.MVCWebFrame.Controllers
         ///     Gets MembershipService.
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
+
+        [System.Web.Http.HttpGet]
+        public JsonResult NotDuplicateEmail(string email, string id)
+        {
+            if (Membership.Provider.RequiresUniqueEmail)
+            {
+                email = Request.QueryString[0];
+                id = Request.QueryString[1];
+                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
+                            JsonRequestBehavior.AllowGet);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [System.Web.Http.HttpGet]
+        public JsonResult NotDuplicate(string loginId)
+        {
+            loginId = Request.QueryString[0];
+            return Json(_memberShipFactory.CreateUserDao().Count(loginId) == 0, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult VarifyEmail(string email)
+        {
+            var ss = new MemberSecrityManager(_memberShipFactory.CreateUserSecurityTokenDao(), new SmtpClient());
+            ss.VerifyEmail(OrnamentContext.MemberShip.CurrentUser(),
+                OrnamentContext.Configuration.ApplicationSetting.VerifyEmailTimeout,
+                OrnamentContext.MemberShip.ProfileLanguage());
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
 
 
         /// <summary>
@@ -93,7 +128,11 @@ namespace Ornament.MVCWebFrame.Controllers
         /// </returns>
         public ActionResult LogOn()
         {
-            return View();
+            var a = new LogonModel()
+                {
+                    ReturnUrl = Request.QueryString["ReturnUrl"]
+                };
+            return View(a);
         }
 
         [Authorize]
@@ -107,17 +146,23 @@ namespace Ornament.MVCWebFrame.Controllers
         [HttpPost, Session]
         public ActionResult SaveBaseInfo(FormCollection data)
         {
-            try
+            bool emailChanged = false;
+            OrnamentContext.MemberShip.CurrentUser().Name = data["Name"];
+            if (OrnamentContext.MemberShip.CurrentUser().Email != data["Email"])
             {
-                OrnamentContext.MemberShip.CurrentUser().Name = data["Name"];
+                emailChanged = true;
                 OrnamentContext.MemberShip.CurrentUser().Email = data["Email"];
-                OrnamentContext.MemberShip.CurrentUser().Phone = data["Phone"];
-                return Json("true");
+                var mabnager = new MemberSecrityManager(_memberShipFactory.CreateUserSecurityTokenDao(),
+                                                        new SmtpClient());
+                {
+                    mabnager.VerifyEmail(OrnamentContext.MemberShip.CurrentUser(),
+                                         OrnamentContext.Configuration.ApplicationSetting.VerifyEmailTimeout,
+                                         OrnamentContext.MemberShip.ProfileLanguage());
+                }
             }
-            catch
-            {
-                return Json("false");
-            }
+            OrnamentContext.MemberShip.CurrentUser().Phone = data["Phone"];
+            return Json(new { success = true, emailChanged = emailChanged });
+
         }
 
         /// <summary>
@@ -132,7 +177,8 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             string errorMessage = null;
             if (!ModelState.IsValid ||
-                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao(), OrnamentContext.MemberShip.CurrentVerifyCode()))
+                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao(),
+                                OrnamentContext.MemberShip.CurrentVerifyCode()))
             {
                 if (errorMessage != null)
                 {
@@ -161,7 +207,8 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory, "test[url]", OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl);
+                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory, "test[url]",
+                                OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl);
                 return Redirect("ForgetPasswordSucccess");
             }
             return View();

@@ -24,7 +24,7 @@ namespace Ornament.MemberShip.Secret
         /// <summary>
         /// </summary>
         public virtual DateTime CreateTime { get; protected set; }
-
+        public virtual DateTime? VerifyTime { get; set; }
         /// <summary>
         ///     Gets the PrivateKey of this token, it's auto create
         /// </summary>
@@ -41,6 +41,8 @@ namespace Ornament.MemberShip.Secret
         {
             get
             {
+                if (VerifyTime != null)
+                    return true;
                 TimeSpan now = DateTime.Now - CreateTime;
                 return now.TotalMinutes > ExpireTime;
             }
@@ -48,7 +50,13 @@ namespace Ornament.MemberShip.Secret
 
         public virtual bool Verify(string token)
         {
-            return CreateToken(Account) == token;
+            if (CreateToken(Account) == token)
+            {
+                VerifyTime = DateTime.Now;
+                return true;
+            }
+            return false;
+
         }
 
         private string CreateToken(User user)

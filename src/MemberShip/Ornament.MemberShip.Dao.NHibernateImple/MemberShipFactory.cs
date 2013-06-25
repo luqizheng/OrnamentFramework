@@ -43,9 +43,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new OrgDao();
         }
 
-        public IUserSecretTokenDao CreateUserSecortTokeDao()
+        public IUserSecurityTokenDao CreateUserSecurityTokenDao()
         {
-            return new UserSecretTokenDao();
+            return new UserSecurityTokenDao();
         }
 
 

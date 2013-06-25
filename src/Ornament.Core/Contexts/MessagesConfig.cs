@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
+using Ornament.Properties;
+using Qi.IO.Serialization;
 
 namespace Ornament.Contexts
 {
@@ -22,7 +26,19 @@ namespace Ornament.Contexts
                 {
                     _personalMessageId = CreateNotifyType("Regist New User (Template)",
                                                           "Regist New user, and verify safe email address.", dao,
-                                                          new Dictionary<string, Content>());
+                                                          new Dictionary<string, Content>
+                                                              {
+                                                                  {
+                                                                      "zh-CN",
+                                                                      DeserializerXml(Resources.registAccount_zh_CN,
+                                                                                      "zh-CN")
+                                                                  },
+                                                                  {"en", DeserializerXml(Resources.registAccount, "en")},
+                                                                  {
+                                                                      "zh",
+                                                                      DeserializerXml(Resources.registAccount_zh, "zh")
+                                                                  }
+                                                              });
                 }
                 return dao.Get(_personalMessageId);
             }
@@ -59,16 +75,31 @@ namespace Ornament.Contexts
             }
         }
 
+        private Content DeserializerXml(string text, string lang)
+        {
+            using (var zhStream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
+            {
+                var content = (Content) SerializationHelper.DeserializerXml(zhStream, typeof (Content));
+                content.Language = lang;
+                return content;
+            }
+        }
+
 
         private string CreateNotifyType(string name, string remark, INotifyTypeDao dao,
                                         IDictionary<string, Content> contents)
         {
             NotifyType personal = dao.GetByName(name) ?? new NotifyType();
             personal.Name = name;
+            personal.Remark = remark;
             if (string.IsNullOrEmpty(personal.Id))
             {
                 dao.SaveOrUpdate(personal);
                 dao.Flush();
+            }
+            foreach (string key in contents.Keys)
+            {
+                personal.Contents.Add(key, contents[key]);
             }
 
 

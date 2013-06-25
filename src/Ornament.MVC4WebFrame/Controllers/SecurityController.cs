@@ -2,6 +2,7 @@
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Secret;
 using Ornament.Models.Security;
+using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
@@ -13,26 +14,34 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             _factory = factory;
         }
-
-        //
-        // GET: /Secrity/
-        [Authorize]
-        public ActionResult VerifyEmailAndChangePassword(string id, string token)
+        [Authorize,Session]
+        public ActionResult VerifyEmail(string id, string token)
         {
-            UserSecretToken userToken = _factory.CreateUserSecortTokeDao().Get(id);
-            var result = new VerifyEmailAndChangePasswordResutl();
+            var userToken = _factory.CreateUserSecurityTokenDao().Get(id);
+            try
+            {
 
-            if (userToken == null)
-            {
-                result.Type = VerifyEmailAndChangePasswordResutlType.NotFoundTokenId;
+                if (userToken == null)
+                {
+                    return View("~/Views/HttpErrors/404.cshtml");
+                }
+                if (userToken.IsExpire)
+                {
+                    return View("VerifyEmailResult", VerifyResutl.Expire);
+                }
+                if (userToken.Verify(token))
+                {
+                    return View("VerifyEmailResult", VerifyResutl.Success);
+                }
+                return View("VerifyEmailResult", VerifyResutl.Failed);
             }
-            else
+            finally
             {
-                result.Type = userToken.Verify(token)
-                    ? VerifyEmailAndChangePasswordResutlType.Success
-                    : VerifyEmailAndChangePasswordResutlType.Failed;
+                _factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
             }
-            return View(result);
+
         }
+
+
     }
 }

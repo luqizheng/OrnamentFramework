@@ -83,7 +83,7 @@
     </Compile>
     <Compile Include="Secret\ActiveUserAction.cs" />
     <Compile Include="Secret\UserSecretToken.cs" />
-    <Compile Include="Dao\IUserSecretTokenDao.cs" />
+    <Compile Include="Dao\IUserSecurityTokenDao.cs" />
     <Compile Include="MemberShipProviders\MembershipContext.cs" />
     <Compile Include="PasswordFormatException.cs" />
     <Compile Include="PasswordResetToken.cs" />

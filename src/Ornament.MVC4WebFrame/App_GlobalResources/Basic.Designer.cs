@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   查找类似 Validate 的本地化字符串。
+        /// </summary>
+        internal static string Validate {
+            get {
+                return ResourceManager.GetString("Validate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Wednesday 的本地化字符串。
         /// </summary>
         internal static string Wednesday {

@@ -25,5 +25,11 @@ namespace Ornament.Contexts
                 return result;
             }
         }
+
+        public int VerifyEmailTimeout
+        {
+
+            get { return Convert.ToInt32(ConfigurationManager.AppSettings["VerifyEmailTimeout"] ?? "144"); }
+        }
     }
 }

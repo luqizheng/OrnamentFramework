@@ -68,7 +68,9 @@ namespace Ornament.Contexts
         }
 
         /// <summary>
+        /// 
         /// </summary>
+        /// <param name="currentUser"></param>
         /// <param name="resType"></param>
         /// <param name="id"></param>
         /// <param name="operator"></param>

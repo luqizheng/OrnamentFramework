@@ -231,4 +231,7 @@
   <data name="Add" xml:space="preserve">
     <value>添加</value>
   </data>
+  <data name="Validate" xml:space="preserve">
+    <value>驗證</value>
+  </data>
 </root>
