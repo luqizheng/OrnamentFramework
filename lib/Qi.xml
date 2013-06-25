@@ -899,26 +899,23 @@
         </member>
         <member name="T:Qi.IO.Serialization.SerializationHelper">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.SerializeBinary(System.Object,System.IO.Stream)">
             <summary>
-            
             </summary>
             <param name="obj"></param>
             <param name="outputSteam"></param>
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.SerializeBinary(System.Object,System.String)">
             <summary>
-            SerializeBinary to binary.
+                SerializeBinary to binary.
             </summary>
             <param name="obj"></param>
             <param name="filePath"></param>
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.DeserializeBinary``1(System.IO.Stream)">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="objectStream"></param>
@@ -926,29 +923,40 @@
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.DeserializeBinary``1(System.String)">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="file"></param>
             <returns></returns>
         </member>
-        <member name="M:Qi.IO.Serialization.SerializationHelper.SerializerXml(System.Object,System.IO.Stream)">
+        <member name="M:Qi.IO.Serialization.SerializationHelper.DeserializeFromXml``1(System.String)">
+            <summary>
+            Deserialize from xml string
+            </summary>
+            <typeparam name="T">Deserialize object Type</typeparam>
+            <param name="xml">xml string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.IO.Serialization.SerializationHelper.SerializerToXml(System.Object)">
             <summary>
             
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.IO.Serialization.SerializationHelper.SerializerXml(System.Object,System.IO.Stream)">
+            <summary>
             </summary>
             <param name="obj"></param>
             <param name="outputSteam"></param>
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.SerializerXml(System.Object,System.String)">
             <summary>
-            
             </summary>
             <param name="obj"></param>
             <param name="file"></param>
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.DeserializerXml(System.String,System.Type)">
             <summary>
-            
             </summary>
             <param name="file"></param>
             <param name="type"></param>
@@ -956,7 +964,6 @@
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.DeserializerXml(System.IO.Stream,System.Type)">
             <summary>
-            
             </summary>
             <param name="stream"></param>
             <param name="type"></param>
@@ -964,7 +971,6 @@
         </member>
         <member name="M:Qi.IO.Serialization.SerializationHelper.DeserializerXml``1(System.String)">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="file"></param>
@@ -1605,13 +1611,12 @@
         </member>
         <member name="T:Qi.Text.NamedFormatterHelper">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.Text.NamedFormatterHelper.Replace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
-            use replacePatten to replace Variables those in ormatString, 
-            Variable need to defined in  square brackets, such as like that "[var]"
+                use replacePatten to replace Variables those in ormatString,
+                Variable need to defined in  square brackets, such as like that "[var]"
             </summary>
             <param name="formatString"></param>
             <param name="replacePattern">a dictionary with key and value,the key without "["</param>
@@ -1619,7 +1624,7 @@
         </member>
         <member name="M:Qi.Text.NamedFormatterHelper.CollectVariable(System.String)">
             <summary>
-            Collect variable express in content, such as "I am a [varName]"
+                Collect variable express in content, such as "I am a [varName]"
             </summary>
             <param name="content"></param>
             <returns></returns>
