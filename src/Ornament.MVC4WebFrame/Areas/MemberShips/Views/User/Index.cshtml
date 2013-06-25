@@ -109,16 +109,21 @@
             @{
                 var userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
                 var totalUser = Convert.ToDouble(userDao.Count());
-                var onlineUser = Membership.GetNumberOfUsersOnline();
+                
+              
             }
             <ul class="statistics">
                 <li>
                     <div class="top-info">
                         <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
-                        <strong>@OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Count()</strong>
+                        @{
+                            var dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
+                            var toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
+                        }
+                        <strong>@toDayUser</strong>
                     </div>
                     <div class="progress progress-micro">
-                        <div class="bar" style="width: 60%;"></div>
+                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser) / totalUser).ToString("p"))"></div>
                     </div>
                     <span>User registrations today</span>
                 </li>
@@ -131,6 +136,7 @@
                     </div>
                     <div class="progress progress-micro">
                         @{
+                            var onlineUser = Membership.GetNumberOfUsersOnline();
                             var onlineRate = (Convert.ToDouble(onlineUser) / totalUser).ToString("p");
                         }
                         <div class="bar" style="width: @onlineRate;"></div>

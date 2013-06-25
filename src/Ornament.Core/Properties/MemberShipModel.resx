@@ -264,4 +264,10 @@
   <data name="VerifyCode" xml:space="preserve">
     <value>Verify Code</value>
   </data>
+  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
+    <value>Please input verify code.</value>
+  </data>
+  <data name="error_notMatchVerifyCode" xml:space="preserve">
+    <value>Verify Code not match.</value>
+  </data>
 </root>

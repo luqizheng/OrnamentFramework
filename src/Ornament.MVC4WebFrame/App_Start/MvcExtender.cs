@@ -17,7 +17,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             //
             ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
-            ValueProviderFactories.Factories[3] = new NHRouterDataProviderFactory();
+            //ValueProviderFactories.Factories[3] = new NHRouterDataProviderFactory();
             ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
 
             //change the default binder.

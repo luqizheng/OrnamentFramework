@@ -69,7 +69,7 @@
             <ul class="dropdown-menu" id="uld">
                 @foreach (var lang in OrnamentContext.Configuration.Languages)
                 {
-                    <li><a href="@Url.Action("SwitchLanguage","Home",new{id=lang.Key})">@lang.Name</a></li>
+                    <li><a href="@Url.Action("SwitchLanguage","Home",new{id=lang.Key,area=""})">@lang.Name</a></li>
                 }
             </ul>
         </li>
