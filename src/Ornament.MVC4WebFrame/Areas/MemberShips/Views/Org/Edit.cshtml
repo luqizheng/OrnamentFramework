@@ -1,43 +1,40 @@
 ﻿@using Ornament.MemberShip
-@using Qi.Web.Mvc
 @using Resources
 @model Ornament.Models.Memberships.OrgModel
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var parent = ViewData["ParentOrg"] as Org;
 }
-@Html.Partial("OrgNavigator", parent)
+@section pageTitle
+{
+    @if (this.Model != null && this.Model.Parent != null)
+    {
+        <h5>Parent Org: @Model.Parent.Name</h5>
+    }
+    else
+    {
+        <h5>Parent Org : Root</h5>
+    }
+    <span></span>
+}
+
 <div class="widget">
 
     <div class="well">
-        <div class="form-horizontal">
-            @using (Html.BeginForm())
-            {
-                @Html.ValidationSummary()
-    
-                @Html.EditorFor(s => s.Name)
-                @Html.EditorFor(s => s.Remark)
-                @Html.EditorFor(s=>s.Roles)
-                @Html.HiddenFor(model => model.Id)
+        @Html.ValidationSummary()
+        @using (Html.BeginForm("Save", "Org", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.EditorFor(s => s.Name)
+            @Html.EditorFor(s => s.Remark)
+            @Html.EditorFor(s => s.Roles)
+          
+            
+            @Html.Hidden("Parent", (this.Model != null && this.Model.Parent != null) ? this.Model.Parent.Id : "")
+            <div class="form-actions">
+                <button class="btn btn-primary">@Basic.OK</button>
+                <button onclick=" location = '@Url.Action("Index")' " class="btn">@Basic.Cancel</button>
+            </div>
+        }
 
-                <div class="btn-toolbar form-actions">
-                    <a id="submit" class="btn btn-primary">@Basic.OK</a>
-                    <a  id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
-                </div>
-    
-            }
-        </div>
     </div>
 </div>
-@section script{
-    <script type="text/javascript">
-        seajs.use(['jquery'], function () {
-
-            $(".btn-toolbar a:first").click(function () {
-                $("form").submit();
-            });
-        });
-
-    </script>
-}

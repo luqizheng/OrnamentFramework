@@ -11,6 +11,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            
 
             context.MapRoute(
                 "MemberShips_default",

@@ -20,9 +20,10 @@ namespace Ornament.Models.Memberships
             Name = org.Name;
             Remark = org.Remark;
             Roles = org.GetAllRoles().ToArray();
+            Parent = org;
         }
 
-        public string ParentId { get; set; }
+        public Org Parent { get; set; }
 
         /// <summary>
         /// </summary>
@@ -50,15 +51,21 @@ namespace Ornament.Models.Memberships
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="dao"></param>
+        /// <exception cref="ArgumentNullException">dao is null.</exception>
         public void Save(IOrgDao dao)
         {
-            string id = Id.Trim();
-            Org ug = dao.Get(id);
+            if (dao == null) throw new ArgumentNullException("dao");
+            Org ug = !String.IsNullOrEmpty(Id) ? dao.Get(Id) : new Org(Name);
             ug.Name = Name;
             ug.Remark = Remark;
-            var parent = dao.Get(this.ParentId);
-            parent.Add(ug);
             dao.SaveOrUpdate(ug);
+            if (Parent != null)
+            {
+                Parent.Add(ug);
+            }
         }
     }
 }

@@ -14,83 +14,77 @@
 }
 @section pageTitle
 {
-    <h5>Org List </h5>
+    @if (this.Model == null || this.Model.Parent == null)
+    {
+        <h5>Org List </h5>
+    }
+    else
+    {
+       
+        <h5>@this.Model.Name</h5>
+    }
+    <span>
+        @Html.Partial("OrgNavigator", this.Model)
+    </span>
 }
+
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a  class="btn btn-primary" href="@Url.Action("Create", new { id = parentId })"><i class="icon-white icon-plus"></i>
+            <a  class="btn btn-primary" href="@Url.Action("Create", new { parentId = parentId })"><i class="icon-white icon-plus"></i>
                 @Basic.Create
             </a>
         </div>
     </div>
-
-    <div class="body">
-
-        @Html.Partial("OrgNavigator", Model)
-        <div class="row">
-            @if (childOrgs.Count() != 0)
-            {
-                <div class="span4">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>
-                                    @Html.LabelFor(s => s.Name)
-                                </th>
-                                <th>
-                                    @Html.LabelFor(s => s.Remark)
-                                </th>
-                            </tr>
-                        </thead>
-                        @foreach (Org item in childOrgs)
-                        {
-                            <tr>
-                                <th>
-                                    <a href="@Url.Action("index", new { id = item.Id })" class="btn btn-info btn-mini"><i
-                                        class="icon-arrow-right icon-white"></i></a>
-                                </th>
-                                <td>@item.Name
-                                </td>
-                                <td>@item.Remark
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            }
-            @if (Model != null)
-            {
-                <form method="post" class="form-horizontal span6 offset2" action="@Url.Action("Edit")">
-                    @if (Model.Parent != null)
-                    {
-                        <input type="hidden" value="@Model.Parent.Id" name="parentId"/>
-                    }
-                    <input type="hidden" name="Id" value="@Model.Id"/>
-                    <div class="control-group">
-                        @Html.LabelFor(s => s.Name, new { @class = "control-label" })
-                        <div class="controls">
-                            @(editPermission ? Html.TextBoxFor(s => s.Name) : Html.TextBoxFor(s => s.Name, new { disabled = "disabled" }))
-                            @Html.ValidationMessageFor(s => s.Name)
-                        </div>
+    <div class="body well">
+        @if (childOrgs.Count() != 0)
+        {
+            <div class="row">
+                @if (childOrgs.Count() != 0)
+                {
+                    <div class="span4">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40px"></th>
+                                    <th>
+                                        @Html.LabelFor(s => s.Name)
+                                    </th>
+                                    <th>
+                                        @Html.LabelFor(s => s.Remark)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (Org item in childOrgs)
+                            {
+                                <tr>
+                                    <th>
+                                        <a href="@Url.Action("index", new { id = item.Id })" class="btn btn-info btn-mini"><i class="icon-arrow-right icon-white"></i></a>
+                                    </th>
+                                    <td>@item.Name
+                                    </td>
+                                    <td>@item.Remark
+                                    </td>
+                                    <td>
+                                        @if (editPermission)
+                                        {
+                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-info btn-mini"><i class=" icon-edit icon-white"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
                     </div>
-                    <div class="control-group">
-                        @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
-                        <div class="controls">
-                            @(editPermission ? Html.TextAreaFor(s => s.Remark) : Html.TextAreaFor(s => s.Remark, new { disabled = "disabled" }))
-                            @Html.ValidationMessageFor(s => s.Remark)
-                        </div>
-                    </div>
-                    @if (editPermission)
-                    {
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="icon-pencil icon-white"></i>@Basic.Save</button>
-                        </div>
-                    }
-                </form>
-            }
-        </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="alert">
+                Not found org.
+            </div>
+        }
     </div>
 </div>
