@@ -9,7 +9,7 @@
     ViewBag.Title = "Organization";
     Layout = "~/Views/Shared/_appLayout.cshtml";
     string parentId = Model != null ? Model.Id : "";
-    var childOrgs = ((IEnumerable<Org>) ViewData["Orgs"]);
+    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Modify);
 }
 @section pageTitle
@@ -19,8 +19,8 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a  class="btn btn-primary" href="@Url.Action("Create", new {id = parentId})"><i
-                                                                                              class="icon-white icon-plus"></i>@Basic.Create
+            <a  class="btn btn-primary" href="@Url.Action("Create", new { id = parentId })"><i class="icon-white icon-plus"></i>
+                @Basic.Create
             </a>
         </div>
     </div>
@@ -48,8 +48,8 @@
                         {
                             <tr>
                                 <th>
-                                    <a href="@Url.Action("index", new {id = item.Id})" class="btn btn-info btn-mini"><i
-                                                                                                                         class="icon-arrow-right icon-white"></i></a>
+                                    <a href="@Url.Action("index", new { id = item.Id })" class="btn btn-info btn-mini"><i
+                                        class="icon-arrow-right icon-white"></i></a>
                                 </th>
                                 <td>@item.Name
                                 </td>
@@ -69,16 +69,16 @@
                     }
                     <input type="hidden" name="Id" value="@Model.Id"/>
                     <div class="control-group">
-                        @Html.LabelFor(s => s.Name, new {@class = "control-label"})
+                        @Html.LabelFor(s => s.Name, new { @class = "control-label" })
                         <div class="controls">
-                            @(editPermission ? Html.TextBoxFor(s => s.Name) : Html.TextBoxFor(s => s.Name, new {disabled = "disabled"}))
+                            @(editPermission ? Html.TextBoxFor(s => s.Name) : Html.TextBoxFor(s => s.Name, new { disabled = "disabled" }))
                             @Html.ValidationMessageFor(s => s.Name)
                         </div>
                     </div>
                     <div class="control-group">
-                        @Html.LabelFor(s => s.Remark, new {@class = "control-label"})
+                        @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
                         <div class="controls">
-                            @(editPermission ? Html.TextAreaFor(s => s.Remark) : Html.TextAreaFor(s => s.Remark, new {disabled = "disabled"}))
+                            @(editPermission ? Html.TextAreaFor(s => s.Remark) : Html.TextAreaFor(s => s.Remark, new { disabled = "disabled" }))
                             @Html.ValidationMessageFor(s => s.Remark)
                         </div>
                     </div>

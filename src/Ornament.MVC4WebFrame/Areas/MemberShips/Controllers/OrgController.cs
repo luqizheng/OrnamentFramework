@@ -47,13 +47,12 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         // POST: /Orgs/Create
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Save(OrgModel org, string parentId)
+        public ActionResult Save(OrgModel org)
         {
             if (ModelState.IsValid)
             {
                 IOrgDao orgDao = _factory.CreateOrgDao();
-                orgDao.Save(orgDao,parentId);
-               
+                org.Save(orgDao);
                 return RedirectToAction("Index");
             }
             return View("Edit", org);

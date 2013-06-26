@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
@@ -15,7 +16,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         // GET api/usersapi
-        [HttpGet]
+        [System.Web.Http.HttpGet]
         public IEnumerable<object> Match(string name, int? pageIndex)
         {
             var page = pageIndex ?? 0;

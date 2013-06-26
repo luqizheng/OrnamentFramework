@@ -22,6 +22,8 @@ namespace Ornament.Models.Memberships
             Roles = org.GetAllRoles().ToArray();
         }
 
+        public string ParentId { get; set; }
+
         /// <summary>
         /// </summary>
         [UIHint("RoleMultiSelect")]
@@ -48,12 +50,14 @@ namespace Ornament.Models.Memberships
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }
 
-        public void Save(IOrgDao dao,string parentId)
+        public void Save(IOrgDao dao)
         {
             string id = Id.Trim();
             Org ug = dao.Get(id);
             ug.Name = Name;
             ug.Remark = Remark;
+            var parent = dao.Get(this.ParentId);
+            parent.Add(ug);
             dao.SaveOrUpdate(ug);
         }
     }
