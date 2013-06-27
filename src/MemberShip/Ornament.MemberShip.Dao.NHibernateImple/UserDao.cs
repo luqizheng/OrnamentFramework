@@ -294,9 +294,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             var count = DetachedCriteria.For<User>("user")
                 .SetProjection(
                     Projections.ProjectionList()
-                    .Add(Projections.SqlGroupProjection("year(CreateTime)", "year(CreateTime)", new[] { "year" }, new IType[] { NHibernateUtil.Int32 }))
-                    .Add(Projections.SqlGroupProjection("Month(CreateTime)", "Month(CreateTime)", new[] { "Month" }, new IType[] { NHibernateUtil.Int32 }))
-                    .Add(Projections.SqlGroupProjection("day(CreateTime)", "day(CreateTime)", new[] { "day" }, new IType[] { NHibernateUtil.Int32 }))
+                    .Add(Projections.SqlGroupProjection("year(CreateTime) year1", "year(CreateTime)", new[] { "year1" }, new IType[] { NHibernateUtil.Int32 }))
+                    .Add(Projections.SqlGroupProjection("Month(CreateTime) month1", "Month(CreateTime)", new[] { "month1" }, new IType[] { NHibernateUtil.Int32 }))
+                    .Add(Projections.SqlGroupProjection("day(CreateTime) day1", "day(CreateTime)", new[] { "day1" }, new IType[] { NHibernateUtil.Int32 }))
                     .Add(Projections.RowCount())
                     )
                 .Add(Restrictions.Gt(Projections.Property<User>(s => s.CreateTime), startTime))
