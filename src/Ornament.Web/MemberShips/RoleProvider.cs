@@ -53,7 +53,7 @@ namespace Ornament.Web.MemberShips
         public override string[] GetRolesForUser(string username)
         {
             var s = SessionManager.GetSessionWrapper();
-            s.InitSession();
+            var openTrue = s.InitSession();
             try
             {
                 User userInfo =
@@ -62,7 +62,8 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                s.Close(true);
+                if (openTrue)
+                    s.Close(true);
             }
         }
 
@@ -74,7 +75,7 @@ namespace Ornament.Web.MemberShips
         public override void CreateRole(string roleName)
         {
             var s = SessionManager.GetSessionWrapper();
-            s.InitSession();
+            var openSessionCurrentThread = s.InitSession();
             try
             {
                 var role = new Role(roleName);
@@ -86,7 +87,10 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                s.Close(true);
+                if (openSessionCurrentThread)
+                {
+                    s.Close(true);
+                }
             }
         }
 
@@ -100,10 +104,10 @@ namespace Ornament.Web.MemberShips
         public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
         {
             var s = SessionManager.GetSessionWrapper();
-            s.InitSession();
+            var openSessionCurrentThread = s.InitSession();
             try
             {
-                IRoleDao roleDao =  Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+                IRoleDao roleDao = Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
                 if (throwOnPopulatedRole)
                 {
                     if (roleDao.IsUsesInRole(roleName))
@@ -118,17 +122,20 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                s.Close(true);
+                if (openSessionCurrentThread)
+                {
+                    s.Close(true);
+                }
             }
         }
 
         public override bool RoleExists(string roleName)
         {
             var s = SessionManager.GetSessionWrapper();
-            var opened=s.InitSession();
+            var opened = s.InitSession();
             try
             {
-                IQueryable<Role> reuslt = from role in  OrnamentContext.DaoFactory.MemberShipFactory.Roles
+                IQueryable<Role> reuslt = from role in OrnamentContext.DaoFactory.MemberShipFactory.Roles
                                           where role.Name == roleName
                                           select role;
                 return reuslt.Count() != 0;
@@ -136,7 +143,7 @@ namespace Ornament.Web.MemberShips
             finally
             {
                 if (opened)
-                s.Close(true);
+                    s.Close(true);
             }
         }
 
@@ -155,7 +162,7 @@ namespace Ornament.Web.MemberShips
                 throw new ArgumentNullException("roleNames");
 
             var s = SessionManager.GetSessionWrapper();
-            s.InitSession();
+            var openSessionCurrentThread = s.InitSession();
             try
             {
                 ReadOnlyCollection<Role> roles =
@@ -191,17 +198,20 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                s.Close(true);
+                if (openSessionCurrentThread)
+                {
+                    s.Close(true);
+                }
             }
         }
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {
             var s = SessionManager.GetSessionWrapper();
-            s.InitSession();
+            var openSessionCurrentThread = s.InitSession();
             try
             {
-                IUserDao userDao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+                IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
                 ReadOnlyCollection<Role> roles =
                      OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
                 IList<User> users = userDao.GetUsers(usernames);
@@ -213,7 +223,10 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                s.Close(true);
+                if (openSessionCurrentThread)
+                {
+                    s.Close(true);
+                }
             }
         }
 
@@ -225,7 +238,7 @@ namespace Ornament.Web.MemberShips
         public override string[] GetUsersInRole(string roleName)
         {
             var s = SessionManager.GetSessionWrapper();
-            s.InitSession();
+            var openSessionCurrentThread = s.InitSession();
             try
             {
                 IList<User> users =
@@ -234,7 +247,10 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                s.Close(true);
+                if (openSessionCurrentThread)
+                {
+                    s.Close(true);
+                }
             }
         }
 

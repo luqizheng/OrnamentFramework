@@ -52,7 +52,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 a.Parent = _factory.CreateOrgDao().Get(parentId);
             }
 
-            return View("Edit", a);
+            return View(a);
         }
 
         //

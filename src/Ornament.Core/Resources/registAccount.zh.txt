@@ -1,4 +1,8 @@
- 亲爱的[Name]用户:
+<?xml version="1.0"?>
+<Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Subject>新注册用户</Subject>
+  <Value>
+    亲爱的[Name]用户:
 
     你已经在XXX系统成功注册了一个新账号，为了请点击下面的连接验证。
 
@@ -12,3 +16,5 @@
 
 
     管理员
+  </Value>
+</Content>

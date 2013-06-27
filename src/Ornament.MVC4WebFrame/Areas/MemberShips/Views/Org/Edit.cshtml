@@ -4,10 +4,11 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_appLayout.cshtml";
+    Org parent = Model.Parent;
 }
 @section pageTitle
 {
-    @if (this.Model != null && this.Model.Parent != null)
+    @if (Model != null && Model.Parent != null)
     {
         <h5>Parent Org: @Model.Parent.Name</h5>
     }
@@ -15,24 +16,29 @@
     {
         <h5>Parent Org : Root</h5>
     }
-    <span></span>
+    @if (Model != null)
+    {
+        <span>
+            Html.Partial("OrgNavigator", parent)
+        </span>
+    }
 }
-
 <div class="widget">
 
     <div class="well">
         @Html.ValidationSummary()
-        @using (Html.BeginForm("Save", "Org", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Save", "Org", FormMethod.Post, new {@class = "form-horizontal"}))
         {
+            @Html.HiddenFor(s => s.Id)
             @Html.EditorFor(s => s.Name)
             @Html.EditorFor(s => s.Remark)
             @Html.EditorFor(s => s.Roles)
-          
-            
-            @Html.Hidden("Parent", (this.Model != null && this.Model.Parent != null) ? this.Model.Parent.Id : "")
+
+
+            @Html.Hidden("Parent", (Model != null && Model.Parent != null) ? Model.Parent.Id : "")
             <div class="form-actions">
                 <button class="btn btn-primary">@Basic.OK</button>
-                <button onclick=" location = '@Url.Action("Index")' " class="btn">@Basic.Cancel</button>
+                <button onclick = " location = '@Url.Action("Index")' " class="btn" type="button">@Basic.Cancel</button>
             </div>
         }
 

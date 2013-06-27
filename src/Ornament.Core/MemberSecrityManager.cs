@@ -18,6 +18,8 @@ namespace Ornament
 
         public MemberSecrityManager(IUserSecurityTokenDao dao, SmtpClient client)
         {
+            if (dao == null) throw new ArgumentNullException("dao");
+            if (client == null) throw new ArgumentNullException("client");
             _dao = dao;
             _client = client;
         }

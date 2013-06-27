@@ -652,6 +652,7 @@
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
     <Content Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
