@@ -54,7 +54,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete([ModelBinder(typeof(NHModelBinder))] Role role)
+        public ActionResult Delete(Role role)
         {
             var a = _factory.CreateMemberDao().Find(role.Id);
             foreach (var member in a)
@@ -66,7 +66,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Role role)
+        public ActionResult Create(Role role, string[] permissionIds)
         {
             if (!ModelState.IsValid)
             {
