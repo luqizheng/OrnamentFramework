@@ -50,7 +50,8 @@ namespace Ornament.Models.Memberships.Partials
             get { return _roles ?? new Role[0]; }
             set { _roles = value; }
         }
-
+        [UIHint("OrgSelect")]
+        public Org Org { get; set; }
         [UIHint("UsergroupMultiSelect")]
         [Display(Name = "UserGroup", ResourceType = typeof (MemberShipModel))]
         public UserGroup[] UserGroups

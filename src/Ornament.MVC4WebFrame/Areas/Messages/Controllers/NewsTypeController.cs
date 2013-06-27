@@ -9,7 +9,7 @@ using Qi.Web.Mvc;
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
-    [Authorize(Roles = "admin", Users = "admin")]
+    [Authorize(Roles = "admin")]
     public class NewsTypeController : Controller
     {
         private readonly IMessageDaoFactory _messageDao;
@@ -19,7 +19,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             _messageDao = messageDao;
         }
 
-        public ActionResult Index(string parentId)
+        public ActionResult Index()
         {
             IList<NewsType>
                 msgType = _messageDao.NewsTypeDao.GetAll();

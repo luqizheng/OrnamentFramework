@@ -963,6 +963,7 @@
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
     <Content Include="Views\Security\VerifyEmailResult.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\OrgSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

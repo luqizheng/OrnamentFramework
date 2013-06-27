@@ -22,11 +22,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             int page = pageIndex ?? 0;
             IEnumerable<Org> result = _factory.CreateOrgDao().Find(name, page, 10);
 
-            var c = from user in result
+            var c = from org in result
                     select new
                         {
-                            id = user.Id,
-                            user.Name,
+                            id = org.Id,
+                            Name=org.Name,
                         };
             return c;
         }

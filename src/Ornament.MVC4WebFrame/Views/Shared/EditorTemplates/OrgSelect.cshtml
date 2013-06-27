@@ -1,0 +1,34 @@
+﻿@using System.Web.UI.WebControls
+@using Ornament.MemberShip
+@using Qi.Web
+@model Ornament.MemberShip.Org
+@{
+    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    object Selection=new object();
+}
+<div class="control-group">
+    @Html.Label("", display, new { @class = "control-label" })
+    <div class="controls">
+        @if (this.Model != null)
+        {
+            Selection = new
+                {
+                    id = this.Model.Id,
+                    text = this.Model.Name
+                };
+            
+            @Html.Hidden("", this.Model.Id)
+        }
+        else
+        {
+            @Html.Hidden("")
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    seajs.use("/models/org", function (r) {
+        var d = @Html.Raw(JsonHelper.ToJson(Selection));
+        r.select2("#@Html.Id("")",d);
+    });
+</script>

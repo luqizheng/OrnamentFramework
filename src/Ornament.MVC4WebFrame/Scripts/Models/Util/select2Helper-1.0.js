@@ -22,19 +22,22 @@
         }
     };
     return {
-        select2: function (selector, opts) {
+        select2: function (selector, opts, data) {
             var $tag = $(selector),
-                $form = $tag.closest("form"), options = $.extend({}, defaults);
+                $form = $tag.closest("form"),
+                options = $.extend({}, defaults, opts);
             options.ajax.url = opts.url;
-            //options.data = opts.data;
             options.initSelection = function (ele, callback) {
-                callback(opts.data);
-                //callback({ id: "f61ac372fb534f3fb003baed8bea44b5", text: "aaa" });
+                if (data) {
+                    callback(data);
+                }
             };
-            $tag.select2(options);
-            $tag.on("change", function (e) {
-                var a =  $tag.val().replace(e.val, "");
-                $tag.val(a);
+            $tag.select2(options)
+            .on("change", function (e) {
+                if (e.removed) {
+                    var a = $tag.val().replace(e.val, "");
+                    $tag.val(a);
+                }
             });
             $(document).ready(function () {
                 $form.submit(function () {

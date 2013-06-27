@@ -22,12 +22,12 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             var page = pageIndex ?? 0;
             var result = _factory.CreateRoleDao().Find(name + "%", page, 10);
 
-            var c = from user in result
+            var c = from role in result
 
                     select new
                         {
-                            id = user.Id,
-                            Name = user.Name,
+                            id = role.Id,
+                            Name = role.Name,
                         };
             return c;
         }

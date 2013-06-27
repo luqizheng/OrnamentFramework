@@ -78,7 +78,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         [HttpPost]
         [ResourceAuthorize(RoleOperator.Modify, ResourceSetting.Role)]
-        public ActionResult Edit([ModelBinder(typeof(NHModelBinder))] Role role, string[] permissionIds)
+        public ActionResult Edit(Role role, string[] permissionIds)
         {
             if (!ModelState.IsValid)
             {
