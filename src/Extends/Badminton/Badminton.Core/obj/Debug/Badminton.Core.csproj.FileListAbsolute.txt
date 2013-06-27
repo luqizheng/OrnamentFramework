@@ -1,0 +1,8 @@
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\bin\Debug\Badminton.Core.dll
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\bin\Debug\Badminton.Core.pdb
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\bin\Debug\Qi.dll
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\bin\Debug\Qi.pdb
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\bin\Debug\Qi.xml
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\obj\Debug\Badminton.Core.csprojResolveAssemblyReference.cache
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\obj\Debug\Badminton.Core.dll
+F:\CoderSource\GitHub\OrnamentFramework\src\Extends\Badminton\Badminton.Core\obj\Debug\Badminton.Core.pdb

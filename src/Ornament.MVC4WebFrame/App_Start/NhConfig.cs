@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using System.Web.Hosting;
+using Badminton;
+using Badminton.Dao.NhImpl;
 using FluentNHibernate.Cfg;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -16,9 +18,10 @@ namespace Ornament.MVCWebFrame.App_Start
             var assemblies = new[]
                 {
                     typeof (NotifyMessageDao).Assembly,
-                    typeof (UserDao).Assembly
+                    typeof (UserDao).Assembly,
+                    typeof(BadmintonDaoFactory).Assembly
                 };
-            NHConfig(assemblies, new Assembly[0]);
+            NHConfig(assemblies, new Assembly[0]); 
             UpdateDatabase();
         }
 

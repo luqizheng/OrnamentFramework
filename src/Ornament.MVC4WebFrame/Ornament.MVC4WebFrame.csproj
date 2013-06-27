@@ -1037,6 +1037,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Extends\Badminton\Badminton.Core\Badminton.Core.csproj">
+      <Project>{c227a14c-6a46-4ea8-9645-20cfd50606dc}</Project>
+      <Name>Badminton.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\Badminton\Badminton.Dao.NhImpl\Badminton.Dao.NhImpl.csproj">
+      <Project>{5e455c9c-eecf-4838-a3cb-2124632b24de}</Project>
+      <Name>Badminton.Dao.NhImpl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Extends\Daily\Qi.Attendance.Dao.NhImple\Qi.Attendance.Dao.NhImple.csproj">
       <Project>{60DA740D-75F7-46D2-976B-D2DB22768333}</Project>
       <Name>Qi.Attendance.Dao.NhImple</Name>
@@ -1209,7 +1217,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>14501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
@@ -1231,6 +1239,5 @@
   <Target Name="AfterBuild">
     <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
   </Target>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
   <!--Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" /-->
 </Project>

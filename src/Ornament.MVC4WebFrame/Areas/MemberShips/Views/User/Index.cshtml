@@ -17,8 +17,8 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
-
+        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", "uniform","jquery",'ext'], function () {
+            
             $(".actionCheckbox").uniform().change(function () {
                 $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
             }).change();

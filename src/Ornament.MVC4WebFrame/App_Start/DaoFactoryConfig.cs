@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Badminton.Dao;
+using Badminton.Dao.NhImpl;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.Messages.Dao;
@@ -14,7 +16,8 @@ namespace Ornament.MVCWebFrame.App_Start
             var dao = new Dictionary<Type, Type>
                 {
                     {typeof (IMemberShipFactory), typeof (MemberShipFactory)},
-                    {typeof (IMessageDaoFactory), typeof (MessageDaoFactory)}
+                    {typeof (IMessageDaoFactory), typeof (MessageDaoFactory)},
+                    {typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)}
                 };
             foreach (Type key in dao.Keys)
             {
