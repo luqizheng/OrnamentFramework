@@ -67,3 +67,7 @@
 /src/MemberShip/Ornament.MemberShip.Core/bin
 /src/MemberShip/Ornament.MemberShip.Dao.NHibernateImple/obj
 /src/MemberShip/Ornament.MemberShip.Dao.NHibernateImple/bin
+/src/Extends/Badminton/Badminton.Dao.NhImpl/bin
+/src/Extends/Badminton/Badminton.Dao.NhImpl/obj
+/src/Extends/Badminton/Badminton.Core/obj
+/src/Extends/Badminton/Badminton.Core/bin

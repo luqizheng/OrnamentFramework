@@ -5,25 +5,27 @@
 @{
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var roles = this.Model ?? (new Role[0]);
-    var selected = from role in roles
+    object selected = new object();
+    string ids="";
+    if (this.Model != null && this.Model.Length != 0)
+    {
+        selected = from role in this.Model
                    select new
                        {
                            id = role.Id,
                            text = role.Name
                        };
+
+
+        ids = String.Join(",", from role in this.Model select role.Id);
+    }
 }
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        @if (this.Model != null)
-        {
-            @Html.Hidden("", String.Join(",", from role in this.Model select role.Id))
-        }
-        else
-        {
-            @Html.Hidden("")
-        }
+
+        @Html.Hidden("", ids, new { style = "width:100%" })
+
     </div>
 </div>
 
