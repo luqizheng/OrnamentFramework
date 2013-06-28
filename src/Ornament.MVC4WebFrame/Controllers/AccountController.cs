@@ -173,7 +173,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn([ModelBinder(typeof(NHModelBinder))] LogonModel model)
+        public ActionResult LogOn(LogonModel model)
         {
             string errorMessage = null;
             if (!ModelState.IsValid ||

@@ -31,29 +31,31 @@ namespace Ornament.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Email", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "Email", ResourceType = typeof(MemberShipModel))]
         [Required(ErrorMessageResourceName = "error_missingEmailAddress",
-            ErrorMessageResourceType = typeof (MemberShipModel))]
+            ErrorMessageResourceType = typeof(MemberShipModel))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
             ErrorMessageResourceName = "EmailNotRightFormat",
-            ErrorMessageResourceType = typeof (ErrorMessage))]
+            ErrorMessageResourceType = typeof(ErrorMessage))]
         [DataType(DataType.EmailAddress)]
         [UIHint("String")]
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "LoginId",
-            ErrorMessageResourceType = typeof (MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
+            ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
 
         [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "Role", ResourceType = typeof(MemberShipModel))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
             set { _roles = value; }
         }
+
         [UIHint("OrgSelect")]
         public Org Org { get; set; }
+
         [UIHint("UsergroupMultiSelect")]
-        [Display(Name = "UserGroup", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "UserGroup", ResourceType = typeof(MemberShipModel))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }
@@ -74,6 +76,7 @@ namespace Ornament.Models.Memberships.Partials
             user.ClearRole();
             user.IsApproved = IsApprove;
             user.IsLockout = IsLock;
+            user.Org = this.Org;
             foreach (Role role in Roles)
             {
                 if (role == null)

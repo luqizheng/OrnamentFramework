@@ -2,6 +2,7 @@
 using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Validations;
 
 namespace Ornament.Models.Memberships
 {
@@ -22,7 +23,7 @@ namespace Ornament.Models.Memberships
         public bool RememberMe { get; set; }
 
         [Display(Name = "VerifyCode", ResourceType = typeof(MemberShipModel))]
-        [Required(ErrorMessageResourceName = "alertMsg_requireVerifyCode", ErrorMessageResourceType = typeof(MemberShipModel))]
+        [VerifyCodeRequire(ErrorMessageResourceName = "alertMsg_requireVerifyCode", ErrorMessageResourceType = typeof(MemberShipModel))]
         [UIHint("VerifyCode")]
         public string VerifyCodde { get; set; }
 
