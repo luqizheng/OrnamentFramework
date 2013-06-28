@@ -3,7 +3,6 @@
 @using Ornament.MVCWebFrame.Models
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
-@using Ornament.Models.Memberships
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
 @using Resources
@@ -17,7 +16,7 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", "uniform","jquery",'ext'], function () {
+        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", "uniform"], function () {
             
             $(".actionCheckbox").uniform().change(function () {
                 $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);

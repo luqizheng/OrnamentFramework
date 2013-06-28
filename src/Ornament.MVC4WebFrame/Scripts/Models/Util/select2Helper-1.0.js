@@ -32,28 +32,21 @@
                     callback(data);
                 }
             };
-            $tag.select2(options)
-            .on("change", function (e) {
-                if (e.removed) {
-                    var a = $tag.val().replace(e.val, "");
-                    $tag.val(a);
-                }
-            });
+            $tag.select2(options);
             $(document).ready(function () {
                 $form.submit(function () {
-                    var roles = $tag.val().split(","),
+                    var items = $tag.select2('val'),
                         ary = [],
                         tmp = "<input type='hidden' name='" + $tag.attr("name") + "'/>";
-
-                    $tag.val(roles.shift());
-                    $(roles).each(function () {
-                        var $hid = $(tmp).removeAttr("id").val(this);
+                    $tag.val(items.shift());
+                    $(items).each(function () {
+                        var $hid = $(tmp).val(this);
                         ary.push($hid);
                     });
                     $form.append(ary);
                 });
-                return $tag;
             });
+            return $tag;
         }
     };
 });

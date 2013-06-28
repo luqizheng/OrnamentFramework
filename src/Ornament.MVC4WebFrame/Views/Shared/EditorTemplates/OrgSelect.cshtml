@@ -29,6 +29,8 @@
 <script type="text/javascript">
     seajs.use("/models/org", function (r) {
         var d = @Html.Raw(JsonHelper.ToJson(Selection));
-        r.select2("#@Html.Id("")",d);
+        
+        r.select2("#@Html.Id("")");
+        
     });
 </script>
