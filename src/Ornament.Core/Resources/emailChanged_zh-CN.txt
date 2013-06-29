@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Subject>[site] ֪ͨ </Subject>
+  <Value>
+    [Name]����
+
+    ���İ�ȫ�����ʼ��Ѿ����޸ģ�Ո�������urlĽ���ȷ�ϡ�
+
+    [Url]
+
+	�벻Ҫ�ظ����ʼ
+
+    [site] ����Ա
+  </Value>
+</Content>

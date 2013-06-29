@@ -81,8 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Secret\ActiveUserAction.cs" />
-    <Compile Include="Secret\UserSecretToken.cs" />
     <Compile Include="Dao\IUserSecurityTokenDao.cs" />
     <Compile Include="MemberShipProviders\MembershipContext.cs" />
     <Compile Include="PasswordFormatException.cs" />
@@ -119,6 +117,7 @@
     <Compile Include="Permissions\ResourceOperatorManager.cs" />
     <Compile Include="Permissions\TypeResourceMapping.cs" />
     <Compile Include="ProfileValue.cs" />
+    <Compile Include="Security\UserSecretToken.cs" />
     <Compile Include="UserGroup.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Role.cs" />
@@ -191,7 +190,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Secret\UserSecretToken.hbm.xml" />
+    <Content Include="Security\UserSecretToken.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

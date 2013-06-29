@@ -23,6 +23,7 @@ namespace Ornament
 
         /// <summary>
         /// </summary>
+        /// <param name="ornamentContext"></param>
         /// <param name="resourceType"></param>
         /// <param name="resourceId"></param>
         /// <returns></returns>

@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Secret;
 using Ornament.Models.Security;
 using Qi.Web.Mvc;
 

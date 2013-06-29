@@ -18,7 +18,26 @@
     </div>
 </div>*@
 @Html.HiddenFor(model => model.LoginId)
-@Html.EditorFor(model => model.Email)
+<div class="control-group">
+    @Html.LabelFor(s => s.Email, new { @class = "control-label" })
+    <div class="controls">
+        <div class="input-append">
+            @Html.TextBoxFor(s => s.Email, this.Model)
+            @*<div class="btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret dd-caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#"><i class="icon-plus"></i>Send Verify Email</a></li>
+                    <li><a href="#"><i class="icon-reorder"></i>View statement</a></li>
+                    <li><a href="#"><i class="icon-cogs"></i>Parameters</a></li>
+                </ul>
+            </div>*@
+        </div>
+        @Html.ValidationMessageFor(s => s.Email)
+    </div>
+</div>
+
 @Html.EditorFor(model => model.IsApprove)
 @Html.EditorFor(model => model.IsLock)
 @Html.EditorFor(model => model.Org)

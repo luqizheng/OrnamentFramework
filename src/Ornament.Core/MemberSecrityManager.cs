@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Secret;
+using Ornament.MemberShip.Security;
 using Ornament.Messages;
 using Ornament.Messages.Notification;
 using Qi.Text;
@@ -12,18 +12,29 @@ namespace Ornament
 {
     public class MemberSecrityManager : IDisposable
     {
-        private readonly SmtpClient _client;
         private readonly IUserSecurityTokenDao _dao;
+        private readonly IMemberShipFactory _memberShipFactory;
         private IDictionary<string, string> _variables;
 
-        public MemberSecrityManager(IUserSecurityTokenDao dao, SmtpClient client)
+        public MemberSecrityManager(IMemberShipFactory memberShipFactory, SmtpClient client, User user,string urlWithoutDomain)
         {
-            if (dao == null) throw new ArgumentNullException("dao");
+            User = user;
+            Url = urlWithoutDomain;
+            if (memberShipFactory == null) throw new ArgumentNullException("memberShipFactory");
             if (client == null) throw new ArgumentNullException("client");
-            _dao = dao;
-            _client = client;
+            _dao = memberShipFactory.CreateUserSecurityTokenDao();
+            _memberShipFactory = memberShipFactory;
+            SmtpClient = client;
         }
 
+        public User User { get; set; }
+        public string Url { get; set; }
+
+        public string Action { get; set; }
+        public int ExpireTimeMiniutes { get; set; }
+
+        public SmtpClient SmtpClient { get; set; }
+        
         public IDictionary<string, string> Variables
         {
             get
@@ -31,43 +42,105 @@ namespace Ornament
                 return _variables ?? (_variables = new Dictionary<string, string>
                     {
                         {"url", ""},
-                        {"name", ""}
+                        {"name", ""},
+                        {"site", OrnamentContext.Configuration.ApplicationSetting.SiteName}
                     });
             }
         }
 
         public void Dispose()
         {
-            _client.Dispose();
+            SmtpClient.Dispose();
         }
 
-        public void VerifyEmail(User user, int expireMiniutes, string lang)
+        /// <summary>
+        ///     Send Token by emial.
+        /// </summary>
+        public void SendToken()
         {
-            UserSecretToken token = UserSecretToken.VerifyEmail(user, expireMiniutes);
+            var token = new UserSecretToken(User, Action, ExpireTimeMiniutes);
             _dao.SaveOrUpdate(token);
-
-            string sender = OrnamentContext.Configuration.ApplicationSetting.SupportEmail;
-            string url = OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl;
-
-
-            var msg = new NotifyMessage { Type = OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress };
-            Content content = msg.Type.Show(lang);
-
-
-            Variables["url"] = url + "/Security/VerifyEmail?" + token.CreateQueryString();
-            Variables["name"] = user.Name;
-
-            var namedFormatterHelper = new NamedFormatterHelper();
-            string emailContent = namedFormatterHelper.Replace(content.Value, Variables);
-
-            var mailMessage = new MailMessage(new MailAddress(sender), new MailAddress(user.Email))
-                {
-                    Body = emailContent,
-                    Subject = namedFormatterHelper.Replace(content.Subject, Variables),
-                    IsBodyHtml = true
-                };
-
-            _client.Send(mailMessage);
+            Content template = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged.Show(Language(this.User));
+            Variables["url"] =
+                token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + this.Url);
+            Variables["name"] = User.Name;
+            Content content = Replace(template, Variables);
+            SendEmail(User.Email, content);
         }
+
+        public void VerifyToke()
+        {
+        }
+
+        private string Language(User user)
+        {
+            ProfileValue prfile = _memberShipFactory.CreateProfileDao().FindByLoginId(user.LoginId);
+            if (prfile.Properities.ContainsKey("language"))
+            {
+                return prfile.Properities["language"].ToString();
+            }
+            return OrnamentContext.Configuration.DefaultLanguage.Key;
+        }
+
+        private void SendEmail(string receive, Content content)
+        {
+            var mailMessage =
+                new MailMessage(new MailAddress(OrnamentContext.Configuration.ApplicationSetting.SupportEmail),
+                                new MailAddress(receive))
+                    {
+                        Body = content.Value,
+                        Subject = content.Subject,
+                        IsBodyHtml = true
+                    };
+
+            SmtpClient.Send(mailMessage);
+        }
+
+        private Content Replace(Content templateContent, IDictionary<string, string> variableds)
+        {
+            var helper = new NamedFormatterHelper();
+            return new Content
+                {
+                    Subject = helper.Replace(templateContent.Subject, Variables),
+                    Value = helper.Replace(templateContent.Value, Variables)
+                };
+        }
+
+        public static MemberSecrityManager CreateEmailChangedToken(User user, int expireMiniutes)
+        {
+            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user,"/Security/EmailChanged")
+                {
+                    Action = "VerifyEmail",
+                    ExpireTimeMiniutes = expireMiniutes
+                };
+            return manager;
+        }
+
+        /// <summary>
+        ///     Create a new user and should need user to verify the email address.
+        /// </summary>
+        public static MemberSecrityManager CreateNewUser(User user, int expireMiniutes)
+        {
+            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user,"/Security/NewAccount")
+            {
+                Action = "VerifyNewAccount",
+                ExpireTimeMiniutes = expireMiniutes,
+            };
+            return manager;
+        }
+
+        /// <summary>
+        ///     Create a new user and should need user to verify the email address.
+        /// </summary>
+        public static MemberSecrityManager ForgetPassword(User user, int expireMiniutes)
+        {
+            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user, "/Security/ChangedPassword")
+            {
+                Action = "RetrievePassword",
+                ExpireTimeMiniutes = expireMiniutes,
+            };
+            return manager;
+        }
+
     }
 }

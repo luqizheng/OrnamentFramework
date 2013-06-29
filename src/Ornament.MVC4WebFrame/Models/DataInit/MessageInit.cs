@@ -28,7 +28,7 @@ namespace Ornament.Web
         public void CreateData()
         {
             NotifyType a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
-            NotifyType b = OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress;
+            NotifyType b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
             NotifyType c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
 
 

@@ -3,19 +3,34 @@ using Qi;
 using Qi.Domain;
 using Qi.Secret;
 
-namespace Ornament.MemberShip.Secret
+namespace Ornament.MemberShip.Security
 {
     /// <summary>
     /// </summary>
     public class UserSecretToken : DomainObject<UserSecretToken, string>
     {
-        public UserSecretToken()
+        protected UserSecretToken()
         {
-            CreateTime = DateTime.Now;
-            PrivateKey = Guid.NewGuid().ToString("N");
+
         }
 
-        public virtual ActiveUserAction Action { get; set; }
+        public UserSecretToken(User account, string action, int expireTimeMinutes)
+        {
+            if (account == null) throw new ArgumentNullException("account");
+            if (action == null) throw new ArgumentNullException("action");
+            if (expireTimeMinutes <= 0)
+            {
+                throw new ArgumentOutOfRangeException("expireTimeMinut should be larger than 0.");
+            }
+            IsEffective = true;
+            CreateTime = DateTime.Now;
+            PrivateKey = Guid.NewGuid().ToString("N");
+
+            this.Account = account;
+            this.Action = action;
+            this.ExpireTime = expireTimeMinutes;
+        }
+        public virtual string Action { get; set; }
 
         /// <summary>
         /// </summary>
@@ -24,7 +39,11 @@ namespace Ornament.MemberShip.Secret
         /// <summary>
         /// </summary>
         public virtual DateTime CreateTime { get; protected set; }
+
+        /// <summary>
+        /// </summary>
         public virtual DateTime? VerifyTime { get; set; }
+
         /// <summary>
         ///     Gets the PrivateKey of this token, it's auto create
         /// </summary>
@@ -48,20 +67,24 @@ namespace Ornament.MemberShip.Secret
             }
         }
 
+        public virtual bool IsEffective { get; set; }
+
         public virtual bool Verify(string token)
         {
+            if (String.IsNullOrEmpty(token))
+                throw new ArgumentNullException("token");
+
             if (CreateToken(Account) == token)
             {
                 VerifyTime = DateTime.Now;
                 return true;
             }
             return false;
-
         }
 
         private string CreateToken(User user)
         {
-            return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();
+            return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey + Action).Sha1Unicode().ToStringEx();
         }
 
         /// <summary>
@@ -71,35 +94,18 @@ namespace Ornament.MemberShip.Secret
         {
             if (IsTransient())
                 throw new Exception("Please save the object after to build the QueryString.");
-
-
             return string.Format("id={0}&token={1}", Id, CreateToken(Account));
         }
 
-        public virtual void Renew()
+        public virtual string CreateQueryString(string domainUrl)
         {
-            CreateTime = DateTime.Now;
-        }
-
-        public static UserSecretToken RetrievePassword(User user, int expireMins)
-        {
-            return new UserSecretToken
-                {
-                    Account = user,
-                    ExpireTime = expireMins,
-                    Action = ActiveUserAction.ChangePassword
-                };
-        }
-
-
-        public static UserSecretToken VerifyEmail(User user, int expireMinis)
-        {
-            return new UserSecretToken
-                {
-                    Account = user,
-                    Action = ActiveUserAction.Verify,
-                    ExpireTime = expireMinis
-                };
+            if (IsTransient())
+                throw new Exception("Please save the object after to build the QueryString.");
+            if (domainUrl.EndsWith("/"))
+            {
+                domainUrl = domainUrl.TrimEnd('/');
+            }
+            return string.Format("{2}?id={0}&token={1}", Id, CreateToken(Account), domainUrl);
         }
     }
 }

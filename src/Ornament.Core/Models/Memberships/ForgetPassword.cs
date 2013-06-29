@@ -3,7 +3,7 @@ using System.Net.Mail;
 using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Secret;
+using Ornament.MemberShip.Security;
 
 namespace Ornament.Models.Memberships
 {
@@ -20,31 +20,11 @@ namespace Ornament.Models.Memberships
         /// <summary>
         /// </summary>
         /// <param name="daoFactory"></param>
-        public void Retrieve(IMemberShipFactory daoFactory, string content, string domainUrl)
+        public void Retrieve(IMemberShipFactory daoFactory)
         {
-            User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
+             User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
                         daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
-            if (user == null)
-                throw new MemberShipException("Cannot find the account.");
-            UserSecretToken s = UserSecretToken.RetrievePassword(user, 30);
-            UserSecretToken token = daoFactory.CreateUserSecurityTokenDao().Get(s.Account, s.Action);
-            if (token != null)
-            {
-                token.Renew();
-            }
-            else
-            {
-                token = s;
-            }
-            daoFactory.CreateUserSecurityTokenDao().Save(token);
-
-            //send email
-            var mail = new MailMessage("fantasylu@126.com", user.Email, "取回密码", "")
-                {
-                    Body = domainUrl + "/ChangedPassword?" + token.CreateQueryString()
-                };
-            var smtp = new SmtpClient();
-            smtp.Send(mail);
+            MemberSecrityManager.ForgetPassword(user, 1440);
         }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Mail;
 using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -82,12 +81,10 @@ namespace Ornament.MVCWebFrame.Controllers
 
         public JsonResult VarifyEmail(string email)
         {
-            var ss = new MemberSecrityManager(_memberShipFactory.CreateUserSecurityTokenDao(), new SmtpClient());
-            ss.VerifyEmail(OrnamentContext.MemberShip.CurrentUser(),
-                OrnamentContext.Configuration.ApplicationSetting.VerifyEmailTimeout,
-                OrnamentContext.MemberShip.ProfileLanguage());
-
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
+                                                         OrnamentContext.Configuration.ApplicationSetting
+                                                                        .VerifyEmailTimeout);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -100,7 +97,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
@@ -128,7 +125,7 @@ namespace Ornament.MVCWebFrame.Controllers
         /// </returns>
         public ActionResult LogOn()
         {
-            var a = new LogonModel()
+            var a = new LogonModel
                 {
                     ReturnUrl = Request.QueryString["ReturnUrl"]
                 };
@@ -152,17 +149,12 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 emailChanged = true;
                 OrnamentContext.MemberShip.CurrentUser().Email = data["Email"];
-                var mabnager = new MemberSecrityManager(_memberShipFactory.CreateUserSecurityTokenDao(),
-                                                        new SmtpClient());
-                {
-                    mabnager.VerifyEmail(OrnamentContext.MemberShip.CurrentUser(),
-                                         OrnamentContext.Configuration.ApplicationSetting.VerifyEmailTimeout,
-                                         OrnamentContext.MemberShip.ProfileLanguage());
-                }
+                MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
+                                                             OrnamentContext.Configuration.ApplicationSetting
+                                                                            .VerifyEmailTimeout);
             }
             OrnamentContext.MemberShip.CurrentUser().Phone = data["Phone"];
-            return Json(new { success = true, emailChanged = emailChanged });
-
+            return Json(new {success = true, emailChanged});
         }
 
         /// <summary>
@@ -189,7 +181,7 @@ namespace Ornament.MVCWebFrame.Controllers
             model.ReturnUrl = Request["ReturnUrl"];
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult)Redirect(model.ReturnUrl)
+                       ? (ActionResult) Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 
@@ -207,8 +199,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory, "test[url]",
-                                OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl);
+                forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory);
                 return Redirect("ForgetPasswordSucccess");
             }
             return View();

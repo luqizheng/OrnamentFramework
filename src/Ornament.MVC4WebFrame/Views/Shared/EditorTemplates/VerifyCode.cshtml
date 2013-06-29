@@ -7,6 +7,6 @@
         @Html.ValidationMessage("")
     </div>
     <div>
-        <img src="@Url.Action("Index", "VerifyCode", new { area = "" })" onclick='this.src = $(this).attr("src") + "?" + Math.random()' class="verifyCode"/>
+        <img src="@Url.Action("Index", "VerifyCode", new { area = "" })" onclick='this.src = $(this).attr("src") + "?" + Math.random()'/>
     </div>
 </div>

@@ -1,6 +1,6 @@
 using System.Linq;
 using Ornament.MemberShip.Permissions;
-using Ornament.MemberShip.Secret;
+using Ornament.MemberShip.Security;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {

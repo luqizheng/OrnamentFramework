@@ -1,4 +1,4 @@
-﻿using Ornament.MemberShip.Secret;
+﻿using Ornament.MemberShip.Security;
 
 namespace Ornament.Models.Security
 {
@@ -15,5 +15,4 @@ namespace Ornament.Models.Security
         public UserSecretToken UserSecretToken { get; set; }
         public VerifyResutl Type { get; set; }
     }
-
 }

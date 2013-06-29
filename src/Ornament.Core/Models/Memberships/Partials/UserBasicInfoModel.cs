@@ -42,7 +42,7 @@ namespace Ornament.Models.Memberships.Partials
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "LoginId",
             ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
-
+      
         [UIHint("RoleMultiSelect")]
         [Display(Name = "Role", ResourceType = typeof(MemberShipModel))]
         public Role[] Roles

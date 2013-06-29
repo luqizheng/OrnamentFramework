@@ -8,7 +8,7 @@ using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
-using Ornament.MemberShip.Secret;
+using Ornament.MemberShip.Security;
 using Ornament.Models.Memberships.Partials;
 using log4net;
 
@@ -68,15 +68,9 @@ namespace Ornament.Models.Memberships
                 errorMessage = "Duplciate login Id.";
                 return false;
             }
-
             userDao.SaveOrUpdate(createUser);
             userDao.Flush();
 
-            //Create Verify token
-            UserSecretToken userSecretToken = UserSecretToken.VerifyEmail(createUser, 180);
-            dao.CreateUserSecurityTokenDao().SaveOrUpdate(userSecretToken);
-
-            //SendEmail(userSecretToken, createUser);
 
             return true;
         }

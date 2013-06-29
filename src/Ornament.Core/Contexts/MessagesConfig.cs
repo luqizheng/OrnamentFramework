@@ -14,7 +14,7 @@ namespace Ornament.Contexts
         private static string _personalMessageId;
         private static string _registId;
         private static string _verifyEmailAddressId;
-
+        private static string _passwordRetrive;
         /// <summary>
         /// </summary>
         public NotifyType RegistAccount
@@ -44,7 +44,7 @@ namespace Ornament.Contexts
             }
         }
 
-        public NotifyType VerifyEmailAddress
+        public NotifyType EmailAddressChanged
         {
             get
             {
@@ -53,9 +53,55 @@ namespace Ornament.Contexts
                 {
                     _verifyEmailAddressId = CreateNotifyType("Verify Email Address (Template)",
                                                              "Email has changed, It should verify again.", dao,
-                                                             new Dictionary<string, Content>());
+                                                             new Dictionary<string, Content>
+                                                                 {
+                                                                     {
+                                                                         "zh-CN",
+                                                                         DeserializerXml(Resources.emailChanged_zh_CN,
+                                                                                         "zh-CN")
+                                                                     },
+                                                                     {
+                                                                         "zh",
+                                                                         DeserializerXml(Resources.emailChanged_zh, "zh")
+                                                                     },
+                                                                     {
+                                                                         "en",
+                                                                         DeserializerXml(Resources.emailChanged, "en")
+                                                                     },
+                                                                 });
                 }
                 return dao.Get(_verifyEmailAddressId);
+            }
+        }
+
+        public NotifyType RetrivePassword
+        {
+            get
+            {
+                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
+                if (_passwordRetrive == null)
+                {
+                    _passwordRetrive = CreateNotifyType("Forget Password (Template)",
+                                                             "Retrive Password", dao,
+                                                             new Dictionary<string, Content>
+                                                                 {
+                                                                     {
+                                                                         "zh-CN",
+                                                                         DeserializerXml(
+                                                                             Resources.forgetPassword_zh_CN, "zh-CN")
+                                                                     },
+                                                                     {
+                                                                         "zh",
+                                                                         DeserializerXml(Resources.forgetPassword_zh,
+                                                                                         "zh")
+                                                                     },
+                                                                     {
+                                                                         "en",
+                                                                         DeserializerXml(Resources.forgetPassword, "en")
+                                                                     },
+                                                                 });
+                }
+                return dao.Get(_passwordRetrive);
             }
         }
 
@@ -75,6 +121,7 @@ namespace Ornament.Contexts
             }
         }
 
+     
         private Content DeserializerXml(string text, string lang)
         {
             using (var zhStream = new MemoryStream(Encoding.UTF8.GetBytes(text)))

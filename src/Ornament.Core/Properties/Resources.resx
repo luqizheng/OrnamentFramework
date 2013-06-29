@@ -118,6 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="emailChanged" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emailChanged.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="emailChanged_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emailChanged.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="emailChanged_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\emailChanged_zh-CN.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="forgetPassword" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\forgetPassword.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="forgetPassword_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\forgetPassword.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="forgetPassword_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\forgetPassword_zh-CN.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
   <data name="registAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\registAccount.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>

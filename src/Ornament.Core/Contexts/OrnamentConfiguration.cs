@@ -8,7 +8,7 @@ namespace Ornament.Contexts
     {
         private readonly LanguageCollection _languages = new LanguageCollection();
         private MessagesConfig _messagesConfig;
-
+        
         private ApplicationSetting _setting;
         /// <summary>
         /// 
@@ -26,7 +26,7 @@ namespace Ornament.Contexts
             get { return _messagesConfig ?? (_messagesConfig = new MessagesConfig()); }
         }
 
-        
+      
         /// <summary>
         /// 
         /// </summary>

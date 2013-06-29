@@ -10,10 +10,7 @@
 
 
     账号信息
-    登录Id:[LoginId]
-    密码:[Password]
-    Email:[Email]
-
+    登录Id:[LoginId]   
 
     管理员
   </Value>
