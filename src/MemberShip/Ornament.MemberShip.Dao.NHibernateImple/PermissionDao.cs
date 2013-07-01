@@ -51,14 +51,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<Permission> GetPermissionByLoginId(string loginid)
         {
             DetachedCriteria user =
-                DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq(UserLoginidProperty, loginid))
+                DetachedCriteria.For(typeof(User)).Add(Restrictions.Eq(UserLoginidProperty, loginid))
                     .SetProjection(null)
                     .CreateCriteria("Roles")
                     .CreateCriteria("Permissions", "permission")
                     .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
 
             DetachedCriteria permission =
-                DetachedCriteria.For(typeof (Permission)).Add(Property.ForName("Id").In(user));
+                DetachedCriteria.For(typeof(Permission)).Add(Property.ForName("Id").In(user));
             return permission.GetExecutableCriteria(CurrentSession).List<Permission>();
         }
 
@@ -74,7 +74,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             ;
 
             DetachedCriteria org =
-                GetUserOrgPermissions(loginid).SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                GetUserOrgPermissions(loginid)
+                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
             ;
 
 
@@ -108,7 +109,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public DetachedCriteria GetUserOrgPermissions(string loginid)
         {
             return DetachedCriteria.For<User>().Add(Restrictions.Eq(UserOrgProperty, loginid))
-                .CreateCriteria("Roles", "role")
+                .CreateCriteria("Org", "org")
+                .CreateCriteria("org.Roles", "role")
                 .CreateCriteria("Permissions", "permission");
         }
 
@@ -126,7 +128,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public DetachedCriteria GetUserPermissions(string loginid)
         {
-            return DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq(UserLoginidProperty, loginid))
+            return DetachedCriteria.For(typeof(User)).Add(Restrictions.Eq(UserLoginidProperty, loginid))
                 .CreateCriteria("Roles")
                 .CreateCriteria("Permissions", "permission");
         }

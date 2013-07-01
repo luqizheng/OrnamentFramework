@@ -1,15 +1,23 @@
 <?xml version="1.0"?>
 <Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Subject>[site] 通知 </Subject>
-  <Value>
-    [Name]，您好
+    <Value> <![CDATA[
+    [name]，您好
 
+	<p>
     你的安全電子郵件已經被修改了，請點擊下面的url進行確認。
+	</p>
 
-    [Url]
+	<p>
+    [url]
+	</p>
 
+	<p>
 	請不要回覆此郵件。
+	</P>
 
+	<p>
     [site] 管理员
-  </Value>
+	</p>
+ ]]></Value>
 </Content>

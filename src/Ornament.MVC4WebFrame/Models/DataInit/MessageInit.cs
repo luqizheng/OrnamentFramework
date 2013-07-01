@@ -30,6 +30,7 @@ namespace Ornament.Web
             NotifyType a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
             NotifyType b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
             NotifyType c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
+            NotifyType d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
 
 
             //InitMessageType();

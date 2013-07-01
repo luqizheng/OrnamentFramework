@@ -5,13 +5,21 @@ using Qi.Secret;
 
 namespace Ornament.MemberShip.Security
 {
+    public enum SecretTokemStatus
+    {
+        Effective,
+        Expire,
+        Success,
+    }
+
     /// <summary>
     /// </summary>
     public class UserSecretToken : DomainObject<UserSecretToken, string>
     {
+        private SecretTokemStatus _status;
+
         protected UserSecretToken()
         {
-
         }
 
         public UserSecretToken(User account, string action, int expireTimeMinutes)
@@ -22,14 +30,28 @@ namespace Ornament.MemberShip.Security
             {
                 throw new ArgumentOutOfRangeException("expireTimeMinut should be larger than 0.");
             }
-            IsEffective = true;
             CreateTime = DateTime.Now;
             PrivateKey = Guid.NewGuid().ToString("N");
-
-            this.Account = account;
-            this.Action = action;
-            this.ExpireTime = expireTimeMinutes;
+            Account = account;
+            Action = action;
+            ExpireTime = expireTimeMinutes;
         }
+
+        public virtual SecretTokemStatus Status
+        {
+            get
+            {
+                if (_status == SecretTokemStatus.Effective)
+                {
+                    if (IsExpire)
+                    {
+                        _status = SecretTokemStatus.Expire;
+                    }
+                }
+                return _status;
+            }
+        }
+
         public virtual string Action { get; set; }
 
         /// <summary>
@@ -41,6 +63,7 @@ namespace Ornament.MemberShip.Security
         public virtual DateTime CreateTime { get; protected set; }
 
         /// <summary>
+        ///     this token is Effective for current user;
         /// </summary>
         public virtual DateTime? VerifyTime { get; set; }
 
@@ -56,7 +79,7 @@ namespace Ornament.MemberShip.Security
 
         /// <summary>
         /// </summary>
-        public virtual bool IsExpire
+        private bool IsExpire
         {
             get
             {
@@ -66,16 +89,26 @@ namespace Ornament.MemberShip.Security
                 return now.TotalMinutes > ExpireTime;
             }
         }
-
-        public virtual bool IsEffective { get; set; }
-
+        /// <summary>
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /// <exception cref="UserSecurityTimeoutException">User Token is Timeout</exception>
         public virtual bool Verify(string token)
         {
             if (String.IsNullOrEmpty(token))
                 throw new ArgumentNullException("token");
-
+            if (this.Status == SecretTokemStatus.Expire)
+            {
+                throw new UserSecurityTimeoutException();
+            }
+            if (this.Status == SecretTokemStatus.Success)
+            {
+                throw new UserSecurityException("this token is veirfy by another one, can't be use again");
+            }
             if (CreateToken(Account) == token)
             {
+                _status = SecretTokemStatus.Success;
                 VerifyTime = DateTime.Now;
                 return true;
             }
@@ -96,7 +129,11 @@ namespace Ornament.MemberShip.Security
                 throw new Exception("Please save the object after to build the QueryString.");
             return string.Format("id={0}&token={1}", Id, CreateToken(Account));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domainUrl"></param>
+        /// <returns></returns>
         public virtual string CreateQueryString(string domainUrl)
         {
             if (IsTransient())
@@ -106,6 +143,13 @@ namespace Ornament.MemberShip.Security
                 domainUrl = domainUrl.TrimEnd('/');
             }
             return string.Format("{2}?id={0}&token={1}", Id, CreateToken(Account), domainUrl);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual void Expire()
+        {
+            this._status = SecretTokemStatus.Expire;
         }
     }
 }

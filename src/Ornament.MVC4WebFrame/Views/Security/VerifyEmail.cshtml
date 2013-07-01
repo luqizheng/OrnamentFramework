@@ -1,20 +1,20 @@
 ﻿@using Ornament.Models.Security
 @using Ornament.Web
-@model Ornament.Models.Security.VerifyResutl?
+@model Ornament.Models.Security.VerifyResult?
 @{
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_layout.cshtml";
-    var dict = new Dictionary<VerifyResutl, string>
+    var dict = new Dictionary<VerifyResult, string>
         {
             {
-                VerifyResutl.Expire, Url.Action("Index", "Account")
+                VerifyResult.Expire, Url.Action("Index", "Account")
             },
              {
-                VerifyResutl.Failed, Url.Action("Index", "Account")
+                VerifyResult.Failed, Url.Action("Index", "Account")
             },
             
             {
-                VerifyResutl.Success, Url.Action("Index", "Home")
+                VerifyResult.Success, Url.Action("Index", "Home")
             },
         };
 }

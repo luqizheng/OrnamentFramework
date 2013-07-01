@@ -22,7 +22,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 //if found the prevous Token, it should be let it invalidate.
                 if (previousToke != null)
                 {
-                    previousToke.IsEffective = false;
+                    previousToke.Expire();
                     base.SaveOrUpdate(previousToke);
                 }
             }
@@ -37,7 +37,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 //if found the prevous Token, it should be let it invalidate.
                 if (previousToke != null)
                 {
-                    previousToke.IsEffective = false;
+                    previousToke.Expire();
                     base.SaveOrUpdate(previousToke);
                 }
             }

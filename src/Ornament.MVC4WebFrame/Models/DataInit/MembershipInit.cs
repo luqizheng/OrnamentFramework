@@ -56,6 +56,7 @@ namespace Ornament.MVCWebFrame.Models.DataInit
             admin.Permissions.Add(rolePermission);
             admin.Permissions.Add(userPermission);
             admin.Permissions.Add(memberPermission);
+            OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(admin);
 
             UserGroup adminGroup = CreateOrGetUserGroup("administrators");
             adminGroup.AddRole(admin);

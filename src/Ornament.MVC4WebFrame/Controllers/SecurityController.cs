@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Security;
 using Ornament.Models.Security;
 using Qi.Web.Mvc;
 
@@ -13,34 +15,68 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             _factory = factory;
         }
-        [Authorize,Session]
+
+        [Authorize, Session]
         public ActionResult VerifyEmail(string id, string token)
         {
-            var userToken = _factory.CreateUserSecurityTokenDao().Get(id);
+            UserSecretToken userToken = _factory.CreateUserSecurityTokenDao().Get(id);
             try
             {
-
                 if (userToken == null)
                 {
                     return View("~/Views/HttpErrors/404.cshtml");
                 }
-                if (userToken.IsExpire)
+                if (userToken.Status == SecretTokemStatus.Expire)
                 {
-                    return View("VerifyEmailResult", VerifyResutl.Expire);
+                    return View(VerifyResult.Expire);
                 }
                 if (userToken.Verify(token))
                 {
-                    return View("VerifyEmailResult", VerifyResutl.Success);
+                    return View(VerifyResult.Success);
                 }
-                return View("VerifyEmailResult", VerifyResutl.Failed);
+                return View(VerifyResult.Failed);
             }
             finally
             {
-                _factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
+                if (userToken != null)
+                {
+                    userToken.VerifyTime = DateTime.Now;
+                    _factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
+                }
             }
-
         }
 
+        [ Session]
+        public ActionResult RetrievePassword(string id, string token)
+        {
+            UserSecretToken userToken = _factory.CreateUserSecurityTokenDao().Get(id);
+            if (userToken == null)
+            {
+                return View("~/Views/HttpErrors/404.cshtml");
+            }
+            if (userToken.Status == SecretTokemStatus.Expire)
+            {
+                _factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
+                ViewData["VerifyResult"] = VerifyResult.Expire;
+                return View();
+            }
+            ViewData["VerifyResult"] = VerifyResult.Success;
+            return View(new RetrievePasswordModel
+                {
+                    Id = id,
+                    TokenId = token
+                });
+        }
 
+        [ Session, HttpPost]
+        public ActionResult RetrievePassword(RetrievePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Save(_factory);
+                return View("RetrievePasswordResult", true);
+            }
+            return View(model);
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace Ornament.Models.Memberships.Partials
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
             ErrorMessageResourceType = typeof(MemberShipModel))]
         [DataType(DataType.Password)]
+        [UIHint("Password")]
         public string Password { get; set; }
 
         /// <summary>
@@ -21,6 +22,7 @@ namespace Ornament.Models.Memberships.Partials
         [Required(ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "error_MissPassword")]
         [Compare("Password", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
             ErrorMessageResourceType = typeof(MemberShipModel))]
+        [UIHint("Password")]
         public string ConfirmPassword { get; set; }
 
         

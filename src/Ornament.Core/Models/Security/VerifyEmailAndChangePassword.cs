@@ -2,7 +2,7 @@
 
 namespace Ornament.Models.Security
 {
-    public enum VerifyResutl
+    public enum VerifyResult
     {
         NotFoundTokenId,
         Success,
@@ -10,9 +10,5 @@ namespace Ornament.Models.Security
         Expire
     }
 
-    public class VerifyEmailAndChangePasswordResutl
-    {
-        public UserSecretToken UserSecretToken { get; set; }
-        public VerifyResutl Type { get; set; }
-    }
+  
 }

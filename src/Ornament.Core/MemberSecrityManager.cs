@@ -5,7 +5,6 @@ using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
 using Ornament.Messages;
-using Ornament.Messages.Notification;
 using Qi.Text;
 
 namespace Ornament
@@ -16,10 +15,10 @@ namespace Ornament
         private readonly IMemberShipFactory _memberShipFactory;
         private IDictionary<string, string> _variables;
 
-        public MemberSecrityManager(IMemberShipFactory memberShipFactory, SmtpClient client, User user,string urlWithoutDomain)
+        public MemberSecrityManager(IMemberShipFactory memberShipFactory, SmtpClient client, User user)
         {
             User = user;
-            Url = urlWithoutDomain;
+
             if (memberShipFactory == null) throw new ArgumentNullException("memberShipFactory");
             if (client == null) throw new ArgumentNullException("client");
             _dao = memberShipFactory.CreateUserSecurityTokenDao();
@@ -28,13 +27,13 @@ namespace Ornament
         }
 
         public User User { get; set; }
-        public string Url { get; set; }
+
 
         public string Action { get; set; }
         public int ExpireTimeMiniutes { get; set; }
 
         public SmtpClient SmtpClient { get; set; }
-        
+
         public IDictionary<string, string> Variables
         {
             get
@@ -60,9 +59,9 @@ namespace Ornament
         {
             var token = new UserSecretToken(User, Action, ExpireTimeMiniutes);
             _dao.SaveOrUpdate(token);
-            Content template = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged.Show(Language(this.User));
+            Content template = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged.Show(Language(User));
             Variables["url"] =
-                token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + this.Url);
+                token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + "/Security/" + this.Action);
             Variables["name"] = User.Name;
             Content content = Replace(template, Variables);
             SendEmail(User.Email, content);
@@ -75,7 +74,8 @@ namespace Ornament
         private string Language(User user)
         {
             ProfileValue prfile = _memberShipFactory.CreateProfileDao().FindByLoginId(user.LoginId);
-            if (prfile.Properities.ContainsKey("language"))
+
+            if (prfile != null && prfile.Properities.ContainsKey("language"))
             {
                 return prfile.Properities["language"].ToString();
             }
@@ -108,7 +108,7 @@ namespace Ornament
 
         public static MemberSecrityManager CreateEmailChangedToken(User user, int expireMiniutes)
         {
-            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user,"/Security/EmailChanged")
+            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user)
                 {
                     Action = "VerifyEmail",
                     ExpireTimeMiniutes = expireMiniutes
@@ -121,11 +121,11 @@ namespace Ornament
         /// </summary>
         public static MemberSecrityManager CreateNewUser(User user, int expireMiniutes)
         {
-            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user,"/Security/NewAccount")
-            {
-                Action = "VerifyNewAccount",
-                ExpireTimeMiniutes = expireMiniutes,
-            };
+            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user)
+                {
+                    Action = "VerifyEmail",
+                    ExpireTimeMiniutes = expireMiniutes,
+                };
             return manager;
         }
 
@@ -134,13 +134,12 @@ namespace Ornament
         /// </summary>
         public static MemberSecrityManager ForgetPassword(User user, int expireMiniutes)
         {
-            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user, "/Security/ChangedPassword")
-            {
-                Action = "RetrievePassword",
-                ExpireTimeMiniutes = expireMiniutes,
-            };
+            var manager = new MemberSecrityManager(OrnamentContext.DaoFactory.MemberShipFactory, new SmtpClient(), user)
+                {
+                    Action = "RetrievePassword",
+                    ExpireTimeMiniutes = expireMiniutes,
+                };
             return manager;
         }
-
     }
 }

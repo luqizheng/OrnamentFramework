@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
 <Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Subject>[site] notify messages</Subject>
-  <Value>
-    Dear [Name],
+  <Value> <![CDATA[
+    Dear [name],
 
+	<p>
     You eEmail has be changed, please click following Url to verify this email address.
+	</p>
 
-    [Url]
+    [url]
 
+	<p>
     [site] administrator.
-  </Value>
+	</p>
+ ]]></Value>
 </Content>

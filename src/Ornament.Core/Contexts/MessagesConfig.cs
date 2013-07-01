@@ -12,7 +12,16 @@ namespace Ornament.Contexts
     public class MessagesConfig
     {
         private static string _personalMessageId;
-        private static string _registId;
+        private static string dd = "";
+        private static string _registId
+        {
+            get { return dd; }
+            set
+            {
+                dd = value;
+            }
+
+        }
         private static string _verifyEmailAddressId;
         private static string _passwordRetrive;
         /// <summary>
@@ -40,7 +49,14 @@ namespace Ornament.Contexts
                                                                   }
                                                               });
                 }
-                return dao.Get(_personalMessageId);
+
+                var result = dao.Get(_personalMessageId);
+                if (result == null)
+                {
+                    _personalMessageId = null;
+                    return RegistAccount;
+                }
+                return result;
             }
         }
 
@@ -70,7 +86,13 @@ namespace Ornament.Contexts
                                                                      },
                                                                  });
                 }
-                return dao.Get(_verifyEmailAddressId);
+                var result = dao.Get(_verifyEmailAddressId);
+                if (result == null)
+                {
+                    _verifyEmailAddressId = null;
+                    return EmailAddressChanged;
+                }
+                return result;
             }
         }
 
@@ -101,7 +123,13 @@ namespace Ornament.Contexts
                                                                      },
                                                                  });
                 }
-                return dao.Get(_passwordRetrive);
+                var result = dao.Get(_passwordRetrive);
+                if (result == null)
+                {
+                    _passwordRetrive = null;
+                    return this.RetrivePassword;
+                }
+                return result;
             }
         }
 
@@ -117,16 +145,23 @@ namespace Ornament.Contexts
                     _registId = CreateNotifyType("Account Changed (Inside)", "log some about account changed.", dao,
                                                  new Dictionary<string, Content>());
                 }
-                return dao.Get(_registId);
+
+                var result = dao.Get(_registId);
+                if (result == null)
+                {
+                    _registId = null;
+                    return this.AccountChanged;
+                }
+                return result;
             }
         }
 
-     
+
         private Content DeserializerXml(string text, string lang)
         {
             using (var zhStream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
             {
-                var content = (Content) SerializationHelper.DeserializerXml(zhStream, typeof (Content));
+                var content = (Content)SerializationHelper.DeserializerXml(zhStream, typeof(Content));
                 content.Language = lang;
                 return content;
             }
@@ -136,19 +171,27 @@ namespace Ornament.Contexts
         private string CreateNotifyType(string name, string remark, INotifyTypeDao dao,
                                         IDictionary<string, Content> contents)
         {
-            NotifyType personal = dao.GetByName(name) ?? new NotifyType();
+            NotifyType personal = dao.GetByName(name);
+            if (personal != null)
+                return personal.Id;
+            personal = new NotifyType();
             personal.Name = name;
             personal.Remark = remark;
-            if (string.IsNullOrEmpty(personal.Id))
-            {
-                dao.SaveOrUpdate(personal);
-                dao.Flush();
-            }
+
             foreach (string key in contents.Keys)
             {
-                personal.Contents.Add(key, contents[key]);
+                if (!personal.Contents.ContainsKey(key))
+                {
+                    personal.Contents.Add(key, contents[key]);
+                }
+                else
+                {
+                    personal.Contents[key] = contents[key];
+                }
             }
 
+            dao.SaveOrUpdate(personal);
+            dao.Flush();
 
             return personal.Id;
         }

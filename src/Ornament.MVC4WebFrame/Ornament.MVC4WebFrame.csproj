@@ -965,8 +965,11 @@
     <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
-    <Content Include="Views\Security\VerifyEmailResult.cshtml" />
+    <Content Include="Views\Security\VerifyEmail.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\OrgSelect.cshtml" />
+    <Content Include="Views\Security\RetrievePassword.cshtml" />
+    <Content Include="Views\Security\RetrievePasswordResult.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1195,13 +1198,18 @@
     <Content Include="Views\Home\App_LocalResources\Index.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Security\App_LocalResources\VerifyEmailResult.resx" />
+    <Content Include="Views\Security\App_LocalResources\RetrievePassword.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Security\App_LocalResources\VerifyEmailResult.zh.resx" />
+    <Content Include="Views\Security\App_LocalResources\RetrievePassword.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Security\App_LocalResources\VerifyEmailResult.zh-CN.resx" />
+    <Content Include="Views\Security\App_LocalResources\RetrievePassword.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-CN.resx" />
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

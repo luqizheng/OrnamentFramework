@@ -22,9 +22,10 @@ namespace Ornament.Models.Memberships
         /// <param name="daoFactory"></param>
         public void Retrieve(IMemberShipFactory daoFactory)
         {
-             User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
-                        daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
-            MemberSecrityManager.ForgetPassword(user, 1440);
+            User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
+                       daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
+            var aa = MemberSecrityManager.ForgetPassword(user, 1440);
+            aa.SendToken();
         }
     }
 }
