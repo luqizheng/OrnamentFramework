@@ -34,6 +34,9 @@
             var a = $.extend({}, { pageSize: 30, pageIndex: 0 }, search);
             $.post("/api/Users/Match", a, func);
         },
+        verifyEmail: function (id, func) {
+            $.post("/api/Users/VerifyEmail", { loginId: id }, func);
+        }
     };
 });
 
