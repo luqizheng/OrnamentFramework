@@ -8,5 +8,6 @@ namespace Badminton.Dao
 {
     public interface IGymnasiumDao : Qi.Domain.IDao<int, Gymnasium>
     {
+        IList<Gymnasium> GetGymnasiums(int pageSize, int currentPage,out int totalRows);
     }
 }

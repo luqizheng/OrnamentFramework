@@ -11,5 +11,6 @@ namespace Badminton.Dao
        IGymnasiumDao GymasiumDao();
        IYardDao YardDao();
        IYardTypeDao YardTypeDao();
+       
    }
 }

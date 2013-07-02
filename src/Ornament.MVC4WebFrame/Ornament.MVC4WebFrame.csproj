@@ -224,6 +224,8 @@
     <Compile Include="App_Start\NhConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
+    <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
     <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
     <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
@@ -658,6 +660,9 @@
     <Content Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
     <Content Include="Areas\Settings\Views\Site\Index.cshtml" />
+    <Content Include="Areas\Badminton\Views\Web.config" />
+    <Content Include="Areas\Badminton\Views\Gymnasium\Index.cshtml" />
+    <Content Include="Areas\Badminton\Views\Gymnasium\Create.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -975,6 +980,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Badminton\Models\" />
+    <Folder Include="Areas\Badminton\Views\Shared\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="Areas\Messages\Views\Shared\" />
