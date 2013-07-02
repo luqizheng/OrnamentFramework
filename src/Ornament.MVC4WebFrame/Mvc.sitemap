@@ -71,6 +71,7 @@ use permission for checking permission like @user:Read, user is the string type 
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false">
       <mvcSiteMapNode controller="NotifyType" area="Messages" action="Index" title="NotifyType Setting"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="Site" area="Settings" action="Index" title="Information"></mvcSiteMapNode>
     </mvcSiteMapNode>
 
   </mvcSiteMapNode>

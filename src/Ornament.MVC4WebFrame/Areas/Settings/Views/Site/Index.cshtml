@@ -1,0 +1,90 @@
+﻿@using System.Configuration
+@using Ornament
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+}
+
+@section pageTitle{
+    <h5>Information</h5>
+}
+
+<div class="row-fluid">
+    <div class="span4">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>AppSetting</h6>
+                </div>
+            </div>
+            <div class="well body">
+
+                <div id="accordion2" class="accordion">
+                    @foreach (var appSetting in ConfigurationManager.AppSettings.AllKeys)
+                    {
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a href="#@appSetting" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">@appSetting = @ConfigurationManager.AppSettings[appSetting]</a>
+                            </div>
+                            <div class="accordion-body collapse" id="@appSetting" style="height: 0px;">
+                                <div class="accordion-inner">
+                                    <code>
+                                        @{
+                        var content = "<add key=\"" + appSetting + "\" value=\"" + ConfigurationManager.AppSettings[appSetting] + "\" />";
+                                                                                                                        
+                                        }
+                                        @content
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="span8">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>Language</h6>
+                </div>
+            </div>
+            <div class="well body">
+                <div class="list">
+                    <ul>
+                        @foreach (var langage in OrnamentContext.Configuration.Languages)
+                        {
+                            <li>
+
+                                @langage.Name (@langage.Key)
+                                @if (langage.IsDefault)
+                                {
+                                    <b>Default</b>
+                                }
+                            </li>
+                        }
+                    </ul>
+                    <div class="semi-widget">
+                        <strong class="subtitle">Setting file</strong>
+                        <div class="well-smoke body">
+                            ~/App_Start/ApplicationConfig.cs
+                            <br />
+                            <code>
+                                @foreach (var langage in OrnamentContext.Configuration.Languages)
+                                {
+                                    <div>
+                                        context.Languages.Add(new Language(@langage.Name,@langage.Key) {IsDefault = @langage.IsDefault});
+                                    </div>
+                                }
+                            </code>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
