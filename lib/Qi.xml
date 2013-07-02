@@ -1613,6 +1613,10 @@
             <summary>
             </summary>
         </member>
+        <member name="M:Qi.Text.NamedFormatterHelper.#ctor">
+            <summary>
+            </summary>
+        </member>
         <member name="M:Qi.Text.NamedFormatterHelper.Replace(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
             <summary>
                 use replacePatten to replace Variables those in ormatString,
@@ -1628,6 +1632,16 @@
             </summary>
             <param name="content"></param>
             <returns></returns>
+        </member>
+        <member name="P:Qi.Text.NamedFormatterHelper.StartPlaceholder">
+            <summary>
+            Start Placholder default is "["
+            </summary>
+        </member>
+        <member name="P:Qi.Text.NamedFormatterHelper.EndPlaceHolder">
+            <summary>
+            End Placeholder default is "]"
+            </summary>
         </member>
         <member name="T:Qi.Time">
             <summary>
