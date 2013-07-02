@@ -29,7 +29,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 return View((Org)null);
             }
             Org org = _factory.CreateOrgDao().Get(id);
-            ViewData["Orgs"] = org.GetAllChilds();
+            ViewData["Orgs"] = org.Childs;
             return View(org);
         }
 

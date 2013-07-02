@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Ornament.MemberShip.Dao
 {
-    public interface IMemberDao
+    public interface IPerformerDao
     {
-        IList<IMember> Find(string roleId);
+        IList<IPerformer> Find(string roleId);
 
     }
 }

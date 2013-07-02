@@ -59,13 +59,13 @@ namespace Ornament.MVCWebFrame.Models.DataInit
             OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(admin);
 
             UserGroup adminGroup = CreateOrGetUserGroup("administrators");
-            adminGroup.AddRole(admin);
+            adminGroup.Roles.Add(admin);
             IUserGroupDao ugDao =  OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             ugDao.SaveOrUpdate(adminGroup);
 
             User adminUser = CreateUser("admin", AdminPassword, "admin@admin.com", "admin", "123456");
-            adminUser.AddRole(admin);
-            adminUser.AddToUserGroup(adminGroup);
+            adminUser.Roles.Add(admin);
+            adminUser.UserGroups.Add(adminGroup);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
         }
 

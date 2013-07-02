@@ -192,7 +192,7 @@ namespace Ornament.Web.MemberShips
                 {
                     foreach (string roleName in roleNames)
                     {
-                        user.AddRole(new Role(roleName));
+                        user.Roles.Add(new Role(roleName));
                     }
                 }
             }
@@ -217,7 +217,7 @@ namespace Ornament.Web.MemberShips
                 IList<User> users = userDao.GetUsers(usernames);
                 foreach (User u in users)
                 {
-                    u.ClearRole();
+                    u.Roles.Clear();
                     userDao.Save(u);
                 }
             }

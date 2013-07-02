@@ -93,7 +93,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MemberDao.cs" />
+    <Compile Include="Mappings\GeneralPermissionMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\OrgMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\PerformerMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\PermissionMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\ProfileValueMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\RoleMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\UserGroupMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\UserMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\UserSecretTokenMapping.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PerformerDao.cs" />
     <Compile Include="MemberShipFactory.cs" />
     <Compile Include="OrgDao.cs" />
     <Compile Include="ProfileDao.cs" />

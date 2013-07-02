@@ -6,12 +6,11 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Properties;
-using Qi.Domain;
 
 namespace Ornament.MemberShip
 {
     [Serializable]
-    public class Role : DomainObject<Role, string>, IPerformer
+    public class Role : Performer<Role>
     {
         private string _name;
 
@@ -26,7 +25,7 @@ namespace Ornament.MemberShip
         /// </summary>
         /// <param name="roleName"></param>
         /// <exception cref="ArgumentNullException">roleName is null or length is 0</exception>
-        public Role(string roleName)
+        public  Role(string roleName)
         {
             if (String.IsNullOrWhiteSpace(roleName))
                 throw new ArgumentNullException("roleName");
@@ -40,7 +39,7 @@ namespace Ornament.MemberShip
         [Display(Name = "Remark", ResourceType = typeof (Resources))]
         [StringLength(100, ErrorMessageResourceType = typeof (ErrorMessage),
             ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
-        public string Remark
+        public virtual string Remark
         {
             get { return _remark; }
             set
@@ -57,35 +56,9 @@ namespace Ornament.MemberShip
             }
         }
 
-        public Iesi.Collections.Generic.ISet<Permission> Permissions
+        public virtual Iesi.Collections.Generic.ISet<Permission> Permissions
         {
             get { return _permissions ?? (_permissions = new HashedSet<Permission>()); }
-        }
-
-        #region IPerformer Members
-
-        string IPerformer.Id
-        {
-            get { return Id; }
-            set { throw new NotImplementedException("Can't set the User's Id"); }
-        }
-
-        IList<User> IPerformer.GetUsers(IMemberShipFactory factory)
-        {
-            return factory.CreateUserDao().GetUsersInRole(Name);
-        }
-
-        string IPerformer.Name
-        {
-            get { return Name; }
-            set { Name = value; }
-        }
-
-        #endregion
-
-        PerformerType IPerformer.Type
-        {
-            get { return PerformerType.Role; }
         }
 
         /// <summary>
@@ -95,7 +68,7 @@ namespace Ornament.MemberShip
         [Required(ErrorMessageResourceType = typeof (ErrorMessage), ErrorMessageResourceName = "RequireRoleName")]
         [StringLength(20, ErrorMessageResourceType = typeof (ErrorMessage),
             ErrorMessageResourceName = "RoleNameOverMaxLength")]
-        public string Name
+        public virtual  string Name
         {
             get { return _name; }
             set
@@ -104,6 +77,25 @@ namespace Ornament.MemberShip
                     throw new ArgumentOutOfRangeException("value", value.Length, "Name's lenght over than 20");
                 _name = value;
             }
+        }
+
+        #region IPerformer Members
+
+        public override IEnumerable<Role> GetAllRoles()
+        {
+            return Roles;
+        }
+
+        #endregion
+
+        protected override PerformerType GetPerformerType()
+        {
+            return PerformerType.Role;
+        }
+
+        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+        {
+            return memberShipFactory.CreateUserDao().GetUsersInRole(Name);
         }
     }
 }

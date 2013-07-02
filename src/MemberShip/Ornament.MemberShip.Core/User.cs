@@ -17,14 +17,14 @@ namespace Ornament.MemberShip
     /// <summary>
     /// </summary>
     [Serializable]
-    public partial class User : Member<User>, IPerformer
+    public partial class User : Performer<User>
     {
         /// <summary>
         ///     god of the system login id
         /// </summary>
         public static readonly string AdminLoginId = "admin";
 
-     
+
         //private UserInformation _information;
         private bool _isLockout;
         private string _password;
@@ -224,8 +224,6 @@ namespace Ornament.MemberShip
             }
         }
 
-     
-
         #region Member
 
         /// <summary>
@@ -272,64 +270,9 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The user groups.
         /// </value>
-        protected virtual Iesi.Collections.Generic.ISet<UserGroup> UserGroups
+        public virtual Iesi.Collections.Generic.ISet<UserGroup> UserGroups
         {
             get { return _userGroups ?? (_userGroups = new HashedSet<UserGroup>()); }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="ug">
-        ///     The ug.
-        /// </param>
-        /// <returns>
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// </exception>
-        public virtual bool AddToUserGroup(UserGroup ug)
-        {
-            if (ug == null)
-            {
-                throw new ArgumentNullException("ug");
-            }
-            ModifyUpdateTime();
-            return UserGroups.Add(ug);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="ug">
-        ///     The ug.
-        /// </param>
-        /// <returns>
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// </exception>
-        public virtual bool Remove(UserGroup ug)
-        {
-            if (ug == null)
-            {
-                throw new ArgumentNullException("ug");
-            }
-            ModifyUpdateTime();
-            return UserGroups.Remove(ug);
-        }
-
-        /// <summary>
-        /// </summary>
-        public virtual void ClearUserGroup()
-        {
-            UserGroups.Clear();
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        public virtual ReadOnlyCollection<UserGroup> GetUserGroups()
-        {
-            var result = new List<UserGroup>(UserGroups);
-            return new ReadOnlyCollection<UserGroup>(result);
         }
 
         #endregion
@@ -339,11 +282,6 @@ namespace Ornament.MemberShip
         [Display(Name = "Org", ResourceType = typeof (Resources))]
         public virtual Org Org { get; set; }
 
-        string IPerformer.Id
-        {
-            get { return Id; }
-            set { throw new NotImplementedException("Can't set the User's Id"); }
-        }
 
         /// <summary>
         /// </summary>
@@ -362,15 +300,17 @@ namespace Ornament.MemberShip
             set { base.Name = value; }
         }
 
-
-        IList<User> IPerformer.GetUsers(IMemberShipFactory memberShip)
+        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {
-            return new List<User> {this};
+            return new List<User>
+                {
+                    this,
+                };
         }
 
-        PerformerType IPerformer.Type
+        protected override PerformerType GetPerformerType()
         {
-            get { return PerformerType.User; }
+            return PerformerType.User;
         }
 
         #endregion

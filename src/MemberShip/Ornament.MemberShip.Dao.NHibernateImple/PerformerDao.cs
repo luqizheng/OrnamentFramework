@@ -9,16 +9,16 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
     /// <summary>
     /// 
     /// </summary>
-    public class MemberDao : IMemberDao
+    public class PerformerDao : IPerformerDao
     {
         public ISession CurrentSession
         {
             get { return SessionManager.Instance.GetCurrentSession(); }
         }
 
-        #region IMemberDao Members
+        #region IPerformerDao Members
 
-        public IList<IMember> Find(string roleId)
+        public IList<IPerformer> Find(string roleId)
         {
             IList<User> user = DetachedCriteria.For<User>().CreateCriteria("Roles", "role").
                 Add(Restrictions.Eq("Id", roleId))
@@ -26,7 +26,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             IList<UserGroup> userGroup = DetachedCriteria.For<UserGroup>().CreateCriteria("Roles", "role").
                 Add(Restrictions.Eq("Id", roleId))
                 .GetExecutableCriteria(CurrentSession).List<UserGroup>();
-            var result = new List<IMember>();
+            var result = new List<IPerformer>();
             result.AddRange(user);
             result.AddRange(userGroup);
             return result;

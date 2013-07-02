@@ -20,7 +20,7 @@ namespace Ornament.Models.Memberships.Partials
         public UserBasicInfoModel(User user)
         {
             Email = user.Email;
-            UserGroups = user.GetUserGroups().ToArray();
+            UserGroups = user.UserGroups.ToArray();
             Roles = user.GetRoles().ToArray();
             IsApprove = user.IsApproved;
             IsLock = user.IsLockout;
@@ -73,7 +73,7 @@ namespace Ornament.Models.Memberships.Partials
             if (user == null)
                 throw new ArgumentNullException("user");
             user.Email = Email;
-            user.ClearRole();
+            user.Roles.Clear();
             user.IsApproved = IsApprove;
             user.IsLockout = IsLock;
             user.Org = this.Org;
@@ -81,14 +81,14 @@ namespace Ornament.Models.Memberships.Partials
             {
                 if (role == null)
                     continue;
-                user.AddRole(role);
+                user.Roles.Add(role);
             }
-            user.ClearUserGroup();
+            user.UserGroups.Clear();
             foreach (UserGroup ug in UserGroups)
             {
                 if (ug == null)
                     continue;
-                user.AddToUserGroup(ug);
+                user.UserGroups.Add(ug);
             }
         }
     }

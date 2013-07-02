@@ -24,7 +24,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns></returns>
-        public ReadOnlyCollection<Role> GetRolesByName(string[] roleName)
+        public  ReadOnlyCollection<Role> GetRolesByName(string[] roleName)
         {
             if (roleName == null || roleName.Length == 0)
                 return new ReadOnlyCollection<Role>(new List<Role>());

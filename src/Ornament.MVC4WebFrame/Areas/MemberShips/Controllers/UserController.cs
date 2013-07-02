@@ -133,15 +133,15 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             IUserGroupDao userGroupDao =
                 _memberShipFactory.CreateUserGroupDao();
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
-            user.ClearRole();
+            user.Roles.Clear();
             foreach (Role role in roleDao.GetRolesByName(roles))
             {
-                user.AddRole(role);
+                user.Roles.Add(role);
             }
-            user.ClearUserGroup();
+            user.UserGroups.Clear();
             foreach (UserGroup ug in userGroupDao.GetUserGroups(userGroups))
             {
-                user.AddToUserGroup(ug);
+                user.UserGroups.Add(ug);
             }
             _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             _memberShipFactory.CreateUserDao().Flush();

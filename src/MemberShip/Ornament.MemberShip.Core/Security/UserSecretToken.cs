@@ -89,6 +89,7 @@ namespace Ornament.MemberShip.Security
                 return now.TotalMinutes > ExpireTime;
             }
         }
+
         /// <summary>
         /// </summary>
         /// <param name="token"></param>
@@ -98,11 +99,11 @@ namespace Ornament.MemberShip.Security
         {
             if (String.IsNullOrEmpty(token))
                 throw new ArgumentNullException("token");
-            if (this.Status == SecretTokemStatus.Expire)
+            if (Status == SecretTokemStatus.Expire)
             {
                 throw new UserSecurityTimeoutException();
             }
-            if (this.Status == SecretTokemStatus.Success)
+            if (Status == SecretTokemStatus.Success)
             {
                 throw new UserSecurityException("this token is veirfy by another one, can't be use again");
             }
@@ -129,8 +130,8 @@ namespace Ornament.MemberShip.Security
                 throw new Exception("Please save the object after to build the QueryString.");
             return string.Format("id={0}&token={1}", Id, CreateToken(Account));
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="domainUrl"></param>
         /// <returns></returns>
@@ -144,12 +145,12 @@ namespace Ornament.MemberShip.Security
             }
             return string.Format("{2}?id={0}&token={1}", Id, CreateToken(Account), domainUrl);
         }
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual void Expire()
         {
-            this._status = SecretTokemStatus.Expire;
+            _status = SecretTokemStatus.Expire;
         }
     }
 }

@@ -56,10 +56,10 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [HttpDelete]
         public ActionResult Delete(Role role)
         {
-            var a = _factory.CreateMemberDao().Find(role.Id);
+            IList<IPerformer> a = _factory.CreateMemberDao().Find(role.Id);
             foreach (var member in a)
             {
-                member.RemoveRole(role);
+                member.Roles.Remove(role);
             }
             _roleDao.Delete(role);
             return RedirectToAction("Index");

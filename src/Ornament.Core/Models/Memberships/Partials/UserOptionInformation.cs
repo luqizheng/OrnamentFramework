@@ -17,7 +17,7 @@ namespace Ornament.Models.Memberships.Partials
         {
             Phone = user.Phone;
             Name = user.Name;
-            Remark = user.Remark;
+            Remark = user.Remarks;
          
         }
 
@@ -42,7 +42,7 @@ namespace Ornament.Models.Memberships.Partials
 
         public void UpdateOn(User user)
         {
-            user.Remark = Remark;
+            user.Remarks = Remark;
             user.Name = Name;
             user.Phone = Phone;
            

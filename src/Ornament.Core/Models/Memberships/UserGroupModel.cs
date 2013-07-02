@@ -21,7 +21,7 @@ namespace Ornament.Models.Memberships
             _ug = ug;
             Id = ug.Id;
             Name = ug.Name;
-            Remark = ug.Remark;
+            Remark = ug.Remarks;
             Roles = ug.GetAllRoles().ToArray();
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Ornament.Models.Memberships
             string id = Id.Trim();
             UserGroup ug = dao.Get(id);
             ug.Name = Name;
-            ug.Remark = Remark;
+            ug.Remarks = Remark;
             dao.SaveOrUpdate(ug);
         }
     }

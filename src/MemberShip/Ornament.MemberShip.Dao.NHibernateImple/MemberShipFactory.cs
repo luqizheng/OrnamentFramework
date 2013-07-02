@@ -62,9 +62,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// 
         /// </summary>
         /// <returns></returns>
-        public IMemberDao CreateMemberDao()
+        public IPerformerDao CreateMemberDao()
         {
-            return new MemberDao();
+            return new PerformerDao();
         }
 
         /// <summary>

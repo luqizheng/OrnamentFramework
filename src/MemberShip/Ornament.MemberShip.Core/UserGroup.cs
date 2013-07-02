@@ -7,9 +7,8 @@ using Ornament.MemberShip.Permissions;
 namespace Ornament.MemberShip
 {
     /// <summary>
-    /// 
     /// </summary>
-    public class UserGroup : Member<UserGroup>, IPerformer
+    public class UserGroup : Performer<UserGroup>
     {
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
 
@@ -21,10 +20,7 @@ namespace Ornament.MemberShip
             : base(name)
         {
         }
-        PerformerType IPerformer.Type
-        {
-            get { return PerformerType.UserGroup; }
-        }
+
         public virtual IEnumerable<Permission> Permissions
         {
             get
@@ -39,21 +35,20 @@ namespace Ornament.MemberShip
             }
         }
 
-        #region IPerformer Members
 
-        string IPerformer.Id
+        protected override PerformerType GetPerformerType()
         {
-            get { return this.Id; }
-            set { throw new NotImplementedException("Can't set the UserGroup's Id"); }
+            return PerformerType.UserGroup;
         }
 
-        IList<User> IPerformer.GetUsers(IMemberShipFactory factory)
+        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {
-            if (factory == null)
-                throw new ArgumentNullException("factory");
-            return factory.CreateUserDao().GetUsers(this);
+            return memberShipFactory.CreateUserDao().GetUsers(this);
         }
 
-        #endregion
+        public override IEnumerable<Role> GetAllRoles()
+        {
+            return this.Roles;
+        }
     }
 }

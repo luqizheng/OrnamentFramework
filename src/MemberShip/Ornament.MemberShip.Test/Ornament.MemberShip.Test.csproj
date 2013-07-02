@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="helper\MockOperator.cs" />
-    <Compile Include="MemberTest.cs" />
     <Compile Include="NHibernateResourceOperatorTest.cs" />
     <Compile Include="Permissions\NewsPermission.cs" />
     <Compile Include="PermissionTest.cs" />

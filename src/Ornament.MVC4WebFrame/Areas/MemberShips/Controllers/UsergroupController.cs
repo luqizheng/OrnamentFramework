@@ -97,10 +97,10 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             IRoleDao roleDao = _factory.CreateRoleDao();
             UserGroup user =
                 _factory.CreateUserGroupDao().Get(id);
-            user.ClearRole();
+            user.Roles.Clear();
             foreach (Role role in roleDao.GetRolesByName(roles))
             {
-                user.AddRole(role);
+                user.Roles.Add(role);
             }
             return RedirectToAction("Index");
         }
@@ -125,7 +125,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
             foreach (User user in dao.GetUsers(loginIds))
             {
-                user.AddToUserGroup(ug);
+                user.UserGroups.Add(ug);
             }
 
             return RedirectToAction("index");

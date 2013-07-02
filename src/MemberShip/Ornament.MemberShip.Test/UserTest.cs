@@ -258,7 +258,7 @@ namespace MemberShip.Test
             Assert.AreEqual(expected, actual);
         }
 
-       
+
 
         /// <summary>
         ///A test for CreateTime
@@ -281,8 +281,8 @@ namespace MemberShip.Test
             var target = new User("kkkkk");
             string expected = "Comment";
             string actual;
-            target.Remark = expected;
-            actual = target.Remark;
+            target.Remarks = expected;
+            actual = target.Remarks;
             Assert.AreEqual(expected, actual);
         }
 
@@ -294,7 +294,7 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             UserGroup ug = null;
-            target.Remove(ug);
+            target.UserGroups.Remove(ug);
         }
 
 
@@ -307,8 +307,8 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             var expected = new ReadOnlyCollection<UserGroup>(new List<UserGroup>());
-            ReadOnlyCollection<UserGroup> actual;
-            actual = target.GetUserGroups();
+            
+            var actual = target.UserGroups;
             Assert.AreEqual(expected.Count
                             , actual.Count);
         }
@@ -321,10 +321,10 @@ namespace MemberShip.Test
         public void ClearUserGroupTest()
         {
             var target = new User("kkkkk");
-            target.AddToUserGroup(new UserGroup("userGroup"));
-            Assert.AreEqual(1, target.GetUserGroups().Count);
-            target.ClearUserGroup();
-            Assert.AreEqual(0, target.GetUserGroups().Count);
+            target.UserGroups.Add(new UserGroup("userGroup"));
+            Assert.AreEqual(1, target.UserGroups.Count);
+            target.UserGroups.Clear();
+            Assert.AreEqual(0, target.UserGroups.Count);
         }
 
         /// <summary>
@@ -474,16 +474,16 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             var ug = new UserGroup("usergroup2");
-            Assert.IsTrue(target.AddToUserGroup(ug));
+            Assert.IsTrue(target.UserGroups.Add(ug));
 
-            ReadOnlyCollection<UserGroup> s = target.GetUserGroups();
+            var s = target.UserGroups;
             Assert.IsTrue(s.Contains(ug));
 
-            target.Remove(ug);
-            s = target.GetUserGroups();
+            target.UserGroups.Remove(ug);
+            s = target.UserGroups;
             Assert.IsFalse(s.Contains(ug));
 
-            target.Remove(ug);
+            target.UserGroups.Remove(ug);
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace MemberShip.Test
         public void Add_Null_UserGroup()
         {
             var target = new User("kkkkk");
-            target.AddRole(null);
+            target.Roles.Add(null);
         }
 
 

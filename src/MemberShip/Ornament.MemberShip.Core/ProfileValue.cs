@@ -47,7 +47,7 @@ namespace Ornament.MemberShip
         }
 
 
-        protected virtual byte[] StreamValues
+        public virtual byte[] StreamValues
         {
             get
             {

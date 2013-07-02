@@ -48,7 +48,7 @@ namespace Ornament.MemberShip.Dao
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        IMemberDao CreateMemberDao();
+        IPerformerDao CreateMemberDao();
 
         /// <summary>
         /// </summary>

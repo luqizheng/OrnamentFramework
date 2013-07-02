@@ -576,7 +576,7 @@ namespace Ornament.Web.MemberShips
                 user.Id,
                 user.Email,
                 user.PasswordQuestion,
-                user.Remark,
+                user.Remarks,
                 user.IsApproved,
                 user.IsLockout,
                 user.CreateTime,
@@ -597,7 +597,7 @@ namespace Ornament.Web.MemberShips
 
             result.Name = memberShipUser.ProviderName;
             result.Email = memberShipUser.Email;
-            result.Remark = memberShipUser.Comment;
+            result.Remarks = memberShipUser.Comment;
             return result;
         }
 

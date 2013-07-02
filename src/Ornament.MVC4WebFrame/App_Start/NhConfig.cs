@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Web.Hosting;
 using Badminton.Dao.NhImpl;
+using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Ornament.MemberShip.Dao.NHibernateImple;
@@ -15,10 +16,11 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Config()
         {
-            var assemblies = new[]
+            var assemblies = new Assembly[]
                 {
-                    typeof (NotifyMessageDao).Assembly,
+                    
                     typeof (UserDao).Assembly,
+                    typeof (NotifyMessageDao).Assembly,
                     typeof (BadmintonDaoFactory).Assembly
                 };
             NHConfig(assemblies, new Assembly[0]);
@@ -36,7 +38,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
                     // ReSharper disable ForCanBeConvertedToForeach
                     for (int index = 0; index < fluentAssemblies.Length; index++)
-                        // ReSharper restore ForCanBeConvertedToForeach
+                    // ReSharper restore ForCanBeConvertedToForeach
                     {
                         Assembly assembly = fluentAssemblies[index];
                         result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly));
@@ -45,7 +47,10 @@ namespace Ornament.MVCWebFrame.App_Start
                     {
                         result.Mappings(s => s.HbmMappings.AddFromAssembly(nhAssembilies[i]));
                     }
+                  
                     return result.BuildConfiguration();
+
+
                 });
         }
 

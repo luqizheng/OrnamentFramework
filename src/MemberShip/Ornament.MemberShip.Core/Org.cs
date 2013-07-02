@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip
 {
@@ -14,11 +11,11 @@ namespace Ornament.MemberShip
     ///     组织单元，越上层的组织单元，自动继承下级单元的角色
     /// </summary>
     [Serializable]
-    public class Org : Member<Org>, IPerformer
+    public class Org : Performer<Org>
     {
         private const string BaseMaxOrderId = "ffffffffffffffffffffffffffffffff";
         private const string BaseMinOrderId = "00000000000000000000000000000000";
-        private Iesi.Collections.Generic.ISet<Org> _childs;
+        private OrgCollection _childs;
         private string _orderId;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
 
@@ -31,43 +28,36 @@ namespace Ornament.MemberShip
         {
         }
 
+        /// <summary>
+        /// </summary>
+        public virtual Org Parent { get; protected internal set; }
 
         /// <summary>
         /// </summary>
-        public virtual Org Parent { get; protected set; }
-
-        /// <summary>
-        /// </summary>
-        protected virtual Iesi.Collections.Generic.ISet<Org> Childs
+        public virtual OrgCollection Childs
         {
             get
             {
-                if (_childs == null)
-                    _childs = new HashedSet<Org>();
-                return _childs;
+                var result= _childs ?? (_childs = new OrgCollection(this));
+                if (result.Parent == null)
+                {
+                    result.Parent = this;
+                }
+                return result;
             }
             set { _childs = value; }
         }
 
-        [Display(ResourceType = typeof (Resources), Name = "Org_OrgCount_Child_Org_s_Count")]
-        public virtual int OrgCount
-        {
-            get { return Childs.Count; }
-        }
 
         /// <summary>
         /// </summary>
         public virtual string OrderId
         {
             get { return _orderId; }
-        }
-
-        public virtual ReadOnlyCollection<Org> Orgs
-        {
-            get
+            protected internal set
             {
-                var a = new List<Org>(Childs);
-                return new ReadOnlyCollection<Org>(a);
+                _orderId = value;
+                Childs.ResetOrderId();
             }
         }
 
@@ -89,143 +79,23 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
-        string IPerformer.Id
+        protected override PerformerType GetPerformerType()
         {
-            get { return Id; }
-            set { throw new NotImplementedException("Can't set the Org's Id"); }
+            return PerformerType.Org;
         }
 
-
-        IList<User> IPerformer.GetUsers(IMemberShipFactory memberShip)
+        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {
-            IQueryable<User> a = from user in memberShip.Users where user.Org == this select user;
+            IQueryable<User> a = from user in memberShipFactory.Users where user.Org == this select user;
             return a.ToList();
         }
 
+        public override IEnumerable<Role> GetAllRoles()
+        {
+            return Roles;
+        }
+
         #endregion
-
-        PerformerType IPerformer.Type
-        {
-            get { return PerformerType.Org; }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="childOrg"></param>
-        public virtual void Add(Org childOrg)
-        {
-            /* 1 检查child是否为空，检查 child是否已经保存过数据库.child必须不能体属于任何一个ParentOrg
-             * 2 检查现在的对象及父节点必须已经拥有Id            
-             * 3 更新child下所有的子的OrderId，为childOrg的parent赋值
-             * 4 创建当前的Orderid
-             * */
-            //1
-            if (childOrg.Id == Id)
-                throw new ArgumentException("Org can not add self");
-            if (childOrg == null)
-                throw new ArgumentNullException("childOrg");
-            if (string.IsNullOrEmpty(childOrg.Id))
-                throw new ArgumentNullException("childOrg", "org's Id must have value before being added");
-            if (childOrg.Parent != null && childOrg.Parent.Id != Id)
-                throw new ArgumentException("org must not be belong to some parent");
-            //if childOrg is current org's parent ,it throw exception;
-            if (OrderId != null && OrderId.IndexOf(childOrg.Id) != -1)
-                throw new ArgumentException("org can't add it's parent org");
-
-            //2
-            if (String.IsNullOrEmpty(Id))
-                throw new ArgumentException("save it before add child org");
-            if (Parent != null && String.IsNullOrEmpty(Parent.Id))
-                throw new ArgumentException("Before add child org ,Org's Id must have value");
-
-            //3
-            childOrg.Parent = this;
-            childOrg.SetOrderId(this);
-        }
-
-        private void SetOrderId(Org parent)
-        {
-            if (String.IsNullOrEmpty(parent.OrderId))
-                _orderId = parent.Id;
-            else
-                _orderId = parent.OrderId + "." + parent.Id;
-            foreach (Org childOrg in Childs)
-            {
-                childOrg.SetOrderId(this);
-            }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="org"></param>
-        public virtual void Remove(Org org)
-        {
-            if (org == null)
-                throw new ArgumentNullException("org");
-            if (!_childs.Contains(org))
-            {
-                throw new ArgumentOutOfRangeException("org", "It not belong to this");
-            }
-            if (Childs.Remove(org))
-            {
-                org._orderId = null;
-                org.Parent = null;
-            }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="org"></param>
-        /// <returns></returns>
-        public virtual bool Contains(Org org)
-        {
-            if (org == null) throw new ArgumentNullException("org");
-
-            return Childs.Contains(org);
-        }
-
-
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public virtual bool LevelUp()
-        {
-            if (Parent == null)
-                return false;
-            if (Parent.Parent == null)
-            {
-                Parent.Remove(this);
-            }
-            else
-            {
-                Parent.Remove(this);
-                Parent.Parent.Add(this);
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="newParent"></param>
-        /// <returns></returns>
-        public virtual bool LevelDown(Org newParent)
-        {
-            if (Parent != null)
-                Parent.Remove(this);
-
-            try
-            {
-                newParent.Add(this);
-                return true;
-            }
-            catch (ArgumentException ex)
-            {
-                if (ex.Message == "org can't add it's parent org")
-                    throw new ArgumentException("newParent is it's child,can't be LevelDown");
-                throw;
-            }
-        }
-
 
         /// <summary>
         /// </summary>
@@ -239,23 +109,7 @@ namespace Ornament.MemberShip
                 throw new ArgumentException("org.Id");
             }
             minOrderid = !String.IsNullOrEmpty(org.OrderId) ? org.OrderId + "." + BaseMinOrderId : BaseMinOrderId;
-            maxOrderId = !String.IsNullOrEmpty(org._orderId) ? org.OrderId + "." + BaseMaxOrderId : BaseMaxOrderId;
-        }
-
-        //private static void ChangeNewParent(IEnumerable<Org> childOrg, string newParentOrderId)
-        //{
-        //    foreach (Org org in childOrg)
-        //    {
-        //        org._orderId = newParentOrderId;
-        //        if (org.Childs.Count != 0)
-        //            ChangeNewParent(org.Childs, newParentOrderId + "." + org.Id);
-        //    }
-        //}
-
-        public virtual ReadOnlyCollection<Org> GetAllChilds()
-        {
-            IList<Org> orgs = new List<Org>(Childs);
-            return new ReadOnlyCollection<Org>(orgs);
+            maxOrderId = !String.IsNullOrEmpty(org.OrderId) ? org.OrderId + "." + BaseMaxOrderId : BaseMaxOrderId;
         }
     }
 }

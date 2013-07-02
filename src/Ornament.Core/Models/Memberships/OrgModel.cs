@@ -21,7 +21,7 @@ namespace Ornament.Models.Memberships
             _org = org;
             Id = org.Id;
             Name = org.Name;
-            Remark = org.Remark;
+            Remark = org.Remarks;
             Roles = org.GetAllRoles().ToArray();
             Parent = org.Parent;
         }
@@ -64,11 +64,11 @@ namespace Ornament.Models.Memberships
                 throw new ArgumentNullException("dao");
             Org ug = !String.IsNullOrEmpty(Id) ? dao.Get(Id) : new Org(Name);
             ug.Name = Name;
-            ug.Remark = Remark;
+            ug.Remarks = Remark;
             dao.SaveOrUpdate(ug);
             if (Parent != null)
             {
-                Parent.Add(ug);
+                Parent.Childs.Add(ug);
             }
         }
     }
