@@ -661,7 +661,7 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHModelBinder.RemoveWrapper(System.Web.Mvc.ControllerContext)">
             <summary>
-            Remvoe NH Session, but it nevery close the session.
+                Remvoe NH Session, but it nevery close the session.
             </summary>
             <param name="controllerContext"></param>
             <returns></returns>
@@ -838,7 +838,6 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult.#ctor(System.Web.Mvc.ValueProviderResult,Qi.NHibernateExtender.SessionWrapper)">
             <summary>
-            
             </summary>
             <param name="result"></param>
             <param name="sessionWrapper"></param>
@@ -846,7 +845,6 @@
         </member>
         <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult.ConvertTo(System.Type,System.Globalization.CultureInfo)">
             <summary>
-            
             </summary>
             <param name="type"></param>
             <param name="culture"></param>

@@ -234,14 +234,14 @@
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
-    <Compile Include="Api\Core\OrgsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\OrgsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
-    <Compile Include="Api\Core\RolesController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\RolesController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
-    <Compile Include="Api\Core\UserGroupsController.cs" />
-    <Compile Include="Api\Core\UsersController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UserGroupsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UsersController.cs" />
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
@@ -254,7 +254,7 @@
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
-    <Compile Include="Api\Core\ClientController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpErrorsController.cs" />
@@ -280,6 +280,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\MemberShips\Views\Shared\RolesSelector.ascx" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserBasicInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOptionInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
@@ -662,7 +663,6 @@
     <Content Include="Areas\Badminton\Views\Web.config" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Index.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserStatusModel.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
