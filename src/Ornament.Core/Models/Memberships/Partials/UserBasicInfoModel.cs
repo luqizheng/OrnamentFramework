@@ -25,9 +25,14 @@ namespace Ornament.Models.Memberships.Partials
             IsApprove = user.IsApproved;
             IsLock = user.IsLockout;
             LoginId = user.LoginId;
+            SrcEmail = user.Email;
         }
+        public string SrcEmail { get; set; }
 
         public string LoginId { get; set; }
+
+        [Display(Name = "VerifyEmail", ResourceType = typeof(MemberShipModel))]
+        public bool VerifyEmail { get; set; }
 
         /// <summary>
         /// </summary>
@@ -42,7 +47,7 @@ namespace Ornament.Models.Memberships.Partials
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "LoginId",
             ErrorMessageResourceType = typeof(MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
-      
+
         [UIHint("RoleMultiSelect")]
         [Display(Name = "Role", ResourceType = typeof(MemberShipModel))]
         public Role[] Roles
