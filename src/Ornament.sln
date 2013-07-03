@@ -47,8 +47,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton.Core", "Extends\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton.Dao.NhImpl", "Extends\Badminton\Badminton.Dao.NhImpl\Badminton.Dao.NhImpl.csproj", "{5E455C9C-EECF-4838-A3CB-2124632B24DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApplication1", "MvcApplication1\MvcApplication1.csproj", "{E8F253E0-5242-4AA3-9798-5599DDFC0806}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi
@@ -222,16 +220,6 @@ Global
 		{5E455C9C-EECF-4838-A3CB-2124632B24DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5E455C9C-EECF-4838-A3CB-2124632B24DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5E455C9C-EECF-4838-A3CB-2124632B24DE}.Release|x86.ActiveCfg = Release|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E8F253E0-5242-4AA3-9798-5599DDFC0806}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

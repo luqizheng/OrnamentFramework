@@ -7,7 +7,7 @@ using FluentNHibernate.Mapping;
 
 namespace Badminton.Dao.NhImpl.Mappings
 {
-    public class GymnasiumMapping : ClassMap<Gymnasium> 
+    public class GymnasiumMapping : ClassMap<Gymnasium>
     {
         public GymnasiumMapping()
         {
@@ -17,6 +17,7 @@ namespace Badminton.Dao.NhImpl.Mappings
             this.Map(s => s.Phone).Length(100);
             this.Map(s => s.Address).Length(200);
             this.Map(s => s.Remarks).Length(200);
+            this.HasMany(s => s.Yards).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
         }
 
     }

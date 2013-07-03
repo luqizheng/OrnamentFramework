@@ -270,4 +270,7 @@
   <data name="error_notMatchVerifyCode" xml:space="preserve">
     <value>Verify Code not match.</value>
   </data>
+  <data name="VerifyEmail" xml:space="preserve">
+    <value>Verify Email if changed</value>
+  </data>
 </root>

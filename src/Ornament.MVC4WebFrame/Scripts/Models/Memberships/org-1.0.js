@@ -4,7 +4,7 @@
     return {
         select2: function (selector, initData) {
             var opts = {
-                url: "/api/Orgs/Match",
+                url: "/api/Orgs",
                 multiple: false
             };
             return api.select2(selector, opts, initData);

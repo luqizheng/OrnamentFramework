@@ -15,7 +15,7 @@ namespace Ornament.MemberShip
     {
         private const string BaseMaxOrderId = "ffffffffffffffffffffffffffffffff";
         private const string BaseMinOrderId = "00000000000000000000000000000000";
-        private OrgCollection _childs;
+        private IOrgCollection _childs;
         private string _orderId;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
 
@@ -34,11 +34,11 @@ namespace Ornament.MemberShip
 
         /// <summary>
         /// </summary>
-        public virtual OrgCollection Childs
+        public virtual IOrgCollection Childs
         {
             get
             {
-                var result= _childs ?? (_childs = new OrgCollection(this));
+                var result = _childs ?? (_childs = new OrgCollection(this));
                 if (result.Parent == null)
                 {
                     result.Parent = this;
@@ -54,7 +54,7 @@ namespace Ornament.MemberShip
         public virtual string OrderId
         {
             get { return _orderId; }
-            protected internal set
+            set
             {
                 _orderId = value;
                 Childs.ResetOrderId();

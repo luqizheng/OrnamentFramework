@@ -27,7 +27,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             References(s => s.Parent);
         }
 
-        public class OrgListPersistent : PersistentGenericSet<Org>
+        public class OrgListPersistent : PersistentGenericSet<Org>, IOrgCollection
         {
             public OrgListPersistent(ISessionImplementor session)
                 : base(session)
@@ -37,6 +37,24 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             public OrgListPersistent(ISessionImplementor session, OrgCollection list)
                 : base(session, list)
             {
+            }
+
+            public Org Parent { get; set; }
+
+            public void ResetOrderId()
+            {
+                foreach (Org c in this)
+                {
+                    SetOrderId(Parent, c);
+                }
+            }
+
+            private void SetOrderId(Org parent, Org newChild)
+            {
+                if (String.IsNullOrEmpty(parent.OrderId))
+                    newChild.OrderId = parent.Id;
+                else
+                    newChild.OrderId = parent.OrderId + "." + parent.Id;
             }
         }
 

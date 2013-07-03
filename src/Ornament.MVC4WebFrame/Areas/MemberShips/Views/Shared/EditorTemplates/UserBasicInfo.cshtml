@@ -9,29 +9,19 @@
     <div class="controls">
         <div class="input-append">
             @Html.TextBoxFor(s => s.Email, this.Model)
-            <div class="btn-group">
-                <button class="btn" id="VerifyEmail" type="button">
-                    Verify Email
-                </button>
-            </div>
+            @Html.ValidationMessageFor(s => s.Email)
         </div>
-        @Html.ValidationMessageFor(s => s.Email)
     </div>
 </div>
+@Html.HiddenFor(s => s.SrcEmail)
+<div class="control-group info">
+    @Html.LabelFor(s => s.VerifyEmail, new { @class = "control-label" })
+    <div class="controls">
+        @Html.CheckBoxFor(s => s.VerifyEmail, this.Model)
+        <span class="help-block">如果email被修改，会自动发送验证email</span>
+    </div>
+</div>
+@Html.EditorFor(s => s.Org)
+@Html.EditorFor(s => s.Roles)
+@Html.EditorFor(s => s.UserGroups)
 
-@Html.EditorFor(model => model.IsApprove)
-@Html.EditorFor(model => model.IsLock)
-@Html.EditorFor(model => model.Org)
-@Html.EditorFor(model => model.Roles)
-@Html.EditorFor(model => model.UserGroups)
-<script type="text/javascript">
-    seajs.use(["/models/user",'jquery'], function (d) {
-        $("#VerifyEmail").click(function () {
-            d.verifyEmail("@this.Model.LoginId", function (data) {
-                if (!data.success) {
-                    alert(data.message);
-                }
-            });
-        });
-    });
-</script>

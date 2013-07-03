@@ -264,4 +264,7 @@
   <data name="error_notMatchVerifyCode" xml:space="preserve">
     <value>验证码不正确</value>
   </data>
+  <data name="VerifyEmail" xml:space="preserve">
+    <value>验证eMail</value>
+  </data>
 </root>

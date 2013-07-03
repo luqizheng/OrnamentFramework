@@ -518,5 +518,14 @@ namespace MultiLanguage {
                 return ResourceManager.GetString("VerifyCode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Verify Email if changed 的本地化字符串。
+        /// </summary>
+        public static string VerifyEmail {
+            get {
+                return ResourceManager.GetString("VerifyEmail", resourceCulture);
+            }
+        }
     }
 }

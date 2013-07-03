@@ -4,7 +4,14 @@ using System.Collections.ObjectModel;
 
 namespace Ornament.MemberShip
 {
-    public class OrgCollection : Iesi.Collections.Generic.HashedSet<Org>
+    public interface IOrgCollection:Iesi.Collections.Generic.ISet<Org>
+    {
+        Org Parent { get; set; }
+        void ResetOrderId();
+
+
+    }
+    public class OrgCollection : Iesi.Collections.Generic.HashedSet<Org>,IOrgCollection
     {
         public OrgCollection(Org parent)
         {

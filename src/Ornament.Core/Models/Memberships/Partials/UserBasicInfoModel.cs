@@ -22,6 +22,7 @@ namespace Ornament.Models.Memberships.Partials
             Email = user.Email;
             UserGroups = user.UserGroups.ToArray();
             Roles = user.GetRoles().ToArray();
+            Org = user.Org;
             IsApprove = user.IsApproved;
             IsLock = user.IsLockout;
             LoginId = user.LoginId;

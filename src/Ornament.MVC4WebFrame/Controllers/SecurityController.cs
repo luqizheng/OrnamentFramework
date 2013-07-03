@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
 using Ornament.Models.Security;
+using Ornament.Web;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
@@ -32,7 +33,14 @@ namespace Ornament.MVCWebFrame.Controllers
                 }
                 if (userToken.Verify(token))
                 {
-                    return View(VerifyResult.Success);
+                    if (OrnamentContext.MemberShip.CurrentUser().LoginId == userToken.Account.LoginId)
+                    {
+                        return View(VerifyResult.Success);
+                    }
+                    else
+                    {
+                        return View(VerifyResult.Failed);
+                    }
                 }
                 return View(VerifyResult.Failed);
             }

@@ -18,10 +18,10 @@
                 <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
                 <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_option")</a></li>
             </ul>
-          
+
             <div class="tab-content">
-                
-@Html.EditorFor(model => model.LoginId)
+
+                @Html.EditorFor(model => model.LoginId)
                 <div class="tab-pane active" id="tab3">
                     @Html.EditorFor(s => s.BasicInfo)
                 </div>
@@ -31,9 +31,9 @@
             </div>
             <div class="form-actions">
                 <input type="submit" value="@Basic.Create" class="btn btn-info"/>
-                            <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
+                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
 
-
+            </div>
         </div>
     </form>
 
