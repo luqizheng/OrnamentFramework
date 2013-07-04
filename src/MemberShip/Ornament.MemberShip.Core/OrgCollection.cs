@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using Iesi.Collections.Generic;
 
 namespace Ornament.MemberShip
 {
-    public interface IOrgCollection:Iesi.Collections.Generic.ISet<Org>
+    public interface IOrgCollection : ISet<Org>
     {
         Org Parent { get; set; }
         void ResetOrderId();
-
-
     }
-    public class OrgCollection : Iesi.Collections.Generic.HashedSet<Org>,IOrgCollection
+
+    public class OrgCollection : HashedSet<Org>, IOrgCollection
     {
         public OrgCollection(Org parent)
         {
@@ -20,7 +18,6 @@ namespace Ornament.MemberShip
 
         public OrgCollection()
         {
-            
         }
 
         public Org Parent { get; set; }
@@ -37,13 +34,14 @@ namespace Ornament.MemberShip
                 throw new ArgumentException("save it before add child org");
             return base.Add(o);
         }
+
         public override bool Remove(Org o)
         {
             o.Parent = null;
             o.OrderId = null;
             return base.Remove(o);
         }
-      
+
 
         public void ResetOrderId()
         {
