@@ -1,8 +1,8 @@
-﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform', 'valid'], function (require) {
+﻿seajs.use(["/models/util/online.js", 'easytabs', 'collapsible', 'bootstrap', 'uniform', 'valid'], function (online) {
 
 
     $(".styled").uniform({ radioClass: 'choice' });
-    
+
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
 
@@ -40,6 +40,5 @@
         $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
         $('#content').toggleClass("full-content");
     });
-
-
+    online.check();
 });

@@ -200,7 +200,7 @@ namespace Ornament.MVCWebFrame.Controllers
             if (ModelState.IsValid)
             {
                 forget.Retrieve(OrnamentContext.DaoFactory.MemberShipFactory);
-                return Redirect("ForgetPasswordSucccess");
+                return RedirectToAction("ForgetPasswordSucccess");
             }
             return View();
         }

@@ -74,6 +74,9 @@ namespace Ornament.MVCWebFrame.App_Start
 
             bundles.Add(new Bundle("~/models/util/select2Helper.js")
                 .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
+
+            bundles.Add(new Bundle("~/models/util/online.js")
+                .Include("~/Scripts/Models/Util/online.js"));
         }
 
         private static void Utility(BundleCollection bundles)

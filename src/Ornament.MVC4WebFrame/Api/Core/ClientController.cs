@@ -11,8 +11,7 @@ namespace Ornament.MVCWebFrame.Api.Core
         {
             if (utc != null)
             {
-                int t =
-                    OrnamentContext.MemberShip.CorrectClientUtcTime(utc.Value);
+                int t = OrnamentContext.MemberShip.CorrectClientUtcTime(utc.Value);
                 OrnamentModule.SetClientOffsetHour(t);
             }
         }

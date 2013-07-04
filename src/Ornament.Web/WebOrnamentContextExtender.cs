@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Web;
+using System.Web.Security;
 using Castle.MicroKernel.Registration;
 using Ornament.Contexts;
 using Ornament.MemberShip;
@@ -15,6 +16,7 @@ namespace Ornament.Web
     public static class WebOrnamentContextExtender
     {
         public static readonly string VerifyCodeKey = "VerifyCode";
+
         /// <summary>
         /// </summary>
         static WebOrnamentContextExtender()
@@ -23,7 +25,7 @@ namespace Ornament.Web
                            .Register(
                                Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
-        
+
         public static string CurrentVerifyCode(this MemberShipContext context)
         {
             return HttpContext.Current.Session[VerifyCodeKey] as string;
@@ -44,7 +46,17 @@ namespace Ornament.Web
                 !HttpContext.Current.User.Identity.IsAuthenticated)
                 return null;
             IUserDao a = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
-            return a.GetByLoginId(HttpContext.Current.User.Identity.Name);
+
+            User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
+            //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
+            DateTime now = DateTime.Now;
+            if (user.LastActivityDate == null || (now - user.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
+            {
+                user.LastActivityDate = now;
+                a.SaveOrUpdate(user);
+                a.Flush();
+            }
+            return user;
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             DiscriminatorValue("User");
             Extends(typeof(IPerformer));
             KeyColumn("Id");
-
+            DynamicUpdate();
 
             Map(s => s.LoginId).Length(50).Unique();
             Map(s => s.Password)

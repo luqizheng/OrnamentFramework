@@ -227,6 +227,7 @@ namespace Ornament.Web.MemberShips
 
         public override int GetNumberOfUsersOnline()
         {
+
             var onlineSpan = new TimeSpan(0, Membership.UserIsOnlineTimeWindow, 0);
             DateTime compareTime = DateTime.Now.Subtract(onlineSpan);
             return Facotry.CreateUserDao().GetActivityDateNumber(compareTime);
