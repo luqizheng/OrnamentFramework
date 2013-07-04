@@ -121,7 +121,7 @@
     <value>创建用户</value>
   </data>
   <data name="tab_basicInfo" xml:space="preserve">
-    <value>基础信息</value>
+    <value>基本信息</value>
   </data>
   <data name="tab_choice_role" xml:space="preserve">
     <value>选择角色</value>
@@ -129,7 +129,7 @@
   <data name="tab_choice_userGroup" xml:space="preserve">
     <value>选择用户组</value>
   </data>
-  <data name="tab_option" xml:space="preserve">
-    <value>选填项</value>
+  <data name="tab_Permission" xml:space="preserve">
+    <value>权限</value>
   </data>
 </root>

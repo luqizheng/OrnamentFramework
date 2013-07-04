@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="submit_btton" xml:space="preserve">
-    <value>Create</value>
+    <value>創建用戶</value>
   </data>
   <data name="tab_basicInfo" xml:space="preserve">
-    <value>Basic Info</value>
+    <value>基本信息</value>
   </data>
   <data name="tab_choice_role" xml:space="preserve">
-    <value>Select role(s)</value>
+    <value>選擇角色</value>
   </data>
   <data name="tab_choice_userGroup" xml:space="preserve">
-    <value>Select usergroup(s)</value>
+    <value>選擇用戶組</value>
   </data>
   <data name="tab_Permission" xml:space="preserve">
-    <value>Permissions</value>
+    <value>权限</value>
   </data>
 </root>
