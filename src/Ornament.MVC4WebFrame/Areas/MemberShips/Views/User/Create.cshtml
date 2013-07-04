@@ -16,17 +16,15 @@
             @Html.ValidationSummary(true)
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
-                <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_option")</a></li>
+                <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_Permission")</a></li>
             </ul>
 
             <div class="tab-content">
-
-                @Html.EditorFor(model => model.LoginId)
                 <div class="tab-pane active" id="tab3">
-                    @Html.EditorFor(s => s.BasicInfo)
+                    @Html.EditorFor(s => s, "_BasicInfo")
                 </div>
                 <div class="tab-pane" id="tab4">
-                    @Html.EditorFor(s => s.OptionInfo)
+                    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
                 </div>
             </div>
             <div class="form-actions">

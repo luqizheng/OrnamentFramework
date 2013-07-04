@@ -123,12 +123,6 @@
   <data name="tab_basicInfo" xml:space="preserve">
     <value>Basic Info</value>
   </data>
-  <data name="tab_choice_role" xml:space="preserve">
-    <value>Select role(s)</value>
-  </data>
-  <data name="tab_choice_userGroup" xml:space="preserve">
-    <value>Select usergroup(s)</value>
-  </data>
   <data name="tab_Permission" xml:space="preserve">
     <value>Permissions</value>
   </data>

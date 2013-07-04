@@ -67,10 +67,7 @@ namespace Ornament
             SendEmail(User.Email, content);
         }
 
-        public void VerifyToke()
-        {
-        }
-
+    
         private string Language(User user)
         {
             ProfileValue prfile = _memberShipFactory.CreateProfileDao().FindByLoginId(user.LoginId);

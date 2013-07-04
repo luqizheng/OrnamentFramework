@@ -171,6 +171,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\Core\ClientController.cs" />
+    <Compile Include="Api\Core\OrgsController.cs" />
+    <Compile Include="Api\Core\RolesController.cs" />
+    <Compile Include="Api\Core\UserGroupsController.cs" />
+    <Compile Include="Api\Core\UsersController.cs" />
     <Compile Include="App_GlobalResources\Basic.Designer.cs">
       <DependentUpon>Basic.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -657,6 +662,8 @@
     <Content Include="Areas\Badminton\Views\Web.config" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Index.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -1212,6 +1219,9 @@
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-CN.resx" />
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
