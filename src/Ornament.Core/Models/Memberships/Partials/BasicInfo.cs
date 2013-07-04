@@ -28,17 +28,16 @@ namespace Ornament.Models.Memberships.Partials
     {
         public BasicInfo()
         {
-            
         }
 
         public BasicInfo(User user)
         {
-            this.Name = user.Name;
-            this.Phone = user.Phone;
-            this.Email = user.Email;
-            this.VerifyEmail = true;
-            
+            Name = user.Name;
+            Phone = user.Phone;
+            Email = user.Email;
+            VerifyEmail = true;
         }
+
         [UIHint("String")]
         [Display(Name = "Phone", ResourceType = typeof (MemberShipModel))]
         public string Phone { get; set; }

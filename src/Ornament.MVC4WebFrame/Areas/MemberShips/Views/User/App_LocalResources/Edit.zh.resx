@@ -123,9 +123,6 @@
   <data name="tab_options" xml:space="preserve">
     <value>可選項</value>
   </data>
-  <data name="tab_permission" xml:space="preserve">
-    <value>許可證</value>
-  </data>
   <data name="tab_profile" xml:space="preserve">
     <value>擴展信息</value>
   </data>

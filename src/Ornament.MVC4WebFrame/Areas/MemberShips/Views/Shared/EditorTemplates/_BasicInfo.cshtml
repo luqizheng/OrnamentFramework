@@ -4,9 +4,9 @@
 @model Ornament.Models.Memberships.Partials.BasicInfo
 
 @Html.HiddenFor(model => model.Id)
-
 @Html.EditorFor(model => model.LoginId)
-<div class="control-group">
+
+@*<div class="control-group">
     @Html.LabelFor(s => s.Email, new { @class = "control-label" })
     <div class="controls">
         <div class="input-append">
@@ -14,16 +14,17 @@
             @Html.ValidationMessageFor(s => s.Email)
         </div>
     </div>
-</div>
+</div>*@
+@Html.EditorFor(s => s.Email)
 
-<div class="control-group info">
+<div class="control-group">
     @Html.LabelFor(s => s.VerifyEmail, new { @class = "control-label" })
-    <div class="controls">
-        @Html.CheckBoxFor(s => s.VerifyEmail, this.Model)
-        <span class="help-block">如果email被修改，会自动发送验证email</span>
+    <div class="controls" >
+        @Html.CheckBoxFor(s => s.VerifyEmail,new{@class="tip",title="如果email被修改，会自动发送验证email"})
     </div>
 </div>
 @Html.EditorFor(s => s.Name)
 @Html.EditorFor(s => s.Phone)
 @Html.EditorFor(s => s.TimeZone)
 
+  

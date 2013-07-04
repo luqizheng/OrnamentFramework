@@ -52,7 +52,7 @@
                 <dd>@base.Server.ScriptTimeout.ToString()seconds;</dd>
 
 
-                <dt>服务器的语言种类</dt>
+                <dt>浏览器的语言种类</dt>
                 <dd>@base.Request.ServerVariables["HTTP_ACCEPT_LANGUAGE"]</dd>
 
                 <dt>.NET Framework 版本</dt>
@@ -90,83 +90,50 @@
                 </div>
             </div>
             <div class="well body">
+                <dl>
+                    <dt>SupportEmail:
+                    </dt>
+                    <dd>
+                        @ConfigurationManager.AppSettings["SupportEmail"]
+                    </dd>
+                    <dt>DomainUrl:
+                    </dt>
+                    <dd>
+                        @ConfigurationManager.AppSettings["DomainUrl"]
+                    </dd>
 
-                <div class="accordion" id="accordion2">
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#SupportEmail">SupportEmail = fantasylu@126.com</a>
-                        </div>
-                        <div style="height: 0px;" id="SupportEmail" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                <code>&lt;add key="SupportEmail" value="fantasylu@126.com" /&gt;
-                                    </code>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#DomainUrl">DomainUrl = http://localhost:37037</a>
-                        </div>
-                        <div style="height: 0px;" id="DomainUrl" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                <code>&lt;add key="DomainUrl" value="http://localhost:37037" /&gt;
-                                    </code>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#nhConfig">nhConfig = ~/config/hibernate_mysql.cfg.config</a>
-                        </div>
-                        <div style="height: 0px;" id="nhConfig" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                <code>&lt;add key="nhConfig" value="~/config/hibernate_mysql.cfg.config" /&gt;
-                                    </code>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#verifyEmailTimeout">verifyEmailTimeout = 144</a>
-                        </div>
-                        <div style="height: 0px;" id="verifyEmailTimeout" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                <code>&lt;add key="verifyEmailTimeout" value="144" /&gt;
-                                    </code>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#VerifyCode">VerifyCode = false</a>
-                        </div>
-                        <div style="height: 0px;" id="VerifyCode" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                <code>&lt;add key="VerifyCode" value="false" /&gt;
-                                    </code>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#SiteName">SiteName = Ornament</a>
-                        </div>
-                        <div style="height: auto;" id="SiteName" class="accordion-body in collapse">
-                            <div class="accordion-inner">
-                                <code>&lt;add key="SiteName" value="Ornament" /&gt;
-                                    </code>
-                            </div>
-                        </div>
-                    </div>
+                    <dt>nhConfig:
+                    </dt>
+                    <dd>
+                        @ConfigurationManager.AppSettings["nhConfig"]
+                    </dd>
 
-                </div>
+
+                    <dt>verifyEmailTimeout:
+                    </dt>
+                    <dd>
+                        @ConfigurationManager.AppSettings["verifyEmailTimeout"]
+                    </dd>
+
+                    <dt>VerifyCode:
+                    </dt>
+                    <dd>
+                        @ConfigurationManager.AppSettings["VerifyCode"]
+                    </dd>
+                    <dt>SiteName:
+                    </dt>
+                    <dd>
+                        @ConfigurationManager.AppSettings["SiteName"]
+                    </dd>
+                </dl>
+
             </div>
         </div>
 
     </div>
 </div>
 <div class="row-fluid">
-    
+
     <div class="span8">
         <div class="widget">
             <div class="navbar">

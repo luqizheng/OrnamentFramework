@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 
-namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
+namespace Ornament.MVCWebFrame.Api.Core
 {
     public class RolesController : ApiController
     {

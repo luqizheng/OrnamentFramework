@@ -123,9 +123,6 @@
   <data name="tab_options" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="tab_permission" xml:space="preserve">
-    <value>Permission</value>
-  </data>
   <data name="tab_profile" xml:space="preserve">
     <value>Profile</value>
   </data>
