@@ -12,7 +12,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             KeyColumn("Id");
 
 
-            Map(s => s.LoginId).Length(50);
+            Map(s => s.LoginId).Length(50).Unique();
             Map(s => s.Password)
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
                 .Length(40);
@@ -22,7 +22,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Map(s => s.PasswordQuestion).Length(100)
                                         .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-            Map(s => s.CreateTime).Insert();
+            Map(s => s.CreateTime).Not.Update();
 
             Map(s => s.IsLockout)
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);

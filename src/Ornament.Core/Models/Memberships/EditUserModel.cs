@@ -14,7 +14,9 @@ namespace Ornament.Models.Memberships
         }
 
         public EditUserModel(User user)
+            : base(user)
         {
+
             LoginId = user.LoginId;
             Id = user.Id;
             Permissions = new PermissionInfo(user);

@@ -26,6 +26,19 @@ namespace Ornament.Models.Memberships.Partials
 
     public class BasicInfo : MemberInfo
     {
+        public BasicInfo()
+        {
+            
+        }
+
+        public BasicInfo(User user)
+        {
+            this.Name = user.Name;
+            this.Phone = user.Phone;
+            this.Email = user.Email;
+            this.VerifyEmail = true;
+            
+        }
         [UIHint("String")]
         [Display(Name = "Phone", ResourceType = typeof (MemberShipModel))]
         public string Phone { get; set; }
@@ -95,6 +108,7 @@ namespace Ornament.Models.Memberships.Partials
             Org = user.Org;
             IsApprove = user.IsApproved;
             IsLock = user.IsLockout;
+            Remark = user.Remarks;
         }
 
         [UIHint("Textarea")]

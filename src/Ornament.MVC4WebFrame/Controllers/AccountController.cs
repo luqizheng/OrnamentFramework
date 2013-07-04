@@ -84,7 +84,7 @@ namespace Ornament.MVCWebFrame.Controllers
             MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
                                                          OrnamentContext.Configuration.ApplicationSetting
                                                                         .VerifyEmailTimeout);
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -97,7 +97,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
@@ -154,7 +154,7 @@ namespace Ornament.MVCWebFrame.Controllers
                                                                             .VerifyEmailTimeout);
             }
             OrnamentContext.MemberShip.CurrentUser().Phone = data["Phone"];
-            return Json(new { success = true, emailChanged });
+            return Json(new {success = true, emailChanged});
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Ornament.MVCWebFrame.Controllers
             model.ReturnUrl = Request["ReturnUrl"];
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult)Redirect(model.ReturnUrl)
+                       ? (ActionResult) Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 
