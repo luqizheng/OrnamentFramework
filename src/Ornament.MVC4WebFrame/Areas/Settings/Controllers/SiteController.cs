@@ -13,7 +13,6 @@ namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
 
         public ActionResult Index()
         {
-            
             return View();
         }
 

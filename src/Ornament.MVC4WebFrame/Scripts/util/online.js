@@ -1,11 +1,13 @@
 ﻿
 var online =
 {
-    start: function () {
+    start: function (time) {
+        if (!time)
+            time = 30000;
         this.ticket = setInterval(function () {
             $.get("/api/Online", function () {
             });
-        }, 3 * 1000);
+        }, time);
     },
     stop: function () {
         clearInterval(this.ticket);

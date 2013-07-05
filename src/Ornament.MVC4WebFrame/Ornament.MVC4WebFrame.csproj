@@ -285,12 +285,10 @@
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOptionInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
-    <Content Include="Areas\Settings\Views\EmailSetting\Email.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Settings\Views\EmailSetting\Index.cshtml" />
     <Content Include="Areas\Messages\Views\NewsType\Index.cshtml" />
     <Content Include="Areas\Messages\Views\NewsType\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
@@ -665,6 +663,7 @@
     <Content Include="Areas\Badminton\Views\Gymnasium\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
+    <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -1153,7 +1152,6 @@
     <Content Include="Views\Shared\DisplayTemplates\Operators.cshtml" />
     <Content Include="Views\Shared\Empty.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\LogOnUserControl.cshtml" />
     <Content Include="Views\Shared\_mainMenu.cshtml" />
     <Content Include="Views\Shared\NavPagination.cshtml" />
   </ItemGroup>
@@ -1185,9 +1183,6 @@
     <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
-    <Content Include="Areas\Settings\Views\Application\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\Application\ResetPasswrodFormat.cshtml" />
-    <Content Include="Areas\Settings\Views\Application\Success.cshtml" />
     <Content Include="Areas\Settings\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>

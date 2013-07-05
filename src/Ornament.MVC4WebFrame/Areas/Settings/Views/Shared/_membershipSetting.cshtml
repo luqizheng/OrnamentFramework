@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "_membershipSetting";
+}
+
+
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h5>MemberShipSetting (@typeof(Ornament.Web.MemberShips.MemberShipProvider).FullName)</h5>
+        </div>
+    </div>
+    <div class="body well">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget">
+                    <strong class="subtitle">Member Basic Setting</strong>
+                    <div class="well-white body">
+                        <dl>
+                            <dt>UserIsOnlineTimeWindow</dt>
+                            <dd>@Membership.UserIsOnlineTimeWindow minutes</dd>
+                            <dt>EnablePasswordReset</dt>
+                            <dd>@Membership.EnablePasswordReset</dd>
+                            <dt>HashAlgorithmType
+                            </dt>
+                            <dd>
+                                @Membership.HashAlgorithmType 无论设置什么，它都是单向加密的。
+                            </dd>
+                            <dt>EnablePasswordRetrieval</dt>
+                            <dd>@Membership.EnablePasswordRetrieval 无论是什么设置,都只能是ResetPassword，因为密码是单向加密，无法重新获取</dd>
+                            <dt>PasswordAttemptWindow</dt>
+                            <dt>PasswordAttemptWindow</dt>
+                            <dd>@Membership.PasswordAttemptWindow</dd>
+
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span6">
+                <div class="widget">
+                    <strong class="subtitle">Password</strong>
+                    <div class="body well-white">
+                        <dl>
+                            <dt>MaxInvalidPasswordAttempts</dt>
+                            <dd>@Membership.MaxInvalidPasswordAttempts</dd>
+
+
+                            <dt>MinRequiredPasswordLength</dt>
+                            <dd>@Membership.MinRequiredPasswordLength</dd>
+
+                            <dt>MinRequiredNonAlphanumericCharacters</dt>
+                            <dd>@Membership.MinRequiredNonAlphanumericCharacters</dd>
+
+                            <dt>EnablePasswoPasswordStrengthRegularExpressionrdReset</dt>
+                            <dd>@Membership.PasswordStrengthRegularExpression</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+
+
