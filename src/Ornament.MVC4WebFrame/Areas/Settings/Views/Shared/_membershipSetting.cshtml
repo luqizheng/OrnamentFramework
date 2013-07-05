@@ -6,7 +6,7 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <h5>MemberShipSetting (@typeof(Ornament.Web.MemberShips.MemberShipProvider).FullName)</h5>
+            <h6>MemberShipSetting (@typeof(Ornament.Web.MemberShips.MemberShipProvider).FullName)</h6>
         </div>
     </div>
     <div class="body well">
@@ -23,11 +23,12 @@
                             <dt>HashAlgorithmType
                             </dt>
                             <dd>
-                                @Membership.HashAlgorithmType 无论设置什么，它都是单向加密的。
+                                @Membership.HashAlgorithmType
+                                 无论设置什么，它都是单向加密的。
                             </dd>
                             <dt>EnablePasswordRetrieval</dt>
                             <dd>@Membership.EnablePasswordRetrieval 无论是什么设置,都只能是ResetPassword，因为密码是单向加密，无法重新获取</dd>
-                            <dt>PasswordAttemptWindow</dt>
+                            
                             <dt>PasswordAttemptWindow</dt>
                             <dd>@Membership.PasswordAttemptWindow</dd>
 
