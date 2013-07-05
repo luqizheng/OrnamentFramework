@@ -1,4 +1,4 @@
-﻿seajs.use(["/models/util/online.js", 'easytabs', 'collapsible', 'bootstrap', 'uniform', 'valid'], function (online) {
+﻿seajs.use(['easytabs', 'collapsible', 'bootstrap', 'uniform', 'valid'], function () {
 
 
     $(".styled").uniform({ radioClass: 'choice' });
@@ -40,5 +40,4 @@
         $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
         $('#content').toggleClass("full-content");
     });
-    online.check();
 });

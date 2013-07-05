@@ -8,6 +8,7 @@ namespace Ornament.MVCWebFrame.App_Start
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
+
             BundleTable.EnableOptimizations = false;
             bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]
@@ -35,6 +36,8 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void JQueryRelative(BundleCollection bundles)
         {
+
+
             bundles.Add(new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
             bundles.Add(new Bundle("~/bundles/inputmask", new JsMinify()).Include("~/Scripts/InputMasker/*.js"));
             bundles.Add(new Bundle("~/bundles/jqueryval.js", new JsMinify()).Include("~/Scripts/jquery.validate*"));
@@ -64,6 +67,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void BizRelative(BundleCollection bundles)
         {
+
             bundles.Add(new Bundle("~/models/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
             bundles.Add(new Bundle("~/models/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
             bundles.Add(new Bundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
@@ -75,15 +79,14 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new Bundle("~/models/util/select2Helper.js")
                 .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
 
-            bundles.Add(new Bundle("~/models/util/online.js")
-                .Include("~/Scripts/Models/Util/online.js"));
+
         }
 
         private static void Utility(BundleCollection bundles)
         {
-            //Code style registry
             bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
                             .Include("~/Scripts/Util/*.js"));
+     
         }
 
         private static void CodeStyle(BundleCollection bundles)

@@ -690,7 +690,7 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
-    <Content Include="Scripts\Models\Util\online.js" />
+    <Content Include="Scripts\util\online.js" />
     <Content Include="Scripts\Models\Util\select2Helper-1.0.js" />
     <Content Include="Scripts\Models\Messages\chat-1.0.js" />
     <Content Include="Scripts\Models\Memberships\role-1.0.js" />
