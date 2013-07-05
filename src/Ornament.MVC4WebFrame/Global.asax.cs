@@ -10,6 +10,8 @@ using Ornament.MVCWebFrame.App_Start;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
+using Ornament.Web;
+using Ornament.Web.HttpModel;
 using Qi.NHibernateExtender;
 using log4net;
 using log4net.Config;
@@ -51,6 +53,7 @@ namespace Ornament.MVCWebFrame
                 ProfileValue anonymous = profileDao.FindByLoginId(args.AnonymousID);
                 if (anonymous != null)
                 {
+                    //合并anonymous profile
                     ProfileBase currenProfile = HttpContext.Current.Profile;
                     foreach (string key in anonymous.Properities.Keys)
                     {
@@ -60,6 +63,10 @@ namespace Ornament.MVCWebFrame
                     currenProfile.Save();
                     AnonymousIdentificationModule.ClearAnonymousIdentifier();
                 }
+                
+                //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
+                OrnamentModule.SiwtchTo(OrnamentContext.MemberShip.ProfileLanguage());
+
             }
             catch (Exception ex)
             {

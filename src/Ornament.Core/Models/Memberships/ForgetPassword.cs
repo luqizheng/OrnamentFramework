@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
-using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Security;
+using Ornament.Properties;
 
 namespace Ornament.Models.Memberships
 {
@@ -11,9 +9,9 @@ namespace Ornament.Models.Memberships
     {
         /// <summary>
         /// </summary>
-        [Display(Name = "label_AccountOrEmail", ResourceType = typeof(MemberShipModel))]
+        [Display(Name = "label_AccountOrEmail", ResourceType = typeof (Resources))]
         [DataType(DataType.Password)]
-        [Required(ErrorMessageResourceType = typeof(MemberShipModel),
+        [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "alertMsg_RequireAccountOrEmail")]
         public string AccountOrEmail { get; set; }
 
@@ -23,8 +21,8 @@ namespace Ornament.Models.Memberships
         public void Retrieve(IMemberShipFactory daoFactory)
         {
             User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
-                       daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
-            var aa = MemberSecrityManager.ForgetPassword(user, 1440);
+                        daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
+            MemberSecrityManager aa = MemberSecrityManager.ForgetPassword(user, 1440);
             aa.SendToken();
         }
     }

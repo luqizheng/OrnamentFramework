@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
@@ -50,7 +49,8 @@ namespace Ornament.Web
             User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
-            if (user.LastActivityDate == null || (now - user.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
+            if (user.LastActivityDate == null ||
+                (now - user.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
             {
                 user.LastActivityDate = now;
                 a.SaveOrUpdate(user);
@@ -105,8 +105,21 @@ namespace Ornament.Web
         {
             object a = HttpContext.Current.Profile["language"];
             if (a == null)
-                return CultureInfo.CurrentUICulture.EnglishName;
-            return a.ToString();
+                return OrnamentContext.Configuration.DefaultLanguage.Key;
+            return (string) a;
+        }
+
+        /// <summary>
+        ///     Switch lanugage.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="language"></param>
+        public static void SwitchLanguage(this MemberShipContext context, string language)
+        {
+            if (!OrnamentContext.Configuration.Languages.Contains(language))
+                throw new ArgumentOutOfRangeException("language", language + " do not support in this web-site.");
+            HttpContext.Current.Profile["language"] = language;
+            OrnamentModule.SiwtchTo(language);
         }
 
         /// <summary>

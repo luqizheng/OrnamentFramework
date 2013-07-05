@@ -1,16 +1,18 @@
 ﻿@using System.Web.Optimization
 @using Ornament
 @using Ornament.Web
-@using Qi.Web.Mvc
-@using QiProject.Defects
+
+
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
-@section pageTitle{
+@*section pageTitle
+  {
+
     <h5>@Html.GetResourceString("Home")</h5>
     <span>@Html.GetResourceString("Home_subtitle")</span>
-}
+}*@
 
 @OrnamentContext.MemberShip.ToClientDateTime(DateTime.Now);
 <div class="actions-wrapper">

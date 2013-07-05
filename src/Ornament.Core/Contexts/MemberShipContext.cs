@@ -115,5 +115,7 @@ namespace Ornament.Contexts
         }
 
         public IMemberShipProvider MemberShipProvider { get; set; }
+
+      
     }
 }

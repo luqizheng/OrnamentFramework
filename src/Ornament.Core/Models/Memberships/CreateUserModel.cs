@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
-using System.Threading;
-using System.Web.Mvc;
-using MultiLanguage;
+﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
-using Ornament.MemberShip.Security;
 using Ornament.Models.Memberships.Partials;
-using log4net;
 
 namespace Ornament.Models.Memberships
 {
@@ -35,7 +26,7 @@ namespace Ornament.Models.Memberships
         {
             errorMessage = null;
             var createUser = new User(LoginId, Password);
-            this.UpdateOn(createUser);
+            UpdateOn(createUser);
             //Check duplicate account.
             IUserDao userDao = dao.CreateUserDao();
             User user = userDao.GetByLoginId(createUser.LoginId);
@@ -50,7 +41,5 @@ namespace Ornament.Models.Memberships
 
             return true;
         }
-
-
     }
 }

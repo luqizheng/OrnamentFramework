@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Threading;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Ornament.Web.HttpModel
 {
@@ -62,7 +63,7 @@ namespace Ornament.Web.HttpModel
                 context.Request.UserLanguages.SetValue(lang, 0);
             }
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
-            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
         }
 
         /// <summary>

@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
-using MultiLanguage;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
+using Ornament.Properties;
 
 namespace Ornament.Models.Memberships.Partials
 {
@@ -12,13 +12,13 @@ namespace Ornament.Models.Memberships.Partials
     {
         /// <summary>
         /// </summary>
-        [Display(Name = "LoginId", ResourceType = typeof (MemberShipModel))]
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (MemberShipModel))]
+        [Display(Name = "LoginId", ResourceType = typeof (Resources))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (Resources))]
         [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof (ErrorMessage))]
         [UIHint("String")]
         [Remote("NotDuplicate", "User", "MemberShips", ErrorMessageResourceName = "alertMsg_duplicate_loginId",
-            ErrorMessageResourceType = typeof (MemberShipModel))]
+            ErrorMessageResourceType = typeof (Resources))]
         public string LoginId { get; set; }
 
         public string Id { get; set; }
@@ -39,11 +39,11 @@ namespace Ornament.Models.Memberships.Partials
         }
 
         [UIHint("String")]
-        [Display(Name = "Phone", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "Phone", ResourceType = typeof (Resources))]
         public string Phone { get; set; }
 
         [UIHint("String")]
-        [Display(Name = "Name", ResourceType = typeof (MemberShipModel)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Name { get; set; }
@@ -54,20 +54,20 @@ namespace Ornament.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Email", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "Email", ResourceType = typeof (Resources))]
         [Required(ErrorMessageResourceName = "error_missingEmailAddress",
-            ErrorMessageResourceType = typeof (MemberShipModel))]
+            ErrorMessageResourceType = typeof (Resources))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
             ErrorMessageResourceName = "EmailNotRightFormat",
             ErrorMessageResourceType = typeof (ErrorMessage))]
         [DataType(DataType.EmailAddress)]
         [UIHint("String")]
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "LoginId",
-            ErrorMessageResourceType = typeof (MemberShipModel), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
+            ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
 
 
-        [Display(Name = "VerifyEmail", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "VerifyEmail", ResourceType = typeof (Resources))]
         public bool VerifyEmail { get; set; }
 
         public virtual void UpdateOn(User user)
@@ -111,13 +111,13 @@ namespace Ornament.Models.Memberships.Partials
         }
 
         [UIHint("Textarea")]
-        [Display(Name = "Remark", ResourceType = typeof (MemberShipModel)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Remark { get; set; }
 
         [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "Role", ResourceType = typeof (Resources))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
@@ -128,7 +128,7 @@ namespace Ornament.Models.Memberships.Partials
         public Org Org { get; set; }
 
         [UIHint("UsergroupMultiSelect")]
-        [Display(Name = "UserGroup", ResourceType = typeof (MemberShipModel))]
+        [Display(Name = "UserGroup", ResourceType = typeof (Resources))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }

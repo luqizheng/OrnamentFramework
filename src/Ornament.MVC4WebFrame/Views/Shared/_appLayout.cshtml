@@ -9,12 +9,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
-    @Html.CorrectTimeZone(false)
+   
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link href="@Url.Content("~/content/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/content/templates/pannonia/css/plugins.css")" rel="stylesheet" type="text/css" />
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
     <script type="text/javascript" src="/scripts/seajs/sea.js" data-config="/scripts/config" data-main="/scripts/_applayout"> </script>
+     @Html.CorrectTimeZone(false)
     @RenderSection("head", false)
 </head>
 <body @Html.Raw(showMenu ? "" : "class=no-background")>

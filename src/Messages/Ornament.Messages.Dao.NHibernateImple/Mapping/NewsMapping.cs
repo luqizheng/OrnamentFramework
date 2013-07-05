@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
+using NHibernate;
 using Ornament.Messages.Newses;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping
@@ -22,9 +23,9 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                 .Table("Msgs_NewsContent")
                 .Component(x =>
                     {
-                        x.Map(a => a.Value);
-                        x.Map(a => a.Subject);
-                        x.Map(a => a.Language, "language2");
+                        x.Map(a => a.Value).CustomSqlType("CLOB");
+                        x.Map(a => a.Subject).Length(255);
+                        x.Map(a => a.Language, "language2").Length(10);
                     });
         }
     }

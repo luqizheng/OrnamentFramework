@@ -182,16 +182,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh-cn.designer.cs">
-      <DependentUpon>Basic.zh-cn.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh.designer.cs">
-      <DependentUpon>Basic.zh.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="App_GlobalResources\MemberShip.Designer.cs">
       <DependentUpon>MemberShip.resx</DependentUpon>
       <AutoGen>True</AutoGen>

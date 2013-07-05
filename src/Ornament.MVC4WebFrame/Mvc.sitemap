@@ -7,7 +7,7 @@
 use permission for checking permission like @user:Read, user is the string type Resources, the Read is the Enum's Value.
 
 -->
-  <mvcSiteMapNode resourceKey="home" controller="Home" action="Index" title="Home" imageUrl="icon-home">
+  <mvcSiteMapNode resourceKey="home" controller="Home" action="Admin" title="Home" imageUrl="icon-home">
     <!-- Main -->
     <!--<mvcSiteMapNode action="Index" controller="Product" title="Projects" area="Projects" imageUrl="icon-comments">
       <mvcSiteMapNode area="Projects" controller="Product" action="Index" title="Product List">

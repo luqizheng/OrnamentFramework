@@ -1,11 +1,12 @@
 ﻿using System.Web.Mvc;
 using System.Web.Profile;
+using Ornament.Web;
 using Ornament.Web.HttpModel;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
-    [HandleError, Session, Authorize]
+    [HandleError, Session]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -23,10 +24,8 @@ namespace Ornament.MVCWebFrame.Controllers
         [Session]
         public ActionResult SwitchLanguage(string id)
         {
-            ProfileBase profile = HttpContext.Profile;
-            profile["Language"] = id;
-            profile.Save();
-            OrnamentModule.SiwtchTo(id);
+            OrnamentContext.MemberShip.SwitchLanguage(id);
+                
             if (Request.UrlReferrer != null)
                 return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Index");
