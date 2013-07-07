@@ -32,6 +32,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui.js").Include("~/Scripts/jquery-ui-{version}.js"));
         }
 
         private static void JQueryRelative(BundleCollection bundles)
@@ -86,7 +87,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
                             .Include("~/Scripts/Util/*.js"));
-     
+
         }
 
         private static void CodeStyle(BundleCollection bundles)

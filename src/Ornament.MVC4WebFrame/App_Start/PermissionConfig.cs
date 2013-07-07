@@ -24,13 +24,13 @@ namespace Ornament.MVCWebFrame.App_Start
                 {
                     ValueType = typeof (string),
                     Name = "类型资源",
-                    Path = " /Areas/MemberShips/Views/Permissions/DefaultResourceSelector.cshtml"
+                    Path = "~/Areas/MemberShips/Views/Permissions/_defaultResourceSelector.cshtml"
                 });
 
             OrnamentContext.ResourceManager.Configuration().ResourceSettings.Add(new ResourceDescription
                 {
                     Name = "信息资源",
-                    Path = "/Areas/Infos/Views/Shared/InfoTypeChoice.cshtml",
+                    Path = "~/Areas/Infos/Views/Shared/InfoTypeChoice.cshtml",
                     ValueType = typeof (NewsType)
                 });
         }

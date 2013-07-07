@@ -1,0 +1,25 @@
+﻿@using Ornament
+@model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionResourceSelectModel
+@{
+    ViewBag.Title = "Choice Ressource";
+    string[] resources = OrnamentContext.ResourceManager.AllTypeResource;
+    string res = null;
+    if (Model != null && Model.Permission != null && Model.Permission.Resource != null)
+    {
+        res = (string)Model.Permission.Resource;
+    }
+
+    //找出已经选择的
+    string selectedResourceId = res ?? resources[0];
+}
+@Html.Hidden("ResourceType", typeof(string).FullName)
+@foreach (string resourceInfo in resources)
+{
+    string checkedTag = selectedResourceId == resourceInfo ? "checked='checked'" : "";
+    <div class="control-group">
+        <label for="@resourceInfo">
+            <input type="radio" value="@resourceInfo" id="@resourceInfo" name="ResourceId" @checkedTag/>
+            @resourceInfo
+        </label>
+    </div>
+}

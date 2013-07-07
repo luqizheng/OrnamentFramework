@@ -1,0 +1,88 @@
+﻿@using Ornament
+@using Ornament.MemberShip.Permissions
+@using Ornament.Web
+@using Resources
+@using Qi
+@using Qi.Web.Mvc
+@model Permission
+@{
+    Permission permission = Model;
+    Type type = OrnamentContext.ResourceManager.GetOperatorType(permission.Resource);
+    SortedDictionary<string, object> operatorKeyMaping = EnumHelper.GetDescriptionList(type);
+}
+
+<div class="control-group">
+    <label class="control-label">@Basic.Name</label>
+    <div class="controls">
+        @Html.TextBoxFor(s => s.Name)
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">@Basic.Comment</label>
+    <div class="controls">
+        @Html.TextAreaFor(s => s.Remark)
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">@Html.GetResourceString("Operators")</label>
+    <div class="controls">
+
+        @foreach (string key in operatorKeyMaping.Keys)
+        {
+                
+            <label for="@operatorKeyMaping[key]" class="checkbox">
+                <input type="checkbox" id="@operatorKeyMaping[key]" value="@Convert.ToInt32(operatorKeyMaping[key])" name="Operator" />
+                @key
+            </label>
+                
+        }
+    </div>
+</div>
+
+@section script
+{
+    <script type="text/javascript">
+        seajs.use(['jquery'], function () {
+            $("#cancel").click(function () {
+                return confirm("@Html.GetResourceString("message", "warnning_leave_without_saving")");
+            });
+
+            $(":checkbox", $("#OperatorsList")).click(function () {
+
+                var check = this.checked;
+                var beCheckValue = $(this).val();
+
+                $(this).siblings(":checkbox").each(function () {
+                    if (beCheckValue == 0) {
+                        this.checked = !check;
+                    }
+                    var checkValue = $(this).val();
+                    var include;
+                    if (beCheckValue >= checkValue) {
+                        include = hasPermission(beCheckValue, checkValue);
+                        if (include && check) {
+                            this.checked = true;
+                        }
+                    } else {
+                        include = hasPermission(checkValue, beCheckValue);
+                        if (include && !check) {
+                            this.checked = false;
+                        }
+                    }
+                });
+            });
+
+
+            (function (permissions) {
+                $("#OperatorsList :checkbox").each(function () {
+                    var theValue = parseInt(this.value);
+                    var value = theValue & permissions;
+                    this.checked = (value == theValue) && (permissions > theValue) && (theValue != 0);
+                });
+            })("@permission.Operator");
+
+        });
+
+
+    </script>
+}

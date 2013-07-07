@@ -5,6 +5,11 @@
             src: "/bundles/jquery.js",
             exports: "jQuery "
         },
+        jqueryui: {
+            src: "/bundles/jqueryui.js",
+            deps: ['jquery'],
+            exports: "jQuery"
+        },
         bootstrap: {
             src: "/bundles/bootstrap.js",
             deps: ['jquery'],
@@ -13,7 +18,12 @@
         easytabs: {
             src: "/scripts/plugins/ui/jquery.easytabs.js",
             deps: ['jquery'],
-            exports: "jQuery "
+            exports: "jQuery"
+        },
+        form: {
+            src: "/scripts/plugins/forms/jquery.form.js",
+            deps: ['jquery'],
+            exports: "jQuery"
         },
         tmpl: {
             src: "/bundles/tmpl.js",
@@ -25,6 +35,7 @@
             deps: ['jquery'],
             exports: "jQuery "
         },
+
         collapsible: {
             src: "/bundles/collapsible.js",
             deps: ['jquery'],
@@ -66,9 +77,15 @@
             src: "/bundles/datePicker.js",
             deps: ["bootstrap"], exports: "jQuery"
         },
+
         util: {
             src: "/Scripts/Utils.js",
-            deps:["jquery"]
+            deps: ["jquery"]
+        },
+        wizard: {
+            src: "/Scripts/plugins/forms/jquery.form.wizard.js",
+            deps: ['jqueryui', 'form'],
+            exports: 'jQuery'
         },
         periodDailog: { exports: "jQuery " },
         preload: ["jquery"]

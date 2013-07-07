@@ -15,6 +15,13 @@
 {
     @Html.HiddenFor(s => s.Name)
     @Html.HiddenFor(s => s.Remark)
-    @Html.HiddenFor(s => s.Operator)
+    if (Model != null)
+    {
+        foreach (var a in this.Model.Operator)
+        {
+            Html.Hidden("Operator", a);
+        }
+    }
+
 }
 <input type="hidden" name="CurrentStep"  value="@this.Model.CurrentStep" />

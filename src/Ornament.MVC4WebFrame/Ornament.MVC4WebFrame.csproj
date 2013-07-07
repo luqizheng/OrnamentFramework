@@ -235,6 +235,7 @@
     <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
+    <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionWizard.cs" />
     <Compile Include="Areas\MemberShips\Models\UserModel.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
@@ -654,10 +655,12 @@
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery.dotdotdot-1.5.1.js" />
     <Content Include="Scripts\jQuery.tmpl.js" />
     <Content Include="Scripts\jQuery.tmpl.min.js" />
@@ -1148,10 +1151,9 @@
   <ItemGroup>
     <Content Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
     <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResource.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\ChoiceResourceType.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\DefaultResourceSelector.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\EditPermission.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\_ChoiceResourceType.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\EditPermissionView.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\PermissionWizardDataView.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />

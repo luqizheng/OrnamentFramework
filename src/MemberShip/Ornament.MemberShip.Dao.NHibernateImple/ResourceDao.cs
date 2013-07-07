@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Castle.Core.Resource;
 using NHibernate.Criterion;
 using NHibernate.Mapping;
+using NHibernate.Metadata;
 using NHibernate.Type;
 using Ornament.MemberShip.Permissions;
 using Qi.NHibernateExtender;
@@ -56,6 +58,19 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             if (id == null)
                 throw new ArgumentNullException("id");
             return SessionManager.Instance.GetCurrentSession().Load(resourceType, id);
+        }
+
+        public object GetResourceByStringId(Type resource, string resId)
+        {
+            if (resource == typeof (string))
+                return resId;
+            IClassMetadata perisisteType = SessionManager.GetSessionWrapper()
+                .SessionFactory.GetClassMetadata(resource);
+            if(perisisteType==null)
+                throw new ResourceException("Resource type "+ resource.GetType().Name +" is not belong to nhibernate mapping class");
+            var identity = perisisteType.IdentifierType as PrimitiveType;
+            var id = identity.FromStringValue(resId);
+            return SessionManager.Instance.GetCurrentSession().Get(resource, id);
         }
 
         public IList<T> FindResources<T>(User user, Enum @operator)
