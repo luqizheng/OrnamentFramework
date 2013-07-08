@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <form id="wizard2" method="post" action="#" class="form-horizontal row-fluid well">
+    <form id="wizard2" method="post" action="@Url.Action("Save")" class="form-horizontal row-fluid well">
         <fieldset class="step" id="theFirst">
             <div class="step-title">
                 <i>1</i>
@@ -53,7 +53,7 @@
         <fieldset id="resourceView" class="step">
             <div class="step-title">
                 <i>2</i>
-                <h5>选择你要对应</h5>
+                <h5>选择你要对应资源</h5>
                 <span>Aenean sem dui, semper sit amet luctus sit amet, molestie vitae nunc</span>
             </div>
             <div id="resViewContent">
@@ -63,19 +63,22 @@
             <div class="step-title">
                 <i>3</i>
                 <h5>设置许可证基础信息</h5>
-                <span></span>
+                <span>设置许可证的基本信息及操作
+                </span>
             </div>
             <div id="editPermissionView">
                 <div class="control-group">
                     @Html.LabelFor(s => s.Name, new { @class = "control-label" })
                     <div class="controls">
                         @Html.TextBoxFor(s => s.Name)
+                        @Html.ValidationMessageFor(s => s.Name)
                     </div>
                 </div>
                 <div class="control-group">
                     @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
                     <div class="controls">
                         @Html.TextAreaFor(s => s.Remark)
+                        @Html.ValidationMessageFor(s => s.Remark)
                     </div>
                 </div>
                 <div class="control-group">
@@ -90,41 +93,49 @@
             <input class="btn" id="back-2" value="Back" type="reset" />
             <input type="submit" class="btn btn-danger" id="next-2" value="Next">
         </div>
+        @Html.Hidden("operators", Model.Operator)
+        @Html.HiddenFor(s => s.Id)
     </form>
     <div class="submit-data" id="w1"></div>
 </div>
 @section script
 {
     <script type="text/javascript">
-        seajs.use(["/bundles/jqueryui", "wizard"], function () {
+        seajs.use(["/bundles/jqueryui", "wizard"], function() {
+            $("form").submit(function() {
+                var i = 0;
+                $("#operators :checkbox").each(function() {
+                    if (this.checked) {
+                        i |= parseInt($(this).val());
+                    }
+                });
+                $("[name = operators]").val(i);
+            });
             $("#wizard2").formwizard({
-                formPluginEnabled: true,
-                validationEnabled: false,
-                focusFirstInput: false,
+                formPluginEnabled: false,
+                validationEnabled: true,
+                focusFirstInput: true,
                 disableUIStyles: true,
                 formOptions: {
-                    success: function(data) {
-                        $("#status1").fadeTo(500, 1, function() {
-                            $(this).html("<span>Form was submitted!</span>").fadeTo(5000, 0);
-                        });
-                    },
-                    beforeSubmit: function(data) {
-                         $("#data1").html("<span>Form was submitted with ajax. Data sent to the server: " + $.param(data) + "</span>");
-                    },
                     resetForm: true
                 }
             });
 
-            $(":checkbox", $("#operators")).click(function () {
+            $(document).delegate("#operators input", "change", function() {
 
                 var check = this.checked;
                 var beCheckValue = $(this).val();
 
-                $(this).siblings(":checkbox").each(function () {
-                    if (beCheckValue == 0) {
-                        this.checked = !check;
-                    }
+                $("#operators input").each(function() {
                     var checkValue = $(this).val();
+                    if (checkValue == beCheckValue)
+                        return true;
+
+                    if (beCheckValue == 0 && check) {
+                        this.checked = false;
+                        return true;
+                    }
+
                     var include;
                     if (beCheckValue >= checkValue) {
                         include = hasPermission(beCheckValue, checkValue);
@@ -140,27 +151,27 @@
                 });
             });
 
-            $("#wizard2").bind("before_step_shown", function (event, data) {
-                if (data.currentStep == "resourceView") {
-                    var a = "@Url.Action("ChoiceResourceView")/" + $("[name=DescriptionResourceName]").val();
-                    $("#resViewContent").load(a);
+            $("#wizard2").bind("before_step_shown", function(event, data) {
+                var curName = data.currentStep;
+                if (curName == "resourceView") {
+                    $("#resViewContent").load("@Url.Action("ChoiceResourceView")/" + $("[name=DescriptionResourceName]:checked").val());
 
-                } else if (data.currentStep == "editPermission") {
+                } else if (curName == "editPermission") {
                     var input = {
                         resourceId: $("[name=ResourceId]").val(),
                         permissionId: "@(this.Model != null ? this.Model.Id : "")"
                     };
                     var url = "@Url.Action("Operators")/" + $("[name=DescriptionResourceName]").val();
-                    $.get(url, input, function (d) {
+                    $.get(url, input, function(d) {
                         var labels = [];
                         for (var key in d) {
-                            labels.push('<label class="checkbox"><input name="Operator" type="checkbox" value="' + d[key] + '"/>' + key + '</label>');
+                            labels.push('<label class="checkbox"><input type="checkbox" value="' + d[key] + '"/>' + key + '</label>');
                         }
 
                         $("#operators").html("").append(labels.join(""));
-                        
-                        (function (permissions) {
-                            $("#operators :checkbox").each(function () {
+
+                        (function(permissions) {
+                            $("#operators :checkbox").each(function() {
                                 var theValue = parseInt(this.value);
                                 var value = theValue & permissions;
                                 this.checked = (value == theValue) && (permissions > theValue) && (theValue != 0);

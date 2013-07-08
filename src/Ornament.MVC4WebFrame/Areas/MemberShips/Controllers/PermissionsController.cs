@@ -42,35 +42,42 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            var wizard = new PermissionWizard();
-            return View(wizard.Next(), wizard);
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit()
-        {
             return View("Permission");
         }
 
-
-
         /// <summary>
+        /// 
         /// </summary>
-        /// <param name="wizard"></param>
-        /// <param name="forward"></param>
+        /// <param name="id">permission id</param>
+        /// <param name="descriptionResourceName"></param>
+        /// <param name="name"></param>
+        /// <param name="remark"></param>
+        /// <param name="resourceId"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(PermissionWizard wizard, bool forward)
+        public ActionResult Save(string id, string descriptionResourceName, string name, string remark,
+            string resourceId, int operators)
         {
-            string viewName = forward ? wizard.Next() : wizard.Previous();
-            if (wizard.IsLast)
-            {
-                Permission permission = wizard.GetPermission();
-                _memberShipFactory.CreatePermissionDao().SaveOrUpdate(permission);
-                return RedirectToAction("Index");
-            }
-            return View(viewName, wizard);
+            ResourceDescription resourceDescription = OrnamentContext.ResourceManager.Configuration()
+                                                           .Get(descriptionResourceName);
+
+            Permission permission;
+
+            if (!string.IsNullOrEmpty(id))
+                permission = _memberShipFactory.CreatePermissionDao().Get(id);
+            else
+                permission = Permission.CreatePermission(resourceDescription.ValueType);
+            var dao = _memberShipFactory.CreateResourceDao();
+            permission.Name = name;
+            permission.Remark = remark;
+            permission.Resource = dao.GetResourceByStringId(resourceDescription.ValueType, resourceId);
+            permission.Operator = operators;
+
+            _memberShipFactory.CreatePermissionDao().SaveOrUpdate(permission);
+            return RedirectToAction("Index");
         }
+
+
 
 
         public ActionResult Delete(string id)
@@ -121,7 +128,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 .GetResourceByStringId(resourceDescription.ValueType, resourceId);
             Type type = OrnamentContext.ResourceManager.GetOperatorType(res);
             SortedDictionary<string, object> operatorKeyMaping = EnumHelper.GetDescriptionList(type);
-            return Json(operatorKeyMaping,JsonRequestBehavior.AllowGet);
+            return Json(operatorKeyMaping, JsonRequestBehavior.AllowGet);
         }
 
 
