@@ -9,6 +9,7 @@ using Ornament.Web;
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Authorize]
+    [Authorize(Roles = "admin", Users = "admin")]
     public class PersonalController : Controller
     {
         private readonly IMessageDaoFactory _messageDaoFactory;

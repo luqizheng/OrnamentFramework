@@ -625,7 +625,6 @@
     <Content Include="Content\less\variables.less" />
     <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
     <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
-    <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Areas\Messages\Views\News\Index.cshtml" />
@@ -958,6 +957,8 @@
     <Content Include="Views\Security\RetrievePassword.cshtml" />
     <Content Include="Views\Security\RetrievePasswordResult.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Period.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1139,7 +1140,6 @@
     <Content Include="Areas\MemberShips\Views\Permissions\_ChoiceResourceType.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\PermissionWizardDataView.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Edit.cshtml" />

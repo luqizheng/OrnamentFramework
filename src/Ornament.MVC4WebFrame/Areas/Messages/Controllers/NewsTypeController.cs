@@ -9,7 +9,7 @@ using Qi.Web.Mvc;
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin", Users = "admin")]
     public class NewsTypeController : Controller
     {
         private readonly IMessageDaoFactory _messageDao;

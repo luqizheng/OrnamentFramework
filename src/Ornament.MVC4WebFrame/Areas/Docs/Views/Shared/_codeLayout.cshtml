@@ -1,17 +1,20 @@
 ﻿@{
-    ViewBag.Title = "_codeLayout";
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
 @section head
 {
-    @Styles.Render("~/Content/CodeStyle")
+ 
     @RenderSection("head", false)
+}
+@section pageTitle
+{
+    @RenderSection("pageTitle", false)
 }
 @section script
 {
     @Scripts.Render("~/Scripts/CodeStyle")
     <script type="text/javascript">
-        prettyPrint()
+        window.prettyPrint && prettyPrint();
     </script>
     @RenderSection("script", false)
 }

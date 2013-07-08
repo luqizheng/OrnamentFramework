@@ -74,6 +74,11 @@ use permission for checking permission like @user:Read, user is the string type 
       <mvcSiteMapNode controller="Site" area="Settings" action="Index" title="Information"></mvcSiteMapNode>
     </mvcSiteMapNode>
 
+    <mvcSiteMapNode title="Docs" imageUrl="icon-indent-right">
+      <mvcSiteMapNode controller="Plugin" area="Docs" action="DatePicker" title="DateTime"></mvcSiteMapNode>
+      
+    </mvcSiteMapNode>
+
   </mvcSiteMapNode>
 
 
