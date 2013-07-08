@@ -87,5 +87,11 @@ namespace Ornament.MemberShip.Permissions
             TypeResourcesOperator.Add(resource, operatorType);
             return this;
         }
+
+        public ResourceManager Add(Type resourceType, Type operatorType)
+        {
+            NHibernateResourceManager.Add(resourceType, operatorType);
+            return this;
+        }
     }
 }

@@ -1,0 +1,41 @@
+﻿@using Ornament
+@using Ornament.Messages.Newses
+@using Resources
+@model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionResourceSelectModel
+@{
+    var items = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao.GetAll();
+    var selected = items.First().Id;
+    if (this.Model != null && this.Model.Permission != null && this.Model.Permission.Resource != null)
+    {
+        selected = ((NewsType)this.Model.Permission.Resource).Id;
+    }
+}
+
+<table class="table table-condensed table-striped table-bordered">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Name
+            </th>
+            <th>Remark
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in items)
+        {
+            <tr>
+                <td>
+                    @Html.RadioButton("ResourceId", item.Id, item.Id == selected)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remark)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

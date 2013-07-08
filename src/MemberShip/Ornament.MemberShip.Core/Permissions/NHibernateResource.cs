@@ -37,7 +37,15 @@ namespace Ornament.MemberShip.Permissions
             {
                 if (res == null)
                     throw new ArgumentNullException("res");
-                string key = string.Format(NHProxyType, res.Name);
+                string key;
+                if (!res.Assembly.FullName.Contains("ProxyAssembly"))
+                {
+                    key = string.Format(NHProxyType, res.Name);
+                }
+                else
+                {
+                    key = res.AssemblyQualifiedName;
+                }
                 return _typeMapping.GetOperatorType(key);
             }
             catch (NotFoundOperatorTypeException ex)
@@ -48,19 +56,19 @@ namespace Ornament.MemberShip.Permissions
 
         /// <summary>
         /// </summary>
-        /// <param name="resourceInstance"></param>
+        /// <param name="mappingClass"></param>
         /// <param name="enumType"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException">resourceInstance is null or enumType is null</exception>
-        public IResourceOperatorManager<Type> Add(Type resourceInstance, Type enumType)
+        /// <exception cref="ArgumentNullException">mappingClass is null or enumType is null</exception>
+        public IResourceOperatorManager<Type> Add(Type mappingClass, Type enumType)
         {
-            if (resourceInstance == null)
-                throw new ArgumentNullException("resourceInstance");
+            if (mappingClass == null)
+                throw new ArgumentNullException("mappingClass");
             if (enumType == null)
                 throw new ArgumentNullException("enumType");
-            string key = string.Format(NHProxyType, resourceInstance.Name);
+            string key = string.Format(NHProxyType, mappingClass.Name);
             _typeMapping.Add(key, enumType);
-            _proxyTypeAndActualTypeMapping.Add(key, resourceInstance);
+            _proxyTypeAndActualTypeMapping.Add(key, mappingClass);
             return this;
         }
 

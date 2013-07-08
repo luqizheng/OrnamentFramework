@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Threading;
 using System.Web;
-using System.Web.Mvc;
 
 namespace Ornament.Web.HttpModel
 {
@@ -40,13 +39,12 @@ namespace Ornament.Web.HttpModel
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication)sender;
+            var context = (HttpApplication) sender;
             MultiLanguage(context);
             if (context.Request["utc"] != null)
             {
-                var offict = Convert.ToInt32(context.Request["utc"]);
+                int offict = Convert.ToInt32(context.Request["utc"]);
                 SetClientOffsetHour(OrnamentContext.MemberShip.CorrectClientUtcTime(offict));
-
             }
         }
 

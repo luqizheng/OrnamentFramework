@@ -62,14 +62,23 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public object GetResourceByStringId(Type resource, string resId)
         {
-            if (resource == typeof (string))
+            if (resource == typeof(string))
                 return resId;
             IClassMetadata perisisteType = SessionManager.GetSessionWrapper()
                 .SessionFactory.GetClassMetadata(resource);
-            if(perisisteType==null)
-                throw new ResourceException("Resource type "+ resource.GetType().Name +" is not belong to nhibernate mapping class");
+            if (perisisteType == null)
+                throw new ResourceException("Resource type " + resource.GetType().Name + " is not belong to nhibernate mapping class");
             var identity = perisisteType.IdentifierType as PrimitiveType;
-            var id = identity.FromStringValue(resId);
+            object id;
+            if (identity != null)
+            {
+                id = identity.FromStringValue(resId);
+            }
+            else
+            {
+                var emub = perisisteType.IdentifierType as ImmutableType;
+                id = emub.FromStringValue(resId);
+            }
             return SessionManager.Instance.GetCurrentSession().Get(resource, id);
         }
 

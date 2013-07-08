@@ -10,11 +10,14 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void Regist()
         {
             OrnamentContext.ResourceManager
-                           .Add("User", typeof (UserOperator))
-                           .Add("Role", typeof (RoleOperator))
-                           .Add("Account", typeof (AccountOperator))
-                           .Add("Org", typeof (OrgOperator))
-                           .Add("UserGroup", typeof (UserGroupOperator));
+                           .Add("User", typeof(UserOperator))
+                           .Add("Role", typeof(RoleOperator))
+                           .Add("Account", typeof(AccountOperator))
+                           .Add("Org", typeof(OrgOperator))
+                           .Add("UserGroup", typeof(UserGroupOperator));
+            OrnamentContext.ResourceManager
+                           .Add(typeof(NewsType), typeof(NewsOperator));
+
             RegistrySettingPage();
         }
 
@@ -22,16 +25,16 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             OrnamentContext.ResourceManager.Configuration().ResourceSettings.Add(new ResourceDescription
                 {
-                    ValueType = typeof (string),
+                    ValueType = typeof(string),
                     Name = "类型资源",
                     Path = "~/Areas/MemberShips/Views/Permissions/_defaultResourceSelector.cshtml"
                 });
 
             OrnamentContext.ResourceManager.Configuration().ResourceSettings.Add(new ResourceDescription
                 {
-                    Name = "信息资源",
-                    Path = "~/Areas/Infos/Views/Shared/InfoTypeChoice.cshtml",
-                    ValueType = typeof (NewsType)
+                    Name = "新闻资源",
+                    Path = "~/Areas/Messages/Views/Shared/resNewsType.cshtml",
+                    ValueType = typeof(NewsType)
                 });
         }
     }

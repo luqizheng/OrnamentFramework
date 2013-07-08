@@ -32,6 +32,7 @@ namespace Ornament.MemberShip.Permissions
         /// </summary>
         /// <value>The name.</value>
         [Display(ResourceType = typeof (Resources), Name = "PermissionName")]
+        [Required]
         public virtual string Name { get; set; }
 
         /// <summary>

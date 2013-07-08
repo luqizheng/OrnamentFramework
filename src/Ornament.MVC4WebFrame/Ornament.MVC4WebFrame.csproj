@@ -222,10 +222,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
     <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
-    <Compile Include="Areas\Docs\Controllers\BaseCssController.cs" />
-    <Compile Include="Areas\Docs\Controllers\ComponentController.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
-    <Compile Include="Areas\Docs\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
@@ -626,16 +623,6 @@
     <Content Include="Content\less\font-awesome\font-awesome.less" />
     <Content Include="Content\less\global.less" />
     <Content Include="Content\less\variables.less" />
-    <Content Include="Areas\Docs\Views\BaseCss\Buttons.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Code.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Form.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Icons.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Image.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Table.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Typography.cshtml" />
-    <Content Include="Areas\Docs\Views\Component\Dropdowns.cshtml" />
-    <Content Include="Areas\Docs\Views\Dashboard\Bootstrap.cshtml" />
-    <Content Include="Areas\Docs\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
     <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
     <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
@@ -654,6 +641,7 @@
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
+    <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -977,7 +965,6 @@
     <Folder Include="Areas\Badminton\Views\Shared\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
-    <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
   </ItemGroup>
   <ItemGroup>

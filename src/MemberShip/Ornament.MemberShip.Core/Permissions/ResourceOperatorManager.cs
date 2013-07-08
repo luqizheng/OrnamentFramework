@@ -38,10 +38,10 @@ namespace Ornament.MemberShip.Permissions
             throw new NotFoundOperatorTypeException(typeof(T));
         }
 
-        public virtual IResourceOperatorManager<T> Add(T resourceInstance, Type enumType)
+        public virtual IResourceOperatorManager<T> Add(T mappingClass, Type enumType)
         {
-            if (Equals(resourceInstance, default(T)))
-                throw new ArgumentNullException("resourceInstance");
+            if (Equals(mappingClass, default(T)))
+                throw new ArgumentNullException("mappingClass");
 
             if (enumType == null)
                 throw new ArgumentNullException("enumType");
@@ -49,7 +49,7 @@ namespace Ornament.MemberShip.Permissions
             {
                 throw new ArgumentException("enumType should be a enum");
             }
-            _resOperatorMapping.Add(resourceInstance, enumType);
+            _resOperatorMapping.Add(mappingClass, enumType);
             return this;
         }
 
