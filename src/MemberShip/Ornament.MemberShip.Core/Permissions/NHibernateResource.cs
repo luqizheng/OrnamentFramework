@@ -37,15 +37,9 @@ namespace Ornament.MemberShip.Permissions
             {
                 if (res == null)
                     throw new ArgumentNullException("res");
-                string key;
-                if (!res.Assembly.FullName.Contains("ProxyAssembly"))
-                {
-                    key = string.Format(NHProxyType, res.Name);
-                }
-                else
-                {
-                    key = res.AssemblyQualifiedName;
-                }
+                string key = res.Assembly.FullName.Contains("ProxyAssembly")
+                                 ? res.AssemblyQualifiedName
+                                 : string.Format(NHProxyType, res.Name);
                 return _typeMapping.GetOperatorType(key);
             }
             catch (NotFoundOperatorTypeException ex)
