@@ -140,43 +140,45 @@
         seajs.use(['ckeditor/ckeditor.js', "select2",
                 "bootstrap", "datePicker", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
 
-            var editor = CKEDITOR.replace('editor');
-            editor.on("blur", function () {
-                content[$("#Language").val()] = {
-                    content: editor.getData(),
-                    subject: $("#subject").val()
-                };
+                    var editor = CKEDITOR.replace('editor', {
+                        filebrowserBrowseUrl: '@Url.Action("FileCtrl", "FileManager", new { area = "Settings" })',
             });
+                    editor.on("blur", function () {
+                        content[$("#Language").val()] = {
+                            content: editor.getData(),
+                            subject: $("#subject").val()
+                        };
+                    });
 
-            $("#Type").select2();
+                    $("#Type").select2();
 
-            $('.date').datepicker();
+                    $('.date').datepicker();
 
-            $("#Language").select2().change(function () {
-                var cont = content[$(this).val()];
-                editor.setData(cont ? cont.content : "");
-                $("#subject").val(cont ? cont.subject : "");
-            }).change().next().click(function () {
-                delete content[$("#Language").val()];
-            });
+                    $("#Language").select2().change(function () {
+                        var cont = content[$(this).val()];
+                        editor.setData(cont ? cont.content : "");
+                        $("#subject").val(cont ? cont.subject : "");
+                    }).change().next().click(function () {
+                        delete content[$("#Language").val()];
+                    });
 
 
-            $("form").submit(function () {
-                //Make sure the editor save to content.
+                    $("form").submit(function () {
+                        //Make sure the editor save to content.
 
-                content[$("#Language").val()] = {
-                    content: editor.getData(),
-                    subject: $("#subject").val()
-                };
+                        content[$("#Language").val()] = {
+                            content: editor.getData(),
+                            subject: $("#subject").val()
+                        };
 
-                var ary = [];
-                for (var key in content) {
-                    ary.push("<input type='hidden' value='" + content[key].content + "' name='NewContents[" + key + "]'/>");
-                    ary.push("<input type='hidden' value='" + content[key].subject + "' name='NewSubjects[" + key + "]'/>");
-                }
-                $("form").append(ary.join(""));
-            });
-        });
+                        var ary = [];
+                        for (var key in content) {
+                            ary.push("<input type='hidden' value='" + content[key].content + "' name='NewContents[" + key + "]'/>");
+                            ary.push("<input type='hidden' value='" + content[key].subject + "' name='NewSubjects[" + key + "]'/>");
+                        }
+                        $("form").append(ary.join(""));
+                    });
+                });
 
     </script>
 }

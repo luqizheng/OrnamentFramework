@@ -613,6 +613,7 @@
     <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
+    <Content Include="Views\Shared\filectrl.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

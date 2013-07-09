@@ -9,7 +9,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
-                name:"fileManage",
+                name: "fileManage",
                 url: "connector",
                 defaults: new { Controller = "Files", action = "Index", Area = "Settings", id = UrlParameter.Optional }
                 );
