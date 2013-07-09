@@ -21,8 +21,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                 .Table("Msgs_NotifyContent")
                 .Component(x =>
                     {
-                        x.Map(a => a.Value);
-                        x.Map(a => a.Subject);
+                        x.Map(a => a.Value).Length(4096);
+                        x.Map(a => a.Subject).Length(255);
                         //x.Map(a => a.Language, "language2");
                     }
                 );
