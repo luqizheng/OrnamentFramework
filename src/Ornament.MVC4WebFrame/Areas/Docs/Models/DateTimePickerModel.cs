@@ -15,6 +15,8 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Models
             this.TimeNow=new Time(Now.Hour,Now.Minute,Now.Second);
         }
         [UIHint("Date")]
+        [Required]
+        [System.ComponentModel.DataAnnotations.DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "yyyy-MM-dd")]
         public DateTime Now { get; set; }
 
         [UIHint("Time")]
