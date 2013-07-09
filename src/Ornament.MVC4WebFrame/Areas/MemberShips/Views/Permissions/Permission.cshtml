@@ -25,7 +25,7 @@
         </div>
     </div>
     <form id="wizard2" method="post" action="@Url.Action("Save")" class="form-horizontal row-fluid well">
-        <fieldset class="step" id="theFirst">
+        <span class="step" id="theFirst">
             <div class="step-title">
                 <i>1</i>
                 <h5>选择资源类别</h5>
@@ -49,8 +49,8 @@
                     }
                 }
             </div>
-        </fieldset>
-        <fieldset id="resourceView" class="step">
+        </span>
+        <span id="resourceView" class="step">
             <div class="step-title">
                 <i>2</i>
                 <h5>选择你要对应资源</h5>
@@ -58,8 +58,8 @@
             </div>
             <div id="resViewContent">
             </div>
-        </fieldset>
-        <fieldset id="editPermission" class="step">
+        </span>
+        <span id="editPermission" class="step">
             <div class="step-title">
                 <i>3</i>
                 <h5>设置许可证基础信息</h5>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-        </fieldset>
+        </span>
         <div class="form-actions align-right">
             <div id="status1" class="status"></div>
             <input class="btn" id="back-2" value="Back" type="reset" />
