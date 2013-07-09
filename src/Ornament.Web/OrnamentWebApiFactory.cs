@@ -3,29 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Web.Http;
 using System.Web.Http.Controllers;
-using System.Web.Http.Dependencies;
 using System.Web.Http.Dispatcher;
-using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
 namespace Ornament.Web
 {
-    public class OrnamentWebApiFactory : IHttpControllerActivator 
+    public class OrnamentWebApiFactory : IHttpControllerActivator
     {
-        private readonly WindsorContainer _container;
+        public OrnamentWebApiFactory()
+        {
+            
+        }
+
         public OrnamentWebApiFactory(params Type[] controllers)
         {
-            if (controllers == null)
-                throw new ArgumentNullException("controllers");
-            _container = (WindsorContainer)OrnamentContext.IocContainer;
-            foreach (Type t in controllers)
+
+            if (controllers != null)
             {
-                _container.Register(Component.For(t).LifestyleTransient());
+                foreach (Type t in controllers)
+                {
+                    Container.Register(Component.For(t).LifestyleTransient());
+                }
             }
-     
         }
+
+        public IWindsorContainer Container
+        {
+            get { return OrnamentContext.IocContainer; }
+        }
+
+        IHttpController IHttpControllerActivator.Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor,
+                                      Type controllerType)
+        {
+            var controller = (IHttpController)Container.Resolve(controllerType);
+            return controller;
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="assemblies"></param>
@@ -34,15 +50,9 @@ namespace Ornament.Web
         {
             // Also register all the controller types as transient
             IEnumerable<Type> controllerTypes = from t in assemblies.GetTypes()
-                                                where typeof(IHttpController).IsAssignableFrom(t)
+                                                where typeof(ApiController).IsAssignableFrom(t)
                                                 select t;
             return controllerTypes.ToArray();
-        }
-
-        public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
-        {
-            var controller = (IHttpController)_container.Resolve(controllerType);
-            return controller;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Ornament.MemberShip
     [Serializable]
     public class Role : Performer<Role>
     {
-        private string _name;
+        
 
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
         private string _remark;
@@ -61,23 +61,7 @@ namespace Ornament.MemberShip
             get { return _permissions ?? (_permissions = new HashedSet<Permission>()); }
         }
 
-        /// <summary>
-        ///     Gets or sets the name of role.
-        /// </summary>
-        [Display(Name = "Name", ResourceType = typeof (Resources))]
-        [Required(ErrorMessageResourceType = typeof (ErrorMessage), ErrorMessageResourceName = "RequireRoleName")]
-        [StringLength(20, ErrorMessageResourceType = typeof (ErrorMessage),
-            ErrorMessageResourceName = "RoleNameOverMaxLength")]
-        public virtual  string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value != null && value.Length > 20)
-                    throw new ArgumentOutOfRangeException("value", value.Length, "Name's lenght over than 20");
-                _name = value;
-            }
-        }
+     
 
         #region IPerformer Members
 
