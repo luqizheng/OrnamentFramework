@@ -28,7 +28,6 @@ namespace Ornament.Web.HttpModel
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("_multiCookie", language));
             }
         }
-
         public static void SetClientOffsetHour(int hour)
         {
             if (HttpContext.Current != null)

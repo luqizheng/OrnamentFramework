@@ -103,10 +103,15 @@ namespace Ornament.Web
         /// <returns></returns>
         public static string ProfileLanguage(this MemberShipContext context)
         {
-            object a = HttpContext.Current.Profile["language"];
-            if (a == null)
+            var a = (string)HttpContext.Current.Profile["language"];
+            if (String.IsNullOrEmpty(a))
+            {
+                var cookie = HttpContext.Current.Request.Cookies["_multiCookie"];
+                if (cookie != null)
+                    return cookie.Value;
                 return OrnamentContext.Configuration.DefaultLanguage.Key;
-            return (string) a;
+            }
+            return (string)a;
         }
 
         /// <summary>
