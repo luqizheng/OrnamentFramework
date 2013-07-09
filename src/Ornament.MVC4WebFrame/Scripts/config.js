@@ -20,6 +20,10 @@
             deps: ['jquery'],
             exports: "jQuery"
         },
+        elfinder: {
+            src: "/Scripts/plugins/ui/jquery.elfinder.js",
+            deps:["jqueryui"]
+        },
         form: {
             src: "/scripts/plugins/forms/jquery.form.js",
             deps: ['jquery'],

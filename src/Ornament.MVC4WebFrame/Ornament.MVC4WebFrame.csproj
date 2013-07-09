@@ -250,10 +250,12 @@
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
+    <Compile Include="Areas\Settings\Controllers\FileManagerController.cs" />
     <Compile Include="Areas\Settings\Controllers\SiteController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
+    <Compile Include="Areas\Settings\Controllers\FilesController.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpErrorsController.cs" />
@@ -298,50 +300,6 @@
     <Content Include="Content\media\swfupload.swf" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
-    <Content Include="Images\ajax-loader.gif" />
-    <Content Include="Images\FileTypes\accdb.png" />
-    <Content Include="Images\FileTypes\avi.png" />
-    <Content Include="Images\FileTypes\bm.png" />
-    <Content Include="Images\FileTypes\css.png" />
-    <Content Include="Images\FileTypes\docx mac.png" />
-    <Content Include="Images\FileTypes\docx win.png" />
-    <Content Include="Images\FileTypes\eml.png" />
-    <Content Include="Images\FileTypes\eps.png" />
-    <Content Include="Images\FileTypes\fla.png" />
-    <Content Include="Images\FileTypes\Folder-Blank-icon.png" />
-    <Content Include="Images\FileTypes\gif.png" />
-    <Content Include="Images\FileTypes\html.png" />
-    <Content Include="Images\FileTypes\ind.png" />
-    <Content Include="Images\FileTypes\ini.png" />
-    <Content Include="Images\FileTypes\jpeg.png" />
-    <Content Include="Images\FileTypes\jsf.png" />
-    <Content Include="Images\FileTypes\midi.png" />
-    <Content Include="Images\FileTypes\mov.png" />
-    <Content Include="Images\FileTypes\mp3.png" />
-    <Content Include="Images\FileTypes\mpeg.png" />
-    <Content Include="Images\FileTypes\pdf.png" />
-    <Content Include="Images\FileTypes\png.png" />
-    <Content Include="Images\FileTypes\pptx mac.png" />
-    <Content Include="Images\FileTypes\pptx win.png" />
-    <Content Include="Images\FileTypes\proj.png" />
-    <Content Include="Images\FileTypes\psd.png" />
-    <Content Include="Images\FileTypes\pst.png" />
-    <Content Include="Images\FileTypes\pub.png" />
-    <Content Include="Images\FileTypes\rar.png" />
-    <Content Include="Images\FileTypes\readme.png" />
-    <Content Include="Images\FileTypes\settings.png" />
-    <Content Include="Images\FileTypes\text.png" />
-    <Content Include="Images\FileTypes\tiff.png" />
-    <Content Include="Images\FileTypes\unknow.png" />
-    <Content Include="Images\FileTypes\url.png" />
-    <Content Include="Images\FileTypes\vsd.png" />
-    <Content Include="Images\FileTypes\wav.png" />
-    <Content Include="Images\FileTypes\wma.png" />
-    <Content Include="Images\FileTypes\wmv.png" />
-    <Content Include="Images\FileTypes\xlsx mac.png" />
-    <Content Include="Images\FileTypes\xlsx win.png" />
-    <Content Include="Images\FileTypes\zip.png" />
-    <Content Include="Images\Upload.png" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -653,6 +611,8 @@
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -1064,6 +1024,10 @@
     <ProjectReference Include="..\Extends\Projects\QiProject.Dao.NhImple\QiProject.Dao.NhImple.csproj">
       <Project>{71bba53c-0fba-4b59-a4a1-7caf15f41104}</Project>
       <Name>QiProject.Dao.NhImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helpers\ElFinder.Net\ElFinder.Net.csproj">
+      <Project>{4635b781-a1a1-40a3-b57d-26cf552695bb}</Project>
+      <Name>ElFinder.Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{c8cdafc3-3071-4246-91ef-c9e8dfbdbae4}</Project>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Web.Http;
-using System.Web.Http.Dependencies;
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
@@ -31,15 +30,14 @@ namespace Ornament.MVCWebFrame.App_Start
 
             //Web API for castle inject.
             var httpDependencyResolver =
-               new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(typeof(RolesController).Assembly));
+                new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(typeof (RolesController).Assembly));
 
             OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>()
                                                            .Instance(httpDependencyResolver).LifestyleSingleton());
 
-            GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
-            
-        }
 
+            GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
+        }
         private static void ChangeControllerFacotry()
         {
             try
@@ -49,12 +47,12 @@ namespace Ornament.MVCWebFrame.App_Start
                 ////change the default controller.
                 ControllerBuilder.Current.SetControllerFactory(new OrnamentControllerFactory(controllerTypes)
                     {
-                        ErrorController = typeof(HttpErrorsController)
+                        ErrorController = typeof (HttpErrorsController)
                     });
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcExtender)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcExtender)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

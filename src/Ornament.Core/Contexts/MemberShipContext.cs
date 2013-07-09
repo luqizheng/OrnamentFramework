@@ -11,12 +11,58 @@ namespace Ornament.Contexts
     public class MemberShipContext
     {
         private readonly IMemberShipFactory _factory;
-
+        private string adminUserId;
+        private string adminRoleId;
         public MemberShipContext(IMemberShipFactory factory)
         {
             _factory = factory;
         }
 
+        public IMemberShipProvider MemberShipProvider { get; set; }
+        public User UserAdmin
+        {
+            get
+            {
+                User admin;
+                if (adminUserId == null)
+                {
+                    admin = _factory.CreateUserDao().GetByLoginId("admin");
+                    adminUserId = admin.Id;
+                }
+                else
+                {
+                    admin = _factory.CreateUserDao().Get(adminUserId);
+                    if (admin == null)
+                    {
+                        adminUserId = null;
+                        return this.UserAdmin;
+                    }
+                }
+                return admin;
+            }
+        }
+        public Role RoleAdmin
+        {
+            get
+            {
+                Role role;
+                if (adminRoleId == null)
+                {
+                    role = _factory.CreateRoleDao().GetByName("admin");
+                    adminRoleId = role.Id;
+                }
+                else
+                {
+                    role = _factory.CreateRoleDao().Get(adminRoleId);
+                    if (role == null)
+                    {
+                        adminRoleId = null;
+                        return this.RoleAdmin;
+                    }
+                }
+                return role;
+            }
+        }
         /// <summary>
         ///     检查当前用户是否有资源的操作权限
         /// </summary>
@@ -28,9 +74,8 @@ namespace Ornament.Contexts
         /// <exception cref="OrnamentException">通过资源Id，无法找到资源的时候，就会发出这个异常</exception>
         /// <remarks>
         /// </remarks>
-        public bool HasRight(User currentUser,Type resType, string id, Enum @operator)
+        public bool HasRight(User currentUser, Type resType, string id, Enum @operator)
         {
-
             object res;
             try
             {
@@ -41,7 +86,7 @@ namespace Ornament.Contexts
                 throw new OrnamentException(String.Format("Can't find the resource {0}, id={1}", resType.FullName, id),
                                             ex);
             }
-            return HasRight(currentUser,res, @operator);
+            return HasRight(currentUser, res, @operator);
         }
 
 
@@ -68,14 +113,13 @@ namespace Ornament.Contexts
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="currentUser"></param>
         /// <param name="resType"></param>
         /// <param name="id"></param>
         /// <param name="operator"></param>
         /// <returns></returns>
-        public bool HasRight(User currentUser,Type resType, object id, Enum @operator)
+        public bool HasRight(User currentUser, Type resType, object id, Enum @operator)
         {
             if (currentUser.LoginId == User.AdminLoginId)
                 return true;
@@ -89,7 +133,7 @@ namespace Ornament.Contexts
                 throw new OrnamentException(String.Format("Can't find the resource {0}, id={1}", resType.FullName, id),
                                             ex);
             }
-            return HasRight(currentUser,res, @operator);
+            return HasRight(currentUser, res, @operator);
         }
 
         /// <summary>
@@ -113,9 +157,5 @@ namespace Ornament.Contexts
             return permissions.Any(permission => permission.Resource.Equals(resourceType)
                                                  && permission.HasOperator(operatorVal));
         }
-
-        public IMemberShipProvider MemberShipProvider { get; set; }
-
-      
     }
 }

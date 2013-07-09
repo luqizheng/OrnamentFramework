@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Threading;
 using System.Web;
+using log4net;
 
 namespace Ornament.Web.HttpModel
 {
@@ -39,12 +40,20 @@ namespace Ornament.Web.HttpModel
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication) sender;
+            var context = (HttpApplication)sender;
             MultiLanguage(context);
-            if (context.Request["utc"] != null)
+            var utc = context.Request.QueryString["utc"];
+            if (!String.IsNullOrEmpty(utc))
             {
-                int offict = Convert.ToInt32(context.Request["utc"]);
-                SetClientOffsetHour(OrnamentContext.MemberShip.CorrectClientUtcTime(offict));
+                try
+                {
+                    int offict = Convert.ToInt32(utc);
+                    SetClientOffsetHour(OrnamentContext.MemberShip.CorrectClientUtcTime(offict));
+                }
+                catch (Exception ex)
+                {
+                    LogManager.GetLogger(this.GetType()).Error("Setting offset minis error.", ex);
+                }
             }
         }
 

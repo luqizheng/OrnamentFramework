@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
+using Qi;
+using Qi.IO;
 
 namespace Ornament.Contexts
 {
@@ -9,12 +12,29 @@ namespace Ornament.Contexts
         {
             get
             {
-                var supportEmail= ConfigurationManager.AppSettings["SupportEmail"];
+                string supportEmail = ConfigurationManager.AppSettings["SupportEmail"];
                 if (String.IsNullOrEmpty(supportEmail))
                 {
                     throw new ApplicationException("Pleases set SupportEmail in AppSettings.");
                 }
                 return supportEmail;
+            }
+        }
+
+        public DirectoryInfo UploadFilesFolder
+        {
+            get
+            {
+                string folder = ConfigurationManager.AppSettings["UploadFolder"];
+                if (String.IsNullOrEmpty(folder))
+                {
+                    folder = "~/files/";
+                }
+
+                var dir = new DirectoryInfo(ApplicationHelper.MapPath(folder));
+                if (!dir.Exists)
+                    dir.CreateEx();
+                return dir;
             }
         }
 

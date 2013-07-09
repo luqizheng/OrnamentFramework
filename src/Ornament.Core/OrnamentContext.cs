@@ -26,6 +26,7 @@ namespace Ornament
         }
 
 
+
         /// <summary>
         /// </summary>
         public static DaoFactory DaoFactory
