@@ -53,7 +53,10 @@ use permission for checking permission like @user:Read, user is the string type 
         <mvcSiteMapNode area="MemberShips" controller="Org" action="Edit" resourceKey="orgEdit" permission="Org:Modify"></mvcSiteMapNode>
         <mvcSiteMapNode area="MemberShips" controller="Org" action="Create" resourceKey="orgCreate" permission="Org:Modify"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >  </mvcSiteMapNode>
+      <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" >
+        <mvcSiteMapNode area="MemberShips" controller="Permissions" action="Edit" resourceKey="permissionEdit"></mvcSiteMapNode>
+        <mvcSiteMapNode area="MemberShips" controller="Permissions" action="Create" resourceKey="permissionCreate"></mvcSiteMapNode>
+      </mvcSiteMapNode>
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" clickable="false">
@@ -77,7 +80,6 @@ use permission for checking permission like @user:Read, user is the string type 
 
     <mvcSiteMapNode title="Docs" imageUrl="icon-indent-right">
       <mvcSiteMapNode controller="Plugin" area="Docs" action="DatePicker" title="DateTime"></mvcSiteMapNode>
-
     </mvcSiteMapNode>
 
   </mvcSiteMapNode>

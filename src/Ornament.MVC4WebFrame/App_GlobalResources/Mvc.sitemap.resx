@@ -192,4 +192,10 @@
   <data name="personal.title" xml:space="preserve">
     <value>Personal</value>
   </data>
+  <data name="permissionCreate.title" xml:space="preserve">
+    <value>Create New Permission</value>
+  </data>
+  <data name="permissionEdit.title" xml:space="preserve">
+    <value>Edit Permission</value>
+  </data>
 </root>

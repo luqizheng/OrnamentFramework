@@ -187,6 +187,24 @@ namespace Resources.Mvc {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create New Permission.
+        /// </summary>
+        internal static string permissionCreate_title {
+            get {
+                return ResourceManager.GetString("permissionCreate.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Permission.
+        /// </summary>
+        internal static string permissionEdit_title {
+            get {
+                return ResourceManager.GetString("permissionEdit.title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Permission list.
         /// </summary>
         internal static string permissionList_title {

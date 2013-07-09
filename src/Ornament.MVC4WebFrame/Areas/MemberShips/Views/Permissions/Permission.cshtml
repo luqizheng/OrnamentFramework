@@ -14,18 +14,10 @@
     <div class="navbar">
         <div class="navbar-inner">
             <h6>Permission wizard</h6>
-            <div class="nav pull-right">
-                <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
-                <ul class="dropdown-menu pull-right">
-                    <li><a href="#"><i class="icon-plus"></i>Add new option</a></li>
-                    <li><a href="#"><i class="icon-reorder"></i>View statement</a></li>
-                    <li><a href="#"><i class="icon-cogs"></i>Parameters</a></li>
-                </ul>
-            </div>
         </div>
     </div>
     <form id="wizard2" method="post" action="@Url.Action("Save")" class="form-horizontal row-fluid well">
-        <span class="step" id="theFirst">
+        <fieldset class="step" id="theFirst">
             <div class="step-title">
                 <i>1</i>
                 <h5>选择资源类别</h5>
@@ -34,10 +26,9 @@
             <div>
                 @{
                     var i = -1;
-                    bool foundSelected = false;
                     foreach (var resourceDescription in OrnamentContext.ResourceManager.Configuration().ResourceSettings)
                     {
-                        foundSelected = i == -1 || (this.Model != null && resourceDescription.ValueType == this.Model.Resource.GetType());
+                        bool foundSelected = i == -1 || (this.Model != null && resourceDescription.ValueType == this.Model.Resource.GetType());
                         i++;
 
                     <div class="control-group">
@@ -49,8 +40,8 @@
                     }
                 }
             </div>
-        </span>
-        <span id="resourceView" class="step">
+        </fieldset>
+        <fieldset id="resourceView" class="step">
             <div class="step-title">
                 <i>2</i>
                 <h5>选择你要对应资源</h5>
@@ -58,8 +49,8 @@
             </div>
             <div id="resViewContent">
             </div>
-        </span>
-        <span id="editPermission" class="step">
+        </fieldset>
+        <fieldset id="editPermission" class="step">
             <div class="step-title">
                 <i>3</i>
                 <h5>设置许可证基础信息</h5>
@@ -87,7 +78,7 @@
                     </div>
                 </div>
             </div>
-        </span>
+        </fieldset>
         <div class="form-actions align-right">
             <div id="status1" class="status"></div>
             <input class="btn" id="back-2" value="Back" type="reset" />
