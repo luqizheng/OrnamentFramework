@@ -6,45 +6,48 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public UserMapping()
         {
-            Table("MBS_User");
             DiscriminatorValue("User");
             Extends(typeof(IPerformer));
-            KeyColumn("Id");
             DynamicUpdate();
+            //KeyColumn("Id");
+            this.Join("MBS_User", d =>
+                {
+                    d.KeyColumn("Id");
+                    d.Map(s => s.LoginId).Length(50).Unique();
+                    d.Map(s => s.Password)
+                        .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+                        .Length(40);
 
-            Map(s => s.LoginId).Length(50).Unique();
-            Map(s => s.Password)
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
-                .Length(40);
+                    d.Map(s => s.PasswordAnswer).Length(100)
+                                              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                    d.Map(s => s.PasswordQuestion).Length(100)
+                                                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-            Map(s => s.PasswordAnswer).Length(100)
-                                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-            Map(s => s.PasswordQuestion).Length(100)
-                                        .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                    d.Map(s => s.CreateTime).Not.Update();
 
-            Map(s => s.CreateTime).Not.Update();
+                    d.Map(s => s.IsLockout)
+                        .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                    d.Map(s => s.IsApproved);
+                    d.Map(s => s.Email).Length(64)
+                                     .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-            Map(s => s.IsLockout)
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-            Map(s => s.IsApproved);
-            Map(s => s.Email).Length(64)
-                             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-
-            Map(s => s.Phone).Length(20)
-                             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-
-
-            Map(s => s.LastLockoutDate);
-            Map(s => s.LastLoginDate);
-            Map(s => s.LastActivityDate);
-            Map(s => s.LastPasswordChangedDate);
+                    d.Map(s => s.Phone).Length(20)
+                                     .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
 
-            References(_ => _.Org);
+                    d.Map(s => s.LastLockoutDate);
+                    d.Map(s => s.LastLoginDate);
+                    d.Map(s => s.LastActivityDate);
+                    d.Map(s => s.LastPasswordChangedDate);
 
-            HasMany(s => s.UserGroups).Table("MBS_UserGroupUserRelation")
-                                      .KeyColumn("UserId").ForeignKeyConstraintName("FK_MBS_USERGROUP")
-                                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+
+                    d.References(s => s.Org);
+
+                    d.HasManyToMany(s => s.UserGroups).Table("MBS_UserGroupUserRelation")
+                                              .ParentKeyColumn("UserId")
+                                              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                });
+
         }
     }
 

@@ -14,17 +14,21 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public OrgMapping()
         {
-            Table("MBS_ORG");
+            
             Extends(typeof (IPerformer));
             DiscriminatorValue("org");
-            KeyColumn("Id");
-            Map(s => s.OrderId).Length(4000)
-                               .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-            HasMany(s => s.Childs).CollectionType<OrgListType>()
-                                  .ForeignKeyConstraintName("FK_ORG_SELF")
-                                  .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+            
+            Join("MBS_ORG",_=>
+            {
+                _.KeyColumn("Id");
+                _.Map(s => s.OrderId).Length(4000);
+                _.HasMany(s => s.Childs).Table("MBS_ORG").CollectionType<OrgListType>()
+                                      .ForeignKeyConstraintName("FK_ORG_SELF")
+                                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-            References(s => s.Parent);
+                _.References(s => s.Parent);
+            });
+            
         }
 
         public class OrgListPersistent : PersistentGenericSet<Org>, IOrgCollection
