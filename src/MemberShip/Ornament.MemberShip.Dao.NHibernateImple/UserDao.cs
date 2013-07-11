@@ -152,7 +152,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public int GetActivityDateNumber(DateTime time)
         {
-            var projections = Projections.Property<User>(s => s.OtherInfo.LastActivityDate);
+            var projections = Projections.Property<User>(s => s.Other.LastActivityDate);
             return Count(Restrictions.Le(projections, time));
         }
 
@@ -300,8 +300,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .Add(Projections.SqlGroupProjection("day(CreateTime) day1", "day(CreateTime)", new[] { "day1" }, new IType[] { NHibernateUtil.Int32 }))
                     .Add(Projections.RowCount())
                     )
-                .Add(Restrictions.Gt(Projections.Property<User>(s => s.OtherInfo.CreateTime), startTime))
-                .Add(Restrictions.Le(Projections.Property<User>(s => s.OtherInfo.CreateTime), endTime))
+                .Add(Restrictions.Gt(Projections.Property<User>(s => s.Other.CreateTime), startTime))
+                .Add(Restrictions.Le(Projections.Property<User>(s => s.Other.CreateTime), endTime))
                 .GetExecutableCriteria(this.CurrentSession)
                 .List();
             Dictionary<DateTime, int> dictionary = new Dictionary<DateTime, int>();

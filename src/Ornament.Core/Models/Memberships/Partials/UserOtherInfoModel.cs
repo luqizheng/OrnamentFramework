@@ -18,12 +18,12 @@ namespace Ornament.Models.Memberships.Partials
 
         public UserOtherInfoModel(User user)
         {
-            UpdateTime = user.OtherInfo.UpdateTime;
-            this.CreateTime = user.OtherInfo.CreateTime;
-            this.LastPasswordChangedDate = user.OtherInfo.LastPasswordChangedDate;
-            this.LastLockoutDate = user.OtherInfo.LastLockoutDate;
-            this.LastLoginDate = user.OtherInfo.LastLoginDate;
-            this.LastActivityDate = user.OtherInfo.LastActivityDate;
+            UpdateTime = user.Other.UpdateTime;
+            this.CreateTime = user.Other.CreateTime;
+            this.LastPasswordChangedDate = user.Other.LastPasswordChangedDate;
+            this.LastLockoutDate = user.Other.LastLockoutDate;
+            this.LastLoginDate = user.Other.LastLoginDate;
+            this.LastActivityDate = user.Other.LastActivityDate;
         }
         
 

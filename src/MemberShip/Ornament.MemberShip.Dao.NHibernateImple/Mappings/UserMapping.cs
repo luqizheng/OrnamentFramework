@@ -24,17 +24,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
 
-                    d.Map(s => s.IsLockout).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-                    d.Map(s => s.IsApproved);
 
-                    d.Component(_ => _.OtherInfo, c =>
-                        {
-                            c.Map(s => s.CreateTime).Not.Update();
-                            c.Map(s => s.LastLockoutDate);
-                            c.Map(s => s.LastLoginDate);
-                            c.Map(s => s.LastActivityDate);
-                            c.Map(s => s.LastPasswordChangedDate);
-                        });
+                    d.Map(s => s.IsApproved);
+                    d.Map(s => s.IsLockout).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
                     d.Map(s => s.TimeZoneId).Length(64);
                     d.Map(s => s.Language).Length(32);
@@ -43,20 +35,34 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                      .ParentKeyColumn("UserId")
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-
+                    d.References(s => s.Other).Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Cascade.All().PropertyRef(s => s.User);
                     d.References(s => s.Contact).Cascade.All()
                         .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
                 });
         }
     }
-
+    public class OtherInfoMapping : ClassMap<User.OtherUserInfo>
+    {
+        public OtherInfoMapping()
+        {
+            Table(("MBS_UserOtherInfo"));
+            Id(s => s.Id).GeneratedBy.UuidHex("N");
+            HasOne(s => s.User);
+            Map(s => s.CreateTime).Not.Update();
+            Map(s => s.LastLockoutDate);
+            Map(s => s.UpdateTime);
+            Map(s => s.LastLoginDate);
+            Map(s => s.LastActivityDate);
+            Map(s => s.LastPasswordChangedDate);
+        }
+    }
     public class ContactInfoMapping : ClassMap<User.ContactInfo>
     {
         public ContactInfoMapping()
         {
             Table(("MBS_UserContactInfo"));
             Id(s => s.Id).GeneratedBy.UuidHex("N");
-            HasOne(s => s.User);
+            HasOne(s => s.User).Not.Constrained().Not.ForeignKey();
             Map(s => s.Email).Length(64)
                              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 

@@ -8,13 +8,13 @@ namespace Ornament.MemberShip
 {
     public partial class User
     {
-        public class Other
+        public class OtherUserInfo:DomainObject<OtherUserInfo,string>
         {
-            internal protected Other(User user)
+            internal protected OtherUserInfo(User user)
             {
                 this.User = user;
             }
-            protected Other()
+            protected OtherUserInfo()
             {
 
             }

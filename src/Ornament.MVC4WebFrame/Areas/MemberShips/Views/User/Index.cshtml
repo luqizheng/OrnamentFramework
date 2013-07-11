@@ -223,7 +223,7 @@
                     @Html.LabelFor(item => ((User)null).IsApproved)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OtherInfo.LastActivityDate)
+                    @Html.DisplayNameFor(model => model.Other.LastActivityDate)
                 </th>
             </tr>
         </thead>
@@ -275,7 +275,7 @@
                         </div>
                     </td>
                     <td>
-                        @user.OtherInfo.LastActivityDate
+                        @user.Other.LastActivityDate
                     </td>
                 </tr>
             }

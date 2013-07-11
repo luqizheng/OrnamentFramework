@@ -430,7 +430,7 @@ namespace Ornament.Web.MemberShips
                 foreach (ProfileValue prof in profiles)
                 {
                     User u = MemberShipFactory.CreateUserDao().GetByLoginId(prof.LoginId);
-                    infos.Add(new ProfileInfo(u.Name, prof.IsAnonymous, u.OtherInfo.LastActivityDate.Value,
+                    infos.Add(new ProfileInfo(u.Name, prof.IsAnonymous, u.Other.LastActivityDate.Value,
                                               prof.LastActivityDate.Value, 30));
                 }
 

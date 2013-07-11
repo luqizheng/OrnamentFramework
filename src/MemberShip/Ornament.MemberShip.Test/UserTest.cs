@@ -76,8 +76,8 @@ namespace MemberShip.Test
         {
             var target = new User("okok");
             DateTime? actual;
-            actual = target.OtherInfo.UpdateTime;
-            Assert.IsNull(target.OtherInfo.UpdateTime);
+            actual = target.Other.UpdateTime;
+            Assert.IsNull(target.Other.UpdateTime);
         }
 
 
@@ -166,11 +166,11 @@ namespace MemberShip.Test
         public void LastPasswordChangedDateTest()
         {
             var target = new User("kkkkk", "123456");
-            Assert.IsNull(target.OtherInfo.LastPasswordChangedDate);
+            Assert.IsNull(target.Other.LastPasswordChangedDate);
             target.ChangePassword("654321", "123456");
             DateTime? actual;
-            actual = target.OtherInfo.LastPasswordChangedDate;
-            Assert.IsNotNull(target.OtherInfo.LastPasswordChangedDate);
+            actual = target.Other.LastPasswordChangedDate;
+            Assert.IsNotNull(target.Other.LastPasswordChangedDate);
         }
 
         /// <summary>
@@ -180,11 +180,11 @@ namespace MemberShip.Test
         public void LastLoginDateTest()
         {
             var target = new User("kkkkk", "123456");
-            Assert.IsNull(target.OtherInfo.LastLoginDate);
+            Assert.IsNull(target.Other.LastLoginDate);
 
             target.ValidateUser("123456");
             DateTime? actual;
-            actual = target.OtherInfo.LastLoginDate;
+            actual = target.Other.LastLoginDate;
 
             Assert.IsNotNull(actual);
         }
@@ -198,7 +198,7 @@ namespace MemberShip.Test
             var target = new User("kkkkk");
             target.IsLockout = true;
             DateTime? actual;
-            actual = target.OtherInfo.LastLockoutDate;
+            actual = target.Other.LastLockoutDate;
             Assert.AreNotEqual(DateTime.MinValue, actual.Value);
         }
 
@@ -211,8 +211,8 @@ namespace MemberShip.Test
             var target = new User("kkkkk");
             var expected = new DateTime?();
             DateTime? actual;
-            target.OtherInfo.LastActivityDate = expected;
-            actual = target.OtherInfo.LastActivityDate;
+            target.Other.LastActivityDate = expected;
+            actual = target.Other.LastActivityDate;
             Assert.AreEqual(expected, actual);
         }
 
@@ -268,7 +268,7 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             DateTime actual;
-            actual = target.OtherInfo.CreateTime;
+            actual = target.Other.CreateTime;
             Assert.IsNotNull(actual);
         }
 

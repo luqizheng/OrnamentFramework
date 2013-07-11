@@ -49,10 +49,10 @@ namespace Ornament.Web
             User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
-            if (user.OtherInfo.LastActivityDate == null ||
-                (now - user.OtherInfo.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
+            if (user.Other.LastActivityDate == null ||
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
             {
-                user.OtherInfo.LastActivityDate = now;
+                user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
                 a.Flush();
             }

@@ -191,7 +191,7 @@ namespace Ornament.Web.MemberShips
 
             if (userIsOnline)
             {
-                User.OtherInfo.LastActivityDate = DateTime.Now;
+                User.Other.LastActivityDate = DateTime.Now;
                 //Facotry.CreateUserDao().SaveOrUpdate(User);
             }
             return ToMembershipUser(User, this);
@@ -412,7 +412,7 @@ namespace Ornament.Web.MemberShips
             User u = dao.GetByLoginId(providerUserKey.ToString());
             if (userIsOnline)
             {
-                u.OtherInfo.LastActivityDate = DateTime.Now;
+                u.Other.LastActivityDate = DateTime.Now;
                 dao.SaveOrUpdate(u);
             }
             return ToMembershipUser(u, this);
@@ -580,13 +580,13 @@ namespace Ornament.Web.MemberShips
                 user.Remarks,
                 user.IsApproved,
                 user.IsLockout,
-                user.OtherInfo.CreateTime,
-                user.OtherInfo.LastLoginDate.HasValue ? user.OtherInfo.LastLoginDate.Value : DateTime.MinValue,
-                user.OtherInfo.LastActivityDate.HasValue ? user.OtherInfo.LastActivityDate.Value : DateTime.MinValue,
-                user.OtherInfo.LastPasswordChangedDate.HasValue
-                    ? user.OtherInfo.LastPasswordChangedDate.Value
+                user.Other.CreateTime,
+                user.Other.LastLoginDate.HasValue ? user.Other.LastLoginDate.Value : DateTime.MinValue,
+                user.Other.LastActivityDate.HasValue ? user.Other.LastActivityDate.Value : DateTime.MinValue,
+                user.Other.LastPasswordChangedDate.HasValue
+                    ? user.Other.LastPasswordChangedDate.Value
                     : DateTime.MinValue,
-                user.OtherInfo.LastLockoutDate.HasValue ? user.OtherInfo.LastLockoutDate.Value : DateTime.MinValue
+                user.Other.LastLockoutDate.HasValue ? user.Other.LastLockoutDate.Value : DateTime.MinValue
                 );
             return result;
         }

@@ -29,7 +29,7 @@ namespace Ornament.MemberShip
 
         //private UserInformation _information;
         private bool _isLockout;
-        private Other _otherInfo;
+        private OtherUserInfo _other;
         private string _password;
         private string _passwordAnswer;
         private string _passwordQuestion;
@@ -59,7 +59,7 @@ namespace Ornament.MemberShip
             if (password == null) throw new ArgumentNullException("password");
             LoginId = loginId;
             _password = MembershipContext.Provider.Encrypt(password);
-            OtherInfo.CreateTime = DateTime.Now;
+            Other.CreateTime = DateTime.Now;
             IsApproved = true;
         }
 
@@ -73,7 +73,7 @@ namespace Ornament.MemberShip
         {
             if (loginId == null) throw new ArgumentNullException("loginId");
             LoginId = loginId;
-            OtherInfo.CreateTime = DateTime.Now;
+            Other.CreateTime = DateTime.Now;
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace Ornament.MemberShip
             }
         }
 
-        public virtual Other OtherInfo
+        public virtual OtherUserInfo Other
         {
-            get { return _otherInfo ?? (_otherInfo = new Other(this)); }
+            get { return _other ?? (_other = new OtherUserInfo(this)); }
         }
 
         public virtual ContactInfo Contact
@@ -124,7 +124,7 @@ namespace Ornament.MemberShip
             set
             {
                 _isLockout = value;
-                OtherInfo.LastLockoutDate = DateTime.Now;
+                Other.LastLockoutDate = DateTime.Now;
             }
         }
 
@@ -312,7 +312,7 @@ namespace Ornament.MemberShip
         {
             if (!String.IsNullOrEmpty(Id))
             {
-                OtherInfo.UpdateTime = DateTime.Now;
+                Other.UpdateTime = DateTime.Now;
             }
         }
 
@@ -377,7 +377,7 @@ namespace Ornament.MemberShip
             if (MembershipContext.Provider.Encrypt(oldPassword) == Password)
             {
                 ChangePassword(newPassword);
-                OtherInfo.LastPasswordChangedDate = DateTime.Now;
+                Other.LastPasswordChangedDate = DateTime.Now;
                 return true;
             }
             return false;
@@ -397,7 +397,7 @@ namespace Ornament.MemberShip
             if (newPassword.Length < 3)
                 throw new PasswordFormatException("newPassword's length is too short.");
             _password = MembershipContext.Provider.Encrypt(newPassword);
-            OtherInfo.LastPasswordChangedDate = DateTime.Now;
+            Other.LastPasswordChangedDate = DateTime.Now;
         }
 
         /// <summary>
@@ -448,7 +448,7 @@ namespace Ornament.MemberShip
             if (PasswordAnswer == answer.Sha1Utf8().ToStringEx())
             {
                 _password = newPassword;
-                OtherInfo.LastPasswordChangedDate = DateTime.Now;
+                Other.LastPasswordChangedDate = DateTime.Now;
             }
             else
             {
@@ -482,8 +482,8 @@ namespace Ornament.MemberShip
 
             if (MembershipContext.Provider.Encrypt(inputPassword) == Password)
             {
-                OtherInfo.LastLoginDate = DateTime.Now;
-                OtherInfo.LastActivityDate = DateTime.Now;
+                Other.LastLoginDate = DateTime.Now;
+                Other.LastActivityDate = DateTime.Now;
                 return true;
             }
 
