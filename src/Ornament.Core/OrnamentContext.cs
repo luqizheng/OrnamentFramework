@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Ornament.Contexts;
 using Ornament.MemberShip.Permissions;
@@ -24,7 +25,6 @@ namespace Ornament
         {
             get { return Config.Instance.GetConfig(); }
         }
-
 
 
         /// <summary>
@@ -122,5 +122,31 @@ namespace Ornament
         }
 
         #endregion
+        /// <summary>
+        /// 计算出客户端和服务器之间的时间差
+        /// </summary>
+        /// <param name="clientUtcOffsetHour"></param>
+        /// <returns></returns>
+        public static int CorrectClientUtcTime(int clientUtcOffsetHour)
+        {
+            DateTime serverTime = DateTime.Now;
+            return clientUtcOffsetHour - Convert.ToInt32(TimeZoneInfo.Local.GetUtcOffset(serverTime).Hours);
+        }
+        /// <summary>
+        /// 通过计算客户端提交的时间差，大概地计算出TimeZone
+        /// </summary>
+        /// <param name="utcOffsetHout"></param>
+        /// <returns></returns>
+        public static TimeZoneInfo GetClientTimeZone(int utcOffsetHout)
+        {
+            if(utcOffsetHout>23||utcOffsetHout<0)
+                throw new ArgumentOutOfRangeException("utcOffsetHout","utcOffsetHour should be bewteen 0 and 23.");
+            foreach (var a in TimeZoneInfo.GetSystemTimeZones())
+            {
+                if (a.BaseUtcOffset.Hours == utcOffsetHout)
+                    return a;
+            }
+            return null;
+        }
     }
 }

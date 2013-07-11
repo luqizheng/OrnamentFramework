@@ -9,8 +9,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public UserSecretToken Get(User user, string action)
         {
             var cri = CreateDetachedCriteria()
+                .Add(Restrictions.Eq(Projections.Property<UserSecretToken>(s => s.Status), SecretTokemStatus.Effective))
                 .Add(Restrictions.Eq(Projections.Property<UserSecretToken>(s => s.Account), user))
                 .Add(Restrictions.Eq(Projections.Property<UserSecretToken>(s => s.Action), action));
+
+
             return cri.GetExecutableCriteria(this.CurrentSession).UniqueResult<UserSecretToken>();
         }
 

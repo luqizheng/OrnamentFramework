@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ornament.MemberShip;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.Models.Memberships.Partials
 {
@@ -16,14 +18,16 @@ namespace Ornament.Models.Memberships.Partials
 
         public UserOtherInfoModel(User user)
         {
-            UpdateTime = user.UpdateTime;
-            this.CreateTime = user.CreateTime;
-            this.LastPasswordChangedDate = user.LastPasswordChangedDate;
-            this.LastLockoutDate = user.LastLockoutDate;
-            this.LastLoginDate = user.LastLoginDate;
-            this.LastActivityDate = user.LastActivityDate;
+            UpdateTime = user.OtherInfo.UpdateTime;
+            this.CreateTime = user.OtherInfo.CreateTime;
+            this.LastPasswordChangedDate = user.OtherInfo.LastPasswordChangedDate;
+            this.LastLockoutDate = user.OtherInfo.LastLockoutDate;
+            this.LastLoginDate = user.OtherInfo.LastLoginDate;
+            this.LastActivityDate = user.OtherInfo.LastActivityDate;
         }
-        public DateTime? UpdateTime { get; set; }
+        
+
+        public  DateTime? UpdateTime { get; set; }
 
         public DateTime CreateTime { get; set; }
 

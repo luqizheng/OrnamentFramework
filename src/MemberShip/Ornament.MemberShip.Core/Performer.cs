@@ -101,20 +101,7 @@ namespace Ornament.MemberShip
         [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof(ErrorMessage))]
-        public virtual string Remarks
-        {
-            get { return _remark; }
-
-            set
-            {
-                if (value != null && value.Length > 200)
-                {
-                    throw new ArgumentOutOfRangeException("value", value.Length, "Comment's length is more than 200");
-                }
-
-                _remark = value;
-            }
-        }
+        public virtual string Remarks { get; set; }
 
 
         /// <summary>

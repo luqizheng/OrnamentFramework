@@ -296,50 +296,6 @@
     <Content Include="Content\media\swfupload.swf" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
-    <Content Include="Images\ajax-loader.gif" />
-    <Content Include="Images\FileTypes\accdb.png" />
-    <Content Include="Images\FileTypes\avi.png" />
-    <Content Include="Images\FileTypes\bm.png" />
-    <Content Include="Images\FileTypes\css.png" />
-    <Content Include="Images\FileTypes\docx mac.png" />
-    <Content Include="Images\FileTypes\docx win.png" />
-    <Content Include="Images\FileTypes\eml.png" />
-    <Content Include="Images\FileTypes\eps.png" />
-    <Content Include="Images\FileTypes\fla.png" />
-    <Content Include="Images\FileTypes\Folder-Blank-icon.png" />
-    <Content Include="Images\FileTypes\gif.png" />
-    <Content Include="Images\FileTypes\html.png" />
-    <Content Include="Images\FileTypes\ind.png" />
-    <Content Include="Images\FileTypes\ini.png" />
-    <Content Include="Images\FileTypes\jpeg.png" />
-    <Content Include="Images\FileTypes\jsf.png" />
-    <Content Include="Images\FileTypes\midi.png" />
-    <Content Include="Images\FileTypes\mov.png" />
-    <Content Include="Images\FileTypes\mp3.png" />
-    <Content Include="Images\FileTypes\mpeg.png" />
-    <Content Include="Images\FileTypes\pdf.png" />
-    <Content Include="Images\FileTypes\png.png" />
-    <Content Include="Images\FileTypes\pptx mac.png" />
-    <Content Include="Images\FileTypes\pptx win.png" />
-    <Content Include="Images\FileTypes\proj.png" />
-    <Content Include="Images\FileTypes\psd.png" />
-    <Content Include="Images\FileTypes\pst.png" />
-    <Content Include="Images\FileTypes\pub.png" />
-    <Content Include="Images\FileTypes\rar.png" />
-    <Content Include="Images\FileTypes\readme.png" />
-    <Content Include="Images\FileTypes\settings.png" />
-    <Content Include="Images\FileTypes\text.png" />
-    <Content Include="Images\FileTypes\tiff.png" />
-    <Content Include="Images\FileTypes\unknow.png" />
-    <Content Include="Images\FileTypes\url.png" />
-    <Content Include="Images\FileTypes\vsd.png" />
-    <Content Include="Images\FileTypes\wav.png" />
-    <Content Include="Images\FileTypes\wma.png" />
-    <Content Include="Images\FileTypes\wmv.png" />
-    <Content Include="Images\FileTypes\xlsx mac.png" />
-    <Content Include="Images\FileTypes\xlsx win.png" />
-    <Content Include="Images\FileTypes\zip.png" />
-    <Content Include="Images\Upload.png" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -1002,6 +958,8 @@
     <Content Include="Views\Security\RetrievePassword.cshtml" />
     <Content Include="Views\Security\RetrievePasswordResult.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Period.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1080,22 +1038,6 @@
     <ProjectReference Include="..\Extends\Badminton\Badminton.Dao.NhImpl\Badminton.Dao.NhImpl.csproj">
       <Project>{5e455c9c-eecf-4838-a3cb-2124632b24de}</Project>
       <Name>Badminton.Dao.NhImpl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Extends\Daily\Qi.Attendance.Dao.NhImple\Qi.Attendance.Dao.NhImple.csproj">
-      <Project>{60DA740D-75F7-46D2-976B-D2DB22768333}</Project>
-      <Name>Qi.Attendance.Dao.NhImple</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Extends\Daily\Qi.Attendance\Qi.Attendance.csproj">
-      <Project>{04B993CF-3A5C-4227-ADB4-77A119B12EA5}</Project>
-      <Name>Qi.Attendance</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Extends\Projects\QiPorject\QiProject.csproj">
-      <Project>{e3e9ae4e-34ba-4e8d-acea-94f90b319af4}</Project>
-      <Name>QiProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Extends\Projects\QiProject.Dao.NhImple\QiProject.Dao.NhImple.csproj">
-      <Project>{71bba53c-0fba-4b59-a4a1-7caf15f41104}</Project>
-      <Name>QiProject.Dao.NhImple</Name>
     </ProjectReference>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{c8cdafc3-3071-4246-91ef-c9e8dfbdbae4}</Project>

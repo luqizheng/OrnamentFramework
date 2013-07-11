@@ -2,6 +2,7 @@
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Models.Memberships.Partials;
+using Qi.NHibernateExtender;
 
 namespace Ornament.Models.Memberships
 {
@@ -33,6 +34,7 @@ namespace Ornament.Models.Memberships
             User user = memberShipFactory.CreateUserDao().Get(Id);
             UpdateOn(user);
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+            SessionManager.GetSessionWrapper().CurrentSession.SaveOrUpdate(user.Contact);
             return user;
         }
     }

@@ -19,12 +19,11 @@
 
 <div class="control-group">
     @Html.LabelFor(s => s.VerifyEmail, new { @class = "control-label" })
-    <div class="controls" >
-        @Html.CheckBoxFor(s => s.VerifyEmail,new{@class="tip",title="如果email被修改，会自动发送验证email"})
+    <div class="controls">
+        @Html.CheckBoxFor(s => s.VerifyEmail, new { @class = "tip", title = "如果email被修改，会自动发送验证email" })
     </div>
 </div>
 @Html.EditorFor(s => s.Name)
 @Html.EditorFor(s => s.Phone)
-@Html.EditorFor(s => s.TimeZone)
+@Html.EditorFor(s => s.TimeZoneId)
 
-  

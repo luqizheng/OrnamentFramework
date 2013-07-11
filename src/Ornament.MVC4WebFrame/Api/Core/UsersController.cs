@@ -36,7 +36,7 @@ namespace Ornament.MVCWebFrame.Api.Core
                         {
                             id = user.Id,
                             user.Name,
-                            user.Email,
+                            user.Contact.Email,
                             user.LoginId
                         };
             return c;

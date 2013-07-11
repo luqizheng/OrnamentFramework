@@ -145,15 +145,15 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             bool emailChanged = false;
             OrnamentContext.MemberShip.CurrentUser().Name = data["Name"];
-            if (OrnamentContext.MemberShip.CurrentUser().Email != data["Email"])
+            if (OrnamentContext.MemberShip.CurrentUser().Contact.Email != data["Email"])
             {
                 emailChanged = true;
-                OrnamentContext.MemberShip.CurrentUser().Email = data["Email"];
+                OrnamentContext.MemberShip.CurrentUser().Contact.Email = data["Email"];
                 MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
                                                              OrnamentContext.Configuration.ApplicationSetting
                                                                             .VerifyEmailTimeout);
             }
-            OrnamentContext.MemberShip.CurrentUser().Phone = data["Phone"];
+            OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
             return Json(new {success = true, emailChanged});
         }
 

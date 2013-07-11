@@ -21,7 +21,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
             <li><a href="#Options" data-toggle="tab">@Html.GetResourceString("Create", "tab_Permission")</a></li>
-            <li><a data-toggle="tab" href="#Profile">@Html.GetResourceString("tab_profile")</a></li>
+            @*<li><a data-toggle="tab" href="#Profile">@Html.GetResourceString("tab_profile")</a></li>*@
             <li><a data-toggle="tab" href="#anotherInfo">@Html.GetResourceString("tab_anotherInfo")</a></li>
         </ul>
 
@@ -30,26 +30,29 @@
                 @Html.EditorFor(s => s, "_BasicInfo")
             </div>
             <div id="Options" class="tab-pane">
-                 @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+                @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
             </div>
-            <div id="Profile" class="tab-pane">
+            @* 
+           // Do not use profile 
+            <div id="Profile" class="tab-pane"> 
+                
                 @{
-    var emu = ProfileBase.Properties.GetEnumerator();
-    if (emu != null)
-    {
-        while (emu.MoveNext())
-        {
-            var property = emu.Current as SettingsProperty;
-                    <div class="control-group">
-                        <label class="control-label">@property.Name</label>
-                        <div class="controls">
-                            @Html.TextBox(property.Name, property.DefaultValue)
-                        </div>
-                    </div>
-        }
-    }
+                    var emu = ProfileBase.Properties.GetEnumerator();
+                    if (emu != null)
+                    {
+                        while (emu.MoveNext())
+                        {
+                            var property = emu.Current as SettingsProperty;
+                            <div class="control-group">
+                                <label class="control-label">@property.Name</label>
+                                <div class="controls">
+                                    @Html.TextBox(property.Name, property.DefaultValue)
+                                </div>
+                            </div>
+                        }
+                    }
                 }
-            </div>
+            </div>*@
             <div id="permissions" class="tab-pane">
             </div>
             <div id="anotherInfo" class="tab-pane">

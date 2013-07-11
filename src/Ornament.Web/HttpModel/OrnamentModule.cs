@@ -47,7 +47,7 @@ namespace Ornament.Web.HttpModel
                 try
                 {
                     int offict = Convert.ToInt32(utc);
-                    SetClientOffsetHour(OrnamentContext.MemberShip.CorrectClientUtcTime(offict));
+                    SetClientOffsetHour(OrnamentContext.CorrectClientUtcTime(offict));
                 }
                 catch (Exception ex)
                 {

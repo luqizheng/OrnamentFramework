@@ -9,9 +9,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Table("MBS_Performer");
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
 
-             DiscriminateSubClassesOnColumn("PerformerType", string.Empty).Not.Nullable().CustomType(typeof(string)).Length(10);
+            DiscriminateSubClassesOnColumn("PerformerType", string.Empty).Not.Nullable().CustomType(typeof(string)).Length(10);
             Map(s => s.Name);
-            Map(s => s.Remarks);
+            Map(s => s.Remarks).Length(2000);
             HasManyToMany(s => s.Roles)
                 .Table("MBS_PerformerRoleRelation")
                 .ParentKeyColumn("PerformerId")

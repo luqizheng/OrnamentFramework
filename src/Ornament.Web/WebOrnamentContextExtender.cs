@@ -49,10 +49,10 @@ namespace Ornament.Web
             User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
-            if (user.LastActivityDate == null ||
-                (now - user.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
+            if (user.OtherInfo.LastActivityDate == null ||
+                (now - user.OtherInfo.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
             {
-                user.LastActivityDate = now;
+                user.OtherInfo.LastActivityDate = now;
                 a.SaveOrUpdate(user);
                 a.Flush();
             }
@@ -81,12 +81,6 @@ namespace Ornament.Web
             return clientSetting.Value;
         }
 
-        public static int CorrectClientUtcTime(this MemberShipContext context, int clientUtcOfficeHour)
-        {
-            DateTime serverTime = DateTime.Now;
-            return clientUtcOfficeHour - Convert.ToInt32(TimeZoneInfo.Local.GetUtcOffset(serverTime).Hours);
-        }
-
         /// <summary>
         /// </summary>
         /// <param name="context"></param>
@@ -103,7 +97,7 @@ namespace Ornament.Web
         /// <returns></returns>
         public static string ProfileLanguage(this MemberShipContext context)
         {
-            var a = (string)HttpContext.Current.Profile["language"];
+            var a = context.CurrentUser() != null ? context.CurrentUser().Language : "";
             if (String.IsNullOrEmpty(a))
             {
                 var cookie = HttpContext.Current.Request.Cookies["_multiCookie"];
@@ -123,7 +117,11 @@ namespace Ornament.Web
         {
             if (!OrnamentContext.Configuration.Languages.Contains(language))
                 throw new ArgumentOutOfRangeException("language", language + " do not support in this web-site.");
-            HttpContext.Current.Profile["language"] = language;
+            if (OrnamentContext.MemberShip.CurrentUser() != null)
+            {
+                OrnamentContext.MemberShip.CurrentUser() .Language = language;
+            }
+            
             OrnamentModule.SiwtchTo(language);
         }
 

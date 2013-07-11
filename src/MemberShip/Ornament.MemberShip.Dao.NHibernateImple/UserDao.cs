@@ -24,7 +24,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         private IProjection EmailProperty
         {
-            get { return _pools.Once(() => Projections.Property<User>(u => u.Email)); }
+            get { return _pools.Once(() => Projections.Property<User>(u => u.Contact.Email)); }
         }
 
         private IProjection NameProperty
@@ -38,7 +38,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
         private IProjection PhoneProperty
         {
-            get { return Projections.Property<User>(s => s.Phone); }
+            get { return Projections.Property<User>(s => s.Contact.Phone); }
         }
         #endregion
 
@@ -152,7 +152,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public int GetActivityDateNumber(DateTime time)
         {
-            return Count(Restrictions.Le("LastActivityDate", time));
+            var projections = Projections.Property<User>(s => s.OtherInfo.LastActivityDate);
+            return Count(Restrictions.Le(projections, time));
         }
 
         /// <summary>
@@ -299,8 +300,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .Add(Projections.SqlGroupProjection("day(CreateTime) day1", "day(CreateTime)", new[] { "day1" }, new IType[] { NHibernateUtil.Int32 }))
                     .Add(Projections.RowCount())
                     )
-                .Add(Restrictions.Gt(Projections.Property<User>(s => s.CreateTime), startTime))
-                .Add(Restrictions.Le(Projections.Property<User>(s => s.CreateTime), endTime))
+                .Add(Restrictions.Gt(Projections.Property<User>(s => s.OtherInfo.CreateTime), startTime))
+                .Add(Restrictions.Le(Projections.Property<User>(s => s.OtherInfo.CreateTime), endTime))
                 .GetExecutableCriteria(this.CurrentSession)
                 .List();
             Dictionary<DateTime, int> dictionary = new Dictionary<DateTime, int>();

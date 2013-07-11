@@ -24,13 +24,17 @@ namespace Ornament.MemberShip
         /// </summary>
         public static readonly string AdminLoginId = "admin";
 
+        private ContactInfo _contact;
+
 
         //private UserInformation _information;
         private bool _isLockout;
+        private Other _otherInfo;
         private string _password;
         private string _passwordAnswer;
         private string _passwordQuestion;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
+        private TimeZoneInfo _timeZone;
         private Iesi.Collections.Generic.ISet<UserGroup> _userGroups;
 
         /// <summary>
@@ -55,7 +59,7 @@ namespace Ornament.MemberShip
             if (password == null) throw new ArgumentNullException("password");
             LoginId = loginId;
             _password = MembershipContext.Provider.Encrypt(password);
-            CreateTime = DateTime.Now;
+            OtherInfo.CreateTime = DateTime.Now;
             IsApproved = true;
         }
 
@@ -69,14 +73,42 @@ namespace Ornament.MemberShip
         {
             if (loginId == null) throw new ArgumentNullException("loginId");
             LoginId = loginId;
-            CreateTime = DateTime.Now;
+            OtherInfo.CreateTime = DateTime.Now;
         }
 
         /// <summary>
-        ///     获取用户创建时间
+        ///     获取或设定用户是否已经获准使用
         /// </summary>
-        [Display(Name = "CreateTime", ResourceType = typeof (Resources))]
-        public virtual DateTime CreateTime { get; protected set; }
+        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
+        public virtual bool IsApproved { get; set; }
+
+        public virtual string TimeZoneId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets language
+        /// </summary>
+        public virtual string Language { get; set; }
+
+        public virtual TimeZoneInfo TimeZone
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(TimeZoneId))
+                    return _timeZone ?? (_timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId));
+                return TimeZoneInfo.Local;
+            }
+        }
+
+        public virtual Other OtherInfo
+        {
+            get { return _otherInfo ?? (_otherInfo = new Other(this)); }
+        }
+
+        public virtual ContactInfo Contact
+        {
+            get { return _contact ?? (_contact = new ContactInfo(this)); }
+        }
+
 
         /// <summary>
         ///     Gets or sets IsLockout.
@@ -92,48 +124,9 @@ namespace Ornament.MemberShip
             set
             {
                 _isLockout = value;
-                LastLockoutDate = DateTime.Now;
+                OtherInfo.LastLockoutDate = DateTime.Now;
             }
         }
-
-        /// <summary>
-        ///     获取或设定用户是否已经获准使用
-        /// </summary>
-        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
-        public virtual bool IsApproved { get; set; }
-
-        /// <summary>
-        ///     获取用户最后改变时间
-        /// </summary>
-        [Display(Name = "LastPasswordChangedTime", ResourceType = typeof (Resources))]
-        public virtual DateTime? LastPasswordChangedDate { get; set; }
-
-        /// <summary>
-        ///     获取用户被锁定的时间
-        /// </summary>
-        [Display(Name = "LastLockTime", ResourceType = typeof (Resources))]
-        public virtual DateTime? LastLockoutDate { get; protected set; }
-
-        /// <summary>
-        ///     获取用户最后登录时间
-        /// </summary>
-        [Display(Name = "LastLoginTime", ResourceType = typeof (Resources))]
-        public virtual DateTime? LastLoginDate { get; protected set; }
-
-        /// <summary>
-        ///     获取或设定用户最后活跃时间
-        /// </summary>
-        [Display(Name = "LastActivityTime", ResourceType = typeof (Resources))]
-        public virtual DateTime? LastActivityDate { get; set; }
-
-        /// <summary>
-        ///     Gets or sets UpdateTime.
-        /// </summary>
-        /// <value>
-        ///     The update time.
-        /// </value>
-        [Display(Name = "LastUpdateTime", ResourceType = typeof (Resources))]
-        public virtual DateTime? UpdateTime { get; protected set; }
 
 
         /// <summary>
@@ -319,7 +312,7 @@ namespace Ornament.MemberShip
         {
             if (!String.IsNullOrEmpty(Id))
             {
-                UpdateTime = DateTime.Now;
+                OtherInfo.UpdateTime = DateTime.Now;
             }
         }
 
@@ -384,7 +377,7 @@ namespace Ornament.MemberShip
             if (MembershipContext.Provider.Encrypt(oldPassword) == Password)
             {
                 ChangePassword(newPassword);
-                LastPasswordChangedDate = DateTime.Now;
+                OtherInfo.LastPasswordChangedDate = DateTime.Now;
                 return true;
             }
             return false;
@@ -404,7 +397,7 @@ namespace Ornament.MemberShip
             if (newPassword.Length < 3)
                 throw new PasswordFormatException("newPassword's length is too short.");
             _password = MembershipContext.Provider.Encrypt(newPassword);
-            LastPasswordChangedDate = DateTime.Now;
+            OtherInfo.LastPasswordChangedDate = DateTime.Now;
         }
 
         /// <summary>
@@ -455,7 +448,7 @@ namespace Ornament.MemberShip
             if (PasswordAnswer == answer.Sha1Utf8().ToStringEx())
             {
                 _password = newPassword;
-                LastPasswordChangedDate = DateTime.Now;
+                OtherInfo.LastPasswordChangedDate = DateTime.Now;
             }
             else
             {
@@ -489,8 +482,8 @@ namespace Ornament.MemberShip
 
             if (MembershipContext.Provider.Encrypt(inputPassword) == Password)
             {
-                LastLoginDate = DateTime.Now;
-                LastActivityDate = DateTime.Now;
+                OtherInfo.LastLoginDate = DateTime.Now;
+                OtherInfo.LastActivityDate = DateTime.Now;
                 return true;
             }
 

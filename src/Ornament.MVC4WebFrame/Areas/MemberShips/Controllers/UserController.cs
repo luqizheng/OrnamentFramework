@@ -76,17 +76,21 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             if (ModelState.IsValid)
             {
                 User actualUser = user.Save(_memberShipFactory);
-                ProfileBase profile = ProfileBase.Create(actualUser.LoginId, true);
-                IEnumerator properites = ProfileBase.Properties.GetEnumerator();
-                if (properites != null)
+                if (ProfileManager.Enabled)
                 {
-                    while (properites.MoveNext())
+                    ProfileBase profile = ProfileBase.Create(actualUser.LoginId, true);
+
+                    IEnumerator properites = ProfileBase.Properties.GetEnumerator();
+                    if (properites != null)
                     {
-                        var property = properites.Current as SettingsProperty;
-                        string v = collection[property.Name];
-                        profile[property.Name] = v;
+                        while (properites.MoveNext())
+                        {
+                            var property = properites.Current as SettingsProperty;
+                            string v = collection[property.Name];
+                            profile[property.Name] = v;
+                        }
+                        profile.Save();
                     }
-                    profile.Save();
                 }
                 return RedirectToAction("Index");
             }
@@ -236,10 +240,10 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
-                                                   u.Email.Contains(loginIdOrEmail)
+                                                   u.Contact.Email.Contains(loginIdOrEmail)
                                                select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

@@ -9,21 +9,6 @@
 @using Resources
 @{
     SiteMapNodeCollection topMenus = SiteMap.RootNode.ChildNodes;
-
-    SiteMapNode activedNode;
-    if (!Html.CurrentNodeMatchParent(topMenus, out activedNode))
-    {
-        activedNode = SiteMap.RootNode;
-    }
-
-    var siteMapPermission = new SiteMapPermission(OrnamentContext.MemberShip, Ornament.OrnamentContext.ResourceManager);
-    ProfileBase profile = Profile;
-    if (String.IsNullOrEmpty((string)profile["Language"]))
-    {
-        profile["Language"] = "en-US";
-    }
-    var languate = new CultureInfo(profile["Language"].ToString().Substring(0, 2), true);
-
     
 }
 

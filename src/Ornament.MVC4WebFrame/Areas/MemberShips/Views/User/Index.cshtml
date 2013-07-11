@@ -6,7 +6,7 @@
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
 @using Resources
-@model IList<Ornament.MemberShip.User>
+@model IEnumerable<Ornament.MemberShip.User>
 @{
     ViewBag.Title = MemberShip.User;
     Layout = "~/Views/Shared/_appLayout.cshtml";
@@ -207,14 +207,14 @@
                 <th></th>
                 <th class="span1"></th>
                 <th class="span1">
-                    @Html.LabelFor(item => ((User)null).LoginId)
+                    @Html.DisplayNameFor(model => model.LoginId)
                 </th>
 
                 <th style="width: 100px">
-                    @Html.LabelFor(item => ((User)null).Name)
+                    @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    @Html.LabelFor(item => ((User)null).Email)
+                    @Html.DisplayNameFor(model => model.Contact.Email)
                 </th>
                 <th>
                     @Html.LabelFor(item => ((User)null).IsLockout)
@@ -223,7 +223,7 @@
                     @Html.LabelFor(item => ((User)null).IsApproved)
                 </th>
                 <th>
-                    @Html.LabelFor(item => ((User)null).LastActivityDate)
+                    @Html.DisplayNameFor(model => model.OtherInfo.LastActivityDate)
                 </th>
             </tr>
         </thead>
@@ -264,7 +264,7 @@
                         @user.Name
                     </td>
                     <td>
-                        @user.Email
+                        @user.Contact.Email
                     </td>
                     <td style="text-align: center">
                         <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
@@ -275,7 +275,7 @@
                         </div>
                     </td>
                     <td>
-                        @user.LastActivityDate
+                        @user.OtherInfo.LastActivityDate
                     </td>
                 </tr>
             }

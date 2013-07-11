@@ -64,7 +64,7 @@ namespace Ornament
                 token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + "/Security/" + this.Action);
             Variables["name"] = User.Name;
             Content content = Replace(template, Variables);
-            SendEmail(User.Email, content);
+            SendEmail(User.Contact.Email, content);
         }
 
     

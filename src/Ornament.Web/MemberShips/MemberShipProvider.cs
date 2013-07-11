@@ -191,7 +191,7 @@ namespace Ornament.Web.MemberShips
 
             if (userIsOnline)
             {
-                User.LastActivityDate = DateTime.Now;
+                User.OtherInfo.LastActivityDate = DateTime.Now;
                 //Facotry.CreateUserDao().SaveOrUpdate(User);
             }
             return ToMembershipUser(User, this);
@@ -412,7 +412,7 @@ namespace Ornament.Web.MemberShips
             User u = dao.GetByLoginId(providerUserKey.ToString());
             if (userIsOnline)
             {
-                u.LastActivityDate = DateTime.Now;
+                u.OtherInfo.LastActivityDate = DateTime.Now;
                 dao.SaveOrUpdate(u);
             }
             return ToMembershipUser(u, this);
@@ -472,7 +472,7 @@ namespace Ornament.Web.MemberShips
                              {
                                  IsApproved = isApproved,
                              };
-                result.Email = email;
+                result.Contact.Email = email;
                 result.SetQuestionAndAnswer(passwordQuestion, passwordAnswer);
                 userDao.SaveOrUpdate(result);
                 userDao.Flush();
@@ -575,18 +575,18 @@ namespace Ornament.Web.MemberShips
                 provider.Name,
                 user.LoginId,
                 user.Id,
-                user.Email,
+                user.Contact.Email,
                 user.PasswordQuestion,
                 user.Remarks,
                 user.IsApproved,
                 user.IsLockout,
-                user.CreateTime,
-                user.LastLoginDate.HasValue ? user.LastLoginDate.Value : DateTime.MinValue,
-                user.LastActivityDate.HasValue ? user.LastActivityDate.Value : DateTime.MinValue,
-                user.LastPasswordChangedDate.HasValue
-                    ? user.LastPasswordChangedDate.Value
+                user.OtherInfo.CreateTime,
+                user.OtherInfo.LastLoginDate.HasValue ? user.OtherInfo.LastLoginDate.Value : DateTime.MinValue,
+                user.OtherInfo.LastActivityDate.HasValue ? user.OtherInfo.LastActivityDate.Value : DateTime.MinValue,
+                user.OtherInfo.LastPasswordChangedDate.HasValue
+                    ? user.OtherInfo.LastPasswordChangedDate.Value
                     : DateTime.MinValue,
-                user.LastLockoutDate.HasValue ? user.LastLockoutDate.Value : DateTime.MinValue
+                user.OtherInfo.LastLockoutDate.HasValue ? user.OtherInfo.LastLockoutDate.Value : DateTime.MinValue
                 );
             return result;
         }
@@ -597,7 +597,7 @@ namespace Ornament.Web.MemberShips
                           new User(memberShipUser.UserName);
 
             result.Name = memberShipUser.ProviderName;
-            result.Email = memberShipUser.Email;
+            result.Contact.Email = memberShipUser.Email;
             result.Remarks = memberShipUser.Comment;
             return result;
         }
