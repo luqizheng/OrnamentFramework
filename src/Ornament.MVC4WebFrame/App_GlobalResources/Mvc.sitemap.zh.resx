@@ -162,7 +162,7 @@
   <data name="userList.title" xml:space="preserve">
     <value>用戶列表</value>
   </data>
-  <data name="assign.title" xml:space="preserve">
+  <data name=".1" xml:space="preserve">
     <value>分配</value>
   </data>
   <data name="userEdit.title" xml:space="preserve">
@@ -190,12 +190,12 @@
     <value>創建</value>
   </data>
   <data name="personal.title" xml:space="preserve">
-    <value>个人中心</value>
+    <value>個人中心</value>
   </data>
   <data name="permissionCreate.title" xml:space="preserve">
-    <value>Create New Permission</value>
+    <value>創建新許可證</value>
   </data>
   <data name="permissionEdit.title" xml:space="preserve">
-    <value>Edit Permission</value>
+    <value>編輯許可證</value>
   </data>
 </root>

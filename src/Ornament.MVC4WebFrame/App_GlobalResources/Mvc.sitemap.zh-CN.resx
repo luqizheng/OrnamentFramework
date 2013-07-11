@@ -174,7 +174,7 @@
   <data name="roleEdit.title" xml:space="preserve">
     <value>编辑</value>
   </data>
-  <data name="roleDelete" xml:space="preserve">
+  <data name="roleDelete.title" xml:space="preserve">
     <value>刪除</value>
   </data>
   <data name="groupEdit.title" xml:space="preserve">
@@ -193,9 +193,9 @@
     <value>个人中心</value>
   </data>
   <data name="permissionCreate.title" xml:space="preserve">
-    <value>Create New Permission</value>
+    <value>创建新许可证</value>
   </data>
   <data name="permissionEdit.title" xml:space="preserve">
-    <value>Edit Permission</value>
+    <value>编辑许可证</value>
   </data>
 </root>
