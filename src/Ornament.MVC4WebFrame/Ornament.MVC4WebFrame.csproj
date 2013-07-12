@@ -277,8 +277,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserBasicInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOptionInfo.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
@@ -990,12 +988,14 @@
     <Content Include="App_GlobalResources\Basic.zh-cn.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Basic.zh-cn.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Basic.zh.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Basic.zh.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

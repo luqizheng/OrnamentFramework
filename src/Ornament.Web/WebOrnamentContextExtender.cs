@@ -97,15 +97,15 @@ namespace Ornament.Web
         /// <returns></returns>
         public static string ProfileLanguage(this MemberShipContext context)
         {
-            var a = context.CurrentUser() != null ? context.CurrentUser().Language : "";
+            string a = context.CurrentUser() != null ? context.CurrentUser().Language : "";
             if (String.IsNullOrEmpty(a))
             {
-                var cookie = HttpContext.Current.Request.Cookies["_multiCookie"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["_multiCookie"];
                 if (cookie != null)
                     return cookie.Value;
                 return OrnamentContext.Configuration.DefaultLanguage.Key;
             }
-            return (string)a;
+            return a;
         }
 
         /// <summary>
@@ -119,9 +119,9 @@ namespace Ornament.Web
                 throw new ArgumentOutOfRangeException("language", language + " do not support in this web-site.");
             if (OrnamentContext.MemberShip.CurrentUser() != null)
             {
-                OrnamentContext.MemberShip.CurrentUser() .Language = language;
+                OrnamentContext.MemberShip.CurrentUser().Language = language;
             }
-            
+
             OrnamentModule.SiwtchTo(language);
         }
 

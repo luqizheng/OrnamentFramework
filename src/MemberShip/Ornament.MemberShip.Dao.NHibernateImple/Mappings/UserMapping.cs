@@ -8,15 +8,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             DiscriminatorValue("User");
             Extends(typeof (IPerformer));
-
-            //DynamicUpdate();
+            
+            DynamicUpdate();
             //KeyColumn("Id");
             Join("MBS_User", d =>
                 {
                     d.KeyColumn("Id");
                     d.Map(s => s.LoginId).Length(50).Unique();
-
-
                     d.Map(s => s.IsApproved)
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
                         //Map to _isApprove,avoid change theUpdate time.

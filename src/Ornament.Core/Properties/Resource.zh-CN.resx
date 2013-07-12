@@ -267,4 +267,7 @@
   <data name="VerifyEmail" xml:space="preserve">
     <value>验证eMail</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
 </root>

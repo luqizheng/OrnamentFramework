@@ -36,6 +36,7 @@ namespace Ornament.Models.Memberships.Partials
             Phone = user.Contact.Phone;
             Email = user.Contact.Email;
             TimeZoneId = user.TimeZoneId;
+            this.Language = this.Language;
             VerifyEmail = true;
         }
 
@@ -71,6 +72,8 @@ namespace Ornament.Models.Memberships.Partials
 
         [Display(Name = "VerifyEmail", ResourceType = typeof(Resources))]
         public bool VerifyEmail { get; set; }
+        [Display(Name = "Language", ResourceType = typeof(Resources))]
+        public string Language { get; set; }
 
         public virtual void UpdateOn(User user)
         {

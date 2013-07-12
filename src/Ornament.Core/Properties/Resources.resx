@@ -301,4 +301,7 @@
   <data name="VerifyEmail" xml:space="preserve">
     <value>Verify Email if changed</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>
