@@ -14,16 +14,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public OrgMapping()
         {
-            
             Extends(typeof (IPerformer));
             DiscriminatorValue("org");
-            
             Join("MBS_ORG",_=>
             {
                 _.KeyColumn("Id");
                 _.Map(s => s.OrderId).Length(4000);
-                _.HasMany(s => s.Childs).Table("MBS_ORG").CollectionType<OrgListType>()
-                                      .ForeignKeyConstraintName("FK_ORG_SELF")
+                _.HasMany(s => s.Childs).CollectionType<OrgListType>()
                                       .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
                 _.References(s => s.Parent);

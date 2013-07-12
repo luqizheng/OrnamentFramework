@@ -6,11 +6,8 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
-using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Properties;
-using Qi;
-using Qi.Secret;
 
 namespace Ornament.MemberShip
 {
@@ -25,17 +22,18 @@ namespace Ornament.MemberShip
         public static readonly string AdminLoginId = "admin";
 
         private ContactInfo _contact;
-
+        private bool _isApproved;
 
         //private UserInformation _information;
         private bool _isLockout;
         private OtherUserInfo _other;
-        private string _password;
-        private string _passwordAnswer;
-        private string _passwordQuestion;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
+        private SecurityInfo _security;
+
         private TimeZoneInfo _timeZone;
+        private string _timeZoneId;
         private Iesi.Collections.Generic.ISet<UserGroup> _userGroups;
+
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="User" /> class.
@@ -58,7 +56,7 @@ namespace Ornament.MemberShip
             if (loginId == null) throw new ArgumentNullException("loginId");
             if (password == null) throw new ArgumentNullException("password");
             LoginId = loginId;
-            _password = MembershipContext.Provider.Encrypt(password);
+            Security.ChangePassword(password);
             Other.CreateTime = DateTime.Now;
             IsApproved = true;
         }
@@ -76,32 +74,59 @@ namespace Ornament.MemberShip
             Other.CreateTime = DateTime.Now;
         }
 
+        public virtual SecurityInfo Security
+        {
+            get { return _security ?? (_security = new SecurityInfo(this)); }
+        }
+
         /// <summary>
         ///     获取或设定用户是否已经获准使用
         /// </summary>
         [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
-        public virtual bool IsApproved { get; set; }
+        public virtual bool IsApproved
+        {
+            get { return _isApproved; }
+            set
+            {
+                _isApproved = value;
+                ModifyUpdateTime();
+            }
+        }
 
-        public virtual string TimeZoneId { get; set; }
+        public virtual string TimeZoneId
+        {
+            get { return _timeZoneId; }
+            set
+            {
+                _timeZoneId = value;
+                ModifyUpdateTime();
+            }
+        }
 
         /// <summary>
         ///     Gets or sets language
         /// </summary>
         public virtual string Language { get; set; }
 
+        /// <summary>
+        /// </summary>
         public virtual TimeZoneInfo TimeZone
         {
             get
             {
                 if (!String.IsNullOrEmpty(TimeZoneId))
-                    return _timeZone ?? (_timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId));
+                {
+                    if (_timeZone == null || _timeZone.Id != TimeZoneId)
+                        return _timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
+                    return _timeZone;
+                }
                 return TimeZoneInfo.Local;
             }
         }
 
         public virtual OtherUserInfo Other
         {
-            get { return _other ?? (_other = new OtherUserInfo(this)); }
+            get { return _other ?? (_other = new OtherUserInfo()); }
         }
 
         public virtual ContactInfo Contact
@@ -130,21 +155,6 @@ namespace Ornament.MemberShip
 
 
         /// <summary>
-        ///     Gets Password.
-        /// </summary>
-        /// <value>
-        ///     The password.
-        /// </value>
-        [Display(Name = "Password", ResourceType = typeof (Resources)),
-         Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePassword",
-             ErrorMessageResourceType = typeof (ErrorMessage))]
-        public virtual string Password
-        {
-            get { return MembershipContext.Provider.Decrypt(_password); }
-        }
-
-
-        /// <summary>
         ///     Gets or sets LoginId.
         /// </summary>
         /// <value>
@@ -156,42 +166,6 @@ namespace Ornament.MemberShip
                  ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
         public virtual string LoginId { get; set; }
 
-        /// <summary>
-        ///     Gets PasswordQuestion.
-        /// </summary>
-        /// <value>
-        ///     The password question.
-        /// </value>
-        [Display(Name = "PasswordQuestion", ResourceType = typeof (Resources)),
-         Required(AllowEmptyStrings = false,
-             ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof (ErrorMessage))]
-        public virtual string PasswordQuestion
-        {
-            protected set
-            {
-                ModifyUpdateTime();
-                _passwordQuestion = value;
-            }
-            get { return _passwordQuestion; }
-        }
-
-        /// <summary>
-        ///     Gets the answer of <see cref="PasswordQuestion" />. It alwasy entrypted by md5
-        /// </summary>
-        [Display(Name = "PasswordAnswer", ResourceType = typeof (Resources)),
-         Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
-             ErrorMessageResourceType = typeof (ErrorMessage)),
-         StringLength(50, MinimumLength = 0, ErrorMessageResourceName = "PasswordQuestionAnswerOverMaxLength",
-             ErrorMessageResourceType = typeof (ErrorMessage))]
-        public virtual string PasswordAnswer
-        {
-            protected set
-            {
-                ModifyUpdateTime();
-                _passwordAnswer = value;
-            }
-            get { return _passwordAnswer; }
-        }
 
         public virtual IEnumerable<Permission> Permissions
         {
@@ -336,158 +310,6 @@ namespace Ornament.MemberShip
                 }
             }
             return new List<Role>(result);
-        }
-
-        /// <summary>
-        ///     set Question and Answer. This function always set answer never check old answer and question.
-        /// </summary>
-        /// <param name="answer">
-        /// </param>
-        /// <param name="question">
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        ///     answer or question is null or empty
-        /// </exception>
-        public virtual void SetQuestionAndAnswer(string question, string answer)
-        {
-            if (String.IsNullOrEmpty(answer))
-            {
-                throw new ArgumentNullException("answer");
-            }
-
-            if (String.IsNullOrEmpty(question))
-            {
-                throw new ArgumentNullException("question");
-            }
-            PasswordAnswer = answer.Trim().Sha1Utf8().ToStringEx();
-            PasswordQuestion = question.Trim();
-        }
-
-        /// <summary>
-        ///     直接改变密码
-        /// </summary>
-        /// <param name="newPassword">
-        /// </param>
-        /// <param name="oldPassword">
-        /// </param>
-        /// <returns>
-        /// </returns>
-        public virtual bool ChangePassword(string newPassword, string oldPassword)
-        {
-            if (MembershipContext.Provider.Encrypt(oldPassword) == Password)
-            {
-                ChangePassword(newPassword);
-                Other.LastPasswordChangedDate = DateTime.Now;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="newPassword"></param>
-        /// <exception cref="ArgumentNullException">Password is null or empty</exception>
-        /// <exception cref="PasswordFormatException">ArgumentException's length is too short</exception>
-        public virtual void ChangePassword(string newPassword)
-        {
-            if (String.IsNullOrEmpty(newPassword))
-            {
-                throw new ArgumentNullException("newPassword");
-            }
-            if (newPassword.Length < 3)
-                throw new PasswordFormatException("newPassword's length is too short.");
-            _password = MembershipContext.Provider.Encrypt(newPassword);
-            Other.LastPasswordChangedDate = DateTime.Now;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="answer">
-        ///     The answer.
-        /// </param>
-        /// <returns>
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        ///     answer is null or
-        /// </exception>
-        public virtual bool AnswertIsCorrect(string answer)
-        {
-            if (String.IsNullOrEmpty(answer))
-            {
-                throw new ArgumentNullException("answer");
-            }
-
-            return PasswordAnswer == answer.Sha1Utf8().ToStringEx();
-            ;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="answer">
-        ///     The answer.
-        /// </param>
-        /// <param name="newPassword">
-        ///     The new password.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// </exception>
-        /// <exception cref="MemberShipPermissionException">
-        /// </exception>
-        public virtual void ChangePasswordByAnswer(string answer, string newPassword)
-        {
-            if (String.IsNullOrEmpty(answer))
-            {
-                throw new ArgumentNullException("answer", "Password answer is requested");
-            }
-
-            if (PasswordAnswer == null)
-            {
-                throw new MemberShipPermissionException("Password Answer of user is not setting");
-            }
-
-            if (PasswordAnswer == answer.Sha1Utf8().ToStringEx())
-            {
-                _password = newPassword;
-                Other.LastPasswordChangedDate = DateTime.Now;
-            }
-            else
-            {
-                throw new MemberShipPermissionException("answer is not correct");
-            }
-        }
-
-        /// <summary>
-        ///     该用户是否能够登录
-        /// </summary>
-        /// <param name="inputPassword">
-        /// </param>
-        /// <returns>
-        /// </returns>
-        public virtual bool ValidateUser(string inputPassword)
-        {
-            if (String.IsNullOrEmpty(inputPassword))
-            {
-                throw new ArgumentNullException("inputPassword");
-            }
-
-            if (IsLockout)
-            {
-                throw new MemberShipException("User is locked");
-            }
-
-            if (!IsApproved)
-            {
-                throw new MemberShipException("User isn't approved");
-            }
-
-            if (MembershipContext.Provider.Encrypt(inputPassword) == Password)
-            {
-                Other.LastLoginDate = DateTime.Now;
-                Other.LastActivityDate = DateTime.Now;
-                return true;
-            }
-
-            return false;
         }
     }
 }

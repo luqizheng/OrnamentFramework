@@ -152,8 +152,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public int GetActivityDateNumber(DateTime time)
         {
-            var projections = Projections.Property<User>(s => s.Other.LastActivityDate);
-            return Count(Restrictions.Le(projections, time));
+            var projections = Projections.Property<User.OtherUserInfo>(s => s.LastActivityDate);
+            var re = Restrictions.Le(projections, time);
+            return CreateCriteria().CreateCriteria("Other").Add(re).SetProjection(Projections.RowCount()).UniqueResult<Int32>();
+            //return Count(Restrictions.Le(projections, time));
         }
 
         /// <summary>
@@ -300,11 +302,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .Add(Projections.SqlGroupProjection("day(CreateTime) day1", "day(CreateTime)", new[] { "day1" }, new IType[] { NHibernateUtil.Int32 }))
                     .Add(Projections.RowCount())
                     )
-                .Add(Restrictions.Gt(Projections.Property<User>(s => s.Other.CreateTime), startTime))
-                .Add(Restrictions.Le(Projections.Property<User>(s => s.Other.CreateTime), endTime))
+                .CreateCriteria("Other")
+                .Add(Restrictions.Gt(Projections.Property<User.OtherUserInfo>(s => s.CreateTime), startTime))
+                .Add(Restrictions.Le(Projections.Property <User.OtherUserInfo > (s => s.CreateTime), endTime))
                 .GetExecutableCriteria(this.CurrentSession)
                 .List();
-            Dictionary<DateTime, int> dictionary = new Dictionary<DateTime, int>();
+            var dictionary = new Dictionary<DateTime, int>();
             foreach (object[] objects in count)
             {
                 dictionary.Add(new DateTime((int) objects[0], (int) objects[1], (int) objects[2]), (int) objects[3]);

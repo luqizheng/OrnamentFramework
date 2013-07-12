@@ -105,8 +105,8 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             const string expected = "theQuestion";
-            target.SetQuestionAndAnswer(expected, "answer");
-            string actual = target.PasswordQuestion;
+            target.Security.SetQuestionAndAnswer(expected, "answer");
+            string actual = target.Security.PasswordQuestion;
             Assert.AreEqual(expected, actual);
         }
 
@@ -118,8 +118,8 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             const string expected = "theAnswer";
-            target.SetQuestionAndAnswer("question", expected);
-            Assert.IsTrue(target.AnswertIsCorrect(expected));
+            target.Security.SetQuestionAndAnswer("question", expected);
+            Assert.IsTrue(target.Security.AnswertIsCorrect(expected));
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -127,8 +127,8 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             const string expected = "theAnswer";
-            target.SetQuestionAndAnswer("question", expected);
-            Assert.IsTrue(target.AnswertIsCorrect(null));
+            target.Security.SetQuestionAndAnswer("question", expected);
+            Assert.IsTrue(target.Security.AnswertIsCorrect(null));
         }
 
         /// <summary>
@@ -138,8 +138,8 @@ namespace MemberShip.Test
         public void PasswordTest()
         {
             var target = new User("kkkkk", "12345678910");
-            string actual = target.Password;
-            Assert.AreEqual(target.Password, actual);
+            string actual = target.Security.Password;
+            Assert.AreEqual(target.Security.Password, actual);
         }
 
 
@@ -166,11 +166,11 @@ namespace MemberShip.Test
         public void LastPasswordChangedDateTest()
         {
             var target = new User("kkkkk", "123456");
-            Assert.IsNull(target.Other.LastPasswordChangedDate);
-            target.ChangePassword("654321", "123456");
+            Assert.IsNull(target.Security.LastPasswordChangedDate);
+            target.Security.ChangePassword("654321", "123456");
             DateTime? actual;
-            actual = target.Other.LastPasswordChangedDate;
-            Assert.IsNotNull(target.Other.LastPasswordChangedDate);
+            actual = target.Security.LastPasswordChangedDate;
+            Assert.IsNotNull(target.Security.LastPasswordChangedDate);
         }
 
         /// <summary>
@@ -180,11 +180,11 @@ namespace MemberShip.Test
         public void LastLoginDateTest()
         {
             var target = new User("kkkkk", "123456");
-            Assert.IsNull(target.Other.LastLoginDate);
+            Assert.IsNull(target.Security.LastLoginDate);
 
-            target.ValidateUser("123456");
+            target.Security.ValidateUser("123456");
             DateTime? actual;
-            actual = target.Other.LastLoginDate;
+            actual = target.Security.LastLoginDate;
 
             Assert.IsNotNull(actual);
         }
@@ -335,10 +335,10 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk", "123456");
             string answer = "hehehe";
-            target.SetQuestionAndAnswer("question", answer);
+            target.Security.SetQuestionAndAnswer("question", answer);
             string newPassword = "654321";
-            target.ChangePasswordByAnswer(answer, newPassword);
-            Assert.AreEqual("654321", target.Password);
+            target.Security.ChangePasswordByAnswer(answer, newPassword);
+            Assert.AreEqual("654321", target.Security.Password);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException), "Password Answer is requested")]
@@ -347,17 +347,17 @@ namespace MemberShip.Test
             var target = new User("kkkkk", "123456");
             const string answer = null;
             const string newPassword = "654321";
-            target.ChangePasswordByAnswer(answer, newPassword);
+            target.Security.ChangePasswordByAnswer(answer, newPassword);
         }
 
         [TestMethod, ExpectedException(typeof(MemberShipPermissionException), "answer is not correct")]
         public void ChangePasswordByAnswer_AnswerIsNotCorrect()
         {
             var target = new User("kkkkk", "123456");
-            target.SetQuestionAndAnswer("question", "answer");
+            target.Security.SetQuestionAndAnswer("question", "answer");
             string answer = "error_answer";
             string newPassword = "654321";
-            target.ChangePasswordByAnswer(answer, newPassword);
+            target.Security.ChangePasswordByAnswer(answer, newPassword);
         }
 
         [TestMethod, ExpectedException(typeof(MemberShipPermissionException), "Password Answer of user is not setting")
@@ -367,7 +367,7 @@ namespace MemberShip.Test
             var target = new User("kkkkk", "123456");
             string answer = "error_answer";
             string newPassword = "654321";
-            target.ChangePasswordByAnswer(answer, newPassword);
+            target.Security.ChangePasswordByAnswer(answer, newPassword);
         }
 
         /// <summary>
@@ -382,9 +382,9 @@ namespace MemberShip.Test
 
             bool expected = true;
             bool actual;
-            actual = target.ChangePassword(newPassword, oldPassword);
+            actual = target.Security.ChangePassword(newPassword, oldPassword);
             Assert.AreEqual(expected, actual);
-            Assert.AreEqual(newPassword, target.Password);
+            Assert.AreEqual(newPassword, target.Security.Password);
         }
 
         [TestMethod]
@@ -396,7 +396,7 @@ namespace MemberShip.Test
 
             bool expected = false;
             bool actual;
-            actual = target.ChangePassword(newPassword, "errorOldPassword");
+            actual = target.Security.ChangePassword(newPassword, "errorOldPassword");
             Assert.AreEqual(expected, actual);
         }
 
@@ -410,10 +410,10 @@ namespace MemberShip.Test
             string inputPassword = "123456";
             bool expected = true;
             bool actual;
-            actual = target.ValidateUser(inputPassword);
+            actual = target.Security.ValidateUser(inputPassword);
             Assert.AreEqual(expected, actual);
 
-            Assert.IsFalse(target.ValidateUser("error_password"));
+            Assert.IsFalse(target.Security.ValidateUser("error_password"));
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -422,7 +422,7 @@ namespace MemberShip.Test
             var target = new User("kkkkk", "123456");
             string answer = "";
             string password = "password";
-            target.SetQuestionAndAnswer(answer, password);
+            target.Security.SetQuestionAndAnswer(answer, password);
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -431,7 +431,7 @@ namespace MemberShip.Test
             var target = new User("kkkkk", "123456");
             string answer = "answer";
             string password = "";
-            target.SetQuestionAndAnswer(answer, password);
+            target.Security.SetQuestionAndAnswer(answer, password);
         }
 
         [TestMethod]
@@ -444,7 +444,7 @@ namespace MemberShip.Test
 
             bool expected = false;
             bool actual;
-            actual = target.ValidateUser(inputPassword);
+            actual = target.Security.ValidateUser(inputPassword);
             Assert.AreEqual(expected, actual);
         }
 
@@ -455,7 +455,7 @@ namespace MemberShip.Test
             var target = new User("kkkkk", "123456") { IsApproved = false };
             const string inputPassword = "123456";
             const bool expected = false;
-            bool actual = target.ValidateUser(inputPassword);
+            bool actual = target.Security.ValidateUser(inputPassword);
             Assert.AreEqual(expected, actual);
         }
 
@@ -463,7 +463,7 @@ namespace MemberShip.Test
         public void CanLoginTest_checking_password_is_empty()
         {
             var target = new User("kkkkk", "123456");
-            target.ValidateUser(null);
+            target.Security.ValidateUser(null);
         }
 
         /// <summary>

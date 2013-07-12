@@ -8,7 +8,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         public UserSecretTokenMapping()
         {
             Table("MBS_UserSecretToken");
-            Id(s => s.Id).GeneratedBy.UuidHex("N");
+            Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32); ;
             this.References(s => s.Account);
             Map(s => s.CreateTime).Insert();
             Map(s => s.PrivateKey);

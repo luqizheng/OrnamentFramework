@@ -232,7 +232,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
             string newpassword = Membership.GeneratePassword(Membership.MinRequiredPasswordLength, 0);
 
-            user.ChangePassword(privoder.EncodeString(newpassword, privoder.PasswordFormat));
+            user.Security.ChangePassword(privoder.EncodeString(newpassword, privoder.PasswordFormat));
 
             _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             return Json(newpassword);

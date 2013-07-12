@@ -9,11 +9,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             
             Extends(typeof(IPerformer));
             DiscriminatorValue("usergroup");
-            KeyColumn("Id");
-            Join("MBS_UserGroup",_ =>
-                {
-                    _.KeyColumn("Id");
-                });
+            Join("MBS_UserGroup",_ => _.KeyColumn("Id"));
             
         }
     }

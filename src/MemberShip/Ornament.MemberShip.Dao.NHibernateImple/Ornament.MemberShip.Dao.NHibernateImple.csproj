@@ -87,12 +87,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\ContactInfoMapping.cs" />
     <Compile Include="Mappings\GeneralPermissionMapping.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Mappings\OrgMapping.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Mappings\OtherInfoMapping.cs" />
     <Compile Include="Mappings\PerformerMapping.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -105,6 +107,7 @@
     <Compile Include="Mappings\RoleMapping.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Mappings\SecrityInfoMapping.cs" />
     <Compile Include="Mappings\UserGroupMapping.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -58,7 +58,7 @@ namespace Ornament.Models.Memberships
             }
 
 
-            bool result = u.ValidateUser(Password);
+            bool result = u.Security.ValidateUser(Password);
             if (!result)
             {
                 errorMessage = Ornament.Properties.Resources.error_LoginError;

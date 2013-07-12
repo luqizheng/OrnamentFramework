@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactInfo.cs" />
     <Compile Include="OrgCollection.cs" />
     <Compile Include="Performer.cs" />
     <Compile Include="PerformerType.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Permissions\ResourceOperatorManager.cs" />
     <Compile Include="Permissions\TypeResourceMapping.cs" />
     <Compile Include="ProfileValue.cs" />
+    <Compile Include="SecrityInfo.cs" />
     <Compile Include="Security\UserSecretToken.cs" />
     <Compile Include="Security\UserSecurityException.cs" />
     <Compile Include="UserGroup.cs" />

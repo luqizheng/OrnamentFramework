@@ -22,7 +22,7 @@ namespace Ornament.Models.Security
                 return VerifyResult.Expire;
             if (userToken.Verify(TokenId))
             {
-                userToken.Account.ChangePassword(PasswordModel.Password);
+                userToken.Account.Security.ChangePassword(PasswordModel.Password);
                 factory.CreateUserDao().SaveOrUpdate(userToken.Account);
                 return VerifyResult.Success;
             }

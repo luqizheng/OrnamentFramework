@@ -274,11 +274,11 @@ namespace Ornament.Web.MemberShips
             User user = Facotry.CreateUserDao().GetByLoginId(username);
             if (user == null)
                 return false;
-            if (!user.ValidateUser(password))
+            if (!user.Security.ValidateUser(password))
             {
                 return false;
             }
-            user.SetQuestionAndAnswer(newPasswordQuestion, newPasswordAnswer);
+            user.Security.SetQuestionAndAnswer(newPasswordQuestion, newPasswordAnswer);
             return true;
         }
 
@@ -295,9 +295,9 @@ namespace Ornament.Web.MemberShips
         public override string GetPassword(string username, string answer)
         {
             User user = Facotry.CreateUserDao().GetByLoginId(username);
-            if (user.AnswertIsCorrect(answer))
+            if (user.Security.AnswertIsCorrect(answer))
                 throw new MemberShipException("answer is error");
-            return DecodeString(user.Password, _passwordFormat);
+            return DecodeString(user.Security.Password, _passwordFormat);
         }
 
         ///<summary>
@@ -316,7 +316,7 @@ namespace Ornament.Web.MemberShips
             IUserDao userDao = Facotry.CreateUserDao();
             User user = userDao.GetByLoginId(username);
 
-            if (user.ChangePassword(newPassword, oldPassword))
+            if (user.Security.ChangePassword(newPassword, oldPassword))
             {
                 userDao.SaveOrUpdate(user);
                 return true;
@@ -339,7 +339,7 @@ namespace Ornament.Web.MemberShips
             User user = Facotry.CreateUserDao().GetByLoginId(username);
             string newpassword = Membership.GeneratePassword(Membership.MinRequiredPasswordLength,
                                                              Membership.MinRequiredNonAlphanumericCharacters);
-            user.ChangePasswordByAnswer(answer, newpassword);
+            user.Security.ChangePasswordByAnswer(answer, newpassword);
             Facotry.CreateUserDao().SaveOrUpdate(user);
             return newpassword;
         }
@@ -371,7 +371,7 @@ namespace Ornament.Web.MemberShips
             User u = userDao.GetByLoginId(username);
             if (u == null)
                 return false;
-            bool result = u.ValidateUser(password);
+            bool result = u.Security.ValidateUser(password);
             userDao.SaveOrUpdate(u);
             return result;
         }
@@ -473,7 +473,7 @@ namespace Ornament.Web.MemberShips
                                  IsApproved = isApproved,
                              };
                 result.Contact.Email = email;
-                result.SetQuestionAndAnswer(passwordQuestion, passwordAnswer);
+                result.Security.SetQuestionAndAnswer(passwordQuestion, passwordAnswer);
                 userDao.SaveOrUpdate(result);
                 userDao.Flush();
             }
@@ -576,15 +576,16 @@ namespace Ornament.Web.MemberShips
                 user.LoginId,
                 user.Id,
                 user.Contact.Email,
-                user.PasswordQuestion,
+                user.Security.PasswordQuestion,
                 user.Remarks,
                 user.IsApproved,
                 user.IsLockout,
                 user.Other.CreateTime,
-                user.Other.LastLoginDate.HasValue ? user.Other.LastLoginDate.Value : DateTime.MinValue,
+                user.Security
+                    .LastLoginDate.HasValue ? user.Security.LastLoginDate.Value : DateTime.MinValue,
                 user.Other.LastActivityDate.HasValue ? user.Other.LastActivityDate.Value : DateTime.MinValue,
-                user.Other.LastPasswordChangedDate.HasValue
-                    ? user.Other.LastPasswordChangedDate.Value
+                user.Security.LastPasswordChangedDate.HasValue
+                    ? user.Security.LastPasswordChangedDate.Value
                     : DateTime.MinValue,
                 user.Other.LastLockoutDate.HasValue ? user.Other.LastLockoutDate.Value : DateTime.MinValue
                 );

@@ -43,7 +43,9 @@ namespace Ornament.MemberShip
         /// <param name="memberShipFactory"></param>
         /// <returns></returns>
         IList<User> GetUsers(IMemberShipFactory memberShipFactory);
-
+        /// <summary>
+        /// 
+        /// </summary>
         PerformerType Type { get; }
     }
 }
