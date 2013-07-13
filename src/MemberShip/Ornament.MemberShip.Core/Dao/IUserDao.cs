@@ -48,9 +48,9 @@ namespace Ornament.MemberShip.Dao
 
         IList<User> FindAll(int pageIndex, int pageSize);
 
-        int Count(string loginId);
+        int Count(string loginId,string userIdForExclude);
 
-        int CountByEmail(string email,string loginIdForExclude);
+        int CountByEmail(string email,string idForExclude);
 
         IDictionary<DateTime, int> CountNewUser(DateTime start, DateTime end);
 

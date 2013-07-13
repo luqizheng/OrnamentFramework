@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NHibernate;
@@ -22,10 +23,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<User>(u => u.LoginId)); }
         }
 
-        private IProjection EmailProperty
+        private IProjection ContactEmailProperty
         {
-            get { return _pools.Once(() => Projections.Property<User>(u => u.Contact.Email)); }
+            get { return _pools.Once(() => Projections.Property<User.ContactInfo>(u => u.Email)); }
         }
+
 
         private IProjection NameProperty
         {
@@ -36,15 +38,15 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return _pools.Once(() => Projections.Property<User>(u => u.Id)); }
         }
-        private IProjection PhoneProperty
+
+        private IProjection ContactPhoneProperty
         {
-            get { return Projections.Property<User>(s => s.Contact.Phone); }
+            get { return Projections.Property<User.ContactInfo>(s => s.Phone); }
         }
+
         #endregion
 
         #region IUserDao Members
-
-
 
         public IQueryable<User> Users
         {
@@ -64,15 +66,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             Disjunction a = Restrictions.Disjunction();
             if (!string.IsNullOrEmpty(loginid))
                 a.Add(Restrictions.InsensitiveLike(LoginProperty, loginid));
-            if (!string.IsNullOrEmpty(email))
-                a.Add(Restrictions.InsensitiveLike(EmailProperty, email));
             if (!string.IsNullOrEmpty(name))
                 a.Add(Restrictions.InsensitiveLike(NameProperty, name));
+            result.Add(a);
+
+            Disjunction contactJunction = Restrictions.Disjunction();
+            if (!string.IsNullOrEmpty(email))
+            {
+                contactJunction.Add(Restrictions.InsensitiveLike(ContactEmailProperty, email));
+            }
             if (!string.IsNullOrEmpty(phone))
             {
-                a.Add(Restrictions.InsensitiveLike(PhoneProperty, name));
+                contactJunction.Add(Restrictions.InsensitiveLike(ContactPhoneProperty, name));
             }
-            result.Add(a);
+            result.CreateCriteria("Contact").Add(contactJunction);
             return
                 result.SetFirstResult(pageIndex * pageSize)
                       .SetMaxResults(pageSize)
@@ -142,7 +149,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public User GetUserByEmail(string email)
         {
-            return CreateCriteria().Add(Restrictions.Eq(EmailProperty, email)).UniqueResult<User>();
+            return
+                CreateCriteria()
+                    .CreateCriteria("Contact")
+                    .Add(Restrictions.Eq(ContactEmailProperty, email))
+                    .UniqueResult<User>();
         }
 
         /// <summary>
@@ -152,9 +163,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public int GetActivityDateNumber(DateTime time)
         {
-            var projections = Projections.Property<User.OtherUserInfo>(s => s.LastActivityDate);
-            var re = Restrictions.Le(projections, time);
-            return CreateCriteria().CreateCriteria("Other").Add(re).SetProjection(Projections.RowCount()).UniqueResult<Int32>();
+            PropertyProjection projections = Projections.Property<User.OtherUserInfo>(s => s.LastActivityDate);
+            SimpleExpression re = Restrictions.Le(projections, time);
+            return
+                CreateCriteria()
+                    .CreateCriteria("Other")
+                    .Add(re)
+                    .SetProjection(Projections.RowCount())
+                    .UniqueResult<Int32>();
             //return Count(Restrictions.Le(projections, time));
         }
 
@@ -185,11 +201,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public IList<User> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize)
         {
-            return CreateDetachedCriteria()
-                .Add(Restrictions.InsensitiveLike(EmailProperty, emailToMatch))
-                .SetMaxResults(pageSize)
-                .SetFirstResult(pageSize * pageIndex)
-                .GetExecutableCriteria(CurrentSession).List<User>();
+            return CreateDetachedCriteria().CreateCriteria("Contact")
+                                           .Add(Restrictions.InsensitiveLike(ContactEmailProperty, emailToMatch))
+                                           .SetMaxResults(pageSize)
+                                           .SetFirstResult(pageSize * pageIndex)
+                                           .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
         /// <summary>
@@ -262,31 +278,34 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                          GetExecutableCriteria(CurrentSession).List<User>();
         }
 
-        public int Count(string loginId)
+        public int Count(string loginId, string userIdForExclude)
         {
-            return
+            DetachedCriteria detached =
                 CreateDetachedCriteria()
                     .SetProjection(Projections.RowCount())
-                    .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase())
-                    .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+                    .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase());
+            if (!String.IsNullOrEmpty(userIdForExclude))
+                detached.Add(Restrictions.Not(Restrictions.IdEq(userIdForExclude)));
+
+            return detached.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
         /// <summary>
         /// </summary>
         /// <param name="email"></param>
-        /// <param name="loginIdForExclude"></param>
+        /// <param name="idForExclude"></param>
         /// <returns></returns>
-        public int CountByEmail(string email, string loginIdForExclude)
+        public int CountByEmail(string email, string idForExclude)
         {
             DetachedCriteria a =
-                CreateDetachedCriteria()
+                DetachedCriteria.For<User.ContactInfo>()
                     .SetProjection(Projections.RowCount())
-                    .Add(Restrictions.Eq(EmailProperty, email).IgnoreCase());
-            if (!String.IsNullOrEmpty(loginIdForExclude))
-            {
-                a.Add(Restrictions.Not(Restrictions.Eq(LoginProperty, loginIdForExclude).IgnoreCase()));
-            }
+                    .Add(Restrictions.Eq(ContactEmailProperty, email).IgnoreCase());
 
+            if (!String.IsNullOrEmpty(idForExclude))
+            {
+                a.Add(Restrictions.Not(Restrictions.Eq(Projections.Property<User.ContactInfo>(s => s.User.Id), idForExclude)));
+            }
             return a.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
@@ -294,26 +313,37 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             var startTime = new DateTime(start.Year, start.Month, start.Day);
             var endTime = new DateTime(end.Year, end.Month, end.Day, 23, 59, 59, 999);
-            var count = DetachedCriteria.For<User>("user")
-                .SetProjection(
-                    Projections.ProjectionList()
-                    .Add(Projections.SqlGroupProjection("year(CreateTime) year1", "year(CreateTime)", new[] { "year1" }, new IType[] { NHibernateUtil.Int32 }))
-                    .Add(Projections.SqlGroupProjection("Month(CreateTime) month1", "Month(CreateTime)", new[] { "month1" }, new IType[] { NHibernateUtil.Int32 }))
-                    .Add(Projections.SqlGroupProjection("day(CreateTime) day1", "day(CreateTime)", new[] { "day1" }, new IType[] { NHibernateUtil.Int32 }))
-                    .Add(Projections.RowCount())
-                    )
-                .CreateCriteria("Other")
-                .Add(Restrictions.Gt(Projections.Property<User.OtherUserInfo>(s => s.CreateTime), startTime))
-                .Add(Restrictions.Le(Projections.Property <User.OtherUserInfo > (s => s.CreateTime), endTime))
-                .GetExecutableCriteria(this.CurrentSession)
-                .List();
+            IList count = DetachedCriteria.For<User>("user")
+                                          .SetProjection(
+                                              Projections.ProjectionList()
+                                                         .Add(Projections.SqlGroupProjection("year(CreateTime) year1",
+                                                                                             "year(CreateTime)",
+                                                                                             new[] { "year1" },
+                                                                                             new IType[] { NHibernateUtil.Int32 }))
+                                                         .Add(Projections.SqlGroupProjection(
+                                                             "Month(CreateTime) month1", "Month(CreateTime)",
+                                                             new[] { "month1" }, new IType[] { NHibernateUtil.Int32 }))
+                                                         .Add(Projections.SqlGroupProjection("day(CreateTime) day1",
+                                                                                             "day(CreateTime)",
+                                                                                             new[] { "day1" },
+                                                                                             new IType[] { NHibernateUtil.Int32 }))
+                                                         .Add(Projections.RowCount())
+                )
+                                          .CreateCriteria("Other")
+                                          .Add(
+                                              Restrictions.Gt(
+                                                  Projections.Property<User.OtherUserInfo>(s => s.CreateTime), startTime))
+                                          .Add(
+                                              Restrictions.Le(
+                                                  Projections.Property<User.OtherUserInfo>(s => s.CreateTime), endTime))
+                                          .GetExecutableCriteria(CurrentSession)
+                                          .List();
             var dictionary = new Dictionary<DateTime, int>();
             foreach (object[] objects in count)
             {
-                dictionary.Add(new DateTime((int) objects[0], (int) objects[1], (int) objects[2]), (int) objects[3]);
+                dictionary.Add(new DateTime((int)objects[0], (int)objects[1], (int)objects[2]), (int)objects[3]);
             }
             return dictionary;
-
         }
 
         /// <summary>

@@ -59,32 +59,29 @@ namespace Ornament.MVCWebFrame.Controllers
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
 
-        [System.Web.Http.HttpGet]
-        public JsonResult NotDuplicateEmail(string email, string id)
-        {
-            if (Membership.Provider.RequiresUniqueEmail)
-            {
-                email = Request.QueryString[0];
-                id = Request.QueryString[1];
-                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
-                            JsonRequestBehavior.AllowGet);
-            }
-            return Json(true, JsonRequestBehavior.AllowGet);
-        }
+        //[System.Web.Http.HttpGet]
+        //public JsonResult NotDuplicateEmail(string email, string id)
+        //{
+        //    if (Membership.Provider.RequiresUniqueEmail)
+        //    {
+        //        return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
+        //                    JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(true, JsonRequestBehavior.AllowGet);
+        //}
 
-        [System.Web.Http.HttpGet]
-        public JsonResult NotDuplicate(string loginId)
-        {
-            loginId = Request.QueryString[0];
-            return Json(_memberShipFactory.CreateUserDao().Count(loginId) == 0, JsonRequestBehavior.AllowGet);
-        }
+        //[System.Web.Http.HttpGet]
+        //public JsonResult NotDuplicate(string loginId)
+        //{
+        //    return Json(_memberShipFactory.CreateUserDao().Count(loginId, null) == 0, JsonRequestBehavior.AllowGet);
+        //}
 
         public JsonResult VarifyEmail(string email)
         {
             MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
                                                          OrnamentContext.Configuration.ApplicationSetting
                                                                         .VerifyEmailTimeout);
-            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -97,7 +94,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post),
          ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword([ModelBinder(typeof (NHModelBinder))] ChangePasswordModel model)
+        public ActionResult ChangePassword([ModelBinder(typeof(NHModelBinder))] ChangePasswordModel model)
         {
             if (ModelState.IsValid)
             {
@@ -154,7 +151,7 @@ namespace Ornament.MVCWebFrame.Controllers
                                                                             .VerifyEmailTimeout);
             }
             OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
-            return Json(new {success = true, emailChanged});
+            return Json(new { success = true, emailChanged });
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Ornament.MVCWebFrame.Controllers
             model.ReturnUrl = Request["ReturnUrl"];
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult) Redirect(model.ReturnUrl)
+                       ? (ActionResult)Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 

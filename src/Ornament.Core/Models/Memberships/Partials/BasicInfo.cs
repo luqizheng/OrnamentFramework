@@ -8,22 +8,6 @@ using Ornament.Properties;
 
 namespace Ornament.Models.Memberships.Partials
 {
-    public class MemberInfo
-    {
-        /// <summary>
-        /// </summary>
-        [Display(Name = "LoginId", ResourceType = typeof(Resources))]
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Resources))]
-        [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
-            ErrorMessageResourceType = typeof(ErrorMessage))]
-        [UIHint("String")]
-        [Remote("NotDuplicate", "User", "MemberShips", ErrorMessageResourceName = "alertMsg_duplicate_loginId",
-            ErrorMessageResourceType = typeof(Resources))]
-        public string LoginId { get; set; }
-
-        public string Id { get; set; }
-    }
-
     public class BasicInfo : MemberInfo
     {
         public BasicInfo()
@@ -36,18 +20,18 @@ namespace Ornament.Models.Memberships.Partials
             Phone = user.Contact.Phone;
             Email = user.Contact.Email;
             TimeZoneId = user.TimeZoneId;
-            this.Language = this.Language;
+            Language = Language;
             VerifyEmail = true;
         }
 
         [UIHint("String")]
-        [Display(Name = "Phone", ResourceType = typeof(Resources))]
+        [Display(Name = "Phone", ResourceType = typeof (Resources))]
         public string Phone { get; set; }
 
         [UIHint("String")]
-        [Display(Name = "Name", ResourceType = typeof(Resources)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Name { get; set; }
 
 
@@ -55,24 +39,12 @@ namespace Ornament.Models.Memberships.Partials
         public string TimeZoneId { get; set; }
 
 
-        /// <summary>
-        /// </summary>
-        [Display(Name = "Email", ResourceType = typeof(Resources))]
-        [Required(ErrorMessageResourceName = "error_missingEmailAddress",
-            ErrorMessageResourceType = typeof(Resources))]
-        [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-            ErrorMessageResourceName = "EmailNotRightFormat",
-            ErrorMessageResourceType = typeof(ErrorMessage))]
-        [DataType(DataType.EmailAddress)]
-        [UIHint("String")]
-        [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "LoginId",
-            ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
-        public string Email { get; set; }
+       
 
-
-        [Display(Name = "VerifyEmail", ResourceType = typeof(Resources))]
+        [Display(Name = "VerifyEmail", ResourceType = typeof (Resources))]
         public bool VerifyEmail { get; set; }
-        [Display(Name = "Language", ResourceType = typeof(Resources))]
+
+        [Display(Name = "Language", ResourceType = typeof (Resources))]
         public string Language { get; set; }
 
         public virtual void UpdateOn(User user)
@@ -121,13 +93,13 @@ namespace Ornament.Models.Memberships.Partials
         }
 
         [UIHint("Textarea")]
-        [Display(Name = "Remark", ResourceType = typeof(Resources)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Remark { get; set; }
 
         [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof(Resources))]
+        [Display(Name = "Role", ResourceType = typeof (Resources))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
@@ -138,7 +110,7 @@ namespace Ornament.Models.Memberships.Partials
         public Org Org { get; set; }
 
         [UIHint("UsergroupMultiSelect")]
-        [Display(Name = "UserGroup", ResourceType = typeof(Resources))]
+        [Display(Name = "UserGroup", ResourceType = typeof (Resources))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }

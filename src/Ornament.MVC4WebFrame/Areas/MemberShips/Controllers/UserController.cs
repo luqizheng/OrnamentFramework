@@ -33,10 +33,10 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        public JsonResult NotDuplicate(string loginId)
+        public JsonResult NotDuplicate(string loginId, string id)
         {
             loginId = Request.QueryString[0];
-            return Json(_memberShipFactory.CreateUserDao().Count(loginId) == 0, JsonRequestBehavior.AllowGet);
+            return Json(_memberShipFactory.CreateUserDao().Count(loginId, id) == 0, JsonRequestBehavior.AllowGet);
         }
 
         [System.Web.Http.HttpGet]
@@ -44,8 +44,6 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             if (Membership.Provider.RequiresUniqueEmail)
             {
-                email = Request.QueryString[0];
-                id = Request.QueryString[1];
                 return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
                             JsonRequestBehavior.AllowGet);
             }
