@@ -11,11 +11,16 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             get { return Projections.Property<News>(s => s.Type); }
         }
-
+        private IProjection CreateTimeProperty
+        {
+            get { return Projections.Property<News>(s => s.CreateTime); }
+        }
         public IList<News> GetNews(int pageIndex, int pageSize, NewsType type, out int total)
         {
             total = CountMessage(type);
-            DetachedCriteria cri = CreateDetachedCriteria().Add(Restrictions.Eq(TypeProperty, type));
+            DetachedCriteria cri = CreateDetachedCriteria()
+                .Add(Restrictions.Eq(TypeProperty, type))
+                .AddOrder(Order.Desc(CreateTimeProperty));
             cri.SetFirstResult(pageIndex*pageSize).SetMaxResults(pageSize);
             return cri.GetExecutableCriteria(CurrentSession).List<News>();
         }
