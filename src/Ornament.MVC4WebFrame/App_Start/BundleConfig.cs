@@ -40,7 +40,10 @@ namespace Ornament.MVCWebFrame.App_Start
 
 
             bundles.Add(new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
-            bundles.Add(new Bundle("~/bundles/inputmask", new JsMinify()).Include("~/Scripts/InputMasker/*.js"));
+
+            bundles.Add(new Bundle("~/bundles/inputmask.js", new JsMinify()).Include("~/Scripts/jquery.inputmask/*.js")
+                .Include("~/Scripts/compatibles/inputMask-{version}.js"));
+
             bundles.Add(new Bundle("~/bundles/jqueryval.js", new JsMinify()).Include("~/Scripts/jquery.validate*"));
             bundles.Add(new ScriptBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
             bundles.Add(new ScriptBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));

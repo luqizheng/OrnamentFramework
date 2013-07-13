@@ -12,20 +12,72 @@
     <span>Pure Html for DatePicker and input mask for Date 
     </span>
 }
+<h5 class="widget-name"><i class="icon-th"></i>Date Picker</h5>
+
+<div class="row-fluid">
+    <div class="span3">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner"></div>
+            </div>
+            <div class="body well">
+                @Html.EditorFor(s => s.Now)
+            </div>
+        </div>
+    </div>
+    <div class="span7">
+        <div class="widget">
+            <div class="body well">
+                <!-- start to build-->
+                <div class="semi-widget">
+                    <strong>Defined a View Model</strong>
+                    <pre class="prettyprint lang-vb pre-scrollable linenums">
+public class DateTimePickerModel
+{
+        [UIHint("Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "yyyy/MM/dd")]
+        public DateTime Now { get; set; }
+}
+                    </pre>
+                </div>
+
+                <!-- start to build-->
+                <div class="semi-widget">
+                    <strong>Render HTML with Razor</strong>
+
+                    <pre class="prettyprint lang-html  pre-scrollable linenums">
+@@Html.EditorFor(s => s.Now)
+</pre>
+                </div>
+
+                <!-- start to build-->
+                <div class="semi-widget">
+                    <strong>call datepicker</strong>
+
+                    <pre class="prettyprint lang-js  pre-scrollable linenums">
+seajs.use(["datePicker"], function () {
+    $(".date").datepicker();
+});
+</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="row-fluid">
     <div class="widget">
         <div class="navbar">
             <div class="navbar-inner">
-                <h6>Date Picker</h6>
+                <h6>Time Picker</h6>
             </div>
         </div>
         <div class="body well">
             <div class="row-fluid">
-                <div class="span3">
-                    <div class="widget">
-                        <div class="body well">
-                            @Html.EditorFor(s => s.Now)
-                        </div>
+                <div class="span3 widget">
+                    <div class="body well">
+                        @Html.EditorFor(s => s.TimeNow)
                     </div>
                 </div>
                 <div class="span7">
@@ -37,12 +89,13 @@
                                 <pre class="prettyprint lang-vb pre-scrollable linenums">
 public class DateTimePickerModel
 {
-        [UIHint("Date")]
+         [UIHint("Time")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "HH:ss")]
         public DateTime Now { get; set; }
 }
                     </pre>
                             </div>
-                            
+
                             <!-- start to build-->
                             <div class="semi-widget">
                                 <strong>Render HTML with Razor</strong>
@@ -51,144 +104,22 @@ public class DateTimePickerModel
 @@Html.EditorFor(s => s.Now)
 </pre>
                             </div>
-                            
-                            <!-- start to build-->
-                            <div class="semi-widget">
-                                <strong> call datepicker</strong>
-                               
-                                <pre class="prettyprint lang-js  pre-scrollable linenums">
-seajs.use(["datePicker"], function () {
-    $(".date").datepicker();
-});
-</pre>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-        </div>
-    </div>
-</div>
-<div class="box">
-    <div class="content">
-        <h4>Pure Html for DatePicker and input mask for Date
-        </h4>
-        <div class="text-info">
-            <ul>
-                <li>DatePicker is https://github.com/eternicode/bootstrap-datepicker </li>
-                <li>InputMask is https://github.com/RobinHerbots/jquery.inputmask </li>
-            </ul>
-        </div>
-        <form>
-            <div class="control-group">
-                <label>
-                    Time Picker & input mask</label>
-                <div class="controls">
-                    <div class="input-append date" id="example1" data-date="@DateTime.Now.ToString("yyyy-MM-dd")" data-date-format="yyyy-mm-dd">
-                        <input size="16" type="text" value="@DateTime.Now.ToString("yyyy-MM-dd")">
-                        <span class="add-on"><i class="icon-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <pre class="prettyprint lang-html">
-            @{
-                var code = @"
- <div class=""controls"">
-        <div class=""input-append date"" id=""example1"" data-date=""@DateTime.Now.ToString(""yyyy-MM-dd"")"" data-date-format=""yyyy-mm-dd"">
-            <input size=""16"" type=""text"" value=""@DateTime.Now.ToString(""yyyy-MM-dd"")"">
-            <span class=""add-on""><i class=""icon-calendar""></i></span>
-        </div>
-</div>
- @Scripts.Render(""~/Scripts/DatePicker"")
-<script type=""text/javascript"">
-        $('#example1').children().first().inputmask('y-m-d');
-</script>
-";
-            }
-@code
-</pre>
-        </form>
-    </div>
-</div>
-<div class="box">
-    <div class="content">
-        <h4>Html.Helper for DateTime type
-        </h4>
-        <form>
-            @{
-                var code2 = @"
-<div class=""control-group"">
-            <label>
-                Time Picker using HTMLHelper</label>
-            <div class=""controls"">
-                @Html.DatePickerFor(f => f.Now,""yyyy/MM/dd"")
-            </div>
-        </div>";
-            }
-            <div class="control-group">
-                <label>
-                    Date Picker using HTMLHelper</label>
-                <div class="controls">
-                    @Html.DatePickerFor(f => f.Now, "yyyy/MM/dd")
-                </div>
-            </div>
-            <pre class="prettyprint lang-html">
-@code2
-</pre>
-        </form>
-    </div>
-</div>
-<div class="box">
-    <div class="content">
-        <form>
-            <div class="control-group">
-                <label>
-                    Time Picker & input mask</label>
-                <div class="controls">
-                    <div class="input-append" id="example2">
-                        <input size="16" type="text" value="@DateTime.Now.ToString("HH:mm:ss")">
-                        <span class="add-on"><i class="icon-time"></i></span>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <pre class="prettyprint lang-html">
-@{var code3 = @"
- <div class=""controls"">
-        <div class=""input-append"" id=""example2"">
-            <input size=""16"" type=""text"" value=""@DateTime.Now.ToString(""HH:mm:ss"")"">
-            <span class=""add-on""><i class=""icon-calendar""></i></span>
-        </div>
-</div>
- @Scripts.Render(""~/Scripts/DatePicker"")
-<script type=""text/javascript"">
-          $('#example2').children().first().inputmask('h:s:s');
-</script>
-";
-}
-@code3
-</pre>
-    </div>
-</div>
-<div class="box">
-    <div class="content">
-        <from>
-        <div class="control-group">
-            <label class="control-label">Date Picker using HTMLHelper</label>
-            <div class="controls">
-                @Html.TimeInputFor(f => f.TimeNow)
-</div>
-        </div>
-        </from>
-    </div>
-</div>
+
 @section script
 {
     <!--https://github.com/RobinHerbots/jquery.inputmask-->
     <!--Scripts.Render("~/Scripts/InputMasker")-->
     <script type="text/javascript">
-        seajs.use(["datePicker"], function () {
+        seajs.use(["datePicker", "inputmask"], function () {
             $(".date").datepicker();
             /*$('#example1').children().first().inputmask("y-m-d");
             $('#example2').children().first().inputmask('h:s:s');*/

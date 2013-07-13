@@ -46,7 +46,8 @@
             exports: "jQuery "
         },
         inputmask: {
-            src: "/bundles/inputmask#",//make sure it's endwith "#"
+            src: "/bundles/inputmask",//make sure it's endwith "#"
+            deps: ['jquery'],
             exports: "jQuery "
         },
         uniform: {

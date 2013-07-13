@@ -1,13 +1,16 @@
-﻿@model Qi.Time
+﻿@using System.Text.RegularExpressions
+@model Qi.Time
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    
+    var timeFormat = ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:ss";
+    var displayValue = this.Model.ToString(timeFormat);
+    var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
 }
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
         <div class="input-append">
-            <input size="5" type="text" value="@DateTime.Now.ToString("HH:mm")" inputmask-format="h:s" class="time">
+            <input size="5" type="text" value="@displayValue" inputmask-format="@inputMask" class="time">
             <span class="add-on"><i class="icon-time"></i></span>
         </div>
         @Html.ValidationSummary("")

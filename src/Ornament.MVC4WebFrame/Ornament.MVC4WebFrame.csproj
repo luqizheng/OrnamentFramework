@@ -533,17 +533,14 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\compatibles\jqueryui-1.0.js" />
     <Content Include="Scripts\compatibles\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\dialogs\alert.js" />
     <Content Include="Scripts\datePicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\dialogs\confirm.js" />
     <Content Include="Scripts\html5shiv.js" />
-    <Content Include="Scripts\inputMasker\ornament.compatible.js" />
-    <Content Include="Scripts\inputMasker\jquery.inputmask.date.extensions.js" />
-    <Content Include="Scripts\inputMasker\jquery.inputmask.extensions.js" />
-    <Content Include="Scripts\inputMasker\1jquery.inputmask.js" />
-    <Content Include="Scripts\inputMasker\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\compatibles\inputMask-1.0.js" />
     <Content Include="Content\less\bootstrap\accordion.less" />
     <Content Include="Content\less\bootstrap\alerts.less" />
     <Content Include="Content\less\bootstrap\breadcrumbs.less" />
@@ -587,20 +584,7 @@
     <Content Include="Content\less\font-awesome\font-awesome.less" />
     <Content Include="Content\less\global.less" />
     <Content Include="Content\less\variables.less" />
-    <Content Include="Areas\Docs\Views\BaseCss\Buttons.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Code.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Form.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Icons.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Image.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Table.cshtml" />
-    <Content Include="Areas\Docs\Views\BaseCss\Typography.cshtml" />
-    <Content Include="Areas\Docs\Views\Component\Dropdowns.cshtml" />
-    <Content Include="Areas\Docs\Views\Dashboard\Bootstrap.cshtml" />
-    <Content Include="Areas\Docs\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
-    <Content Include="Areas\Docs\Views\Plugin\Editor.cshtml" />
-    <Content Include="Areas\Docs\Views\Plugin\FileManager.cshtml" />
-    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Areas\Messages\Views\News\Index.cshtml" />
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
@@ -615,12 +599,21 @@
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
+    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery.dotdotdot-1.5.1.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask-2.2.66.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask-2.2.66.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.date.extensions-2.2.66.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.date.extensions-2.2.66.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.extensions-2.2.66.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.extensions-2.2.66.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.numeric.extensions-2.2.66.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.numeric.extensions-2.2.66.min.js" />
     <Content Include="Scripts\jQuery.tmpl.js" />
     <Content Include="Scripts\jQuery.tmpl.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -916,7 +909,6 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Shared\_swfupload.cshtml" />
     <Content Include="Views\Shared\_editor.cshtml" />
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
@@ -958,6 +950,8 @@
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Period.cshtml" />
+    <Content Include="Views\Shared\filectrl.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -967,6 +961,7 @@
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
+    <Folder Include="Scripts\inputMasker\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
