@@ -235,6 +235,7 @@
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
+    <Compile Include="Areas\Docs\Models\BaseTypeModel.cs" />
     <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
@@ -600,6 +601,7 @@
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Areas\Docs\Views\Plugin\BaseType.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -952,6 +954,7 @@
     <Content Include="Views\Shared\EditorTemplates\Period.cshtml" />
     <Content Include="Views\Shared\filectrl.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

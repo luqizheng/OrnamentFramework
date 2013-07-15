@@ -167,6 +167,7 @@
     <Compile Include="ReturnResult.cs" />
     <Compile Include="SiteMapResolveUrl.cs" />
     <Compile Include="TimeZoneHtmlExtender.cs" />
+    <Compile Include="ValidationAdapter\StepAttributeAdapter.cs" />
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>

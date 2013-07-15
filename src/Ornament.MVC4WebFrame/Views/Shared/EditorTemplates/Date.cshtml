@@ -1,8 +1,8 @@
 ﻿@using System.Text.RegularExpressions
-@model DateTime
+@model DateTime?
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var displayValue = this.Model.ToString(this.ViewData.ModelMetadata.DisplayFormatString);
+    var displayValue = this.Model!=null?this.Model.Value.ToString(this.ViewData.ModelMetadata.DisplayFormatString):"";
     var format = ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd";
     var inputMask = format.ToLower();
 }

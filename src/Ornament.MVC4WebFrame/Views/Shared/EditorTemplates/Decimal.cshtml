@@ -1,55 +1,74 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@using Ornament.Validations
+@using Ornament.Web.ValidationAdapter
 @model decimal?
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var inputName = ViewData.TemplateInfo.HtmlFieldPrefix;
 
+    var rangAttr = false;
+    var stepAttr = false;
     var minValue = 0m;
     var maxValue = 100m;
-
+    double step = 1;
 
     foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
     {
-        if (attr.GetType() == typeof(RangeAttributeAdapter))
+        var a = attr as RangeAttributeAdapter;
+        if (a != null)
         {
-            var a = attr as RangeAttributeAdapter;
             foreach (ModelClientValidationRule mcvr in a.GetClientValidationRules())
             {
                 minValue = Convert.ToDecimal(mcvr.ValidationParameters["min"]);
                 maxValue = Convert.ToDecimal(mcvr.ValidationParameters["max"]);
             }
-            break;
+            rangAttr = true;
+            if (stepAttr)
+            {
+                break;
+            }
         }
-    }
-    char[] str = minValue != 0 ? minValue.ToString("0.###").ToArray() : maxValue.ToString("0.###").ToArray();
-
-    for (int i = 0; i < str.Length - 1; i++)
-    {
-        if (str[i] != '.')
+        var b = attr as StepAttributeAdapter;
+        if (b != null)
         {
-            str[i] = '0';
+            foreach (ModelClientValidationRule mcvr in b.GetClientValidationRules())
+            {
+                step = Convert.ToDouble(mcvr.ValidationParameters["step"]);
+            }
+            stepAttr = true;
+            if (rangAttr)
+            {
+                break;
+            }
         }
+
     }
-    str[str.Length - 1] = '1';
-    var Step = Convert.ToDecimal(new string(str));
+    if (!stepAttr)
+    {
+        char[] str = minValue != 0 ? minValue.ToString("0.###").ToArray() : maxValue.ToString("0.###").ToArray();
+
+        for (int i = 0; i < str.Length - 1; i++)
+        {
+            if (str[i] != '.')
+            {
+                str[i] = '0';
+            }
+        }
+        str[str.Length - 1] = '1';
+        step = Convert.ToDouble(new string(str));
+    }
 
 }
+
 
 <div class="control-group">
     @Html.Label(inputName, display, new { @class = "control-label" })
     <div class="controls">
-        @Html.TextBox("", this.Model ?? 0, new { @class = "styled" })
+        @Html.TextBox("", this.Model ?? 0, new Dictionary<string, object>(){
+            { "class" , "styled jqui-spinner"},
+            {"jq-step",step }
+        })
         @Html.ValidationMessage("")
     </div>
 </div>
-<script type="text/javascript">
-    seajs.use(["jquerui"], function () {
-        $("#@ViewData.TemplateInfo.HtmlFieldPrefix").spinner({
-            numberFormat: "n",
-            step: @Step,
-            max:@maxValue.ToString("0.###") ,
-            min:@minValue.ToString("0.###")
-            
-            });
-    });
-</script>
+

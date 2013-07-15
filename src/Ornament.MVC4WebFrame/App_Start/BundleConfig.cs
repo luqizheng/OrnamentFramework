@@ -9,7 +9,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
             bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
@@ -32,13 +32,11 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui.js").Include("~/Scripts/jquery-ui-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui.js").Include("~/Scripts/jquery-ui-{version}.js").Include("~/Scripts/compatibles/jqueryui-{version}.js"));
         }
 
         private static void JQueryRelative(BundleCollection bundles)
         {
-
-
             bundles.Add(new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
 
             bundles.Add(new Bundle("~/bundles/inputmask.js", new JsMinify()).Include("~/Scripts/jquery.inputmask/*.js")

@@ -12,12 +12,14 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Controllers
        
         public ActionResult DatePicker()
         {
+
             return View(new DateTimePickerModel());
         }
       
-        public ActionResult Editor()
+        public ActionResult BaseType()
         {
-            return View();
+            var a = new BaseTypeModel();
+            return View(a);
         }
     }
 }
