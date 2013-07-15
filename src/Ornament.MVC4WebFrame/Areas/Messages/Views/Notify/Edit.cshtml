@@ -231,7 +231,7 @@
     <script type="text/javascript">
         var content = @Html.Raw(contents);
 
-        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap", "datePicker", "user", "org", "role", "usergroup"], function() {
+        seajs.use(['ckeditor/ckeditor.js', "select2", "bootstrap", "ExtenderType", "user", "org", "role", "usergroup"], function() {
 
             var editor = CKEDITOR.replace('editor');
             editor.on("blur", function() {

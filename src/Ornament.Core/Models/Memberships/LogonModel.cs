@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Properties;
 using Ornament.Validations;
 
 namespace Ornament.Models.Memberships
@@ -9,21 +10,21 @@ namespace Ornament.Models.Memberships
     {
         public string ReturnUrl { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Ornament.Properties.Resources))]
-        [Display(Name = "LoginId", ResourceType = typeof(Ornament.Properties.Resources))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (Resources))]
+        [Display(Name = "LoginId", ResourceType = typeof (Resources))]
         public string User { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof(Ornament.Properties.Resources))]
-        [Display(Name = "Password", ResourceType = typeof(Ornament.Properties.Resources))]
+        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof (Resources))]
+        [Display(Name = "Password", ResourceType = typeof (Resources))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof(Ornament.Properties.Resources))]
+        [Display(Name = "RememberMe", ResourceType = typeof (Resources))]
         public bool RememberMe { get; set; }
 
-        [Display(Name = "VerifyCode", ResourceType = typeof (Ornament.Properties.Resources))]
+        [Display(Name = "VerifyCode", ResourceType = typeof (Resources))]
         [VerifyCodeRequire(ErrorMessageResourceName = "alertMsg_requireVerifyCode",
-            ErrorMessageResourceType = typeof (Ornament.Properties.Resources))]
+            ErrorMessageResourceType = typeof (Resources))]
         [UIHint("VerifyCode")]
         public string VerifyCodde { get; set; }
 
@@ -33,7 +34,7 @@ namespace Ornament.Models.Memberships
             {
                 if (expectVerifyCode.ToLower() != VerifyCodde.ToLower())
                 {
-                    errorMessage = Ornament.Properties.Resources.error_notMatchVerifyCode;
+                    errorMessage = Resources.error_notMatchVerifyCode;
                     return false;
                 }
             }
@@ -42,18 +43,18 @@ namespace Ornament.Models.Memberships
             User u = userDao.GetByLoginId(User);
             if (u == null)
             {
-                errorMessage = Ornament.Properties.Resources.error_LoginError;
+                errorMessage = Resources.error_LoginError;
                 return false;
             }
             if (u.IsLockout)
             {
-                errorMessage = Ornament.Properties.Resources.error_UserIsLockout;
+                errorMessage = Resources.error_UserIsLockout;
                 return false;
             }
 
             if (!u.IsApproved)
             {
-                errorMessage = Ornament.Properties.Resources.error_UserIsNotApproved;
+                errorMessage = Resources.error_UserIsNotApproved;
                 return false;
             }
 
@@ -61,7 +62,7 @@ namespace Ornament.Models.Memberships
             bool result = u.Security.ValidateUser(Password);
             if (!result)
             {
-                errorMessage = Ornament.Properties.Resources.error_LoginError;
+                errorMessage = Resources.error_LoginError;
                 return false;
             }
             return true;

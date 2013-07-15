@@ -1,0 +1,94 @@
+﻿@using Ornament.Web
+@using Qi
+@model Ornament.MVCWebFrame.Areas.Docs.Models.ExtenderTypeModel
+@{
+    ViewBag.Title = "ExtenderType";
+    Layout = "../Shared/_codeLayout.cshtml";
+}
+@section pageTitle
+{
+    <h5>Date/Time/Period 
+    </h5>
+    <span>Pure Html for ExtenderType and input mask for Date 
+    </span>
+}
+
+
+
+
+<div class="row-fluid">
+    <div class="widget">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h6>Time Picker</h6>
+            </div>
+        </div>
+        <div class="body well">
+            <div class="row-fluid">
+                <div class="span3 widget">
+                    <div class="body well">
+                        <form method="post">
+                            @Html.EditorFor(s => s.TimeNow)
+                            <div class="form-actions">
+                                <button>Submit</button>
+                            </div>
+                        </form>
+
+                        <div class="semi-widget">
+                            <strong>Output</strong>
+                            <div class="body well-white">
+                                TimeNow:@this.Model.TimeNow
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body well">
+                        <ul>
+                            <li><a href="https://github.com/jonthornton/jquery-timepicker">TimePicker lib</a></li>
+                            <li><a href="https://github.com/RobinHerbots/jquery.inputmask">Input mask</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span7">
+                    <div class="widget">
+                        <div class="body well">
+                            <!-- start to build-->
+                            <div class="semi-widget">
+                                <strong>Defined a View Model</strong>
+                                <pre class="prettyprint lang-vb pre-scrollable linenums">
+public class ExtenderTypeModel
+{
+        [UIHint("Time")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "HH:ss")]
+        public DateTime Now { get; set; }
+}
+                    </pre>
+                            </div>
+
+                            <!-- start to build-->
+                            <div class="semi-widget">
+                                <strong>Render HTML with Razor</strong>
+
+                                <pre class="prettyprint lang-html  pre-scrollable linenums">
+@@Html.EditorFor(s => s.Now)
+</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section script
+{
+
+<script type="text/javascript">
+    seajs.use(["timePicker", ], function () {
+
+    });
+
+    </script>
+}

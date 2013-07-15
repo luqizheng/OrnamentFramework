@@ -22,7 +22,7 @@
         },
         elfinder: {
             src: "/Scripts/plugins/ui/jquery.elfinder.js",
-            deps:["jqueryui"]
+            deps: ["jqueryui"]
         },
         form: {
             src: "/scripts/plugins/forms/jquery.form.js",
@@ -67,7 +67,12 @@
         tagsInput: {
             src: "/scripts/plugins/forms/jquery.tagsinput.min.js",
             deps: ["jquery"],
-            exports: "jQuery "
+            exports: "jQuery"
+        },
+        timePicker: {
+            src: "/bundles/timepicker.js",
+            deps: ["jquery", "inputmask"],
+            exports: "jQuery"
         },
         select2: {
             src: "/scripts/plugins/forms/jquery.select2.min.js",
@@ -79,7 +84,7 @@
             deps: ["jquery"], exports: "jQuery"
         },
         datePicker: {
-            src: "/bundles/datePicker.js",
+            src: "/bundles/ExtenderType.js",
             deps: ["bootstrap"], exports: "jQuery"
         },
 

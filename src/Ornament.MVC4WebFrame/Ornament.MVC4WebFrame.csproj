@@ -233,9 +233,10 @@
     <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
     <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
-    <Compile Include="Areas\Docs\Controllers\PluginController.cs" />
+    <Compile Include="Areas\Docs\Controllers\TypeLayoutController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
-    <Compile Include="Areas\Docs\Models\DateTimePickerModel.cs" />
+    <Compile Include="Areas\Docs\Models\BaseTypeModel.cs" />
+    <Compile Include="Areas\Docs\Models\ExtenderTypeModel.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
@@ -534,13 +535,13 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\compatibles\jqueryui-1.0.js" />
+    <Content Include="Scripts\compatibles\timePicker-1.0.js" />
     <Content Include="Scripts\compatibles\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\dialogs\alert.js" />
     <Content Include="Scripts\datePicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\dialogs\confirm.js" />
     <Content Include="Scripts\html5shiv.js" />
-    <Content Include="Scripts\compatibles\inputMask-1.0.js" />
     <Content Include="Content\less\bootstrap\accordion.less" />
     <Content Include="Content\less\bootstrap\alerts.less" />
     <Content Include="Content\less\bootstrap\breadcrumbs.less" />
@@ -584,7 +585,7 @@
     <Content Include="Content\less\font-awesome\font-awesome.less" />
     <Content Include="Content\less\global.less" />
     <Content Include="Content\less\variables.less" />
-    <Content Include="Areas\Docs\Views\Plugin\DatePicker.cshtml" />
+    <Content Include="Areas\Docs\Views\TypeLayout\ExtenderType.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Areas\Messages\Views\News\Index.cshtml" />
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
@@ -600,6 +601,7 @@
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Areas\Docs\Views\TypeLayout\BaseType.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -659,6 +661,7 @@
     <Content Include="Scripts\plugins\ui\i18n\elfinder.vi.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.zh_CN.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.zh_TW.js" />
+    <Content Include="Scripts\plugins\ui\jquery.timepicker-1.1.10.js" />
     <Content Include="Scripts\util\online.js" />
     <Content Include="Scripts\Models\Util\select2Helper-1.0.js" />
     <Content Include="Scripts\Models\Messages\chat-1.0.js" />
@@ -700,7 +703,6 @@
     <Content Include="Scripts\plugins\ui\jquery.fullcalendar.min.js" />
     <Content Include="Scripts\plugins\ui\jquery.jgrowl.js" />
     <Content Include="Scripts\plugins\ui\jquery.mousewheel.js" />
-    <Content Include="Scripts\plugins\ui\jquery.timepicker.min.js" />
     <Content Include="Scripts\plugins\ui\prettify.js" />
     <Content Include="Scripts\plugins\uploader\jquery.plupload.queue.js" />
     <Content Include="Scripts\plugins\uploader\plupload.html4.js" />
@@ -952,6 +954,8 @@
     <Content Include="Views\Shared\EditorTemplates\Period.cshtml" />
     <Content Include="Views\Shared\filectrl.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

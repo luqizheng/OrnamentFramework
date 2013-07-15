@@ -4,13 +4,14 @@
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var timeFormat = ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:ss";
     var displayValue = this.Model.ToString(timeFormat);
+    var timePickerFormat = Regex.Replace(timeFormat.Replace("m","i"), @"(\w)(\1)+", "$1");
     var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
 }
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
         <div class="input-append">
-            <input size="5" type="text" value="@displayValue" inputmask-format="@inputMask" class="time">
+            <input type="text" value="@displayValue" class="jqui-time" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix">
             <span class="add-on"><i class="icon-time"></i></span>
         </div>
         @Html.ValidationSummary("")
