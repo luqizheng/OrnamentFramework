@@ -9,7 +9,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
             bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
@@ -32,7 +32,9 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui.js").Include("~/Scripts/jquery-ui-{version}.js").Include("~/Scripts/compatibles/jqueryui-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui.js")
+                .Include("~/Scripts/jquery-ui-{version}.js")
+                .Include("~/Scripts/compatibles/jqueryui-{version}.js"));
         }
 
         private static void JQueryRelative(BundleCollection bundles)

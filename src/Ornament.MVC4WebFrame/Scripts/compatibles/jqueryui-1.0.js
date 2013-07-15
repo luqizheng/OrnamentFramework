@@ -12,4 +12,9 @@ $(document).ready(function () {
             min: min ? min : -3200000
         });
     });
+    $(".jqui-date input").each(function () {
+        var $this = $(this), format = $this.attr("data-date-format");
+        console.log(format);
+        $this.datepicker({ dateFormat: format });
+    });
 });
