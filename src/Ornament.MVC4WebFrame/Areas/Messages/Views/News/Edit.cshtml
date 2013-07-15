@@ -138,7 +138,7 @@
         var content = @Html.Raw(contents)
 
         seajs.use(['ckeditor/ckeditor.js', "select2",
-                "bootstrap", "datePicker", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
+                "bootstrap", "ExtenderType", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
 
                     var editor = CKEDITOR.replace('editor', {
                         filebrowserBrowseUrl: '@Url.Action("FileCtrl", "FileManager", new { area = "Settings" })',

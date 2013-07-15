@@ -10,7 +10,9 @@ using Ornament.MVCWebFrame.Controllers;
 using Ornament.Validations;
 using Ornament.Web;
 using Ornament.Web.IoC;
+using Ornament.Web.ModelBinder;
 using Ornament.Web.ValidationAdapter;
+using Qi;
 using Qi.Web.Mvc;
 using Qi.Web.Mvc.NHMvcExtender;
 using log4net;
@@ -26,7 +28,8 @@ namespace Ornament.MVCWebFrame.App_Start
             ValueProviderFactories.Factories[3] = new NHRouterDataProviderFactory();
             ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
             //change the default binder.
-            ModelBinders.Binders.DefaultBinder = new NHModelBinder();
+            ExtenderModelType();
+
 
 
             //Mvc Ioc of Castle.
@@ -43,6 +46,11 @@ namespace Ornament.MVCWebFrame.App_Start
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
             //for jquery spiner step,
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute), typeof(StepAttributeAdapter));
+        }
+        private static void ExtenderModelType()
+        {
+            ModelBinders.Binders.DefaultBinder = new NHModelBinder();
+            ModelBinders.Binders.Add(typeof(Time), new TimeModelBinder());
         }
         private static void ChangeControllerFacotry()
         {

@@ -1,15 +1,15 @@
 ﻿@using Ornament.Web
 @using Qi
-@model Ornament.MVCWebFrame.Areas.Docs.Models.DateTimePickerModel
+@model Ornament.MVCWebFrame.Areas.Docs.Models.ExtenderTypeModel
 @{
-    ViewBag.Title = "DatePicker";
+    ViewBag.Title = "ExtenderType";
     Layout = "../Shared/_codeLayout.cshtml";
 }
 @section pageTitle
 {
     <h5>Date/Time/Period 
     </h5>
-    <span>Pure Html for DatePicker and input mask for Date 
+    <span>Pure Html for ExtenderType and input mask for Date 
     </span>
 }
 
@@ -27,7 +27,25 @@
             <div class="row-fluid">
                 <div class="span3 widget">
                     <div class="body well">
-                        @Html.EditorFor(s => s.TimeNow)
+                        <form method="post">
+                            @Html.EditorFor(s => s.TimeNow)
+                            <div class="form-actions">
+                                <button>Submit</button>
+                            </div>
+                        </form>
+
+                        <div class="semi-widget">
+                            <strong>Output</strong>
+                            <div class="body well-white">
+                                TimeNow:@this.Model.TimeNow
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body well">
+                        <ul>
+                            <li><a href="https://github.com/jonthornton/jquery-timepicker">TimePicker lib</a></li>
+                            <li><a href="https://github.com/RobinHerbots/jquery.inputmask">Input mask</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="span7">
@@ -37,7 +55,7 @@
                             <div class="semi-widget">
                                 <strong>Defined a View Model</strong>
                                 <pre class="prettyprint lang-vb pre-scrollable linenums">
-public class DateTimePickerModel
+public class ExtenderTypeModel
 {
         [UIHint("Time")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "HH:ss")]
@@ -67,10 +85,10 @@ public class DateTimePickerModel
 @section script
 {
 
-    <script type="text/javascript">
-        seajs.use(["datePicker", "inputmask"], function () {
-      
-        });
+<script type="text/javascript">
+    seajs.use(["timePicker", ], function () {
+
+    });
 
     </script>
 }

@@ -14,7 +14,8 @@ $(document).ready(function () {
     });
     $(".jqui-date input").each(function () {
         var $this = $(this), format = $this.attr("data-date-format");
-        console.log(format);
         $this.datepicker({ dateFormat: format });
     });
+
+   
 });

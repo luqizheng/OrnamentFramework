@@ -144,6 +144,7 @@
     <Compile Include="MemberShips\OrnamentProfile.cs" />
     <Compile Include="MemberShips\SiteMapException.cs" />
     <Compile Include="MemberShips\SiteMapPermission.cs" />
+    <Compile Include="ModelBinder\TimeModelBinder.cs" />
     <Compile Include="Models\GlobalInitializer.cs" />
     <Compile Include="Models\IDataInitializer.cs" />
     <Compile Include="Models\InitData.cs" />

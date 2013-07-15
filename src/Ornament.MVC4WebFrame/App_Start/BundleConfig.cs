@@ -9,7 +9,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
             bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
@@ -32,6 +32,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
+            
             bundles.Add(new ScriptBundle("~/bundles/jqueryui.js")
                 .Include("~/Scripts/jquery-ui-{version}.js")
                 .Include("~/Scripts/compatibles/jqueryui-{version}.js"));
@@ -64,8 +65,13 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new ScriptBundle("~/bundles/form.js").Include("~/Scripts/plugins/forms/jquery.form.js"));
 
             bundles.Add(
-                new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
-
+                new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js")
+                );
+            
+            //time picker ;
+            bundles.Add(new ScriptBundle("~/bundles/timepicker.js")
+                .Include("~/Scripts/plugins/ui/jquery.timepicker-{version}.js")
+                .Include("~/Scripts/compatibles/timePicker-{version}.js"));
 
         }
 
