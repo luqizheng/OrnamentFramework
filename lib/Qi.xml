@@ -1635,12 +1635,12 @@
         </member>
         <member name="P:Qi.Text.NamedFormatterHelper.StartPlaceholder">
             <summary>
-            Start Placholder default is "["
+                Start Placholder default is "["
             </summary>
         </member>
         <member name="P:Qi.Text.NamedFormatterHelper.EndPlaceHolder">
             <summary>
-            End Placeholder default is "]"
+                End Placeholder default is "]"
             </summary>
         </member>
         <member name="T:Qi.Time">
