@@ -4,7 +4,8 @@
     return {
         select2: function (selector, initData) {
             var opts = {
-                url: "/api/Orgs",
+                ajax:
+                    { url: "/api/Orgs" },
                 multiple: false
             };
             return api.select2(selector, opts, initData);

@@ -969,7 +969,6 @@
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
-    <Folder Include="Scripts\inputMasker\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

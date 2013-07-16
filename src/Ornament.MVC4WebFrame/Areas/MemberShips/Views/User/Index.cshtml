@@ -30,11 +30,7 @@
                 var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
                 $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
             });
-
-            $("#btnCreateUser").click(function () {
-                $("#createUserModel form").submit();
-            });
-
+ 
             $("#createUserModel").on("hidden", function () {
                 $("input", $(this)).val("");
                 $(this).bootstrapMakeUp("clear");
@@ -72,6 +68,7 @@
         }
     </script>
 }
+
 @section pageTitle{
     <h5>@String.Format("{0}{1}", MemberShip.User, "列表")</h5>
 }

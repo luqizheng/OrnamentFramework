@@ -21,8 +21,9 @@ namespace Ornament.MVCWebFrame.Api.Core
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match(string name,
-                                         string email, string loginId, string phone, int? pageIndex, int? pageSize)
+        public IEnumerable<object> Match([FromUri]string name,
+                                         [FromUri]string email, [FromUri]string loginId, [FromUri]string phone,
+            int? pageIndex, int? pageSize)
         {
             if (pageIndex == null)
                 pageIndex = 0;

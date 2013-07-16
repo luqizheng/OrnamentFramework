@@ -51,6 +51,16 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserOperator.Read, "User")]
+        public ActionResult Index()
+        {
+            var pagination = new Pagination();
+            IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
+            pagination.TotalNumber = _userDao.Count();
+            ViewData["Nav"] = pagination;
+            return View(result);
+        }
+
+        [ResourceAuthorize(UserOperator.Read, "User"), HttpPost]
         public ActionResult Index(Pagination pagination)
         {
             IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
@@ -58,6 +68,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             ViewData["Nav"] = pagination;
             return View(result);
         }
+
+
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
         public ActionResult Edit(string id)

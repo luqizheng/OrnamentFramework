@@ -3,7 +3,7 @@
     var api = require("/models/util/select2Helper.js");
     return {
         select2: function (selector, initData) {
-            return api.select2(selector, { url: "/api/Roles" }, initData);
+            return api.select2(selector, { ajax: { url: "/api/Roles" } }, initData);
         }
     };
 });
