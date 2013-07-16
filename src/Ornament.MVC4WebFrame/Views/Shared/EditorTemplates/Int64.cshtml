@@ -1,10 +1,10 @@
 ﻿@using System.ComponentModel.DataAnnotations
 @using Ornament.Web.ValidationAdapter
-@model Int32?
+@model Int64?
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var inputName = ViewData.TemplateInfo.HtmlFieldPrefix;
-    var step = 1;
+    Int64 step = 1;
 
     foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
     {
@@ -13,8 +13,7 @@
         {
             foreach (ModelClientValidationRule mcvr in b.GetClientValidationRules())
             {
-                step = Convert.ToInt32(mcvr.ValidationParameters["step"]);
-
+                step = Convert.ToInt64(mcvr.ValidationParameters["step"]);
             }
             break;
         }

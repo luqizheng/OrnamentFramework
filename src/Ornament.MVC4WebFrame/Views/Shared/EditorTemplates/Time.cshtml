@@ -11,7 +11,7 @@
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
         <div class="input-append">
-            <input type="text" value="@displayValue" class="jqui-time" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix">
+            <input type="text" value="@displayValue" class="jqui-time styled" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix">
             <span class="add-on"><i class="icon-time"></i></span>
         </div>
         @Html.ValidationSummary("")

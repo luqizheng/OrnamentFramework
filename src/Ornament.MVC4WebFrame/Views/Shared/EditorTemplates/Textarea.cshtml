@@ -5,7 +5,10 @@
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        @Html.TextArea("", this.Model, ViewData)
+        @Html.TextArea("", this.Model, 20,60,new Dictionary<string, object>
+            {
+                {"class","styled"}
+            })
         @Html.ValidationMessage("")
     </div>
 </div>

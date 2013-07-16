@@ -956,6 +956,7 @@
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
