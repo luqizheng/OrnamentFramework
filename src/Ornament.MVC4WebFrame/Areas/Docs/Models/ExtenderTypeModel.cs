@@ -11,8 +11,7 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Models
            
         }
         [UIHint("Time")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "HH:ss")]
-        public Time TimeNow { get; set; }
+        public Time? TimeNow { get; set; }
 
         
 

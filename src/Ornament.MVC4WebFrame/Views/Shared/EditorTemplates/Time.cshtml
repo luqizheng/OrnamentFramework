@@ -1,10 +1,10 @@
 ﻿@using System.Text.RegularExpressions
-@model Qi.Time
+@model Qi.Time?
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var timeFormat = ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:ss";
-    var displayValue = this.Model.ToString(timeFormat);
-    var timePickerFormat = Regex.Replace(timeFormat.Replace("m","i"), @"(\w)(\1)+", "$1");
+    var displayValue = this.Model.HasValue ? this.Model.Value.ToString(timeFormat) : "00:00:00";
+    var timePickerFormat = Regex.Replace(timeFormat.Replace("m", "i"), @"(\w)(\1)+", "$1");
     var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
 }
 <div class="control-group">

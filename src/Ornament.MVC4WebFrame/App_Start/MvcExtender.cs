@@ -51,6 +51,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             ModelBinders.Binders.DefaultBinder = new NHModelBinder();
             ModelBinders.Binders.Add(typeof(Time), new TimeModelBinder());
+            ModelBinders.Binders.Add(typeof(Time?), new TimeModelBinder());
         }
         private static void ChangeControllerFacotry()
         {

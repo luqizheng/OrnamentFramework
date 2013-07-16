@@ -48,7 +48,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         // POST: /Usergroups/Create
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create([ModelBinder(typeof (NHModelBinder))] UserGroup userGroup)
+        public ActionResult Create(UserGroup userGroup)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         // POST: /Usergroups/Edit/5
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit([ModelBinder(typeof (NHModelBinder))] UserGroup userGroup)
+        public ActionResult Edit(UserGroup userGroup)
         {
             if (ModelState.IsValid)
             {

@@ -12,22 +12,32 @@ namespace Ornament.Web.ModelBinder
             ValueProviderResult value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
             string attemptedValue = value.AttemptedValue;
 
-            var format = bindingContext.ModelMetadata.DisplayFormatString;
+            string format = !String.IsNullOrEmpty(bindingContext.ModelMetadata.DisplayFormatString)
+                                ? bindingContext.ModelMetadata.DisplayFormatString
+                                : "HH:mm:ss tt";
+
 
 
             DateTime datetime = ToDateTime(attemptedValue, format);
             var time = new Time(datetime.Hour, datetime.Minute, datetime.Second);
-            return time;
+            var type = bindingContext.ModelType;
+            if (!type.IsGenericType)
+            {
+                return time;
+            }
+            Time? t = time;
+            return t;
         }
 
         public static DateTime ToDateTime(string inputString, string formatString)
         {
-
             var format = new[]
                 {
                     formatString,
+                    CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern,
                     CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern,
                     CultureInfo.CurrentUICulture.DateTimeFormat.ShortTimePattern,
+                    CultureInfo.CurrentUICulture.DateTimeFormat.LongTimePattern,
                     "HH:mm",
                     "HH:mm:ss",
                     "hh:mm:ss tt",
@@ -39,7 +49,6 @@ namespace Ornament.Web.ModelBinder
                 return dateTime;
 
             throw new FormatException(inputString + " is not in correct format.");
-
         }
     }
 }
