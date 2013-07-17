@@ -169,7 +169,7 @@
     display: none;
 }
 .select2-container.select2-drop-above .select2-choice { border-bottom-color: #aaa; }
-.select2-container .select2-choice span { margin-right: 28px; display: block; overflow: hidden; white-space: nowrap; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis; height:12px }
+.select2-container .select2-choice span { margin-right: 28px; display: block; overflow: hidden; white-space: nowrap; -ms-text-overflow: ellipsis; -o-text-overflow: ellipsis; text-overflow: ellipsis;}
 .select2-container .select2-choice abbr { display: block; width: 10px; height: 10px; position: absolute; right: 28px; top: 9px; background: url(../img/elements/forms/clear_results.png) no-repeat; cursor: pointer; }
 .select2-container .select2-choice abbr:hover { cursor: pointer; }
 .select2-drop-mask { position: absolute; left: 0; top: 0; z-index: 9998; opacity: 0; filter: alpha(opacity=0); }
