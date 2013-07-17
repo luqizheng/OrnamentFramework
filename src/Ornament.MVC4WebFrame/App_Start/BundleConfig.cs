@@ -10,7 +10,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
             ;
             bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]

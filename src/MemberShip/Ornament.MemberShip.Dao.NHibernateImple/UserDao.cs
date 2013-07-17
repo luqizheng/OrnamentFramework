@@ -23,9 +23,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<User>(u => u.LoginId)); }
         }
 
-        private IProjection ContactEmailProperty
+        private string ContactEmailProperty(string prefix)
         {
-            get { return _pools.Once(() => Projections.Property<User.ContactInfo>(u => u.Email)); }
+            if (!String.IsNullOrEmpty(prefix))
+            {
+                return prefix + "." + Projections.Property<User.ContactInfo>(u => u.Email).PropertyName;
+            }
+            return Projections.Property<User.ContactInfo>(u => u.Email).PropertyName;
         }
 
 
@@ -39,9 +43,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<User>(u => u.Id)); }
         }
 
-        private IProjection ContactPhoneProperty
+        private string ContactPhoneProperty(string prefix)
         {
-            get { return Projections.Property<User.ContactInfo>(s => s.Phone); }
+            return prefix + "." + Projections.Property<User.ContactInfo>(s => s.Phone).PropertyName;
         }
 
         #endregion
@@ -62,24 +66,28 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex,
                                        int pageSize)
         {
-            DetachedCriteria result = CreateDetachedCriteria();
-            Disjunction a = Restrictions.Disjunction();
-            if (!string.IsNullOrEmpty(loginid))
-                a.Add(Restrictions.InsensitiveLike(LoginProperty, loginid));
-            if (!string.IsNullOrEmpty(name))
-                a.Add(Restrictions.InsensitiveLike(NameProperty, name));
-            result.Add(a);
+            DetachedCriteria result = CreateDetachedCriteria().CreateAlias("Contact","contact");
+            
+           
 
-            Disjunction contactJunction = Restrictions.Disjunction();
+            Disjunction userInfo = Restrictions.Disjunction();
+            result.Add(userInfo);
+
+            if (!string.IsNullOrEmpty(loginid))
+                userInfo.Add(Restrictions.InsensitiveLike(LoginProperty, loginid));
+            if (!string.IsNullOrEmpty(name))
+                userInfo.Add(Restrictions.InsensitiveLike(NameProperty, name));
+            
+            
             if (!string.IsNullOrEmpty(email))
             {
-                contactJunction.Add(Restrictions.InsensitiveLike(ContactEmailProperty, email));
+                userInfo.Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), email));
             }
             if (!string.IsNullOrEmpty(phone))
             {
-                contactJunction.Add(Restrictions.InsensitiveLike(ContactPhoneProperty, name));
+                userInfo.Add(Restrictions.InsensitiveLike(ContactPhoneProperty("contact"), name));
             }
-            result.CreateCriteria("Contact").Add(contactJunction);
+
             return
                 result.SetFirstResult(pageIndex * pageSize)
                       .SetMaxResults(pageSize)
@@ -151,8 +159,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return
                 CreateCriteria()
-                    .CreateCriteria("Contact")
-                    .Add(Restrictions.Eq(ContactEmailProperty, email))
+                    .CreateAlias("Contact", "contact")
+                    .Add(Restrictions.Eq(ContactEmailProperty("contact"), email))
                     .UniqueResult<User>();
         }
 
@@ -202,7 +210,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize)
         {
             return CreateDetachedCriteria().CreateCriteria("Contact")
-                                           .Add(Restrictions.InsensitiveLike(ContactEmailProperty, emailToMatch))
+                                           .Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), emailToMatch))
                                            .SetMaxResults(pageSize)
                                            .SetFirstResult(pageSize * pageIndex)
                                            .GetExecutableCriteria(CurrentSession).List<User>();
@@ -300,7 +308,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             DetachedCriteria a =
                 DetachedCriteria.For<User.ContactInfo>()
                     .SetProjection(Projections.RowCount())
-                    .Add(Restrictions.Eq(ContactEmailProperty, email).IgnoreCase());
+                    .Add(Restrictions.Eq(Projections.Property<User.ContactInfo>(s => s.Email), email).IgnoreCase());
 
             if (!String.IsNullOrEmpty(idForExclude))
             {

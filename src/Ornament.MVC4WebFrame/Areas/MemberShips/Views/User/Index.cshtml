@@ -16,7 +16,7 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", 'select2'], function () {
+        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", 'select2'], function (a,user) {
 
             $(".actionCheckbox").uniform().change(function () {
                 $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
@@ -35,7 +35,7 @@
                 $("input", $(this)).val("");
                 $(this).bootstrapMakeUp("clear");
             });
-
+          
             updateTable = function (user) {
                 if (user.success) {
                     var $tar = $("#userTableTmpl").tmpl(user.user).prependTo($("#userListBody"));
@@ -44,6 +44,7 @@
                     return;
                 }
             };
+            user.typeHeader("#searchContent");
             $("#search :submit").click(function () {
                 var searchData = {
                     loginIdOrEmail: $("#searchContent").val()
@@ -70,7 +71,7 @@
 }
 
 @section pageTitle{
-    <h5>@String.Format("{0}{1}", MemberShip.User, "列表")</h5>
+    <h5>MemberShip Dashboard</h5>
 }
 <div class="actions-wrapper">
     <div class="actions">
@@ -151,7 +152,7 @@
 
 <form action="#" class="search widget" id="search">
     <div class="autocomplete-append">
-        <input type="text" id="searchContent" placeholder="" class="ui-autocomplete-input" autocomplete="off">
+        <input type="text" id="searchContent" placeholder="Please input @Basic.Email LoginId @Basic.Phone" class="ui-autocomplete-input" autocomplete="off">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" value="@Basic.Search" class="btn btn-info">
         <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="searchTextBox" tabindex="0" style="display: none; z-index: 1;"></ul>

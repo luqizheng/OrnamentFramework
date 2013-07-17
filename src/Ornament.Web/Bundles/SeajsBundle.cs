@@ -14,14 +14,21 @@ namespace Ornament.Web.Bundles
             : base(virtualPath)
         {
             this.Transforms.Clear();
-            this.Transforms.Add(new SeajsMinify());
+            if (BundleTable.EnableOptimizations)
+            {
+                this.Transforms.Add(new SeajsMinify());
+            }
+            
         }
 
         public SeajsBundle(string virtualPath, string cdnPath)
             : base(virtualPath, cdnPath)
         {
             this.Transforms.Clear();
-            this.Transforms.Add(new SeajsMinify());
+            if (BundleTable.EnableOptimizations)
+            {
+                this.Transforms.Add(new SeajsMinify());
+            }
         }
 
     }
