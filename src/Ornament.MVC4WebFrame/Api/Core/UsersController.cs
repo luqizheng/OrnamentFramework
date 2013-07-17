@@ -32,7 +32,7 @@ namespace Ornament.MVCWebFrame.Api.Core
             IList<User> result = _factory.CreateUserDao()
                                          .QuickSearch(name, loginId, email, phone, pageSize.Value, pageIndex.Value);
 
-            var c = from user in result
+            return from user in result
                     select new
                         {
                             id = user.Id,
@@ -40,7 +40,7 @@ namespace Ornament.MVCWebFrame.Api.Core
                             user.Contact.Email,
                             user.LoginId
                         };
-            return c;
+            
         }
 
         [HttpPost]

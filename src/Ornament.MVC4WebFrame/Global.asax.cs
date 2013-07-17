@@ -31,7 +31,6 @@ namespace Ornament.MVCWebFrame
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             PermissionConfig.Regist();
             ApplicationConfig.Register(OrnamentContext.Configuration);
             //Ornament setting

@@ -3,6 +3,7 @@
     var defaults = {
         minimumInputLength: 1,
         multiple: true,
+        placeholder: "Please input a char"
     };
     var ajaxOpts = {
             data: function(term, page) { // page is the one-based page number tracked by Select2

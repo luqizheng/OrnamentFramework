@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿define(function (require) {
     var api = require("/models/util/select2Helper.js");
     return {
         select2: function (selector, initFunc) {

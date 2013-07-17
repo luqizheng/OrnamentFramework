@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using Ornament.Web.Bundles;
 using Qi;
 
 namespace Ornament.MVCWebFrame.App_Start
@@ -10,6 +11,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
 
             BundleTable.EnableOptimizations = true;
+            ;
             bundles.UseCdn = false;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
@@ -77,16 +79,16 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void BizRelative(BundleCollection bundles)
         {
-
-            bundles.Add(new Bundle("~/models/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
-            bundles.Add(new Bundle("~/models/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
-            bundles.Add(new Bundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
-            bundles.Add(new Bundle("~/models/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
-            bundles.Add(new Bundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
+            
+            bundles.Add(new SeajsBundle("~/models/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
 
             //Util
 
-            bundles.Add(new Bundle("~/models/util/select2Helper.js")
+            bundles.Add(new SeajsBundle("~/models/util/select2Helper.js")
                 .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
 
 
@@ -106,8 +108,10 @@ namespace Ornament.MVCWebFrame.App_Start
                             .Include("~/Scripts/Prettify/prettify.js"));
             //.IncludeDirectory("~/Scripts/Prettify/", "*.js", false));
             bundles.Add(new StyleBundle("~/Content/CodeStyle")
+
                             .Include("~/Content/Prettify/prettify.css", "~/Content/Prettify/desert.css"));
         }
+
 
         private static void RichEditor(BundleCollection bundles)
         {
