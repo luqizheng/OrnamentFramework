@@ -38,7 +38,7 @@ namespace Ornament.MemberShip
         {
             get
             {
-                var result = _childs ?? (_childs = new OrgCollection(this));
+                IOrgCollection result = _childs ?? (_childs = new OrgCollection(this));
                 if (result.Parent == null)
                 {
                     result.Parent = this;

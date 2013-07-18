@@ -6,6 +6,7 @@ using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
 using NHibernate.Type;
+using Ornament.MemberShip.Languages;
 using Qi;
 using Qi.Domain.NHibernates;
 using Qi.NHibernateExtender;
@@ -23,15 +24,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<User>(u => u.LoginId)); }
         }
 
-        private string ContactEmailProperty(string prefix)
-        {
-            if (!String.IsNullOrEmpty(prefix))
-            {
-                return prefix + "." + Projections.Property<User.ContactInfo>(u => u.Email).PropertyName;
-            }
-            return Projections.Property<User.ContactInfo>(u => u.Email).PropertyName;
-        }
-
 
         private IProjection NameProperty
         {
@@ -41,6 +33,15 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         private IProjection IdProperty
         {
             get { return _pools.Once(() => Projections.Property<User>(u => u.Id)); }
+        }
+
+        private string ContactEmailProperty(string prefix)
+        {
+            if (!String.IsNullOrEmpty(prefix))
+            {
+                return prefix + "." + Projections.Property<User.ContactInfo>(u => u.Email).PropertyName;
+            }
+            return Projections.Property<User.ContactInfo>(u => u.Email).PropertyName;
         }
 
         private string ContactPhoneProperty(string prefix)
@@ -54,7 +55,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IQueryable<User> Users
         {
-            get { return SessionManager.Instance.GetCurrentSession().Query<User>(); }
+            get { return this.CurrentSession.Query<User>(); }
         }
 
         public int Count()
@@ -66,9 +67,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex,
                                        int pageSize)
         {
-            DetachedCriteria result = CreateDetachedCriteria().CreateAlias("Contact","contact");
-            
-           
+            DetachedCriteria result = CreateDetachedCriteria().CreateAlias("Contact", "contact");
+
 
             Disjunction userInfo = Restrictions.Disjunction();
             result.Add(userInfo);
@@ -77,8 +77,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 userInfo.Add(Restrictions.InsensitiveLike(LoginProperty, loginid));
             if (!string.IsNullOrEmpty(name))
                 userInfo.Add(Restrictions.InsensitiveLike(NameProperty, name));
-            
-            
+
+
             if (!string.IsNullOrEmpty(email))
             {
                 userInfo.Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), email));
@@ -89,7 +89,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                result.SetFirstResult(pageIndex * pageSize)
+                result.SetFirstResult(pageIndex*pageSize)
                       .SetMaxResults(pageSize)
                       .GetExecutableCriteria(CurrentSession)
                       .List<User>();
@@ -197,7 +197,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
                    .List<User>();
         }
 
@@ -210,9 +210,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<User> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize)
         {
             return CreateDetachedCriteria().CreateCriteria("Contact")
-                                           .Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), emailToMatch))
+                                           .Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"),
+                                                                             emailToMatch))
                                            .SetMaxResults(pageSize)
-                                           .SetFirstResult(pageSize * pageIndex)
+                                           .SetFirstResult(pageSize*pageIndex)
                                            .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -248,7 +249,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
                     pageSize)
                                         .GetExecutableCriteria(CurrentSession)
                                         .List<User>();
@@ -281,8 +282,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IList<User> FindAll(int pageIndex, int pageSize)
         {
+            if (pageSize <= 0)
+                throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
+            if (pageIndex < 0)
+                throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
                                          GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -307,12 +312,16 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             DetachedCriteria a =
                 DetachedCriteria.For<User.ContactInfo>()
-                    .SetProjection(Projections.RowCount())
-                    .Add(Restrictions.Eq(Projections.Property<User.ContactInfo>(s => s.Email), email).IgnoreCase());
+                                .SetProjection(Projections.RowCount())
+                                .Add(
+                                    Restrictions.Eq(Projections.Property<User.ContactInfo>(s => s.Email), email)
+                                                .IgnoreCase());
 
             if (!String.IsNullOrEmpty(idForExclude))
             {
-                a.Add(Restrictions.Not(Restrictions.Eq(Projections.Property<User.ContactInfo>(s => s.User.Id), idForExclude)));
+                a.Add(
+                    Restrictions.Not(Restrictions.Eq(Projections.Property<User.ContactInfo>(s => s.User.Id),
+                                                     idForExclude)));
             }
             return a.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
@@ -326,15 +335,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                               Projections.ProjectionList()
                                                          .Add(Projections.SqlGroupProjection("year(CreateTime) year1",
                                                                                              "year(CreateTime)",
-                                                                                             new[] { "year1" },
-                                                                                             new IType[] { NHibernateUtil.Int32 }))
+                                                                                             new[] {"year1"},
+                                                                                             new IType[]
+                                                                                                 {NHibernateUtil.Int32}))
                                                          .Add(Projections.SqlGroupProjection(
                                                              "Month(CreateTime) month1", "Month(CreateTime)",
-                                                             new[] { "month1" }, new IType[] { NHibernateUtil.Int32 }))
+                                                             new[] {"month1"}, new IType[] {NHibernateUtil.Int32}))
                                                          .Add(Projections.SqlGroupProjection("day(CreateTime) day1",
                                                                                              "day(CreateTime)",
-                                                                                             new[] { "day1" },
-                                                                                             new IType[] { NHibernateUtil.Int32 }))
+                                                                                             new[] {"day1"},
+                                                                                             new IType[]
+                                                                                                 {NHibernateUtil.Int32}))
                                                          .Add(Projections.RowCount())
                 )
                                           .CreateCriteria("Other")
@@ -349,7 +360,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             var dictionary = new Dictionary<DateTime, int>();
             foreach (object[] objects in count)
             {
-                dictionary.Add(new DateTime((int)objects[0], (int)objects[1], (int)objects[2]), (int)objects[3]);
+                dictionary.Add(new DateTime((int) objects[0], (int) objects[1], (int) objects[2]), (int) objects[3]);
             }
             return dictionary;
         }

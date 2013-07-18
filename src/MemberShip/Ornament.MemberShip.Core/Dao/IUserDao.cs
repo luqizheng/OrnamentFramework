@@ -5,12 +5,35 @@ using Qi.Domain;
 
 namespace Ornament.MemberShip.Dao
 {
-    
     public interface IUserDao : IDao<string, User>
     {
+        /// <summary>
+        ///     For Linq
+        /// </summary>
         IQueryable<User> Users { get; }
+
+        /// <summary>
+        ///     Get User by LoginId
+        /// </summary>
+        /// <param name="loginId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">LoginId is null or empty</exception>
         User GetByLoginId(string loginId);
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
         int Count();
+
+        /// <summary>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="loginid"></param>
+        /// <param name="email"></param>
+        /// <param name="phone"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize);
 
         IList<User> GetUsers(string[] loginIds);
@@ -48,12 +71,10 @@ namespace Ornament.MemberShip.Dao
 
         IList<User> FindAll(int pageIndex, int pageSize);
 
-        int Count(string loginId,string userIdForExclude);
+        int Count(string loginId, string userIdForExclude);
 
-        int CountByEmail(string email,string idForExclude);
+        int CountByEmail(string email, string idForExclude);
 
         IDictionary<DateTime, int> CountNewUser(DateTime start, DateTime end);
-
-
     }
 }

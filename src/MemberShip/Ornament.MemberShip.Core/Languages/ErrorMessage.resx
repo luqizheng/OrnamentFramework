@@ -156,4 +156,10 @@
   <data name="RoleRemarkOverMaxLength" xml:space="preserve">
     <value>The length of role's Remark should be less than 100</value>
   </data>
+  <data name="PageSize_should_greater_than_zero" xml:space="preserve">
+    <value>pageSize should greater than zero.</value>
+  </data>
+  <data name="PageIndex_should_greater_than_zero_" xml:space="preserve">
+    <value>PageIndex should greater than zero or equal zero.</value>
+  </data>
 </root>

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Ornament.MemberShip;
 using Ornament.Messages.PersonalMessages;
 using Qi.Domain.NHibernates;
@@ -20,6 +22,8 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             get { return Projections.Property<PersonalMessage>(s => s.ReadStatus); }
         }
+
+        public IQueryable<PersonalMessage> Types { get { return CurrentSession.Query<PersonalMessage>(); } }
 
         public IList<PersonalMessage> GetNewMessage(User user, int pageIndex, int pageSize)
         {

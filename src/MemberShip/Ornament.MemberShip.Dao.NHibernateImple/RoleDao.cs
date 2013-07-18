@@ -20,11 +20,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// Gets Roles by names
+        ///     Gets Roles by names
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns></returns>
-        public  ReadOnlyCollection<Role> GetRolesByName(string[] roleName)
+        public ReadOnlyCollection<Role> GetRolesByName(string[] roleName)
         {
             if (roleName == null || roleName.Length == 0)
                 return new ReadOnlyCollection<Role>(new List<Role>());
@@ -38,10 +38,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new ReadOnlyCollection<Role>(result);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         public IEnumerable<Role> GetRolesByIds(string[] ids)
         {
             if (ids == null || ids.Length == 0)
-                return new ReadOnlyCollection<Role>(new List<Role>());
+                return new List<Role>();
             Disjunction disJunction = Restrictions.Disjunction();
             foreach (string a in ids)
             {
@@ -52,19 +56,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new ReadOnlyCollection<Role>(result);
         }
 
-        public ReadOnlyCollection<Role> GetRolesByName(Guid[] roleIds)
-        {
-            if (roleIds == null || roleIds.Length == 0)
-                return new ReadOnlyCollection<Role>(new List<Role>());
-
-            IList<Role> result = CreateDetachedCriteria()
-                .Add(Restrictions.In(Projections.Property<Role>(s => s.Id), roleIds)).GetExecutableCriteria(
-                    CurrentSession).List<Role>();
-            return new ReadOnlyCollection<Role>(result);
-        }
 
         public IList<Role> GetInUseRoles(string[] roleIds, out string[] unuseRoles)
         {
+            if (roleIds == null) throw new ArgumentNullException("roleIds");
             string hql =
                 String.Format(
                     "from Role r where r.Name in ('{0}') and  r in (select elements(u.Roles) from User u)",
@@ -79,6 +74,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new List<Role>(result.Values);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         public bool IsUsesInRole(string roleName)
         {
             IQuery query =
@@ -91,6 +90,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public ReadOnlyCollection<Role> GetRolesByName(string loginId)
         {
+            if (loginId == null)
+                throw new ArgumentNullException("loginId");
             const string foundOrgId = "Select u.Org.Id From User u where u.LoginId=?";
             IList guid = CurrentSession.CreateQuery(foundOrgId).SetString(0, loginId).List();
 
@@ -125,41 +126,34 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 CreateDetachedCriteria()
                     .Add(Restrictions.Eq("Name", roleName)).GetExecutableCriteria(CurrentSession).SetCacheMode(
                         CacheMode.Normal).
-                    UniqueResult<Role>();
+                     UniqueResult<Role>();
         }
 
         public IList<Role> Find(int pageSize, int currentPage)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize * currentPage).
-                    GetExecutableCriteria(CurrentSession).List<Role>();
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize*currentPage).
+                                         GetExecutableCriteria(CurrentSession).List<Role>();
         }
 
         public IList<Role> Find(string roleName, int pageIndex, int pageSize)
         {
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
-                .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
-                .GetExecutableCriteria(CurrentSession).List<Role>();
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+                                           .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
+                                           .GetExecutableCriteria(CurrentSession).List<Role>();
+        }
 
+        public IList<Role> GetInUseRoles(string[] roleIds)
+        {
+            string[] unuseRoles;
+            return GetInUseRoles(roleIds, out unuseRoles);
         }
 
         #endregion
-        IProjection NameProperty
+
+        private IProjection NameProperty
         {
             get { return Projections.Property<Role>(s => s.Name); }
-        }
-        public void Delete(string[] roleName)
-        {
-            SimpleExpression ros = Restrictions.Eq("Name", roleName[0]);
-            ICriterion icn = null;
-            for (int i = 1; i < roleName.Length; i++)
-            {
-                icn = Restrictions.Or(ros, Restrictions.Eq("Name", roleName[1]));
-            }
-            foreach (string role in CreateCriteria().Add(icn).List<string>())
-            {
-                CurrentSession.Delete(role);
-            }
         }
     }
 }

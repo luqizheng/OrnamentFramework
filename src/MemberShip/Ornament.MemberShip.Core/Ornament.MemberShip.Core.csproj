@@ -127,6 +127,7 @@
     <EmbeddedResource Include="Languages\ErrorMessage.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\ErrorMessage.zh-cn.resx" />
     <EmbeddedResource Include="Languages\ErrorMessage.zh.resx" />

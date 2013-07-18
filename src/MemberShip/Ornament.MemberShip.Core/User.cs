@@ -55,7 +55,7 @@ namespace Ornament.MemberShip
         {
             if (loginId == null) throw new ArgumentNullException("loginId");
             if (password == null) throw new ArgumentNullException("password");
-            LoginId = loginId;
+            LoginId = loginId.Trim();
             Security.ChangePassword(password);
             Other.CreateTime = DateTime.Now;
             IsApproved = true;

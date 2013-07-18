@@ -8,7 +8,7 @@ namespace Ornament.Messages.Dao
     {
         /// <summary>
         /// </summary>
-        IQueryable<NewsType> MessageTypes { get; }
+        IQueryable<NewsType> Types { get; }
 
         /// <summary>
         /// </summary>

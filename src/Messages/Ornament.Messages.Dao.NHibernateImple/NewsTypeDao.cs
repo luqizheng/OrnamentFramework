@@ -54,7 +54,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         /// <summary>
         /// </summary>
-        public IQueryable<NewsType> MessageTypes
+        public IQueryable<NewsType> Types
         {
             get { return CurrentSession.Query<NewsType>(); }
         }

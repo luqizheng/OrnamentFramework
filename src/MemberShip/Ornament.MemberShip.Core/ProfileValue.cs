@@ -41,7 +41,6 @@ namespace Ornament.MemberShip
                         _properities = new Dictionary<string, object>();
                     }
                 }
-
                 return _properities;
             }
         }

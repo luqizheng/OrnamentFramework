@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NHibernate.Criterion;
+using Ornament.MemberShip.Languages;
 using Qi.Domain.NHibernates;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
@@ -14,23 +15,31 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return Projections.Property<Org>(s => s.Name); }
         }
 
+        protected IProjection OrderIdProperty
+        {
+            get { return Projections.Property<Org>(s => s.OrderId); }
+        }
+
         /// <summary>
         /// </summary>
         /// <returns></returns>
         public IList<Org> GetRootOrgs()
         {
-            return CreateCriteria().Add(Restrictions.IsNull("OrderId")).List<Org>();
+            return CreateCriteria().Add(Restrictions.IsNull(OrderIdProperty)).List<Org>();
         }
 
         public bool InUse(string orgId)
         {
+            if (string.IsNullOrEmpty(orgId))
+                throw new ArgumentNullException("orgId");
             Org org = Get(orgId);
             string maxOrderId;
             string minOrderId;
 
             Org.CreateGetChildCondition(org, out maxOrderId, out minOrderId);
 
-            string hql = "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
+            const string hql =
+                "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
 
             var oo = (Int64) CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
             return oo > 0;
@@ -38,6 +47,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IEnumerable<Org> Find(string name, int pageIndex, int pageSize)
         {
+            if (pageSize <= 0)
+                throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
+            if (pageIndex < 0)
+                throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
             return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
                                            .Add(Restrictions.InsensitiveLike(NameProperty, name))
                                            .GetExecutableCriteria(CurrentSession).List<Org>();
@@ -47,13 +60,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             if (ids == null || ids.Length == 0)
                 return new Org[0];
-            Disjunction disJunction = Restrictions.Disjunction();
-            foreach (string a in ids)
-            {
-                disJunction.Add(Restrictions.Eq(Projections.Property<Org>(s => s.Id), a));
-            }
             return
-                CreateDetachedCriteria().Add(disJunction).GetExecutableCriteria(CurrentSession).List<Org>();
+                CreateDetachedCriteria().Add(Restrictions.In(Projections.Property<Org>(s => s.Id), ids))
+                                        .GetExecutableCriteria(CurrentSession).List<Org>();
         }
     }
 }

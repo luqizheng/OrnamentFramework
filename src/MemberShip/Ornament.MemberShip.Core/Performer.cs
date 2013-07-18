@@ -23,15 +23,9 @@ namespace Ornament.MemberShip
 
         /// <summary>
         /// </summary>
-        private string _remark;
-
-        /// <summary>
-        /// </summary>
         private Iesi.Collections.Generic.ISet<Role> _roles;
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Member" /> class.
-        /// </summary>
+      
         protected Performer()
         {
         }

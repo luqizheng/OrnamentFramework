@@ -12,7 +12,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
     {
         public IQueryable<NotifyMessage> Messages { get { return NotifyMessageDao.Messages; } }
         public IQueryable<Reader> ReadStates { get { return ReaderDao.ReaderReadStatus; } }
-        public IQueryable<NewsType> MessageTypes { get { return NewsTypeDao.MessageTypes; } }
+        public IQueryable<NewsType> MessageTypes { get { return NewsTypeDao.Types; } }
         public INotifyMessageDao NotifyMessageDao
         {
             get

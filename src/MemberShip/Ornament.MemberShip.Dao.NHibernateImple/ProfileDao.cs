@@ -30,7 +30,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return _pools.Once(() => Projections.Property<ProfileValue>(s => s.IsAnonymous)); }
         }
 
-      
         #region IUserProfileDao Members
 
         public int Delete(string[] userName)
@@ -102,36 +101,36 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             totalRecords = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(AnonymousProperty, true))
-                .SetProjection(Projections.RowCount()).GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+                .SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
             return CreateDetachedCriteria()
-                   .Add(Restrictions.Eq(AnonymousProperty, true))
-                   .SetFirstResult(pageIndex*pageSize)
-                   .SetMaxResults(pageSize)
-                   .GetExecutableCriteria(CurrentSession).List<ProfileValue>();
+                .Add(Restrictions.Eq(AnonymousProperty, true))
+                .SetFirstResult(pageIndex*pageSize)
+                .SetMaxResults(pageSize)
+                .GetExecutableCriteria(CurrentSession).List<ProfileValue>();
         }
 
         public IList<ProfileValue> GetAllAuthenticated(int pageIndex, int pageSize, out int totalRecords)
         {
             totalRecords = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(AnonymousProperty, false))
-                .SetProjection(Projections.RowCount()).GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+                .SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
             return CreateDetachedCriteria()
-                   .Add(Restrictions.Eq(AnonymousProperty, false))
-                   .SetFirstResult(pageIndex * pageSize)
-                   .SetMaxResults(pageSize)
-                   .GetExecutableCriteria(CurrentSession).List<ProfileValue>();
+                .Add(Restrictions.Eq(AnonymousProperty, false))
+                .SetFirstResult(pageIndex*pageSize)
+                .SetMaxResults(pageSize)
+                .GetExecutableCriteria(CurrentSession).List<ProfileValue>();
         }
 
         public IList<ProfileValue> GetAll(int pageIndex, int pageSize, out int totalRecords)
         {
             totalRecords = CreateDetachedCriteria()
-               //.Add(Restrictions.Eq(AnonymousProperty, false))
-               .SetProjection(Projections.RowCount()).GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+                //.Add(Restrictions.Eq(AnonymousProperty, false))
+                .SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
             return CreateDetachedCriteria()
-                  // .Add(Restrictions.Eq(AnonymousProperty, false))
-                   .SetFirstResult(pageIndex * pageSize)
-                   .SetMaxResults(pageSize)
-                   .GetExecutableCriteria(CurrentSession).List<ProfileValue>();
+                // .Add(Restrictions.Eq(AnonymousProperty, false))
+                .SetFirstResult(pageIndex*pageSize)
+                .SetMaxResults(pageSize)
+                .GetExecutableCriteria(CurrentSession).List<ProfileValue>();
         }
 
 
@@ -144,7 +143,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return
                 CreateDetachedCriteria().Add(Restrictions.Eq(LoginIdProperty, loginId).IgnoreCase()).
-                    GetExecutableCriteria(CurrentSession).UniqueResult<ProfileValue>();
+                                         GetExecutableCriteria(CurrentSession).UniqueResult<ProfileValue>();
         }
 
         #endregion
