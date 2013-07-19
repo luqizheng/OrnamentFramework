@@ -18,7 +18,6 @@ namespace Ornament.MVCWebFrame.App_Start
                     GlobalStyle,
                     JQueryRelative,
                     CodeStyle,
-                    RichEditor,
                     SeajsLib,
                     BizRelative,Utility
                 };
@@ -34,7 +33,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
-            
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryui.js")
                 .Include("~/Scripts/jquery-ui-{version}.js")
                 .Include("~/Scripts/compatibles/jqueryui-{version}.js"));
@@ -65,11 +64,9 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new ScriptBundle("~/bundles/easytabs.js").Include("~/Scripts/plugins/ui/jquery.easytabs.js"));
             //form
             bundles.Add(new ScriptBundle("~/bundles/form.js").Include("~/Scripts/plugins/forms/jquery.form.js"));
+            bundles.Add(new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jgrowl.js").Include("~/Scripts/plugins/ui/jquery.jgrowl.js"));
 
-            bundles.Add(
-                new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js")
-                );
-            
             //time picker ;
             bundles.Add(new ScriptBundle("~/bundles/timepicker.js")
                 .Include("~/Scripts/plugins/ui/jquery.timepicker-{version}.js")
@@ -79,15 +76,17 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void BizRelative(BundleCollection bundles)
         {
-            
+            //Memberships
             bundles.Add(new SeajsBundle("~/models/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
             bundles.Add(new SeajsBundle("~/models/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
             bundles.Add(new SeajsBundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
             bundles.Add(new SeajsBundle("~/models/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
-            bundles.Add(new SeajsBundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
+            //bundles.Add(new SeajsBundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
+
+            //PersonalMessage
+            bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Messages/pm-{version}.js"));
 
             //Util
-
             bundles.Add(new SeajsBundle("~/models/util/select2Helper.js")
                 .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
 
@@ -108,15 +107,10 @@ namespace Ornament.MVCWebFrame.App_Start
                             .Include("~/Scripts/Prettify/prettify.js"));
             //.IncludeDirectory("~/Scripts/Prettify/", "*.js", false));
             bundles.Add(new StyleBundle("~/Content/CodeStyle")
-
                             .Include("~/Content/Prettify/prettify.css", "~/Content/Prettify/desert.css"));
         }
 
 
-        private static void RichEditor(BundleCollection bundles)
-        {
-
-        }
 
 
 

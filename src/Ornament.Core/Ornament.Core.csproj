@@ -108,6 +108,7 @@
     <Compile Include="Models\Memberships\Partials\MemberInfo.cs" />
     <Compile Include="Models\Memberships\UserGroupModel.cs" />
     <Compile Include="Models\Messages\NotifyTypeModel.cs" />
+    <Compile Include="Models\Messages\PersonalMessageModel.cs" />
     <Compile Include="Models\Security\RetrievePasswordModel.cs" />
     <Compile Include="Models\Security\VerifyEmailAndChangePassword.cs" />
     <Compile Include="OrnamentContext.cs" />

@@ -1,0 +1,43 @@
+﻿<style type="text/css">
+    #pmEditor .widget  {
+        margin-bottom: 10px;
+    }
+
+    #pmEditor .chat {
+        min-height: 255px;
+        height: 255px;
+        overflow: auto;
+    }
+</style>
+<div id="pmEditor" class="modal fade">
+    <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h3><i class="fam-comments"></i>Chat Record</h3>
+    </div>
+    <div class="modal-body">
+        <div class="widget">
+            <div class="body well-smoke">
+                <dl class="clearfix chat">
+                </dl>
+            </div>
+            <form class="form-horizontal widget">
+                <div class="control-group" style="padding: 10px 0px">
+                    <label class="control-label">
+                        Content
+                    </label>
+                    <div class="controls">
+                        <textarea class="styled" style="width: 100%; resize: none;"></textarea>
+                        <input type="hidden" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <a class="btn" href="#" data-dismiss="modal" aria-hidden="true">Close</a>
+        <a class="btn btn-primary" href="#" role="send">send</a>
+    </div>
+</div>
+

@@ -10,6 +10,7 @@
             deps: ['jquery'],
             exports: "jQuery"
         },
+        
         bootstrap: {
             src: "/bundles/bootstrap.js",
             deps: ['jquery'],
@@ -53,7 +54,11 @@
         uniform: {
             src: "/scripts/plugins/forms/jquery.uniform.min.js",
             deps: ['jquery'],
-            exports: "jQuery "
+            exports: "jQuery"
+        },
+        jgrowl: {
+            src: "/bundles/jgrowl.js",
+            deps: ['jquery'], exports: "jQuery"
         },
         validation: {
             src: "/bundles/jqueryval.js",
@@ -87,10 +92,12 @@
             src: "/bundles/ExtenderType.js",
             deps: ["bootstrap"], exports: "jQuery"
         },
-
         util: {
             src: "/Scripts/Utils.js",
             deps: ["jquery"]
+        },
+        pm: {
+            src:"/models/pm.js", deps: ["jquery"]
         },
         wizard: {
             src: "/Scripts/plugins/forms/jquery.form.wizard.js",

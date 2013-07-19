@@ -1,12 +1,13 @@
 ﻿@using Ornament.Messages
 @using Ornament.Messages.Notification
+@using Ornament.Messages.PersonalMessages
 @using Ornament.Web
 @model Ornament.Messages.Notification.NotifyMessage
 
 @{
     ViewBag.Title = "Message Index";
     Layout = "~/Views/Shared/_appLayout.cshtml";
-    var messages = (IList<NotifyMessage>)ViewData["notify"];
+    var messages = (IList<PersonalMessage>)ViewData["notify"];
 }
 
 @section pageTitle
@@ -25,16 +26,15 @@
             <div class="well body">
                 @foreach (var a in messages)
                 {
-                    var content = a.Show();
+                    var content = a.Content;
                     <div class="semi-widget">
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <h6>@content.Subject</h6>
                                 <button class="btn pull-right btn-info">知道了</button>
                             </div>
                         </div>
                         <div class="body well">
-                            @content.Value
+                            @content
                         </div>
                     </div>
                 }

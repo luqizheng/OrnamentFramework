@@ -16,40 +16,38 @@
 {
     <script type="text/javascript">
         var updateTable;
-        seajs.use(['valid', '/models/user', 'tmpl', "/scripts/json2.js", 'select2'], function (a,user) {
+        seajs.use(["/models/pm.js",
+                '/models/user',
+                'tmpl',
+                "/scripts/json2.js", 'select2', 'valid'], function (pm, user) {
 
-            $(".actionCheckbox").uniform().change(function () {
-                $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
-            }).change();
-            $("#selApplyAction").select2();
-            $("#BtnApply").click(function () {
-                var action = $("#selApplyAction").val();
-                $("#tableForm").attr("action", "User/" + action).submit();
-            });
-            $("input[name=loginIds]").change(function () {
-                var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
-                $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
-            });
- 
-            $("#createUserModel").on("hidden", function () {
-                $("input", $(this)).val("");
-                $(this).bootstrapMakeUp("clear");
-            });
-          
-            updateTable = function (user) {
-                if (user.success) {
-                    var $tar = $("#userTableTmpl").tmpl(user.user).prependTo($("#userListBody"));
-                    $("input", $tar).uniform();
-                    $('#createUserModel').modal('hide');
-                    return;
-                }
-            };
-            user.typeHeader("#searchContent");
-            $("#search :submit").click(function () {
-                var searchData = {
-                    loginIdOrEmail: $("#searchContent").val()
-                };
-                $.post("@Url.Action("Search")", searchData,
+                    $(".actionCheckbox").uniform().change(function () {
+                        $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
+                    }).change();
+                    $("#selApplyAction").select2();
+                    $("#BtnApply").click(function () {
+                        var action = $("#selApplyAction").val();
+                        $("#tableForm").attr("action", "User/" + action).submit();
+                    });
+                    $("input[name=loginIds]").change(function () {
+                        var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
+                        $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
+                    });
+
+                  
+
+                    $(".pm").click(function () {
+                        var id = $(this).attr("href").substr(1);
+                        pm.show(id, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                    });
+                    //User Search;
+                    user.typeHeader("#searchContent");
+                    
+                    $("#search :submit").click(function () {
+                        var searchData = {
+                            loginIdOrEmail: $("#searchContent").val()
+                        };
+                        $.post("@Url.Action("Search")", searchData,
                     function (user) {
                         var target = $("#userListBody").empty();
                         if (user.length > 0) {
@@ -58,15 +56,11 @@
                         $("table").toggle(user.length > 0);
                         $("#alertMsg").toggle(user.length == 0);
                     });
-            });
-        });
+                    });
 
-        function GetDate(jsonDate) {
-            if (jsonDate == null)
-                return "";
-            var value = new Date(parseInt(jsonDate.substr(6)));
-            return value.getFullYear() + "-" + (value.getMonth() + 1) + "-" + value.getDate() + " " + value.getHours() + ":" + value.getMinutes() + ":" + value.getSeconds();
-        }
+                });
+
+
     </script>
 }
 
@@ -160,10 +154,9 @@
 </form>
 
 
+
 <ul class="options-bar">
-
     <li>
-
         <form>
             <div class="bulk">
                 <div class="bar-select">
@@ -252,6 +245,14 @@
                                     <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
                                         <i class="fam-group-gear"></i></a>
                                 </li>
+                                @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
+                                {
+                                    <li>
+                                        <a href="#@user.Id" class="btn tip pm" title="@Html.GetResourceString("PersonalMessage")">
+                                            <i class="fam-email-edit"></i>
+                                        </a>
+                                    </li>
+                                }
                             </ul>
                         </td>
                     }
@@ -289,75 +290,7 @@
         </tfoot>
     </table>
 </form>
+@Html.Partial("_pm")
 
 
 
-
-<p>
-    @Html.AlertMessage(Html.GetResourceString("UserNotFound"), false, new { id = "alertMsg" })
-</p>
-
-<script id="userTableTmpl" type="text/x-jquery-tmpl">
-    {{if(State.IsLockout)}}
-    <tr class="warning">
-        {{else (State.IsApproved==false)}}
-    <tr class="info">
-        {{else}}
-    <tr>
-        {{/if}}
-        <td>
-            @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Lock) || OrnamentContext.MemberShip.HasRight("User", UserOperator.Delete) || OrnamentContext.MemberShip.HasRight("User", UserOperator.Approve))
-            {
-                <input type="checkbox" name="loginIds" value="${BasicInfo.LoginId}" class="actionCheckbox" />
-            }
-        </td>
-        @if (editPermission)
-        {
-            <td>
-                <ul class="table-controls">
-                    <li><a href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Basic.Edit">
-                        <i class="fam-user-edit"></i></a></li>
-                    <li>
-                        <a  href="/Memberships/User/Edit/${BasicInfo.LoginId}" class="btn tip" title="@Html.GetResourceString("Assignment")">
-                            <i class="fam-group-gear"></i></a>
-                    </li>
-                </ul>
-            </td>
-        }
-        <td>${BasicInfo.LoginId}
-        </td>
-        <td>${BasicInfo.Name}
-        </td>
-        <td>${BasicInfo.Email}
-        </td>
-        <td style="text-align: center">{{if(State.IsLockout)}}
-            <div class="icon-ok"></div>
-            {{else}}
-            <div class="icon-remove"></div>
-            {{/if}}
-
-        </td>
-        <td style="text-align: center">{{if(State.IsApproved)}}
-            <div class="icon-ok"></div>
-            {{else}}
-            <div class="icon-remove"></div>
-            {{/if}}
-        </td>
-        <td>${GetDate(OtherInfo.LastActivityDate)}
-        </td>
-    </tr>
-</script>
-
-<!-- place holder for dialog -->
-@{
-    var ajaxOptions = new AjaxOptions
-        {
-            HttpMethod = "post",
-            OnSuccess = "updateTable",
-        };
-    var formStyle = new
-        {
-            @class = "form-horizontal row-fluid ",
-            autocomplete = "off",
-        };
-}

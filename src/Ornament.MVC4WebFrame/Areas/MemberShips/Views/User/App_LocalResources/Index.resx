@@ -153,4 +153,7 @@
   <data name="QuickActions_MemberState" xml:space="preserve">
     <value>Member statistics</value>
   </data>
+  <data name="PersonalMessage" xml:space="preserve">
+    <value>Send Personal Message to user</value>
+  </data>
 </root>

@@ -7,7 +7,17 @@ namespace Ornament.Messages.PersonalMessages
 {
     public class PersonalMessage : DomainObject<PersonalMessage, int>
     {
-        public virtual ReadStatus  ReadStatus { get; set; }
+        protected PersonalMessage()
+        {
+          
+        }
+
+        public PersonalMessage(User publisher)
+        {
+            CreateTime = DateTime.Now;
+            this.Publisher = publisher;
+        }
+        public virtual ReadStatus ReadStatus { get; set; }
 
         /// <summary>
         /// </summary>

@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
+    <Compile Include="Api\Core\PersonalMessagesController.cs" />
     <Compile Include="Api\Core\OnlineController.cs" />
     <Compile Include="Api\Core\OrgsController.cs" />
     <Compile Include="Api\Core\RolesController.cs" />
@@ -639,6 +640,7 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\Models\Messages\pm-1.0.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.ar.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.bg.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.ca.js" />
@@ -914,7 +916,6 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Shared\_editor.cshtml" />
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
@@ -960,6 +961,8 @@
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
+    <Content Include="Views\Shared\PopupMessage.cshtml" />
+    <Content Include="Views\Shared\_pm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

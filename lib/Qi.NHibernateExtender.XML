@@ -469,6 +469,50 @@
             <summary>
             </summary>
         </member>
+        <member name="T:Qi.Web.Http.ApiSessionAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.#ctor(System.Boolean,System.String)">
+            <summary>
+            </summary>
+            <param name="enabled"></param>
+            <param name="sessionFactoryName"></param>
+        </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.#ctor(System.Boolean)">
+            <summary>
+            </summary>
+            <param name="enabled"></param>
+        </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.OnException(System.Web.Mvc.ExceptionContext)">
+            <summary>
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="P:Qi.Web.Http.ApiSessionAttribute.Enable">
+            <summary>
+                Enable session or not.
+            </summary>
+        </member>
+        <member name="P:Qi.Web.Http.ApiSessionAttribute.SessionFactoryName">
+            <summary>
+                session factory
+            </summary>
+        </member>
+        <member name="P:Qi.Web.Http.ApiSessionAttribute.Transaction">
+            <summary>
+                Gets or sets the value indecate use transaction or not.
+            </summary>
+        </member>
+        <member name="P:Qi.Web.Http.ApiSessionAttribute.IsolationLevel">
+            <summary>
+                Gets or sets the IsolationLevel, default use the config setting.
+            </summary>
+        </member>
         <member name="T:Qi.Web.Mvc.Founders.FounderAttribute">
             <summary>
                 Find the object whihc belong a property or field defined in a DTO

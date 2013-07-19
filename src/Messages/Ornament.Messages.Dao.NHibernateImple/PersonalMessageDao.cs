@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
@@ -43,18 +44,24 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         public IList<PersonalMessage> GetChat(User owner, User relative, int pageIndex, int pageSize)
         {
-            Disjunction receive=new Disjunction();
-            receive.Add(Restrictions.Eq(ReceiverProperty, owner));
-            receive.Add(Restrictions.Eq(ReceiverProperty, relative));
+            if (owner == null) throw new ArgumentNullException("owner");
+            if (relative == null) throw new ArgumentNullException("relative");
+            var receiver = ReceiverProperty;
+            var publish = PublisherProperty;
+            
+            var receive=new Disjunction();
+            receive.Add(Restrictions.Eq(receiver, owner));
+            receive.Add(Restrictions.Eq(receiver, relative));
 
-            Disjunction publisher = new Disjunction();
-            receive.Add(Restrictions.Eq(PublisherProperty, owner));
-            receive.Add(Restrictions.Eq(PublisherProperty, relative));
+            var publisher = new Disjunction();
+            publisher.Add(Restrictions.Eq(publish, owner));
+            publisher.Add(Restrictions.Eq(publish, relative));
 
             return CreateDetachedCriteria()
                  .Add(receive)
                  .Add(publisher)
-                 .SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(this.CurrentSession).List<PersonalMessage>();
+                 .SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+                 .GetExecutableCriteria(this.CurrentSession).List<PersonalMessage>();
         }
     }
 }

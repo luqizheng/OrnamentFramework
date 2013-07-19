@@ -9,16 +9,17 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
-   
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />
     <link href="@Url.Content("~/content/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/content/templates/pannonia/css/plugins.css")" rel="stylesheet" type="text/css" />
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
     <script type="text/javascript" src="/scripts/seajs/sea.js" data-config="/scripts/config" data-main="/scripts/_applayout"> </script>
-     @Html.CorrectTimeZone(false)
+    @Html.CorrectTimeZone(false)
     @RenderSection("head", false)
 </head>
 <body @Html.Raw(showMenu ? "" : "class=no-background")>
+    @Html.Partial("PopupMessage")
     <div id="top">
         <div class="fixed">
             <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
@@ -31,28 +32,28 @@
 
             <div id="sidebar">
                 <!--
-                    <div class="sidebar-tabs">
-                    <ul class="tabs-nav two-items">
-                        <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
-                        <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
-                    </ul>
+                        <div class="sidebar-tabs">
+                        <ul class="tabs-nav two-items">
+                            <li><a href="#general" title=""><i class="icon-reorder"></i></a></li>
+                            <li><a href="#stuff" title=""><i class="icon-cogs"></i></a></li>
+                        </ul>
 
-                    <div id="general">
+                        <div id="general">
 
-                    <!-- Main navigation -->
+                        <!-- Main navigation -->
 
                 @Html.Partial("_mainMenu")
 
                 <!-- /main navigation -->
                 <!--
-                </div>
-
-                    <div id="stuff">
-                        @RenderSection("stuff", false)
                     </div>
 
-                </div>
-                    -->
+                        <div id="stuff">
+                            @RenderSection("stuff", false)
+                        </div>
+
+                    </div>
+                        -->
 
             </div>
 
@@ -83,7 +84,7 @@
     @RenderSection("script", false)
     @Scripts.Render("~/Scripts/Utils.js")
     <script type="text/javascript">
-        online.start(@((Membership.UserIsOnlineTimeWindow / 2)*1000*60));
+        online.start(@((Membership.UserIsOnlineTimeWindow / 2) * 1000 * 60));
     </script>
 </body>
 </html>

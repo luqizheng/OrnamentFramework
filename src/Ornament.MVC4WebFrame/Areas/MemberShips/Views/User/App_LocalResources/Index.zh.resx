@@ -153,4 +153,7 @@
   <data name="QuickActions_MemberState" xml:space="preserve">
     <value>成員狀態</value>
   </data>
+  <data name="PersonalMessage" xml:space="preserve">
+    <value>發信息</value>
+  </data>
 </root>
