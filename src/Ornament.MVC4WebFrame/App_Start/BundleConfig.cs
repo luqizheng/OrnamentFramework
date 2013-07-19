@@ -19,7 +19,8 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryRelative,
                     CodeStyle,
                     SeajsLib,
-                    BizRelative,Utility
+                    BizRelative,
+                    Utility
                 };
 
             foreach (var item in registryParty)
@@ -136,7 +137,12 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(bundler);*/
 
             //Now use pre-compiler
-            //bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
+            bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
+            bundles.Add(new StyleBundle("~/Content/plugin")
+                .Include("~/Content/templates/pannonia/css/ornamentExtender.css")
+                .Include("~/Content/templates/pannonia/css/plugins.css")
+                .Include("~/Content/templates/pannonia/css/jquery.custom.css")
+                );
         }
     }
 }

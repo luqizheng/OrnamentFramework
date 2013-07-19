@@ -14,6 +14,8 @@
 }
 @section script
 {
+    @Html.Partial("_pm")
+
     <script type="text/javascript">
         var updateTable;
         seajs.use(["/models/pm.js",
@@ -34,7 +36,7 @@
                         $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
                     });
 
-                  
+
 
                     $(".pm").click(function () {
                         var id = $(this).attr("href").substr(1);
@@ -42,7 +44,7 @@
                     });
                     //User Search;
                     user.typeHeader("#searchContent");
-                    
+
                     $("#search :submit").click(function () {
                         var searchData = {
                             loginIdOrEmail: $("#searchContent").val()
@@ -282,15 +284,13 @@
         <tfoot>
             <tr>
                 <td colspan="8">
-                    <form id="navbar">
-                        @Html.Partial("NavPagination", ViewData["Nav"])
-                    </form>
+                    @Html.Partial("NavPagination", ViewData["Nav"])
                 </td>
             </tr>
         </tfoot>
     </table>
 </form>
-@Html.Partial("_pm")
+
 
 
 
