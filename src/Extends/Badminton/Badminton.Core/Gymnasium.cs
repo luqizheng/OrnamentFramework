@@ -14,7 +14,10 @@ namespace Badminton
         [Display(Name = "名字")]
         public virtual string Name { get; set; }
 
+        [Display(Name = "联系电话")]
         public virtual string Phone { get; set; }
+
+        [Display(Name = "地址")]
         public virtual string Address { get; set; }
 
         public virtual ISet<Yard> Yards
@@ -22,6 +25,12 @@ namespace Badminton
             get { return _yards ?? (_yards = new HashedSet<Yard>()); }
         }
 
+        [Display(Name = "备注")]
         public virtual string Remarks { get; set; }
     }
+
+
+    
+
+
 }

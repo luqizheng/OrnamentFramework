@@ -62,6 +62,7 @@
     <Compile Include="BadmintonDaoFactory.cs" />
     <Compile Include="GymnasiumDao.cs" />
     <Compile Include="Mappings\GymnasiumMapping.cs" />
+    <Compile Include="Mappings\MemberMapping.cs" />
     <Compile Include="Mappings\YardMapping.cs" />
     <Compile Include="Mappings\YardTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="YardTypeDao.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
+      <Project>{f86ba9a8-a466-412e-8d18-2a17452cc348}</Project>
+      <Name>Ornament.MemberShip.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Badminton.Core\Badminton.Core.csproj">
       <Project>{c227a14c-6a46-4ea8-9645-20cfd50606dc}</Project>
       <Name>Badminton.Core</Name>

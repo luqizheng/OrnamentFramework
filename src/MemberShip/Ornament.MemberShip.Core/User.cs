@@ -275,9 +275,9 @@ namespace Ornament.MemberShip
                 };
         }
 
-        protected override PerformerType GetPerformerType()
+        protected override string GetPerformerType()
         {
-            return PerformerType.User;
+            return PerformerType.User.ToString();
         }
 
         #endregion

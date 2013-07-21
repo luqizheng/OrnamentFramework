@@ -156,4 +156,7 @@
   <data name="PersonalMessage" xml:space="preserve">
     <value>Send Personal Message to user</value>
   </data>
+  <data name="search_placeHolder" xml:space="preserve">
+    <value>Please input {0} or LoginId or {1}</value>
+  </data>
 </root>

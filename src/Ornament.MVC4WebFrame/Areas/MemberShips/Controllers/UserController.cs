@@ -32,14 +32,14 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             _userDao = _memberShipFactory.CreateUserDao();
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public JsonResult NotDuplicate(string loginId, string id)
         {
             loginId = Request.QueryString[0];
             return Json(_memberShipFactory.CreateUserDao().Count(loginId, id) == 0, JsonRequestBehavior.AllowGet);
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public JsonResult NotDuplicateEmail(string email, string id)
         {
             if (Membership.Provider.RequiresUniqueEmail)
@@ -61,10 +61,26 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserOperator.Read, "User"), HttpPost]
-        public ActionResult Index(Pagination pagination)
+        public ActionResult Index(Pagination pagination, string searchContent)
         {
-            IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
-            pagination.TotalNumber = _userDao.Count();
+            if (pagination == null)
+            {
+                pagination = new Pagination();
+            }
+            IList<User> result;
+
+            if (!string.IsNullOrEmpty(searchContent))
+            {
+                int total;
+                result = _userDao.QuickSearch(searchContent, searchContent, searchContent, searchContent, pagination.CurrentPage,
+                                      pagination.PageSize, out total);
+                pagination.TotalNumber = total;
+            }
+            else
+            {
+                result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
+                pagination.TotalNumber = _userDao.Count();
+            }
             ViewData["Nav"] = pagination;
             return View(result);
         }

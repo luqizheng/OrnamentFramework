@@ -8,7 +8,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             DiscriminatorValue("User");
             Extends(typeof (IPerformer));
-            
             DynamicUpdate();
             //KeyColumn("Id");
             Join("MBS_User", d =>

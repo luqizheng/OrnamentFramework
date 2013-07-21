@@ -72,9 +72,9 @@ namespace Ornament.MemberShip
 
         #endregion
 
-        protected override PerformerType GetPerformerType()
+        protected override string GetPerformerType()
         {
-            return PerformerType.Role;
+            return PerformerType.Role.ToString();
         }
 
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)

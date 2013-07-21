@@ -1,6 +1,8 @@
-﻿namespace Badminton.Dao.NhImpl
+﻿using Qi.Domain.NHibernates;
+
+namespace Badminton.Dao.NhImpl
 {
-    class YardDao : Qi.Domain.NHibernates.DaoBase<int, Yard>, Badminton.Dao.IYardDao
+    internal class YardDao : DaoBase<int, Yard>, IYardDao
     {
     }
 }

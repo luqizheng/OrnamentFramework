@@ -34,6 +34,7 @@ namespace Ornament.MemberShip.Dao
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
+        IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize,out int total);
         IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize);
 
         IList<User> GetUsers(string[] loginIds);

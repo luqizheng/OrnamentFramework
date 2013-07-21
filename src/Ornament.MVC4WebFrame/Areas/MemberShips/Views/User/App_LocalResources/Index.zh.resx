@@ -156,4 +156,7 @@
   <data name="PersonalMessage" xml:space="preserve">
     <value>發信息</value>
   </data>
+  <data name="search_placeHolder" xml:space="preserve">
+    <value>請輸入 {0}、LoginId 或者 {1}</value>
+  </data>
 </root>

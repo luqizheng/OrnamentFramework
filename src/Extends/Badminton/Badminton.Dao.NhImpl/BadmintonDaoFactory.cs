@@ -27,5 +27,35 @@ namespace Badminton.Dao.NhImpl
         {
             return new YardTypeDao();
         }
+
+        public ICardDao CardDao()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActivityDao ActivityDao()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IClassConsumablesDao ClassConsumablesDao()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IBrandDao BrandDao()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IModelDao ModelDao()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IConsumablesDao ConsumablesDao()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

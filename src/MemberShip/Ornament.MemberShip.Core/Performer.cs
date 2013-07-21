@@ -10,7 +10,6 @@ using Qi.Domain;
 
 namespace Ornament.MemberShip
 {
-
     /// <summary>
     /// </summary>
     [Serializable]
@@ -25,11 +24,11 @@ namespace Ornament.MemberShip
         /// </summary>
         private Iesi.Collections.Generic.ISet<Role> _roles;
 
-      
+
         protected Performer()
         {
         }
-        string IPerformer.Id { get; set; }
+
         /// <summary>
         /// </summary>
         /// <param name="name"></param>
@@ -49,10 +48,12 @@ namespace Ornament.MemberShip
             get { return _roles ?? (_roles = new HashedSet<Role>()); }
         }
 
+        string IPerformer.Id { get; set; }
+
         Iesi.Collections.Generic.ISet<Role> IPerformer.Roles
         {
-            get { return this.Roles; }
-            set { this._roles = value; }
+            get { return Roles; }
+            set { _roles = value; }
         }
 
         IList<User> IPerformer.GetUsers(IMemberShipFactory memberShipFactory)
@@ -61,12 +62,12 @@ namespace Ornament.MemberShip
         }
 
 
-        PerformerType IPerformer.Type
+        string IPerformer.Type
         {
             get { return GetPerformerType(); }
         }
 
-        protected abstract PerformerType GetPerformerType();
+        protected abstract string GetPerformerType();
 
         protected abstract IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory);
 

@@ -79,9 +79,9 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
-        protected override PerformerType GetPerformerType()
+        protected override string GetPerformerType()
         {
-            return PerformerType.Org;
+            return PerformerType.Org.ToString();
         }
 
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)

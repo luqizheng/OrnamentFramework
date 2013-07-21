@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Qi.Domain;
 
 namespace Badminton
 {
-    public class Yard : Qi.Domain.DomainObject<Yard, int>
+    /// <summary>
+    ///     片场，场馆下属的每一篇
+    /// </summary>
+    public class Yard : DomainObject<Yard, int>
     {
+        /// <summary>
+        ///     片场
+        /// </summary>
         public virtual string Name { get; set; }
-        public virtual YardType Type { get; set; }
-        public virtual decimal Price { get; set; }
-    }
 
-    public class YardType : Qi.Domain.DomainObject<YardType, int>
-    {
-        public virtual string Name { get; set; }
+        /// <summary>
+        /// </summary>
+        public virtual YardType Type { get; set; }
+
+        /// <summary>
+        ///     单价
+        /// </summary>
+        public virtual decimal Price { get; set; }
     }
 }

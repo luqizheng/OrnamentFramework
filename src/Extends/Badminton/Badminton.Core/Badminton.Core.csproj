@@ -46,15 +46,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs" />
+    <Compile Include="Brand.cs" />
+    <Compile Include="Card.cs" />
+    <Compile Include="ClassConsumables.cs" />
+    <Compile Include="Consumables.cs" />
+    <Compile Include="ConsumablesHistory.cs" />
     <Compile Include="Dao\IBadmintonDaoFactory.cs" />
+    <Compile Include="Dao\IConsumablesDao.cs" />
     <Compile Include="Dao\IGymnasiumDao.cs" />
     <Compile Include="Dao\IYardDao.cs" />
     <Compile Include="Dao\IYardTypeDao.cs" />
+    <Compile Include="Gender.cs" />
     <Compile Include="Gymnasium.cs" />
+    <Compile Include="Dao\ICardDao.cs" />
+    <Compile Include="Dao\IActivityDao.cs" />
+    <Compile Include="Dao\IClassConsumablesDao.cs" />
+    <Compile Include="Dao\IBrandDao.cs" />
+    <Compile Include="IConsumables.cs" />
+    <Compile Include="Dao\IModelDao.cs" />
+    <Compile Include="MeasurementUnit.cs" />
+    <Compile Include="Member.cs" />
+    <Compile Include="MemberGroup.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Yard.cs" />
+    <Compile Include="YardType.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
+      <Project>{f86ba9a8-a466-412e-8d18-2a17452cc348}</Project>
+      <Name>Ornament.MemberShip.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

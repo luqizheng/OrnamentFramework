@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Qi.Domain;
 
 namespace Badminton.Dao
 {
-    public interface IGymnasiumDao : Qi.Domain.IDao<int, Gymnasium>
+    public interface IGymnasiumDao : IDao<int, Gymnasium>
     {
-        IList<Gymnasium> GetGymnasiums(int pageSize, int currentPage,out int totalRows);
+        IList<Gymnasium> GetGymnasiums(int pageSize, int currentPage, out int totalRows);
     }
 }

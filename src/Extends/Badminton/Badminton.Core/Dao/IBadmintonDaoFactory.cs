@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Badminton.Dao
+﻿namespace Badminton.Dao
 {
-   public interface IBadmintonDaoFactory
-   {
-       IGymnasiumDao GymasiumDao();
-       IYardDao YardDao();
-       IYardTypeDao YardTypeDao();
-       
-   }
+    public interface IBadmintonDaoFactory
+    {
+        IGymnasiumDao GymasiumDao();
+        IYardDao YardDao();
+        IYardTypeDao YardTypeDao();
+        ICardDao CardDao();
+        IActivityDao ActivityDao();
+        IClassConsumablesDao ClassConsumablesDao();
+        IBrandDao BrandDao();
+        IModelDao ModelDao();
+        IConsumablesDao ConsumablesDao();
+
+    }
 }

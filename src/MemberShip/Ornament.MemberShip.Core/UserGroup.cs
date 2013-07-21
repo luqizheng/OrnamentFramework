@@ -36,9 +36,9 @@ namespace Ornament.MemberShip
         }
 
 
-        protected override PerformerType GetPerformerType()
+        protected override string GetPerformerType()
         {
-            return PerformerType.UserGroup;
+            return PerformerType.UserGroup.ToString();
         }
 
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
