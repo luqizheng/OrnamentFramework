@@ -6,8 +6,13 @@ using Qi.Domain;
 
 namespace Badminton
 {
+    public interface IOwner
+    {
+        
+    }
 
-    public class Member : Performer<Member>
+
+    public class Member : Performer<Member>, IOwner
     {
         /// <summary>
         /// 所对应的User对象

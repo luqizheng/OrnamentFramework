@@ -11,6 +11,7 @@
         IBrandDao BrandDao();
         IModelDao ModelDao();
         IConsumablesDao ConsumablesDao();
+        IConsumablesHistoryDao ConsumablesHistoryDao();
 
     }
 }

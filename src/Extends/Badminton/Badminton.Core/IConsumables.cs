@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Badminton.Dao;
-using Ornament.MemberShip;
 
 namespace Badminton
 {
@@ -12,6 +12,7 @@ namespace Badminton
         /// <summary>
         /// </summary>
         int Id { get; set; }
+
         /// <summary>
         ///     消耗品型号
         /// </summary>
@@ -19,21 +20,23 @@ namespace Badminton
         Model Model { get; set; }
 
         /// <summary>
-        ///     Gets or sets Balance
+        ///     余额。消耗品的实际余额
         /// </summary>
         decimal Balance { get; }
 
         /// <summary>
-        ///     消耗品的管理者。可以是User UserGroup, 避免
+        ///     消耗品的管理者。可以是Member 或者是MemberGroup
         /// </summary>
-        IPerformer Owner { get; }
-
+        IOwner Owner { get; }
         /// <summary>
-        ///     把东西分配给会员
+        /// 消耗品的历史情况
         /// </summary>
-        /// <param name="number"></param>
-        /// <param name="member"></param>
-        /// <param name="daoFactory"></param>
-        void AssignToMember(decimal number, Member member, IBadmintonDaoFactory daoFactory);
+        IList<ConsumablesHistory> Histories { get; }
+        /// <summary>
+        /// 进货记录
+        /// </summary>
+        IList<StockHistory> StockHistory { get; }
     }
+
+
 }

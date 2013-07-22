@@ -57,5 +57,10 @@ namespace Badminton.Dao.NhImpl
         {
             throw new NotImplementedException();
         }
+
+        public IConsumablesHistoryDao ConsumablesHistoryDao()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

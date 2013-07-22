@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Badminton.Dao;
 using Ornament.MemberShip;
 using Qi.Domain;
@@ -18,11 +19,13 @@ namespace Badminton
         {
         }
 
-        protected Consumables(decimal number, IPerformer member)
+        protected Consumables(decimal number, IOwner member)
         {
-            if (member == null) throw new ArgumentNullException("member");
+            if (member == null)
+                throw new ArgumentNullException("member");
             Balance = number;
             Owner = member;
+            this.CreateTime = CreateTime;
         }
 
         int IConsumables.Id
@@ -33,35 +36,34 @@ namespace Badminton
                 //base.Id = value;
             }
         }
+        public virtual DateTime CreateTime { get; protected set; }
+        /// <summary>
+        /// </summary>
+        public virtual Model Model { get; set; }
 
         /// <summary>
         /// </summary>
-        public Model Model { get; set; }
+        public virtual decimal Balance { get; protected set; }
 
         /// <summary>
         /// </summary>
-        public decimal Balance { get; protected set; }
+        public virtual IOwner Owner { get; protected set; }
 
+        private IList<ConsumablesHistory> _histories;
         /// <summary>
+        /// 消耗品的历史记录
         /// </summary>
-        public IPerformer Owner { get; protected set; }
+        public IList<ConsumablesHistory> Histories { get { return _histories ?? (_histories = new List<ConsumablesHistory>()); } }
 
-        /// <summary>
-        ///     把消耗品分给会员。
-        ///     里面要完成
-        ///     1）记录历史记录 ConsumablesHistory
-        ///     2）创建 User拥有的 Consumables
-        ///     3）
-        /// </summary>
-        /// <param name="number"></param>
-        /// <param name="user"></param>
-        /// <param name="daoFactory"></param>
-        public void AssignToMember(decimal number, Member user, IBadmintonDaoFactory daoFactory)
+        private IList<StockHistory> _stockHistory;
+        public virtual IList<StockHistory> StockHistory
         {
-            throw new NotImplementedException();
-            IConsumables result = CreateInstance(number, user);
+            get { return _stockHistory ?? (_stockHistory = new List<StockHistory>()); }
+            
         }
-
-        protected abstract IConsumables CreateInstance(decimal number, IPerformer member);
     }
+
+
+
+
 }

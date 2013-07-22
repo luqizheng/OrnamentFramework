@@ -7,7 +7,7 @@ using Qi.Domain;
 
 namespace Badminton
 {
-    public class MemberGroup : Performer<Member>
+    public class MemberGroup : Performer<Member>, IOwner
     {
         /// <summary>
         ///     for NHibernate

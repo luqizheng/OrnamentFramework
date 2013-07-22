@@ -1,6 +1,4 @@
-﻿using Qi.Domain;
-
-namespace Badminton.Dao
+﻿namespace Badminton.Dao
 {
     public interface IConsumablesDao
     {
