@@ -41,7 +41,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Show().Subject)
                         </td>
-                        
+
                         <th>
                             @Html.DisplayFor(modeItem => item.State)
                         </th>
@@ -51,7 +51,7 @@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn" })
                             <a data-toggle="popover" data-val="@item.Id"
-                                class="btn btn-danger" href="#" data-original-title="A Title">Delete</a>
+                               class="btn btn-danger" href="#" data-original-title="A Title">Delete</a>
                         </td>
                     </tr>
                 }
@@ -67,11 +67,14 @@
         }
 
     </div>
-    <div class="table-footer">
-        <form method="POST">
-            @Html.Partial("NavPagination", (Pagination)ViewData["nav"])
-        </form>
-    </div>
+    @if (this.Model.Count() != 0)
+    {
+        <div class="table-footer">
+            <form method="POST">
+                @Html.Partial("NavPagination", (Pagination)ViewData["nav"])
+            </form>
+        </div>
+    }
 </div>
 <div id="warning" class="hide">
     <p>Do you want to delete this message?</p>

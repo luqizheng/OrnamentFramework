@@ -14,9 +14,29 @@ namespace Ornament.Messages.Dao
     {
         /// <summary>
         /// </summary>
-        IQueryable<PersonalMessage> Types { get; }
+        IQueryable<PersonalMessage> PersonalMessages { get; }
+        /// <summary>
+        /// Get personal message about users relative
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         IList<PersonalMessage> GetNewMessage(User user, int pageIndex, int pageSize);
+        /// <summary>
+        /// Count all new msg
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         int CountNewMessage(User user);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <param name="relative"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         IList<PersonalMessage> GetChat(User owner, User relative,int pageIndex,int pageSize);
     }
 }

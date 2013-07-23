@@ -10,11 +10,26 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
     /// </summary>
-    public class NotifyMessageDao : DaoBase<int, NotifyMessage>, INotifyMessageDao
+    public class MessageDao : DaoBase<int, NotifyMessage>, IMessageDao
     {
         public IQueryable<NotifyMessage> Messages
         {
             get { return CurrentSession.Query<NotifyMessage>(); }
+        }
+
+        public IList<NotifyMessage> GetAll(int pageSize, int pageIndex, out int total)
+        {
+            total = AllNotifyMsg()
+                .SetProjection(Projections.RowCount())
+                .GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+
+            return
+                AllNotifyMsg()
+                    .SetMaxResults(pageSize)
+                    .SetFirstResult(pageIndex*pageSize)
+                    .GetExecutableCriteria(this.CurrentSession)
+                    .List<NotifyMessage>();
+
         }
 
         public IList<NotifyMessage> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total)
@@ -22,8 +37,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
             total = NewNotifyMsg(user);
             return
                 BuildNewNotifyMsg(user)
+                    .AddOrder(Order.Desc(Projections.Property<NotifyMessage>(s => s.CreateTime)))
                     .SetMaxResults(pageSize)
-                    .SetFirstResult(pageSize*pageIndex)
+                    .SetFirstResult(pageSize * pageIndex)
                     .GetExecutableCriteria(CurrentSession)
                     .List<NotifyMessage>();
         }
@@ -36,7 +52,13 @@ namespace Ornament.Messages.Dao.NHibernateImple
         private DetachedCriteria BuildNewNotifyMsg(User user)
         {
             DetachedCriteria cri = CreateDetachedCriteria();
+            
+            return cri;
+        }
 
+        private DetachedCriteria AllNotifyMsg()
+        {
+            DetachedCriteria cri = CreateDetachedCriteria();
             return cri;
         }
     }

@@ -17,6 +17,16 @@ namespace Ornament.Contexts
             _container = container;
         }
 
+        public IMemberShipFactory MemberShipFactory
+        {
+            get { return GetDaoFactory<IMemberShipFactory>(); }
+        }
+
+        public IMessageDaoFactory MessageDaoFactory
+        {
+            get { return GetDaoFactory<IMessageDaoFactory>(); }
+        }
+
         /// <summary>
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -26,20 +36,9 @@ namespace Ornament.Contexts
             return _container.Resolve<T>();
         }
 
-        public void Regist(Type interfaceType,Type daoType)
+        public void Regist(Type interfaceType, Type daoType)
         {
             _container.Register(Component.For(interfaceType).ImplementedBy(daoType).LifestyleSingleton());
-        }
-
-        public IMemberShipFactory MemberShipFactory
-        {
-            get { return GetDaoFactory<IMemberShipFactory>(); }
-
-        }
-
-        public IMessageDaoFactory MessageDaoFactory
-        {
-            get { return GetDaoFactory<IMessageDaoFactory>(); }
         }
     }
 }

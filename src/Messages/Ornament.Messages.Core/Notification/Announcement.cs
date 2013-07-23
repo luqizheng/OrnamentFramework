@@ -1,24 +1,26 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
 namespace Ornament.Messages.Notification
 {
-    public class NotifyMessage : MessageFactoryBase
+    public class Announcement : Message
     {
-        /// <summary>
-        ///     only for nhibernate
-        /// </summary>
-        protected NotifyMessage()
-        {
-        }
+        private IDictionary<string, Content> _contents;
 
+        /// <summary>
+        /// </summary>
+        public virtual IDictionary<string, Content> Contents
+        {
+            get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
+        }
 
         /// <summary>
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        public virtual Content Show(string language)
+        public override Content Show(string language)
         {
             if (!Contents.ContainsKey(language))
                 throw new ArgumentOutOfRangeException("language", "can't find language(" + language + ") defined.");
@@ -30,7 +32,7 @@ namespace Ornament.Messages.Notification
         /// </summary>
         /// <para name="manager"></para>
         /// <returns></returns>
-        public virtual Content Show()
+        public override Content Show()
         {
             if (Contents.Count == 0)
                 throw new ArgumentOutOfRangeException("Message do not have any content");

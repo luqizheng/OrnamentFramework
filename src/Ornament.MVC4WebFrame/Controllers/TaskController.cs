@@ -36,7 +36,7 @@ namespace Ornament.MVCWebFrame.Controllers
             //    pagination = new Pagination(10, 0);
             //}
             //int totalPage;
-            //IList<NotifyMessage> result = _messageDaoFactory.NotifyMessageDao.GetNewNotifyMessages(pagination.CurrentPage,
+            //IList<NotifyMessage> result = _messageDaoFactory.MessageDao.GetNewNotifyMessages(pagination.CurrentPage,
             //                                                                  pagination.PageSize,out totalPage);
 
             //var r = new List<object>();

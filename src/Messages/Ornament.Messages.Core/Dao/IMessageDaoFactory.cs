@@ -8,19 +8,41 @@ namespace Ornament.Messages.Dao
 {
     public interface IMessageDaoFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
         IQueryable<NotifyMessage> Messages { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         IQueryable<Reader> ReadStates { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         IQueryable<NewsType> MessageTypes { get; }
-
-        INotifyMessageDao NotifyMessageDao { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        IMessageDao MessageDao { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         INewsTypeDao NewsTypeDao { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         INotifyTypeDao NotifyTypeDao { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         IPersonalMessageDao PersonalMessageDao { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         IReaderDao ReaderDao { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         INewsDao NewsDao { get;  }
     }
 }

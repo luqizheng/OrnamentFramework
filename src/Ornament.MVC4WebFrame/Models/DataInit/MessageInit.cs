@@ -41,7 +41,7 @@ namespace Ornament.Web
         private void InitTask()
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
+            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
             IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
             var m = new NotifyMessage(admin) {State = EditState.Published};
@@ -60,7 +60,7 @@ namespace Ornament.Web
         private void InitNotify()
         {
             User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            INotifyMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyMessageDao;
+            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
             IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
 

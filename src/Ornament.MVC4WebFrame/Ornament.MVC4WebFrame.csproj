@@ -246,6 +246,7 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Messages\Controllers\NotifyController.cs" />
     <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
@@ -607,6 +608,7 @@
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\TypeLayout\BaseType.cshtml" />
     <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
+    <Content Include="Areas\Messages\Views\Dashboard\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

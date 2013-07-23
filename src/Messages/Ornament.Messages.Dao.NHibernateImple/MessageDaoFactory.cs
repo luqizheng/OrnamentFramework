@@ -10,14 +10,14 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     public class MessageDaoFactory : IMessageDaoFactory
     {
-        public IQueryable<NotifyMessage> Messages { get { return NotifyMessageDao.Messages; } }
+        public IQueryable<NotifyMessage> Messages { get { return MessageDao.Messages; } }
         public IQueryable<Reader> ReadStates { get { return ReaderDao.ReaderReadStatus; } }
         public IQueryable<NewsType> MessageTypes { get { return NewsTypeDao.Types; } }
-        public INotifyMessageDao NotifyMessageDao
+        public IMessageDao MessageDao
         {
             get
             {
-                return new NotifyMessageDao();
+                return new MessageDao();
             }
         }
         public INewsTypeDao NewsTypeDao

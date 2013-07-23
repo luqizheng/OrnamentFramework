@@ -16,58 +16,18 @@ namespace Ornament.Messages.Notification
 
     public class NotifyType : DomainObject<NotifyType, string>
     {
-        
-        private IDictionary<string, Content> _contents;
+        //private IDictionary<string, Content> _contents;
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual string Name { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual string Remark { get; set; }
-      /// <summary>
-      /// 
-      /// </summary>
+
+        /// <summary>
+        /// </summary>
         public virtual CommunicationType CommunicationType { get; set; }
-
-        /// <summary>
-        /// </summary>
-        public virtual IDictionary<string, Content> Contents
-        {
-            get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="language"></param>
-        /// <returns></returns>
-        public virtual Content Show(string language)
-        {
-            if (!Contents.ContainsKey(language))
-                throw new ArgumentOutOfRangeException("language", "can't find language(" + language + ") defined.");
-            Content content = Contents[language];
-            return content;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <para name="manager"></para>
-        /// <returns></returns>
-        public virtual Content Show()
-        {
-            if (Contents.Count == 0)
-                throw new ArgumentOutOfRangeException("Message do not have any content");
-            string lang = CultureInfo.CurrentUICulture.Name;
-            if (Contents.ContainsKey(lang))
-                return Show(lang);
-            if (lang.IndexOf("-", StringComparison.Ordinal) != -1)
-            {
-                lang = lang.Substring(2);
-                if (Contents.ContainsKey(lang))
-                    return Show(lang);
-            }
-            return Contents.Values.First();
-        }
     }
 }

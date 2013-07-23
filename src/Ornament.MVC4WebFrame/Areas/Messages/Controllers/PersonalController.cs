@@ -52,7 +52,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         [HttpGet,]
         public object Get(int? id)
         {
-            return _messageDaoFactory.NotifyMessageDao.Get(id.Value);
+            return _messageDaoFactory.MessageDao.Get(id.Value);
         }
     }
 }

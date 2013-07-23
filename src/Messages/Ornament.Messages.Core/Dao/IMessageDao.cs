@@ -6,11 +6,19 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Dao
 {
-    public interface INotifyMessageDao : IDao<int, NotifyMessage>
+    public interface IMessageDao : IDao<string, Message>
     {
         /// <summary>
         /// </summary>
-        IQueryable<NotifyMessage> Messages { get; }
+        IQueryable<Message> Messages { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        IList<Message> GetAll(int pageSize, int pageIndex, out int total);
 
         /// <summary>
         /// </summary>
@@ -19,8 +27,7 @@ namespace Ornament.Messages.Dao
         /// <param name="pageIndex"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        IList<NotifyMessage> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total);
-
+        IList<Message> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total);
         /// <summary>
         /// </summary>
         /// <param name="user"></param>

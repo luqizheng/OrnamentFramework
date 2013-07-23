@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -18,28 +19,44 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
     {
         private readonly IMessageDaoFactory _daoFactory;
         private readonly IMemberShipFactory _memberShipFactory;
-        private readonly INotifyMessageDao _notifyMessageDao;
+        private readonly IMessageDao _messageDao;
 
         public NotifyController(IMessageDaoFactory daoFactory, IMemberShipFactory memberShipFactory)
         {
             _daoFactory = daoFactory;
             _memberShipFactory = memberShipFactory;
-            _notifyMessageDao = daoFactory.NotifyMessageDao;
+            _messageDao = daoFactory.MessageDao;
         }
 
-        public ActionResult Index(Pagination pagination)
+        public ActionResult Index()
         {
-            ViewData["nav"] = (pagination ?? (pagination = new Pagination()));
-            int totalNumber;
-            IList<NotifyMessage> result = _notifyMessageDao.GetNewNotifyMessages(pagination.PageSize,
-                                                                                 pagination.CurrentPage, out totalNumber);
-            pagination.SetTotalPage(totalNumber);
+            var pagination = new Pagination();
+            ViewData["nav"] = pagination;
+
+            int total = 0;
+            IList<NotifyMessage> result = _messageDao.GetAll(pagination.PageSize, pagination.CurrentPage,
+                                                                   out total);
+            pagination.TotalNumber = total;
+
             return View(result);
         }
 
-        public ActionResult Edit(string id)
+        [HttpPost]
+        public ActionResult Index(Pagination pagination)
         {
-            NotifyMessage notifyMessage = _notifyMessageDao.Get(id);
+            int total;
+            IList<NotifyMessage> result = _messageDao.GetAll(pagination.PageSize, pagination.CurrentPage,
+                                                                   out total);
+            pagination.TotalNumber = total;
+            ViewData["nav"] = pagination;
+            return View(result);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                throw new HttpException(404, "Can't find resources.");
+            NotifyMessage notifyMessage = _messageDao.Get(id.Value);
             ViewData["types"] = _daoFactory.NewsTypeDao.GetAll();
             return View("Edit", notifyMessage);
         }
@@ -52,11 +69,13 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         }
 
         [ResourceAuthorize(MessageOperator.Delete, "Message")]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+                throw new HttpException(404, "cant' delete empty notify message.");
             try
             {
-                _notifyMessageDao.Delete(_notifyMessageDao.Get(id));
+                _messageDao.Delete(_messageDao.Get(id.Value));
                 return Json(new {success = true}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -124,7 +143,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
                 }
             }
 
-            _daoFactory.NotifyMessageDao.SaveOrUpdate(notifyMessage);
+            _daoFactory.MessageDao.SaveOrUpdate(notifyMessage);
             return RedirectToAction("Index");
         }
     }
