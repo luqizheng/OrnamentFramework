@@ -7,7 +7,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Notification
 {
-    public abstract class MessageFactoryBase : DomainObject<NotifyMessage, int>
+    public abstract class MessageHeaderBase<T> : DomainObject<T, string> where T : DomainObject<T, string>
     {
         private IDictionary<string, Content> _contents;
 
@@ -15,15 +15,22 @@ namespace Ornament.Messages.Notification
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentNullException">type or publisher are null</exception>
-        protected MessageFactoryBase()
+        protected MessageHeaderBase()
         {
-            CreateTime = DateTime.Now;
+        }
+
+        protected MessageHeaderBase(NotifyType notifyType)
+        {
+            if (notifyType == null)
+                throw new ArgumentNullException("notifyType");
+            Type = notifyType;
+            ModifyTime = DateTime.Now;
         }
 
         /// <summary>
         ///     Gets Notify Message DateTime
         /// </summary>
-        public virtual DateTime CreateTime { get; protected set; }
+        public virtual DateTime ModifyTime { get; protected set; }
 
         /// <summary>
         /// </summary>
@@ -40,7 +47,7 @@ namespace Ornament.Messages.Notification
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        public virtual Content GetContent(string language)
+        protected virtual Content GetContent(string language)
         {
             if (!Contents.ContainsKey(language))
                 throw new ArgumentOutOfRangeException("language", "can't find language(" + language + ") defined.");
@@ -52,7 +59,7 @@ namespace Ornament.Messages.Notification
         /// </summary>
         /// <para name="manager"></para>
         /// <returns></returns>
-        public virtual Content GetContent(User user)
+        protected virtual Content GetContent(User user)
         {
             if (Contents.Count == 0)
                 throw new ArgumentOutOfRangeException("Message do not have any content");

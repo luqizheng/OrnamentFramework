@@ -169,6 +169,78 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;Subject&gt;关键信息被修改&lt;/Subject&gt;
+        ///    &lt;Value&gt; &lt;![CDATA[
+        ///    &lt;p&gt;亲爱的[name]用户:
+        ///
+        ///    &lt;p&gt;  你已经在XXX系统修改了[content].
+        ///
+        ///  
+        ///    &lt;p&gt;账号信息
+        ///   &lt;p&gt; 登录Id:[loginId]  
+        ///    
+        ///
+        ///   &lt;p&gt; 管理员
+        /// ]]&gt;&lt;/Value&gt;
+        ///&lt;/Content&gt; 的本地化字符串。
+        /// </summary>
+        public static string changeAccount {
+            get {
+                return ResourceManager.GetString("changeAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;Subject&gt;关键信息被修改&lt;/Subject&gt;
+        ///    &lt;Value&gt; &lt;![CDATA[
+        ///    &lt;p&gt;亲爱的[name]用户:
+        ///
+        ///    &lt;p&gt;  你已经在XXX系统修改了[content].
+        ///
+        ///  
+        ///    &lt;p&gt;账号信息
+        ///   &lt;p&gt; 登录Id:[loginId]  
+        ///    
+        ///
+        ///   &lt;p&gt; 管理员
+        /// ]]&gt;&lt;/Value&gt;
+        ///&lt;/Content&gt; 的本地化字符串。
+        /// </summary>
+        public static string changeAccount_zh {
+            get {
+                return ResourceManager.GetString("changeAccount_zh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;Subject&gt;关键信息被修改&lt;/Subject&gt;
+        ///    &lt;Value&gt; &lt;![CDATA[
+        ///    &lt;p&gt;亲爱的[name]用户:
+        ///
+        ///    &lt;p&gt;  你已经在XXX系统修改了[content].
+        ///
+        ///  
+        ///    &lt;p&gt;账号信息
+        ///   &lt;p&gt; 登录Id:[loginId]  
+        ///    
+        ///
+        ///   &lt;p&gt; 管理员
+        /// ]]&gt;&lt;/Value&gt;
+        ///&lt;/Content&gt; 的本地化字符串。
+        /// </summary>
+        public static string changeAccount_zh_CN {
+            get {
+                return ResourceManager.GetString("changeAccount_zh_CN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Password agan 的本地化字符串。
         /// </summary>
         public static string ConfirmPassword {

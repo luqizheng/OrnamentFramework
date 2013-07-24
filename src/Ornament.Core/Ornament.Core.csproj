@@ -137,6 +137,9 @@
     </Compile>
     <Compile Include="ResourceContextExtender.cs" />
     <Compile Include="MemberSecrityManager.cs" />
+    <Compile Include="Retrives\NotifyTypeRetrive.cs" />
+    <Compile Include="Retrives\Retrive.cs" />
+    <Compile Include="Retrives\SimpleMessageFactoryRetrive.cs" />
     <Compile Include="Validations\JqStepAttribute.cs" />
     <Compile Include="Validations\VerifyCodeRequireAttribute.cs" />
   </ItemGroup>
@@ -207,6 +210,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Web\Attributes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\changeAccount.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\changeAccount.zh.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\changeAccount_zh-CN.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

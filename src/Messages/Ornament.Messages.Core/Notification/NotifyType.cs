@@ -16,8 +16,6 @@ namespace Ornament.Messages.Notification
 
     public class NotifyType : DomainObject<NotifyType, string>
     {
-        //private IDictionary<string, Content> _contents;
-
         /// <summary>
         /// </summary>
         public virtual string Name { get; set; }

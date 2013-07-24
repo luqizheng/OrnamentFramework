@@ -27,10 +27,10 @@ namespace Ornament.Web
 
         public void CreateData()
         {
-            NotifyType a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
-            NotifyType b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
-            NotifyType c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
-            NotifyType d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
+            var a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
+            var b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
+            var c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
+            var d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
 
 
             //InitMessageType();
@@ -40,50 +40,50 @@ namespace Ornament.Web
 
         private void InitTask()
         {
-            User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
-            IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
+            //User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
+            //IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
+            //IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
-            var m = new NotifyMessage(admin) {State = EditState.Published};
-            m.Contents.Add("zh-CN", new Content("zh-CN")
-                {
-                    Subject = "请修改初始化密码",
-                    Value = "请修改初始化密码，如果已经修改过，请忽略这条信息"
-                });
+            //var m = new Announcement(admin) {State = EditState.Published};
+            //m.Contents.Add("zh-CN", new Content("zh-CN")
+            //    {
+            //        Subject = "请修改初始化密码",
+            //        Value = "请修改初始化密码，如果已经修改过，请忽略这条信息"
+            //    });
 
-            msgDao.SaveOrUpdate(m);
-            var reader = new Reader(admin, m);
-            readerDao.SaveOrUpdate(reader);
-            msgDao.Flush();
+            //msgDao.SaveOrUpdate(m);
+            //var reader = new Reader(admin, m);
+            //readerDao.SaveOrUpdate(reader);
+            //msgDao.Flush();
         }
 
         private void InitNotify()
         {
-            User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
-            IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
+            //User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
+            //IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
+            //IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
 
 
-            for (int i = 0; i < 30; i++)
-            {
-                var m = new NotifyMessage(admin)
-                    {
-                        State = EditState.Published
-                    };
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    var m = new Announcement(admin)
+            //        {
+            //            State = EditState.Published
+            //        };
 
-                m.Contents.Add("zh-CN", new Content("zh-CN")
-                    {
-                        Subject = "[Demo]请修改初始化密码",
-                        Value =
-                            "Demo 请修改初始化密码，如果已经修改过，请忽略这条信息.在直角三角形中，∠A（非直角）的对边与斜边的比叫做∠A的正弦，记作sinA，即sinA porta lacus fringilla vel.d"
-                    });
+            //    m.Contents.Add("zh-CN", new Content("zh-CN")
+            //        {
+            //            Subject = "[Demo]请修改初始化密码",
+            //            Value =
+            //                "Demo 请修改初始化密码，如果已经修改过，请忽略这条信息.在直角三角形中，∠A（非直角）的对边与斜边的比叫做∠A的正弦，记作sinA，即sinA porta lacus fringilla vel.d"
+            //        });
 
 
-                msgDao.SaveOrUpdate(m);
-                var reader = new Reader(admin, m);
-                readerDao.SaveOrUpdate(reader);
-            }
-            msgDao.Flush();
+            //    msgDao.SaveOrUpdate(m);
+            //    var reader = new Reader(admin, m);
+            //    readerDao.SaveOrUpdate(reader);
+            //}
+            //msgDao.Flush();
         }
     }
 }

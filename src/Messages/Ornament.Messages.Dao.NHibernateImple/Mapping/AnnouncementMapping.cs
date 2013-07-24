@@ -3,30 +3,28 @@ using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping
 {
-    public class NotifyMessageMapping : ClassMap<NotifyMessage>
+    public class AnnouncementMapping : ClassMap<Announcement>
     {
-        public NotifyMessageMapping()
+        public AnnouncementMapping()
         {
-            Table("Msgs_NotifyMessage");
+            Table("Msgs_AnnouncementMessage");
             Id(x => x.Id).GeneratedBy.Increment();
             DynamicUpdate();
-            Map(x => x.CreateTime);
-            Map(x => x.State);
-
-            References(x => x.Publisher);
+            Map(x => x.ModifyTime);
+            Map(x => x.EditState);
             References(x => x.Type);
 
             HasMany(x => x.Contents)
                 .AsMap(s => s.Language).Cascade.AllDeleteOrphan()
-                .Table("Msgs_NotifyContent")
+                .Table("Msgs_AnnouncementContent")
                 .Component(x =>
                     {
                         x.Map(a => a.Value).Length(4096);
                         x.Map(a => a.Subject).Length(255);
-                        //x.Map(a => a.Language, "language2");
+                        x.Map(a => a.Language, "language2");
                     }
                 );
-            //HasMany(x => x.Readers).KeyColumn("notifyMessageId");
+
         }
     }
 }

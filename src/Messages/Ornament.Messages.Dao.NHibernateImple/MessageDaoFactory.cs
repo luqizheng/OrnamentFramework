@@ -1,37 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Ornament.Messages.Newses;
-using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
     public class MessageDaoFactory : IMessageDaoFactory
     {
-        public IQueryable<NotifyMessage> Messages { get { return MessageDao.Messages; } }
-        public IQueryable<Reader> ReadStates { get { return ReaderDao.ReaderReadStatus; } }
-        public IQueryable<NewsType> MessageTypes { get { return NewsTypeDao.Types; } }
-        public IMessageDao MessageDao
+        /// <summary>
+        /// </summary>
+        public IQueryable<NewsType> MessageTypes
         {
-            get
-            {
-                return new MessageDao();
-            }
+            get { return NewsTypeDao.Types; }
         }
+
+        /// <summary>
+        /// </summary>
+        public INotifyMessageDao MessageDao
+        {
+            get { return new NotifyMessageDao(); }
+        }
+
+        /// <summary>
+        /// </summary>
         public INewsTypeDao NewsTypeDao
         {
-            get
-            {
-                return new NewsTypeDao();
-            }
+            get { return new NewsTypeDao(); }
         }
 
-        public INotifyTypeDao NotifyTypeDao { get { return new NotifyTypeDao(); } }
+        /// <summary>
+        /// </summary>
+        public INotifyTypeDao NotifyTypeDao
+        {
+            get { return new NotifyTypeDao(); }
+        }
 
-        public IPersonalMessageDao PersonalMessageDao { get { return new PersonalMessageDao(); } }
-        public IReaderDao ReaderDao { get { return new ReaderDao(); } }
-        public INewsDao NewsDao { get { return new NewsDao(); } }
+        /// <summary>
+        /// </summary>
+        public IPersonalMessageDao PersonalMessageDao
+        {
+            get { return new PersonalMessageDao(); }
+        }
+
+        /// <summary>
+        /// </summary>
+        public IMessageTemplateDao SimpleMessageFactory
+        {
+            get { return new SimpleMessageFactoryDao(); }
+        }
+
+        /// <summary>
+        /// </summary>
+        public INewsDao NewsDao
+        {
+            get { return new NewsDao(); }
+        }
+
+        public IAnnouncementDao AnnouncementDao
+        {
+            get { return new AnnouncementDao(); }
+        }
     }
 }

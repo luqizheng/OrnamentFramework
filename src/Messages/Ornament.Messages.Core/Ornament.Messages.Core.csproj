@@ -73,26 +73,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\IAnnouncementDao.cs" />
     <Compile Include="Dao\INewsDao.cs" />
     <Compile Include="Dao\INotifyTypeDao.cs" />
     <Compile Include="Dao\IPersonalMessageDao.cs" />
+    <Compile Include="Dao\IMessageTemplateDao.cs" />
     <Compile Include="Dao\PersonalSearcher.cs" />
     <Compile Include="MssageOperator.cs" />
     <Compile Include="Dao\IMessageDaoFactory.cs" />
-    <Compile Include="Dao\IMessageDao.cs" />
-    <Compile Include="Dao\IReaderDao.cs" />
+    <Compile Include="Dao\INotifyMessageDao.cs" />
     <Compile Include="Dao\INewsTypeDao.cs" />
-    <Compile Include="Dao\MessageSearcher.cs" />
     <Compile Include="Newses\News.cs" />
+    <Compile Include="Notification\Contents\AnnouncementMessage.cs" />
+    <Compile Include="Notification\NotifyMessageBase.cs" />
     <Compile Include="Notification\Announcement.cs" />
-    <Compile Include="Notification\Message.cs" />
-    <Compile Include="Notification\NotifyMessage.cs" />
     <Compile Include="EditState.cs" />
     <Compile Include="Newses\NewsType.cs" />
-    <Compile Include="Notification\MessageFactoryBase.cs" />
+    <Compile Include="Notification\MessageHeaderBase.cs" />
     <Compile Include="Notification\NotifyType.cs" />
-    <Compile Include="Notification\SimpleMessage.cs" />
-    <Compile Include="Notification\SimpleMessageFactory.cs" />
+    <Compile Include="Notification\Contents\SimpleMessage.cs" />
+    <Compile Include="Notification\MessageTemplate.cs" />
     <Compile Include="PersonalMessages\PersonalMessage.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

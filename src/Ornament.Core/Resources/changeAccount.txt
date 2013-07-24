@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Subject>关键信息被修改</Subject>
+    <Value> <![CDATA[
+    <p>亲爱的[name]用户:
+
+    <p>  你已经在XXX系统修改了[content].
+
+  
+    <p>账号信息
+   <p> 登录Id:[loginId]  
+    
+
+   <p> 管理员
+ ]]></Value>
+</Content>

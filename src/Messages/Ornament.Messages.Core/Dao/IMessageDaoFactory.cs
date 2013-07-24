@@ -8,14 +8,7 @@ namespace Ornament.Messages.Dao
 {
     public interface IMessageDaoFactory
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        IQueryable<NotifyMessage> Messages { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        IQueryable<Reader> ReadStates { get; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -23,7 +16,7 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// 
         /// </summary>
-        IMessageDao MessageDao { get; }
+        INotifyMessageDao MessageDao { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -39,10 +32,14 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// 
         /// </summary>
-        IReaderDao ReaderDao { get; }
+        IMessageTemplateDao SimpleMessageFactory { get; }
         /// <summary>
         /// 
         /// </summary>
-        INewsDao NewsDao { get;  }
+        INewsDao NewsDao { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        IAnnouncementDao AnnouncementDao { get; }
     }
 }

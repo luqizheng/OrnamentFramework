@@ -304,4 +304,13 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="changeAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\changeaccount.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="changeAccount_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\changeaccount.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="changeAccount_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\changeaccount_zh-cn.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
 </root>

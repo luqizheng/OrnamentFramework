@@ -10,6 +10,11 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// </summary>
         IQueryable<NotifyType> Types { get; }
+        /// <summary>
+        /// Gets Notify Type By Name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         NotifyType GetByName(string name);
     }
 }

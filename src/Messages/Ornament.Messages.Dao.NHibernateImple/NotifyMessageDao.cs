@@ -9,15 +9,16 @@ using Qi.Domain.NHibernates;
 namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
+    /// 
     /// </summary>
-    public class MessageDao : DaoBase<int, NotifyMessage>, IMessageDao
+    public class NotifyMessageDao : DaoBase<string, NotifyMessageBase>, INotifyMessageDao
     {
-        public IQueryable<NotifyMessage> Messages
+        public IQueryable<NotifyMessageBase> Messages
         {
-            get { return CurrentSession.Query<NotifyMessage>(); }
+            get { return CurrentSession.Query<NotifyMessageBase>(); }
         }
 
-        public IList<NotifyMessage> GetAll(int pageSize, int pageIndex, out int total)
+        public IList<NotifyMessageBase> GetAll(int pageSize, int pageIndex, out int total)
         {
             total = AllNotifyMsg()
                 .SetProjection(Projections.RowCount())
@@ -28,20 +29,20 @@ namespace Ornament.Messages.Dao.NHibernateImple
                     .SetMaxResults(pageSize)
                     .SetFirstResult(pageIndex*pageSize)
                     .GetExecutableCriteria(this.CurrentSession)
-                    .List<NotifyMessage>();
+                    .List<NotifyMessageBase>();
 
         }
 
-        public IList<NotifyMessage> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total)
+        public IList<NotifyMessageBase> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total)
         {
             total = NewNotifyMsg(user);
             return
                 BuildNewNotifyMsg(user)
-                    .AddOrder(Order.Desc(Projections.Property<NotifyMessage>(s => s.CreateTime)))
+                    .AddOrder(Order.Desc(Projections.Property<Announcement>(s => s.ModifyTime)))
                     .SetMaxResults(pageSize)
                     .SetFirstResult(pageSize * pageIndex)
                     .GetExecutableCriteria(CurrentSession)
-                    .List<NotifyMessage>();
+                    .List<NotifyMessageBase>();
         }
 
         public int NewNotifyMsg(User user)

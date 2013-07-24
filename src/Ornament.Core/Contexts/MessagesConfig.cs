@@ -5,154 +5,112 @@ using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Properties;
+using Ornament.Retrives;
 using Qi.IO.Serialization;
 
 namespace Ornament.Contexts
 {
     public class MessagesConfig
     {
-        private static string _personalMessageId;
-        private static string dd = "";
-        private static string _registId
+        private static SimpleMessageFactoryRetrive _personalMessageId;
+        private static SimpleMessageFactoryRetrive _verifyEmailAddress;
+        private static SimpleMessageFactoryRetrive _passwordRetrive;
+        private static NotifyTypeRetrive _systemId;
+        private static SimpleMessageFactoryRetrive _registryAccount;
+        private static SimpleMessageFactoryRetrive _accountChanged;
+        public MessagesConfig()
         {
-            get { return dd; }
-            set
-            {
-                dd = value;
-            }
-
+            _systemId = new NotifyTypeRetrive("System");
         }
-        private static string _verifyEmailAddressId;
-        private static string _passwordRetrive;
+
+        /// <summary>
+        ///     System Notify Type.
+        /// </summary>
+        public NotifyType SystemType
+        {
+            get { return _systemId.Get(); }
+        }
+
         /// <summary>
         /// </summary>
-        public NotifyType RegistAccount
+        public MessageTemplate RegistAccount
         {
             get
             {
-                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
-                if (_personalMessageId == null)
+                if (_registryAccount != null)
                 {
-                    _personalMessageId = CreateNotifyType("Regist New User (Template)",
-                                                          "Regist New user, and verify safe email address.", dao,
-                                                          new Dictionary<string, Content>
-                                                              {
-                                                                  {
-                                                                      "zh-CN",
-                                                                      DeserializerXml(Resources.registAccount_zh_CN,
-                                                                                      "zh-CN")
-                                                                  },
-                                                                  {"en", DeserializerXml(Resources.registAccount, "en")},
-                                                                  {
-                                                                      "zh",
-                                                                      DeserializerXml(Resources.registAccount_zh, "zh")
-                                                                  }
-                                                              });
+                    _registryAccount = new SimpleMessageFactoryRetrive(
+                        "Regist New User (Template)",
+                        "Regist New user, and verify safe email address.",
+                        SystemType,
+                        DeserializerXml(Resources.registAccount_zh_CN, "zh-CN"),
+                        DeserializerXml(Resources.registAccount, "en"),
+                        DeserializerXml(Resources.registAccount_zh, "zh")
+                        );
                 }
-
-                var result = dao.Get(_personalMessageId);
-                if (result == null)
-                {
-                    _personalMessageId = null;
-                    return RegistAccount;
-                }
-                return result;
+                return _registryAccount.Get();
             }
         }
 
-        public NotifyType EmailAddressChanged
+        public MessageTemplate EmailAddressChanged
         {
             get
             {
-                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
-                if (_verifyEmailAddressId == null)
+                if (_verifyEmailAddress == null)
                 {
-                    _verifyEmailAddressId = CreateNotifyType("Verify Email Address (Template)",
-                                                             "Email has changed, It should verify again.", dao,
-                                                             new Dictionary<string, Content>
-                                                                 {
-                                                                     {
-                                                                         "zh-CN",
-                                                                         DeserializerXml(Resources.emailChanged_zh_CN,
-                                                                                         "zh-CN")
-                                                                     },
-                                                                     {
-                                                                         "zh",
-                                                                         DeserializerXml(Resources.emailChanged_zh, "zh")
-                                                                     },
-                                                                     {
-                                                                         "en",
-                                                                         DeserializerXml(Resources.emailChanged, "en")
-                                                                     },
-                                                                 });
+                    _verifyEmailAddress = new SimpleMessageFactoryRetrive(
+                        "Verify Email Address (Template)",
+                        "Email has changed, It should verify again.",
+                        SystemType,
+                        DeserializerXml(Resources.emailChanged_zh_CN, "zh-CN"),
+                        DeserializerXml(Resources.emailChanged_zh, "zh"),
+                        DeserializerXml(Resources.emailChanged, "en")
+                        );
                 }
-                var result = dao.Get(_verifyEmailAddressId);
-                if (result == null)
-                {
-                    _verifyEmailAddressId = null;
-                    return EmailAddressChanged;
-                }
-                return result;
+
+                return _verifyEmailAddress.Get();
             }
         }
 
-        public NotifyType RetrivePassword
+        public MessageTemplate RetrivePassword
         {
             get
             {
-                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
                 if (_passwordRetrive == null)
                 {
-                    _passwordRetrive = CreateNotifyType("Forget Password (Template)",
-                                                             "Retrive Password", dao,
-                                                             new Dictionary<string, Content>
-                                                                 {
-                                                                     {
-                                                                         "zh-CN",
-                                                                         DeserializerXml(
-                                                                             Resources.forgetPassword_zh_CN, "zh-CN")
-                                                                     },
-                                                                     {
-                                                                         "zh",
-                                                                         DeserializerXml(Resources.forgetPassword_zh,
-                                                                                         "zh")
-                                                                     },
-                                                                     {
-                                                                         "en",
-                                                                         DeserializerXml(Resources.forgetPassword, "en")
-                                                                     },
-                                                                 });
+                    _passwordRetrive = new SimpleMessageFactoryRetrive(
+                        "Verify Email Address (Template)",
+                        "Email has changed, It should verify again.",
+                        SystemType,
+                        DeserializerXml(Resources.forgetPassword_zh_CN, "zh-CN"),
+                        DeserializerXml(Resources.forgetPassword_zh, "zh"),
+                        DeserializerXml(Resources.forgetPassword, "en")
+                        );
                 }
-                var result = dao.Get(_passwordRetrive);
-                if (result == null)
-                {
-                    _passwordRetrive = null;
-                    return this.RetrivePassword;
-                }
-                return result;
+
+                return _passwordRetrive.Get();
             }
         }
 
         /// <summary>
         /// </summary>
-        public NotifyType AccountChanged
+        public MessageTemplate AccountChanged
         {
             get
             {
-                INotifyTypeDao dao = OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao;
-                if (_registId == null)
-                {
-                    _registId = CreateNotifyType("Account Changed (Inside)", "log some about account changed.", dao,
-                                                 new Dictionary<string, Content>());
-                }
 
-                var result = dao.Get(_registId);
-                if (result == null)
+                if (_accountChanged == null)
                 {
-                    _registId = null;
-                    return this.AccountChanged;
+                    _accountChanged = new SimpleMessageFactoryRetrive(
+                        "Verify Email Address (Template)",
+                        "Email has changed, It should verify again.",
+                        SystemType,
+                        DeserializerXml(Resources.changeAccount_zh_CN, "zh-CN"),
+                        DeserializerXml(Resources.changeAccount_zh, "zh"),
+                        DeserializerXml(Resources.changeAccount, "en")
+                        );
                 }
-                return result;
+                return _passwordRetrive.Get();
             }
         }
 
@@ -168,14 +126,13 @@ namespace Ornament.Contexts
         }
 
 
-        private string CreateNotifyType(string name, string remark, INotifyTypeDao dao,
+        private string CreateNotifyType(string name, string remark, IMessageTemplateDao dao,
                                         IDictionary<string, Content> contents)
         {
-            NotifyType personal = dao.GetByName(name);
+            MessageTemplate personal = dao.GetByName(name);
             if (personal != null)
                 return personal.Id;
-            personal = new NotifyType();
-            personal.Name = name;
+            personal = new MessageTemplate(SystemType) { Name = name };
             personal.Remark = remark;
 
             foreach (string key in contents.Keys)

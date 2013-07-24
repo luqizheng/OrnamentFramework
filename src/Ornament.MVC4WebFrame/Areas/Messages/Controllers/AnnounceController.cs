@@ -8,24 +8,23 @@ using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Web;
-using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 using log4net;
 
 namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 {
     [Session]
-    public class NotifyController : Controller
+    public class AnnounceController : Controller
     {
+        private readonly IAnnouncementDao _announcementDao;
         private readonly IMessageDaoFactory _daoFactory;
         private readonly IMemberShipFactory _memberShipFactory;
-        private readonly IMessageDao _messageDao;
 
-        public NotifyController(IMessageDaoFactory daoFactory, IMemberShipFactory memberShipFactory)
+        public AnnounceController(IMessageDaoFactory daoFactory, IMemberShipFactory memberShipFactory)
         {
             _daoFactory = daoFactory;
             _memberShipFactory = memberShipFactory;
-            _messageDao = daoFactory.MessageDao;
+            _announcementDao = daoFactory.AnnouncementDao;
         }
 
         public ActionResult Index()
@@ -34,8 +33,8 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             ViewData["nav"] = pagination;
 
             int total = 0;
-            IList<NotifyMessage> result = _messageDao.GetAll(pagination.PageSize, pagination.CurrentPage,
-                                                                   out total);
+            IList<Announcement> result = _announcementDao.GetAll(pagination.PageSize, pagination.CurrentPage,
+                                                                 out total);
             pagination.TotalNumber = total;
 
             return View(result);
@@ -45,20 +44,20 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         public ActionResult Index(Pagination pagination)
         {
             int total;
-            IList<NotifyMessage> result = _messageDao.GetAll(pagination.PageSize, pagination.CurrentPage,
-                                                                   out total);
+            IList<Announcement> result = _announcementDao.GetAll(pagination.PageSize, pagination.CurrentPage,
+                                                                 out total);
             pagination.TotalNumber = total;
             ViewData["nav"] = pagination;
             return View(result);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
                 throw new HttpException(404, "Can't find resources.");
-            NotifyMessage notifyMessage = _messageDao.Get(id.Value);
+            Announcement announcement = _announcementDao.Get(id);
             ViewData["types"] = _daoFactory.NewsTypeDao.GetAll();
-            return View("Edit", notifyMessage);
+            return View("Edit", announcement);
         }
 
 
@@ -68,14 +67,14 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             return View("Edit");
         }
 
-        [ResourceAuthorize(MessageOperator.Delete, "Message")]
-        public ActionResult Delete(int? id)
+        //[ResourceAuthorize(MessageOperator.Delete, "Message")]
+        public ActionResult Delete(string id)
         {
             if (id == null)
                 throw new HttpException(404, "cant' delete empty notify message.");
             try
             {
-                _messageDao.Delete(_messageDao.Get(id.Value));
+                _announcementDao.Delete(_announcementDao.Get(id));
                 return Json(new {success = true}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -86,38 +85,33 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         }
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
-        public ActionResult Save(NotifyMessage notifyMessage, IDictionary<string, string> newContents,
+        public ActionResult Save(Announcement announcement, IDictionary<string, string> newContents,
                                  IDictionary<string, string> newSubjects, string users, string userGroups, string roles,
                                  string orgs)
         {
-            notifyMessage.Contents.Clear();
+            announcement.Contents.Clear();
 
             foreach (string key in newContents.Keys)
             {
-                notifyMessage.Contents.Add(key, new Content
+                announcement.Contents.Add(key, new Content
                     {
                         Language = key,
                         Value = newContents[key],
                         Subject = newSubjects[key]
                     });
             }
-
-            IUserDao userDao = _memberShipFactory.CreateUserDao();
             if (roles != null)
             {
-                foreach (string role in roles.Split(','))
+                foreach (Role role in _memberShipFactory.CreateRoleDao().GetRolesByIds(roles.Split(',')))
                 {
-                    foreach (User a in userDao.GetUsersInRole(role))
-                    {
-                        notifyMessage.Readers.Add(new Reader(a, notifyMessage));
-                    }
+                    announcement.Roles.Add(role);
                 }
             }
             if (users != null)
             {
                 foreach (User user in _memberShipFactory.CreateUserDao().GetUsersByIds(users.Split(',')))
                 {
-                    notifyMessage.Readers.Add(new Reader(user, notifyMessage));
+                    announcement.Users.Add(user);
                 }
             }
 
@@ -125,10 +119,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             {
                 foreach (Org org in _memberShipFactory.CreateOrgDao().GetOrgs(orgs.Split(',')))
                 {
-                    foreach (User a in userDao.GetUsers(org))
-                    {
-                        notifyMessage.Readers.Add(new Reader(a, notifyMessage));
-                    }
+                    announcement.Orgs.Add(org);
                 }
             }
 
@@ -136,14 +127,11 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             {
                 foreach (UserGroup ug in _memberShipFactory.CreateUserGroupDao().GetByIds(userGroups.Split(',')))
                 {
-                    foreach (User a in userDao.GetUsers(ug))
-                    {
-                        notifyMessage.Readers.Add(new Reader(a, notifyMessage));
-                    }
+                    announcement.UserGroups.Add(ug);
                 }
             }
 
-            _daoFactory.MessageDao.SaveOrUpdate(notifyMessage);
+            _daoFactory.AnnouncementDao.SaveOrUpdate(announcement);
             return RedirectToAction("Index");
         }
     }

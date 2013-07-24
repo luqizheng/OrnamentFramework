@@ -1,51 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using Iesi.Collections.Generic;
+using Ornament.MemberShip;
 
 namespace Ornament.Messages.Notification
 {
-    public class Announcement : Message
+    public class Announcement : MessageHeaderBase<Announcement>
     {
-        private IDictionary<string, Content> _contents;
-
         /// <summary>
+        ///     only for nhibernate
         /// </summary>
-        public virtual IDictionary<string, Content> Contents
+        protected Announcement()
         {
-            get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
         }
+
+        public virtual EditState EditState { get; set; }
 
         /// <summary>
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
-        public override Content Show(string language)
+        public virtual Content Show(string language)
         {
-            if (!Contents.ContainsKey(language))
-                throw new ArgumentOutOfRangeException("language", "can't find language(" + language + ") defined.");
-            Content content = Contents[language];
-            return content;
+            return GetContent(language);
         }
 
         /// <summary>
         /// </summary>
         /// <para name="manager"></para>
         /// <returns></returns>
-        public override Content Show()
+        public virtual Content Show(User user)
         {
-            if (Contents.Count == 0)
-                throw new ArgumentOutOfRangeException("Message do not have any content");
-            string lang = CultureInfo.CurrentUICulture.Name;
-            if (Contents.ContainsKey(lang))
-                return Show(lang);
-            if (lang.IndexOf("-", StringComparison.Ordinal) != -1)
-            {
-                lang = lang.Substring(2);
-                if (Contents.ContainsKey(lang))
-                    return Show(lang);
-            }
-            return Contents.Values.First();
+            return GetContent(user);
         }
+
+        private ISet<User> _users;
+        private ISet<Role> _roles;
+        private ISet<UserGroup> _userGroups;
+        private ISet<Org> _orgs;
+
+        public virtual ISet<User> Users
+        {
+            get { return _users ?? (_users = new HashedSet<User>()); }
+        }
+
+        public virtual ISet<Role> Roles
+        {
+            get { return _roles ?? (_roles = new HashedSet<Role>()); }
+        }
+
+        public virtual ISet<UserGroup> UserGroups
+        {
+            get { return _userGroups ?? (_userGroups = new HashedSet<UserGroup>()); }
+        }
+
+        public virtual ISet<Org> Orgs
+        {
+            get { return _orgs ?? (_orgs = new HashedSet<Org>()); }
+        }
+
     }
 }

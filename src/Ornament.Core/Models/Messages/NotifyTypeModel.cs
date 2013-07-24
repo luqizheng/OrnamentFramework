@@ -21,7 +21,7 @@ namespace Ornament.Models.Messages
             Name = type.Name;
             Remark = type.Remark;
             CommunicationType = type.CommunicationType;
-            Contents = type.Contents;
+           
         }
 
         /// <summary>
@@ -65,11 +65,6 @@ namespace Ornament.Models.Messages
             type.Name = Name;
             type.Remark = Remark;
             type.CommunicationType = CommunicationType;
-            type.Contents.Clear();
-            foreach (string key in Contents.Keys)
-            {
-                type.Contents.Add(key, Contents[key]);
-            }
             dao.SaveOrUpdate(type);
             dao.Flush();
         }

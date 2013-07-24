@@ -17,10 +17,13 @@ namespace Ornament
 
         public MemberSecrityManager(IMemberShipFactory memberShipFactory, SmtpClient client, User user)
         {
+            if (memberShipFactory == null)
+                throw new ArgumentNullException("memberShipFactory");
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
             User = user;
-
-            if (memberShipFactory == null) throw new ArgumentNullException("memberShipFactory");
-            if (client == null) throw new ArgumentNullException("client");
             _dao = memberShipFactory.CreateUserSecurityTokenDao();
             _memberShipFactory = memberShipFactory;
             SmtpClient = client;
@@ -59,15 +62,16 @@ namespace Ornament
         {
             var token = new UserSecretToken(User, Action, ExpireTimeMiniutes);
             _dao.SaveOrUpdate(token);
-            Content template = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged.Show(Language(User));
+            Content template = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged(User);
             Variables["url"] =
-                token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + "/Security/" + this.Action);
+                token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + "/Security/" +
+                                        Action);
             Variables["name"] = User.Name;
             Content content = Replace(template, Variables);
             SendEmail(User.Contact.Email, content);
         }
 
-    
+
         private string Language(User user)
         {
             ProfileValue prfile = _memberShipFactory.CreateProfileDao().FindByLoginId(user.LoginId);
