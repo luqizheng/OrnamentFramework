@@ -611,6 +611,7 @@
     <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -1196,6 +1197,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

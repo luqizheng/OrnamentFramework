@@ -45,14 +45,6 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         }
 
         //
-        // GET: /Messages/Template/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
         // GET: /Messages/Template/Create
 
         public ActionResult Create()
@@ -64,17 +56,21 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         // POST: /Messages/Template/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(MessageTemplateModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (this.ModelState.IsValid)
+                {
+                    model.Save(_daoFactory.MessageTemplateDao);
+                    return RedirectToAction("Index");
+                }
+                return View(model);
 
-                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
 
@@ -93,17 +89,21 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         // POST: /Messages/Template/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(MessageTemplateModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (this.ModelState.IsValid)
+                {
+                    model.Save(_daoFactory.MessageTemplateDao);
+                    return RedirectToAction("Index");
+                }
+                return View(model);
 
-                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
 

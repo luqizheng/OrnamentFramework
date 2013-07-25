@@ -52,7 +52,7 @@ namespace Ornament.Models.Messages
             get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
             set { _contents = value; }
         }
-
+        [DisplayName("Inside Template")]
         public bool Inside { get; private set; }
 
         public void Save(IMessageTemplateDao dao)

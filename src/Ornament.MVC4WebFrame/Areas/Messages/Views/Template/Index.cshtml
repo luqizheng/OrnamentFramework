@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@using Ornament.Web
+@using Resources
 @model System.Collections.Generic.IEnumerable<Ornament.Messages.Notification.MessageTemplate>
 
 @{
@@ -8,7 +9,24 @@
 @section pageTitle{
     <h2>Template for Simple Message</h2>
 }
+<div class="actions-wrapper">
+    <div class="actions">
 
+        <div id="user-stats">
+            <ul class="round-buttons">
+                <li>
+                    <div class="depth"><a href="@Url.Action("Create")" title="Add new Message Template" class="tip"><i class="icon-plus-sign"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Media posts" class="tip"><i class="icon-reorder"></i></a></div>
+                </li>
+            </ul>
+        </div>
+        <ul class="action-tabs">
+            <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
+        </ul>
+    </div>
+</div>
 <div class="widget">
 
     <div class="navbar">
@@ -45,7 +63,7 @@
                                 @Html.DisplayFor(modelItem => item.Remark)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
+                                @Html.ActionLink(@Basic.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
                                 <a data-toggle="popover" data-val="@item.Id" 
                                 class="btn btn-danger btn-small" href="#">@Basic.Delete</a>
                             </td>

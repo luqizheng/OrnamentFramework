@@ -65,17 +65,16 @@ use permission for checking permission like @user:Read, user is the string type 
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
       <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" >
-        <mvcSiteMapNode controller="News" area="Messages" action="Edit" title="Edit">
-        </mvcSiteMapNode>
-        <mvcSiteMapNode controller="News" area="Messages" action="Create" title="Create">
-        </mvcSiteMapNode>
+        <mvcSiteMapNode controller="News" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="News" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="Notify Messages" controller="Notify" area="Messages" action="Index" clickable="false">
       <mvcSiteMapNode controller="NotifyType" area="Messages" action="Index" title="NotifyType Setting"></mvcSiteMapNode>
       <mvcSiteMapNode controller="Template" area="Messages" action="Index" title="Templates">
-        
+        <mvcSiteMapNode controller="Template" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="Template" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 
