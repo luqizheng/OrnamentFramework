@@ -66,6 +66,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -73,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\NotifySenderManager.cs" />
     <Compile Include="Dao\IAnnouncementDao.cs" />
     <Compile Include="Dao\INewsDao.cs" />
     <Compile Include="Dao\INotifyTypeDao.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Dao\INewsTypeDao.cs" />
     <Compile Include="Newses\News.cs" />
     <Compile Include="Notification\Contents\AnnouncementMessage.cs" />
+    <Compile Include="Notification\ISender.cs" />
     <Compile Include="Notification\NotifyMessageBase.cs" />
     <Compile Include="Notification\Announcement.cs" />
     <Compile Include="EditState.cs" />
@@ -93,6 +96,8 @@
     <Compile Include="Notification\NotifyType.cs" />
     <Compile Include="Notification\Contents\SimpleMessage.cs" />
     <Compile Include="Notification\MessageTemplate.cs" />
+    <Compile Include="Notification\Senders\ClientSender.cs" />
+    <Compile Include="Notification\Senders\EmailSender.cs" />
     <Compile Include="PersonalMessages\PersonalMessage.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +139,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

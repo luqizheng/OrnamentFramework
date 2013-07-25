@@ -55,7 +55,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             var pagination = new Pagination();
             IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
-            pagination.TotalNumber = _userDao.Count();
+            pagination.TotalRows = _userDao.Count();
             ViewData["Nav"] = pagination;
             return View(result);
         }
@@ -74,12 +74,12 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 int total;
                 result = _userDao.QuickSearch(searchContent, searchContent, searchContent, searchContent, pagination.CurrentPage,
                                       pagination.PageSize, out total);
-                pagination.TotalNumber = total;
+                pagination.TotalRows = total;
             }
             else
             {
                 result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
-                pagination.TotalNumber = _userDao.Count();
+                pagination.TotalRows = _userDao.Count();
             }
             ViewData["Nav"] = pagination;
             return View(result);

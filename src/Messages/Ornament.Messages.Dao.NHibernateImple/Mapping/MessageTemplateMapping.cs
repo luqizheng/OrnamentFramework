@@ -8,6 +8,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         public MessageTemplateMapping()
         {
             Table("Msgs_MessageTemplate");
+            Id(x => x.Id).GeneratedBy.UuidHex("N");
             Map(x => x.Name).Length(64);
             Map(x => x.Remark).Length(255);
             Map(x => x.Inside);

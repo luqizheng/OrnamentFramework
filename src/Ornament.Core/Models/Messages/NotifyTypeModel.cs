@@ -10,7 +10,7 @@ namespace Ornament.Models.Messages
 {
     public class NotifyTypeModel
     {
-        private IDictionary<string, Content> _contents;
+       
 
         public NotifyTypeModel()
         {
@@ -44,14 +44,7 @@ namespace Ornament.Models.Messages
         [UIHint("EnumCheckBox"), Required]
         public CommunicationType CommunicationType { get; set; }
 
-        /// <summary>
-        /// </summary>
-        [AllowHtml]
-        public virtual IDictionary<string, Content> Contents
-        {
-            get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
-            set { _contents = value; }
-        }
+      
         /// <summary>
         /// 
         /// </summary>

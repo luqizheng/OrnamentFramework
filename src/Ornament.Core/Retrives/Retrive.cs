@@ -2,7 +2,7 @@
 
 namespace Ornament.Retrives
 {
-    internal abstract class Retrive<T, TID> where T : DomainObject<T, TID>
+    public abstract class Retrive<T, TID> where T : DomainObject<T, TID>
     {
         private readonly string _name;
 
@@ -15,25 +15,28 @@ namespace Ornament.Retrives
 
         public T Get()
         {
-            T result = _id == null ||
-                       default(TID).Equals(_id)
-                           ? CreateInstance(_name)
-                           : GetById(_id);
+            T result = null;
+            if (!object.ReferenceEquals(_id, default(TID)) && _id != null)
+            {
+                result = GetById(_id);
+            }
 
             if (result == null)
             {
-                _id = default(TID);
-                return Get();
-            }
-            if (result.IsTransient())
-            {
-                SaveOrUpdate(result);
+                result = GetByName(_name);
+                if (result == null)
+                {
+                    result = CreateInstance(_name);
+                    SaveOrUpdate(result);
+                }
+                _id = result.Id;
             }
             return result;
         }
 
         protected abstract T GetById(TID id);
         protected abstract T CreateInstance(string name);
+        protected abstract T GetByName(string name);
         protected abstract void SaveOrUpdate(T t);
     }
 }

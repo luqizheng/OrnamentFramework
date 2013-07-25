@@ -7,25 +7,35 @@ using Qi.Text;
 
 namespace Ornament.Messages.Notification
 {
-    public delegate Dictionary<string, string> ReplaceVariabled(User reader);
+    public delegate Dictionary<string, string> CreateVariablesHandler(User reader);
 
     /// <summary>
-    /// Simple Message foactory create a template messagr for each IPerformer.
+    ///     Simple Message foactory create a template messagr for each IPerformer.
     /// </summary>
     public class MessageTemplate : MessageHeaderBase<MessageTemplate>
     {
-        public MessageTemplate(NotifyType type)
-            : base(type)
+        protected MessageTemplate()
         {
 
         }
+        public MessageTemplate(NotifyType type)
+            : base(type)
+        {
+        }
+
         /// <summary>
-        /// 如果是内置message，那么Name是不允许修改的
+        ///     如果是内置message，那么Name是不允许修改的
         /// </summary>
         public virtual bool Inside { get; set; }
 
+        /// <summary>
+        ///     Gets or sets Name of  message template.
+        /// </summary>
         public virtual string Name { get; set; }
 
+        /// <summary>
+        ///     Gets or sets remark
+        /// </summary>
         public virtual string Remark { get; set; }
 
         /// <summary>
@@ -36,8 +46,7 @@ namespace Ornament.Messages.Notification
         /// <param name="performers"></param>
         public virtual void Publish(
             IMemberShipFactory daoFactory,
-            INotifyMessageDao dao,
-            ReplaceVariabled replaceVariabled,
+            CreateVariablesHandler replaceVariabled,
             params IPerformer[] performers)
         {
             var targetuser = new HashSet<User>();
@@ -50,11 +59,9 @@ namespace Ornament.Messages.Notification
             var helper = new NamedFormatterHelper();
             foreach (User u in targetuser)
             {
-                
                 Content content = GetContent(u);
                 Dictionary<string, string> variable = replaceVariabled(u);
 
-                
                 var simpleMessage = new SimpleMessage(u)
                     {
                         Content = new Content
@@ -64,7 +71,7 @@ namespace Ornament.Messages.Notification
                                 Value = helper.Replace(content.Value, variable)
                             }
                     };
-                dao.SaveOrUpdate(simpleMessage);
+                this.Type.Send(simpleMessage);
             }
         }
     }

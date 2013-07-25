@@ -19,7 +19,7 @@ namespace Ornament.Web
 
         public Pagination(int totalNumber)
         {
-            TotalNumber = totalNumber;
+            TotalRows = totalNumber;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Ornament.Web
             get
             {
                 int remarider;
-                _totalPage = Math.DivRem(TotalNumber, PageSize, out remarider);
+                _totalPage = Math.DivRem(TotalRows, PageSize, out remarider);
                 if (remarider != 0)
                     _totalPage++;
                 return _totalPage;
@@ -58,6 +58,6 @@ namespace Ornament.Web
 
         /// <summary>
         /// </summary>
-        public int TotalNumber { get; set; }
+        public int TotalRows { get; set; }
     }
 }

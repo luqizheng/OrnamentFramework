@@ -8,7 +8,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         public AnnouncementMapping()
         {
             Table("Msgs_AnnouncementMessage");
-            Id(x => x.Id).GeneratedBy.Increment();
+            Id(x => x.Id).GeneratedBy.UuidHex("N");
             DynamicUpdate();
             Map(x => x.ModifyTime);
             Map(x => x.EditState);

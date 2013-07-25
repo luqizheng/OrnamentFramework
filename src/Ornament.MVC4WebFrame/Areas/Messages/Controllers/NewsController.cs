@@ -33,7 +33,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             {
                 int total;
                 news = _factory.NewsDao.GetNews(pagination.CurrentPage, pagination.PageSize, type, out total);
-                pagination.TotalNumber = total;
+                pagination.TotalRows = total;
             }
             else
             {

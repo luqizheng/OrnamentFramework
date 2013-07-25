@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using Ornament.Messages.Config;
+using Ornament.Messages.Notification.Contents;
 using Qi.Domain;
 
 namespace Ornament.Messages.Notification
 {
+    [Flags]
     public enum CommunicationType
     {
         None,
@@ -14,6 +14,8 @@ namespace Ornament.Messages.Notification
         Sms = 4
     }
 
+    /// <summary>
+    /// </summary>
     public class NotifyType : DomainObject<NotifyType, string>
     {
         /// <summary>
@@ -27,5 +29,16 @@ namespace Ornament.Messages.Notification
         /// <summary>
         /// </summary>
         public virtual CommunicationType CommunicationType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="simpleMessage"></param>
+        public virtual void Send(SimpleMessage simpleMessage)
+        {
+            foreach (ISender sender in NotifySenderManager.Instance.GetSenders(this))
+            {
+                sender.Send(simpleMessage);
+            }
+        }
     }
 }

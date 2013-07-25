@@ -32,7 +32,7 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// 
         /// </summary>
-        IMessageTemplateDao SimpleMessageFactory { get; }
+        IMessageTemplateDao MessageTemplateDao { get; }
         /// <summary>
         /// 
         /// </summary>

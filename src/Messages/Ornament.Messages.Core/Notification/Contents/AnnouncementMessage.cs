@@ -8,6 +8,7 @@ namespace Ornament.Messages.Notification.Contents
 {
     public class AnnouncementMessage : NotifyMessageBase
     {
+        protected AnnouncementMessage() { }
         public AnnouncementMessage(User user)
             : base(user)
         {

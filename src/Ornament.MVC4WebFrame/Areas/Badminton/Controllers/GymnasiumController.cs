@@ -29,7 +29,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
                 pagination = new Pagination(1, 0);
             int total;
             var result = _daoFactory.GymasiumDao().GetGymnasiums(pagination.PageSize, pagination.CurrentPage, out total);
-            pagination.TotalNumber = total;
+            pagination.TotalRows = total;
             ViewData["nav"] = pagination;
 
             return View(result);

@@ -35,7 +35,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             int total = 0;
             IList<Announcement> result = _announcementDao.GetAll(pagination.PageSize, pagination.CurrentPage,
                                                                  out total);
-            pagination.TotalNumber = total;
+            pagination.TotalRows = total;
 
             return View(result);
         }
@@ -46,7 +46,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             int total;
             IList<Announcement> result = _announcementDao.GetAll(pagination.PageSize, pagination.CurrentPage,
                                                                  out total);
-            pagination.TotalNumber = total;
+            pagination.TotalRows = total;
             ViewData["nav"] = pagination;
             return View(result);
         }

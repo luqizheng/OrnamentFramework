@@ -24,7 +24,7 @@ namespace Ornament.Retrives
 
         protected override MessageTemplate GetById(string id)
         {
-            return OrnamentContext.DaoFactory.MessageDaoFactory.SimpleMessageFactory.Get(id);
+            return OrnamentContext.DaoFactory.MessageDaoFactory.MessageTemplateDao.Get(id);
         }
 
         protected override MessageTemplate CreateInstance(string name)
@@ -33,6 +33,7 @@ namespace Ornament.Retrives
                 {
                     Name = name,
                     Remark = _remark,
+                    Inside = true,
                 };
             foreach (Content content in _contents)
             {
@@ -41,9 +42,14 @@ namespace Ornament.Retrives
             return result;
         }
 
+        protected override MessageTemplate GetByName(string name)
+        {
+            return OrnamentContext.DaoFactory.MessageDaoFactory.MessageTemplateDao.GetByName(name);
+        }
+
         protected override void SaveOrUpdate(MessageTemplate t)
         {
-            OrnamentContext.DaoFactory.MessageDaoFactory.SimpleMessageFactory.SaveOrUpdate(t);
+            OrnamentContext.DaoFactory.MessageDaoFactory.MessageTemplateDao.SaveOrUpdate(t);
         }
     }
 }

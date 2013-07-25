@@ -28,7 +28,10 @@ namespace Ornament.Contexts
         /// </summary>
         public NotifyType SystemType
         {
-            get { return _systemId.Get(); }
+            get
+            {
+                return _systemId.Get();
+            }
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace Ornament.Contexts
         {
             get
             {
-                if (_registryAccount != null)
+                if (_registryAccount == null)
                 {
                     _registryAccount = new SimpleMessageFactoryRetrive(
                         "Regist New User (Template)",
@@ -110,7 +113,7 @@ namespace Ornament.Contexts
                         DeserializerXml(Resources.changeAccount, "en")
                         );
                 }
-                return _passwordRetrive.Get();
+                return _accountChanged.Get();
             }
         }
 

@@ -4,6 +4,8 @@ namespace Ornament.Messages.Notification.Contents
 {
     public class SimpleMessage : NotifyMessageBase
     {
+        protected SimpleMessage(){}
+
         public SimpleMessage(User user)
             : base(user)
         {
