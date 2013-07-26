@@ -82,8 +82,8 @@ namespace Ornament.Contexts
                 if (_passwordRetrive == null)
                 {
                     _passwordRetrive = new SimpleMessageFactoryRetrive(
-                        "Verify Email Address (Template)",
-                        "Email has changed, It should verify again.",
+                        "Retrive Password (Template)",
+                        "User forget password and try to use email to retrieve.",
                         SystemType,
                         DeserializerXml(Resources.forgetPassword_zh_CN, "zh-CN"),
                         DeserializerXml(Resources.forgetPassword_zh, "zh"),
@@ -105,8 +105,8 @@ namespace Ornament.Contexts
                 if (_accountChanged == null)
                 {
                     _accountChanged = new SimpleMessageFactoryRetrive(
-                        "Verify Email Address (Template)",
-                        "Email has changed, It should verify again.",
+                        "Account Information changed (Template)",
+                        "Account Information Changed for user",
                         SystemType,
                         DeserializerXml(Resources.changeAccount_zh_CN, "zh-CN"),
                         DeserializerXml(Resources.changeAccount_zh, "zh"),
@@ -129,31 +129,31 @@ namespace Ornament.Contexts
         }
 
 
-        private string CreateNotifyType(string name, string remark, IMessageTemplateDao dao,
-                                        IDictionary<string, Content> contents)
-        {
-            MessageTemplate personal = dao.GetByName(name);
-            if (personal != null)
-                return personal.Id;
-            personal = new MessageTemplate(SystemType) { Name = name };
-            personal.Remark = remark;
+        //private string CreateNotifyType(string name, string remark, IMessageTemplateDao dao,
+        //                                IDictionary<string, Content> contents)
+        //{
+        //    MessageTemplate personal = dao.GetByName(name);
+        //    if (personal != null)
+        //        return personal.Id;
+        //    personal = new MessageTemplate(SystemType) { Name = name };
+        //    personal.Remark = remark;
 
-            foreach (string key in contents.Keys)
-            {
-                if (!personal.Contents.ContainsKey(key))
-                {
-                    personal.Contents.Add(key, contents[key]);
-                }
-                else
-                {
-                    personal.Contents[key] = contents[key];
-                }
-            }
+        //    foreach (string key in contents.Keys)
+        //    {
+        //        if (!personal.Contents.ContainsKey(key))
+        //        {
+        //            personal.Contents.Add(key, contents[key]);
+        //        }
+        //        else
+        //        {
+        //            personal.Contents[key] = contents[key];
+        //        }
+        //    }
 
-            dao.SaveOrUpdate(personal);
-            dao.Flush();
+        //    dao.SaveOrUpdate(personal);
+        //    dao.Flush();
 
-            return personal.Id;
-        }
+        //    return personal.Id;
+        //}
     }
 }

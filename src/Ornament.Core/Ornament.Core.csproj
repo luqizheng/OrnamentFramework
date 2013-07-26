@@ -106,6 +106,7 @@
     <Compile Include="Models\Memberships\OrgModel.cs" />
     <Compile Include="Models\Memberships\Partials\BasicInfo.cs" />
     <Compile Include="Models\Memberships\Partials\MemberInfo.cs" />
+    <Compile Include="Models\Memberships\Partials\PermissionInfo.cs" />
     <Compile Include="Models\Memberships\UserGroupModel.cs" />
     <Compile Include="Models\Messages\NotifyTypeModel.cs" />
     <Compile Include="Models\Messages\PersonalMessageModel.cs" />

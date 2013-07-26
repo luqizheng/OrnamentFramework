@@ -35,6 +35,10 @@ namespace Ornament.Models.Memberships
             UpdateOn(user);
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             SessionManager.GetSessionWrapper().CurrentSession.SaveOrUpdate(user.Contact);
+            if (this.VerifyEmail && EmailHasChanged)
+            {
+                this.SendVerifyEmail(user);
+            }
             return user;
         }
     }

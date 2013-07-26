@@ -9,7 +9,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             Table("MBS_UserSecretToken");
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32); ;
-            this.References(s => s.Account);
+            this.References(s => s.Account).Cascade.SaveUpdate();
             Map(s => s.CreateTime).Insert();
             Map(s => s.PrivateKey);
             Map(s => s.ExpireTime);

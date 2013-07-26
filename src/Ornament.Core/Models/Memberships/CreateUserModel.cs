@@ -37,7 +37,7 @@ namespace Ornament.Models.Memberships
             }
             userDao.SaveOrUpdate(createUser);
             userDao.Flush();
-
+            this.SendVerifyEmail(user);
 
             return true;
         }

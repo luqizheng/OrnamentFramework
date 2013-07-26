@@ -53,7 +53,7 @@ namespace Ornament.Models.Messages
             set { _contents = value; }
         }
         [DisplayName("Inside Template")]
-        public bool Inside { get; private set; }
+        public bool Inside { get; set; }
 
         public void Save(IMessageTemplateDao dao)
         {

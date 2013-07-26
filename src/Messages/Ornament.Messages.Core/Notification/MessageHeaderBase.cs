@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Ornament.MemberShip;
 using Qi.Domain;
 
@@ -65,6 +66,10 @@ namespace Ornament.Messages.Notification
                 throw new ArgumentOutOfRangeException("Message do not have any content");
 
             string lang = user.Language;
+            if (String.IsNullOrEmpty(lang))
+            {
+                lang = Thread.CurrentThread.CurrentUICulture.EnglishName;
+            }
             Content result = Get(lang);
             if (result == null)
             {
@@ -78,6 +83,7 @@ namespace Ornament.Messages.Notification
 
         private Content Get(string lang)
         {
+            
             if (Contents.ContainsKey(lang))
                 return GetContent(lang);
             if (lang.IndexOf("-", StringComparison.Ordinal) != -1)
