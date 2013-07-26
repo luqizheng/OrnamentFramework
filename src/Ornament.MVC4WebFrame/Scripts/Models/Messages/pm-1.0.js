@@ -1,6 +1,5 @@
-﻿define(function (require) {
-    
-
+﻿
+define(function (require) {
         require('/bundles/bootstrap.js');
         var url = "/Api/PersonalMessages",
          api = {

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 using log4net;
 
@@ -25,10 +27,6 @@ namespace Ornament.MVCWebFrame.Api.Core
                                          [FromUri]string email,
             [FromUri]string loginId, [FromUri]string phone)
         {
-
-            var pageIndex = 0;
-            var pageSize = 10;
-
             IList<User> result = _factory.CreateUserDao()
                                          .QuickSearch(name, loginId, email, phone, 0, 15);
 
@@ -42,7 +40,20 @@ namespace Ornament.MVCWebFrame.Api.Core
                        };
 
         }
+        [HttpPost]
+        public object VerifyEmail(string loginId, string verifyEmail)
+        {
+            var user = _factory.CreateUserDao().GetByLoginId(loginId);
+            MemberSecrityManager manager = MemberSecrityManager.CreateEmailChangedToken(user, 30);
+            manager.SendToken();
+            return new
+                {
+                    success = true
+                };
 
+
+
+        }
         //[HttpPost]
         //public object VerifyEmail([FromBody]string loginId)
         //{

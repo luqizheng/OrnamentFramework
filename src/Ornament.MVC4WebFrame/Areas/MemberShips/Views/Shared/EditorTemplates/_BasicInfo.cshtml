@@ -5,7 +5,14 @@
 
 @Html.HiddenFor(model => model.Id)
 @Html.EditorFor(model => model.LoginId)
-
+@{
+    var langs = from lang in OrnamentContext.Configuration.Languages
+                select new SelectListItem()
+                    {
+                        Text = lang.Name+"("+lang.Key+")",
+                        Value = lang.Key
+                    };
+}
 @*<div class="control-group">
     @Html.LabelFor(s => s.Email, new { @class = "control-label" })
     <div class="controls">
@@ -26,5 +33,10 @@
 @Html.EditorFor(s => s.Name)
 @Html.EditorFor(s => s.Phone)
 @Html.EditorFor(s => s.TimeZoneId)
-@Html.EditorFor(s => s.Language)
+<div class="control-group">
+    @Html.LabelFor(s => s.Language, new { @class = "control-label" })
+    <div class="controls">
+        @Html.DropDownListFor(s=>s.Language,langs,new{style="padding-top:4px"})
+    </div>
+</div>
 

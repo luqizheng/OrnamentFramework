@@ -234,4 +234,7 @@
   <data name="Validate" xml:space="preserve">
     <value>驗證</value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>發送</value>
+  </data>
 </root>

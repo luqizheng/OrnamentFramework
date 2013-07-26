@@ -49,6 +49,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Remark)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Inside)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -61,6 +64,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Remark)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Inside)
                             </td>
                             <td>
                                 @Html.ActionLink(@Basic.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-small" })

@@ -944,14 +944,14 @@
     <Content Include="Scripts\Models\Memberships\user-1.0.js" />
     <Content Include="Views\HttpErrors\501.cshtml" />
     <Content Include="Views\PersonalMessage\Index.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BootstrapDate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RichText.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RoleMultiSelect.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UsergroupMultiSelect.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmumRadio.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Bool.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
@@ -965,10 +965,11 @@
     <Content Include="Views\Shared\filectrl.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\PopupMessage.cshtml" />
     <Content Include="Views\Shared\_pm.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

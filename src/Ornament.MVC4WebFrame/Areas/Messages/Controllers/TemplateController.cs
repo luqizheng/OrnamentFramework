@@ -55,18 +55,17 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         //
         // POST: /Messages/Template/Create
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken, ValidateInput(false)]
         public ActionResult Create(MessageTemplateModel model)
         {
             try
             {
-                if (this.ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     model.Save(_daoFactory.MessageTemplateDao);
                     return RedirectToAction("Index");
                 }
                 return View(model);
-
             }
             catch
             {
@@ -81,25 +80,24 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         {
             if (id == null)
                 throw new HttpException(404, "Template message not found.");
-            var model = _daoFactory.MessageTemplateDao.Get(id);
+            MessageTemplate model = _daoFactory.MessageTemplateDao.Get(id);
             return View(new MessageTemplateModel(model));
         }
 
         //
         // POST: /Messages/Template/Edit/5
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken, ValidateInput(false)]
         public ActionResult Edit(MessageTemplateModel model)
         {
             try
             {
-                if (this.ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     model.Save(_daoFactory.MessageTemplateDao);
                     return RedirectToAction("Index");
                 }
                 return View(model);
-
             }
             catch
             {
@@ -110,27 +108,11 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         //
         // GET: /Messages/Template/Delete/5
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
-        }
-
-        //
-        // POST: /Messages/Template/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var dao = _daoFactory.MessageTemplateDao;
+            dao.Delete(dao.Get(id));
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

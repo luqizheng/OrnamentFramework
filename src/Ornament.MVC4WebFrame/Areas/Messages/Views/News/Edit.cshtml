@@ -37,7 +37,7 @@
     <div class="widget">
         <div class="navbar">
             <div class="navbar-inner">
-                <button id="submitButton" class="btn btn-info" type="button">@Basic.Submit</button>
+                <button id="submitButton" class="btn btn-info" type="submit">@Basic.Submit</button>
                 <a href="@Url.Action("Index")" class="btn">Back</a>
             </div>
         </div>
@@ -138,7 +138,7 @@
         var content = @Html.Raw(contents)
 
         seajs.use(['ckeditor/ckeditor.js', "select2",
-                "bootstrap", "ExtenderType", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
+                "bootstrap", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
 
                     var editor = CKEDITOR.replace('editor', {
                         filebrowserBrowseUrl: '@Url.Action("FileCtrl", "FileManager", new { area = "Settings" })',
@@ -151,9 +151,6 @@
                     });
 
                     $("#Type").select2();
-
-                    $('.date').datepicker();
-
                     $("#Language").select2().change(function () {
                         var cont = content[$(this).val()];
                         editor.setData(cont ? cont.content : "");

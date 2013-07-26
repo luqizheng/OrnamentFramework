@@ -1,4 +1,5 @@
-﻿<div id="pmEditor" class="modal fade">
+﻿@using Resources
+<div id="pmEditor" class="modal fade">
     <div class="modal-header">
         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
         <h3><i class="fam-comments"></i>Chat Record</h3>
@@ -6,7 +7,7 @@
     <div class="modal-body">
         <div class="widget" style="margin-bottom: 10px">
             <div class="well-smoke">
-                <dl class="clearfix chat">
+                <dl class="clearfix chat" style="padding: 8px">
                 </dl>
             </div>
             <form class="form-horizontal widget">
@@ -23,8 +24,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a class="btn" href="#" data-dismiss="modal" aria-hidden="true">Close</a>
-        <a class="btn btn-primary" href="#" role="send">send</a>
+        <a class="btn" href="#" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i>@Basic.Cancel</a>
+        <a class="btn btn-primary" href="#" role="send"><i class="icon-envelope"></i>@Basic.Send</a>
     </div>
 </div>
 

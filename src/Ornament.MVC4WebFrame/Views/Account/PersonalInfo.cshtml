@@ -18,50 +18,50 @@
 </style>
 <fieldset class="form-horizontal" id="Pinfo">
     <div class="control-group">
-        @Html.LabelFor(s => s.UpdateTime, new { @class = "control-label" })
+        @Html.LabelFor(s => s.Other.UpdateTime, new { @class = "control-label" })
         <div class="controls">
             <label class="control-label">
-                @this.Model.UpdateTime
+                @this.Model.Other.UpdateTime
             </label>
         </div>
     </div>
     <div class="control-group">
-        @Html.LabelFor(s => s.CreateTime, new { @class = "control-label" })
+        @Html.LabelFor(s => s.Other.CreateTime, new { @class = "control-label" })
         <div class="controls">
             <label class="control-label">
-                @Model.CreateTime
+                @Model.Other.CreateTime
             </label>
         </div>
     </div>
     <div class="control-group">
-        @Html.LabelFor(s => s.LastPasswordChangedDate, new { @class = "control-label" })
+        @Html.LabelFor(s => s.Security.LastPasswordChangedDate, new { @class = "control-label" })
         <div class="controls">
             <label class="control-label">
-                @Model.LastPasswordChangedDate
+                @Model.Security.LastPasswordChangedDate
             </label>
         </div>
     </div>
     <div class="control-group">
-        @Html.LabelFor(s => s.LastLockoutDate, new { @class = "control-label" })
+        @Html.LabelFor(s => s.Other.LastLockoutDate, new { @class = "control-label" })
         <div class="controls">
             <label class="control-label">
-                @Model.LastLockoutDate
+                @Model.Other.LastLockoutDate
             </label>
         </div>
     </div>
     <div class="control-group">
-        @Html.LabelFor(s => s.LastLoginDate, new { @class = "control-label" })
+        @Html.LabelFor(s => s.Security.LastLoginDate, new { @class = "control-label" })
         <div class="controls">
             <label class="control-label">
-                @Model.LastLoginDate
+                @Model.Security.LastLoginDate
             </label>
         </div>
     </div>
     <div class="control-group">
-        @Html.LabelFor(s => s.LastActivityDate, new { @class = "control-label" })
+        @Html.LabelFor(s => s.Other.LastActivityDate, new { @class = "control-label" })
         <div class="controls">
             <label class="control-label">
-                @Model.LastActivityDate
+                @Model.Other.LastActivityDate
             </label>
         </div>
     </div>
