@@ -14,7 +14,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
                     .SetProjection(Projections.RowCount())
                     .GetExecutableCriteria(CurrentSession)
                     .UniqueResult<int>();
-            return CreateDetachedCriteria()
+            return CreateDetachedCriteria().AddOrder(Order.Desc(Projections.Property<Announcement>(s=>s.ModifyTime))) 
                 .SetMaxResults(pageSize)
                 .SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(this.CurrentSession).List<Announcement>();
         }

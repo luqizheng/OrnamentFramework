@@ -44,7 +44,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// </summary>
         public IMessageTemplateDao MessageTemplateDao
         {
-            get { return new SimpleMessageFactoryDao(); }
+            get { return new MessageTemplateDao(); }
         }
 
         /// <summary>

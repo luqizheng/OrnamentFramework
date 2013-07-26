@@ -9,7 +9,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
     /// <summary>
     /// 
     /// </summary>
-    public class SimpleMessageFactoryDao : DaoBase<string, MessageTemplate>, IMessageTemplateDao
+    public class MessageTemplateDao : DaoBase<string, MessageTemplate>, IMessageTemplateDao
     {
         /// <summary>
         /// </summary>
@@ -19,7 +19,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
             if (!messageTemplate.Inside)
             {
                 base.Delete(messageTemplate);
+                return;
             }
+
             throw new ArgumentException("simple message factory is inside template, it should not be deleted.");
         }
 
@@ -50,8 +52,10 @@ namespace Ornament.Messages.Dao.NHibernateImple
                                 .GetExecutableCriteria(CurrentSession)
                                 .UniqueResult<int>();
             return DetachedCriteria.For<MessageTemplate>()
-                                   .SetMaxResults(pageSize).SetFirstResult(pageSize*pageIndex)
-                                   .GetExecutableCriteria(CurrentSession).List<MessageTemplate>();
+                .AddOrder(Order.Desc(Projections.Property<MessageTemplate>(s => s.Inside)))
+                .AddOrder(Order.Desc(Projections.Property<MessageTemplate>(s => s.ModifyTime)))
+                .SetMaxResults(pageSize).SetFirstResult(pageSize * pageIndex)
+                .GetExecutableCriteria(CurrentSession).List<MessageTemplate>();
         }
     }
 }

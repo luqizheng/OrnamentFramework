@@ -82,7 +82,9 @@ use permission for checking permission like @user:Read, user is the string type 
 
 
       <mvcSiteMapNode controller="Site" area="Settings" action="Index" title="Information"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="FileManager" area="Settings" action="Index" title="File Managers"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="FileManager" area="Settings" action="Index" title="File Managers">
+        
+      </mvcSiteMapNode>
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="Docs" imageUrl="icon-indent-right">

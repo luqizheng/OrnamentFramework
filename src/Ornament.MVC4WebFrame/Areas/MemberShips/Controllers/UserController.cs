@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿  using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -61,7 +61,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserOperator.Read, "User"), HttpPost]
-        public ActionResult Index(Pagination pagination, string searchContent)
+        public ActionResult Index(Pagination pagination, string search)
         {
             if (pagination == null)
             {
@@ -69,10 +69,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             }
             IList<User> result;
 
-            if (!string.IsNullOrEmpty(searchContent))
+            if (!string.IsNullOrEmpty(search))
             {
+                search = search + "%";
                 int total;
-                result = _userDao.QuickSearch(searchContent, searchContent, searchContent, searchContent, pagination.CurrentPage,
+                result = _userDao.QuickSearch(search, search, search, search, pagination.CurrentPage,
                                       pagination.PageSize, out total);
                 pagination.TotalRows = total;
             }

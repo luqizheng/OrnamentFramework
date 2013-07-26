@@ -44,22 +44,6 @@
                     });
                     //User Search;
                     user.typeHeader("#searchContent");
-
-                    $("#search :submit").click(function () {
-                        var searchData = {
-                            loginIdOrEmail: $("#searchContent").val()
-                        };
-                        $.post("@Url.Action("Search")", searchData,
-                    function (user) {
-                        var target = $("#userListBody").empty();
-                        if (user.length > 0) {
-                            target.append($("#userTableTmpl").tmpl(user));
-                        }
-                        $("table").toggle(user.length > 0);
-                        $("#alertMsg").toggle(user.length == 0);
-                    });
-                    });
-
                 });
 
 
@@ -146,12 +130,12 @@
     </div>
 </div>
 
-<form action="#" class="search widget" id="search">
+<form action="@Url.Action("Index")" class="search widget"method="POST">
     <div class="autocomplete-append">
-        <input type="text" id="searchContent" placeholder="@String.Format(Html.GetResourceString("search_placeHolder"),@Basic.Email ,@Basic.Phone)" class="ui-autocomplete-input" autocomplete="off">
+        <input type="text" id="searchContent" name="search" placeholder="@String.Format(Html.GetResourceString("search_placeHolder"), @Basic.Email, @Basic.Phone)" 
+            class="ui-autocomplete-input" autocomplete="off">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" value="@Basic.Search" class="btn btn-info">
-        <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="searchTextBox" tabindex="0" style="display: none; z-index: 1;"></ul>
     </div>
 </form>
 

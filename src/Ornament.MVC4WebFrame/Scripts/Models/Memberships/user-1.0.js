@@ -23,8 +23,17 @@
                         phone: query,
                     };
                     $.get('/api/Users', data, function (d) {
+                        var qu = query.substr(0, query.lengh - 1);
                         $(d).each(function (i) {
-                            rs.push(d[i].name + "(" + d[i].loginId + ")-" + d[i].email);
+                            if (d[i].loginId.indexOf(qu) != -1) {
+                                rs.push(d[i].loginId);
+                            }
+                            if (d[i].name.indexOf(qu) != -1) {
+                                rs.push(d[i].name);
+                            }
+                            if (d[i].email.indexOf(qu) != -1) {
+                                rs.push(d[i].email);
+                            }
                         });
                         process(rs);
                     });

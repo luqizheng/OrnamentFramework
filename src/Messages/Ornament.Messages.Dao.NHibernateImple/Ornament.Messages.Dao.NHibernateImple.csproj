@@ -109,7 +109,7 @@
     <Compile Include="NewsTypeDao.cs" />
     <Compile Include="PersonalMessageDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleMessageFactoryDao.cs" />
+    <Compile Include="MessageTemplateDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
