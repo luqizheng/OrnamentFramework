@@ -167,13 +167,13 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="emailChanged" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\emailChanged.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\emailChanged.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="emailChanged_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\emailChanged.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\emailChanged.zh.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="emailChanged_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\emailChanged_zh-CN.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\emailChanged_zh-CN.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="error_LoginError" xml:space="preserve">
     <value>Login id or Password is not match.</value>
@@ -197,13 +197,13 @@
     <value>User is not approved.</value>
   </data>
   <data name="forgetPassword" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\forgetPassword.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\forgetPassword.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="forgetPassword_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\forgetPassword.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\forgetPassword.zh.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="forgetPassword_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\forgetPassword_zh-CN.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\forgetPassword_zh-CN.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="input_password_again" xml:space="preserve">
     <value>Confirm can't be blank.</value>
@@ -269,13 +269,13 @@
     <value>Phone</value>
   </data>
   <data name="registAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\registAccount.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\registAccount.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="registAccount_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\registAccount.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\registAccount.zh.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="registAccount_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\registAccount_zh-CN.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\Resources\registAccount_zh-CN.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="RegistryTime" xml:space="preserve">
     <value>Registry time</value>
@@ -305,12 +305,12 @@
     <value>Language</value>
   </data>
   <data name="changeAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\changeaccount.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\resources\changeaccount.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="changeAccount_zh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\changeaccount.zh.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\resources\changeaccount.zh.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="changeAccount_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\changeaccount_zh-cn.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+    <value>..\resources\changeaccount_zh-cn.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

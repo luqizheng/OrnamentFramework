@@ -159,4 +159,16 @@
   <data name="search_placeHolder" xml:space="preserve">
     <value>請輸入 {0}、LoginId 或者 {1}</value>
   </data>
+  <data name="retrieve_pwd_fail" xml:space="preserve">
+    <value>取回密碼的信息發送失敗</value>
+  </data>
+  <data name="retrieve_pwd_success" xml:space="preserve">
+    <value>取回密碼的信息已成功發送</value>
+  </data>
+  <data name="verify_email_fail" xml:space="preserve">
+    <value>驗證郵箱的電子郵件發送成功</value>
+  </data>
+  <data name="verify_email_success" xml:space="preserve">
+    <value>驗證郵箱的電子郵件發送失敗</value>
+  </data>
 </root>

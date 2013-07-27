@@ -169,10 +169,11 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;关键信息被修改&lt;/Subject&gt;
-        ///    &lt;Value&gt; &lt;![CDATA[
+        ///  &lt;Value&gt;
+        ///    &lt;![CDATA[
         ///    &lt;p&gt;亲爱的[name]用户:
         ///
         ///    &lt;p&gt;  你已经在XXX系统修改了[content].
@@ -193,10 +194,14 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;关键信息被修改&lt;/Subject&gt;
-        ///    &lt;Value&gt; &lt;![CDATA[
+        ///    &lt;Value&gt;
+        ///      &lt;![CDATA[
+        ///      
+        ///      
+        ///&lt;![CDATA[
         ///    &lt;p&gt;亲爱的[name]用户:
         ///
         ///    &lt;p&gt;  你已经在XXX系统修改了[content].
@@ -207,7 +212,8 @@ namespace Ornament.Properties {
         ///    
         ///
         ///   &lt;p&gt; 管理员
-        /// ]]&gt;&lt;/Value&gt;
+        /// ]]&gt;
+        /// &lt;/Value&gt;
         ///&lt;/Content&gt; 的本地化字符串。
         /// </summary>
         public static string changeAccount_zh {
@@ -217,7 +223,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;关键信息被修改&lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
@@ -277,7 +283,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;[site] notify messages&lt;/Subject&gt;
         ///  &lt;Value&gt; &lt;![CDATA[
@@ -302,7 +308,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;[site] 通知 &lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
@@ -333,20 +339,20 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-        /// &lt;Subject&gt;[site] 閫氱煡 &lt;/Subject&gt;
+        /// &lt;Subject&gt;[site] 通知 &lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
-        ///    [name]锛屾偍濂?
+        ///    [name]，您好
         ///	&lt;p&gt;
-        ///		浣犵殑瀹夊叏鐢靛瓙閭欢宸茬粡琚慨鏀广€傝鐐瑰嚮涓嬮潰閾炬帴杩涜纭
+        ///		你的安全电子邮件已经被修改。请点击下面链接进行确认
         ///		&lt;/p&gt;
         ///
         ///    &lt;p&gt;[url]&lt;/p&gt;
         ///
-        ///	&lt;p&gt;璇蜂笉瑕佸洖澶嶆閭欢&lt;/p&gt;
+        ///	&lt;p&gt;请不要回复此邮件&lt;/p&gt;
         ///
-        ///    &lt;p&gt;[site] 绠＄悊鍛?/p&gt;
+        ///    &lt;p&gt;[site] 管理员&lt;/p&gt;
         /// ]]&gt;&lt;/Value&gt;  
         ///&lt;/Content&gt; 的本地化字符串。
         /// </summary>
@@ -420,7 +426,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;[site] Password Retrive&lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
@@ -442,7 +448,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;[site] 密碼重置&lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
@@ -464,18 +470,18 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-        ///  &lt;Subject&gt;[site] 瀵嗙⒓閲嶇疆&lt;/Subject&gt;
+        ///  &lt;Subject&gt;[site] 密码重置&lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
         ///  &lt;p&gt;  [name]
         ///	
-        ///	 &lt;p&gt;  鎮ㄥソ锛岃珛榛炴搳浠ヤ笅閺堟帴閫茶閲嶇疆瀵嗙⒓鎿嶄綔
+        ///	 &lt;p&gt;  您好，请点击下面url进行密码重置
         ///    
         ///
         /// &lt;p&gt;   [url]
         ///
-        /// &lt;p&gt;   [site]绠＄悊鍝″湗闅?
+        /// &lt;p&gt;   [site]管理团队
         /// ]]&gt;&lt;/Value&gt;
         ///&lt;/Content&gt; 的本地化字符串。
         /// </summary>
@@ -684,22 +690,22 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;x-cp20936&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
-        ///  &lt;Subject&gt;新注册用户&lt;/Subject&gt;
-        ///    &lt;Value&gt; &lt;![CDATA[
-        ///    &lt;p&gt;亲爱的[name]用户:
-        ///
-        ///  &lt;p&gt;  你已经在XXX系统成功注册了一个新账号，为了请点击下面的连接验证。
+        ///  &lt;Subject&gt;��ע���û�&lt;/Subject&gt;
+        ///    &lt;Value&gt;
+        ///      &lt;![CDATA[�װ���[name]�û�:
+        ///      
+        ///  &lt;p&gt;  ���Ѿ���XXXϵͳ�ɹ�ע����һ�����˺ţ�Ϊ�����������������֤��
         ///
         ///  &lt;p&gt;  [url]
         ///
         ///
-        ///    &lt;p&gt;账号信息
-        ///   &lt;p&gt; 登录Id:[loginId]  
+        ///    &lt;p&gt;�˺���Ϣ
+        ///   &lt;p&gt; ��¼Id:[loginId]  
         ///    
         ///
-        ///   &lt;p&gt; 管理员
+        ///   &lt;p&gt; ����Ա
         /// ]]&gt;&lt;/Value&gt;
         ///&lt;/Content&gt; 的本地化字符串。
         /// </summary>
@@ -710,7 +716,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;新注册用户&lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[
@@ -735,7 +741,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Content xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
         ///  &lt;Subject&gt;新注册用户&lt;/Subject&gt;
         ///    &lt;Value&gt; &lt;![CDATA[

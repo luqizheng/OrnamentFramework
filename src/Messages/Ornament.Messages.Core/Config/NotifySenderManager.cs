@@ -19,7 +19,7 @@ namespace Ornament.Messages.Config
         ///     添加发送器
         /// </summary>
         /// <param name="senders"></param>
-        public void Add(IEnumerable<ISender> senders)
+        public void Add(params ISender[] senders)
         {
             if (senders == null) throw new ArgumentNullException("senders");
 

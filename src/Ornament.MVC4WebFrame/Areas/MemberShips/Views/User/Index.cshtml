@@ -30,6 +30,7 @@
                     $("#BtnApply").click(function () {
                         var action = $("#selApplyAction").val();
                         $("#tableForm").attr("action", "User/" + action).submit();
+                        return false;
                     });
                     $("input[name=loginIds]").change(function () {
                         var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
@@ -38,9 +39,26 @@
 
 
 
-                    $(".pm").click(function () {
-                        var id = $(this).attr("href").substr(1);
+                    $("table [role=pm]").click(function () {
+                        var id = $(this).closest("ul").attr("val");
                         pm.show(id, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                    });
+                    $("table [role=verifyEmail]").click(function () {
+                        var loginId = $("td:first input", $(this).closest("tr")).val();
+                        user.verifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
+                            alert(e.success ?
+                                "@Html.GetResourceString("verify_email_success")" :
+                                "@Html.GetResourceString("verify_email_fail")");
+                        });
+                        return false;
+                    });
+                    $("table [role=retievePwd]").click(function () {
+                        var loginId = $("td:first input", $(this).closest("tr")).val();
+                        user.retrievePassword(loginId, function (e) {
+                            alert(e.success ?
+                                "@Html.GetResourceString("retrieve_pwd_success")" :
+                                "@Html.GetResourceString("retrieve_pwd_fail")");
+                        });
                     });
                     //User Search;
                     user.typeHeader("#searchContent");
@@ -224,7 +242,7 @@
                     @if (editPermission)
                     {
                         <td>
-                            <ul class="table-controls">
+                            <ul class="table-controls" val="@user.Id">
                                 <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
                                     <i class="fam-user-edit"></i></a></li>
                                 <li>
@@ -234,11 +252,22 @@
                                 @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
                                 {
                                     <li>
-                                        <a href="#@user.Id" class="btn tip pm" title="@Html.GetResourceString("PersonalMessage")">
+                                        <a href="#@user.Id" class="btn tip" title="@Html.GetResourceString("PersonalMessage")" role="pm">
                                             <i class="fam-email-edit"></i>
                                         </a>
                                     </li>
                                 }
+                                <li>
+                                    <a href="#@user.Contact.Email" class="btn tip" title="Verify Email" role="verifyEmail">
+                                        <i class="fam-email-go"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#@user.Contact.Email" class="btn tip" title="Verify Email" role="retievePwd">
+                                        <i class="fam-key-go"></i>
+                                    </a>
+                                </li>
                             </ul>
                         </td>
                     }

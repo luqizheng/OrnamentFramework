@@ -189,7 +189,11 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="forget"></param>
+        /// <returns></returns>
         [HttpPost, Session]
         public ActionResult ForgetPassword(ForgetPassword forget)
         {
@@ -200,7 +204,10 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ForgetPasswordSucccess()
         {
             return View();

@@ -1,4 +1,4 @@
-﻿  using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -74,7 +74,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
                 search = search + "%";
                 int total;
                 result = _userDao.QuickSearch(search, search, search, search, pagination.CurrentPage,
-                                      pagination.PageSize, out total);
+                                              pagination.PageSize, out total);
                 pagination.TotalRows = total;
             }
             else
@@ -85,7 +85,6 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             ViewData["Nav"] = pagination;
             return View(result);
         }
-
 
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
@@ -267,7 +266,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
                                                    u.Contact.Email.Contains(loginIdOrEmail)

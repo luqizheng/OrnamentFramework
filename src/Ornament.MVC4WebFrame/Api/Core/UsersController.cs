@@ -5,6 +5,8 @@ using System.Net.Mail;
 using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Models.Memberships;
+using Ornament.Models.Security;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 using log4net;
@@ -23,9 +25,9 @@ namespace Ornament.MVCWebFrame.Api.Core
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match([FromUri]string name,
-                                         [FromUri]string email,
-            [FromUri]string loginId, [FromUri]string phone)
+        public IEnumerable<object> Match([FromUri] string name,
+                                         [FromUri] string email,
+                                         [FromUri] string loginId, [FromUri] string phone)
         {
             IList<User> result = _factory.CreateUserDao()
                                          .QuickSearch(name, loginId, email, phone, 0, 15);
@@ -40,20 +42,24 @@ namespace Ornament.MVCWebFrame.Api.Core
                        };
 
         }
+
         [HttpPost]
-        public object VerifyEmail(string loginId, string verifyEmail)
+        public object VerifyEmail([FromBody] VerifyEmailModel model)
         {
-            var user = _factory.CreateUserDao().GetByLoginId(loginId);
-            MemberSecrityManager manager = MemberSecrityManager.CreateEmailChangedToken(user, 30);
-            manager.SendToken();
+            if (model.Veirfy(_factory))
+            {
+                return new
+                    {
+                        success = true,
+                    };
+            }
             return new
                 {
-                    success = true
+                    success = false,
                 };
-
-
-
         }
+        
+
         //[HttpPost]
         //public object VerifyEmail([FromBody]string loginId)
         //{

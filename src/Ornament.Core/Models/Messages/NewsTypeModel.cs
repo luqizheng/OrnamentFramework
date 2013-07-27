@@ -31,9 +31,15 @@ namespace Ornament.Models.Messages
         [UIHint("Textarea")]
         public string Remark { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dao"></param>
+        /// <exception cref="ArgumentNullException">dao is null</exception>
         public void Save(IMessageDaoFactory dao)
         {
-            if (dao == null) throw new ArgumentNullException("dao");
+            if (dao == null)
+                throw new ArgumentNullException("dao");
             NewsType type = Id != null ? dao.NewsTypeDao.Get(Id) : new NewsType(Name);
             type.Name = Name;
             type.Remark = Remark;

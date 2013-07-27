@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 
@@ -10,8 +7,6 @@ namespace Ornament.Models.Messages
 {
     public class NotifyTypeModel
     {
-       
-
         public NotifyTypeModel()
         {
         }
@@ -21,7 +16,6 @@ namespace Ornament.Models.Messages
             Name = type.Name;
             Remark = type.Remark;
             CommunicationType = type.CommunicationType;
-           
         }
 
         /// <summary>
@@ -44,9 +38,8 @@ namespace Ornament.Models.Messages
         [UIHint("EnumCheckBox"), Required]
         public CommunicationType CommunicationType { get; set; }
 
-      
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="dao"></param>
         /// <exception cref="ArgumentNullException">dao is null.</exception>

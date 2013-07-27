@@ -99,7 +99,7 @@ namespace Ornament.Contexts
         /// </summary>
         public MessageTemplate AccountChanged
         {
-            get
+            get   
             {
 
                 if (_accountChanged == null)

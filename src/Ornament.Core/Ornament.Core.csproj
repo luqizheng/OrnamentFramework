@@ -108,11 +108,12 @@
     <Compile Include="Models\Memberships\Partials\MemberInfo.cs" />
     <Compile Include="Models\Memberships\Partials\PermissionInfo.cs" />
     <Compile Include="Models\Memberships\UserGroupModel.cs" />
+    <Compile Include="Models\Security\VerifyEmailModel.cs" />
     <Compile Include="Models\Messages\NotifyTypeModel.cs" />
     <Compile Include="Models\Messages\PersonalMessageModel.cs" />
     <Compile Include="Models\Messages\MessageTemplateModel.cs" />
     <Compile Include="Models\Security\RetrievePasswordModel.cs" />
-    <Compile Include="Models\Security\VerifyEmailAndChangePassword.cs" />
+    <Compile Include="Models\Security\VerifyResult.cs" />
     <Compile Include="OrnamentContext.cs" />
     <Compile Include="Contexts\NhConfiguration.cs" />
     <Compile Include="Contexts\OrnamentConfiguration.cs" />
@@ -178,49 +179,48 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
     <EmbeddedResource Include="Properties\Resources.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\registAccount.zh.txt" />
+    <Content Include="Resources\registAccount.zh.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\registAccount_zh-CN.txt" />
+    <Content Include="Resources\registAccount_zh-CN.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\registAccount.txt" />
+    <Content Include="Resources\registAccount.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\emailChanged.txt" />
+    <Content Include="Resources\emailChanged.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\emailChanged.zh.txt" />
+    <Content Include="Resources\emailChanged.zh.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\emailChanged_zh-CN.txt" />
+    <Content Include="Resources\emailChanged_zh-CN.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\forgetPassword.txt" />
+    <Content Include="Resources\forgetPassword.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\forgetPassword.zh.txt" />
+    <Content Include="Resources\forgetPassword.zh.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\forgetPassword_zh-CN.txt" />
+    <Content Include="Resources\forgetPassword_zh-CN.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\changeAccount.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Web\Attributes\" />
+    <Content Include="Resources\changeAccount.zh.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\changeAccount.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\changeAccount.zh.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\changeAccount_zh-CN.txt" />
+    <Content Include="Resources\changeAccount_zh-CN.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

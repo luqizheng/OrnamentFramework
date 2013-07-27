@@ -38,6 +38,7 @@ namespace Ornament.MVCWebFrame
             //Assembly auto config.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
             DaoFactoryConfig.Config();
+            NotifyConfig.Register();
             NhConfig.Config();
         }
 

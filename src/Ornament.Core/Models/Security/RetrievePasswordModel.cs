@@ -26,10 +26,7 @@ namespace Ornament.Models.Security
                 factory.CreateUserDao().SaveOrUpdate(userToken.Account);
                 return VerifyResult.Success;
             }
-            else
-            {
-                return VerifyResult.Failed;
-            }
+            return VerifyResult.Failed;
         }
     }
 }
