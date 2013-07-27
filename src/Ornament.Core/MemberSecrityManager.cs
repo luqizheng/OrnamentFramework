@@ -24,7 +24,8 @@ namespace Ornament
             {
                 throw new ArgumentNullException("client");
             }
-            if (user == null) throw new ArgumentNullException("user");
+            if (user == null)
+                throw new ArgumentNullException("user");
             User = user;
 
             _dao = memberShipFactory.CreateUserSecurityTokenDao();
@@ -36,7 +37,7 @@ namespace Ornament
         public User User { get; set; }
 
         /// <summary>
-        /// 获取Action。一般会被用于mvc的导航上面。这个Action对应是Controller的Action
+        ///     获取Action。一般会被用于mvc的导航上面。这个Action对应是Controller的Action
         /// </summary>
         public string Action { get; set; }
 
