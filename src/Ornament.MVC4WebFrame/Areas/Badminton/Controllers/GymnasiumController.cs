@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Badminton;
 using Badminton.Dao;
@@ -23,12 +20,13 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         //
         // GET: /Badminton/Gymnasium/
 
-        public ActionResult Index(Ornament.Web.Pagination pagination)
+        public ActionResult Index(Pagination pagination)
         {
             if (pagination == null && pagination.PageSize != 1)
                 pagination = new Pagination(1, 0);
             int total;
-            var result = _daoFactory.GymasiumDao().GetGymnasiums(pagination.PageSize, pagination.CurrentPage, out total);
+            IList<Gymnasium> result = _daoFactory.GymasiumDao()
+                                                 .GetGymnasiums(pagination.PageSize, pagination.CurrentPage, out total);
             pagination.TotalRows = total;
             ViewData["nav"] = pagination;
 
@@ -40,10 +38,11 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         {
             return View();
         }
+
         [HttpPost, Session]
         public ActionResult Create(Gymnasium model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _daoFactory.GymasiumDao().SaveOrUpdate(model);
                 return RedirectToAction("Index");

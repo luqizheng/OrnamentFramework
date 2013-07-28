@@ -22,7 +22,7 @@ namespace Badminton
         public virtual DateTime EndDateTime { get; set; }
 
         /// <summary>
-        ///     人均消费
+        ///     人均消费，需要计算出来
         /// </summary>
         public virtual decimal AvgAmount
         {

@@ -1,4 +1,6 @@
-﻿namespace Badminton
+﻿using Badminton.Consumableses;
+
+namespace Badminton
 {
     /// <summary>
     /// 请主要使用这个消耗品作为分配例子。其他的用户扩展使用。

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Badminton.Dao;
-using Ornament.MemberShip;
 using Qi.Domain;
 
 namespace Badminton
@@ -12,6 +10,9 @@ namespace Badminton
     public abstract class Consumables<T> : DomainObject<T, int>, IConsumables
         where T : DomainObject<T, int>
     {
+        private IList<ConsumablesHistory> _histories;
+        private IList<Order> _stockHistory;
+
         /// <summary>
         ///     just for NHibernate;
         /// </summary>
@@ -25,7 +26,7 @@ namespace Badminton
                 throw new ArgumentNullException("member");
             Balance = number;
             Owner = member;
-            this.CreateTime = CreateTime;
+            CreateTime = DateTime.Now;
         }
 
         int IConsumables.Id
@@ -36,7 +37,7 @@ namespace Badminton
                 //base.Id = value;
             }
         }
-        public virtual DateTime CreateTime { get; protected set; }
+
         /// <summary>
         /// </summary>
         public virtual Model Model { get; set; }
@@ -48,22 +49,9 @@ namespace Badminton
         /// <summary>
         /// </summary>
         public virtual IOwner Owner { get; protected set; }
-
-        private IList<ConsumablesHistory> _histories;
         /// <summary>
-        /// 消耗品的历史记录
+        /// 
         /// </summary>
-        public IList<ConsumablesHistory> Histories { get { return _histories ?? (_histories = new List<ConsumablesHistory>()); } }
-
-        private IList<StockHistory> _stockHistory;
-        public virtual IList<StockHistory> StockHistory
-        {
-            get { return _stockHistory ?? (_stockHistory = new List<StockHistory>()); }
-            
-        }
+        public DateTime CreateTime { get; protected set; }
     }
-
-
-
-
 }

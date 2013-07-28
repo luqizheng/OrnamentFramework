@@ -16,9 +16,5 @@ namespace Badminton
         /// </summary>
         public virtual YardType Type { get; set; }
 
-        /// <summary>
-        ///     单价
-        /// </summary>
-        public virtual decimal Price { get; set; }
     }
 }

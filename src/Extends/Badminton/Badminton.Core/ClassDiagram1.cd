@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Badminton.Activity">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAEAAAAAEABAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Activity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.Brand">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Brand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.Card" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.ClassConsumables">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassConsumables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.CommandPhysicalConsumables" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandPhysicalConsumables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.Consumables&lt;T&gt;" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAADAAABAAAAAAAkAAAAAAAEggAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Consumables.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Badminton.ConsumablesHistory" Collapsed="true">
+    <Position X="7.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAIAAACAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConsumablesHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.Gymnasium" Collapsed="true">
+    <Position X="10.75" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIIAAAAAAAAAAAAQAAAABAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Gymnasium.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.MeasurementUnit">
+    <Position X="7.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAA=</HashCode>
+      <FileName>MeasurementUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.Member" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAAAAAAAAACAAAgAAAACAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Member.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Badminton.MemberGroup" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAIAAAAAAAAgAAAACAAAAgAAAAAAAAAAAQAA=</HashCode>
+      <FileName>MemberGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Badminton.Model">
+    <Position X="5.25" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQCAAAAAAAAACAAAAABAAA=</HashCode>
+      <FileName>Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.PhysicalConsumables&lt;T&gt;" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAgAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>PhysicalConsumables.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Badminton.StockHistory" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>IAAQAAAAAAAAAAAAAAIQCAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StockHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.VirtualConsumables&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VirtualConsumables.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Badminton.Yard" Collapsed="true">
+    <Position X="10.75" Y="6.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Yard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Badminton.YardType" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>YardType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Badminton.IConsumables" Collapsed="true">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAADAAABAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>IConsumables.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.IOwner" Collapsed="true">
+    <Position X="5.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Member.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.IPhysicalConsumables" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>PhysicalConsumables.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.IVirtualConsumables" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VirtualConsumables.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IActivityDao" Collapsed="true">
+    <Position X="3.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IActivityDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IBadmintonDaoFactory" Collapsed="true">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBAAAgAJAAAAAAAAQAAAAAACCAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IBadmintonDaoFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IBrandDao" Collapsed="true">
+    <Position X="7" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IBrandDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.ICardDao" Collapsed="true">
+    <Position X="8.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\ICardDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IClassConsumablesDao" Collapsed="true">
+    <Position X="3.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IClassConsumablesDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IConsumablesDao" Collapsed="true">
+    <Position X="5.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IConsumablesDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IConsumablesHistoryDao" Collapsed="true">
+    <Position X="7" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IConsumablesHistoryDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IGymnasiumDao" Collapsed="true">
+    <Position X="8.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IGymnasiumDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IModelDao" Collapsed="true">
+    <Position X="3.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IModelDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IYardDao" Collapsed="true">
+    <Position X="7" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IYardDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Badminton.Dao.IYardTypeDao" Collapsed="true">
+    <Position X="8.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dao\IYardTypeDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Badminton.Gender" Collapsed="true">
+    <Position X="12.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAABA=</HashCode>
+      <FileName>Gender.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>

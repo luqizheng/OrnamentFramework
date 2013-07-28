@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Badminton.Consumableses;
 
 namespace Badminton
 {
@@ -14,9 +14,9 @@ namespace Badminton
         {
         }
 
-        public Card(decimal balance, Gymnasium gymnasium,IOwner owner):base(balance,owner)
+        public Card(decimal balance, Gymnasium gymnasium, IOwner owner) : base(balance, owner)
         {
-            this.Gymnasium = gymnasium;
+            Gymnasium = gymnasium;
         }
 
 

@@ -61,8 +61,10 @@
   <ItemGroup>
     <Compile Include="BadmintonDaoFactory.cs" />
     <Compile Include="GymnasiumDao.cs" />
+    <Compile Include="Mappings\BrandMapping.cs" />
     <Compile Include="Mappings\GymnasiumMapping.cs" />
     <Compile Include="Mappings\MemberMapping.cs" />
+    <Compile Include="Mappings\ModelMapping.cs" />
     <Compile Include="Mappings\YardMapping.cs" />
     <Compile Include="Mappings\YardTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
