@@ -1,15 +1,18 @@
 ﻿using FluentNHibernate.Mapping;
+using Ornament.MemberShip;
 
 namespace Badminton.Dao.NhImpl.Mappings
 {
-    public class MemberMapping : ClassMap<Member>
+    public class MemberMapping : SubclassMap<Member>
     {
         public MemberMapping()
         {
-            this.Table("Bad_Member");
-            this.Id(s => s.Id);
+            Extends(typeof(IPerformer));
+            DiscriminatorValue("Member");
+            Join("Bad_Member", _ => _.KeyColumn("Id"));
             this.Map(s => s.Gender);
             this.Map(s => s.Balance);
+            this.References(s => s.User);
         }
     }
 }

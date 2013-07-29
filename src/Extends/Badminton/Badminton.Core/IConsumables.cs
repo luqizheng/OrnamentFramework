@@ -23,15 +23,20 @@ namespace Badminton
         ///     余额。消耗品的实际余额
         /// </summary>
         [DisplayName("余额")]
-        decimal Balance { get; }
+        decimal Balance { get; set; }
 
         /// <summary>
         ///     消耗品的管理者。可以是Member 或者是MemberGroup
         /// </summary>
-        IOwner Owner { get; }
+        IOwner Owner { get; set; }
         /// <summary>
         /// 消耗品的创建时间。 
         /// </summary>
-        DateTime CreateTime { get; }
+        DateTime CreateTime { get; set; }
+
+        /// <summary>
+        ///     单价自动计算
+        /// </summary>
+        decimal UnitPrice { get; set; }
     }
 }

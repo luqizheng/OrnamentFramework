@@ -52,7 +52,7 @@
     <Compile Include="Activities\PlanJoinStatus.cs" />
     <Compile Include="Consumableses\Brand.cs" />
     <Compile Include="Card.cs" />
-    <Compile Include="ClassConsumables.cs" />
+    <Compile Include="Consumableses\ClassConsumables.cs" />
     <Compile Include="CommandPhysicalConsumables.cs" />
     <Compile Include="Consumables.cs" />
     <Compile Include="Consumableses\IPhysicalConsumables.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="IConsumables.cs" />
     <Compile Include="Dao\IModelDao.cs" />
     <Compile Include="Consumableses\IVirtualConsumables.cs" />
+    <Compile Include="IOwner.cs" />
     <Compile Include="MeasurementUnit.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="MemberGroup.cs" />

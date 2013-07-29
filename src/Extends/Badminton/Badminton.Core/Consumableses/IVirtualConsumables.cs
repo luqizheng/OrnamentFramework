@@ -8,7 +8,7 @@
         /// <summary>
         ///     购买虚拟物品的实际价格
         /// </summary>
-        decimal Price { get; set; }
+        //decimal Price { get; set; }
 
         
     }

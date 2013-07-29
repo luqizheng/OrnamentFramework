@@ -1,7 +1,7 @@
 ﻿using Badminton.Consumableses;
 using FluentNHibernate.Mapping;
 
-namespace Badminton.Dao.NhImpl.Mappings
+namespace Badminton.Dao.NhImpl.Mappings.Consumableses
 {
     public class BrandMapping : ClassMap<Brand>
     {

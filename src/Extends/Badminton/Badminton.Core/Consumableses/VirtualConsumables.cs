@@ -13,9 +13,9 @@ namespace Badminton.Consumableses
         {
         }
 
-        /// <summary>
-        ///     购买虚拟物品的实际价格
-        /// </summary>
-        public decimal Price { get; set; }
+        ///// <summary>
+        /////     购买虚拟物品的实际价格
+        ///// </summary>
+        //public virtual decimal Price { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Qi.Domain;
 
-namespace Badminton
+namespace Badminton.Consumableses
 {
     /// <summary>
     ///     类别，如羽毛球，羽毛球拍

@@ -13,4 +13,5 @@ namespace Badminton.Dao.NhImpl.Mappings
             
         }
     }
+
 }

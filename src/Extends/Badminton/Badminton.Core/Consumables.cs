@@ -45,7 +45,7 @@ namespace Badminton
         /// <summary>
         ///     单价自动计算
         /// </summary>
-        public decimal UnitPrice { get; protected set; }
+        public virtual decimal UnitPrice { get; set; }
 
         int IConsumables.Id
         {
@@ -63,15 +63,15 @@ namespace Badminton
         /// <summary>
         /// </summary>
         [DisplayName("余额")]
-        public virtual decimal Balance { get; protected set; }
+        public virtual decimal Balance { get;  set; }
 
         /// <summary>
         /// </summary>
-        public virtual IOwner Owner { get; protected set; }
+        public virtual IOwner Owner { get;  set; }
 
         /// <summary>
         /// </summary>
-        public DateTime CreateTime { get; protected set; }
+        public virtual DateTime CreateTime { get;  set; }
 
         /// <summary>
         ///     进货

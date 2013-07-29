@@ -4,7 +4,7 @@ using Qi.Domain;
 namespace Badminton
 {
     /// <summary>
-    /// 计量单位
+    ///     计量单位
     /// </summary>
     public class MeasurementUnit : DomainObject<MeasurementUnit, int>
     {

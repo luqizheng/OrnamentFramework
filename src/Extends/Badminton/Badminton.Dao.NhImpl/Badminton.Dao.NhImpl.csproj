@@ -61,10 +61,17 @@
   <ItemGroup>
     <Compile Include="BadmintonDaoFactory.cs" />
     <Compile Include="GymnasiumDao.cs" />
-    <Compile Include="Mappings\BrandMapping.cs" />
+    <Compile Include="Mappings\Consumableses\BrandMapping.cs" />
+    <Compile Include="Mappings\Consumableses\CardMapping.cs" />
+    <Compile Include="Mappings\Consumableses\CommandPhysicalConsumablesMapping.cs" />
+    <Compile Include="Mappings\Consumableses\ConsumablesMapping.cs" />
+    <Compile Include="Mappings\ConsumablesHistoryMapping.cs" />
     <Compile Include="Mappings\GymnasiumMapping.cs" />
+    <Compile Include="Mappings\MeasurementUnitMapping.cs" />
+    <Compile Include="Mappings\MemberGroupMapping.cs" />
     <Compile Include="Mappings\MemberMapping.cs" />
-    <Compile Include="Mappings\ModelMapping.cs" />
+    <Compile Include="Mappings\Consumableses\ModelMapping.cs" />
+    <Compile Include="Mappings\StockHistories\StockHistoryMapping.cs" />
     <Compile Include="Mappings\YardMapping.cs" />
     <Compile Include="Mappings\YardTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
