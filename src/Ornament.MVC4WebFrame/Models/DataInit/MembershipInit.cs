@@ -52,10 +52,15 @@ namespace Ornament.MVCWebFrame.Models.DataInit
                                                            AccountOperator.ViewPermission |
                                                            AccountOperator.ChangePrivateInfo);
 
+            Permission permissionPermission = CreatePermission(ResourceSetting.Permission, "许可证完全控制", "许可证完全控制",
+                                                               PermissionOperator.Create | PermissionOperator.Delete |
+                                                               PermissionOperator.Edit);
+
             Role adminRole = CreateRole("admin", "管理员");
             adminRole.Permissions.Add(rolePermission);
             adminRole.Permissions.Add(userPermission);
             adminRole.Permissions.Add(memberPermission);
+            adminRole.Permissions.Add(permissionPermission);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(adminRole);
 
             UserGroup adminGroup = CreateOrGetUserGroup("admin group");

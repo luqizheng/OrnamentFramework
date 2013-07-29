@@ -7,5 +7,8 @@
         public const string Account = "Account";
         public const string UserGroup = "UserGroup";
         public const string Org = "Org";
+
+        public const string Permission = "Permission";
+
     }
 }

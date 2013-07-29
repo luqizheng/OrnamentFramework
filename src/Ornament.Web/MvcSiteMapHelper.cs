@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using MvcSiteMapProvider;
@@ -36,6 +37,74 @@ namespace Ornament.Web
             return null;
         }
 
+        /// <summary>
+        /// 获取当前用户访问的Node信息
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="siteMapPermission"></param>
+        /// <param name="maxLevel"></param>
+        /// <returns></returns>
+        public static IList<MainMenu> GetUserMenus(this HtmlHelper helper,
+            SiteMapPermission siteMapPermission, int maxLevel)
+        {
+            var node = SiteMap.RootNode;
+            var result = new List<MainMenu>();
+
+            for (int i = 0; i < node.ChildNodes.Count; i++)
+            {
+                var childNode = (MvcSiteMapNode)node.ChildNodes[i];
+                if (Match(siteMapPermission, childNode)) //如果包含disabled 
+                {
+                    var mainMenu = new MainMenu()
+                        {
+                            Current = childNode,
+                        };
+                    SubMenuMatch(siteMapPermission, mainMenu, maxLevel, 0);
+                    result.Add(mainMenu);
+
+                }
+            }
+            return result;
+        }
+        /// <summary>
+        /// </summary>
+        /// <param name="siteMapPermission"></param>
+        /// <param name="mainMenu"></param>
+        /// <param name="maxLevel"></param>
+        /// <param name="currentLevel"></param>
+        /// <returns>return true main this menu is active.</returns>
+        private static void SubMenuMatch(SiteMapPermission siteMapPermission,
+            MainMenu mainMenu, int maxLevel, int currentLevel)
+        {
+
+            for (int i = 0; i < mainMenu.Current.ChildNodes.Count; i++)
+            {
+                var childNode = (MvcSiteMapNode)mainMenu.Current.ChildNodes[i];
+                if (Match(siteMapPermission, childNode)) //如果包含disabled 
+                {
+                    var childMainMenu = new MainMenu()
+                    {
+                        Current = childNode,
+                    };
+                    mainMenu.SubMenus.Add(childMainMenu);
+                    if (currentLevel + 1 <= maxLevel)
+                    {
+                        SubMenuMatch(siteMapPermission, childMainMenu, maxLevel, currentLevel + 1);
+                        if (childMainMenu.Current.Equals(SiteMap.CurrentNode))
+                        {
+                            childMainMenu.Actived = true;
+                            mainMenu.Actived = true;
+                        }
+                    }
+                }
+            }
+        }
+        private static bool Match(SiteMapPermission siteMapPermission, MvcSiteMapNode childNode)
+        {
+            return siteMapPermission.IsAccessibleToUser(childNode)
+                && !childNode.MetaAttributes.ContainsKey("disabled");
+            //如果包含disabled 
+        }
 
         public static bool CurrentNodeMatchParent(this HtmlHelper helper, SiteMapNodeCollection nodes,
                                                   out SiteMapNode matchParentNode)

@@ -142,6 +142,7 @@
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="IoC\CastleDependcyResyle.cs" />
+    <Compile Include="MainMenu.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
     <Compile Include="HttpModel\OrnamentModule.cs" />
     <Compile Include="MemberShips\MenuPermission.cs" />

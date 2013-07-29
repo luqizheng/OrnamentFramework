@@ -2,147 +2,65 @@
 @using Ornament
 @using Ornament.Web
 @using Ornament.Web.MemberShips
-
 @{
-
-    //var nodeList = SiteMap.RootNode.ChildNodes[0].ChildNodes;
-    var site = new SiteMapPermission(OrnamentContext.MemberShip, Ornament.OrnamentContext.ResourceManager);
-    var matchedFirstLevelMenu = Html.GetFirstLevelMenuByCurrentNode();
+    var site = new SiteMapPermission(OrnamentContext.MemberShip, OrnamentContext.ResourceManager);
+    var nodes = Html.GetUserMenus(site, 3);
 }
-@helper RenderChildMenu(SiteMapNodeCollection nodeCollection, int level, int maxLevel, SiteMapPermission site, bool visable)
-{
-    if (nodeCollection == null)
-    {
-        return;
+@*
+1) 菜单上面的Operator 操作检查只支持类型Permission。写法是 User:Create,前面一个ResourceDessciption的Id，后面一个UserOperator的值
+2) 如果发现mvcNode上面有Disabled = false，那么在主菜单中是不会显示。
+3) 如果发现mvcNode上clickabled=false，那么就不会使用url二是"#"。
+4）主菜单中，如果某节点clickable=true 或者没有声明，
+   a.这个节点拥有子菜单的，那么这个节点会自动设置为clickabled=false,也就是url会设置为"#"。
+   b.这个节点没有任意一个菜单。那么会显示设置的url
+
+上面的解释来源于mvc.sitemap
+但是使用的ui template有部分不同，因此修改第4）点
+1） 这个节点没有子菜单，那么不会出现。
+*@
+
+<ul class="navigation widget" id="mainMenu">
+    @{
+        var isCurrentHomeMenu = SiteMap.RootNode.Equals(SiteMap.CurrentNode);
     }
 
-    for (int i = 0; i < nodeCollection.Count; i++)
+    <li class="@(isCurrentHomeMenu ? "active" : "")">
+        <a href="@SiteMap.RootNode.Url" ><i class="icon-home"></i>@SiteMap.RootNode.Title</a>
+    </li>
+
+    @foreach (var node in nodes)
     {
-        var node = (MvcSiteMapNode)nodeCollection[i];
-        if (!site.IsAccessibleToUser(node))
+        if (node.SubMenus.Count == 0)
         {
             continue;
         }
-        var selected = node.Equals(Html.MvcSiteMap().Provider.CurrentNode);
-        var clz = selected ? "class=\"active\"" : "";
-        
-    <li @Html.Raw(clz)>
-        @RenderHrefChildMenus(node, true, level + 1, selected)
+        <li class="@(node.Actived ? "active" : "")">
+            <a href="@node.Url" class="expand">
+                <i class="@(!String.IsNullOrEmpty(node.Current.ImageUrl) ? node.Current.ImageUrl : "")"></i>
+                @node.Current.Title
+                <strong>@node.SubMenus.Count</strong>
 
-        @if (node.HasChildNodes && (level + 1) < maxLevel)
-        {
+            </a>
             <ul>
-                @RenderChildMenu(node.ChildNodes, level + 1, maxLevel, site, selected)
+                @foreach (var child in node.SubMenus)
+                {
+                    <li>
+                        <a href="@child.Url" class="@(child.Actived ? "current" : "")">
+                            @child.Current.Title
+                        </a>
+                    </li>
+                }
             </ul>
-        }
-    </li>
-    }
-}
-<ul class="navigation widget" id="mainMenu">
-
-    @if (!SiteMap.RootNode.Equals(SiteMap.CurrentNode))
-    {
-        <li>
-            <a href="@SiteMap.RootNode.Url"><i class="icon-home"></i>@SiteMap.RootNode.Title</a>
         </li>
     }
-    else
-    {
-        <li class="active">
-            <a href="@SiteMap.RootNode.Url" ><i class="icon-home"></i>@SiteMap.RootNode.Title</a>
-        </li>
-    }
-    @FirstLevelMenu(SiteMap.RootNode.ChildNodes, matchedFirstLevelMenu, site)
 </ul>
 
-@helper FirstLevelMenu(SiteMapNodeCollection nodeCollection, SiteMapNode secondLevel, SiteMapPermission site)
-{
-    
-    for (int i = 0; i < nodeCollection.Count; i++)
-    {
-        var node = (MvcSiteMapNode)nodeCollection[i];
-        if (node.MetaAttributes.ContainsKey("disabled"))
-        {
-            continue;
-        }
 
-        if (!site.IsAccessibleToUser(node))
-        {
-            continue;
-        }
-        var clz = node.Equals(secondLevel) ? "class=\"active\"" : "";
-        
-    <li @Html.Raw(clz)>
-        @RenderHref(node, true, true)
-        @if (node.HasChildNodes)
-        {
-            <ul>
-                @RenderChildMenu(node.ChildNodes, 1, 2, site, node.Equals(secondLevel))
-            </ul>
-        }
-    </li>
-    }
-}
-@helper RenderHrefChildMenus(MvcSiteMapNode node, bool defaultStyle, int level, bool selected)
-{
-    var hasChild = node.HasChildNodes;
-    var href = node.Clickable ? node.Url : "#";
-    var extendClass = selected ? "current" : "";
-    if (level < 2 && hasChild)
-    {
-        extendClass = "expand";
-    }
-    if (extendClass.Length != 0)
-    {
-        extendClass = string.Format("class='{0}'", extendClass);
-    }
-    <a href="@href" @Html.Raw(extendClass)>
-        @if (!String.IsNullOrEmpty(node.ImageUrl))
-        {
-            <i class="@node.ImageUrl"></i>
-        }
-        else if (defaultStyle)
-        {
-            <i></i>
-        }
-        @node.Title
-        @*@if (node.HasChildNodes)
-        {
-            <strong>@node.ChildNodes.Count</strong>
-        }*@
-    </a>
-}
 
-@helper RenderHref(MvcSiteMapNode node, bool defaultStyle, bool firstLevel)
-{
-
-    var href = node.Clickable ? node.Url : "#";
-    var hasChild = firstLevel && node.HasChildNodes;
-    var extendClass = hasChild ? "class='expand'" : "";
-    <a href="@href" @Html.Raw(extendClass)>
-        @if (!String.IsNullOrEmpty(node.ImageUrl))
-        {
-            <i class="@node.ImageUrl"></i>
-        }
-        else if (defaultStyle)
-        {
-            <i></i>
-        }
-        @node.Title
-        @if (firstLevel && node.HasChildNodes)
-        {
-            <strong>@node.ChildNodes.Count</strong>
-        }
-    </a>
-}
-@if (matchedFirstLevelMenu != null)
-{
-    <script type="text/javascript">
-        seajs.use(["jquery"], function () {
-            $(document).ready(function () {
-                $("#mainMenu > li.active > ul").attr("style", "");
-            });
-
-        })
-    </script>
-}
+<script type="text/javascript">
+    seajs.use(["jquery"], function () {
+        $(document).ready(function () {
+            $("#mainMenu > li.active > ul").attr("style", "");
+        });
+    })
+</script>
