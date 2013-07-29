@@ -11,30 +11,6 @@ using System;
 
 namespace Ornament.MVCWebFrame.Models.Membership
 {
-    [Flags]
-    public enum NewsOperator
-    {
-        None = 0,
-        Create = 1,
-        Modify = 2 | Create,
-        Delete = 4 | Create,
-
-    }
-    [Flags]
-    public enum UserGroupOperator
-    {
-        None = 0,
-
-        /// <summary>
-        /// </summary>
-        Read = 1,
-
-        Assign = 2 | Read,
-
-        Modify = 4 | Assign,
-
-        Delete = 8 | Modify
-    }
     /// <summary>
     /// </summary>
     [Flags]
@@ -47,34 +23,28 @@ namespace Ornament.MVCWebFrame.Models.Membership
         Read = 1,
 
 
+        /// <summary>
+        /// </summary>
+        Lock = 2 | Read,
 
         /// <summary>
         /// </summary>
-        Lock = 2 | UserOperator.Read,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Approve = 4 | UserOperator.Read,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        SetPassword = 8 | UserOperator.Lock | UserOperator.Approve,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        ReadPrivat = 16 | UserOperator.Read,
+        Approve = 4 | Read,
 
         /// <summary>
         /// </summary>
-        Modify = 32 | UserOperator.SetPassword,
+        SetPassword = 8 | Lock | Approve,
 
         /// <summary>
-        /// 
         /// </summary>
-        Delete = 64 | UserOperator.Modify
+        ReadPrivat = 16 | Read,
 
+        /// <summary>
+        /// </summary>
+        Modify = 32 | SetPassword,
+
+        /// <summary>
+        /// </summary>
+        Delete = 64 | Modify
     }
 }

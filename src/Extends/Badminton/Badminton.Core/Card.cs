@@ -1,4 +1,6 @@
-﻿using Badminton.Consumableses;
+﻿using System;
+using Badminton.Consumableses;
+using Badminton.Dao;
 
 namespace Badminton
 {
@@ -14,8 +16,14 @@ namespace Badminton
         {
         }
 
-        public Card(decimal balance, Gymnasium gymnasium, IOwner owner) : base(balance, owner)
+        /// <summary>
+        /// </summary>
+        /// <param name="gymnasium"></param>
+        /// <param name="owner"></param>
+        public Card(Gymnasium gymnasium, IOwner owner) : base(0, owner)
         {
+            if (gymnasium == null)
+                throw new ArgumentNullException("gymnasium");
             Gymnasium = gymnasium;
         }
 
@@ -29,5 +37,10 @@ namespace Badminton
         ///     所属场馆
         /// </summary>
         public virtual Gymnasium Gymnasium { get; set; }
+
+        protected override decimal CalculateUnitPrice(decimal amount, decimal numberOrGoods)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

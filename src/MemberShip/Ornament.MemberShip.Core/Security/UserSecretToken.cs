@@ -5,10 +5,21 @@ using Qi.Secret;
 
 namespace Ornament.MemberShip.Security
 {
-    public enum SecretTokemStatus
+    public enum SecretTokenStatus
     {
+        /// <summary>
+        ///     It's normal and waitting some one to use it.
+        /// </summary>
         Effective,
+
+        /// <summary>
+        ///     Token is Timeout
+        /// </summary>
         Expire,
+
+        /// <summary>
+        ///     Token has been used
+        /// </summary>
         Success,
     }
 
@@ -16,7 +27,7 @@ namespace Ornament.MemberShip.Security
     /// </summary>
     public class UserSecretToken : DomainObject<UserSecretToken, string>
     {
-        private SecretTokemStatus _status;
+        private SecretTokenStatus _status;
 
         protected UserSecretToken()
         {
@@ -37,22 +48,22 @@ namespace Ornament.MemberShip.Security
             ExpireTime = expireTimeMinutes;
         }
 
-        public virtual SecretTokemStatus Status
+        public virtual SecretTokenStatus Status
         {
             get
             {
-                if (_status == SecretTokemStatus.Effective)
+                if (_status == SecretTokenStatus.Effective)
                 {
                     if (IsExpire)
                     {
-                        _status = SecretTokemStatus.Expire;
+                        _status = SecretTokenStatus.Expire;
                     }
                 }
                 return _status;
             }
         }
 
-        public virtual string Action { get; set; }
+        public virtual string Action { get; protected set; }
 
         /// <summary>
         /// </summary>
@@ -65,7 +76,7 @@ namespace Ornament.MemberShip.Security
         /// <summary>
         ///     this token is Effective for current user;
         /// </summary>
-        public virtual DateTime? VerifyTime { get; set; }
+        public virtual DateTime? VerifyTime { get; protected set; }
 
         /// <summary>
         ///     Gets the PrivateKey of this token, it's auto create
@@ -99,17 +110,17 @@ namespace Ornament.MemberShip.Security
         {
             if (String.IsNullOrEmpty(token))
                 throw new ArgumentNullException("token");
-            if (Status == SecretTokemStatus.Expire)
+            if (Status == SecretTokenStatus.Expire)
             {
                 throw new UserSecurityTimeoutException();
             }
-            if (Status == SecretTokemStatus.Success)
+            if (Status == SecretTokenStatus.Success)
             {
                 throw new UserSecurityException("this token is veirfy by another one, can't be use again");
             }
             if (CreateToken(Account) == token)
             {
-                _status = SecretTokemStatus.Success;
+                _status = SecretTokenStatus.Success;
                 VerifyTime = DateTime.Now;
                 return true;
             }
@@ -150,7 +161,7 @@ namespace Ornament.MemberShip.Security
         /// </summary>
         public virtual void Expire()
         {
-            _status = SecretTokemStatus.Expire;
+            _status = SecretTokenStatus.Expire;
         }
     }
 }

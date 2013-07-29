@@ -53,6 +53,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         /// <param name="name"></param>
         /// <param name="remark"></param>
         /// <param name="resourceId"></param>
+        /// <param name="operators"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Save(string id, string descriptionResourceName, string name, string remark,

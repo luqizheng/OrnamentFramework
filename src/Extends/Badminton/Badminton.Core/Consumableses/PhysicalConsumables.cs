@@ -14,10 +14,6 @@ namespace Badminton.Consumableses
             : base(balance, owner)
         {
         }
-        /// <summary>
-        /// 单价
-        /// </summary>
-        public virtual decimal UnitPrice { get; set; }
 
         /// <summary>
         ///     把东西分配给会员,并且要记录历史记录
@@ -27,23 +23,23 @@ namespace Badminton.Consumableses
         /// <param name="daoFactory"></param>
         public virtual void AssignToMember(decimal number, Member member, IBadmintonDaoFactory daoFactory)
         {
-            if (this.Balance < number)
+            if (Balance < number)
                 throw new ArgumentOutOfRangeException("number", "请求派发的数量大于存量.");
             IConsumablesHistoryDao historyDao = daoFactory.ConsumablesHistoryDao();
-            
+
             IPhysicalConsumables memberChecker = CreatePhysicalConsumables(number, member);
 
             //派发给会员，然后创建这个消耗品的历史记录
             var assignHisotry = new ConsumablesHistory(memberChecker, number);
             historyDao.SaveOrUpdate(assignHisotry);
-            
+
 
             //自身减少一部分数量
             var selfHistory = new ConsumablesHistory(this, -number);
             historyDao.SaveOrUpdate(selfHistory);
-            
+
             //自身数量减少
-            this.Balance = -number;
+            Balance = -number;
             daoFactory.ConsumablesDao().SaveOrUpdate(this);
         }
 

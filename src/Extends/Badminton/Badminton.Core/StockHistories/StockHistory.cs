@@ -1,13 +1,13 @@
 ﻿using System;
 using Qi.Domain;
 
-namespace Badminton
+namespace Badminton.StockHistories
 {
-    public class Order : DomainObject<Order, int>
+    public class StockHistory : DomainObject<StockHistory, int>
     {
         /// <summary>
         /// </summary>
-        protected Order()
+        protected StockHistory()
         {
         }
 
@@ -16,14 +16,19 @@ namespace Badminton
         /// <param name="stockPrice">入货总价钱</param>
         /// <param name="goodsNumber">货物数量</param>
         /// <param name="buyer">谁购买的</param>
-        public Order(decimal stockPrice, decimal goodsNumber, Member buyer)
+        public StockHistory(decimal stockPrice, decimal goodsNumber, Member buyer)
         {
             StockAmount = stockPrice;
             GoodsNumber = goodsNumber;
             Buyer = buyer;
         }
 
-        public Model Model { get; set; }
+        public virtual IConsumables Consumables { get; set; }
+
+        /// <summary>
+        ///     购买日期
+        /// </summary>
+        public virtual DateTime OrderTime { get; set; }
 
         /// <summary>
         ///     采购金额
@@ -40,21 +45,6 @@ namespace Badminton
         /// </summary>
         public virtual Member Buyer { get; set; }
 
-        /// <summary>
-        ///     单价自动计算
-        /// </summary>
-        public virtual decimal UnitPrice
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        /// <summary>
-        ///     确认订单,并且计算订单总费用，并且计算查找消耗品及其存量的存量
-        /// </summary>
-        public virtual void Confirm(Dao.IBadmintonDaoFactory daoFactory)
-        {
-            if (daoFactory == null) 
-                throw new ArgumentNullException("daoFactory");
-        }
+       
     }
 }

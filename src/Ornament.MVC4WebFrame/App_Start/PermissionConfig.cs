@@ -1,5 +1,4 @@
 ﻿using Ornament.MVCWebFrame.Models.Membership;
-using Ornament.Messages;
 using Ornament.Messages.Newses;
 using Ornament.Web;
 
@@ -10,13 +9,16 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void Regist()
         {
             OrnamentContext.ResourceManager
-                           .Add("User", typeof(UserOperator))
-                           .Add("Role", typeof(RoleOperator))
-                           .Add("Account", typeof(AccountOperator))
-                           .Add("Org", typeof(OrgOperator))
-                           .Add("UserGroup", typeof(UserGroupOperator));
+                           .Add("User", typeof (UserOperator))
+                           .Add("Role", typeof (RoleOperator))
+                           .Add("Account", typeof (AccountOperator))
+                           .Add("Org", typeof (OrgOperator))
+                           .Add("UserGroup", typeof (UserGroupOperator))
+                           .Add("Permission", typeof (PermissionOperator))
+                ;
+
             OrnamentContext.ResourceManager
-                           .Add(typeof(NewsType), typeof(NewsOperator));
+                           .Add(typeof (NewsType), typeof (NewsOperator));
 
             RegistrySettingPage();
         }
@@ -25,7 +27,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             OrnamentContext.ResourceManager.Configuration().ResourceSettings.Add(new ResourceDescription
                 {
-                    ValueType = typeof(string),
+                    ValueType = typeof (string),
                     Name = "类型资源",
                     Path = "~/Areas/MemberShips/Views/Permissions/_defaultResourceSelector.cshtml"
                 });
@@ -34,7 +36,7 @@ namespace Ornament.MVCWebFrame.App_Start
                 {
                     Name = "新闻资源",
                     Path = "~/Areas/Messages/Views/Shared/resNewsType.cshtml",
-                    ValueType = typeof(NewsType)
+                    ValueType = typeof (NewsType)
                 });
         }
     }

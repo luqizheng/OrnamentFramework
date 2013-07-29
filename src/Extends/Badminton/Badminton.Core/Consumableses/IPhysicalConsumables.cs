@@ -7,10 +7,7 @@ namespace Badminton.Consumableses
     /// </summary>
     public interface IPhysicalConsumables : IConsumables
     {
-        /// <summary>
-        /// 单价
-        /// </summary>
-        decimal UnitPrice { get; set; }
+       
         /// <summary>
         ///     把东西分配给会员,并且要记录历史记录
         /// </summary>

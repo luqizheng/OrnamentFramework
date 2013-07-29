@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Contents;
 using Qi.Text;
 
@@ -16,8 +15,8 @@ namespace Ornament.Messages.Notification
     {
         protected MessageTemplate()
         {
-
         }
+
         public MessageTemplate(NotifyType type)
             : base(type)
         {
@@ -71,7 +70,7 @@ namespace Ornament.Messages.Notification
                                 Value = helper.Replace(content.Value, variable)
                             }
                     };
-                this.Type.Send(simpleMessage);
+                Type.Send(simpleMessage);
             }
         }
     }

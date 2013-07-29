@@ -18,12 +18,16 @@ namespace Ornament.Models.Security
             {
                 return VerifyResult.NotFoundTokenId;
             }
-            if (userToken.Status == SecretTokemStatus.Expire)
+
+            if (userToken.Status == SecretTokenStatus.Expire)
+            {
                 return VerifyResult.Expire;
+            }
             if (userToken.Verify(TokenId))
             {
                 userToken.Account.Security.ChangePassword(PasswordModel.Password);
                 factory.CreateUserDao().SaveOrUpdate(userToken.Account);
+                factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
                 return VerifyResult.Success;
             }
             return VerifyResult.Failed;

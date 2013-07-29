@@ -27,7 +27,7 @@ namespace Ornament.MVCWebFrame.Controllers
                 {
                     return View("~/Views/HttpErrors/404.cshtml");
                 }
-                if (userToken.Status == SecretTokemStatus.Expire)
+                if (userToken.Status == SecretTokenStatus.Expire)
                 {
                     return View(VerifyResult.Expire);
                 }
@@ -48,13 +48,12 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 if (userToken != null)
                 {
-                    userToken.VerifyTime = DateTime.Now;
                     _factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
                 }
             }
         }
 
-        [ Session]
+        [Session]
         public ActionResult RetrievePassword(string id, string token)
         {
             UserSecretToken userToken = _factory.CreateUserSecurityTokenDao().Get(id);
@@ -62,12 +61,18 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 return View("~/Views/HttpErrors/404.cshtml");
             }
-            if (userToken.Status == SecretTokemStatus.Expire)
+
+            if (userToken.Status == SecretTokenStatus.Expire || userToken.Status == SecretTokenStatus.Success)
             {
                 _factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
                 ViewData["VerifyResult"] = VerifyResult.Expire;
-                return View();
+                return View(new RetrievePasswordModel
+                {
+                    Id = id,
+                    TokenId = token
+                });
             }
+
             ViewData["VerifyResult"] = VerifyResult.Success;
             return View(new RetrievePasswordModel
                 {
@@ -76,7 +81,7 @@ namespace Ornament.MVCWebFrame.Controllers
                 });
         }
 
-        [ Session, HttpPost]
+        [Session, HttpPost]
         public ActionResult RetrievePassword(RetrievePasswordModel model)
         {
             if (ModelState.IsValid)

@@ -18,7 +18,8 @@ namespace Ornament.Models.Memberships
         /// <summary>
         /// </summary>
         /// <param name="daoFactory"></param>
-        public void Retrieve(IMemberShipFactory daoFactory)
+        public void
+            Retrieve(IMemberShipFactory daoFactory)
         {
             User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
                         daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);

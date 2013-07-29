@@ -149,7 +149,7 @@
 
                 } else if (curName == "editPermission") {
                     var input = {
-                        resourceId: $("[name=ResourceId]").val(),
+                        resourceId: $("[name=ResourceId]:checked").val(),
                         permissionId: "@(this.Model != null ? this.Model.Id : "")"
                     };
                     var url = "@Url.Action("Operators")/" + $("[name=DescriptionResourceName]:checked").val();

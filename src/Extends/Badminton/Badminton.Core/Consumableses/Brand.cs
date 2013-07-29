@@ -1,6 +1,6 @@
 ﻿using Qi.Domain;
 
-namespace Badminton
+namespace Badminton.Consumableses
 {
     public class Brand : DomainObject<Brand, int>
     {

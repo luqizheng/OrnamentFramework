@@ -275,8 +275,11 @@
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\MessageInit.cs" />
     <Compile Include="Models\Membership\AccountOperator.cs" />
+    <Compile Include="Models\Membership\NewsOperator.cs" />
     <Compile Include="Models\Membership\OrgOperator.cs" />
+    <Compile Include="Models\Membership\PermissionOperator.cs" />
     <Compile Include="Models\Membership\RoleOperator.cs" />
+    <Compile Include="Models\Membership\UserGroupOperator.cs" />
     <Compile Include="Models\Membership\UserOperator.cs" />
     <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="Models\swfuploadFile.cs" />
@@ -1144,7 +1147,6 @@
     <Content Include="Areas\MemberShips\Views\Permissions\_ChoiceResourceType.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\PermissionWizardDataView.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
     <Content Include="Areas\MemberShips\Views\Role\Edit.cshtml" />

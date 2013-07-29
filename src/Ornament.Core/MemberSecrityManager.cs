@@ -71,12 +71,18 @@ namespace Ornament
         {
             var token = new UserSecretToken(User, Action, ExpireTimeMiniutes);
             _dao.SaveOrUpdate(token);
+            _dao.Flush();
             var deleage = new CreateVariablesHandler(user =>
                 {
-                    var dict = new Dictionary<string, string>();
-                    dict.Add("url",
-                             OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + "/Security/" + Action);
-                    dict.Add("name", user.Name);
+                    var dict = new Dictionary<string, string>
+                        {
+                            {
+                                "url",
+                                token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl +
+                                                        "/Security/" + Action)
+                            },
+                            {"name", user.Name}
+                        };
 
                     foreach (string key in Variables.Keys)
                     {

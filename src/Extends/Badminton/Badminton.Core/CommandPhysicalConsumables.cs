@@ -16,5 +16,10 @@ namespace Badminton
         {
             return new CommandPhysicalConsumables(balance, member);
         }
+
+        protected override decimal CalculateUnitPrice(decimal amount, decimal numberOrGoods)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

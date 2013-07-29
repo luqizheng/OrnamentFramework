@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Badminton.Consumableses;
 
 namespace Badminton
 {
@@ -31,6 +32,6 @@ namespace Badminton
         /// <summary>
         /// 消耗品的创建时间。 
         /// </summary>
-        DateTime CreateTime { get;  }
+        DateTime CreateTime { get; }
     }
 }

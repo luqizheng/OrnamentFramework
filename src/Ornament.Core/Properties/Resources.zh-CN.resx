@@ -154,7 +154,7 @@
     <value>分配角色</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>在一次密码</value>
+    <value>再一次密码</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
     <value>创建时间</value>

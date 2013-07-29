@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Ornament.Models.Memberships;
 
@@ -17,6 +18,8 @@ namespace Ornament.MVCWebFrame.Api.Core
         /// <param name="factory"></param>
         public SecurityController(IMemberShipFactory factory)
         {
+            if (factory == null) 
+                throw new ArgumentNullException("factory");
             _factory = factory;
         }
 

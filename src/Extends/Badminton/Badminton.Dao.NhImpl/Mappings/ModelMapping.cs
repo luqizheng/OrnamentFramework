@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Mapping;
+﻿using Badminton.Consumableses;
+using FluentNHibernate.Mapping;
 
 namespace Badminton.Dao.NhImpl.Mappings
 {
