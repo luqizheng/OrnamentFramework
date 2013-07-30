@@ -12,7 +12,11 @@ define(function (require) {
                 if (getCookie("offsetHour")) {
                     data.utcOffset = new Date().getTimezoneOffset() / 60 * -1;
                 }
-                $.post(clientUrl, func);
+                $.post(clientUrl,function(d) {
+                    if (!func(d)) {
+                        autoChecking.stop();
+                    }
+                });
             }
             if (!time)
                 time = 30000;
@@ -43,8 +47,8 @@ define(function (require) {
         sendPm: function (content, receiver, func) {
             $.post(url, { userId: receiver, content: content }, func);
         },
-        watch: function (func) {
-            autoChecking.start(func);
+        watch: function (internal,func) {
+            autoChecking.start(internal,func);
         },
         unWatch: function () {
             autoChecking.stop();
