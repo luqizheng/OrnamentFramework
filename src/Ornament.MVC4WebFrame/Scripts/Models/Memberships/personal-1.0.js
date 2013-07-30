@@ -2,7 +2,7 @@
 
 define(function (require) {
     require("/bundles/jquery.js");
-    var url = "/Api/NotifyMessage",
+    var url = "/Api/PersonalMessages",
      clientUrl = "/Api/Client",
         autoChecking =
     {

@@ -1,5 +1,5 @@
 ﻿@using Resources
-<div id="pmEditor" class="modal fade">
+<div id="pmEditor" class="modal fade hide">
     <div class="modal-header">
         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
         <h3><i class="fam-comments"></i>Chat Record</h3>
@@ -7,16 +7,16 @@
     <div class="modal-body">
         <div class="widget" style="margin-bottom: 10px">
             <div class="well-smoke">
-                <dl class="clearfix chat" style="padding: 8px">
+                <dl class="clearfix chat" style="padding: 8px;height: 245px;overflow:auto">
                 </dl>
             </div>
-            <form class="form-horizontal widget">
+            <form class="form-horizontal">
                 <div class="control-group" style="padding: 10px 0">
                     <label class="control-label">
                         Content
                     </label>
                     <div class="controls">
-                        <textarea class="styled" style="width: 100%; resize: none;" rows="10" cols="35"></textarea>
+                        <textarea class="styled" style="width: 100%; resize: none;" rows="5" cols="35"></textarea>
                         <input type="hidden" />
                     </div>
                 </div>

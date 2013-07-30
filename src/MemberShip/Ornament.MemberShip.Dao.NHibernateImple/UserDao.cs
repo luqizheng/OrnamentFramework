@@ -273,8 +273,16 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
 
+        /// <summary>
+        ///     Get User by LoginId
+        /// </summary>
+        /// <param name="loginId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">LoginId is null or empty</exception>
         public User GetByLoginId(string loginId)
         {
+            if(String.IsNullOrEmpty(loginId))
+                throw new ArgumentNullException("loginId","loginid can not be empty or null.");
             DetachedCriteria cri = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase())
                 .SetCacheMode(CacheMode.Normal)

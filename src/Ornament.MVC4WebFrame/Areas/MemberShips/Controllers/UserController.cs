@@ -124,12 +124,12 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
 
-        public ActionResult Assign(string id)
+        public ActionResult Assign(string loginId)
         {
-            User user = _memberShipFactory.CreateUserDao().GetByLoginId(id);
+            User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
             if (user == null)
             {
-                throw new HttpException(404, "Cant' find the user with loginid is " + id);
+                throw new HttpException(404, "Cant' find the user with loginid is " + loginId);
             }
             var userGroupRoleMap = new Dictionary<string, List<string>>();
             var rolePermissionsMap = new Dictionary<string, List<string>>();

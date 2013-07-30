@@ -40,8 +40,10 @@ define(function (require) {
                     var dt = $("<dt><h6>" + chatItem.publisher + " <small>" + chatItem.createTime + "</small></h6></dt>");
                     var dd = $("<dd><div>" + chatItem.content + "</div></dd>");
                     if (!isOwnerMgs) {
-                        dt.addClass("clearfix").find(":first").addClass("pull-right");
-                        dd.addClass("clearfix").find(":first").addClass("pull-right");
+                        $([dt, dd]).each(function() {
+                            $(this).addClass("clearfix").find(":first").addClass("pull-right");
+                        });
+                        //dd.addClass("clearfix").find(":first").addClass("pull-right");
                     }
                     chat.push(dt);
                     chat.push(dd);

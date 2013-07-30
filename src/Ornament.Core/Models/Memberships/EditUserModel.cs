@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Models.Memberships.Partials;
@@ -28,6 +29,7 @@ namespace Ornament.Models.Memberships
 
         public User Save(IMemberShipFactory memberShipFactory)
         {
+            if (memberShipFactory == null) throw new ArgumentNullException("memberShipFactory");
             User user = memberShipFactory.CreateUserDao().Get(Id);
             UpdateOn(user);
             Permissions.UpdateOn(user);
