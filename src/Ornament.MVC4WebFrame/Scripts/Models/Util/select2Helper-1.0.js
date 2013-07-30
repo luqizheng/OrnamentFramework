@@ -39,12 +39,14 @@
                     var items = $tag.select2('val'),
                         ary = [],
                         tmp = "<input type='hidden' name='" + $tag.attr("name") + "'/>";
-                    $tag.val(items.shift());
-                    $(items).each(function () {
-                        var $hid = $(tmp).val(this);
-                        ary.push($hid);
-                    });
-                    $form.append(ary);
+                    if (items !== "") {
+                        $tag.val(items.shift());
+                        $(items).each(function() {
+                            ary.push($(tmp).val(this));
+                        });
+                        $form.append(ary);
+                    }
+                    return true;
                 });
             });
             return $tag;

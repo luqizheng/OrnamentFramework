@@ -16,8 +16,6 @@
 @using (Html.BeginForm("edit", "User", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <div class="well">
-        <input type="hidden" name="Id" value="@Model.Id" />
-
         <ul class="nav nav-tabs">
             <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
             <li><a href="#Options" data-toggle="tab">@Html.GetResourceString("Create", "tab_Permission")</a></li>

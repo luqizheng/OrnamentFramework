@@ -39,15 +39,15 @@
 </style>
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
-    var unReadCout = OrnamentContext.DaoFactory.MessageDaoFactory.PersonalMessageDao.CountNewMessage(OrnamentContext.MemberShip.CurrentUser());
+    //var unReadCout = OrnamentContext.DaoFactory.MessageDaoFactory.PersonalMessageDao.CountNewMessage(OrnamentContext.MemberShip.CurrentUser());
     <ul class="top-menu">
         <li><a class="fullview"></a></li>
         <li><a class="showmenu"></a></li>
         <li><a href="#" title="" class="messages">
-            @if (unReadCout != 0)
+            @*if (unReadCout != 0)
             {
                 <i class="new-message"></i>
-            }
+            }*@
         </a></li>
         <li class="dropdown mlang">
             <a data-toggle="dropdown" title="Multi language" data-placement="bottom"><i class="icon-globe" style="color: white"></i></a>
@@ -63,13 +63,13 @@
                 <img src="/Content/templates/pannonia/img/userpic.png" alt="" /><span style="min-width: 90px">@OrnamentContext.MemberShip.CurrentUser().Name<b class="caret"></b></span></a>
             <ul class="dropdown-menu">
                 <li><a href="#" title=""><i class="icon-user"></i>Profile</a></li>
-                <li><a href="@Url.Action("Index", "PersonalMessage", new { area = "" })" title=""><i class="icon-inbox"></i>@Basic.Messages</a>
+                @*<li><a href="@Url.Action("Index", "PersonalMessage", new { area = "" })" title=""><i class="icon-inbox"></i>@Basic.Messages</a>
                     @if (unReadCout != 0)
                     {
                         <span class="badge badge-info">@unReadCout</span>
 
                     }
-                </li>
+                </li>*@
 
                 <li><a href="@Url.Action("Index", "Account", new { area = "" })" title=""><i class="icon-cog"></i>@Basic.Setting</a></li>
                 <li><a href="@Url.Action("LogOff", "Account", new { area = "" })" title=""><i class="icon-remove"></i>@Basic.Logout</a></li>
@@ -90,8 +90,19 @@ else
             </ul>
         </li>
         <li>
-            <a href="@Url.Action("Logon","Account",new{area=""})" class="user-menu" style="width: 50px; padding:12px"><span style="margin: 0"><i class="icon-user" style="color: white"></i>@Basic.Logon</span></a>
+            <a href="@Url.Action("Logon", "Account", new { area = "" })" class="user-menu" style="width: 50px; padding:12px"><span style="margin: 0"><i class="icon-user" style="color: white"></i>@Basic.Logon</span></a>
         </li>
 
     </ul>
 }
+
+<script type="text/javascript">
+    seajs.use(["/models/personal.js"], function(api) {
+        api.watch(1000,function (d) {
+            if (d.HasMessage) {
+                $(".messages").append('<i class="new-message"></i>');
+            }
+        });
+        api.unWatch();
+    });
+</script>

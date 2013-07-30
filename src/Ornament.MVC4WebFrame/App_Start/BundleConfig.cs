@@ -89,6 +89,8 @@ namespace Ornament.MVCWebFrame.App_Start
             //PersonalMessage
             bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Messages/pm-{version}.js"));
 
+            bundles.Add(new SeajsBundle("~/models/personal.js").Include("~/Scripts/Models/Memberships/personal-{version}.js"));
+
             //Util
             bundles.Add(new SeajsBundle("~/models/util/select2Helper.js")
                             .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));

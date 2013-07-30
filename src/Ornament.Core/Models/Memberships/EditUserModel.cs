@@ -17,9 +17,6 @@ namespace Ornament.Models.Memberships
         public EditUserModel(User user)
             : base(user)
         {
-
-            LoginId = user.LoginId;
-            Id = user.Id;
             Permissions = new PermissionInfo(user);
             OtherInfo = new UserOtherInfoModel(user);
         }
@@ -33,6 +30,7 @@ namespace Ornament.Models.Memberships
         {
             User user = memberShipFactory.CreateUserDao().Get(Id);
             UpdateOn(user);
+            Permissions.UpdateOn(user);
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             SessionManager.GetSessionWrapper().CurrentSession.SaveOrUpdate(user.Contact);
             if (this.VerifyEmail && EmailHasChanged)

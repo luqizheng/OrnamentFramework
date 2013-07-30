@@ -86,8 +86,5 @@
 
     @RenderSection("script", false)
     @Scripts.Render("~/Scripts/Utils.js")
-    <script type="text/javascript">
-        online.start(@((Membership.UserIsOnlineTimeWindow / 2) * 1000 * 60));
-    </script>
 </body>
 </html>

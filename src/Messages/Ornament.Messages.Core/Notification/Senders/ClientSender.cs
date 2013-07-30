@@ -18,7 +18,7 @@ namespace Ornament.Messages.Notification.Senders
 
         public void Send(NotifyMessageBase notifyMessage)
         {
-            DaoFactory.MessageDao.SaveOrUpdate(notifyMessage);
+            DaoFactory.NotifyMessageDao.SaveOrUpdate(notifyMessage);
         }
     }
 }

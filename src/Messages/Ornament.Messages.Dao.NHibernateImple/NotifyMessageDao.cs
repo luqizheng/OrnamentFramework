@@ -9,7 +9,6 @@ using Qi.Domain.NHibernates;
 namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
-    /// 
     /// </summary>
     public class NotifyMessageDao : DaoBase<string, NotifyMessageBase>, INotifyMessageDao
     {
@@ -22,38 +21,42 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             total = AllNotifyMsg()
                 .SetProjection(Projections.RowCount())
-                .GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+                .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
 
             return
                 AllNotifyMsg()
                     .SetMaxResults(pageSize)
                     .SetFirstResult(pageIndex*pageSize)
-                    .GetExecutableCriteria(this.CurrentSession)
-                    .List<NotifyMessageBase>();
-
-        }
-
-        public IList<NotifyMessageBase> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total)
-        {
-            total = NewNotifyMsg(user);
-            return
-                BuildNewNotifyMsg(user)
-                    .AddOrder(Order.Desc(Projections.Property<Announcement>(s => s.ModifyTime)))
-                    .SetMaxResults(pageSize)
-                    .SetFirstResult(pageSize * pageIndex)
                     .GetExecutableCriteria(CurrentSession)
                     .List<NotifyMessageBase>();
         }
 
-        public int NewNotifyMsg(User user)
+        public IList<NotifyMessageBase> GetNotifyMessages(User user, ReadStatus? readStatus, int pageSize, int pageIndex,
+                                                          out int total)
         {
-            return 0;
+            total = CountNotifyMsg(user, readStatus);
+            return
+                BuildNewNotifyMsg(user, readStatus)
+                    .AddOrder(Order.Desc(Projections.Property<NotifyMessageBase>(s => s.CreateTime)))
+                    .SetMaxResults(pageSize)
+                    .SetFirstResult(pageSize*pageIndex)
+                    .GetExecutableCriteria(CurrentSession)
+                    .List<NotifyMessageBase>();
         }
 
-        private DetachedCriteria BuildNewNotifyMsg(User user)
+        public int CountNotifyMsg(User user, ReadStatus? readStatus)
+        {
+            return BuildNewNotifyMsg(user, readStatus)
+                .SetProjection(Projections.RowCount())
+                .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+        }
+
+        private DetachedCriteria BuildNewNotifyMsg(User user, ReadStatus? readStatus)
         {
             DetachedCriteria cri = CreateDetachedCriteria();
-            
+            cri.Add(Restrictions.Eq(Projections.Property<NotifyMessageBase>(s => s.User), user));
+            if (readStatus != null)
+                cri.Add(Restrictions.Eq(Projections.Property<NotifyMessageBase>(s => s.ReadStatus), readStatus));
             return cri;
         }
 

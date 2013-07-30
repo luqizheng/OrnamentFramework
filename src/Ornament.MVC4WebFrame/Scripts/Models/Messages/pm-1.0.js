@@ -1,15 +1,8 @@
 ﻿
 define(function (require) {
-        require('/bundles/bootstrap.js');
-        var url = "/Api/PersonalMessages",
-         api = {
-             getChat: function (receiverUserId, pageIndex, func) {
-                 $.get(url, { userId: receiverUserId, page: pageIndex }, func);
-             },
-             send: function (content, receiver, func) {
-                 $.post(url, { userId: receiver, content: content }, func);
-             }
-         }, $this = $("#pmEditor").modal({
+    require('/bundles/bootstrap.js');
+        var api = require('/models/personal.js');
+         var $this = $("#pmEditor").modal({
              show: false,
              hidden: function () {
                  $("textarea", $this).val("");
@@ -22,7 +15,7 @@ define(function (require) {
             e.stopPropagation();
 
             var content = $("textarea", $this).val(), receiver = $("input", $this).val();
-            api.send(content, receiver,
+            api.sendPm(content, receiver,
                 function (d) {
                     if (d) {
                         var dt = "<dt>" + ownerName + "</dt>";

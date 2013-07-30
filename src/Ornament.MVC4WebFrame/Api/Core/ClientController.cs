@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
-using Ornament.Web;
 using Ornament.Web.HttpModel;
+using Ornament.Web.Models;
 
 namespace Ornament.MVCWebFrame.Api.Core
 {
@@ -15,5 +15,12 @@ namespace Ornament.MVCWebFrame.Api.Core
                 OrnamentModule.SetClientOffsetHour(t);
             }
         }
+        [HttpPost]
+        public ClientResult Post([FromBody] ClientModel model)
+        {
+            return (model ?? new ClientModel()).GetStatus();
+        }
+
+
     }
 }

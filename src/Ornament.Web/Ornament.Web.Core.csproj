@@ -151,6 +151,7 @@
     <Compile Include="MemberShips\SiteMapPermission.cs" />
     <Compile Include="MemberShips\ApiResourceAuthorizeAttribute.cs" />
     <Compile Include="ModelBinder\TimeModelBinder.cs" />
+    <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\GlobalInitializer.cs" />
     <Compile Include="Models\IDataInitializer.cs" />
     <Compile Include="Models\InitData.cs" />
@@ -178,6 +179,10 @@
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
+      <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
+      <Name>Ornament.Messages.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>

@@ -7,13 +7,14 @@ using Qi.Domain;
 namespace Ornament.Messages.Dao
 {
     /// <summary>
-    /// 获取所有NotifyMessage的Dao。包括获取Template产生的SimpleMessage以及AnnounceMessage
+    ///     获取所有NotifyMessage的Dao。包括获取Template产生的SimpleMessage以及AnnounceMessage
     /// </summary>
     public interface INotifyMessageDao : IDao<string, NotifyMessageBase>
     {
         /// <summary>
         /// </summary>
         IQueryable<NotifyMessageBase> Messages { get; }
+
 
         /// <summary>
         /// </summary>
@@ -26,16 +27,18 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// </summary>
         /// <param name="user"></param>
+        /// <param name="readStatus"></param>
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        IList<NotifyMessageBase> GetNewNotifyMessages(User user, int pageSize, int pageIndex, out int total);
+        IList<NotifyMessageBase> GetNotifyMessages(User user, ReadStatus? readStatus, int pageSize, int pageIndex,
+                                                   out int total);
 
         /// <summary>
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        int NewNotifyMsg(User user);
+        int CountNotifyMsg(User user, ReadStatus? readStatus);
     }
 }

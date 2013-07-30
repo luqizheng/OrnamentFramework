@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Properties;
 using Qi.Domain;
@@ -14,17 +10,17 @@ namespace Ornament.MemberShip
     {
         public class ContactInfo : DomainObject<ContactInfo, string>
         {
+            private string _email;
+            private string _phone;
+
             protected ContactInfo()
             {
-
             }
-            internal
-                protected ContactInfo(User user)
+
+            protected internal ContactInfo(User user)
             {
                 User = user;
             }
-            private string _email;
-            private string _phone;
 
             public virtual User User { get; protected set; }
 
@@ -35,7 +31,7 @@ namespace Ornament.MemberShip
             ///     The phone.
             /// </value>
             [Display(Name = "Phone",
-                ResourceType = typeof(Resources)),
+                ResourceType = typeof (Resources)),
              StringLength(30)]
             public virtual string Phone
             {
@@ -45,7 +41,6 @@ namespace Ornament.MemberShip
                     if (_phone != string.Empty)
                     {
                         User.ModifyUpdateTime();
-
                     }
                     _phone = value;
                 }
@@ -58,10 +53,10 @@ namespace Ornament.MemberShip
             ///     The email.
             /// </value>
             [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
-                ErrorMessageResourceType = typeof(ErrorMessage)),
-             Display(Name = "Email", ResourceType = typeof(Resources)),
+                ErrorMessageResourceType = typeof (ErrorMessage)),
+             Display(Name = "Email", ResourceType = typeof (Resources)),
              RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof(ErrorMessage))]
+                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
             [MaxLength(64)]
             public virtual string Email
             {
@@ -76,7 +71,5 @@ namespace Ornament.MemberShip
                 }
             }
         }
-
-
     }
 }

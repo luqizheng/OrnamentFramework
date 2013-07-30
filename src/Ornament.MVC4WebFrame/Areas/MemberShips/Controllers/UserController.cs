@@ -88,9 +88,9 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string loginId)
         {
-            User user = _memberShipFactory.CreateUserDao().GetByLoginId(id);
+            User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
             if (user == null)
                 throw new MemberShipException("Not found user.");
             return View(new EditUserModel(user));

@@ -16,7 +16,7 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// 
         /// </summary>
-        INotifyMessageDao MessageDao { get; }
+        INotifyMessageDao NotifyMessageDao { get; }
         /// <summary>
         /// 
         /// </summary>

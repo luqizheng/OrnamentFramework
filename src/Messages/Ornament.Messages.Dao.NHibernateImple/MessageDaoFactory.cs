@@ -14,7 +14,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         /// <summary>
         /// </summary>
-        public INotifyMessageDao MessageDao
+        public INotifyMessageDao NotifyMessageDao
         {
             get { return new NotifyMessageDao(); }
         }

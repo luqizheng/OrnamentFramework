@@ -243,10 +243,10 @@
                     {
                         <td>
                             <ul class="table-controls" val="@user.Id">
-                                <li><a href="@Url.Action("Edit", new { id = user.LoginId })" class="btn tip" title="@Basic.Edit">
+                                <li><a href="@Url.Action("Edit", new { loginId = user.LoginId })" class="btn tip" title="@Basic.Edit">
                                     <i class="fam-user-edit"></i></a></li>
                                 <li>
-                                    <a  href="@Url.Action("Assign", new { id = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                    <a  href="@Url.Action("Assign", new { loginId = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
                                         <i class="fam-group-gear"></i></a>
                                 </li>
                                 @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)

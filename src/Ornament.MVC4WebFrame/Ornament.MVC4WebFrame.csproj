@@ -172,7 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
-    <Compile Include="Api\Core\PersonalMessagesController.cs" />
+    <Compile Include="Api\Core\NotifyMessagesController.cs" />
     <Compile Include="Api\Core\OnlineController.cs" />
     <Compile Include="Api\Core\OrgsController.cs" />
     <Compile Include="Api\Core\RolesController.cs" />
@@ -651,6 +651,7 @@
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\Models\Memberships\personal-1.0.js" />
     <Content Include="Scripts\Models\Messages\pm-1.0.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.ar.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.bg.js" />
@@ -678,14 +679,10 @@
     <Content Include="Scripts\plugins\ui\i18n\elfinder.zh_CN.js" />
     <Content Include="Scripts\plugins\ui\i18n\elfinder.zh_TW.js" />
     <Content Include="Scripts\plugins\ui\jquery.timepicker-1.1.10.js" />
-    <Content Include="Scripts\util\online.js" />
     <Content Include="Scripts\Models\Util\select2Helper-1.0.js" />
-    <Content Include="Scripts\Models\Messages\chat-1.0.js" />
     <Content Include="Scripts\Models\Memberships\role-1.0.js" />
     <Content Include="Scripts\Models\Memberships\org-1.0.js" />
-    <Content Include="Scripts\Models\Messages\msg-1.0.js" />
     <Content Include="Scripts\Models\Messages\notify-1.0.js" />
-    <Content Include="Scripts\Models\Messages\task-1.0.js" />
     <Content Include="Scripts\Models\Memberships\userGroup-1.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\periodDailog\jquery.periodDailog.js" />
