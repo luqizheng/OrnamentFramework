@@ -41,8 +41,8 @@ define(function (require) {
     };
 
     return {
-        getChat: function (receiverUserId, pageIndex, func) {
-            $.get(url, { userId: receiverUserId, page: pageIndex }, func);
+        getChat: function (relativeUserId, pageIndex, func) {
+            $.get(url, { relativeUserId: relativeUserId, page: pageIndex }, func);
         },
         sendPm: function (content, receiver, func) {
             $.post(url, { userId: receiver, content: content }, func);

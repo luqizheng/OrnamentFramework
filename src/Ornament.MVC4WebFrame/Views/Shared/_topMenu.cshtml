@@ -1,16 +1,9 @@
-﻿@using System.Globalization
-@using System.Web.Profile
-@using MvcSiteMapProvider
+﻿@using MvcSiteMapProvider
 @using Ornament
-@using Ornament.MVCWebFrame.Models
-@using Ornament.Messages.Dao
+@using Ornament.Models
 @using Ornament.Web
 @using Ornament.Web.MemberShips
 @using Resources
-@{
-    SiteMapNodeCollection topMenus = SiteMap.RootNode.ChildNodes;
-    
-}
 
 @helper RenderMenu(MvcSiteMapNode node, SiteMapPermission site, SiteMapNode currentNode)
 {
@@ -24,7 +17,7 @@
         }
         @node.Title
     </a></li>
-    } 
+    }
 }
 <style type="text/css">
     .mlang a {
@@ -43,7 +36,7 @@
     <ul class="top-menu">
         <li><a class="fullview"></a></li>
         <li><a class="showmenu"></a></li>
-        <li><a href="#" title="" class="messages">
+        <li><a href="@Url.Action("Index", "MyMessage", new { area = "" })" title="" class="messages">
             @*if (unReadCout != 0)
             {
                 <i class="new-message"></i>
@@ -52,7 +45,7 @@
         <li class="dropdown mlang">
             <a data-toggle="dropdown" title="Multi language" data-placement="bottom"><i class="icon-globe" style="color: white"></i></a>
             <ul class="dropdown-menu" id="uld">
-                @foreach (var lang in OrnamentContext.Configuration.Languages)
+                @foreach (Language lang in OrnamentContext.Configuration.Languages)
                 {
                     <li><a href="@Url.Action("SwitchLanguage", "Home", new { id = lang.Key, area = "" })">@lang.Name</a></li>
                 }
@@ -83,22 +76,22 @@ else
         <li class="dropdown mlang">
             <a data-toggle="dropdown" title="Multi language" data-placement="bottom"><i class="icon-globe" style="color: white"></i></a>
             <ul class="dropdown-menu" id="uld">
-                @foreach (var lang in OrnamentContext.Configuration.Languages)
+                @foreach (Language lang in OrnamentContext.Configuration.Languages)
                 {
                     <li><a href="@Url.Action("SwitchLanguage", "Home", new { id = lang.Key, area = "" })">@lang.Name</a></li>
                 }
             </ul>
         </li>
         <li>
-            <a href="@Url.Action("Logon", "Account", new { area = "" })" class="user-menu" style="width: 50px; padding:12px"><span style="margin: 0"><i class="icon-user" style="color: white"></i>@Basic.Logon</span></a>
+            <a href="@Url.Action("Logon", "Account", new { area = "" })" class="user-menu" style="padding: 12px; width: 50px;"><span style="margin: 0"><i class="icon-user" style="color: white"></i>@Basic.Logon</span></a>
         </li>
 
     </ul>
 }
 
 <script type="text/javascript">
-    seajs.use(["/models/personal.js"], function(api) {
-        api.watch(1000,function (d) {
+    seajs.use(["/models/personal.js"], function (api) {
+        api.watch(1000, function (d) {
             if (d.HasMessage) {
                 $(".messages").append('<i class="new-message"></i>');
             }

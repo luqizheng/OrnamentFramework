@@ -1,0 +1,68 @@
+﻿@using Ornament
+@using Ornament.Messages
+@using Ornament.Messages.Notification
+@using Ornament.Messages.Notification.Contents
+@using Ornament.Messages.PersonalMessages
+@using Ornament.Web
+
+
+@{
+    ViewBag.Title = "Message Index";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    var personalMessages = (IList<PersonalMessage>)ViewData["notify"];
+}
+
+@section pageTitle
+{
+    <h5>Personal Messages</h5>
+}
+@helper NotifyMethod(IEnumerable<SimpleMessage> simpleMessages)
+{
+    
+}
+@helper AnnounceMent(IEnumerable<AnnouncementMessage> announcementMessages)
+{
+    
+}
+@helper PersonalMessage(IEnumerable<PersonalMessage> pms)
+{
+    foreach (var msg in pms)
+    {
+        var showName = msg.Receiver.LoginId == OrnamentContext.MemberShip.CurrentUser().LoginId ? msg.Publisher.Name : msg.Receiver.Name;
+        
+    <h6><a href="#@msg.Publisher.Id" role="pmReplay">@showName<small>@msg.CreateTime</small></a></h6>
+    <p>
+        @msg.Content
+    </p>
+    }
+}
+
+
+<div class="widget">
+    <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#notify"><i class="fam-layout-content"></i>通知</a></li>
+            <li class=""><a data-toggle="tab" href="#announced"><i class="fam-date"></i>站内信息</a></li>
+            <li class=""><a data-toggle="tab" href="#pm"><i class="fam-date"></i>私信</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="notify" class="tab-pane active">I'm in Section 1.</div>
+            <div id="pm" class="tab-pane">@PersonalMessage(personalMessages)</div>
+            <div id="announced" class="tab-pane">Howdy, I'm in Section 2.</div>
+        </div>
+    </div>
+</div>
+@Html.Partial("_pm")
+@section script
+{
+    <script type="text/javascript">
+
+        seajs.use(["/models/pm.js"],function (pm) {
+            $( "[role=pmReplay]").on("click", function () {
+                var relativeUserId = $(this).attr("href").substr(1);
+                pm.show(relativeUserId, "@OrnamentContext.MemberShip.CurrentUser().Name");
+            });
+        });
+    </script>
+
+}

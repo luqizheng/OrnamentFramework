@@ -22,7 +22,7 @@ namespace Ornament.Messages.Dao
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        IList<PersonalMessage> GetNewMessage(User user, int pageIndex, int pageSize);
+        IList<PersonalMessage> GetLastMessageForEachUser(User user, int pageIndex, int pageSize);
         /// <summary>
         /// Count all new msg
         /// </summary>

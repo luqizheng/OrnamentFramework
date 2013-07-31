@@ -18,7 +18,6 @@
     @Styles.Render("~/content/plugin")
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
     <script type="text/javascript" src="/scripts/seajs/sea.js" data-config="/scripts/config" data-main="/scripts/_applayout"> </script>
-    @Html.CorrectTimeZone(false)
     @RenderSection("head", false)
 </head>
 <body @Html.Raw(showMenu ? "" : "class=no-background")>

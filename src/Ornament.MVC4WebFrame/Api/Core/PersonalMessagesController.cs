@@ -23,14 +23,19 @@ namespace Ornament.MVCWebFrame.Api.Core
             _factory = factory;
             _memberShipFactory = memberShipFactory;
         }
-
-        public IEnumerable<object> Get([FromUri] string userId, [FromUri] int? page)
+        /// <summary>
+        /// 获取当前loginUser和relativeUser之间的PM内容
+        /// </summary>
+        /// <param name="relativeUserId"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public IEnumerable<object> Get([FromUri] string relativeUserId, [FromUri] int? page)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
-            User publisherUser = OrnamentContext.MemberShip.CurrentUser();
-            User receiverUser = dao.Get(userId);
+            User currentUser = OrnamentContext.MemberShip.CurrentUser();
+            User receiverUser = dao.Get(relativeUserId);
 
-            var result = from a in _factory.PersonalMessageDao.GetChat(publisherUser, receiverUser,
+            var result = from a in _factory.PersonalMessageDao.GetChat(currentUser, receiverUser,
                                                                        page ?? 0, 20)
                          select new
                              {

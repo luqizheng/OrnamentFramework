@@ -33,7 +33,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
 
 
             IList<PersonalMessage> result =
-                _messageDaoFactory.PersonalMessageDao.GetNewMessage(OrnamentContext.MemberShip.CurrentUser(),
+                _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(OrnamentContext.MemberShip.CurrentUser(),
                                                                     pagination.CurrentPage, pagination.PageSize);
 
 

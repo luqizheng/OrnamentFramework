@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using NHibernate.Type;
 using Ornament.MemberShip;
 using Ornament.Messages.PersonalMessages;
 using Qi.Domain.NHibernates;
@@ -45,14 +46,28 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IList<PersonalMessage> GetNewMessage(User user, int pageIndex, int pageSize)
+        public IList<PersonalMessage> GetLastMessageForEachUser(User user, int pageIndex, int pageSize)
         {
-            return CreateDetachedCriteria()
+            /*
+             *   select *
+from Msgs_PersonalMessage t
+where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_id and createTime>t.createTime)<=1
+ */
+            var detache = DetachedCriteria.For<PersonalMessage>("b")
                 .Add(Restrictions.Eq(ReceiverProperty, user))
                 .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                .Add(Restrictions.LtProperty("b.CreateTime", "a.CreateTime"))
+                .Add(Restrictions.EqProperty("a.Publisher", "b.Publisher"))
+                .SetProjection(Projections.SqlProjection("count(1)+1", new string[] { "sd" }, new IType[] { NHibernate.NHibernateUtil.Int32 }));
+
+            //var d = detache.GetExecutableCriteria(this.CurrentSession).List<object>();
+            return DetachedCriteria.For<PersonalMessage>("a")
+                  .Add(Restrictions.Eq(ReceiverProperty, user))
+                .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                .Add(Subqueries.Ge(1, detache))
                 .AddOrder(Order.Desc(Projections.Property<PersonalMessage>(s => s.CreateTime)))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageIndex*pageSize)
+                .SetFirstResult(pageIndex * pageSize)
                 .GetExecutableCriteria(CurrentSession)
                 .List<PersonalMessage>();
         }
@@ -95,7 +110,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(receive)
                 .Add(publisher)
-                .SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+                .SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
                 .GetExecutableCriteria(CurrentSession).List<PersonalMessage>();
         }
     }

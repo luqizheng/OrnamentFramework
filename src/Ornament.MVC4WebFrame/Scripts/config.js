@@ -97,7 +97,7 @@
             deps: ["jquery"]
         },
         pm: {
-            src:"/models/pm.js", deps: ["jquery"]
+            src:"/models/pm.js", deps: ["bootstrap"]
         },
         wizard: {
             src: "/Scripts/plugins/forms/jquery.form.wizard.js",

@@ -5,11 +5,11 @@ using Ornament.Web;
 namespace Ornament.MVCWebFrame.Controllers
 {
     [Authorize]
-    public class PersonalMessageController : Controller
+    public class MyMessageController : Controller
     {
         private readonly IMessageDaoFactory _messageDaoFactory;
 
-        public PersonalMessageController(IMessageDaoFactory messageDaoFactory)
+        public MyMessageController(IMessageDaoFactory messageDaoFactory)
         {
             _messageDaoFactory = messageDaoFactory;
         }
@@ -21,7 +21,7 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult Index()
         {
             ViewData["notify"] =
-                _messageDaoFactory.PersonalMessageDao.GetNewMessage(OrnamentContext.MemberShip.CurrentUser(), 0, 40);
+                _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(OrnamentContext.MemberShip.CurrentUser(), 0, 40);
             return View();
         }
     }
