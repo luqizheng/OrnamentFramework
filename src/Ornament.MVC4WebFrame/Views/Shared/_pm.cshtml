@@ -2,7 +2,10 @@
 <div id="pmEditor" class="modal fade hide">
     <div class="modal-header">
         <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-        <h3><i class="fam-comments"></i>Chat Record</h3>
+        <h3><i class="fam-comments"></i>Chat Record  
+         
+        </h3>
+
     </div>
     <div class="modal-body">
         <div class="widget" style="margin-bottom: 10px">
@@ -10,9 +13,11 @@
                 <dl class="clearfix chat" role="chat" style="padding: 8px; height: 245px; overflow: auto">
                 </dl>
             </div>
-
-            <div class="control-group" style="padding: 10px 0">
+            <div style="padding: 10px 0; position: relative">
                 <textarea class="styled" style="width: 100%; resize: none;" rows="5" cols="35" role="content"></textarea>
+                <span style="padding-left: 10px; position: absolute; right: 10px; top: 10px" role="progressbar" class="hide">
+                    <img alt="" src="/content/templates/pannonia/img/elements/loaders/5s.gif">
+                </span>
             </div>
         </div>
     </div>

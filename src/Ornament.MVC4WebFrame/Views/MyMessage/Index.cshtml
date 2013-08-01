@@ -57,10 +57,10 @@
 {
     <script type="text/javascript">
 
-        seajs.use(["/models/pm.js"],function (pm) {
-            $( "[role=pmReplay]").on("click", function () {
+        seajs.use(["/models/pm.js"], function (pm) {
+            $("[role=pmReplay]").on("click", function () {
                 var relativeUserId = $(this).attr("href").substr(1);
-                pm.show(relativeUserId, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                pm.Show("#pmEditor", relativeUserId, "@OrnamentContext.MemberShip.CurrentUser().Name");
             });
         });
     </script>

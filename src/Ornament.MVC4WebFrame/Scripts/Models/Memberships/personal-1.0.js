@@ -4,8 +4,8 @@ define(function (require) {
     require("/bundles/jquery.js");
     var url = "/Api/PersonalMessages",
         clientUrl = "/Api/Client",
-    
-        
+
+
     getCookie = function (cName) {
         if (document.cookie.length > 0) {
             var cStart = document.cookie.indexOf(cName + "=");
@@ -18,26 +18,30 @@ define(function (require) {
         }
         return "";
     };
-    
+
     function AutoChecking(time, func) {
-    	/// <summary>
-    	/// auto checking class;
-    	/// </summary>
-    	/// <param name="time"></param>
-    	/// <param name="func"></param>
+        /// <summary>
+        /// auto checking class;
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="func"></param>
         this.time = time;
         this.func = func;
-        this.start = function() {
+        this.start = function () {
             var cbFunc = this.func;
-                
+            var ins = this;
             function clientAttach() {
                 var data = {};
-                    
+
                 if (getCookie("offsetHour")) {
                     data.utcOffset = new Date().getTimezoneOffset() / 60 * -1;
                 }
-                    
-                $.post(clientUrl, function(d) {if (!cbFunc(d)) {AutoChecking.stop();}});
+
+                $.post(clientUrl, function (d) {
+                    if (!cbFunc(d)) {
+                        ins.stop();
+                    }
+                });
             }
 
             if (!this.time)
@@ -45,30 +49,30 @@ define(function (require) {
             clientAttach();
             this.ticket = setInterval(clientAttach, this.time);
         };
-        this.stop = function() {
+        this.stop = function () {
             clearInterval(this.ticket);
         };
     };
-    var autocheckIns=null;
+    var autocheckIns = null;
     return {
         getChat: function (relativeUserId, pageIndex, lastTime, func) {
-        	/// <summary>
-        	/// 获取login用户和relativeUserId之间数据
-        	/// </summary>
-        	/// <param name="relativeUserId"></param>
-        	/// <param name="pageIndex"></param>
-        	/// <param name="lastTime"></param>
-        	/// <param name="func"></param>
-            $.get(url, { relativeUserId: relativeUserId,lastTime:lastTime, page: pageIndex }, func);
+            /// <summary>
+            /// 获取login用户和relativeUserId之间数据
+            /// </summary>
+            /// <param name="relativeUserId"></param>
+            /// <param name="pageIndex"></param>
+            /// <param name="lastTime"></param>
+            /// <param name="func"></param>
+            $.get(url, { relativeUserId: relativeUserId, lastTime: lastTime, page: pageIndex }, func);
         },
         sendPm: function (content, receiver, func) {
-        	/// <summary>
-        	/// 发送pm给用户
-        	/// </summary>
-        	/// <param name="content"></param>
-        	/// <param name="receiver"></param>
-        	/// <param name="lastTime"></param>
-        	/// <param name="func"></param>
+            /// <summary>
+            /// 发送pm给用户
+            /// </summary>
+            /// <param name="content"></param>
+            /// <param name="receiver"></param>
+            /// <param name="lastTime"></param>
+            /// <param name="func"></param>
             $.post(url, { userId: receiver, content: content }, func);
         },
         watch: function (internal, func) {
@@ -79,7 +83,8 @@ define(function (require) {
         },
         unWatch: function () {
             autocheckIns.stop();
-        }};
+        }
+    };
 })
 
 

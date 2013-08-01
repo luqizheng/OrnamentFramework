@@ -12,6 +12,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Map(x => x.CreateTime).Insert();
             Map(x => x.Content).Length(5000);
             Map(x => x.ReadStatus);
+            Map(x => x.DeleteStatus);
             References(x => x.Publisher);
             References(x => x.Receiver);
 

@@ -11,34 +11,35 @@ define(function (require) {
 
     function buildTemp(chatItem) {
         return {
-            dt: $("<dt><h6>" + chatItem.publisher + " <small>" + chatItem.createTime + "</small></h6></dt>"),
+            dt: $("<dt><h6><span>" + chatItem.publisher + "</span> <small>" + chatItem.createTime + "</small> <a class='pull-right'><i class='icon-remove'></i></a></h6></dt>"),
             dd: $("<dd><div>" + chatItem.content + "</div></dd>")
         };
     };
 
     function pmDialog($dialog) {
-
-        var lastTime = null;
+        var self = this;
+        this.lastTime = null;
         this.ListChat = function (relUserId, myName) {
             /// <summary>
             /// 列出对话内容
             /// </summary>
             /// <param name="relUserId"></param>
             /// <param name="myName"></param>
-            api.getChat(relUserId, 0, lastTime, function (remoteData) {
+            api.getChat(relUserId, 0, this.lastTime, function (remoteData) {
 
                 var chat = [], $chat = $("[role=chat]", $dialog);
                 if (remoteData.length != 0) {
-                    lastTime = remoteData[0].createTime;
+                    self.lastTime = remoteData[0].createTime;
                 }
                 $(remoteData).each(function () {
 
                     var item = buildTemp(this);
 
                     if (this.publisher != myName) {//对方的信息放在右面
-                        $([item.dt, item.dd]).each(function () {
-                            $(this).addClass("clearfix").find(":first").addClass("pull-right");
-                        });
+                        /*$([item.dt, item.dd]).each(function () {
+                            $(this).addClass("clearfix").find(":first").css("color","blue");
+                        });*/
+                        $("span", item.dt).addClass("text-info");
                     }
 
                     chat.unshift(item.dd);
@@ -48,13 +49,14 @@ define(function (require) {
 
                 if (chat.length != 0) {
                     $chat.append(chat).scrollTop($chat[0].scrollHeight).closest(".well-smoke").show();
-                } else if (lastTime == null) {
+                } else if (self.lastTime == null) {
                     $chat.closest(".well-smoke").hide();
                 }
             });
         };
 
         this.Send = function (cContent, relUserId) {
+            $("[role=progressbar]", $dialog).fadeIn();
             /// <summary>
             /// 发送pm
             /// </summary>
@@ -62,6 +64,7 @@ define(function (require) {
             /// <param name="relUserId"></param>
             /// <param name="myName"></param>
             api.sendPm(cContent, relUserId, function (d) {
+                $("[role=progressbar]", $dialog).fadeOut();
                 if (!d.success) {
                     alert(d.error);
                 } else {
@@ -99,15 +102,16 @@ define(function (require) {
                     ticket = setTimeout(callIt, 2000);
                 }
 
-                $dialog.on("shown", function () {
+                $dialog.on("show", function () {
                     tipsMsge.unWatch(); //stop topmenu 的message检查
-                    ticket = setTimeout(callIt, 0);
+                    ticket = setTimeout(callIt, 100);
                 });
                 $dialog.on("hidden", function () {
                     $("[role=content]", $dialog).val("");
                     $("[role=chat]", $dialog).html("");
                     tipsMsge.watch(); //重新开启top menu的监控
                     clearTimeout(ticket);
+                    func.lastTime = null;
                 });
 
                 $("[role=send]", $dialog).click(function () {

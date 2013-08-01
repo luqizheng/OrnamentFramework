@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.PersonalMessages;
 using Ornament.Web;
@@ -37,16 +38,22 @@ namespace Ornament.MVCWebFrame.Api.Core
             IUserDao dao = _memberShipFactory.CreateUserDao();
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
             User receiverUser = dao.Get(relativeUserId);
+            var msgDao = _factory.PersonalMessageDao;
+            var result = new List<object>();
+            foreach (var a in msgDao.GetChat(currentUser, receiverUser, lastTime,
+                                                                   page ?? 0, 20))
+            {
+                a.ReadStatus = ReadStatus.Read;
+                msgDao.SaveOrUpdate(a);
+                result.Add(new
+                {
+                    publisher = a.Publisher.Name,
+                    receiver = a.Receiver.Name,
+                    content = a.Content,
+                    createTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                });
+            }
 
-            var result = from a in _factory.PersonalMessageDao.GetChat(currentUser, receiverUser, lastTime,
-                                                                       page ?? 0, 20)
-                         select new
-                             {
-                                 publisher = a.Publisher.Name,
-                                 receiver = a.Receiver.Name,
-                                 content = a.Content,
-                                 createTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
-                             };
             return result;
         }
 
