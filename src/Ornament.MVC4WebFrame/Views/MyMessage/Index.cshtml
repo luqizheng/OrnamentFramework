@@ -10,6 +10,7 @@
     ViewBag.Title = "Message Index";
     Layout = "~/Views/Shared/_appLayout.cshtml";
     var personalMessages = (IList<PersonalMessage>)ViewData["notify"];
+    var notifyMessage = (IList<Announcement>)ViewData["annoumcement"];
 }
 
 @section pageTitle
@@ -22,7 +23,15 @@
 }
 @helper AnnounceMent(IEnumerable<AnnouncementMessage> announcementMessages)
 {
-    
+    foreach (var msg in announcementMessages)
+    {
+        
+        
+    <h6>@msg.Show().Subject<small>@msg.CreateTime</small></h6>
+    <p>
+        @msg.Show().Value
+    </p>
+    }
 }
 @helper PersonalMessage(IEnumerable<PersonalMessage> pms)
 {
