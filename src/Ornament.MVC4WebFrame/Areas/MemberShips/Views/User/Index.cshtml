@@ -18,8 +18,7 @@
 
     <script type="text/javascript">
         var updateTable;
-        seajs.use(["/models/pm.js",
-                '/models/user',
+        seajs.use(["/models/pm.js", '/models/user',
                 'tmpl',
                 "/scripts/json2.js", 'select2', 'valid'], function (pm, user) {
 
@@ -37,11 +36,10 @@
                         $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
                     });
 
-
-
                     $("table [role=pm]").click(function () {
                         var id = $(this).closest("ul").attr("val");
-                        pm.show(id, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                        pm.Show("#pmEditor", id, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                        return false;
                     });
                     $("table [role=verifyEmail]").click(function () {
                         var loginId = $("td:first input", $(this).closest("tr")).val();

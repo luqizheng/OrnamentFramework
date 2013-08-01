@@ -37,6 +37,6 @@ namespace Ornament.Messages.Dao
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        IList<PersonalMessage> GetChat(User owner, User relative,int pageIndex,int pageSize);
+        IList<PersonalMessage> GetChat(User owner, User relative,DateTime? lastGetLastTime,int pageIndex,int pageSize);
     }
 }

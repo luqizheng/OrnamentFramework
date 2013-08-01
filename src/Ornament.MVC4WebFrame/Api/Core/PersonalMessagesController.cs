@@ -23,19 +23,22 @@ namespace Ornament.MVCWebFrame.Api.Core
             _factory = factory;
             _memberShipFactory = memberShipFactory;
         }
+
         /// <summary>
-        /// 获取当前loginUser和relativeUser之间的PM内容
+        ///     获取当前loginUser和relativeUser之间的PM内容
         /// </summary>
         /// <param name="relativeUserId"></param>
+        /// <param name="lastTime"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public IEnumerable<object> Get([FromUri] string relativeUserId, [FromUri] int? page)
+        public IEnumerable<object> Get([FromUri] string relativeUserId, [FromUri] DateTime? lastTime,
+                                       [FromUri] int? page)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
             User receiverUser = dao.Get(relativeUserId);
 
-            var result = from a in _factory.PersonalMessageDao.GetChat(currentUser, receiverUser,
+            var result = from a in _factory.PersonalMessageDao.GetChat(currentUser, receiverUser, lastTime,
                                                                        page ?? 0, 20)
                          select new
                              {
@@ -55,42 +58,37 @@ namespace Ornament.MVCWebFrame.Api.Core
 
         // POST api/default1
 
-        public bool Post([FromBody] SubmitContentData cc)
+        public object Post([FromBody] SubmitContentData cc)
         {
             try
             {
                 string content = cc.content;
                 string userId = cc.userId;
 
-                var pm = new PersonalMessage(OrnamentContext.MemberShip.CurrentUser())
+                var a = new PersonalMessage(OrnamentContext.MemberShip.CurrentUser())
                     {
                         Content = content,
                         Receiver = _memberShipFactory.CreateUserDao().Get(userId)
                     };
-                _factory.PersonalMessageDao.SaveOrUpdate(pm);
-                return true;
+                _factory.PersonalMessageDao.SaveOrUpdate(a);
+                return new
+                    {
+                        success = true
+                    };
+
             }
             catch (Exception ex)
             {
                 LogManager.GetLogger(GetType()).Error("send message error", ex);
-                return false;
+                throw;
             }
-        }
-
-        // PUT api/default1/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/default1/5
-        public void Delete(int id)
-        {
         }
 
         public class SubmitContentData
         {
             public string content { get; set; }
             public string userId { get; set; }
+
         }
     }
 }

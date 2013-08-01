@@ -15,12 +15,11 @@ namespace Ornament.MVCWebFrame.Api.Core
                 OrnamentModule.SetClientOffsetHour(t);
             }
         }
+
         [HttpPost]
         public ClientResult Post([FromBody] ClientModel model)
         {
             return (model ?? new ClientModel()).GetStatus();
         }
-
-
     }
 }
