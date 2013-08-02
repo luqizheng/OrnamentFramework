@@ -141,8 +141,8 @@
                 "bootstrap", "/models/user", "/models/org", "/models/role", "/models/usergroup"], function () {
 
                     var editor = CKEDITOR.replace('editor', {
-                        filebrowserBrowseUrl: '@Url.Action("FileCtrl", "FileManager", new { area = "Settings" })',
-            });
+                        filebrowserBrowseUrl: '@Url.Action("FileCtrl", "FileManager", new { area = "Settings" })'
+                    });
                     editor.on("blur", function () {
                         content[$("#Language").val()] = {
                             content: editor.getData(),

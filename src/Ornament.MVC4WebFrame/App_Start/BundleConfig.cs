@@ -100,6 +100,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
                             .Include("~/Scripts/Util/*.js"));
+            bundles.Add(new Bundle("~/Scripts/ckeditor.js").Include("~/Scripts/ckeditor/ckeditor.js"));
         }
 
         private static void CodeStyle(BundleCollection bundles)

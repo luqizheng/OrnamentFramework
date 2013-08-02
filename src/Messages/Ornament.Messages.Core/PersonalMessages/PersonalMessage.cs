@@ -1,6 +1,5 @@
 ﻿using System;
 using Ornament.MemberShip;
-using Ornament.Messages.Notification;
 using Qi.Domain;
 
 namespace Ornament.Messages.PersonalMessages
@@ -9,14 +8,14 @@ namespace Ornament.Messages.PersonalMessages
     {
         protected PersonalMessage()
         {
-          
         }
 
         public PersonalMessage(User publisher)
         {
             CreateTime = DateTime.Now;
-            this.Publisher = publisher;
+            Publisher = publisher;
         }
+
         public virtual ReadStatus ReadStatus { get; set; }
 
         /// <summary>
@@ -36,5 +35,14 @@ namespace Ornament.Messages.PersonalMessages
         ///     发布人
         /// </summary>
         public virtual User Publisher { get; protected set; }
+        /// <summary>
+        /// 删除标记。
+        /// </summary>
+        public virtual DeleteStatus DeleteStatus { get; set; }
+
+    }
+    public enum DeleteStatus
+    {
+        Publisher = 1, Receiver = 2
     }
 }

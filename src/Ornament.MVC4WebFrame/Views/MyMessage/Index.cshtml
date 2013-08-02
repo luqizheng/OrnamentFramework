@@ -1,15 +1,13 @@
 ﻿@using Ornament
-@using Ornament.Messages
 @using Ornament.Messages.Notification
 @using Ornament.Messages.Notification.Contents
 @using Ornament.Messages.PersonalMessages
 @using Ornament.Web
-
-
 @{
     ViewBag.Title = "Message Index";
     Layout = "~/Views/Shared/_appLayout.cshtml";
     var personalMessages = (IList<PersonalMessage>)ViewData["notify"];
+    var notifyMessage = (IList<Announcement>)ViewData["annoumcement"];
 }
 
 @section pageTitle
@@ -17,21 +15,25 @@
     <h5>Personal Messages</h5>
 }
 @helper NotifyMethod(IEnumerable<SimpleMessage> simpleMessages)
-{
-    
-}
+{ }
 @helper AnnounceMent(IEnumerable<AnnouncementMessage> announcementMessages)
 {
-    
+    foreach (AnnouncementMessage msg in announcementMessages)
+    {
+    <h6>@msg.Show().Subject<small>@msg.CreateTime</small></h6>
+    <p val="@msg.Id" class="unRead">
+        @msg.Show().Value
+    </p>
+    }
 }
 @helper PersonalMessage(IEnumerable<PersonalMessage> pms)
 {
-    foreach (var msg in pms)
+    foreach (PersonalMessage msg in pms)
     {
-        var showName = msg.Receiver.LoginId == OrnamentContext.MemberShip.CurrentUser().LoginId ? msg.Publisher.Name : msg.Receiver.Name;
-        
+        string showName = msg.Receiver.LoginId == OrnamentContext.MemberShip.CurrentUser().LoginId ? msg.Publisher.Name : msg.Receiver.Name;
+
     <h6><a href="#@msg.Publisher.Id" role="pmReplay">@showName<small>@msg.CreateTime</small></a></h6>
-    <p>
+    <p val="@msg.Id" class="unRead">
         @msg.Content
     </p>
     }
@@ -57,11 +59,20 @@
 {
     <script type="text/javascript">
 
-        seajs.use(["/models/pm.js"],function (pm) {
-            $( "[role=pmReplay]").on("click", function () {
+        seajs.use(["/models/pm.js"], function (pm) {
+            $("[role=pmReplay]").on("click", function () {
                 var relativeUserId = $(this).attr("href").substr(1);
-                pm.show(relativeUserId, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                pm.Show("#pmEditor", relativeUserId, "@OrnamentContext.MemberShip.CurrentUser().Name");
             });
+            $(".unRead").on("mouseover", function (e) {
+                var self = this;
+                $.get("@Url.Action("MakeRead")/" + $(this).attr("val"), function (d) {
+                    if (d) {
+                        self.removeClass("unRead");
+                    }
+                });
+            });
+
         });
     </script>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
 using NHibernate.Type;
@@ -35,6 +36,14 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         /// <summary>
         /// </summary>
+        private IProjection CreateTimeProperty
+        {
+            get { return Projections.Property<PersonalMessage>(s => s.CreateTime); }
+        }
+
+
+        /// <summary>
+        /// </summary>
         public IQueryable<PersonalMessage> PersonalMessages
         {
             get { return CurrentSession.Query<PersonalMessage>(); }
@@ -53,23 +62,29 @@ namespace Ornament.Messages.Dao.NHibernateImple
 from Msgs_PersonalMessage t
 where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_id and createTime>t.createTime)<=1
  */
-            var detache = DetachedCriteria.For<PersonalMessage>("b")
-                .Add(Restrictions.Eq(ReceiverProperty, user))
-                .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
-                .Add(Restrictions.LtProperty("b.CreateTime", "a.CreateTime"))
-                .Add(Restrictions.EqProperty("a.Publisher", "b.Publisher"))
-                .SetProjection(Projections.SqlProjection("count(1)+1", new string[] { "sd" }, new IType[] { NHibernate.NHibernateUtil.Int32 }));
+            DetachedCriteria detache = DetachedCriteria.For<PersonalMessage>("b")
+                                                       .Add(Restrictions.Eq(ReceiverProperty, user))
+                                                       .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                                                       .Add(Restrictions.LtProperty("b.CreateTime", "a.CreateTime"))
+                                                       .Add(Restrictions.EqProperty("a.Publisher", "b.Publisher"))
+                                                       .SetProjection(Projections.SqlProjection("count(1)+1",
+                                                                                                new[] {"sd"},
+                                                                                                new IType[]
+                                                                                                    {
+                                                                                                        NHibernateUtil
+                                                                                                    .Int32
+                                                                                                    }));
 
             //var d = detache.GetExecutableCriteria(this.CurrentSession).List<object>();
             return DetachedCriteria.For<PersonalMessage>("a")
-                  .Add(Restrictions.Eq(ReceiverProperty, user))
-                .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
-                .Add(Subqueries.Ge(1, detache))
-                .AddOrder(Order.Desc(Projections.Property<PersonalMessage>(s => s.CreateTime)))
-                .SetMaxResults(pageSize)
-                .SetFirstResult(pageIndex * pageSize)
-                .GetExecutableCriteria(CurrentSession)
-                .List<PersonalMessage>();
+                                   .Add(Restrictions.Eq(ReceiverProperty, user))
+                                   .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                                   .Add(Subqueries.Ge(1, detache))
+                                   .AddOrder(Order.Desc(Projections.Property<PersonalMessage>(s => s.CreateTime)))
+                                   .SetMaxResults(pageSize)
+                                   .SetFirstResult(pageIndex*pageSize)
+                                   .GetExecutableCriteria(CurrentSession)
+                                   .List<PersonalMessage>();
         }
 
         /// <summary>
@@ -92,7 +107,8 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IList<PersonalMessage> GetChat(User owner, User relative, int pageIndex, int pageSize)
+        public IList<PersonalMessage> GetChat(User owner, User relative, DateTime? lastGetLastTime, int pageIndex,
+                                              int pageSize)
         {
             if (owner == null) throw new ArgumentNullException("owner");
             if (relative == null) throw new ArgumentNullException("relative");
@@ -107,11 +123,17 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
             publisher.Add(Restrictions.Eq(publish, owner));
             publisher.Add(Restrictions.Eq(publish, relative));
 
-            return CreateDetachedCriteria()
+            DetachedCriteria deach = CreateDetachedCriteria()
                 .Add(receive)
-                .Add(publisher)
-                .SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
-                .GetExecutableCriteria(CurrentSession).List<PersonalMessage>();
+                .Add(publisher);
+            if (lastGetLastTime != null)
+            {
+                deach.Add(Restrictions.Gt(CreateTimeProperty, lastGetLastTime.Value));
+            }
+            return
+                deach.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+                     .AddOrder(Order.Desc(CreateTimeProperty))
+                     .GetExecutableCriteria(CurrentSession).List<PersonalMessage>();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Ornament.Web.Models
         ///     有客户端提交上来和Utc之间的时间差
         /// </summary>
         public int? UtcOffset { get; set; }
+
         ///
         public ClientResult GetStatus()
         {
