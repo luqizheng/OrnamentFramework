@@ -22,12 +22,11 @@ namespace Ornament.MVCWebFrame.Controllers
         [Session]
         public ActionResult Index()
         {
-
-            ViewData["notify"] =
+            ViewBag.Notify=
                 _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(OrnamentContext.MemberShip.CurrentUser(), 0, 40);
 
 
-            ViewData["annoumcement"] = _messageDaoFactory.AnnouncementDao.GetByUser(OrnamentContext.MemberShip.CurrentUser(), 0, 20);
+            ViewBag.Announcements = _messageDaoFactory.AnnouncementDao.GetByUser(OrnamentContext.MemberShip.CurrentUser(), 0, 20);
 
             return View();
         }

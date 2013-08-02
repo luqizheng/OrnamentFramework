@@ -6,6 +6,7 @@ PM dialog UI 1.0
 */
 define(function (require) {
     require('/bundles/bootstrap.js');
+    require('/scripts/ckeditor/ckeditor.js');
     var api = require('/models/personal.js'),
         tipsMsge = require('/models/personal.js');
 
@@ -15,7 +16,6 @@ define(function (require) {
             dd: $("<dd><div>" + chatItem.content + "</div></dd>")
         };
     };
-
     function pmDialog($dialog) {
         var self = this;
         this.lastTime = null;
@@ -55,22 +55,15 @@ define(function (require) {
             });
         };
 
-        this.Send = function (cContent, relUserId) {
-            $("[role=progressbar]", $dialog).fadeIn();
+        this.Send = function (cContent, relUserId, func) {
+
             /// <summary>
             /// 发送pm
             /// </summary>
             /// <param name="cContent"></param>
             /// <param name="relUserId"></param>
             /// <param name="myName"></param>
-            api.sendPm(cContent, relUserId, function (d) {
-                $("[role=progressbar]", $dialog).fadeOut();
-                if (!d.success) {
-                    alert(d.error);
-                } else {
-                    $("[role=content]", $dialog).val("");
-                }
-            });
+            api.sendPm(cContent, relUserId, func);
         };
     }
 
@@ -84,20 +77,29 @@ define(function (require) {
             /// <param name="relativeUserId">对话的人</param>
             /// <param name="myName">login user的名字</param>
 
-            var $dialog = $(selector);
+            var $dialog = $(selector), editor;
 
             if (!$dialog.data("_pmDialog")) {
-                $dialog.data("_pmDialog", true);
-                var func = new pmDialog($dialog);
-                var ticket;
-                $dialog.modal({
-                    show: false
+
+                $dialog.data("_pmDialog", true)
+                    .modal({
+                        show: false
+                    });
+
+                var func =
+                        new pmDialog($dialog), ticket,
+                    sendBtn = $("[role=send]", $dialog);
+
+                editor = CKEDITOR.replace('editor',
+                    {
+                        toolbar: "Basic", height: "100"
+                    }
+                );
+                editor.on("key", function() {
+                    sendBtn.prop("disabled", editor.getData().length == 0);
                 });
 
                 function callIt() {
-                    /// <summary>
-                    /// get chat
-                    /// </summary>
                     func.ListChat(relativeUserId, myName);
                     ticket = setTimeout(callIt, 2000);
                 }
@@ -106,6 +108,7 @@ define(function (require) {
                     tipsMsge.unWatch(); //stop topmenu 的message检查
                     ticket = setTimeout(callIt, 100);
                 });
+
                 $dialog.on("hidden", function () {
                     $("[role=content]", $dialog).val("");
                     $("[role=chat]", $dialog).html("");
@@ -114,12 +117,25 @@ define(function (require) {
                     func.lastTime = null;
                 });
 
-                $("[role=send]", $dialog).click(function () {
-                    func.Send($("[role=content]", $dialog).val(), relativeUserId, myName);
-                    return false;
-                });
-            }
+                sendBtn
+                    .click(function () {//点击发送按钮
 
+                        var progressBra = $("[role=progressbar]", $dialog).fadeIn();
+                        var content = editor.getData();
+                        if (content.length != 0) {
+                            func.Send(content, relativeUserId, function (d) {
+
+                                progressBra.fadeOut(); //hide progressbar
+                                if (!d.success) {
+                                    alert(d.error);
+                                } else {
+                                    editor.setData("");
+                                }
+                            });
+                        }
+                        return false;
+                    });
+            }
             $dialog.modal("show");
 
         }

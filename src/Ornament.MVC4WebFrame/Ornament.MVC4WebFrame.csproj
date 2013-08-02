@@ -303,7 +303,6 @@
     <Content Include="Areas\Messages\Views\Announce\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Web.config" />
     <Content Include="Content\Combine\global.css" />
-    <Content Include="Content\media\swfupload.swf" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Content\templates\pannonia\css\ornamentExtender.css" />
     <Content Include="Global.asax" />

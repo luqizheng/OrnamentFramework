@@ -45,6 +45,7 @@ namespace Ornament.MVCWebFrame.Api.Core
             {
                 a.ReadStatus = ReadStatus.Read;
                 msgDao.SaveOrUpdate(a);
+                msgDao.Flush();
                 result.Add(new
                 {
                     publisher = a.Publisher.Name,

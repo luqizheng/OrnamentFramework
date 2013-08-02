@@ -43,8 +43,9 @@ namespace Ornament.MVCWebFrame.Api.Core
         // GET api/default1/5
         public int Count()
         {
-            return _messageDaoFactory.NotifyMessageDao.CountNotifyMsg(OrnamentContext.MemberShip.CurrentUser(),
+            var result= _messageDaoFactory.NotifyMessageDao.CountNotifyMsg(OrnamentContext.MemberShip.CurrentUser(),
                                                                       ReadStatus.UnRead);
+            return result;
         }
 
         // POST api/default1
