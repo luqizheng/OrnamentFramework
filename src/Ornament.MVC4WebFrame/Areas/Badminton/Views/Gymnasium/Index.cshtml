@@ -5,12 +5,8 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
 
-@section pageTitle{
-    <h5>kajsdkfjka</h5>
-}
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增", "Create")
 </p>
 <table class="table table-bordered table-condensed table-striped">
     <tr>
@@ -45,9 +41,9 @@
                 @Html.DisplayFor(modelItem => item.Remarks)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("明细", "Details", new { id = item.Id }) |
+            @Html.ActionLink("删除", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

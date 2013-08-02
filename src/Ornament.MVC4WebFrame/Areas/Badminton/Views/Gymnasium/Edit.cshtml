@@ -2,7 +2,7 @@
 @model Badminton.Gymnasium
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
 
@@ -23,7 +23,7 @@
 
             @Html.EditorFor(model => model.Remarks)
             <div class="form-actions">
-                <button class="btn btn-primary">@Basic.Create</button>
+                <button class="btn btn-primary">@Basic.Edit</button>
                 <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
             </div>
         </form>
