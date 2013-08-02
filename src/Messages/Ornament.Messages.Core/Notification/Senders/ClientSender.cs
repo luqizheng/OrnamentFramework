@@ -16,9 +16,9 @@ namespace Ornament.Messages.Notification.Senders
             get { return CommunicationType.Client; }
         }
 
-        public void Send(NotifyMessageBase notifyMessage)
+        public void Send(SimpleMessage notifyMessage)
         {
-            DaoFactory.NotifyMessageDao.SaveOrUpdate(notifyMessage);
+            DaoFactory.SimpleMessageDao.SaveOrUpdate(notifyMessage);
         }
     }
 }

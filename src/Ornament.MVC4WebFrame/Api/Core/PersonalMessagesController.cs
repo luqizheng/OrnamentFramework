@@ -43,9 +43,11 @@ namespace Ornament.MVCWebFrame.Api.Core
             foreach (var a in msgDao.GetChat(currentUser, receiverUser, lastTime,
                                                                    page ?? 0, 20))
             {
-                a.ReadStatus = ReadStatus.Read;
-                msgDao.SaveOrUpdate(a);
-                msgDao.Flush();
+                if (currentUser == a.Receiver)
+                {
+                    a.ReadStatus = ReadStatus.Read;
+                }
+
                 result.Add(new
                 {
                     publisher = a.Publisher.Name,
@@ -83,7 +85,7 @@ namespace Ornament.MVCWebFrame.Api.Core
                     {
                         success = true
                     };
-
+                +
             }
             catch (Exception ex)
             {

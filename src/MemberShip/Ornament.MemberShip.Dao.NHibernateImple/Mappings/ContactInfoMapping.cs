@@ -7,7 +7,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         public ContactInfoMapping()
         {
             Table(("MBS_UserContactInfo"));
-            Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32); ;
+            Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
             References(s => s.User).Cascade.None();
             Map(s => s.Email).Length(64)
                              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);

@@ -36,7 +36,7 @@ namespace Ornament.Contexts
 
         /// <summary>
         /// </summary>
-        public MessageTemplate RegistAccount
+        public NotifyMessageTemplate RegistAccount
         {
             get
             {
@@ -55,7 +55,7 @@ namespace Ornament.Contexts
             }
         }
 
-        public MessageTemplate EmailAddressChanged
+        public NotifyMessageTemplate EmailAddressChanged
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Ornament.Contexts
             }
         }
 
-        public MessageTemplate RetrivePassword
+        public NotifyMessageTemplate RetrivePassword
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Ornament.Contexts
 
         /// <summary>
         /// </summary>
-        public MessageTemplate AccountChanged
+        public NotifyMessageTemplate AccountChanged
         {
             get   
             {

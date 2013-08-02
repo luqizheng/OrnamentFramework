@@ -9,8 +9,8 @@ namespace Ornament.Messages.Notification
     public interface ISender
     {
         CommunicationType CommunicationType { get; }
-        void Send(NotifyMessageBase notifyMessage);
+        void Send(SimpleMessage notifyMessage);
     }
 
-    
+
 }

@@ -90,26 +90,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnnouncementDao.cs" />
-    <Compile Include="Mapping\NotifyMessageBaseMapping.cs" />
+    <Compile Include="Mapping\SimpleMessageMapping.cs" />
     <Compile Include="Mapping\NewsMapping.cs" />
     <Compile Include="Mapping\NewsTypeMapping.cs" />
-    <Compile Include="Mapping\AnnouncementMapping.cs" />
-    <Compile Include="Mapping\NotifyMessageReadStatusMapping.cs" />
     <Compile Include="Mapping\NotifyTypeMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
     <Compile Include="Mapping\PersonalMessageMapping.cs" />
-    <Compile Include="Mapping\MessageTemplateMapping.cs" />
-    <Compile Include="Mapping\SimpleMessageMapping.cs" />
+    <Compile Include="Mapping\NotifyMessageTemplateMapping.cs" />
     <Compile Include="MessageDaoFactory.cs" />
-    <Compile Include="DaoMultiId.cs" />
     <Compile Include="NewsDao.cs" />
-    <Compile Include="NotifyMessageDao.cs" />
+    <Compile Include="SimpleMessageDao.cs" />
     <Compile Include="NotifyTypeDao.cs" />
     <Compile Include="NewsTypeDao.cs" />
     <Compile Include="PersonalMessageDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageTemplateDao.cs" />
+    <Compile Include="NotifyMessageTemplateDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">

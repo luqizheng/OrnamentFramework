@@ -16,7 +16,7 @@ namespace Ornament.Messages.Dao
         /// <summary>
         /// 
         /// </summary>
-        INotifyMessageDao NotifyMessageDao { get; }
+        ISimpleMessageDao SimpleMessageDao { get; }
         /// <summary>
         /// 
         /// </summary>
@@ -37,9 +37,6 @@ namespace Ornament.Messages.Dao
         /// 
         /// </summary>
         INewsDao NewsDao { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        IAnnouncementDao AnnouncementDao { get; }
+      
     }
 }

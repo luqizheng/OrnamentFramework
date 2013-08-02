@@ -14,9 +14,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         /// <summary>
         /// </summary>
-        public INotifyMessageDao NotifyMessageDao
+        public ISimpleMessageDao SimpleMessageDao
         {
-            get { return new NotifyMessageDao(); }
+            get { return new SimpleMessageDao(); }
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
         /// </summary>
         public IMessageTemplateDao MessageTemplateDao
         {
-            get { return new MessageTemplateDao(); }
+            get { return new NotifyMessageTemplateDao(); }
         }
 
         /// <summary>
@@ -54,9 +54,6 @@ namespace Ornament.Messages.Dao.NHibernateImple
             get { return new NewsDao(); }
         }
 
-        public IAnnouncementDao AnnouncementDao
-        {
-            get { return new AnnouncementDao(); }
-        }
+      
     }
 }

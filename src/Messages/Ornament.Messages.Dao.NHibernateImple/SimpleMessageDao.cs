@@ -10,14 +10,14 @@ namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
     /// </summary>
-    public class NotifyMessageDao : DaoBase<string, NotifyMessageBase>, INotifyMessageDao
+    public class SimpleMessageDao : DaoBase<string, SimpleMessage>, ISimpleMessageDao
     {
-        public IQueryable<NotifyMessageBase> Messages
+        public IQueryable<SimpleMessage> Messages
         {
-            get { return CurrentSession.Query<NotifyMessageBase>(); }
+            get { return CurrentSession.Query<SimpleMessage>(); }
         }
 
-        public IList<NotifyMessageBase> GetAll(int pageSize, int pageIndex, out int total)
+        public IList<SimpleMessage> GetAll(int pageSize, int pageIndex, out int total)
         {
             total = AllNotifyMsg()
                 .SetProjection(Projections.RowCount())
@@ -28,20 +28,20 @@ namespace Ornament.Messages.Dao.NHibernateImple
                     .SetMaxResults(pageSize)
                     .SetFirstResult(pageIndex*pageSize)
                     .GetExecutableCriteria(CurrentSession)
-                    .List<NotifyMessageBase>();
+                    .List<SimpleMessage>();
         }
 
-        public IList<NotifyMessageBase> GetNotifyMessages(User user, ReadStatus? readStatus, int pageSize, int pageIndex,
+        public IList<SimpleMessage> GetNotifyMessages(User user, ReadStatus? readStatus, int pageSize, int pageIndex,
                                                           out int total)
         {
             total = CountNotifyMsg(user, readStatus);
             return
                 BuildNewNotifyMsg(user, readStatus)
-                    .AddOrder(Order.Desc(Projections.Property<NotifyMessageBase>(s => s.CreateTime)))
+                    .AddOrder(Order.Desc(Projections.Property<SimpleMessage>(s => s.CreateTime)))
                     .SetMaxResults(pageSize)
                     .SetFirstResult(pageSize*pageIndex)
                     .GetExecutableCriteria(CurrentSession)
-                    .List<NotifyMessageBase>();
+                    .List<SimpleMessage>();
         }
 
         public int CountNotifyMsg(User user, ReadStatus? readStatus)
@@ -54,9 +54,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
         private DetachedCriteria BuildNewNotifyMsg(User user, ReadStatus? readStatus)
         {
             DetachedCriteria cri = CreateDetachedCriteria();
-            cri.Add(Restrictions.Eq(Projections.Property<NotifyMessageBase>(s => s.User), user));
+            cri.Add(Restrictions.Eq(Projections.Property<SimpleMessage>(s => s.User), user));
             if (readStatus != null)
-                cri.Add(Restrictions.Eq(Projections.Property<NotifyMessageBase>(s => s.ReadStatus), readStatus));
+                cri.Add(Restrictions.Eq(Projections.Property<SimpleMessage>(s => s.ReadStatus), readStatus));
             return cri;
         }
 

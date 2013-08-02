@@ -15,7 +15,7 @@ namespace Ornament.Models.Messages
         {
         }
         private IDictionary<string, Content> _contents;
-        public MessageTemplateModel(MessageTemplate template)
+        public MessageTemplateModel(NotifyMessageTemplate template)
         {
             this.Name = template.Name;
             this.Remark = template.Remark;
@@ -60,8 +60,8 @@ namespace Ornament.Models.Messages
             if (dao == null)
                 throw new ArgumentNullException("dao");
 
-            MessageTemplate type = Id != null ?
-                dao.Get(Id) : new MessageTemplate(Notify);
+            NotifyMessageTemplate type = Id != null ?
+                dao.Get(Id) : new NotifyMessageTemplate(Notify);
             type.Name = Name;
             type.Remark = Remark;
             dao.SaveOrUpdate(type);

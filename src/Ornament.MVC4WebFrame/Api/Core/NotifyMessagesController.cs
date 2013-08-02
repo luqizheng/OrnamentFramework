@@ -25,7 +25,7 @@ namespace Ornament.MVCWebFrame.Api.Core
         {
             User user = OrnamentContext.MemberShip.CurrentUser();
             int total;
-            IList<NotifyMessageBase> msgs = _messageDaoFactory.NotifyMessageDao.GetNotifyMessages(user, readStatus, 40,
+            var msgs = _messageDaoFactory.SimpleMessageDao.GetNotifyMessages(user, readStatus, 40,
                                                                                                   0, out total);
             var result = new
                 {
@@ -33,7 +33,7 @@ namespace Ornament.MVCWebFrame.Api.Core
                     data = from message in msgs
                            select new
                                {
-                                   content = message.Show(),
+                                   content = message.Content,
                                    createTime = message.CreateTime,
                                }
                 };
@@ -43,7 +43,7 @@ namespace Ornament.MVCWebFrame.Api.Core
         // GET api/default1/5
         public int Count()
         {
-            var result= _messageDaoFactory.NotifyMessageDao.CountNotifyMsg(OrnamentContext.MemberShip.CurrentUser(),
+            var result = _messageDaoFactory.SimpleMessageDao.CountNotifyMsg(OrnamentContext.MemberShip.CurrentUser(),
                                                                       ReadStatus.UnRead);
             return result;
         }

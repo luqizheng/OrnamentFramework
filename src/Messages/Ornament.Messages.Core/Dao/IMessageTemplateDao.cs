@@ -7,14 +7,14 @@ namespace Ornament.Messages.Dao
     /// <summary>
     /// Message Tempalte Data Access Object.
     /// </summary>
-    public interface IMessageTemplateDao : IDao<string, MessageTemplate>
+    public interface IMessageTemplateDao : IDao<string, NotifyMessageTemplate>
     {
         /// <summary>
         ///     Get Mesage Template from name
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        MessageTemplate GetByName(string name);
+        NotifyMessageTemplate GetByName(string name);
 
         /// <summary>
         ///     Get MessageTemplate.
@@ -23,6 +23,6 @@ namespace Ornament.Messages.Dao
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        IList<MessageTemplate> GetAll(int pageIndex, int pageSize, out int total);
+        IList<NotifyMessageTemplate> GetAll(int pageIndex, int pageSize, out int total);
     }
 }

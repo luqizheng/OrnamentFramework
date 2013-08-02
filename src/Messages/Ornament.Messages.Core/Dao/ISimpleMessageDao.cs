@@ -9,11 +9,11 @@ namespace Ornament.Messages.Dao
     /// <summary>
     ///     获取所有NotifyMessage的Dao。包括获取Template产生的SimpleMessage以及AnnounceMessage
     /// </summary>
-    public interface INotifyMessageDao : IDao<string, NotifyMessageBase>
+    public interface ISimpleMessageDao : IDao<string, SimpleMessage>
     {
         /// <summary>
         /// </summary>
-        IQueryable<NotifyMessageBase> Messages { get; }
+        IQueryable<SimpleMessage> Messages { get; }
 
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Ornament.Messages.Dao
         /// <param name="pageIndex"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        IList<NotifyMessageBase> GetAll(int pageSize, int pageIndex, out int total);
+        IList<SimpleMessage> GetAll(int pageSize, int pageIndex, out int total);
 
         /// <summary>
         /// </summary>
@@ -32,12 +32,13 @@ namespace Ornament.Messages.Dao
         /// <param name="pageIndex"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        IList<NotifyMessageBase> GetNotifyMessages(User user, ReadStatus? readStatus, int pageSize, int pageIndex,
+        IList<SimpleMessage> GetNotifyMessages(User user, ReadStatus? readStatus, int pageSize, int pageIndex,
                                                    out int total);
 
         /// <summary>
         /// </summary>
         /// <param name="user"></param>
+        /// <param name="readStatus"></param>
         /// <returns></returns>
         int CountNotifyMsg(User user, ReadStatus? readStatus);
     }

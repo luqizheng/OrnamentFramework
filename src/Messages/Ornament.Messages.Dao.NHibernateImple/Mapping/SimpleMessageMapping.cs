@@ -1,16 +1,19 @@
 ﻿using FluentNHibernate.Mapping;
-using Ornament.Messages.Notification.Contents;
+using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping
 {
-    public class SimpleMessageMapping : SubclassMap<SimpleMessage>
+    public class SimpleMessageMapping : ClassMap<SimpleMessage>
     {
         public SimpleMessageMapping()
         {
-            this.DiscriminatorValue("simple");
-            this.Map(s => s.CreateTime);
+            Table("Msgs_SimpleMessage");
+            Id(x => x.Id);
+            Map(x => x.ReadStatus);
+            Map(s => s.CreateTime);
 
-            this.Component(s => s.Content, f =>
+            References(x => x.User);
+            Component(s => s.Content, f =>
                 {
                     f.Map(a => a.Language);
                     f.Map(a => a.Subject);

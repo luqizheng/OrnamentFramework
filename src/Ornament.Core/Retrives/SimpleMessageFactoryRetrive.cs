@@ -4,7 +4,7 @@ using Ornament.Messages.Notification;
 
 namespace Ornament.Retrives
 {
-    internal class SimpleMessageFactoryRetrive : Retrive<MessageTemplate, string>
+    internal class SimpleMessageFactoryRetrive : Retrive<NotifyMessageTemplate, string>
     {
         private readonly Content[] _contents;
         private readonly string _name;
@@ -22,14 +22,14 @@ namespace Ornament.Retrives
             _contents = contents;
         }
 
-        protected override MessageTemplate GetById(string id)
+        protected override NotifyMessageTemplate GetById(string id)
         {
             return OrnamentContext.DaoFactory.MessageDaoFactory.MessageTemplateDao.Get(id);
         }
 
-        protected override MessageTemplate CreateInstance(string name)
+        protected override NotifyMessageTemplate CreateInstance(string name)
         {
-            var result = new MessageTemplate(_notifyType)
+            var result = new NotifyMessageTemplate(_notifyType)
                 {
                     Name = name,
                     Remark = _remark,
@@ -42,12 +42,12 @@ namespace Ornament.Retrives
             return result;
         }
 
-        protected override MessageTemplate GetByName(string name)
+        protected override NotifyMessageTemplate GetByName(string name)
         {
             return OrnamentContext.DaoFactory.MessageDaoFactory.MessageTemplateDao.GetByName(name);
         }
 
-        protected override void SaveOrUpdate(MessageTemplate t)
+        protected override void SaveOrUpdate(NotifyMessageTemplate t)
         {
             OrnamentContext.DaoFactory.MessageDaoFactory.MessageTemplateDao.SaveOrUpdate(t);
         }

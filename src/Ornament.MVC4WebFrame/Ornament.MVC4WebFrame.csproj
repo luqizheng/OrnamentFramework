@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
+    <Compile Include="Api\Core\FriendsController.cs" />
     <Compile Include="Api\Core\NotifyMessagesController.cs" />
     <Compile Include="Api\Core\OnlineController.cs" />
     <Compile Include="Api\Core\OrgsController.cs" />
@@ -249,7 +250,6 @@
     <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
-    <Compile Include="Areas\Messages\Controllers\AnnounceController.cs" />
     <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />
@@ -299,8 +299,6 @@
     <Content Include="Areas\Messages\Views\NewsType\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
     <Content Include="Areas\Messages\Views\NewsType\Create.cshtml" />
-    <Content Include="Areas\Messages\Views\Announce\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\Announce\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Web.config" />
     <Content Include="Content\Combine\global.css" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />

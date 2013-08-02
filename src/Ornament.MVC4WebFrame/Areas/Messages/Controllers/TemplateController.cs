@@ -27,7 +27,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
             var pagination = new Pagination();
             ViewData["Nav"] = pagination;
             int total;
-            IList<MessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
+            IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
                                                                                   pagination.PageSize, out total);
             pagination.TotalRows = total;
             return View(result);
@@ -38,7 +38,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         {
             ViewData["Nav"] = pagination;
             int total;
-            IList<MessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
+            IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
                                                                                   pagination.PageSize, out total);
             pagination.TotalRows = total;
             return View(result);
@@ -80,7 +80,7 @@ namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
         {
             if (id == null)
                 throw new HttpException(404, "Template message not found.");
-            MessageTemplate model = _daoFactory.MessageTemplateDao.Get(id);
+            NotifyMessageTemplate model = _daoFactory.MessageTemplateDao.Get(id);
             return View(new MessageTemplateModel(model));
         }
 

@@ -15,8 +15,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IQueryable<UserSecretToken> UserSecretTokens { get; private set; }
 
+        public IFriendDao CreateFriendDao()
+        {
+            return new FriendDao();
+        }
+
+        public IFriendRequestDao CreateFriendRequestDao()
+        {
+            return new FriendRequestDao();
+        }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IUserDao CreateUserDao()
@@ -26,7 +35,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IUserGroupDao CreateUserGroupDao()
@@ -35,7 +43,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IOrgDao CreateOrgDao()
@@ -50,7 +57,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IRoleDao CreateRoleDao()
@@ -59,7 +65,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IPerformerDao CreateMemberDao()
@@ -68,7 +73,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public IQueryable<User> Users
         {
@@ -76,7 +80,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public IQueryable<Role> Roles
         {
@@ -84,7 +87,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public IQueryable<UserGroup> UserGroups
         {
@@ -92,7 +94,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public IQueryable<Permission> Permissions
         {
@@ -100,7 +101,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IPermissionDao CreatePermissionDao()
@@ -110,7 +110,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public IResourceDao CreateResourceDao()

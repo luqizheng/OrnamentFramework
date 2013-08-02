@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Web;
@@ -22,21 +23,25 @@ namespace Ornament.MVCWebFrame.Controllers
         [Session]
         public ActionResult Index()
         {
-            ViewBag.Notify=
+            ViewData["PM"]=
                 _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(OrnamentContext.MemberShip.CurrentUser(), 0, 40);
 
 
-            ViewBag.Announcements = _messageDaoFactory.AnnouncementDao.GetByUser(OrnamentContext.MemberShip.CurrentUser(), 0, 20);
-
+            int total;
+            ViewData["SimpleMessage"] =
+                _messageDaoFactory.SimpleMessageDao.GetNotifyMessages(OrnamentContext.MemberShip.CurrentUser(),
+                                                                      ReadStatus.UnRead, 30, 0, out total);
             return View();
         }
 
         [Session]
-        public ActionResult MakeRead(string id)
+        public ActionResult MakeRead(int? id)
         {
-            var a = _messageDaoFactory.NotifyMessageDao.Get(id);
+            if (id == null)
+                throw new HttpException(404, "Can't find any message.");
+            var a = _messageDaoFactory.PersonalMessageDao.Get(id.Value);
             a.ReadStatus = ReadStatus.Read;
-            return Json(true);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
     }

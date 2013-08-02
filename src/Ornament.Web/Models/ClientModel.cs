@@ -23,7 +23,7 @@ namespace Ornament.Web.Models
             //refresh online.
             User user = OrnamentContext.MemberShip.CurrentUser();
             IMessageDaoFactory daoFactory = OrnamentContext.DaoFactory.MessageDaoFactory;
-            int cout = daoFactory.NotifyMessageDao.CountNotifyMsg(user, ReadStatus.UnRead) +
+            int cout = daoFactory.SimpleMessageDao.CountNotifyMsg(user, ReadStatus.UnRead) +
                        daoFactory.PersonalMessageDao.CountNewMessage(user);
             return new ClientResult
                 {

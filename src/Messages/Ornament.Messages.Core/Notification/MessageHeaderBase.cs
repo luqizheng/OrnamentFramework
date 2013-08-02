@@ -4,23 +4,26 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
 using Qi.Domain;
+using Qi.Text;
 
 namespace Ornament.Messages.Notification
 {
-    public abstract class MessageHeaderBase<T> : DomainObject<T, string> where T : DomainObject<T, string>
+    public class NotifyMessageTemplate : DomainObject<NotifyMessageTemplate, string>
     {
         private IDictionary<string, Content> _contents;
 
 
         /// <summary>
+        /// jsut for Nhibernate.
         /// </summary>
         /// <exception cref="ArgumentNullException">type or publisher are null</exception>
-        protected MessageHeaderBase()
+        protected NotifyMessageTemplate()
         {
         }
 
-        protected MessageHeaderBase(NotifyType notifyType)
+        public NotifyMessageTemplate(NotifyType notifyType)
         {
             if (notifyType == null)
                 throw new ArgumentNullException("notifyType");
@@ -45,6 +48,21 @@ namespace Ornament.Messages.Notification
         public virtual NotifyType Type { get; set; }
 
         /// <summary>
+        ///     如果是内置message，那么Name是不允许修改的
+        /// </summary>
+        public virtual bool Inside { get; set; }
+
+        /// <summary>
+        ///     Gets or sets Name of  message template.
+        /// </summary>
+        public virtual string Name { get; set; }
+
+        /// <summary>
+        ///     Gets or sets remark
+        /// </summary>
+        public virtual string Remark { get; set; }
+
+        /// <summary>
         /// </summary>
         /// <param name="language"></param>
         /// <returns></returns>
@@ -63,7 +81,7 @@ namespace Ornament.Messages.Notification
         protected virtual Content GetContent(User user)
         {
             if (Contents.Count == 0)
-                throw new ArgumentOutOfRangeException("Message do not have any content");
+                throw new ArgumentOutOfRangeException("Message do not have any content.");
 
             string lang = user.Language;
             if (String.IsNullOrEmpty(lang))
@@ -83,7 +101,6 @@ namespace Ornament.Messages.Notification
 
         private Content Get(string lang)
         {
-            
             if (Contents.ContainsKey(lang))
                 return GetContent(lang);
             if (lang.IndexOf("-", StringComparison.Ordinal) != -1)
@@ -93,6 +110,42 @@ namespace Ornament.Messages.Notification
                     return GetContent(lang);
             }
             return null;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="daoFactory"></param>
+        /// <param name="replaceVariabled"></param>
+        /// <param name="performers"></param>
+        public virtual void Publish(
+            IMemberShipFactory daoFactory,
+            CreateVariablesHandler replaceVariabled,
+            params IPerformer[] performers)
+        {
+            var targetuser = new HashSet<User>();
+            foreach (IPerformer performer in performers)
+            {
+                foreach (User user in performer.GetUsers(daoFactory))
+                    targetuser.Add(user);
+            }
+
+            var helper = new NamedFormatterHelper();
+            foreach (User u in targetuser)
+            {
+                Content content = GetContent(u);
+                Dictionary<string, string> variable = replaceVariabled(u);
+
+                var simpleMessage = new SimpleMessage(u)
+                    {
+                        Content = new Content
+                            {
+                                Language = content.Language,
+                                Subject = helper.Replace(content.Subject, variable),
+                                Value = helper.Replace(content.Value, variable)
+                            }
+                    };
+                Type.Send(simpleMessage);
+            }
         }
     }
 }

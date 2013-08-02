@@ -1,6 +1,5 @@
 ﻿using System;
 using Ornament.Messages.Config;
-using Ornament.Messages.Notification.Contents;
 using Qi.Domain;
 
 namespace Ornament.Messages.Notification
