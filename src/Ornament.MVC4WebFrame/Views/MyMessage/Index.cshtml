@@ -61,10 +61,13 @@
     <script type="text/javascript">
 
         seajs.use(["/models/pm.js"], function (pm) {
+
             $("[role=pmReplay]").on("click", function () {
                 var relativeUserId = $(this).attr("href").substr(1);
                 pm.Show("#pmEditor", relativeUserId, "@OrnamentContext.MemberShip.CurrentUser().Name");
+                return false;
             });
+
             $(".unRead").on("mouseover", function (e) {
                 var self = $(this);
                 $.get("@Url.Action("MakeRead")/" + $(this).attr("val"), function (d) {
@@ -72,6 +75,7 @@
                         self.removeClass("unRead").off("mouseover");
                     }
                 });
+                return false;
             });
 
         });

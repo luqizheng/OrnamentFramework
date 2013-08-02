@@ -16,6 +16,26 @@ define(function (require) {
             dd: $("<dd><div>" + chatItem.content + "</div></dd>")
         };
     };
+    function buildFrendList(friends,activeId) {
+        var result = {};
+        var sortedName = {};
+        $(friends).each(function () {
+            sortedName.push(this.group);
+            result[this.group] = {
+                id: this.id,
+                name: this.name,
+                memo: this.memo,
+            };
+        });
+
+        sortedName.sort();
+        var elements = [];
+        $(sortedName).each(function () {
+            elements.push("<li><a href='#" + this.id + "'>" + this.name + "</a></li>");
+        });
+        return elements.join("");
+    }
+    
     function pmDialog($dialog) {
         var self = this;
         this.lastTime = null;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -38,10 +37,10 @@ namespace Ornament.MVCWebFrame.Api.Core
             IUserDao dao = _memberShipFactory.CreateUserDao();
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
             User receiverUser = dao.Get(relativeUserId);
-            var msgDao = _factory.PersonalMessageDao;
+            IPersonalMessageDao msgDao = _factory.PersonalMessageDao;
             var result = new List<object>();
-            foreach (var a in msgDao.GetChat(currentUser, receiverUser, lastTime,
-                                                                   page ?? 0, 20))
+            foreach (PersonalMessage a in msgDao.GetChat(currentUser, receiverUser, lastTime,
+                                                         page ?? 0, 20))
             {
                 if (currentUser == a.Receiver)
                 {
@@ -49,12 +48,12 @@ namespace Ornament.MVCWebFrame.Api.Core
                 }
 
                 result.Add(new
-                {
-                    publisher = a.Publisher.Name,
-                    receiver = a.Receiver.Name,
-                    content = a.Content,
-                    createTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
-                });
+                    {
+                        publisher = a.Publisher.Name,
+                        receiver = a.Receiver.Name,
+                        content = a.Content,
+                        createTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                    });
             }
 
             return result;
@@ -85,7 +84,6 @@ namespace Ornament.MVCWebFrame.Api.Core
                     {
                         success = true
                     };
-                +
             }
             catch (Exception ex)
             {
@@ -98,7 +96,6 @@ namespace Ornament.MVCWebFrame.Api.Core
         {
             public string content { get; set; }
             public string userId { get; set; }
-
         }
     }
 }

@@ -1,18 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using FluentNHibernate.Mapping;
+using Ornament.MemberShip.Dao;
+using Ornament.Web;
+using Qi.Web.Http;
 
 namespace Ornament.MVCWebFrame.Api.Core
 {
+    [ApiSession]
     public class FriendsController : ApiController
     {
+        private readonly IMemberShipFactory _dao;
+
+        public FriendsController(IMemberShipFactory dao)
+        {
+            _dao = dao;
+        }
+
         // GET api/friends
         public IEnumerable<object> Get()
         {
-            return new string[] { "value1", "value2" };
+
+
+            return from friend in
+                       _dao.CreateFriendDao().GetFriends(OrnamentContext.MemberShip.CurrentUser())
+                   select new
+                       {
+                           id = friend.Relative.Id,
+                           name = friend.Relative.Name,
+                           memo = friend.Memo,
+                           @group = friend.Group
+                       };
         }
 
         // GET api/friends/5
@@ -22,12 +41,12 @@ namespace Ornament.MVCWebFrame.Api.Core
         }
 
         // POST api/friends
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/friends/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
