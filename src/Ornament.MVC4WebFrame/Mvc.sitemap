@@ -65,8 +65,6 @@
     </mvcSiteMapNode>
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false">
-
-
       <mvcSiteMapNode controller="Site" area="Settings" action="Index" title="Information"></mvcSiteMapNode>
       <mvcSiteMapNode controller="FileManager" area="Settings" action="Index" title="File Managers">
 
@@ -77,7 +75,10 @@
       <mvcSiteMapNode controller="TypeLayout" area="Docs" action="BaseType" title="BaseType"></mvcSiteMapNode>
       <mvcSiteMapNode controller="TypeLayout" area="Docs" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
     </mvcSiteMapNode>
-
+    
+    <mvcSiteMapNode title="基础数据设置" imageUrl="icon-indent-right">
+        <mvcSiteMapNode controller="Gymnasium" area="Badminton" action="Index" title="场馆管理"></mvcSiteMapNode>
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
 
 

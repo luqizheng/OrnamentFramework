@@ -618,6 +618,8 @@
     <Content Include="Areas\Messages\Views\Template\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
+    <Content Include="Areas\Badminton\Views\Gymnasium\Edit.cshtml" />
+    <Content Include="Areas\Badminton\Views\Gymnasium\Details.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -1043,6 +1045,7 @@
     <Content Include="App_GlobalResources\Mvc.sitemap.zh-CN.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Mvc.sitemap.zh-CN.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

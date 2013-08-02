@@ -17,9 +17,6 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
             _daoFactory = daoFactory;
         }
 
-        //
-        // GET: /Badminton/Gymnasium/
-
         public ActionResult Index(Pagination pagination)
         {
             if (pagination == null && pagination.PageSize != 1)
@@ -47,6 +44,33 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
                 _daoFactory.GymasiumDao().SaveOrUpdate(model);
                 return RedirectToAction("Index");
             }
+            return View(model);
+        }
+        [HttpPost, Session]
+        public ActionResult Delete(int id)
+        {
+            _daoFactory.GymasiumDao().Delete(_daoFactory.GymasiumDao().Load(id));
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return View(_daoFactory.GymasiumDao().Load(id));
+        }
+
+        [HttpPost, Session]
+        public ActionResult Edit(Gymnasium model)
+        {
+            if (ModelState.IsValid)
+            {
+                _daoFactory.GymasiumDao().SaveOrUpdate(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        public ActionResult Details(Gymnasium model)
+        {
             return View(model);
         }
     }
