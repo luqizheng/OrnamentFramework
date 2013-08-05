@@ -10,7 +10,7 @@
 <div class="widget">
     <div class="body well">
 
-        <form method="POST" class="form-horizontal">
+        <form method="POST" class="form-horizontal" action="@Url.Action("Save")">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 

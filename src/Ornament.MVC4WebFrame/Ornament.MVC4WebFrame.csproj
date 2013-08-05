@@ -237,6 +237,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
     <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
+    <Compile Include="Areas\Badminton\Controllers\YardController.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Docs\Controllers\TypeLayoutController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
@@ -617,6 +618,7 @@
     <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Edit.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Details.cshtml" />
+    <Content Include="Areas\Badminton\Views\Yard\Create.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

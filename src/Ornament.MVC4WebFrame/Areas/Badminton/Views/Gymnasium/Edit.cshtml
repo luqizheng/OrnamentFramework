@@ -9,24 +9,38 @@
 
 <div class="widget">
     <div class="body well">
+        <div class="tabbable">
+            <!-- default tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab3" data-toggle="tab"><i class="icon-cog"></i>Section 1</a></li>
+                <li><a href="#tab4" data-toggle="tab"><i class="icon-heart"></i>Section 2</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab3">
+                    <form method="POST" class="form-horizontal" action="@Url.Action("Save")">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Id)
 
-        <form method="POST" class="form-horizontal">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
+                        @Html.EditorFor(model => model.Name)
 
+                        @Html.EditorFor(model => model.Phone)
 
-            @Html.EditorFor(model => model.Name)
+                        @Html.EditorFor(model => model.Address)
 
-            @Html.EditorFor(model => model.Phone)
-
-            @Html.EditorFor(model => model.Address)
-
-            @Html.EditorFor(model => model.Remarks)
-            <div class="form-actions">
-                <button class="btn btn-primary">@Basic.Edit</button>
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                        @Html.EditorFor(model => model.Remarks)
+                        <div class="form-actions">
+                            <button class="btn btn-primary">@Basic.Edit</button>
+                            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="tab4">
+                    <a href="@Url.Action("Create", "Yard", new { gymasiumId = Model.Id })">Create</a>
+                </div>
             </div>
-        </form>
+        </div>
+
     </div>
 </div>
 

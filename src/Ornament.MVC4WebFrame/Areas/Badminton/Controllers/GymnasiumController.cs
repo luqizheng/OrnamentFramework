@@ -36,16 +36,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
             return View();
         }
 
-        [HttpPost, Session]
-        public ActionResult Create(Gymnasium model)
-        {
-            if (ModelState.IsValid)
-            {
-                _daoFactory.GymasiumDao().SaveOrUpdate(model);
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
+
         [HttpPost, Session]
         public ActionResult Delete(int id)
         {
@@ -59,14 +50,16 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         }
 
         [HttpPost, Session]
-        public ActionResult Edit(Gymnasium model)
+        public ActionResult Save(Gymnasium model)
         {
             if (ModelState.IsValid)
             {
                 _daoFactory.GymasiumDao().SaveOrUpdate(model);
                 return RedirectToAction("Index");
             }
-            return View(model);
+            if (model.Id != 0)
+                return View("Edit", model);
+            return View("Create", model);
         }
 
         public ActionResult Details(Gymnasium model)
