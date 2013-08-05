@@ -1,94 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Web.Optimization;
-using Microsoft.Ajax.Utilities;
 
 namespace Ornament.Web.Bundles
 {
+    /// <summary>
+    /// </summary>
     public class SeajsBundle : ScriptBundle
     {
+        private readonly string _virtualPath;
+
         public SeajsBundle(string virtualPath)
             : base(virtualPath)
         {
-            this.Transforms.Clear();
+            _virtualPath = virtualPath.TrimStart('~');
+            Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
-                this.Transforms.Add(new SeajsMinify());
+                Transforms.Add(new SeajsMinify(virtualPath));
             }
-            
         }
 
         public SeajsBundle(string virtualPath, string cdnPath)
             : base(virtualPath, cdnPath)
         {
-            this.Transforms.Clear();
+            Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
-                this.Transforms.Add(new SeajsMinify());
+                Transforms.Add(new SeajsMinify(_virtualPath));
             }
         }
 
-    }
-
-    public class SeajsMinify : IBundleTransform
-    {
-
-        // Fields
-        internal static readonly JsMinify Instance = new JsMinify();
-        internal static string JsContentType = "text/javascript";
-
-        // Methods
-        internal static void GenerateErrorResponse(BundleResponse bundle, IEnumerable<object> errors)
+        public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
+            IEnumerable<BundleFile> bundleFiles)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("/* ");
-            builder.Append("Error").Append("\r\n");
-            foreach (object obj2 in errors)
-            {
-                builder.Append(obj2.ToString()).Append("\r\n");
-            }
-            builder.Append(" */\r\n");
-            builder.Append(bundle.Content);
-            bundle.Content = builder.ToString();
-        }
+            var fileInfo = new FileInfo(_virtualPath);
 
-        public virtual void Process(BundleContext context, BundleResponse response)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-            if (response == null)
-            {
-                throw new ArgumentNullException("response");
-            }
-            if (!context.EnableInstrumentation)
-            {
-                Minifier minifier = new Minifier();
-                var codeSettings = new CodeSettings
-                {
-                    EvalTreatment = EvalTreatment.MakeImmediateSafe,
-                    PreserveImportantComments = false,
-                };
-                codeSettings.AddNoAutoRename("require");
-                codeSettings.AddNoAutoRename("exports");
-                codeSettings.AddNoAutoRename("module");
-                string str = minifier.MinifyJavaScript(response.Content, codeSettings);
-                if (minifier.ErrorList.Count > 0)
-                {
-                    GenerateErrorResponse(response, minifier.ErrorList);
-                }
-                else
-                {
-                    response.Content = str;
-                }
-            }
-            response.ContentType = JsContentType;
+            int lastPost = _virtualPath.LastIndexOf('/');
+            string path = _virtualPath.Substring(0, lastPost);
+            var seajs = new CombineSeajs(bundleContent, fileInfo.Name, path, "/scripts/models/base/");
+            BundleResponse a = base.ApplyTransforms(context, seajs.Processs(), bundleFiles);
+            return a;
         }
     }
-
-
 }

@@ -18,7 +18,7 @@
 
     <script type="text/javascript">
         var updateTable;
-        seajs.use(["/models/pm.js", '/models/user',
+        seajs.use(["/models/pm.js", '/models/membership.js',
                 'tmpl',
                 "/scripts/json2.js", 'select2', 'valid'], function (pm, user) {
 
@@ -59,7 +59,7 @@
                         });
                     });
                     //User Search;
-                    user.typeHeader("#searchContent");
+                    user.typeHeader.user("#searchContent");
                 });
 
 

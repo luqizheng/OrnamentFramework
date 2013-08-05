@@ -27,10 +27,9 @@
 </div>
 
 <script type="text/javascript">
-    seajs.use("/models/org", function (r) {
+    seajs.use("/models/membership.js", function (r) {
         var d = @Html.Raw(JsonHelper.ToJson(Selection));
-        
-        r.select2("#@Html.Id("")");
+        r.select2.org("#@Html.Id("")",d);
         
     });
 </script>

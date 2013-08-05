@@ -29,7 +29,7 @@ namespace Ornament.Web
         {
             get
             {
-                if (!Current.Clickable || this.SubMenus.Count != 0)
+                if (!Current.Clickable)
                 {
                     return "#";
                 }

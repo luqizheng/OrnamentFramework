@@ -10,7 +10,7 @@
             deps: ['jquery'],
             exports: "jQuery"
         },
-        
+
         bootstrap: {
             src: "/bundles/bootstrap.js",
             deps: ['jquery'],
@@ -82,7 +82,7 @@
         select2: {
             src: "/scripts/plugins/forms/jquery.select2.min.js",
             deps: ["jquery"],
-            exports: "jQuery "
+            exports: "jQuery"
         },
         endlessScroll: {
             src: "/Scripts/jquery.endless-scroll.js",
@@ -97,7 +97,7 @@
             deps: ["jquery"]
         },
         pm: {
-            src:"/models/pm.js", deps: ["bootstrap"]
+            src: "/models/pm.js", deps: ["bootstrap"]
         },
         wizard: {
             src: "/Scripts/plugins/forms/jquery.form.wizard.js",
