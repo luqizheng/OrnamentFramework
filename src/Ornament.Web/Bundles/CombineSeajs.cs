@@ -12,8 +12,8 @@ namespace Ornament.Web.Bundles
         private readonly string _content;
         private readonly string _id;
         private readonly string _modelsbaseFilepath;
+        private readonly string _rootPath;
         private List<string> _existDefined;
-        private string _rootPath;
 
         /// <summary>
         /// </summary>
@@ -40,17 +40,20 @@ namespace Ornament.Web.Bundles
         /// <param name="rootPath">主模块的路径</param>
         /// <param name="existDefined">已经被加载过的模块</param>
         private CombineSeajs(string content, string id, string modelsbaseFilepath, string rootPath,
-                             List<string> existDefined)
+            List<string> existDefined)
             : this(content, id, rootPath, modelsbaseFilepath)
         {
             _existDefined = existDefined;
-
         }
+
         public string ModelId
         {
             get { return Path.Combine(_rootPath, _id).Replace("\\", "/"); }
         }
-        public List<string> ExistDefined
+        /// <summary>
+        /// 获取已经合并过的文件
+        /// </summary>
+        public List<string> CombinedFiles
         {
             get { return _existDefined ?? (_existDefined = new List<string>()); }
         }
@@ -59,13 +62,13 @@ namespace Ornament.Web.Bundles
         public string Processs()
         {
             string[] importPathes;
-            var content = _content;
+            string content = _content;
             IEnumerable<string> apis = CollectRequire(ref content, out importPathes);
             var dependcyFiles = new List<string>();
             string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", ModelId, String.Join("\",\"", importPathes));
             foreach (string dependcyFile in apis)
             {
-                if (dependcyFile.StartsWith(_modelsbaseFilepath) && !ExistDefined.Contains(dependcyFile))
+                if (dependcyFile.StartsWith(_modelsbaseFilepath) && !CombinedFiles.Contains(dependcyFile))
                 {
                     dependcyFiles.Add(dependcyFile);
                 }
@@ -77,33 +80,35 @@ namespace Ornament.Web.Bundles
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="content"></param>
+        /// <param name="importRequirePath"></param>
         /// <returns>return physica path of file store.</returns>
         private IEnumerable<string> CollectRequire(ref string content, out string[] importRequirePath)
         {
-            List<string> replaceRequire = new List<string>();
-            var phyPathes = new List<string>();
+            var importRequirePathList = new List<string>();
+            var modelRequireFiles = new List<string>();
             content = Regex.Replace(content, @"require\((.+?)\)", s =>
+            {
+                string requireFile = s.Groups[1].Value.ToLower().TrimStart('\"').TrimEnd('\"');
+                bool isModelFile = requireFile.StartsWith(_modelsbaseFilepath);
+                if (isModelFile) //model file 需要合并
                 {
-                    var phyPath = s.Groups[1].Value.ToLower().TrimStart('\"').TrimEnd('\"');
-                    if (phyPath.StartsWith(this._modelsbaseFilepath))
-                    {
-                        phyPathes.Add(phyPath);
-                        var file = new FileInfo(phyPath);
-                        var clientRequrePath = Path.Combine(_rootPath, file.Name);
-                        replaceRequire.Add(clientRequrePath);
-                        return s.Value.ToLower().Replace(phyPath, clientRequrePath);
-                    }
-                    return s.Value;
-                });
+                    modelRequireFiles.Add(requireFile);
+                    var file = new FileInfo(requireFile);
+                    string clientRequrePath = Path.Combine(_rootPath, file.Name);
+                    importRequirePathList.Add(clientRequrePath);
+                    return s.Value.ToLower().Replace(requireFile, clientRequrePath);
+                }
+                importRequirePathList.Add(requireFile); //普通requirefile，如Jquery等plugin，直接放到数组上面，无需要替换
+                return s.Value;
+            });
 
-            importRequirePath = replaceRequire.ToArray();
-            return phyPathes;
+            importRequirePath = importRequirePathList.ToArray();
+            return modelRequireFiles;
         }
 
-        private StringBuilder BuidlChildItem(IList<string> files, string modelsbaseFilepath)
+        private StringBuilder BuidlChildItem(IEnumerable<string> files, string modelsbaseFilepath)
         {
             var result = new StringBuilder();
             var queue = new Queue<string>(files);
@@ -114,9 +119,9 @@ namespace Ornament.Web.Bundles
                 string id = (new FileInfo(file)).Name;
                 using (var reader = new StreamReader(file))
                 {
-                    var r = new CombineSeajs(reader.ReadToEnd(), id, modelsbaseFilepath, _rootPath, ExistDefined);
+                    var r = new CombineSeajs(reader.ReadToEnd(), id, modelsbaseFilepath, _rootPath, CombinedFiles);
                     result.Append(r.Processs());
-                    this.ExistDefined.Add(physicPath);
+                    CombinedFiles.Add(physicPath);
                 }
             }
             return result;

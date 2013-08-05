@@ -1,10 +1,10 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles
 {
     /// <summary>
-    /// 
     /// </summary>
     public class SeajsBundle : ScriptBundle
     {
@@ -31,14 +31,15 @@ namespace Ornament.Web.Bundles
             }
         }
 
-        public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent, System.Collections.Generic.IEnumerable<BundleFile> bundleFiles)
+        public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
+            IEnumerable<BundleFile> bundleFiles)
         {
             var fileInfo = new FileInfo(_virtualPath);
 
             int lastPost = _virtualPath.LastIndexOf('/');
-            var path = _virtualPath.Substring(0, lastPost);
-            CombineSeajs seajs = new CombineSeajs(bundleContent, fileInfo.Name, path, "/scripts/models/base/");
-            var a = base.ApplyTransforms(context, seajs.Processs(), bundleFiles);
+            string path = _virtualPath.Substring(0, lastPost);
+            var seajs = new CombineSeajs(bundleContent, fileInfo.Name, path, "/scripts/models/base/");
+            BundleResponse a = base.ApplyTransforms(context, seajs.Processs(), bundleFiles);
             return a;
         }
     }
