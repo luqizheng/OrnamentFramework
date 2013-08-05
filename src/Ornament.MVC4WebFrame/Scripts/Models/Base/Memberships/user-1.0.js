@@ -1,5 +1,5 @@
 ﻿define(function (require) {
-    var api = require("/models/util/select2Helper.js");
+    var api = require("/scripts/models/base/util/select2Helper.js");
     var userUrl = "/api/Users";
     var secrityUrl = "/api/security";
     return {

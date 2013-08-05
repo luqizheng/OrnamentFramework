@@ -28,8 +28,8 @@
 </div>
 
 <script type="text/javascript">
-    seajs.use("/models/role", function(r) {
+    seajs.use("/models/membership.js", function(r) {
         var d = @Html.Raw(JsonHelper.ToJson(selected));
-        r.select2("#@Html.Id("")",d);
+        r.select2.role("#@Html.Id("")",d);
     });
 </script>

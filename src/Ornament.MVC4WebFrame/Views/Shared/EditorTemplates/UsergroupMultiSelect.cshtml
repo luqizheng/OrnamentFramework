@@ -14,13 +14,13 @@
 <div class="control-group">
     @Html.Label("", display, new {@class = "control-label"})
     <div class="controls">
-        @Html.Hidden("", String.Join(",", from role in ugs select role.Id), new {style = "width:100%"})        
+        @Html.Hidden("", String.Join(",", from role in ugs select role.Id), new {style = "width:100%"})
     </div>
 
     <script type="text/javascript">
-        seajs.use("/models/userGroup", function(r) {
+        seajs.use("/models/membership.js", function(r) {
             var d = @Html.Raw(JsonHelper.ToJson(selected));
-            r.select2("#@Html.Id("")", d);
+            r.select2.userGroup("#@Html.Id("")", d);
         });
     </script>
 </div>

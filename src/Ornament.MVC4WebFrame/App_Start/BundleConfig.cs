@@ -11,7 +11,7 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             BundleTable.EnableOptimizations = false;
             ;
-            bundles.UseCdn = false;
+            bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
                     GlobalStyle,
@@ -43,9 +43,9 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(
                 new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
 
-            bundles.Add(new Bundle("~/bundles/inputmask.js", new JsMinify()).Include("~/Scripts/jquery.inputmask/*.js")
-                                                                            .Include(
-                                                                                "~/Scripts/compatibles/inputMask-{version}.js"));
+            //input forms;
+            bundles.Add(new Bundle("~/bundles/inputmask.js", new JsMinify()).Include("~/Scripts/plugins/forms/jquery.inputmask/*.js")
+                                                                            .Include("~/Scripts/compatibles/inputMask-{version}.js"));
 
             bundles.Add(new Bundle("~/bundles/jqueryval.js", new JsMinify()).Include("~/Scripts/jquery.validate*"));
             bundles.Add(new ScriptBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
@@ -79,21 +79,31 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void BizRelative(BundleCollection bundles)
         {
             //Memberships
-            bundles.Add(new SeajsBundle("~/models/user.js").Include("~/Scripts/Models/Memberships/user-{version}.js"));
-            bundles.Add(new SeajsBundle("~/models/role.js").Include("~/Scripts/Models/Memberships/role-{version}.js"));
+            /*bundles.Add(new SeajsBundle("~/models/user.js").Include("~/Scripts/Models/Base/Memberships/user-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/role.js").Include("~/Scripts/Models/Base/Memberships/role-{version}.js"));
             bundles.Add(
-                new SeajsBundle("~/models/userGroup.js").Include("~/Scripts/Models/Memberships/userGroup-{version}.js"));
-            bundles.Add(new SeajsBundle("~/models/org.js").Include("~/Scripts/Models/Memberships/org-{version}.js"));
+                new SeajsBundle("~/models/userGroup.js").Include("~/Scripts/Models/Base/Memberships/userGroup-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/org.js").Include("~/Scripts/Models/Base/Memberships/org-{version}.js"));
             //bundles.Add(new SeajsBundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
 
-            //PersonalMessage
-            bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Messages/pm-{version}.js"));
+            bundles.Add(new SeajsBundle("~/models/ui/membership.js")
+                .Include(@"~/Scripts/Models/Biz/Ui/MemberShip.js"));
 
-            bundles.Add(new SeajsBundle("~/models/personal.js").Include("~/Scripts/Models/Memberships/personal-{version}.js"));
+
+            //PersonalMessage
+            bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Base/Messages/pm-{version}.js"));
+
+            bundles.Add(new SeajsBundle("~/models/personal.js").Include("~/Scripts/Models/Base/Memberships/personal-{version}.js"));
 
             //Util
             bundles.Add(new SeajsBundle("~/models/util/select2Helper.js")
-                            .Include("~/Scripts/Models/Util/select2Helper-1.0.js"));
+                            .Include("~/Scripts/Models/Base/Util/select2Helper-1.0.js"));*/
+
+
+            bundles.Add(new SeajsBundle("~/models/membership.js").Include(@"~/Scripts/Models/Biz/Ui/MemberShip.js"));
+            bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Base/Messages/pm-{version}.js"));
+
+
         }
 
         private static void Utility(BundleCollection bundles)
