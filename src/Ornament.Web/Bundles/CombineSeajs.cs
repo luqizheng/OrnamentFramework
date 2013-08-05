@@ -25,8 +25,6 @@ namespace Ornament.Web.Bundles
         {
             _id = id;
             _modelsbaseFilepath = modelsbaseFilepath;
-            if (!_modelsbaseFilepath.StartsWith("\""))
-                _modelsbaseFilepath = "\"" + _modelsbaseFilepath;
             _rootPath = path;
             if (!_rootPath.EndsWith("/"))
                 _rootPath += "/";
@@ -61,7 +59,8 @@ namespace Ornament.Web.Bundles
         public string Processs()
         {
             string[] importPathes;
-            IEnumerable<string> apis = CollectRequire(_content, out importPathes);
+            var content = _content;
+            IEnumerable<string> apis = CollectRequire(ref content, out importPathes);
             var dependcyFiles = new List<string>();
             string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", ModelId, String.Join("\",\"", importPathes));
             foreach (string dependcyFile in apis)
@@ -72,8 +71,8 @@ namespace Ornament.Web.Bundles
                 }
             }
 
-            StringBuilder childContent = BuidlChildItem(dependcyFiles, importPathes, _modelsbaseFilepath);
-            childContent.Insert(0, Regex.Replace(_content, @"define\(", match => newDefined));
+            StringBuilder childContent = BuidlChildItem(dependcyFiles, _modelsbaseFilepath);
+            childContent.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
             return childContent.ToString();
         }
 
@@ -82,25 +81,29 @@ namespace Ornament.Web.Bundles
         /// </summary>
         /// <param name="content"></param>
         /// <returns>return physica path of file store.</returns>
-        private IEnumerable<string> CollectRequire(string content, out string[] importRequirePath)
+        private IEnumerable<string> CollectRequire(ref string content, out string[] importRequirePath)
         {
+            List<string> replaceRequire = new List<string>();
+            var phyPathes = new List<string>();
+            content = Regex.Replace(content, @"require\((.+?)\)", s =>
+                {
+                    var phyPath = s.Groups[1].Value.ToLower().TrimStart('\"').TrimEnd('\"');
+                    if (phyPath.StartsWith(this._modelsbaseFilepath))
+                    {
+                        phyPathes.Add(phyPath);
+                        var file = new FileInfo(phyPath);
+                        var clientRequrePath = Path.Combine(_rootPath, file.Name);
+                        replaceRequire.Add(clientRequrePath);
+                        return s.Value.ToLower().Replace(phyPath, clientRequrePath);
+                    }
+                    return s.Value;
+                });
 
-            MatchCollection s = Regex.Matches(content, @"require\((.+?)\)");
-            var result = new List<string>();
-            for (int i = 0; i < s.Count; i++)
-            {
-                result.Add(s[i].Groups[1].Value.ToLower().TrimStart('\"').TrimEnd('\"'));
-            }
-            importRequirePath = new string[result.Count];
-            for (int i = 0; i < importRequirePath.Length; i++)
-            {
-                var file = new FileInfo(result[i]);
-                importRequirePath[i] = Path.Combine(_rootPath, file.Name);
-            }
-            return result;
+            importRequirePath = replaceRequire.ToArray();
+            return phyPathes;
         }
 
-        private StringBuilder BuidlChildItem(IList<string> files, string[] referenceFilePath, string modelsbaseFilepath)
+        private StringBuilder BuidlChildItem(IList<string> files, string modelsbaseFilepath)
         {
             var result = new StringBuilder();
             var queue = new Queue<string>(files);

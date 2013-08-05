@@ -28,8 +28,8 @@
 
 <script type="text/javascript">
     seajs.use("/models/membership.js", function (r) {
-        @*var d = @Html.Raw(JsonHelper.ToJson(Selection));*@
-        r.select2.org("#@Html.Id("")");
+        var d = @Html.Raw(JsonHelper.ToJson(Selection));
+        r.select2.org("#@Html.Id("")",d);
         
     });
 </script>
