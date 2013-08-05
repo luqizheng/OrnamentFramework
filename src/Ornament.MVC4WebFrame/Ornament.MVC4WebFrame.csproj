@@ -630,7 +630,6 @@
     <Content Include="Scripts\Models\Base\Memberships\userGroup-1.0.js" />
     <Content Include="Scripts\Models\Base\Messages\notify-1.0.js" />
     <Content Include="Scripts\Models\Base\Messages\pm-1.0.js" />
-    <Content Include="Scripts\Models\Biz\JavaScript1.js" />
     <Content Include="Scripts\Models\Biz\Ui\MemberShip.js" />
     <Content Include="Scripts\Models\Base\Util\select2Helper.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask-2.2.66.js" />

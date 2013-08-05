@@ -12,6 +12,11 @@
             user:function(selector,data){ user.select2(selector,data);},
             role: function (selector, data) { role.select2(selector, data); },
             userGroup: function (selector, data) { userGroup.select2(selector, data); },
+        },
+        typeHeader: {
+            user:function(selector) {
+                user.typeHeader(selector);
+            }
         }
     };
 });
