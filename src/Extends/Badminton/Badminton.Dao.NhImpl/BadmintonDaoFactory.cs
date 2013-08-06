@@ -23,11 +23,6 @@ namespace Badminton.Dao.NhImpl
             return new YardDao();
         }
 
-        public IYardTypeDao YardTypeDao()
-        {
-            return new YardTypeDao();
-        }
-
         public ICardDao CardDao()
         {
             throw new NotImplementedException();

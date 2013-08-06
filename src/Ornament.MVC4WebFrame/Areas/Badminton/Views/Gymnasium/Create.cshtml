@@ -1,5 +1,5 @@
 ﻿@using Resources
-@model Badminton.Gymnasium
+@model Ornament.MVCWebFrame.Areas.Badminton.Models.GymnasiumViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -15,13 +15,13 @@
             @Html.ValidationSummary(true)
 
 
-            @Html.EditorFor(model => model.Name)
+            @Html.EditorFor(model => model.Gymnasium.Name)
 
-            @Html.EditorFor(model => model.Phone)
+            @Html.EditorFor(model => model.Gymnasium.Phone)
 
-            @Html.EditorFor(model => model.Address)
+            @Html.EditorFor(model => model.Gymnasium.Address)
 
-            @Html.EditorFor(model => model.Remarks)
+            @Html.EditorFor(model => model.Gymnasium.Remarks)
             <div class="form-actions">
                 <button class="btn btn-primary">@Basic.Create</button>
                 <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>

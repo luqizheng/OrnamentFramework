@@ -1,20 +1,21 @@
-﻿using Qi.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using Qi.Domain;
 
 namespace Badminton
 {
     /// <summary>
-    ///     片场，场馆下属的每一篇
+    /// 场地，场馆下属的每一片场地
     /// </summary>
     public class Yard : DomainObject<Yard, int>
     {
-        /// <summary>
-        ///     片场
-        /// </summary>
+        
+        [Display(Name="名称")]
         public virtual string Name { get; set; }
 
-        /// <summary>
-        /// </summary>
-        public virtual YardType Type { get; set; }
+        [Display(Name = "单价")]
+        public virtual decimal Price { get; set; }
+        [Display(Name = "描述")]
+        public virtual string Remarks { get; set; }
 
     }
 }

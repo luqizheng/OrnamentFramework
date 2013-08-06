@@ -11,7 +11,7 @@ namespace Badminton
     {
         private ISet<Yard> _yards;
 
-        [Display(Name = "名字")]
+        [Display(Name = "名称")]
         public virtual string Name { get; set; }
 
         [Display(Name = "联系电话")]

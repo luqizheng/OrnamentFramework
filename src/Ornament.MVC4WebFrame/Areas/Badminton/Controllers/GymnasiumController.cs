@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Badminton;
 using Badminton.Dao;
+using Ornament.MVCWebFrame.Areas.Badminton.Models;
 using Ornament.Web;
 using Qi.Web.Mvc;
 
@@ -36,8 +37,6 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
             return View();
         }
 
-
-        [HttpPost, Session]
         public ActionResult Delete(int id)
         {
             _daoFactory.GymasiumDao().Delete(_daoFactory.GymasiumDao().Load(id));
@@ -46,25 +45,21 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View(_daoFactory.GymasiumDao().Load(id));
+            var gymasium = _daoFactory.GymasiumDao().Load(id);
+            return View(new GymnasiumViewModel{Gymnasium=gymasium});
         }
 
         [HttpPost, Session]
-        public ActionResult Save(Gymnasium model)
+        public ActionResult Save(GymnasiumViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _daoFactory.GymasiumDao().SaveOrUpdate(model);
+                _daoFactory.GymasiumDao().SaveOrUpdate(model.Gymnasium);
                 return RedirectToAction("Index");
             }
-            if (model.Id != 0)
+            if (model.Gymnasium.Id != 0)
                 return View("Edit", model);
             return View("Create", model);
-        }
-
-        public ActionResult Details(Gymnasium model)
-        {
-            return View(model);
         }
     }
 }

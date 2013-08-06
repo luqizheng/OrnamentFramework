@@ -74,10 +74,8 @@
     <Compile Include="Mappings\Consumableses\ModelMapping.cs" />
     <Compile Include="Mappings\StockHistories\StockHistoryMapping.cs" />
     <Compile Include="Mappings\YardMapping.cs" />
-    <Compile Include="Mappings\YardTypeMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YardDao.cs" />
-    <Compile Include="YardTypeDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">

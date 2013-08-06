@@ -4,7 +4,6 @@
     {
         IGymnasiumDao GymasiumDao();
         IYardDao YardDao();
-        IYardTypeDao YardTypeDao();
         ICardDao CardDao();
         IActivityDao ActivityDao();
         IClassConsumablesDao ClassConsumablesDao();

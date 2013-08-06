@@ -63,7 +63,6 @@
     <Compile Include="Dao\IConsumablesHistoryDao.cs" />
     <Compile Include="Dao\IGymnasiumDao.cs" />
     <Compile Include="Dao\IYardDao.cs" />
-    <Compile Include="Dao\IYardTypeDao.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Gymnasium.cs" />
     <Compile Include="Dao\ICardDao.cs" />
@@ -83,7 +82,6 @@
     <Compile Include="StockHistories\StockHistory.cs" />
     <Compile Include="Consumableses\VirtualConsumables.cs" />
     <Compile Include="Yard.cs" />
-    <Compile Include="YardType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
