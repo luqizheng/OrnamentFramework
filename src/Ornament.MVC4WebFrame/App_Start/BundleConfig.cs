@@ -32,11 +32,12 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void SeajsLib(BundleCollection bundles)
         {
             bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui.js")
-                            .Include("~/Scripts/jquery-ui-{version}.js")
-                            .Include("~/Scripts/compatibles/jqueryui-{version}.js"));
+                .Include("~/Scripts/jquery-ui-{version}.js")
+                .Include("~/Scripts/compatibles/jqueryui-{version}.js"));
         }
 
         private static void JQueryRelative(BundleCollection bundles)
@@ -49,14 +50,13 @@ namespace Ornament.MVCWebFrame.App_Start
                 "~/Scripts/plugins/forms/jquery.inputmask/*.js")
                                                                             .Include(
                                                                                 "~/Scripts/compatibles/inputMask-{version}.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jquery.collapsible.js").Include("~/scripts/plugin/ui/jquery.collapsible.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryval.js").Include("~/Scripts/jquery.validate*"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));
 
-            bundles.Add(new Bundle("~/bundles/jqueryval.js", new JsMinify()).Include("~/Scripts/jquery.validate*"));
-            bundles.Add(new ScriptBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
-            bundles.Add(new ScriptBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));
-            //bundles.Add(new ScriptBundle("~/bundles/multiChoice.js").Include("~/scripts/jQuery.multiChoice.js"));
-            bundles.Add(new ScriptBundle("~/bundles/periodDailog.js").Include("~/scripts/periodDailog/*.js"));
-            //bundles.Add(new Bundle("~/bundles/dialog.js", new JsMinify()).Include("~/scripts/dialogs/*.js"));
-
+            
+            
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
@@ -65,16 +65,17 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(
                 new Bundle("~/bundles/toDictionary.js", new JsMinify()).Include("~/scripts/jquery.toDictionary.js"));
 
-
-            bundles.Add(new ScriptBundle("~/bundles/easytabs.js").Include("~/Scripts/plugins/ui/jquery.easytabs.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jquery.uniform.js").Include("~/Scripts/plugins/ui/jquery.uniform.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jquery.easytabs.js")
+                .Include("~/Scripts/plugins/ui/jquery.easytabs.js"));
             //form
-            bundles.Add(new ScriptBundle("~/bundles/form.js").Include("~/Scripts/plugins/forms/jquery.form.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/form.js").Include("~/Scripts/plugins/forms/jquery.form.js"));
             bundles.Add(
-                new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
-            bundles.Add(new ScriptBundle("~/bundles/jgrowl.js").Include("~/Scripts/plugins/ui/jquery.jgrowl.js"));
+                new JQueryPluginSeajsBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jgrowl.js").Include("~/Scripts/plugins/ui/jquery.jgrowl.js"));
 
             //time picker ;
-            bundles.Add(new ScriptBundle("~/bundles/timepicker.js")
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/timepicker.js")
                             .Include("~/Scripts/plugins/ui/jquery.timepicker-{version}.js")
                             .Include("~/Scripts/compatibles/timePicker-{version}.js"));
         }

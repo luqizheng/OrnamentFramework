@@ -35,7 +35,7 @@ namespace Ornament.Web.Bundles
         /// <param name="rootPath">主模块的路径</param>
         /// <param name="existDefined">已经被加载过的模块</param>
         private CombineSeajs(string id, string modelsbaseFilepath, string rootPath,
-                             List<string> existDefined)
+            List<string> existDefined)
             : this(id, rootPath, modelsbaseFilepath)
         {
             _existDefined = existDefined;
@@ -84,20 +84,20 @@ namespace Ornament.Web.Bundles
             var importRequirePathList = new List<string>();
             var modelRequireFiles = new List<string>();
             content = Regex.Replace(content, @"require\((.+?)\)", s =>
+            {
+                string requireFile = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
+                bool isModelFile = requireFile.StartsWith(_modelsbaseFilepath);
+                if (isModelFile) //model file 需要合并
                 {
-                    string requireFile = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
-                    bool isModelFile = requireFile.StartsWith(_modelsbaseFilepath);
-                    if (isModelFile) //model file 需要合并
-                    {
-                        modelRequireFiles.Add(requireFile);
-                        var file = new FileInfo(requireFile);
-                        string clientRequrePath = Path.Combine(_rootPath, file.Name);
-                        importRequirePathList.Add(clientRequrePath);
-                        return s.Value.ToLower().Replace(requireFile, clientRequrePath);
-                    }
-                    importRequirePathList.Add(requireFile); //普通requirefile，如Jquery等plugin，直接放到数组上面，无需要替换
-                    return s.Value;
-                });
+                    modelRequireFiles.Add(requireFile);
+                    var file = new FileInfo(requireFile);
+                    string clientRequrePath = Path.Combine(_rootPath, file.Name);
+                    importRequirePathList.Add(clientRequrePath);
+                    return s.Value.ToLower().Replace(requireFile, clientRequrePath);
+                }
+                importRequirePathList.Add(requireFile); //普通requirefile，如Jquery等plugin，直接放到数组上面，无需要替换
+                return s.Value;
+            });
 
             importRequirePath = importRequirePathList.ToArray();
             return modelRequireFiles;

@@ -1,13 +1,13 @@
 ﻿/// <reference path="jquery-1.9.1.js" />
-define("/scripts/_applayout.js", ["jquery"], function (require) {
+/// <reference path="plugins/ui/jquery.easytabs.min.js" />
+define(function (require) {
 
-    var jQuery = require('jquery');
-    
-    require("/scripts/plugins/ui/jquery.easytabs.js");
+    var $ = require("/bundles/jquery.js");
+    var a = require("/bundles/jquery.easytabs.js");
     require("collapsible")($);
     require("bootstrap")($);
     require("uniform")($);
-    
+
 
     $(".styled").uniform({ radioClass: 'choice' });
     $("#mainMenu > li.active > ul").attr("style", "");

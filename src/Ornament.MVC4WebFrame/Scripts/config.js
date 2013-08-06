@@ -1,16 +1,16 @@
 ﻿seajs.config({
     alias: {
-        "jquery": "/bundles/jquery.js",
+        "jquery": { src: "/bundles/jquery.js" },
         jqueryui: "/bundles/jqueryui.js",
         bootstrap: "/bundles/bootstrap.js",
-        "easytabs": "/scripts/plugins/ui/jquery.easytabs.js",
+        "easytabs": "/bundles/jquery.easytabs.js",
         elfinder: "/Scripts/plugins/ui/jquery.elfinder.js",
         form: "/scripts/plugins/forms/jquery.form.js",
         tmpl: "/bundles/tmpl.js",
         unobtrusive: "/bundles/unobtrusive.js",
         collapsible: "/bundles/collapsible.js",
         inputmask: "/bundles/inputmask",//make sure it's endwith "#"
-        uniform: "/scripts/plugins/forms/jquery.uniform.min.js",
+        "uniform": "/bundles/jquery.uniform.js",
         jgrowl: "/bundles/jgrowl.js",
         validation: "/bundles/jqueryval.js",
         valid: "/scripts/compatibles/valid.js",
