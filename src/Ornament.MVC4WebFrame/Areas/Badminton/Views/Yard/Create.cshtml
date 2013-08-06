@@ -1,11 +1,14 @@
+
 ﻿@model Badminton.Yard
 
 @{
+
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
 
 <h2>Create</h2>
+
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -27,4 +30,3 @@
         </p>
     </fieldset>
 }
-

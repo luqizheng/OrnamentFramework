@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Badminton;
 using Badminton.Dao;
 using Ornament.MVCWebFrame.Areas.Badminton.Models;
 using Qi.Web.Mvc;
+
 
 namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
 {
@@ -14,6 +14,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
     {
         //
         // GET: /Badminton/Yard/
+
         private readonly IBadmintonDaoFactory _daoFactory;
 
         public ActionResult Create()
@@ -27,6 +28,12 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
             {
                 _daoFactory.YardDao().SaveOrUpdate(model.Yard);
             }
+            return View();
+        }
+
+
+        public ActionResult Create(int? gymasiumId)
+        {
             return View();
         }
 
