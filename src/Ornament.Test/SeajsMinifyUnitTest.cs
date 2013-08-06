@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ornament.Web.Bundles;
 
 namespace Ornament.Test
@@ -39,11 +38,9 @@ namespace Ornament.Test
         }
     };
 });";
-            var target = new CombineSeajs(content, "js.js", "/finad", "/base/modules/");
-            
-            var actual = target.Processs();
+            var target = new CombineSeajs("js.js", "/finad", "/base/modules/");
+            string actual = target.Processs(content);
             Assert.AreEqual(expect, actual);
-
         }
     }
 }

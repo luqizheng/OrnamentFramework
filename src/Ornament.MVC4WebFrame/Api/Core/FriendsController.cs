@@ -27,10 +27,10 @@ namespace Ornament.MVCWebFrame.Api.Core
                        _dao.CreateFriendDao().GetFriends(OrnamentContext.MemberShip.CurrentUser())
                    select new
                        {
-                           id = friend.Relative.Id,
-                           name = friend.Relative.Name,
-                           memo = friend.Memo,
-                           @group = friend.Group
+                           Id = friend.Relative.Id,
+                           Name = friend.Relative.Name,
+                           Memo = friend.Memo,
+                           Group = friend.Group
                        };
         }
 

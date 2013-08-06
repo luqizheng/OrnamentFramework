@@ -17,35 +17,36 @@
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-        var updateTable;
-        seajs.use(["/models/pm.js", '/models/membership.js',
-                'tmpl',
-                "/scripts/json2.js", 'select2', 'valid'], function (pm, user) {
-
-                    $(".actionCheckbox").uniform().change(function () {
-                        $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
-                    }).change();
-                    $("#selApplyAction").select2();
-                    $("#BtnApply").click(function () {
-                        var action = $("#selApplyAction").val();
-                        $("#tableForm").attr("action", "User/" + action).submit();
-                        return false;
-                    });
-                    $("input[name=loginIds]").change(function () {
-                        var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
-                        $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
-                    });
-
-                    $("table [role=pm]").click(function () {
-                        var id = $(this).closest("ul").attr("val");
-                        pm.Show("#pmEditor", id, "@OrnamentContext.MemberShip.CurrentUser().Name");
-                        return false;
-                    });
-                    $("table [role=verifyEmail]").click(function () {
-                        var loginId = $("td:first input", $(this).closest("tr")).val();
-                        user.verifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
-                            alert(e.success ?
-                                "@Html.GetResourceString("verify_email_success")" :
+       // seajs.use("/scripts/memberships/user/index.js");
+        /* var updateTable;
+            seajs.use(["/models/pm.js", '/models/membership.js',
+                    'tmpl',
+                    "/scripts/json2.js", 'select2', 'valid'], function (pm, user) {
+    
+                        $(".actionCheckbox").uniform().change(function () {
+                            $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
+                        }).change();
+                        $("#selApplyAction").select2();
+                        $("#BtnApply").click(function () {
+                            var action = $("#selApplyAction").val();
+                            $("#tableForm").attr("action", "User/" + action).submit();
+                            return false;
+                        });
+                        $("input[name=loginIds]").change(function () {
+                            var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
+                            $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
+                        });
+    
+                        $("table [role=pm]").click(function () {
+                            var id = $(this).closest("ul").attr("val");
+                            pm.Show("#pmEditor", id, "@OrnamentContext.MemberShip.CurrentUser().Name");
+        return false;
+        });
+        $("table [role=verifyEmail]").click(function () {
+            var loginId = $("td:first input", $(this).closest("tr")).val();
+            user.verifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
+                alert(e.success ?
+                    "@Html.GetResourceString("verify_email_success")" :
                                 "@Html.GetResourceString("verify_email_fail")");
                         });
                         return false;
@@ -60,7 +61,7 @@
                     });
                     //User Search;
                     user.typeHeader.user("#searchContent");
-                });
+                    });*/
 
 
     </script>
