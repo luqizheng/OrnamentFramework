@@ -1,10 +1,9 @@
-﻿@using System.Text.RegularExpressions
-@using Ornament
+﻿@using Ornament
 @using Ornament.MVCWebFrame.Models
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
+@using Ornament.MemberShip.Dao
 @using Ornament.Web
-@using Ornament.Web.HtmlExtends
 @using Resources
 @model IEnumerable<Ornament.MemberShip.User>
 @{
@@ -12,66 +11,20 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
 }
-@section script
+@section script 
 {
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-        seajs.use("memberships/user/index.js",function(main) {
+        seajs.use("memberships/user/index.js", function(main) {
             main.init({
-                success: "@Html.GetResourceString("verify_email_success")",
-                fail: "@Html.GetResourceString("verify_email_fail")"
-            }, {
-                success: "@Html.GetResourceString("retrieve_pwd_success")" ,
-                fail:"@Html.GetResourceString("retrieve_pwd_fail")"
-            });
+                    success: "@Html.GetResourceString("verify_email_success")",
+                    fail: "@Html.GetResourceString("verify_email_fail")"
+                }, {
+                    success: "@Html.GetResourceString("retrieve_pwd_success")",
+                    fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+                });
         });
-        /* var updateTable;
-            seajs.use(["/models/pm.js", '/models/membership.js',
-                    'tmpl',
-                    "/scripts/json2.js", 'select2', 'valid'], function (pm, user) {
-    
-                        $(".actionCheckbox").uniform().change(function () {
-                            $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
-                        }).change();
-                        $("#selApplyAction").select2();
-                        $("#BtnApply").click(function () {
-                            var action = $("#selApplyAction").val();
-                            $("#tableForm").attr("action", "User/" + action).submit();
-                            return false;
-                        });
-                        $("input[name=loginIds]").change(function () {
-                            var val = $("input[name=loginIds]:checked").length == 0 ? true : false;
-                            $("#unlockButton,#approvedButton,#delete,#Lock").attr("disabled", val);
-                        });
-    
-                        $("table [role=pm]").click(function () {
-                            var id = $(this).closest("ul").attr("val");
-                            pm.Show("#pmEditor", id, "@OrnamentContext.MemberShip.CurrentUser().Name");
-        return false;
-        });
-        $("table [role=verifyEmail]").click(function () {
-            var loginId = $("td:first input", $(this).closest("tr")).val();
-            user.verifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
-                alert(e.success ?
-                    "@Html.GetResourceString("verify_email_success")" :
-                                "@Html.GetResourceString("verify_email_fail")");
-            });
-            return false;
-        });
-        $("table [role=retievePwd]").click(function () {
-            var loginId = $("td:first input", $(this).closest("tr")).val();
-            user.retrievePassword(loginId, function (e) {
-                alert(e.success ?
-                    "@Html.GetResourceString("retrieve_pwd_success")" :
-                                "@Html.GetResourceString("retrieve_pwd_fail")");
-            });
-        });
-        //User Search;
-        user.typeHeader.user("#searchContent");
-        });*/
-
-
     </script>
 }
 
@@ -86,7 +39,7 @@
                 @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Modify))
                 {
                     <li>
-                        <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
+                        <div class="depth"><a href="@Url.Action("Create", "User", new {area = "MemberShips"})" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
                     </li>
                 }
                 <li>
@@ -109,23 +62,21 @@
         </div>
         <div id="quick-actions">
             @{
-                var userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
-                var totalUser = Convert.ToDouble(userDao.Count());
-                
-              
+                IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+                double totalUser = Convert.ToDouble(userDao.Count());
             }
             <ul class="statistics">
                 <li>
                     <div class="top-info">
                         <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
                         @{
-                            var dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
-                            var toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
+                            IDictionary<DateTime, int> dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
+                            double toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
                         }
                         <strong>@toDayUser</strong>
                     </div>
                     <div class="progress progress-micro">
-                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser) / totalUser).ToString("p"))"></div>
+                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser)/totalUser).ToString("p"))"></div>
                     </div>
                     <span>User registrations today</span>
                 </li>
@@ -138,8 +89,8 @@
                     </div>
                     <div class="progress progress-micro">
                         @{
-                            var onlineUser = Membership.GetNumberOfUsersOnline();
-                            var onlineRate = (Convert.ToDouble(onlineUser) / totalUser).ToString("p");
+                            int onlineUser = Membership.GetNumberOfUsersOnline();
+                            string onlineRate = (Convert.ToDouble(onlineUser)/totalUser).ToString("p");
                         }
                         <div class="bar" style="width: @onlineRate;"></div>
                     </div>
@@ -158,7 +109,7 @@
 <form action="@Url.Action("Index")" class="search widget"method="POST">
     <div class="autocomplete-append">
         <input type="text" id="searchContent" name="search" placeholder="@String.Format(Html.GetResourceString("search_placeHolder"), @Basic.Email, @Basic.Phone)" 
-            class="ui-autocomplete-input" autocomplete="off">
+               class="ui-autocomplete-input" autocomplete="off">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <input type="submit" value="@Basic.Search" class="btn btn-info">
     </div>
@@ -219,10 +170,10 @@
                     @Html.DisplayNameFor(model => model.Contact.Email)
                 </th>
                 <th>
-                    @Html.LabelFor(item => ((User)null).IsLockout)
+                    @Html.LabelFor(item => ((User) null).IsLockout)
                 </th>
                 <th>
-                    @Html.LabelFor(item => ((User)null).IsApproved)
+                    @Html.LabelFor(item => ((User) null).IsApproved)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Other.LastActivityDate)
@@ -250,10 +201,10 @@
                     {
                         <td>
                             <ul class="table-controls" val="@user.Id">
-                                <li><a href="@Url.Action("Edit", new { loginId = user.LoginId })" class="btn tip" title="@Basic.Edit">
-                                    <i class="fam-user-edit"></i></a></li>
+                                <li><a href="@Url.Action("Edit", new {loginId = user.LoginId})" class="btn tip" title="@Basic.Edit">
+                                        <i class="fam-user-edit"></i></a></li>
                                 <li>
-                                    <a  href="@Url.Action("Assign", new { loginId = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                    <a  href="@Url.Action("Assign", new {loginId = user.LoginId})" class="btn tip" title="@Html.GetResourceString("Assignment")">
                                         <i class="fam-group-gear"></i></a>
                                 </li>
                                 @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
@@ -310,7 +261,3 @@
         </tfoot>
     </table>
 </form>
-
-
-
-

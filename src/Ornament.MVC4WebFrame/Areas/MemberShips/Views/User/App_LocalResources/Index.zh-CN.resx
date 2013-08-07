@@ -172,9 +172,9 @@
     <value>获取密码的信息已经成功发送.</value>
   </data>
   <data name="verify_email_fail" xml:space="preserve">
-    <value>验证电子邮件地址的信息成功发送.</value>
+    <value>验证电子邮件地址的信息发送失败.</value>
   </data>
   <data name="verify_email_success" xml:space="preserve">
-    <value>验证电子邮件地址的信息发送失败.</value>
+    <value>验证电子邮件地址的信息成功发送.</value>
   </data>
 </root>

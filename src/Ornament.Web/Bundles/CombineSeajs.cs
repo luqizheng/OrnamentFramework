@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -9,67 +10,42 @@ namespace Ornament.Web.Bundles
 {
     public class CombineSeajs
     {
-        private readonly string _id;
-        private readonly string _modelsbaseFilepath;
-        private readonly string _rootPath;
-        private List<string> _existDefined;
 
+        private SeajsModuleCollection _existDefined;
         /// <summary>
         /// </summary>
-        /// <param name="id">模块的Id</param>
-        /// <param name="path">浏览器引用的路径</param>
-        /// <param name="modelsbaseFilepath">业务模块所在的目录。如果发现Require的路径，和这个不同，就不需要合并</param>
-        public CombineSeajs(string id, string path, string modelsbaseFilepath)
+        /// <param name="virtualPath">浏览器引用的路径</param>
+        /// <param name="combinePath">业务模块所在的目录。如果发现Require的路径，和这个不同，就不需要合并</param>
+        public CombineSeajs(string virtualPath, string combinePath)
         {
-            _id = id;
-            _modelsbaseFilepath = modelsbaseFilepath;
-            _rootPath = path;
-            if (!_rootPath.EndsWith("/"))
-                _rootPath += "/";
+            Modual = new SeajsModual(virtualPath.TrimStart('~'), combinePath);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="modelsbaseFilepath"></param>
-        /// <param name="rootPath">主模块的路径</param>
-        /// <param name="existDefined">已经被加载过的模块</param>
-        private CombineSeajs(string id, string modelsbaseFilepath, string rootPath,
-            List<string> existDefined)
-            : this(id, rootPath, modelsbaseFilepath)
+       
+        private CombineSeajs(SeajsModual modual)
         {
-            _existDefined = existDefined;
+            Modual = modual;
         }
 
-        public string ModelId
-        {
-            get { return Path.Combine(_rootPath, _id).Replace("\\", "/").ToLower(); }
-        }
+        private SeajsModual Modual { get; set; }
 
         /// <summary>
         ///     获取已经合并过的文件
         /// </summary>
-        public List<string> CombinedFiles
+        public SeajsModuleCollection CombinedFiles
         {
-            get { return _existDefined ?? (_existDefined = new List<string>()); }
+            get { return _existDefined ?? (_existDefined = new SeajsModuleCollection()); }
         }
 
 
         public string Processs(string content)
         {
-            string[] importPathes;
-            IEnumerable<string> apis = CollectRequire(ref content, out importPathes);
-            var dependcyFiles = new List<string>();
-            string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", ModelId, String.Join("\",\"", importPathes));
-            foreach (string dependcyFile in apis)
-            {
-                if (dependcyFile.StartsWith(_modelsbaseFilepath) && !CombinedFiles.Contains(dependcyFile))
-                {
-                    dependcyFiles.Add(dependcyFile);
-                }
-            }
+            SeajsModuleCollection dependFiles = new SeajsModuleCollection();
+            var combineFiles = CollectRequire(ref content, dependFiles);
+            string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", Modual.Id, String.Join("\",\"", dependFiles.RequrestIds));
 
-            StringBuilder childContent = BuidlChildItem(dependcyFiles, _modelsbaseFilepath);
+
+            StringBuilder childContent = BuidlChildItem(combineFiles);
             childContent.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
             return childContent.ToString();
         }
@@ -77,51 +53,50 @@ namespace Ornament.Web.Bundles
         /// <summary>
         /// </summary>
         /// <param name="content"></param>
-        /// <param name="importRequirePath"></param>
+        /// <param name="dependFiles"></param>
         /// <returns>return physica path of file store.</returns>
-        private IEnumerable<string> CollectRequire(ref string content, out string[] importRequirePath)
+        private SeajsModuleCollection CollectRequire(ref string content, SeajsModuleCollection dependFiles)
         {
-            var importRequirePathList = new List<string>();
-            var modelRequireFiles = new List<string>();
+            //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
+
+            var combineMode = new SeajsModuleCollection();
+
             content = Regex.Replace(content, @"require\((.+?)\)", s =>
             {
-                string requireFile = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
-                bool isModelFile = requireFile.StartsWith(_modelsbaseFilepath);
-                if (isModelFile) //model file 需要合并
+                string requireModel = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
+                var modual = new SeajsModual(requireModel, this.Modual.CombinePath);
+                dependFiles.Add(modual);
+                if (modual.IsCombine) //model file 需要合并
                 {
-                    modelRequireFiles.Add(requireFile);
-                    var file = new FileInfo(requireFile);
-                    string clientRequrePath = Path.Combine(_rootPath, file.Name);
-                    importRequirePathList.Add(clientRequrePath);
-                    return s.Value.ToLower().Replace(requireFile, clientRequrePath);
+                    combineMode.Add(modual);
+                    return s.Value.ToLower().Replace(requireModel, modual.Id);
                 }
-                importRequirePathList.Add(requireFile); //普通requirefile，如Jquery等plugin，直接放到数组上面，无需要替换
                 return s.Value;
             });
 
-            importRequirePath = importRequirePathList.ToArray();
-            return modelRequireFiles;
+
+            return combineMode;
         }
 
-        private StringBuilder BuidlChildItem(IEnumerable<string> files, string modelsbaseFilepath)
+        private StringBuilder BuidlChildItem(SeajsModuleCollection files)
         {
             var result = new StringBuilder();
-            var queue = new Queue<string>(files);
+            var queue = new Queue<SeajsModual>(files);
             while (queue.Count != 0)
             {
-                string physicPath = queue.Dequeue();
-                string file = HttpContext.Current.Request.MapPath("~/" + physicPath);
-                string id = (new FileInfo(file)).Name;
-                if (!File.Exists(file))
+                var modual = queue.Dequeue();
+
+
+                if (!File.Exists(modual.PhysicPath))
                 {
-                    result.Append(string.Format("console.warn('can not find path {0} in {1}');", physicPath, ModelId));
+                    result.Append(string.Format("console.warn('can not find path {0} in {1}');", modual.PhysicPath, Modual.PhysicPath));
                     continue;
                 }
-                var combineSeajs = new CombineSeajs(id, modelsbaseFilepath, _rootPath, CombinedFiles);
-                using (var reader = new StreamReader(file))
+                var combineSeajs = new CombineSeajs(modual);
+                using (var reader = new StreamReader(modual.PhysicPath))
                 {
                     result.Append(combineSeajs.Processs(reader.ReadToEnd()));
-                    CombinedFiles.Add(physicPath);
+                    CombinedFiles.Add(modual);
                 }
             }
             return result;

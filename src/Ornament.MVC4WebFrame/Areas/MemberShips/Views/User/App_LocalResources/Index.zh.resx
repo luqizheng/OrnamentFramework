@@ -166,9 +166,9 @@
     <value>取回密碼的信息已成功發送</value>
   </data>
   <data name="verify_email_fail" xml:space="preserve">
-    <value>驗證郵箱的電子郵件發送成功</value>
+    <value>驗證郵箱的電子郵件發送失敗.</value>
   </data>
   <data name="verify_email_success" xml:space="preserve">
-    <value>驗證郵箱的電子郵件發送失敗</value>
+    <value>驗證郵箱的電子郵件發送成功.</value>
   </data>
 </root>

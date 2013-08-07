@@ -1,8 +1,11 @@
 ﻿
 define(function (require) {
     var $ = require("jquery"),
-        userTypeahead = require("/scripts/models/base/views/user.typeahead.js");;
+        userTypeahead = require("/scripts/models/base/views/user.typeahead.js"),
+        user = require("/scripts/models/base/memberships/user.js"),
+        pm = require("/scripts/models/base/views/pm.js");
 
+    var dialog = new pm($("#pmEditor"), { name: "me", id: "ff" });
     require("uniform")($);
     require('select2')($);
 
@@ -13,27 +16,34 @@ define(function (require) {
 
     $("#selApplyAction").select2();
 
-
     userTypeahead.typeahead("#searchContent");
-
-
 
     return {
         init: function (verifyEmailMessage, retrievePwdMessage) {
             //Table Verify User.
             $("table [role=verifyEmail]").click(function () {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
-                user.verifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
+                var loadder = $("<li style='display:none'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\"></li>");
+                var parent = $(this).closest("ul");
+
+                var img = $("img", parent);
+                if (img.length == 0) {
+                    img = loadder.appendTo(parent);
+                }
+                img.show();
+                user.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
+                    img.hide();
                     alert(e.success ?
                         verifyEmailMessage.success :
                         verifyEmailMessage.fail);
+
                 });
                 return false;
             });
 
             $("table [role=retievePwd]").click(function () {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
-                user.retrievePassword(loginId, function (e) {
+                user.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
                         retrievePwdMessage.success :
                         retrievePwdMessage.fail);

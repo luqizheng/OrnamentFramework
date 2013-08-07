@@ -38,7 +38,7 @@ namespace Ornament.Test
         }
     };
 });";
-            var target = new CombineSeajs("js.js", "/finad", "/base/modules/");
+            var target = new CombineSeajs("/finad/js.js", "/base/modules/");
             string actual = target.Processs(content);
             Assert.AreEqual(expect, actual);
         }

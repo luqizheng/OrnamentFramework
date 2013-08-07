@@ -31,7 +31,7 @@
         }, func);
     };
 
-    User.VerifyEmail = function (loginId, email) {
+    User.VerifyEmail = function (loginId, email,func) {
     	/// <summary>
     	/// 发送验证Email账号
     	/// </summary>
