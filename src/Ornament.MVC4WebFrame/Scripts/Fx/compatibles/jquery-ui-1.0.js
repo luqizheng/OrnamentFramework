@@ -16,6 +16,5 @@ $(document).ready(function () {
         var $this = $(this), format = $this.attr("data-date-format");
         $this.datepicker({ dateFormat: format });
     });
-
    
 });

@@ -34,17 +34,15 @@ namespace Ornament.Web.Bundles
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
                                                        IEnumerable<BundleFile> bundleFiles)
         {
-
             var fileInfo = new FileInfo(_virtualPath);
             int lastPost = _virtualPath.LastIndexOf('/');
             string path = _virtualPath.Substring(0, lastPost);
             var seajs = new CombineSeajs(fileInfo.Name, path, "/scripts/models/base/");
-            var result = base.ApplyTransforms(context, seajs.Processs(bundleContent), bundleFiles);
+            BundleResponse result = base.ApplyTransforms(context, seajs.Processs(bundleContent), bundleFiles);
 #if DEBUG
-            this.UpdateCache(context, result);
+            UpdateCache(context, result);
 #endif
             return result;
-
         }
     }
 }

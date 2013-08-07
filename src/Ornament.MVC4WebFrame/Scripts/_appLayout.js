@@ -3,11 +3,12 @@
 define(function (require) {
 
     var $ = require("/bundles/jquery.js");
-    var a = require("/bundles/jquery.easytabs.js");
+    require("easytabs")($);
     require("collapsible")($);
     require("bootstrap")($);
     require("uniform")($);
-
+    require("unobtrusive")($);
+    require("valid")($);
 
     $(".styled").uniform({ radioClass: 'choice' });
     $("#mainMenu > li.active > ul").attr("style", "");

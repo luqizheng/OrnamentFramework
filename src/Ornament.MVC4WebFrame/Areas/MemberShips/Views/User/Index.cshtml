@@ -17,7 +17,15 @@
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-       // seajs.use("/scripts/memberships/user/index.js");
+        seajs.use("memberships/user/index.js",function(main) {
+            main.init({
+                success: "@Html.GetResourceString("verify_email_success")",
+                fail: "@Html.GetResourceString("verify_email_fail")"
+            }, {
+                success: "@Html.GetResourceString("retrieve_pwd_success")" ,
+                fail:"@Html.GetResourceString("retrieve_pwd_fail")"
+            });
+        });
         /* var updateTable;
             seajs.use(["/models/pm.js", '/models/membership.js',
                     'tmpl',
@@ -48,20 +56,20 @@
                 alert(e.success ?
                     "@Html.GetResourceString("verify_email_success")" :
                                 "@Html.GetResourceString("verify_email_fail")");
-                        });
-                        return false;
-                    });
-                    $("table [role=retievePwd]").click(function () {
-                        var loginId = $("td:first input", $(this).closest("tr")).val();
-                        user.retrievePassword(loginId, function (e) {
-                            alert(e.success ?
-                                "@Html.GetResourceString("retrieve_pwd_success")" :
+            });
+            return false;
+        });
+        $("table [role=retievePwd]").click(function () {
+            var loginId = $("td:first input", $(this).closest("tr")).val();
+            user.retrievePassword(loginId, function (e) {
+                alert(e.success ?
+                    "@Html.GetResourceString("retrieve_pwd_success")" :
                                 "@Html.GetResourceString("retrieve_pwd_fail")");
-                        });
-                    });
-                    //User Search;
-                    user.typeHeader.user("#searchContent");
-                    });*/
+            });
+        });
+        //User Search;
+        user.typeHeader.user("#searchContent");
+        });*/
 
 
     </script>

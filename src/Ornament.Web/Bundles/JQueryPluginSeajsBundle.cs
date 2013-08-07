@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles
@@ -9,6 +8,8 @@ namespace Ornament.Web.Bundles
     /// </summary>
     public class JQueryPluginSeajsBundle : ScriptBundle
     {
+        private readonly string[] _dependIds;
+
         public JQueryPluginSeajsBundle(string virtualPath)
             : base(virtualPath)
         {
@@ -19,9 +20,10 @@ namespace Ornament.Web.Bundles
             }
         }
 
-        public JQueryPluginSeajsBundle(string virtualPath, string cdnPath)
-            : base(virtualPath, cdnPath)
+        public JQueryPluginSeajsBundle(string virtualPath, params string[] dependIds)
+            : base(virtualPath)
         {
+            _dependIds = dependIds;
             Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
@@ -30,16 +32,31 @@ namespace Ornament.Web.Bundles
         }
 
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
-            IEnumerable<BundleFile> bundleFiles)
+                                                       IEnumerable<BundleFile> bundleFiles)
         {
+            const string wrapper =
+                @"define(function(require){{
+{1}
+    return function(jQuery){{
+        {0}
+    }}
+}})";
 
-            bundleContent = bundleContent.Replace("(jQuery);", ";") + " })";
-            string replaceContent = Regex.Replace(bundleContent, @"\(function \($\)", "define(function (require) { return (function($)");
+            string requires;
+            if (_dependIds != null && _dependIds.Length != 0)
+            {
+                var s = "');require(''";
+                requires = "require('" + string.Join(s, _dependIds) + "')";
+            }
+            else
+            {
+                requires = "";
+            }
+
+            string replaceContent = string.Format(wrapper, bundleContent, requires);
             return base.ApplyTransforms(context, replaceContent, bundleFiles);
 
             //return base.ApplyTransforms(context, bundleContent, bundleFiles);
         }
-
-
     }
 }

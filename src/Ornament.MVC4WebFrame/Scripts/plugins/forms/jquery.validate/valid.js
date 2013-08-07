@@ -2,7 +2,7 @@
 mvc和bootstrap的报错
 */
 (function ($) {
-
+    //for bootstrap style.
     $.fn.bootstrapMakeUp = function (cmd) {
         cmd = cmd ? cmd : "error";
         try {
@@ -44,5 +44,5 @@ mvc和bootstrap的报错
         }
     });
 
-})($)
+})(jQuery)
 

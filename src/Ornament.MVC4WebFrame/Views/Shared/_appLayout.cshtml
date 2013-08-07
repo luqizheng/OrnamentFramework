@@ -83,9 +83,10 @@
     }
 
     <div id="footer"></div>
+    <script src="/Scripts/config.js" type="text/javascript"></script>
+    
     <script type="text/javascript">
-        seajs.use(["/scripts/config", "/scripts/_applayout.js"])
-        //data-config="/scripts/config" data-main="./scripts/_applayout.js"
+        seajs.use(["/scripts/_applayout.js"])
     </script>
     @RenderSection("script", false)
     @Scripts.Render("~/Scripts/Utils.js")
