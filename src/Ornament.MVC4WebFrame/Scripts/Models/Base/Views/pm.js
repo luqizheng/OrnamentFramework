@@ -1,4 +1,6 @@
-﻿
+﻿/// <reference path="../Memberships/friend.js" />
+/// <reference path="../Memberships/friend.js" />
+
 /*
 PM dialog UI 1.0
 1) 显示对话框。对话
@@ -7,7 +9,9 @@ PM dialog UI 1.0
 define(function (require) {
     require('/bundles/bootstrap.js');
     require('/scripts/ckeditor/ckeditor.js');
-    var Personal = require('personal');
+    var Friend = require("/Scripts/Models/Base/Memberships/friend.js"),
+     PersonalMessage = require("/Scripts/Models/Base/Views/pm.js"),
+        pm=new PersonalMessage();
 
     function buildTemp(chatItem) {
         return {
@@ -15,61 +19,79 @@ define(function (require) {
             dd: $("<dd><div>" + chatItem.content + "</div></dd>")
         };
     };
-    function buildFrendList(friends, activeId) {
-        var result = {};
-        var sortedName = {};
+
+    function buildTemplChat() {
+
+    }
+
+    function setFriendList(friends) {
+        /// <summary>
+        /// this 是 pmDialog的Instance，frends是ajax获取的friends对象
+        /// </summary>
+        /// <param name="friends"></param>
+        var sortedName = [];
+        var self = this;
+        self.friends = {};
         $(friends).each(function () {
+            self.friends[this.Id] = new Friend(this, pm);
             sortedName.push(this.group);
-            result[this.group] = {
-                id: this.id,
-                name: this.name,
-                memo: this.memo,
-            };
         });
 
         sortedName.sort();
         var elements = [];
         $(sortedName).each(function () {
-            elements.push("<li><a href='#" + this.id + "'>" + this.name + "</a></li>");
+            elements.push("<li" + (self.activeId == this.Id ? "class='active'" : "") + "><a href='#" + this.Id + "'>" + this.Name + "</a></li>");
         });
-        return elements.join("");
+        this.$friendList.append(elements.join(""));
     }
 
-    function pmDialog($dialog,my) {
+    function pmDialog($dialog, my) {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="$dialog"></param>
         /// <param name="my">my is User object, property is Name and Id</param>
         //初始化
-        var self = this;
-        this.$dialog = $dialog.modal({show:false});
+        var self = this, friends = null;
+        this.Owen = my;
+        this.$dialog = $dialog.modal({ show: false });
         this.$chat = $("[role=chat]");
-        this.personal = new Personal(my);
-        this.processBar = $("[role=progressbar]", self.$dialog);
+        this.$processBar = $("[role=progressbar]", self.$dialog);
         this.$friendList = $("[role=friendList]", self.$dialog);
-        this.activeFriend = false;
+        
+        this.curFriendId = false;
         this.editor = CKEDITOR.replace('editor', {
             toolbar: "Basic", height: "100"
         });
         this.editor.on("key", function () {
-            $sendBtn.prop("disabled", editor.getData().length == 0);
+            self.$sendBtn.prop("disabled", self.editor.getData().length == 0);
         });
-        
+
         $dialog.on("show", function () {
-            
             //tipsMsge.unWatch(); //stop topmenu 的message检查
             //ticket = setTimeout(callIt, 100);
-        });
-       
-        this.$sendBtn = $("[role=send]", $dialog).click(function () {//点击发送按钮
+            if (friends == null) {
+                Friend.ListFriends(function (d) {
+                    friends = d;
+                    setFriendList.apply(self, d);
+                    self.ListChat();
+                });
+            } else {
+                $("a[href=#" + self.curFriendId + "]").parent().addClass("active");
+                self.ListChat();
+            }
 
-            self.processBar.fadeIn();
+        });
+
+        //初始化发送按钮
+        this.$sendBtn = ("[role=send]", $dialog).click(function () {//点击发送按钮
+            self.$processBar.fadeIn();
             var content = self.editor.getData();
 
             if (content.length != 0) {
-                func.Send(content, relativeUserId, function (d) {
-                    self.processBar.fadeOut(); //hide progressbar
+                var friend = self.friends[self.curFriendId];
+                friend.Send(content, relativeUserId, function (d) {
+                    self.$processBar.fadeOut(); //hide progressbar
                     if (!d.success) {
                         alert(d.error);
                     } else {
@@ -79,67 +101,17 @@ define(function (require) {
             }
             return false;
         });
-        
-        
-
-
-
-        //this.ListChat = function (relUserId, myName) {
-        //    /// <summary>
-        //    /// 列出对话内容
-        //    /// </summary>
-        //    /// <param name="relUserId"></param>
-        //    /// <param name="myName"></param>
-        //    api.getChat(relUserId, 0, this.lastTime, function (remoteData) {
-
-        //        var chat = [], $chat = $("[role=chat]", $dialog);
-        //        if (remoteData.length != 0) {
-        //            self.lastTime = remoteData[0].createTime;
-        //        }
-        //        $(remoteData).each(function () {
-
-        //            var item = buildTemp(this);
-
-        //            if (this.publisher != myName) {//对方的信息放在右面
-        //                /*$([item.dt, item.dd]).each(function () {
-        //                    $(this).addClass("clearfix").find(":first").css("color","blue");
-        //                });*/
-        //                $("span", item.dt).addClass("text-info");
-        //            }
-
-        //            chat.unshift(item.dd);
-        //            chat.unshift(item.dt);
-
-        //        });
-
-        //        if (chat.length != 0) {
-        //            $chat.append(chat).scrollTop($chat[0].scrollHeight).closest(".well-smoke").show();
-        //        } else if (self.lastTime == null) {
-        //            $chat.closest(".well-smoke").hide();
-        //        }
-        //    });
-        //};
-
-        //this.Send = function (cContent, relUserId, func) {
-
-        //    /// <summary>
-        //    /// 发送pm
-        //    /// </summary>
-        //    /// <param name="cContent"></param>
-        //    /// <param name="relUserId"></param>
-        //    /// <param name="myName"></param>
-        //    api.sendPm(cContent, relUserId, func);
-        //};
     }
 
-    pmDialog.property.GetRelativeUser = function () {
-        
-    };
-    pmDialog.property.ListChat = function () {
-        
-        this.personal.getChat(this.activeFriend, 0, null,function(remoteData) {
+    pmDialog.prototype.ListChat = function () {
+
+        var f = this.friends[self.curFriendId];
+        if (f == null) {
+            f = new Friend({ Id: self.curFriendId }, pm);
+        }
+        f.ListChat(function (remoteData) {
             var chat = [];
-            $(remoteData).each(function() {
+            $(remoteData).each(function () {
                 var item = buildTemp(this);
                 if (this.publisher != self.personal.Name) {//对方的信息放在右面
                     $("span", item.dt).addClass("text-info");
@@ -154,96 +126,18 @@ define(function (require) {
             }
         });
     };
-    
-    pmDialog.property.ListFriend = function() {
-        
-        this.personal.GetFriends(function(data) {
-            
-        });
-    };
-    
+
+
+
     pmDialog.prototype.loopMessage = function () {
 
     };
 
 
-    pmDialog.property.show = function (activeId) {
-
+    pmDialog.prototype.show = function (activeId) {
+        this.curFriendId = activeId;
+        this.$dialog.modal("show");
     };
-
     return pmDialog;
-
-
-    //return {
-    //    Show: function (selector, relativeUserId, myName) {
-    //        /// <summary>
-    //        /// 显示Pm 对话框
-    //        /// </summary>
-    //        /// <param name="selector">PM dialog的selector</param>
-    //        /// <param name="relativeUserId">对话的人</param>
-    //        /// <param name="myName">login user的名字</param>
-
-    //        var $dialog = $(selector), editor;
-
-    //        if (!$dialog.data("_pmDialog")) {
-
-    //            $dialog.data("_pmDialog", true)
-    //                .modal({
-    //                    show: false
-    //                });
-
-    //            var func =
-    //                    new pmDialog($dialog), ticket,
-    //                sendBtn = $("[role=send]", $dialog);
-
-    //            editor = CKEDITOR.replace('editor',
-    //                {
-    //                    toolbar: "Basic", height: "100"
-    //                }
-    //            );
-    //            editor.on("key", function () {
-    //                sendBtn.prop("disabled", editor.getData().length == 0);
-    //            });
-
-    //            function callIt() {
-    //                func.ListChat(relativeUserId, myName);
-    //                ticket = setTimeout(callIt, 2000);
-    //            }
-
-    //            $dialog.on("show", function () {
-    //                tipsMsge.unWatch(); //stop topmenu 的message检查
-    //                ticket = setTimeout(callIt, 100);
-    //            });
-
-    //            $dialog.on("hidden", function () {
-    //                $("[role=content]", $dialog).val("");
-    //                $("[role=chat]", $dialog).html("");
-    //                tipsMsge.watch(); //重新开启top menu的监控
-    //                clearTimeout(ticket);
-    //                func.lastTime = null;
-    //            });
-
-    //            sendBtn
-    //                .click(function () {//点击发送按钮
-
-    //                    var progressBra = $("[role=progressbar]", $dialog).fadeIn();
-    //                    var content = editor.getData();
-    //                    if (content.length != 0) {
-    //                        func.Send(content, relativeUserId, function (d) {
-
-    //                            progressBra.fadeOut(); //hide progressbar
-    //                            if (!d.success) {
-    //                                alert(d.error);
-    //                            } else {
-    //                                editor.setData("");
-    //                            }
-    //                        });
-    //                    }
-    //                    return false;
-    //                });
-    //        }
-    //        $dialog.modal("show");
-
-    //    }
 
 });

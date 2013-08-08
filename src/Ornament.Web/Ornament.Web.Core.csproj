@@ -136,12 +136,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bundles\CombineSeajs.cs" />
     <Compile Include="Bundles\JQueryPluginSeajsBundle.cs" />
     <Compile Include="Bundles\SeajsBundle.cs" />
     <Compile Include="Bundles\SeajsMinify.cs" />
-    <Compile Include="Bundles\SeajsModual.cs" />
-    <Compile Include="Bundles\SeajsModuleCollection.cs" />
+    <Compile Include="Bundles\Seajs\CombineModule.cs" />
+    <Compile Include="Bundles\Seajs\BaseModule.cs" />
+    <Compile Include="Bundles\Seajs\IdCollection.cs" />
+    <Compile Include="Bundles\Seajs\ModuleCollection.cs" />
+    <Compile Include="Bundles\Seajs\ReferenceModule.cs" />
+    <Compile Include="Bundles\Seajs\RootModule.cs" />
     <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />

@@ -7,7 +7,7 @@
 <select id="userSearcher" multiple="multiple" class="multiple">
 </select>
 <script type="text/javascript">
-    var pageIndex = 0;
+    var page = 0;
     var searchContent = "";
 
     seajs.use(['jquery'], function () {
@@ -17,20 +17,20 @@
             fireDelay: false,
             loader: "<div class=\"loading\"><div>",
             callback: function () {
-                pageIndex++;
+                page++;
                 InvokeSearch();
             }
         });
 
         $("#searchUser").click(function () {
             searchContent = $("#loginid").val();
-            pageIndex = 0;
+            page = 0;
             InvokeSearch();
         });
         function InvokeSearch() {
             var data = {
                 loginId: searchContent,
-                pageIndex: pageIndex
+                page: page
             };
             $.getJSON('@this.Url.Action("Search", "User", new { area = "MemberShips" })', data, AddToSelector);
     }

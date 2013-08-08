@@ -544,7 +544,10 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\Fx\compatibles\jquery-ui-1.0.js" />
+    <Content Include="Scripts\Models\Base\Personal\PersonalMessage.js" />
     <Content Include="Scripts\Models\Base\Views\Time.js" />
+    <Content Include="Scripts\Models\Views\MemberShips\User\Create.js" />
+    <Content Include="Scripts\Models\Views\MemberShips\User\Edit.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\dialogs\alert.js" />
@@ -652,6 +655,7 @@
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moono\readme.md" />
     <Content Include="Scripts\Models\Base\Views\user.typeahead.js" />
+    <Content Include="Scripts\Models\Base\Views\role.select2.js" />
     <None Include="Scripts\plugins\forms\jquery.validate\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\jquery.validate.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\jquery.validate.min.js" />

@@ -5,7 +5,7 @@ define(function (require) {
         user = require("/scripts/models/base/memberships/user.js"),
         pm = require("/scripts/models/base/views/pm.js");
 
-    var dialog = new pm($("#pmEditor"), { name: "me", id: "ff" });
+    var pmDialog;
     require("uniform")($);
     require('select2')($);
 
@@ -19,7 +19,7 @@ define(function (require) {
     userTypeahead.typeahead("#searchContent");
 
     return {
-        init: function (verifyEmailMessage, retrievePwdMessage) {
+        init: function (verifyEmailMessage, retrievePwdMessage, currentUser) {
             //Table Verify User.
             $("table [role=verifyEmail]").click(function () {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
@@ -48,6 +48,11 @@ define(function (require) {
                         retrievePwdMessage.success :
                         retrievePwdMessage.fail);
                 });
+            });
+
+            pmDialog = new pm($("#pmEditor"), currentUser);
+            $("table [role=pm]").click(function() {
+                pmDialog.show();
             });
         }
     };

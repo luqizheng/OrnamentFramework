@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Optimization;
+using Ornament.Web.Bundles.Seajs;
+using Qi;
 
 namespace Ornament.Web.Bundles
 {
@@ -34,8 +37,9 @@ namespace Ornament.Web.Bundles
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
                                                        IEnumerable<BundleFile> bundleFiles)
         {
-            var seajs = new CombineSeajs(this.Path, "/scripts/models/base/");
-            BundleResponse result = base.ApplyTransforms(context, seajs.Processs(bundleContent), bundleFiles);
+            var seajs = new RootModule(this.Path, ApplicationHelper.MapPath(this.Path));
+            var subContent = seajs.BuildContent(bundleContent, new ModuleCollection());
+            BundleResponse result = base.ApplyTransforms(context, subContent, bundleFiles);
 #if DEBUG
             UpdateCache(context, result);
 #endif

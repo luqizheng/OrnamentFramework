@@ -9,7 +9,7 @@
             data: function(term, page) { // page is the one-based page number tracked by Select2
                 return {
                     name: term + "%",
-                    pageIndex: (page - 1), // page number
+                    page: (page - 1), // page number
                 };
             },
             results: function(data, page) {

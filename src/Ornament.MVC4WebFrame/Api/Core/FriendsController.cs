@@ -23,15 +23,16 @@ namespace Ornament.MVCWebFrame.Api.Core
         {
 
 
-            return from friend in
+            var s= from friend in
                        _dao.CreateFriendDao().GetFriends(OrnamentContext.MemberShip.CurrentUser())
                    select new
                        {
-                           Id = friend.Relative.Id,
-                           Name = friend.Relative.Name,
-                           Memo = friend.Memo,
-                           Group = friend.Group
+                           Id = friend.User.Id,
+                           Name = friend.User.Name,
+                           Memo = friend.Remarks,
+                           Group = friend.GroupName
                        };
+            return s;
         }
 
         // GET api/friends/5
