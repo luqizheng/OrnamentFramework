@@ -37,37 +37,38 @@ namespace Ornament.Web.Bundles.Seajs
 
         /// <summary>
         /// </summary>
-        /// <param name="skipCombineModule"></param>
+        /// <param name="combinedModules">已经合并过</param>
+        /// <param name="referencModule">reference 过的 module </param>
         /// <returns></returns>
-        public virtual string BuildContent(ModuleCollection skipCombineModule)
+        public virtual string BuildContent(ModualIdSets combinedModules, ModuleCollection referencModule)
         {
             string content = null;
             using (var reader = new StreamReader(PhysciPath))
             {
                 content = reader.ReadToEnd();
             }
-            return BuildContent(content, skipCombineModule);
+            return BuildContent(content, combinedModules, referencModule);
         }
 
         /// <summary>
         /// </summary>
         /// <param name="content"></param>
-        /// <param name="skipCombineModule"></param>
+        /// <param name="combinedModule"></param>
         /// <returns></returns>
-        public string BuildContent(string content, ModuleCollection skipCombineModule)
+        public string BuildContent(string content, ModualIdSets combinedModule, ModuleCollection referencModule)
         {
-            List<CombineModule> combineFiles = CollectRequire(ref content, skipCombineModule);
+            List<CombineModule> combineFiles = CollectRequire(ref content, combinedModule, referencModule);
             var result = new StringBuilder(content);
 
             //Build Define Header 
-            string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", UniqueId,
-                String.Join("\",\"", Modules.RequrestIds));
+            string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", combinedModule.GetModualId(this),
+                String.Join("\",\"", Modules.RequrestIds(combinedModule)));
             result.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
 
             //添加合并文件的内容
             foreach (CombineModule combineFile in combineFiles)
             {
-                string subContent = combineFile.BuildContent(skipCombineModule);
+                string subContent = combineFile.BuildContent(combinedModule, referencModule);
                 result.Append(subContent);
             }
             return result.ToString();
@@ -81,16 +82,17 @@ namespace Ornament.Web.Bundles.Seajs
         /// <summary>
         /// </summary>
         /// <param name="content"></param>
-        /// <param name="skipCombinePath">已经被combine的Modules</param>
+        /// <param name="combinedModule">已经被combine的Modules</param>
+        /// <param name="referencModule"></param>
         /// <returns>返回需要被combie module的Moudle</returns>
         protected virtual List<CombineModule> CollectRequire(ref string content,
-            ModuleCollection skipCombinePath)
+            ModualIdSets combinedModule, ModuleCollection referencModule)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
-            var combineFiles = new List<CombineModule>();
+            var result = new List<CombineModule>();
 
-            content = Regex.Replace(content, @"require\((.+?)\)", s =>
+            content = Regex.Replace(content, @"require\((.+?)\)", match =>
             {
                 /*
                      * 1）询问是否为合并模块。
@@ -100,34 +102,47 @@ namespace Ornament.Web.Bundles.Seajs
                      *      a.1.2: 包含，设置为引用模块
                      *    b:是引用模块
                      */
-                string moduleId = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
-                string physicPath = MapPath(moduleId).ToLower();
+                
+                string srcRequireModualId = match.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
 
+                if (referencModule.Contains(srcRequireModualId))
+                {
+                    this.Modules.Add(new ReferenceModule(srcRequireModualId));
+                    return match.Value;
+                    
+                }
+
+                if (combinedModule.Contains(srcRequireModualId))
+                {
+                    //无论是reference 或者 combineId，都不需要combine
+                    var refModule = combinedModule[srcRequireModualId];
+                    this.Modules.Add(refModule);
+                    if (refModule is CombineModule)
+                        return match.Value.Replace(srcRequireModualId, combinedModule.GetModualId(refModule));
+                    return match.Value;
+
+                }
+                
                 ReferenceModule subModule = null;
-                if (!skipCombinePath.Contains(physicPath) && File.Exists(physicPath)) //文件存就需要合并
+                string physicPath = MapPath(srcRequireModualId).ToLower(); //it will be use in physicId
+                if (File.Exists(physicPath))
                 {
-                    if (!skipCombinePath.Contains(physicPath))
-                    {
-                        subModule = new CombineModule(physicPath);
-                        skipCombinePath.Add(subModule);
-                        combineFiles.Add((CombineModule) subModule);
-                    }
-                    else
-                    {
-                        subModule = skipCombinePath[physicPath];
-                    }
-                }
-                else
-                {
-                    subModule = new ReferenceModule(moduleId);
+                    subModule = new CombineModule(physicPath);
+                    combinedModule.Add(subModule); //加入combined 变量，告诉后面遇到的不需要再合并。
+                    result.Add((CombineModule) subModule);
+                    this.Modules.Add(subModule);
+                    return match.Value.Replace(srcRequireModualId, combinedModule.GetModualId(subModule));
                 }
 
+                //路径下面，可能根部不存在该文件，如juqery，所以直接作为ReferenceModule使用
+                subModule = new ReferenceModule(srcRequireModualId);
                 Modules.Add(subModule);
-                return s.Value.Replace(moduleId, subModule.UniqueId);
+                referencModule.Add(subModule);
+                return match.Value;
             });
 
 
-            return combineFiles;
+            return result;
         }
     }
 }
