@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using Qi;
 
 namespace Ornament.Web.Bundles.Seajs
 {
@@ -12,7 +11,7 @@ namespace Ornament.Web.Bundles.Seajs
     /// </summary>
     public class CombineModule : BaseModule
     {
-      
+        private readonly HttpRequest _request;
         private ModuleCollection _modules;
 
         /// <summary>
@@ -23,7 +22,7 @@ namespace Ornament.Web.Bundles.Seajs
             : base(physicPath.ToLower())
         {
             PhysciPath = physicPath;
-           // _request = new HttpRequest(physicPath, virtualPaht, "");
+            _request = new HttpRequest(physicPath, virtualPaht, "");
             ModuleId = virtualPaht;
         }
 
@@ -102,9 +101,8 @@ namespace Ornament.Web.Bundles.Seajs
                      *      a.1.2: 包含，设置为引用模块
                      *    b:是引用模块
                      */
-                    .
                     string moduleId = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
-                    string physicPath = VirtualPathUtility.ToAbsolute(vi)
+                    string physicPath = _request.MapPath(moduleId).ToLower();
 
                     BaseModule subModule = null;
                     if (!skipCombinePath.Contains(physicPath) && File.Exists(physicPath)) //文件存就需要合并
