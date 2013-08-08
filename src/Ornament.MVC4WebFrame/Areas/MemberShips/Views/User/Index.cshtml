@@ -23,6 +23,9 @@
                 }, {
                     success: "@Html.GetResourceString("retrieve_pwd_success")",
                     fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+                }, {
+                    Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
+                    Name:"@OrnamentContext.MemberShip.CurrentUser().Name"
                 });
         });
     </script>
@@ -209,7 +212,7 @@
                                 </li>
                                 @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
                                 {
-                                    <li>
+                                    <li> 
                                         <a href="#@user.Id" class="btn tip" title="@Html.GetResourceString("PersonalMessage")" role="pm">
                                             <i class="fam-email-edit"></i>
                                         </a>

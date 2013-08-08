@@ -11,12 +11,12 @@ namespace Ornament.MemberShip.Relatives
         public Friend(User owner, User relative)
         {
             Owner = owner;
-            Relative = relative;
+            User = relative;
         }
 
         public virtual User Owner { get; set; }
-        public virtual User Relative { get; set; }
-        public virtual string Memo { get; set; }
-        public virtual string Group { get; set; }
+        public virtual User User { get; set; }
+        public virtual string Remarks { get; set; }
+        public virtual string GroupName { get; set; }
     }
 }

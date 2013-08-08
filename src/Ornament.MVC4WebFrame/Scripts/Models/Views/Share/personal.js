@@ -22,14 +22,12 @@ define(function (require) {
     function Personal(my) {
 
         this.Name;
-
+           
         if (my.Name) {
             this.Name = my.Name;
         }
         this.Frends = [];
     }
-
-
 
     Personal.prototype.getChat = function (relativeUserId, pageIndex, lastTime, func) {
         /// <summary>
@@ -41,6 +39,7 @@ define(function (require) {
         /// <param name="func"></param>
         $.get(url, { relativeUserId: relativeUserId, lastTime: lastTime, page: pageIndex }, func);
     },
+    
     Personal.prototype.sendPm = function (content, receiver, func) {
         /// <summary>
         /// 发送pm给用户
@@ -101,6 +100,7 @@ define(function (require) {
         };
     };
     var autocheckIns = null;
+    return Personal;
     return {
         watch: function (internal, func) {
             if (autocheckIns == null) {
