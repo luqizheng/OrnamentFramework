@@ -1,11 +1,18 @@
-﻿namespace Ornament.Web.Bundles.Seajs
-{
-    public class ReferenceModule : BaseModule
-    {
-        public ReferenceModule(string id)
-            : base(id)
-        {
+﻿using NHibernate.Hql.Ast.ANTLR;
 
+namespace Ornament.Web.Bundles.Seajs
+{
+    public class ReferenceModule
+    {
+        public ReferenceModule(string moduleId)
+        {
+            UniqueId = moduleId;
         }
+
+        /// <summary>
+        ///   Id
+        /// </summary>
+        public string UniqueId { get; set; }
+        
     }
 }

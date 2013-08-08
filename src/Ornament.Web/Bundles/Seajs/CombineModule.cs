@@ -9,29 +9,24 @@ namespace Ornament.Web.Bundles.Seajs
 {
     /// <summary>
     /// </summary>
-    public class CombineModule : BaseModule
+    public class CombineModule : ReferenceModule
     {
-        private readonly HttpRequest _request;
         private ModuleCollection _modules;
 
         /// <summary>
         /// </summary>
         /// <param name="physicPath"></param>
         /// <param name="virtualPaht"></param>
-        public CombineModule(string physicPath, string virtualPaht)
-            : base(physicPath.ToLower())
+        public CombineModule(string physicPath)
+            : base(physicPath)
         {
-            PhysciPath = physicPath;
-            _request = new HttpRequest(physicPath, virtualPaht, "");
-            ModuleId = virtualPaht;
+            UniqueId = physicPath;
         }
 
-        public string PhysciPath { get; set; }
-
-        /// <summary>
-        ///     Id of Seajs moduleId and should be a virtualPath.
-        /// </summary>
-        public string ModuleId { get; set; }
+        public string PhysciPath
+        {
+            get { return UniqueId; }
+        }
 
         /// <summary>
         /// </summary>
@@ -41,7 +36,6 @@ namespace Ornament.Web.Bundles.Seajs
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="skipCombineModule"></param>
         /// <returns></returns>
@@ -54,8 +48,8 @@ namespace Ornament.Web.Bundles.Seajs
             }
             return BuildContent(content, skipCombineModule);
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="content"></param>
         /// <param name="skipCombineModule"></param>
@@ -67,7 +61,7 @@ namespace Ornament.Web.Bundles.Seajs
 
             //Build Define Header 
             string newDefined = String.Format("define(\"{0}\",[\"{1}\"],", UniqueId,
-                                              String.Join("\",\"", Modules.RequrestIds));
+                String.Join("\",\"", Modules.RequrestIds));
             result.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
 
             //添加合并文件的内容
@@ -79,21 +73,26 @@ namespace Ornament.Web.Bundles.Seajs
             return result.ToString();
         }
 
+        private string MapPath(string virtualPath)
+        {
+            return HttpContext.Current.Request.MapPath(virtualPath);
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="content"></param>
         /// <param name="skipCombinePath">已经被combine的Modules</param>
         /// <returns>返回需要被combie module的Moudle</returns>
         protected virtual List<CombineModule> CollectRequire(ref string content,
-                                                             ModuleCollection skipCombinePath)
+            ModuleCollection skipCombinePath)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
             var combineFiles = new List<CombineModule>();
 
             content = Regex.Replace(content, @"require\((.+?)\)", s =>
-                {
-                    /*
+            {
+                /*
                      * 1）询问是否为合并模块。
                      *    a: 是合并模块
                      *      a.1: 是否包含在skipCombinePath
@@ -101,31 +100,31 @@ namespace Ornament.Web.Bundles.Seajs
                      *      a.1.2: 包含，设置为引用模块
                      *    b:是引用模块
                      */
-                    string moduleId = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
-                    string physicPath = _request.MapPath(moduleId).ToLower();
+                string moduleId = s.Groups[1].Value.ToLower().TrimStart('\"', '\'').TrimEnd('\"', '\'');
+                string physicPath = MapPath(moduleId).ToLower();
 
-                    BaseModule subModule = null;
-                    if (!skipCombinePath.Contains(physicPath) && File.Exists(physicPath)) //文件存就需要合并
+                ReferenceModule subModule = null;
+                if (!skipCombinePath.Contains(physicPath) && File.Exists(physicPath)) //文件存就需要合并
+                {
+                    if (!skipCombinePath.Contains(physicPath))
                     {
-                        if (skipCombinePath.Contains(physicPath))
-                        {
-                            subModule = new CombineModule(physicPath, moduleId);
-                            skipCombinePath.Add(subModule);
-                            combineFiles.Add((CombineModule) subModule);
-                        }
-                        else
-                        {
-                            subModule = skipCombinePath[physicPath];
-                        }
+                        subModule = new CombineModule(physicPath);
+                        skipCombinePath.Add(subModule);
+                        combineFiles.Add((CombineModule) subModule);
                     }
                     else
                     {
-                        subModule = new ReferenceModule(moduleId);
+                        subModule = skipCombinePath[physicPath];
                     }
+                }
+                else
+                {
+                    subModule = new ReferenceModule(moduleId);
+                }
 
-                    Modules.Add(subModule);
-                    return s.Value.Replace(moduleId, subModule.UniqueId);
-                });
+                Modules.Add(subModule);
+                return s.Value.Replace(moduleId, subModule.UniqueId);
+            });
 
 
             return combineFiles;

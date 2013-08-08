@@ -45,8 +45,7 @@ namespace Ornament.Web.Bundles
             string requires;
             if (_dependIds != null && _dependIds.Length != 0)
             {
-                var s = "');require(''";
-                requires = "require('" + string.Join(s, _dependIds) + "')";
+                requires = "require('" + string.Join("');require(''", _dependIds) + "')";
             }
             else
             {
@@ -55,8 +54,6 @@ namespace Ornament.Web.Bundles
 
             string replaceContent = string.Format(wrapper, bundleContent, requires);
             return base.ApplyTransforms(context, replaceContent, bundleFiles);
-
-            //return base.ApplyTransforms(context, bundleContent, bundleFiles);
         }
     }
 }

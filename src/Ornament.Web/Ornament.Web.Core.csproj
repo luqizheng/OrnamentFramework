@@ -140,7 +140,6 @@
     <Compile Include="Bundles\SeajsBundle.cs" />
     <Compile Include="Bundles\SeajsMinify.cs" />
     <Compile Include="Bundles\Seajs\CombineModule.cs" />
-    <Compile Include="Bundles\Seajs\BaseModule.cs" />
     <Compile Include="Bundles\Seajs\IdCollection.cs" />
     <Compile Include="Bundles\Seajs\ModuleCollection.cs" />
     <Compile Include="Bundles\Seajs\ReferenceModule.cs" />
