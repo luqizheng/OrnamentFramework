@@ -11,7 +11,7 @@
     Layout = "~/Views/Shared/_appLayout.cshtml";
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
 }
-@section script 
+@section scripts 
 {
     @Html.Partial("_pm")
 
