@@ -8,7 +8,7 @@ PM dialog UI 1.0
 */
 define(function (require) {
     require('/bundles/bootstrap.js');
-    require('/scripts/ckeditor/ckeditor.js');
+    require('ckeditor');
     var Friend = require("/Scripts/Models/Base/Memberships/friend.js"),
      PersonalMessage = require("/Scripts/Models/Base/Views/pm.js"),
         pm=new PersonalMessage();

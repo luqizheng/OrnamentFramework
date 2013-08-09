@@ -20,8 +20,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryPlugin,
                     CodeStyle,
                     Fx,
-                    BizRelative,
-                    Utility
+                    BizRelative
                 };
 
             foreach (var item in registryParty)
@@ -109,19 +108,9 @@ namespace Ornament.MVCWebFrame.App_Start
             }
         }
 
-        private static void Utility(BundleCollection bundles)
-        {
-            bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
-                            .Include("~/Scripts/Util/*.js"));
-            bundles.Add(new Bundle("~/Scripts/ckeditor.js").Include("~/Scripts/ckeditor/ckeditor.js"));
-        }
-
+        
         private static void CodeStyle(BundleCollection bundles)
         {
-            //Code style registry
-            bundles.Add(new ScriptBundle("~/Scripts/CodeStyle")
-                            .Include("~/Scripts/Prettify/prettify.js"));
-            //.IncludeDirectory("~/Scripts/Prettify/", "*.js", false));
             bundles.Add(new StyleBundle("~/Content/CodeStyle")
                             .Include("~/Content/Prettify/prettify.css", "~/Content/Prettify/desert.css"));
         }

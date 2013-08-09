@@ -14,7 +14,7 @@
 <div class="control-group">
     @Html.Label("", display, new {@class = "control-label"})
     <div class="controls">
-        @Html.Hidden("", String.Join(",", from role in ugs select role.Id), new {style = "width:100%"})
+        @Html.Hidden("", String.Join(",", from role in ugs select role.Id), new {style = "width:100%",role="usergroup.select2"})
     </div>
 
     <script type="text/javascript">

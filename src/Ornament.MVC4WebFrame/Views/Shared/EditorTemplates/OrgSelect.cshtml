@@ -17,11 +17,11 @@
                     text = this.Model.Name
                 };
             
-            @Html.Hidden("", this.Model.Id)
+            @Html.Hidden("", this.Model.Id,new {role="org.select2"})
         }
         else
         {
-            @Html.Hidden("")
+            @Html.Hidden("","",new {role="org.select2"})
         }
     </div>
 </div>

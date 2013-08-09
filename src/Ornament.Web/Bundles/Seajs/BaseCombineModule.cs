@@ -11,10 +11,13 @@ namespace Ornament.Web.Bundles.Seajs
     {
         private ModuleCollection _modules;
 
-        protected BaseCombineModule(string uniquireId) :
+        protected BaseCombineModule(string uniquireId, string virtualPath) :
             base(uniquireId)
         {
+            this.VirtualPath = virtualPath;
         }
+
+        public string VirtualPath { get; set; }
 
         /// <summary>
         ///     当前这个Module依赖的子module
@@ -24,9 +27,10 @@ namespace Ornament.Web.Bundles.Seajs
             get { return _modules ?? (_modules = new ModuleCollection()); }
         }
 
-        protected string MapPath(string virtualPath)
+        protected virtual string MapPath(string virtualPath)
         {
-            return HttpContext.Current.Request.MapPath(virtualPath);
+            var rootVirtualPath = this.UniqueId.ToLower().Replace(HttpContext.Current.Request.PhysicalApplicationPath.ToLower(), "~/").Replace('\\', '/');
+            return HttpContext.Current.Request.MapPath(virtualPath, VirtualPathUtility.GetDirectory(rootVirtualPath), true);
         }
 
         /// <summary>
@@ -54,9 +58,10 @@ namespace Ornament.Web.Bundles.Seajs
                      *    b:是引用模块
                      */
 
-                    string srcRequireModualId = match.Groups[1].Value.ToLower()
+                    string replacement = match.Groups[1].Value
                                                                .TrimStart('\"', '\'')
                                                                .TrimEnd('\"', '\'');
+                    string srcRequireModualId = replacement.ToLower();
                     ReferenceModule module;
                     if (referencModule.Contains(srcRequireModualId))
                     {
@@ -72,7 +77,7 @@ namespace Ornament.Web.Bundles.Seajs
                         ReferenceModule refModule = combinedModule[srcRequireModualId];
                         Modules.Add(refModule);
                         if (refModule is CombineModule)
-                            return match.Value.Replace(srcRequireModualId, combinedModule.GetModualId(refModule));
+                            return match.Value.Replace(replacement, combinedModule.GetModualId(refModule));
                         return match.Value;
                     }
 
@@ -80,11 +85,11 @@ namespace Ornament.Web.Bundles.Seajs
                     string physicPath = MapPath(srcRequireModualId).ToLower(); //it will be use in physicId
                     if (!combinedModule.Contains(physicPath) && File.Exists(physicPath))
                     {
-                        subModule = new CombineModule(physicPath);
+                        subModule = new CombineModule(physicPath, srcRequireModualId);
                         combinedModule.Add(subModule); //加入combined 变量，告诉后面遇到的不需要再合并。
                         result.Add((CombineModule)subModule);
                         Modules.Add(subModule);
-                        return match.Value.Replace(srcRequireModualId, combinedModule.GetModualId(subModule));
+                        return match.Value.Replace(replacement, combinedModule.GetModualId(subModule));
                     }
 
                     //路径下面，可能根部不存在该文件，如juqery，所以直接作为ReferenceModule使用
@@ -124,7 +129,7 @@ namespace Ornament.Web.Bundles.Seajs
         protected string BuildDefine(ModualIdSets moduleIdList)
         {
             return String.Format("define(\"{0}\",[\"{1}\"],", GetOutputModuleId(moduleIdList),
-                                            String.Join("\",\"", Modules.RequrestIds(moduleIdList)));
+                                 String.Join("\",\"", Modules.RequrestIds(moduleIdList)));
         }
 
 

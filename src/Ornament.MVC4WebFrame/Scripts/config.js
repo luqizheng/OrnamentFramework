@@ -1,5 +1,6 @@
 ﻿seajs.config({
     alias: {
+        "ckeditor":"/scripts/ckeditor/ckeditor.js",
         "jquery": "/bundles/jquery.js",
         "jqueryui": "/bundles/jqueryui.js",
         "bootstrap": "/bundles/bootstrap.js",

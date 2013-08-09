@@ -1,7 +1,9 @@
-﻿
+﻿/// <reference path="../../../Base/Views/user.typeahead.js" />
+/// <reference path="../../../Base/Views/userGroup.select2.js" />
+
 define(function (require) {
     var $ = require("jquery"),
-        userTypeahead = require("/scripts/models/base/views/user.typeahead.js"),
+        userTypeahead = require("../../../Base/Views/user.typeahead.js"),
         user = require("/scripts/models/base/memberships/user.js"),
         pm = require("/scripts/models/base/views/pm.js");
 
