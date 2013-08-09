@@ -1,11 +1,16 @@
 ﻿/// <reference path="../../../Base/Views/user.typeahead.js" />
 /// <reference path="../../../Base/Views/userGroup.select2.js" />
+/// <reference path="../../_appLayout.js" />
+
 
 define(function (require) {
     var $ = require("jquery"),
         userTypeahead = require("../../../Base/Views/user.typeahead.js"),
         user = require("/scripts/models/base/memberships/user.js"),
         pm = require("/scripts/models/base/views/pm.js");
+    require("../../_appLayout.js");
+
+
 
     var pmDialog;
     require("uniform")($);
@@ -53,7 +58,7 @@ define(function (require) {
             });
 
             pmDialog = new pm($("#pmEditor"), currentUser);
-            $("table [role=pm]").click(function() {
+            $("table [role=pm]").click(function () {
                 pmDialog.show();
             });
         }

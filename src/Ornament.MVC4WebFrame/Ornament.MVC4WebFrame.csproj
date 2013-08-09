@@ -770,7 +770,7 @@
     <Content Include="Scripts\plugins\utility\jquery.toDictionary.js" />
     <Content Include="Scripts\Models\Utility\Permission.js" />
     <Content Include="Scripts\Models\Utility\String.js" />
-    <Content Include="Scripts\_appLayout.js" />
+    <Content Include="Scripts\Models\Views\_appLayout.js" />
     <Content Include="Scripts\plugins\uploader\_swfuploadHandler.js" />
     <Content Include="Content\templates\pannonia\css\elfinder.css" />
     <Content Include="Content\templates\pannonia\css\fam-icons.css" />

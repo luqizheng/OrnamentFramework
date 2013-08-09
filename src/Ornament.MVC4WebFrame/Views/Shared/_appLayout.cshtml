@@ -17,7 +17,7 @@
     <link href="@Url.Content("~/content/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/content/plugin")
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
-    
+
     <script type="text/javascript" src="/scripts/seajs/sea-debug.js"> </script>
     @RenderSection("head", false)
 </head>
@@ -84,10 +84,14 @@
 
     <div id="footer"></div>
     <script src="/Scripts/config.js" type="text/javascript"></script>
-    
-    <script type="text/javascript">
-        seajs.use(["/scripts/_applayout.js"])
-    </script>
+
+    @if (!IsSectionDefined("script"))
+    {
+        <script type="text/javascript">
+            seajs.use("/scripts/_applayout.js")
+        </script>
+    }
+
     @RenderSection("script", false)
 </body>
 </html>

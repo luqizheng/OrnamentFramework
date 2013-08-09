@@ -72,10 +72,7 @@
 
       </mvcSiteMapNode>
     </mvcSiteMapNode>
-    <mvcSiteMapNode title="add" imageUrl="icon-indent-right">
-      <mvcSiteMapNode controller="TypeLayout" area="Docs" action="BaseType" title="BaseType"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="TypeLayout" area="Docs" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
-    </mvcSiteMapNode>
+    
     <mvcSiteMapNode title="Docs" imageUrl="icon-indent-right">
       <mvcSiteMapNode controller="TypeLayout" area="Docs" action="BaseType" title="BaseType"></mvcSiteMapNode>
       <mvcSiteMapNode controller="TypeLayout" area="Docs" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
