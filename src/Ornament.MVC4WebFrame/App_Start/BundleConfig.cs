@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Qi;
@@ -20,7 +21,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryPlugin,
                     CodeStyle,
                     Fx,
-                    BizRelative
+                    BizRelative,RegistryCtrl
                 };
 
             foreach (var item in registryParty)
@@ -40,6 +41,8 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js")
                             .Include("~/Scripts/fx/jquery-ui-{version}.js")
                             .Include("~/Scripts/fx/compatibles/jqueryui-{version}.js"));
+
+            bundles.Add(new SeajsBundle("~/Scripts/_appLayout.js").Include("~/Scripts/Models/Views/_appLayout.js"));
         }
 
         private static void JQueryPlugin(BundleCollection bundles)
@@ -77,9 +80,9 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <returns></returns>
         private static string ToVirtualPath(string fullPath)
         {
-            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/").Replace("\\", "/");
+            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/").Replace("////", "/");
         }
-       
+
 
         /// <summary>
         ///     业务逻辑相关的，全部都需要带有版本号
@@ -93,22 +96,32 @@ namespace Ornament.MVCWebFrame.App_Start
             AutoForPageScripts(bundles);
         }
 
+        private static void RegistryCtrl(BundleCollection bundles)
+        {
+
+            bundles.Add(new SeajsBundle("~/scripts/ctrls/memberships.js").Include("~/Scripts/Models/Views/Share/memberships.js"));
+        }
+
         /// <summary>
         /// 每个Page对应一个 js，冲这里做映射
         /// </summary>
         /// <param name="bundles"></param>
         private static void AutoForPageScripts(BundleCollection bundles)
         {
-            const string str = "~/Scripts/Models/Views/";
-            string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
-            foreach (string file in files)
+            using (var writer = new StreamWriter(ApplicationHelper.MapPath("~/log/page.txt")))
             {
-                var bundleName = ToVirtualPath(file).ToLower().Replace(str.ToLower(), "~/scripts/");
-                bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
+                const string str = "~/Scripts/Models/Views/";
+                string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
+                foreach (string file in files)
+                {
+                    var bundleName = ToVirtualPath(file).ToLower().Replace(str.ToLower(), "~/scripts/");
+                    bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
+                    writer.WriteLine("{0}={1}", bundleName, file);
+                }
             }
         }
 
-        
+
         private static void CodeStyle(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/Content/CodeStyle")
