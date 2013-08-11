@@ -45,8 +45,12 @@ namespace Ornament.Web
         /// <param name="name">name of the resource descript.</param>
         /// <returns></returns>
         /// <exception cref="ResourceException">Can not find ResourceDescription</exception>
+        /// <exception cref="ArgumentNullException">name is null or empty.</exception>
         public ResourceDescription Get(string name)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
+
             ResourceDescription result = (from a in ResourceSettings where a.Name == name select a).FirstOrDefault();
             if (result == null)
                 throw new ResourceException(String.Format("can't find the {0} from setting.", name));

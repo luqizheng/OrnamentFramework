@@ -546,12 +546,14 @@
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\Fx\compatibles\jquery-ui-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\friend.js" />
+    <Content Include="Scripts\Modules\Combine\Memberships\permission.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\user.js" />
     <Content Include="Scripts\Modules\Combine\Messages\notify-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
     <Content Include="Scripts\Modules\Combine\Util\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\Time.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
+    <Content Include="Scripts\Modules\Views\MemberShips\Permissions\Permission.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\User\Create.js" />
     <Content Include="Scripts\Modules\Views\Messages\NewsType\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\memberships.js" />

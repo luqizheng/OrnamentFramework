@@ -11,15 +11,15 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-
+            //Edit user use login Id.
             context.MapRoute("MemberShips_EditUser",
-                             "MemberShips/{controller}/{action}/{loginId}",
-                             new {action = "Index", loginId = UrlParameter.Optional}
+                             "MemberShips/Users/{action}/{loginId}",
+                             new { action = "Index", controller = "Users", loginId = UrlParameter.Optional }
                 );
             context.MapRoute(
                 "MemberShips_default",
                 "MemberShips/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional}
+                new { action = "Index", id = UrlParameter.Optional }
                 );
         }
     }
