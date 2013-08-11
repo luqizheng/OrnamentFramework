@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Qi;
@@ -20,8 +21,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryPlugin,
                     CodeStyle,
                     Fx,
-                    BizRelative,
-                    Utility
+                    BizRelative,RegistryCtrl
                 };
 
             foreach (var item in registryParty)
@@ -41,6 +41,8 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js")
                             .Include("~/Scripts/fx/jquery-ui-{version}.js")
                             .Include("~/Scripts/fx/compatibles/jqueryui-{version}.js"));
+
+            bundles.Add(new SeajsBundle("~/_appLayout.js").Include("~/Scripts/Modules/Views/_appLayout.js"));
         }
 
         private static void JQueryPlugin(BundleCollection bundles)
@@ -78,9 +80,9 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <returns></returns>
         private static string ToVirtualPath(string fullPath)
         {
-            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/").Replace("\\", "/");
+            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/").Replace("////", "/");
         }
-       
+
 
         /// <summary>
         ///     业务逻辑相关的，全部都需要带有版本号
@@ -88,10 +90,16 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void BizRelative(BundleCollection bundles)
         {
-            bundles.Add(new SeajsBundle("~/models/personal-1.0.js").Include("~/Scripts/Models/personal.js"));
-            bundles.Add(new SeajsBundle("~/models/membership-1.0.js").Include(@"~/Scripts/Models/Ui/Controls/MemberShip.js"));
-            bundles.Add(new SeajsBundle("~/models/pm-1.0.js").Include("~/Scripts/Models/Ui/Controls/pm.js"));
+            /*bundles.Add(new SeajsBundle("~/models/personal-1.0.js").Include("~/Scripts/Models/personal.js"));
+            bundles.Add(new SeajsBundle("~/models/membership-1.0.js").Include(@"~/Scripts/Modules/Ui/Controls/MemberShip.js"));*/
+            bundles.Add(new SeajsBundle("~/models/pm-1.0.js").Include("~/Scripts/Modules/Ui/Controls/pm.js"));
             AutoForPageScripts(bundles);
+        }
+
+        private static void RegistryCtrl(BundleCollection bundles)
+        {
+
+            bundles.Add(new SeajsBundle("~/scripts/ctrls/memberships.js").Include("~/Scripts/Modules/Views/Share/memberships.js"));
         }
 
         /// <summary>
@@ -100,28 +108,22 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void AutoForPageScripts(BundleCollection bundles)
         {
-            const string str = "~/scripts/models/views/";
-            string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
-            foreach (string file in files)
+            using (var writer = new StreamWriter(ApplicationHelper.MapPath("~/log/page.txt")))
             {
-                var bundleName = ToVirtualPath(file).ToLower().Replace(str.ToLower(), "~/");
-                bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
+                const string str = "~/Scripts/Modules/Views/";
+                string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
+                foreach (string file in files)
+                {
+                    var bundleName = ToVirtualPath(file).Replace("\\", "/").ToLower().Replace(str.ToLower(), "~/");
+                    bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
+                    writer.WriteLine("{0}={1}", bundleName, file);
+                }
             }
         }
 
-        private static void Utility(BundleCollection bundles)
-        {
-            bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
-                            .Include("~/Scripts/Util/*.js"));
-            bundles.Add(new Bundle("~/Scripts/ckeditor.js").Include("~/Scripts/ckeditor/ckeditor.js"));
-        }
 
         private static void CodeStyle(BundleCollection bundles)
         {
-            //Code style registry
-            bundles.Add(new ScriptBundle("~/Scripts/CodeStyle")
-                            .Include("~/Scripts/Prettify/prettify.js"));
-            //.IncludeDirectory("~/Scripts/Prettify/", "*.js", false));
             bundles.Add(new StyleBundle("~/Content/CodeStyle")
                             .Include("~/Content/Prettify/prettify.css", "~/Content/Prettify/desert.css"));
         }

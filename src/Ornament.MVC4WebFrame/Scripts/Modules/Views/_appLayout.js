@@ -49,4 +49,6 @@ define(function (require) {
         $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
         $('#content').toggleClass("full-content");
     });
+
+    return { init: function () { } };
 });

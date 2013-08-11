@@ -17,17 +17,17 @@
                     text = this.Model.Name
                 };
             
-            @Html.Hidden("", this.Model.Id)
+            @Html.Hidden("", this.Model.Id,new {role="org.select2"})
         }
         else
         {
-            @Html.Hidden("")
+            @Html.Hidden("","",new {role="org.select2"})
         }
     </div>
 </div>
 
 <script type="text/javascript">
-    seajs.use("/models/membership.js", function (r) {
+    seajs.use("/scripts/ctrls/memberships.js", function (r) {
         var d = @Html.Raw(JsonHelper.ToJson(Selection));
         r.select2.org("#@Html.Id("")",d);
         

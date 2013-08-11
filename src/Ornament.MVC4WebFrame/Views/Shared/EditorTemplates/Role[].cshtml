@@ -6,7 +6,7 @@
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     object selected = new object();
-    string ids="";
+    string ids = "";
     if (this.Model != null && this.Model.Length != 0)
     {
         selected = from role in this.Model
@@ -23,12 +23,12 @@
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        @Html.Hidden("", ids, new { style = "width:100%" })
+        @Html.Hidden("", ids, new { style = "width:100%", role = "role.select2" })
     </div>
 </div>
 
 <script type="text/javascript">
-    seajs.use("/models/membership.js", function(r) {
+    seajs.use("/scripts/ctrls/memberships.js", function(r) {
         var d = @Html.Raw(JsonHelper.ToJson(selected));
         r.select2.role("#@Html.Id("")",d);
     });
