@@ -10,8 +10,8 @@ PM dialog UI 1.0
 define(function(require) {
     require('/bundles/bootstrap.js');
     require('ckeditor');
-    var Friend = require("/Scripts/Modules/Base/Memberships/friend.js"),
-        PersonalMessage = require("../../Base/Personal/PersonalMessage.js"),
+    var Friend = require("/Scripts/Modules/Combine/Memberships/friend.js"),
+        PersonalMessage = require("../../Combine/Personal/PersonalMessage.js"),
         pm = new PersonalMessage();
 
     function buildTemp(chatItem) {
