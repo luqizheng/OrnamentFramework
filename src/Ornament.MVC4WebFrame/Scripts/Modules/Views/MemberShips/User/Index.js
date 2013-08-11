@@ -1,16 +1,16 @@
-﻿/// <reference path="../../../Base/Views/user.typeahead.js" />
-/// <reference path="../../../Base/Views/userGroup.select2.js" />
+﻿/// <reference path="../../../Combine/Views/user.typeahead.js" />
+/// <reference path="../../../Combine/Views/userGroup.select2.js" />
 /// <reference path="../../_appLayout.js" />
-/// <reference path="../../../Base/Views/user.typeahead.js" />
-/// <reference path="../../../Base/Memberships/user.js" />
+/// <reference path="../../../Combine/Views/user.typeahead.js" />
+/// <reference path="../../../Combine/Memberships/user.js" />
 /// <reference path="../../_appLayout.js" />
 
 
 define(function (require) {
     require("../../_appLayout.js");
     var $ = require("jquery"),
-        userTypeahead = require("../../../Base/Views/user.typeahead.js"),
-        userAPI = require("../../../Base/Memberships/user.js"),
+        userTypeahead = require("../../../Combine/Views/user.typeahead.js"),
+        userAPI = require("../../../Combine/Memberships/user.js"),
         pm = require("/share/pm.js");
     require("/_appLayout.js");
 
