@@ -9,6 +9,7 @@
  *
  * Date: Tue Jan 26 16:30:00 2012 -0500
  */
+
 (function ($) {
 
     $.easytabs = function (container, options) {

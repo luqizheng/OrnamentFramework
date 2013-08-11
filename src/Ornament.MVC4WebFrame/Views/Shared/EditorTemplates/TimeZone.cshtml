@@ -21,7 +21,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    seajs.use(["select2"], function () {
+    seajs.use(["jquery","select2"], function ($,sFunc) {
+        sFunc($);
         $("#@ViewData.TemplateInfo.HtmlFieldPrefix.Replace(".", "_")").select2({ width: "350px" });
     });
 </script>

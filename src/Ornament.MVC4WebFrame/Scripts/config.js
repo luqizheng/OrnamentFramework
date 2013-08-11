@@ -1,111 +1,30 @@
 ﻿seajs.config({
-    plugins: ['shim'],
     alias: {
-        jquery: {
-            src: "/bundles/jquery.js",
-            exports: "jQuery "
-        },
-        jqueryui: {
-            src: "/bundles/jqueryui.js",
-            deps: ['jquery'],
-            exports: "jQuery"
-        },
-
-        bootstrap: {
-            src: "/bundles/bootstrap.js",
-            deps: ['jquery'],
-            exports: "jQuery "
-        },
-        easytabs: {
-            src: "/scripts/plugins/ui/jquery.easytabs.js",
-            deps: ['jquery'],
-            exports: "jQuery"
-        },
-        elfinder: {
-            src: "/Scripts/plugins/ui/jquery.elfinder.js",
-            deps: ["jqueryui"]
-        },
-        form: {
-            src: "/scripts/plugins/forms/jquery.form.js",
-            deps: ['jquery'],
-            exports: "jQuery"
-        },
-        tmpl: {
-            src: "/bundles/tmpl.js",
-            deps: ['jquery'],
-            exports: "jQuery "
-        },
-        unobtrusive: {
-            src: "/bundles/unobtrusive.js",
-            deps: ['jquery'],
-            exports: "jQuery "
-        },
-
-        collapsible: {
-            src: "/bundles/collapsible.js",
-            deps: ['jquery'],
-            exports: "jQuery "
-        },
-        inputmask: {
-            src: "/bundles/inputmask",//make sure it's endwith "#"
-            deps: ['jquery'],
-            exports: "jQuery "
-        },
-        uniform: {
-            src: "/scripts/plugins/forms/jquery.uniform.min.js",
-            deps: ['jquery'],
-            exports: "jQuery"
-        },
-        jgrowl: {
-            src: "/bundles/jgrowl.js",
-            deps: ['jquery'], exports: "jQuery"
-        },
-        validation: {
-            src: "/bundles/jqueryval.js",
-            deps: ["unobtrusive"], exports: "jQuery "
-        },
-        valid: {
-            src: "/scripts/compatibles/valid.js",
-            deps: ["validation"]
-        },
-
-        tagsInput: {
-            src: "/scripts/plugins/forms/jquery.tagsinput.min.js",
-            deps: ["jquery"],
-            exports: "jQuery"
-        },
-        timePicker: {
-            src: "/bundles/timepicker.js",
-            deps: ["jquery", "inputmask"],
-            exports: "jQuery"
-        },
-        select2: {
-            src: "/scripts/plugins/forms/jquery.select2.min.js",
-            deps: ["jquery"],
-            exports: "jQuery"
-        },
-        endlessScroll: {
-            src: "/Scripts/jquery.endless-scroll.js",
-            deps: ["jquery"], exports: "jQuery"
-        },
-        datePicker: {
-            src: "/bundles/ExtenderType.js",
-            deps: ["bootstrap"], exports: "jQuery"
-        },
-        util: {
-            src: "/Scripts/Utils.js",
-            deps: ["jquery"]
-        },
-        pm: {
-            src: "/models/pm.js", deps: ["bootstrap"]
-        },
-        wizard: {
-            src: "/Scripts/plugins/forms/jquery.form.wizard.js",
-            deps: ['jqueryui', 'form'],
-            exports: 'jQuery'
-        },
-        periodDailog: { exports: "jQuery " },
-        preload: ["jquery"]
+        "ckeditor":"/scripts/ckeditor/ckeditor.js",
+        "jquery": "/bundles/jquery.js",
+        "jqueryui": "/bundles/jqueryui.js",
+        "bootstrap": "/bundles/bootstrap.js",
+        "easytabs": "/bundles/jquery.easytabs.js",
+        "elfinder": "/Scripts/plugins/ui/jquery.elfinder.js",
+        "form": "/scripts/plugins/forms/jquery.form.js",
+        "tmpl": "/bundles/tmpl.js",
+        "unobtrusive": "/bundles/jquery.unobtrusive-ajax.js",
+        "collapsible": "/bundles/jquery.collapsible.js",
+        "inputmask": "/bundles/jquery.inputmask.js",//make sure it's endwith "#"
+        "uniform": "/bundles/jquery.uniform.js",
+        "jgrowl": "/bundles/jquery.jgrowl.js",
+        "valid": "/bundles/jquery.validate.js",
+        "tagsInput": "/scripts/plugins/forms/jquery.tagsinput.min.js",
+        "timePicker": "/bundles/timepicker.js",
+        "select2": "/bundles/jquery.select2.js",
+        "endlessScroll": "/Scripts/jquery.endless-scroll.js",
+        "util": "/Scripts/Utils.js",
+        "wizard": "/bundles/jquery.form.wizard.js",
+        //following is Model
+        "pm": "/models/pm-1.0.js",
+        "user": "/models/user-1.0.js",
+        "membership": "/models/membership-1.0.js",
+        "personal": "/models/personal-1.0.js"
     }
 });
 

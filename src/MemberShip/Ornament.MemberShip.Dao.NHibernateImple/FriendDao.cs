@@ -10,9 +10,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<Friend> GetFriends(User owner)
         {
             return CreateDetachedCriteria()
-                .Add(NHibernate.Criterion.Restrictions.Eq(Projections.Property<Friend>(s => s.Owner), owner))
+                .Add(Restrictions.Eq(Projections.Property<Friend>(s => s.Owner), owner))
                 .SetMaxResults(400)
-                .GetExecutableCriteria(this.CurrentSession).List<Friend>();
+                .GetExecutableCriteria(CurrentSession).List<Friend>();
         }
     }
 }

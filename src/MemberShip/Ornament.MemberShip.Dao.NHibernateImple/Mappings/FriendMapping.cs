@@ -10,10 +10,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Table("MBS_Friend");
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
             References(s => s.Owner);
-            References(s => s.Relative);
-            Map(_ => _.Memo).Length(255);
-            Map(_ => _.Group).Length(255);
-
+            References(s => s.User);
+            Map(_ => _.Remarks).Length(255);
+            Map(_ => _.GroupName).Length(255);
         }
     }
 }

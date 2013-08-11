@@ -1,4 +1,7 @@
-﻿using System.Web.Optimization;
+﻿using System.IO;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Qi;
 
@@ -15,11 +18,10 @@ namespace Ornament.MVCWebFrame.App_Start
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
                     GlobalStyle,
-                    JQueryRelative,
+                    JQueryPlugin,
                     CodeStyle,
-                    SeajsLib,
-                    BizRelative,
-                    Utility
+                    Fx,
+                    BizRelative,RegistryCtrl
                 };
 
             foreach (var item in registryParty)
@@ -28,97 +30,100 @@ namespace Ornament.MVCWebFrame.App_Start
             }
         }
 
-        private static void SeajsLib(BundleCollection bundles)
+        private static void Fx(BundleCollection bundles)
         {
-            bundles.Add(new Bundle("~/bundles/jquery.js").Include("~/Scripts/jquery-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap.js").Include("~/Scripts/bootstrap/bootstrap.js"));
+            bundles.Add(new Bundle("~/bundles/jquery.js")
+                            .Include("~/Scripts/fx/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui.js")
-                            .Include("~/Scripts/jquery-ui-{version}.js")
-                            .Include("~/Scripts/compatibles/jqueryui-{version}.js"));
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js", "/bundles/jquery.js")
+                            .Include("~/Scripts/fx/bootstrap.js"));
+
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js")
+                            .Include("~/Scripts/fx/jquery-ui-{version}.js")
+                            .Include("~/Scripts/fx/compatibles/jqueryui-{version}.js"));
+
+            bundles.Add(new SeajsBundle("~/_appLayout.js").Include("~/Scripts/Modules/Views/_appLayout.js"));
         }
 
-        private static void JQueryRelative(BundleCollection bundles)
+        private static void JQueryPlugin(BundleCollection bundles)
         {
-            bundles.Add(
-                new ScriptBundle("~/bundles/datePicker.js").Include("~/Scripts/datePicker/bootstrap-datepicker.js"));
+            string searchFolder = ApplicationHelper.MapPath("~/Scripts/plugins");
+            foreach (var dirPath in Directory.GetDirectories(searchFolder))
+            {
+                string[] files = Directory.GetFiles(dirPath, "*.js");
+                var virtualFolderNmae = ToVirtualPath(dirPath);
+                foreach (string file in files)
+                {
+                    if (file.ToLower().EndsWith(".min.js"))
+                        continue;
+                    var fileInfo = new FileInfo(file);
+                    if (fileInfo.Name.StartsWith("jquery."))
+                    {
+                        var path = virtualFolderNmae + "/" + fileInfo.Name;
+                        bundles.Add(new JQueryPluginSeajsBundle("~/bundles/" + fileInfo.Name).Include(path));
+                    }
+                }
 
-            //input forms;
-            bundles.Add(new Bundle("~/bundles/inputmask.js", new JsMinify()).Include("~/Scripts/plugins/forms/jquery.inputmask/*.js")
-                                                                            .Include("~/Scripts/compatibles/inputMask-{version}.js"));
-
-            bundles.Add(new Bundle("~/bundles/jqueryval.js", new JsMinify()).Include("~/Scripts/jquery.validate*"));
-            bundles.Add(new ScriptBundle("~/bundles/unobtrusive.js").Include("~/Scripts/jquery.unobtrusive*"));
-            bundles.Add(new ScriptBundle("~/bundles/tmpl.js").Include("~/Scripts/jquery.tmpl.js"));
-            //bundles.Add(new ScriptBundle("~/bundles/multiChoice.js").Include("~/scripts/jQuery.multiChoice.js"));
-            bundles.Add(new ScriptBundle("~/bundles/periodDailog.js").Include("~/scripts/periodDailog/*.js"));
-            //bundles.Add(new Bundle("~/bundles/dialog.js", new JsMinify()).Include("~/scripts/dialogs/*.js"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
-            bundles.Add(new ScriptBundle("~/bundles/knockout.js").Include("~/Scripts/knockout-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/json2.js").Include("~/Scripts/json2.js"));
-            bundles.Add(
-                new Bundle("~/bundles/toDictionary.js", new JsMinify()).Include("~/scripts/jquery.toDictionary.js"));
-
-
-            bundles.Add(new ScriptBundle("~/bundles/easytabs.js").Include("~/Scripts/plugins/ui/jquery.easytabs.js"));
-            //form
-            bundles.Add(new ScriptBundle("~/bundles/form.js").Include("~/Scripts/plugins/forms/jquery.form.js"));
-            bundles.Add(
-                new ScriptBundle("~/bundles/collapsible.js").Include("~/Scripts/plugins/ui/jquery.collapsible.js"));
-            bundles.Add(new ScriptBundle("~/bundles/jgrowl.js").Include("~/Scripts/plugins/ui/jquery.jgrowl.js"));
-
-            //time picker ;
-            bundles.Add(new ScriptBundle("~/bundles/timepicker.js")
-                            .Include("~/Scripts/plugins/ui/jquery.timepicker-{version}.js")
-                            .Include("~/Scripts/compatibles/timePicker-{version}.js"));
+                var folders = Directory.GetDirectories(dirPath);
+                foreach (var folderPath in folders)
+                {
+                    var directInfo = new DirectoryInfo(folderPath);
+                    string virtualFolderName = ToVirtualPath(folderPath);
+                    bundles.Add(new JQueryPluginSeajsBundle("~/bundles/" + directInfo.Name + ".js").Include(virtualFolderName + "/*.js"));
+                }
+            }
+        }
+        /// <summary>
+        /// 把物理路径改为虚拟路径
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
+        private static string ToVirtualPath(string fullPath)
+        {
+            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/").Replace("////", "/");
         }
 
+
+        /// <summary>
+        ///     业务逻辑相关的，全部都需要带有版本号
+        /// </summary>
+        /// <param name="bundles"></param>
         private static void BizRelative(BundleCollection bundles)
         {
-            //Memberships
-            /*bundles.Add(new SeajsBundle("~/models/user.js").Include("~/Scripts/Models/Base/Memberships/user-{version}.js"));
-            bundles.Add(new SeajsBundle("~/models/role.js").Include("~/Scripts/Models/Base/Memberships/role-{version}.js"));
-            bundles.Add(
-                new SeajsBundle("~/models/userGroup.js").Include("~/Scripts/Models/Base/Memberships/userGroup-{version}.js"));
-            bundles.Add(new SeajsBundle("~/models/org.js").Include("~/Scripts/Models/Base/Memberships/org-{version}.js"));
-            //bundles.Add(new SeajsBundle("~/models/message.js").Include("~/Scripts/Models/Messages/msg-{version}.js"));
-
-            bundles.Add(new SeajsBundle("~/models/ui/membership.js")
-                .Include(@"~/Scripts/Models/Biz/Ui/MemberShip.js"));
-
-
-            //PersonalMessage
-            bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Base/Messages/pm-{version}.js"));
-
-            bundles.Add(new SeajsBundle("~/models/personal.js").Include("~/Scripts/Models/Base/Memberships/personal-{version}.js"));
-
-            //Util
-            bundles.Add(new SeajsBundle("~/models/util/select2Helper.js")
-                            .Include("~/Scripts/Models/Base/Util/select2Helper-1.0.js"));*/
-
-
-            bundles.Add(new SeajsBundle("~/models/membership.js").Include(@"~/Scripts/Models/Biz/Ui/MemberShip.js"));
-            bundles.Add(new SeajsBundle("~/models/pm.js").Include("~/Scripts/Models/Base/Messages/pm-{version}.js"));
-
-
+            /*bundles.Add(new SeajsBundle("~/models/personal-1.0.js").Include("~/Scripts/Models/personal.js"));
+            bundles.Add(new SeajsBundle("~/models/membership-1.0.js").Include(@"~/Scripts/Modules/Ui/Controls/MemberShip.js"));*/
+            bundles.Add(new SeajsBundle("~/models/pm-1.0.js").Include("~/Scripts/Modules/Ui/Controls/pm.js"));
+            AutoForPageScripts(bundles);
         }
 
-        private static void Utility(BundleCollection bundles)
+        private static void RegistryCtrl(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/Scripts/Utils.js")
-                            .Include("~/Scripts/Util/*.js"));
-            bundles.Add(new Bundle("~/Scripts/ckeditor.js").Include("~/Scripts/ckeditor/ckeditor.js"));
+
+            bundles.Add(new SeajsBundle("~/scripts/ctrls/memberships.js").Include("~/Scripts/Modules/Views/Share/memberships.js"));
         }
+
+        /// <summary>
+        /// 每个Page对应一个 js，冲这里做映射
+        /// </summary>
+        /// <param name="bundles"></param>
+        private static void AutoForPageScripts(BundleCollection bundles)
+        {
+            using (var writer = new StreamWriter(ApplicationHelper.MapPath("~/log/page.txt")))
+            {
+                const string str = "~/Scripts/Modules/Views/";
+                string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
+                foreach (string file in files)
+                {
+                    var bundleName = ToVirtualPath(file).Replace("\\", "/").ToLower().Replace(str.ToLower(), "~/");
+                    bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
+                    writer.WriteLine("{0}={1}", bundleName, file);
+                }
+            }
+        }
+
 
         private static void CodeStyle(BundleCollection bundles)
         {
-            //Code style registry
-            bundles.Add(new ScriptBundle("~/Scripts/CodeStyle")
-                            .Include("~/Scripts/Prettify/prettify.js"));
-            //.IncludeDirectory("~/Scripts/Prettify/", "*.js", false));
             bundles.Add(new StyleBundle("~/Content/CodeStyle")
                             .Include("~/Content/Prettify/prettify.css", "~/Content/Prettify/desert.css"));
         }

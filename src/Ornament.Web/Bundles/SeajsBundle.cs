@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Optimization;
+using Ornament.Web.Bundles.Seajs;
+using Qi;
 
 namespace Ornament.Web.Bundles
 {
@@ -32,15 +35,15 @@ namespace Ornament.Web.Bundles
         }
 
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
-            IEnumerable<BundleFile> bundleFiles)
+                                                       IEnumerable<BundleFile> bundleFiles)
         {
-            var fileInfo = new FileInfo(_virtualPath);
-
-            int lastPost = _virtualPath.LastIndexOf('/');
-            string path = _virtualPath.Substring(0, lastPost);
-            var seajs = new CombineSeajs(bundleContent, fileInfo.Name, path, "/scripts/models/base/");
-            BundleResponse a = base.ApplyTransforms(context, seajs.Processs(), bundleFiles);
-            return a;
+            var seajs = new RootModule(context.HttpContext.Request.MapPath(bundleFiles.First().VirtualFile.VirtualPath), this.Path);
+            var subContent = seajs.BuildContent(bundleContent);
+            BundleResponse result = base.ApplyTransforms(context, subContent, bundleFiles);
+#if DEBUG
+            UpdateCache(context, result);
+#endif
+            return result;
         }
     }
 }

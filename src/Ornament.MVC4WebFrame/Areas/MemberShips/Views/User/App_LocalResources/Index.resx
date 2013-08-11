@@ -166,9 +166,9 @@
     <value>Success to send retrieve password message.</value>
   </data>
   <data name="verify_email_fail" xml:space="preserve">
-    <value>Success to send verify email message.</value>
+    <value>Failed to send verify email message.</value>
   </data>
   <data name="verify_email_success" xml:space="preserve">
-    <value>Failed to send verify email message.</value>
+    <value>Success to send verify email message.</value>
   </data>
 </root>
