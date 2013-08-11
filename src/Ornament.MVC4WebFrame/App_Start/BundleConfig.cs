@@ -100,11 +100,11 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void AutoForPageScripts(BundleCollection bundles)
         {
-            const string str = "~/Scripts/Models/Views/";
+            const string str = "~/scripts/models/views/";
             string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
             foreach (string file in files)
             {
-                var bundleName = ToVirtualPath(file).ToLower().Replace(str.ToLower(), "~/scripts/");
+                var bundleName = ToVirtualPath(file).ToLower().Replace(str.ToLower(), "~/");
                 bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
             }
         }

@@ -16,7 +16,7 @@
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-        seajs.use("memberships/user/index.js", function(main) {
+        seajs.use("/memberships/user/index.js", function(main) {
             main.init({
                     success: "@Html.GetResourceString("verify_email_success")",
                     fail: "@Html.GetResourceString("verify_email_fail")"
