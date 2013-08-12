@@ -59,12 +59,6 @@ namespace Ornament.MVCWebFrame.Api.Core
             return result;
         }
 
-        // GET api/default1/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/default1
 
         public object Post([FromBody] SubmitContentData cc)

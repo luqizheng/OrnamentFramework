@@ -13,16 +13,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return CreateProfileDao().Profiles; }
         }
 
-        public IQueryable<UserSecretToken> UserSecretTokens { get; private set; }
+        public IQueryable<UserSecretToken> UserSecretTokens { get { return CreateUserSecurityTokenDao().Tokens; } }
 
-        public IFriendDao CreateFriendDao()
+      
+        public IFriendGroupDao CreateFriendGroupDao()
         {
-            return new FriendDao();
-        }
-
-        public IFriendRequestDao CreateFriendRequestDao()
-        {
-            return new FriendRequestDao();
+            return new FriendGroupDao();
         }
 
         /// <summary>

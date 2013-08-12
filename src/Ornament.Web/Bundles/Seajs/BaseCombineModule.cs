@@ -141,7 +141,7 @@ namespace Ornament.Web.Bundles.Seajs
             foreach (CombineModule combineFile in combineFiles)
             {
                 string subContent = combineFile.BuildContent(moduleIdList, referencModule);
-                result.Append(";\r\n").Append("//").Append(moduleIdList.GetModualId(combineFile)).Append(subContent);
+                result.Append(";\r\n").Append("//").Append(moduleIdList.GetModualId(combineFile)).Append(";\r\n").Append(subContent);
             }
             return result.ToString();
         }

@@ -2,21 +2,19 @@
 
 namespace Ornament.MemberShip.Relatives
 {
-    public class Friend : DomainObject<Friend, string>
+    public class Friend 
     {
-        protected Friend()
+        public Friend()
         {
+            
+        }
+        public Friend(User user)
+        {
+            this.User = user;
         }
 
-        public Friend(User owner, User relative)
-        {
-            Owner = owner;
-            User = relative;
-        }
-
-        public virtual User Owner { get; set; }
-        public virtual User User { get; set; }
-        public virtual string Remarks { get; set; }
-        public virtual string GroupName { get; set; }
+        public User User { get; set; }
+        public string Name { get; set; }
+        public string Remakrs { get; set; }
     }
 }

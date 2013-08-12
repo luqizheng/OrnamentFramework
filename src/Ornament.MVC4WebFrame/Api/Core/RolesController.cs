@@ -16,10 +16,10 @@ namespace Ornament.MVCWebFrame.Api.Core
 
         // GET api/usersapi
         [System.Web.Http.HttpGet]
-        public IEnumerable<object> Match(string name, int? pageIndex)
+        public IEnumerable<object> Match(string name, int? page)
         {
-            var page = pageIndex ?? 0;
-            var result = _factory.CreateRoleDao().Find(name + "%", page, 10);
+            var page1 = page ?? 0;
+            var result = _factory.CreateRoleDao().Find(name + "%", page1, 10);
 
             var c = from role in result
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.Optimization;
 using Microsoft.Ajax.Utilities;
-using Qi;
 
 namespace Ornament.Web.Bundles
 {
@@ -12,12 +11,6 @@ namespace Ornament.Web.Bundles
         // Fields
         internal static readonly JsMinify Instance = new JsMinify();
         internal static string JsContentType = "text/javascript";
-        private readonly string _virtualPath;
-
-        public SeajsMinify(string virtualPath)
-        {
-            _virtualPath = virtualPath;
-        }
 
         // Methods
 
@@ -68,8 +61,5 @@ namespace Ornament.Web.Bundles
             builder.Append(bundle.Content);
             bundle.Content = builder.ToString();
         }
-
-       
-
     }
 }

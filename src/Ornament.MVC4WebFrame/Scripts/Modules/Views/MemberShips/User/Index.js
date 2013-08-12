@@ -62,8 +62,8 @@ define(function (require) {
             });
 
             pmDialog = new pm($("#pmEditor"), currentUser);
-            $("table [role=pm]").click(function () {
-                pmDialog.show();
+            $("table a[role=pm]").click(function () {
+                pmDialog.show($(this).attr("href").substr(1));
             });
         }
     };

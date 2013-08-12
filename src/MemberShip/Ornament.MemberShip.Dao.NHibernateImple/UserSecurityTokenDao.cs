@@ -1,4 +1,6 @@
+using System.Linq;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Ornament.MemberShip.Security;
 using Qi.Domain.NHibernates;
 
@@ -16,6 +18,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
             return cri.GetExecutableCriteria(this.CurrentSession).UniqueResult<UserSecretToken>();
         }
+
+        public IQueryable<UserSecretToken> Tokens { get { return this.CurrentSession.Query<UserSecretToken>(); } }
 
         public override void SaveOrUpdate(UserSecretToken t)
         {

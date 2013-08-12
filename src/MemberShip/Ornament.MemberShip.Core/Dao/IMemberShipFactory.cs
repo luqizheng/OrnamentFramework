@@ -23,11 +23,10 @@ namespace Ornament.MemberShip.Dao
 
         IQueryable<UserSecretToken> UserSecretTokens { get; }
 
-        IFriendDao CreateFriendDao();
-        IFriendRequestDao CreateFriendRequestDao();
-        
-            
-        
+
+        IFriendGroupDao CreateFriendGroupDao();
+
+
         /// <summary>
         /// </summary>
         IUserDao CreateUserDao();

@@ -3,8 +3,9 @@ using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
 
-namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
+namespace Ornament.MVCWebFrame.Api.Core
 {
+    [Authorize]
     public class UserGroupsController : ApiController
     {
         private readonly IMemberShipFactory _factory;
@@ -15,11 +16,10 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         }
 
         // GET api/usersapi
-        [HttpGet]
-        public IEnumerable<object> Match(string name, int? pageIndex)
+        public IEnumerable<object> Get(string name, int? page)
         {
-            var page = pageIndex ?? 0;
-            var result = _factory.CreateUserGroupDao().Find(name , page, 10);
+            var page1 = page ?? 0;
+            var result = _factory.CreateUserGroupDao().Find(name, page1, 10);
 
             var c = from user in result
 

@@ -17,10 +17,10 @@ namespace Ornament.MVCWebFrame.Api.Core
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match(string name, int? pageIndex)
+        public IEnumerable<object> Match(string name, int? page)
         {
-            int page = pageIndex ?? 0;
-            IEnumerable<Org> result = _factory.CreateOrgDao().Find(name, page, 10);
+            int page1 = page ?? 0;
+            IEnumerable<Org> result = _factory.CreateOrgDao().Find(name, page1, 10);
 
             var c = from org in result
                     select new

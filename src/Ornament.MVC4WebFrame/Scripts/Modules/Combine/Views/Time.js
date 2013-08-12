@@ -1,5 +1,6 @@
 ﻿defined(function (require) {
-    $ = require("jquery");
+    var $ = require("jquery");
+    require("/scripts/plugins/jquery.inputmask.js");
     $(document).ready(function () {
         $('input.jqui-time').each(function () {
             var $this = $(this), format = $this.attr("timeFormat"), inputMask = $this.attr("inputmask-format");

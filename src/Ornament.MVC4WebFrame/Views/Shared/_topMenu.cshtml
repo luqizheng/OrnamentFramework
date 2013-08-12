@@ -36,7 +36,7 @@
     <ul class="top-menu">
         <li><a class="fullview"></a></li>
         <li><a class="showmenu"></a></li>
-        <li><a href="@Url.Action("Index", "MyMessage", new { area = "" })" title="" class="messages">
+        <li><a href="@Url.Action("Index", "MyMessage", new { area = "" })" title="" class="messages" id="#msgAlert">
             @*if (unReadCout != 0)
             {
                 <i class="new-message"></i>
@@ -88,13 +88,3 @@ else
 
     </ul>
 }
-
-<script type="text/javascript">
-    /*seajs.use(["/models/personal.js"], function (api) {
-        api.watch(1000, function (d) {
-            if (d.HasMessage) {
-                $(".messages").append('<i class="new-message"></i>');
-            }
-        });
-    });*/
-</script>

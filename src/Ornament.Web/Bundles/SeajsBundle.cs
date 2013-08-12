@@ -11,16 +11,15 @@ namespace Ornament.Web.Bundles
     /// </summary>
     public class SeajsBundle : ScriptBundle
     {
-        private readonly string _virtualPath;
-
+       
         public SeajsBundle(string virtualPath)
             : base(virtualPath)
         {
-            _virtualPath = virtualPath.TrimStart('~');
+          
             Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
-                Transforms.Add(new SeajsMinify(virtualPath));
+                Transforms.Add(new SeajsMinify());
             }
         }
 
@@ -30,7 +29,7 @@ namespace Ornament.Web.Bundles
             Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
-                Transforms.Add(new SeajsMinify(_virtualPath));
+                Transforms.Add(new SeajsMinify());
             }
         }
 

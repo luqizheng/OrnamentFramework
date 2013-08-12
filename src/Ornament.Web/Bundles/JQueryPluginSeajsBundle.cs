@@ -16,7 +16,7 @@ namespace Ornament.Web.Bundles
             Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
-                Transforms.Add(new SeajsMinify(virtualPath));
+                Transforms.Add(new SeajsMinify());
             }
         }
 
@@ -27,7 +27,7 @@ namespace Ornament.Web.Bundles
             Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
-                Transforms.Add(new SeajsMinify(virtualPath));
+                Transforms.Add(new SeajsMinify());
             }
         }
 

@@ -87,11 +87,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FriendDao.cs" />
-    <Compile Include="FriendRequestDao.cs" />
+    <Compile Include="FriendGroupDao.cs" />
     <Compile Include="Mappings\ContactInfoMapping.cs" />
     <Compile Include="Mappings\FriendMapping.cs" />
-    <Compile Include="Mappings\FriendRequestMapping.cs" />
     <Compile Include="Mappings\GeneralPermissionMapping.cs">
       <SubType>Code</SubType>
     </Compile>

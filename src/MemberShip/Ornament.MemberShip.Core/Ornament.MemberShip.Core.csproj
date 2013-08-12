@@ -75,7 +75,7 @@
   <ItemGroup>
     <Compile Include="ContactInfo.cs" />
     <Compile Include="Dao\IFriendDao.cs" />
-    <Compile Include="Dao\IFriendRequestDao.cs" />
+    <Compile Include="Dao\IFriendGroupDao.cs" />
     <Compile Include="OrgCollection.cs" />
     <Compile Include="Performer.cs" />
     <Compile Include="PerformerType.cs" />
@@ -117,7 +117,7 @@
     <Compile Include="Permissions\TypeResourceMapping.cs" />
     <Compile Include="ProfileValue.cs" />
     <Compile Include="Relatives\Friend.cs" />
-    <Compile Include="Relatives\FriendRequest.cs" />
+    <Compile Include="Relatives\FriendGroup.cs" />
     <Compile Include="SecrityInfo.cs" />
     <Compile Include="Security\UserSecretToken.cs" />
     <Compile Include="Security\UserSecurityException.cs" />

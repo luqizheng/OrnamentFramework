@@ -23,7 +23,6 @@
     @RenderSection("head", false)
 </head>
 <body @Html.Raw(showMenu ? "" : "class=no-background")>
-    @Html.Partial("PopupMessage")
     <div id="top">
         <div class="fixed">
             <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>

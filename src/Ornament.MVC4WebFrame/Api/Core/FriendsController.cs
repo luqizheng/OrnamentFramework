@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System.Web.Http;
-using FluentNHibernate.Mapping;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Relatives;
 using Ornament.Web;
 using Qi.Web.Http;
 
@@ -21,19 +21,31 @@ namespace Ornament.MVCWebFrame.Api.Core
         // GET api/friends
         public IEnumerable<object> Get()
         {
+            var result = new List<object>();
+            foreach (var friendGroup in _dao.CreateFriendGroupDao().GetGroups(OrnamentContext.MemberShip.CurrentUser()))
+            {
+                var item = new
+                    {
+                        Id = friendGroup.Id,
+                        Name = friendGroup.Name,
+                        Friends = new List<object>()
+                    };
+                foreach (var friend in friendGroup.Friends)
+                {
+                    item.Friends.Add(new
+                        {
+                            Id = friend.User.Id,
+                            Name = friend.Name ?? friend.User.Name,
+                            Remarks = friend.Remakrs
+                        });
+                }
 
-
-            var s= from friend in
-                       _dao.CreateFriendDao().GetFriends(OrnamentContext.MemberShip.CurrentUser())
-                   select new
-                       {
-                           Id = friend.User.Id,
-                           Name = friend.User.Name,
-                           Memo = friend.Remarks,
-                           Group = friend.GroupName
-                       };
-            return s;
+                result.Add(item);
+            }
+            return result;
         }
+
+       
 
         // GET api/friends/5
         public string Get(int id)
@@ -47,8 +59,17 @@ namespace Ornament.MVCWebFrame.Api.Core
         }
 
         // PUT api/friends/5
-        public void Put(int id, [FromBody] string value)
+        public void Put(string userId, [FromBody] string @group)
         {
+            var friendGroup = _dao.CreateFriendGroupDao().GetByName(@group);
+            var user = _dao.CreateUserDao().Get(userId);
+            if (friendGroup == null)
+                friendGroup = new FriendGroup()
+                    {
+                        Name = @group
+                    };
+
+            friendGroup.Friends.Add(new Friend(user));
         }
 
         // DELETE api/friends/5

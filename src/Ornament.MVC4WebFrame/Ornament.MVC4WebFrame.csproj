@@ -174,7 +174,6 @@
     <Compile Include="Api\Core\ClientController.cs" />
     <Compile Include="Api\Core\FriendsController.cs" />
     <Compile Include="Api\Core\NotifyMessagesController.cs" />
-    <Compile Include="Api\Core\OnlineController.cs" />
     <Compile Include="Api\Core\OrgsController.cs" />
     <Compile Include="Api\Core\PersonalMessagesController.cs" />
     <Compile Include="Api\Core\RolesController.cs" />
@@ -550,11 +549,13 @@
     <Content Include="Scripts\Modules\Combine\Memberships\user.js" />
     <Content Include="Scripts\Modules\Combine\Messages\notify-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
+    <Content Include="Scripts\Modules\Combine\Share\client.js" />
+    <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
+    <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
     <Content Include="Scripts\Modules\Combine\Util\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\Time.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\Permissions\Permission.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\User\Create.js" />
     <Content Include="Scripts\Modules\Views\Messages\NewsType\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\memberships.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
@@ -917,7 +918,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\_multiLangChoice.cshtml" />
     <Content Include="Views\Shared\_appLayout.cshtml" />
     <Content Include="Views\Shared\_topMenu.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
@@ -971,7 +971,6 @@
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
-    <Content Include="Views\Shared\PopupMessage.cshtml" />
     <Content Include="Views\Shared\_pm.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
   </ItemGroup>

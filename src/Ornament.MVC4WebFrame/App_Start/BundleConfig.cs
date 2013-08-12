@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Qi;
@@ -21,7 +19,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryPlugin,
                     CodeStyle,
                     Fx,
-                    BizRelative,RegistryCtrl
+                    BizRelative, RegistryCtrl
                 };
 
             foreach (var item in registryParty)
@@ -48,10 +46,10 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void JQueryPlugin(BundleCollection bundles)
         {
             string searchFolder = ApplicationHelper.MapPath("~/Scripts/plugins");
-            foreach (var dirPath in Directory.GetDirectories(searchFolder))
+            foreach (string dirPath in Directory.GetDirectories(searchFolder))
             {
                 string[] files = Directory.GetFiles(dirPath, "*.js");
-                var virtualFolderNmae = ToVirtualPath(dirPath);
+                string virtualFolderNmae = ToVirtualPath(dirPath);
                 foreach (string file in files)
                 {
                     if (file.ToLower().EndsWith(".min.js"))
@@ -59,22 +57,25 @@ namespace Ornament.MVCWebFrame.App_Start
                     var fileInfo = new FileInfo(file);
                     if (fileInfo.Name.StartsWith("jquery."))
                     {
-                        var path = virtualFolderNmae + "/" + fileInfo.Name;
+                        string path = virtualFolderNmae + "/" + fileInfo.Name;
                         bundles.Add(new JQueryPluginSeajsBundle("~/bundles/" + fileInfo.Name).Include(path));
                     }
                 }
 
-                var folders = Directory.GetDirectories(dirPath);
-                foreach (var folderPath in folders)
+                string[] folders = Directory.GetDirectories(dirPath);
+                foreach (string folderPath in folders)
                 {
                     var directInfo = new DirectoryInfo(folderPath);
                     string virtualFolderName = ToVirtualPath(folderPath);
-                    bundles.Add(new JQueryPluginSeajsBundle("~/bundles/" + directInfo.Name + ".js").Include(virtualFolderName + "/*.js"));
+                    bundles.Add(
+                        new JQueryPluginSeajsBundle("~/bundles/" + directInfo.Name + ".js").Include(virtualFolderName +
+                                                                                                    "/*.js"));
                 }
             }
         }
+
         /// <summary>
-        /// 把物理路径改为虚拟路径
+        ///     把物理路径改为虚拟路径
         /// </summary>
         /// <param name="fullPath"></param>
         /// <returns></returns>
@@ -98,12 +99,12 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void RegistryCtrl(BundleCollection bundles)
         {
-
-            bundles.Add(new SeajsBundle("~/scripts/ctrls/memberships.js").Include("~/Scripts/Modules/Views/Share/memberships.js"));
+            bundles.Add(
+                new SeajsBundle("~/scripts/ctrls/memberships.js").Include("~/Scripts/Modules/Views/Share/memberships.js"));
         }
 
         /// <summary>
-        /// 每个Page对应一个 js，冲这里做映射
+        ///     每个Page对应一个 js，冲这里做映射
         /// </summary>
         /// <param name="bundles"></param>
         private static void AutoForPageScripts(BundleCollection bundles)
@@ -114,7 +115,7 @@ namespace Ornament.MVCWebFrame.App_Start
                 string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
                 foreach (string file in files)
                 {
-                    var bundleName = ToVirtualPath(file).Replace("\\", "/").ToLower().Replace(str.ToLower(), "~/");
+                    string bundleName = ToVirtualPath(file).Replace("\\", "/").ToLower().Replace(str.ToLower(), "~/");
                     bundles.Add(new SeajsBundle(bundleName).Include(ToVirtualPath(file)));
                     writer.WriteLine("{0}={1}", bundleName, file);
                 }

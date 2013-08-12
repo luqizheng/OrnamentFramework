@@ -1,4 +1,7 @@
-﻿/// <reference path="jquery-1.9.1.js" />
+﻿/// <reference path="../../../Views/Shared/_topMenu.cshtml" />
+/// <reference path="../../../Views/Shared/_topMenu.cshtml" />
+/// <reference path="../Combine/Share/client.js" />
+/// <reference path="jquery-1.9.1.js" />
 /// <reference path="plugins/ui/jquery.easytabs.min.js" />
 define(function (require) {
 
@@ -11,7 +14,7 @@ define(function (require) {
     require("valid")($);
 
     $(".styled").uniform({ radioClass: 'choice' });
-    $("#mainMenu > li.active > ul").attr("style", "");
+    $("#mainMenu > li.active > ul").attr("style", "").click();
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
 
@@ -50,5 +53,18 @@ define(function (require) {
         $('#content').toggleClass("full-content");
     });
 
-    return { init: function () { } };
+    //提示独享
+    var clientChecking = require("../Combine/Share/client.js");
+    var api = new clientChecking(1000, function (d) {
+        if (d.HasMessage) {
+            // 在\Views\Shared\_topMenu.cshtml
+            $("#msgAlert").append('<i class="new-message"></i>');
+        }
+    });
+    api.start();
+
+    return {
+        message: api
+    };
+
 });
