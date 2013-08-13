@@ -7,7 +7,7 @@ PM dialog UI 1.0
 2）show的时候，需要停止。主page的提示ajax。
 */
 define(function (require) {
-    require('/bundles/bootstrap.js');
+    require('bootstrap');
     require('ckeditor');
     var PersonalMessage = require("../../Combine/Personal/PersonalMessage.js"),
         pm = new PersonalMessage(),

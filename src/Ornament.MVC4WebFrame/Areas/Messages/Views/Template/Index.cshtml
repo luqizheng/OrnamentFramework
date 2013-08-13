@@ -66,7 +66,7 @@
                                 @Html.DisplayFor(modelItem => item.Inside)
                             </td>
                             <td>
-                                @Html.ActionLink(@Basic.Edit, @Basic.Edit, new { id = item.Id }, new { @class = "btn btn-small" })
+                                @Html.ActionLink(@Basic.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
                                 <a data-toggle="popover" data-val="@item.Id" 
                                 class="btn btn-danger btn-small" href="javascript:void">@Basic.Delete</a>
                             </td>
