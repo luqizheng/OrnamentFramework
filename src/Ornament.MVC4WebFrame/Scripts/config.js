@@ -12,13 +12,12 @@
         "autosize": "/bundles/autosize.js",
         "form": "/bundles/form.js",
         "form.wizard": "/bundles/form.wizard.js",
-        "inputmask": "/bundles/inputmask.js",
         "listbox": "/bundles/listbox.js",
         "select2": "/bundles/select2.js",
         "tagsinput": "/bundles/tagsinput.js",
         "uniform": "/bundles/uniform.js",
         "bootstrap.datepicker": "/bundles/bootstrap.datepicker.js",
-        "inputmask.bootstrap": "/bundles/inputmask.js",
+        "inputmask": "/bundles/inputmask.js",
         "validate": "/bundles/validate.js",
         "bootbox": "/bundles/bootbox.js",
         "collapsible": "/bundles/collapsible.js",
@@ -31,14 +30,11 @@
         "timepicker": "/bundles/timepicker.js",
         "plupload.queue": "/bundles/plupload.queue.js",
         "dotdotdot": "/bundles/dotdotdot.js",
+        "endless-scroll": "/bundles/endless-scroll.js",
+        "tmpl": "/bundles/tmpl.js",
         "toDictionary": "/bundles/toDictionary.js",
         "unobtrusive": "/bundles/unobtrusive-ajax.js",
-        //specileTheName
-        "wizard": "/bundles/form.wizard.js",
 
-        "tmpl": "/bundles/tmpl.js",
-        "endlessScroll": "/Scripts/jquery.endless-scroll.js",
-        
         //following is Model
         "pm": "/models/pm-1.0.js",
         "user": "/models/user-1.0.js",

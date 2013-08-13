@@ -42,7 +42,8 @@ namespace Ornament.MVCWebFrame.App_Start
                             .Include("~/Scripts/fx/jquery-ui-{version}.js")
                             .Include("~/Scripts/fx/compatibles/jqueryui-{version}.js"));
 
-            bundles.Add(new SeajsBundle("~/_appLayout.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/_appLayout.js"));
+            bundles.Add(
+                new SeajsBundle("~/_appLayout.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/_appLayout.js"));
         }
 
         private static void JQueryPlugin(BundleCollection bundles)
@@ -64,10 +65,13 @@ namespace Ornament.MVCWebFrame.App_Start
                         if (fileInfo.Name.StartsWith("jquery."))
                         {
                             string path = virtualFolderNmae + "/" + fileInfo.Name;
-                            var bundleName = "~/bundles/" + Regex.Replace(fileInfo.Name, @"(jquery\.)|(-[\d.]+\d)", "", RegexOptions.IgnoreCase);
+                            string bundleName = "~/bundles/" +
+                                                Regex.Replace(fileInfo.Name, @"(jquery\.)|(-[\d.]+\d)", "",
+                                                              RegexOptions.IgnoreCase);
                             bundles.Add(new JQueryPluginSeajsBundle(bundleName).Include(path));
 #if DEBUG
-                            writer.WriteLine("\"{0}\":\"{1}\",", (new FileInfo(bundleName).Name.Replace(".js", "")), bundleName.Replace("~/", "/"));
+                            writer.WriteLine("\"{0}\":\"{1}\",", (new FileInfo(bundleName).Name.Replace(".js", "")),
+                                             bundleName.Replace("~/", "/"));
 #endif
                         }
 #if DEBUG
@@ -77,18 +81,21 @@ namespace Ornament.MVCWebFrame.App_Start
                     string[] folders = Directory.GetDirectories(dirPath);
                     foreach (string folderPath in folders)
                     {
-                        if (!folderPath.StartsWith("jquery."))
-                        {
-
-                        }
                         var directInfo = new DirectoryInfo(folderPath);
+
+                        if (!directInfo.Name.StartsWith("jquery."))
+                        {
+                            continue;
+                        }
+
                         string virtualFolderName = ToVirtualPath(folderPath);
-                        var bundleName = "~/bundles/" + directInfo.Name.Replace("jquery.", "") + ".js";
+                        string bundleName = "~/bundles/" + directInfo.Name.Replace("jquery.", "") + ".js";
                         bundles.Add(
                             new JQueryPluginSeajsBundle(bundleName).Include(
                                 virtualFolderName +
                                 "/*.js"));
-                        writer.WriteLine("\"{0}\":\"{1}\",", directInfo.Name.Replace(".js", ""), bundleName.Replace("~/", "/"));
+                        writer.WriteLine("\"{0}\":\"{1}\",", directInfo.Name.Replace(".js", ""),
+                                         bundleName.Replace("~/", "/"));
                     }
                 }
             }
@@ -111,17 +118,20 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void BizRelative(BundleCollection bundles)
         {
-            bundles.Add(new SeajsBundle("~/models/pm-1.0.js", CombineSeajsModule).Include("~/Scripts/Modules/Ui/Controls/pm.js"));
+            bundles.Add(
+                new SeajsBundle("~/models/pm-1.0.js", CombineSeajsModule).Include("~/Scripts/Modules/Ui/Controls/pm.js"));
             AutoForPageScripts(bundles);
         }
 
         private static void RegistryCtrl(BundleCollection bundles)
         {
             bundles.Add(
-                new SeajsBundle("~/scripts/ctrls/memberships.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/memberships.js"));
+                new SeajsBundle("~/scripts/ctrls/memberships.js", CombineSeajsModule).Include(
+                    "~/Scripts/Modules/Views/Share/memberships.js"));
 
             bundles.Add(
-                new SeajsBundle("~/scripts/ctrls/form.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/form.js"));
+                new SeajsBundle("~/scripts/ctrls/form.js", CombineSeajsModule).Include(
+                    "~/Scripts/Modules/Views/Share/form.js"));
         }
 
         /// <summary>
