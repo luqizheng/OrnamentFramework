@@ -25,12 +25,12 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Models
         public decimal DecimalType { get; set; }
 
 
-        [UIHint("DateTime")]
+        [UIHint("Date")]
         [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "dd/MM/yyyy")]
         public DateTime Now { get; set; }
 
-        [UIHint("DateTime")]
+        [UIHint("Date")]
         public DateTime? DefualtFormat { get; set; }
     }
 }

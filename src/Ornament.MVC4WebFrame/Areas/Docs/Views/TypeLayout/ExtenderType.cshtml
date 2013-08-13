@@ -3,18 +3,15 @@
 @model Ornament.MVCWebFrame.Areas.Docs.Models.ExtenderTypeModel
 @{
     ViewBag.Title = "ExtenderType";
-    Layout = "../Shared/_codeLayout.cshtml";
+    Layout = "~/Areas/Docs/Views/Shared/_codeLayout.cshtml";
 }
 @section pageTitle
 {
-    <h5>Date/Time/Period 
+    <h5>Time/Period 
     </h5>
     <span>Pure Html for ExtenderType and input mask for Date 
     </span>
 }
-
-
-
 
 <div class="row-fluid">
     <div class="widget">
@@ -80,15 +77,3 @@ public class ExtenderTypeModel
         </div>
     </div>
 </div>
-
-
-@section script
-{
-
-<script type="text/javascript">
-    seajs.use(["timePicker", ], function () {
-
-    });
-
-    </script>
-}

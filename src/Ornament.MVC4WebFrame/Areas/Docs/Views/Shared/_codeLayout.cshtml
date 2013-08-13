@@ -3,19 +3,20 @@
 }
 @section head
 {
- 
+
     @RenderSection("head", false)
 }
 @section pageTitle
 {
     @RenderSection("pageTitle", false)
 }
-@section script
+@section scripts
 {
-    @Scripts.Render("~/Scripts/CodeStyle")
+    @Scripts.Render("~/Components/CodeStyle")
     <script type="text/javascript">
+        seajs.use("/_applayout.js");
         window.prettyPrint && prettyPrint();
     </script>
-    @RenderSection("script", false)
+    @RenderSection("scripts", false)
 }
 @RenderBody()

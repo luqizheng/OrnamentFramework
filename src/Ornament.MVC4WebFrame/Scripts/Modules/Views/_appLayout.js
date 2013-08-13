@@ -5,16 +5,14 @@
 /// <reference path="plugins/ui/jquery.easytabs.min.js" />
 define(function (require) {
 
-    var $ = require("/bundles/jquery.js");
+    var $ = require("jquery");
     require("easytabs")($);
     require("collapsible")($);
     require("bootstrap")($);
     require("uniform")($);
-    require("unobtrusive")($);
-    require("valid")($);
-
+  
     $(".styled").uniform({ radioClass: 'choice' });
-    
+
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
 
@@ -24,10 +22,7 @@ define(function (require) {
         tabActiveClass: "active"
     });
 
-    //form for boostratp
-    $('form').bootstrapMakeUp().submit(function () {
-        $(this).valid(); $(this).bootstrapMakeUp();
-    });
+ 
 
     // ==== Action Wizard ===
     $('.actions').easytabs({
@@ -52,19 +47,19 @@ define(function (require) {
         $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
         $('#content').toggleClass("full-content");
     });
-    
-    $("#mainMenu > li.active > ul").attr("style", "").click();
+
+    $("#mainMenu > li.active > ul").attr("style", "");
     $("#mainMenu > li.active a").click();
 
     //提示
     var clientChecking = require("../Combine/Share/client.js");
     var api = new clientChecking(1000, function (d) {
         if (d.HasMessage) {
-            // 在\Views\Shared\_topMenu.cshtml
+            //#msgAlert 在\Views\Shared\_topMenu.cshtml
             $("#msgAlert").append('<i class="new-message"></i>');
         }
     });
-    
+
     api.start();
     return {
         message: api

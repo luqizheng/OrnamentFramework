@@ -1,11 +1,12 @@
-﻿define(function (require) {
+﻿/// <reference path="../../_appLayout.js" />
+define(function (require) {
 
     return function (Model) {
         
         var $ = require("jquery");
         require("/bundles/jqueryui")($);
         require("wizard")($);
-
+        require("../../_applayout.js");
 
         $("form").submit(function () {
             var i = 0;

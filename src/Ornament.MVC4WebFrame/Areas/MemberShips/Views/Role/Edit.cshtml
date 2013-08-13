@@ -37,22 +37,9 @@
             </div>
         </div>
         <div class="form-actions" id="toolbar">
-            <a class="btn btn-primary">@Basic.Save</a>
+            <button class="btn btn-primary">@Basic.Save</button>
             <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
         </div>
          
     }
 </div>
-@section scripts
-
-{
-    <script type="text/javascript">
-        sea.use('jquery', function () {
-            $("#toolbar a:first").click(function () {
-                $("form").submit();
-            });
-
-        });
-
-    </script>
-}

@@ -8,23 +8,11 @@
 @section scripts{
     <script type="text/javascript">
 
-        seajs([""], function () {
-
-            $(".delete").on('click', function () {
-                if (confirm("@Html.GetResourceString("warnning_deleting_msg")")) {
-                    var target = $(this);
-                    $.getJSON('@Url.Action("Delete")/' + target.attr("href"), {}, function (result) {
-                        oAlert(result.Message);
-                        if (result.Success) {
-                            target.parent().parent().remove();
-                        }
-                    });
-                }
-                return false;
+        seajs.use(["/memberships/permissions/index.js"], function (init) {
+            init({
+                warnDel: "@Html.GetResourceString("warnning_deleting_msg")",
+                delUrl: "@Url.Action("Delete")"
             });
-
-            $("#add").button({ icons: { primary: "ui-icon-plus" } });
-
         });
     </script>
 }

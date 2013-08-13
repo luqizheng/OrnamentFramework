@@ -28,7 +28,7 @@
 </div>
 
 <script type="text/javascript">
-    seajs.use("/scripts/ctrls/memberships.js", function(r) {
+    seajs.use("membership", function(r) {
         var d = @Html.Raw(JsonHelper.ToJson(selected));
         r.select2.role("#@Html.Id("")",d);
     });

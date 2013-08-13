@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text.RegularExpressions;
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Qi;
@@ -12,7 +13,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
-            
+
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
@@ -46,31 +47,49 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void JQueryPlugin(BundleCollection bundles)
         {
-            string searchFolder = ApplicationHelper.MapPath("~/Scripts/plugins");
-            foreach (string dirPath in Directory.GetDirectories(searchFolder))
+#if DEBUG
+            using (var writer = new StreamWriter(ApplicationHelper.MapPath("~/log/jqPlugin.txt")))
             {
-                string[] files = Directory.GetFiles(dirPath, "*.js");
-                string virtualFolderNmae = ToVirtualPath(dirPath);
-                foreach (string file in files)
+#endif
+                string searchFolder = ApplicationHelper.MapPath("~/Scripts/plugins");
+                foreach (string dirPath in Directory.GetDirectories(searchFolder))
                 {
-                    if (file.ToLower().EndsWith(".min.js"))
-                        continue;
-                    var fileInfo = new FileInfo(file);
-                    if (fileInfo.Name.StartsWith("jquery."))
+                    string[] files = Directory.GetFiles(dirPath, "*.js");
+                    string virtualFolderNmae = ToVirtualPath(dirPath);
+                    foreach (string file in files)
                     {
-                        string path = virtualFolderNmae + "/" + fileInfo.Name;
-                        bundles.Add(new JQueryPluginSeajsBundle("~/bundles/" + fileInfo.Name).Include(path));
+                        if (file.ToLower().EndsWith(".min.js"))
+                            continue;
+                        var fileInfo = new FileInfo(file);
+                        if (fileInfo.Name.StartsWith("jquery."))
+                        {
+                            string path = virtualFolderNmae + "/" + fileInfo.Name;
+                            var bundleName = "~/bundles/" + Regex.Replace(fileInfo.Name, @"(jquery\.)|(-[\d.]+\d)", "", RegexOptions.IgnoreCase);
+                            bundles.Add(new JQueryPluginSeajsBundle(bundleName).Include(path));
+#if DEBUG
+                            writer.WriteLine("\"{0}\":\"{1}\",", (new FileInfo(bundleName).Name.Replace(".js", "")), bundleName.Replace("~/", "/"));
+#endif
+                        }
+#if DEBUG
                     }
-                }
+#endif
 
-                string[] folders = Directory.GetDirectories(dirPath);
-                foreach (string folderPath in folders)
-                {
-                    var directInfo = new DirectoryInfo(folderPath);
-                    string virtualFolderName = ToVirtualPath(folderPath);
-                    bundles.Add(
-                        new JQueryPluginSeajsBundle("~/bundles/" + directInfo.Name + ".js").Include(virtualFolderName +
-                                                                                                    "/*.js"));
+                    string[] folders = Directory.GetDirectories(dirPath);
+                    foreach (string folderPath in folders)
+                    {
+                        if (!folderPath.StartsWith("jquery."))
+                        {
+
+                        }
+                        var directInfo = new DirectoryInfo(folderPath);
+                        string virtualFolderName = ToVirtualPath(folderPath);
+                        var bundleName = "~/bundles/" + directInfo.Name.Replace("jquery.", "") + ".js";
+                        bundles.Add(
+                            new JQueryPluginSeajsBundle(bundleName).Include(
+                                virtualFolderName +
+                                "/*.js"));
+                        writer.WriteLine("\"{0}\":\"{1}\",", directInfo.Name.Replace(".js", ""), bundleName.Replace("~/", "/"));
+                    }
                 }
             }
         }
@@ -92,7 +111,7 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void BizRelative(BundleCollection bundles)
         {
-            bundles.Add(new SeajsBundle("~/models/pm-1.0.js",CombineSeajsModule).Include("~/Scripts/Modules/Ui/Controls/pm.js"));
+            bundles.Add(new SeajsBundle("~/models/pm-1.0.js", CombineSeajsModule).Include("~/Scripts/Modules/Ui/Controls/pm.js"));
             AutoForPageScripts(bundles);
         }
 
@@ -100,6 +119,9 @@ namespace Ornament.MVCWebFrame.App_Start
         {
             bundles.Add(
                 new SeajsBundle("~/scripts/ctrls/memberships.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/memberships.js"));
+
+            bundles.Add(
+                new SeajsBundle("~/scripts/ctrls/form.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/form.js"));
         }
 
         /// <summary>
@@ -124,8 +146,8 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void CodeStyle(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/CodeStyle")
-                            .Include("~/Content/Prettify/prettify.css", "~/Content/Prettify/desert.css"));
+            bundles.Add(new ScriptBundle("~/Components/CodeStyle")
+                            .Include("~/scripts/Components/Prettify/prettify.js"));
         }
 
 
