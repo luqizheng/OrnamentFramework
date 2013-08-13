@@ -558,6 +558,7 @@
     <Content Include="Scripts\Modules\Views\MemberShips\Permissions\Permission.js" />
     <Content Include="Scripts\Modules\Views\Messages\NewsType\Index.js" />
     <Content Include="Scripts\Modules\Views\Messages\News\Index.js" />
+    <Content Include="Scripts\Modules\Views\Messages\Template\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\memberships.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
     <Content Include="Scripts\config.js" />

@@ -41,7 +41,7 @@ namespace Ornament.Web.Bundles
                 context.HttpContext.Request.MapPath(bundleFiles.First().VirtualFile.VirtualPath), Path, Combine);
             string subContent = seajs.BuildContent(bundleContent);
             BundleResponse result = base.ApplyTransforms(context, subContent, bundleFiles);
-            if (BundleTable.EnableOptimizations)
+            if (!BundleTable.EnableOptimizations)
             {
                 result.Cacheability = HttpCacheability.NoCache;
             }

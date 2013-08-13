@@ -17,9 +17,6 @@
                 <li>
                     <div class="depth"><a href="@Url.Action("Create")" title="Add new Message Template" class="tip"><i class="icon-plus-sign"></i></a></div>
                 </li>
-                <li>
-                    <div class="depth"><a href="" title="Media posts" class="tip"><i class="icon-reorder"></i></a></div>
-                </li>
             </ul>
         </div>
         <ul class="action-tabs">
@@ -69,9 +66,9 @@
                                 @Html.DisplayFor(modelItem => item.Inside)
                             </td>
                             <td>
-                                @Html.ActionLink(@Basic.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
+                                @Html.ActionLink(@Basic.Edit, @Basic.Edit, new { id = item.Id }, new { @class = "btn btn-small" })
                                 <a data-toggle="popover" data-val="@item.Id" 
-                                class="btn btn-danger btn-small" href="#">@Basic.Delete</a>
+                                class="btn btn-danger btn-small" href="javascript:void">@Basic.Delete</a>
                             </td>
                         </tr>
                     }
@@ -97,26 +94,8 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use(["bootstrap"], function () {
-            var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
-            $(document)
-                .delegate("button.deleteYes", "click", function () {
-                    $("[data-toggle=popover]").popover("hide");
-                    var $td = $(this).closest("td"),
-                        id = $td.find("a:eq(1)").attr("data-val");
-
-                    $.get("@Url.Action("Delete")/" + id, function (data) {
-                        if (data.success) {
-                            $td.closest("tr").remove();
-                        } else {
-                            alert(data.message);
-                        }
-                    });
-                    $popver.popover("hide");
-                })
-                .delegate("button.deleteNo", "click", function () {
-                    $popver.popover("hide");
-                });
+        seajs.use(["/messages/template/index.js"], function (init) {
+            init("@Url.Action("Delete")");
         });
     </script>
 }
