@@ -43,11 +43,11 @@
                     {
                         if (selectedType == type)
                         {
-                            <option value="@type.Id" selected="selected">@type.Name</option>
+                        <option value="@type.Id" selected="selected">@type.Name</option>
                         }
                         else
                         {
-                            <option value="@type.Id" >@type.Name</option>
+                        <option value="@type.Id" >@type.Name</option>
                         }
                     }
                 </select>
@@ -156,26 +156,6 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use(["bootstrap", "select2"], function () {
-            var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
-            $("#Type").select2();
-            $(document)
-                .delegate("button.deleteYes", "click", function () {
-                    $("[data-toggle=popover]").popover("hide");
-                    $td = $(this).closest("td");
-                    var id = $td.find("a:eq(1)").attr("data-val");
-                    $.get("@Url.Action("Delete")/" + id, function (data) {
-                        if (data.success) {
-                            $td.closest("tr").remove();
-                        } else {
-                            alert(data.message);
-                        }
-                    });
-                    $popver.popover("hide");
-                })
-                .delegate("button.deleteNo", "click", function () {
-                    $popver.popover("hide");
-                });
-        });
+        seajs.use(["/messages/news/index.js"]);
     </script>
 }

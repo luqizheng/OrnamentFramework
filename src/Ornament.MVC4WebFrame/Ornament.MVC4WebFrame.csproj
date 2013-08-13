@@ -557,6 +557,7 @@
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\Permissions\Permission.js" />
     <Content Include="Scripts\Modules\Views\Messages\NewsType\Index.js" />
+    <Content Include="Scripts\Modules\Views\Messages\News\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\memberships.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
     <Content Include="Scripts\config.js" />
@@ -769,8 +770,7 @@
     <Content Include="Scripts\plugins\utility\selectivizr-min.js" />
     <Content Include="Scripts\plugins\uploader\swfupload.js" />
     <Content Include="Scripts\plugins\utility\jquery.toDictionary.js" />
-    <Content Include="Scripts\Modules\Utility\Permission.js" />
-    <Content Include="Scripts\Modules\Utility\String.js" />
+    <Content Include="Scripts\Modules\Combine\Util\String.js" />
     <Content Include="Scripts\Modules\Views\_appLayout.js" />
     <Content Include="Scripts\plugins\uploader\_swfuploadHandler.js" />
     <Content Include="Content\templates\pannonia\css\elfinder.css" />
