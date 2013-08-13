@@ -142,6 +142,7 @@
     <Compile Include="Retrives\NotifyTypeRetrive.cs" />
     <Compile Include="Retrives\Retrive.cs" />
     <Compile Include="Retrives\SimpleMessageFactoryRetrive.cs" />
+    <Compile Include="TimePeriod.cs" />
     <Compile Include="Validations\JqStepAttribute.cs" />
     <Compile Include="Validations\VerifyCodeRequireAttribute.cs" />
   </ItemGroup>
