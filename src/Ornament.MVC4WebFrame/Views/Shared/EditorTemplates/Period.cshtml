@@ -1,16 +1,31 @@
-﻿@model Qi.Attendance.Period
+﻿@using System.Text.RegularExpressions
+@model Ornament.TimePeriod
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-}
-<div class="control-group">
-     @Html.Label("", display, new { @class = "control-label" })
-    <div class="controls">
-        <div class="input-append">
-            <input size="5" type="text" value="@DateTime.Now.ToString("HH:mm")" inputmask-format="h:s">
-            <span class="add-on"><i class="icon-time"></i></span>
-        </div>
-        to
+    var timeFormat = ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:ss";
 
-        @Html.ValidationSummary("")
+    var startDisplayValue = this.Model.Start.HasValue ? this.Model.Start.Value.ToString(timeFormat) : "00:00:00";
+    var endDisplayValue = this.Model.Start.HasValue ? this.Model.Start.Value.ToString(timeFormat) : "00:00:00";
+
+    var timePickerFormat = Regex.Replace(timeFormat.Replace("m", "i"), @"(\w)(\1)+", "$1");
+    var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
+}
+
+<div class="control-group">
+    @Html.Label("", display, new { @class = "control-label" })
+    <div class="controls">
+        <ul class="dates-range no-append">
+            <li>
+
+                <input type="text" value="@startDisplayValue" class="jqui-time styled" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix">
+                <span class="add-on"><i class="icon-time"></i></span>
+
+                <li class="sep">-</li>
+            <li>
+                <input type="text" value="@endDisplayValue" class="jqui-time styled" timeFormat="@endDisplayValue" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix">
+                <span class="add-on"><i class="icon-time"></i></span>
+            </li>
+        </ul>
     </div>
 </div>
+<script type="text/javascript">seajs.use(["formInput"])</script>

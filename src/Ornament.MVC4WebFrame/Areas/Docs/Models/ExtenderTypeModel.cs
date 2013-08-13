@@ -13,6 +13,8 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Models
         [UIHint("Time")]
         public Time? TimeNow { get; set; }
 
+
+        public TimePeriod Period { get; set; }
         
 
     }
