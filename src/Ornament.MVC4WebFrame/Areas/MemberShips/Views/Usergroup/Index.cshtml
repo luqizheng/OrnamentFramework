@@ -1,49 +1,81 @@
-﻿@using Ornament.MemberShip
-@using Resources
+﻿@using Resources
+@using Ornament.Web
 @model IEnumerable<Ornament.MemberShip.UserGroup>
+
 @{
-    ViewBag.Title = MemberShip.UserGroup + Basic.Index;
+    ViewBag.Title = "View1";
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
-<div class="box">
-    <div class="content">
-        <section>
-            <header>
-                <a href="@Url.Action("Create")" class="btn btn-primary"><i class="icon-white icon-plus"></i>@Basic.Create                </a>
-            </header>
-            <section>
-                <table class="table table-striped">
-                    <thead>
+@section pageTitle{
+    <h6>UserGroup List</h6>
+}
+
+
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+        </div>
+    </div>
+    <div class="body well">
+        @if (Model.Count() != 0)
+        {
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Remarks)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th style="width: 250px">
-                            </th>
-                            <th>
-                                @Html.LabelFor(s => ((UserGroup)null).Name)
-                            </th>
-                            <th>
-                                @Html.LabelFor(s => ((UserGroup)null).Remarks)
-                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Remarks)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Basic.Edit" class="btn btn-info btn-mini">
+                                    <i class="icon-edit icon-white"></i>
+                                </a>
+                                <a href="@Url.Action("Details", new { id = item.Id })" title="@Basic.Edit" class="btn btn-mini">
+                                    <i class="icon-share icon-white"></i>
+                                </a>
+
+
+                                <a href="@Url.Action("Delete", new { id = item.Id })" title="@Basic.Edit" class="btn btn-danger btn-mini">
+                                    <i class="icon-remove icon-white"></i>
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (UserGroup item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.ActionLink(Basic.Edit, "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink(MemberShip.AssignUserGroup, "AssignUser", new { id = item.Id })
-                                </td>
-                                <td>
-                                    @item.Name
-                                </td>
-                                <td>
-                                    @item.Remarks
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </section>
-        </section>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">
+                            <form>
+                                @Html.Partial("NavPagination", (Pagination)(ViewData["Nav"] ?? new Pagination()))
+                            </form>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+        else
+        {
+            <div class="alert">
+                <h6>No news found. 
+                </h6>
+            </div>
+        }
     </div>
 </div>

@@ -80,7 +80,12 @@
 
     <mvcSiteMapNode title="场馆管理" imageUrl="icon-indent-right">
       <mvcSiteMapNode controller="Gymnasium" area="Badminton" action="Index" title ="场馆管理" ></mvcSiteMapNode>
-      
+
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="消耗品" imageUrl="icon-indent-rigth">
+      <mvcSiteMapNode controller="Brand" area="Badminton" action="Index" title="品牌"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="Model" area="Badminton" action="Index" title="型号"></mvcSiteMapNode>
     </mvcSiteMapNode>
 
   </mvcSiteMapNode>

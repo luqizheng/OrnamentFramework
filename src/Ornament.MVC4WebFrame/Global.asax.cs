@@ -26,6 +26,7 @@ namespace Ornament.MVCWebFrame
         {
             XmlConfigurator.Configure(); //Log4net registry.
             AreaRegistration.RegisterAllAreas();
+            DaoFactoryConfig.Config();
             MvcExtender.Register();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -37,7 +38,7 @@ namespace Ornament.MVCWebFrame
             //Registry the Provider to use Membership rule of asp.net.
             //Assembly auto config.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-            DaoFactoryConfig.Config();
+           
             NotifyConfig.Register();
             NhConfig.Config();
         }

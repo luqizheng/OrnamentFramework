@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Models.Memberships;
+using Ornament.Web;
 using Qi.Web.Mvc;
 
 //using Ornament.Web.Mvc.JQuery.JQGrid;
@@ -21,12 +22,16 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         //
         // GET: /Usergroups/
 
-        public ActionResult Index(int? pageIndex)
+        public ActionResult Index(Pagination pagination)
         {
-            int page = pageIndex ?? 0;
             IUserGroupDao dao = _factory.CreateUserGroupDao();
-            return View(dao.FindAll(page, 30));
+            int total;
+            var result = dao.FindAll(pagination.CurrentPage, pagination.PageSize, out total);
+            pagination.TotalRows = total;
+            ViewData["Nav"] = pagination;
+            return View(result);
         }
+
 
 
         //
@@ -47,7 +52,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         //
         // POST: /Usergroups/Create
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public ActionResult Create(UserGroup userGroup)
         {
             if (ModelState.IsValid)
@@ -72,11 +77,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         // POST: /Usergroups/Edit/5
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(UserGroup userGroup)
+        public ActionResult Edit(UserGroupModel userGroup)
         {
             if (ModelState.IsValid)
             {
-                _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
+                userGroup.Save(_factory.CreateUserGroupDao());
                 return RedirectToAction("Index");
             }
             return View(userGroup);

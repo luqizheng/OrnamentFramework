@@ -86,8 +86,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 CurrentSession).UniqueResult<UserGroup>();
         }
 
-        public IList<UserGroup> FindAll(int pageIndex, int pageSize)
+        public IList<UserGroup> FindAll(int pageIndex, int pageSize, out int total)
         {
+            total =
+                CreateDetachedCriteria()
+                    .SetProjection(Projections.RowCount())
+                    .GetExecutableCriteria(this.CurrentSession)
+                    .UniqueResult<int>();
             return
                 CreateDetachedCriteria().SetFirstResult(pageIndex * pageSize).SetMaxResults(pageSize).
                     GetExecutableCriteria(

@@ -235,7 +235,9 @@
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
+    <Compile Include="Areas\Badminton\Controllers\BrandController.cs" />
     <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
+    <Compile Include="Areas\Badminton\Controllers\ModelController.cs" />
     <Compile Include="Areas\Badminton\Controllers\YardController.cs" />
     <Compile Include="Areas\Badminton\Models\GymnasiumViewModel.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
@@ -633,6 +635,19 @@
     <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Edit.cshtml" />
     <Content Include="Areas\Badminton\Views\Yard\Create.cshtml" />
+    <Content Include="Areas\Badminton\Views\Brand\Index.cshtml" />
+    <Content Include="Areas\Badminton\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\oCreate.tt" />
+    <Content Include="CodeTemplates\AddView\CSHTML\oDelete.tt" />
+    <Content Include="CodeTemplates\AddView\CSHTML\oDetails.tt" />
+    <Content Include="CodeTemplates\AddView\CSHTML\oEdit.tt" />
+    <Content Include="CodeTemplates\AddView\CSHTML\oEmpty.tt" />
+    <Content Include="CodeTemplates\AddView\CSHTML\oList.tt" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
+    <Content Include="CodeTemplates\AddController\oController.tt" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -968,10 +983,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Badminton\Views\Model\" />
     <Folder Include="Areas\Badminton\Views\Shared\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
-    <Folder Include="Areas\Messages\Views\Shared\" />
     <Folder Include="bin\" />
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
   </ItemGroup>
@@ -1154,7 +1169,6 @@
     <Content Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
     <Content Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
     <Content Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
     <Content Include="Areas\Settings\Views\Web.config" />
@@ -1211,6 +1225,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

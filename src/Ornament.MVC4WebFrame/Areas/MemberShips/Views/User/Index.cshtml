@@ -16,16 +16,16 @@
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-        seajs.use("/memberships/user/index.js", function(main) {
+        seajs.use("/memberships/user/index.js", function (main) {
             main.init({
-                    success: "@Html.GetResourceString("verify_email_success")",
-                    fail: "@Html.GetResourceString("verify_email_fail")"
-                }, {
-                    success: "@Html.GetResourceString("retrieve_pwd_success")",
+                success: "@Html.GetResourceString("verify_email_success")",
+                fail: "@Html.GetResourceString("verify_email_fail")"
+            }, {
+                success: "@Html.GetResourceString("retrieve_pwd_success")",
                     fail: "@Html.GetResourceString("retrieve_pwd_fail")"
                 }, {
                     Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
-                    Name:"@OrnamentContext.MemberShip.CurrentUser().Name"
+                    Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
                 });
         });
     </script>
@@ -42,7 +42,7 @@
                 @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Modify))
                 {
                     <li>
-                        <div class="depth"><a href="@Url.Action("Create", "User", new {area = "MemberShips"})" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
+                        <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
                     </li>
                 }
                 <li>
@@ -66,20 +66,18 @@
         <div id="quick-actions">
             @{
                 IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+                IDictionary<DateTime, int> dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
+                double toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
                 double totalUser = Convert.ToDouble(userDao.Count());
             }
             <ul class="statistics">
                 <li>
                     <div class="top-info">
                         <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
-                        @{
-                            IDictionary<DateTime, int> dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
-                            double toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
-                        }
                         <strong>@toDayUser</strong>
                     </div>
                     <div class="progress progress-micro">
-                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser)/totalUser).ToString("p"))"></div>
+                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser) / totalUser).ToString("p"))"></div>
                     </div>
                     <span>User registrations today</span>
                 </li>
@@ -93,7 +91,7 @@
                     <div class="progress progress-micro">
                         @{
                             int onlineUser = Membership.GetNumberOfUsersOnline();
-                            string onlineRate = (Convert.ToDouble(onlineUser)/totalUser).ToString("p");
+                            string onlineRate = (Convert.ToDouble(onlineUser) / totalUser).ToString("p");
                         }
                         <div class="bar" style="width: @onlineRate;"></div>
                     </div>
@@ -173,10 +171,10 @@
                     @Html.DisplayNameFor(model => model.Contact.Email)
                 </th>
                 <th>
-                    @Html.LabelFor(item => ((User) null).IsLockout)
+                    @Html.LabelFor(item => ((User)null).IsLockout)
                 </th>
                 <th>
-                    @Html.LabelFor(item => ((User) null).IsApproved)
+                    @Html.LabelFor(item => ((User)null).IsApproved)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Other.LastActivityDate)
@@ -204,15 +202,15 @@
                     {
                         <td>
                             <ul class="table-controls" val="@user.Id">
-                                <li><a href="@Url.Action("Edit", new {loginId = user.LoginId})" class="btn tip" title="@Basic.Edit">
-                                        <i class="fam-user-edit"></i></a></li>
+                                <li><a href="@Url.Action("Edit", new { loginId = user.LoginId })" class="btn tip" title="@Basic.Edit">
+                                    <i class="fam-user-edit"></i></a></li>
                                 <li>
-                                    <a  href="@Url.Action("Assign", new {loginId = user.LoginId})" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                    <a  href="@Url.Action("Assign", new { loginId = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
                                         <i class="fam-group-gear"></i></a>
                                 </li>
                                 @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
                                 {
-                                    <li> 
+                                    <li>
                                         <a href="#@user.Id" class="btn tip" title="@Html.GetResourceString("PersonalMessage")" role="pm">
                                             <i class="fam-email-edit"></i>
                                         </a>
