@@ -55,5 +55,11 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
             }
             return View(brand);
         }
+
+        [HttpPost]
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }

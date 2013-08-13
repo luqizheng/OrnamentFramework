@@ -12,6 +12,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="Microsoft.VisualStudio.Web.Mvc.Scaffolding.BuiltIn" #>
+@using Resources
 <#
 MvcTextTemplateHost mvcHost = MvcTemplateHost;
 #>
@@ -64,20 +65,25 @@ if (mvcHost.ReferenceScriptLibraries) {
 <#
     if (!mvcHost.IsContentPage) {
 #>
-<script src="~/Scripts/jquery-1.8.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
 
 <#
     }
 }
 #>
 @using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <button class="btn btn-primary">@Basic.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+        </div>
+    </div>
 
-    <fieldset>
-        <legend><#= mvcHost.ViewDataType.Name #></legend>
+    <div class="well form-horizontal">
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)    
 
 <#
 foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
@@ -89,32 +95,9 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
 <#
         } else if (!property.IsReadOnly) {
 #>
-        <div class="editor-label">
-<#
-            if (property.IsForeignKey) {
-#>
-            @Html.LabelFor(model => model.<#= property.Name #>, "<#= property.AssociationName #>")
-<#
-            } else {
-#>
-            @Html.LabelFor(model => model.<#= property.Name #>)
-<#
-            }
-#>
-        </div>
-        <div class="editor-field">
-<#
-            if (property.IsForeignKey) {
-#>
-            @Html.DropDownList("<#= property.Name #>", String.Empty)
-<#
-            } else {
-#>
+        
             @Html.EditorFor(model => model.<#= property.Name #>)
-<#
-            }
-#>
-            @Html.ValidationMessageFor(model => model.<#= property.Name #>)
+
         </div>
 
 <#
@@ -122,22 +105,33 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
     }
 }
 #>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+        <div class="form-actions">
+           <button class="btn btn-primary">@Basic.Save</button>
+		     <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+        </div>
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 <#
 if(mvcHost.IsContentPage && mvcHost.ReferenceScriptLibraries) {
 #>
 
+@* 
+ 如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
+ seajs.use必须是全小写
+ please create a js in /Scripts/Module/Views/{Area}/{Controller}/<#=mvcHost.ViewName#>.js
+*@
+@*
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+		seajs.use(["{area}/{controller}/<#=mvcHost.ViewName#>.js"],function(init){
+			inti();
+		});
+	</script>
 }
+
+*@
 <#
 }
 #>

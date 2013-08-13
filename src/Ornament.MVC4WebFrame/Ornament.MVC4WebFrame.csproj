@@ -648,6 +648,7 @@
     <Content Include="CodeTemplates\AddView\CSHTML\oList.tt" />
     <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="CodeTemplates\AddController\oController.tt" />
+    <Content Include="Areas\Badminton\Views\Brand\Create.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
