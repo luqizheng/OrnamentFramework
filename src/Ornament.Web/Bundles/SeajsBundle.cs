@@ -39,9 +39,6 @@ namespace Ornament.Web.Bundles
             var seajs = new RootModule(context.HttpContext.Request.MapPath(bundleFiles.First().VirtualFile.VirtualPath), this.Path);
             var subContent = seajs.BuildContent(bundleContent);
             BundleResponse result = base.ApplyTransforms(context, subContent, bundleFiles);
-#if DEBUG
-            UpdateCache(context, result);
-#endif
             return result;
         }
     }
