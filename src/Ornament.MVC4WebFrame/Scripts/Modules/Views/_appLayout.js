@@ -14,7 +14,7 @@ define(function (require) {
     require("valid")($);
 
     $(".styled").uniform({ radioClass: 'choice' });
-    $("#mainMenu > li.active > ul").attr("style", "").click();
+    
     $('.tip').tooltip();
     $('.focustip').tooltip({ 'trigger': 'focus' });
 
@@ -52,8 +52,11 @@ define(function (require) {
         $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
         $('#content').toggleClass("full-content");
     });
+    
+    $("#mainMenu > li.active > ul").attr("style", "").click();
+    $("#mainMenu > li.active a").click();
 
-    //提示独享
+    //提示
     var clientChecking = require("../Combine/Share/client.js");
     var api = new clientChecking(1000, function (d) {
         if (d.HasMessage) {
@@ -61,8 +64,8 @@ define(function (require) {
             $("#msgAlert").append('<i class="new-message"></i>');
         }
     });
+    
     api.start();
-
     return {
         message: api
     };
