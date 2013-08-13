@@ -2,7 +2,7 @@
 
 
 define(function (require) {
-    var cookie = require("cookie.js");
+    var cookie = require("./cookie.js");
     // get cookie setting
 
     function autoChecking(time, func) {

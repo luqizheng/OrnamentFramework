@@ -3,7 +3,6 @@
 /// <reference path="../../_appLayout.js" />
 /// <reference path="../../../Combine/Views/user.typeahead.js" />
 /// <reference path="../../../Combine/Memberships/user.js" />
-/// <reference path="../../_appLayout.js" />
 
 
 define(function (require) {
@@ -12,7 +11,7 @@ define(function (require) {
         userTypeahead = require("../../../Combine/Views/user.typeahead.js"),
         userAPI = require("../../../Combine/Memberships/user.js"),
         pm = require("/share/pm.js");
-    require("/_appLayout.js");
+
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Optimization;
 using System.Windows.Forms;
 
 namespace Ornament.Web.Bundles.Seajs
@@ -8,7 +9,7 @@ namespace Ornament.Web.Bundles.Seajs
     public class ModualIdSets
     {
         private readonly Dictionary<string, string> _moduleIdUniquireId = new Dictionary<string, string>();
-        private readonly Dictionary<string,string> _uniquireIdModuleId=new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _uniquireIdModuleId = new Dictionary<string, string>();
         private readonly ModuleCollection _modules = new ModuleCollection();
 
         public string GetModualId(ReferenceModule module)
@@ -29,7 +30,7 @@ namespace Ornament.Web.Bundles.Seajs
             }
             else
             {
-                string moduleId = (new FileInfo(module.UniqueId)).Name;
+                string moduleId = combineModual.Combine ? (new FileInfo(module.UniqueId)).Name : combineModual.VirtualPath;
                 int index
                     = 1;
                 while (_moduleIdUniquireId.ContainsKey(moduleId))
@@ -37,7 +38,7 @@ namespace Ornament.Web.Bundles.Seajs
                     moduleId += index;
                     index++;
                 }
-                _uniquireIdModuleId.Add(module.UniqueId,moduleId);
+                _uniquireIdModuleId.Add(module.UniqueId, moduleId);
                 _moduleIdUniquireId.Add(moduleId, module.UniqueId);
             }
         }

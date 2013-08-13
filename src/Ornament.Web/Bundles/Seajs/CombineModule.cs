@@ -9,8 +9,8 @@ namespace Ornament.Web.Bundles.Seajs
         /// <summary>
         /// </summary>
         /// <param name="physicPath"></param>
-        public CombineModule(string physicPath,string virtualPath)
-            : base(physicPath,virtualPath)
+        public CombineModule(string physicPath, string virtualPath, bool combine)
+            : base(physicPath, virtualPath, combine)
         {
             UniqueId = physicPath;
         }

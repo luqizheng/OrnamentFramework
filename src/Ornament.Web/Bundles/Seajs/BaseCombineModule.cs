@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles.Seajs
 {
@@ -11,14 +12,15 @@ namespace Ornament.Web.Bundles.Seajs
     {
         private ModuleCollection _modules;
 
-        protected BaseCombineModule(string uniquireId, string virtualPath) :
+        protected BaseCombineModule(string uniquireId, string virtualPath, bool combine) :
             base(uniquireId)
         {
             VirtualPath = virtualPath;
+            this.Combine = combine;
         }
 
         public string VirtualPath { get; set; }
-
+        public bool Combine { get; set; }
         /// <summary>
         ///     当前这个Module依赖的子module
         /// </summary>
@@ -31,10 +33,10 @@ namespace Ornament.Web.Bundles.Seajs
         {
             string rootVirtualPath =
                 UniqueId.ToLower()
-                    .Replace(HttpContext.Current.Request.PhysicalApplicationPath.ToLower(), "~/")
-                    .Replace('\\', '/');
+                        .Replace(HttpContext.Current.Request.PhysicalApplicationPath.ToLower(), "~/")
+                        .Replace('\\', '/');
             return HttpContext.Current.Request.MapPath(virtualPath, VirtualPathUtility.GetDirectory(rootVirtualPath),
-                true);
+                                                       true);
         }
 
         /// <summary>
@@ -44,34 +46,34 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="referencModule"></param>
         /// <returns>返回需要被combie module的Moudle</returns>
         protected virtual List<CombineModule> CollectRequire(ref string content,
-            ModualIdSets idSets,
-            ModuleCollection referencModule)
+                                                             ModualIdSets idSets,
+                                                             ModuleCollection referencModule)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
             var result = new List<CombineModule>();
 
             content = Regex.Replace(content, @"require\((.+?)\)", match =>
-            {
-                string replacement = match.Groups[1].Value
-                    .TrimStart('\"', '\'')
-                    .TrimEnd('\"', '\'');
-                string srcRequireModualId = replacement.ToLower();
-                bool combinedHere = false;
-                ReferenceModule modual = GetModual(srcRequireModualId, idSets, referencModule, out combinedHere);
-                ReferenceModules.Add(modual);
-
-                var combineModual = modual as CombineModule;
-                if (combineModual != null)
                 {
-                    if (combinedHere)
+                    string replacement = match.Groups[1].Value
+                                                        .TrimStart('\"', '\'')
+                                                        .TrimEnd('\"', '\'');
+                    string srcRequireModualId = replacement.ToLower();
+                    bool combinedHere = false;
+                    ReferenceModule modual = GetModual(srcRequireModualId, idSets, referencModule, out combinedHere);
+                    ReferenceModules.Add(modual);
+
+                    var combineModual = modual as CombineModule;
+                    if (combineModual != null)
                     {
-                        result.Add(combineModual);
+                        if (combinedHere)
+                        {
+                            result.Add(combineModual);
+                        }
+                        return match.Value.Replace(replacement, idSets.GetModualId(combineModual));
                     }
-                    return match.Value.Replace(replacement, idSets.GetModualId(combineModual));
-                }
-                return match.Value;
-            });
+                    return match.Value;
+                });
 
 
             return result;
@@ -82,10 +84,10 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="srcRequireModualId"></param>
         /// <param name="moduleIdSets"></param>
         /// <param name="globalReferenceModules"></param>
-        /// <param name="combinedHere">是否需要合并</param>
+        /// <param name="combinedHere"> 获取到的 return 模块是否需要合并</param>
         /// <returns></returns>
-        private ReferenceModule GetModual(string srcRequireModualId, ModualIdSets moduleIdSets,
-            ModuleCollection globalReferenceModules, out bool combinedHere)
+        protected virtual ReferenceModule GetModual(string srcRequireModualId, ModualIdSets moduleIdSets,
+                                          ModuleCollection globalReferenceModules, out bool combinedHere)
         {
             combinedHere = false;
             if (globalReferenceModules.Contains(srcRequireModualId))
@@ -111,11 +113,19 @@ namespace Ornament.Web.Bundles.Seajs
                 {
                     return moduleIdSets[physicPath];
                 }
+                //从这里合并为绝对的虚拟路径
+                string fullpath =
+                    UniqueId.ToLower()
+                            .Replace(HttpContext.Current.Request.PhysicalApplicationPath.ToLower(), "/")
+                            .Replace("\\", "/");
+                fullpath = VirtualPathUtility.Combine(fullpath, srcRequireModualId);
+
                 //引用js
-                var sub = new CombineModule(physicPath, srcRequireModualId);
+                var sub = new CombineModule(physicPath, fullpath, this.Combine);
                 moduleIdSets.Add(sub);
                 combinedHere = true;
                 return sub;
+
             }
             //普通一个的引用js
             var subModule = new ReferenceModule(srcRequireModualId);
@@ -141,7 +151,11 @@ namespace Ornament.Web.Bundles.Seajs
             foreach (CombineModule combineFile in combineFiles)
             {
                 string subContent = combineFile.BuildContent(moduleIdList, referencModule);
-                result.Append(";\r\n").Append("//").Append(moduleIdList.GetModualId(combineFile)).Append(";\r\n").Append(subContent);
+                result.Append(";\r\n")
+                      .Append("//")
+                      .Append(moduleIdList.GetModualId(combineFile))
+                      .Append(";\r\n")
+                      .Append(subContent);
             }
             return result.ToString();
         }
@@ -149,7 +163,7 @@ namespace Ornament.Web.Bundles.Seajs
         protected string BuildDefine(ModualIdSets moduleIdList)
         {
             return String.Format("define(\"{0}\",[\"{1}\"],", GetOutputModuleId(moduleIdList),
-                String.Join("\",\"", ReferenceModules.RequrestIds(moduleIdList)));
+                                 String.Join("\",\"", ReferenceModules.RequrestIds(moduleIdList)));
         }
 
 
