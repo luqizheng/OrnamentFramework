@@ -96,9 +96,7 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
         } else if (!property.IsReadOnly) {
 #>
         
-            @Html.EditorFor(model => model.<#= property.Name #>)
-
-        </div>
+            @Html.EditorFor(model => model.<#= property.Name #>)        
 
 <#
         }

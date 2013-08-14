@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Badminton.Dao;
 using Ornament.MVCWebFrame.Areas.Badminton.Models;
 using Qi.Web.Mvc;
-
 
 namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
 {
@@ -21,6 +16,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         {
             return View();
         }
+
         [HttpPost, Session]
         public ActionResult Create(GymnasiumViewModel model)
         {
@@ -36,6 +32,5 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         {
             return View();
         }
-
     }
 }

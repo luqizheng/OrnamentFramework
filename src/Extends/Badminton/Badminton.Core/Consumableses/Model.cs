@@ -48,8 +48,12 @@ namespace Badminton.Consumableses
         /// <summary>
         ///     消耗品类型
         /// </summary>
+        [UIHint("EnumRadio")]
         public virtual ConsumablesType ConsumablesType { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual MeasurementUnit Unit { get; set; }
         /// <summary>
         /// </summary>
         /// <returns></returns>
@@ -58,5 +62,4 @@ namespace Badminton.Consumableses
             return Brand.Name + (Prefix ?? "") + (Name + Suffix ?? "");
         }
     }
-   
 }

@@ -237,6 +237,7 @@
     <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
     <Compile Include="Areas\Badminton\Controllers\BrandController.cs" />
     <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
+    <Compile Include="Areas\Badminton\Controllers\MeasurementUnitController.cs" />
     <Compile Include="Areas\Badminton\Controllers\ModelController.cs" />
     <Compile Include="Areas\Badminton\Controllers\YardController.cs" />
     <Compile Include="Areas\Badminton\Models\GymnasiumViewModel.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataInit\MeasurementUnitInit.cs" />
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\MessageInit.cs" />
     <Compile Include="Models\Membership\AccountOperator.cs" />
@@ -545,6 +547,7 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\Fx\compatibles\jquery-ui-1.0.js" />
+    <Content Include="Scripts\Modules\Combine\Badminton\Brand.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\friend.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\permission.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\user.js" />
@@ -553,7 +556,7 @@
     <Content Include="Scripts\Modules\Combine\Share\client.js" />
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
-    <Content Include="Scripts\Modules\Combine\Util\select2Helper.js" />
+    <Content Include="Scripts\Modules\Views\Share\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\Permissions\index.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\Permissions\Permission.js" />
@@ -634,7 +637,6 @@
     <Content Include="Areas\Messages\Views\Template\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Edit.cshtml" />
-    <Content Include="Areas\Badminton\Views\Yard\Create.cshtml" />
     <Content Include="Areas\Badminton\Views\Brand\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml">
       <SubType>Code</SubType>
@@ -649,6 +651,15 @@
     <Content Include="CodeTemplates\AddController\oController.tt" />
     <Content Include="Areas\Badminton\Views\Brand\Create.cshtml" />
     <Content Include="Areas\Badminton\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Badminton\Views\Yard\Create.cshtml" />
+    <Content Include="Areas\Badminton\Views\Model\Index.cshtml" />
+    <Content Include="Areas\Badminton\Views\Model\Create.cshtml" />
+    <Content Include="CodeTemplates\AddView\CSHTML\Select2_Single.tt" />
+    <Content Include="Areas\Badminton\Views\Shared\EditorTemplates\Brand.cshtml" />
+    <Content Include="Areas\Badminton\Views\MeasurementUnit\Index.cshtml" />
+    <Content Include="Areas\Badminton\Views\MeasurementUnit\Edit.cshtml" />
+    <Content Include="Areas\Badminton\Views\Shared\EditorTemplates\MeasurementUnit.cshtml" />
+    <Content Include="Areas\Badminton\Views\MeasurementUnit\Create.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -984,8 +995,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Badminton\Views\Model\" />
-    <Folder Include="Areas\Badminton\Views\Shared\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="bin\" />

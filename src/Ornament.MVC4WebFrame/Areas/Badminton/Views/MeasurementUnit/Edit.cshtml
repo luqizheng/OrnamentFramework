@@ -1,14 +1,14 @@
 ﻿@using Resources
-@model Badminton.Consumableses.Brand
+@model Badminton.MeasurementUnit
 
 @{
-    ViewBag.Title = "View1";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_appLayout.cshtml";
 }
 
-<h2>View1</h2>
+<h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Save", "MeasurementUnit", FormMethod.Post))
 {
     <div class="widget">
         <div class="navbar">
@@ -19,16 +19,23 @@
         </div>
 
         <div class="well form-horizontal">
+
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-            @Html.EditorFor(model => model.Name)
-        </div>
 
-        @Html.HiddenFor(model => model.Id)
 
-        <div class="form-actions">
-            <button class="btn btn-primary">@Basic.Save</button>
-            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+            @Html.EditorFor(model => model.IntegerName)
+            @Html.EditorFor(model => model.DecimalName)
+            @Html.EditorFor(model => model.Adecimal)
+
+
+
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-actions">
+                <button class="btn btn-primary">@Basic.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+            </div>
         </div>
     </div>
 }
@@ -37,13 +44,13 @@
 @* 
  如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
  seajs.use必须是全小写
- please create a js in /Scripts/Module/Views/{Area}/{Controller}/View1.js
+ please create a js in /Scripts/Module/Views/{Area}/{Controller}/Edit.js
 *@
 @*
 
 @section Scripts {
     <script type="text/javascript">
-		seajs.use(["{area}/{controller}/View1.js"],function(init){
+		seajs.use(["{area}/{controller}/Edit.js"],function(init){
 			inti();
 		});
 	</script>

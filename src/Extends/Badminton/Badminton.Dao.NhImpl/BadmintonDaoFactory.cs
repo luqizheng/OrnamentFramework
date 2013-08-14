@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Badminton.Dao.NhImpl
 {
-    public  class BadmintonDaoFactory:IBadmintonDaoFactory
+    public class BadmintonDaoFactory : IBadmintonDaoFactory
     {
         public IGymnasiumDao CreateGymasiumDao()
         {
@@ -40,12 +40,12 @@ namespace Badminton.Dao.NhImpl
 
         public IBrandDao BrandDao()
         {
-            throw new NotImplementedException();
+            return new BrandDao();
         }
 
         public IModelDao ModelDao()
         {
-            throw new NotImplementedException();
+            return new ModelDao();
         }
 
         public IConsumablesDao ConsumablesDao()
@@ -56,6 +56,11 @@ namespace Badminton.Dao.NhImpl
         public IConsumablesHistoryDao ConsumablesHistoryDao()
         {
             throw new NotImplementedException();
+        }
+
+        public IMeasurementUnitDao MeasurementUnit()
+        {
+            return new MeasurementUnitDao();
         }
     }
 }

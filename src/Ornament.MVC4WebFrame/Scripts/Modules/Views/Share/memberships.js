@@ -69,7 +69,9 @@
                     };
                     return forData(selector, opts, initData);
                 },
-            role: function (selector, initData) { return forData(selector, { ajax: { url: "/api/Roles" } }, initData); },
+            role: function(selector, initData) {
+                 return forData(selector, { ajax: { url: "/api/Roles" } }, initData);
+            },
             userGroup: function (selector, initData) {
                 return forData(selector, { ajax: { url: "/api/usergroups" } }, initData);
 

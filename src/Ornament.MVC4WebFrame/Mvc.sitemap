@@ -83,10 +83,13 @@
 
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="消耗品" imageUrl="icon-indent-rigth">
+    <mvcSiteMapNode title="基础数据" imageUrl="icon-indent-rigth">
       <mvcSiteMapNode controller="Brand" area="Badminton" action="Index" title="品牌"></mvcSiteMapNode>
       <mvcSiteMapNode controller="Model" area="Badminton" action="Index" title="型号"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="MeasurementUnit" area="Badminton" action="Index" title="计量单位"></mvcSiteMapNode>
     </mvcSiteMapNode>
+    
+    
 
   </mvcSiteMapNode>
 

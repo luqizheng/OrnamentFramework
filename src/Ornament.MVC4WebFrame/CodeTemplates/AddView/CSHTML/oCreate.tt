@@ -92,9 +92,7 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
     if (!property.IsPrimaryKey && !property.IsReadOnly && property.Scaffold) {
 #>
       
-    @Html.EditorFor(model => model.<#= property.Name #>)
-
-        </div>
+    @Html.EditorFor(model => model.<#= property.Name #>)        
 
 <#
 
@@ -105,6 +103,7 @@ foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
            <button class="btn btn-primary">@Basic.Create</button>
 		     <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
         </div>
+	</div>
 </div>
 
 }

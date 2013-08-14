@@ -1,5 +1,5 @@
 ﻿define(function (require) {
-    var $ = require("select2");
+    var $ = require("jquery ");
     require("select2")($);
     var defaults = {
         minimumInputLength: 1,
@@ -24,7 +24,7 @@
         }
     };
     return {
-        select2: function (selector, opts, data) {
+        ajax: function (selector, opts, data) {
             var $tag = $(selector),
                 $form = $tag.closest("form"),
                 options = $.extend({}, defaults, opts);

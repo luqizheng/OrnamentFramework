@@ -1,0 +1,22 @@
+﻿@using Badminton.Dao
+@using Ornament
+@model Badminton.MeasurementUnit
+@{
+    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    IEnumerable<SelectListItem> listItem = from brand in
+        OrnamentContext.DaoFactory.GetDaoFactory<IBadmintonDaoFactory>().MeasurementUnit().GetAll()
+        select new SelectListItem
+        {
+            Text = brand.IntegerName + brand.DecimalName,
+            Value = brand.Id.ToString(),
+            Selected = Model != null && brand.Id == Model.Id
+        };
+}
+
+<div class="control-group">
+    @Html.Label("", display, new {@class = "control-label"})
+    <div class="controls">
+        @Html.DropDownList("", listItem, new {style = "display:none"})
+        @Html.ValidationMessage("")
+    </div>
+</div>

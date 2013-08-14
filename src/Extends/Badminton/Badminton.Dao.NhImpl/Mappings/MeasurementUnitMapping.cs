@@ -10,7 +10,9 @@ namespace Badminton.Dao.NhImpl.Mappings
             this.Id(s => s.Id);
             this.Map(s => s.DecimalName);
             this.Map(s => s.IntegerName);
+            this.Map(s => s.Adecimal);
         }
+
 
     }
 }

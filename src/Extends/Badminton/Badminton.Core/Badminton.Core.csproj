@@ -62,6 +62,7 @@
     <Compile Include="Dao\IConsumablesDao.cs" />
     <Compile Include="Dao\IConsumablesHistoryDao.cs" />
     <Compile Include="Dao\IGymnasiumDao.cs" />
+    <Compile Include="Dao\IMeasurementUnitDao.cs" />
     <Compile Include="Dao\IYardDao.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Gymnasium.cs" />
@@ -87,6 +88,10 @@
     <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{f86ba9a8-a466-412e-8d18-2a17452cc348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
+      <Name>Ornament.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
