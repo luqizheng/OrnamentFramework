@@ -13,7 +13,7 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Models
         [UIHint("Time")]
         public Time? TimeNow { get; set; }
 
-
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "HH:mm")]
         public TimePeriod Period { get; set; }
         
 

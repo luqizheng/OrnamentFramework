@@ -984,7 +984,7 @@
     <Content Include="Views\Security\RetrievePasswordResult.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Period.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimePeriod.cshtml" />
     <Content Include="Views\Shared\filectrl.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />

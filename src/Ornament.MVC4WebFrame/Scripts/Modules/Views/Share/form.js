@@ -13,7 +13,7 @@ define(function (require) {
     $('form').bootstrapMakeUp().submit(function () {
         $(this).valid(); $(this).bootstrapMakeUp();
     });
-    
+
     $(document).ready(function () {
         //for time input.
         $('input.jqui-time').each(function () {
