@@ -11,6 +11,6 @@
         IModelDao ModelDao();
         IConsumablesDao ConsumablesDao();
         IConsumablesHistoryDao ConsumablesHistoryDao();
-
+        IMeasurementUnit MeasurementUnit();
     }
 }
