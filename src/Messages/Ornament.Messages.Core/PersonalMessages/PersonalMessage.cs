@@ -1,5 +1,6 @@
 ﻿using System;
 using Ornament.MemberShip;
+using Ornament.Messages.Dao;
 using Qi.Domain;
 
 namespace Ornament.Messages.PersonalMessages
@@ -39,8 +40,31 @@ namespace Ornament.Messages.PersonalMessages
         /// 删除标记。
         /// </summary>
         public virtual DeleteStatus DeleteStatus { get; set; }
+        /// <summary>
+        /// 至少有当Receiver和Publisher都要求删除的时候。db中才会真正删除
+        /// </summary>
+        /// <param name="currentUser"></param>
+        /// <param name="personalMessageDao"></param>
+        public virtual void Delete(User currentUser, IPersonalMessageDao personalMessageDao)
+        {
+            if (currentUser == null) throw new ArgumentNullException("currentUser");
+            if (personalMessageDao == null) throw new ArgumentNullException("personalMessageDao");
+            if (Receiver.Id == currentUser.Id)
+            {
+                DeleteStatus |= DeleteStatus.Receiver;
+            }
+            else
+            {
+                DeleteStatus |= DeleteStatus.Publisher;
+            }
 
+            if (this.DeleteStatus.HasFlag(DeleteStatus.Publisher) && this.DeleteStatus.HasFlag(DeleteStatus.Receiver))
+            {
+                personalMessageDao.Delete(this);
+            }
+        }
     }
+    [Flags]
     public enum DeleteStatus
     {
         Publisher = 1, Receiver = 2
