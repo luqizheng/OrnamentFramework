@@ -100,7 +100,7 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
         {
             return CreateDetachedCriteria()
                 .Add(Restrictions.Eq(ReceiverProperty, user))
-                .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                .Add(Restrictions.Not(Restrictions.Eq(StateProperty, PersonalMessageStatus.Receiver)))
                 .SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
