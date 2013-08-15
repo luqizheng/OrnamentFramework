@@ -14,8 +14,10 @@ define(function (require) {
         Friend = require("../../Combine/Memberships/friend.js");
 
     function buildTemp(chatItem) {
+        var $dt = $("<dt><h6><span>" + chatItem.publisher + "</span> <small>" + chatItem.createTime + "</small><a class='pull-right' href='#" + chatItem.id + "'><i class='icon-remove'></i></a></h6></dt>");
+        $("a", $dt).click(remove);
         return {
-            dt: $("<dt><h6><span>" + chatItem.publisher + "</span> <small>" + chatItem.createTime + "</small> <a class='pull-right'><i class='icon-remove'></i></a></h6></dt>"),
+            dt: $dt,
             dd: $("<dd><div>" + chatItem.content + "</div></dd>")
         };
     }
@@ -26,17 +28,25 @@ define(function (require) {
             if (this.publisher != self.Owner.Name) { //对方的信息放在右面
                 $("span", item.dt).addClass("text-info");
             }
-            chat.push(item.dt);
             chat.push(item.dd);
+            chat.push(item.dt);
         });
+        chat.reverse();
         if (chat.length != 0) {
             self.$chat.append(chat).scrollTop(self.$chat[0].scrollHeight).closest(".well-smoke").show();
-        } else if (self.lastTime == null) {
-            self.$chat.closest(".well-smoke").hide();
         }
-
     };
-
+    function remove() {
+        var self = $(this);
+        pm.delete($(this).attr("href").substr(1), function (d) {
+            if (d) {
+                var $dt = self.closest("dt");
+                var $dd = $dt.next();
+                $dt.remove();
+                $dd.remove();
+            }
+        });
+    }
     function pmDialog($dialog, my) {
         /// <summary>
         /// </summary>
@@ -52,7 +62,7 @@ define(function (require) {
         this.$processBar = $("[role=progressbar]", self.$dialog);
 
 
-        this.curFriendId = false;
+        this.curFriend = false;
         this.editor = CKEDITOR.replace('editor', {
             toolbar: "Basic",
             height: "100"
@@ -86,10 +96,7 @@ define(function (require) {
             self.$processBar.fadeIn();
             var content = self.editor.getData();
             if (content.length != 0) {
-
-                var friend = new Friend({ Id: self.curFriendId }, pm);
-
-                friend.Send(content, self.curFriendId, function (d) {
+                self.curFriend.Send(content, self.curFriendId, function (d) {
                     self.$processBar.fadeOut(); //hide progressbar
                     if (!d.success) {
                         alert(d.error);
@@ -107,13 +114,13 @@ define(function (require) {
     }
 
     pmDialog.prototype.ListChat = function () {
-        var f = new Friend({ Id: this.curFriendId }, pm), self = this;
-        f.ListChat(function (d) { buildListChat(d, self); });
+        var self = this;
+        self.curFriend.ListChat(function (d) { buildListChat(d, self); });
     };
 
     pmDialog.prototype.GetNewer = function () {
-        var f = new Friend({ Id: this.curFriendId }, pm), self = this;
-        f.GetNewer(function (d) {
+        var self = this;
+        self.curFriend.GetNewer(function (d) {
             buildListChat(d, self);
         });
     };
@@ -122,7 +129,7 @@ define(function (require) {
 
 
     pmDialog.prototype.show = function (activeId) {
-        this.curFriendId = activeId;
+        this.curFriend = new Friend({ Id: activeId }, pm);
         this.$dialog.modal("show");
     };
 

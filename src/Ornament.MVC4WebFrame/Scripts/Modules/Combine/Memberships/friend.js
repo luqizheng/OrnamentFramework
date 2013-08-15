@@ -5,6 +5,7 @@ define(function (require) {
     var webApi = require("../share/webapi.js");
     var url = "/Api/Friends";
     var friendApi = new webApi(url);
+    
     function Friend(obj, pmIns) {
         /// <summary>
         /// obj是Friend对象，可以从/Api/Friends获取到 
@@ -57,7 +58,6 @@ define(function (require) {
 
     Friend.prototype.GetNewer = function (func) {
         var self = this;
-        console.log("ajaxing self.lastCheckTime:" + self.lastCheckTime);
         /// <summary>
         /// 
         /// </summary>
@@ -65,9 +65,7 @@ define(function (require) {
         pm.getChat(this.Id, 0, self.lastCheckTime, function (d) {
 
             if (d.length != 0) {
-                console.log("ajaxed self.lastCheckTime:" + self.lastCheckTime);
                 self.lastCheckTime = d[0].createTime;
-                console.log("after set self.lastCheckTime:" + self.lastCheckTime);
             }
             func(d);
         });
