@@ -5,7 +5,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_appLayout.cshtml";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
     var types = (IList<NewsType>)ViewData["types"];
     var selectedType = ViewData["type"] as NewsType;
     var pae = ViewData["nav"] as Pagination;

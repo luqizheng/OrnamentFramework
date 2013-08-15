@@ -26,7 +26,7 @@
     <div id="top">
         <div class="fixed">
             <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
-            @Html.Partial("_topMenu")
+            @Html.Partial("/Views/Shared/Backend/_topMenu.cshtml")
         </div>
     </div>
     @if (showMenu)
@@ -45,7 +45,7 @@
 
                         <!-- Main navigation -->
 
-                @Html.Partial("_mainMenu")
+                @Html.Partial("/Views/Shared/Backend/_mainMenu.cshtml")
 
                 <!-- /main navigation -->
                 <!--
@@ -62,7 +62,7 @@
 
             <div id="content">
                 <div class="wrapper">
-                    @Html.Partial("_crumbs")
+                    @Html.Partial("/Views/Shared/Backend/_crumbs.cshtml")
                     <div class="page-header">
                         <div class="page-title">
                             @RenderSection("pageTitle", false)

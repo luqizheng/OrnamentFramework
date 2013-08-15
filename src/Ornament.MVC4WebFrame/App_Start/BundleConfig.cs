@@ -118,8 +118,8 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void BizRelative(BundleCollection bundles)
         {
-            bundles.Add(
-                new SeajsBundle("~/models/pm-1.0.js", CombineSeajsModule).Include("~/Scripts/Modules/Ui/Controls/pm.js"));
+
+            new SeajsBundle("~/scripts/ctrls/pm.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/pm.js");
             AutoForPageScripts(bundles);
         }
 

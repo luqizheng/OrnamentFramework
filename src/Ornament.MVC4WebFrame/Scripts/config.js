@@ -36,10 +36,8 @@
         "unobtrusive": "/bundles/unobtrusive-ajax.js",
 
         //following is Model
-        "pm": "/models/pm-1.0.js",
-        "user": "/models/user-1.0.js",
-        "membership": "/scripts/ctrls/membership-1.0.js",
-        "personal": "/models/personal-1.0.js",
+        "pm": "/scripts/ctrls/pm.js",
+        "membership": "/scripts/ctrls/memberships.js",
         "formInput": "/scripts/ctrls/form.js",
         //components 不依赖jquery
         "ckeditor": "/scripts/ckeditor/ckeditor.js",

@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Windsor.3.2.0\lib\net40\Castle.Windsor.dll</HintPath>
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="dotless.ClientOnly, Version=1.3.1.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -940,8 +940,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\_appLayout.cshtml" />
-    <Content Include="Views\Shared\_topMenu.cshtml" />
+    <Content Include="Views\Shared\Backend\_appLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
@@ -952,7 +951,6 @@
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <Content Include="Views\Shared\_crumbs.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ActionMenus.cshtml" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.eot" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.ttf" />
@@ -995,6 +993,11 @@
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\_pm.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\Backend\_crumbs.cshtml" />
+    <Content Include="Views\Shared\Backend\_mainMenu.cshtml" />
+    <Content Include="Views\Shared\Backend\_topMenu.cshtml" />
+    <Content Include="Views\Shared\Backend\Error.cshtml" />
+    <Content Include="Views\Shared\Backend\NavPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1157,7 +1160,6 @@
     <Content Include="Views\Shared\DisplayTemplates\Operators.cshtml" />
     <Content Include="Views\Shared\Empty.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_mainMenu.cshtml" />
     <Content Include="Views\Shared\NavPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>

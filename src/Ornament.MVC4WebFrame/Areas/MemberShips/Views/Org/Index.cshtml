@@ -7,7 +7,7 @@
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = "Organization";
-    Layout = "~/Views/Shared/_appLayout.cshtml";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
     string parentId = Model != null ? Model.Id : "";
     var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Modify);
