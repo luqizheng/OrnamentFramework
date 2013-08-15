@@ -1,7 +1,9 @@
 ﻿define(function (require) {
     var $ = require("jquery");
-    require('bootstrap')($);
     require("../../_appLayout.js");
+    if (!$.fn.popover) {
+        require('bootstrap')($);
+    }
     return function (deleteUrl) {
         var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
         $(document)
@@ -16,7 +18,7 @@
                     } else {
                         alert(data.message);
                     }
-                }); 
+                });
                 return false;
             })
             .delegate("button.deleteNo", "click", function () {

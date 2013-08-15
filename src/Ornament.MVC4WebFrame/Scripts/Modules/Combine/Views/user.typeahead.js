@@ -1,6 +1,8 @@
 ﻿define(function (require) {
     var $ = require("jquery");
-    require("/bundles/bootstrap.js")($);
+    if (!$.fn.tooltip) {
+        require("/bundles/bootstrap.js")($);
+    }
     return {
         typeahead: function (selector) {
             /// <summary>

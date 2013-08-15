@@ -2,9 +2,12 @@
 define(function (require) {
 
     var $ = require('jquery');
-    require('bootstrap')($);
+    
     require('select2')($);
     require("../../_appLayout.js");
+    if (!$.fn.popover) {
+        require("bootstrap")($);
+    }
     require('ckeditor');
     return function (content) {
 

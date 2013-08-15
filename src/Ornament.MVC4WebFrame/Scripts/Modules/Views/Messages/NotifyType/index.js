@@ -1,7 +1,9 @@
 ﻿define(function (require) {
     var $ = require("jquery");
-    require("bootstrap")($);
     require("../../_appLayout.js");
+    if (!$.fn.popover) {
+        require("bootstrap")($);
+    }
     var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
     return function (opts) {
         $(document)

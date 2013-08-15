@@ -3,6 +3,7 @@
 /// <reference path="../../_appLayout.js" />
 /// <reference path="../../../Combine/Views/user.typeahead.js" />
 /// <reference path="../../../Combine/Memberships/user.js" />
+/// <reference path="../../_appLayout.js" />
 
 
 define(function (require) {

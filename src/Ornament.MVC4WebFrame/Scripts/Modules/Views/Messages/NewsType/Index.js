@@ -3,7 +3,9 @@ define(function (require) {
 
     return function (deleteUrl) {
         var $ = require('jquery');
-        require('bootstrap')($);
+        if (!$.fn.popover) {
+            require("bootstrap")($);
+        }
         var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
         $(document)
             .delegate("button.deleteYes", "click", function () {

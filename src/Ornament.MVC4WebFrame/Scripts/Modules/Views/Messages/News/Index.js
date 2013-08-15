@@ -1,11 +1,13 @@
 ﻿/// <reference path="../../_appLayout.js" />
 define(function (require) {
-    
+
     var $ = require('jquery');
     require("../../_appLayout.js");
-    require("bootstrap")($);
+    if (!$.fn.popover) {
+        require("bootstrap")($);
+    }
     require("select2")($);
-        
+
     var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
     $("#Type").select2();
     $(document)
@@ -25,5 +27,5 @@ define(function (require) {
         .delegate("button.deleteNo", "click", function () {
             $popver.popover("hide");
         });
-    
+
 })
