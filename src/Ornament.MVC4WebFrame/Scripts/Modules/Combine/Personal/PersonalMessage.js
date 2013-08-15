@@ -1,8 +1,10 @@
-﻿define(function (require) { 
-    var $ = require("jquery"),
-     url = "/Api/PersonalMessages";
+﻿/// <reference path="../Share/WebApi.js" />
+define(function (require) {
+    var url = "/Api/PersonalMessages",
+        Api = require("../share/webapi.js"),
+         webApi = new Api(url);
 
-    function pm(){};
+    function pm() { };
 
     pm.prototype.send = function (content, receiver, func) {
         /// <summary>
@@ -25,7 +27,9 @@
         /// <param name="func"></param>
         $.get(url, { relativeUserId: relativeUserId, lastTime: lastTime, page: pageIndex }, func);
     };
-
+    pm.prototype.delete = function (id, func) {
+        webApi.Delete({ id: id }, func);
+    };
     return pm;
 
 

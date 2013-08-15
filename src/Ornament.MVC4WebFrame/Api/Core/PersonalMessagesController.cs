@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -49,6 +50,7 @@ namespace Ornament.MVCWebFrame.Api.Core
 
                 result.Add(new
                     {
+                        id = a.Id,
                         publisher = a.Publisher.Name,
                         receiver = a.Receiver.Name,
                         content = a.Content,
@@ -59,8 +61,15 @@ namespace Ornament.MVCWebFrame.Api.Core
             return result;
         }
 
+        public object Delete(int? id)
+        {
+            if (id == null)
+                throw new HttpException(404, "id is null");
+            var a = _factory.PersonalMessageDao.Get(id.Value);
+            a.Delete(OrnamentContext.MemberShip.CurrentUser(), _factory.PersonalMessageDao);
+            return true;
+        }
         // POST api/default1
-
         public object Post([FromBody] SubmitContentData cc)
         {
             try

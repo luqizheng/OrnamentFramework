@@ -28,7 +28,7 @@ define(function (require) {
         /// <param name="func"></param>
         $.get(url, func);
     };
-    Friend.Add = function(userId, group, func) {
+    Friend.Add = function (userId, group, func) {
         /// <summary>
         /// 
         /// </summary>
@@ -43,9 +43,9 @@ define(function (require) {
         /// </summary>
         /// <param name="func"></param>
         var self = this;
-        pm.getChat(this.Id, 0, null,function(d) {
+        pm.getChat(this.Id, 0, null, function (d) {
             if (d.length != 0) {
-                self.lastCheckTime = d[length - 1].createTime;
+                self.lastCheckTime = d[d.length - 1].createTime;
             }
             func(d);
         });
@@ -55,8 +55,22 @@ define(function (require) {
         pm.send(content, this.Id, func);
     };
 
-    Friend.prototype.GetNewer = function(func) {
-        pm.getChat(this.Id, 0, this.lastCheckTime, func);
+    Friend.prototype.GetNewer = function (func) {
+        var self = this;
+        console.log("ajaxing self.lastCheckTime:" + self.lastCheckTime);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="func"></param>
+        pm.getChat(this.Id, 0, self.lastCheckTime, function (d) {
+
+            if (d.length != 0) {
+                console.log("ajaxed self.lastCheckTime:" + self.lastCheckTime);
+                self.lastCheckTime = d[0].createTime;
+                console.log("after set self.lastCheckTime:" + self.lastCheckTime);
+            }
+            func(d);
+        });
     };
 
     return Friend;
