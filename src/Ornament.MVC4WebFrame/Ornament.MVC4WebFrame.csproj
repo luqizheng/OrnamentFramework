@@ -559,6 +559,9 @@
     <Content Include="Scripts\Modules\Combine\Share\client.js" />
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
+    <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
+    <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
+    <Content Include="Scripts\Modules\Views\MyMessage\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\Permissions\index.js" />
@@ -570,6 +573,7 @@
     <Content Include="Scripts\Modules\Views\Messages\Template\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\form.js" />
     <Content Include="Scripts\Modules\Views\Share\memberships.js" />
+    <Content Include="Scripts\Modules\Views\_layout.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\plugins\forms\jquery.bootstrap.datepicker\bootstrap-datepicker.js" />
@@ -998,6 +1002,7 @@
     <Content Include="Views\Shared\Backend\_topMenu.cshtml" />
     <Content Include="Views\Shared\Backend\Error.cshtml" />
     <Content Include="Views\Shared\Backend\NavPagination.cshtml" />
+    <Content Include="Views\Shared\_topMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

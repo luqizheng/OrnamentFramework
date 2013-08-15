@@ -8,15 +8,6 @@
     Html.EnableUnobtrusiveJavaScript(true);
     Html.EnableClientValidation(true);
 }
-@section script
-{
-    <script type="text/javascript">
-        seajs.use(['uniform', 'bootstrap'], function () {
-            $(".styled").uniform({ radioClass: 'choice' });
-        })
-
-    </script>
-}
 
 <div class="login">
     <div class="navbar">
