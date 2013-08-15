@@ -34,7 +34,7 @@ namespace Ornament.Models.Memberships.Partials
         /// </summary>
         [Display(Name = "LoginId", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Resources))]
-        [RegularExpression(@"^[a-zA-z1-9_-]{1,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
+        [RegularExpression(@"^[a-zA-z1-9_-]{3,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof(ErrorMessage))]
         [UIHint("String")]
         [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",

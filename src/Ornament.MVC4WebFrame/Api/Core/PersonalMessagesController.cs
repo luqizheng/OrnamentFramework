@@ -43,11 +43,7 @@ namespace Ornament.MVCWebFrame.Api.Core
             foreach (PersonalMessage a in msgDao.GetChat(currentUser, receiverUser, lastTime,
                                                          page ?? 0, 20))
             {
-                if (currentUser == a.Receiver)
-                {
-                    a.ReadStatus = ReadStatus.Read;
-                }
-
+                a.HasRead(currentUser, msgDao);
                 result.Add(new
                     {
                         id = a.Id,

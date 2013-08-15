@@ -46,7 +46,7 @@ define(function (require) {
         var self = this;
         pm.getChat(this.Id, 0, null, function (d) {
             if (d.length != 0) {
-                self.lastCheckTime = d[d.length - 1].createTime;
+                self.lastCheckTime = d[0].createTime;
             }
             func(d);
         });

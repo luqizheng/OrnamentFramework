@@ -17,7 +17,7 @@ namespace Ornament.Messages.PersonalMessages
             Publisher = publisher;
         }
 
-        public virtual ReadStatus ReadStatus { get; set; }
+        public virtual PersonalMessageStatus ReadStatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -39,7 +39,7 @@ namespace Ornament.Messages.PersonalMessages
         /// <summary>
         /// 删除标记。
         /// </summary>
-        public virtual DeleteStatus DeleteStatus { get; set; }
+        public virtual PersonalMessageStatus DeleteStatus { get; set; }
         /// <summary>
         /// 至少有当Receiver和Publisher都要求删除的时候。db中才会真正删除
         /// </summary>
@@ -51,21 +51,33 @@ namespace Ornament.Messages.PersonalMessages
             if (personalMessageDao == null) throw new ArgumentNullException("personalMessageDao");
             if (Receiver.Id == currentUser.Id)
             {
-                DeleteStatus |= DeleteStatus.Receiver;
+                DeleteStatus |= PersonalMessageStatus.Receiver;
             }
             else
             {
-                DeleteStatus |= DeleteStatus.Publisher;
+                DeleteStatus |= PersonalMessageStatus.Publisher;
             }
 
-            if (this.DeleteStatus.HasFlag(DeleteStatus.Publisher) && this.DeleteStatus.HasFlag(DeleteStatus.Receiver))
+            if (this.DeleteStatus.HasFlag(PersonalMessageStatus.Publisher) && this.DeleteStatus.HasFlag(PersonalMessageStatus.Receiver))
             {
                 personalMessageDao.Delete(this);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentUser"></param>
+        /// <param name="personalMessageDao"></param>
+        public virtual void HasRead(User currentUser, IPersonalMessageDao personalMessageDao)
+        {
+            if (currentUser == null) throw new ArgumentNullException("currentUser");
+            if (personalMessageDao == null) throw new ArgumentNullException("personalMessageDao");
+            ReadStatus = Receiver.Id == currentUser.Id ? PersonalMessageStatus.Receiver : PersonalMessageStatus.Publisher;
+            personalMessageDao.SaveOrUpdate(this);
+        }
     }
     [Flags]
-    public enum DeleteStatus
+    public enum PersonalMessageStatus
     {
         Publisher = 1, Receiver = 2
     }

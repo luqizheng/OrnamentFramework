@@ -48,7 +48,7 @@ namespace Badminton
         {
             return new List<User>
                 {
-                    User
+                    this.User
                 };
         }
 

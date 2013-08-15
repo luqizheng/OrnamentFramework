@@ -78,13 +78,14 @@ define(function (require) {
             self.ListChat();
 
             function watch() {
-                self.GetNewer();
-                if (watcher) {
-                    ticket = setTimeout(watch, 1000);
-                } else {
-                    clearTimeout(ticket);
-                    ticket = null;
-                }
+                self.GetNewer(function () {
+                    if (watcher) {
+                        ticket = setTimeout(watch, 1000);
+                    } else {
+                        clearTimeout(ticket);
+                        ticket = null;
+                    }
+                });
             }
             ticket = setTimeout(watch, 1000);
         }).on("hide", function () {
@@ -118,10 +119,11 @@ define(function (require) {
         self.curFriend.ListChat(function (d) { buildListChat(d, self); });
     };
 
-    pmDialog.prototype.GetNewer = function () {
+    pmDialog.prototype.GetNewer = function (func) {
         var self = this;
         self.curFriend.GetNewer(function (d) {
             buildListChat(d, self);
+            func();
         });
     };
 

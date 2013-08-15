@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
+using Ornament.Messages.PersonalMessages;
 using Ornament.Web;
 using Qi.Web.Mvc;
 
@@ -23,7 +24,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Session]
         public ActionResult Index()
         {
-            ViewData["PM"]=
+            ViewData["PM"] =
                 _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(OrnamentContext.MemberShip.CurrentUser(), 0, 40);
 
 
@@ -40,7 +41,7 @@ namespace Ornament.MVCWebFrame.Controllers
             if (id == null)
                 throw new HttpException(404, "Can't find any message.");
             var a = _messageDaoFactory.PersonalMessageDao.Get(id.Value);
-            a.ReadStatus = ReadStatus.Read;
+            a.HasRead(OrnamentContext.MemberShip.CurrentUser(), _messageDaoFactory.PersonalMessageDao);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

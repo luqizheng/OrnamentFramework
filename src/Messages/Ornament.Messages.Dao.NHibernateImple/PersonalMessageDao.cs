@@ -41,6 +41,11 @@ namespace Ornament.Messages.Dao.NHibernateImple
             get { return Projections.Property<PersonalMessage>(s => s.CreateTime); }
         }
 
+        private IProjection CreateDeleteStatus
+        {
+            get { return Projections.Property<PersonalMessage>(s => s.DeleteStatus); }
+        }
+
 
         /// <summary>
         /// </summary>
@@ -64,11 +69,11 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
  */
             DetachedCriteria detache = DetachedCriteria.For<PersonalMessage>("b")
                                                        .Add(Restrictions.Eq(ReceiverProperty, user))
-                                                       .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                                                       .Add(Restrictions.Not(Restrictions.Eq(StateProperty, PersonalMessageStatus.Receiver)))
                                                        .Add(Restrictions.LtProperty("b.CreateTime", "a.CreateTime"))
                                                        .Add(Restrictions.EqProperty("a.Publisher", "b.Publisher"))
                                                        .SetProjection(Projections.SqlProjection("count(1)+1",
-                                                                                                new[] {"sd"},
+                                                                                                new[] { "sd" },
                                                                                                 new IType[]
                                                                                                     {
                                                                                                         NHibernateUtil
@@ -78,11 +83,11 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
             //var d = detache.GetExecutableCriteria(this.CurrentSession).List<object>();
             return DetachedCriteria.For<PersonalMessage>("a")
                                    .Add(Restrictions.Eq(ReceiverProperty, user))
-                                   .Add(Restrictions.Eq(StateProperty, ReadStatus.UnRead))
+                                   .Add(Restrictions.Not(Restrictions.Eq(StateProperty, PersonalMessageStatus.Receiver)))
                                    .Add(Subqueries.Ge(1, detache))
                                    .AddOrder(Order.Desc(Projections.Property<PersonalMessage>(s => s.CreateTime)))
                                    .SetMaxResults(pageSize)
-                                   .SetFirstResult(pageIndex*pageSize)
+                                   .SetFirstResult(pageIndex * pageSize)
                                    .GetExecutableCriteria(CurrentSession)
                                    .List<PersonalMessage>();
         }
@@ -112,16 +117,25 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
         {
             if (owner == null) throw new ArgumentNullException("owner");
             if (relative == null) throw new ArgumentNullException("relative");
-            IProjection receiver = ReceiverProperty;
-            IProjection publish = PublisherProperty;
+            IProjection receiverProperty = ReceiverProperty;
+            IProjection publisherProperty = PublisherProperty;
+            IProjection deleteProperty = CreateDeleteStatus;
 
             var receive = new Disjunction();
-            receive.Add(Restrictions.Eq(receiver, owner));
-            receive.Add(Restrictions.Eq(receiver, relative));
+            receive.Add(
+                (new Conjunction())
+                    .Add(Restrictions.Eq(receiverProperty, owner))
+                    .Add(Restrictions.Not(Restrictions.Eq(deleteProperty, PersonalMessageStatus.Receiver)))
+                );
+            receive.Add(Restrictions.Eq(receiverProperty, relative));
+
 
             var publisher = new Disjunction();
-            publisher.Add(Restrictions.Eq(publish, owner));
-            publisher.Add(Restrictions.Eq(publish, relative));
+            publisher.Add(
+                (new Conjunction()).Add(Restrictions.Eq(publisherProperty, owner))
+                                   .Add(Restrictions.Not(Restrictions.Eq(deleteProperty, PersonalMessageStatus.Publisher)))
+                );
+            publisher.Add(Restrictions.Eq(publisherProperty, relative));
 
             DetachedCriteria deach = CreateDetachedCriteria()
                 .Add(receive)
@@ -131,7 +145,7 @@ where (select count(1) from Msgs_PersonalMessage where publisher_id=t.publisher_
                 deach.Add(Restrictions.Gt(CreateTimeProperty, lastGetLastTime.Value));
             }
             return
-                deach.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+                deach.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
                      .AddOrder(Order.Desc(CreateTimeProperty))
                      .GetExecutableCriteria(CurrentSession).List<PersonalMessage>();
         }
