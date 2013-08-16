@@ -3,7 +3,6 @@ using Ornament.Web.Models;
 
 namespace Ornament.MVCWebFrame.Api.Core
 {
-    [Authorize]
     public class ClientController : ApiController
     {
         [HttpPost]

@@ -22,19 +22,33 @@ namespace Ornament.Web.Models
             }
             //refresh online.
             User user = OrnamentContext.MemberShip.CurrentUser();
-            IMessageDaoFactory daoFactory = OrnamentContext.DaoFactory.MessageDaoFactory;
-            int cout = daoFactory.SimpleMessageDao.CountNotifyMsg(user, ReadStatus.UnRead) +
-                       daoFactory.PersonalMessageDao.CountNewMessage(user);
-            return new ClientResult
+            if (user != null)
+            {
+                IMessageDaoFactory daoFactory = OrnamentContext.DaoFactory.MessageDaoFactory;
+                int cout = daoFactory.SimpleMessageDao.CountNotifyMsg(user, ReadStatus.UnRead) +
+                           daoFactory.PersonalMessageDao.CountNewMessage(user);
+
+                return new ClientResult
                 {
                     HasMessage = cout != 0
                 };
+            }
+            return new ClientResult()
+            {
+                Refresh = false
+            };
+
         }
     }
 
     public class ClientResult
     {
+        public ClientResult()
+        {
+            Refresh = true;
+        }
         public bool HasMessage { get; set; }
         public int? TimeZone { get; set; }
+        public bool Refresh { get; set; }
     }
 }

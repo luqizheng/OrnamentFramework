@@ -16,9 +16,9 @@ define(function (require) {
         this.ticket = null;
 
         this.start = function () {
-        	/// <summary>
-        	/// 
-        	/// </summary>
+            /// <summary>
+            /// 
+            /// </summary>
             var cbFunc = this.func;
             var ins = this;
 
@@ -30,9 +30,11 @@ define(function (require) {
                 }
 
                 $.post("/Api/Client", data, function (d) {
-                    if (!cbFunc(d)) {
+
+                    if (!cbFunc(d) || !d.refresh) {
                         ins.stop();
                     }
+
                 });
             }
 
