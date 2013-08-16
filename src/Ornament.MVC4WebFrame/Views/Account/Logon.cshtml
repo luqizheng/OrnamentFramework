@@ -21,7 +21,7 @@
                     {
                         <li><a href="@Url.Action("ForgetPassword", "Account")"><i class="icon-refresh"></i>@Html.GetResourceString("ForgetPassword")</a></li>
                     }
-                    @*  <li><a href="#"><i class="icon-cog"></i>Settings</a></li>*@
+@*  <li><a href="#"><i class="icon-cog"></i>Settings</a></li>*@
                 </ul>
             </div>
         </div>
@@ -65,3 +65,9 @@
         </form>
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("/accounts/logon.js");
+    </script>
+
+}
