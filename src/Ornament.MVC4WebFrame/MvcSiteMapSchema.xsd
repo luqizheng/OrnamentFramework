@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xs:schema
-    targetNamespace="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0"
+    targetNamespace="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
     elementFormDefault="qualified"
-    xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0"
+    xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:annotation>
@@ -53,7 +53,7 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="title" type="xs:string" use="optional">
+    <xs:attribute name="title" type="xs:string" use="required">
       <xs:annotation>
         <xs:documentation>
           The title of the node.
@@ -119,7 +119,7 @@
     <xs:attribute name="dynamicNodeProvider" type="xs:string" use="optional" >
       <xs:annotation>
         <xs:documentation>
-          A class name implementing MvcSiteMapProvider.Extensibility.IDynamicNodeProvider and providing dynamic nodes for the site map.
+          A class name implementing MvcSiteMapProvider.IDynamicNodeProvider and providing dynamic nodes for the site map.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -130,6 +130,13 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
+		<xs:attribute name="cacheResolvedUrl" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Should the resolved URL be cached (true) or resolved on each request (false)? Default is true.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
     <xs:attribute name="visibility" type="xs:string" use="optional" >
       <xs:annotation>
         <xs:documentation>
@@ -168,11 +175,42 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
+
+		<xs:attribute name="canonicalUrl" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Optional. The primary URL for what is completely or mostly duplicated content on the current node. 
+					The value may be an absolute URL (in the current site or in an external site), a rooted URL starting with '~/', or a relative URL.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="canonicalKey" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Optional. The key value for the node that contains the primary copy of the content for the current node, if it is largely similar.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+
+		<xs:attribute name="metaRobotsValues" type="metarobots_type" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Optional. A space-delimited list of values to apply to the robots meta tag. These will apply to all robots.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+
+		<xs:attribute name="httpMethod" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					The HTTP method that will be used to check node accessibility. This value is used to select correct controller action if a controller has multiple action accepting different HTTP verbs. Set to * to use HTTP method of current request.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
   </xs:attributeGroup>
 
   <xs:attributeGroup name="fileNodeAttributes">
     <xs:attribute name="siteMapFile" type="xs:string" use="optional" />
-    <xs:attribute name="securityTrimmingEnabled" type="small_boolean_Type" default="false" />
   </xs:attributeGroup>
 
   <xs:attributeGroup name="providerNodeAttributes">
@@ -183,29 +221,29 @@
     <xs:attribute name="lastModifiedDate" type="xs:dateTime" use="optional">
       <xs:annotation>
         <xs:documentation>
-          Last modified date for the node.
-        </xs:documentation>
+					Last modified date for the node. Will be output to sitemaps XML for search engines.
+				</xs:documentation>
       </xs:annotation>
     </xs:attribute>
 
     <xs:attribute name="changeFrequency" type="changefrequency_type" use="optional" default="Undefined" >
       <xs:annotation>
         <xs:documentation>
-          Change frequency for the node.
-        </xs:documentation>
+					Change frequency for the node. Will be output to sitemaps XML for search engines.
+				</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="updatePriority" type="updatepriority_type" default="Undefined" use="optional">
       <xs:annotation>
         <xs:documentation>
-          Update priority for the node.
+          Update priority for the node. Will be output to sitemaps XML for search engines.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
 
   <xs:attributeGroup name="siteMapAttributes">
-    <xs:attribute name="enableLocalization" type="small_boolean_Type" default="false" use="optional" />
+		<!-- Put sitemap attributes here -->
   </xs:attributeGroup>
 
   <xs:simpleType name="small_boolean_Type">
@@ -250,4 +288,24 @@
       <xs:enumeration value="Absolute_100" />
     </xs:restriction>
   </xs:simpleType>
+
+	<xs:simpleType name="metarobots_type">
+		<xs:list>
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="index"/>
+					<xs:enumeration value="noindex"/>
+					<xs:enumeration value="follow"/>
+					<xs:enumeration value="nofollow"/>
+					<xs:enumeration value="none"/>
+					<xs:enumeration value="noarchive"/>
+					<xs:enumeration value="nocache"/>
+					<xs:enumeration value="nosnippet"/>
+					<xs:enumeration value="nopreview"/>
+					<xs:enumeration value="noodp"/>
+					<xs:enumeration value="noydir"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:list>
+	</xs:simpleType>
 </xs:schema>

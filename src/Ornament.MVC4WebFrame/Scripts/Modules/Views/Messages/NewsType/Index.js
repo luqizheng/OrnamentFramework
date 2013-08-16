@@ -1,6 +1,6 @@
 ﻿//Message news type index
 define(function (require) {
-
+    require("../../_appLayout.js");
     return function (deleteUrl) {
         var $ = require('jquery');
         if (!$.fn.popover) {

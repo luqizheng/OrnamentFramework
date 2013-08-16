@@ -1,4 +1,5 @@
-﻿define(function (require) {
+﻿/// <reference path="../../_appLayout.js" />
+define(function (require) {
     var $ = require("jquery");
     require("../../_appLayout.js");
     if (!$.fn.popover) {

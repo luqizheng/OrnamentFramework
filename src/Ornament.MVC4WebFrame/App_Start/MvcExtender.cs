@@ -36,8 +36,7 @@ namespace Ornament.MVCWebFrame.App_Start
             ChangeControllerFacotry();
 
             //Web API for castle inject.
-            var httpDependencyResolver =
-                new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(typeof(RolesController).Assembly));
+            var httpDependencyResolver = new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(typeof(RolesController).Assembly));
 
             OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>()
                                                            .Instance(httpDependencyResolver).LifestyleSingleton());
