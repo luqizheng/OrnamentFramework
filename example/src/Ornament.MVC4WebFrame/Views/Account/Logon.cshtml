@@ -1,0 +1,73 @@
+﻿@using Ornament
+@using Ornament.Web
+@using Resources
+@model Ornament.Models.Memberships.LogonModel
+@{
+    ViewBag.Title = Basic.Logon;
+    Layout = "~/Views/Shared/_layout.cshtml";
+    Html.EnableUnobtrusiveJavaScript(true);
+    Html.EnableClientValidation(true);
+}
+
+<div class="login">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h6><i class="icon-user"></i>@Html.GetResourceString("logonTitle")</h6>
+            <div class="nav pull-right">
+                <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#"><i class="icon-plus"></i>@Basic.Regist</a></li>
+                    @if (Membership.EnablePasswordReset)
+                    {
+                        <li><a href="@Url.Action("ForgetPassword", "Account")"><i class="icon-refresh"></i>@Html.GetResourceString("ForgetPassword")</a></li>
+                    }
+@*  <li><a href="#"><i class="icon-cog"></i>Settings</a></li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="well">
+        <form class="row-fluid" method="POST" action="@Url.Action("LogOn")">
+
+            @Html.ValidationSummary(false)
+
+            <div class="control-group">
+                @Html.LabelFor(m => m.User, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.User, new { @class = "span12" })
+                    @Html.ValidationMessageFor(m => m.User)
+                </div>
+            </div>
+
+            <div class="control-group">
+                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.PasswordFor(m => m.Password, new { @class = "span12" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+            @if (OrnamentContext.Configuration.ApplicationSetting.EnableVerifyCode)
+            {
+                @Html.EditorFor(m => m.VerifyCodde)
+            }
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox inline">
+                        <input name="@Html.GetResourceString("RemeberMe")" type="checkbox" class="styled" />
+                        @Html.GetResourceString("RemeberMe")
+                    </label>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.ReturnUrl)
+            <div class="login-btn">
+                <input type="submit" value="@Basic.OK" class="btn btn-danger btn-block" />
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("/accounts/logon.js");
+    </script>
+
+}

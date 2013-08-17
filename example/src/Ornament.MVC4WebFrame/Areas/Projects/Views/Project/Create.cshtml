@@ -1,0 +1,34 @@
+﻿@using Ornament.MemberShip
+@using Qi.Web.Mvc
+@using QiProject
+@using Resources
+@model Ornament.MVCWebFrame.Areas.Projects.Models.ProjectModel
+@{
+    ViewBag.Title = "Create Project for Product";
+    Layout = "~/Views/Shared/_appLayout.cshtml";
+    Product product = Model.Product;
+  
+}
+<div class="page-header">
+    <h2>
+        Create project for @product.Name</h2>
+    <p>
+        Create new project for defeat, please special following info.
+    </p>
+</div>
+<div class="box">
+    <div class="content">
+        <section>
+            <header>
+                <h2>
+                    Project information</h2>
+            </header>
+            <form class="form-horizontal" method="post">
+            @Html.Partial("EditorTemplates/Project", this.Model, ViewData)
+            <div class="form-actions">
+                <button class="btn btn-primary">@Basic.Create</button>
+            </div>
+            </form>
+        </section>
+    </div>
+</div>

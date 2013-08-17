@@ -1,0 +1,42 @@
+﻿@using Ornament
+@using Ornament.MemberShip.Permissions
+@using Ornament.Web
+@model Ornament.MemberShip.Role
+@{
+
+    var permissions = from a in OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().Permissions select a;
+}
+
+<table class="table table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th>
+                @Html.LabelFor(a => ((Permission)null).Name)
+            </th>
+            <th>
+                @Html.LabelFor(a => ((Permission)null).Remark)
+            </th>
+        </tr>
+    </thead>
+    @foreach (var permission in permissions)
+    {
+                
+        <tr title="@permission.Remark">
+            <td>
+                @{
+              var checkedAttr = (this.Model != null && this.Model.Permissions.Contains(permission)) ? "checked='checked'" : "";
+                }
+                <input name="permissionIds" value="@permission.Id" @checkedAttr type="checkbox"/>
+            </td>
+            <td>
+                @permission.Name
+            </td>
+            <td>
+                @permission.Resource
+            </td>
+        </tr>
+                
+    }
+</table>

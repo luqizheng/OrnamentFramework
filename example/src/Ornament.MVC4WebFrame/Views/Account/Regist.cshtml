@@ -1,0 +1,46 @@
+﻿@using Ornament.Web
+@model Ornament.Models.Memberships.RegistAccount
+@{
+    ViewBag.Title = Html.GetResourceString("title");
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+<fieldset class="cssform">
+    <legend>@Html.GetResourceString("title")</legend>
+    @Html.ValidationSummary()
+    @using (Html.BeginForm())
+    {
+        <div class="control-group">
+            @Html.LabelFor(s => s.UserBasicInfo.LoginId, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(s => s.UserBasicInfo.LoginId)
+                @Html.ValidationMessageFor(s => s.UserBasicInfo.LoginId)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            @Html.LabelFor(s => s.UserBasicInfo.Email, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(s => s.UserBasicInfo.Email)
+                @Html.ValidationMessageFor(s => s.UserBasicInfo.Email)
+            </div>
+        </div>
+            
+        <div class="control-group">
+            @Html.LabelFor(s => s.PasswordModel.Password)
+            <div class="controls">
+                @Html.TextBoxFor(s => s.PasswordModel.Password)
+                @Html.ValidationMessageFor(s => s.PasswordModel.Password)
+            </div>
+        </div>    
+        <div class="control-group">
+            @Html.LabelFor(s => s.PasswordModel.ConfirmPassword)
+            <div class="controls">
+                @Html.TextBoxFor(s => s.PasswordModel.ConfirmPassword)
+                @Html.ValidationMessageFor(s => s.PasswordModel.ConfirmPassword)
+            </div>
+        </div>            
+        <div class="form-actions">
+            <input type="submit" value="@Resources.Basic.Regist" />
+        </div>
+    }
+</fieldset>

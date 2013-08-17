@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Badminton.Consumableses.Brand>
+
+@{
+    ViewBag.Title = "品牌";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+
+@section pageTitle
+{
+    <h6>品牌</h6>
+}
+
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+        </div>
+    </div>
+    <div class="body well">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 100px"></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(Resources.Basic.Edit, "Edit", new { id = item.Id }) |
+                        @Html.ActionLink(Resources.Basic.Delete, "Delete", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+                </tbody>
+        </table>
+    </div>
+</div>
+

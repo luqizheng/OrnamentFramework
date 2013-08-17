@@ -1,0 +1,12 @@
+﻿@model string
+
+<div class="control-group" id="verifyCode">
+    <div class="controls">
+        @Html.Label("", new { @class = "control-label" })
+        @Html.TextBox("", "", new { @class = "span12", autocomplete = "off" })
+        @Html.ValidationMessage("")
+    </div>
+    <div>
+        <img src="@Url.Action("Index", "VerifyCode", new { area = "" })" onclick='this.src = $(this).attr("src") + "?" + Math.random()'/>
+    </div>
+</div>

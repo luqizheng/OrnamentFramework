@@ -1,0 +1,86 @@
+﻿@using Ornament.Messages
+@using Resources
+@model IEnumerable<Ornament.Messages.Newses.NewsType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+
+
+
+@section pageTitle
+{
+    <h5>News Type(@this.Model.Count())</h5>
+}
+<div class="widget">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+
+            <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
+        </div>
+    </div>
+
+    <div class="well body">
+        @if (Model.Count() != 0)
+        {
+   
+            <table class="table table-condensed table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Remark)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Remark)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
+                                <a data-toggle="popover" data-val="@item.Id" 
+                                class="btn btn-danger btn-small" href="#">@Basic.Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    
+
+        }
+        else
+        {
+            <div class="alert">
+                <h6>No message type found. 
+                </h6>
+            </div>
+        }
+    </div>
+</div>
+<div id="warning" class="hide">
+    <p>Do you want to delete this message?</p>
+    <p>
+        <button class="btn btn-danger deleteYes">@Basic.Delete</button>
+        <button class="btn deleteNo">@Basic.Cancel</button>
+    </p>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        seajs.use("/messages/newstype/index.js",function(main) {
+            main("@Url.Action("Delete")");
+         })
+    </script>
+}

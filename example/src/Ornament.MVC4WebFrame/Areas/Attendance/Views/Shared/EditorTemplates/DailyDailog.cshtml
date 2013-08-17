@@ -1,0 +1,57 @@
+﻿@using Resources
+@using Ornament.Web
+@model string
+<div class="modal hide" id="@Model">
+    <div class="modal-header">
+        选择日期
+    </div>
+    <div class="modal-body form-horizontal">
+        <div class="control-group">
+            <label class="control-label">
+                日期
+            </label>
+            <div class="controls">
+                @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "start", new { role = "start" })
+                <span class="field-validation-valid help-inline">请输入日期,格式yyyy-MM-dd 如:2012-01-01</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                日期
+            </label>
+            <div class="controls">
+                @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "end", new { role = "end" })
+                <span class="field-validation-valid help-inline">请输入日期,格式yyyy-MM-dd 如:2012-01-01</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                备注
+            </label>
+            <div class="controls">
+                <textarea role="remarks" cols="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" role="ok" type="button">@Basic.OK</button>
+        <a class="btn" role="cancel">@Basic.Cancel</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $.fn.dailyDailog = function (option) {
+        if (typeof option == "object") {
+            option.validate = function (data) {
+                var ele = $(this),
+                validate = data.start <= data.end;
+                ele.find(".control-group:first").toggleClass("error", !validate);
+                return validate;
+            };
+            option.onShow = function (e) {
+                var ele = e.data.inc.element;
+                ele.find(".control-group").removeClass("error");
+            };
+        }
+        return $(this).confirm(option);
+    }
+</script>

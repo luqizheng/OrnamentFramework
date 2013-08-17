@@ -1,0 +1,112 @@
+﻿@using Ornament
+@using Ornament.MVCWebFrame.Models
+@using Ornament.MVCWebFrame.Models.Membership
+@using Ornament.MemberShip.Dao
+@using Ornament.MemberShip.Permissions
+@using Ornament.Models.Memberships
+@using Resources
+@using Ornament.Web
+@model Ornament.MemberShip.User
+@{
+    ViewBag.Title = Basic.Index;
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    IList<Permission> permissions =
+               OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().GetPermissionByLoginId
+                  (OrnamentContext.MemberShip.CurrentUser().LoginId);
+    var isFirst = true;
+
+    var menus = new[]
+                    {
+                        new
+                            {  
+                                id="BaseInfo",
+                                url = "BaseInfo",
+                                text = Html.GetResourceString("Menu_BasicInfo"),
+                                skipChecked = true,
+                                Operator = AccountOperator.None,
+                                Model=(object)OrnamentContext.MemberShip.CurrentUser()
+                            },
+                               new
+                            {
+                                id="ChangePassword",
+                                url = "ChangePassword",
+                                text = Html.GetResourceString("Menu_ChangePassword"),
+                                skipChecked = false,
+                                Operator = AccountOperator.ChangePassword,
+                                Model = (object)(new ChangePasswordModel())
+                            },
+                             new
+                            {
+                                id="PersonalInfo",
+                                url = "PersonalInfo",
+                                text = Html.GetResourceString("Menu_PersonalInfo"),
+                                skipChecked = true,
+                                Operator = AccountOperator.None,
+                                Model=(object)OrnamentContext.MemberShip.CurrentUser()
+                            },
+                     
+                        new
+                            {
+                                 id="Permissions",
+                                url ="Permissions",
+                                text = Html.GetResourceString("Menu_PermissionsInfo"),
+                                skipChecked = false,
+                                Operator = AccountOperator.ViewPermission,
+                                Model=(object)permissions
+                            }
+                            
+                    };
+}
+@section pageTitle
+{
+    <h5>@Basic.Setting</h5>
+}
+
+<ul class="nav nav-tabs">
+    @foreach (var item in menus)
+    {
+        if (item.skipChecked || OrnamentContext.MemberShip.HasRight(ResourceSetting.Account, item.Operator))
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+        <li class="active"><a href="#@item.url" data-toggle="tab">@item.text</a></li>
+            }
+            else
+            {
+        <li><a href="#@item.url" data-toggle="tab">@item.text</a></li>
+            }
+        }
+    }
+</ul>
+<div class="tab-content">
+    @{
+        isFirst = true;
+    }
+    @foreach (var item in menus)
+    {
+        if (item.skipChecked || OrnamentContext.MemberShip.HasRight(ResourceSetting.Account, item.Operator))
+        {
+            if (isFirst)
+            {
+                isFirst = false;
+        <div id="@item.url" class="tab-pane active">
+            @Html.Partial(item.url, item.Model)
+        </div>
+            }
+            else
+            {
+        <div id="@item.url" class="tab-pane">
+            @Html.Partial(item.url, item.Model)
+        </div>
+            }
+        }
+    }
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+      seajs.use("/accounts/index.js")
+    </script>
+}

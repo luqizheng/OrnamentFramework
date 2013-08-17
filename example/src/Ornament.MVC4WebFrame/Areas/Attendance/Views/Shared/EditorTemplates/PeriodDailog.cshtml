@@ -1,0 +1,66 @@
+﻿@using Ornament.Web
+@using Resources
+@model string
+<style type="text/css">
+    /* 
+    datepicker z-index can't be used modal dialog, so i change it's z-index
+    */
+    .dropdown-menu
+    {
+        z-index: 100000;
+    }
+</style>
+<div class="modal hide" id="@Model">
+    <div class="modal-header">
+        <h4>选择时间段</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            <div class="control-group" role="dateSelector">
+                <label class="control-label">
+                    日期
+                </label>
+                <div class="controls">
+                    @Html.DatePicker(DateTime.Now, "yyyy-MM-dd", "dateForPeriod", new { role = "date" })
+                    <span class="field-validation-valid help-inline">请输入日期,格式yyyy-MM-dd 如:2012-01-01</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    开始:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input size="5" type="text" value="@DateTime.Now.ToString("HH:mm")" inputmask-format="h:s" role="start">
+                        <span class="add-on"><i class="icon-time"></i></span>
+                    </div>
+                    <span class="field-validation-valid help-inline">请输入开始时间，并且要大于结束时间</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    结束:</label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input size="5" type="text" value="@DateTime.Now.ToString("HH:mm")" inputmask-format="h:s" role="end">
+                        <span class="add-on"><i class="icon-time"></i></span>
+                    </div>
+                    <span class="field-validation-valid help-inline">请输入结束时间，并且大于开始时间</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    备注:</label>
+                <div class="controls">
+                    <textarea size="5" type="text" name="remarks" role="remarks"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" role="ok">@Basic.OK</button>
+        <a class="btn" role="cancel">@Basic.Cancel</a>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["inputmask"]);
+</script>

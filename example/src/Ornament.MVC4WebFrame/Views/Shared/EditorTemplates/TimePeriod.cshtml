@@ -1,0 +1,33 @@
+﻿@using System.Text.RegularExpressions
+@model Ornament.TimePeriod
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var timeFormat = ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:ss";
+
+    var startDisplayValue = this.Model != null && this.Model.Start.HasValue ? this.Model.Start.Value.ToString(timeFormat) : "00:00:00";
+    var endDisplayValue = this.Model != null && this.Model.Start.HasValue ? this.Model.Start.Value.ToString(timeFormat) : "00:00:00";
+
+    var timePickerFormat = Regex.Replace(timeFormat.Replace("m", "i"), @"(\w)(\1)+", "$1");
+    var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
+}
+
+<div class="control-group">
+    @Html.Label("", display, new { @class = "control-label" })
+    <div class="controls">
+        <ul class="dates-range">
+            <li>
+
+                <input type="text" value="@startDisplayValue" class="jqui-time styled" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix"/>
+
+
+            <li class="sep">-</li>
+            <li>
+
+                <input type="text" value="@endDisplayValue" class="jqui-time styled" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix"/>
+
+
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">seajs.use(["formInput"])</script>

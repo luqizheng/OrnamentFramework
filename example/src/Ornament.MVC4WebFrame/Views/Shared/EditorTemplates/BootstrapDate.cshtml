@@ -1,0 +1,28 @@
+﻿@using System.Text.RegularExpressions
+@model DateTime?
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var format = ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd";
+    var inputMask = format.ToLower();
+}
+<div class="control-group">
+    @Html.Label("", display, new { @class = "control-label" })
+    <div class="controls">
+        @*
+        data-data-fromat for bootstrap date.
+        http://www.eyecon.ro/bootstrap-datepicker/
+        *@
+        <div data-date-format="@inputMask" data-date="@ViewData.TemplateInfo.FormattedModelValue" class="date input-append">
+            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new Dictionary<string, object>()
+                {
+                    {"inputmask-format",  Regex.Replace(inputMask, @"(\w)(\1)+", "$1")},
+                    {"placeholder",format},
+                    
+                })
+            <span class="add-on"><i class="icon-calendar"></i></span>
+            @Html.ValidationSummary("")
+        </div>
+
+    </div>
+</div>
+

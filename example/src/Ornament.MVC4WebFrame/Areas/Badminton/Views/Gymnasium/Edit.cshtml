@@ -1,0 +1,87 @@
+﻿@using Resources
+@model Ornament.MVCWebFrame.Areas.Badminton.Models.GymnasiumViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+
+
+<div class="widget">
+    <div class="body well">
+        <div class="tabbable">
+            <!-- default tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab"><i class="icon-cog"></i>场馆明细</a></li>
+                <li><a href="#tab2" data-toggle="tab"><i class="icon-heart"></i>场地情况</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <form method="POST" class="form-horizontal" action="@Url.Action("Save")">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Gymnasium.Id)
+
+                        @Html.EditorFor(model => model.Gymnasium.Name)
+
+                        @Html.EditorFor(model => model.Gymnasium.Phone)
+
+                        @Html.EditorFor(model => model.Gymnasium.Address)
+
+                        @Html.EditorFor(model => model.Gymnasium.Remarks)
+                        <div class="form-actions">
+                            <button class="btn btn-primary">@Basic.Edit</button>
+                            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="tab2">                   
+                    <a href="#">新增</a>
+                    <div id="divEdit">
+                        <table class="table table-bordered table-condensed table-striped">
+                            <tr><td>名称</td><td><input type="text" id="txtName" /></td></tr>
+                            <tr><td>单价</td><td><input type="text" id="txtPrice" /></td></tr>
+                            <tr><td>描述</td><td><input type="text" id="txtRemarks" /></td></tr>
+                        </table>
+                    </div>
+                    <a href="#">提交</a>
+                    <table class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Yard.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Yard.Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Yard.Remarks)
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.Gymnasium.Yards)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Remarks)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
+    @Html.ActionLink("返回列表", "Index")
+</div>

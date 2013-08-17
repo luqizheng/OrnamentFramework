@@ -1,0 +1,264 @@
+﻿@using Ornament
+@using Ornament.MVCWebFrame.Models
+@using Ornament.MVCWebFrame.Models.Membership
+@using Ornament.MemberShip
+@using Ornament.MemberShip.Dao
+@using Ornament.Web
+@using Resources
+@model IEnumerable<Ornament.MemberShip.User>
+@{
+    ViewBag.Title = MemberShip.User;
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
+}
+@section scripts 
+{
+    @Html.Partial("_pm")
+
+    <script type="text/javascript">
+        seajs.use("/memberships/user/index.js", function (main) {
+            main.init({
+                success: "@Html.GetResourceString("verify_email_success")",
+                fail: "@Html.GetResourceString("verify_email_fail")"
+            }, {
+                success: "@Html.GetResourceString("retrieve_pwd_success")",
+                    fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+                }, {
+                    Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
+                    Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
+                });
+        });
+    </script>
+}
+
+@section pageTitle{
+    <h5>MemberShip Dashboard</h5>
+}
+<div class="actions-wrapper">
+    <div class="actions">
+
+        <div id="user-stats">
+            <ul class="round-buttons">
+                @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Modify))
+                {
+                    <li>
+                        <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
+                    </li>
+                }
+                <li>
+                    <div class="depth"><a href="" title="View statement" class="tip"><i class="icon-search"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Media posts" class="tip"><i class="icon-reorder"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="RSS feed" class="tip"><i class="icon-rss"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Create new task" class="tip"><i class="icon-tasks"></i></a></div>
+                </li>
+                <li>
+                    <div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div>
+                </li>
+
+            </ul>
+        </div>
+        <div id="quick-actions">
+            @{
+                IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+                IDictionary<DateTime, int> dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
+                double toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
+                double totalUser = Convert.ToDouble(userDao.Count());
+            }
+            <ul class="statistics">
+                <li>
+                    <div class="top-info">
+                        <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
+                        <strong>@toDayUser</strong>
+                    </div>
+                    <div class="progress progress-micro">
+                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser) / totalUser).ToString("p"))"></div>
+                    </div>
+                    <span>User registrations today</span>
+                </li>
+
+
+                <li>
+                    <div class="top-info">
+                        <a href="#" title="" class="sea-square"><i class=" icon-globe"></i></a>
+                        <strong>@totalUser</strong>
+                    </div>
+                    <div class="progress progress-micro">
+                        @{
+                            int onlineUser = Membership.GetNumberOfUsersOnline();
+                            string onlineRate = (Convert.ToDouble(onlineUser) / totalUser).ToString("p");
+                        }
+                        <div class="bar" style="width: @onlineRate;"></div>
+                    </div>
+                    <span class="tip" title="@onlineUser/@totalUser ">Online users</span>
+                </li>
+
+            </ul>
+        </div>
+        <ul class="action-tabs">
+            <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
+            <li><a href="#quick-actions" title="">@Html.GetResourceString("QuickActions_MemberState")</a></li>
+        </ul>
+    </div>
+</div>
+
+<form action="@Url.Action("Index")" class="search widget"method="POST">
+    <div class="autocomplete-append">
+        <input type="text" id="searchContent" name="search" placeholder="@String.Format(Html.GetResourceString("search_placeHolder"), @Basic.Email, @Basic.Phone)" 
+               class="ui-autocomplete-input" autocomplete="off">
+        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        <input type="submit" value="@Basic.Search" class="btn btn-info">
+    </div>
+</form>
+
+
+
+<ul class="options-bar">
+    <li>
+        <form>
+            <div class="bulk">
+                <div class="bar-select">
+                    <span>@Html.GetResourceString("ApplyAction")</span>
+
+                    <select id="selApplyAction">
+                        @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Lock))
+                        {
+                            <option value="Lock">@Html.GetResourceString("Lock")</option>
+                            <option value="unLock">@Html.GetResourceString("Unlock")</option>
+                        }
+
+                        @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Approve))
+                        {
+                            <option value="Approve">@Html.GetResourceString("Approve")</option>
+                        }
+                        @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Delete))
+                        {
+                            <option value="delete">
+                                @Basic.Delete
+                            </option>
+                        }
+                    </select>
+
+                </div>
+
+                <div class="bar-button">
+                    <button class="btn btn-info" type="button" id="BtnApply" disabled="disabled">@Html.GetResourceString("BtnApply")</button>
+                </div>
+            </div>
+        </form>
+    </li>
+</ul>
+
+<form method="POST" id="tableForm">
+    <table class="table table-condensed table-striped table-bordered table-checks">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="span1"></th>
+                <th class="span1">
+                    @Html.DisplayNameFor(model => model.LoginId)
+                </th>
+
+                <th style="width: 100px">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Contact.Email)
+                </th>
+                <th>
+                    @Html.LabelFor(item => ((User)null).IsLockout)
+                </th>
+                <th>
+                    @Html.LabelFor(item => ((User)null).IsApproved)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody id="userListBody">
+
+            @foreach (User user in Model)
+            {
+                string clz = "";
+                if (user.IsApproved == false)
+                {
+                    clz = "class=info";
+                }
+                if (user.IsLockout)
+                {
+                    clz = "class=Warning";
+                }
+                <tr @clz>
+                    <td>
+                        <input type="checkbox" name="loginIds" value="@user.LoginId" class="actionCheckbox"/>
+                    </td>
+                    @if (editPermission)
+                    {
+                        <td>
+                            <ul class="table-controls" val="@user.Id">
+                                <li><a href="@Url.Action("Edit", new { loginId = user.LoginId })" class="btn tip" title="@Basic.Edit">
+                                    <i class="fam-user-edit"></i></a></li>
+                                <li>
+                                    <a  href="@Url.Action("Assign", new { loginId = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
+                                        <i class="fam-group-gear"></i></a>
+                                </li>
+                                @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
+                                {
+                                    <li>
+                                        <a href="#@user.Id" class="btn tip" title="@Html.GetResourceString("PersonalMessage")" role="pm">
+                                            <i class="fam-email-edit"></i>
+                                        </a>
+                                    </li>
+                                }
+                                <li>
+                                    <a href="#@user.Contact.Email" class="btn tip" title="Verify Email" role="verifyEmail">
+                                        <i class="fam-email-go"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#@user.Contact.Email" class="btn tip" title="Retrieve Password" role="retievePwd">
+                                        <i class="fam-key-go"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    }
+                    <td>
+                        @user.LoginId
+                    </td>
+                    <td>
+                        @user.Name
+                    </td>
+                    <td>
+                        @user.Contact.Email
+                    </td>
+                    <td style="text-align: center">
+                        <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
+                        </div>
+                    </td>
+                    <td style="text-align: center">
+                        <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
+                        </div>
+                    </td>
+                    <td>
+                        @user.Other.LastActivityDate
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    @Html.Partial("NavPagination", ViewData["Nav"])
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</form>

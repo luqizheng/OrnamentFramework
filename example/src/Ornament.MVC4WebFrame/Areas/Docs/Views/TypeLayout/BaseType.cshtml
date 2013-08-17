@@ -1,0 +1,202 @@
+﻿@model Ornament.MVCWebFrame.Areas.Docs.Models.BaseTypeModel
+@{
+    ViewBag.Title = "BaseType";
+    Layout = "~/Areas/Docs/Views/Shared/_codeLayout.cshtml";
+}
+
+@section pageTitle{
+    <h6>BaseType</h6>
+}
+<!-- SString Type -->
+<h5 class="widget-name"><i class="icon-th"></i>String</h5>
+<div class="row-fluid">
+    <div class="widget span4">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h6>String</h6>
+            </div>
+        </div>
+        <div class="well body">
+            @Html.EditorFor(s => s.StringType)
+            @Html.EditorFor(s => s.TextArea)
+        </div>
+    </div>
+
+    <div class="widget span7">
+        <div class="body well">
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Defined a View Model</strong>
+                <pre class="prettyprint lang-vb pre-scrollable linenums">
+public class BaseTypeModel
+{
+        public string StringType { get; set; }
+        
+        [UIHint("Textarea")]
+        public string TextArea { get; set; }
+}
+                    </pre>
+            </div>
+
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Render HTML with Razor</strong>
+
+                <pre class="prettyprint lang-html  pre-scrollable linenums">
+@@Html.EditorFor(s => s.StringType)
+@@Html.EditorFor(s => s.TextArea)
+</pre>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+    Int type 
+    -->
+<h5 class="widget-name"><i class="icon-th"></i>Int32</h5>
+<div class="row-fluid">
+    <div class="widget span4">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h6>Int32 JQuery UI Spinner</h6>
+            </div>
+        </div>
+        <div class="well body">
+            @Html.EditorFor(s => s.IntType)
+        </div>
+    </div>
+
+    <div class="widget span7">
+        <div class="body well">
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Defined a View Model</strong>
+                <pre class="prettyprint lang-vb pre-scrollable linenums">
+public class BaseTypeModel
+{
+        [Range(0, 200), JqStep(10)]
+        public int IntType { get; set; }
+}
+                    </pre>
+            </div>
+
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Render HTML with Razor</strong>
+                <pre class="prettyprint lang-html  pre-scrollable linenums">
+@@Html.EditorFor(s => s.IntType)</pre>
+            </div>
+        </div>
+        <!-- Scripts -->
+        <div class="semi-widget">
+            <strong>Reference js</strong>
+            <pre class="prettyprint lang-html  pre-scrollable linenums">
+seajs.use(["jqueryui"]);</pre>
+        </div>
+
+    </div>
+</div>
+
+<h5 class="widget-name"><i class="icon-th"></i>Decimal</h5>
+<div class="row-fluid">
+    <div class="widget span4">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h6>Decimal JQuery UI Spinner</h6>
+            </div>
+        </div>
+        <div class="well body">
+            @Html.EditorFor(s => s.DecimalType)
+        </div>
+    </div>
+
+    <div class="widget span7">
+        <div class="body well">
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Defined a View Model</strong>
+                <pre class="prettyprint lang-vb pre-scrollable linenums">
+public class BaseTypeModel
+{
+          [Range(0.01, 1), JqStep(0.001)]
+        public decimal DecimalType { get; set; }
+}
+                    </pre>
+            </div>
+
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Render HTML with Razor</strong>
+                <pre class="prettyprint lang-html  pre-scrollable linenums">
+@@Html.EditorFor(s => s.IntType)</pre>
+            </div>
+        </div>
+        <!-- Scripts -->
+        <div class="semi-widget">
+            <strong>Reference js</strong>
+            <pre class="prettyprint lang-html  pre-scrollable linenums">
+seajs.use(["jqueryui"]);</pre>
+        </div>
+
+    </div>
+</div>
+<h5 class="widget-name"><i class="icon-th"></i>Date Time</h5>
+
+
+<div class="row-fluid">
+
+    <div class="widget span4">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <h6>Date without time</h6>
+            </div>
+        </div>
+        <div class="body well">
+            @Html.EditorFor(s => s.Now)
+            @Html.EditorFor(s => s.DefualtFormat)
+        </div>
+    </div>
+
+    <div class="widget span7">
+        <div class="body well">
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Defined a View Model</strong>
+                <pre class="prettyprint lang-vb pre-scrollable linenums">
+public class BaseTypeModel
+{
+        [UIHint("Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "yyyy/MM/dd")]
+        public DateTime Now { get; set; }
+                    
+        [UIHint("Date")]
+        public DateTime? DefualtFormat { get; set; }
+}
+                    </pre>
+            </div>
+
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>Render HTML with Razor</strong>
+
+                <pre class="prettyprint lang-html  pre-scrollable linenums">
+@@Html.EditorFor(s => s.Now)
+@@Html.EditorFor(s => s.DefualtFormat)
+</pre>
+            </div>
+
+            <!-- start to build-->
+            <div class="semi-widget">
+                <strong>call datepicker</strong>
+
+                <pre class="prettyprint lang-js  pre-scrollable linenums">
+seajs.use(["datePicker"], function () {
+    $(".date").datepicker();
+});
+</pre>
+            </div>
+        </div>
+    </div>
+</div>

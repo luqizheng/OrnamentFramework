@@ -1,0 +1,15 @@
+﻿@model Boolean?
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var inputName = ViewData.TemplateInfo.HtmlFieldPrefix;    
+}
+
+<div class="control-group">
+    @Html.Label(inputName, display, new { @class = "control-label" })
+    <div class="controls">
+        <label class="checkbox">
+            @Html.CheckBox("", this.Model ?? false, new { @class = "styled" })
+            @Html.ValidationMessage("")
+        </label>
+    </div>
+</div>

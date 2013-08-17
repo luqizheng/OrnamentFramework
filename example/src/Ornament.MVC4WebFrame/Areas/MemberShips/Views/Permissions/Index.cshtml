@@ -1,0 +1,69 @@
+﻿@using Ornament.MemberShip.Permissions
+@using Ornament.Web;
+@model IEnumerable<Ornament.MemberShip.Permissions.Permission>
+@{
+    ViewBag.Title = "Permissions";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+
+        seajs.use(["/memberships/permissions/index.js"], function (init) {
+            init({
+                warnDel: "@Html.GetResourceString("warnning_deleting_msg")",
+                delUrl: "@Url.Action("Delete")"
+            });
+        });
+    </script>
+}
+@section pageTitle
+{
+    <h6>Permission list</h6>
+    <span>Maintain the permission
+    </span>
+}
+
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+        </div>
+    </div>
+    <div class="body well">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 100px"></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                        
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Operator)
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(Resources.Basic.Edit, "Edit", new { id = item.Id }) |
+                        @Html.ActionLink(Resources.Basic.Delete, "Delete", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item, "Operators")
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

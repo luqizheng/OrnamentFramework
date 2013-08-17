@@ -1,0 +1,99 @@
+﻿@using Qi.Web.Mvc
+@using QiProject
+@using Resources
+@model Iesi.Collections.Generic.ISet<QiProject.Component>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jQuery.tmpl.min.js")"> </script>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="span3">
+            </th>
+            <th>
+                @Html.ContentFor(model => ((Component) null).Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (Component component in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="#" data-val="@component.Id" class="btn edit btn-small">@Basic.Edit</a>
+                        <input type="hidden" name="componentsId" value="@component.Id"/>
+                        <input type="hidden" name="componentsName" value="@component.Name"/>
+                    </td>
+                    <td>@component.Name
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                <button class="btn btn-small btn-info" id="create" type="button">
+                    <i class="icon-plus"></i>@Basic.Create</button>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<script id="show" type="text/x-jquery-tmpl">    
+    <td>
+        <a href="#" class="btn btn-small edit">@Basic.Edit</a>
+        <input type="hidden" name="componentsId" value="${Id}"/>
+        <input type="hidden" name="componentsName" value="${Name}"/>
+    </td>
+    <td>${Name}</td>    
+</script>
+<script id="edit" type="text/x-jquery-tmpl">     
+    <td>
+        <a href="#" class="btn save btn-small" data-val="${Id}">@Basic.Save</a>
+        <a href="#" class="btn cancel btn-small" data-val="${Id}">@Basic.Cancel</a>        
+    </td>
+    <td>
+        <input type="text" value="${Name}" src-val="${Name}"/>
+    </td>    
+</script>
+<script id="createTemp" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+            <a href="#" class="btn save btn-small" data-val="${Id}">@Basic.Save</a>
+            <a href="#" class="btn cancel btn-small" data-val="${Id}">@Basic.Cancel</a>
+        </td>
+        <td>
+            <input type="text" value="${Name}"/>
+        </td>    
+    </tr>
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("table").delegate(".edit", "click", function() {
+            var data = {
+                Id: $(this).attr("data-val"),
+                Name: $(this).parent().next().text()
+            };
+            var a = $(this).closest("tr").empty();
+            $("#edit").tmpl(data).appendTo(a);
+        });
+
+        $("table").delegate(".save,.cancel", "click", function() {
+            var cancel = $(this).hasClass("cancel");
+            var nameInput = $("input", $(this).closest("tr"));
+            var data = {
+                Name: cancel ? nameInput.attr("src-val") : nameInput.val(),
+                Id: $(this).attr("data-val")
+            };
+            $(this).closest("tr").empty().append($("#show").tmpl(data));
+            $("#create").attr("disabled", false);
+
+        });
+
+        $("#create").click(function() {
+            $("#createTemp").tmpl({ Id: "-1", Name: "" }).appendTo($("tbody"));
+            $(this).attr("disabled", true);
+        }).attr("disabled", false);
+    })
+</script>

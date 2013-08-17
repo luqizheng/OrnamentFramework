@@ -1,0 +1,42 @@
+﻿@using Ornament
+@using Ornament.MemberShip
+@using Ornament.Web
+@model Ornament.Models.Memberships.Partials.BasicInfo
+
+@Html.HiddenFor(model => model.Id)
+@Html.EditorFor(model => model.LoginId)
+@{
+    var langs = from lang in OrnamentContext.Configuration.Languages
+                select new SelectListItem()
+                    {
+                        Text = lang.Name+"("+lang.Key+")",
+                        Value = lang.Key
+                    };
+}
+@*<div class="control-group">
+    @Html.LabelFor(s => s.Email, new { @class = "control-label" })
+    <div class="controls"> 
+        <div class="input-append">
+            @Html.TextBoxFor(s => s.Email, this.Model)
+            @Html.ValidationMessageFor(s => s.Email)
+        </div>
+    </div>
+</div>*@
+@Html.EditorFor(s => s.Email)
+
+<div class="control-group">
+    @Html.LabelFor(s => s.VerifyEmail, new { @class = "control-label" })
+    <div class="controls">
+        @Html.CheckBoxFor(s => s.VerifyEmail, new { @class = "tip", title = "如果email被修改，会自动发送验证email" })
+    </div>
+</div>
+@Html.EditorFor(s => s.Name)
+@Html.EditorFor(s => s.Phone)
+@Html.EditorFor(s => s.TimeZoneId)
+<div class="control-group">
+    @Html.LabelFor(s => s.Language, new { @class = "control-label" })
+    <div class="controls">
+        @Html.DropDownListFor(s=>s.Language,langs,new{style="padding-top:4px"})
+    </div>
+</div>
+

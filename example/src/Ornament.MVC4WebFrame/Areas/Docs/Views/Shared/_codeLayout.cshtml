@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+@section head
+{
+
+    @RenderSection("head", false)
+}
+@section pageTitle
+{
+    @RenderSection("pageTitle", false)
+}
+@section scripts
+{
+    @Scripts.Render("~/Components/CodeStyle")
+    <script type="text/javascript">
+        seajs.use("/_applayout.js");
+        window.prettyPrint && prettyPrint();
+    </script>
+    @RenderSection("scripts", false)
+}
+@RenderBody()

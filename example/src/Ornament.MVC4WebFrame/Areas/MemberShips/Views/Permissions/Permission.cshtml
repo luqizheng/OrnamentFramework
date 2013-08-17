@@ -1,0 +1,114 @@
+﻿@using Ornament
+@using Ornament.Web
+@using Resources
+@model Ornament.MemberShip.Permissions.Permission
+@{
+    ViewBag.Title = "Permission";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    object jsonObject = null;
+    if (this.Model != null)
+    {
+        jsonObject = new
+        {
+            Id = this.Model.Id,
+            Name = this.Model.Name,
+            Remark = this.Model.Remark,
+            Operator = this.Model.Operator
+
+        };
+    }
+}
+@section pageTitle{
+    <h5>Permission</h5>
+}
+
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <h6>Permission wizard</h6>
+        </div>
+    </div>
+    <form id="wizard2" method="post" action="@Url.Action("Save")" class="form-horizontal row-fluid well">
+        <fieldset class="step" id="theFirst">
+            <div class="step-title">
+                <i>1</i>
+                <h5>选择资源类别</h5>
+                <span>Permission 由 资源和操作组成，因此这里选择需要资源的类别。</span>
+            </div>
+            <div>
+                @{
+                    var i = -1;
+                    foreach (var resourceDescription in OrnamentContext.ResourceManager.Configuration().ResourceSettings)
+                    {
+                        bool foundSelected = i == -1 || (this.Model != null && resourceDescription.ValueType == this.Model.Resource.GetType());
+                        i++;
+
+                    <div class="control-group">
+                        <label for="@("ResourceType" + i)">
+                            @Html.RadioButton("DescriptionResourceName", resourceDescription.Name, foundSelected, new { id = "ResourceType" + i })
+                            @resourceDescription.Name
+                        </label>
+                    </div>
+                    }
+                }
+            </div>
+        </fieldset>
+        <fieldset id="resourceView" class="step">
+            <div class="step-title">
+                <i>2</i>
+                <h5>选择你要对应资源</h5>
+                <span>Aenean sem dui, semper sit amet luctus sit amet, molestie vitae nunc</span>
+            </div>
+            <div id="resViewContent">
+            </div>
+        </fieldset>
+        <fieldset id="editPermission" class="step">
+            <div class="step-title">
+                <i>3</i>
+                <h5>设置许可证基础信息</h5>
+                <span>设置许可证的基本信息及操作
+                </span>
+            </div>
+            <div id="editPermissionView">
+                <div class="control-group">
+                    @Html.LabelFor(s => s.Name, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(s => s.Name)
+                        @Html.ValidationMessageFor(s => s.Name)
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextAreaFor(s => s.Remark)
+                        @Html.ValidationMessageFor(s => s.Remark)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">@Html.GetResourceString("Operators")</label>
+                    <div class="controls" id="operators">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-actions align-right">
+            <div id="status1" class="status"></div>
+            <input class="btn" id="back-2" value="Back" type="reset" />
+            <input type="submit" class="btn btn-danger" id="next-2" value="Next">
+        </div>
+        @Html.Hidden("operators", Model != null ? Model.Operator : 0)
+        @Html.HiddenFor(s => s.Id)
+    </form>
+    <div class="submit-data" id="w1"></div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        seajs.use(["/memberships/permissions/permission.js"], function (main) {
+
+            main(@(jsonObject != null ? Html.Raw(Json.Encode(jsonObject)) : new MvcHtmlString("null")));
+
+        });
+    </script>
+
+}
