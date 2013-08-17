@@ -3,6 +3,9 @@
     if (!$.fn.modal) {
         require("bootstrap")($);
     }
-    require("validate")($);
+    //form for boostratp
+    $('form').bootstrapMakeUp().submit(function () {
+        $(this).valid(); $(this).bootstrapMakeUp();
+    });
 
 })
