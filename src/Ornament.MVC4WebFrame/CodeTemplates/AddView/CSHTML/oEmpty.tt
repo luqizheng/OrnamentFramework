@@ -1,11 +1,15 @@
 ﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ assembly name="EnvDTE" #>
 <#@ output extension=".cshtml" #>
 <#
 MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
 if(!String.IsNullOrEmpty(mvcHost.ViewDataTypeName)) {
 #>
 @model <#= mvcHost.ViewDataTypeName #>
-
+<#
+  IServiceProvider serviceProvider = (IServiceProvider)this.Host;
+  EnvDTE.DTE dte = (EnvDTE.DTE) serviceProvider.GetService(typeof(EnvDTE.DTE));
+#>
 <#
 }
 

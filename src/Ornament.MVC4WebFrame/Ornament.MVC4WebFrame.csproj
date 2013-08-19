@@ -304,6 +304,11 @@
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
+    <Content Include="CodeTemplates\AddView\CSHTML\TextTemplate1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextTemplate1.tt</DependentUpon>
+    </Content>
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
@@ -644,7 +649,6 @@
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\TypeLayout\BaseType.cshtml" />
     <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\Template\Index.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
     <Content Include="Areas\Badminton\Views\Gymnasium\Edit.cshtml" />
@@ -671,6 +675,13 @@
     <Content Include="Areas\Badminton\Views\MeasurementUnit\Edit.cshtml" />
     <Content Include="Areas\Badminton\Views\Shared\EditorTemplates\MeasurementUnit.cshtml" />
     <Content Include="Areas\Badminton\Views\MeasurementUnit\Create.cshtml" />
+    <Content Include="Areas\Messages\Views\Template\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\TextTemplate1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TextTemplate1.txt</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />

@@ -5,6 +5,7 @@
 <#@ assembly name="System.Data.Entity" #>
 <#@ assembly name="System.Data.Linq" #>
 <#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.ComponentModel.DataAnnotations" #>
 <#@ import namespace="System.Data.Linq.Mapping" #>
@@ -15,11 +16,35 @@
 
 @using Resources
 @using Ornament.Web
+<#
+	MvcTextTemplateHost mvcHost = MvcTemplateHost;
+	var key = mvcHost.Namespace.Split('.');
+    var myPath = key[key.Length - 1]+"\\"+mvcHost.ViewName+".js";
+    var areaName = mvcHost.AreaName;
+    if (!String.IsNullOrEmpty(areaName))
+    {
+        myPath = areaName + "\\" + myPath;
+    }
+    
+    var dir = new System.IO.FileInfo(mvcHost.TemplateFile).Directory.FullName;
+    var jsFile = Path.Combine(dir, "..\\..\\..\\Scripts\\Modules\\Views\\"+myPath);
+	
+	
+#>
 
 <#
 
-MvcTextTemplateHost mvcHost = MvcTemplateHost;	
+var serviceProvider = this.Host as IServiceProvider;
+var dte = serviceProvider.GetService(typeof(DTE)) as DTE;
+foreach (Project p in dte.Solution.Projects)
+{
 #>
+    <#=p.Name#> at <#=p.FullName#>
+<#
+}
+
+#>
+
 
 @model IEnumerable<#= "<" + mvcHost.ViewDataTypeName + ">" #>
 <#
@@ -157,17 +182,17 @@ else{
     <button class="btn btn-danger deleteYes">@Basic.Delete</button>
     <button class="btn deleteNo">@Basic.Cancel</button>
 </div>
-
 @* 
  如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
  seajs.use必须是全小写
- please create a js in /Scripts/Module/Views/{Area}/{Controller}/<#=mvcHost.ViewName#>.js
+ please create a js in <#=@"Scripts\Modules\Views\"+myPath#>
+ 
 *@
 @*
 
 @section Scripts {
     <script type="text/javascript">
-		seajs.use(["{area}/{controller}/<#=mvcHost.ViewName#>.js"],function(init){
+		seajs.use(["<#=myPath.ToLower()#>"],function(init){
 			inti();
 		});
 	</script>
