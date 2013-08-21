@@ -171,4 +171,10 @@
   <data name="verify_email_success" xml:space="preserve">
     <value>Success to send verify email message.</value>
   </data>
+  <data name="OnlineUser" xml:space="preserve">
+    <value>Online users</value>
+  </data>
+  <data name="TodayRegist" xml:space="preserve">
+    <value>User registrations today</value>
+  </data>
 </root>

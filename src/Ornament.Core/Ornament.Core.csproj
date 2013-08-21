@@ -108,6 +108,7 @@
     <Compile Include="Models\Memberships\Partials\BasicInfo.cs" />
     <Compile Include="Models\Memberships\Partials\PermissionInfo.cs" />
     <Compile Include="Models\Memberships\UserGroupModel.cs" />
+    <Compile Include="Models\Memberships\UsersStatusModel.cs" />
     <Compile Include="Models\Security\VerifyEmailModel.cs" />
     <Compile Include="Models\Messages\NotifyTypeModel.cs" />
     <Compile Include="Models\Messages\PersonalMessageModel.cs" />

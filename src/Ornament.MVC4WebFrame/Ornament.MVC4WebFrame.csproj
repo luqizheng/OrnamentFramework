@@ -304,11 +304,6 @@
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
-    <Content Include="CodeTemplates\AddView\CSHTML\TextTemplate1.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TextTemplate1.tt</DependentUpon>
-    </Content>
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
@@ -677,10 +672,6 @@
     <Content Include="Areas\Badminton\Views\MeasurementUnit\Create.cshtml" />
     <Content Include="Areas\Messages\Views\Template\Index.cshtml">
       <SubType>Code</SubType>
-    </Content>
-    <Content Include="CodeTemplates\AddView\CSHTML\TextTemplate1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TextTemplate1.txt</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />

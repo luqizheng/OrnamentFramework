@@ -177,4 +177,10 @@
   <data name="verify_email_success" xml:space="preserve">
     <value>验证电子邮件地址的信息成功发送.</value>
   </data>
+  <data name="OnlineUser" xml:space="preserve">
+    <value>在线会员</value>
+  </data>
+  <data name="TodayRegist" xml:space="preserve">
+    <value>今天注册会员</value>
+  </data>
 </root>

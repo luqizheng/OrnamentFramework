@@ -57,6 +57,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
             pagination.TotalRows = _userDao.Count();
             ViewData["Nav"] = pagination;
+            ViewData["UserStatus"] = new UsersStatusModel(_memberShipFactory);
             return View(result);
         }
 
@@ -266,7 +267,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
                                                where
                                                    u.LoginId.Contains(loginIdOrEmail) ||
                                                    u.Contact.Email.Contains(loginIdOrEmail)

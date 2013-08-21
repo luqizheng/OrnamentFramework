@@ -3,6 +3,7 @@
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Dao
+@using Ornament.Models.Memberships
 @using Ornament.Web
 @using Resources
 @model IEnumerable<Ornament.MemberShip.User>
@@ -10,6 +11,7 @@
     ViewBag.Title = MemberShip.User;
     Layout = "~/Views/Shared/Backend/_applayout.cshtml";
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
+    var status = ViewData["UserStatus"] as UsersStatusModel;
 }
 @section scripts 
 {
@@ -22,11 +24,11 @@
                 fail: "@Html.GetResourceString("verify_email_fail")"
             }, {
                 success: "@Html.GetResourceString("retrieve_pwd_success")",
-                    fail: "@Html.GetResourceString("retrieve_pwd_fail")"
-                }, {
-                    Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
-                    Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
-                });
+                fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+            }, {
+                Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
+                Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
+            });
         });
     </script>
 }
@@ -45,7 +47,7 @@
                         <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
                     </li>
                 }
-                <li>
+@*<li>
                     <div class="depth"><a href="" title="View statement" class="tip"><i class="icon-search"></i></a></div>
                 </li>
                 <li>
@@ -59,45 +61,33 @@
                 </li>
                 <li>
                     <div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div>
-                </li>
+                </li>*@
 
             </ul>
         </div>
         <div id="quick-actions">
-            @{
-                IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
-                IDictionary<DateTime, int> dict = userDao.CountNewUser(DateTime.Now, DateTime.Now);
-                double toDayUser = dict.Count == 0 ? 0d : Convert.ToDouble(dict.First().Value);
-                double totalUser = Convert.ToDouble(userDao.Count());
-            }
             <ul class="statistics">
                 <li>
                     <div class="top-info">
-                        <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
-                        <strong>@toDayUser</strong>
+                        <a href="#" title="" class="sea-square"><i class=" icon-globe"></i></a>
+                        <strong>@status.OnlineUser</strong>
                     </div>
                     <div class="progress progress-micro">
-                        <div class="bar" style="width: @((Convert.ToDouble(toDayUser) / totalUser).ToString("p"))"></div>
+
+                        <div class="bar" style="width: @status.OnlineUserRate.ToString("P");"></div>
                     </div>
-                    <span>User registrations today</span>
+                    <span class="tip" title="@status.OnlineUser/@status.TotalUsers ">@Html.GetResourceString("OnlineUser")</span>
                 </li>
-
-
                 <li>
                     <div class="top-info">
-                        <a href="#" title="" class="sea-square"><i class=" icon-globe"></i></a>
-                        <strong>@totalUser</strong>
+                        <a href="#" title="" class="blue-square"><i class="icon-plus"></i></a>
+                        <strong>@status.TodayRegist</strong>
                     </div>
                     <div class="progress progress-micro">
-                        @{
-                            int onlineUser = Membership.GetNumberOfUsersOnline();
-                            string onlineRate = (Convert.ToDouble(onlineUser) / totalUser).ToString("p");
-                        }
-                        <div class="bar" style="width: @onlineRate;"></div>
+                        <div class="bar" style="width: @(status.TodayRegistRate.ToString("P"))"></div>
                     </div>
-                    <span class="tip" title="@onlineUser/@totalUser ">Online users</span>
+                    <span class="tip" title="@status.TodayRegist/@status.TotalUsers">@Html.GetResourceString("TodayRegist")</span>
                 </li>
-
             </ul>
         </div>
         <ul class="action-tabs">

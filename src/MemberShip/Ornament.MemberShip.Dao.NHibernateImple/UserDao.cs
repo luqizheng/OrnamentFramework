@@ -189,7 +189,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public int GetActivityDateNumber(DateTime time)
         {
             PropertyProjection projections = Projections.Property<User.OtherUserInfo>(s => s.LastActivityDate);
-            SimpleExpression re = Restrictions.Le(projections, time);
+            SimpleExpression re = Restrictions.Ge(projections, time);
             return
                 CreateCriteria()
                     .CreateCriteria("Other")
