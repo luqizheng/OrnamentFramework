@@ -1,0 +1,30 @@
+﻿@model Ornament.MVCWebFrame.Controllers.AjaxError
+<div id="ajaxerror" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>@this.Model.ExceptionType</h3>
+    </div>
+    <div class="modal-body">
+        <h4>@this.Model.Message</h4>
+        <h6>@this.Model.ExceptionMessage</h6>
+        <p></p>
+        <p>
+            @if (this.Model.StackTrace != null)
+            {
+                foreach (var line in this.Model.StackTrace.Split(new char[] { '\r', '\n' }))
+                {
+                    
+                @line
+                <br />
+                    
+                }
+
+            }
+
+        </p>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">OK</button>
+    </div>
+</div>
