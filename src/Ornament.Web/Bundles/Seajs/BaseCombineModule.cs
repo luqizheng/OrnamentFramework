@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles.Seajs
 {
@@ -16,11 +15,12 @@ namespace Ornament.Web.Bundles.Seajs
             base(uniquireId)
         {
             VirtualPath = virtualPath;
-            this.Combine = combine;
+            Combine = combine;
         }
 
         public string VirtualPath { get; set; }
         public bool Combine { get; set; }
+
         /// <summary>
         ///     当前这个Module依赖的子module
         /// </summary>
@@ -87,7 +87,7 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="combinedHere"> 获取到的 return 模块是否需要合并</param>
         /// <returns></returns>
         protected virtual ReferenceModule GetModual(string srcRequireModualId, ModualIdSets moduleIdSets,
-                                          ModuleCollection globalReferenceModules, out bool combinedHere)
+                                                    ModuleCollection globalReferenceModules, out bool combinedHere)
         {
             combinedHere = false;
             if (globalReferenceModules.Contains(srcRequireModualId))
@@ -121,11 +121,10 @@ namespace Ornament.Web.Bundles.Seajs
                 fullpath = VirtualPathUtility.Combine(fullpath, srcRequireModualId);
 
                 //引用js
-                var sub = new CombineModule(physicPath, fullpath, this.Combine);
+                var sub = new CombineModule(physicPath, fullpath, Combine);
                 moduleIdSets.Add(sub);
                 combinedHere = true;
                 return sub;
-
             }
             //普通一个的引用js
             var subModule = new ReferenceModule(srcRequireModualId);
@@ -141,13 +140,24 @@ namespace Ornament.Web.Bundles.Seajs
         protected string BuildContent(string content, ModualIdSets moduleIdList, ModuleCollection referencModule)
         {
             List<CombineModule> combineFiles = CollectRequire(ref content, moduleIdList, referencModule);
-            var result = new StringBuilder();
+
 
             //Build Define Header 
-            string newDefined = BuildDefine(moduleIdList);
-            result.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
+            var result = RebuildDefinedHeader(content, moduleIdList);
 
             //添加合并文件的内容
+            CombineRequirePart(result, combineFiles, moduleIdList, referencModule);
+            return result.ToString();
+        }
+        /// <summary>
+        /// 合并Require部分
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="combineFiles"></param>
+        /// <param name="moduleIdList"></param>
+        /// <param name="referencModule"></param>
+        protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles, ModualIdSets moduleIdList, ModuleCollection referencModule)
+        {
             foreach (CombineModule combineFile in combineFiles)
             {
                 string subContent = combineFile.BuildContent(moduleIdList, referencModule);
@@ -157,10 +167,21 @@ namespace Ornament.Web.Bundles.Seajs
                       .Append(";\r\n")
                       .Append(subContent);
             }
-            return result.ToString();
         }
-
-        protected string BuildDefine(ModualIdSets moduleIdList)
+        /// <summary>
+        /// 重新整理defined 这一段代码，并且返回defined所包含的所有内容。
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="moduleIdList"></param>
+        /// <returns></returns>
+        protected virtual StringBuilder RebuildDefinedHeader(string content, ModualIdSets moduleIdList)
+        {
+            var result = new StringBuilder();
+            string newDefined = BuildDefine(moduleIdList);
+            result.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
+            return result;
+        }
+        protected virtual string BuildDefine(ModualIdSets moduleIdList)
         {
             return String.Format("define(\"{0}\",[\"{1}\"],", GetOutputModuleId(moduleIdList),
                                  String.Join("\",\"", ReferenceModules.RequrestIds(moduleIdList)));

@@ -968,9 +968,6 @@
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.ttf" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.woff" />
     <Content Include="Content\templates\pannonia\css\font\FontAwesome.otf" />
-    <Content Include="Content\templates\pannonia\img\elements\.DS_Store" />
-    <Content Include="Content\templates\pannonia\img\elements\interface\.DS_Store" />
-    <Content Include="Content\templates\pannonia\img\elements\lightbox\.DS_Store" />
     <Content Include="Content\templates\pannonia\img\elements\uploader\.DS_Store" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />

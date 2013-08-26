@@ -12,7 +12,7 @@ namespace Ornament.MVCWebFrame.App_Start
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
 
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
@@ -184,11 +184,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
             //Now use pre-compiler
             bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
-            bundles.Add(new StyleBundle("~/Content/plugin")
-                            .Include("~/Content/templates/pannonia/css/ornamentExtender.css")
-                            .Include("~/Content/templates/pannonia/css/plugins.css")
-                            .Include("~/Content/templates/pannonia/css/jquery.custom.css")
-                );
+          
         }
     }
 }

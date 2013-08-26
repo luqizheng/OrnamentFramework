@@ -73,12 +73,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 
             public IEnumerable GetElements(object collection)
             {
-                return (OrgCollection) collection;
+                return (IOrgCollection) collection;
             }
 
             public bool Contains(object collection, object entity)
             {
-                return ((OrgCollection) collection).Contains((Org) entity);
+                return ((IOrgCollection)collection).Contains((Org)entity);
             }
 
             public object IndexOf(object collection, object entity)
@@ -89,7 +89,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             public object ReplaceElements(object original, object target, ICollectionPersister persister, object owner,
                                           IDictionary copyCache, ISessionImplementor session)
             {
-                var result = (OrgCollection) target;
+                var result = (IOrgCollection)target;
                 result.Clear();
                 foreach (Org item in (IEnumerable<Org>) original)
                 {
