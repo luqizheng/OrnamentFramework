@@ -12,7 +12,10 @@ namespace Ornament.Web.Models
         /// </summary>
         public int? UtcOffset { get; set; }
 
-        ///
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ClientResult GetStatus()
         {
             if (UtcOffset != null)

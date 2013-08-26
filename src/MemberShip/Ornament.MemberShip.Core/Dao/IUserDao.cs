@@ -33,18 +33,50 @@ namespace Ornament.MemberShip.Dao
         /// <param name="phone"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="total"></param>
         /// <returns></returns>
-        IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize,out int total);
+        IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize, out int total);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="loginid"></param>
+        /// <param name="email"></param>
+        /// <param name="phone"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginIds"></param>
+        /// <returns></returns>
         IList<User> GetUsers(string[] loginIds);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         IList<User> GetUsersByIds(string[] ids);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
         IList<User> GetUsersInRole(string roleId);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <param name="loginMatch"></param>
+        /// <returns></returns>
         IList<User> FindUsersInRole(string roleId, string loginMatch);
-
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         User GetUserByEmail(string email);
 
         int GetActivityDateNumber(DateTime time);
@@ -77,5 +109,7 @@ namespace Ornament.MemberShip.Dao
         int CountByEmail(string email, string idForExclude);
 
         IDictionary<DateTime, int> CountNewUser(DateTime start, DateTime end);
+
+        IList<string> GetOnlineUsers(DateTime now);
     }
 }

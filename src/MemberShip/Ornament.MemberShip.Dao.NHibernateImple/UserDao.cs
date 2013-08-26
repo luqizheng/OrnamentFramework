@@ -281,8 +281,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <exception cref="ArgumentNullException">LoginId is null or empty</exception>
         public User GetByLoginId(string loginId)
         {
-            if(String.IsNullOrEmpty(loginId))
-                throw new ArgumentNullException("loginId","loginid can not be empty or null.");
+            if (String.IsNullOrEmpty(loginId))
+                throw new ArgumentNullException("loginId", "loginid can not be empty or null.");
             DetachedCriteria cri = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase())
                 .SetCacheMode(CacheMode.Normal)
@@ -386,6 +386,18 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 dictionary.Add(new DateTime((int)objects[0], (int)objects[1], (int)objects[2]), (int)objects[3]);
             }
             return dictionary;
+        }
+
+        public IList<string> GetOnlineUsers(DateTime time)
+        {
+            PropertyProjection projections = Projections.Property<User.OtherUserInfo>(s => s.LastActivityDate);
+            SimpleExpression re = Restrictions.Ge(projections, time);
+            return
+                CreateDetachedCriteria()
+                    .CreateCriteria("Other")
+                    .Add(re)
+                    .SetProjection(Projections.Property<User>(s => s.LoginId)).GetExecutableCriteria(this.CurrentSession).List<string>();
+
         }
 
         /// <summary>
