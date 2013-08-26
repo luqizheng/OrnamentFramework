@@ -50,7 +50,7 @@ namespace Ornament.Web
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
