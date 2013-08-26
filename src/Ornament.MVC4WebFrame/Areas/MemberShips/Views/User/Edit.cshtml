@@ -1,6 +1,4 @@
-﻿
-
-@using System.Configuration
+﻿@using System.Configuration
 @using System.Web.Profile
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
@@ -65,5 +63,11 @@
             <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
         </p>
     </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["/memberships/user/edit.js"]);
+    </script>
 }
 

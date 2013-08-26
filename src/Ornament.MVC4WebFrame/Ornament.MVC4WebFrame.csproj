@@ -565,6 +565,7 @@
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
+    <Content Include="Scripts\Modules\Views\MemberShips\User\Create.js" />
     <Content Include="Scripts\Modules\Views\MyMessage\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
