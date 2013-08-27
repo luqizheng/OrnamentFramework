@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles
@@ -8,6 +9,7 @@ namespace Ornament.Web.Bundles
     /// </summary>
     public class JQueryPluginSeajsBundle : ScriptBundle
     {
+        private string _pluginName;
         private readonly string[] _dependIds;
 
         public JQueryPluginSeajsBundle(string virtualPath)
@@ -20,6 +22,27 @@ namespace Ornament.Web.Bundles
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="virtualPath"></param>
+        /// <param name="pluginName">please input "$.fn.XXX" or $.xxxx, in order to avoid duplicate init.</param>
+        /// <param name="dependIds"></param>
+        public JQueryPluginSeajsBundle(string virtualPath, string pluginName, string[] dependIds)
+            : base(virtualPath)
+        {
+            _pluginName = pluginName;
+            _dependIds = dependIds;
+            Transforms.Clear();
+            if (BundleTable.EnableOptimizations)
+            {
+                Transforms.Add(new SeajsMinify());
+            }
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="virtualPath"></param>
+        /// <param name="dependIds"></param>
         public JQueryPluginSeajsBundle(string virtualPath, params string[] dependIds)
             : base(virtualPath)
         {
@@ -34,10 +57,23 @@ namespace Ornament.Web.Bundles
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
                                                        IEnumerable<BundleFile> bundleFiles)
         {
+
+            if (_pluginName == null)
+            {
+                var v = Regex.Match(bundleContent, @"\.fn.([A-z0-9_]+)\s+=");
+                if (v.Success)
+                {
+                    _pluginName = "jQuery.fn." + v.Groups[1];
+                }
+            }
+            var pluginAvoidDuplicate = _pluginName != null ? string.Format("if({0}){{ return; }}", _pluginName) : "";
+
             const string wrapper =
                 @"define(function(require){{
 {1}
     return function(jQuery){{
+
+{2}
         {0}
     }}
 }})";
@@ -52,7 +88,7 @@ namespace Ornament.Web.Bundles
                 requires = "";
             }
 
-            string replaceContent = string.Format(wrapper, bundleContent, requires);
+            string replaceContent = string.Format(wrapper, bundleContent, requires, pluginAvoidDuplicate);
             return base.ApplyTransforms(context, replaceContent, bundleFiles);
         }
     }

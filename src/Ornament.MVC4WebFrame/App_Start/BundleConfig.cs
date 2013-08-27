@@ -12,7 +12,7 @@ namespace Ornament.MVCWebFrame.App_Start
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]

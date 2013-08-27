@@ -751,7 +751,6 @@
     <Content Include="Scripts\plugins\ui\jquery.collapsible.min.js" />
     <Content Include="Scripts\plugins\ui\jquery.colorpicker.js" />
     <Content Include="Scripts\plugins\ui\jquery.easytabs.js" />
-    <Content Include="Scripts\plugins\ui\jquery.easytabs.min.js" />
     <Content Include="Scripts\plugins\ui\jquery.elfinder.js" />
     <Content Include="Scripts\plugins\ui\jquery.fancybox.js" />
     <Content Include="Scripts\plugins\ui\jquery.fullcalendar.min.js" />
