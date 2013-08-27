@@ -1,15 +1,16 @@
-﻿@{
+﻿@using NHibernate.Cfg
+@{
     ViewBag.Title = "NotFound";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
 <div class="error-page">
-	    <span class="reason">404</span>
-		<div class="error-content">
-		    <span class="reason-title">- Oops, an error has occurred. Page not found! -</span>
-            You request: @Request.Url
+    <span class="reason">404</span>
+    <div class="error-content">
+        <span class="reason-title">- Oops, an error has occurred. Page not found! -</span>
+        You request: @Request.QueryString["aspxerrorpath"]
 
-	    	@*<!-- Search widget -->
+        @*<!-- Search widget -->
 	    	<form action="#" class="search">
 	    		<div class="autocomplete-append">
 		    		<input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
@@ -22,5 +23,5 @@
 	            <a class="btn btn-info span6" title="" href="index.html">Back to dashboard</a>
 	            <a class="btn btn-success span6" title="" href="index.html">Back to the website</a>
 	        </div>*@
-	    </div>
-	</div>
+    </div>
+</div>

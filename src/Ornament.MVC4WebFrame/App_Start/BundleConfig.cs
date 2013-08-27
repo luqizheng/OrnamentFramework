@@ -94,8 +94,10 @@ namespace Ornament.MVCWebFrame.App_Start
                             new JQueryPluginSeajsBundle(bundleName).Include(
                                 virtualFolderName +
                                 "/*.js"));
+#if DEBUG
                         writer.WriteLine("\"{0}\":\"{1}\",", directInfo.Name.Replace(".js", ""),
                                          bundleName.Replace("~/", "/"));
+#endif
                     }
                 }
             }

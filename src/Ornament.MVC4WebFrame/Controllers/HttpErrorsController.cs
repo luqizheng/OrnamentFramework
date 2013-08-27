@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
@@ -11,13 +8,8 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult NotFound()
         {
             Response.StatusCode = 404;
+            Response.TrySkipIisCustomErrors = true;
             return View("404");
-        }
-
-        public ActionResult Error()
-        {
-            Response.StatusCode = 501;
-            return View("501");
         }
 
         [HttpPost, ValidateInput(false)]
@@ -29,7 +21,8 @@ namespace Ornament.MVCWebFrame.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult AjaxPageError(string text)
         {
-            const string result = @"<div id=""ajaxerror"" class=""modal hide fade"" tabindex=""-1"" role=""dialog"" aria-labelledby=""myModalLabel"" aria-hidden=""true"">
+            const string result =
+                @"<div id=""ajaxerror"" class=""modal hide fade"" tabindex=""-1"" role=""dialog"" aria-labelledby=""myModalLabel"" aria-hidden=""true"">
     <div class=""modal-header"">
         <button type=""button"" class=""close"" data-dismiss=""modal"" aria-hidden=""true"">×</button>
         <h3 role=""title"">page requirest host</h3>
@@ -51,13 +44,10 @@ namespace Ornament.MVCWebFrame.Controllers
     {
         public string ExceptionMessage { get; set; }
 
-        public string ExceptionType
-        {
-            get;
-            set;
-        }
+        public string ExceptionType { get; set; }
 
         public string Message { get; set; }
+
         [AllowHtml]
         public string StackTrace { get; set; }
     }

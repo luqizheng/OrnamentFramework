@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Security.Policy;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Ornament.MVCWebFrame.App_Start
@@ -8,6 +9,12 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //handler error
+            routes.MapRoute(
+                name: "404Notfound",
+                url: "404/{action}/{id}",
+                defaults: new { controller = "HttpError", action = "NotFound", id = UrlParameter.Optional }
+                );
             routes.MapRoute(
                 name: "fileManage",
                 url: "connector",
