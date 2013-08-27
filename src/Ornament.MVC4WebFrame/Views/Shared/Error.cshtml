@@ -1,5 +1,8 @@
 ﻿@*
 if you want to modify this page, please more careful, if has any error, the custome page isn't works.
+
+http://www.devcurry.com/2012/06/aspnet-mvc-handling-exceptions-and-404.html#.Uhy4qRudGog
+
 *@
 @using log4net
 @model System.Web.Mvc.HandleErrorInfo
@@ -8,22 +11,44 @@ if you want to modify this page, please more careful, if has any error, the cust
     Layout = "_layout.cshtml";
     LogManager.GetLogger(this.GetType()).Fatal(this.Model.Exception.Message, this.Model.Exception);
 }
-<h2>Sorry, an error occurred while processing your request.</h2>
 
-
-@RenderExceptionMessage(this.Model.Exception)
 @helper RenderExceptionMessage(Exception exception)
 {
-    <ul>
-        <li>
-            @exception.Message
-            <div style="overflow: auto">
-                @Html.Raw(exception.StackTrace.Replace("\r\n", "<br>"))
+    var innerException = exception;
+    do
+    {
+        <li>@innerException.Message
+            <div>
+                @Html.Raw(Html.Encode(innerException.StackTrace).Replace("\r\n", "<br>")))
             </div>
         </li>
-        @if (exception.InnerException != null)
-        {
-            RenderExceptionMessage(exception.InnerException);
-        }
-    </ul>
+    
+        innerException = innerException.InnerException;
+    } while (innerException != null);
+
 }
+<div class="error-page">
+    <span class="reason">500</span>
+    <div class="error-content">
+        <span class="reason-title">- Oops, an error has occurred. Internal server error!  -</span>
+        You request: @Request.Url
+
+        @*<!-- Search widget -->
+	    	<form action="#" class="search">
+	    		<div class="autocomplete-append">
+		    		<input type="text" id="autocomplete" placeholder="search website..." class="ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+		    		<input type="submit" value="Search" class="btn btn-info">
+		    	<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none;"></ul></div>
+	    	</form>
+	    	<!-- /search widget -->
+
+	        <div class="row-fluid error-buttons">
+	            <a class="btn btn-info span6" title="" href="index.html">Back to dashboard</a>
+	            <a class="btn btn-success span6" title="" href="index.html">Back to the website</a>
+	        </div>*@
+    </div>
+    <ul>
+        @RenderExceptionMessage(this.Model.Exception)
+    </ul>
+</div>
+

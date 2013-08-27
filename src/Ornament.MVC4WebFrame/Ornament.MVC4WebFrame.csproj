@@ -565,6 +565,8 @@
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
+    <Content Include="Scripts\Modules\Views\Badminton\Model\Edit.js" />
+    <Content Include="Scripts\Modules\Views\Badminton\Model\Index.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\User\Create.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\User\Edit.js" />
     <Content Include="Scripts\Modules\Views\MyMessage\Index.js" />
@@ -675,6 +677,7 @@
     <Content Include="Areas\Messages\Views\Template\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\Badminton\Views\Model\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -972,7 +975,6 @@
     <Content Include="Content\templates\pannonia\img\elements\uploader\.DS_Store" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Account\ForgetPasswordSucccess.cshtml" />
-    <Content Include="Views\HttpErrors\501.cshtml" />
     <Content Include="Views\MyMessage\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BootstrapDate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RichText.cshtml" />

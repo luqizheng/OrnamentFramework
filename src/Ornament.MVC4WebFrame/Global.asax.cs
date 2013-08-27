@@ -38,7 +38,7 @@ namespace Ornament.MVCWebFrame
             //Registry the Provider to use Membership rule of asp.net.
             //Assembly auto config.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-           
+
             NotifyConfig.Register();
             NhConfig.Config();
         }
@@ -64,7 +64,7 @@ namespace Ornament.MVCWebFrame
                     currenProfile.Save();
                     AnonymousIdentificationModule.ClearAnonymousIdentifier();
                 }
-                
+
                 //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
                 OrnamentModule.SiwtchTo(OrnamentContext.MemberShip.ProfileLanguage());
 
@@ -150,6 +150,17 @@ namespace Ornament.MVCWebFrame
             }
             cookie.Value = cookie_value;
             HttpContext.Current.Request.Cookies.Set(cookie);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            HttpException http = exception as HttpException;
+            if (http == null || http.GetHttpCode() != 404)
+            {
+                log4net.LogManager.GetLogger(this.GetType()).Error("Un-handle exception.", exception);
+            }
+
         }
     }
 }
