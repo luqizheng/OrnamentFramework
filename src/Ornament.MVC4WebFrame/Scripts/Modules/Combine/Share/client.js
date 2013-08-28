@@ -33,7 +33,7 @@ define(function (require) {
 
                 $.post("/Api/Client", data, function (d) {
 
-                    if (!cbFunc(d) || !d.refresh) {
+                    if (cbFunc(d) === false || !d.IsLogin) {
                         ins.stop();
                     }
 
