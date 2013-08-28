@@ -560,6 +560,7 @@
     <Content Include="Scripts\Modules\Combine\Memberships\user.js" />
     <Content Include="Scripts\Modules\Combine\Messages\notify-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
+    <Content Include="Scripts\Modules\Combine\Share\ajaxErrorHandler.js" />
     <Content Include="Scripts\Modules\Combine\Share\client.js" />
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
     <Content Include="Scripts\Modules\Combine\Share\time.js" />
