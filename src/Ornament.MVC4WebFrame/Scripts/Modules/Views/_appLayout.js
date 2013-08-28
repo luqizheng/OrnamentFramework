@@ -3,6 +3,7 @@
 /// <reference path="../Combine/Share/client.js" />
 /// <reference path="jquery-1.9.1.js" />
 /// <reference path="plugins/ui/jquery.easytabs.min.js" />
+/// <reference path="../Combine/Share/ajaxErrorHandler.js" />
 define(function (require) {
 
     var $ = require("jquery");
@@ -10,6 +11,7 @@ define(function (require) {
     require("collapsible")($);
     require("bootstrap")($);
     require("uniform")($);
+    require('../Combine/Share/ajaxErrorHandler.js')($);
 
 
     $(".styled").uniform({ radioClass: 'choice' });
@@ -52,26 +54,7 @@ define(function (require) {
     $("#mainMenu > li.active > ul").attr("style", "");
     $("#mainMenu > li.active a").click();
 
-    //modal
-    $(document).ajaxError(function (event, jqxhr, settings, exception) {
-        var url = "/HttpErrors/AjaxPageError";
-
-        var data = { text: jqxhr.responseText };
-        if (jqxhr.responseJSON) {
-            data = jqxhr.responseJSON;
-            url = "/HttpErrors/AjaxError";
-        }
-        $.post(url, data, function (d) {
-            var $dialog = $("#ajaxerror");
-            if ($dialog.length == 0) {
-                $("body").append(d);
-            } else {
-                $dialog.replaceWith(d);
-            }
-            $("#ajaxerror").modal();
-        });
-    });
-
+  
 
     //提示
     var clientChecking = require("../Combine/Share/client.js");
