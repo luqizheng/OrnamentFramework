@@ -1,11 +1,13 @@
 ﻿/// <reference path="cookie.js" />
+/// <reference path="time.js" />
 
 
 define(function (require) {
     var cookie = require("./cookie.js");
+    require("./time.js");
     // get cookie setting
 
-    function autoChecking(time, func) {
+    function client(time, func) {
         /// <summary>
         /// auto checking class;
         /// </summary>
@@ -17,7 +19,7 @@ define(function (require) {
 
         this.start = function () {
             /// <summary>
-            /// 
+            /// start to checking 
             /// </summary>
             var cbFunc = this.func;
             var ins = this;
@@ -45,10 +47,28 @@ define(function (require) {
         };
 
         this.stop = function () {
+            /// <summary>
+            /// stop to checking.
+            /// </summary>
             clearInterval(this.ticket);
+        };
+
+        this.toClientTime = function (serverTime) {
+            /// <summary>
+            /// 服务器时间改为客户端时间
+            /// </summary>
+            /// <param name="serverTime">服务器时间</param>
+            var f = cookie.get("offsetHour");
+            if (f != "") {
+                if (f != "0") {
+                    serverTime.addHours(parseInt(f));
+                }
+            } else {
+                alert('not offsetHour cookie find.');
+            }
         };
     };
 
 
-    return autoChecking;
+    return client;
 })

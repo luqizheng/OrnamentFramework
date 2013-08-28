@@ -5,51 +5,43 @@
     ViewBag.Title = subject;
     Layout = "~/Views/Shared/Backend/_applayout.cshtml";
 }
-<div class="box">
-    <div class="content">
+<div class="widget">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <button class="btn btn-primary">@Basic.Save</button>
+            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+        </div>
+    </div>
+    <div class="well form-horizontal">
         @using (Html.BeginForm())
         {
 
-            <fieldset class="form-horizontal">
-                <legend>@subject</legend>
-                <div class="control-group">
-                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextBoxFor(model => model.Name)
-                        @Html.ValidationMessageFor(model => model.Name)
-                    </div>
+            @Html.ValidationSummary(true)
+            <div class="control-group">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
                 </div>
-                <div class="control-group">
-                    @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextAreaFor(model => model.Remark)
-                        @Html.ValidationMessageFor(model => model.Remark)
-                    </div>
+            </div>
+            <div class="control-group">
+                @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextAreaFor(model => model.Remark)
+                    @Html.ValidationMessageFor(model => model.Remark)
                 </div>
-                <div class="control-group">
-                    <label class="control-label">@Resources.MemberShip.Permission</label>
-                    <div class="controls">
-                        @Html.Partial("ChoicePermissions", Model)
-                    </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">@Resources.MemberShip.Permission</label>
+                <div class="controls">
+                    @Html.Partial("ChoicePermissions", Model)
                 </div>
-                <div class="form-actions">
-                    <a class="btn btn-primary" id="submit"><i class="icon-pencil icon-white"></i>@Basic.Save</a>
-                    <a href="@Url.Action("Index")" class="btn"><i class="icon-warning-sign icon-white"></i>@Basic.Cancel</a>
-                </div>
-            </fieldset>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">@Basic.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+            </div>
+          
         }
     </div>
 </div>
-@section scripts
-{
-    <script type="text/javascript">
-
-        seajs.use(['jquery'], function () {
-            $("#submit").click(function () {
-                $("form").submit();
-            });
-        });
-
-
-    </script>
-}

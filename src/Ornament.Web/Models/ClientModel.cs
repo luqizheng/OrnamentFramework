@@ -1,4 +1,5 @@
-﻿using Ornament.MemberShip;
+﻿using System;
+using Ornament.MemberShip;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Web.HttpModel;
@@ -13,16 +14,23 @@ namespace Ornament.Web.Models
         public int? UtcOffset { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public ClientResult GetStatus()
         {
+            var result = new ClientResult();
+
             if (UtcOffset != null)
             {
                 int t = OrnamentContext.CorrectClientUtcTime(UtcOffset.Value);
                 OrnamentModule.SetClientOffsetHour(t);
             }
+            else if (OrnamentModule.GetOffSetHour() != null)
+            {
+                result.ClientServerOffset = OrnamentModule.GetOffSetHour();
+            }
+
+
             //refresh online.
             User user = OrnamentContext.MemberShip.CurrentUser();
             if (user != null)
@@ -31,27 +39,33 @@ namespace Ornament.Web.Models
                 int cout = daoFactory.SimpleMessageDao.CountNotifyMsg(user, ReadStatus.UnRead) +
                            daoFactory.PersonalMessageDao.CountNewMessage(user);
 
-                return new ClientResult
-                {
-                    HasMessage = cout != 0
-                };
+                result.IsLogin = true;
+                result.HasMessage = cout != 0;
             }
-            return new ClientResult()
+            else
             {
-                Refresh = false
-            };
-
+                result.IsLogin = false;
+            }
+            return result;
         }
     }
 
     public class ClientResult
     {
-        public ClientResult()
-        {
-            Refresh = true;
-        }
-        public bool HasMessage { get; set; }
-        public int? TimeZone { get; set; }
-        public bool Refresh { get; set; }
+        /// <summary>
+        /// </summary>
+        public bool HasMessage { get; internal set; }
+
+        /// <summary>
+        ///     是否登录了
+        /// </summary>
+        public bool IsLogin { get; internal set; }
+
+
+
+        /// <summary>
+        ///     客户端和服务器端之间的时差。
+        /// </summary>
+        public int? ClientServerOffset { get; internal set; }
     }
 }

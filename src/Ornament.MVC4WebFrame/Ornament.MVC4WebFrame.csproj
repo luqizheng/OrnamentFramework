@@ -562,6 +562,7 @@
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
     <Content Include="Scripts\Modules\Combine\Share\client.js" />
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
+    <Content Include="Scripts\Modules\Combine\Share\time.js" />
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
