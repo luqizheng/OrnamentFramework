@@ -60,47 +60,6 @@ namespace Ornament.MVCWebFrame.Api.Core
         }
         
 
-        //[HttpPost]
-        //public object VerifyEmail([FromBody]string loginId)
-        //{
-        //    try
-        //    {
-        //        User user = _factory.CreateUserDao().GetByLoginId(loginId);
-        //        user.IsApproved = false;
-        //        MemberSecrityManager token = MemberSecrityManager.CreateEmailChangedToken(user,
-        //                                                                                  OrnamentContext.Configuration
-        //                                                                                                 .ApplicationSetting
-        //                                                                                                 .VerifyEmailTimeout);
-        //        token.SendToken();
-        //        _factory.CreateUserDao().SaveOrUpdate(user);
-        //        return new { success = true };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogManager.GetLogger((GetType())).Error("Verify Email in UsersController fial", ex);
-        //        return new { success = false, message = ex.Message };
-        //    }
-        //}
-        //[HttpPost]
-        //public object VerifyEmail([FromBody]string loginId, [FromBody]string email)
-        //{
-        //    try
-        //    {
-        //        User user = _factory.CreateUserDao().GetByLoginId(loginId);
-        //        user.IsApproved = false;
-        //        MemberSecrityManager token = MemberSecrityManager.CreateEmailChangedToken(user,
-        //                                                                                  OrnamentContext.Configuration
-        //                                                                                                 .ApplicationSetting
-        //                                                                                                 .VerifyEmailTimeout);
-        //        token.SendToken();
-        //        _factory.CreateUserDao().SaveOrUpdate(user);
-        //        return new { success = true };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogManager.GetLogger((GetType())).Error("Verify Email in UsersController fial", ex);
-        //        return new { success = false, message = ex.Message };
-        //    }
-        //}
+      
     }
 }

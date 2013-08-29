@@ -21,13 +21,20 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryPlugin,
                     CodeStyle,
                     Fx,
-                    BizRelative, RegistryCtrl
+                    BizRelative, 
+                    RegistryCtrl,
+                    Comp
                 };
 
             foreach (var item in registryParty)
             {
                 item.Invoke(bundles);
             }
+        }
+
+        private static void Comp(BundleCollection t1)
+        {
+            t1.Add(new ScriptBundle("~/Components/json2.js").Include("~/Scripts/Components/json2.js"));
         }
 
         private static void Fx(BundleCollection bundles)
@@ -186,7 +193,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
             //Now use pre-compiler
             bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
-          
+
         }
     }
 }

@@ -29,35 +29,45 @@ define(function (require) {
 
     userTypeahead.typeahead("#searchContent");
 
+
+
+    function ShowLoading(enable) {
+        var parent = $(this).closest("ul"),
+        $loading = $("[role=loading]", parent);
+        if ($loading.length == 0) {
+            $loading = $("<li role='loading'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\"></li>")
+            $loading.appendTo(parent);
+        }
+        $loading.toggle(enable);
+    }
     return {
         init: function (verifyEmailMessage, retrievePwdMessage, currentUser) {
-            //Table Verify User.
-            $("table [role=verifyEmail]").click(function () {
-                var loginId = $("td:first input", $(this).closest("tr")).val();
-                var loadder = $("<li style='display:none'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\"></li>");
-                var parent = $(this).closest("ul");
 
-                var img = $("img", parent);
-                if (img.length == 0) {
-                    img = loadder.appendTo(parent);
-                }
-                img.show();
+            //Table Verify User.
+            $("table a[role=verifyEmail]").click(function () {
+                var loginId = $("td:first input", $(this).closest("tr")).val();
+                var self = this;
+                ShowLoading.call(self, true);
                 userAPI.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
-                    img.hide();
                     alert(e.success ?
                         verifyEmailMessage.success :
                         verifyEmailMessage.fail);
 
+                }, function () {
+                    ShowLoading.call(self, false);
                 });
                 return false;
             });
 
             $("table [role=retievePwd]").click(function () {
-                var loginId = $("td:first input", $(this).closest("tr")).val();
+                var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
+                ShowLoading.call(this, true);
                 userAPI.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
                         retrievePwdMessage.success :
                         retrievePwdMessage.fail);
+                }, function () {
+                    ShowLoading.call(self, false);
                 });
             });
 
