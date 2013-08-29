@@ -31,7 +31,7 @@ define(function (require) {
 
 
 
-    function ShowLoading(enable) {
+    function showLoading(enable) {
         var parent = $(this).closest("ul"),
         $loading = $("[role=loading]", parent);
         if ($loading.length == 0) {
@@ -47,27 +47,27 @@ define(function (require) {
             $("table a[role=verifyEmail]").click(function () {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
                 var self = this;
-                ShowLoading.call(self, true);
+                showLoading.call(self, true);
                 userAPI.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
                     alert(e.success ?
                         verifyEmailMessage.success :
                         verifyEmailMessage.fail);
 
                 }, function () {
-                    ShowLoading.call(self, false);
+                    showLoading.call(self, false);
                 });
                 return false;
             });
 
             $("table [role=retievePwd]").click(function () {
                 var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
-                ShowLoading.call(this, true);
+                showLoading.call(this, true);
                 userAPI.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
                         retrievePwdMessage.success :
                         retrievePwdMessage.fail);
                 }, function () {
-                    ShowLoading.call(self, false);
+                    showLoading.call(self, false);
                 });
             });
 
