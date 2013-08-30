@@ -553,7 +553,6 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\Fx\compatibles\jquery-ui-1.0.js" />
-    <Content Include="Scripts\i18n\inputlimiter\inputlimiter.zh.js" />
     <Content Include="Scripts\Modules\Combine\Badminton\Brand.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\friend.js" />
     <Content Include="Scripts\Modules\Combine\Memberships\permission.js" />

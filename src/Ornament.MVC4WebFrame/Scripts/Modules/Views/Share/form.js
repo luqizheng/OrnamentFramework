@@ -8,39 +8,58 @@ define(function (require) {
     require("timepicker")($);
     require("validate")($);
     require("unobtrusive")($);
-    
+
 
     //form for boostratp
     $('form').bootstrapMakeUp().submit(function () {
-        $(this).valid(); $(this).bootstrapMakeUp();
+        $(this).valid();
+        $(this).bootstrapMakeUp();
     });
 
     $(document).ready(function () {
+
         //for time input.
-        $('input.jqui-time').each(function () {
-            var $this = $(this), format = $this.attr("timeFormat"), inputMask = $this.attr("inputmask-format");
-            $this.timepicker({ 'timeFormat': format }).inputmask(inputMask);
+        $('input.jqui-time,input.jqui-spinner,textarea[max]').each(function () {
+
+            var $this = $(this), format, max;
+            if ($this.hasClass(".jqui-time")) {
+                format = $this.attr("timeFormat");var inputMask = $this.attr("inputmask-format");
+                $this.timepicker({ 'timeFormat': format }).inputmask(inputMask);
+                return true;
+            }
+
+            if ($this.hasClass(".jqui-spinner")) {
+                var min = $this.attr("data-val-range-min");
+                max = $this.attr("data-val-range-max");
+                $(this).spinner({
+                    numberFormat: "n",
+                    step: $this.attr("jq-step"),
+                    max: max ? max : 32000000,
+                    min: min ? min : -3200000
+                });
+                return true;
+            }
+
+            if ($this.hasClass(".jqui-date")) {
+                format = $this.attr("data-date-format");
+                $this.datepicker({ dateFormat: format });
+                return true;
+            }
+
+            max = $this.attr("max");
+            if ($this[0].nodeName == "TEXTAREA" && max) {
+                require("inputlimiter")($);
+                $this.inputlimiter({ limit: max });
+                return true;
+            }
+
+
+
         });
 
-        //for date input
-        $(".jqui-spinner").each(function () {
-            var $this = $(this), min = $this.attr("data-val-range-min"), max = $this.attr("data-val-range-max");
-            $(this).spinner({
-                numberFormat: "n",
-                step: $this.attr("jq-step"),
-                max: max ? max : 32000000,
-                min: min ? min : -3200000
-            });
-        });
-        $(".jqui-date input").each(function () {
-            var $this = $(this), format = $this.attr("data-date-format");
-            $this.datepicker({ dateFormat: format });
-        });
-        
-        $("textarea[max]").each(function () {
-            require("inputlimiter")($);
-            $(this).inputlimiter({ limit: $(this).attr("max") });
-        });
+
+
     });
+
 
 });
