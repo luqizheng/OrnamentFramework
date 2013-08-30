@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Languages;
@@ -15,22 +16,29 @@ namespace Ornament.Models.Memberships.Partials
         /// <summary>
         /// </summary>
         /// <param name="user"></param>
+        /// <exception cref="ArgumentNullException">input user is null</exception>
         public BasicInfo(User user)
         {
-            this.Id = user.Id;
+            if (user == null)
+                throw new ArgumentNullException("user");
+            Id = user.Id;
             Name = user.Name;
             TimeZoneId = user.TimeZoneId;
             Language = Language;
-            this.LoginId = user.LoginId;
+            LoginId = user.LoginId;
 
             Phone = user.Contact.Phone;
             Email = user.Contact.Email;
 
             VerifyEmail = true;
-
         }
-        public string Id { get; set; }
         /// <summary>
+        /// Gets or sets the User's Id
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the LoginId
         /// </summary>
         [Display(Name = "LoginId", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Resources))]
@@ -43,8 +51,8 @@ namespace Ornament.Models.Memberships.Partials
         public string LoginId { get; set; }
 
 
-
         /// <summary>
+        /// Gets or sets the Email of user.
         /// </summary>
         [Display(Name = "Email", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_missingEmailAddress",
@@ -57,6 +65,7 @@ namespace Ornament.Models.Memberships.Partials
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
             ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
+
         /// <summary>
         /// </summary>
         [UIHint("String")]
@@ -99,10 +108,9 @@ namespace Ornament.Models.Memberships.Partials
             EmailHasChanged = user.Contact.Email != Email;
             user.Contact.Email = Email;
             user.Contact.Phone = Phone;
-
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="user"></param>
         protected virtual void SendVerifyEmail(User user)

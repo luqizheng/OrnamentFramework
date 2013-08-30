@@ -4,6 +4,9 @@ using Ornament.Web;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
+    /// <summary>
+    /// Permission setting 
+    /// </summary>
     public class PermissionConfig
     {
         public static void Regist()

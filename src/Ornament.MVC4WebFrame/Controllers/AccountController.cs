@@ -58,23 +58,11 @@ namespace Ornament.MVCWebFrame.Controllers
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
 
-        //[System.Web.Http.HttpGet]
-        //public JsonResult NotDuplicateEmail(string email, string id)
-        //{
-        //    if (Membership.Provider.RequiresUniqueEmail)
-        //    {
-        //        return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
-        //                    JsonRequestBehavior.AllowGet);
-        //    }
-        //    return Json(true, JsonRequestBehavior.AllowGet);
-        //}
-
-        //[System.Web.Http.HttpGet]
-        //public JsonResult NotDuplicate(string loginId)
-        //{
-        //    return Json(_memberShipFactory.CreateUserDao().Count(loginId, null) == 0, JsonRequestBehavior.AllowGet);
-        //}
-
+        /// <summary>
+        /// —È÷§Emial
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public JsonResult VarifyEmail(string email)
         {
             MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),

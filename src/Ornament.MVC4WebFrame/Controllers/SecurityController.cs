@@ -35,6 +35,8 @@ namespace Ornament.MVCWebFrame.Controllers
                 {
                     if (OrnamentContext.MemberShip.CurrentUser().LoginId == userToken.Account.LoginId)
                     {
+                        userToken.Account.IsApproved = true;
+                        _factory.CreateUserDao().SaveOrUpdate(userToken.Account);
                         return View(VerifyResult.Success);
                     }
                     else

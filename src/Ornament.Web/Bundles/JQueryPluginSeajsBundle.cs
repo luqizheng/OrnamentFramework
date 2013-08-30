@@ -27,11 +27,10 @@ namespace Ornament.Web.Bundles
         /// <param name="virtualPath"></param>
         /// <param name="pluginName">please input "$.fn.XXX" or $.xxxx, in order to avoid duplicate init.</param>
         /// <param name="dependIds"></param>
-        public JQueryPluginSeajsBundle(string virtualPath, string pluginName, string[] dependIds)
+        public JQueryPluginSeajsBundle(string virtualPath, string pluginName)
             : base(virtualPath)
         {
             _pluginName = pluginName;
-            _dependIds = dependIds;
             Transforms.Clear();
             if (BundleTable.EnableOptimizations)
             {
@@ -43,7 +42,7 @@ namespace Ornament.Web.Bundles
         /// </summary>
         /// <param name="virtualPath"></param>
         /// <param name="dependIds"></param>
-        public JQueryPluginSeajsBundle(string virtualPath, params string[] dependIds)
+        public JQueryPluginSeajsBundle(string virtualPath, string[] dependIds)
             : base(virtualPath)
         {
             _dependIds = dependIds;

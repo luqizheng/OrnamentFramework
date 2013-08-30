@@ -8,6 +8,7 @@ define(function (require) {
     require("timepicker")($);
     require("validate")($);
     require("unobtrusive")($);
+    
 
     //form for boostratp
     $('form').bootstrapMakeUp().submit(function () {
@@ -34,6 +35,11 @@ define(function (require) {
         $(".jqui-date input").each(function () {
             var $this = $(this), format = $this.attr("data-date-format");
             $this.datepicker({ dateFormat: format });
+        });
+        
+        $("textarea[max]").each(function () {
+            require("inputlimiter")($);
+            $(this).inputlimiter({ limit: $(this).attr("max") });
         });
     });
 

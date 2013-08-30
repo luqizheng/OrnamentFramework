@@ -10,7 +10,7 @@ define(function (require) {
     require("../../_appLayout.js");
     var $ = require("jquery"),
         userTypeahead = require("../../../Combine/Views/user.typeahead.js"),
-        userAPI = require("../../../Combine/Memberships/user.js"),
+        userApi = require("../../../Combine/Memberships/user.js"),
         pm = require("/share/pm.js");
 
 
@@ -48,7 +48,7 @@ define(function (require) {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
                 var self = this;
                 showLoading.call(self, true);
-                userAPI.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
+                userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
                     alert(e.success ?
                         verifyEmailMessage.success :
                         verifyEmailMessage.fail);
@@ -62,7 +62,7 @@ define(function (require) {
             $("table [role=retievePwd]").click(function () {
                 var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
                 showLoading.call(this, true);
-                userAPI.RetrievePassword(loginId, function (e) {
+                userApi.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
                         retrievePwdMessage.success :
                         retrievePwdMessage.fail);

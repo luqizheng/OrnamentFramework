@@ -34,6 +34,7 @@
         "tmpl": "/bundles/tmpl.js",
         "toDictionary": "/bundles/toDictionary.js",
         "unobtrusive": "/bundles/unobtrusive-ajax.js",
+        "inputlimiter": "/bundles/inputlimiter.js",
 
         //following is Model
         "pm": "/scripts/ctrls/pm.js",

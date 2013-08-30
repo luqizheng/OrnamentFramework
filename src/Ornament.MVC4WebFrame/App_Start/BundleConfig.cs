@@ -42,10 +42,10 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new Bundle("~/bundles/jquery.js")
                             .Include("~/Scripts/fx/jquery-{version}.js"));
 
-            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js", "/bundles/jquery.js")
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js")
                             .Include("~/Scripts/fx/bootstrap.js"));
 
-            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js")
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js", "jQuery.fn.spinner")
                             .Include("~/Scripts/fx/jquery-ui-{version}.js")
                             .Include("~/Scripts/fx/compatibles/jqueryui-{version}.js"));
 

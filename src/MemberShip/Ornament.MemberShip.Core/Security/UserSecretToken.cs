@@ -62,7 +62,9 @@ namespace Ornament.MemberShip.Security
                 return _status;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public virtual string Action { get; protected set; }
 
         /// <summary>
@@ -70,6 +72,7 @@ namespace Ornament.MemberShip.Security
         public virtual User Account { get; protected set; }
 
         /// <summary>
+        /// Gets the token createTime
         /// </summary>
         public virtual DateTime CreateTime { get; protected set; }
 
