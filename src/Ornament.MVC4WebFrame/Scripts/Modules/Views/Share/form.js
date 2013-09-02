@@ -1,6 +1,6 @@
 ﻿/* 所有与form有关的 的UI 都在这里定义*/
 
-define(function (require) {
+define(function(require) {
     //input mask
     var $ = require("jquery");
     require("jqueryui")($);
@@ -11,19 +11,20 @@ define(function (require) {
 
 
     //form for boostratp
-    $('form').bootstrapMakeUp().submit(function () {
+    $('form').bootstrapMakeUp().submit(function() {
         $(this).valid();
         $(this).bootstrapMakeUp();
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         //for time input.
-        $('input.jqui-time,input.jqui-spinner,textarea[max]').each(function () {
+        $('input.jqui-time,input.jqui-spinner,textarea[max]').each(function() {
 
             var $this = $(this), format, max;
             if ($this.hasClass(".jqui-time")) {
-                format = $this.attr("timeFormat");var inputMask = $this.attr("inputmask-format");
+                format = $this.attr("timeFormat");
+                var inputMask = $this.attr("inputmask-format");
                 $this.timepicker({ 'timeFormat': format }).inputmask(inputMask);
                 return true;
             }
@@ -54,9 +55,7 @@ define(function (require) {
             }
 
 
-
         });
-
 
 
     });

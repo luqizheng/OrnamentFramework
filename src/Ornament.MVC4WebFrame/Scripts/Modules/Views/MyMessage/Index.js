@@ -1,8 +1,9 @@
 ﻿define(function (require) {
+   
     return function(currentUser, makeReadUrl) {
         var $ = require("jquery"), pmDialog = require("/share/pm.js"),
             pm = new pmDialog($("#pmEditor"), currentUser);
-        require("../../_appLayout.js");
+        require("../_appLayout.js");
         if (!$.fn.popover) {
             require("bootstrap")($);
         }
