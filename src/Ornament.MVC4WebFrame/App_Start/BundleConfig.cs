@@ -46,8 +46,7 @@ namespace Ornament.MVCWebFrame.App_Start
                             .Include("~/Scripts/fx/bootstrap.js"));
 
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js", "jQuery.fn.spinner")
-                            .Include("~/Scripts/fx/jquery-ui-{version}.js")
-                            .Include("~/Scripts/fx/compatibles/jqueryui-{version}.js"));
+                            .Include("~/Scripts/fx/jquery-ui-{version}.js"));
 
             bundles.Add(
                 new SeajsBundle("~/_appLayout.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/_appLayout.js"));
