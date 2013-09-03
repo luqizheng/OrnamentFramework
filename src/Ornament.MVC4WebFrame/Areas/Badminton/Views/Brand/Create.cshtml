@@ -6,28 +6,20 @@
     Layout = "~/Views/Shared/Backend/_applayout.cshtml";
 }
 @section pageTitle{
-    <h5>Create</h5>
+    <h5>Create Brand</h5>
 }
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Brand", FormMethod.Post))
 {
     <div class="widget">
-        <div class="navbar">
+        @*<div class="navbar">
             <div class="navbar-inner">
-                <button class="btn btn-primary">@Basic.Save</button>
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
             </div>
-        </div>
+        </div>*@
 
         <div class="well form-horizontal">
-
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
-
-
             @Html.EditorFor(model => model.Name)
-
         </div>
 
         <div class="form-actions">

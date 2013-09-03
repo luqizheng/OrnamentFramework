@@ -21,7 +21,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     JQueryPlugin,
                     CodeStyle,
                     Fx,
-                    BizRelative, 
+                    BizRelative,
                     RegistryCtrl,
                     Comp
                 };
@@ -126,7 +126,6 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void BizRelative(BundleCollection bundles)
         {
-
             new SeajsBundle("~/scripts/ctrls/pm.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/pm.js");
             AutoForPageScripts(bundles);
         }
@@ -192,7 +191,6 @@ namespace Ornament.MVCWebFrame.App_Start
 
             //Now use pre-compiler
             bundles.Add(new StyleBundle("~/Content/global").Include("~/Content/Combine/global.css"));
-
         }
     }
 }

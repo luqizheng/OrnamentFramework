@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,7 +23,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
 
         public ActionResult Index()
         {
-            var result = _daoFactory.BrandDao().GetAll();
+            IList<Brand> result = _daoFactory.BrandDao().GetAll();
             return View(result);
         }
 
@@ -32,14 +31,14 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         {
             if (id == null)
                 throw new HttpException(404, "NotFind");
-            var brand = _daoFactory.BrandDao().Get(id.Value);
+            Brand brand = _daoFactory.BrandDao().Get(id.Value);
             return View(brand);
         }
 
         [HttpPost]
         public ActionResult Edit(Brand brand)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _daoFactory.BrandDao().SaveOrUpdate(brand);
                 return Redirect("index");
@@ -48,32 +47,41 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         }
 
 
-        [HttpPost]
         public ActionResult Create()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Brand brand)
+        {
+            if (ModelState.IsValid)
+            {
+                _daoFactory.BrandDao().SaveOrUpdate(brand);
+                return RedirectToAction("Index");
+            }
+            return View(brand);
         }
 
         [HttpPost]
         public ActionResult Save(Brand brand)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _daoFactory.BrandDao().SaveOrUpdate(brand);
             }
             else
             {
                 return Json(new
-                {
-                    success = false,
-                    message = this.ModelState.Values.First()
-                });
+                    {
+                        success = false,
+                        message = ModelState.Values.First()
+                    });
             }
             return Json(new
-            {
-                success = true,
-                brand = brand
-            });
+                {
+                    success = true,
+                    brand
+                });
         }
     }
 }
