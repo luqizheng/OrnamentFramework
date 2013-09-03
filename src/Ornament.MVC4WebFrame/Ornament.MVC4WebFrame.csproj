@@ -567,6 +567,8 @@
     <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
     <Content Include="Scripts\Modules\Views\Badminton\Model\Edit.js" />
     <Content Include="Scripts\Modules\Views\Badminton\Model\Index.js" />
+    <Content Include="Scripts\Modules\Views\Docs\TypeLayout\BaseType.js" />
+    <Content Include="Scripts\Modules\Views\Docs\TypeLayout\ExtenderType.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\User\Assign.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\User\Create.js" />
     <Content Include="Scripts\Modules\Views\MemberShips\User\Edit.js" />

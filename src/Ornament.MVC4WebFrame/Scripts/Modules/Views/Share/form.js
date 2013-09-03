@@ -1,6 +1,6 @@
 ﻿/* 所有与form有关的 的UI 都在这里定义*/
 
-define(function(require) {
+define(function (require) {
     //input mask
     var $ = require("jquery");
     require("jqueryui")($);
@@ -11,25 +11,25 @@ define(function(require) {
 
 
     //form for boostratp
-    $('form').bootstrapMakeUp().submit(function() {
+    $('form').bootstrapMakeUp().submit(function () {
         $(this).valid();
         $(this).bootstrapMakeUp();
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         //for time input.
-        $('input.jqui-time,input.jqui-spinner,textarea[max]').each(function() {
+        $('input.jqui-time,input.jqui-spinner,textarea[max],.jqui-date').each(function () {
 
             var $this = $(this), format, max;
-            if ($this.hasClass(".jqui-time")) {
+            if ($this.hasClass("jqui-time")) {
                 format = $this.attr("timeFormat");
                 var inputMask = $this.attr("inputmask-format");
                 $this.timepicker({ 'timeFormat': format }).inputmask(inputMask);
                 return true;
             }
 
-            if ($this.hasClass(".jqui-spinner")) {
+            if ($this.hasClass("jqui-spinner")) {
                 var min = $this.attr("data-val-range-min");
                 max = $this.attr("data-val-range-max");
                 $(this).spinner({
@@ -41,9 +41,11 @@ define(function(require) {
                 return true;
             }
 
-            if ($this.hasClass(".jqui-date")) {
-                format = $this.attr("data-date-format");
-                $this.datepicker({ dateFormat: format });
+            if ($this.hasClass("jqui-date")) {
+                
+                var $target=$("input", $this);
+                format = $target.attr("data-date-format");
+                $target.datepicker({ dateFormat: format });
                 return true;
             }
 
@@ -53,8 +55,6 @@ define(function(require) {
                 $this.inputlimiter({ limit: max });
                 return true;
             }
-
-
         });
 
 

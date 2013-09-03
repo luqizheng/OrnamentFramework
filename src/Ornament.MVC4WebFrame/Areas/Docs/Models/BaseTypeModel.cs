@@ -14,6 +14,7 @@ namespace Ornament.MVCWebFrame.Areas.Docs.Models
 
         }
         [StringLength(15, ErrorMessage = "Max length is 15.")]
+        [UIHint("String")]
         public string StringType { get; set; }
 
         [UIHint("Textarea")]
