@@ -1,8 +1,8 @@
 ﻿define(function () {
 
-    return function($) {
+    return function ($) {
         //modal
-        $(document).ajaxError(function(event, jqxhr, settings, exception) {
+        $(document).ajaxError(function (event, jqxhr, settings, exception) {
 
             var url = "/HttpErrors/AjaxPageError";
             if (settings.url.indexOf(url) != -1)
@@ -15,7 +15,8 @@
             }
             $.ajax(url, {
                 data: data,
-                success: function(d) {
+                type: "post",
+                success: function (d) {
                     var $dialog = $("#ajaxerror");
                     if ($dialog.length == 0) {
                         $("body").append(d);

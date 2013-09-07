@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bundles\JQueryPluginSeajsBundle.cs" />
+    <Compile Include="Bundles\ScriptsSeajs.cs" />
     <Compile Include="Bundles\SeajsBundle.cs" />
     <Compile Include="Bundles\SeajsMinify.cs" />
     <Compile Include="Bundles\Seajs\BaseCombineModule.cs" />

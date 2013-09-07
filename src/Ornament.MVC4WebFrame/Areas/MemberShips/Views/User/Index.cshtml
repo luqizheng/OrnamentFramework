@@ -5,6 +5,7 @@
 @using Ornament.MemberShip.Dao
 @using Ornament.Models.Memberships
 @using Ornament.Web
+@using Ornament.Web.Bundles
 @using Resources
 @model IEnumerable<Ornament.MemberShip.User>
 @{
@@ -13,22 +14,24 @@
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
     var status = ViewData["UserStatus"] as UsersStatusModel;
 }
+
 @section scripts 
 {
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-        seajs.use("/memberships/user/index.js", function (main) {
+        
+        seajs.use(@ScriptsSeajs.RenderUrl("~/memberships/user/index.js"), function (main) {
             main.init({
                 success: "@Html.GetResourceString("verify_email_success")",
                 fail: "@Html.GetResourceString("verify_email_fail")"
             }, {
                 success: "@Html.GetResourceString("retrieve_pwd_success")",
-                fail: "@Html.GetResourceString("retrieve_pwd_fail")"
-            }, {
-                Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
-                Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
-            });
+                    fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+                }, {
+                    Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
+                    Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
+                });
         });
     </script>
 }

@@ -1,40 +1,25 @@
-﻿using Ornament.MemberShip.Permissions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using MemberShip.Test.helper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ornament.MemberShip.Permissions;
 
 namespace MemberShip.Test
 {
-
-
     /// <summary>
-    ///This is a test class for PermissionTest and is intended
-    ///to contain all PermissionTest Unit Tests
-    ///</summary>
-    [TestClass()]
+    ///     This is a test class for PermissionTest and is intended
+    ///     to contain all PermissionTest Unit Tests
+    /// </summary>
+    [TestClass]
     public class PermissionTest
     {
-
-
-        private TestContext testContextInstance;
-
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
+
         // 
         //You can use the following additional attributes as you write your tests:
         //
@@ -62,10 +47,8 @@ namespace MemberShip.Test
         //{
         //}
         //
+
         #endregion
-
-
-
 
         ///// <summary>
         /////A test for Operator
@@ -97,9 +80,9 @@ namespace MemberShip.Test
         //}
 
         /// <summary>
-        ///A test for Comment
-        ///</summary>
-        [TestMethod()]
+        ///     A test for Comment
+        /// </summary>
+        [TestMethod]
         public void CommentTest()
         {
             Permission target = new GenericPermission<string>("ok");
@@ -108,13 +91,12 @@ namespace MemberShip.Test
             target.Remark = expected;
             actual = target.Remark;
             Assert.AreEqual(expected, actual);
-
         }
 
         /// <summary>
-        ///A test for HasOperator
-        ///</summary>
-        [TestMethod()]
+        ///     A test for HasOperator
+        /// </summary>
+        [TestMethod]
         public void HasOperatorTest()
         {
             Permission target = new GenericPermission<string>("ok");
@@ -138,12 +120,6 @@ namespace MemberShip.Test
             Assert.IsTrue(target.HasOperator(MockOperator.None));
             Assert.IsFalse(target.HasOperator(MockOperator.All));
             Assert.IsFalse(target.HasOperator((MockOperator.ABC | MockOperator.E)));
-
-
-
-
         }
-
-
     }
 }
