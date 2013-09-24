@@ -243,6 +243,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Badminton\BadmintonAreaRegistration.cs" />
     <Compile Include="Areas\Badminton\Controllers\BrandController.cs" />
+    <Compile Include="Areas\Badminton\Controllers\ConsumablesController.cs" />
     <Compile Include="Areas\Badminton\Controllers\GymnasiumController.cs" />
     <Compile Include="Areas\Badminton\Controllers\MeasurementUnitController.cs" />
     <Compile Include="Areas\Badminton\Controllers\ModelController.cs" />
@@ -681,6 +682,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\Badminton\Views\Model\Edit.cshtml" />
+    <Content Include="Areas\Badminton\Views\Consumables\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -751,7 +753,7 @@
     <Content Include="Scripts\plugins\forms\jquery.select2.js" />
     <Content Include="Scripts\plugins\forms\jquery.tagsinput.js" />
     <Content Include="Scripts\plugins\forms\jquery.uniform.js" />
-    <Content Include="Scripts\plugins\tables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\plugins\tables\jquery.dataTables.js" />
     <Content Include="Scripts\plugins\ui\jquery.bootbox.js" />
     <Content Include="Scripts\plugins\ui\jquery.collapsible.js" />
     <Content Include="Scripts\plugins\ui\jquery.collapsible.min.js" />
@@ -1017,6 +1019,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\HttpErrors\AjaxError.cshtml" />
+    <Content Include="Scripts\seajs\sea.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

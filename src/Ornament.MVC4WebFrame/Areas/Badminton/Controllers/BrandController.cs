@@ -51,6 +51,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(Brand brand)
         {

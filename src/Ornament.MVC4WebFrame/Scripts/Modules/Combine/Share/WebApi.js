@@ -6,7 +6,7 @@
 
         this.opts = {
             url: url,
-            contentType: "application/json",
+            contentType: "application/json"
         };
 
         this.Put = function (data, func) {
