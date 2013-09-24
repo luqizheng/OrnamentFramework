@@ -48,7 +48,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     FluentConfiguration result = Fluently.Configure(config);
                     // ReSharper disable ForCanBeConvertedToForeach
                     for (int index = 0; index < fluentAssemblies.Length; index++)
-                        // ReSharper restore ForCanBeConvertedToForeach
+                    // ReSharper restore ForCanBeConvertedToForeach
                     {
                         Assembly assembly = fluentAssemblies[index];
 #if DEBUG
@@ -69,12 +69,23 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void UpdateDatabase()
         {
+
             foreach (string name in SessionManager.SessionFactoryNames)
             {
+
                 var a = new SchemaUpdate(SessionManager.GetSessionWrapper(name).Configuration);
                 a.Execute(true, true);
             }
-            InitData.Initialize();
+            var sessionWrapper = SessionManager.GetSessionWrapper();
+            try
+            {
+                sessionWrapper.InitSession();
+                InitData.Initialize();
+            }
+            finally
+            {
+                sessionWrapper.Close(true);
+            }
         }
     }
 }

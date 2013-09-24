@@ -469,6 +469,54 @@
             <summary>
             </summary>
         </member>
+        <member name="T:Qi.Wcfs.NHibernateContextAttribute">
+            <summary>
+            WCF service context for hibernate.
+            </summary>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextAttribute.#ctor">
+            <summary>
+            Default to disabled transaction and use defualt sessionfactory key
+            </summary>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextAttribute.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)">
+            <summary>
+            
+            </summary>
+            <param name="contractDescription"></param>
+            <param name="endpoint"></param>
+            <param name="dispatchRuntime"></param>
+        </member>
+        <member name="T:Qi.Wcfs.NHibernateContextExension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextExension.#ctor(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sessionfactoryName"></param>
+            <param name="enabledTransaction"></param>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextExension.Detach(System.ServiceModel.InstanceContext)">
+            <summary>
+            
+            </summary>
+            <param name="owner"></param>
+        </member>
+        <member name="T:Qi.Wcfs.NHibernateContextInitializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextInitializer.#ctor(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="sessionfactoryName"></param>
+            <param name="enabledTransaction"></param>
+        </member>
         <member name="T:Qi.Web.Http.ApiSessionAttribute">
             <summary>
             </summary>
