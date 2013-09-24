@@ -5,7 +5,7 @@ define(function (require) {
     require("/bundles/jquery.js");
     var url = "/Api/PersonalMessages",
         clientUrl = "/Api/Client",
-        Friend = require("/scripts/Modules/Combine/Memberships/friend.js");
+        friendLib = require("/scripts/Modules/Combine/Memberships/friend.js"),
     getCookie = function (cName) {
         if (document.cookie.length > 0) {
             var cStart = document.cookie.indexOf(cName + "=");

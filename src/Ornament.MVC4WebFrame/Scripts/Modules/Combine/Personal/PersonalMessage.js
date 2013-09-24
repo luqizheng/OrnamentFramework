@@ -27,7 +27,8 @@ define(function (require) {
         /// <param name="func"></param>
         $.get(url, { relativeUserId: relativeUserId, lastTime: lastTime, page: pageIndex }, func);
     };
-    pm.prototype.delete = function (id, func) {
+    
+    pm.prototype.del = function (id, func) {
         webApi.Delete({ id: id }, func);
     };
     return pm;

@@ -50,10 +50,11 @@ namespace Badminton.Consumableses
         /// </summary>
         [UIHint("EnumRadio")]
         public virtual ConsumablesType ConsumablesType { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual MeasurementUnit Unit { get; set; }
+
         /// <summary>
         /// </summary>
         /// <returns></returns>

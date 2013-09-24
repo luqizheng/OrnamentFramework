@@ -12,13 +12,13 @@ define(function (require) {
         require('bootstrap')($);
     }
     require('ckeditor');
-    var PersonalMessage = require("../../Combine/Personal/PersonalMessage.js"),
-        pm = new PersonalMessage(),
-        Friend = require("../../Combine/Memberships/friend.js");
+    var pmLib = require("../../Combine/Personal/PersonalMessage.js"),
+        pm = new pmLib(),
+        friendCls = require("../../Combine/Memberships/friend.js");
 
     function buildTemp(chatItem) {
-        var $dt = $("<dt><h6><span>" + chatItem.publisher + "</span> <small>" + chatItem.createTime + "</small><a class='pull-right' href='#" + chatItem.id + "'><i class='icon-remove'></i></a></h6></dt>");
-        $("a", $dt).click(remove);
+        var $dt = $("<dt><h6><span>" + chatItem.publisher + "</span> <small>" + chatItem.createTime + "</small><a role='remove' class='pull-right' href='#" + chatItem.id + "'><i class='icon-remove'></i></a></h6></dt>");
+
         return {
             dt: $dt,
             dd: $("<dd><div>" + chatItem.content + "</div></dd>")
@@ -39,17 +39,7 @@ define(function (require) {
             self.$chat.append(chat).scrollTop(self.$chat[0].scrollHeight).closest(".well-smoke").show();
         }
     };
-    function remove() {
-        var self = $(this);
-        pm.delete($(this).attr("href").substr(1), function (d) {
-            if (d) {
-                var $dt = self.closest("dt");
-                var $dd = $dt.next();
-                $dt.remove();
-                $dd.remove();
-            }
-        });
-    }
+
     function pmDialog($dialog, my) {
         /// <summary>
         /// </summary>
@@ -73,7 +63,17 @@ define(function (require) {
         this.editor.on("key", function () {
             self.$sendBtn.prop("disabled", self.editor.getData().length == 0);
         });
-
+        $dialog.on("click", "[role=remove]", function () {
+            var itself = $(this);
+            pm.del($(this).attr("href").substr(1), function (d) {
+                if (d) {
+                    var $dt = itself.closest("dt");
+                    var $dd = $dt.next();
+                    $dt.remove();
+                    $dd.remove();
+                }
+            });
+        });
         $dialog.on("show", function () {
             //tipsMsge.unWatch(); //stop topmenu 的message检查
             //ticket = setTimeout(callIt, 100);
@@ -134,7 +134,7 @@ define(function (require) {
 
 
     pmDialog.prototype.show = function (activeId) {
-        this.curFriend = new Friend({ Id: activeId }, pm);
+        this.curFriend = new friendCls({ Id: activeId }, pm);
         this.$dialog.modal("show");
     };
 
