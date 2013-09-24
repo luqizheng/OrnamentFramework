@@ -16,7 +16,7 @@
                         name: query,
                         email: query,
                         loginId: query,
-                        phone: query,
+                        phone: query
                     };
                     $.get("/api/Users", data, function (d) {
                         var qu = query.substr(0, query.lengh - 1);
