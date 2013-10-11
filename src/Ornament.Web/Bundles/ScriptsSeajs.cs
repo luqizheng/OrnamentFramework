@@ -12,7 +12,7 @@ namespace Ornament.Web.Bundles
     {
         public static IHtmlString RenderUrl(string path)
         {
-            return new HtmlString(Scripts.RenderFormat("\"{0}\"", path).ToHtmlString().Replace("\r\n", ""));
+            return new HtmlString(Scripts.RenderFormat("{0}", path).ToHtmlString().Replace("\r\n", ""));
         }
     }
 }
