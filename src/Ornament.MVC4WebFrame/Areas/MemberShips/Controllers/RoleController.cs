@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MVCWebFrame.Models;
 using Ornament.MVCWebFrame.Models.Membership;
@@ -13,7 +12,7 @@ using Qi.Web.Mvc;
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 {
     /// <summary>
-    /// </summary>   
+    /// </summary>
     [Session]
     public class RoleController : Controller
     {
@@ -29,8 +28,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [ResourceAuthorize(RoleOperator.Read, ResourceSetting.Role)]
         public ActionResult Index(Pagination pagination)
         {
-
-            var result = _roleDao.Find(pagination.PageSize, pagination.CurrentPage);
+            IList<Role> result = _roleDao.Find(pagination.PageSize, pagination.CurrentPage);
             ViewData["Nav"] = pagination;
             return View(result);
         }
@@ -40,6 +38,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         {
             return View(_roleDao.Load(id));
         }
+
         [ResourceAuthorize(RoleOperator.Modify, ResourceSetting.Role)]
         public ActionResult Create()
         {
@@ -48,7 +47,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
 
         public ActionResult Delete(string id)
         {
-            var a = _factory.CreateMemberDao().Find(id);
+            IList<IPerformer> a = _factory.CreateMemberDao().Find(id);
             ViewData["members"] = a;
             return View(_roleDao.Get(id));
         }
@@ -57,7 +56,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         public ActionResult Delete(Role role)
         {
             IList<IPerformer> a = _factory.CreateMemberDao().Find(role.Id);
-            foreach (var member in a)
+            foreach (IPerformer member in a)
             {
                 member.Roles.Remove(role);
             }
@@ -86,9 +85,9 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             }
 
             IPermissionDao permissionDao =
-                 OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
+                OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
             role.Permissions.Clear();
-            foreach (var id in permissionIds)
+            foreach (string id in permissionIds)
             {
                 role.Permissions.Add(permissionDao.Load(id));
             }

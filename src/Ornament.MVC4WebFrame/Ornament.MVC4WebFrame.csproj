@@ -1020,6 +1020,9 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\HttpErrors\AjaxError.cshtml" />
     <Content Include="Scripts\seajs\sea.js.map" />
+    <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxHeader.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\pannonia\Box.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxBody.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1265,6 +1268,15 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MyMessage\App_LocalResources\Index.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MyMessage\App_LocalResources\Index.zh.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MyMessage\App_LocalResources\Index.zh-CN.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

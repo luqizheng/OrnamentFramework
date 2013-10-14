@@ -21,7 +21,7 @@
 
     <script type="text/javascript">
         
-        seajs.use(@ScriptsSeajs.RenderUrl("~/memberships/user/index.js"), function (main) {
+        seajs.use("@ScriptsSeajs.RenderUrl("~/memberships/user/index.js")", function (main) {
             main.init({
                 success: "@Html.GetResourceString("verify_email_success")",
                 fail: "@Html.GetResourceString("verify_email_fail")"
