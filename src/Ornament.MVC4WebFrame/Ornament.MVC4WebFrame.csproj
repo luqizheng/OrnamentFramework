@@ -1021,7 +1021,6 @@
     <Content Include="Views\HttpErrors\AjaxError.cshtml" />
     <Content Include="Scripts\seajs\sea.js.map" />
     <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxHeader.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\pannonia\Box.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxBody.cshtml" />
   </ItemGroup>
   <ItemGroup>
