@@ -7,6 +7,7 @@ using System.Web.Routing;
 
 namespace Ornament.Web.HtmlExtends
 {
+    [System.Obsolete("Please use EditorFor and UiHintAttribute.")]
     public static class BootstrapHtmlHelper
     {
         public static MvcHtmlString BootstrapLabelTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper,

@@ -10,6 +10,24 @@ namespace Ornament.Web.HtmlExtends
 {
     public static class TemplateHelper
     {
+        public static Box Box(this HtmlHelper htmlHelper, params string[] classNames)
+        {
+            if (classNames == null) throw new ArgumentNullException("classNames");
+
+            var tagBuilder = new TagBuilder("div");
+            foreach (var className in classNames)
+            {
+                tagBuilder.AddCssClass(className);
+            }
+            htmlHelper.ViewContext.Writer.Write(tagBuilder.ToString(TagRenderMode.StartTag));
+
+            return new Box(htmlHelper.ViewContext);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="htmlHelper"></param>
+        /// <returns></returns>
         public static Box Box(this HtmlHelper htmlHelper)
         {
             var tagBuilder = new TagBuilder("div");
@@ -18,7 +36,12 @@ namespace Ornament.Web.HtmlExtends
 
             return new Box(htmlHelper.ViewContext);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="htmlHelper"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static MvcHtmlString BoxHeader(this HtmlHelper htmlHelper, Func<object, HelperResult> action)
         {
             TextWriter writer = htmlHelper.ViewContext.Writer;
@@ -26,7 +49,12 @@ namespace Ornament.Web.HtmlExtends
             action(null).WriteTo(buffer);
             return htmlHelper.Partial(PartialViewPath("BoxHeader"), buffer.Builder);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="htmlHelper"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static MvcHtmlString BoxBody(this HtmlHelper htmlHelper, Func<object, HelperResult> action)
         {
             TextWriter writer = htmlHelper.ViewContext.Writer;
@@ -34,7 +62,11 @@ namespace Ornament.Web.HtmlExtends
             action(null).WriteTo(buffer);
             return htmlHelper.Partial(PartialViewPath("BoxBody"), buffer.Builder);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewType"></param>
+        /// <returns></returns>
         private static string PartialViewPath(string viewType)
         {
             string _template = ConfigurationManager.AppSettings["UiTemplate"] ?? "pannonia";
