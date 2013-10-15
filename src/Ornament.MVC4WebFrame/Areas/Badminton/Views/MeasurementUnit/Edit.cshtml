@@ -39,21 +39,3 @@
         </div>
     </div>
 }
-
-
-@* 
- 如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
- seajs.use必须是全小写
- please create a js in /Scripts/Module/Views/{Area}/{Controller}/Edit.js
-*@
-@*
-
-@section Scripts {
-    <script type="text/javascript">
-		seajs.use(["{area}/{controller}/Edit.js"],function(init){
-			inti();
-		});
-	</script>
-}
-
-*@

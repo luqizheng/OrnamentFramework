@@ -50,7 +50,7 @@
     <Compile Include="Dao\IClientDao.cs" />
     <Compile Include="Dao\IClientModelDao.cs" />
     <Compile Include="Dao\ICompanyDao.cs" />
-    <Compile Include="Dao\ISandDaoFactory.cs" />
+    <Compile Include="Dao\ICrmDaoFactory.cs" />
     <Compile Include="Dao\IShopDao.cs" />
     <Compile Include="Dao\IShopMemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

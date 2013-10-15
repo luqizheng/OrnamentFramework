@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Qi.CRM.Dao
 {
-    public interface ISandDaoFactory
+    public interface ICrmDaoFactory
     {
         IClientDao ClientDao();
         IClientModelDao ClientModel();

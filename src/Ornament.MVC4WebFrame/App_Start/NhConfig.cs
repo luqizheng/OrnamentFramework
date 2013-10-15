@@ -8,6 +8,7 @@ using NHibernate.Tool.hbm2ddl;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.Messages.Dao.NHibernateImple;
 using Qi;
+using Qi.CRM.Dao.NhImple;
 using Qi.NHibernateExtender;
 using Configuration = NHibernate.Cfg.Configuration;
 
@@ -32,7 +33,8 @@ namespace Ornament.MVCWebFrame.App_Start
                 {
                     typeof (UserDao).Assembly,
                     typeof (NewsDao).Assembly,
-                    typeof (BadmintonDaoFactory).Assembly
+                    typeof (BadmintonDaoFactory).Assembly,
+                    typeof(CrmDaoFactory).Assembly
                 };
             NHConfig(assemblies, new Assembly[0]);
             UpdateDatabase();
@@ -48,7 +50,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     FluentConfiguration result = Fluently.Configure(config);
                     // ReSharper disable ForCanBeConvertedToForeach
                     for (int index = 0; index < fluentAssemblies.Length; index++)
-                        // ReSharper restore ForCanBeConvertedToForeach
+                    // ReSharper restore ForCanBeConvertedToForeach
                     {
                         Assembly assembly = fluentAssemblies[index];
 #if DEBUG

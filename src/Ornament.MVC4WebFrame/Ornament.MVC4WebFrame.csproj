@@ -75,6 +75,9 @@
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.JQuery.Datatables">
+      <HintPath>..\packages\Mvc.JQuery.Datatables.1.2.80\lib\net40\Mvc.JQuery.Datatables.dll</HintPath>
+    </Reference>
     <Reference Include="MvcSiteMapProvider, Version=4.0.0.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.0.6\lib\net45\MvcSiteMapProvider.dll</HintPath>
@@ -249,6 +252,8 @@
     <Compile Include="Areas\Badminton\Controllers\ModelController.cs" />
     <Compile Include="Areas\Badminton\Controllers\YardController.cs" />
     <Compile Include="Areas\Badminton\Models\GymnasiumViewModel.cs" />
+    <Compile Include="Areas\CRM\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\CRM\CRMAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Docs\Controllers\TypeLayoutController.cs" />
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
@@ -586,6 +591,7 @@
     <Content Include="Scripts\Modules\Views\Share\form.js" />
     <Content Include="Scripts\Modules\Views\Share\memberships.js" />
     <Content Include="Scripts\Modules\Views\_layout.js" />
+    <Content Include="Scripts\plugins\ui\jquery.bootbox.js" />
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\plugins\forms\jquery.bootstrap.datepicker\bootstrap-datepicker.js" />
@@ -683,6 +689,8 @@
     </Content>
     <Content Include="Areas\Badminton\Views\Model\Edit.cshtml" />
     <Content Include="Areas\Badminton\Views\Consumables\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\Web.config" />
+    <Content Include="Areas\CRM\Views\Company\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -754,7 +762,6 @@
     <Content Include="Scripts\plugins\forms\jquery.tagsinput.js" />
     <Content Include="Scripts\plugins\forms\jquery.uniform.js" />
     <Content Include="Scripts\plugins\tables\jquery.dataTables.js" />
-    <Content Include="Scripts\plugins\ui\jquery.bootbox.js" />
     <Content Include="Scripts\plugins\ui\jquery.collapsible.js" />
     <Content Include="Scripts\plugins\ui\jquery.collapsible.min.js" />
     <Content Include="Scripts\plugins\ui\jquery.colorpicker.js" />
@@ -1025,6 +1032,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CRM\Models\" />
+    <Folder Include="Areas\CRM\Views\Shared\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="bin\" />
@@ -1101,6 +1110,14 @@
     <ProjectReference Include="..\Extends\Badminton\Badminton.Dao.NhImpl\Badminton.Dao.NhImpl.csproj">
       <Project>{5e455c9c-eecf-4838-a3cb-2124632b24de}</Project>
       <Name>Badminton.Dao.NhImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\CRM\Qi.CRM.Dao.NHimple\Qi.CRM.Dao.NhImple.csproj">
+      <Project>{6ab594b1-72ef-4886-a6d1-cc6cff644d31}</Project>
+      <Name>Qi.CRM.Dao.NhImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\CRM\Qi.CRM\Qi.CRM.Core.csproj">
+      <Project>{49102e6e-3fd1-4b38-978f-e60e32ab534b}</Project>
+      <Name>Qi.CRM.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Helpers\ElFinder.Net\ElFinder.Net.csproj">
       <Project>{4635b781-a1a1-40a3-b57d-26cf552695bb}</Project>

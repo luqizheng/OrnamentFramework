@@ -6,6 +6,8 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
+using Qi.CRM.Dao;
+using Qi.CRM.Dao.NhImple;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
@@ -17,7 +19,9 @@ namespace Ornament.MVCWebFrame.App_Start
                 {
                     {typeof (IMemberShipFactory), typeof (MemberShipFactory)},
                     {typeof (IMessageDaoFactory), typeof (MessageDaoFactory)},
-                    {typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)}
+                    {typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)},
+                    {typeof(ICrmDaoFactory),typeof(CrmDaoFactory)}
+
                 };
             foreach (Type key in dao.Keys)
             {

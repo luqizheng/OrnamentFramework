@@ -32,20 +32,6 @@
 	
 #>
 
-<#
-
-var serviceProvider = this.Host as IServiceProvider;
-var dte = serviceProvider.GetService(typeof(DTE)) as DTE;
-foreach (Project p in dte.Solution.Projects)
-{
-#>
-    <#=p.Name#> at <#=p.FullName#>
-<#
-}
-
-#>
-
-
 @model IEnumerable<#= "<" + mvcHost.ViewDataTypeName + ">" #>
 <#
 // The following chained if-statement outputs the file header code and markup for a partial view, a content page, or a regular view.

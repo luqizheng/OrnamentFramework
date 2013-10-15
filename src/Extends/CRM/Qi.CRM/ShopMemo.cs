@@ -10,10 +10,11 @@ namespace Qi.CRM
         {
             CreateTime = DateTime.Now;
         }
+
         /// <summary>
-        /// Gets or sets the Content of the shop memo
+        ///     Gets or sets the Content of the shop memo
         /// </summary>
-        [Required(), MaxLength(5000)]
+        [Required, MaxLength(5000)]
         public virtual string Content { get; set; }
 
 
