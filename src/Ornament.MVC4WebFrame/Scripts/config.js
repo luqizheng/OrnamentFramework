@@ -5,6 +5,7 @@
         "jqueryui": "/bundles/jqueryui.js",
         "bootstrap": "/bundles/bootstrap.js",
         //jquery,plugin
+        "table": "/bundles/dataTables.js",
         "flot": "/bundles/flot.js",
         "flot.orderBars": "/bundles/flot.orderBars.js",
         "flot.pie": "/bundles/flot.pie.js",

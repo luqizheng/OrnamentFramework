@@ -11,7 +11,13 @@ namespace Ornament.Web.Plugins.Datables
     [System.Serializable]
     public class DataTableResult
     {
-        [DataMember]
-        public int PageIndex { get; set; }
+        [DataMember(Name = "iTotalRecords")]
+        public int TotalRecords { get; set; }
+
+        [DataMember(Name = "iTotalDisplayRecords")]
+        public int TotalDisplayRecords { get; set; }
+
+        [DataMember(Name = "aaData")]
+        public List<object> Datas { get; set; }
     }
 }
