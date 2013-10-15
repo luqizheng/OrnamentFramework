@@ -7,8 +7,8 @@
     <ProjectGuid>{6AB594B1-72EF-4886-A6D1-CC6CFF644D31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sand.Dao.NhImple</RootNamespace>
-    <AssemblyName>Sand.Dao.NhImple</AssemblyName>
+    <RootNamespace>Qi.CRM.Dao.NhImple</RootNamespace>
+    <AssemblyName>Qi.CRM.Dao.NhImple</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\..\..\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\..\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\..\..\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi">
+      <HintPath>..\..\..\..\lib\Qi.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi.NHibernateExtender">
+      <HintPath>..\..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,6 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\ClientMapping.cs" />
+    <Compile Include="Mapping\ClientModelMapping.cs" />
+    <Compile Include="Mapping\CompanyMapping.cs" />
+    <Compile Include="Mapping\ShopMapping.cs" />
+    <Compile Include="Mapping\ShopMemoMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

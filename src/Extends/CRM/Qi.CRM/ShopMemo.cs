@@ -12,5 +12,7 @@ namespace Sand
 
         public virtual string Content { get; set; }
         public virtual DateTime? CreateTime { get; set; }
+
+        public virtual Shop Shop { get; set; }
     }
 }

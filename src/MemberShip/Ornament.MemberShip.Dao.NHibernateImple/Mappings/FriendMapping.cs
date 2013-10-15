@@ -29,7 +29,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                         x.Map(_ => _.Name);
                         x.Map(_ => _.Remakrs).Length(255);
                         x.References(_ => _.User);
-                    }).Table("Mbs_Friends")
+                    }).Table("MBS_Friends")
                     .ParentKeyColumn("groupId")
                     .ChildKeyColumn("friendId");
         }

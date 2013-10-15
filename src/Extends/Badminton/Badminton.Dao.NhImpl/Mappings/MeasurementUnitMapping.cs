@@ -7,7 +7,7 @@ namespace Badminton.Dao.NhImpl.Mappings
         public MeasurementUnitMapping()
         {
             this.Table("Bad_MeasurementUnit");
-            this.Id(s => s.Id);
+            Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
             this.Map(s => s.DecimalName);
             this.Map(s => s.IntegerName);
             this.Map(s => s.Adecimal);
