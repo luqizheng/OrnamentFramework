@@ -1,6 +1,6 @@
 ﻿using Qi.Domain;
 
-namespace Sand
+namespace Qi.CRM
 {
     public class ClientModel : DomainObject<ClientModel, string>
     {

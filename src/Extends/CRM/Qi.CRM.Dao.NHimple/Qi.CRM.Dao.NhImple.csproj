@@ -61,6 +61,12 @@
     <Compile Include="Mapping\ShopMemoMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Qi.CRM\Qi.CRM.Core.csproj">
+      <Project>{49102E6E-3FD1-4B38-978F-E60E32AB534B}</Project>
+      <Name>Qi.CRM.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

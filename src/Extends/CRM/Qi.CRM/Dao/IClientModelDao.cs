@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Qi.Domain;
 
-namespace Sand.Dao
+namespace Qi.CRM.Dao
 {
     public interface IClientModelDao : IDao<string, ClientModel>
     {

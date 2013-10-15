@@ -1,6 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 
-namespace Sand.Dao.NhImple.Mapping
+namespace Qi.CRM.Dao.NhImple.Mapping
 {
     public class CompanyMapping : ClassMap<Company>
     {

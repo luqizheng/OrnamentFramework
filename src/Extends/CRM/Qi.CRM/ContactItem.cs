@@ -1,4 +1,4 @@
-﻿namespace Sand
+﻿namespace Qi.CRM
 {
     public class ContactItem
     {

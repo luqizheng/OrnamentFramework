@@ -1,6 +1,6 @@
 ﻿using Qi.Domain;
 
-namespace Sand.Dao
+namespace Qi.CRM.Dao
 {
     public interface IShopDao:IDao<string,Shop>
     {

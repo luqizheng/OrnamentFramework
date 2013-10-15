@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Qi.Domain;
 
-namespace Sand
+namespace Qi.CRM
 {
     public class Shop : DomainObject<Shop, string>
     {

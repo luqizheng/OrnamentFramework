@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sand.Dao
+namespace Qi.CRM.Dao
 {
     public interface ISandDaoFactory
     {

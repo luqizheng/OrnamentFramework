@@ -1,7 +1,7 @@
 ﻿using System;
 using Qi.Domain;
 
-namespace Sand
+namespace Qi.CRM
 {
     public class Client : DomainObject<Client, string>
     {
