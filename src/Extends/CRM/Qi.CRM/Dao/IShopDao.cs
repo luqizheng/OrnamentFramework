@@ -2,8 +2,8 @@
 
 namespace Qi.CRM.Dao
 {
-    public interface IShopDao:IDao<string,Shop>
+    public interface IShopDao : IDao<string, Shop>
     {
-        
+
     }
 }

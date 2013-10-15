@@ -14,6 +14,7 @@ namespace Qi.CRM
         /// </summary>
         /// <param name="model"></param>
         /// <param name="code"></param>
+        /// <exception cref="ArgumentNullException">Model or code is null</exception>
         public Client(ClientModel model, string code)
         {
             if (model == null) throw new ArgumentNullException("model");
@@ -21,9 +22,10 @@ namespace Qi.CRM
                 throw new ArgumentNullException("code");
             Model = model;
             Code = code;
+            
         }
         /// <summary>
-        /// 
+        /// Gets or sets the Model of the client.
         /// </summary>
         public virtual ClientModel Model { get; set; }
         /// <summary>
