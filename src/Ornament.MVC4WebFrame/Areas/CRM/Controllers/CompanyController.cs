@@ -25,7 +25,7 @@ namespace Ornament.MVCWebFrame.Areas.CRM.Controllers
             foreach (var data in _crmDaoFactory.CompanyDao().GetAll())
 
                 d.Datas.Add(data);
-            return Json(d);
+            return Json(d,JsonRequestBehavior.AllowGet);
         }
     }
 }
