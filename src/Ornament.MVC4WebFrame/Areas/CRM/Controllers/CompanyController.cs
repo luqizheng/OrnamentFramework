@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
-using Ornament.Web.Plugins.Datables;
+using Ornament.Web.Plugins.DataTables;
+using Qi.CRM;
 using Qi.CRM.Dao;
 
 namespace Ornament.MVCWebFrame.Areas.CRM.Controllers
@@ -19,13 +20,14 @@ namespace Ornament.MVCWebFrame.Areas.CRM.Controllers
             return View();
         }
 
-        public ActionResult Companies()
+        public ActionResult Companies([ModelBinder(typeof(PostDataModelBinder))]DataTablesPostData postData)
         {
             var d = new DataTableResult();
-            foreach (var data in _crmDaoFactory.CompanyDao().GetAll())
-
-                d.Datas.Add(data);
-            return Json(d,JsonRequestBehavior.AllowGet);
+            foreach (Company data in _crmDaoFactory.CompanyDao().GetAll())
+            {
+                d.aaData.Add(data);
+            }
+            return Json(d, JsonRequestBehavior.AllowGet);
         }
     }
 }

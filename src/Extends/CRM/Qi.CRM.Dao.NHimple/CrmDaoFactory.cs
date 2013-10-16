@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Qi.CRM.Dao.NhImple
 {
-    public class CrmDaoFactory:ICrmDaoFactory
+    public class CrmDaoFactory : ICrmDaoFactory
     {
         public IClientDao ClientDao()
         {
@@ -30,7 +30,7 @@ namespace Qi.CRM.Dao.NhImple
 
         public ICompanyDao CompanyDao()
         {
-            throw new NotImplementedException();
+            return new CompanyDao();
         }
     }
 }

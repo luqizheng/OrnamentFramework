@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyDao.cs" />
     <Compile Include="CrmDaoFactory.cs" />
     <Compile Include="Mapping\ClientMapping.cs" />
     <Compile Include="Mapping\ClientModelMapping.cs" />

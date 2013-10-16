@@ -185,7 +185,10 @@
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="OrnamentWebApiFactory.cs" />
     <Compile Include="Pagination.cs" />
-    <Compile Include="Plugins\Datables\DataTableResult.cs" />
+    <Compile Include="Plugins\DataTables\Column.cs" />
+    <Compile Include="Plugins\DataTables\DataTableResult.cs" />
+    <Compile Include="Plugins\DataTables\DataTablesPostData.cs" />
+    <Compile Include="Plugins\DataTables\PostDataModelBinder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

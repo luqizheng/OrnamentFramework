@@ -178,7 +178,7 @@ else{
 
 @section Scripts {
     <script type="text/javascript">
-		seajs.use(["<#=myPath.ToLower()#>"],function(init){
+		seajs.use(["@ScriptsSeajs.RenderUrl("<#=myPath.ToLower()#>")"],function(init){
 			inti();
 		});
 	</script>
