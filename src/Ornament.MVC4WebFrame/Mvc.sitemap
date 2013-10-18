@@ -78,7 +78,7 @@
       <mvcSiteMapNode controller="TypeLayout" area="Docs" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="场馆管理" imageUrl="icon-indent-right">
+    <!--<mvcSiteMapNode title="场馆管理" imageUrl="icon-indent-right">
       <mvcSiteMapNode controller="Gymnasium" area="Badminton" action="Index" title ="场馆管理" >
 
       </mvcSiteMapNode>
@@ -95,7 +95,7 @@
       <mvcSiteMapNode controller="MeasurementUnit" area="Badminton" action="Index" title="计量单位"></mvcSiteMapNode>
 
       <mvcSiteMapNode controller="Company" area="CRM" action="Index" title="公司"></mvcSiteMapNode>
-    </mvcSiteMapNode>
+    </mvcSiteMapNode>-->
 
 
 

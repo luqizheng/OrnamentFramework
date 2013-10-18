@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
@@ -23,6 +24,16 @@ namespace Ornament.Web
             OrnamentContext.IocContainer
                            .Register(
                                Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
+        }
+
+        /// <summary>
+        ///     gets the TemplateName of setting.
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public static string TemplateName(this OrnamentConfiguration config)
+        {
+            return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
         }
 
         public static string CurrentVerifyCode(this MemberShipContext context)
@@ -124,7 +135,10 @@ namespace Ornament.Web
 
             OrnamentModule.SiwtchTo(language);
         }
-
+        public static string BackendLayout(this OrnamentConfiguration config)
+        {
+            return "~/Views/Shared/Backend/" + TemplateName(config) + "/_applayout.cshtml";
+        }
         /// <summary>
         /// </summary>
         /// <param name="context"></param>

@@ -11,6 +11,8 @@
         "flot.pie": "/bundles/flot.pie.js",
         "flot.resize": "/bundles/flot.resize.js",
         "autosize": "/bundles/autosize.js",
+        "nicescroll": "/bundles/nicescroll.js",//metrolab
+        "slimscroll":"/bundles/slimscroll.js",//metroLab
         "form": "/bundles/form.js",
         "form.wizard": "/bundles/form.wizard.js",
         "listbox": "/bundles/listbox.js",

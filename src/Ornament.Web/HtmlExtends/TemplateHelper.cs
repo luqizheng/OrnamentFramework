@@ -69,7 +69,7 @@ namespace Ornament.Web.HtmlExtends
         /// <returns></returns>
         private static string PartialViewPath(string viewType)
         {
-            string _template = ConfigurationManager.AppSettings["UiTemplate"] ?? "pannonia";
+            string _template = OrnamentContext.Configuration.TemplateName();
             return string.Format("/Views/Shared/DisplayTemplates/{0}/{1}", _template, viewType + ".cshtml");
         }
     }

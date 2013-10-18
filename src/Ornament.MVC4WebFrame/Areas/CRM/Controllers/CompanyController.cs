@@ -25,8 +25,22 @@ namespace Ornament.MVCWebFrame.Areas.CRM.Controllers
             var d = new DataTableResult();
             foreach (Company data in _crmDaoFactory.CompanyDao().GetAll())
             {
-                d.aaData.Add(data);
+                d.aaData.Add(new
+                    {
+                        Name = data.Name,
+                        Id = data.Id
+                    });
             }
+            for (int i = 0; i < 10; i++)
+            {
+                d.aaData.Add(new
+                    {
+                        Name = "ata.Name",
+                        Id = i
+                    });
+            }
+            d.iTotalDisplayRecords = 10;
+            d.iTotalDisplayRecords = 1000;
             return Json(d, JsonRequestBehavior.AllowGet);
         }
     }

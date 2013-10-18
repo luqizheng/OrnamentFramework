@@ -1,9 +1,11 @@
-﻿@using Ornament.MemberShip
+﻿@using Ornament
+@using Ornament.MemberShip
+@using Ornament.Web
 @using Resources
 @model Ornament.Models.Memberships.OrgModel
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     Org parent = Model.Parent;
 }
 @section pageTitle

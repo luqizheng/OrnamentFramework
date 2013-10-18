@@ -9,7 +9,7 @@
 @model Ornament.MemberShip.User
 @{
     ViewBag.Title = Basic.Index;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     IList<Permission> permissions =
                OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().GetPermissionByLoginId
                   (OrnamentContext.MemberShip.CurrentUser().LoginId);

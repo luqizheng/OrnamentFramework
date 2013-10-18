@@ -1,9 +1,10 @@
-﻿@using Ornament.MemberShip.Permissions
+﻿@using Ornament
+@using Ornament.MemberShip.Permissions
 @using Ornament.Web;
 @model IEnumerable<Ornament.MemberShip.Permissions.Permission>
 @{
     ViewBag.Title = "Permissions";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section scripts{
     <script type="text/javascript">

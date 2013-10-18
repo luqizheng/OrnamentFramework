@@ -1,9 +1,11 @@
-﻿@using Resources
+﻿@using Ornament
+@using Ornament.Web
+@using Resources
 @model Ornament.Models.Memberships.OrgModel
 
 @{
     ViewBag.Title = "title";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 @section pageTitle

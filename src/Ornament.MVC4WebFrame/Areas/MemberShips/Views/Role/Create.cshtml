@@ -1,10 +1,11 @@
-﻿@using Resources
+﻿@using Ornament
+@using Ornament.Web
+@using Resources
 @model Ornament.MemberShip.Role
 @{
     string subject = Basic.Create + MemberShip.Role;
     ViewBag.Title = subject;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
-}
+     Layout = OrnamentContext.Configuration.BackendLayout();
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">

@@ -8,7 +8,7 @@
 @model Ornament.MemberShip.User
 @{
     ViewBag.Title = MemberShip.AssignRoles + ":" + Model.Name;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     IList<UserGroup> allUserGroups = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao().GetAll();
     IList<Role> allRoles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
 

@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Ornament
+@using Ornament.Web
+@{
     ViewBag.Title = "Admin";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 <h2>Admin</h2>

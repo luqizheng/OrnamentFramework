@@ -20,7 +20,7 @@
 @using Qi.Web
 @using System.Collections
 @using System.Linq
-
+@using Ornament.Web
 @using System.Collections
 <#
 	MvcTextTemplateHost mvcHost = MvcTemplateHost;

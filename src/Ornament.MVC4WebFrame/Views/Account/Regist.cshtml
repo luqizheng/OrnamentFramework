@@ -1,8 +1,9 @@
-﻿@using Ornament.Web
+﻿@using Ornament
+@using Ornament.Web
 @model Ornament.Models.Memberships.RegistAccount
 @{
     ViewBag.Title = Html.GetResourceString("title");
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 <fieldset class="cssform">
     <legend>@Html.GetResourceString("title")</legend>

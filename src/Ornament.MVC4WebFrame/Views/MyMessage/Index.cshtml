@@ -4,7 +4,7 @@
 @using Ornament.Web
 @{
     ViewBag.Title = "Message Index";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     var personalMessages = (IList<PersonalMessage>)ViewData["PM"];
     var notifyMessage = (IList<SimpleMessage>)ViewData["SimpleMessage"];
 }

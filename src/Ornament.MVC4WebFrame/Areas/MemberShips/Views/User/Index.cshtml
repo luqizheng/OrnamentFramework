@@ -10,7 +10,7 @@
 @model IEnumerable<Ornament.MemberShip.User>
 @{
     ViewBag.Title = MemberShip.User;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
     var status = ViewData["UserStatus"] as UsersStatusModel;
 }

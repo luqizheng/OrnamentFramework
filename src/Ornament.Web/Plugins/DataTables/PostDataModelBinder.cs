@@ -29,7 +29,9 @@ namespace Ornament.Web.Plugins.DataTables
                     };
                 if (column.Sortable && strSorTag != null)
                 {
-                    column.SortTag = strSorTag != "false" ? (SortTag)Enum.Parse(typeof(SortTag), strSorTag, true) : SortTag.asc;
+                    column.SortTag = strSorTag != "false"
+                                         ? (SortTag) Enum.Parse(typeof (SortTag), strSorTag, true)
+                                         : SortTag.asc;
                 }
 
                 result.Columns.Add(column);

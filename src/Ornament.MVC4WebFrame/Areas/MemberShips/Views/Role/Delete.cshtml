@@ -1,11 +1,12 @@
-﻿@using Ornament.MemberShip
+﻿@using Ornament
+@using Ornament.MemberShip
 @using Ornament.Web
 @using Resources
 @model Ornament.MemberShip.Role
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
-    var members = (IList<IMember>)ViewData["members"];
+    Layout = OrnamentContext.Configuration.BackendLayout();
+    var members = (IList<IPerformer>)ViewData["members"];
     int index = 0;
 }
 @section scripts
@@ -46,11 +47,11 @@
 
             <div class="well body">
                 <ul>
-                    @foreach (IMember member in members)
+                    @foreach (IPerformer member in members)
                     {
                         if (member is User)
                         {
-                        <li title="@member.Remark">@member.Name</li>
+                        <li title="@member.Remarks">@member.Name</li>
                             index++;
                         }
                         else
@@ -73,12 +74,12 @@
                 <ul>
                     @for (int i = index; i < members.Count; i++)
                     {
-                        IMember member = members[i];
+                        IPerformer member = members[i];
                         if (member is User)
                         {
                             continue;
                         }
-                        <li title="@member.Remark">@member.Name</li>
+                        <li title="@member.Remarks">@member.Name</li>
                     }
                 </ul>
             </div>

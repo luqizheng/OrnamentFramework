@@ -3,11 +3,12 @@
 @using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
 @using Ornament.Web
+@using Ornament.Web.HtmlExtends
 @using Resources
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = "Organization";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     string parentId = Model != null ? Model.Id : "";
     var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Modify);
@@ -29,13 +30,13 @@
 }
 
 <div class="widget">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a  class="btn btn-primary" href="@Url.Action("Create", new { parentId = parentId })"><i class="icon-white icon-plus"></i>
-                @Basic.Create
-            </a>
-        </div>
-    </div>
+    @Html.BoxHeader(
+    @<text>
+    <a  class="btn btn-primary" href="@Url.Action("Create", new { parentId = parentId })"><i class="icon-white icon-plus"></i>
+        @Basic.Create
+    </a>
+    </text>)
+
     <div class="body well">
         @if (childOrgs.Count() != 0)
         {

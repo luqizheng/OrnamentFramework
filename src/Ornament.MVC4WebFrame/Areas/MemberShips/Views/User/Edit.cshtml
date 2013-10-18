@@ -1,11 +1,12 @@
 ﻿@using System.Configuration
 @using System.Web.Profile
+@using Ornament
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
 @model Ornament.Models.Memberships.EditUserModel
 @{
     ViewBag.Title = Resources.Basic.Edit + this.Model.LoginId;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle{
     <h5>

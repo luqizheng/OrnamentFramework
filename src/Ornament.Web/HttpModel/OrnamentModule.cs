@@ -28,6 +28,7 @@ namespace Ornament.Web.HttpModel
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("_multiCookie", language));
             }
         }
+
         public static void SetClientOffsetHour(int hour)
         {
             if (HttpContext.Current != null)
@@ -39,9 +40,9 @@ namespace Ornament.Web.HttpModel
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication)sender;
+            var context = (HttpApplication) sender;
             MultiLanguage(context);
-            var utc = context.Request.QueryString["utc"];
+            string utc = context.Request.QueryString["utc"];
             if (!String.IsNullOrEmpty(utc))
             {
                 try
@@ -51,7 +52,7 @@ namespace Ornament.Web.HttpModel
                 }
                 catch (Exception ex)
                 {
-                    LogManager.GetLogger(this.GetType()).Error("Setting offset minis error.", ex);
+                    LogManager.GetLogger(GetType()).Error("Setting offset minis error.", ex);
                 }
             }
         }

@@ -8,7 +8,7 @@
 @model IEnumerable<Ornament.MemberShip.Role>
 @{
     ViewBag.Title = Resources.MemberShip.Role;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     var hasDelete = OrnamentContext.MemberShip.HasRight(ResourceSetting.Role, RoleOperator.Delete);
     var hasModify = true; OrnamentContext.MemberShip.HasRight(ResourceSetting.Role, RoleOperator.Modify);
 }

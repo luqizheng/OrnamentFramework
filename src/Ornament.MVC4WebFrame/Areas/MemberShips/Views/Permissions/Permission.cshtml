@@ -4,7 +4,7 @@
 @model Ornament.MemberShip.Permissions.Permission
 @{
     ViewBag.Title = "Permission";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     object jsonObject = null;
     if (this.Model != null)
     {

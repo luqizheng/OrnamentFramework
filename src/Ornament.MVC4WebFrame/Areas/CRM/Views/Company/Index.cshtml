@@ -17,13 +17,12 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+            <a id="add" class="btn btn-primary" href="###"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
         </div>
     </div>
     <div class="body well">
         <div class="table-overflow">
-
-            <table id="table" class="table">
+            <table id="table" class="table ">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -39,13 +38,6 @@
     <button class="btn btn-danger deleteYes">@Basic.Delete</button>
     <button class="btn deleteNo">@Basic.Cancel</button>
 </div>
-@* 
- 如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
- seajs.use必须是全小写
- please create a js in Scripts\Modules\Views\CRM\Company\Index.js
- 
-*@
-
 
 @section Scripts {
     <script type="text/javascript">

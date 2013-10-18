@@ -1,10 +1,12 @@
-﻿@using Ornament.Web.HtmlExtends
+﻿@using Ornament
+@using Ornament.Web
+@using Ornament.Web.HtmlExtends
 @using Resources
 @model Ornament.MemberShip.Role
 @{
     string subject = Basic.Edit + Resources.MemberShip.Role + Model.Name;
     ViewBag.Title = subject;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 @section pageTitle

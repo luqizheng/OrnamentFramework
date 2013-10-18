@@ -13,6 +13,7 @@
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="Microsoft.VisualStudio.Web.Mvc.Scaffolding.BuiltIn" #>
 @using Resources
+@using Ornament.Web
 <#
 MvcTextTemplateHost mvcHost = MvcTemplateHost;
 #>
@@ -31,7 +32,8 @@ if(mvcHost.IsPartialView) {
 <#
 if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 #>
-    Layout = "<#= mvcHost.MasterPageFile#>";
+    //Layout = "<#= mvcHost.MasterPageFile#>"; //for theme switch. 
+	Layout = OrnamentContext.Configuration.BackendLayout();
 <#
 }
 #>

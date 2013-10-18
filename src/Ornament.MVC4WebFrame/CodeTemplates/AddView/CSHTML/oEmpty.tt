@@ -6,6 +6,7 @@ MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
 if(!String.IsNullOrEmpty(mvcHost.ViewDataTypeName)) {
 #>
 @model <#= mvcHost.ViewDataTypeName #>
+@using Ornament.Web
 <#
   IServiceProvider serviceProvider = (IServiceProvider)this.Host;
   EnvDTE.DTE dte = (EnvDTE.DTE) serviceProvider.GetService(typeof(EnvDTE.DTE));
