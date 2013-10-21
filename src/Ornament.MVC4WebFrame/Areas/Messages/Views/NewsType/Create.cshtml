@@ -1,9 +1,11 @@
 ﻿@model Ornament.Models.Messages.NewsTypeModel
+@using Ornament
+@using Ornament.Web
 @using Ornament.Web.HtmlExtends
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 @section pageTitle

@@ -6,7 +6,7 @@
 
 @{
     ViewBag.Title = Html.GetResourceString("title");
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     string contents = "{}";
 
 

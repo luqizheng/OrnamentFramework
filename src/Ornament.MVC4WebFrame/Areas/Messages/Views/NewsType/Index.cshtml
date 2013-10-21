@@ -1,10 +1,12 @@
-﻿@using Ornament.Messages
+﻿@using Ornament
+@using Ornament.Messages
+@using Ornament.Web
 @using Resources
 @model IEnumerable<Ornament.Messages.Newses.NewsType>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 

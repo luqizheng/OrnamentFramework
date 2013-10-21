@@ -3,6 +3,7 @@
 define(function (require) {
 
     var $ = require('jquery');
+    var jQuery = $;
     require("jqueryui")($);
     require("bootstrap")($);
     require("nicescroll")($);
@@ -25,7 +26,7 @@ define(function (require) {
             sub.slideDown(200);
         }
         var o = ($(this).offset());
-        diff = 200 - o.top;
+        var diff = 200 - o.top;
         if (diff > 0)
             $(".sidebar-scroll").scrollTo("-=" + Math.abs(diff), 500);
         else
@@ -112,8 +113,8 @@ define(function (require) {
     });
 
     var setColor = function (color) {
-        $('#style_color').attr("href", "css/style-" + color + ".css");
-    }
+        $('#style_color').attr("href", "/Content/Templates/metralab/css/style-" + color + ".css");
+    };
 
     // widget tools
 

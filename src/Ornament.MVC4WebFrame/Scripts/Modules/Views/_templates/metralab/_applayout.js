@@ -1,8 +1,9 @@
 ﻿/* layout 暂时无法做 template 切换，只能替换 _templayte/下面的文件*/
 
 define(function (require) {
-
+    
     var $ = require('jquery');
+    var jQuery = $;
     require("jqueryui")($);
     require("bootstrap")($);
     require("nicescroll")($);
@@ -25,7 +26,7 @@ define(function (require) {
             sub.slideDown(200);
         }
         var o = ($(this).offset());
-        diff = 200 - o.top;
+        var diff = 200 - o.top;
         if (diff > 0)
             $(".sidebar-scroll").scrollTo("-=" + Math.abs(diff), 500);
         else
@@ -111,9 +112,9 @@ define(function (require) {
         setLayout();
     });
 
-    var setColor = function (color) {
-        $('#style_color').attr("href", "css/style-" + color + ".css");
-    }
+    var setColor = function(color) {
+        $('#style_color').attr("href", "/Content/Templates/metralab/css/style-" + color + ".css");
+    };
 
     // widget tools
 

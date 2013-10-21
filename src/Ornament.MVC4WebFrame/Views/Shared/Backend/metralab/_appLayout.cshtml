@@ -256,36 +256,7 @@
                 </div>
                 <!-- END  NOTIFICATION -->
                 <div class="top-nav ">
-                    <ul class="nav pull-right top-menu">
-                        <!-- BEGIN SUPPORT -->
-                        <li class="dropdown mtop5">
-
-                            <a data-original-title="Chat" href="#" data-toggle="tooltip" data-placement="bottom" class="dropdown-toggle element">
-                                <i class="icon-comments-alt"></i>
-                            </a>
-                        </li>
-                        <li class="dropdown mtop5">
-                            <a data-original-title="Help" href="#" data-toggle="tooltip" data-placement="bottom" class="dropdown-toggle element">
-                                <i class="icon-headphones"></i>
-                            </a>
-                        </li>
-                        <!-- END SUPPORT -->
-                        <!-- BEGIN USER LOGIN DROPDOWN -->
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <img alt="" src="img/avatar1_small.jpg">
-                                <span class="username">Jhon Doe</span>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu extended logout">
-                                <li><a href="#"><i class="icon-user"></i>My Profile</a></li>
-                                <li><a href="#"><i class="icon-cog"></i>My Settings</a></li>
-                                <li><a href="login.html"><i class="icon-key"></i>Log Out</a></li>
-                            </ul>
-                        </li>
-                        <!-- END USER LOGIN DROPDOWN -->
-                    </ul>
-                    <!-- END TOP NAVIGATION MENU -->
+                    @Html.Partial("Backend/metralab/_topMenu")
                 </div>
             </div>
         </div>
@@ -318,10 +289,13 @@
                         </div>
                         <!-- END THEME CUSTOMIZER-->
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                        @RenderSection("pageTitle", false)
+                        <div class="page-title">
+                            @RenderSection("pageTitle", false)
+                        </div>
                         @*<h3 class="page-title">Calendar
                         </h3>*@
-                        <ul class="breadcrumb">
+                        @Html.Partial("~/Views/Shared/Backend/metralab/_crumbs.cshtml")
+                        @*<ul class="breadcrumb">
                             <li>
                                 <a href="#">Home</a>
                                 <span class="divider">/</span>
@@ -340,7 +314,7 @@
                                     </div>
                                 </form>
                             </li>
-                        </ul>
+                        </ul>*@
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>
                 </div>

@@ -1,9 +1,10 @@
 ﻿@using System.Configuration
 @using System.Text
 @using Ornament
+@using Ornament.Web
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 @section pageTitle{

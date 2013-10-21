@@ -1,10 +1,11 @@
-﻿@using Ornament.Web
+﻿@using Ornament
+@using Ornament.Web
 @using Resources
 @model System.Collections.Generic.IEnumerable<Ornament.Messages.Notification.NotifyMessageTemplate>
 
 @{
     ViewBag.Title = "title";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle{
     <h2>Template for Simple Message</h2>

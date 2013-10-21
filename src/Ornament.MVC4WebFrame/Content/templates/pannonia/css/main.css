@@ -9560,3 +9560,13 @@ input, textarea, .uneditable-input
         display: none;
     }
 }
+/* addtion multi-language ddl contrl on the topMenu.cshtml.*/
+ .mlang a {
+        height: 16px;
+        padding: 12px 14px;
+        width: 18px;
+    }
+
+    .mlang #uld:after {
+        left: 20%;
+    }

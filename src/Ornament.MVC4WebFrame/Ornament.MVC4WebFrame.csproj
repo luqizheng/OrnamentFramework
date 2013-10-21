@@ -583,7 +583,7 @@
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
     <Content Include="Scripts\Modules\Combine\Share\time.js" />
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
-    <Content Include="Scripts\Modules\Views\_applayout.js" />
+    <Content Include="Scripts\Modules\Views\111_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\metralab\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\pannonia\_applayout.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
@@ -1068,8 +1068,10 @@
     <Content Include="Views\Shared\Backend\_crumbs.cshtml" />
     <Content Include="Views\Shared\Backend\_mainMenu.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_topMenu.cshtml" />
-    <Content Include="Views\Shared\Backend\metroLab\_appLayout.cshtml" />
-    <Content Include="Views\Shared\Backend\metroLab\_mainMenu.cshtml" />
+    <Content Include="Views\Shared\Backend\metralab\_appLayout.cshtml" />
+    <Content Include="Views\Shared\Backend\metralab\_mainMenu.cshtml" />
+    <Content Include="Views\Shared\Backend\metralab\_crumbs.cshtml" />
+    <Content Include="Views\Shared\Backend\metralab\_topMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

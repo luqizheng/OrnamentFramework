@@ -1,6 +1,7 @@
 ﻿using System.Security.Policy;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Ornament.Web;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
@@ -25,6 +26,7 @@ namespace Ornament.MVCWebFrame.App_Start
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+ 
         }
     }
 }

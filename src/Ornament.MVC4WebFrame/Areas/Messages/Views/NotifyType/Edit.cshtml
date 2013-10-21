@@ -1,11 +1,12 @@
 ﻿@using Ornament
+@using Ornament.Web
 @using Qi.Web
 @using Resources
 @model Ornament.Models.Messages.NotifyTypeModel
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
   
 
 }
