@@ -583,7 +583,7 @@
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
     <Content Include="Scripts\Modules\Combine\Share\time.js" />
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
-    <Content Include="Scripts\Modules\Views\111_applayout.js" />
+    <Content Include="Scripts\Modules\Views\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\metralab\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\pannonia\_applayout.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
@@ -1349,7 +1349,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>14501</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
@@ -1368,9 +1368,9 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
-  <Target Name="AfterBuild">
+  <!--Target Name="AfterBuild">
     <Exec Command="$(ProjectDir)..\..\tools\dotless.Compiler.exe -d $(ProjectDir)\content\less\global.less $(ProjectDir)\content\combine\global.css" />
-  </Target>
+  </Target-->
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />

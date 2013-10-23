@@ -7,6 +7,7 @@
 @using Ornament.Web
 @using Ornament.Web.Bundles
 @using Resources
+@using Ornament.Web.HtmlExtends;
 @model IEnumerable<Ornament.MemberShip.User>
 @{
     ViewBag.Title = MemberShip.User;
@@ -20,17 +21,19 @@
     @Html.Partial("_pm")
 
     <script type="text/javascript">
-        
-        seajs.use("@ScriptsSeajs.RenderUrl("~/memberships/user/index.js")", function (main) {
+
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Memberships/user/index.js")", function (main) {
             main.init({
                 success: "@Html.GetResourceString("verify_email_success")",
                 fail: "@Html.GetResourceString("verify_email_fail")"
             }, {
                 success: "@Html.GetResourceString("retrieve_pwd_success")",
-                    fail: "@Html.GetResourceString("retrieve_pwd_fail")"
-                }, {
-                    Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
-                    Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
+                fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+            }, {
+                Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
+                Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
+            }, {
+                url: "@Url.Action("Users", "User", new { area = "MemberShips" })"
                 });
         });
     </script>
@@ -41,7 +44,6 @@
 }
 <div class="actions-wrapper">
     <div class="actions">
-
         <div id="user-stats">
             <ul class="round-buttons">
                 @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Modify))
@@ -50,22 +52,6 @@
                         <div class="depth"><a href="@Url.Action("Create", "User", new { area = "MemberShips" })" title="@Html.GetResourceString("quickAction_CreateUser")" class="tip"><i class="icon-plus"></i></a></div>
                     </li>
                 }
-@*<li>
-                    <div class="depth"><a href="" title="View statement" class="tip"><i class="icon-search"></i></a></div>
-                </li>
-                <li>
-                    <div class="depth"><a href="" title="Media posts" class="tip"><i class="icon-reorder"></i></a></div>
-                </li>
-                <li>
-                    <div class="depth"><a href="" title="RSS feed" class="tip"><i class="icon-rss"></i></a></div>
-                </li>
-                <li>
-                    <div class="depth"><a href="" title="Create new task" class="tip"><i class="icon-tasks"></i></a></div>
-                </li>
-                <li>
-                    <div class="depth"><a href="" title="Layout settings" class="tip"><i class="icon-cogs"></i></a></div>
-                </li>*@
-
             </ul>
         </div>
         <div id="quick-actions">
@@ -147,111 +133,36 @@
     </li>
 </ul>
 
-<form method="POST" id="tableForm">
-    <table class="table table-condensed table-striped table-bordered table-checks">
-        <thead>
-            <tr>
-                <th></th>
-                <th class="span1"></th>
-                <th class="span1">
-                    @Html.DisplayNameFor(model => model.LoginId)
-                </th>
+@using (Html.Box())
+{
+    <form method="POST" id="tableForm">
+        <table class="table table-condensed table-striped table-bordered table-checks" id="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="span1"></th>
+                    <th class="span1">
+                        @Html.DisplayNameFor(model => model.LoginId)
+                    </th>
 
-                <th style="width: 100px">
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Contact.Email)
-                </th>
-                <th>
-                    @Html.LabelFor(item => ((User)null).IsLockout)
-                </th>
-                <th>
-                    @Html.LabelFor(item => ((User)null).IsApproved)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Other.LastActivityDate)
-                </th>
-            </tr>
-        </thead>
-        <tbody id="userListBody">
-
-            @foreach (User user in Model)
-            {
-                string clz = "";
-                if (user.IsApproved == false)
-                {
-                    clz = "class=info";
-                }
-                if (user.IsLockout)
-                {
-                    clz = "class=Warning";
-                }
-                <tr @clz>
-                    <td>
-                        <input type="checkbox" name="loginIds" value="@user.LoginId" class="actionCheckbox"/>
-                    </td>
-                    @if (editPermission)
-                    {
-                        <td>
-                            <ul class="table-controls" val="@user.Id">
-                                <li><a href="@Url.Action("Edit", new { loginId = user.LoginId })" class="btn tip" title="@Basic.Edit">
-                                    <i class="fam-user-edit"></i></a></li>
-                                <li>
-                                    <a  href="@Url.Action("Assign", new { loginId = user.LoginId })" class="btn tip" title="@Html.GetResourceString("Assignment")">
-                                        <i class="fam-group-gear"></i></a>
-                                </li>
-                                @if (OrnamentContext.MemberShip.CurrentUser().Id != user.Id)
-                                {
-                                    <li>
-                                        <a href="#@user.Id" class="btn tip" title="@Html.GetResourceString("PersonalMessage")" role="pm">
-                                            <i class="fam-email-edit"></i>
-                                        </a>
-                                    </li>
-                                }
-                                <li>
-                                    <a href="#@user.Contact.Email" class="btn tip" title="Verify Email" role="verifyEmail">
-                                        <i class="fam-email-go"></i>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#@user.Contact.Email" class="btn tip" title="Retrieve Password" role="retievePwd">
-                                        <i class="fam-key-go"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </td>
-                    }
-                    <td>
-                        @user.LoginId
-                    </td>
-                    <td>
-                        @user.Name
-                    </td>
-                    <td>
-                        @user.Contact.Email
-                    </td>
-                    <td style="text-align: center">
-                        <div class="@(user.IsLockout ? "icon-ok" : "icon-remove")">
-                        </div>
-                    </td>
-                    <td style="text-align: center">
-                        <div class="@(user.IsApproved ? "icon-ok" : "icon-remove")">
-                        </div>
-                    </td>
-                    <td>
-                        @user.Other.LastActivityDate
-                    </td>
+                    <th style="width: 100px">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contact.Email)
+                    </th>
+                    <th>
+                        @Html.LabelFor(item => ((User)null).IsLockout)
+                    </th>
+                    <th>
+                        @Html.LabelFor(item => ((User)null).IsApproved)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                    </th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="8">
-                    @Html.Partial("NavPagination", ViewData["Nav"])
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</form>
+            </thead>
+           
+        </table>
+    </form>
+}

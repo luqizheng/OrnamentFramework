@@ -14,6 +14,7 @@ using Ornament.MemberShip.Permissions;
 using Ornament.Models.Memberships;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.Plugins.DataTables;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
@@ -31,6 +32,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             _memberShipFactory = memberShipFactory;
             _userDao = _memberShipFactory.CreateUserDao();
         }
+
+        #region for ValidationChecking
 
         [HttpGet]
         public JsonResult NotDuplicate(string loginId, string id)
@@ -50,6 +53,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        #endregion
+
         [ResourceAuthorize(UserOperator.Read, "User")]
         public ActionResult Index()
         {
@@ -61,30 +66,45 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             return View(result);
         }
 
-        [ResourceAuthorize(UserOperator.Read, "User"), HttpPost]
-        public ActionResult Index(Pagination pagination, string search)
-        {
-            if (pagination == null)
-            {
-                pagination = new Pagination();
-            }
-            IList<User> result;
 
+        [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
+        public ActionResult Users([ModelBinder(typeof(PostDataModelBinder))] DataTablesPostData postData)
+        {
+            var result = new DataTableResult();
+            result.iTotalDisplayRecords = postData.DisplayLength;
+
+            string search = postData.SearchContent;
+            int total;
+            IList<User> userResult = new List<User>();
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";
-                int total;
-                result = _userDao.QuickSearch(search, search, search, search, pagination.CurrentPage,
-                                              pagination.PageSize, out total);
-                pagination.TotalRows = total;
+                userResult = _userDao.QuickSearchOffset(search, search, search, search, postData.DisplayStart,
+                                                        postData.DisplayLength, out total);
             }
             else
             {
-                result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
-                pagination.TotalRows = _userDao.Count();
+                userResult = _userDao.FindAllOffset(postData.DisplayStart, postData.DisplayLength, out total);
             }
-            ViewData["Nav"] = pagination;
-            return View(result);
+
+            foreach (User user in userResult)
+            {
+                result.aaData.Add(new
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        LoginId = user.LoginId,
+                        Email = user.Contact.Email,
+                        IsLockout = user.IsLockout,
+                        IsApproved = user.IsApproved,
+                        LastActivityDate = user.Other.LastActivityDate != null ? user.Other.LastActivityDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : "",
+                    });
+            }
+
+
+            result.iTotalRecords = total;
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 

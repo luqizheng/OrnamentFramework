@@ -4,8 +4,10 @@ using Ornament.Web.HttpModel;
 
 namespace Ornament.Web
 {
+    [System.Obsolete]
     public static class TimeZoneHtmlExtender
     {
+        [System.Obsolete]
         public static IHtmlString CorrectTimeZone(this HtmlHelper helper, bool refresh)
         {
             const string ssss =

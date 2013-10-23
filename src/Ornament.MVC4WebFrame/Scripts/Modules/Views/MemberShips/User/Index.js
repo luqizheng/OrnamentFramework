@@ -8,6 +8,7 @@
 
 define(function (require) {
     require("../../_appLayout.js");
+
     var $ = require("jquery"),
         userTypeahead = require("../../../Combine/Views/user.typeahead.js"),
         userApi = require("../../../Combine/Memberships/user.js"),
@@ -19,6 +20,7 @@ define(function (require) {
     var pmDialog;
     require("uniform")($);
     require('select2')($);
+    require("table")($);
 
     //Table List checkbox.
     $(".actionCheckbox").uniform().change(function () {
@@ -40,8 +42,59 @@ define(function (require) {
         }
         $loading.toggle(enable);
     }
+
+    function tableEdit(config) {
+        var oTable = $("#table").dataTable({
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": config.url,
+            "aaSorting": [[0, false], [1, 'asc']],
+            "aoColumns": [
+               {
+                   mData: "Id",
+                   bSortable: false,
+                   fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                       $(nTd).html("<input type='checkbox' value=\""+sData+"\">");
+                   }
+               },
+                {
+                    bSortable :false,
+                    mData: "Id",
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html(createBtn());
+                    }
+                },
+                { "mData": "LoginId" },
+                { "mData": "Email" },
+                { "mData": "IsLockout" },
+                { "mData": "IsApproved" },
+                { "mData": "Name" },
+                { "mData": "LastActivityDate" }
+                
+            ],
+            "bJQueryUI": false,
+            "bAutoWidth": false,
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sSearch": "<span>Filter records:</span> _INPUT_",
+                "sLengthMenu": "<span>Show entries:</span> _MENU_",
+                "oPaginate": { "sFirst": "首页", "sLast": "最后一页", "sNext": ">", "sPrevious": "<" }
+            }
+
+        });
+
+        $("#add").click(function (e) {
+            e.preventDefault();
+            oTable.fnAddData({ Id: 0, Name: "" });
+        });
+    }
+
+    function createBtn() {
+        return '<a href="#@user.Contact.Email" class="btn btn-mini tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i>';
+    }
+
     return {
-        init: function (verifyEmailMessage, retrievePwdMessage, currentUser) {
+        init: function (verifyEmailMessage, retrievePwdMessage, currentUser, tableConfig) {
 
             //Table Verify User.
             $("table a[role=verifyEmail]").click(function () {
@@ -75,6 +128,8 @@ define(function (require) {
             $("table a[role=pm]").click(function () {
                 pmDialog.show($(this).attr("href").substr(1));
             });
+
+            tableEdit(tableConfig);
         }
     };
 

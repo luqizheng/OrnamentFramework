@@ -1,154 +1,73 @@
-﻿/* layout 暂时无法做 template 切换，只能替换 _templayte/下面的文件*/
-
+﻿
+/// <reference path="../../../Views/Shared/_topMenu.cshtml" />
+/// <reference path="../Combine/Share/client.js" />
+/// <reference path="jquery-1.9.1.js" />
+/// <reference path="plugins/ui/jquery.easytabs.min.js" />
+/// <reference path="../Combine/Share/ajaxErrorHandler.js" />
 define(function (require) {
 
-    var $ = require('jquery');
-    var jQuery = $;
-    require("jqueryui")($);
+    var $ = require("jquery");
+    require("easytabs")($);
+    require("collapsible")($);
     require("bootstrap")($);
-    require("nicescroll")($);
-    require('slimscroll')($);
+    require("uniform")($);
+    require('../Combine/Share/ajaxErrorHandler.js')($);
 
-    //    sidebar dropdown menu
-    $('#sidebar').on('click', '.sub-menu > a', function () {
-        var last = jQuery('.sub-menu.open', $('#sidebar'));
-        last.removeClass("open");
-        jQuery('.arrow', last).removeClass("open");
-        jQuery('.sub', last).slideUp(200);
-        var sub = jQuery(this).next();
-        if (sub.is(":visible")) {
-            jQuery('.arrow', jQuery(this)).removeClass("open");
-            jQuery(this).parent().removeClass("open");
-            sub.slideUp(200);
-        } else {
-            jQuery('.arrow', jQuery(this)).addClass("open");
-            jQuery(this).parent().addClass("open");
-            sub.slideDown(200);
-        }
-        var o = ($(this).offset());
-        var diff = 200 - o.top;
-        if (diff > 0)
-            $(".sidebar-scroll").scrollTo("-=" + Math.abs(diff), 500);
-        else
-            $(".sidebar-scroll").scrollTo("+=" + Math.abs(diff), 500);
+
+    $(".styled").uniform({ radioClass: 'choice' });
+
+    $('.tip').tooltip();
+    $('.focustip').tooltip({ 'trigger': 'focus' });
+
+    $('.sidebar-tabs').easytabs({
+        animationSpeed: 150,
+        collapsible: false,
+        tabActiveClass: "active"
     });
 
-    //    sidebar toggle
 
-    $('.icon-reorder').click(function () {
-        if ($('#sidebar > ul').is(":visible") === true) {
-            $('#main-content').css({
-                'margin-left': '0px'
-            });
-            $('#sidebar').css({
-                'margin-left': '-180px'
-            });
-            $('#sidebar > ul').hide();
-            $("#container").addClass("sidebar-closed");
-        } else {
-            $('#main-content').css({
-                'margin-left': '180px'
-            });
-            $('#sidebar > ul').show();
-            $('#sidebar').css({
-                'margin-left': '0'
-            });
-            $("#container").removeClass("sidebar-closed");
-        }
+
+    // ==== Action Wizard ===
+    $('.actions').easytabs({
+        animationSpeed: 300,
+        collapsible: false,
+        tabActiveClass: "current"
     });
 
-    // custom scrollbar
-    $(".sidebar-scroll").niceScroll({ styler: "fb", cursorcolor: "#4A8BC2", cursorwidth: '5', cursorborderradius: '0px', background: '#404040', cursorborder: '' });
+    //===== Collapsible plugin for main nav =====//
+    $('.expand').collapsible({
+        defaultOpen: 'current,third',
+        cookieName: 'navAct',
+        cssOpen: 'subOpened',
+        cssClose: 'subClosed',
+        speed: 200
+    });
+    $('.showmenu').click(function () {
+        $('.actions-wrapper').slideToggle(100);
+    });
+    $('.fullview').click(function () {
+        $("body").toggleClass("clean");
+        $('#sidebar').toggleClass("hide-sidebar mobile-sidebar");
+        $('#content').toggleClass("full-content");
+    });
 
-    $(".portlet-scroll-1").niceScroll({ styler: "fb", cursorcolor: "#4A8BC2", cursorwidth: '5', cursorborderradius: '0px', background: '#404040', cursorborder: '' });
-
-    $(".portlet-scroll-2").niceScroll({ styler: "fb", cursorcolor: "#4A8BC2", cursorwidth: '5', cursorborderradius: '0px', autohidemode: false, cursorborder: '' });
-
-    $(".portlet-scroll-3").niceScroll({ styler: "fb", cursorcolor: "#4A8BC2", cursorwidth: '5', cursorborderradius: '0px', background: '#404040', autohidemode: false, cursorborder: '' });
-
-    $("html").niceScroll({ styler: "fb", cursorcolor: "#4A8BC2", cursorwidth: '8', cursorborderradius: '0px', background: '#404040', cursorborder: '', zindex: '1000' });
+    $("#mainMenu > li.active > ul").attr("style", "");
+    $("#mainMenu > li.active a").click();
 
 
-    // theme switcher
 
-    var scrollHeight = '60px';
-    jQuery('#theme-change').click(function () {
-        if ($(this).attr("opened") && !$(this).attr("opening") && !$(this).attr("closing")) {
-            $(this).removeAttr("opened");
-            $(this).attr("closing", "1");
-
-            $("#theme-change").css("overflow", "hidden").animate({
-                width: '20px',
-                height: '22px',
-                'padding-top': '3px'
-            }, {
-                complete: function () {
-                    $(this).removeAttr("closing");
-                    $("#theme-change .settings").hide();
-                }
-            });
-        } else if (!$(this).attr("closing") && !$(this).attr("opening")) {
-            $(this).attr("opening", "1");
-            $("#theme-change").css("overflow", "visible").animate({
-                width: '226px',
-                height: scrollHeight,
-                'padding-top': '3px'
-            }, {
-                complete: function () {
-                    $(this).removeAttr("opening");
-                    $(this).attr("opened", 1);
-                }
-            });
-            $("#theme-change .settings").show();
+    //提示
+    var clientChecking = require("../Combine/Share/client.js");
+    var api = new clientChecking(30 * 1000, function (d) {
+        if (d.HasMessage) {
+            //#msgAlert 在\Views\Shared\_topMenu.cshtml
+            $("#msgAlert").append('<i class="new-message"></i>');
         }
     });
 
-    jQuery('#theme-change .colors span').click(function () {
-        var color = $(this).attr("data-style");
-        setColor(color);
-    });
-
-    jQuery('#theme-change .layout input').change(function () {
-        setLayout();
-    });
-
-    var setColor = function (color) {
-        $('#style_color').attr("href", "/Content/Templates/metralab/css/style-" + color + ".css");
+    api.start();
+    return {
+        message: api
     };
-
-    // widget tools
-
-    $('.widget .tools .icon-chevron-down').click(function () {
-        var el = jQuery(this).parents(".widget").children(".widget-body");
-        if (jQuery(this).hasClass("icon-chevron-down")) {
-            jQuery(this).removeClass("icon-chevron-down").addClass("icon-chevron-up");
-            el.slideUp(200);
-        } else {
-            jQuery(this).removeClass("icon-chevron-up").addClass("icon-chevron-down");
-            el.slideDown(200);
-        }
-    });
-
-    $('.widget .tools .icon-remove').click(function () {
-        $(this).parents(".widget").parent().remove();
-    });
-
-    //    tool tips
-
-    $('.element').tooltip();
-
-    $('.tooltips').tooltip();
-
-    //    popovers
-
-    $('.popovers').popover();
-
-    // scroller
-
-    $('.scroller').slimscroll({
-        height: 'auto'
-    });
-
-
 
 });

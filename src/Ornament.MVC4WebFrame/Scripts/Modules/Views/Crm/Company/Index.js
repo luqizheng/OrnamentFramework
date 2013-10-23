@@ -38,6 +38,8 @@
             oTable.fnAddData({Id:0,Name:""});
         });
     }
+    
+
 
     return function (config) {
         tableEdit(config);

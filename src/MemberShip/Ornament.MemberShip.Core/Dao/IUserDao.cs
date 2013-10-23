@@ -43,6 +43,19 @@ namespace Ornament.MemberShip.Dao
         /// <param name="loginid"></param>
         /// <param name="email"></param>
         /// <param name="phone"></param>
+        /// <param name="startRecord"></param>
+        /// <param name="recordLength"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        IList<User> QuickSearchOffset(string name, string loginid, string email, string phone, int startRecord, int recordLength, out int total);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="loginid"></param>
+        /// <param name="email"></param>
+        /// <param name="phone"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
@@ -103,7 +116,15 @@ namespace Ornament.MemberShip.Dao
         IList<User> GetUsers(Org org);
 
         IList<User> FindAll(int pageIndex, int pageSize);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <param name="total"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException">length should be larger than 0</exception>
+        IList<User> FindAllOffset(int start, int length,out int total);
         int Count(string loginId, string userIdForExclude);
 
         int CountByEmail(string email, string idForExclude);
