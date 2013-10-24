@@ -86,17 +86,6 @@
     </div>
 </div>
 
-<form action="@Url.Action("Index")" class="search widget"method="POST">
-    <div class="autocomplete-append">
-        <input type="text" id="searchContent" name="search" placeholder="@String.Format(Html.GetResourceString("search_placeHolder"), @Basic.Email, @Basic.Phone)" 
-               class="ui-autocomplete-input" autocomplete="off">
-        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-        <input type="submit" value="@Basic.Search" class="btn btn-info">
-    </div>
-</form>
-
-
-
 <ul class="options-bar">
     <li>
         <form>

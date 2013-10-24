@@ -64,12 +64,12 @@ define(function (require) {
                         $(nTd).html(createBtn());
                     }
                 },
-                { "mData": "LoginId" },
-                { "mData": "Email" },
-                { "mData": "IsLockout" },
-                { "mData": "IsApproved" },
-                { "mData": "Name" },
-                { "mData": "LastActivityDate" }
+                { "mData": "LoginId",bSortable:true },
+                { "mData": "Email", bSortable: true },
+                { "mData": "IsLockout",bSortable:false },
+                { "mData": "IsApproved", bSortable: false },
+                { "mData": "Name", bSortable: true },
+                { "mData": "LastActivityDate", bSortable: true }
                 
             ],
             "bJQueryUI": false,

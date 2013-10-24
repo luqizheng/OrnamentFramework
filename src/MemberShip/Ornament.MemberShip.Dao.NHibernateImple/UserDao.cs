@@ -75,9 +75,15 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                                            .List<User>();
         }
 
+        public IList<User> QuickSearchOffset(string name, string loginid, string email, string phone, int startRecord, int recordLength,
+                                       out int total, params SortTarget[] sortTargets)
+        {
+            
+        }
+
         public IList<User> QuickSearchOffset(string name, string loginid, string email, string phone, int startRecord,
                                              int recordLength,
-                                             out int total)
+                                             out int total, params SortTarget[] sortTargets)
         {
             DetachedCriteria result = QuickSearch(name, loginid, email, phone);
             total = result

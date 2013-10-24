@@ -18,20 +18,23 @@ namespace Ornament.Web.Plugins.DataTables
                     DisplayStart = Convert.ToInt32(requestContext["iDisplayStart"]),
                     SearchContent = requestContext["sSearch"]
                 };
-
+            var sortedColunIndex = Convert.ToInt32(requestContext["iSortCol_0"]);
+            var sortedIndex = 0;
             for (int i = 0; i < iColumn; i++)
             {
-                string strSorTag = requestContext["sSortDir_" + i];
+                string strSorTag = requestContext["sSortDir_" + sortedIndex];
                 var column = new Column
                     {
                         SearchContent = requestContext["sSearch_" + i],
                         Sortable = Convert.ToBoolean(requestContext["bSortable_" + i])
                     };
-                if (column.Sortable && strSorTag != null)
+
+                if (column.Sortable && sortedColunIndex == i)
                 {
                     column.SortTag = strSorTag != "false"
-                                         ? (SortTag) Enum.Parse(typeof (SortTag), strSorTag, true)
+                                         ? (SortTag)Enum.Parse(typeof(SortTag), strSorTag, true)
                                          : SortTag.asc;
+                    
                 }
 
                 result.Columns.Add(column);

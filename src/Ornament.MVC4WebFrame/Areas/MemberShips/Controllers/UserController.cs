@@ -70,12 +70,11 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
         public ActionResult Users([ModelBinder(typeof(PostDataModelBinder))] DataTablesPostData postData)
         {
-            var result = new DataTableResult();
-            result.iTotalDisplayRecords = postData.DisplayLength;
+            var result = new DataTableResult {iTotalDisplayRecords = postData.DisplayLength};
 
             string search = postData.SearchContent;
             int total;
-            IList<User> userResult = new List<User>();
+            IList<User> userResult;
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";

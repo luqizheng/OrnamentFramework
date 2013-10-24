@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using System.Web.UI.WebControls
 @using Ornament
 @using Ornament.Web
 @{
@@ -14,7 +15,7 @@
     @*
     Backend admin templates.
     *@
-    <link href="@Url.Content("~/content/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
+    @System.Web.Optimization.Styles.Render("~/Content/global.css", "~/content/templates/pannonia/css/main.css")
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
 
     <script type="text/javascript" src="/scripts/seajs/sea.js"> </script>
