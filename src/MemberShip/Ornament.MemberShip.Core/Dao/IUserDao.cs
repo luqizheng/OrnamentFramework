@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Qi.Domain;
 
 namespace Ornament.MemberShip.Dao
@@ -13,7 +14,7 @@ namespace Ornament.MemberShip.Dao
     public class SortTarget
     {
         public SortTag Tag { get; set; }
-        public string Name { get; set; }
+        public Expression<Func<object>> Name { get; set; }
     }
     public interface IUserDao : IDao<string, User>
     {

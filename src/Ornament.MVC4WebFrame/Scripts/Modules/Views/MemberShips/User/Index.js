@@ -13,19 +13,15 @@ define(function (require) {
         userTypeahead = require("../../../Combine/Views/user.typeahead.js"),
         userApi = require("../../../Combine/Memberships/user.js"),
         pm = require("/share/pm.js");
-
-
-
-
     var pmDialog;
     require("uniform")($);
     require('select2')($);
     require("table")($);
 
     //Table List checkbox.
-    $(".actionCheckbox").uniform().change(function () {
-        $("#BtnApply").prop("disabled", $(".actionCheckbox:checked").length == 0);
-    }).change();
+    $("#table").on('click', 'input', function () {
+        $("#BtnApply").prop("disabled", $("#table input:checked").length == 0);
+    });
 
     $("#selApplyAction").select2();
 
@@ -34,10 +30,10 @@ define(function (require) {
 
 
     function showLoading(enable) {
-        var parent = $(this).closest("ul"),
+        var parent = $(this).closest("td"),
         $loading = $("[role=loading]", parent);
         if ($loading.length == 0) {
-            $loading = $("<li role='loading'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\"></li>")
+            $loading = $("<a role='loading'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\" ></a>");
             $loading.appendTo(parent);
         }
         $loading.toggle(enable);
@@ -54,30 +50,30 @@ define(function (require) {
                    mData: "Id",
                    bSortable: false,
                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                       $(nTd).html("<input type='checkbox' value=\""+sData+"\">");
+                       $(nTd).html("<input type='checkbox' class='actionCheckbox' value=\"" + sData + "\">");
                    }
                },
                 {
-                    bSortable :false,
+                    bSortable: false,
                     mData: "Id",
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html(createBtn());
+                        $(nTd).html(createBtn(oData));
                     }
                 },
-                { "mData": "LoginId",bSortable:true },
+                { "mData": "LoginId", bSortable: true },
                 { "mData": "Email", bSortable: true },
-                { "mData": "IsLockout",bSortable:false },
+                { "mData": "IsLockout", bSortable: false },
                 { "mData": "IsApproved", bSortable: false },
                 { "mData": "Name", bSortable: true },
                 { "mData": "LastActivityDate", bSortable: true }
-                
+
             ],
             "bJQueryUI": false,
             "bAutoWidth": false,
             "sPaginationType": "full_numbers",
             "oLanguage": {
-                "sSearch": "<span>Filter records:</span> _INPUT_",
-                "sLengthMenu": "<span>Show entries:</span> _MENU_",
+                "sSearch": "<span>查询:</span> _INPUT_",
+                "sLengthMenu": "<span>显示数据:</span> _MENU_",
                 "oPaginate": { "sFirst": "首页", "sLast": "最后一页", "sNext": ">", "sPrevious": "<" }
             }
 
@@ -89,22 +85,30 @@ define(function (require) {
         });
     }
 
-    function createBtn() {
-        return '<a href="#@user.Contact.Email" class="btn btn-mini tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i>';
+    function createBtn(oObj) {
+        var ary = [];
+
+        ary.push('<a href="/MemberShips/User/Edit/' + oObj.LoginId + '" class="btn tip"><i class="fam-user-edit"></i></a>'); //edit User
+        ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>'); //assign role and ug and org
+        ary.push('<a href="#' + oObj.Id + '" class="btn tip" title="" role="pm"><i class="fam-email-edit"></i></a>'); //PM
+        ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="" role="verifyEmail"><i class="fam-email-go"></i></a>'); //VerifyEmail
+        ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i></a>');//Retrew password
+        return ary.join("");
+
     }
 
     return {
-        init: function (verifyEmailMessage, retrievePwdMessage, currentUser, tableConfig) {
+        init: function (lang, currentUser, tableConfig) {
 
             //Table Verify User.
-            $("table a[role=verifyEmail]").click(function () {
+            $("#table").on("click", "a[role=verifyEmail]", function () {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
                 var self = this;
                 showLoading.call(self, true);
                 userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
                     alert(e.success ?
-                        verifyEmailMessage.success :
-                        verifyEmailMessage.fail);
+                        lang.verifyEmailMessage.success :
+                        lang.verifyEmailMessage.fail);
 
                 }, function () {
                     showLoading.call(self, false);
@@ -112,20 +116,20 @@ define(function (require) {
                 return false;
             });
 
-            $("table [role=retievePwd]").click(function () {
+            $("#table").on('click', "[role=retievePwd]", function () {
                 var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
                 showLoading.call(this, true);
                 userApi.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
-                        retrievePwdMessage.success :
-                        retrievePwdMessage.fail);
+                        lang.retrievePwdMessage.success :
+                        lang.retrievePwdMessage.fail);
                 }, function () {
                     showLoading.call(self, false);
                 });
             });
 
             pmDialog = new pm($("#pmEditor"), currentUser);
-            $("table a[role=pm]").click(function () {
+            $("#table").on("click", "a[role=pm]", function () {
                 pmDialog.show($(this).attr("href").substr(1));
             });
 

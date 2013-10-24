@@ -69,16 +69,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             total = QuickSearch(name, loginid, email, phone).SetProjection(Projections.RowCount())
                                                             .GetExecutableCriteria(CurrentSession)
                                                             .UniqueResult<int>();
-            return QuickSearch(name, loginid, email, phone).SetFirstResult(pageIndex*pageSize)
+            return QuickSearch(name, loginid, email, phone).SetFirstResult(pageIndex * pageSize)
                                                            .SetMaxResults(pageSize)
                                                            .GetExecutableCriteria(CurrentSession)
                                                            .List<User>();
-        }
-
-        public IList<User> QuickSearchOffset(string name, string loginid, string email, string phone, int startRecord, int recordLength,
-                                       out int total, params SortTarget[] sortTargets)
-        {
-            
         }
 
         public IList<User> QuickSearchOffset(string name, string loginid, string email, string phone, int startRecord,
@@ -86,9 +80,18 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                              out int total, params SortTarget[] sortTargets)
         {
             DetachedCriteria result = QuickSearch(name, loginid, email, phone);
+
             total = result
                 .SetProjection(Projections.RowCount())
                 .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+            result = QuickSearch(name, loginid, email, phone);
+            if (sortTargets != null)
+            {
+                foreach (var a in sortTargets)
+                {
+                    result.AddOrder(Order.Asc(Projections.Property(a.Name)));
+                }
+            }
             return
                 result.SetFirstResult(startRecord)
                       .SetMaxResults(recordLength)
@@ -102,7 +105,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             DetachedCriteria result = QuickSearch(name, loginid, email, phone);
 
             return
-                result.SetFirstResult(pageIndex*pageSize)
+                result.SetFirstResult(pageIndex * pageSize)
                       .SetMaxResults(pageSize)
                       .GetExecutableCriteria(CurrentSession)
                       .List<User>();
@@ -210,7 +213,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
             return
-                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).GetExecutableCriteria(CurrentSession)
+                ica.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).GetExecutableCriteria(CurrentSession)
                    .List<User>();
         }
 
@@ -226,7 +229,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                            .Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"),
                                                                              emailToMatch))
                                            .SetMaxResults(pageSize)
-                                           .SetFirstResult(pageSize*pageIndex)
+                                           .SetFirstResult(pageSize * pageIndex)
                                            .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -262,7 +265,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 sortProperty = "LoginId";
             var order = new Order(sortProperty, isSortAsc);
             return
-                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex*pageSize).SetMaxResults(
+                CreateDetachedCriteria().Add(creator).AddOrder(order).SetFirstResult(pageIndex * pageSize).SetMaxResults(
                     pageSize)
                                         .GetExecutableCriteria(CurrentSession)
                                         .List<User>();
@@ -308,7 +311,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             if (pageIndex < 0)
                 throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).
                                          GetExecutableCriteria(CurrentSession).List<User>();
         }
 
@@ -369,17 +372,15 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                               Projections.ProjectionList()
                                                          .Add(Projections.SqlGroupProjection("year(CreateTime) year1",
                                                                                              "year(CreateTime)",
-                                                                                             new[] {"year1"},
-                                                                                             new IType[]
-                                                                                                 {NHibernateUtil.Int32}))
+                                                                                             new[] { "year1" },
+                                                                                             new IType[] { NHibernateUtil.Int32 }))
                                                          .Add(Projections.SqlGroupProjection(
                                                              "Month(CreateTime) month1", "Month(CreateTime)",
-                                                             new[] {"month1"}, new IType[] {NHibernateUtil.Int32}))
+                                                             new[] { "month1" }, new IType[] { NHibernateUtil.Int32 }))
                                                          .Add(Projections.SqlGroupProjection("day(CreateTime) day1",
                                                                                              "day(CreateTime)",
-                                                                                             new[] {"day1"},
-                                                                                             new IType[]
-                                                                                                 {NHibernateUtil.Int32}))
+                                                                                             new[] { "day1" },
+                                                                                             new IType[] { NHibernateUtil.Int32 }))
                                                          .Add(Projections.RowCount())
                 )
                                           .CreateCriteria("Other")
@@ -394,7 +395,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             var dictionary = new Dictionary<DateTime, int>();
             foreach (object[] objects in count)
             {
-                dictionary.Add(new DateTime((int) objects[0], (int) objects[1], (int) objects[2]), (int) objects[3]);
+                dictionary.Add(new DateTime((int)objects[0], (int)objects[1], (int)objects[2]), (int)objects[3]);
             }
             return dictionary;
         }
