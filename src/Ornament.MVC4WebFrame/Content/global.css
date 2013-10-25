@@ -1,0 +1,28 @@
+﻿
+td.op .btn {
+    padding: 6px 4px;
+    margin: 0;
+    width: 18px;
+    height: 15px;
+    margin-right: 2px;
+}
+
+    td.op .btn > i {
+        margin-left: 0;
+        margin-right: 0;
+        font-size: 14px;
+    }
+    
+td.cd .btn {
+    padding: 6px 4px;
+    margin: 0;
+    width: 18px;
+    height: 15px;
+    margin-right: 2px;
+}
+
+    td.cd .btn > i {
+        margin-left: 0;
+        margin-right: 0;
+        font-size: 14px;
+    }

@@ -57,13 +57,35 @@ define(function (require) {
                     bSortable: false,
                     mData: "Id",
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html(createBtn(oData));
+                        
+                        $(nTd).html(createBtn(oData)).addClass("op");
                     }
                 },
                 { "mData": "LoginId", bSortable: true },
-                { "mData": "Email"},
-                { "mData": "IsLockout", bSortable: false },
-                { "mData": "IsApproved", bSortable: false },
+                { "mData": "Email" },
+                {
+                    "mData": "IsLockout",
+                    bSortable: false,
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).html("<input type='checkbox' class='actionCheckbox' value=\"" + sData + "\">");
+                    }
+                },
+                {
+                    "mData": "IsApproved",
+                    bSortable: false,
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).addClass("cs");
+                        var html = '<div class="btn-group">';
+                        html += '<a class="btn btn-primary btn-mini" href="#"><i class="icon-user icon-white"></i></a>';
+                        html += '<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>';
+                        html += '<ul class="dropdown-menu">' +
+                            '<li><a href="#"><i class="icon-pencil"></i> Approve </a></li>' +
+                            '<li><a href="#"><i class="icon-trash"></i> Reject </a></li>' +
+                            '</ul></div>';
+
+                        $(nTd).html(html);
+                    }
+                },
                 { "mData": "Name", bSortable: true },
                 { "mData": "LastActivityDate", bSortable: true }
 
@@ -74,7 +96,9 @@ define(function (require) {
             "oLanguage": {
                 "sSearch": "<span>查询:</span> _INPUT_",
                 "sLengthMenu": "<span>显示数据:</span> _MENU_",
-                "oPaginate": { "sFirst": "首页", "sLast": "最后一页", "sNext": ">", "sPrevious": "<" }
+                "oPaginate": { "sFirst": "首页", "sLast": "最后一页", "sNext": ">", "sPrevious": "<" },
+                "sInfo": "合计_TOTAL_ ,显示其中的(_START_ 至 _END_)",
+                "sInfoFiltered": ""
             }
 
         });
