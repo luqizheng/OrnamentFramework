@@ -1643,6 +1643,11 @@
                 End Placeholder default is "]"
             </summary>
         </member>
+        <member name="T:Qi.TimePeriod">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Qi.Time">
             <summary>
             
