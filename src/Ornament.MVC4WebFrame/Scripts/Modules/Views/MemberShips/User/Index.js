@@ -61,7 +61,7 @@ define(function (require) {
                     }
                 },
                 { "mData": "LoginId", bSortable: true },
-                { "mData": "Email", bSortable: true },
+                { "mData": "Email"},
                 { "mData": "IsLockout", bSortable: false },
                 { "mData": "IsApproved", bSortable: false },
                 { "mData": "Name", bSortable: true },

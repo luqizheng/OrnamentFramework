@@ -85,11 +85,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .SetProjection(Projections.RowCount())
                 .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
             result = QuickSearch(name, loginid, email, phone);
-            if (sortTargets != null)
+            if (sortTargets != null && sortTargets.Length!=0)
             {
                 foreach (var a in sortTargets)
                 {
-                    result.AddOrder(Order.Asc(Projections.Property(a.Name)));
+                    result.AddOrder(a.Tag == SortTag.Asc
+                                        ? Order.Asc(Projections.Property(a.Property))
+                                        : Order.Desc(Projections.Property(a.Property)));
                 }
             }
             return
