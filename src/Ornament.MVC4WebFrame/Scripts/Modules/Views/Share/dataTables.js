@@ -23,15 +23,53 @@ define(function (require) {
     return function (url) {
 
         this.url = url;
+        this.col = [];
 
-        this.AddCol = function (col) {
-
+        this.AddCol = function (sPropertyName, bSortable, func) {
+            var a = {
+                mData: sPropertyName,
+                bSortable: bSortable === false ? false : true,
+            };
+            if ($.isFunction(func)) {
+                a.fnCreatedCell = func;
+            }
+            this.col.push(a);
         };
+        this.AddBoolCol =
+            function (sPropertyName, idProperty, trueIcon, falseIcon) {
 
+                var a = {
+                    mData: sPropertyName,
+                    bSortable: false,
+                    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                        $(nTd).addClass("cs").attr("data", oData[idProperty]);
+                        $(nTd).html(build(sData));
 
-        this.BuildTable = function(selector) {
+                    }
+                };
+
+                function build(bData) {
+                    var html = [];
+                    html.push('<div class="btn-group">');
+                    html.push('<a class="btn btn-primary btn-mini" href="#"><i class="' + (bData ? trueIcon.icon : falseIcon.icon) + ' icon-white"></i></a>');
+                    html.push('<a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-caret-down icon-white"></i></a>');
+                    html.push('<ul class="dropdown-menu">');
+                    html.push('<li><a href="javascript:;"><i class="' + trueIcon.icon + '"></i> ' + trueIcon.name + ' </a></li>');
+                    html.push('<li><a href="javascript:;"><i class="' + falseIcon.icon + '"></i> ' + falseIcon.name + ' </a></li>');
+                    html.push('</ul></div>');
+                    return $(html.join(""));
+                }
+
+                this.col.push(a);
+            };
+        this.BuildTable = function (selector) {
             return $(selector)
-                .dataTable($.extend({}, defOpts, config, { url: this.url }));
+                .dataTable($.extend({}, defOpts, {
+                    sAjaxSource: this.url,
+                    "aoColumns": this.col
+                }));
         };
+
+
     };
 })

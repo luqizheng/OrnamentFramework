@@ -70,7 +70,7 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
         [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
         public ActionResult Users([ModelBinder(typeof(PostDataModelBinder))] DataTablesPostData postData)
         {
-            var result = new DataTableResult {iTotalDisplayRecords = postData.DisplayLength};
+            var result = new DataTableResult { iTotalDisplayRecords = postData.DisplayLength };
 
             string search = postData.SearchContent;
             int total;
@@ -221,44 +221,51 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips.Controllers
             return View(createUser);
         }
 
-
         [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
-        public ActionResult Unlock(string[] loginIds)
+        public ActionResult Lock(string[] ids)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string loginid in loginIds)
+            foreach (string loginid in ids)
             {
-                User user = dao.GetByLoginId(loginid);
-                user.IsLockout = false;
-            }
-            return RedirectToAction("Index");
-        }
-
-        [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
-        public ActionResult Lock(string[] loginIds)
-        {
-            IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string loginid in loginIds)
-            {
-                User user = dao.GetByLoginId(loginid);
+                User user = dao.Get(loginid);
                 user.IsLockout = true;
             }
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
-
-
-        [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
-        public ActionResult Approve(string[] loginIds)
+        [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
+        public ActionResult UnLock(string[] ids)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string loginid in loginIds)
+            foreach (string loginid in ids)
             {
-                User user = dao.GetByLoginId(loginid);
-                user.IsApproved = true;
+                User user = dao.Get(loginid);
+                user.IsLockout = false;
             }
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
+        [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
+        public ActionResult Approve(string[] ids)
+        {
+            IUserDao dao = _memberShipFactory.CreateUserDao();
+            foreach (string id in ids)
+            {
+                User user = dao.Get(id);
+                user.IsApproved = true;
+            }
+            return Json(new { success = true });
+        }
+        [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
+        public ActionResult Reject(string[] ids)
+        {
+            IUserDao dao = _memberShipFactory.CreateUserDao();
+            foreach (string id in ids)
+            {
+                User user = dao.Get(id);
+                user.IsApproved = false;
+            }
+            return Json(new { success = true });
+        }
         [HttpPost, ResourceAuthorize(UserOperator.Delete, "MessageReader")]
         public ActionResult Delete(string[] loginIds)
         {

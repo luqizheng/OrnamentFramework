@@ -13,8 +13,8 @@ namespace Ornament.MVCWebFrame.Areas.MemberShips
         {
             //Edit user use login Id.
             context.MapRoute("MemberShips_EditUser",
-                             "MemberShips/Users/{action}/{loginId}",
-                             new { action = "Index", controller = "Users", loginId = UrlParameter.Optional }
+                             "MemberShips/{controller}/{action}/{loginId}",
+                             new { action = "Edit", loginId = UrlParameter.Optional }
                 );
             context.MapRoute(
                 "MemberShips_default",

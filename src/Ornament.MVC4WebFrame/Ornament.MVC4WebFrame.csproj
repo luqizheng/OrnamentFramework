@@ -708,6 +708,7 @@
     <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
     <Content Include="Scripts\Modules\Combine\Share\time.js" />
     <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
+    <Content Include="Scripts\Modules\Views\Share\dataTables.js" />
     <Content Include="Scripts\Modules\Views\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\metralab\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\pannonia\_applayout.js" />
