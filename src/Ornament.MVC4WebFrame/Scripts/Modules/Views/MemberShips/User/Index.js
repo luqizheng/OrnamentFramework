@@ -79,7 +79,7 @@ define(function (require) {
             .on("click", "ul.dropdown-menu a", function () {
                 //DropDown Menu
                 var id = $(this).closest("tr").attr("data"),
-                self = $(this), target = setting[$("i", this).attr("class")];
+                self = $(this), target = setting[$("i", this).attr("class")] ;
 
                 $.post(target.url, { ids: id }, function (result) {
                     if (result.success) {
@@ -97,7 +97,7 @@ define(function (require) {
         var ary = [];
 
         ary.push('<a href="/MemberShips/User/Edit/' + oObj.LoginId + '" class="btn tip"><i class="fam-user-edit"></i></a>'); //edit User
-        ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>'); //assign role and ug and org
+        ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title=""><i class="fam-group-gear"></i></a>'); //assign role and ug and org
         ary.push('<a href="#' + oObj.Id + '" class="btn tip" title="" role="pm"><i class="fam-email-edit"></i></a>'); //PM
         ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="" role="verifyEmail"><i class="fam-email-go"></i></a>'); //VerifyEmail
         ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i></a>');//Retrew password

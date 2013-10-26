@@ -30,7 +30,6 @@ namespace Ornament.MVCWebFrame.Api.Core
         /// <summary>
         ///     重新獲取密碼
         /// </summary>
-        /// <param name="accountOrEmail"></param>
         /// <returns></returns>
         public object Post([FromBody] ForgetPassword forgetPassword)
         {
