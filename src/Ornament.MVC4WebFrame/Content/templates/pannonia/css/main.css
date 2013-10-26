@@ -6378,6 +6378,11 @@ button.btn, input[type="submit"].btn
     {
         margin-left: 5px;
     }
+    .btn-group .btn {
+        vertical-align: top;
+    }
+    
+    
 
 .btn-toolbar
 {

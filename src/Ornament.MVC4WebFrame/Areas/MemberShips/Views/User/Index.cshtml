@@ -35,9 +35,9 @@
             Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
         };
 
-        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Memberships/user/index.js")", function(main) {
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Memberships/user/index.js")", function (main) {
             main.init(multiLanguate, curUser, {
-                url: "@Url.Action("Users", "User", new {area = "MemberShips"})"
+                url: "@Url.Action("Users", "User", new { area = "MemberShips" })"
             });
         });
     </script>
@@ -99,66 +99,66 @@
         @<text>
 
 
-             <form>
+    <form>
 
 
-                 <span>@Html.GetResourceString("ApplyAction")</span>
+        <span>@Html.GetResourceString("ApplyAction")</span>
 
-                 <select id="selApplyAction">
-                     @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Lock))
-                     {
-                         <option value="Lock">@Html.GetResourceString("Lock")</option>
-                         <option value="unLock">@Html.GetResourceString("Unlock")</option>
-                     }
+        <select id="selApplyAction">
+            @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Lock))
+            {
+                <option value="Lock">@Html.GetResourceString("Lock")</option>
+                <option value="unLock">@Html.GetResourceString("Unlock")</option>
+            }
 
-                     @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Approve))
-                     {
-                         <option value="Approve">@Html.GetResourceString("Approve")</option>
-                     }
-                     @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Delete))
-                     {
-                         <option value="delete">
-                             @Basic.Delete
-                         </option>
-                     }
-                 </select>
-                 <button class="btn btn-info" type="button" id="BtnApply" disabled="disabled">@Html.GetResourceString("BtnApply")</button>
-             </form>
+            @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Approve))
+            {
+                <option value="Approve">@Html.GetResourceString("Approve")</option>
+            }
+            @if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Delete))
+            {
+                <option value="delete">
+                    @Basic.Delete
+                </option>
+            }
+        </select>
+        <button class="btn btn-info" type="button" id="BtnApply" disabled="disabled">@Html.GetResourceString("BtnApply")</button>
+    </form>
 
-         </text>)
+    </text>)
     @Html.BoxBody(
         @<text>
-             <form method="POST" id="tableForm">
-                 <table class="table table-condensed table-striped table-bordered table-checks" id="table">
-                     <thead>
-                         <tr>
-                             <th></th>
-                             <th class="span1"></th>
-                             <th class="span1">
-                                 @Html.DisplayNameFor(model => model.LoginId)
-                             </th>
+    <form method="POST" id="tableForm">
+        <table class="table table-condensed table-striped table-bordered table-checks" id="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="span1"></th>
+                    <th class="span1">
+                        @Html.DisplayNameFor(model => model.LoginId)
+                    </th>
 
-                             <th style="width: 100px">
-                                 @Html.DisplayNameFor(model => model.Name)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Contact.Email)
-                             </th>
-                             <th>
-                                 @Html.LabelFor(model => ((User) null).IsLockout)
-                             </th>
-                             <th class="span3">
-                                 @Html.LabelFor(model => ((User) null).IsApproved)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Other.LastActivityDate)
-                             </th>
-                         </tr>
-                     </thead>
+                    <th style="width: 100px">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contact.Email)
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => ((User)null).IsLockout)
+                    </th>
+                    <th class="span2">
+                        @Html.LabelFor(model => ((User)null).IsApproved)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                    </th>
+                </tr>
+            </thead>
 
-                 </table>
-             </form>
-         </text>
+        </table>
+    </form>
+    </text>
         )
     ;
 }

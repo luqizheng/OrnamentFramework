@@ -8,9 +8,7 @@
 
 define(function (require) {
     require("../../_appLayout.js");
-
     var $ = require("jquery"),
-        userTypeahead = require("../../../Combine/Views/user.typeahead.js"),
         userApi = require("../../../Combine/Memberships/user.js"),
         pm = require("/share/pm.js");
     var pmDialog;
@@ -24,10 +22,6 @@ define(function (require) {
     });
 
     $("#selApplyAction").select2();
-
-    userTypeahead.typeahead("#searchContent");
-
-
 
     function showLoading(enable) {
         var parent = $(this).closest("td"),
@@ -46,28 +40,30 @@ define(function (require) {
             "sAjaxSource": config.url,
             "aaSorting": [[0, false], [1, 'asc']],
             "aoColumns": [
-               {
-                   mData: "Id",
-                   bSortable: false,
-                   fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                       $(nTd).html("<input type='checkbox' class='actionCheckbox' value=\"" + sData + "\">");
-                   }
-               },
                 {
                     bSortable: false,
                     mData: "Id",
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        
-                        $(nTd).html(createBtn(oData)).addClass("op");
+                        $(nTd).html(createBtn(oData)).addClass("op").before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>");
                     }
                 },
-                { "mData": "LoginId", bSortable: true },
-                { "mData": "Email" },
+                {
+                    "mData": "LoginId",
+                    bSortable: true
+                },
+            {
+                "mData": "Name"
+            },
+                {
+                    "mData": "Email",
+                    bSortable: true
+                },
                 {
                     "mData": "IsLockout",
                     bSortable: false,
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<input type='checkbox' class='actionCheckbox' value=\"" + sData + "\">");
+                        $(nTd).addClass("cs");
+                        $(nTd).html(lockTdBuild(sData));
                     }
                 },
                 {
@@ -75,18 +71,9 @@ define(function (require) {
                     bSortable: false,
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                         $(nTd).addClass("cs");
-                        var html = '<div class="btn-group">';
-                        html += '<a class="btn btn-primary btn-mini" href="#"><i class="icon-user icon-white"></i></a>';
-                        html += '<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>';
-                        html += '<ul class="dropdown-menu">' +
-                            '<li><a href="#"><i class="icon-pencil"></i> Approve </a></li>' +
-                            '<li><a href="#"><i class="icon-trash"></i> Reject </a></li>' +
-                            '</ul></div>';
-
-                        $(nTd).html(html);
+                        $(nTd).html(approveTdBuild(sData));
                     }
                 },
-                { "mData": "Name", bSortable: true },
                 { "mData": "LastActivityDate", bSortable: true }
 
             ],
@@ -107,6 +94,28 @@ define(function (require) {
             e.preventDefault();
             oTable.fnAddData({ Id: 0, Name: "" });
         });
+    }
+
+    function lockTdBuild(isLock) {
+        var html = '<div class="btn-group">';
+        html += '<a class="btn btn-primary btn-mini" href="#"><i class="' + (isLock ? "icon-lock" : "icon-unlock") + ' icon-white"></i></a>';
+        html += '<a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-caret-down icon-white"></i></a>';
+        html += '<ul class="dropdown-menu">' +
+            '<li><a href="#"><i class="icon-lock"></i> 锁定 </a></li>' +
+            '<li><a href="#"><i class="icon-unlock"></i> 解锁 </a></li>' +
+            '</ul></div>';
+        return $(html);
+    }
+
+    function approveTdBuild(isApprove) {
+        var html = '<div class="btn-group">';
+        html += '<a class="btn btn-primary btn-mini" href="#"><i class="' + (isApprove ? "icon-ok" : "icon-remove") + ' icon-white"></i></a>';
+        html += '<a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-caret-down icon-white"></i></a>';
+        html += '<ul class="dropdown-menu">' +
+            '<li><a href="#"><i class="icon-ok"></i> 批准 </a></li>' +
+            '<li><a href="#"><i class="icon-remove"></i> 拒绝 </a></li>' +
+            '</ul></div>';
+        return $(html);
     }
 
     function createBtn(oObj) {
@@ -140,6 +149,15 @@ define(function (require) {
                 return false;
             });
 
+
+
+
+            pmDialog = new pm($("#pmEditor"), currentUser);
+
+            $("#table").on("click", "a[role=pm]", function () {
+                pmDialog.show($(this).attr("href").substr(1));
+            });
+
             $("#table").on('click', "[role=retievePwd]", function () {
                 var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
                 showLoading.call(this, true);
@@ -152,12 +170,8 @@ define(function (require) {
                 });
             });
 
-            pmDialog = new pm($("#pmEditor"), currentUser);
-            $("#table").on("click", "a[role=pm]", function () {
-                pmDialog.show($(this).attr("href").substr(1));
-            });
-
             tableEdit(tableConfig);
+
         }
     };
 
