@@ -59,7 +59,7 @@ define(function (require) {
             }
 
         };
-        
+
         var table = new tableHelper(config.url);
         table.AddCol("Id", false,
             function (nTd, sData, oData, iRow, iCol) {
@@ -75,13 +75,12 @@ define(function (require) {
         table.AddBoolCol("IsLockout", 'Id', { icon: "icon-lock", name: "锁定" }, { icon: "icon-unlock", name: "解锁" });
         table.AddBoolCol("IsApproved", 'Id', { icon: "icon-ok", name: "批准" }, { icon: "icon-remove", name: "拒绝" });
         table.AddCol("LastActivityDate", false);
-
-        var oTable = table.BuildTable("#table")
+        table.BuildTable("#table")
             .on("click", "ul.dropdown-menu a", function () {
                 //DropDown Menu
                 var id = $(this).closest("tr").attr("data"),
-                self = $(this),target = setting[$("i", this).attr("class")];
-                
+                self = $(this), target = setting[$("i", this).attr("class")];
+
                 $.post(target.url, { ids: id }, function (result) {
                     if (result.success) {
                         self.closest(".btn-group")
@@ -91,13 +90,6 @@ define(function (require) {
                     }
                 });
             });
-
-
-
-        /*$("#add").click(function (e) {
-            e.preventDefault();
-            oTable.fnAddData({ Id: 0, Name: "" });
-        })*/;
     }
 
 
