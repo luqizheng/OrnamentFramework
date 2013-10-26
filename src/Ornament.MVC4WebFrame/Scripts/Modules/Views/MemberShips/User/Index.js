@@ -65,7 +65,7 @@ define(function (require) {
             function (nTd, sData, oData, iRow, iCol) {
                 $(nTd).html(createBtn(oData))
                     .addClass("op")
-                    .before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>")
+                    //.before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>")
                     .closest("tr").attr("data", sData);
             });
 
