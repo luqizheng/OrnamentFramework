@@ -871,7 +871,6 @@
     <Content Include="Scripts\i18n\elfinder\elfinder.zh_TW.js" />
     <Content Include="Scripts\plugins\ui\jquery.timepicker-1.1.10.js" />
     <Content Include="Scripts\Components\modernizr-2.6.2.js" />
-    <Content Include="Scripts\periodDailog\jquery.periodDailog.js" />
     <Content Include="Scripts\plugins\charts\excanvas.min.js" />
     <Content Include="Scripts\plugins\charts\jquery.flot.js" />
     <Content Include="Scripts\plugins\charts\jquery.flot.orderBars.js" />

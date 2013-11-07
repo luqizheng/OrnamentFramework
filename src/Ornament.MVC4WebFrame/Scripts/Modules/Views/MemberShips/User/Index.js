@@ -35,61 +35,57 @@ define(function (require) {
     }
 
     function tableEdit(config) {
-
-        var setting = {
-            "icon-lock": {
-                url: "/memberships/user/lock",
-                removeClass: "icon-unlock",
-                addClass: "icon-lock"
-            },
-            "icon-unlock": {
-                url: "/memberships/user/unlock",
-                removeClass: "icon-lock",
-                addClass: "icon-unlock"
-            },
-            "icon-ok": {
-                url: "/memberships/user/Approve",
-                removeClass: "icon-remove",
-                addClass: "icon-ok"
-            },
-            "icon-remove": {
-                url: "/memberships/user/reject",
-                addClass: "icon-remove",
-                removeClass: "icon-ok"
-            }
-
-        };
-
         var table = new tableHelper(config.url);
         table.AddCol("Id", false,
             function (nTd, sData, oData, iRow, iCol) {
                 $(nTd).html(createBtn(oData))
                     .addClass("op")
-                    //.before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>")
+                    .before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>")
                     .closest("tr").attr("data", sData);
             });
 
         table.AddCol("LoginId", true);
         table.AddCol("Name", true);
         table.AddCol("Email", true);
-        table.AddBoolCol("IsLockout", 'Id', { icon: "icon-lock", name: "锁定" }, { icon: "icon-unlock", name: "解锁" });
-        table.AddBoolCol("IsApproved", 'Id', { icon: "icon-ok", name: "批准" }, { icon: "icon-remove", name: "拒绝" });
+        table.AddBoolCol("IsLockout", 'Id', {
+            icon: "icon-lock",
+            name: "锁定"
+        },
+            {
+                icon: "icon-unlock",
+                name: "解锁"
+            }, lockUser);
+        table.AddBoolCol("IsApproved", 'Id',
+            { icon: "icon-ok", name: "批准" }, { icon: "icon-remove", name: "拒绝" }, approve);
         table.AddCol("LastActivityDate", false);
-        table.BuildTable("#table")
-            .on("click", "ul.dropdown-menu a", function () {
-                //DropDown Menu
-                var id = $(this).closest("tr").attr("data"),
-                self = $(this), target = setting[$("i", this).attr("class")] ;
 
-                $.post(target.url, { ids: id }, function (result) {
-                    if (result.success) {
-                        self.closest(".btn-group")
-                            .find("a:first i")
-                            .removeClass(target.removeClass)
-                            .addClass(target.addClass);
-                    }
-                });
+        table.BuildTable("#table");
+
+        function lockUser(id, bLock, process) {
+            /// <summary>
+            /// 锁定用户
+            /// </summary>
+            /// <param name="id"></param>
+            /// <param name="bLock"></param>
+            /// <param name="process"></param>
+            var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
+            $.post(url, { ids: id }, function (result) {
+                process(result.success);
             });
+        }
+
+        function approve(id, bApprove, process) {
+            /// <summary>
+            /// 锁定用户
+            /// </summary>
+            /// <param name="id"></param>
+            /// <param name="bLock"></param>
+            /// <param name="process"></param>
+            var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
+            $.post(url, { ids: id }, function (result) {
+                process(result.success);
+            });
+        }
     }
 
 
@@ -97,7 +93,7 @@ define(function (require) {
         var ary = [];
 
         ary.push('<a href="/MemberShips/User/Edit/' + oObj.LoginId + '" class="btn tip"><i class="fam-user-edit"></i></a>'); //edit User
-        ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title=""><i class="fam-group-gear"></i></a>'); //assign role and ug and org
+        ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>'); //assign role and ug and org
         ary.push('<a href="#' + oObj.Id + '" class="btn tip" title="" role="pm"><i class="fam-email-edit"></i></a>'); //PM
         ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="" role="verifyEmail"><i class="fam-email-go"></i></a>'); //VerifyEmail
         ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i></a>');//Retrew password

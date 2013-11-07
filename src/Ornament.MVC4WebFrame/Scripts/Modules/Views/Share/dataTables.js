@@ -4,11 +4,11 @@ define(function (require) {
 
     var $ = require("jquery");
     require("table")($);
-
     var defOpts = {
+        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
         "bProcessing": true,
         "bServerSide": true,
-        "bJQueryUI": false,
+        //"bJQueryUI": false,
         "bAutoWidth": false,
         "sPaginationType": "full_numbers",
         "oLanguage": {
@@ -24,6 +24,7 @@ define(function (require) {
 
         this.url = url;
         this.col = [];
+        this.boolColEvent = {};
 
         this.AddCol = function (sPropertyName, bSortable, func) {
             var a = {
@@ -35,39 +36,95 @@ define(function (require) {
             }
             this.col.push(a);
         };
-        this.AddBoolCol =
-            function (sPropertyName, idProperty, trueIcon, falseIcon) {
 
-                var a = {
+        this.AddBoolCol =
+
+            function (sPropertyName, idProperty, trueIcon, falseIcon, func) {
+
+                var tableNetsCols = {
                     mData: sPropertyName,
                     bSortable: false,
                     fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).addClass("cs").attr("data", oData[idProperty]);
+                        var $td = $(nTd), $tr = $td.closest("tr");
+                        $tr.attr("data", oData[idProperty]);
                         $(nTd).html(build(sData));
-
                     }
                 };
 
                 function build(bData) {
                     var html = [];
-                    html.push('<div class="btn-group">');
-                    html.push('<a class="btn btn-primary btn-mini" href="#"><i class="' + (bData ? trueIcon.icon : falseIcon.icon) + ' icon-white"></i></a>');
+                    html.push('<div class="btn-group" data="' + sPropertyName + '">');
+                    html.push('<a class="btn btn-primary btn-mini switch" href="#"><i class="' + (bData ? trueIcon.icon : falseIcon.icon) + ' icon-white"></i></a>');
                     html.push('<a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-caret-down icon-white"></i></a>');
                     html.push('<ul class="dropdown-menu">');
-                    html.push('<li><a href="javascript:;"><i class="' + trueIcon.icon + '"></i> ' + trueIcon.name + ' </a></li>');
-                    html.push('<li><a href="javascript:;"><i class="' + falseIcon.icon + '"></i> ' + falseIcon.name + ' </a></li>');
+                    html.push('<li><a href="#" ><i class="' + trueIcon.icon + '"></i> ' + trueIcon.name + ' </a></li>');
+                    html.push('<li><a href="#" ><i class="' + falseIcon.icon + '"></i> ' + falseIcon.name + ' </a></li>');
                     html.push('</ul></div>');
                     return $(html.join(""));
                 }
+                this.col.push(tableNetsCols);
 
-                this.col.push(a);
+                if (func) {
+                    this.boolColEvent[sPropertyName] = {
+                        trueData: trueIcon,
+                        falseData: falseIcon,
+                        func: func
+                    };
+                }
+
             };
+
         this.BuildTable = function (selector) {
-            return $(selector)
+            var ins = this;
+            var d = $(selector)
                 .dataTable($.extend({}, defOpts, {
                     sAjaxSource: this.url,
-                    "aoColumns": this.col
-                }));
+                    aoColumns: this.col
+                }))
+                .on("click", "div.btn-group a", function (e) {
+
+                    //DropDown Menu
+                    var self = $(this);
+
+                    if (self.hasClass("dropdown-toggle"))
+                        return;
+
+                    var id = self.closest("tr").attr("data"),
+                        propertyName = self.closest(".btn-group").attr("data"),
+                        colSetting = ins.boolColEvent[propertyName],
+                        iconPlace = self.find("i:first"),
+                        execute = colSetting.trueData,
+                        removeExecute = colSetting.falseData, trueOrfalse = true;
+
+
+                    if (self.hasClass("switch")) { //主按钮自动切换
+                        if (iconPlace.hasClass(colSetting.trueData.icon)) {
+                            execute = colSetting.falseData;
+                            removeExecute = colSetting.trueData;
+                            trueOrfalse = false;
+                        }
+
+                    } else { //下拉框按钮
+
+                        if (!iconPlace.hasClass(execute.icon)) {
+                            execute = colSetting.falseData;
+                            trueOrfalse = false;
+                        }
+
+                        iconPlace = self.closest(".btn-group").find("a:first i");
+                    }
+
+                    colSetting.func(id, trueOrfalse, function (bChange) {
+                        if (bChange) {
+                            iconPlace.removeClass(removeExecute.icon)
+                                .addClass(execute.icon);
+                        }
+                    });
+                    e.preventDefault();
+                });
+
+            //只是为metrlab UI 而做的
+            return d;
         };
 
 
