@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.CRM.Core", "Extends\CRM\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.CRM.Dao.NhImple", "Extends\CRM\Qi.CRM.Dao.NHimple\Qi.CRM.Dao.NhImple.csproj", "{6AB594B1-72EF-4886-A6D1-CC6CFF644D31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.CRM.Web", "Extends\CRM\Qi.CRM.Web\Qi.CRM.Web.csproj", "{1472A46B-0578-4877-8192-18FA35FBB3A0}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi
@@ -244,6 +246,16 @@ Global
 		{6AB594B1-72EF-4886-A6D1-CC6CFF644D31}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6AB594B1-72EF-4886-A6D1-CC6CFF644D31}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6AB594B1-72EF-4886-A6D1-CC6CFF644D31}.Release|x86.ActiveCfg = Release|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1472A46B-0578-4877-8192-18FA35FBB3A0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -268,5 +280,6 @@ Global
 		{5E455C9C-EECF-4838-A3CB-2124632B24DE} = {428703EE-DA8E-48F4-B8B9-CDC411D6A62C}
 		{49102E6E-3FD1-4B38-978F-E60E32AB534B} = {0C1F87DE-FD4D-4611-871C-2CAA07F887D2}
 		{6AB594B1-72EF-4886-A6D1-CC6CFF644D31} = {0C1F87DE-FD4D-4611-871C-2CAA07F887D2}
+		{1472A46B-0578-4877-8192-18FA35FBB3A0} = {0C1F87DE-FD4D-4611-871C-2CAA07F887D2}
 	EndGlobalSection
 EndGlobal

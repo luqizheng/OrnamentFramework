@@ -7,6 +7,7 @@ using System.Web.Profile;
 using System.Web.Routing;
 using System.Web.Security;
 using Ornament.MVCWebFrame.App_Start;
+using Ornament.MVCWebFrame.Models;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
@@ -25,6 +26,9 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
+            MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
+            //MvcContrib.Bus.AddAllMessageHandlers();
+
             AreaRegistration.RegisterAllAreas();
             DaoFactoryConfig.Config();
             MvcExtender.Register();

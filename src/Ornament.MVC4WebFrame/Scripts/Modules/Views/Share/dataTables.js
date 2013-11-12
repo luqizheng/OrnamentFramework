@@ -110,7 +110,7 @@ define(function (require) {
                             execute = colSetting.falseData;
                             trueOrfalse = false;
                         }
-
+                                                                                                                        ++++++++++++++++++++++++++++++++                        
                         iconPlace = self.closest(".btn-group").find("a:first i");
                     }
 

@@ -78,6 +78,9 @@
     <Reference Include="Mvc.JQuery.Datatables">
       <HintPath>..\packages\Mvc.JQuery.Datatables.1.2.80\lib\net40\Mvc.JQuery.Datatables.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="MvcSiteMapProvider, Version=4.0.0.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.0.6\lib\net45\MvcSiteMapProvider.dll</HintPath>
@@ -290,6 +293,7 @@
     <Compile Include="Models\Membership\RoleOperator.cs" />
     <Compile Include="Models\Membership\UserGroupOperator.cs" />
     <Compile Include="Models\Membership\UserOperator.cs" />
+    <Compile Include="Models\ProtableAreaLogMessage.cs" />
     <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1245,6 +1249,10 @@
     <ProjectReference Include="..\Extends\CRM\Qi.CRM.Dao.NHimple\Qi.CRM.Dao.NhImple.csproj">
       <Project>{6ab594b1-72ef-4886-a6d1-cc6cff644d31}</Project>
       <Name>Qi.CRM.Dao.NhImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extends\CRM\Qi.CRM.Web\Qi.CRM.Web.csproj">
+      <Project>{1472a46b-0578-4877-8192-18fa35fbb3a0}</Project>
+      <Name>Qi.CRM.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\Extends\CRM\Qi.CRM\Qi.CRM.Core.csproj">
       <Project>{49102e6e-3fd1-4b38-978f-e60e32ab534b}</Project>
