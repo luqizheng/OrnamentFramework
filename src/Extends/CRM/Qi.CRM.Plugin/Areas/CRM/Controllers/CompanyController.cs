@@ -1,10 +1,9 @@
 ﻿using System.Web.Mvc;
-using Qi.CRM.Dao;
 
 namespace Qi.CRM.Plugin.Areas.CRM.Controllers
 {
     [Authorize]
-    public class CompanyController : System.Web.Mvc.Controller
+    public class CompanyController : Controller
     {
         //private readonly ICrmDaoFactory _crmDaoFactory;
 
@@ -15,10 +14,8 @@ namespace Qi.CRM.Plugin.Areas.CRM.Controllers
 
         public ActionResult Index()
         {
-            return Content("Hello world.");
-            //return View();
+            //return Content("Hello world.");
+            return View();
         }
-
-
     }
 }

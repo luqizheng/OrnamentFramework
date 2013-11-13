@@ -3,7 +3,6 @@
 namespace Qi.CRM.Plugin.Areas.CRM
 {
     public class CRMAreaRegistration : MvcContrib.PortableAreas.PortableAreaRegistration
-
     {
         public override string AreaName
         {
@@ -16,7 +15,7 @@ namespace Qi.CRM.Plugin.Areas.CRM
         public override void RegisterArea(AreaRegistrationContext context, MvcContrib.PortableAreas.IApplicationBus bus)
         {
             base.RegisterArea(context, bus);
-            
+
             context.MapRoute(
                 AreaName + "_scripts",
                 base.AreaRoutePrefix + "/Scripts/{resourceName}",
@@ -36,7 +35,9 @@ namespace Qi.CRM.Plugin.Areas.CRM
                 base.AreaRoutePrefix + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
                 new[] { "Qi.CRM.Plugin.Areas.CRM.Controllers", "MvcContrib" }
-            );
+                );
+
+            //RegisterEmbeddedViewEngine();
         }
 
         /*public override void RegisterArea(AreaRegistrationContext context)
