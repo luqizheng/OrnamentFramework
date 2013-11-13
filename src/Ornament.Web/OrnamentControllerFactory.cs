@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
@@ -24,30 +23,20 @@ namespace Ornament.Web
         {
             if (controllers == null)
                 throw new ArgumentNullException("controllers");
-            _container = (WindsorContainer) OrnamentContext.IocContainer;
-            foreach (Type t in controllers)
-            {
-                _container.Register(Component.For(t).LifestyleTransient());
-            }
-
-            //_container.Register(
-            //    Component.For(typeof (OrnamentContext)).LifestyleSingleton().Instance(OrnamentContext.MemberShip)
-            //    );
+            _container = (WindsorContainer)OrnamentContext.IocContainer;
+            Regist(controllers);
         }
 
         public Type ErrorController { get; set; }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="assemblies"></param>
-        /// <returns></returns>
-        public static Type[] FilterController(Assembly assemblies)
+        public void Regist(params Type[] controllers)
         {
-            // Also register all the controller types as transient
-            IEnumerable<Type> controllerTypes = from t in assemblies.GetTypes()
-                                                where typeof (IController).IsAssignableFrom(t)
-                                                select t;
-            return controllerTypes.ToArray();
+            if (controllers == null || controllers.Length == 0)
+                return;
+            foreach (Type t in controllers)
+            {
+                _container.Register(Component.For(t).LifestyleTransient());
+            }
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)

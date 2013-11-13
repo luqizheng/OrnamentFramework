@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
@@ -31,38 +30,49 @@ namespace Ornament.MVCWebFrame.App_Start
             ExtenderModelType();
 
 
-
             //Mvc Ioc of Castle.
             ChangeControllerFacotry();
 
-            //Web API for castle inject.
-            var httpDependencyResolver = new OrnamentWebApiFactory(OrnamentWebApiFactory.FilterController(typeof(RolesController).Assembly));
 
-            OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>()
-                                                           .Instance(httpDependencyResolver).LifestyleSingleton());
 
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
             //for jquery spiner step,
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute), typeof(StepAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute),
+                                                                  typeof(StepAttributeAdapter));
         }
+
         private static void ExtenderModelType()
         {
             ModelBinders.Binders.DefaultBinder = new NHModelBinder();
             ModelBinders.Binders.Add(typeof(Time), new TimeModelBinder());
             ModelBinders.Binders.Add(typeof(Time?), new TimeModelBinder());
         }
+        /// <summary>
+        /// 为容器添加添加Controller的依赖
+        /// </summary>
         private static void ChangeControllerFacotry()
         {
+            Type[] apiControllers;
+            Type[] controllers;
+            AssemblyHelper.FindController(Assembly.GetExecutingAssembly(), out apiControllers, out controllers);
+
+            var defaultController = new OrnamentControllerFactory(controllers)
+                {
+                    ErrorController = typeof(HttpErrorsController)
+                };
+
+            var apiController = new OrnamentWebApiFactory(apiControllers);
+
+
             try
             {
-                Type[] controllerTypes = OrnamentControllerFactory.FilterController(Assembly.GetExecutingAssembly());
+
+                OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>()
+                                                               .Instance(apiController).LifestyleSingleton());
 
                 ////change the default controller.
-                ControllerBuilder.Current.SetControllerFactory(new OrnamentControllerFactory(controllerTypes)
-                    {
-                        ErrorController = typeof(HttpErrorsController)
-                    });
+                ControllerBuilder.Current.SetControllerFactory(defaultController);
             }
             catch (Exception ex)
             {

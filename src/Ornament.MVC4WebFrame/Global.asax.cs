@@ -28,7 +28,7 @@ namespace Ornament.MVCWebFrame
             XmlConfigurator.Configure(); //Log4net registry.
             MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
             //MvcContrib.Bus.AddAllMessageHandlers();
-
+            
             AreaRegistration.RegisterAllAreas();
             DaoFactoryConfig.Config();
             MvcExtender.Register();

@@ -15,19 +15,11 @@ namespace Ornament.Web
     {
         public OrnamentWebApiFactory()
         {
-            
         }
 
         public OrnamentWebApiFactory(params Type[] controllers)
         {
-
-            if (controllers != null)
-            {
-                foreach (Type t in controllers)
-                {
-                    Container.Register(Component.For(t).LifestyleTransient());
-                }
-            }
+            this.Regist(controllers);
         }
 
         public IWindsorContainer Container
@@ -35,11 +27,23 @@ namespace Ornament.Web
             get { return OrnamentContext.IocContainer; }
         }
 
-        IHttpController IHttpControllerActivator.Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor,
-                                      Type controllerType)
+        IHttpController IHttpControllerActivator.Create(HttpRequestMessage request,
+                                                        HttpControllerDescriptor controllerDescriptor,
+                                                        Type controllerType)
         {
             var controller = (IHttpController)Container.Resolve(controllerType);
             return controller;
+        }
+
+        public void Regist(params Type[] controllers)
+        {
+            if (controllers != null)
+            {
+                foreach (Type t in controllers)
+                {
+                    Container.Register(Component.For(t).LifestyleTransient());
+                }
+            }
         }
 
         /// <summary>

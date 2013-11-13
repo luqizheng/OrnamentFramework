@@ -267,6 +267,7 @@
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Settings\Controllers\FileManagerController.cs" />
     <Compile Include="Areas\Settings\Controllers\FilesController.cs" />
+    <Compile Include="Areas\Settings\Controllers\PluginsController.cs" />
     <Compile Include="Areas\Settings\Controllers\SiteController.cs" />
     <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -820,6 +821,8 @@
     <Content Include="Content\font\fontawesome-webfont.woff" />
     <Content Include="Content\font\FontAwesome.otf" />
     <Content Include="Content\img\elements\uploader\.DS_Store" />
+    <Content Include="Areas\Web.config" />
+    <Content Include="Areas\Settings\Views\Plugins\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -1250,9 +1253,9 @@
       <Project>{6ab594b1-72ef-4886-a6d1-cc6cff644d31}</Project>
       <Name>Qi.CRM.Dao.NhImple</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Extends\CRM\Qi.CRM.Web\Qi.CRM.Web.csproj">
-      <Project>{1472a46b-0578-4877-8192-18fa35fbb3a0}</Project>
-      <Name>Qi.CRM.Web</Name>
+    <ProjectReference Include="..\Extends\CRM\Qi.CRM.Plugin\Qi.CRM.Plugin.csproj">
+      <Project>{b555c0c3-7f18-4dad-a771-a0df15d1aa4a}</Project>
+      <Name>Qi.CRM.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Extends\CRM\Qi.CRM\Qi.CRM.Core.csproj">
       <Project>{49102e6e-3fd1-4b38-978f-e60e32ab534b}</Project>

@@ -149,6 +149,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyHelper.cs" />
     <Compile Include="Bundles\JQueryPluginSeajsBundle.cs" />
     <Compile Include="Bundles\ScriptsSeajs.cs" />
     <Compile Include="Bundles\SeajsBundle.cs" />

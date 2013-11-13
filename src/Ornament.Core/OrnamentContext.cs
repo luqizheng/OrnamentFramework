@@ -36,6 +36,7 @@ namespace Ornament
 
 
         /// <summary>
+        /// 最Top的容器
         /// </summary>
         public static IWindsorContainer IocContainer
         {

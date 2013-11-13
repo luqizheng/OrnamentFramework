@@ -7,9 +7,12 @@ using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
+using Ornament.Web;
 using Ornament.Web.HttpModel;
 
-namespace Ornament.Web
+// ReSharper disable CheckNamespace
+namespace Ornament
+// ReSharper restore CheckNamespace
 {
     /// <summary>
     /// </summary>
