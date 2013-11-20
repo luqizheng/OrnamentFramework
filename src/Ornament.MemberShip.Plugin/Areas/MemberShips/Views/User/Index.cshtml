@@ -1,0 +1,84 @@
+﻿@using Ornament
+@using Ornament.MemberShip
+@using Ornament.MemberShip.Plugin.Areas.MemberShip.Models
+@using Ornament.MemberShip.Plugin.Models
+@using Ornament.MemberShip.Plugin.Models.Memberships
+@using Ornament.Web
+@using Ornament.Web.Bundles
+@using Ornament.Web.HtmlExtends
+@model IEnumerable<Ornament.MemberShip.User>
+@{
+    ViewBag.Title = "";
+    Layout = OrnamentContext.Configuration.BackendLayout();
+    bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
+    var status = ViewData["UserStatus"] as UsersStatusModel;
+}
+
+@section scripts 
+{
+    @Html.Partial("_pm")
+
+    <script type="text/javascript">
+        var multiLanguate = {
+            verifyEmailMessage: {
+                success: "@Html.GetResourceString("verify_email_success")",
+                fail: "@Html.GetResourceString("verify_email_fail")"
+            },
+            retrievePwdMessage: {
+                success: "@Html.GetResourceString("retrieve_pwd_success")",
+                fail: "@Html.GetResourceString("retrieve_pwd_fail")"
+            }
+        };
+        var curUser = {
+            Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
+            Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
+        };
+
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Memberships/user/index.js")", function (main) {
+            main.init(multiLanguate, curUser, {
+                url: "@Url.Action("Users", "User", new { area = "MemberShips" })"
+            });
+        });
+    </script>
+}
+
+@section pageTitle{
+    <h5>MemberShip Dashboard</h5>
+}
+@using (Html.Box())
+{
+    <a href="@Url.Action("Create")">@Ornament.Properties.Resources.Add</a>
+    @Html.BoxBody(
+        @<text>
+    <form method="POST" id="tableForm">
+        <table class="table table-condensed table-striped table-bordered table-checks" id="table">
+            <thead>
+                <tr>
+                    <th style="width: 150px;"></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LoginId)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contact.Email)
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => ((User)null).IsLockout)
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => ((User)null).IsApproved)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                    </th>
+                </tr>
+            </thead>
+
+        </table>
+    </form>
+    </text>
+        )
+}

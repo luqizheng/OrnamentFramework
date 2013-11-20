@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
 using Ornament.Properties;
 
-namespace Ornament.Models.Memberships
+namespace Ornament.MemberShip.Plugin.Models.Memberships
 {
     public class UserGroupModel
     {

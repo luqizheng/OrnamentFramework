@@ -1,7 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Messages.Newses
 @using Resources
-@model Ornament.MVCWebFrame.Areas.MemberShips.Models.PermissionResourceSelectModel
+@model Ornament.MemberShip.Plugin.Areas.MemberShips.Models.PermissionResourceSelectModel
 @{
     var items = OrnamentContext.DaoFactory.MessageDaoFactory.NewsTypeDao.GetAll();
     var selected = items.First().Id;

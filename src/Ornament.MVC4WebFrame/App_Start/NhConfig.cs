@@ -2,7 +2,6 @@
 using System.IO;
 using System.Reflection;
 using System.Web.Hosting;
-using Badminton.Dao.NhImpl;
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Ornament.MemberShip.Dao.NHibernateImple;
@@ -30,12 +29,11 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void Config()
         {
             var assemblies = new[]
-                {
-                    typeof (UserDao).Assembly,
-                    typeof (NewsDao).Assembly,
-                    typeof (BadmintonDaoFactory).Assembly,
-                    typeof(CrmDaoFactory).Assembly
-                };
+            {
+                //typeof (UserDao).Assembly,
+                typeof (NewsDao).Assembly,
+                typeof (CrmDaoFactory).Assembly
+            };
             NHConfig(assemblies, new Assembly[0]);
             UpdateDatabase();
         }
@@ -43,30 +41,30 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void NHConfig(Assembly[] fluentAssemblies, Assembly[] nhAssembilies)
         {
             SessionManager.Regist("default", () =>
-                {
-                    var config = new Configuration();
-                    string configFileName = ConfigurationManager.AppSettings["nhConfig"];
-                    config.Configure(HostingEnvironment.MapPath(configFileName));
-                    FluentConfiguration result = Fluently.Configure(config);
-                    // ReSharper disable ForCanBeConvertedToForeach
-                    for (int index = 0; index < fluentAssemblies.Length; index++)
+            {
+                var config = new Configuration();
+                string configFileName = ConfigurationManager.AppSettings["nhConfig"];
+                config.Configure(HostingEnvironment.MapPath(configFileName));
+                FluentConfiguration result = Fluently.Configure(config);
+                // ReSharper disable ForCanBeConvertedToForeach
+                for (int index = 0; index < fluentAssemblies.Length; index++)
                     // ReSharper restore ForCanBeConvertedToForeach
-                    {
-                        Assembly assembly = fluentAssemblies[index];
+                {
+                    Assembly assembly = fluentAssemblies[index];
 #if DEBUG
-                        result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly).ExportTo(ExportHbmFolder));
+                    result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly).ExportTo(ExportHbmFolder));
 #else
                         result.Mappings(s => s.FluentMappings.AddFromAssembly(assembly));
 #endif
-                    }
-                    for (int i = 0; i < nhAssembilies.Length; i++)
-                    {
-                        result.Mappings(s => s.HbmMappings.AddFromAssembly(nhAssembilies[i]));
-                    }
+                }
+                for (int i = 0; i < nhAssembilies.Length; i++)
+                {
+                    result.Mappings(s => s.HbmMappings.AddFromAssembly(nhAssembilies[i]));
+                }
 
 
-                    return result.BuildConfiguration();
-                });
+                return result.BuildConfiguration();
+            });
         }
 
         private static void UpdateDatabase()

@@ -3,6 +3,7 @@ using System.Web.Security;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Plugin.Areas.MemberShip.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.Web;
 using Ornament.Web.Models;

@@ -6,7 +6,6 @@ using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
-using Ornament.Models.Memberships;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 using log4net;

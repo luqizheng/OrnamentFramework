@@ -117,39 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
-    <value>Password doesn't match the confirmation.</value>
-  </data>
-  <data name="alertMsg_duplicate_Email" xml:space="preserve">
-    <value>This email has been used by another user.</value>
-  </data>
-  <data name="alertMsg_duplicate_loginId" xml:space="preserve">
-    <value>Logind is exist, please choice another one.</value>
-  </data>
-  <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
-    <value>Current Password isn't right.</value>
-  </data>
-  <data name="alertMsg_Password_length_not_right" xml:space="preserve">
-    <value>Password is too short (minimum is {0} characters).</value>
-  </data>
-  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
-    <value>Please input confirm password.</value>
-  </data>
-  <data name="AssignRoles" xml:space="preserve">
-    <value>Assign Roles</value>
-  </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Password agan</value>
-  </data>
-  <data name="CreateTime" xml:space="preserve">
-    <value>Create time</value>
-  </data>
-  <data name="CurrentPassword" xml:space="preserve">
-    <value>Current Password</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>e-Mail</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="emailChanged" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emailChanged.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -160,27 +127,6 @@
   <data name="emailChanged_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emailChanged_zh-CN.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="error_LoginError" xml:space="preserve">
-    <value>Login id or Password is not match.</value>
-  </data>
-  <data name="error_missingEmailAddress" xml:space="preserve">
-    <value>Please input email.</value>
-  </data>
-  <data name="error_MissLoginId" xml:space="preserve">
-    <value>Please input login id.</value>
-  </data>
-  <data name="error_MissPassword" xml:space="preserve">
-    <value>Please input password.</value>
-  </data>
-  <data name="error_notMatchVerifyCode" xml:space="preserve">
-    <value>Verify Code not match.</value>
-  </data>
-  <data name="error_UserIsLockout" xml:space="preserve">
-    <value>User is lockout.</value>
-  </data>
-  <data name="error_UserIsNotApproved" xml:space="preserve">
-    <value>User is not approved.</value>
-  </data>
   <data name="forgetPassword" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\forgetPassword.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -189,69 +135,6 @@
   </data>
   <data name="forgetPassword_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\forgetPassword_zh-CN.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="input_password_again" xml:space="preserve">
-    <value>Confirm can't be blank.</value>
-  </data>
-  <data name="IsApproved" xml:space="preserve">
-    <value>Approved</value>
-  </data>
-  <data name="IsLockout" xml:space="preserve">
-    <value>Lockout</value>
-  </data>
-  <data name="label_AccountOrEmail" xml:space="preserve">
-    <value>Account Or Email</value>
-  </data>
-  <data name="LastActivityTime" xml:space="preserve">
-    <value>Last activity time</value>
-  </data>
-  <data name="LastLockTime" xml:space="preserve">
-    <value>LastUserLockedTime</value>
-  </data>
-  <data name="LastLoginTime" xml:space="preserve">
-    <value>Last login time</value>
-  </data>
-  <data name="LastPasswordChangedTime" xml:space="preserve">
-    <value>Last password changed time</value>
-  </data>
-  <data name="LastUpdateTime" xml:space="preserve">
-    <value>Last update time</value>
-  </data>
-  <data name="LoginId" xml:space="preserve">
-    <value>Login Id</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="NewPassword" xml:space="preserve">
-    <value>New Password</value>
-  </data>
-  <data name="Operator" xml:space="preserve">
-    <value>Operators</value>
-  </data>
-  <data name="Org" xml:space="preserve">
-    <value>Organization</value>
-  </data>
-  <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
-    <value>Child Org's Count</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="PasswordAnswer" xml:space="preserve">
-    <value>Password answer</value>
-  </data>
-  <data name="PasswordQuestion" xml:space="preserve">
-    <value>Password question </value>
-  </data>
-  <data name="Permission" xml:space="preserve">
-    <value>Permission</value>
-  </data>
-  <data name="PermissionName" xml:space="preserve">
-    <value>Permission Name</value>
-  </data>
-  <data name="Phone" xml:space="preserve">
-    <value>Phone</value>
   </data>
   <data name="registAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\registAccount.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -262,33 +145,6 @@
   <data name="registAccount_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\registAccount_zh-CN.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="RegistryTime" xml:space="preserve">
-    <value>Registry time</value>
-  </data>
-  <data name="Remark" xml:space="preserve">
-    <value>Remark</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
-  </data>
-  <data name="Role" xml:space="preserve">
-    <value>Role</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="UserGroup" xml:space="preserve">
-    <value>User Group</value>
-  </data>
-  <data name="VerifyCode" xml:space="preserve">
-    <value>Verify Code</value>
-  </data>
-  <data name="VerifyEmail" xml:space="preserve">
-    <value>Verify Email if changed</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
   <data name="changeAccount" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\changeaccount.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -297,5 +153,128 @@
   </data>
   <data name="changeAccount_zh_CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\changeaccount_zh-cn.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Password again</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Logon" xml:space="preserve">
+    <value>Logon</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="new_password" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="old_password" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Regist" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>Save successly.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Submitting" xml:space="preserve">
+    <value>Submitting...</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
   </data>
 </root>

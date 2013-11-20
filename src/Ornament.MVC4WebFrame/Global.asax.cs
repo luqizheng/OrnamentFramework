@@ -12,6 +12,7 @@ using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
+using Ornament.Web.Cfg;
 using Ornament.Web.HttpModel;
 using Qi.NHibernateExtender;
 using log4net;
@@ -26,9 +27,9 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
-            MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
+            //MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
+            MvcContrib.Bus.AddMessageHandler(typeof(NHConfigurationHandler));
             //MvcContrib.Bus.AddAllMessageHandlers();
-            
             AreaRegistration.RegisterAllAreas();
             DaoFactoryConfig.Config();
             MvcExtender.Register();

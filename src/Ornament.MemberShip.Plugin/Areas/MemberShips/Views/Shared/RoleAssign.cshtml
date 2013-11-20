@@ -1,0 +1,84 @@
+﻿@using Ornament
+@using Ornament.MemberShip
+@using Ornament.MemberShip.Permissions
+@using Ornament.MemberShip.Plugin.Properties
+@using Qi.Web
+@model IEnumerable<Ornament.MemberShip.Role>
+@{
+    IList<Role> roles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
+    IOrderedQueryable<Permission> permissions = from permission in OrnamentContext.DaoFactory.MemberShipFactory.Permissions
+        orderby permission.Name
+        select permission;
+
+    Dictionary<string, object> mapping = roles.ToDictionary<Role, string, object>(a => a.Id, a => new List<string>(from s in a.Permissions select s.Id));
+}
+<style type="text/css">
+    #permissionPanel ul { list-style: none; }
+</style>
+<script type="text/javascript">
+
+    seajs.use(['jquery'], function() {
+        var mapping = @Html.Raw(mapping.ToJson());
+        $("#roles input").change(function() {
+            var permissions = mapping[$(this).val()].join(",#");
+            var tag = $("#" + permissions);
+            if (this.checked) {
+                tag.removeClass("icon-check-empty").addClass("icon-check");
+            } else {
+                tag.addClass("icon-check-empty").removeClass("icon-check");
+            }
+
+        }).change();
+    });
+</script>
+<div class="row-fluid">
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@Resources.Role</h6>
+                </div>
+            </div>
+            <div class="well body" id="roles">
+                @foreach (Role role in roles)
+                {
+                    string checkeds = "";
+                    if (Model != null)
+                    {
+                        if (Model.Any(a => a.Id == role.Id))
+                        {
+                            checkeds = mapping.ContainsKey(role.Id) ? "checked=\"checked\"" : "";
+                        }
+                    }
+                    <label for="@role.Id">
+                        <input name="roles" id="@role.Id" type="checkbox" value="@role.Id"  @Html.Raw(checkeds)/>
+                        @role.Name
+                    </label>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@Resources.Permission</h6>
+                </div>
+            </div>
+            <div class="body well" id="permissionPanel">
+
+
+                <ul>
+                    @foreach (Permission permission in permissions)
+                    {
+                        <li><i id="@permission.Id" class="icon-check-empty"></i>@permission.Name
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -3,7 +3,6 @@ using System.Web;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Memberships;
-using Ornament.Models.Memberships;
 using Qi.Web.Http;
 
 namespace Ornament.MVCWebFrame.Api.Core

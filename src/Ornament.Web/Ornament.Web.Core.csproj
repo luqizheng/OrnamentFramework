@@ -77,6 +77,12 @@
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="MvcSiteMapProvider">
       <HintPath>..\packages\MvcSiteMapProvider.3.3.6.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
     </Reference>
@@ -160,6 +166,7 @@
     <Compile Include="Bundles\Seajs\ModuleCollection.cs" />
     <Compile Include="Bundles\Seajs\ReferenceModule.cs" />
     <Compile Include="Bundles\Seajs\RootModule.cs" />
+    <Compile Include="Cfg\NHConfigurationHandler.cs" />
     <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
     <Compile Include="HtmlExtends\Boxes\Box.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
