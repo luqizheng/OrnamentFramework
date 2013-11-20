@@ -208,21 +208,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basic.zh.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\MemberShip.Designer.cs">
-      <DependentUpon>MemberShip.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\MemberShip.zh-cn.designer.cs">
-      <DependentUpon>MemberShip.zh-cn.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\MemberShip.zh.designer.cs">
-      <DependentUpon>MemberShip.zh.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="App_GlobalResources\Mvc.sitemap.designer.cs">
       <DependentUpon>Mvc.sitemap.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -252,13 +237,6 @@
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Models\BaseTypeModel.cs" />
     <Compile Include="Areas\Docs\Models\ExtenderTypeModel.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
-    <Compile Include="Areas\MemberShips\MemberShipsAreaRegistration.cs" />
-    <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
@@ -287,23 +265,12 @@
     <Compile Include="Models\DataInit\MeasurementUnitInit.cs" />
     <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\MessageInit.cs" />
-    <Compile Include="Models\Membership\AccountOperator.cs" />
-    <Compile Include="Models\Membership\NewsOperator.cs" />
-    <Compile Include="Models\Membership\OrgOperator.cs" />
-    <Compile Include="Models\Membership\PermissionOperator.cs" />
-    <Compile Include="Models\Membership\RoleOperator.cs" />
-    <Compile Include="Models\Membership\UserGroupOperator.cs" />
-    <Compile Include="Models\Membership\UserOperator.cs" />
     <Compile Include="Models\ProtableAreaLogMessage.cs" />
-    <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
@@ -754,12 +721,8 @@
     <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
     <Content Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
     <Content Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
     <Content Include="Areas\Settings\Views\Site\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\TypeLayout\BaseType.cshtml" />
     <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
@@ -774,7 +737,6 @@
     <Content Include="CodeTemplates\AddView\CSHTML\oEdit.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oEmpty.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oList.tt" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="CodeTemplates\AddController\oController.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\Select2_Single.tt" />
     <Content Include="Areas\Messages\Views\Template\Index.cshtml">
@@ -1172,7 +1134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Messages\Models\" />
     <Folder Include="bin\" />
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
@@ -1204,25 +1165,6 @@
     <Content Include="App_GlobalResources\Basic.zh.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Basic.zh.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\MemberShip.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>MemberShip.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\MemberShip.zh-cn.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>MemberShip.zh-cn.designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\MemberShip.zh.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>MemberShip.zh.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
@@ -1285,32 +1227,16 @@
       <Project>{6C6439C4-0EA1-44F9-B406-664512594A1B}</Project>
       <Name>Ornament.MemberShip.Dao.NHibernateImple</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ornament.MemberShip.Plugin\Ornament.MemberShip.Plugin.csproj">
+      <Project>{60965723-bea2-4a7b-b6ee-9e1e237504f6}</Project>
+      <Name>Ornament.MemberShip.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
       <Name>Ornament.Web.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.zh-CN.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.zh.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-CN.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.zh-CN.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.zh.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-cn.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-cn.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-CN.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-CN.resx" />
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh.resx" />
     <Content Include="Views\Account\App_LocalResources\Index.resx" />
     <Content Include="Views\Account\App_LocalResources\Index.zh-cn.resx" />
     <Content Include="Views\Account\App_LocalResources\Index.zh.resx" />
@@ -1346,28 +1272,6 @@
     <Content Include="Views\Shared\NavPagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\_ChoiceResourceType.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
-    <Content Include="Areas\MemberShips\Views\User\Assign.cshtml" />
-    <Content Include="Areas\MemberShips\Views\User\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\User\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\User\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
     <Content Include="Areas\Settings\Views\Web.config" />
   </ItemGroup>
@@ -1402,9 +1306,6 @@
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-CN.resx" />
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.resx" />

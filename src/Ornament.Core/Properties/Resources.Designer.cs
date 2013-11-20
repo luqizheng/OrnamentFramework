@@ -115,51 +115,6 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Password can&apos;t be blank. 的本地化字符串。
-        /// </summary>
-        public static string alertMsg_Require_NewPassword {
-            get {
-                return ResourceManager.GetString("alertMsg_Require_NewPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Current Password can&apos;t be blank. 的本地化字符串。
-        /// </summary>
-        public static string alertMsg_Require_OldPassword {
-            get {
-                return ResourceManager.GetString("alertMsg_Require_OldPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please input login ID or email address. 的本地化字符串。
-        /// </summary>
-        public static string alertMsg_RequireAccountOrEmail {
-            get {
-                return ResourceManager.GetString("alertMsg_RequireAccountOrEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please input verify code. 的本地化字符串。
-        /// </summary>
-        public static string alertMsg_requireVerifyCode {
-            get {
-                return ResourceManager.GetString("alertMsg_requireVerifyCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Please input correct email address. 的本地化字符串。
-        /// </summary>
-        public static string altMessage_EmailFormatNotCorrect {
-            get {
-                return ResourceManager.GetString("altMessage_EmailFormatNotCorrect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Assign Roles 的本地化字符串。
         /// </summary>
         public static string AssignRoles {

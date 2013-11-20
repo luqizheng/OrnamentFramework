@@ -132,23 +132,8 @@
   <data name="alertMsg_Password_length_not_right" xml:space="preserve">
     <value>Password is too short (minimum is {0} characters).</value>
   </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
-    <value>Please input login ID or email address.</value>
-  </data>
-  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
-    <value>Please input verify code.</value>
-  </data>
-  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
-    <value>Password can't be blank.</value>
-  </data>
-  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
-    <value>Current Password can't be blank.</value>
-  </data>
   <data name="alert_Require_ConfirmPassword" xml:space="preserve">
     <value>Please input confirm password.</value>
-  </data>
-  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
-    <value>Please input correct email address.</value>
   </data>
   <data name="AssignRoles" xml:space="preserve">
     <value>Assign Roles</value>

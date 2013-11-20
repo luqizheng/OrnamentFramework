@@ -1,4 +1,4 @@
-﻿using Ornament.MVCWebFrame.Models.Membership;
+﻿using Ornament.MemberShip.Plugin.Models;
 using Ornament.Messages.Newses;
 using Ornament.Web;
 

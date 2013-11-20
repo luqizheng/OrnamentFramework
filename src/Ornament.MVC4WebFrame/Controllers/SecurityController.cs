@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Security;
-using Ornament.Models.Security;
 using Ornament.Web;
 using Qi.Web.Mvc;
 

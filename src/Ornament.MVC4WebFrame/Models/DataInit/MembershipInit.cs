@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Security;
-using Ornament.MVCWebFrame.Models.Membership;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Plugin.Models;
 using Ornament.Web;
 using Ornament.Web.Models;
 

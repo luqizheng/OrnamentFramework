@@ -104,17 +104,10 @@
     <Compile Include="Contexts\MessagesConfig.cs" />
     <Compile Include="Contexts\WebSettings.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\Memberships\OrgModel.cs" />
-    <Compile Include="Models\Memberships\Partials\BasicInfo.cs" />
-    <Compile Include="Models\Memberships\Partials\PermissionInfo.cs" />
-    <Compile Include="Models\Memberships\UserGroupModel.cs" />
-    <Compile Include="Models\Memberships\UsersStatusModel.cs" />
-    <Compile Include="Models\Security\VerifyEmailModel.cs" />
     <Compile Include="Models\Messages\NotifyTypeModel.cs" />
     <Compile Include="Models\Messages\PersonalMessageModel.cs" />
     <Compile Include="Models\Messages\MessageTemplateModel.cs" />
-    <Compile Include="Models\Security\RetrievePasswordModel.cs" />
-    <Compile Include="Models\Security\VerifyResult.cs" />
+    <Compile Include="Models\ResourceSetting.cs" />
     <Compile Include="OrnamentContext.cs" />
     <Compile Include="Contexts\NhConfiguration.cs" />
     <Compile Include="Contexts\OrnamentConfiguration.cs" />
@@ -122,15 +115,6 @@
     <Compile Include="Contexts\MemberShipContext.cs" />
     <Compile Include="Contexts\DaoFactory.cs" />
     <Compile Include="DateTimeHelper.cs" />
-    <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
-    <Compile Include="Models\Memberships\CreateUserModel.cs" />
-    <Compile Include="Models\Memberships\EditUserModel.cs" />
-    <Compile Include="Models\Memberships\ForgetPassword.cs" />
-    <Compile Include="Models\Memberships\LogonModel.cs" />
-    <Compile Include="Models\Memberships\Partials\PasswordModel.cs" />
-    <Compile Include="Models\Memberships\Partials\QuestionAnswerModel.cs" />
-    <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
-    <Compile Include="Models\Memberships\RegistAccount.cs" />
     <Compile Include="Models\Messages\NewsTypeModel.cs" />
     <Compile Include="OrnamentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,7 +130,6 @@
     <Compile Include="Retrives\SimpleMessageFactoryRetrive.cs" />
     <Compile Include="TimePeriod.cs" />
     <Compile Include="Validations\JqStepAttribute.cs" />
-    <Compile Include="Validations\VerifyCodeRequireAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
