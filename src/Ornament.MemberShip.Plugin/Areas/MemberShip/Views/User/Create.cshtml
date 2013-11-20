@@ -1,0 +1,50 @@
+﻿@using Ornament
+@using Ornament.Models.Memberships
+@using Ornament.Web
+@using Ornament.Web.HtmlExtends
+@using Resources
+@model Ornament.MemberShip.Plugin.Models.Memberships.CreateUserModel
+@{
+    Layout = OrnamentContext.Configuration.BackendLayout();
+}
+@section pageTitle
+{
+    <h5>Create a new User</h5>
+}
+<div class="widget">
+    <form method="POST" class="form-horizontal">
+        <div class="well">
+            @Html.ValidationSummary(true)
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
+                <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_Permission")</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab3">
+                    @Html.EditorFor(s => s, "_BasicInfo")
+                </div>
+                <div class="tab-pane" id="tab4">
+                    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+                </div>
+            </div>
+            <div class="form-actions">
+                <input type="submit" value="@Basic.Create" class="btn btn-info"/>
+                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["/MemberShips/User/Create.js"], function () {
+
+        });
+    </script>
+}
+
+
+
+

@@ -1,0 +1,15 @@
+﻿@model Ornament.MemberShip.Plugin.Models.Memberships.Partials.QuestionAnswerModel
+<div class="control-group">
+    @Html.LabelFor(m => m.PasswordQuestion, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(m => Model.PasswordQuestion,new {@class="span12"})
+        @Html.ValidationMessageFor(m => Model.PasswordQuestion)
+    </div>
+</div>
+<div class="control-group">
+    @Html.LabelFor(m => m.PasswordAnswer, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextBoxFor(m => Model.PasswordAnswer,new {@class="span12"})
+        @Html.ValidationMessageFor(m => Model.PasswordAnswer)
+    </div>
+</div>
