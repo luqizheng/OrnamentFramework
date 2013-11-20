@@ -29,9 +29,11 @@ namespace Ornament.MVCWebFrame
             XmlConfigurator.Configure(); //Log4net registry.
             //MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
             MvcContrib.Bus.AddMessageHandler(typeof(NHConfigurationHandler));
+            
             //MvcContrib.Bus.AddAllMessageHandlers();
             AreaRegistration.RegisterAllAreas();
-            DaoFactoryConfig.Config();
+            NhConfig.Config();
+
             MvcExtender.Register();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -45,7 +47,9 @@ namespace Ornament.MVCWebFrame
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
 
             NotifyConfig.Register();
-            NhConfig.Config();
+
+            
+           
         }
 
 

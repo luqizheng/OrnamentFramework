@@ -6,15 +6,9 @@ namespace Ornament.Web.Cfg
 {
     public class NHConfigurationHandler : MessageHandler<DaoFactoryRegister>
     {
-        public NHConfigurationHandler()
-        {
-            var a = 0;
-        }
-        public static readonly NHConfig NHConfig = new NHConfig();
-
         public override void Handle(DaoFactoryRegister message)
         {
-            NHConfig.AddFactoryDao(message.DaoFactoryInterface, message.ImpleDaoFactory);
+            NHConfig.Instance.RegistDaoFactory(message.DaoFactoryInterface, message.ImpleDaoFactory);
         }
     }
 

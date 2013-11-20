@@ -250,15 +250,15 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />

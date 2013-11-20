@@ -17,10 +17,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
         {
             base.RegisterArea(context, bus);
 
-            bus.Send(new DaoFactoryRegister(typeof(IMemberShipFactory),typeof(MemberShipFactory)));
+            //注册 Dao
+            bus.Send(new DaoFactoryRegister(typeof (IMemberShipFactory), typeof (MemberShipFactory)));
 
 
-            
             context.MapRoute(
                 AreaName + "_scripts",
                 base.AreaRoutePrefix + "/Scripts/{resourceName}",
@@ -32,20 +32,21 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 AreaName + "_images",
                 base.AreaRoutePrefix + "/images/{resourceName}",
                 new {controller = "EmbeddedResource", action = "Index", resourcePath = "images"},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips"}
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             context.MapRoute(AreaName + "_EditUser",
+                //MemberShips/User/Edit/admin
                 AreaName + "/User/Edit/{loginId}",
                 new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips"}
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
                 new {action = "Index", id = UrlParameter.Optional},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips"}
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
         }
     }

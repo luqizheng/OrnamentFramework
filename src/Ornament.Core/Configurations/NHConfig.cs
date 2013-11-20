@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using FluentNHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 using Qi;
 using Qi.NHibernateExtender;
 using Configuration = NHibernate.Cfg.Configuration;
@@ -12,14 +14,30 @@ namespace Ornament.Configurations
 {
     public class NHConfig
     {
+        public static NHConfig Instance = new NHConfig();
+
         private readonly IDictionary<Type, Type>
             _regType = new Dictionary<Type, Type>();
 
+        private NHConfig()
+        {
+            BuildHBMFile = true;
+        }
+
         public bool BuildHBMFile { get; set; }
 
-        public string ExportHbmFolder { get; set; }
+        public string ExportHbmFolder
+        {
+            get
+            {
+                string schemaExportPath = Path.Combine(ApplicationHelper.PhysicalApplicationPath, "Mappings");
+                if (!Directory.Exists(schemaExportPath))
+                    Directory.CreateDirectory(schemaExportPath);
+                return schemaExportPath;
+            }
+        }
 
-        public void AddFactoryDao(Type interfaceType, Type impleType)
+        public void RegistDaoFactory(Type interfaceType, Type impleType)
         {
             if (_regType.ContainsKey(interfaceType))
             {
@@ -55,7 +73,7 @@ namespace Ornament.Configurations
         {
             IEnumerable<Assembly> fluentAssemblies = GetFluenAssembly();
             IEnumerable<Assembly> nhAssembilies = GetHBMXmlFile();
-            foreach (var type in _regType.Keys)
+            foreach (Type type in _regType.Keys)
             {
                 OrnamentContext.DaoFactory.Regist(type, _regType[type]);
             }
@@ -85,10 +103,30 @@ namespace Ornament.Configurations
                 {
                     result.Mappings(s => s.HbmMappings.AddFromAssembly(assembly));
                 }
-
-
+                
                 return result.BuildConfiguration();
             });
+
+            UpdateDatabase();
+        }
+
+        private void UpdateDatabase()
+        {
+            foreach (string name in SessionManager.SessionFactoryNames)
+            {
+                var a = new SchemaUpdate(SessionManager.GetSessionWrapper(name).Configuration);
+                a.Execute(true, true);
+            }
+            SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
+            try
+            {
+                sessionWrapper.InitSession();
+                //InitData.Initialize();
+            }
+            finally
+            {
+                sessionWrapper.Close(true);
+            }
         }
     }
 }
