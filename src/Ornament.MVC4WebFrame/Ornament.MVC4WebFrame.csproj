@@ -75,15 +75,18 @@
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Mvc.JQuery.Datatables">
-      <HintPath>..\packages\Mvc.JQuery.Datatables.1.2.80\lib\net40\Mvc.JQuery.Datatables.dll</HintPath>
+      <HintPath>..\packages\Mvc.JQuery.Datatables.1.2.90\lib\net40\Mvc.JQuery.Datatables.dll</HintPath>
     </Reference>
     <Reference Include="MvcContrib">
       <HintPath>..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include="MvcSiteMapProvider, Version=4.0.0.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+    <Reference Include="MvcSiteMapProvider, Version=3.3.6.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.0.6\lib\net45\MvcSiteMapProvider.dll</HintPath>
+      <HintPath>..\packages\MvcSiteMapProvider.3.3.6.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -91,7 +94,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -185,14 +188,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
-    <Compile Include="Api\Core\FriendsController.cs" />
     <Compile Include="Api\Core\NotifyMessagesController.cs" />
-    <Compile Include="Api\Core\OrgsController.cs" />
     <Compile Include="Api\Core\PersonalMessagesController.cs" />
-    <Compile Include="Api\Core\RolesController.cs" />
-    <Compile Include="Api\Core\SecurityController.cs" />
-    <Compile Include="Api\Core\UserGroupsController.cs" />
-    <Compile Include="Api\Core\UsersController.cs" />
     <Compile Include="App_GlobalResources\Basic.Designer.cs">
       <DependentUpon>Basic.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -669,9 +666,6 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\Modules\Combine\Badminton\Brand.js" />
-    <Content Include="Scripts\Modules\Combine\Memberships\friend.js" />
-    <Content Include="Scripts\Modules\Combine\Memberships\permission.js" />
-    <Content Include="Scripts\Modules\Combine\Memberships\user.js" />
     <Content Include="Scripts\Modules\Combine\Messages\notify-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
     <Content Include="Scripts\Modules\Combine\Share\ajaxErrorHandler.js" />
@@ -690,14 +684,9 @@
     <Content Include="Scripts\Modules\Views\Crm\Company\Index.js" />
     <Content Include="Scripts\Modules\Views\Docs\TypeLayout\BaseType.js" />
     <Content Include="Scripts\Modules\Views\Docs\TypeLayout\ExtenderType.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\User\Assign.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\User\Create.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\User\Edit.js" />
     <Content Include="Scripts\Modules\Views\MyMessage\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\Permissions\index.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\Permissions\Permission.js" />
     <Content Include="Scripts\Modules\Views\Messages\NewsType\Index.js" />
     <Content Include="Scripts\Modules\Views\Messages\News\Index.js" />
     <Content Include="Scripts\Modules\Views\Messages\NotifyType\index.js" />
@@ -790,7 +779,6 @@
     <Content Include="Scripts\plugins\utility\jquery.dotdotdot-1.5.1.js" />
     <Content Include="Scripts\Modules\Views\Share\personal.js" />
     <Content Include="Scripts\Modules\Views\Share\pm.js" />
-    <Content Include="Scripts\Modules\Views\MemberShips\User\Index.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask-2.2.66.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask-2.2.66.min.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask.date.extensions-2.2.66.js" />
@@ -1138,7 +1126,9 @@
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Basic.resx">

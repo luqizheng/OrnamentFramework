@@ -9,6 +9,21 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+
+            routes.MapRoute(
+                  "aemberShips_scripts",
+                "aemberShips/Scripts/{resourceName}",
+                new
+                {
+                    controller = "OrnamentEmbeddedResource",
+                    action = "Index",
+                    resourcePath = "scripts",
+                    area = ""
+                },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips" }
+                );
+
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             //handler error
             routes.MapRoute(

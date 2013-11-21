@@ -133,6 +133,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\FriendsController.cs" />
+    <Compile Include="Api\OrgsController.cs" />
+    <Compile Include="Api\RolesController.cs" />
+    <Compile Include="Api\SecurityController.cs" />
+    <Compile Include="Api\UserGroupsController.cs" />
+    <Compile Include="Api\UsersController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
@@ -174,7 +180,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
@@ -242,7 +247,6 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\_ChoiceResourceType.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Create.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
@@ -268,6 +272,15 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Combine\friend.js" />
+    <EmbeddedResource Include="Scripts\Combine\permission.js" />
+    <EmbeddedResource Include="Scripts\Combine\user.js" />
+    <EmbeddedResource Include="Scripts\Permissions\index.js" />
+    <EmbeddedResource Include="Scripts\Permissions\Permission.js" />
+    <EmbeddedResource Include="Scripts\User\Assign.js" />
+    <EmbeddedResource Include="Scripts\User\Create.js" />
+    <EmbeddedResource Include="Scripts\User\Edit.js" />
+    <EmbeddedResource Include="Scripts\User\Index.js" />
     <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

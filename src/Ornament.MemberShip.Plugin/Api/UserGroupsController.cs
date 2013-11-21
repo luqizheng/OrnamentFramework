@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
 
-namespace Ornament.MVCWebFrame.Api.Core
+namespace Ornament.MemberShip.Plugin.Api
 {
     [Authorize]
     public class UserGroupsController : ApiController

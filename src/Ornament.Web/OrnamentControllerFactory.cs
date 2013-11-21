@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using MvcContrib.PortableAreas;
 
 namespace Ornament.Web
 {
@@ -25,6 +24,7 @@ namespace Ornament.Web
                 throw new ArgumentNullException("controllers");
             _container = (WindsorContainer)OrnamentContext.IocContainer;
             Regist(controllers);
+            Regist(typeof(EmbeddedResourceController));
         }
 
         public Type ErrorController { get; set; }
@@ -38,7 +38,17 @@ namespace Ornament.Web
                 _container.Register(Component.For(t).LifestyleTransient());
             }
         }
+        protected override Type GetControllerType(RequestContext requestContext, string controllerName)
+        {
+            var result = base.GetControllerType(requestContext, controllerName);
+            return result;
 
+        }
+        public override IController CreateController(RequestContext requestContext, string controllerName)
+        {
+            var result = base.CreateController(requestContext, controllerName);
+            return result;
+        }
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
             //try

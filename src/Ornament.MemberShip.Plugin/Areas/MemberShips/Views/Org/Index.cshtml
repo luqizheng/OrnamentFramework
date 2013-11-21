@@ -1,42 +1,37 @@
 ﻿@using Ornament
-@using Ornament.MVCWebFrame.Models
-@using Ornament.MVCWebFrame.Models.Membership
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
-@using Ornament.Web
 @using Ornament.Web.HtmlExtends
-@using Resources
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = "Organization";
     Layout = OrnamentContext.Configuration.BackendLayout();
     string parentId = Model != null ? Model.Id : "";
-    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
-    bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Modify);
+    var childOrgs = ((IEnumerable<Org>) ViewData["Orgs"]);
+    bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
 @section pageTitle
 {
-    @if (this.Model == null || this.Model.Parent == null)
+    @if (Model == null || Model.Parent == null)
     {
         <h5>Org List </h5>
     }
     else
     {
-       
-        <h5>@this.Model.Name</h5>
+        <h5>@Model.Name</h5>
     }
     <span>
-        @Html.Partial("OrgNavigator", this.Model)
+        @Html.Partial("OrgNavigator", Model)
     </span>
 }
 
 <div class="widget">
     @Html.BoxHeader(
-    @<text>
-    <a  class="btn btn-primary" href="@Url.Action("Create", new { parentId = parentId })"><i class="icon-white icon-plus"></i>
-        @Basic.Create
-    </a>
-    </text>)
+        @<text>
+             <a  class="btn btn-primary" href="@Url.Action("Create", new {parentId})"><i class="icon-white icon-plus"></i>
+                 @Ornament.Properties.Resources.Create
+             </a>
+         </text>)
 
     <div class="body well">
         @if (childOrgs.Count() != 0)
@@ -62,7 +57,7 @@
                             {
                                 <tr>
                                     <th>
-                                        <a href="@Url.Action("index", new { id = item.Id })" class="btn btn-info btn-mini"><i class="icon-arrow-right icon-white"></i></a>
+                                        <a href="@Url.Action("index", new {id = item.Id})" class="btn btn-info btn-mini"><i class="icon-arrow-right icon-white"></i></a>
                                     </th>
                                     <td>@item.Name
                                     </td>
@@ -71,7 +66,7 @@
                                     <td>
                                         @if (editPermission)
                                         {
-                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-info btn-mini"><i class=" icon-edit icon-white"></i></a>
+                                            <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-info btn-mini"><i class=" icon-edit icon-white"></i></a>
                                         }
                                     </td>
                                 </tr>

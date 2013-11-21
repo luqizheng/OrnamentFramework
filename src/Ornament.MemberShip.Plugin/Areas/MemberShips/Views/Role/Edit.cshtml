@@ -1,10 +1,11 @@
 ﻿@using Ornament
+@using Ornament.MemberShip.Plugin.Properties
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
-@using Resources
+
 @model Ornament.MemberShip.Role
 @{
-    string subject = Basic.Edit + Resources.MemberShip.Role + Model.Name;
+    string subject = Ornament.Properties.Resources.Edit + Resources.Role + Model.Name;
     ViewBag.Title = subject;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
@@ -19,8 +20,8 @@
     {
 
     @Html.BoxHeader(@<text>
-    <button class="btn btn-primary">@Basic.Save</button>
-    <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+    <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
+    <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
     </text>);
 
 
@@ -45,14 +46,14 @@
     </div>
     @Html.HiddenFor(model => model.Id)
     <div class="control-group">
-        <label class="control-label">@MemberShip.Permission</label>
+        <label class="control-label">@Resources.Permission</label>
         <div class="controls">
             @Html.Partial("ChoicePermissions", Model)
         </div>
     </div>
     <div class="form-actions">
-        <button class="btn btn-primary">@Basic.Save</button>
-        <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+        <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
+        <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
     </div>
 
     </text>);

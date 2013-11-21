@@ -1,32 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 
-namespace Ornament.MVCWebFrame.Api.Core
+namespace Ornament.MemberShip.Plugin.Api
 {
-    public class OrgsController : ApiController
+    public class RolesController : ApiController
     {
         private readonly IMemberShipFactory _factory;
 
-        public OrgsController(IMemberShipFactory factory)
+        public RolesController(IMemberShipFactory factory)
         {
             _factory = factory;
         }
 
         // GET api/usersapi
-        [HttpGet]
+        [System.Web.Http.HttpGet]
         public IEnumerable<object> Match(string name, int? page)
         {
-            int page1 = page ?? 0;
-            IEnumerable<Org> result = _factory.CreateOrgDao().Find(name, page1, 10);
+            var page1 = page ?? 0;
+            var result = _factory.CreateRoleDao().Find(name + "%", page1, 10);
 
-            var c = from org in result
+            var c = from role in result
+
                     select new
                         {
-                            id = org.Id,
-                            Name=org.Name,
+                            id = role.Id,
+                            Name = role.Name,
                         };
             return c;
         }

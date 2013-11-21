@@ -34,7 +34,7 @@
             Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
         };
 
-        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Memberships/user/index.js")", function (main) {
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/User/Index.js")", function (main) {
             main.init(multiLanguate, curUser, {
                 url: "@Url.Action("Users", "User", new { area = "MemberShips" })"
             });

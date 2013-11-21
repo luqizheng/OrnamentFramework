@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Web.Http;
-using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
-using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
-using log4net;
 
-namespace Ornament.MVCWebFrame.Api.Core
+namespace Ornament.MemberShip.Plugin.Api
 {
     [Session, Authorize]
     public class UsersController : ApiController

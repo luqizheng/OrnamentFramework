@@ -1,9 +1,10 @@
 ﻿@using Ornament
+@using Ornament.MemberShip.Plugin.Properties
 @using Ornament.Web
-@using Resources
+
 @model Ornament.MemberShip.Role
 @{
-    string subject = Basic.Create + MemberShip.Role;
+    string subject = Ornament.Properties.Resources.Create + Resources.Role;
     ViewBag.Title = subject;
      Layout = OrnamentContext.Configuration.BackendLayout();
 <div class="widget">
@@ -33,7 +34,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">@Resources.MemberShip.Permission</label>
+                <label class="control-label">@Resources.Permission</label>
                 <div class="controls">
                     @Html.Partial("ChoicePermissions", Model)
                 </div>

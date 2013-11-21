@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Relatives;
-using Ornament.Web;
 using Qi.Web.Http;
 
-namespace Ornament.MVCWebFrame.Api.Core
+namespace Ornament.MemberShip.Plugin.Api
 {
     [ApiSession]
     public class FriendsController : ApiController
