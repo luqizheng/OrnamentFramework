@@ -656,7 +656,6 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\Modules\Combine\Badminton\Brand.js" />
-    <Content Include="Scripts\Modules\Combine\Messages\notify-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
     <Content Include="Scripts\Modules\lib\ajaxErrorHandler.js" />
     <Content Include="Scripts\Modules\lib\client.js" />
@@ -677,11 +676,6 @@
     <Content Include="Scripts\Modules\Views\MyMessage\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\select2Helper.js" />
     <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
-    <Content Include="Scripts\Modules\Views\Messages\NewsType\Index.js" />
-    <Content Include="Scripts\Modules\Views\Messages\News\Index.js" />
-    <Content Include="Scripts\Modules\Views\Messages\NotifyType\index.js" />
-    <Content Include="Scripts\Modules\Views\Messages\Template\Edit.js" />
-    <Content Include="Scripts\Modules\Views\Messages\Template\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\form.js" />
     <Content Include="Scripts\Modules\Views\_layout.js" />
     <Content Include="Scripts\plugins\ui\jquery.nicescroll.js" />
@@ -1096,6 +1090,7 @@
     <Folder Include="bin\" />
     <Folder Include="Scripts\Modules\Combine\Share\" />
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
+    <Folder Include="Scripts\Modules\Views\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -1167,6 +1162,10 @@
     <ProjectReference Include="..\Messages\Ornament.Messages.Dao.NHibernateImple\Ornament.Messages.Dao.NHibernateImple.csproj">
       <Project>{65b35676-172d-4c01-ba1e-02d99083c155}</Project>
       <Name>Ornament.Messages.Dao.NHibernateImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Plugin\Ornament.Messages.Plugin.csproj">
+      <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
+      <Name>Ornament.Messages.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>

@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.MemberShip.Plugin"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Messages.Plugin", "Messages\Ornament.Messages.Plugin\Ornament.Messages.Plugin.csproj", "{D598A731-5CD9-4871-AC80-EE64C949E30D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcPlugins", "MvcPlugins", "{0B978B03-DCA6-4665-9224-3C979218D695}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi

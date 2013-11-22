@@ -140,6 +140,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\NewsType\Index.js" />
+    <Content Include="Scripts\News\Index.js" />
+    <Content Include="Scripts\NotifyType\index.js" />
+    <Content Include="Scripts\Template\Edit.js" />
+    <Content Include="Scripts\Template\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
