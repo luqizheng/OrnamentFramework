@@ -16,9 +16,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             //注册 Dao
-            bus.Send(new DaoFactoryRegister(typeof (IMemberShipFactory), typeof (MemberShipFactory)));
+            bus.Send(new DaoFactoryRegister(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
-
+            //page scripts  regist
             context.MapRoute(
                 AreaName + "_scripts",
                 AreaRoutePrefix + "/Scripts/User/{resourceName}",
@@ -26,7 +26,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                     {
                         controller = "OrnamentEmbeddedResource",
                         action = "Index",
-                        resourcePath = "Scripts.User",
+                        resourcePath = "Ornament.MemberShip.Plugin.Scripts.User",
                     }
                     ,
                     new string[]
@@ -36,12 +36,28 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                     );
 
             context.MapRoute(
+              AreaName + "_combine_scripts",
+              AreaRoutePrefix + "/Scripts/Combine/{resourceName}",
+              new
+              {
+                  controller = "OrnamentEmbeddedResource",
+                  action = "Index",
+                  resourcePath = "Ornament.MemberShip.Plugin.Scripts.combine",
+              }
+                  ,
+                  new string[]
+                        {
+                            "Ornament.Web.Controllers"
+                        }
+                  );
+
+            context.MapRoute(
                 AreaName + "_images",
                 AreaRoutePrefix + "/images/{resourceName}",
                 new
                     {
-                        controller = "OrnamentEmbeddedResource", 
-                        action = "Index", 
+                        controller = "OrnamentEmbeddedResource",
+                        action = "Index",
                         resourcePath = "images"
                     },
                     new string[]
@@ -53,14 +69,14 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             //MemberShips/User/Edit/admin
             context.MapRoute(AreaName + "_EditUser",
                              AreaName + "/User/Edit/{loginId}",
-                             new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"}
+                             new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" }
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             base.RegisterArea(context, bus);

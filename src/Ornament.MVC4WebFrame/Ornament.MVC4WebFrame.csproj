@@ -693,7 +693,6 @@
     <Content Include="Scripts\Modules\Views\Messages\Template\Edit.js" />
     <Content Include="Scripts\Modules\Views\Messages\Template\Index.js" />
     <Content Include="Scripts\Modules\Views\Share\form.js" />
-    <Content Include="Scripts\Modules\Views\Share\memberships.js" />
     <Content Include="Scripts\Modules\Views\_layout.js" />
     <Content Include="Scripts\plugins\ui\jquery.nicescroll.js" />
     <Content Include="Scripts\plugins\ui\jquery.slimscroll.js" />
@@ -1069,8 +1068,6 @@
     <Content Include="Views\MyMessage\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BootstrapDate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RichText.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Role[].cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\UserGroup[].cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EmumRadio.cshtml" />
@@ -1079,7 +1076,6 @@
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
     <Content Include="Views\Security\VerifyEmail.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Org.cshtml" />
     <Content Include="Views\Security\RetrievePassword.cshtml" />
     <Content Include="Views\Security\RetrievePasswordResult.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />

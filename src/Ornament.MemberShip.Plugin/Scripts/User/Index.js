@@ -1,16 +1,10 @@
-﻿/// <reference path="../../../Combine/Views/user.typeahead.js" />
-/// <reference path="../../../Combine/Views/userGroup.select2.js" />
-/// <reference path="../../_appLayout.js" />
-/// <reference path="../../../Combine/Views/user.typeahead.js" />
-/// <reference path="../../../Combine/Memberships/user.js" />
-/// <reference path="../../_appLayout.js" />
-/// <reference path="../../Share/dataTables.js" />
+﻿/// <reference path="../Combine/user.js" />
 
 
 define(function (require) {
-    require("../../_appLayout.js");
+    require("/scripts/_appLayout.js");
     var $ = require("jquery"),
-        userApi = require("../../../Combine/Memberships/user.js"),
+        userApi = require("../Combine/user.js"),
         pm = require("/share/pm.js");
     var pmDialog;
     require("uniform")($);

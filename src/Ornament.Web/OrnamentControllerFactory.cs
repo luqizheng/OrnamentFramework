@@ -5,6 +5,7 @@ using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using MvcContrib.PortableAreas;
+using Ornament.Web.Controllers;
 
 namespace Ornament.Web
 {
@@ -24,6 +25,7 @@ namespace Ornament.Web
                 throw new ArgumentNullException("controllers");
             _container = (WindsorContainer)OrnamentContext.IocContainer;
             Regist(controllers);
+            Regist(typeof(OrnamentEmbeddedResourceController));
             Regist(typeof(EmbeddedResourceController));
         }
 
