@@ -233,12 +233,6 @@
     <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
     <Compile Include="Areas\Docs\Models\BaseTypeModel.cs" />
     <Compile Include="Areas\Docs\Models\ExtenderTypeModel.cs" />
-    <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
-    <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
-    <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
-    <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />
-    <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
-    <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Settings\Controllers\FileManagerController.cs" />
     <Compile Include="Areas\Settings\Controllers\FilesController.cs" />
     <Compile Include="Areas\Settings\Controllers\PluginsController.cs" />
@@ -270,11 +264,6 @@
     <Content Include="Config\hibernate_mysql.cfg.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Messages\Views\NewsType\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\NewsType\Edit.cshtml" />
-    <Content Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
-    <Content Include="Areas\Messages\Views\NewsType\Create.cshtml" />
-    <Content Include="Areas\Messages\Views\Web.config" />
     <Content Include="Content\global.css" />
     <Content Include="Content\img\backgrounds\actions.png" />
     <Content Include="Content\img\backgrounds\body_line.png" />
@@ -427,6 +416,7 @@
     <Content Include="Content\templates\metralab\font\myriadproregular.svg" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Components\avalon.js" />
     <Content Include="Scripts\Fx\bootstrap.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -668,11 +658,11 @@
     <Content Include="Scripts\Modules\Combine\Badminton\Brand.js" />
     <Content Include="Scripts\Modules\Combine\Messages\notify-1.0.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
-    <Content Include="Scripts\Modules\Combine\Share\ajaxErrorHandler.js" />
-    <Content Include="Scripts\Modules\Combine\Share\client.js" />
-    <Content Include="Scripts\Modules\Combine\Share\cookie.js" />
-    <Content Include="Scripts\Modules\Combine\Share\time.js" />
-    <Content Include="Scripts\Modules\Combine\Share\WebApi.js" />
+    <Content Include="Scripts\Modules\lib\ajaxErrorHandler.js" />
+    <Content Include="Scripts\Modules\lib\client.js" />
+    <Content Include="Scripts\Modules\lib\cookie.js" />
+    <Content Include="Scripts\Modules\lib\time.js" />
+    <Content Include="Scripts\Modules\lib\WebApi.js" />
     <Content Include="Scripts\Modules\Views\Share\dataTables.js" />
     <Content Include="Scripts\Modules\Views\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\metralab\_applayout.js" />
@@ -704,20 +694,11 @@
     <Content Include="Scripts\Components\html5shiv.js" />
     <Content Include="Areas\Docs\Views\TypeLayout\ExtenderType.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
-    <Content Include="Areas\Messages\Views\News\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
-    <Content Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
     <Content Include="Areas\Settings\Views\Site\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
     <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
     <Content Include="Areas\Docs\Views\TypeLayout\BaseType.cshtml" />
     <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
-    <Content Include="Areas\Messages\Views\Template\Edit.cshtml" />
-    <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
-    <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="CodeTemplates\AddView\CSHTML\oCreate.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oDelete.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oDetails.tt" />
@@ -726,9 +707,6 @@
     <Content Include="CodeTemplates\AddView\CSHTML\oList.tt" />
     <Content Include="CodeTemplates\AddController\oController.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\Select2_Single.tt" />
-    <Content Include="Areas\Messages\Views\Template\Index.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Content\templates\metralab\font\myriadprobold.eot" />
     <Content Include="Content\templates\metralab\font\myriadprobold.ttf" />
     <Content Include="Content\templates\metralab\font\myriadprobold.woff" />
@@ -797,8 +775,6 @@
     <Content Include="Scripts\plugins\forms\jquery.validate\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\plugins\utility\jquery.endless-scroll.js" />
     <Content Include="Scripts\Components\json2.js" />
-    <Content Include="Scripts\Components\knockout-2.2.1.debug.js" />
-    <Content Include="Scripts\Components\knockout-2.2.1.js" />
     <Content Include="Scripts\i18n\elfinder\elfinder.ar.js" />
     <Content Include="Scripts\i18n\elfinder\elfinder.bg.js" />
     <Content Include="Scripts\i18n\elfinder\elfinder.ca.js" />
@@ -897,7 +873,7 @@
     <Content Include="Scripts\Components\selectivizr.js" />
     <Content Include="Scripts\plugins\uploader\swfupload.js" />
     <Content Include="Scripts\plugins\utility\jquery.toDictionary.js" />
-    <Content Include="Scripts\Modules\Combine\Share\String.js" />
+    <Content Include="Scripts\Modules\lib\String.js" />
     <Content Include="Scripts\plugins\uploader\_swfuploadHandler.js" />
     <Content Include="Content\templates\pannonia\css\elfinder.css" />
     <Content Include="Content\templates\pannonia\css\fam-icons.css" />
@@ -1117,8 +1093,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Messages\Models\" />
     <Folder Include="bin\" />
+    <Folder Include="Scripts\Modules\Combine\Share\" />
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
   </ItemGroup>
   <ItemGroup>
@@ -1283,24 +1259,6 @@
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-CN.resx" />
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-CN.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-CN.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

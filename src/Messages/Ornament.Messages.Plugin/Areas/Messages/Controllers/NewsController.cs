@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
 using System.Web.Mvc;
-using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Web;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
+namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Authorize(Roles="admin",Users="admin")]
     public class NewsController : Controller

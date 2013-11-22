@@ -2,11 +2,11 @@
 /// <reference path="../Share/WebApi.js" />
 
 define(function (require) {
-    var webApi = require("../share/webapi.js");
+    var webApi = require("/Scripts/Modules/lib/webapi.js");
     var url = "/Api/Friends";
     var friendApi = new webApi(url);
     
-    function Friend(obj, pmIns) {
+    function friend(obj, pmIns) {
         /// <summary>
         /// obj是Friend对象，可以从/Api/Friends获取到 
         /// </summary>
@@ -22,14 +22,14 @@ define(function (require) {
         pm = pmIns;
     }
 
-    Friend.ListFriends = function (func) {
+    friend.ListFriends = function (func) {
         /// <summary>
         /// 列出当前用户的所有朋友信息
         /// </summary>
         /// <param name="func"></param>
         $.get(url, func);
     };
-    Friend.Add = function (userId, group, func) {
+    friend.Add = function (userId, group, func) {
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +38,7 @@ define(function (require) {
         /// <param name="func"></param>
         friendApi.Put({ friend: userId, group: group }, func);
     };
-    Friend.prototype.ListChat = function (func) {
+    friend.prototype.ListChat = function (func) {
         /// <summary>
         /// 列出对话
         /// </summary>
@@ -52,11 +52,16 @@ define(function (require) {
         });
     };
 
-    Friend.prototype.Send = function (content, func) {
+    friend.prototype.Send = function (content, func) {
+    	/// <summary>
+    	/// 
+    	/// </summary>
+    	/// <param name="content"></param>
+    	/// <param name="func"></param>
         pm.send(content, this.Id, func);
     };
 
-    Friend.prototype.GetNewer = function (func) {
+    friend.prototype.GetNewer = function (func) {
         var self = this;
         /// <summary>
         /// 
@@ -71,5 +76,5 @@ define(function (require) {
         });
     };
 
-    return Friend;
+    return friend;
 })
