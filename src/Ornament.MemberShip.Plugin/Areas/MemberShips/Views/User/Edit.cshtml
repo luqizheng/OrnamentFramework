@@ -1,21 +1,18 @@
-﻿@using System.Configuration
-@using System.Web.Profile
-@using Ornament
-@using Ornament.MemberShip.Plugin.Properties
+﻿@using Ornament
+@using Ornament.Properties
 @using Ornament.Web
-@using Ornament.Web.HtmlExtends
 @model Ornament.MemberShip.Plugin.Models.Memberships.EditUserModel
 @{
-    ViewBag.Title = Ornament.Properties.Resources.Edit + this.Model.LoginId;
+    ViewBag.Title = Resources.Edit + Model.LoginId;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle{
     <h5>
-        @this.Model.LoginId
+        @Model.LoginId
     </h5>
 }
 
-@using (Html.BeginForm("edit", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("edit", "User", FormMethod.Post, new {@class = "form-horizontal"}))
 {
     <div class="well">
         <ul class="nav nav-tabs">
@@ -61,8 +58,8 @@
         </div>
 
         <p class="form-actions">
-            <button id="submitButton" class="btn btn-info" type="submit">@Ornament.Properties.Resources.Save</button>
-            <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Ornament.Properties.Resources.Cancel</a>
+            <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
+            <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new {area = "MemberShips"})">@Resources.Cancel</a>
         </p>
     </div>
 }
@@ -72,4 +69,3 @@
         seajs.use(["/memberships/user/edit.js"]);
     </script>
 }
-

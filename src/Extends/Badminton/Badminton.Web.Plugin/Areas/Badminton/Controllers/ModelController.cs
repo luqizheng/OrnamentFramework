@@ -1,15 +1,12 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using Badminton.Consumableses;
 using Badminton.Dao;
-using Castle.MicroKernel.Handlers;
 using Ornament.Web;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
+namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
     [Session, Authorize(Roles = "admin")]
     public class ModelController : Controller
@@ -46,6 +43,7 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
 
             return View(_daoFactory.ModelDao().Get(id.Value));
         }
+
         [HttpPost]
         public ActionResult Save(Model model)
         {
@@ -62,9 +60,9 @@ namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
         {
             if (id == null)
                 throw new HttpException(404, "Not found Model ");
-            var model = _daoFactory.ModelDao().Get(id.Value);
+            Model model = _daoFactory.ModelDao().Get(id.Value);
             _daoFactory.ModelDao().Delete(model);
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

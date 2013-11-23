@@ -6,7 +6,7 @@ using Badminton.Consumableses;
 using Badminton.Dao;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
+namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
     [Authorize, Session]
     public class BrandController : Controller

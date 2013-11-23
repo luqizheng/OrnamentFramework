@@ -1,0 +1,41 @@
+﻿@using Resources
+@model Badminton.MeasurementUnit
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Save", "MeasurementUnit", FormMethod.Post))
+{
+    <div class="widget">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <button class="btn btn-primary">@Basic.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+            </div>
+        </div>
+
+        <div class="well form-horizontal">
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+
+            @Html.EditorFor(model => model.IntegerName)
+            @Html.EditorFor(model => model.DecimalName)
+            @Html.EditorFor(model => model.Adecimal)
+
+
+
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-actions">
+                <button class="btn btn-primary">@Basic.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+            </div>
+        </div>
+    </div>
+}

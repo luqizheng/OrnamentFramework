@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text.RegularExpressions;
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Qi;
@@ -16,14 +15,14 @@ namespace Ornament.MVCWebFrame.App_Start
             CombineSeajsModule = false;
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
-                {
-                    GlobalStyle,
-                    CodeStyle,
-                    Fx,
-                    BizRelative,
-                    RegistryCtrl,
-                    Comp
-                };
+            {
+                GlobalStyle,
+                CodeStyle,
+                Fx,
+                BizRelative,
+                RegistryCtrl,
+                Comp
+            };
 
             foreach (var item in registryParty)
             {
@@ -32,7 +31,6 @@ namespace Ornament.MVCWebFrame.App_Start
 
             var manager = new ScriptsFolderManager();
             manager.RegisterBundles(bundles);
-
         }
 
         private static void Comp(BundleCollection t1)
@@ -43,75 +41,20 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void Fx(BundleCollection bundles)
         {
             bundles.Add(new Bundle("~/bundles/jquery.js")
-                            .Include("~/Scripts/fx/jquery-{version}.js"));
+                .Include("~/Scripts/fx/jquery-{version}.js"));
 
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js")
-                            .Include("~/Scripts/fx/bootstrap.js"));
+                .Include("~/Scripts/fx/bootstrap.js"));
 
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js", "jQuery.fn.spinner")
-                            .Include("~/Scripts/fx/jquery-ui-{version}.js"));
+                .Include("~/Scripts/fx/jquery-ui-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/avalon.js")
+                .Include("~/Scripts/Components/avalon.js"));
             bundles.Add(
-                new SeajsBundle("~/_appLayout.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/_appLayout.js"));
+                new SeajsBundle("~/Scripts/_appLayout.js", CombineSeajsModule).Include(
+                    "~/Scripts/Modules/Views/_appLayout.js"));
         }
-        /*
-        private static void JQueryPlugin(BundleCollection bundles)
-        {
-#if DEBUG
-            using (var writer = new StreamWriter(ApplicationHelper.MapPath("~/log/jqPlugin.txt")))
-            {
-#endif
-                string searchFolder = ApplicationHelper.MapPath("~/Scripts/plugins");
-                foreach (string dirPath in Directory.GetDirectories(searchFolder))
-                {
-                    string[] files = Directory.GetFiles(dirPath, "*.js");
-                    string virtualFolderNmae = ToVirtualPath(dirPath);
-                    foreach (string file in files)
-                    {
-                        if (file.ToLower().EndsWith(".min.js"))
-                            continue;
-                        var fileInfo = new FileInfo(file);
-                        if (fileInfo.Name.StartsWith("jquery."))
-                        {
-                            string path = virtualFolderNmae + "/" + fileInfo.Name;
-                            string bundleName = "~/bundles/" +
-                                                Regex.Replace(fileInfo.Name, @"(jquery\.)|(-[\d.]+\d)", "",
-                                                              RegexOptions.IgnoreCase);
-                            bundles.Add(new JQueryPluginSeajsBundle(bundleName).Include(path));
-#if DEBUG
-                            writer.WriteLine("\"{0}\":\"{1}\",", (new FileInfo(bundleName).Name.Replace(".js", "")),
-                                             bundleName.Replace("~/", "/"));
-#endif
-                        }
-#if DEBUG
-                    }
-#endif
-
-                    string[] folders = Directory.GetDirectories(dirPath);
-                    foreach (string folderPath in folders)
-                    {
-                        var directInfo = new DirectoryInfo(folderPath);
-
-                        if (!directInfo.Name.StartsWith("jquery."))
-                        {
-                            continue;
-                        }
-
-                        string virtualFolderName = ToVirtualPath(folderPath);
-                        string bundleName = "~/bundles/" + directInfo.Name.Replace("jquery.", "") + ".js";
-                        bundles.Add(
-                            new JQueryPluginSeajsBundle(bundleName).Include(
-                                virtualFolderName +
-                                "/*.js"));
-#if DEBUG
-                        writer.WriteLine("\"{0}\":\"{1}\",", directInfo.Name.Replace(".js", ""),
-                                         bundleName.Replace("~/", "/"));
-#endif
-                    }
-                }
-            }
-        }
-         */
 
         /// <summary>
         ///     把物理路径改为虚拟路径
@@ -168,7 +111,7 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void CodeStyle(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Components/CodeStyle")
-                            .Include("~/scripts/Components/Prettify/prettify.js"));
+                .Include("~/scripts/Components/Prettify/prettify.js"));
         }
 
 

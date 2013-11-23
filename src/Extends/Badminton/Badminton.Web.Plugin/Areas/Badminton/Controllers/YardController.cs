@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
 using Badminton.Dao;
-using Ornament.MVCWebFrame.Areas.Badminton.Models;
+using Badminton.Web.Plugin.Areas.Badminton.Models;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
+namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
     public class YardController : Controller
     {

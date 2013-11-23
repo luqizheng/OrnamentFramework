@@ -655,7 +655,6 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
-    <Content Include="Scripts\Modules\Combine\Badminton\Brand.js" />
     <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
     <Content Include="Scripts\Modules\lib\ajaxErrorHandler.js" />
     <Content Include="Scripts\Modules\lib\client.js" />

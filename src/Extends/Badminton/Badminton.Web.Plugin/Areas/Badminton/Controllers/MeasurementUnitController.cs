@@ -6,7 +6,7 @@ using Badminton;
 using Badminton.Dao;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
+namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
     [Session, Authorize, HandleError]
     public class MeasurementUnitController : Controller

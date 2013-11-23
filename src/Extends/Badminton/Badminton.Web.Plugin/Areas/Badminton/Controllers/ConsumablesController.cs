@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
+namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
     public class ConsumablesController : Controller
     {

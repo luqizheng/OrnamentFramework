@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Badminton;
 using Badminton.Dao;
-using Ornament.MVCWebFrame.Areas.Badminton.Models;
+using Badminton.Web.Plugin.Areas.Badminton.Models;
 using Ornament.Web;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Badminton.Controllers
+namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
     [Session]
     public class GymnasiumController : Controller
