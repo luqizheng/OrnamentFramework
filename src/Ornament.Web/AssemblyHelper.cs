@@ -39,12 +39,12 @@ namespace Ornament.Web
         {
             foreach (Type t in assembly.GetTypes())
             {
-                if (typeof(IController).IsAssignableFrom(t))
+                if (typeof (IController).IsAssignableFrom(t))
                 {
                     controllerResult.Add(t);
                     continue;
                 }
-                if (typeof(ApiController).IsAssignableFrom(t))
+                if (typeof (ApiController).IsAssignableFrom(t))
                 {
                     apiControllerResult.Add(t);
                 }

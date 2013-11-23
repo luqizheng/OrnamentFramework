@@ -156,7 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyHelper.cs" />
+    <Compile Include="Bundles\Config\BaseScriptsManager.cs" />
+    <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
+    <Compile Include="Bundles\RouteUtils.cs" />
     <Compile Include="Bundles\JQueryPluginSeajsBundle.cs" />
+    <Compile Include="Bundles\ScriptsFolderManager.cs" />
     <Compile Include="Bundles\ScriptsSeajs.cs" />
     <Compile Include="Bundles\SeajsBundle.cs" />
     <Compile Include="Bundles\SeajsMinify.cs" />

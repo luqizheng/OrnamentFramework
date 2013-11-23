@@ -1,4 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Web;
+using System.Web.Optimization;
+using System.Web.Routing;
+using MvcContrib.PortableAreas;
 
 namespace Ornament.Web.Bundles.Seajs
 {
@@ -9,13 +14,15 @@ namespace Ornament.Web.Bundles.Seajs
         /// <summary>
         /// </summary>
         /// <param name="physicPath"></param>
-        public CombineModule(string physicPath, string virtualPath, bool combine)
-            : base(physicPath, virtualPath, combine)
+        /// <param name="virtualPath"></param>
+        /// <param name="combine"></param>
+        public CombineModule(BundleContext context, string physicPath, string virtualPath, bool combine)
+            : base(context, physicPath, virtualPath, combine)
         {
             UniqueId = physicPath;
         }
+
         /// <summary>
-        /// 
         /// </summary>
         public string PhysciPath
         {
@@ -30,9 +37,29 @@ namespace Ornament.Web.Bundles.Seajs
         public virtual string BuildContent(ModualIdSets combinedModules, ModuleCollection referencModule)
         {
             string content = null;
-            using (var reader = new StreamReader(PhysciPath))
+            if (!File.Exists(PhysciPath))
             {
-                content = reader.ReadToEnd();
+                //try to get from Assembly;
+                /*var path = PhysciPath.Replace("/", ".");
+                var area = path.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)[0];*/
+                var resData = RouteUtils.GetRouteDataByUrl(PhysciPath);
+                var areaName = (string)resData.DataTokens["area"];
+                var resourcePath = resData.Values["resourcePath"].ToString();
+                var resourceName = resData.Values["resourceName"].ToString();
+                resourceName = resourcePath + "." + resourceName;
+                var resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
+                Stream resourceStream = resourceStore.GetResourceStream(resourceName);
+                using (var readerStream = new StreamReader(resourceStream))
+                {
+                    content = readerStream.ReadToEnd();
+                }
+            }
+            else
+            {
+                using (var reader = new StreamReader(PhysciPath))
+                {
+                    content = reader.ReadToEnd();
+                }
             }
             return BuildContent(content, combinedModules, referencModule);
         }

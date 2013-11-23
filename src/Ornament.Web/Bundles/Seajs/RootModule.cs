@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Web;
+using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles.Seajs
 {
@@ -8,8 +9,8 @@ namespace Ornament.Web.Bundles.Seajs
     /// </summary>
     public class RootModule : BaseCombineModule
     {
-        public RootModule(string filename, string virtualPath, bool combine)
-            : base(filename, virtualPath, combine)
+        public RootModule(BundleContext context,string filename, string virtualPath, bool combine)
+            : base(context,filename, virtualPath, combine)
         {
         }
 

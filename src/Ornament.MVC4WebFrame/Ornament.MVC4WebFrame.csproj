@@ -1090,7 +1090,6 @@
     <Folder Include="bin\" />
     <Folder Include="Scripts\Modules\Combine\Share\" />
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
-    <Folder Include="Scripts\Modules\Views\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

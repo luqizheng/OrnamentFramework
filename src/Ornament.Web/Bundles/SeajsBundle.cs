@@ -37,8 +37,8 @@ namespace Ornament.Web.Bundles
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
                                                        IEnumerable<BundleFile> bundleFiles)
         {
-            var seajs = new RootModule(
-                context.HttpContext.Request.MapPath(bundleFiles.First().VirtualFile.VirtualPath), Path, Combine);
+            var physicPath = context.HttpContext.Request.MapPath(bundleFiles.First().VirtualFile.VirtualPath);
+            var seajs = new RootModule(context, physicPath, Path, Combine);
             string subContent = seajs.BuildContent(bundleContent);
             BundleResponse result = base.ApplyTransforms(context, subContent, bundleFiles);
             if (!BundleTable.EnableOptimizations)

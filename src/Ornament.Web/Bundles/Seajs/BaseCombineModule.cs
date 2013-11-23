@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Optimization;
 
 namespace Ornament.Web.Bundles.Seajs
 {
@@ -11,13 +12,15 @@ namespace Ornament.Web.Bundles.Seajs
     {
         private ModuleCollection _modules;
 
-        protected BaseCombineModule(string uniquireId, string virtualPath, bool combine) :
+        protected BaseCombineModule(BundleContext context, string uniquireId, string virtualPath, bool combine) :
             base(uniquireId)
         {
+            Context = context;
             VirtualPath = virtualPath;
             Combine = combine;
         }
 
+        public BundleContext Context { get; set; }
         public string VirtualPath { get; set; }
         public bool Combine { get; set; }
 
@@ -121,7 +124,7 @@ namespace Ornament.Web.Bundles.Seajs
                 fullpath = VirtualPathUtility.Combine(fullpath, srcRequireModualId);
 
                 //引用js
-                var sub = new CombineModule(physicPath, fullpath, Combine);
+                var sub = new CombineModule(this.Context, physicPath, fullpath, Combine);
                 moduleIdSets.Add(sub);
                 combinedHere = true;
                 return sub;
@@ -143,20 +146,22 @@ namespace Ornament.Web.Bundles.Seajs
 
 
             //Build Define Header 
-            var result = RebuildDefinedHeader(content, moduleIdList);
+            StringBuilder result = RebuildDefinedHeader(content, moduleIdList);
 
             //添加合并文件的内容
             CombineRequirePart(result, combineFiles, moduleIdList, referencModule);
             return result.ToString();
         }
+
         /// <summary>
-        /// 合并Require部分
+        ///     合并Require部分
         /// </summary>
         /// <param name="result"></param>
         /// <param name="combineFiles"></param>
         /// <param name="moduleIdList"></param>
         /// <param name="referencModule"></param>
-        protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles, ModualIdSets moduleIdList, ModuleCollection referencModule)
+        protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles,
+                                                  ModualIdSets moduleIdList, ModuleCollection referencModule)
         {
             foreach (CombineModule combineFile in combineFiles)
             {
@@ -168,8 +173,9 @@ namespace Ornament.Web.Bundles.Seajs
                       .Append(subContent);
             }
         }
+
         /// <summary>
-        /// 重新整理defined 这一段代码，并且返回defined所包含的所有内容。
+        ///     重新整理defined 这一段代码，并且返回defined所包含的所有内容。
         /// </summary>
         /// <param name="content"></param>
         /// <param name="moduleIdList"></param>
@@ -181,6 +187,7 @@ namespace Ornament.Web.Bundles.Seajs
             result.Insert(0, Regex.Replace(content, @"define\(", match => newDefined));
             return result;
         }
+
         protected virtual string BuildDefine(ModualIdSets moduleIdList)
         {
             return String.Format("define(\"{0}\",[\"{1}\"],", GetOutputModuleId(moduleIdList),

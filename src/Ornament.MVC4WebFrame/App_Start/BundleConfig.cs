@@ -18,7 +18,6 @@ namespace Ornament.MVCWebFrame.App_Start
             var registryParty = new VoidFunc<BundleCollection>[]
                 {
                     GlobalStyle,
-                    JQueryPlugin,
                     CodeStyle,
                     Fx,
                     BizRelative,
@@ -30,6 +29,10 @@ namespace Ornament.MVCWebFrame.App_Start
             {
                 item.Invoke(bundles);
             }
+
+            var manager = new ScriptsFolderManager();
+            manager.RegisterBundles(bundles);
+
         }
 
         private static void Comp(BundleCollection t1)
@@ -51,7 +54,7 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(
                 new SeajsBundle("~/_appLayout.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/_appLayout.js"));
         }
-
+        /*
         private static void JQueryPlugin(BundleCollection bundles)
         {
 #if DEBUG
@@ -108,6 +111,7 @@ namespace Ornament.MVCWebFrame.App_Start
                 }
             }
         }
+         */
 
         /// <summary>
         ///     把物理路径改为虚拟路径

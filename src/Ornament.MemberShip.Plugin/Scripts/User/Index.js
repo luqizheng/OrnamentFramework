@@ -4,7 +4,7 @@
 define(function (require) {
     require("/scripts/_appLayout.js");
     var $ = require("jquery"),
-        userApi = require("../Combine/user.js"),
+        userApi = require("/MemberShips/Scripts/Combine/user.js"), //内嵌合并要使用绝对路径
         pm = require("/share/pm.js");
     var pmDialog;
     require("uniform")($);
