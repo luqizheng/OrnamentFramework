@@ -133,6 +133,7 @@
   <ItemGroup>
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
+    <Compile Include="Areas\Messages\Controllers\NotifyMessagesController.cs" />
     <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />

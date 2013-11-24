@@ -146,6 +146,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Brand.js" />
+    <EmbeddedResource Include="Scripts\Model\Edit.js" />
+    <EmbeddedResource Include="Scripts\Model\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

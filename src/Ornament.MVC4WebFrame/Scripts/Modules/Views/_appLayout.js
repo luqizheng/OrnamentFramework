@@ -1,9 +1,4 @@
 ﻿
-/// <reference path="../../../Views/Shared/_topMenu.cshtml" />
-/// <reference path="../Combine/Share/client.js" />
-/// <reference path="jquery-1.9.1.js" />
-/// <reference path="plugins/ui/jquery.easytabs.min.js" />
-/// <reference path="../Combine/Share/ajaxErrorHandler.js" />
 define(function (require) {
 
     var $ = require("jquery");
@@ -11,7 +6,7 @@ define(function (require) {
     require("collapsible")($);
     require("bootstrap")($);
     require("uniform")($);
-    require('../Combine/Share/ajaxErrorHandler.js')($);
+    require('../Combine/ajaxErrorHandler.js')($);
 
 
     $(".styled").uniform({ radioClass: 'choice' });
@@ -57,7 +52,7 @@ define(function (require) {
 
 
     //提示
-    var clientChecking = require("../Combine/Share/client.js");
+    var clientChecking = require("../Combine/client.js");
     var api = new clientChecking(30 * 1000, function (d) {
         if (d.HasMessage) {
             //#msgAlert 在\Views\Shared\_topMenu.cshtml

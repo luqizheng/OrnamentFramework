@@ -281,6 +281,7 @@
     <EmbeddedResource Include="Scripts\User\Create.js" />
     <EmbeddedResource Include="Scripts\User\Edit.js" />
     <EmbeddedResource Include="Scripts\User\Index.js" />
+    <EmbeddedResource Include="Scripts\Combine\dataTables.js" />
     <Content Include="Scripts\Combine\memberships.js" />
     <Content Include="web.config" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Role[].cshtml" />

@@ -12,7 +12,14 @@ namespace Ornament.Web.Bundles
     {
         public static RouteData GetRouteDataByUrl(string url)
         {
-            return RouteTable.Routes.GetRouteData(new RewritedHttpContextBase(url));
+            try
+            {
+                return RouteTable.Routes.GetRouteData(new RewritedHttpContextBase(url));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private class RewritedHttpContextBase : HttpContextBase

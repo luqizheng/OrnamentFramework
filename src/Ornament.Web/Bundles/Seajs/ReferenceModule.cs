@@ -2,7 +2,7 @@
 
 namespace Ornament.Web.Bundles.Seajs
 {
-    public class ReferenceModule
+    public class ReferenceModule : ISeajsModule
     {
         public ReferenceModule(string moduleId)
         {

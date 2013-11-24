@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip;
-using Ornament.Messages;
 using Ornament.Messages.Dao;
-using Ornament.Messages.Notification;
-using Ornament.Web;
 using Qi.Web.Http;
 
-namespace Ornament.MVCWebFrame.Api.Core
+namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [ApiSession]
     public class NotifyMessagesController : ApiController

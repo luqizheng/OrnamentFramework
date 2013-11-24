@@ -61,6 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcPlugins", "MvcPlugins", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton.Web.Plugin", "Extends\Badminton\Badminton.Web.Plugin\Badminton.Web.Plugin.csproj", "{FCA271AF-92ED-468B-9FE7-ECF06889AF32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friends", "MvcPlugins\Friends\Friends.csproj", "{1F2F532B-8342-4469-BF93-9343129BC80C}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi
@@ -294,6 +296,16 @@ Global
 		{FCA271AF-92ED-468B-9FE7-ECF06889AF32}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FCA271AF-92ED-468B-9FE7-ECF06889AF32}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FCA271AF-92ED-468B-9FE7-ECF06889AF32}.Release|x86.ActiveCfg = Release|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1F2F532B-8342-4469-BF93-9343129BC80C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -322,5 +334,6 @@ Global
 		{49102E6E-3FD1-4B38-978F-E60E32AB534B} = {0C1F87DE-FD4D-4611-871C-2CAA07F887D2}
 		{6AB594B1-72EF-4886-A6D1-CC6CFF644D31} = {0C1F87DE-FD4D-4611-871C-2CAA07F887D2}
 		{B555C0C3-7F18-4DAD-A771-A0DF15D1AA4A} = {0C1F87DE-FD4D-4611-871C-2CAA07F887D2}
+		{1F2F532B-8342-4469-BF93-9343129BC80C} = {0B978B03-DCA6-4665-9224-3C979218D695}
 	EndGlobalSection
 EndGlobal

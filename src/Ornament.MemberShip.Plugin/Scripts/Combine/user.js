@@ -3,7 +3,7 @@ define(function (require) {
 
     var userUrl = "/api/Users",
         secrityUrl = "/api/security";
-    var WebApi = require("../Share/WebApi.js");
+    var WebApi = require("/Scripts/combine/webapi.js");
 
     function User(obj) {
         /// <summary>

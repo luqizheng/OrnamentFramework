@@ -188,7 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
-    <Compile Include="Api\Core\NotifyMessagesController.cs" />
     <Compile Include="Api\Core\PersonalMessagesController.cs" />
     <Compile Include="App_GlobalResources\Basic.Designer.cs">
       <DependentUpon>Basic.resx</DependentUpon>
@@ -655,27 +654,24 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
-    <Content Include="Scripts\Modules\Combine\Personal\PersonalMessage.js" />
-    <Content Include="Scripts\Modules\lib\ajaxErrorHandler.js" />
-    <Content Include="Scripts\Modules\lib\client.js" />
-    <Content Include="Scripts\Modules\lib\cookie.js" />
-    <Content Include="Scripts\Modules\lib\time.js" />
-    <Content Include="Scripts\Modules\lib\WebApi.js" />
-    <Content Include="Scripts\Modules\Views\Share\dataTables.js" />
+    <Content Include="Scripts\Modules\Combine\PersonalMessage.js" />
+    <Content Include="Scripts\Modules\Combine\ajaxErrorHandler.js" />
+    <Content Include="Scripts\Modules\Combine\client.js" />
+    <Content Include="Scripts\Modules\Combine\cookie.js" />
+    <Content Include="Scripts\Modules\Combine\time.js" />
+    <Content Include="Scripts\Modules\Combine\WebApi.js" />
+    <Content Include="Scripts\Modules\Combine\dataTables.js" />
     <Content Include="Scripts\Modules\Views\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\metralab\_applayout.js" />
     <Content Include="Scripts\Modules\Views\_templates\pannonia\_applayout.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
-    <Content Include="Scripts\Modules\Views\Badminton\Model\Edit.js" />
-    <Content Include="Scripts\Modules\Views\Badminton\Model\Index.js" />
-    <Content Include="Scripts\Modules\Views\Crm\Company\Index.js" />
     <Content Include="Scripts\Modules\Views\Docs\TypeLayout\BaseType.js" />
     <Content Include="Scripts\Modules\Views\Docs\TypeLayout\ExtenderType.js" />
     <Content Include="Scripts\Modules\Views\MyMessage\Index.js" />
-    <Content Include="Scripts\Modules\Views\Share\select2Helper.js" />
-    <Content Include="Scripts\Modules\Combine\Views\user.typeahead.js" />
-    <Content Include="Scripts\Modules\Views\Share\form.js" />
+    <Content Include="Scripts\Modules\Combine\select2Helper.js" />
+    <Content Include="Scripts\Modules\Combine\user.typeahead.js" />
+    <Content Include="Scripts\Modules\Combine\form.js" />
     <Content Include="Scripts\Modules\Views\_layout.js" />
     <Content Include="Scripts\plugins\ui\jquery.nicescroll.js" />
     <Content Include="Scripts\plugins\ui\jquery.slimscroll.js" />
@@ -747,8 +743,8 @@
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\plugins\utility\jquery.dotdotdot-1.5.1.js" />
-    <Content Include="Scripts\Modules\Views\Share\personal.js" />
-    <Content Include="Scripts\Modules\Views\Share\pm.js" />
+    <Content Include="Scripts\Modules\Combine\personal.js" />
+    <Content Include="Scripts\Modules\Combine\pm.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask-2.2.66.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask-2.2.66.min.js" />
     <Content Include="Scripts\plugins\forms\jquery.inputmask\jquery.inputmask.date.extensions-2.2.66.js" />
@@ -866,7 +862,7 @@
     <Content Include="Scripts\Components\selectivizr.js" />
     <Content Include="Scripts\plugins\uploader\swfupload.js" />
     <Content Include="Scripts\plugins\utility\jquery.toDictionary.js" />
-    <Content Include="Scripts\Modules\lib\String.js" />
+    <Content Include="Scripts\Modules\Combine\String.js" />
     <Content Include="Scripts\plugins\uploader\_swfuploadHandler.js" />
     <Content Include="Content\templates\pannonia\css\elfinder.css" />
     <Content Include="Content\templates\pannonia\css\fam-icons.css" />
@@ -1087,7 +1083,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Scripts\Modules\Combine\Share\" />
     <Folder Include="Scripts\Modules\Views\Docs\BaseType\" />
   </ItemGroup>
   <ItemGroup>

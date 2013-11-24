@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using MvcContrib.PortableAreas;
 using MvcContrib.UI.InputBuilder.ViewEngine;
+using Ornament.Web.Bundles.Seajs;
 
 namespace Ornament.Web.Controllers
 {
@@ -20,6 +23,8 @@ namespace Ornament.Web.Controllers
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
+            var path=VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.ToString());
+            RootModule bundleModule= new RootModule(new BundleContext(this.HttpContext,BundleTable.Bundles,path), );
 
             if (resourceStream == null)
             {

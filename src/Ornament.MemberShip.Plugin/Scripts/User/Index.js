@@ -1,4 +1,5 @@
 ﻿/// <reference path="../Combine/user.js" />
+/// <reference path="../Combine/dataTables.js" />
 
 
 define(function (require) {
@@ -10,7 +11,7 @@ define(function (require) {
     require("uniform")($);
     require('select2')($);
     require("table")($);
-    var tableHelper = require("../../share/dataTables.js");
+    var tableHelper = require("../Combine/dataTables.js");
     //Table List checkbox.
     $("#table").on('click', 'input', function () {
         $("#BtnApply").prop("disabled", $("#table input:checked").length == 0);

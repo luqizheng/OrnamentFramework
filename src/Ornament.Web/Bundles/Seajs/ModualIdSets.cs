@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Optimization;
@@ -6,18 +7,29 @@ using System.Windows.Forms;
 
 namespace Ornament.Web.Bundles.Seajs
 {
+    /// <summary>
+    /// 所有Module根据Id 保存在这个模块中
+    /// </summary>
     public class ModualIdSets
     {
         private readonly Dictionary<string, string> _moduleIdUniquireId = new Dictionary<string, string>();
         private readonly Dictionary<string, string> _uniquireIdModuleId = new Dictionary<string, string>();
         private readonly ModuleCollection _modules = new ModuleCollection();
-
-        public string GetModualId(ReferenceModule module)
+        /// <summary>
+        /// 根据Module获取Module的路径(物理路径或者引用路径)
+        /// </summary>
+        /// <param name="module"></param>
+        /// <returns></returns>
+        public string GetModualId(ISeajsModule module)
         {
+            if (module == null) 
+                throw new ArgumentNullException("module");
             return _uniquireIdModuleId[module.UniqueId];
         }
-        public void Add(ReferenceModule module)
+
+        public void Add(ISeajsModule module)
         {
+            if (module == null) throw new ArgumentNullException("module");
             /*
              */
 
@@ -48,7 +60,7 @@ namespace Ornament.Web.Bundles.Seajs
             return _modules.Contains(uniquireId);
         }
 
-        public ReferenceModule this[string uniquireId]
+        public ISeajsModule this[string uniquireId]
         {
             get
             {

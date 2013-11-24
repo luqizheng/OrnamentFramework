@@ -32,10 +32,10 @@ namespace Ornament.Web.Bundles.Seajs
             return VirtualPathUtility.ToAbsolute(VirtualPath);
         }
 
-        protected override ReferenceModule GetModual(string srcRequireModualId, ModualIdSets moduleIdSets,
+        protected override ISeajsModule GetModual(string srcRequireModualId, ModualIdSets moduleIdSets,
                                                      ModuleCollection globalReferenceModules, out bool combinedHere)
         {
-            ReferenceModule result = base.GetModual(srcRequireModualId, moduleIdSets, globalReferenceModules,
+            ISeajsModule result = base.GetModual(srcRequireModualId, moduleIdSets, globalReferenceModules,
                                                     out combinedHere);
             if (combinedHere)
                 combinedHere = Combine;

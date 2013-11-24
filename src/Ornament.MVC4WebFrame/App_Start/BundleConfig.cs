@@ -12,7 +12,7 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
-            CombineSeajsModule = false;
+            CombineSeajsModule = true;
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
             {
