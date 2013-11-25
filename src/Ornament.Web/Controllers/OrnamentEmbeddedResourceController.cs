@@ -23,8 +23,9 @@ namespace Ornament.Web.Controllers
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-            var path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.ToString());
-            RootModule bundleModule = new RootModule(Request.Url.ToString(), new BundleContext(this.HttpContext, BundleTable.Bundles, path), false);
+            var path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.LocalPath);
+
+            RootModule bundleModule = new RootModule(path, new BundleContext(this.HttpContext, BundleTable.Bundles, path), true);
 
             var content = "";
             using (var stream = new StreamReader(resourceStream))

@@ -59,12 +59,14 @@ namespace Ornament.Web.Bundles.Seajs
             get
             {
                 Bundle bundle = BundleTable.Bundles.GetBundleFor(UniqueId);
-                BundleFile a = bundle.EnumerateFiles(Context).First();
-
-
-                return a.IncludedVirtualPath
-                        .Replace(PhysicalApplicationPath, "~/")
-                        .Replace('\\', '/');
+                if (bundle != null)
+                {
+                    BundleFile a = bundle.EnumerateFiles(Context).First();
+                    return a.IncludedVirtualPath
+                            .Replace(PhysicalApplicationPath, "~/")
+                            .Replace('\\', '/');
+                }
+                return UniqueId;
             }
         }
 
@@ -224,6 +226,8 @@ namespace Ornament.Web.Bundles.Seajs
             {
                 return moduleIdSets[srcRequireModualId];
             }
+
+
             string physicPath = MapRelativePath(srcRequireModualId); //it will be use in physicId
 
             if (File.Exists(physicPath))

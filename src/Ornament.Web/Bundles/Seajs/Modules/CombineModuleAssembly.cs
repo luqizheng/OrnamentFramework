@@ -42,8 +42,9 @@ namespace Ornament.Web.Bundles.Seajs.Modules
         public static bool IsAssemblyCombineModules(string uniqureId)
         {
             RouteData resData = RouteUtils.GetRouteDataByUrl(uniqureId);
-            if (resData == null)
+            if (resData == null || !resData.Values.ContainsKey("resourcePath"))
                 return false;
+            
             var areaName = (string)resData.DataTokens["area"];
             string resourcePath = resData.Values["resourcePath"].ToString();
             string resourceName = resData.Values["resourceName"].ToString();
