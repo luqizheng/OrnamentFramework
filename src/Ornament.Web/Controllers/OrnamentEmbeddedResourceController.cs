@@ -18,13 +18,21 @@ namespace Ornament.Web.Controllers
                 resourceName = resourcePath + "." + resourceName;
             }
 
-            var areaName = (string) RouteData.DataTokens["area"];
+            var areaName = (string)RouteData.DataTokens["area"];
 
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-            var path=VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.ToString());
-            RootModule bundleModule= new RootModule(new BundleContext(this.HttpContext,BundleTable.Bundles,path), );
+            var path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.ToString());
+            RootModule bundleModule = new RootModule(Request.Url.ToString(), new BundleContext(this.HttpContext, BundleTable.Bundles, path), false);
+
+            var content = "";
+            using (var stream = new StreamReader(resourceStream))
+            {
+                content = stream.ReadToEnd();
+            }
+
+            content = bundleModule.BuildContent(content);
 
             if (resourceStream == null)
             {
@@ -33,7 +41,7 @@ namespace Ornament.Web.Controllers
             }
 
             string contentType = GetContentType(resourceName);
-            return File(resourceStream, contentType);
+            return File(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(content)), contentType);
         }
 
         #region Private Members

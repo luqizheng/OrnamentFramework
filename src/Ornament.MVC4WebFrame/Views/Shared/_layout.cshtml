@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using System.Web.Optimization
 @using Ornament.Web
+@using Ornament.Web.Bundles
 @using Resources
 
 @{
@@ -27,15 +28,16 @@
             @Html.Partial("_topMenu")
         </div>
     </div>
+    
     @RenderBody()
     <div id="footer"></div>
     @if (!IsSectionDefined("scripts"))
     {
         <script type="text/javascript">
-            seajs.use("/_layout.js")
+            seajs.use(@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/_layout.js"));
         </script>
     }
     @RenderSection("scripts", false)
-   
+
 </body>
 </html>

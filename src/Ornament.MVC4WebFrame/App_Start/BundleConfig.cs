@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
+using Ornament.Web.Bundles.Config;
 using Qi;
 
 namespace Ornament.MVCWebFrame.App_Start
@@ -94,17 +95,12 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void AutoForPageScripts(BundleCollection bundles)
         {
-            using (var writer = new StreamWriter(ApplicationHelper.MapPath("~/log/page.txt")))
-            {
-                const string str = "~/Scripts/Modules/Views/";
-                string[] files = Directory.GetFiles(ApplicationHelper.MapPath(str), "*.js", SearchOption.AllDirectories);
-                foreach (string file in files)
+
+            var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/", CombineSeajsModule)
                 {
-                    string bundleName = ToVirtualPath(file).Replace("\\", "/").ToLower().Replace(str.ToLower(), "~/");
-                    bundles.Add(new SeajsBundle(bundleName, CombineSeajsModule).Include(ToVirtualPath(file)));
-                    writer.WriteLine("{0}={1}", bundleName, file);
-                }
-            }
+                    LogFile = "/Log/modual.log"
+                };
+            file.Handle(bundles);
         }
 
 

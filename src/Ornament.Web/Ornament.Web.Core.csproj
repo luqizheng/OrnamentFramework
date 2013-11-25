@@ -157,6 +157,7 @@
   <ItemGroup>
     <Compile Include="AssemblyHelper.cs" />
     <Compile Include="Bundles\Config\BaseScriptsManager.cs" />
+    <Compile Include="Bundles\Config\DirectorySingleScriptFileRegistry.cs" />
     <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
     <Compile Include="Bundles\RouteUtils.cs" />
     <Compile Include="Bundles\JQueryPluginSeajsBundle.cs" />
@@ -164,15 +165,14 @@
     <Compile Include="Bundles\ScriptsSeajs.cs" />
     <Compile Include="Bundles\SeajsBundle.cs" />
     <Compile Include="Bundles\SeajsMinify.cs" />
-    <Compile Include="Bundles\Seajs\BaseCombineModule.cs" />
-    <Compile Include="Bundles\Seajs\CombineModule.cs" />
-    <Compile Include="Bundles\Seajs\CombineModuleAssembly.cs" />
+    <Compile Include="Bundles\Seajs\Modules\FileCombineModule.cs" />
+    <Compile Include="Bundles\Seajs\Modules\CombineModuleAssembly.cs" />
     <Compile Include="Bundles\Seajs\ISeajsModule.cs" />
     <Compile Include="Bundles\Seajs\ModualIdSets.cs" />
     <Compile Include="Bundles\Seajs\ModuleCollection.cs" />
     <Compile Include="Bundles\Seajs\ReferenceModule.cs" />
     <Compile Include="Bundles\Seajs\RootModule.cs" />
-    <Compile Include="Bundles\Seajs\StreamCombineModual.cs" />
+    <Compile Include="Bundles\Seajs\CombineModual.cs" />
     <Compile Include="Cfg\NHConfigurationHandler.cs" />
     <Compile Include="Controllers\OrnamentEmbeddedResourceController.cs" />
     <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />

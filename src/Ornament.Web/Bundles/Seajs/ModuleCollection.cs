@@ -7,7 +7,7 @@ namespace Ornament.Web.Bundles.Seajs
     {
         internal string[] RequrestIds(ModualIdSets ids)
         {
-            return this.Select(require => ids.GetModualId(require)).ToArray();
+            return this.Select(ids.GetModualId).ToArray();
         }
 
         protected override string GetKeyForItem(ISeajsModule item)

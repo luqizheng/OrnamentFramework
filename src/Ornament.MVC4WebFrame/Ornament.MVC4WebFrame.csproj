@@ -1011,7 +1011,6 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Shared\Backend\_appLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
@@ -1055,7 +1054,6 @@
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_crumbs.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_mainMenu.cshtml" />
-    <Content Include="Views\Shared\Backend\_topMenu.cshtml" />
     <Content Include="Views\Shared\Backend\Error.cshtml" />
     <Content Include="Views\Shared\Backend\NavPagination.cshtml" />
     <Content Include="Views\Shared\_topMenu.cshtml" />
@@ -1070,8 +1068,6 @@
     <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxHeader.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxBody.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_appLayout.cshtml" />
-    <Content Include="Views\Shared\Backend\_crumbs.cshtml" />
-    <Content Include="Views\Shared\Backend\_mainMenu.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_topMenu.cshtml" />
     <Content Include="Views\Shared\Backend\metralab\_appLayout.cshtml" />
     <Content Include="Views\Shared\Backend\metralab\_mainMenu.cshtml" />

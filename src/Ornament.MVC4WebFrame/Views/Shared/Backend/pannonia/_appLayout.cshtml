@@ -2,6 +2,7 @@
 @using System.Web.UI.WebControls
 @using Ornament
 @using Ornament.Web
+@using Ornament.Web.Bundles
 @{
     var showMenu = OrnamentContext.MemberShip.CurrentUser() != null || this.Response.StatusCode != 200;
 }
@@ -26,9 +27,10 @@
     <div id="top">
         <div class="fixed">
             <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
-            @Html.Partial("/Views/Shared/Backend/_topMenu.cshtml")
+            @Html.Partial("~/Views/Shared/Backend/pannonia/_topMenu.cshtml")
         </div>
     </div>
+
     @if (showMenu)
     {
         <div id="container">
@@ -65,7 +67,7 @@
     @if (!IsSectionDefined("scripts"))
     {
         <script type="text/javascript">
-            seajs.use("/_applayout.js")
+            seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/_applayout.js")");
         </script>
     }
 
