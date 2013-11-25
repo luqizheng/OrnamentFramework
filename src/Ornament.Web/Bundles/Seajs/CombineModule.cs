@@ -10,13 +10,17 @@ using Ornament.Web.Bundles.Seajs.Modules;
 
 namespace Ornament.Web.Bundles.Seajs
 {
-    public abstract class CombineModual : ISeajsModule
+    public abstract class CombineModule : ISeajsModule
     {
         private ModuleCollection _modules;
         private string _physicalApplicationPath;
 
-        protected CombineModual(string uniqueId, BundleContext context, bool isCombine)
+        protected CombineModule(string uniqueId, BundleContext context, bool isCombine)
         {
+            if (uniqueId.StartsWith("/"))
+            {
+                uniqueId = "~" + uniqueId;
+            }
             UniqueId = uniqueId;
             Context = context;
             IsCombine = isCombine;
@@ -93,7 +97,7 @@ namespace Ornament.Web.Bundles.Seajs
         /// <returns></returns>
         protected string BuildContent(string content, ModualIdSets moduleIdList, ModuleCollection referencModule)
         {
-            List<FileCombineModule> combineFiles = CollectRequire(ref content, moduleIdList, referencModule);
+            List<CombineModule> combineFiles = CollectRequire(ref content, moduleIdList, referencModule);
 
 
             //Build Define Header 
@@ -111,10 +115,10 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="combineFiles"></param>
         /// <param name="moduleIdList"></param>
         /// <param name="referencModule"></param>
-        protected virtual void CombineRequirePart(StringBuilder result, List<FileCombineModule> combineFiles,
+        protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles,
                                                   ModualIdSets moduleIdList, ModuleCollection referencModule)
         {
-            foreach (FileCombineModule combineFile in combineFiles)
+            foreach (var combineFile in combineFiles)
             {
                 string subContent = combineFile.BuildContent(moduleIdList, referencModule);
                 result.Append(";\r\n")
@@ -157,14 +161,14 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="combinedModuleSet">已经被combine的Modules</param>
         /// <param name="referencModule"></param>
         /// <returns>返回需要被combie module的Moudle</returns>
-        protected virtual List<FileCombineModule> CollectRequire(ref string content,
+        protected virtual List<CombineModule> CollectRequire(ref string content,
                                                                  ModualIdSets combinedModuleSet,
                                                                  ModuleCollection referencModule)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
 
-            var result = new List<FileCombineModule>();
+            var result = new List<CombineModule>();
 
             content = Regex.Replace(content, @"require\((.+?)\)", match =>
                 {
@@ -177,7 +181,7 @@ namespace Ornament.Web.Bundles.Seajs
                                                     out combinedHere);
                     ReferenceModules.Add(modual);
 
-                    var combineModual = modual as FileCombineModule;
+                    var combineModual = modual as CombineModule;
                     if (combineModual != null)
                     {
                         if (combinedHere)

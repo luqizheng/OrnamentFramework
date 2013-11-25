@@ -6,7 +6,7 @@ namespace Ornament.Web.Bundles.Seajs
     /// <summary>
     ///     Moudle
     /// </summary>
-    public class RootModule : CombineModual
+    public class RootModule : CombineModule
     {
         public RootModule(string uniqureId, BundleContext context, bool isCombine)
             : base(uniqureId, context, isCombine)

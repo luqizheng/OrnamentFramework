@@ -10,7 +10,7 @@ namespace Ornament.Web.Bundles.Seajs.Modules
     /// <summary>
     ///     这个模块式在Plugin里面的.并且需要合并
     /// </summary>
-    public class CombineModuleAssembly : CombineModual
+    public class CombineModuleAssembly : CombineModule
     {
         public CombineModuleAssembly(BundleContext context, string uniquireId, bool combine)
             : base(uniquireId, context, combine)

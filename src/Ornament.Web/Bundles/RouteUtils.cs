@@ -14,6 +14,10 @@ namespace Ornament.Web.Bundles
         {
             try
             {
+                if (!url.StartsWith("~"))
+                {
+                    url = "~" + url;
+                }
                 return RouteTable.Routes.GetRouteData(new RewritedHttpContextBase(url));
             }
             catch (Exception ex)

@@ -6,7 +6,7 @@ namespace Ornament.Web.Bundles.Seajs.Modules
     /// <summary>
     ///     合并模块,从 物理路径上面获取到文件
     /// </summary>
-    public class FileCombineModule : CombineModual
+    public class FileCombineModule : CombineModule
     {
         /// <summary>
         /// </summary>

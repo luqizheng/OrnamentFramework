@@ -172,7 +172,7 @@
     <Compile Include="Bundles\Seajs\ModuleCollection.cs" />
     <Compile Include="Bundles\Seajs\ReferenceModule.cs" />
     <Compile Include="Bundles\Seajs\RootModule.cs" />
-    <Compile Include="Bundles\Seajs\CombineModual.cs" />
+    <Compile Include="Bundles\Seajs\CombineModule.cs" />
     <Compile Include="Cfg\NHConfigurationHandler.cs" />
     <Compile Include="Controllers\OrnamentEmbeddedResourceController.cs" />
     <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
