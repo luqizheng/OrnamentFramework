@@ -2,6 +2,7 @@
 using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Ornament.Web.Bundles.Config;
+using Ornament.Web.Bundles.Seajs;
 using Qi;
 
 namespace Ornament.MVCWebFrame.App_Start
@@ -20,9 +21,9 @@ namespace Ornament.MVCWebFrame.App_Start
                 GlobalStyle,
                 CodeStyle,
                 Fx,
-                BizRelative,
                 RegistryCtrl,
-                Comp
+                Comp,
+                SeajsModules
             };
 
             foreach (var item in registryParty)
@@ -37,6 +38,9 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void Comp(BundleCollection t1)
         {
             t1.Add(new ScriptBundle("~/Components/json2.js").Include("~/Scripts/Components/json2.js"));
+            
+            RootModule.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
+
         }
 
         private static void Fx(BundleCollection bundles)
@@ -57,17 +61,8 @@ namespace Ornament.MVCWebFrame.App_Start
                     "~/Scripts/Modules/Views/_appLayout.js"));
         }
 
-        /// <summary>
-        ///     把物理路径改为虚拟路径
-        /// </summary>
-        /// <param name="fullPath"></param>
-        /// <returns></returns>
-        private static string ToVirtualPath(string fullPath)
-        {
-            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/").Replace("////", "/");
-        }
-
-
+     
+        /*
         /// <summary>
         ///     业务逻辑相关的，全部都需要带有版本号
         /// </summary>
@@ -75,9 +70,8 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void BizRelative(BundleCollection bundles)
         {
             new SeajsBundle("~/scripts/ctrls/pm.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/pm.js");
-            AutoForPageScripts(bundles);
         }
-
+        */
         private static void RegistryCtrl(BundleCollection bundles)
         {
             bundles.Add(
@@ -93,7 +87,7 @@ namespace Ornament.MVCWebFrame.App_Start
         ///     每个Page对应一个 js，冲这里做映射
         /// </summary>
         /// <param name="bundles"></param>
-        private static void AutoForPageScripts(BundleCollection bundles)
+        private static void SeajsModules(BundleCollection bundles)
         {
 
             var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/", CombineSeajsModule)

@@ -21,11 +21,11 @@ namespace Ornament.Web.Bundles.Seajs.Modules
         {
             get
             {
-                RouteData resData = RouteUtils.GetRouteDataByUrl(this.UniqueId);
+                RouteData resData = RouteUtils.GetRouteDataByUrl(UniqueId);
                 if (resData == null)
                     throw new ArgumentOutOfRangeException(UniqueId +
                                                           " is not a assembly embeded resources with js file.");
-                var areaName = (string)resData.DataTokens["area"];
+                var areaName = (string) resData.DataTokens["area"];
                 string resourcePath = resData.Values["resourcePath"].ToString();
                 string resourceName = resData.Values["resourceName"].ToString();
                 resourceName = resourcePath + "." + resourceName;
@@ -38,14 +38,14 @@ namespace Ornament.Web.Bundles.Seajs.Modules
                 }
             }
         }
-       
+
         public static bool IsAssemblyCombineModules(string uniqureId)
         {
             RouteData resData = RouteUtils.GetRouteDataByUrl(uniqureId);
             if (resData == null || !resData.Values.ContainsKey("resourcePath"))
                 return false;
-            
-            var areaName = (string)resData.DataTokens["area"];
+
+            var areaName = (string) resData.DataTokens["area"];
             string resourcePath = resData.Values["resourcePath"].ToString();
             string resourceName = resData.Values["resourceName"].ToString();
             resourceName = resourcePath + "." + resourceName;

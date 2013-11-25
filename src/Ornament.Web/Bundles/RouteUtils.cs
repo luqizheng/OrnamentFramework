@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace Ornament.Web.Bundles
 {
     public static class RouteUtils
     {
+        
         public static RouteData GetRouteDataByUrl(string url)
         {
             try
             {
+
                 if (!url.StartsWith("~"))
                 {
                     url = "~" + url;
                 }
-                return RouteTable.Routes.GetRouteData(new RewritedHttpContextBase(url));
+                var data = RouteTable.Routes.GetRouteData(new RewritedHttpContextBase(url));
+                return data;
             }
             catch (Exception ex)
             {

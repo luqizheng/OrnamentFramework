@@ -10,6 +10,8 @@ namespace Ornament.Web.Bundles.Seajs
             return this.Select(ids.GetModualId).ToArray();
         }
 
+        
+
         protected override string GetKeyForItem(ISeajsModule item)
         {
             return item.UniqueId;

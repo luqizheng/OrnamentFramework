@@ -7,6 +7,7 @@ using Ornament.Web.Bundles.Seajs;
 namespace Ornament.Web.Bundles
 {
     /// <summary>
+    /// Module 
     /// </summary>
     public class SeajsBundle : ScriptBundle
     {

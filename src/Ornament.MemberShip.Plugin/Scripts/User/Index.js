@@ -10,7 +10,7 @@ define(function (require) {
     var pmDialog;
     require("uniform")($);
     require('select2')($);
-    require("table")($);
+    require("dataTables")($);
     var tableHelper = require("../Combine/dataTables.js");
     //Table List checkbox.
     $("#table").on('click', 'input', function () {

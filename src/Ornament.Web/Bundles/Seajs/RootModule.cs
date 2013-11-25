@@ -4,10 +4,15 @@ using System.Web.Optimization;
 namespace Ornament.Web.Bundles.Seajs
 {
     /// <summary>
-    ///     Moudle
+    ///     Module
     /// </summary>
     public class RootModule : CombineModule
     {
+        /// <summary>
+        ///必须为 reference module 的 module,保存在这里的module会自动跳过过
+        /// </summary>
+        public static ModuleCollection ReferenceModules = new ModuleCollection();
+
         public RootModule(string uniqureId, BundleContext context, bool isCombine)
             : base(uniqureId, context, isCombine)
         {
@@ -21,11 +26,9 @@ namespace Ornament.Web.Bundles.Seajs
 
         public string BuildContent(string content)
         {
-            var collection = new ModuleCollection();
-            collection.Add(this);
             var modelets = new ModualIdSets();
             modelets.Add(this);
-            return base.BuildContent(content, modelets, collection);
+            return base.BuildContent(content, modelets, ReferenceModules);
         }
     }
 }

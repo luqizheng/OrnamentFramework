@@ -67,8 +67,8 @@ namespace Ornament.Web.Bundles.Seajs
                 {
                     BundleFile a = bundle.EnumerateFiles(Context).First();
                     return a.IncludedVirtualPath
-                            .Replace(PhysicalApplicationPath, "~/")
-                            .Replace('\\', '/');
+                        .Replace(PhysicalApplicationPath, "~/")
+                        .Replace('\\', '/');
                 }
                 return UniqueId;
             }
@@ -116,16 +116,16 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="moduleIdList"></param>
         /// <param name="referencModule"></param>
         protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles,
-                                                  ModualIdSets moduleIdList, ModuleCollection referencModule)
+            ModualIdSets moduleIdList, ModuleCollection referencModule)
         {
-            foreach (var combineFile in combineFiles)
+            foreach (CombineModule combineFile in combineFiles)
             {
                 string subContent = combineFile.BuildContent(moduleIdList, referencModule);
                 result.Append(";\r\n")
-                      .Append("//")
-                      .Append(moduleIdList.GetModualId(combineFile))
-                      .Append(";\r\n")
-                      .Append(subContent);
+                    .Append("//")
+                    .Append(moduleIdList.GetModualId(combineFile))
+                    .Append(";\r\n")
+                    .Append(subContent);
             }
         }
 
@@ -145,8 +145,9 @@ namespace Ornament.Web.Bundles.Seajs
 
         protected virtual string BuildDefine(ModualIdSets moduleIdList)
         {
-            return String.Format("define(\"{0}\",[\"{1}\"],", GetOutputModuleId(moduleIdList),
-                                 String.Join("\",\"", ReferenceModules.RequrestIds(moduleIdList)));
+            return String.Format("define(\"{0}\",[\"{1}\"],", 
+                GetOutputModuleId(moduleIdList),
+                String.Join("\",\"", ReferenceModules.RequrestIds(moduleIdList)));
         }
 
         protected virtual string GetOutputModuleId(ModualIdSets moduleIdList)
@@ -162,8 +163,8 @@ namespace Ornament.Web.Bundles.Seajs
         /// <param name="referencModule"></param>
         /// <returns>返回需要被combie module的Moudle</returns>
         protected virtual List<CombineModule> CollectRequire(ref string content,
-                                                                 ModualIdSets combinedModuleSet,
-                                                                 ModuleCollection referencModule)
+            ModualIdSets combinedModuleSet,
+            ModuleCollection referencModule)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
@@ -171,93 +172,123 @@ namespace Ornament.Web.Bundles.Seajs
             var result = new List<CombineModule>();
 
             content = Regex.Replace(content, @"require\((.+?)\)", match =>
-                {
-                    string replacement = match.Groups[1].Value
-                                                        .TrimStart('\"', '\'')
-                                                        .TrimEnd('\"', '\'');
-                    string srcRequireModualId = replacement; //.ToLower();
-                    bool combinedHere = false;
-                    ISeajsModule modual = GetModual(srcRequireModualId, combinedModuleSet, referencModule,
-                                                    out combinedHere);
-                    ReferenceModules.Add(modual);
+            {
+                string replacement = match.Groups[1].Value
+                    .TrimStart('\"', '\'')
+                    .TrimEnd('\"', '\'');
+                string srcRequireModualId = replacement; //.ToLower();
+                bool combinedHere = false;
+                ISeajsModule modual = GetModual(srcRequireModualId, combinedModuleSet, referencModule,
+                    out combinedHere);
+                ReferenceModules.Add(modual);
 
-                    var combineModual = modual as CombineModule;
-                    if (combineModual != null)
+                var combineModual = modual as CombineModule;
+                if (combineModual != null)
+                {
+                    if (combinedHere)
                     {
-                        if (combinedHere)
-                        {
-                            result.Add(combineModual);
-                        }
-                        return match.Value.Replace(replacement, combinedModuleSet.GetModualId(combineModual));
+                        result.Add(combineModual);
                     }
-                    return match.Value;
-                });
+                    return match.Value.Replace(replacement, combinedModuleSet.GetModualId(combineModual));
+                }
+                return match.Value;
+            });
 
 
             return result;
         }
 
-        protected virtual string MapRelativePath(string virtualPath)
+        protected virtual string MapToPhysicPath(string virtualPath)
         {
             return HttpContext.Current.Request.MapPath(virtualPath, VirtualPathUtility.GetDirectory(Path),
-                                                       true);
+                true);
+        }
+
+        protected virtual string ToAbstrVirtualPaht(string virtualPath)
+        {
+            if (virtualPath.StartsWith("/"))
+            {
+                return "~" + virtualPath;
+            }
+            string dir = VirtualPathUtility.GetDirectory(Path);
+            string result = VirtualPathUtility.Combine(dir, virtualPath);
+
+            return result;
         }
 
         /// <summary>
         ///     根据文件内容获取module对象.
         /// </summary>
         /// <param name="srcRequireModualId"></param>
-        /// <param name="moduleIdSets"></param>
+        /// <param name="combinedModuleSet"></param>
         /// <param name="globalReferenceModules"></param>
         /// <param name="combinedHere"> 获取到的 return 模块是否需要合并</param>
         /// <returns></returns>
-        protected virtual ISeajsModule GetModual(string srcRequireModualId, ModualIdSets moduleIdSets,
-                                                 ModuleCollection globalReferenceModules, out bool combinedHere)
+        protected virtual ISeajsModule GetModual(string srcRequireModualId, ModualIdSets combinedModuleSet,
+            ModuleCollection globalReferenceModules, out bool combinedHere)
         {
-            combinedHere = false;
-            if (globalReferenceModules.Contains(srcRequireModualId))
+            if (srcRequireModualId.Contains("/") || srcRequireModualId.Contains(".js"))
             {
-                ISeajsModule module = globalReferenceModules[srcRequireModualId];
-                if (!moduleIdSets.Contains(srcRequireModualId))
+                srcRequireModualId = ToAbstrVirtualPaht(srcRequireModualId);
+                combinedHere = false;
+                if (globalReferenceModules.Contains(srcRequireModualId))
                 {
-                    moduleIdSets.Add(module);
+                    ISeajsModule module = globalReferenceModules[srcRequireModualId];
+                    if (!combinedModuleSet.Contains(srcRequireModualId))
+                    {
+                        combinedModuleSet.Add(module);
+                    }
+
+                    return module;
                 }
 
-                return module;
-            }
-
-            if (moduleIdSets.Contains(srcRequireModualId))
-            {
-                return moduleIdSets[srcRequireModualId];
-            }
-
-
-            string physicPath = MapRelativePath(srcRequireModualId); //it will be use in physicId
-
-            if (File.Exists(physicPath))
-            {
-                //这是一个物理路径合并模块
-                if (moduleIdSets.Contains(physicPath))
+                if (combinedModuleSet.Contains(srcRequireModualId))
                 {
-                    return moduleIdSets[physicPath];
+                    var module = combinedModuleSet[srcRequireModualId];
+                    if (!srcRequireModualId.Contains(module .UniqueId))
+                    {
+                        combinedModuleSet.Add(module);
+                    }
                 }
-                //创建合并Module js
-                string uniqure = VirtualPathUtility.Combine(UniqueId, srcRequireModualId);
-                var sub = new FileCombineModule(Context, uniqure, IsCombine, physicPath);
-                moduleIdSets.Add(sub);
-                combinedHere = true;
-                return sub;
-            }
-            if (CombineModuleAssembly.IsAssemblyCombineModules(srcRequireModualId))
-            {
-                var sub = new CombineModuleAssembly(Context, srcRequireModualId, IsCombine);
-                moduleIdSets.Add(sub);
-                combinedHere = true;
-                return sub;
+
+                if (MainWebFileCombine.IsInMainFolder(srcRequireModualId))
+                {
+                    ISeajsModule module = new MainWebFileCombine(srcRequireModualId, Context, IsCombine);
+                    combinedModuleSet.Add(module);
+                    combinedHere = true;
+                    return module;
+                }
+
+                string physicPath = MapToPhysicPath(srcRequireModualId); //it will be use in physicId
+
+                if (File.Exists(physicPath))
+                {
+                    //这是一个物理路径合并模块
+                    if (combinedModuleSet.Contains(physicPath))
+                    {
+                        return combinedModuleSet[physicPath];
+                    }
+                    //创建合并Module js
+                    var module = new FileCombineModule(Context, srcRequireModualId, IsCombine, physicPath);
+                    combinedModuleSet.Add(module);
+                    combinedHere = true;
+                    return module;
+                }
+                if (CombineModuleAssembly.IsAssemblyCombineModules(srcRequireModualId))
+                {
+                    var module = new CombineModuleAssembly(Context, srcRequireModualId, IsCombine);
+                    combinedModuleSet.Add(module);
+                    combinedHere = true;
+                    return module;
+                }
             }
             //普通一个的引用js
             var subModule = new ReferenceModule(srcRequireModualId);
-            moduleIdSets.Add(subModule);
+            if (!combinedModuleSet.Contains(subModule.UniqueId))
+            {
+                combinedModuleSet.Add(subModule);
+            }
+            combinedHere = false;
             return subModule;
         }
     }

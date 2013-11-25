@@ -170,6 +170,7 @@
     <Compile Include="Bundles\Seajs\ISeajsModule.cs" />
     <Compile Include="Bundles\Seajs\ModualIdSets.cs" />
     <Compile Include="Bundles\Seajs\ModuleCollection.cs" />
+    <Compile Include="Bundles\Seajs\Modules\MainWebFileCombine.cs" />
     <Compile Include="Bundles\Seajs\ReferenceModule.cs" />
     <Compile Include="Bundles\Seajs\RootModule.cs" />
     <Compile Include="Bundles\Seajs\CombineModule.cs" />

@@ -28,7 +28,7 @@ namespace Ornament.Web.Bundles.Seajs
         {
             if (module == null)
                 throw new ArgumentNullException("module");
-            return _uniquireIdModuleId[module.UniqueId];
+            return _uniquireIdModuleId[module.UniqueId].TrimStart('~');
         }
 
         public void Add(ISeajsModule module)
