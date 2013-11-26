@@ -39,7 +39,7 @@
         "toDictionary": "/bundles/utility/toDictionary.js",
         "unobtrusive-ajax": "/bundles/utility/unobtrusive-ajax.js",
         //following is Model
-        "pm": "/scripts/ctrls/pm.js",
+        //"pm": "/scripts/ctrls/pm.js",
         "membership": "/scripts/ctrls/memberships.js",
         "formInput": "/scripts/ctrls/form.js",
         //components 不依赖jquery

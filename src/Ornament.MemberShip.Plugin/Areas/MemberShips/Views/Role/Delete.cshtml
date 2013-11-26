@@ -15,7 +15,7 @@
         seajs.use('jquery', function () {
             $(".btn-toolbar a:first")
                 .click(function () {
-                    if (confirm("@Html.GetResourceString("waring_deleting_role")")) {
+                    if (confirm("@Html.GetEmbededResourceString("waring_deleting_role")")) {
                         $("form").submit();
                     }
                 });
@@ -34,7 +34,7 @@
     @Html.HiddenFor(s => s.Id)
 }
 <h4>
-    @Html.Label(Html.GetResourceString("info_role_in_using"))
+    @Html.Label(Html.GetEmbededResourceString("info_role_in_using"))
 </h4>
 <div class="row-fluid">
     <div class="span5">

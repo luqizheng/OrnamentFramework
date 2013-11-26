@@ -176,6 +176,7 @@
     <Compile Include="Bundles\Seajs\CombineModule.cs" />
     <Compile Include="Cfg\NHConfigurationHandler.cs" />
     <Compile Include="Controllers\OrnamentEmbeddedResourceController.cs" />
+    <Compile Include="HtmlEmbeddedResource.cs" />
     <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
     <Compile Include="HtmlExtends\Boxes\Box.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using Ornament.MemberShip.Permissions;
 
 namespace Ornament.Web
 {

@@ -1,5 +1,6 @@
 ﻿@using Ornament
 @using Ornament.Models.Memberships
+@using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
 @using Resources
@@ -16,8 +17,8 @@
         <div class="well">
             @Html.ValidationSummary(true)
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetResourceString("Create", "tab_basicInfo")</a></li>
-                <li><a href="#tab4" data-toggle="tab">@Html.GetResourceString("Create", "tab_Permission")</a></li>
+                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
+                <li><a href="#tab4" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
             </ul>
 
             <div class="tab-content">
@@ -30,7 +31,7 @@
             </div>
             <div class="form-actions">
                 <input type="submit" value="@Basic.Create" class="btn btn-info"/>
-                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Basic.Cancel</a>
+                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
 
             </div>
         </div>
@@ -39,7 +40,7 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        seajs.use(["/MemberShips/User/Create.js"], function () {
+        seajs.use(["/MemberShips/Scripts/User/Create.js"], function () {
 
         });
     </script>

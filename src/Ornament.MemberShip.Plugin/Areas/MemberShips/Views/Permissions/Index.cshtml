@@ -1,5 +1,6 @@
 ﻿@using Ornament
 @using Ornament.MemberShip.Permissions
+@using Ornament.Properties
 @using Ornament.Web;
 @model IEnumerable<Ornament.MemberShip.Permissions.Permission>
 @{
@@ -11,7 +12,7 @@
 
         seajs.use(["/memberships/permissions/index.js"], function (init) {
             init({
-                warnDel: "@Html.GetResourceString("warnning_deleting_msg")",
+                warnDel: "@Html.GetEmbededResourceString("warnning_deleting_msg")",
                 delUrl: "@Url.Action("Delete")"
             });
         });
@@ -27,7 +28,7 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
         </div>
     </div>
     <div class="body well">
@@ -51,8 +52,8 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(Resources.Basic.Edit, "Edit", new { id = item.Id }) |
-                        @Html.ActionLink(Resources.Basic.Delete, "Delete", new { id = item.Id })
+                        @Html.ActionLink(Resources.Edit, "Edit", new { id = item.Id }) |
+                        @Html.ActionLink(Resources.Delete, "Delete", new { id = item.Id })
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)

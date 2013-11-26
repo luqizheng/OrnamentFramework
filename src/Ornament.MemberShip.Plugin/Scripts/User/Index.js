@@ -2,18 +2,18 @@
 /// <reference path="../Combine/dataTables.js" />
 
 
-define(function (require) {
+define(function(require) {
     require("/scripts/views/_appLayout.js");
     var $ = require("jquery"),
-        userApi = require("/MemberShips/Scripts/Combine/user.js"), //内嵌合并要使用绝对路径
-        pm = require("/share/pm.js");
+        userApi = require("/MemberShips/Scripts/Combine/user.js"); //内嵌合并要使用绝对路径
+    //pm = require("/share/pm.js");
     var pmDialog;
     require("uniform")($);
     require('select2')($);
     require("dataTables")($);
     var tableHelper = require("../Combine/dataTables.js");
     //Table List checkbox.
-    $("#table").on('click', 'input', function () {
+    $("#table").on('click', 'input', function() {
         $("#BtnApply").prop("disabled", $("#table input:checked").length == 0);
     });
 
@@ -21,7 +21,7 @@ define(function (require) {
 
     function showLoading(enable) {
         var parent = $(this).closest("td"),
-        $loading = $("[role=loading]", parent);
+            $loading = $("[role=loading]", parent);
         if ($loading.length == 0) {
             $loading = $("<a role='loading'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\" ></a>");
             $loading.appendTo(parent);
@@ -32,7 +32,7 @@ define(function (require) {
     function tableEdit(config) {
         var table = new tableHelper(config.url);
         table.AddCol("Id", false,
-            function (nTd, sData, oData, iRow, iCol) {
+            function(nTd, sData, oData, iRow, iCol) {
                 $(nTd).html(createBtn(oData))
                     .addClass("op")
                     .before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>")
@@ -43,9 +43,9 @@ define(function (require) {
         table.AddCol("Name", true);
         table.AddCol("Email", true);
         table.AddBoolCol("IsLockout", 'Id', {
-            icon: "icon-lock",
-            name: "锁定"
-        },
+                icon: "icon-lock",
+                name: "锁定"
+            },
             {
                 icon: "icon-unlock",
                 name: "解锁"
@@ -58,26 +58,26 @@ define(function (require) {
 
         function lockUser(id, bLock, process) {
             /// <summary>
-            /// 锁定用户
+            ///     锁定用户
             /// </summary>
             /// <param name="id"></param>
             /// <param name="bLock"></param>
             /// <param name="process"></param>
             var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
-            $.post(url, { ids: id }, function (result) {
+            $.post(url, { ids: id }, function(result) {
                 process(result.success);
             });
         }
 
         function approve(id, bApprove, process) {
             /// <summary>
-            /// 锁定用户
+            ///     锁定用户
             /// </summary>
             /// <param name="id"></param>
             /// <param name="bLock"></param>
             /// <param name="process"></param>
             var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
-            $.post(url, { ids: id }, function (result) {
+            $.post(url, { ids: id }, function(result) {
                 process(result.success);
             });
         }
@@ -89,45 +89,45 @@ define(function (require) {
 
         ary.push('<a href="/MemberShips/User/Edit/' + oObj.LoginId + '" class="btn tip"><i class="fam-user-edit"></i></a>'); //edit User
         ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>'); //assign role and ug and org
-        ary.push('<a href="#' + oObj.Id + '" class="btn tip" title="" role="pm"><i class="fam-email-edit"></i></a>'); //PM
+        //ary.push('<a href="#' + oObj.Id + '" class="btn tip" title="" role="pm"><i class="fam-email-edit"></i></a>'); //PM
         ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="" role="verifyEmail"><i class="fam-email-go"></i></a>'); //VerifyEmail
-        ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i></a>');//Retrew password
+        ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i></a>'); //Retrew password
         return ary.join("");
 
     }
 
     return {
-        init: function (lang, currentUser, tableConfig) {
+        init: function(lang, currentUser, tableConfig) {
 
             //Table Verify User.
-            $("#table").on("click", "a[role=verifyEmail]", function () {
+            $("#table").on("click", "a[role=verifyEmail]", function() {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
                 var self = this;
                 showLoading.call(self, true);
-                userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
+                userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function(e) {
                     alert(e.success ?
                         lang.verifyEmailMessage.success :
                         lang.verifyEmailMessage.fail);
 
-                }, function () {
+                }, function() {
                     showLoading.call(self, false);
                 });
                 return false;
-            }).on("click", "a[role=pm]", function () {
+            }).on("click", "a[role=pm]", function() {
                 pmDialog.show($(this).attr("href").substr(1));
-            }).on('click', "[role=retievePwd]", function () {
+            }).on('click', "[role=retievePwd]", function() {
                 var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
                 showLoading.call(this, true);
-                userApi.RetrievePassword(loginId, function (e) {
+                userApi.RetrievePassword(loginId, function(e) {
                     alert(e.success ?
                         lang.retrievePwdMessage.success :
                         lang.retrievePwdMessage.fail);
-                }, function () {
+                }, function() {
                     showLoading.call(self, false);
                 });
             });
 
-            pmDialog = new pm($("#pmEditor"), currentUser);
+            //pmDialog = new pm($("#pmEditor"), currentUser);
             tableEdit(tableConfig);
 
         }

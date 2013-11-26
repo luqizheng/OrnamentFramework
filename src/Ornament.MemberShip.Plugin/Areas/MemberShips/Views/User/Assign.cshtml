@@ -4,10 +4,10 @@
 @using Ornament.MemberShip.Permissions
 @using Ornament.Web
 @using Qi.Web
-@using Resources
+@using Ornament.MemberShip.Properties
 @model Ornament.MemberShip.User
 @{
-    ViewBag.Title = MemberShip.AssignRoles + ":" + Model.Name;
+    ViewBag.Title = Ornament.MemberShip.Properties.Resources.AssignRoles + ":" + Model.Name;
     Layout = OrnamentContext.Configuration.BackendLayout();
     IList<UserGroup> allUserGroups = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao().GetAll();
     IList<Role> allRoles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
@@ -28,14 +28,14 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <button type="submit" class="btn btn-primary">
-                        <i class="icon-pencil icon-white"></i>@Basic.Save</button>
-                    <a id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                        <i class="icon-pencil icon-white"></i>@Ornament.Properties.Resources.Save</button>
+                    <a id="cancel" href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
                 </div>
             </div>
             <div class="body well">
 
                 <div class="form-horizontal span6" id="UserGroups">
-                    <strong class="subtitle">@MemberShip.UserGroup</strong>
+                    <strong class="subtitle">@Resources.UserGroup</strong>
                     <div class="well-smoke body">
                         @foreach (UserGroup ug in allUserGroups)
                         {
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-horizontal span6" id="Roles">
-                    <strong class="subtitle">@MemberShip.Role</strong>
+                    <strong class="subtitle">@Resources.Role</strong>
                     <div class="well-smoke body">
                         @foreach (Role role in allRoles)
                         {
@@ -65,7 +65,7 @@
         <div class="widget span3">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>@MemberShip.Permission</h6>
+                    <h6>@Resources.Permission</h6>
                 </div>
             </div>
             <div class="well body" id="permissionPanel">
@@ -98,7 +98,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use("@Url.Content("~/MemberShips/User/Assign.js")", function(main) {
+        seajs.use("@Url.Content("~/MemberShips/Scripts/User/Assign.js")", function(main) {
             var userGroupMap = @MvcHtmlString.Create(JsonHelper.ToJson(ViewData["userGroupRoleMap"]));
             var roleGroupMap = @MvcHtmlString.Create(JsonHelper.ToJson(ViewData["rolePermissionMap"]));
             main(userGroupMap, roleGroupMap);
