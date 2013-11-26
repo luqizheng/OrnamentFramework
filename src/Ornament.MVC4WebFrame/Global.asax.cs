@@ -6,17 +6,17 @@ using System.Web.Optimization;
 using System.Web.Profile;
 using System.Web.Routing;
 using System.Web.Security;
-using Ornament.MVCWebFrame.App_Start;
-using Ornament.MVCWebFrame.Models;
+using log4net;
+using log4net.Config;
+using MvcContrib;
+using MvcContrib.UI.InputBuilder;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
-using Ornament.Web;
+using Ornament.MVCWebFrame.App_Start;
 using Ornament.Web.Cfg;
 using Ornament.Web.HttpModel;
 using Qi.NHibernateExtender;
-using log4net;
-using log4net.Config;
 
 namespace Ornament.MVCWebFrame
 {
@@ -28,10 +28,11 @@ namespace Ornament.MVCWebFrame
         {
             XmlConfigurator.Configure(); //Log4net registry.
             //MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
-            MvcContrib.Bus.AddMessageHandler(typeof(NHConfigurationHandler));
-            
+            Bus.AddMessageHandler(typeof (NHConfigurationHandler));
+
             //MvcContrib.Bus.AddAllMessageHandlers();
             AreaRegistration.RegisterAllAreas();
+
             NhConfig.Config();
 
             MvcExtender.Register();
@@ -45,11 +46,8 @@ namespace Ornament.MVCWebFrame
             //Registry the Provider to use Membership rule of asp.net.
             //Assembly auto config.
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
-
+            InputBuilder.BootStrap();
             NotifyConfig.Register();
-
-            
-           
         }
 
 
@@ -76,11 +74,10 @@ namespace Ornament.MVCWebFrame
 
                 //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
                 OrnamentModule.SiwtchTo(OrnamentContext.MemberShip.ProfileLanguage());
-
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof(GlobalContext));
+                ILog log = LogManager.GetLogger(typeof (GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally
@@ -164,12 +161,11 @@ namespace Ornament.MVCWebFrame
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception exception = Server.GetLastError();
-            HttpException http = exception as HttpException;
+            var http = exception as HttpException;
             if (http == null || http.GetHttpCode() != 404)
             {
-                log4net.LogManager.GetLogger(this.GetType()).Error("Un-handle exception.", exception);
+                LogManager.GetLogger(GetType()).Error("Un-handle exception.", exception);
             }
-
         }
     }
 }

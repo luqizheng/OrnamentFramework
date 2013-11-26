@@ -80,6 +80,9 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="MvcSiteMapProvider">
       <HintPath>..\packages\MvcSiteMapProvider.3.3.6.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
     </Reference>
@@ -204,20 +207,6 @@
     <Compile Include="Plugins\DataTables\DataTableResult.cs" />
     <Compile Include="Plugins\DataTables\DataTablesPostData.cs" />
     <Compile Include="Plugins\DataTables\PostDataModelBinder.cs" />
-    <Compile Include="PortableAreas\ApplicationBus.cs" />
-    <Compile Include="PortableAreas\AssemblyResourceManager.cs" />
-    <Compile Include="PortableAreas\AssemblyResourceStore.cs" />
-    <Compile Include="PortableAreas\Bus.cs" />
-    <Compile Include="PortableAreas\EmbeddedResourceController.cs" />
-    <Compile Include="PortableAreas\IApplicationBus.cs" />
-    <Compile Include="PortableAreas\IEventMessage.cs" />
-    <Compile Include="PortableAreas\IMessageHandler.cs" />
-    <Compile Include="PortableAreas\IMessageHandlerFactory.cs" />
-    <Compile Include="PortableAreas\MapExtensions.cs" />
-    <Compile Include="PortableAreas\PortableAreaContent.cs" />
-    <Compile Include="PortableAreas\PortableAreaMap.cs" />
-    <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
-    <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
