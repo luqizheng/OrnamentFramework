@@ -1,6 +1,6 @@
 ﻿define(function (require) {
     require("jquery");
-    require('../../_appLayout.js');
+    require("/scripts/views/_appLayout.js");
     return function (userGroupMap, roleGroupMap) {
         $("#UserGroups input").change(function () {
             $("#Roles label").removeClass("active");

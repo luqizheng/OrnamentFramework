@@ -1,10 +1,11 @@
-﻿@using Resources
+﻿@using Ornament
+@using Ornament.Properties
 @using Ornament.Web
 @model IEnumerable<Ornament.MemberShip.UserGroup>
 
 @{
     ViewBag.Title = "View1";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle{
     <h6>UserGroup List</h6>
@@ -14,7 +15,7 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
         </div>
     </div>
     <div class="body well">
@@ -44,15 +45,15 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Basic.Edit" class="btn btn-info btn-mini">
+                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Resources.Edit" class="btn btn-info btn-mini">
                                     <i class="icon-edit icon-white"></i>
                                 </a>
-                                <a href="@Url.Action("Details", new { id = item.Id })" title="@Basic.Edit" class="btn btn-mini">
+                                <a href="@Url.Action("Details", new { id = item.Id })" title="@Resources.Edit" class="btn btn-mini">
                                     <i class="icon-share icon-white"></i>
                                 </a>
 
 
-                                <a href="@Url.Action("Delete", new { id = item.Id })" title="@Basic.Edit" class="btn btn-danger btn-mini">
+                                <a href="@Url.Action("Delete", new { id = item.Id })" title="@Resources.Edit" class="btn btn-danger btn-mini">
                                     <i class="icon-remove icon-white"></i>
                                 </a>
                             </td>
@@ -62,9 +63,9 @@
                 <tfoot>
                     <tr>
                         <td colspan="3">
-                            <form>
+                            @*<form>
                                 @Html.Partial("NavPagination", (Pagination)(ViewData["Nav"] ?? new Pagination()))
-                            </form>
+                            </form>*@
                         </td>
                     </tr>
                 </tfoot>

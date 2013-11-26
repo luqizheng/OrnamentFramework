@@ -72,6 +72,14 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                              new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" }
                 );
 
+
+            context.MapRoute(
+                AreaName + "_AssingUser",
+                AreaName + "/User/Assign/{loginId}",
+                new { action = "Assign", loginId = UrlParameter.Optional, controller = "User" },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
+                );
+
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
