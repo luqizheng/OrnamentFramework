@@ -1,11 +1,13 @@
-﻿@model Ornament.MemberShip.UserGroup
+﻿@using Ornament
+@using Ornament.MemberShip.Plugin.Properties
+@model Ornament.MemberShip.UserGroup
 @{
     
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 <script src="@Url.Content("~/Scripts/lib/jquery.doubleSelectBox.js")" type="text/javascript"></script>
 
-@Resources.MemberShip.AssignUserGroup : @Model.Name
+@Resources.AssignUserGroup : @Model.Name
 
 <form method="POST" class="form-horizontal" action="@Url.Action("AssignUser")" id="assign">
 

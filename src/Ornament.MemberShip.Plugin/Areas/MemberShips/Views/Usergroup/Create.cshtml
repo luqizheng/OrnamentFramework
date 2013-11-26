@@ -1,17 +1,19 @@
-﻿@using Resources
+﻿@using Ornament
+@using Ornament.Properties
+
 @using Qi.Web.Mvc
 @model Ornament.MemberShip.UserGroup
 @{
-    ViewBag.Title = Basic.Create + MemberShip.UserGroup;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
-    Html.EnableClientValidation();
+    ViewBag.Title = Resources.Create + Ornament.MemberShip.Properties.Resources.UserGroup;
+    Layout = OrnamentContext.Configuration.BackendLayout();
+    
 }
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     <fieldset class="form-horizontal">
-        <legend>@Resources.Basic.Create @Resources.MemberShip.UserGroup</legend>
+        <legend>@Resources.Create @Ornament.MemberShip.Properties.Resources.UserGroup</legend>
         <div class="control-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             <div class="controls">
@@ -20,16 +22,16 @@
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+            @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextAreaFor(model => model.Remark)
-                @Html.ValidationMessageFor(model => model.Remark)
+                @Html.TextAreaFor(model => model.Remarks)
+                @Html.ValidationMessageFor(model => model.Remarks)
             </div>
         </div>
         <div class="form-actions">
             <button class="btn btn-primary" type="submit">
                 <i class="icon-plus icon-white"></i>@Basic.Create</button>
-            <button href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i> @Basic.Cancel</button>
+            <a href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i>@Resources.Cancel</a>
         </div>
     </fieldset>
 }

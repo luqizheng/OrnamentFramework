@@ -1,8 +1,9 @@
-﻿@using Resources
+﻿@using Ornament
+@using Ornament.Properties
 @model Ornament.MemberShip.Plugin.Models.Memberships.UserGroupModel
 @{
-    ViewBag.Title = Basic.Edit + ":" + Model.Name;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    ViewBag.Title = Resources.Edit + ":" + Model.Name;
+    Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle
 {
@@ -22,8 +23,8 @@
                 @Html.HiddenFor(model => model.Id)
 
                 <div class="btn-toolbar form-actions">
-                    <a id="submit" class="btn btn-primary">@Basic.OK</a>
-                    <a  id="cancel" href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                    <a id="submit" class="btn btn-primary">@Resources.OK</a>
+                    <a  id="cancel" href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
                 </div>
     
             }

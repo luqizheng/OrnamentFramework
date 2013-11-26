@@ -1,11 +1,15 @@
-﻿@model Ornament.MemberShip.UserGroup
+﻿@using Ornament
+@using Ornament.Properties
+
+@using Resources = Ornament.Properties.Resources
+@model Ornament.MemberShip.UserGroup
 @{
     ViewBag.Title = "分配角色:" + this.Model.Name;
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
 
    
 }
-@section scripts{
+@section Scripts{
     <script type="text/javascript">
         seajs.use(['jquery'], function () {
             $("#cancel").click(function () { location = '@Url.Action("Index")'; });
@@ -14,16 +18,16 @@
 }
 @section pageTitle
 {
-    <h6>@Resources.MemberShip.AssignRoles:@this.Model.Name</h6>
+    <h6>@Ornament.MemberShip.Plugin.Properties.Resources.AssignRoles:@this.Model.Name</h6>
 }
 @using (Html.BeginForm())
 {
     <header>
         <button type="submit" id="submit" class="btn btn-primary">
             <i class="icon-ok icon-white"></i>
-            @Resources.Basic.Save
+            @Resources.Save
         </button>
-        <button type="button" id="cancel" class="btn">@Resources.Basic.Cancel</button>
+        <button type="button" id="cancel" class="btn">@Resources.Cancel</button>
     </header>
     <section>
         <input id="Id" name="Id" value="@this.Model.Id"  type="hidden"/>

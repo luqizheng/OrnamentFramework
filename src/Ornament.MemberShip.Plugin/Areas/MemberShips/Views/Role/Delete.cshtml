@@ -1,7 +1,7 @@
 ﻿@using Ornament
 @using Ornament.MemberShip
 @using Ornament.Web
-@using Resources
+@using Ornament.Properties
 @model Ornament.MemberShip.Role
 @{
     ViewBag.Title = "Delete";
@@ -41,7 +41,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>@MemberShip.User</h6>
+                    <h6>@Ornament.MemberShip.Properties.Resources.User</h6>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>@MemberShip.UserGroup</h6>
+                    <h6>@Ornament.MemberShip.Properties.Resources.UserGroup</h6>
                 </div>
             </div>
             <div class="well body">
