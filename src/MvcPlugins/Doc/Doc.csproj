@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1F2F532B-8342-4469-BF93-9343129BC80C}</ProjectGuid>
+    <ProjectGuid>{296C9324-7DB9-464F-A0E6-59E6634626E0}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Friends</RootNamespace>
-    <AssemblyName>Friends.Plugin</AssemblyName>
+    <RootNamespace>Doc</RootNamespace>
+    <AssemblyName>Doc.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -44,6 +44,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcContrib">
       <HintPath>..\..\Ornament.MVC4WebFrame\bin\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi, Version=1.4.6.38, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Qi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,28 +117,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Friends\Controllers\FriendController.cs" />
-    <Compile Include="Areas\Friends\FriendsAreaRegistration.cs" />
+    <Compile Include="Areas\Doc\Controllers\ConfigurationController.cs" />
+    <Compile Include="Areas\Doc\Controllers\TypeLayoutController.cs" />
+    <Compile Include="Areas\Doc\DocAreaRegistration.cs" />
+    <Compile Include="Areas\Doc\Models\BaseTypeModel.cs" />
+    <Compile Include="Areas\Doc\Models\ExtenderTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
+    <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>
+      <Name>Ornament.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
+      <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
+      <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Friends\Models\" />
-    <Folder Include="Areas\Friends\Views\Shared\" />
+    <Content Include="Areas\Doc\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Doc\Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Areas\Doc\Views\TypeLayout\BaseType.cshtml" />
+    <Content Include="Areas\Doc\Views\TypeLayout\ExtenderType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Friends\Views\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -154,7 +163,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4067/</IISUrl>
+          <IISUrl>http://localhost:2826/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

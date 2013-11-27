@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Ornament.Validations;
 using Qi;
 
-namespace Ornament.MVCWebFrame.Areas.Docs.Models
+namespace Ornament.MVCWebFrame.Areas.Doc.Models
 {
     public class BaseTypeModel
     {

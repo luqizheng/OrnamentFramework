@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using System.Web.Mvc;
-
 using ElFinder;
+using Ornament;
 using Ornament.MemberShip.Dao;
-using Ornament.Web;
 using Qi;
 using Qi.IO;
 
-namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
+namespace Information.Controllers
 {
     /// <summary>
     ///     For elfinder 用于管理Elfinder文件controller

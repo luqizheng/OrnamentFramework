@@ -228,16 +228,6 @@
     <Compile Include="App_Start\NotifyConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Docs\Controllers\ConfigurationController.cs" />
-    <Compile Include="Areas\Docs\Controllers\TypeLayoutController.cs" />
-    <Compile Include="Areas\Docs\DocsAreaRegistration.cs" />
-    <Compile Include="Areas\Docs\Models\BaseTypeModel.cs" />
-    <Compile Include="Areas\Docs\Models\ExtenderTypeModel.cs" />
-    <Compile Include="Areas\Settings\Controllers\FileManagerController.cs" />
-    <Compile Include="Areas\Settings\Controllers\FilesController.cs" />
-    <Compile Include="Areas\Settings\Controllers\PluginsController.cs" />
-    <Compile Include="Areas\Settings\Controllers\SiteController.cs" />
-    <Compile Include="Areas\Settings\SystemAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
@@ -682,13 +672,6 @@
     <Content Include="Scripts\plugins\forms\jquery.bootstrap.datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\Fx\jquery-1.10.2.js" />
     <Content Include="Scripts\Components\html5shiv.js" />
-    <Content Include="Areas\Docs\Views\TypeLayout\ExtenderType.cshtml" />
-    <Content Include="Areas\Docs\Views\Web.config" />
-    <Content Include="Areas\Settings\Views\Site\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\Shared\_membershipSetting.cshtml" />
-    <Content Include="Areas\Docs\Views\Shared\_codeLayout.cshtml" />
-    <Content Include="Areas\Docs\Views\TypeLayout\BaseType.cshtml" />
-    <Content Include="Areas\Settings\Views\FileManager\Index.cshtml" />
     <Content Include="CodeTemplates\AddView\CSHTML\oCreate.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oDelete.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oDetails.tt" />
@@ -739,7 +722,6 @@
     <Content Include="Content\font\FontAwesome.otf" />
     <Content Include="Content\img\elements\uploader\.DS_Store" />
     <Content Include="Areas\Web.config" />
-    <Content Include="Areas\Settings\Views\Plugins\Index.cshtml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
@@ -1164,6 +1146,18 @@
       <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
       <Name>Ornament.Messages.Plugin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Doc\Doc.csproj">
+      <Project>{296c9324-7db9-464f-a0e6-59e6634626e0}</Project>
+      <Name>Doc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Friends\Friends.csproj">
+      <Project>{1f2f532b-8342-4469-bf93-9343129bc80c}</Project>
+      <Name>Friends</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Information\Information.csproj">
+      <Project>{9a7b397f-b083-4af3-8d91-910b7196ab46}</Project>
+      <Name>Information</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>
@@ -1219,10 +1213,6 @@
     <Content Include="Views\Shared\Empty.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\NavPagination.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Settings\Views\Application\DatabaseInit.cshtml" />
-    <Content Include="Areas\Settings\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />

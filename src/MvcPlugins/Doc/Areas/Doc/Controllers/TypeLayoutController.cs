@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using Ornament.MVCWebFrame.Areas.Docs.Models;
+using Ornament.MVCWebFrame.Areas.Doc.Models;
 using Qi;
 
-namespace Ornament.MVCWebFrame.Areas.Docs.Controllers
+namespace Ornament.MVCWebFrame.Areas.Doc.Controllers
 {
     [Authorize]
     public class TypeLayoutController : Controller

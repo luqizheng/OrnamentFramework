@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Settings.Controllers
+namespace Information.Controllers
 {
     public class FileManagerController : Controller
     {
