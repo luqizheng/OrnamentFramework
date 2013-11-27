@@ -1,15 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace Information.Controllers
+namespace Information.Areas.Information.Controllers
 {
-    public class PluginsController: Controller
+    public class SiteController : Controller
     {
         //
-        // GET: /Settings/Plugins/
+        // GET: /Settings/SiteInfo/
 
         public ActionResult Index()
         {
-            
             return View();
         }
 

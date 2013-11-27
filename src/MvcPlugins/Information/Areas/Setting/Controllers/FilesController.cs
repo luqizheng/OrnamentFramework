@@ -6,7 +6,7 @@ using Ornament.MemberShip.Dao;
 using Qi;
 using Qi.IO;
 
-namespace Information.Controllers
+namespace Information.Areas.Setting.Controllers
 {
     /// <summary>
     ///     For elfinder 用于管理Elfinder文件controller

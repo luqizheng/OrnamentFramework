@@ -1,22 +1,26 @@
 ﻿using System.Web.Mvc;
 using MvcContrib.PortableAreas;
 
-namespace Information
+namespace Information.Areas.Information
 {
-    public class SystemAreaRegistration : PortableAreaRegistration
+    public class InformationAreaRegistration : PortableAreaRegistration
     {
         public override string AreaName
         {
-            get { return "Settings"; }
+            get
+            {
+                return "Information";
+            }
         }
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             context.MapRoute(
                this.AreaName + "_default",
-               "Information/{controller}/{action}/{id}",
+               this.AreaRoutePrefix + "/{controller}/{action}/{id}",
                new { action = "Index", id = UrlParameter.Optional }
-               );
+           );
             base.RegisterArea(context, bus);
         }
+        
     }
 }

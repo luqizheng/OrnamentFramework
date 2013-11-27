@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Information.Controllers
+namespace Information.Areas.Setting.Controllers
 {
     public class FileManagerController : Controller
     {
