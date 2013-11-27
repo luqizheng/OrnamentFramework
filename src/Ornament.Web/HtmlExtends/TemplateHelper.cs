@@ -30,10 +30,6 @@ namespace Ornament.Web.HtmlExtends
         /// <returns></returns>
         public static Box Box(this HtmlHelper htmlHelper)
         {
-            var tagBuilder = new TagBuilder("div");
-            tagBuilder.AddCssClass("widget");
-            htmlHelper.ViewContext.Writer.Write(tagBuilder.ToString(TagRenderMode.StartTag));
-
             return new Box(htmlHelper.ViewContext);
         }
         /// <summary>

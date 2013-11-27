@@ -29,6 +29,7 @@
                 fail: "@Html.GetEmbededResourceString("retrieve_pwd_fail")"
             }
         };
+        
         var curUser = {
             Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
             Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
@@ -47,7 +48,7 @@
 }
 @using (Html.Box())
 {
-    <a href="@Url.Action("Create")">@Ornament.Properties.Resources.Add</a>
+    <a href="@Url.Action("Create")" class="btn btn-primary">@Ornament.Properties.Resources.Add</a>
     @Html.BoxBody(
         @<text>
     <form method="POST" id="tableForm">

@@ -4,7 +4,6 @@ using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
-using Ornament.MVCWebFrame.Api.Core;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.Validations;
 using Ornament.Web;
@@ -34,22 +33,21 @@ namespace Ornament.MVCWebFrame.App_Start
             ChangeControllerFacotry();
 
 
-
-
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
             //for jquery spiner step,
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute),
-                                                                  typeof(StepAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (JqStepAttribute),
+                                                                  typeof (StepAttributeAdapter));
         }
 
         private static void ExtenderModelType()
         {
             ModelBinders.Binders.DefaultBinder = new NHModelBinder();
-            ModelBinders.Binders.Add(typeof(Time), new TimeModelBinder());
-            ModelBinders.Binders.Add(typeof(Time?), new TimeModelBinder());
+            ModelBinders.Binders.Add(typeof (Time), new TimeModelBinder());
+            ModelBinders.Binders.Add(typeof (Time?), new TimeModelBinder());
         }
+
         /// <summary>
-        /// 为容器添加添加Controller的依赖
+        ///     为容器添加添加Controller的依赖
         /// </summary>
         private static void ChangeControllerFacotry()
         {
@@ -59,16 +57,15 @@ namespace Ornament.MVCWebFrame.App_Start
 
             var defaultController = new OrnamentControllerFactory(controllers)
                 {
-                    ErrorController = typeof(HttpErrorsController)
+                    ErrorController = typeof (HttpErrorsController)
                 };
-            
+
 
             var apiController = new OrnamentWebApiFactory(apiControllers);
 
 
             try
             {
-
                 OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>()
                                                                .Instance(apiController).LifestyleSingleton());
 
@@ -77,7 +74,7 @@ namespace Ornament.MVCWebFrame.App_Start
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcExtender)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcExtender)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }
