@@ -3,11 +3,11 @@
 @using Ornament.Messages.Newses
 @using Ornament.Web
 @using Qi.Web
-@using Resources
+@using Basic=Ornament.Properties.Resources
 @model Ornament.Messages.Newses.News
 @{
     ViewBag.Title = "Create new message";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     var types = ViewData["types"] as IEnumerable<NewsType>;
     string contents = "{}";
 

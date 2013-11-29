@@ -1208,7 +1208,6 @@
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\HttpErrors\404.cshtml" />
-    <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Operators.cshtml" />
     <Content Include="Views\Shared\Empty.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />

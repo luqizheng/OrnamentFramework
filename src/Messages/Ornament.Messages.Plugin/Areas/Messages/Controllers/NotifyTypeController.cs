@@ -5,7 +5,7 @@ using Ornament.Messages.Notification;
 using Ornament.Models.Messages;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
+namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Session]
     [Authorize(Roles = "admin", Users = "admin")]

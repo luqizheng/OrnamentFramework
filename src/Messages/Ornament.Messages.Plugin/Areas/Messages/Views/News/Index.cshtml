@@ -1,11 +1,12 @@
-﻿@using Ornament.Messages.Newses
+﻿@using Ornament
+@using Ornament.Messages.Newses
 @using Ornament.Web
-@using Resources
+@using Basic=Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.News>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     var types = (IList<NewsType>)ViewData["types"];
     var selectedType = ViewData["type"] as NewsType;
     var pae = ViewData["nav"] as Pagination;

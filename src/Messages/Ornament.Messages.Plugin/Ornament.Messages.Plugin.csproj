@@ -182,6 +182,10 @@
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.MemberShip.Plugin\Ornament.MemberShip.Plugin.csproj">
+      <Project>{60965723-bea2-4a7b-b6ee-9e1e237504f6}</Project>
+      <Name>Ornament.MemberShip.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
       <Name>Ornament.Web.Core</Name>
@@ -196,58 +200,58 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\News\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\News\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\News\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\NewsType\Create.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\NewsType\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\NewsType\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\NewsType\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\NewsType\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\NewsType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Shared\resNewsType.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\Shared\resNewsType.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\Create.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Messages\Views\Template\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

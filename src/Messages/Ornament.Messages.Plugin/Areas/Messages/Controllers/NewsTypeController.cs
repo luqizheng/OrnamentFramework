@@ -6,7 +6,7 @@ using Ornament.Models.Messages;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Messages.Controllers
+namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Session]
     [Authorize(Roles = "admin", Users = "admin")]

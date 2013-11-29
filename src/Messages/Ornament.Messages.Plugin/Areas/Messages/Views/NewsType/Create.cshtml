@@ -2,7 +2,7 @@
 @using Ornament
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
-
+@using Basic=Ornament.Properties.Resources
 @{
     ViewBag.Title = "Create";
     Layout = OrnamentContext.Configuration.BackendLayout();
@@ -18,8 +18,8 @@
             @Html.Partial("_messageTypeEditor", this.Model)
             
             <div class="form-actions">
-                <input type="submit" class="btn btn-info"  value="@Resources.Basic.Submit"/>
-                  <a href="@Url.Action("Index")" class="btn">@Resources.Basic.Cancel</a>
+                <input type="submit" class="btn btn-info"  value="@Basic.Submit"/>
+                  <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
             </div>
         </form>
     </div>
