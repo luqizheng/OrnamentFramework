@@ -16,7 +16,7 @@ namespace Ornament.Messages.Notification
 
 
         /// <summary>
-        /// jsut for Nhibernate.
+        ///     jsut for Nhibernate.
         /// </summary>
         /// <exception cref="ArgumentNullException">type or publisher are null</exception>
         protected NotifyMessageTemplate()
