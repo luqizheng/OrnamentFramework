@@ -88,10 +88,10 @@
     <Compile Include="Notification\ISender.cs" />
     <Compile Include="EditState.cs" />
     <Compile Include="Newses\NewsType.cs" />
-    <Compile Include="Notification\MessageHeaderBase.cs" />
+    <Compile Include="Notification\NotifyMessageTemplate.cs" />
     <Compile Include="Notification\NotifyType.cs" />
     <Compile Include="Notification\SimpleMessage.cs" />
-    <Compile Include="Notification\NotifyMessageTemplate.cs" />
+    <Compile Include="Notification\CreateVariablesHandler.cs" />
     <Compile Include="Notification\Senders\ClientSender.cs" />
     <Compile Include="Notification\Senders\EmailSender.cs" />
     <Compile Include="PersonalMessages\PersonalMessage.cs" />

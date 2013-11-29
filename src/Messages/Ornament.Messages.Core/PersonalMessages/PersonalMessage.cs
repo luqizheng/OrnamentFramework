@@ -13,6 +13,8 @@ namespace Ornament.Messages.PersonalMessages
 
         public PersonalMessage(User publisher)
         {
+            if (publisher == null)
+                throw new ArgumentNullException("publisher");
             CreateTime = DateTime.Now;
             Publisher = publisher;
         }

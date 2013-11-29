@@ -45,8 +45,8 @@
         <div class="body well">
 
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>@Html.GetResourceString("Tab_title_Basic")</a></li>
-                <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>@Html.GetResourceString("Tab_title_Content")</a></li>
+                <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>@Html.GetEmbededResourceString("Tab_title_Basic")</a></li>
+                <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>@Html.GetEmbededResourceString("Tab_title_Content")</a></li>
             </ul>
             <div class="tab-content">
 
@@ -122,7 +122,7 @@
     <script type="text/javascript">
 
 
-        seajs.use("/messages/template/edit.js", function (init) {
+        seajs.use("/messages/scripts/template/edit.js", function (init) {
             var content = @Html.Raw(contents)
             init(content);
         });
