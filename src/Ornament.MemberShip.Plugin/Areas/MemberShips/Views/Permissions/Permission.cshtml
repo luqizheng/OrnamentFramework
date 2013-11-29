@@ -104,7 +104,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use(["/memberships/permissions/permission.js"], function (main) {
+        seajs.use(["/memberships/scripts/permissions/permission.js"], function (main) {
 
             main(@(jsonObject != null ? Html.Raw(Json.Encode(jsonObject)) : new MvcHtmlString("null")));
 

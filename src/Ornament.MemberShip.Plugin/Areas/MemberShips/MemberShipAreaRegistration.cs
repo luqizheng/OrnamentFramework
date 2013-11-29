@@ -17,39 +17,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
         {
             //注册 Dao
             bus.Send(new DaoFactoryRegister(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
-
-            //page scripts  regist
-            context.MapRoute(
-                AreaName + "_scripts",
-                AreaRoutePrefix + "/Scripts/User/{resourceName}",
-                new
-                    {
-                        controller = "OrnamentEmbeddedResource",
-                        action = "Index",
-                        resourcePath = "Ornament.MemberShip.Plugin.Scripts.User",
-                    }
-                    ,
-                    new string[]
-                        {
-                            "Ornament.Web.Controllers"
-                        }
-                    );
-
-            context.MapRoute(
-              AreaName + "_combine_scripts",
-              AreaRoutePrefix + "/Scripts/Combine/{resourceName}",
-              new
-              {
-                  controller = "OrnamentEmbeddedResource",
-                  action = "Index",
-                  resourcePath = "Ornament.MemberShip.Plugin.Scripts.combine",
-              }
-                  ,
-                  new string[]
-                        {
-                            "Ornament.Web.Controllers"
-                        }
-                  );
+            RegistyScripts("User", context);
+            RegistyScripts("Combine", context);
+            RegistyScripts("Permissions", context);
 
             context.MapRoute(
                 AreaName + "_images",
@@ -88,6 +58,26 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 );
 
             base.RegisterArea(context, bus);
+        }
+
+        private void RegistyScripts(string scriptName, AreaRegistrationContext context)
+        {
+            //page scripts  regist
+            context.MapRoute(
+                AreaName + "_" + scriptName + "_scripts",
+                string.Format("{0}/Scripts/{1}/{{resourceName}}", AreaRoutePrefix, scriptName),
+                new
+                {
+                    controller = "OrnamentEmbeddedResource",
+                    action = "Index",
+                    resourcePath = "Ornament.MemberShip.Plugin.Scripts." + scriptName,
+                }
+                ,
+                new[]
+                    {
+                        "Ornament.Web.Controllers"
+                    }
+                );
         }
     }
 }

@@ -2,6 +2,7 @@
 @using Ornament.MemberShip.Permissions
 @using Ornament.Properties
 @using Ornament.Web;
+@using Ornament.Web.HtmlExtends
 @model IEnumerable<Ornament.MemberShip.Permissions.Permission>
 @{
     ViewBag.Title = "Permissions";
@@ -10,7 +11,7 @@
 @section scripts{
     <script type="text/javascript">
 
-        seajs.use(["/memberships/permissions/index.js"], function (init) {
+        seajs.use(["/memberships/scripts/permissions/index.js"], function (init) {
             init({
                 warnDel: "@Html.GetEmbededResourceString("warnning_deleting_msg")",
                 delUrl: "@Url.Action("Delete")"
@@ -25,47 +26,49 @@
     </span>
 }
 
+
 <div class="widget">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
-        </div>
-    </div>
-    <div class="body well">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 100px"></th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Remark)
-                        
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Operator)
-                    </th>
-                </tr>
-            </thead>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(Resources.Edit, "Edit", new { id = item.Id }) |
-                        @Html.ActionLink(Resources.Delete, "Delete", new { id = item.Id })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Remark)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item, "Operators")
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+    @Html.BoxHeader(@<text>
+    <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
+
+    </text>)
+
+    @Html.BoxBody(
+    @<text>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 100px"></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remark)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Operator)
+                </th>
+            </tr>
+        </thead>
+        @foreach (var permission in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(Resources.Edit, "Edit", new { id = permission.Id }) |
+                        @Html.ActionLink(Resources.Delete, "Delete", new { id = permission.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => permission.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => permission.Remark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => permission, "Operators")
+                </td>
+            </tr>
+        }
+    </table>
+    </text>)
 </div>
