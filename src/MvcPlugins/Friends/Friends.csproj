@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcContrib">
-      <HintPath>..\..\Ornament.MVC4WebFrame\bin\MvcContrib.dll</HintPath>
+      <HintPath>..\..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

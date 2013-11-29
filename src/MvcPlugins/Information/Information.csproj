@@ -42,8 +42,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MvcContrib">
-      <HintPath>..\..\Ornament.MVC4WebFrame\bin\MvcContrib.dll</HintPath>
+    <Reference Include="MvcContrib, Version=3.0.0.99, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="Qi">
       <HintPath>..\..\..\lib\Qi.dll</HintPath>

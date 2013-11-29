@@ -6,7 +6,7 @@
 @using Ornament.Web
 @using Ornament.Web.Bundles
 @using Ornament.Web.HtmlExtends
-@model IEnumerable<Ornament.MemberShip.User>
+@model IEnumerable<User>
 @{
     ViewBag.Title = "";
     Layout = OrnamentContext.Configuration.BackendLayout();
@@ -21,23 +21,23 @@
     <script type="text/javascript">
         var multiLanguate = {
             verifyEmailMessage: {
-                success: "@Html.GetEmbededResourceString("verify_email_success")",
-                fail: "@Html.GetEmbededResourceString("verify_email_fail")"
+                success: '@Html.GetEmbededResourceString("verify_email_success")',
+                fail: '@Html.GetEmbededResourceString("verify_email_fail")'
             },
             retrievePwdMessage: {
-                success: "@Html.GetEmbededResourceString("retrieve_pwd_success")",
-                fail: "@Html.GetEmbededResourceString("retrieve_pwd_fail")"
+                success: '@Html.GetEmbededResourceString("retrieve_pwd_success")',
+                fail: '@Html.GetEmbededResourceString("retrieve_pwd_fail")'
             }
         };
-        
+
         var curUser = {
             Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
             Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
         };
 
-        seajs.use("@ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/User/Index.js")", function (main) {
+        seajs.use('@ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/User/Index.js")', function (main) {
             main.init(multiLanguate, curUser, {
-                url: "@Url.Action("Users", "User", new { area = "MemberShips" })"
+                url: '@Url.Action("Users", "User", new { area = "MemberShips" })'
             });
         });
     </script>
@@ -48,7 +48,12 @@
 }
 @using (Html.Box())
 {
-    <a href="@Url.Action("Create")" class="btn btn-primary">@Ornament.Properties.Resources.Add</a>
+    @Html.BoxHeader(@<text>
+                         
+                         <a href="@Url.Action("Create")" class="btn btn-primary">@Ornament.Properties.Resources.Add</a>
+
+                     </text>)
+    
     @Html.BoxBody(
         @<text>
     <form method="POST" id="tableForm">
@@ -81,5 +86,5 @@
         </table>
     </form>
     </text>
-        )
+)
 }

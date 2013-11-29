@@ -1,7 +1,8 @@
 ﻿@using Ornament
 @using Ornament.Messages
 @using Ornament.Web
-@using Basic=Ornament.Properties.Resources
+@using Ornament.Web.Bundles
+@using Basic = Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Notification.NotifyType>
 
 @{
@@ -79,7 +80,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use(["/messages/notifytype/index.js"], function (init) {
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Messages/Scripts/notifytype/index.js")", function (init) {
             init({
                 delUr: "@Url.Action("Delete")"
             });

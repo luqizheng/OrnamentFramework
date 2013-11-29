@@ -1,6 +1,6 @@
 ﻿define(function (require) {
     var $ = require("jquery");
-    require("../../_appLayout.js");
+    require("/scripts/views/_appLayout.js");
     if (!$.fn.popover) {
         require('bootstrap')($);
     }

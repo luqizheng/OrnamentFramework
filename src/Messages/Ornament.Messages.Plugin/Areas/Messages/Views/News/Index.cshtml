@@ -1,6 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Messages.Newses
 @using Ornament.Web
+@using Ornament.Web.Bundles
 @using Basic=Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.News>
 
@@ -157,6 +158,6 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use(["/messages/news/index.js"]);
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/News/Index.js")");
     </script>
 }

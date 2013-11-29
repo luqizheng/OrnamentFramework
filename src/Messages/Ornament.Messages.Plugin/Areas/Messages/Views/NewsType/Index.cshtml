@@ -1,7 +1,8 @@
 ﻿@using Ornament
 @using Ornament.Messages
 @using Ornament.Web
-@using Basic=Ornament.Properties.Resources
+@using Ornament.Web.Bundles
+@using Basic = Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.NewsType>
 
 @{
@@ -78,11 +79,10 @@
         <button class="btn deleteNo">@Basic.Cancel</button>
     </p>
 </div>
-@section scripts
-{
+@section scripts{
     <script type="text/javascript">
-        seajs.use("/messages/newstype/index.js",function(main) {
+        seajs.use("@ScriptsSeajs.RenderUrl("/Scripts/NewsType/Index.js")", function (main) {
             main("@Url.Action("Delete")");
-         })
+        })
     </script>
 }

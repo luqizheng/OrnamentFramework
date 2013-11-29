@@ -16,7 +16,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             //注册 Dao
-            bus.Send(new DaoFactoryRegister(typeof (IMessageDaoFactory), typeof (MessageDaoFactory)));
+            bus.Send(new DaoFactoryRegister(typeof(IMessageDaoFactory), typeof(MessageDaoFactory)));
 
 
             RegistyScripts("News", context);
@@ -41,8 +41,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional}
+                new { action = "Index", id = UrlParameter.Optional }
                 );
+            base.RegisterArea(context, bus);
+
+
         }
 
         private void RegistyScripts(string scriptName, AreaRegistrationContext context)
@@ -50,7 +53,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             //page scripts  regist
             context.MapRoute(
                 AreaName + "_" + scriptName + "_scripts",
-                AreaRoutePrefix + "/Scripts/" + scriptName + "/{resourceName}",
+                string.Format("{0}/Scripts/{1}/{{resourceName}}", AreaRoutePrefix, scriptName),
                 new
                     {
                         controller = "OrnamentEmbeddedResource",

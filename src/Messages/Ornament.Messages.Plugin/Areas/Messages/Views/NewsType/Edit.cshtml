@@ -1,5 +1,6 @@
 ﻿@model Ornament.Models.Messages.NewsTypeModel
 @using Ornament
+@using Ornament.Properties
 @using Ornament.Web;
 @using Ornament.Web.HtmlExtends
 @{
@@ -16,8 +17,8 @@
         <form action="@Url.Action("Edit")" class="form-horizontal" method="POST">
             @Html.Partial("_messageTypeEditor", this.Model)
             <div class="form-actions">
-                <input type="submit" class="btn btn-info"  value="@Resources.Basic.Submit"/>
-                <a href="@Url.Action("Index")" class="btn">@Resources.Basic.Cancel</a>
+                <input type="submit" class="btn btn-info"  value="@Resources.Submit"/>
+                <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
             </div>
         </form>
     </div>

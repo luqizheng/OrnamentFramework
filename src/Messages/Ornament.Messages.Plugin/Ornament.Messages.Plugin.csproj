@@ -27,7 +27,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\coder-projects\lib\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -146,11 +146,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\NewsType\Index.js" />
-    <Content Include="Scripts\News\Index.js" />
-    <Content Include="Scripts\NotifyType\index.js" />
-    <Content Include="Scripts\Template\Edit.js" />
-    <Content Include="Scripts\Template\Index.js" />
+    <EmbeddedResource Include="Scripts\NewsType\Index.js" />
+    <EmbeddedResource Include="Scripts\News\Index.js" />
+    <EmbeddedResource Include="Scripts\NotifyType\index.js" />
+    <EmbeddedResource Include="Scripts\Template\Edit.js" />
+    <EmbeddedResource Include="Scripts\Template\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -181,10 +181,6 @@
     <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Ornament.MemberShip.Plugin\Ornament.MemberShip.Plugin.csproj">
-      <Project>{60965723-bea2-4a7b-b6ee-9e1e237504f6}</Project>
-      <Name>Ornament.MemberShip.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
@@ -269,7 +265,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>10914</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:6382/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
