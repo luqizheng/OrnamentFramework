@@ -4,8 +4,8 @@ using System.Text;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
+using Ornament.Messages.Retrives;
 using Ornament.Properties;
-using Ornament.Retrives;
 using Qi.IO.Serialization;
 
 namespace Ornament.Contexts

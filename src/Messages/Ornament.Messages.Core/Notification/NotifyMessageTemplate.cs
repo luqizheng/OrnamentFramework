@@ -113,7 +113,7 @@ namespace Ornament.Messages.Notification
         }
 
         /// <summary>
-        /// 用template生成sinple message
+        ///     用template生成sinple message
         /// </summary>
         /// <param name="daoFactory"></param>
         /// <param name="replaceVariabled"></param>
@@ -137,14 +137,43 @@ namespace Ornament.Messages.Notification
                 Dictionary<string, string> variable = replaceVariabled(u);
 
                 var simpleMessage = new SimpleMessage(u)
+                {
+                    Content = new Content
                     {
-                        Content = new Content
-                            {
-                                Language = content.Language,
-                                Subject = helper.Replace(content.Subject, variable),
-                                Value = helper.Replace(content.Value, variable)
-                            }
-                    };
+                        Language = content.Language,
+                        Subject = helper.Replace(content.Subject, variable),
+                        Value = helper.Replace(content.Value, variable)
+                    }
+                };
+                Type.Send(simpleMessage);
+            }
+        }
+
+        public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
+            params IPerformer[] performers)
+        {
+            var targetuser = new HashSet<User>();
+            foreach (IPerformer performer in performers)
+            {
+                foreach (User user in performer.GetUsers(daoFactory))
+                    targetuser.Add(user);
+            }
+
+            var helper = new NamedFormatterHelper();
+            foreach (User u in targetuser)
+            {
+                Content content = GetContent(u);
+
+
+                var simpleMessage = new SimpleMessage(u)
+                {
+                    Content = new Content
+                    {
+                        Language = content.Language,
+                        Subject = helper.Replace(content.Subject, variable),
+                        Value = helper.Replace(content.Value, variable)
+                    }
+                };
                 Type.Send(simpleMessage);
             }
         }

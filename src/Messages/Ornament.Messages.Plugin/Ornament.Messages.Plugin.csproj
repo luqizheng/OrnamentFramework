@@ -143,6 +143,10 @@
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
+    <Compile Include="Areas\Messages\Models\Messages\MessageTemplateModel.cs" />
+    <Compile Include="Areas\Messages\Models\Messages\NewsTypeModel.cs" />
+    <Compile Include="Areas\Messages\Models\Messages\NotifyTypeModel.cs" />
+    <Compile Include="Areas\Messages\Models\Messages\PersonalMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Messages\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

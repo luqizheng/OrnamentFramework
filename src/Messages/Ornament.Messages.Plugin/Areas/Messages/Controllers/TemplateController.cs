@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
-using Ornament.Models.Messages;
+using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
 using Ornament.Web;
 using Qi.Web.Mvc;
 

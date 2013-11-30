@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
-using Ornament.Models.Messages;
+using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 

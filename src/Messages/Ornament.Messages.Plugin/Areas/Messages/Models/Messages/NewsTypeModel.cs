@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 
-namespace Ornament.Models.Messages
+namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 {
     public class NewsTypeModel
     {

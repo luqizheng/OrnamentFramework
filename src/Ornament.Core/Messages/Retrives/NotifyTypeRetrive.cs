@@ -1,10 +1,9 @@
 ﻿using System;
 using Ornament.Messages.Notification;
-using Ornament.Messages.Retrives;
 
-namespace Ornament.Messages
+namespace Ornament.Messages.Retrives
 {
-    internal class NotifyTypeRetrive : Retrive<NotifyType, string>
+    public class NotifyTypeRetrive : Retrive<NotifyType, string>
     {
         public NotifyTypeRetrive(string name)
             : base(name)

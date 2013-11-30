@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 
-namespace Ornament.Models.Messages
+namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 {
     public class MessageTemplateModel
     {
