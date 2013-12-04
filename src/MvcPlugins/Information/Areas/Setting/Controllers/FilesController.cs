@@ -40,18 +40,18 @@ namespace Information.Areas.Setting.Controllers
                     {
                         driver.AddRoot(
                             new Root(new DirectoryInfo(ApplicationHelper.PhysicalApplicationPath.TrimEnd('\\')))
-                                {
-                                    Alias = "Site",
-                                    IsLocked = true,
-                                    IsReadOnly = true,
-                                    IsShowOnly = true,
-                                    ThumbnailsStorage = thumbsStorage,
-                                    ThumbnailsUrl = "Thumbnails/"
-                                });
+                            {
+                                Alias = "Site",
+                                IsLocked = true,
+                                IsReadOnly = true,
+                                IsShowOnly = true,
+                                ThumbnailsStorage = thumbsStorage,
+                                ThumbnailsUrl = "Thumbnails/"
+                            });
                     }
                     var privateFolder =
                         new DirectoryInfo(Path.Combine(uploadFolder.FullName,
-                                                       OrnamentContext.MemberShip.CurrentUser().LoginId));
+                            OrnamentContext.MemberShip.CurrentUser().LoginId));
 
                     if (!privateFolder.Exists)
                         IoExtender.CreateDirectories(privateFolder.FullName);
@@ -62,13 +62,13 @@ namespace Information.Areas.Setting.Controllers
                         privateThumbsStorage.CreateEx();
                     }
                     driver.AddRoot(new Root(privateFolder, "/Files/")
-                        {
-                            Alias = "My documents",
-                            StartPath = privateFolder,
-                            ThumbnailsStorage = privateThumbsStorage,
-                            MaxUploadSizeInMb = 2.2,
-                            ThumbnailsUrl = "Thumbnails/"
-                        });
+                    {
+                        Alias = "My documents",
+                        StartPath = privateFolder,
+                        ThumbnailsStorage = privateThumbsStorage,
+                        MaxUploadSizeInMb = 2.2,
+                        ThumbnailsUrl = "Thumbnails/"
+                    });
                     _connector = new Connector(driver);
                 }
                 return _connector;

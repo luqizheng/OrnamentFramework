@@ -4,7 +4,7 @@
 @model Ornament.MemberShip.Plugin.Models.Memberships.LogonModel
 @{
     ViewBag.Title = Basic.Logon;
-    Layout = "~/Views/Shared/_layout.cshtml";
+    Layout = OrnamentContext.Configuration.BackendLayout();
     Html.EnableUnobtrusiveJavaScript(true);
     Html.EnableClientValidation(true);
 }
@@ -65,7 +65,8 @@
         </form>
     </div>
 </div>
-@section scripts{
+
+@section Scripts{
     <script type="text/javascript">
         seajs.use("/accounts/logon.js");
     </script>

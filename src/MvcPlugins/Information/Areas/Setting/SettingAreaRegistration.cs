@@ -13,13 +13,14 @@ namespace Information.Areas.Setting
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context)
+        public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             context.MapRoute(
-                this.AreaName+"_default",
-                this.AreaRoutePrefix+"/{controller}/{action}/{id}",
+                this.AreaName + "_default",
+                this.AreaRoutePrefix + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
+            base.RegisterArea(context, bus);
         }
     }
 }

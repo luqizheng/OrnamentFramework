@@ -68,7 +68,7 @@ namespace Ornament.MVCWebFrame.Controllers
             MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
                                                          OrnamentContext.Configuration.ApplicationSetting
                                                                         .VerifyEmailTimeout);
-            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -138,7 +138,7 @@ namespace Ornament.MVCWebFrame.Controllers
                                                                             .VerifyEmailTimeout);
             }
             OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
-            return Json(new {success = true, emailChanged});
+            return Json(new { success = true, emailChanged });
         }
 
         /// <summary>
@@ -162,10 +162,10 @@ namespace Ornament.MVCWebFrame.Controllers
                 }
                 return View(model);
             }
-            model.ReturnUrl = Request["ReturnUrl"];
+            model.ReturnUrl = model.ReturnUrl;
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult) Redirect(model.ReturnUrl)
+                       ? (ActionResult)Redirect(model.ReturnUrl)
                        : RedirectToAction("Index", "Home");
         }
 
