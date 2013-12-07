@@ -2,7 +2,13 @@
     var $ = require('jquery');
     require("/Components/json2.js");
 
-    function WebApi(url) {
+    return function (url) {
+    	/// <summary>
+    	/// ajax 请求结束之后的回调方法
+    	/// </summary>
+    	/// <param name="url"></param>
+    	/// <returns type=""></returns>
+        this.CompleteCallBack = null;
 
         this.opts = {
             url: url,
@@ -50,25 +56,23 @@
             $.ajax(opts);
         };
 
-        this.CompleteCallBack = null;
+
+
+        this.ext = function (method, data, func) {
+
+            var a = $.extend({}, this.opts, {
+                data: JSON.stringify(data),
+                type: method,
+                success: func
+            });
+            if (this.CompleteCallBack) {
+                a.complete = this.CompleteCallBack;
+            }
+            return a;
+        };
     }
 
-    function ext(method, data, func) {
 
-        var a = $.extend({}, this.opts, {
-            data: JSON.stringify(data),
-            type: method,
-            success: func
-        });
-        if (this.CompleteCallBack) {
-            a.complete = this.CompleteCallBack;
-        }
-        return a;
-    }
-
-
-
-    return WebApi;
 
 
 })

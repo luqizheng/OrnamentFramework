@@ -109,6 +109,7 @@
     <Compile Include="Contexts\MessagesConfig.cs" />
     <Compile Include="Contexts\WebSettings.cs" />
     <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\LanguageCollection.cs" />
     <Compile Include="OrnamentContext.cs" />
     <Compile Include="Contexts\NhConfiguration.cs" />
     <Compile Include="Contexts\OrnamentConfiguration.cs" />
