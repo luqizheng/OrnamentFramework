@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Ornament.Models
+﻿namespace Ornament.Models
 {
     public class Language
     {
@@ -13,13 +11,5 @@ namespace Ornament.Models
         public string Name { get; set; }
         public string Key { get; set; }
         public bool IsDefault { get; set; }
-    }
-
-    public class LanguageCollection : KeyedCollection<string, Language>
-    {
-        protected override string GetKeyForItem(Language item)
-        {
-            return item.Key;
-        }
     }
 }
