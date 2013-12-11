@@ -18,7 +18,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             //注册 Dao
             bus.Send(new DaoFactoryRegister(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
             RegistyScripts("User", context);
-            RegistyScripts("Combine", context);
+            RegistyScripts("Share", context);
             RegistyScripts("Permissions", context);
 
             context.MapRoute(

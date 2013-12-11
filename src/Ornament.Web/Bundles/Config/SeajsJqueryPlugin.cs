@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Optimization;
+using SeajsBundles.JqueryBundles;
 
 namespace Ornament.Web.Bundles.Config
 {

@@ -1,9 +1,10 @@
-﻿using System.IO;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Ornament.Web.Bundles.Config;
-using Ornament.Web.Bundles.Seajs;
 using Qi;
+using SeajsBundles;
+using SeajsBundles.JqueryBundles;
+using SeajsBundles.Seajs;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
@@ -38,14 +39,13 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void Comp(BundleCollection t1)
         {
             t1.Add(new ScriptBundle("~/Components/json2.js").Include("~/Scripts/Components/json2.js"));
-            
-            RootModule.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
 
+            RootModule.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
         }
 
         private static void Fx(BundleCollection bundles)
         {
-            bundles.Add(new Bundle("~/bundles/jquery.js")
+            bundles.Add(new JQueryBundle("~/bundles/jquery.js")
                 .Include("~/Scripts/fx/jquery-{version}.js"));
 
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js")
@@ -61,7 +61,7 @@ namespace Ornament.MVCWebFrame.App_Start
                     "~/Scripts/Modules/Views/_appLayout.js"));
         }
 
-     
+
         /*
         /// <summary>
         ///     业务逻辑相关的，全部都需要带有版本号
@@ -72,6 +72,7 @@ namespace Ornament.MVCWebFrame.App_Start
             new SeajsBundle("~/scripts/ctrls/pm.js", CombineSeajsModule).Include("~/Scripts/Modules/Views/Share/pm.js");
         }
         */
+
         private static void RegistryCtrl(BundleCollection bundles)
         {
             bundles.Add(
@@ -89,11 +90,10 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void SeajsModules(BundleCollection bundles)
         {
-
             var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/", CombineSeajsModule)
-                {
-                    LogFile = "/Log/modual.log"
-                };
+            {
+                LogFile = "/Log/modual.log"
+            };
             file.Handle(bundles);
         }
 

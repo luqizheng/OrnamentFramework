@@ -30,7 +30,7 @@
 </div>
 
 <script type="text/javascript">
-    seajs.use("membership", function (r) {
+    seajs.use("/MemberShips/Scripts/Share/ui.js", function (r) {
         var d = @Html.Raw(JsonHelper.ToJson(Selection));
         r.select2.org("#@Html.Id("")",d);
         
