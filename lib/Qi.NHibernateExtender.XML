@@ -90,8 +90,43 @@
             <param name="query"></param>
             <returns></returns>
         </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.Count">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Qi.Domain.NHibernates.DaoBase`2.CurrentSession">
             <summary>
+            </summary>
+        </member>
+        <member name="T:Qi.Domain.NHibernates.Searcher`2">
+            <summary>
+                NHibernate Search
+            </summary>
+            <typeparam name="TObject"></typeparam>
+            <typeparam name="TId"></typeparam>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.Searcher`2.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="sessionFactoryName"></param>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.Searcher`2.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.Searcher`2.Find(System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            </summary>
+            <param name="start"></param>
+            <param name="length"></param>
+            <param name="total"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Qi.Domain.NHibernates.Searcher`2.Sort">
+            <summary>
+                Sort Property
             </summary>
         </member>
         <member name="T:Qi.NHibernateExtender.Criterion.BitwiseFlags">
@@ -469,19 +504,86 @@
             <summary>
             </summary>
         </member>
+        <member name="T:Qi.SortDirect">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.SortDirect.Asc">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.SortDirect.Desc">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Qi.SortTarget">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.SortTarget.Tag">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.SortTarget.Property">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.SortTarget.Symbol">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Qi.SearchCondition">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.SearchCondition.Value">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.SearchCondition.Property">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Qi.Symbol">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.Symbol.Equal">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.Symbol.Like">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.Symbol.GreaterThan">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.Symbol.GreaterEqual">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.Symbol.LessThan">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Qi.Symbol.LessEqual">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Qi.Wcfs.NHibernateContextAttribute">
             <summary>
-            WCF service context for hibernate.
+                WCF service context for hibernate.
             </summary>
         </member>
         <member name="M:Qi.Wcfs.NHibernateContextAttribute.#ctor">
             <summary>
-            Default to disabled transaction and use defualt sessionfactory key
+                Default to disabled transaction and use defualt sessionfactory key
             </summary>
         </member>
         <member name="M:Qi.Wcfs.NHibernateContextAttribute.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)">
             <summary>
-            
             </summary>
             <param name="contractDescription"></param>
             <param name="endpoint"></param>

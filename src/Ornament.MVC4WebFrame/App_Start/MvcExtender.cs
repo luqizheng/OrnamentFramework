@@ -21,6 +21,7 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Register()
         {
+            NHibernateMvcRegister.Regist();
             //NHibernate Extender
             ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
             ValueProviderFactories.Factories[3] = new NHRouterDataProviderFactory();
