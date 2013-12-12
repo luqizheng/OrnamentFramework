@@ -57,14 +57,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Qi">
-      <HintPath>..\..\..\coder-projects\lib\Qi.dll</HintPath>
+    <Reference Include="Qi, Version=1.4.6.38, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Qi.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.NHibernateExtender">
-      <HintPath>..\..\..\coder-projects\lib\Qi.NHibernateExtender.dll</HintPath>
+    <Reference Include="Qi.NHibernateExtender, Version=1.4.10.14, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.Web">
-      <HintPath>..\..\..\coder-projects\lib\Qi.Web.dll</HintPath>
+    <Reference Include="Qi.Web, Version=1.1.7.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Qi.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SeajsBundles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
