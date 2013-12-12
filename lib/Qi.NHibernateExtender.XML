@@ -124,18 +124,12 @@
             <param name="total"></param>
             <returns></returns>
         </member>
-        <member name="P:Qi.Domain.NHibernates.Searcher`2.Sort">
-            <summary>
-                Sort Property
-            </summary>
-        </member>
         <member name="T:Qi.NHibernateExtender.Criterion.BitwiseFlags">
             <summary>
             </summary>
         </member>
         <member name="M:Qi.NHibernateExtender.Criterion.BitwiseFlags.IsSet(System.String,System.Enum)">
             <summary>
-            
             </summary>
             <param name="propertyName"></param>
             <param name="flags"></param>
@@ -143,7 +137,6 @@
         </member>
         <member name="M:Qi.NHibernateExtender.Criterion.BitwiseFlags.IsSet(System.String,System.Int32)">
             <summary>
-            
             </summary>
             <param name="propertyName"></param>
             <param name="flags"></param>
@@ -504,74 +497,6 @@
             <summary>
             </summary>
         </member>
-        <member name="T:Qi.SortDirect">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.SortDirect.Asc">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.SortDirect.Desc">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Qi.SortTarget">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Qi.SortTarget.Tag">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Qi.SortTarget.Property">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Qi.SortTarget.Symbol">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Qi.SearchCondition">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Qi.SearchCondition.Value">
-            <summary>
-            </summary>
-        </member>
-        <member name="P:Qi.SearchCondition.Property">
-            <summary>
-            </summary>
-        </member>
-        <member name="T:Qi.Symbol">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.Symbol.Equal">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.Symbol.Like">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.Symbol.GreaterThan">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.Symbol.GreaterEqual">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.Symbol.LessThan">
-            <summary>
-            </summary>
-        </member>
-        <member name="F:Qi.Symbol.LessEqual">
-            <summary>
-            </summary>
-        </member>
         <member name="T:Qi.Wcfs.NHibernateContextAttribute">
             <summary>
                 WCF service context for hibernate.
@@ -828,6 +753,16 @@
             <param name="requestKey"></param>
             <returns></returns>
             <exception cref="!:NhConfigurationException">can found the property in class.</exception>
+        </member>
+        <member name="T:Qi.Web.Mvc.NHibernateMvcRegister">
+            <summary>
+            NHibernate Helper注册
+            </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHibernateMvcRegister.Regist">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Qi.Web.Mvc.NHModelBinder">
             <summary>
