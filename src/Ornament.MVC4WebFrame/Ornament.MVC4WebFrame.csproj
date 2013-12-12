@@ -113,6 +113,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.Web.dll</HintPath>
     </Reference>
+    <Reference Include="SeajsBundles">
+      <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -592,7 +595,6 @@
     <Content Include="Content\templates\metralab\assets\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\Web.config" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
-    <None Include="Scripts\Fx\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\plugins\utility\jquery.dotdotdot-1.5.1.js" />
     <Content Include="Scripts\Modules\Combine\personal.js" />
@@ -934,6 +936,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Int64.cshtml" />
+    <Content Include="Views\Shared\_layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

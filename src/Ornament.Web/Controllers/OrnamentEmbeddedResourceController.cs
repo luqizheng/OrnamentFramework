@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using MvcContrib.PortableAreas;
 using MvcContrib.UI.InputBuilder.ViewEngine;
-using Ornament.Web.Bundles.Seajs;
+using SeajsBundles.Seajs;
 
 namespace Ornament.Web.Controllers
 {
@@ -18,16 +19,16 @@ namespace Ornament.Web.Controllers
                 resourceName = resourcePath + "." + resourceName;
             }
 
-            var areaName = (string)RouteData.DataTokens["area"];
+            var areaName = (string) RouteData.DataTokens["area"];
 
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-            var path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.LocalPath);
+            string path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.LocalPath);
 
-            RootModule bundleModule = new RootModule(path, new BundleContext(this.HttpContext, BundleTable.Bundles, path), true);
+            var bundleModule = new RootModule(path, new BundleContext(HttpContext, BundleTable.Bundles, path), true);
 
-            var content = "";
+            string content = "";
             using (var stream = new StreamReader(resourceStream))
             {
                 content = stream.ReadToEnd();
@@ -42,7 +43,7 @@ namespace Ornament.Web.Controllers
             }
 
             string contentType = GetContentType(resourceName);
-            return File(new MemoryStream(System.Text.Encoding.UTF8.GetBytes(content)), contentType);
+            return File(new MemoryStream(Encoding.UTF8.GetBytes(content)), contentType);
         }
 
         #region Private Members
@@ -58,16 +59,16 @@ namespace Ornament.Web.Controllers
         private static Dictionary<string, string> InitializeMimeTypes()
         {
             var mimes = new Dictionary<string, string>
-                {
-                    {".gif", "image/gif"},
-                    {".png", "image/png"},
-                    {".jpg", "image/jpeg"},
-                    {".js", "text/javascript"},
-                    {".css", "text/css"},
-                    {".txt", "text/plain"},
-                    {".xml", "application/xml"},
-                    {".zip", "application/zip"}
-                };
+            {
+                {".gif", "image/gif"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".js", "text/javascript"},
+                {".css", "text/css"},
+                {".txt", "text/plain"},
+                {".xml", "application/xml"},
+                {".zip", "application/zip"}
+            };
             return mimes;
         }
 

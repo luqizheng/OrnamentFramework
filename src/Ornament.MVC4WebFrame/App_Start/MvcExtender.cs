@@ -22,11 +22,6 @@ namespace Ornament.MVCWebFrame.App_Start
         public static void Register()
         {
             NHibernateMvcRegister.Regist();
-            //NHibernate Extender
-            ValueProviderFactories.Factories[1] = new NHFormValueProviderFactory();
-            ValueProviderFactories.Factories[3] = new NHRouterDataProviderFactory();
-            ValueProviderFactories.Factories[4] = new NHQueryValuePrivoderFactory();
-            //change the default binder.
             ExtenderModelType();
 
 
@@ -42,7 +37,6 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void ExtenderModelType()
         {
-            ModelBinders.Binders.DefaultBinder = new NHModelBinder();
             ModelBinders.Binders.Add(typeof (Time), new TimeModelBinder());
             ModelBinders.Binders.Add(typeof (Time?), new TimeModelBinder());
         }

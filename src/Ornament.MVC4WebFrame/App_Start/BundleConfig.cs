@@ -1,8 +1,10 @@
 ﻿using System.Web.Optimization;
 using Ornament.Web.Bundles;
 using Ornament.Web.Bundles.Config;
-using Ornament.Web.Bundles.Seajs;
 using Qi;
+using SeajsBundles;
+using SeajsBundles.JqueryBundles;
+using SeajsBundles.Seajs;
 
 namespace Ornament.MVCWebFrame.App_Start
 {
@@ -43,7 +45,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void Fx(BundleCollection bundles)
         {
-            bundles.Add(new Bundle("~/bundles/jquery.js")
+            bundles.Add(new JQueryBundle("~/bundles/jquery.js")
                 .Include("~/Scripts/fx/jquery-{version}.js"));
 
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js")

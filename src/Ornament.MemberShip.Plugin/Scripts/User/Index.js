@@ -1,17 +1,17 @@
-﻿/// <reference path="../Combine/user.js" />
-/// <reference path="../Combine/dataTables.js" />
+﻿/// <reference path="../Share/user.js" />
+/// <reference path="../Share/dataTables.js" />
 
 
 define(function(require) {
     require("/scripts/views/_appLayout.js");
     var $ = require("jquery"),
-        userApi = require("/MemberShips/Scripts/Combine/user.js"); //内嵌合并要使用绝对路径
+        userApi = require("/MemberShips/Scripts/Share/user.js"); //内嵌合并要使用绝对路径
     //pm = require("/share/pm.js");
     var pmDialog;
     require("uniform")($);
     require('select2')($);
     require("dataTables")($);
-    var tableHelper = require("../Combine/dataTables.js");
+    var tableHelper = require("../Share/dataTables.js");
     //Table List checkbox.
     $("#table").on('click', 'input', function() {
         $("#BtnApply").prop("disabled", $("#table input:checked").length == 0);
