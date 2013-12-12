@@ -226,8 +226,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\InitData.cs" />
     <Compile Include="App_Start\ApplicationConfig.cs" />
-    <Compile Include="App_Start\MvcExtender.cs" />
-    <Compile Include="App_Start\NhConfig.cs" />
     <Compile Include="App_Start\NotifyConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

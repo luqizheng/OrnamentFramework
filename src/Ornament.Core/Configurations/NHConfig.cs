@@ -36,7 +36,12 @@ namespace Ornament.Configurations
                 return schemaExportPath;
             }
         }
-
+        
+        /// <summary>
+        /// 注册Dao
+        /// </summary>
+        /// <param name="interfaceType"></param>
+        /// <param name="impleType"></param>
         public void RegistDaoFactory(Type interfaceType, Type impleType)
         {
             if (_regType.ContainsKey(interfaceType))
@@ -103,7 +108,7 @@ namespace Ornament.Configurations
                 {
                     result.Mappings(s => s.HbmMappings.AddFromAssembly(assembly));
                 }
-                
+
                 return result.BuildConfiguration();
             });
 

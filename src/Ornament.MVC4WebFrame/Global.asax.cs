@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -14,6 +15,7 @@ using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MVCWebFrame.App_Start;
+using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.Cfg;
 using Ornament.Web.HttpModel;
 using Qi.NHibernateExtender;
@@ -28,24 +30,26 @@ namespace Ornament.MVCWebFrame
         {
             XmlConfigurator.Configure(); //Log4net registry.
             //MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
-            Bus.AddMessageHandler(typeof (NHConfigurationHandler));
-
+            Bus.AddMessageHandler(typeof(NHConfigurationHandler)); //处理每个Plutin的关于NH的处理方法
             //MvcContrib.Bus.AddAllMessageHandlers();
-            AreaRegistration.RegisterAllAreas();
 
-            NhConfig.Config();
+            MvcWebConfig.Regist(() =>
+            {
+                AreaRegistration.RegisterAllAreas();
+                WebApiConfig.Register(GlobalConfiguration.Configuration);
+                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+                BundleConfig.RegisterBundles(BundleTable.Bundles);
+            },
+            typeof(HttpErrorsController),
+            Assembly.GetExecutingAssembly());
 
-            MvcExtender.Register();
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
             PermissionConfig.Regist();
             ApplicationConfig.Register(OrnamentContext.Configuration);
             //Ornament setting
             //Registry the Provider to use Membership rule of asp.net.
             //Assembly auto config.
-            MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
+            
             InputBuilder.BootStrap();
             NotifyConfig.Register();
         }
@@ -77,7 +81,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof (GlobalContext));
+                ILog log = LogManager.GetLogger(typeof(GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally
