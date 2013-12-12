@@ -29,10 +29,6 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
-            //MvcContrib.Bus.AddMessageHandler(typeof(ProtableAreaLogMessage));
-            Bus.AddMessageHandler(typeof(NHConfigurationHandler)); //处理每个Plutin的关于NH的处理方法
-            //MvcContrib.Bus.AddAllMessageHandlers();
-
             MvcWebConfig.Regist(() =>
             {
                 AreaRegistration.RegisterAllAreas();
