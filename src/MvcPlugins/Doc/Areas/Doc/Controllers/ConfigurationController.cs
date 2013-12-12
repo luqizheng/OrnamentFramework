@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.Areas.Doc.Controllers
+namespace Doc.Areas.Doc.Controllers
 {
     public class ConfigurationController : Controller
     {

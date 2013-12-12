@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Ornament.MVCWebFrame.Areas.Doc.Models;
 using Qi;
 
-namespace Ornament.MVCWebFrame.Areas.Doc.Controllers
+namespace Doc.Areas.Doc.Controllers
 {
     [Authorize]
     public class TypeLayoutController : Controller
