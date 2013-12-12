@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Optimization;
@@ -50,12 +51,12 @@ namespace Ornament.Web.Bundles.Config
         /// <summary>
         ///     把物理路径改为虚拟路径
         /// </summary>
-        /// <param name="fullPath"></param>
+        /// <param name="physicPath"></param>
         /// <returns></returns>
-        protected static string ToVirtualPath(string fullPath)
+        protected static string ToVirtualPath(string physicPath)
         {
-            return fullPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/")
-                           .Replace(@"\", "/");
+            return physicPath.Replace(ApplicationHelper.PhysicalApplicationPath, "~/")
+                .Replace(@"\", "/");
         }
 
         public void Handle(BundleCollection bundles)
@@ -66,8 +67,8 @@ namespace Ornament.Web.Bundles.Config
                 foreach (string physicPath in Directory.GetDirectories(searchFolder))
                 {
                     HandleFiles(bundles, physicPath + "/",
-                                VirtualPathUtility.Combine(RegPathPrefix, (new DirectoryInfo(physicPath)).Name) + "/",
-                                log);
+                        VirtualPathUtility.Combine(RegPathPrefix, (new DirectoryInfo(physicPath)).Name) + "/",
+                        log);
                 }
             }
         }
@@ -79,17 +80,23 @@ namespace Ornament.Web.Bundles.Config
             foreach (string folderPath in folders)
             {
                 var subFolder = new DirectoryInfo(folderPath);
-                string virtualFolderName = ToVirtualPath(folderPath);
-                if (HandleFolder(bundles, subFolder, virtualFolderName, log))
+
+                if (IsCombine(subFolder, log))
                 {
-                    HandleFiles(bundles, subFolder.FullName,
-                                VirtualPathUtility.Combine(bundlePath, subFolder.Name) + "/", log);
+                    var files = GetCombineFolderFiles(subFolder);
+                    string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name+".js");
+                    Handle(bundles, virtualFolderName, log, files);
+                }
+                else
+                {
+                    string subVirtualFolder = VirtualPathUtility.Combine(bundlePath, subFolder.Name) + "/";
+                    HandleFiles(bundles, subFolder.FullName, subVirtualFolder, log);
                 }
             }
         }
 
         protected virtual void HandleFiles(BundleCollection bundles, string physicPath, string bundleName,
-                                           StreamWriter log)
+            StreamWriter log)
         {
             //处理文件的
 
@@ -99,26 +106,46 @@ namespace Ornament.Web.Bundles.Config
             {
                 var fileInfo = new FileInfo(file);
                 string subVirtualPath = VirtualPathUtility.Combine(virtualPath, fileInfo.Name);
-                string bundle = VirtualPathUtility.Combine(bundleName, fileInfo.Name);
-                Handle(bundles, subVirtualPath, bundle, log);
+                string bundlePath = VirtualPathUtility.Combine(bundleName, fileInfo.Name);
+                Handle(bundles, bundlePath, log, subVirtualPath);
             }
 
             HandleDirectories(bundles, physicPath, bundleName, log);
         }
-
-
-        protected abstract void Handle(BundleCollection bundles, string virtualPath1,
-                                       string bundlePath, StreamWriter logWriter);
-
         /// <summary>
+        /// folder 里面是否需要合并。
         /// </summary>
-        /// <param name="bundles"></param>
-        /// <param name="physicPath"></param>
-        /// <param name="virtualPath"></param>
-        /// <param name="logWriter"></param>
-        /// <returns>返回true，继续处理folder里面的文件</returns>
-        protected abstract bool HandleFolder(BundleCollection bundles,
-                                             DirectoryInfo physicPath,
-                                             string virtualPath, StreamWriter logWriter);
+        /// <param name="directoryInfo"></param>
+        /// <param name="log"></param>
+        /// <returns>true 会读取所有文件并且，执行Bundle注册，否则里面的文件会一个bundle</returns>
+        protected abstract bool IsCombine(DirectoryInfo directoryInfo, StreamWriter log);
+
+        protected virtual string[] GetCombineFolderFiles(DirectoryInfo folder)
+        {
+            var list = new List<String>();
+            foreach (var file in folder.GetFiles("*.js"))
+            {
+                list.Add(ToVirtualPath(file.FullName));
+            }
+            return list.ToArray();
+        }
+
+
+
+
+
+
+        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter, params string[] includeVirtualPathes);
+        /*
+                /// <summary>
+                /// </summary>
+                /// <param name="bundles"></param>
+                /// <param name="physicPath"></param>
+                /// <param name="virtualPath"></param>
+                /// <param name="logWriter"></param>
+                /// <returns>返回true，继续处理folder里面的文件</returns>
+                protected abstract bool HandleFolder(BundleCollection bundles,
+                    DirectoryInfo physicPath,
+                    string virtualPath, StreamWriter logWriter);*/
     }
 }

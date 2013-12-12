@@ -2,6 +2,7 @@
 @using Ornament.Messages
 @using Ornament.Web
 @using Ornament.Web.Bundles
+@using SeajsBundles
 @using Basic = Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.NewsType>
 
@@ -81,7 +82,7 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        seajs.use("@ScriptsSeajs.RenderUrl("/Scripts/NewsType/Index.js")", function (main) {
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Messages/Scripts/NewsType/Index.js")", function (main) {
             main("@Url.Action("Delete")");
         })
     </script>

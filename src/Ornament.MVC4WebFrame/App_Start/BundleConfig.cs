@@ -39,7 +39,6 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void Comp(BundleCollection t1)
         {
             t1.Add(new ScriptBundle("~/Components/json2.js").Include("~/Scripts/Components/json2.js"));
-
             RootModule.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
         }
 
@@ -48,7 +47,7 @@ namespace Ornament.MVCWebFrame.App_Start
             bundles.Add(new JQueryBundle("~/bundles/jquery.js")
                 .Include("~/Scripts/fx/jquery-{version}.js"));
 
-            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js")
+            bundles.Add(new JQueryPluginSeajsBundle("~/bundles/bootstrap.js", "$.fn.alert")
                 .Include("~/Scripts/fx/bootstrap.js"));
 
             bundles.Add(new JQueryPluginSeajsBundle("~/bundles/jqueryui.js", "jQuery.fn.spinner")
@@ -56,6 +55,7 @@ namespace Ornament.MVCWebFrame.App_Start
 
             bundles.Add(new ScriptBundle("~/Scripts/avalon.js")
                 .Include("~/Scripts/Components/avalon.js"));
+
             bundles.Add(
                 new SeajsBundle("~/Scripts/_appLayout.js", CombineSeajsModule).Include(
                     "~/Scripts/Modules/Views/_appLayout.js"));
@@ -75,10 +75,6 @@ namespace Ornament.MVCWebFrame.App_Start
 
         private static void RegistryCtrl(BundleCollection bundles)
         {
-            bundles.Add(
-                new SeajsBundle("~/scripts/ctrls/memberships.js", CombineSeajsModule).Include(
-                    "~/Scripts/Modules/Views/Share/memberships.js"));
-
             bundles.Add(
                 new SeajsBundle("~/scripts/ctrls/form.js", CombineSeajsModule).Include(
                     "~/Scripts/Modules/Views/Share/form.js"));

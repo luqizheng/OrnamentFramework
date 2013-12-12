@@ -1,7 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Web
 @using Qi.Web
-@using Basic=Ornament.Properties.Resources
+@using Basic = Ornament.Properties.Resources
 @model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.MessageTemplateModel
 
 @{
@@ -122,10 +122,9 @@
     <script type="text/javascript">
 
 
-        seajs.use("/messages/scripts/template/edit.js", function (init) {
-            var content = @Html.Raw(contents)
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/messages/scripts/template/edit.js")", function (init) {
+            var content = @Html.Raw(contents);
             init(content);
         });
     </script>
 }
- 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web.Optimization;
 using SeajsBundles;
 
@@ -14,17 +15,15 @@ namespace Ornament.Web.Bundles.Config
             _isCombine = isCombine;
         }
 
-        protected override void Handle(BundleCollection bundles, string virtualPath1, string bundlePath,
-            StreamWriter logWriter)
+        protected override bool IsCombine(DirectoryInfo directoryInfo, StreamWriter log)
         {
-            logWriter.WriteLine("{0}:{1}", bundlePath, virtualPath1);
-            bundles.Add(new SeajsBundle(bundlePath, _isCombine).Include(virtualPath1));
+            return false;
         }
 
-        protected override bool HandleFolder(BundleCollection bundles, DirectoryInfo physicPath, string virtualPath,
-            StreamWriter logWriter)
+        protected override void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter, params string[] includeVirtualPathes)
         {
-            return true;
+            logWriter.WriteLine("{0}:{1}", bundlePath, String.Join(",", includeVirtualPathes));
+            bundles.Add(new SeajsBundle(bundlePath, _isCombine).Include(includeVirtualPathes));
         }
     }
 }

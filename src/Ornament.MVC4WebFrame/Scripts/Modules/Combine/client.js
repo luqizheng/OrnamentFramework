@@ -5,6 +5,7 @@
 define(function (require) {
     var cookie = require("./cookie.js");
     require("./time.js");
+    var $ = require("jquery");
     // get cookie setting
 
     function client(time, func) {

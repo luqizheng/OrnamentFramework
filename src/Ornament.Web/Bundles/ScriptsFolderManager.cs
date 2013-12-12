@@ -3,7 +3,6 @@ using Ornament.Web.Bundles.Config;
 
 namespace Ornament.Web.Bundles
 {
-
     public class ScriptsFolderManager
     {
         private SeajsJqueryPlugin _seajsJqueryPlugin;
@@ -12,11 +11,10 @@ namespace Ornament.Web.Bundles
         {
             get
             {
-                return _seajsJqueryPlugin ??
-                       (_seajsJqueryPlugin = new SeajsJqueryPlugin("~/Scripts/plugins"));
+                return _seajsJqueryPlugin ?? (_seajsJqueryPlugin = new SeajsJqueryPlugin("~/Scripts/plugins"));
             }
         }
-        
+
         public void RegisterBundles(BundleCollection bundles)
         {
             SeajsJqueryPlugin.Handle(bundles);

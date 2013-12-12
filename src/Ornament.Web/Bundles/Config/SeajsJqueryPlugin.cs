@@ -13,15 +13,14 @@ namespace Ornament.Web.Bundles.Config
         {
         }
 
-        protected override void Handle(BundleCollection bundles, string virtualPath,
-                                       string bundleName, StreamWriter log)
+        protected override void Handle(BundleCollection bundles, string bundleName, StreamWriter log, params string[] includeVirtualPathes)
         {
-            if (virtualPath.ToLower().EndsWith(".min.js"))
+            if (bundleName.ToLower().EndsWith(".min.js"))
             {
-                log.WriteLine("Skip {0},", virtualPath);
+                log.WriteLine("//{0},", bundleName);
                 return;
             }
-            var fileInfo = new FileInfo(virtualPath);
+            var fileInfo = new FileInfo(bundleName);
             if (fileInfo.Name.StartsWith("jquery."))
             {
                 int intPos = bundleName.LastIndexOf("/", StringComparison.Ordinal);
@@ -30,31 +29,16 @@ namespace Ornament.Web.Bundles.Config
                              +
                              Regex.Replace(bundleFileInfo.Name, @"(jquery\.)|(-[\d.]+\d)", "", RegexOptions.IgnoreCase);
 
-                bundles.Add(new JQueryPluginSeajsBundle(bundleName).Include(virtualPath));
+                bundles.Add(new JQueryPluginSeajsBundle(bundleName).Include(includeVirtualPathes));
 
                 log.WriteLine("\"{0}\":\"{1}\",", (new FileInfo(bundleName).Name.Replace(".js", "")),
-                              bundleName.Replace("~/", "/"));
+                    bundleName.Replace("~/", "/"));
             }
         }
 
-        protected override bool HandleFolder(BundleCollection bundles, DirectoryInfo directInfo,
-                                             string virtualFolderName, StreamWriter logWriter)
+        protected override bool IsCombine(DirectoryInfo directoryInfo, StreamWriter log)
         {
-            if (!directInfo.Name.StartsWith("jquery."))
-            {
-                //继续查找
-                return true;
-            }
-
-            string bundleName = string.Format("~/bundles/{0}.js", directInfo.Name.Replace("jquery.", ""));
-            bundles.Add(
-                new JQueryPluginSeajsBundle(bundleName).Include(
-                    virtualFolderName +
-                    "/*.js"));
-
-            logWriter.WriteLine("\"{0}\":\"{1}\",", directInfo.Name.Replace(".js", ""),
-                                bundleName.Replace("~/", "/"));
-            return false;
+            return directoryInfo.Name.ToLower().Contains("jquery.");
         }
     }
 }
