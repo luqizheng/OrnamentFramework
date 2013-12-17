@@ -47,15 +47,15 @@
 @section pageTitle{
     <h5>MemberShip Dashboard</h5>
 }
-@using (Html.Box())
+@using (var box = Html.Box())
 {
-    @Html.BoxHeader(@<text>
-                         
-                         <a href="@Url.Action("Create")" class="btn btn-primary">@Ornament.Properties.Resources.Add</a>
+    @box.Header(@<text>
 
-                     </text>)
+    <a href="@Url.Action("Create")" class="btn btn-primary">@Ornament.Properties.Resources.Add</a>
+
+    </text>)
     
-    @Html.BoxBody(
+    @box.Body(
         @<text>
     <form method="POST" id="tableForm">
         <table class="table table-condensed table-striped table-bordered table-checks" id="table">

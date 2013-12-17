@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Http;
+using log4net;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.PersonalMessages;
-using Ornament.Web;
 using Qi.Web.Http;
-using log4net;
 
 namespace Ornament.MVCWebFrame.Api.Core
 {
@@ -33,7 +31,7 @@ namespace Ornament.MVCWebFrame.Api.Core
         /// <param name="page"></param>
         /// <returns></returns>
         public IEnumerable<object> Get([FromUri] string relativeUserId, [FromUri] DateTime? lastTime,
-                                       [FromUri] int? page)
+            [FromUri] int? page)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
@@ -41,17 +39,17 @@ namespace Ornament.MVCWebFrame.Api.Core
             IPersonalMessageDao msgDao = _factory.PersonalMessageDao;
             var result = new List<object>();
             foreach (PersonalMessage a in msgDao.GetChat(currentUser, receiverUser, lastTime,
-                                                         page ?? 0, 20))
+                page ?? 0, 20))
             {
                 a.HasRead(currentUser, msgDao);
                 result.Add(new
-                    {
-                        id = a.Id,
-                        publisher = a.Publisher.Name,
-                        receiver = a.Receiver.Name,
-                        content = a.Content,
-                        createTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
-                    });
+                {
+                    id = a.Id,
+                    publisher = a.Publisher.Name,
+                    receiver = a.Receiver.Name,
+                    content = a.Content,
+                    createTime = a.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                });
             }
 
             return result;
@@ -61,10 +59,11 @@ namespace Ornament.MVCWebFrame.Api.Core
         {
             if (id == null)
                 throw new HttpException(404, "id is null");
-            var a = _factory.PersonalMessageDao.Get(id.Value);
+            PersonalMessage a = _factory.PersonalMessageDao.Get(id.Value);
             a.Delete(OrnamentContext.MemberShip.CurrentUser(), _factory.PersonalMessageDao);
             return true;
         }
+
         // POST api/default1
         public object Post([FromBody] SubmitContentData cc)
         {
@@ -74,15 +73,15 @@ namespace Ornament.MVCWebFrame.Api.Core
                 string userId = cc.userId;
 
                 var a = new PersonalMessage(OrnamentContext.MemberShip.CurrentUser())
-                    {
-                        Content = content,
-                        Receiver = _memberShipFactory.CreateUserDao().Get(userId)
-                    };
+                {
+                    Content = content,
+                    Receiver = _memberShipFactory.CreateUserDao().Get(userId)
+                };
                 _factory.PersonalMessageDao.SaveOrUpdate(a);
                 return new
-                    {
-                        success = true
-                    };
+                {
+                    success = true
+                };
             }
             catch (Exception ex)
             {
