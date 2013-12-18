@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
@@ -25,7 +26,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 IList<Org> orgs = _factory.CreateOrgDao().GetRootOrgs();
                 ViewData["Orgs"] = orgs;
-                return View((Org) null);
+                return View((Org)null);
             }
             Org org = _factory.CreateOrgDao().Get(id);
             ViewData["Orgs"] = org.Childs;
@@ -66,7 +67,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 org.Save(orgDao);
                 return RedirectToAction("Index");
             }
-            return View("Edit", org);
+            return View(String.IsNullOrEmpty(org.Id) ? "Create" : "Edit", org);
         }
     }
 }

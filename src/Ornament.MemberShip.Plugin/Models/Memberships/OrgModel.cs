@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships
 {
@@ -28,8 +29,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof(Ornament.Properties.Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Resources))]
         public Role[] Roles { get; set; }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof(Ornament.Properties.Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }

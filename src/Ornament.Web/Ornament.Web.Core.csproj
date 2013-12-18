@@ -201,6 +201,7 @@
     <Compile Include="Plugins\DataTables\DataTableResult.cs" />
     <Compile Include="Plugins\DataTables\DataTablesPostData.cs" />
     <Compile Include="Plugins\DataTables\PostDataModelBinder.cs" />
+    <Compile Include="PortableArea\RegistScript.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

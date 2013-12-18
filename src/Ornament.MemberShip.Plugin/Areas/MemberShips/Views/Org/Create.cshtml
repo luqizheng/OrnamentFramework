@@ -1,35 +1,49 @@
 ﻿@using Ornament
+@using Ornament.MemberShip.Plugin.Properties
 @using Ornament.Web
+@using Ornament.Web.HtmlExtends
 
 @model Ornament.MemberShip.Plugin.Models.Memberships.OrgModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = Ornament.Properties.Resources.Create + " " + Resources.Org;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 @section pageTitle
 {
-    <h6>Create new Org</h6>
+    <h6>@Ornament.Properties.Resources.Create @Resources.Org</h6>
 }
 
+@using (var box = Html.Box())
+{
+    @box.Body(@<text>
 
-<div class="widget">
-    <div class="well">
-        @Html.ValidationSummary()
-        @using (Html.BeginForm("Save", "Org", FormMethod.Post, new { @class = "form-horizontal" }))
-        {
-            @Html.EditorFor(s => s.Name)
-            @Html.EditorFor(s => s.Remark)
-            @Html.EditorFor(s => s.Roles)
-          
-            
-            @Html.Hidden("Parent", (this.Model != null && this.Model.Parent != null) ? this.Model.Parent.Id : "")
-            <div class="form-actions">
-                <button class="btn btn-primary">@Ornament.Properties.Resources.OK</button>
-                <button onclick="location = '@Url.Action("Index")'" type="button" class="btn">@Ornament.Properties.Resources.Cancel</button>
-            </div>
-        }
 
-    </div>
-</div>
+    @Html.ValidationSummary(true)
+    <form method="POST" action="@Url.Action("Save")" class=" form-horizontal">
+        @Html.EditorFor(s => s.Name)
+        @Html.EditorFor(s => s.Remark)
+        @Html.EditorFor(s => s.Roles)
+
+
+        @Html.Hidden("Parent", (this.Model != null && this.Model.Parent != null) ? this.Model.Parent.Id : "")
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">@Ornament.Properties.Resources.Create</button>
+            <button onclick=" location = '@Url.Action("Index")' " type="button" class="btn">@Ornament.Properties.Resources.Cancel</button>
+        </div>
+
+    </form>
+
+
+
+
+    </text>)
+    
+        
+}
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("/MemberShips/Scripts/Org/Create.js")");
+    </script>
+}

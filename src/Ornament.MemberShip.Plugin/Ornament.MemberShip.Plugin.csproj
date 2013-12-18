@@ -296,6 +296,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Org.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\Org\Create.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
