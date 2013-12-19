@@ -19,7 +19,8 @@
     *@
     @System.Web.Optimization.Styles.Render("~/Content/global.css", "~/content/templates/pannonia/css/main.css")
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
-
+      @Scripts.Render("/Scripts/Components/avalon.js")
+    <script type="text/javascript"> avalon.config({ loader: false })   </script>
     <script type="text/javascript" src="/scripts/seajs/sea.js"> </script>
     <script src="/Scripts/config.js" type="text/javascript"></script>
     @RenderSection("head", false)

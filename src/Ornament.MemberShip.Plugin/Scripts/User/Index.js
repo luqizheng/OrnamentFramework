@@ -2,13 +2,82 @@
 /// <reference path="../Share/dataTables.js" />
 
 
-define(function(require) {
+define(function (require) {
     require("/scripts/views/_appLayout.js");
     var $ = require("jquery"),
-        userApi = require("/MemberShips/Scripts/Share/user.js"); //内嵌合并要使用绝对路径
+       userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
     //pm = require("/share/pm.js");
     var pmDialog;
-    require("uniform")($);
+
+    var model = avalon.define("index", function (vm) {
+        vm.users = [];
+        vm.swtchLock = function() {
+            var mySet = this.$vmodel.el.IsLockout;
+            lock(this, !mySet);
+        };
+        vm.lock = function () {
+            lock(data, true, this);
+        };
+        vm.unlock = function () {
+            lock(this, false);
+        };
+        vm.approve = function () {
+            approve(this, true);
+        };
+        vm.verify = function() {
+            approve(this, false);
+        };
+    });
+
+    find(0, null);
+
+    function lock(self, bLock) {
+        /// <summary>
+        ///     锁定用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bLock"></param>
+        /// <param name="process"></param>
+        var id = $(self).closest("tr").attr("data");
+        var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
+        $.post(url, { ids: id }, function (result) {
+            if (result.success) {
+                self.$vmodel.el.IsLockout = bLock;
+            }
+        });
+    }
+
+    function approve(self,bApprove) {
+        /// <summary>
+        ///     锁定用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bLock"></param>
+        /// <param name="process"></param>
+        var id = $(self.target).closest("tr").attr("data");
+        var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
+        $.post(url, { ids: id }, function (result) {
+            if (result.success) {
+                self.$vmodel.el.IsApprove = bApprove;
+            }
+        });
+    }
+
+
+    function find(page, content) {
+        $.get("/MemberShips/User/List", {
+            page: page,
+            search: content
+        }, function (d) {
+            model.users = [];
+            for (var i = 0; i < d.data.length; i++) {
+                model.users.push(d.data[i]);
+            }
+            avalon.scan();
+        });
+    }
+
+    /*require("uniform")($);
     require('select2')($);
     require("dataTables")($);
     var tableHelper = require("../Share/dataTables.js");
@@ -95,40 +164,40 @@ define(function(require) {
         return ary.join("");
 
     }
-
+    */
     return {
-        init: function(lang, currentUser, tableConfig) {
+        init: function (lang, currentUser, tableConfig) {
 
             //Table Verify User.
-            $("#table").on("click", "a[role=verifyEmail]", function() {
+            $("#table").on("click", "a[role=verifyEmail]", function () {
                 var loginId = $("td:first input", $(this).closest("tr")).val();
                 var self = this;
                 showLoading.call(self, true);
-                userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function(e) {
+                userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
                     alert(e.success ?
                         lang.verifyEmailMessage.success :
                         lang.verifyEmailMessage.fail);
 
-                }, function() {
+                }, function () {
                     showLoading.call(self, false);
                 });
                 return false;
-            }).on("click", "a[role=pm]", function() {
+            }).on("click", "a[role=pm]", function () {
                 pmDialog.show($(this).attr("href").substr(1));
-            }).on('click', "[role=retievePwd]", function() {
+            }).on('click', "[role=retievePwd]", function () {
                 var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
                 showLoading.call(this, true);
-                userApi.RetrievePassword(loginId, function(e) {
+                userApi.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
                         lang.retrievePwdMessage.success :
                         lang.retrievePwdMessage.fail);
-                }, function() {
+                }, function () {
                     showLoading.call(self, false);
                 });
             });
 
             //pmDialog = new pm($("#pmEditor"), currentUser);
-            tableEdit(tableConfig);
+            //tableEdit(tableConfig);
 
         }
     };

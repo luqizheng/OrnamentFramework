@@ -26,7 +26,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 IList<Org> orgs = _factory.CreateOrgDao().GetRootOrgs();
                 ViewData["Orgs"] = orgs;
-                return View((Org)null);
+                return View((Org) null);
             }
             Org org = _factory.CreateOrgDao().Get(id);
             ViewData["Orgs"] = org.Childs;

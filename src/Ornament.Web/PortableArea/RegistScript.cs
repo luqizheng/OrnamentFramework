@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using MvcContrib.PortableAreas;
 
 namespace Ornament.Web.PortableArea
 {
-    public class RegistScriptHelper
+    public class EmbeddedHelper
     {
-        public string AreaName { get; set; }
-        public string AreaRoutePrefix { get; set; }
+        private readonly PortableAreaRegistration _protablAreaRegistration;
 
-        public RegistScriptHelper(string areaName, string areaRoutePrefix)
+
+        public EmbeddedHelper(PortableAreaRegistration protablAreaRegistration)
         {
-            AreaName = areaName;
-            AreaRoutePrefix = areaRoutePrefix;
+            _protablAreaRegistration = protablAreaRegistration;
         }
 
         public void RegistyScripts(string scriptName, AreaRegistrationContext context)
         {
             //page scripts  regist
             context.MapRoute(
-                AreaName + "_" + scriptName + "_scripts",
-                string.Format("{0}/Scripts/{1}/{{resourceName}}", AreaRoutePrefix, scriptName),
+                _protablAreaRegistration.AreaName + "_" + scriptName + "_scripts",
+                string.Format("{0}/Scripts/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, scriptName),
                 new
                 {
                     controller = "OrnamentEmbeddedResource",
@@ -32,9 +27,9 @@ namespace Ornament.Web.PortableArea
                 }
                 ,
                 new[]
-                    {
-                        "Ornament.Web.Controllers"
-                    }
+                {
+                    "Ornament.Web.Controllers"
+                }
                 );
         }
     }

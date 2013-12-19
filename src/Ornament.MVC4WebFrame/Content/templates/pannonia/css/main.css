@@ -3243,6 +3243,8 @@ span.green
 {
     margin-bottom: -30px;
     overflow: hidden;
+    min-height: 600px;
+    
 }
 
 #container

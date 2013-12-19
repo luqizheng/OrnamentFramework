@@ -3,6 +3,7 @@ using MvcContrib.PortableAreas;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.Web.Cfg;
+using Ornament.Web.PortableArea;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 {
@@ -15,11 +16,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            var helper = new EmbeddedHelper(this);
             //注册 Dao
             bus.Send(new DaoFactoryRegister(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
-            RegistyScripts("User", context);
-            RegistyScripts("Share", context);
-            RegistyScripts("Permissions", context);
+            helper.RegistyScripts("User", context);
+            helper.RegistyScripts("Share", context);
+            helper.RegistyScripts("Permissions", context);
 
             context.MapRoute(
                 AreaName + "_images",
@@ -58,26 +60,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 );
 
             base.RegisterArea(context, bus);
-        }
-
-        private void RegistyScripts(string scriptName, AreaRegistrationContext context)
-        {
-            //page scripts  regist
-            context.MapRoute(
-                AreaName + "_" + scriptName + "_scripts",
-                string.Format("{0}/Scripts/{1}/{{resourceName}}", AreaRoutePrefix, scriptName),
-                new
-                {
-                    controller = "OrnamentEmbeddedResource",
-                    action = "Index",
-                    resourcePath = "Ornament.MemberShip.Plugin.Scripts." + scriptName,
-                }
-                ,
-                new[]
-                    {
-                        "Ornament.Web.Controllers"
-                    }
-                );
         }
     }
 }

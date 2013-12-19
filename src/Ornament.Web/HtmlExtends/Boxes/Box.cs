@@ -41,7 +41,7 @@ namespace Ornament.Web.HtmlExtends.Boxes
             TextWriter writer = _context.Writer;
             var buffer = new RecordWriter(writer);
             action(null).WriteTo(buffer);
-            return _helper.Partial(PartialViewPath("BoxHeader"), buffer.Builder);
+            return _helper.Partial(PartialViewPath("BoxBody"), buffer.Builder);
         }
 
         /// <summary>

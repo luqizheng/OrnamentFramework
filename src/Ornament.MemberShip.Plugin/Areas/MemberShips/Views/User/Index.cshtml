@@ -57,7 +57,7 @@
     
     @box.Body(
         @<text>
-    <form method="POST" id="tableForm">
+    <form id="tableForm" ms-controller="index">
         <table class="table table-condensed table-striped table-bordered table-checks" id="table">
             <thead>
                 <tr>
@@ -73,16 +73,56 @@
                         @Html.DisplayNameFor(model => model.Contact.Email)
                     </th>
                     <th>
-                        @Html.LabelFor(model => ((User)null).IsLockout)
+                        @Html.DisplayNameFor(model => model.IsLockout)
                     </th>
                     <th>
-                        @Html.LabelFor(model => ((User)null).IsApproved)
+                        @Html.DisplayNameFor(model => model.IsApproved)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Other.LastActivityDate)
                     </th>
                 </tr>
             </thead>
+            <tbody ms-each-el="users">
+                <tr ms-attr-data="{{el.Id}}">
+                    <td>
+                        <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn tip"><i class="fam-user-edit"></i></a>
+                        <a ms-href="/MemberShips/User/Assign/{{el.LoginId}}" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>
+                    </td>
+                    <td ms-text="el.LoginId"></td>
+                    <td ms-text="el.Name"></td>
+                    <td ms-text="el.Email"></td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-mini" ms-click="swtchLock">
+                                <i ms-class="icon-lock:el.IsLockout" ms-class-1="icon-unlock:!el.IsLockout"></i>
+                            </a>
+                            <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-caret-down icon-white"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="icon-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                <li><a href="#"><i class="icon-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-mini">
+                                <i ms-class="icon-ok:el.IsApprove" ms-class-1="icon-remove:!el.IsApprove"></i>
+                            </a>
+                            <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-caret-down icon-white"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Approve")</a></li>
+                                <li><a href="#"><i class="icon-remove"></i>@Html.GetEmbededResourceString("VerifyAgain")</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td ms-text="LastActivityDate"></td>
+                </tr>
+            </tbody>
 
         </table>
     </form>

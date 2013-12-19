@@ -177,4 +177,7 @@
   <data name="TodayRegist" xml:space="preserve">
     <value>User registrations today</value>
   </data>
+  <data name="VerifyAgain" xml:space="preserve">
+    <value>Verify Again</value>
+  </data>
 </root>

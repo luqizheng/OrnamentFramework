@@ -177,4 +177,7 @@
   <data name="TodayRegist" xml:space="preserve">
     <value>今天註冊會員</value>
   </data>
+  <data name="VerifyAgain" xml:space="preserve">
+    <value>重新驗證</value>
+  </data>
 </root>
