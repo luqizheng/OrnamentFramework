@@ -4,6 +4,8 @@
 
 define(function (require) {
     require("/scripts/views/_appLayout.js");
+    require("/scripts/modules/combine/pagination.js")(avalon);
+
     var $ = require("jquery"),
        userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
     //pm = require("/share/pm.js");
@@ -11,7 +13,9 @@ define(function (require) {
 
     var model = avalon.define("index", function (vm) {
         vm.users = [];
-        vm.swtchLock = function() {
+
+        vm.content = "";
+        vm.swtchLock = function () {
             var mySet = this.$vmodel.el.IsLockout;
             lock(this, !mySet);
         };
@@ -21,48 +25,57 @@ define(function (require) {
         vm.unlock = function () {
             lock(this, false);
         };
+        vm.switchApprove = function () {
+            var mySet = this.$vmodel.el.IsApprove;
+            approve(this, !mySet);
+        };
         vm.approve = function () {
             approve(this, true);
         };
-        vm.verify = function() {
+        vm.verify = function () {
             approve(this, false);
         };
+
+        function lock(self, bLock) {
+            /// <summary>
+            ///     锁定用户
+            /// </summary>
+            /// <param name="id"></param>
+            /// <param name="bLock"></param>
+            /// <param name="process"></param>
+            var id = $(self).closest("tr").attr("data");
+            var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
+            $.post(url, { ids: id }, function (result) {
+                if (result.success) {
+                    self.$vmodel.el.IsLockout = bLock;
+                }
+            });
+        }
+
+        function approve(self, bApprove) {
+            /// <summary>
+            ///     锁定用户
+            /// </summary>
+            /// <param name="id"></param>
+            /// <param name="bLock"></param>
+            /// <param name="process"></param>
+            var id = $(self.target).closest("tr").attr("data");
+            var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
+            $.post(url, { ids: id }, function (result) {
+                if (result.success) {
+                    self.$vmodel.el.IsApprove = bApprove;
+                }
+            });
+        }
+
+    }); 
+
+    var page = avalon.define("page", function (vm) {
+
+        vm.search = function (pageIndex, pageSize) {
+            find(pageIndex, model.content);
+        };
     });
-
-    find(0, null);
-
-    function lock(self, bLock) {
-        /// <summary>
-        ///     锁定用户
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="bLock"></param>
-        /// <param name="process"></param>
-        var id = $(self).closest("tr").attr("data");
-        var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
-        $.post(url, { ids: id }, function (result) {
-            if (result.success) {
-                self.$vmodel.el.IsLockout = bLock;
-            }
-        });
-    }
-
-    function approve(self,bApprove) {
-        /// <summary>
-        ///     锁定用户
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="bLock"></param>
-        /// <param name="process"></param>
-        var id = $(self.target).closest("tr").attr("data");
-        var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
-        $.post(url, { ids: id }, function (result) {
-            if (result.success) {
-                self.$vmodel.el.IsApprove = bApprove;
-            }
-        });
-    }
-
 
     function find(page, content) {
         $.get("/MemberShips/User/List", {
@@ -73,98 +86,15 @@ define(function (require) {
             for (var i = 0; i < d.data.length; i++) {
                 model.users.push(d.data[i]);
             }
-            avalon.scan();
+            page.totalRecords = d.TotalRecords;
         });
     }
 
-    /*require("uniform")($);
-    require('select2')($);
-    require("dataTables")($);
-    var tableHelper = require("../Share/dataTables.js");
-    //Table List checkbox.
-    $("#table").on('click', 'input', function() {
-        $("#BtnApply").prop("disabled", $("#table input:checked").length == 0);
-    });
-
-    $("#selApplyAction").select2();
-
-    function showLoading(enable) {
-        var parent = $(this).closest("td"),
-            $loading = $("[role=loading]", parent);
-        if ($loading.length == 0) {
-            $loading = $("<a role='loading'><img style='float: left; margin: 5px ;' src=\"/Content/templates/pannonia/img/elements/loaders/10s.gif\" ></a>");
-            $loading.appendTo(parent);
-        }
-        $loading.toggle(enable);
-    }
-
-    function tableEdit(config) {
-        var table = new tableHelper(config.url);
-        table.AddCol("Id", false,
-            function(nTd, sData, oData, iRow, iCol) {
-                $(nTd).html(createBtn(oData))
-                    .addClass("op")
-                    .before("<td><input type='checkbox' class='actionCheckbox' value=\"" + sData + "\" /></td>")
-                    .closest("tr").attr("data", sData);
-            });
-
-        table.AddCol("LoginId", true);
-        table.AddCol("Name", true);
-        table.AddCol("Email", true);
-        table.AddBoolCol("IsLockout", 'Id', {
-                icon: "icon-lock",
-                name: "锁定"
-            },
-            {
-                icon: "icon-unlock",
-                name: "解锁"
-            }, lockUser);
-        table.AddBoolCol("IsApproved", 'Id',
-            { icon: "icon-ok", name: "批准" }, { icon: "icon-remove", name: "拒绝" }, approve);
-        table.AddCol("LastActivityDate", false);
-
-        table.BuildTable("#table");
-
-        function lockUser(id, bLock, process) {
-            /// <summary>
-            ///     锁定用户
-            /// </summary>
-            /// <param name="id"></param>
-            /// <param name="bLock"></param>
-            /// <param name="process"></param>
-            var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
-            $.post(url, { ids: id }, function(result) {
-                process(result.success);
-            });
-        }
-
-        function approve(id, bApprove, process) {
-            /// <summary>
-            ///     锁定用户
-            /// </summary>
-            /// <param name="id"></param>
-            /// <param name="bLock"></param>
-            /// <param name="process"></param>
-            var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
-            $.post(url, { ids: id }, function(result) {
-                process(result.success);
-            });
-        }
-    }
 
 
-    function createBtn(oObj) {
-        var ary = [];
+    find(0, null);
 
-        ary.push('<a href="/MemberShips/User/Edit/' + oObj.LoginId + '" class="btn tip"><i class="fam-user-edit"></i></a>'); //edit User
-        ary.push('<a href="/MemberShips/User/Assign/' + oObj.LoginId + '" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>'); //assign role and ug and org
-        //ary.push('<a href="#' + oObj.Id + '" class="btn tip" title="" role="pm"><i class="fam-email-edit"></i></a>'); //PM
-        ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="" role="verifyEmail"><i class="fam-email-go"></i></a>'); //VerifyEmail
-        ary.push('<a href="#' + oObj.Email + '" class="btn tip" title="Retrieve Password" role="retievePwd"><i class="fam-key-go"></i></a>'); //Retrew password
-        return ary.join("");
 
-    }
-    */
     return {
         init: function (lang, currentUser, tableConfig) {
 
@@ -196,8 +126,7 @@ define(function (require) {
                 });
             });
 
-            //pmDialog = new pm($("#pmEditor"), currentUser);
-            //tableEdit(tableConfig);
+            avalon.scan();
 
         }
     };

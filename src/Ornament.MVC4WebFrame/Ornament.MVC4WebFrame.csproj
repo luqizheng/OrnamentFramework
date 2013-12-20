@@ -521,6 +521,7 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\Modules\Combine\pagination.js" />
     <Content Include="Scripts\Modules\Combine\PersonalMessage.js" />
     <Content Include="Scripts\Modules\Combine\ajaxErrorHandler.js" />
     <Content Include="Scripts\Modules\Combine\client.js" />

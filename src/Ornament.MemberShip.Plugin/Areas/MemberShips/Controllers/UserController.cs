@@ -82,7 +82,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             var result = new
             {
                 data = new ArrayList(),
-                TotalRecords = total
+                TotalRecords = 15000
             };
             foreach (User user in userResult)
             {

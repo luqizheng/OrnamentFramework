@@ -20,7 +20,9 @@
     @Html.Partial("_pm")
 
     <script type="text/javascript">
+
         var multiLanguate = {
+
             verifyEmailMessage: {
                 success: '@Html.GetEmbededResourceString("verify_email_success")',
                 fail: '@Html.GetEmbededResourceString("verify_email_fail")'
@@ -45,7 +47,7 @@
 }
 
 @section pageTitle{
-    <h5>MemberShip Dashboard</h5>
+    <h5>User List</h5>
 }
 @using (var box = Html.Box())
 {
@@ -101,29 +103,55 @@
                                 <i class="icon-caret-down icon-white"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                <li><a href="#"><i class="icon-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                <li><a href="#" ms-click="lock"><i class="icon-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                <li><a href="#" ms-click="unlock"><i class="icon-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
                             </ul>
                         </div>
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-primary btn-mini">
+                            <a class="btn btn-primary btn-mini" ms-click="switchApprove">
                                 <i ms-class="icon-ok:el.IsApprove" ms-class-1="icon-remove:!el.IsApprove"></i>
                             </a>
                             <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="icon-caret-down icon-white"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Approve")</a></li>
-                                <li><a href="#"><i class="icon-remove"></i>@Html.GetEmbededResourceString("VerifyAgain")</a></li>
+                                <li><a href="#" ms-click="approve"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Approve")</a></li>
+                                <li><a href="#" ms-click="verify"><i class="icon-remove"></i>@Html.GetEmbededResourceString("VerifyAgain")</a></li>
                             </ul>
                         </div>
                     </td>
                     <td ms-text="LastActivityDate"></td>
                 </tr>
             </tbody>
-
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div class="pagination pull-right" ms-controller="page" 
+                             ms-widget="pagination" >
+                            <ul>
+                                <li>
+                                    <a ms-click="first" href="#" ms-class-disabled="page==0">&lt;&lt;</a>
+                                </li>
+                                <li>
+                                    <a ms-click="previous" href="#" ms-class-disabled="page==0">&lt;</a>
+                                </li>
+                                <li>
+                                    <a href="#" ms-text="page"></a>
+                                </li>
+                                <li>
+                                    <a href="#" ms-class-disabled="page==totalPage" ms-click="next">&gt;</a>
+                                </li>
+                                <li>
+                                    <a href="#" ms-class-disabled="page==totalPage" ms-click="previous">&gt;&gt;</a>
+                                </li>
+                            </ul>
+                            <label ms-text="totalPage"></label>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </form>
     </text>
