@@ -65,24 +65,30 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
-        public ActionResult List(int page, string search)
+        public ActionResult List(int? page, string search, int? size)
         {
+            if (size == null)
+                size = 40;
+            if (size != null && size > 100)
+                size = 100;
+            if (page == null)
+                page = 0;
 
             int total;
             IList<User> userResult;
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";
-                userResult = _userDao.QuickSearchOffset(search, search, search, search, page * 40, 40, out total);
+                userResult = _userDao.QuickSearchOffset(search, search, search, search, page.Value * size.Value, size.Value, out total);
             }
             else
             {
-                userResult = _userDao.FindAllOffset(page * 40, 40, out total);
+                userResult = _userDao.FindAllOffset(page.Value * size.Value, size.Value, out total);
             }
             var result = new
             {
                 data = new ArrayList(),
-                TotalRecords = 15000
+                TotalRecords = total
             };
             foreach (User user in userResult)
             {
@@ -100,7 +106,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                             : "",
                 });
             }
-
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

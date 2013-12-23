@@ -7,31 +7,58 @@
             avalon.clearChild(element);
 
             var model = avalon.define(data.paginationId, function (vm) {
+                vm.totalPage = 0;
 
+                vm.totalRecords = 0;
+                vm.page = 1;
+                vm.first = function () {
+                    if (vm.totalPage == 0)
+                        return;
+                    vm.page = 1;
+                    vm.search.call(vm, vm.page - 1, vm.size);
+                };
+                vm.next = function () {
+                    if (vm.page + 1 > vm.totalPage)
+                        return;
+                    vm.page += 1;
+
+                    vm.search.call(vm, vm.page - 1, vm.size);
+                };
+                vm.previous = function () {
+                    if (vm.page - 1 > 1)
+                        return;
+                    vm.page -= 1;
+                    vm.search.call(vm, vm.page - 1, vm.size);
+                };
+                vm.last = function () {
+                    if (vm.totalPage == 0)
+                        return;
+                    vm.page = vm.totalPage;
+                    vm.search.call(vm, vm.page - 1, vm.size);
+                };
+                vm.size = 5;
+                vm.search = function () {
+                    alert('defalut');
+                };
                 avalon.mix(vm, data.paginationOptions);
+                vm.$watch("totalRecords", function (newValue, oldValue) {
+                    console.log(newValue);
+                    console.log(oldValue);
+                    console.log("---------------");
+                    if (newValue != 0) {
+                        vm.totalPage = calPage();
+                    }
+                    vm.totalPage = 0;
 
-                vm.totalPage = function () {
+                });
 
-                    var r = vm.totalRecord / vm.pageSize;
+                function calPage() {
+                    var r = (vm.totalRecord / vm.pageSize) + 1 //从1开始;
                     var remind = vm.totalRecord % vm.pageSize;
                     if (remind == 0)
                         return r;
                     return ++r;
                 };
-
-                vm.totalRecords = 0;
-                vm.page = 1;
-                vm.first = function () {
-                    vm.search(vm.page, vm.size);
-                };
-                vm.next = function () { };
-                vm.previous = function () { };
-                vm.last = function () { };
-                vm.size = 40;
-                vm.search = function() {
-                    
-                };
-               
             });
 
             avalon.nextTick(function () {

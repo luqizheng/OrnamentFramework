@@ -115,6 +115,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         /// <param name="user"></param>
         protected virtual void SendVerifyEmail(User user)
         {
+           
             MemberSecrityManager token = MemberSecrityManager.CreateEmailChangedToken(user,
                                                                                       OrnamentContext
                                                                                           .Configuration

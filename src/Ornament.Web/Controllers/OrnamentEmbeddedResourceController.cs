@@ -25,8 +25,8 @@ namespace Ornament.Web.Controllers
             // pre-pend "~" so that it will be replaced with assembly namespace
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
             string path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.LocalPath);
-
-            var bundleModule = new RootModule(path, new BundleContext(HttpContext, BundleTable.Bundles, path), true);
+            
+            var bundleModule = new RootModule(path, new BundleContext(HttpContext, BundleTable.Bundles, path), OrnamentContext.Configuration.GetSeajsCombine());
 
             string content = "";
             using (var stream = new StreamReader(resourceStream))

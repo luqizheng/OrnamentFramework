@@ -36,7 +36,10 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             }
             userDao.SaveOrUpdate(createUser);
             userDao.Flush();
-            SendVerifyEmail(createUser);
+            if (this.VerifyEmail)
+            {
+                SendVerifyEmail(createUser);
+            }
 
             return true;
         }

@@ -13,7 +13,7 @@ define(function (require) {
 
     var model = avalon.define("index", function (vm) {
         vm.users = [];
-
+        //Search content
         vm.content = "";
         vm.swtchLock = function () {
             var mySet = this.$vmodel.el.IsLockout;
@@ -68,14 +68,16 @@ define(function (require) {
             });
         }
 
-    }); 
+    });
 
-    var page = avalon.define("page", function (vm) {
-
-        vm.search = function (pageIndex, pageSize) {
-            find(pageIndex, model.content);
+    var pageModule = avalon.define("page", function (vm) {
+        vm.$opts = {
+            search: function (pageIndex, pageSize) {
+                find(pageIndex, model.content);
+            }
         };
     });
+
 
     function find(page, content) {
         $.get("/MemberShips/User/List", {
@@ -86,7 +88,7 @@ define(function (require) {
             for (var i = 0; i < d.data.length; i++) {
                 model.users.push(d.data[i]);
             }
-            page.totalRecords = d.TotalRecords;
+            pageModule.totalRecords = d.TotalRecords;
         });
     }
 

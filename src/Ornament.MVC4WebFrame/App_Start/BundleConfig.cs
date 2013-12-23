@@ -6,16 +6,16 @@ using SeajsBundles;
 using SeajsBundles.JqueryBundles;
 using SeajsBundles.Seajs;
 
-namespace Ornament.MVCWebFrame.App_Start
+namespace Ornament.MVCWebFrame
 {
     public class BundleConfig
     {
-        public static bool CombineSeajsModule = false;
+
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
-            CombineSeajsModule = true;
+            OrnamentContext.Configuration.SetSeajsCombine(false);
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
             {
@@ -57,7 +57,7 @@ namespace Ornament.MVCWebFrame.App_Start
                 .Include("~/Scripts/Components/avalon.js"));
 
             bundles.Add(
-                new SeajsBundle("~/Scripts/_appLayout.js", CombineSeajsModule).Include(
+                new SeajsBundle("~/Scripts/_appLayout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
                     "~/Scripts/Modules/Views/_appLayout.js"));
         }
 
@@ -76,7 +76,7 @@ namespace Ornament.MVCWebFrame.App_Start
         private static void RegistryCtrl(BundleCollection bundles)
         {
             bundles.Add(
-                new SeajsBundle("~/scripts/ctrls/form.js", CombineSeajsModule).Include(
+                new SeajsBundle("~/scripts/ctrls/form.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
                     "~/Scripts/Modules/Views/Share/form.js"));
         }
 
@@ -86,7 +86,7 @@ namespace Ornament.MVCWebFrame.App_Start
         /// <param name="bundles"></param>
         private static void SeajsModules(BundleCollection bundles)
         {
-            var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/", CombineSeajsModule)
+            var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/", OrnamentContext.Configuration.GetSeajsCombine())
             {
                 LogFile = "/Log/modual.log"
             };

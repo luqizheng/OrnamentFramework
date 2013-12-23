@@ -138,6 +138,17 @@ namespace Ornament
 
             OrnamentModule.SiwtchTo(language);
         }
+
+        private static bool combineSeajs = false;
+        public static void SetSeajsCombine(this OrnamentConfiguration config, bool combine)
+        {
+            combineSeajs = combine;
+        }
+
+        public static bool GetSeajsCombine(this OrnamentConfiguration config)
+        {
+            return combineSeajs;
+        }
         /// <summary>
         /// ºóÌ¨Backend laoyout
         /// </summary>
