@@ -6,10 +6,11 @@ define(function (require) {
     require("/scripts/views/_appLayout.js");
     require("/scripts/modules/combine/pagination.js")(avalon);
 
+    var lang = {};
     var $ = require("jquery"),
        userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
     //pm = require("/share/pm.js");
-    var pmDialog;
+    //var pmDialog;
 
     var model = avalon.define("index", function (vm) {
         vm.users = [];
@@ -35,7 +36,29 @@ define(function (require) {
         vm.verify = function () {
             approve(this, false);
         };
+        vm.retievePwd = function () {
+            userApi.RetrievePassword(loginId, function (e) {
+                alert(e.success ?
+                    lang.retrievePwdMessage.success :
+                    lang.retrievePwdMessage.fail);
+            }, function () {
+                //showLoading.call(self, false);
+            });
+        };
+        vm.verifyEmail = function () {
 
+            var email = $(this).attr("href").substr(1);
+            var loginId = $("td:first input", $(this).closest("tr")).val();
+            userApi.VerifyEmail(loginId, email, function (e) {
+                alert(e.success ?
+                    lang.verifyEmailMessage.success :
+                    lang.verifyEmailMessage.fail);
+                
+            }, function () {
+                showLoading.call(self, false);
+            });
+            return false;
+        };
         function lock(self, bLock) {
             /// <summary>
             ///     锁定用户
@@ -79,6 +102,8 @@ define(function (require) {
     });
 
 
+
+
     function find(page, content) {
         $.get("/MemberShips/User/List", {
             page: page,
@@ -92,43 +117,11 @@ define(function (require) {
         });
     }
 
-
-
-    find(0, null);
-
-
     return {
-        init: function (lang, currentUser, tableConfig) {
-
-            //Table Verify User.
-            $("#table").on("click", "a[role=verifyEmail]", function () {
-                var loginId = $("td:first input", $(this).closest("tr")).val();
-                var self = this;
-                showLoading.call(self, true);
-                userApi.VerifyEmail(loginId, $(this).attr("href").substr(1), function (e) {
-                    alert(e.success ?
-                        lang.verifyEmailMessage.success :
-                        lang.verifyEmailMessage.fail);
-
-                }, function () {
-                    showLoading.call(self, false);
-                });
-                return false;
-            }).on("click", "a[role=pm]", function () {
-                pmDialog.show($(this).attr("href").substr(1));
-            }).on('click', "[role=retievePwd]", function () {
-                var self = this, loginId = $("td:first input", $(this).closest("tr")).val();
-                showLoading.call(this, true);
-                userApi.RetrievePassword(loginId, function (e) {
-                    alert(e.success ?
-                        lang.retrievePwdMessage.success :
-                        lang.retrievePwdMessage.fail);
-                }, function () {
-                    showLoading.call(self, false);
-                });
-            });
-
+        init: function (lang1, currentUser, tableConfig) {
+            lang = lang1;
             avalon.scan();
+            find(0, null);
 
         }
     };

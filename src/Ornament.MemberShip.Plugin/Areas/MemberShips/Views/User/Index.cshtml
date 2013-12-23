@@ -15,6 +15,7 @@
     var status = ViewData["UserStatus"] as UsersStatusModel;
 }
 
+
 @section scripts 
 {
     @Html.Partial("_pm")
@@ -59,8 +60,8 @@
     
     @box.Body(
         @<text>
-    <form id="tableForm" ms-controller="index">
-        <table class="table table-condensed table-striped table-bordered table-checks" id="table">
+    <div ms-controller="index">
+        <table class="table table-condensed table-striped table-bordered table-checks">
             <thead>
                 <tr>
                     <th style="width: 150px;"></th>
@@ -86,10 +87,12 @@
                 </tr>
             </thead>
             <tbody ms-each-el="users">
-                <tr ms-attr-data="{{el.Id}}">
+                <tr ms-attr-data="{{el.Id}}" ms-attr-loginId="{{el.LoginId}}">
                     <td>
                         <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn tip"><i class="fam-user-edit"></i></a>
-                        <a ms-href="/MemberShips/User/Assign/{{el.LoginId}}" class="btn tip" title="" role="retievePwd"><i class="fam-group-gear"></i></a>
+                        <a ms-href="/MemberShips/User/Assign/{{el.LoginId}}" class="btn tip" title=""><i class="fam-group-gear"></i></a>
+                        <a ms-href="#{{el.Email}}" class="btn tip" title="" ms-click="verifyEmail" ms-if="el.Email!=''"><i class="fam-email-go"></i></a>
+                        <a ms-href="#{{el.Email}}" class="btn tip" title="Retrieve Password" ms-if="el.Email!=''" ms-click="retievePwd"><i class="fam-key-go"></i></a>
                     </td>
                     <td ms-text="el.LoginId"></td>
                     <td ms-text="el.Name"></td>
@@ -128,8 +131,8 @@
             <tfoot>
                 <tr>
                     <td colspan="7">
-                        <div class="pagination pull-right" ms-controller="page" 
-                             ms-widget="pagination,ddd,$opts" >
+                        <div class="pagination pull-right" ms-controller="page"
+                            ms-widget="pagination,ddd,$opts">
                             <ul>
                                 <li>
                                     <a ms-click="first" href="#" ms-class-disabled="page==0">&lt;&lt;</a>
@@ -153,7 +156,7 @@
                 </tr>
             </tfoot>
         </table>
-    </form>
+    </div>
     </text>
 )
 }

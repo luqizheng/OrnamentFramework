@@ -8,15 +8,16 @@
 
             var model = avalon.define(data.paginationId, function (vm) {
                 vm.totalPage = 0;
-
                 vm.totalRecords = 0;
                 vm.page = 1;
+
                 vm.first = function () {
                     if (vm.totalPage == 0)
                         return;
                     vm.page = 1;
                     vm.search.call(vm, vm.page - 1, vm.size);
                 };
+                
                 vm.next = function () {
                     if (vm.page + 1 > vm.totalPage)
                         return;
@@ -24,27 +25,28 @@
 
                     vm.search.call(vm, vm.page - 1, vm.size);
                 };
+
                 vm.previous = function () {
                     if (vm.page - 1 > 1)
                         return;
                     vm.page -= 1;
                     vm.search.call(vm, vm.page - 1, vm.size);
                 };
+
                 vm.last = function () {
                     if (vm.totalPage == 0)
                         return;
                     vm.page = vm.totalPage;
                     vm.search.call(vm, vm.page - 1, vm.size);
                 };
+
                 vm.size = 5;
+
                 vm.search = function () {
-                    alert('defalut');
+                    alert('please set this function for getting data');
                 };
                 avalon.mix(vm, data.paginationOptions);
                 vm.$watch("totalRecords", function (newValue, oldValue) {
-                    console.log(newValue);
-                    console.log(oldValue);
-                    console.log("---------------");
                     if (newValue != 0) {
                         vm.totalPage = calPage();
                     }
