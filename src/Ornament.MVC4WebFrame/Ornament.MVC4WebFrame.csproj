@@ -1017,17 +1017,17 @@
       <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
       <Name>Ornament.Messages.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcPlugins\Doc\Doc.csproj">
+    <ProjectReference Include="..\MvcPlugins\Doc\Doc.Plugin.csproj">
       <Project>{296c9324-7db9-464f-a0e6-59e6634626e0}</Project>
-      <Name>Doc</Name>
+      <Name>Doc.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcPlugins\Friends\Friends.csproj">
+    <ProjectReference Include="..\MvcPlugins\Friends\Friends.Plugin.csproj">
       <Project>{1f2f532b-8342-4469-bf93-9343129bc80c}</Project>
-      <Name>Friends</Name>
+      <Name>Friends.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcPlugins\Information\Information.csproj">
+    <ProjectReference Include="..\MvcPlugins\Information\Information.Plugin.csproj">
       <Project>{9a7b397f-b083-4af3-8d91-910b7196ab46}</Project>
-      <Name>Information</Name>
+      <Name>Information.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>

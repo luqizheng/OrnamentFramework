@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Files.Areas.File.Controllers
+namespace Ornament.Files.Plugin.Areas.File.Controllers
 {
     public class ManagerController : Controller
     {

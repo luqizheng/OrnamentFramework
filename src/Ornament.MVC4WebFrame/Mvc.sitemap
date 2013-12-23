@@ -66,7 +66,7 @@
 
     <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false">
       <mvcSiteMapNode controller="Site" area="Information" action="Index" title="Information"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="FileManager" area="Setting" action="Index" title="File Managers">
+      <mvcSiteMapNode controller="Manager" area="Files" action="Index" title="File Managers">
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using MvcContrib.PortableAreas;
 
-namespace Files.Areas.File
+namespace Ornament.Files.Plugin.Areas.File
 {
     public class FileAreaRegistration : PortableAreaRegistration
     {
@@ -9,18 +9,18 @@ namespace Files.Areas.File
         {
             get
             {
-                return "File";
+                return "Files";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-            base.RegisterArea(context, bus);
             context.MapRoute(
               this.AreaName + "_default",
               this.AreaName + "/{controller}/{action}/{id}",
               new { action = "Index", id = UrlParameter.Optional }
           );
+            base.RegisterArea(context, bus);
         }
     }
 }

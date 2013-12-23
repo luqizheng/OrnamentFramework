@@ -1,12 +1,11 @@
 ﻿using System.IO;
 using System.Web.Mvc;
 using ElFinder;
-using Ornament;
 using Ornament.MemberShip.Dao;
 using Qi;
 using Qi.IO;
 
-namespace Files.Areas.File.Controllers
+namespace Ornament.Files.Plugin.Areas.File.Controllers
 {
     /// <summary>
     ///     For elfinder 用于管理Elfinder文件controller

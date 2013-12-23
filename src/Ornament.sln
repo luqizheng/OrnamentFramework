@@ -61,13 +61,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvcPlugins", "MvcPlugins", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badminton.Web.Plugin", "Extends\Badminton\Badminton.Web.Plugin\Badminton.Web.Plugin.csproj", "{FCA271AF-92ED-468B-9FE7-ECF06889AF32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friends", "MvcPlugins\Friends\Friends.csproj", "{1F2F532B-8342-4469-BF93-9343129BC80C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Friends.Plugin", "MvcPlugins\Friends\Friends.Plugin.csproj", "{1F2F532B-8342-4469-BF93-9343129BC80C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doc", "MvcPlugins\Doc\Doc.csproj", "{296C9324-7DB9-464F-A0E6-59E6634626E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doc.Plugin", "MvcPlugins\Doc\Doc.Plugin.csproj", "{296C9324-7DB9-464F-A0E6-59E6634626E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information", "MvcPlugins\Information\Information.csproj", "{9A7B397F-B083-4AF3-8D91-910B7196AB46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information.Plugin", "MvcPlugins\Information\Information.Plugin.csproj", "{9A7B397F-B083-4AF3-8D91-910B7196AB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Files", "MvcPlugins\Files\Files.csproj", "{8220CF6B-F27F-433E-AD13-A22691D3CF29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Files.Plugin", "MvcPlugins\Files\Ornament.Files.Plugin.csproj", "{8220CF6B-F27F-433E-AD13-A22691D3CF29}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

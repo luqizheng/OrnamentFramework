@@ -31,11 +31,11 @@ namespace Ornament.MVCWebFrame.App_Start
                 url: "404/{action}/{id}",
                 defaults: new { controller = "HttpError", action = "NotFound", id = UrlParameter.Optional }
                 );
-            routes.MapRoute(
+            /*routes.MapRoute(
                 name: "fileManage",
                 url: "connector",
                 defaults: new { Controller = "Files", action = "Index", Area = "Settings", id = UrlParameter.Optional }
-                );
+                );*/
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
