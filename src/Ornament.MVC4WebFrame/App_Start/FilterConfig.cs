@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Ornament.MVCWebFrame.App_Start
+namespace Ornament.MVCWebFrame
 {
     public class FilterConfig
     {

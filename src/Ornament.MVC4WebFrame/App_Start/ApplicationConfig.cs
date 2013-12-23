@@ -1,7 +1,7 @@
 ﻿using Ornament.Contexts;
 using Ornament.Models;
 
-namespace Ornament.MVCWebFrame.App_Start
+namespace Ornament.MVCWebFrame
 {
     public static class ApplicationConfig
     {

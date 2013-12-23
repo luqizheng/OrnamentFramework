@@ -27,6 +27,9 @@
 [class^="fam-"]:last-child, [class*=" fam-"]:last-child { *margin-left: 0; }
 .btn.btn-large [class^="fam-"] { margin-top: 1px; }
 .btn [class^="fam-"] { float: left; display: block; margin: -2px 4px -2px 0; }
+/*Ornament bug fix */
+.table .btn [class^="fam-"] { float: left; display: block; margin: 0px 0px -1px 0; }
+
 .nav.nav-tabs [class^="fam-"], .nav.nav-tabs [class*=" fam-"] { float: left; margin: 2px 5px 0 0; }
 .nav [class^="fam-"], .nav [class*=" fam-"] { float: left; margin: 2px 5px 0 0; }
 .tabs-left .nav-tabs [class^="fam-"], .tabs-left .nav-tabs [class*=" fam-"] { margin-top: 2px; }
