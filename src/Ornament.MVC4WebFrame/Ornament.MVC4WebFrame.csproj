@@ -1029,6 +1029,10 @@
       <Project>{9a7b397f-b083-4af3-8d91-910b7196ab46}</Project>
       <Name>Information.Plugin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Ornament.Files.Plugin\Ornament.Files.Plugin.csproj">
+      <Project>{8220cf6b-f27f-433e-ad13-a22691d3cf29}</Project>
+      <Name>Ornament.Files.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>

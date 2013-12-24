@@ -67,7 +67,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doc.Plugin", "MvcPlugins\Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information.Plugin", "MvcPlugins\Information\Information.Plugin.csproj", "{9A7B397F-B083-4AF3-8D91-910B7196AB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Files.Plugin", "MvcPlugins\Files\Ornament.Files.Plugin.csproj", "{8220CF6B-F27F-433E-AD13-A22691D3CF29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Files.Plugin", "MvcPlugins\Ornament.Files.Plugin\Ornament.Files.Plugin.csproj", "{8220CF6B-F27F-433E-AD13-A22691D3CF29}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
