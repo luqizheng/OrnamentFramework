@@ -147,6 +147,7 @@
     <Compile Include="Api\SecurityController.cs" />
     <Compile Include="Api\UserGroupsController.cs" />
     <Compile Include="Api\UsersController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\DocController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
@@ -309,6 +310,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User[].cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
