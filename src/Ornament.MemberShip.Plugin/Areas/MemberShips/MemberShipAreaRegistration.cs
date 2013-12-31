@@ -1,9 +1,13 @@
 ﻿using System.Web.Mvc;
 using MvcContrib.PortableAreas;
+using MvcContrib.UI.InputBuilder.ViewEngine;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
+using Ornament.MemberShip.Plugin.Properties;
 using Ornament.Web.Cfg;
-using Ornament.Web.PortableArea;
+
+using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.InputBuilder;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 {
@@ -22,7 +26,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             helper.RegistyScripts("User", context);
             helper.RegistyScripts("Share", context);
             helper.RegistyScripts("Permissions", context);
-
+           
             context.MapRoute(
                 AreaName + "_images",
                 AreaRoutePrefix + "/images/{resourceName}",

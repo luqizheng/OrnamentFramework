@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.Validations;
-using ModelMetadata = System.Web.Mvc.ModelMetadata;
 
 namespace Ornament.Web.ValidationAdapter
 {
@@ -16,7 +14,7 @@ namespace Ornament.Web.ValidationAdapter
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {
             string errorMessage = ErrorMessage;
-            return new[] { new StepModelClientValidationRule(errorMessage, this.Attribute.Step) };
+            return new[] {new StepModelClientValidationRule(errorMessage, Attribute.Step)};
         }
     }
 

@@ -63,8 +63,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,9 +80,6 @@
     </Reference>
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcContrib">
-      <HintPath>..\packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="MvcSiteMapProvider">
       <HintPath>..\packages\MvcSiteMapProvider.3.3.6.0\lib\net40\MvcSiteMapProvider.dll</HintPath>
@@ -166,6 +164,7 @@
     <Compile Include="Bundles\Config\DirectorySingleScriptFileRegistry.cs" />
     <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
     <Compile Include="Bundles\ScriptsFolderManager.cs" />
+    <Compile Include="Bus.cs" />
     <Compile Include="Cfg\DaoFactoryRegister.cs" />
     <Compile Include="Cfg\MvcWebConfig.cs" />
     <Compile Include="Cfg\NHConfigurationHandler.cs" />
@@ -178,6 +177,48 @@
     <Compile Include="HtmlExtends\LazyWriter.cs" />
     <Compile Include="HtmlExtends\TemplateHelper.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
+    <Compile Include="PortableAreas\EmbeddedResourceController.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\CanDeleteAllAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\DisplayOrderAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\ExampleAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\LabelAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\NoAddAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\NoDeleteAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Attributes\PartialViewAttribute.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\PropertyName\DefaultNameConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\PropertyName\IPropertyViewModelNameConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\ArrayPropertyConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\DateTimePropertyConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\DefaultPropertyConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\EnumPropertyConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\GuidPropertyConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\IPropertyViewModelFactory.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\PropertyInfoExtensions.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Type\DefaultTypeViewModelFactoryConvention.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Conventions\Type\ITypeViewModelFactory.cs" />
+    <Compile Include="PortableAreas\InputBuilder\DefaultPropertyConventionsFactory.cs" />
+    <Compile Include="PortableAreas\InputBuilder\DefaultTypeConventionsFactory.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Helpers\DisplayOrderExtensions.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Helpers\ExpressionHelper.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Helpers\ReflectionHelper.cs" />
+    <Compile Include="PortableAreas\InputBuilder\InputBuilder.cs" />
+    <Compile Include="PortableAreas\InputBuilder\InputSpecification\IInputSpecification.cs" />
+    <Compile Include="PortableAreas\InputBuilder\InputSpecification\Input.cs" />
+    <Compile Include="PortableAreas\InputBuilder\InputSpecification\InputPropertySpecification.cs" />
+    <Compile Include="PortableAreas\InputBuilder\InputSpecification\InputTypeSpecification.cs" />
+    <Compile Include="PortableAreas\InputBuilder\InputSpecification\ViewModelFactory.cs" />
+    <Compile Include="PortableAreas\InputBuilder\ViewEngine\AssemblyResourceProvider.cs" />
+    <Compile Include="PortableAreas\InputBuilder\ViewEngine\AssemblyResourceVirtualFile.cs" />
+    <Compile Include="PortableAreas\InputBuilder\ViewEngine\EmbeddedResourceViewEngine.cs" />
+    <Compile Include="PortableAreas\InputBuilder\ViewEngine\RenderInputBuilderException.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\DisplayPartial.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\HtmlDisplayExtensions.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\HtmlExtensions.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\IInputSpecificationExtensions.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\Partial.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\PropertyViewModel.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\TypeViewModel.cs" />
+    <Compile Include="PortableAreas\InputBuilder\Views\TypeViewModelExtensions.asax.cs" />
     <Compile Include="IoC\CastleDependcyResyle.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
@@ -197,11 +238,23 @@
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="OrnamentWebApiFactory.cs" />
     <Compile Include="Pagination.cs" />
-    <Compile Include="Plugins\DataTables\Column.cs" />
-    <Compile Include="Plugins\DataTables\DataTableResult.cs" />
-    <Compile Include="Plugins\DataTables\DataTablesPostData.cs" />
-    <Compile Include="Plugins\DataTables\PostDataModelBinder.cs" />
-    <Compile Include="PortableArea\RegistScript.cs" />
+    <Compile Include="UI\JQuery\Plugins\DataTables\Column.cs" />
+    <Compile Include="UI\JQuery\Plugins\DataTables\DataTableResult.cs" />
+    <Compile Include="UI\JQuery\Plugins\DataTables\DataTablesPostData.cs" />
+    <Compile Include="UI\JQuery\Plugins\DataTables\PostDataModelBinder.cs" />
+    <Compile Include="PortableAreas\ApplicationBus.cs" />
+    <Compile Include="PortableAreas\AssemblyResourceManager.cs" />
+    <Compile Include="PortableAreas\AssemblyResourceStore.cs" />
+    <Compile Include="PortableAreas\IApplicationBus.cs" />
+    <Compile Include="PortableAreas\IEventMessage.cs" />
+    <Compile Include="PortableAreas\IMessageHandler.cs" />
+    <Compile Include="PortableAreas\IMessageHandlerFactory.cs" />
+    <Compile Include="PortableAreas\MapExtensions.cs" />
+    <Compile Include="PortableAreas\PortableAreaContent.cs" />
+    <Compile Include="PortableAreas\PortableAreaMap.cs" />
+    <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
+    <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
+    <Compile Include="PortableAreas\RegistScript.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -252,9 +305,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
+    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Display.Master" />
+    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Field.Master" />
+    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\HiddenField.Master" />
+    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Row.Master" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="PortableAreas\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -262,7 +323,27 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayAddButton.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayRemoveButton.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Boolean.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DateTime.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayInline.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayLabel.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayParagraph.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Enum.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Form.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Guid.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Int32.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\MultilineText.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\RadioButtons.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ReadOnly.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\String.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Submit.aspx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />

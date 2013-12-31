@@ -1,11 +1,28 @@
-﻿using System.Web.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
+using System.Web.Mvc;
 using System.Web.Profile;
+using Ornament.MemberShip;
 using Ornament.Web;
 using Ornament.Web.HttpModel;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
+    public class Test
+    {
+        [UIHint("~/Views/Shared/User[].cshtml")]
+        public User[] Users
+        {
+            get
+            {
+                return new User[]
+                {
+                    new User("kkk"), 
+                };
+            }
+        }
+    }
     [HandleError, Session]
     public class HomeController : Controller
     {
@@ -18,7 +35,8 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         public ActionResult Admin()
         {
-            return View();
+            
+            return View(new Test());
         }
 
         [Session]

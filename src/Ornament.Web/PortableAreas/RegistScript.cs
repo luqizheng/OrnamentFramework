@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using MvcContrib.PortableAreas;
 
-namespace Ornament.Web.PortableArea
+namespace Ornament.Web.PortableAreas
 {
     public class EmbeddedHelper
     {

@@ -18,6 +18,7 @@ using Ornament.MVCWebFrame.App_Start;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.Cfg;
 using Ornament.Web.HttpModel;
+using Ornament.Web.PortableAreas.InputBuilder;
 using Qi.NHibernateExtender;
 
 namespace Ornament.MVCWebFrame

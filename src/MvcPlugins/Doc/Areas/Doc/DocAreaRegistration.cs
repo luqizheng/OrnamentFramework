@@ -7,20 +7,16 @@ namespace Doc.Areas.Doc
     {
         public override string AreaName
         {
-            get
-            {
-                return "Doc";
-            }
+            get { return "Doc"; }
         }
+
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             context.MapRoute(
-               "Doc_default",
-               "Doc/{controller}/{action}/{id}",
-               new { action = "Index", id = UrlParameter.Optional }
-           );
+                "Doc_default",
+                "Doc/{controller}/{action}/{id}",
+                new {action = "Index", id = UrlParameter.Optional}
+                );
         }
-
-      
     }
 }

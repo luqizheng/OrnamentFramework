@@ -1,8 +1,12 @@
 ﻿@using Ornament
 @using Ornament.Web
+@model Ornament.MVCWebFrame.Controllers.Test
 @{
     ViewBag.Title = "Admin";
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 <h2>Admin</h2>
+
+
+@Html.EditorFor(s => s.Users, "~/protableAreas/MemberShips/User[]")
