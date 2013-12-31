@@ -1,16 +1,12 @@
 using System;
 using System.IO;
 using System.Web.Mvc;
-using MvcContrib.UI.InputBuilder;
-using MvcContrib.UI.InputBuilder.ViewEngine;
-using Ornament.Web;
-using Ornament.Web.PortableAreas.InputBuilder;
 
-namespace MvcContrib.PortableAreas
+namespace Ornament.Web.PortableAreas
 {
 	public abstract class PortableAreaRegistration : AreaRegistration
 	{
-		public static Action RegisterEmbeddedViewEngine = () => { InputBuilder.BootStrap(); };
+		public static Action RegisterEmbeddedViewEngine = () => { InputBuilder.InputBuilder.BootStrap(); };
 		public static Action CheckAreasWebConfigExists = () => { EnsureAreasWebConfigExists(); };
 
 		public virtual PortableAreaMap GetMap() { return null; }

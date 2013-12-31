@@ -1,6 +1,4 @@
-using Ornament.Web.PortableAreas.InputBuilder.Views;
-
-namespace MvcContrib.UI.InputBuilder.Views
+namespace Ornament.Web.PortableAreas.InputBuilder.Views
 {
 	public class PropertyViewModel : TypeViewModel
 	{

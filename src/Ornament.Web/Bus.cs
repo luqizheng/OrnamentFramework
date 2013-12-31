@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvcContrib.PortableAreas;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Web

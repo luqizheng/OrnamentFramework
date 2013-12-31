@@ -1,7 +1,6 @@
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using Ornament.Web.PortableAreas.InputBuilder.Views;
+using Ornament.Web.PortableAreas.InputBuilder.InputSpecification;
 
-namespace MvcContrib.UI.InputBuilder.Views
+namespace Ornament.Web.PortableAreas.InputBuilder.Views
 {
 	public static class IInputSpecificationExtensions
 	{

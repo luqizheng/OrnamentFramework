@@ -308,7 +308,9 @@
     <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.Master">
       <SubType>ASPXCodeBehind</SubType>
     </None>
-    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Display.Master" />
+    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Display.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </None>
     <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Field.Master" />
     <None Include="PortableAreas\InputBuilder\Views\InputBuilders\HiddenField.Master" />
     <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Row.Master" />
@@ -340,7 +342,9 @@
     <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Int32.aspx" />
     <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\MultilineText.aspx" />
     <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\RadioButtons.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ReadOnly.aspx" />
+    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ReadOnly.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\String.aspx" />
     <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Submit.aspx" />
   </ItemGroup>

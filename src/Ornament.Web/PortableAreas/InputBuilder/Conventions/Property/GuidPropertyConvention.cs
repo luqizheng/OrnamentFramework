@@ -1,9 +1,7 @@
 using System;
 using System.Reflection;
-using MvcContrib.UI.InputBuilder.Views;
-using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
 
-namespace MvcContrib.UI.InputBuilder.Conventions
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
 	public class GuidPropertyConvention : DefaultPropertyConvention, IPropertyViewModelFactory
 	{

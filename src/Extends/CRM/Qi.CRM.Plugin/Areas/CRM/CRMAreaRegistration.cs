@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using MvcContrib.PortableAreas;
+using Ornament.Web.PortableAreas;
 
 namespace Qi.CRM.Plugin.Areas.CRM
 {

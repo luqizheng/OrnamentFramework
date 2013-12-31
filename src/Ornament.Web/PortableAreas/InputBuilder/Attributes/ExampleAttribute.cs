@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MvcContrib.UI.InputBuilder.Attributes
+namespace Ornament.Web.PortableAreas.InputBuilder.Attributes
 {
 	public class ExampleAttribute : ValidationAttribute
 	{

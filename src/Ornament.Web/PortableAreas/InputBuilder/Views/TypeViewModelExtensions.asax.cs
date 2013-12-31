@@ -1,7 +1,6 @@
-using MvcContrib.UI.InputBuilder.Views;
-using Ornament.Web.PortableAreas.InputBuilder.Views;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
 
-namespace MvcContrib.UI.InputBuilder
+namespace Ornament.Web.PortableAreas.InputBuilder.Views
 {
 	public static class ArrayTypeViewModelExtensions
 	{

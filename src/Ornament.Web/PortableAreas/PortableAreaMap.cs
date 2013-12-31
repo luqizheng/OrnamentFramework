@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace MvcContrib.PortableAreas
+namespace Ornament.Web.PortableAreas
 {
 	public class PortableAreaMap
 	{

@@ -2,13 +2,13 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
-using MvcContrib.UI.InputBuilder.Conventions;
-using MvcContrib.UI.InputBuilder.Helpers;
-using MvcContrib.UI.InputBuilder.Views;
 using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.PropertyName;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.Type;
+using Ornament.Web.PortableAreas.InputBuilder.Helpers;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
-namespace MvcContrib.UI.InputBuilder.InputSpecification
+namespace Ornament.Web.PortableAreas.InputBuilder.InputSpecification
 {
 	public interface IViewModelFactory {		
 		TypeViewModel Create(Type type);

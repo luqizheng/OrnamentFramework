@@ -1,6 +1,6 @@
 using System;
 
-namespace MvcContrib.UI.InputBuilder.Attributes
+namespace Ornament.Web.PortableAreas.InputBuilder.Attributes
 {
     public class DisplayOrderAttribute : Attribute
     {

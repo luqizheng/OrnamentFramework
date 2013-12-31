@@ -1,6 +1,6 @@
 using System;
 
-namespace MvcContrib.PortableAreas
+namespace Ornament.Web.PortableAreas
 {
 	public interface IMessageHandlerFactory
 	{

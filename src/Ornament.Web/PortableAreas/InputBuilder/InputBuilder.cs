@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Hosting;
 using System.Web.Mvc;
-using MvcContrib.PortableAreas;
-using MvcContrib.UI.InputBuilder;
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using MvcContrib.UI.InputBuilder.ViewEngine;
 using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.Type;
 using Ornament.Web.PortableAreas.InputBuilder.ViewEngine;
 
 namespace Ornament.Web.PortableAreas.InputBuilder

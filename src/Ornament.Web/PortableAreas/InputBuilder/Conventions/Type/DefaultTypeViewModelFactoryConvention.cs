@@ -1,19 +1,17 @@
-using System;
-using MvcContrib.UI.InputBuilder.Attributes;
-using MvcContrib.UI.InputBuilder.Conventions;
-using MvcContrib.UI.InputBuilder.Helpers;
-using MvcContrib.UI.InputBuilder.Views;
+using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
+using Ornament.Web.PortableAreas.InputBuilder.Helpers;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
-namespace MvcContrib.UI.InputBuilder.InputSpecification
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Type
 {
 	public class DefaultTypeViewModelFactoryConvention : ITypeViewModelFactory {
-		public bool CanHandle(Type type)
+		public bool CanHandle(System.Type type)
 		{
 			return true;
 		}
 
-		public TypeViewModel Create(Type type)
+		public TypeViewModel Create(System.Type type)
 		{
 			return new TypeViewModel()
 			{
@@ -24,7 +22,7 @@ namespace MvcContrib.UI.InputBuilder.InputSpecification
 			};
 		}
 
-		public string LabelForTypeConvention(Type type)
+		public string LabelForTypeConvention(System.Type type)
 		{
 			if (type.AttributeExists<LabelAttribute>())
 			{

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 #if TESTHELPER
 namespace MvcContrib.TestHelper
 #else
-namespace MvcContrib.UI.InputBuilder.Helpers
+namespace Ornament.Web.PortableAreas.InputBuilder.Helpers
 #endif
 {
 	public static class ReflectionHelper

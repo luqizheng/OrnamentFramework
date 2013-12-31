@@ -1,4 +1,4 @@
-namespace MvcContrib.UI.InputBuilder.InputSpecification
+namespace Ornament.Web.PortableAreas.InputBuilder.InputSpecification
 {
 	public interface IInputSpecification<T>
 	{

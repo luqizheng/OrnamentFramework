@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using MvcContrib.PortableAreas;
+using Ornament.Web.PortableAreas;
 
 namespace Ornament.Web.Cfg
 {

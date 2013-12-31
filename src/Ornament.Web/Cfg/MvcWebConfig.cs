@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
 using log4net;
-using MvcContrib;
 using Ornament.Configurations;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Validations;

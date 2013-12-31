@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace MvcContrib.UI.InputBuilder.Conventions
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.PropertyName
 {
 	public class DefaultNameConvention : IPropertyViewModelNameConvention
 	{

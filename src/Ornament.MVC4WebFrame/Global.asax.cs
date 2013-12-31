@@ -9,11 +9,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using log4net;
 using log4net.Config;
-using MvcContrib;
-using MvcContrib.UI.InputBuilder;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MVCWebFrame.App_Start;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.Cfg;
@@ -38,15 +35,15 @@ namespace Ornament.MVCWebFrame
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
             },
-            typeof(HttpErrorsController),
-            Assembly.GetExecutingAssembly());
+                typeof (HttpErrorsController),
+                Assembly.GetExecutingAssembly());
 
             PermissionConfig.Regist();
             ApplicationConfig.Register(OrnamentContext.Configuration);
             //Ornament setting
             //Registry the Provider to use Membership rule of asp.net.
             //Assembly auto config.
-            
+
             InputBuilder.BootStrap();
             NotifyConfig.Register();
         }
@@ -78,7 +75,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof(GlobalContext));
+                ILog log = LogManager.GetLogger(typeof (GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally

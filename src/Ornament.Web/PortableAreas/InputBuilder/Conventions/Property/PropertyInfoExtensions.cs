@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace MvcContrib.UI.InputBuilder.Conventions
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
 	public static class PropertyInfoExtensions
 	{
@@ -17,7 +17,7 @@ namespace MvcContrib.UI.InputBuilder.Conventions
 			return true;
 		}
 
-		public static bool AttributeExists<T>(this Type type) where T : class
+		public static bool AttributeExists<T>(this System.Type type) where T : class
 		{
 			var attribute = type.GetCustomAttributes(typeof(T), false).FirstOrDefault() as T;
 			if(attribute == null)
@@ -27,7 +27,7 @@ namespace MvcContrib.UI.InputBuilder.Conventions
 			return true;
 		}
 
-		public static T GetAttribute<T>(this Type type) where T : class
+        public static T GetAttribute<T>(this System.Type type) where T : class
 		{
 			return type.GetCustomAttributes(typeof(T), false).FirstOrDefault() as T;
 		}

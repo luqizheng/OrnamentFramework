@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using MvcContrib.PortableAreas;
 
-namespace MvcContrib.UI.InputBuilder.ViewEngine
+namespace Ornament.Web.PortableAreas
 {
     /// <summary>
     /// Stores all the embedded resources for a single assembly/area.

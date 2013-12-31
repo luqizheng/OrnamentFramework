@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using MvcContrib.UI.InputBuilder.InputSpecification;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.Type;
 
-namespace MvcContrib.UI.InputBuilder
+namespace Ornament.Web.PortableAreas.InputBuilder
 {
 	public class DefaultTypeConventionsFactory : List<ITypeViewModelFactory>
 	{

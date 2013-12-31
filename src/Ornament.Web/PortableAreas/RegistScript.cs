@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using MvcContrib.PortableAreas;
 
 namespace Ornament.Web.PortableAreas
 {

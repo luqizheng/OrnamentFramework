@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using MvcContrib.UI.InputBuilder.Views;
-using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
+using Ornament.Web.PortableAreas.InputBuilder.Views;
 
-namespace MvcContrib.UI.InputBuilder.Conventions
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
 	public class EnumPropertyConvention : DefaultPropertyConvention
 	{
@@ -16,7 +14,7 @@ namespace MvcContrib.UI.InputBuilder.Conventions
 			return propertyInfo.PropertyType.IsEnum;
 		}
 
-		public override PropertyViewModel Create(PropertyInfo propertyInfo, object model, string name, Type type)
+        public override PropertyViewModel Create(PropertyInfo propertyInfo, object model, string name, System.Type type)
 		{
 			object value = base.ValueFromModelPropertyConvention(propertyInfo, model, name);
 

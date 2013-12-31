@@ -1,9 +1,9 @@
 ﻿using System.Web.Mvc;
-using MvcContrib.PortableAreas;
+using Ornament.Web.PortableAreas;
 
 namespace Badminton.Web.Plugin.Areas.Badminton
 {
-    public class BadmintonAreaRegistration : MvcContrib.PortableAreas.PortableAreaRegistration
+    public class BadmintonAreaRegistration : PortableAreaRegistration
     {
         public override string AreaName
         {

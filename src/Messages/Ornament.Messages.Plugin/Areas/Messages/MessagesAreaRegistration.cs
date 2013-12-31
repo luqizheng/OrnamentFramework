@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
-using MvcContrib.PortableAreas;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
 using Ornament.Web.Cfg;
+using Ornament.Web.PortableAreas;
 
 namespace Ornament.Messages.Plugin.Areas.Messages
 {

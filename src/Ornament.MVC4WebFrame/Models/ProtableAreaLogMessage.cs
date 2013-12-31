@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MvcContrib.PortableAreas;
 using log4net;
+using Ornament.Web.PortableAreas;
 
 namespace Ornament.MVCWebFrame.Models
 {

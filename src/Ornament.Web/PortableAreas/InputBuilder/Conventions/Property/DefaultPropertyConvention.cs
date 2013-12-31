@@ -3,10 +3,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Web.Mvc;
-using MvcContrib.UI.InputBuilder.Attributes;
-using MvcContrib.UI.InputBuilder.Conventions;
-using MvcContrib.UI.InputBuilder.Helpers;
-using MvcContrib.UI.InputBuilder.Views;
+using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.PortableAreas.InputBuilder.Helpers;
+using Ornament.Web.PortableAreas.InputBuilder.Views;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
@@ -17,7 +16,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 			return true;
 		}
 
-		public virtual PropertyViewModel Create(PropertyInfo propertyInfo, object model, string name, Type type)
+        public virtual PropertyViewModel Create(PropertyInfo propertyInfo, object model, string name, System.Type type)
 		{
 			PropertyViewModel viewModel = CreateViewModel<object>();
 			viewModel.PartialName = PartialNameConvention(propertyInfo);

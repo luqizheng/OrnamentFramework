@@ -1,11 +1,9 @@
-using System;
-using MvcContrib.UI.InputBuilder.Views;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
-namespace MvcContrib.UI.InputBuilder.InputSpecification
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Type
 {
 	public interface ITypeViewModelFactory {
-		bool CanHandle(Type type);
-		TypeViewModel Create(Type type);
+		bool CanHandle(System.Type type);
+		TypeViewModel Create(System.Type type);
 	}
 }

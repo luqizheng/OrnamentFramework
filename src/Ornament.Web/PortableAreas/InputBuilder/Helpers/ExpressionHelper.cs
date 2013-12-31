@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace MvcContrib.UI.InputBuilder.Helpers
+namespace Ornament.Web.PortableAreas.InputBuilder.Helpers
 {
 	public static class ExpressionHelper
 	{

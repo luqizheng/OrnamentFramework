@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvcContrib.UI.InputBuilder.Attributes;
-using MvcContrib.UI.InputBuilder.Conventions;
+using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
 
-namespace MvcContrib.UI.InputBuilder.Helpers
+namespace Ornament.Web.PortableAreas.InputBuilder.Helpers
 {
     public static class DisplayOrderExtensions
     {

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Collections.Generic;
 
-namespace MvcContrib.PortableAreas
+namespace Ornament.Web.PortableAreas
 {
     public class EmbeddedResourceController : Controller
     {

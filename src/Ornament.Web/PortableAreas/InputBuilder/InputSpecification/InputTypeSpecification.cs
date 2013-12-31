@@ -3,10 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using MvcContrib.UI.InputBuilder.Conventions;
-using MvcContrib.UI.InputBuilder.Helpers;
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using MvcContrib.UI.InputBuilder.Views;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.PropertyName;
+using Ornament.Web.PortableAreas.InputBuilder.Helpers;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.InputSpecification

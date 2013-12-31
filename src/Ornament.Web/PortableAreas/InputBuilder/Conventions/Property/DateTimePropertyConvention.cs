@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
-using MvcContrib.UI.InputBuilder.Views;
-using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
+using Ornament.Web.PortableAreas.InputBuilder.Views;
 
-namespace MvcContrib.UI.InputBuilder.Conventions
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
 	public class DateTimePropertyConvention : DefaultPropertyConvention
 	{

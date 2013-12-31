@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using MvcContrib.UI.InputBuilder.ViewEngine;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Web;
 using Ornament.Web.PortableAreas.InputBuilder.ViewEngine;
 
-namespace MvcContrib.PortableAreas
+namespace Ornament.Web.PortableAreas
 {
     /// <summary>
     /// Manages all .NET assemblies that have registered their embedded resources.

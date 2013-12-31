@@ -1,5 +1,5 @@
-﻿using MvcContrib.PortableAreas;
-using Ornament.Configurations;
+﻿using Ornament.Configurations;
+using Ornament.Web.PortableAreas;
 
 namespace Ornament.Web.Cfg
 {

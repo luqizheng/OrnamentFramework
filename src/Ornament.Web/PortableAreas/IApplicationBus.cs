@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvcContrib.PortableAreas
+namespace Ornament.Web.PortableAreas
 {
 	public interface IApplicationBus:IList<Type>
 	{

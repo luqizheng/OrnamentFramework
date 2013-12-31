@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using MvcContrib.UI.InputBuilder.Conventions;
 using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
 
-namespace MvcContrib.UI.InputBuilder
+namespace Ornament.Web.PortableAreas.InputBuilder
 {
 	public class DefaultPropertyConventionsFactory : List<IPropertyViewModelFactory>
 	{

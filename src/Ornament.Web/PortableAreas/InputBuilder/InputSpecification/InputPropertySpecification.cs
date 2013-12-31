@@ -1,7 +1,6 @@
 using System;
 using System.Web.Mvc;
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using MvcContrib.UI.InputBuilder.Views;
+using Ornament.Web.PortableAreas.InputBuilder.InputSpecification;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
 namespace Ornament.Web.InputBuilder.InputSpecification

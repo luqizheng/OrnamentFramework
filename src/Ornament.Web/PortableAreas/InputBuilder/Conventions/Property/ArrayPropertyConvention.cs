@@ -3,14 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvcContrib.UI.InputBuilder.Attributes;
-using MvcContrib.UI.InputBuilder.Conventions;
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using MvcContrib.UI.InputBuilder.Views;
-using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
+using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.PortableAreas.InputBuilder.InputSpecification;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
-namespace MvcContrib.UI.InputBuilder
+namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
 	public class ArrayPropertyConvention : DefaultPropertyConvention,IRequireViewModelFactory
 	{
@@ -76,7 +73,7 @@ namespace MvcContrib.UI.InputBuilder
 			_factory = factory;
 		}
 
-		public override PropertyViewModel Create(PropertyInfo propertyInfo, object model, string name, Type type)
+        public override PropertyViewModel Create(PropertyInfo propertyInfo, object model, string name, System.Type type)
 		{
 			PropertyViewModel value = base.Create(propertyInfo, model, name, type);
 			if (propertyInfo.AttributeExists<NoAddAttribute>())

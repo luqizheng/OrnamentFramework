@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MvcContrib.UI.InputBuilder.Views;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.Views
 {

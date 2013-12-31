@@ -2,10 +2,8 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using MvcContrib.UI.InputBuilder.Conventions;
-using MvcContrib.UI.InputBuilder.InputSpecification;
-using MvcContrib.UI.InputBuilder.Views;
 using Ornament.Web.InputBuilder.InputSpecification;
+using Ornament.Web.PortableAreas.InputBuilder.Conventions.PropertyName;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.InputSpecification
