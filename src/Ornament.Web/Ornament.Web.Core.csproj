@@ -305,15 +305,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.Master">
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.Master">
       <SubType>ASPXCodeBehind</SubType>
-    </None>
-    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Display.Master">
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Display.Master">
       <SubType>ASPXCodeBehind</SubType>
-    </None>
-    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Field.Master" />
-    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\HiddenField.Master" />
-    <None Include="PortableAreas\InputBuilder\Views\InputBuilders\Row.Master" />
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Field.Master" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\HiddenField.Master" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Row.Master" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -326,27 +326,27 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.aspx">
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.aspx">
       <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayAddButton.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayRemoveButton.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Boolean.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DateTime.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayInline.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayLabel.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayParagraph.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Enum.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Form.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Guid.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Int32.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\MultilineText.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\RadioButtons.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\ReadOnly.aspx">
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayAddButton.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayRemoveButton.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Boolean.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DateTime.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayInline.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayLabel.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayParagraph.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Enum.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Form.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Guid.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Int32.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\MultilineText.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\RadioButtons.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\ReadOnly.aspx">
       <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\String.aspx" />
-    <Content Include="PortableAreas\InputBuilder\Views\InputBuilders\Submit.aspx" />
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\String.aspx" />
+    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Submit.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

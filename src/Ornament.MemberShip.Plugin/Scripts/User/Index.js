@@ -82,11 +82,11 @@ define(function (require) {
             /// <param name="id"></param>
             /// <param name="bLock"></param>
             /// <param name="process"></param>
-            var id = $(self.target).closest("tr").attr("data");
+            var id = $(self).closest("tr").attr("data");
             var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
             $.post(url, { ids: id }, function (result) {
                 if (result.success) {
-                    self.$vmodel.el.IsApprove = bApprove;
+                    self.$vmodel.el.IsApproved = bApprove;
                 }
             });
         }

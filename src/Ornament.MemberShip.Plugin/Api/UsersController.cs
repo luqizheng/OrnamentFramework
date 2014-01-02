@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Iesi.Collections;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
 using Qi.Web.Mvc;
@@ -16,7 +17,7 @@ namespace Ornament.MemberShip.Plugin.Api
         {
             _factory = factory;
         }
-
+        
         // GET api/usersapi
         [HttpGet]
         public IEnumerable<object> Match([FromUri] string name,
