@@ -69,6 +69,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information.Plugin", "MvcPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Files.Plugin", "MvcPlugins\Ornament.Files.Plugin\Ornament.Files.Plugin.csproj", "{8220CF6B-F27F-433E-AD13-A22691D3CF29}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Regions", "Regions", "{11AC133F-7766-4312-97D4-BFB3ED65301E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Regions.Core", "MvcPlugins\Regions\Ornament.Regions.Core\Ornament.Regions.Core.csproj", "{F4E55C5E-2676-448E-96B5-59B56F2C4990}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Regions.Plugin", "MvcPlugins\Regions\Ornament.Regions.Plugin\Ornament.Regions.Plugin.csproj", "{1E9CA889-464F-43F8-B078-5190BF691E88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.Regions.Dao.NHibernateImple", "MvcPlugins\Regions\Ornament.Regions.Dao.NHibernateImple\Ornament.Regions.Dao.NHibernateImple.csproj", "{7B40EB73-586F-434A-BA16-4559156B8FA9}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi
@@ -342,6 +350,36 @@ Global
 		{8220CF6B-F27F-433E-AD13-A22691D3CF29}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8220CF6B-F27F-433E-AD13-A22691D3CF29}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8220CF6B-F27F-433E-AD13-A22691D3CF29}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990}.Release|x86.ActiveCfg = Release|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1E9CA889-464F-43F8-B078-5190BF691E88}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7B40EB73-586F-434A-BA16-4559156B8FA9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -374,5 +412,9 @@ Global
 		{296C9324-7DB9-464F-A0E6-59E6634626E0} = {0B978B03-DCA6-4665-9224-3C979218D695}
 		{9A7B397F-B083-4AF3-8D91-910B7196AB46} = {0B978B03-DCA6-4665-9224-3C979218D695}
 		{8220CF6B-F27F-433E-AD13-A22691D3CF29} = {0B978B03-DCA6-4665-9224-3C979218D695}
+		{11AC133F-7766-4312-97D4-BFB3ED65301E} = {0B978B03-DCA6-4665-9224-3C979218D695}
+		{F4E55C5E-2676-448E-96B5-59B56F2C4990} = {11AC133F-7766-4312-97D4-BFB3ED65301E}
+		{1E9CA889-464F-43F8-B078-5190BF691E88} = {11AC133F-7766-4312-97D4-BFB3ED65301E}
+		{7B40EB73-586F-434A-BA16-4559156B8FA9} = {11AC133F-7766-4312-97D4-BFB3ED65301E}
 	EndGlobalSection
 EndGlobal

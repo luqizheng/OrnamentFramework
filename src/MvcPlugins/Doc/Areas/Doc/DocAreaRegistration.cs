@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Ornament.Web.PortableAreas;
 
 namespace Doc.Areas.Doc
@@ -17,6 +18,11 @@ namespace Doc.Areas.Doc
                 "Doc/{controller}/{action}/{id}",
                 new {action = "Index", id = UrlParameter.Optional}
                 );
+        }
+
+        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        {
+            return null;
         }
     }
 }

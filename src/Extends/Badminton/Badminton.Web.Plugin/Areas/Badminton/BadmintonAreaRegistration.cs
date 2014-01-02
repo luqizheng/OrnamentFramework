@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using Badminton.Dao;
+using Badminton.Dao.NhImpl;
 using Ornament.Web.PortableAreas;
 
 namespace Badminton.Web.Plugin.Areas.Badminton
@@ -26,6 +29,14 @@ namespace Badminton.Web.Plugin.Areas.Badminton
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
+        }
+
+        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        {
+            return new[]
+            {
+                new DaoRegistryInformation(typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)),
+            };
         }
     }
 }

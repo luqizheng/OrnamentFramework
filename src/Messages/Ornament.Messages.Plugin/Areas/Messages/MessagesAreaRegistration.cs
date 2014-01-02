@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
-using Ornament.Web.Cfg;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Messages.Plugin.Areas.Messages
@@ -16,56 +16,41 @@ namespace Ornament.Messages.Plugin.Areas.Messages
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             //注册 Dao
-            bus.Send(new DaoFactoryRegister(typeof(IMessageDaoFactory), typeof(MessageDaoFactory)));
+            var helper = new MessagesAreaRegistrationHelper(this);
 
-
-            RegistyScripts("News", context);
-            RegistyScripts("NewsType", context);
-            RegistyScripts("NotifyType", context);
-            RegistyScripts("Template", context);
+            helper.RegistyScripts("News", context);
+            helper.RegistyScripts("NewsType", context);
+            helper.RegistyScripts("NotifyType", context);
+            helper.RegistyScripts("Template", context);
 
             context.MapRoute(
                 AreaName + "_images",
                 AreaRoutePrefix + "/images/{resourceName}",
                 new
-                    {
-                        controller = "OrnamentEmbeddedResource",
-                        action = "Index",
-                        resourcePath = "images"
-                    },
+                {
+                    controller = "OrnamentEmbeddedResource",
+                    action = "Index",
+                    resourcePath = "images"
+                },
                 new[]
-                    {
-                        "Ornament.Web.Controllers"
-                    }
+                {
+                    "Ornament.Web.Controllers"
+                }
                 );
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new {action = "Index", id = UrlParameter.Optional}
                 );
             base.RegisterArea(context, bus);
-
-
         }
 
-        private void RegistyScripts(string scriptName, AreaRegistrationContext context)
+        public override IEnumerable<DaoRegistryInformation> RegistDaos()
         {
-            //page scripts  regist
-            context.MapRoute(
-                AreaName + "_" + scriptName + "_scripts",
-                string.Format("{0}/Scripts/{1}/{{resourceName}}", AreaRoutePrefix, scriptName),
-                new
-                    {
-                        controller = "OrnamentEmbeddedResource",
-                        action = "Index",
-                        resourcePath = "Ornament.Messages.Plugin.Scripts." + scriptName,
-                    }
-                ,
-                new[]
-                    {
-                        "Ornament.Web.Controllers"
-                    }
-                );
+            return new[]
+            {
+                new DaoRegistryInformation(typeof (IMessageDaoFactory), typeof (MessageDaoFactory))
+            };
         }
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Ornament.Web.PortableAreas
 {
-    public class EmbeddedHelper
+    public class MessagesAreaRegistrationHelper
     {
         private readonly PortableAreaRegistration _protablAreaRegistration;
 
 
-        public EmbeddedHelper(PortableAreaRegistration protablAreaRegistration)
+        public MessagesAreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration)
         {
             _protablAreaRegistration = protablAreaRegistration;
         }

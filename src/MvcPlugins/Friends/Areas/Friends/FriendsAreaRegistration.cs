@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Ornament.Web.PortableAreas;
 
 namespace Friends.Areas.Friends
@@ -18,6 +19,11 @@ namespace Friends.Areas.Friends
                 "Friends/{controller}/{action}/{id}",
                 new {action = "Index", id = UrlParameter.Optional}
                 );
+        }
+
+        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        {
+            return null;
         }
     }
 }

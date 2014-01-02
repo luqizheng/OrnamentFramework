@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Files.Plugin.Areas.File
@@ -21,6 +22,11 @@ namespace Ornament.Files.Plugin.Areas.File
               new { action = "Index", id = UrlParameter.Optional }
           );
             base.RegisterArea(context, bus);
+        }
+
+        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        {
+            return null;
         }
     }
 }
