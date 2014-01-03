@@ -11,18 +11,16 @@ namespace Information.Areas.Information
     {
         public override string AreaName
         {
-            get
-            {
-                return "Information";
-            }
+            get { return "Information"; }
         }
+
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             context.MapRoute(
-               this.AreaName + "_default",
-               this.AreaRoutePrefix + "/{controller}/{action}/{id}",
-               new { action = "Index", id = UrlParameter.Optional }
-           );
+                AreaName + "_default",
+                AreaRoutePrefix + "/{controller}/{action}/{id}",
+                new {action = "Index", id = UrlParameter.Optional}
+                );
             base.RegisterArea(context, bus);
         }
 
@@ -31,14 +29,6 @@ namespace Information.Areas.Information
             return null;
         }
 
-        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
-        {
-            apiController = null;
-            controller = new Type[]
-            {
-                typeof (PluginsController),
-                typeof(SiteController),
-            };
-        }
+     
     }
 }
