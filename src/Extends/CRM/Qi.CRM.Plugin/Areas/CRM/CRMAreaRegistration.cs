@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 using Qi.CRM.Dao;
@@ -42,7 +44,7 @@ namespace Qi.CRM.Plugin.Areas.CRM
             //RegisterEmbeddedViewEngine();
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
@@ -50,6 +52,7 @@ namespace Qi.CRM.Plugin.Areas.CRM
             };
         }
 
+       
         /*public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(

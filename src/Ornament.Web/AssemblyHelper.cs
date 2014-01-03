@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -8,31 +9,17 @@ namespace Ornament.Web
 {
     public static class AssemblyHelper
     {
-        public static void FindController(Assembly webAssembly, out Type[] apiControllers, out Type[] controllers)
+
+        public static void FindController(Assembly webAssembly, out IEnumerable<Type> apiControllers, out IEnumerable<Type> controllers)
         {
-            var apiControllerResult = new List<Type>();
-            var controllerResult = new List<Type>();
+            apiControllers = new List<Type>();
+            controllers = new List<Type>();
 
             //Web Assembly assembly
-            FindController(webAssembly, apiControllerResult, controllerResult);
-            //another plugin assembly
-            GetPluginAssemblies(apiControllerResult, controllerResult);
-
-            apiControllers = apiControllerResult.ToArray();
-            controllers = controllerResult.ToArray();
+            FindController(webAssembly, (List<Type>)apiControllers, (List<Type>)controllers);
         }
 
-        private static void GetPluginAssemblies(List<Type> apiControllerResult, List<Type> controllerResult)
-        {
-            foreach (Assembly assembly in
-                AppDomain.CurrentDomain.GetAssemblies())
-            {
-                if (assembly.GetName().Name.ToLower().EndsWith("plugin"))
-                {
-                    FindController(assembly, apiControllerResult, controllerResult);
-                }
-            }
-        }
+    
 
         private static void FindController(Assembly assembly, List<Type> apiControllerResult,
                                            List<Type> controllerResult)

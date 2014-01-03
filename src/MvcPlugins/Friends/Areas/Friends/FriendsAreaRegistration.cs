@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
@@ -22,9 +23,15 @@ namespace Friends.Areas.Friends
                 );
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return null;
+        }
+
+        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
+        {
+            controller = null;
+            apiController = null;
         }
     }
 }

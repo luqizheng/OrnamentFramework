@@ -57,11 +57,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return CurrentSession.Query<User>(); }
         }
 
-        public int Count()
-        {
-            return CreateDetachedCriteria().SetProjection(Projections.RowCount()).SetCacheMode(CacheMode.Normal)
-                                           .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
-        }
+        //public int Count()
+        //{
+        //    return CreateDetachedCriteria().SetProjection(Projections.RowCount()).SetCacheMode(CacheMode.Normal)
+        //                                   .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+        //}
 
         public IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex,
                                        int pageSize, out int total)

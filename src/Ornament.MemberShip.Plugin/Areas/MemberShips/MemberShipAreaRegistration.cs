@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.MemberShip.Plugin.Models.SampleData;
+using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
@@ -64,12 +66,13 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             base.RegisterArea(context, bus);
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
                 new NHRegisterEventMessage(typeof (IMemberShipFactory), typeof (MemberShipFactory))
             };
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -19,14 +20,14 @@ namespace Ornament.Web
         ///     Create defaultFacotryy
         /// </summary>
         /// <param name="controllers">a set type, it will auto to filer the</param>
-        public OrnamentControllerFactory(params Type[] controllers)
+        public OrnamentControllerFactory(IEnumerable<Type> controllers)
         {
             if (controllers == null)
                 throw new ArgumentNullException("controllers");
-            _container = (WindsorContainer)OrnamentContext.IocContainer;
-            Regist(controllers);
-            Regist(typeof(OrnamentEmbeddedResourceController));
-            Regist(typeof(EmbeddedResourceController));
+            _container = (WindsorContainer) OrnamentContext.IocContainer;
+            Regist(controllers.ToArray());
+            Regist(typeof (OrnamentEmbeddedResourceController));
+            Regist(typeof (EmbeddedResourceController));
         }
 
         public Type ErrorController { get; set; }
@@ -40,17 +41,19 @@ namespace Ornament.Web
                 _container.Register(Component.For(t).LifestyleTransient());
             }
         }
+
         protected override Type GetControllerType(RequestContext requestContext, string controllerName)
         {
-            var result = base.GetControllerType(requestContext, controllerName);
+            Type result = base.GetControllerType(requestContext, controllerName);
             return result;
-
         }
+
         public override IController CreateController(RequestContext requestContext, string controllerName)
         {
-            var result = base.CreateController(requestContext, controllerName);
+            IController result = base.CreateController(requestContext, controllerName);
             return result;
         }
+
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
             //try

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
@@ -21,9 +23,11 @@ namespace Doc.Areas.Doc
                 );
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return null;
         }
+
+       
     }
 }

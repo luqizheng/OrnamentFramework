@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Badminton.Dao;
 using Badminton.Dao.NhImpl;
@@ -32,12 +33,17 @@ namespace Badminton.Web.Plugin.Areas.Badminton
             );
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
                 new NHRegisterEventMessage(typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)),
             };
+        }
+
+        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
+        {
+            throw new NotImplementedException();
         }
     }
 }

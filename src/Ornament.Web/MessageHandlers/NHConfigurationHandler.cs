@@ -10,4 +10,6 @@ namespace Ornament.Web.MessageHandlers
             NHConfig.Instance.RegistDaoFactory(message.DaoFactoryInterface, message.ImpleDaoFactory);
         }
     }
+
+
 }

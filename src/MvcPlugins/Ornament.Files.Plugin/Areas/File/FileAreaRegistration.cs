@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.Files.Plugin.Areas.File.Controllers;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
@@ -25,9 +27,18 @@ namespace Ornament.Files.Plugin.Areas.File
             base.RegisterArea(context, bus);
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return null;
+        }
+
+        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
+        {
+            controller = new Type[]
+            {
+                typeof (FileController), typeof (ManagerController)
+            };
+            apiController = null;
         }
     }
 }

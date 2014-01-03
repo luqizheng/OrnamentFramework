@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
+using Information.Areas.Information.Controllers;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
@@ -24,9 +26,19 @@ namespace Information.Areas.Information
             base.RegisterArea(context, bus);
         }
 
-        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return null;
+        }
+
+        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
+        {
+            apiController = null;
+            controller = new Type[]
+            {
+                typeof (PluginsController),
+                typeof(SiteController),
+            };
         }
     }
 }
