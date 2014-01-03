@@ -1,5 +1,7 @@
 ﻿@using Ornament.MVCWebFrame.Models
 @using Ornament.MemberShip
+@using Ornament.Properties
+@using Ornament.Web.DataInitializers
 @using Ornament.Web.Models
 @using Qi
 @using Qi.Web.Mvc
@@ -11,11 +13,11 @@
     <div class="content">
         @Html.ValidationSummary()
         <form method="post">
-        @if (GlobalInitializer.AllDataInitializers.Length != 0)
+        @if (GlobalInitializer.DataInitializers.Length != 0)
         {
             <div id="InitializersPanel">
                 <ul style="margin: 0px; padding: 0; list-style-type: none">
-                    @foreach (var webSiteinit in GlobalInitializer.AllDataInitializers)
+                    @foreach (var webSiteinit in GlobalInitializer.DataInitializers)
                     {
                         <li>
                             <label for="@webSiteinit.Name" class="checkbox">

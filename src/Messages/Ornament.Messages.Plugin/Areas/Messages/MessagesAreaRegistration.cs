@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Messages.Plugin.Areas.Messages
@@ -45,11 +46,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             base.RegisterArea(context, bus);
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
-                new DaoRegistryInformation(typeof (IMessageDaoFactory), typeof (MessageDaoFactory))
+                new NHRegisterEventMessage(typeof (IMessageDaoFactory), typeof (MessageDaoFactory))
             };
         }
     }

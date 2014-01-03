@@ -2,14 +2,19 @@
 using System.Reflection;
 using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Cfg
+namespace Ornament.Web.MessageHandlers
 {
     /// <summary>
     ///     注册NHibernate的Dao，如果Dao和mapping文件放在一起，那么会自动进行Mapping
     /// </summary>
-    public class DaoFactoryRegister : IEventMessage
+    public class NHRegisterEventMessage : IEventMessage
     {
-        public DaoFactoryRegister(Type daoFactoryInterface, Type impleDaoFactory)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="daoFactoryInterface"></param>
+        /// <param name="impleDaoFactory"></param>
+        public NHRegisterEventMessage(Type daoFactoryInterface, Type impleDaoFactory)
         {
             if (daoFactoryInterface == null)
                 throw new ArgumentNullException("daoFactoryInterface");
@@ -21,7 +26,7 @@ namespace Ornament.Web.Cfg
             FluentNhibernate = true;
         }
 
-        public DaoFactoryRegister(Type daoFactoryInterface, Type impleDaoFactory,
+        public NHRegisterEventMessage(Type daoFactoryInterface, Type impleDaoFactory,
             Assembly hbmFileEmbed)
             : this(daoFactoryInterface, impleDaoFactory)
         {

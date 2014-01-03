@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
+using Ornament.MemberShip.Plugin.Models.SampleData;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips
@@ -15,9 +17,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+
+            bus.Send(new MemberShipData());
+
             var helper = new MessagesAreaRegistrationHelper(this);
-
-
             helper.RegistyScripts("User", context);
             helper.RegistyScripts("Share", context);
             helper.RegistyScripts("Permissions", context);
@@ -40,32 +43,32 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             //MemberShips/User/Edit/admin
             context.MapRoute(AreaName + "_EditUser",
                 AreaName + "/User/Edit/{loginId}",
-                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"}
+                new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" }
                 );
 
 
             context.MapRoute(
                 AreaName + "_AssingUser",
                 AreaName + "/User/Assign/{loginId}",
-                new {action = "Assign", loginId = UrlParameter.Optional, controller = "User"},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                new { action = "Assign", loginId = UrlParameter.Optional, controller = "User" },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             base.RegisterArea(context, bus);
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
-                new DaoRegistryInformation(typeof (IMemberShipFactory), typeof (MemberShipFactory))
+                new NHRegisterEventMessage(typeof (IMemberShipFactory), typeof (MemberShipFactory))
             };
         }
     }

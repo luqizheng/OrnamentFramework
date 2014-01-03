@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Badminton.Dao;
 using Badminton.Dao.NhImpl;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
 namespace Badminton.Web.Plugin.Areas.Badminton
@@ -31,11 +32,11 @@ namespace Badminton.Web.Plugin.Areas.Badminton
             );
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
-                new DaoRegistryInformation(typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)),
+                new NHRegisterEventMessage(typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)),
             };
         }
     }

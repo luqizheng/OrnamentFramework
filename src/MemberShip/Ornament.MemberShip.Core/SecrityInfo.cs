@@ -17,10 +17,10 @@ namespace Ornament.MemberShip
             private string _passwordAnswer;
             private string _passwordQuestion;
 
-            internal  protected SecurityInfo()
+            protected internal SecurityInfo()
             {
-                
             }
+
             internal SecurityInfo(User user)
             {
                 if (user == null) throw new ArgumentNullException("user");
@@ -143,7 +143,7 @@ namespace Ornament.MemberShip
                 if (newPassword.Length < 3)
                     throw new PasswordFormatException("newPassword's length is too short.");
                 _password = MembershipContext.Provider.Encrypt(newPassword);
-                if (!this.IsTransient())
+                if (!IsTransient())
                 {
                     LastPasswordChangedDate = DateTime.Now;
                 }

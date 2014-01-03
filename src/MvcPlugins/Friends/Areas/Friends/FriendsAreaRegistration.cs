@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
 namespace Friends.Areas.Friends
@@ -21,7 +22,7 @@ namespace Friends.Areas.Friends
                 );
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return null;
         }

@@ -1,8 +1,9 @@
-﻿using Ornament.MVCWebFrame.Models.DataInit;
+﻿using Ornament.MemberShip.Plugin.Models.SampleData;
 using Ornament.Web;
+using Ornament.Web.DataInitializers;
 using Ornament.Web.Models;
 
-namespace Ornament.MVCWebFrame.App_Start
+namespace Ornament.MVCWebFrame
 {
     public class InitData
     {
@@ -11,7 +12,7 @@ namespace Ornament.MVCWebFrame.App_Start
             var init = new IDataInitializer[]
                 {
                     new MessageInit(),
-                    new MembershipInit
+                    new MemberShipData
                         {
                             AdminPassword = "123456"
                         }

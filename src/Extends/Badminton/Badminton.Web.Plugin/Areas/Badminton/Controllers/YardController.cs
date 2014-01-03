@@ -12,6 +12,11 @@ namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 
         private readonly IBadmintonDaoFactory _daoFactory;
 
+        public YardController(IBadmintonDaoFactory daoFactory)
+        {
+            _daoFactory = daoFactory;
+        }
+
         public ActionResult Create()
         {
             return View();

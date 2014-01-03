@@ -2,6 +2,7 @@
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
+using Ornament.Web.DataInitializers;
 using Ornament.Web.Models;
 
 // ReSharper disable CheckNamespace

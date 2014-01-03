@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
 namespace Information.Areas.Information
@@ -23,7 +24,7 @@ namespace Information.Areas.Information
             base.RegisterArea(context, bus);
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return null;
         }

@@ -1,11 +1,11 @@
 ﻿using Ornament.Configurations;
 using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Cfg
+namespace Ornament.Web.MessageHandlers
 {
-    public class NHConfigurationHandler : MessageHandler<DaoFactoryRegister>
+    public class NHConfigurationHandler : MessageHandler<NHRegisterEventMessage>
     {
-        public override void Handle(DaoFactoryRegister message)
+        public override void Handle(NHRegisterEventMessage message)
         {
             NHConfig.Instance.RegistDaoFactory(message.DaoFactoryInterface, message.ImpleDaoFactory);
         }

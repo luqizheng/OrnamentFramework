@@ -240,7 +240,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataInit\MeasurementUnitInit.cs" />
-    <Compile Include="Models\DataInit\MembershipInit.cs" />
     <Compile Include="Models\DataInit\MessageInit.cs" />
     <Compile Include="Models\ProtableAreaLogMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

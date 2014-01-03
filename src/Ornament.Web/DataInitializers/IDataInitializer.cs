@@ -1,9 +1,11 @@
-namespace Ornament.Web.Models
+using Ornament.Web.PortableAreas;
+
+namespace Ornament.Web.DataInitializers
 {
     /// <summary>
     /// Initializer data of the database.
     /// </summary>
-    public interface IDataInitializer
+    public interface IDataInitializer : IEventMessage
     {
         /// <summary>
         /// the name of this

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Ornament.Regions.Dao;
 using Ornament.Regions.Dao.NHibernateImple;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Regions.Plugin.Areas.Regions
@@ -22,11 +23,11 @@ namespace Ornament.Regions.Plugin.Areas.Regions
                 );
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
-                new DaoRegistryInformation(typeof (IRegionDaoFactory), typeof (RegionDaoFactory)),
+                new NHRegisterEventMessage(typeof (IRegionDaoFactory), typeof (RegionDaoFactory)),
             };
         }
     }

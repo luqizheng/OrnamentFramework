@@ -1,6 +1,6 @@
-﻿using Ornament.Web.Models;
+﻿using Ornament.Web.DataInitializers;
 
-namespace Ornament.Web
+namespace Ornament.MVCWebFrame.Models.DataInit
 {
     public class MeasurementUnitInit : IDataInitializer
     {

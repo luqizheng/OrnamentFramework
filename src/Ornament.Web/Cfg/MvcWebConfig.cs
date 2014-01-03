@@ -9,7 +9,9 @@ using log4net;
 using Ornament.Configurations;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Validations;
+using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.ModelBinder;
 using Ornament.Web.ValidationAdapter;
 using Qi;
@@ -21,32 +23,39 @@ namespace Ornament.Web.Cfg
     {
         public static void Regist(VoidFunc mvcNormalInit, Type httpErrorControllerType, Assembly webAssembly)
         {
-            Bus.AddMessageHandler(typeof (NHConfigurationHandler)); //处理每个Plutin的关于NH的处理方法
+            //AddProtableMessageHandler();
             mvcNormalInit();
-            NHConfig.Instance.Regist(); //启动nhibernate 出事化方法
-
-            NHibernateMvcRegister.Regist();
+            NHConfig.Instance.Regist(); //初始化NH配置
+            NHibernateMvcRegister.Regist();//修改MVC ModelHandler等配置
             ExtenderModelType();
 
             //
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
 
             //新的Attribute，用于JquerUI spinner控件一起用
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (JqStepAttribute),
-                typeof (StepAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute),
+                typeof(StepAttributeAdapter));
 
             //把ControllerFactory和castle联系起来
             ChangeControllerFacotry(httpErrorControllerType, webAssembly);
             //Web MemberShip的加密方法
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
+
+            GlobalInitializer.UpdateAllSturcture();
+            GlobalInitializer.BuildData();
         }
 
+        private static void AddProtableMessageHandler()
+        {
+            Bus.AddMessageHandler(typeof(NHConfigurationHandler)); //处理每个Plutin的关于NH的处理方法
+            Bus.AddMessageHandler(typeof(DataInitialateMessageHandler));
+        }
 
         private static void ExtenderModelType()
         {
             var timeModelBiner = new TimeModelBinder();
-            ModelBinders.Binders.Add(typeof (Time), timeModelBiner);
-            ModelBinders.Binders.Add(typeof (Time?), timeModelBiner);
+            ModelBinders.Binders.Add(typeof(Time), timeModelBiner);
+            ModelBinders.Binders.Add(typeof(Time?), timeModelBiner);
         }
 
 
@@ -76,7 +85,7 @@ namespace Ornament.Web.Cfg
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 using Qi.CRM.Dao;
 using Qi.CRM.Dao.NhImple;
@@ -41,11 +42,11 @@ namespace Qi.CRM.Plugin.Areas.CRM
             //RegisterEmbeddedViewEngine();
         }
 
-        public override IEnumerable<DaoRegistryInformation> RegistDaos()
+        public override IEnumerable<NHRegisterEventMessage> RegistDaos()
         {
             return new[]
             {
-                new DaoRegistryInformation(typeof (ICrmDaoFactory), typeof (CrmDaoFactory)),
+                new NHRegisterEventMessage(typeof (ICrmDaoFactory), typeof (CrmDaoFactory)),
             };
         }
 

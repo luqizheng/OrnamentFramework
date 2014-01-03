@@ -154,6 +154,7 @@
     <Compile Include="Areas\MemberShips\Models\ResourceSetting.cs" />
     <Compile Include="Areas\MemberShips\MemberShipAreaRegistration.cs" />
     <Compile Include="Models\AccountOperator.cs" />
+    <Compile Include="Models\SampleData\MemberShipData.cs" />
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
     <Compile Include="Models\Memberships\EditUserModel.cs" />

@@ -5,6 +5,7 @@ using System.IO;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.Web.Cfg;
+using Ornament.Web.MessageHandlers;
 
 namespace Ornament.Web.PortableAreas
 {
@@ -21,22 +22,21 @@ namespace Ornament.Web.PortableAreas
 
         public virtual void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            var ite = this.RegistDaos();
+            if (ite != null)
+            {
+                foreach (var imple in ite)
+                {
+                    bus.Send(imple);
+                }
+            }
+
 
             bus.Send(new PortableAreaStartupMessage(AreaName));
 
             RegisterDefaultRoutes(context);
 
             RegisterAreaEmbeddedResources();
-
-            var ite = this.RegistDaos();
-            if (ite != null)
-            {
-                foreach (var imple in ite)
-                {
-                    OrnamentContext.DaoFactory.Regist(imple.Interface, imple.Implement);
-                }
-            }
-
 
         }
 
@@ -87,19 +87,6 @@ namespace Ornament.Web.PortableAreas
         }
 
 
-        public abstract IEnumerable<DaoRegistryInformation> RegistDaos();
-    }
-
-    public class DaoRegistryInformation
-    {
-        public DaoRegistryInformation(Type @interface, Type impletment)
-        {
-            this.Interface = @interface;
-            this.Implement = impletment;
-        }
-        public Type Interface { get; set; }
-
-        public Type Implement { get; set; }
-
+        public abstract IEnumerable<NHRegisterEventMessage> RegistDaos();
     }
 }

@@ -11,9 +11,11 @@ using log4net;
 using log4net.Config;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Models.SampleData;
 using Ornament.MVCWebFrame.App_Start;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.Cfg;
+using Ornament.Web.DataInitializers;
 using Ornament.Web.HttpModel;
 using Ornament.Web.PortableAreas.InputBuilder;
 using Qi.NHibernateExtender;
@@ -34,8 +36,14 @@ namespace Ornament.MVCWebFrame
                 FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+                //设置member root的初始化密码
+                var memberDataInit = GlobalInitializer.Get<MemberShipData>();
+                /*if (memberDataInit != null)*/
+                    memberDataInit.AdminPassword = "123456";
+
             },
-                typeof (HttpErrorsController),
+                typeof(HttpErrorsController),
                 Assembly.GetExecutingAssembly());
 
             PermissionConfig.Regist();
@@ -75,7 +83,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof (GlobalContext));
+                ILog log = LogManager.GetLogger(typeof(GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally
