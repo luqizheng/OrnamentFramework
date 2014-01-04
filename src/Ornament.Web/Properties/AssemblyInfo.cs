@@ -1,10 +1,11 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
-
-// General Information about an assembly is controlled through the following 
+﻿// General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+using System.Reflection;
+using System.Runtime.InteropServices;
+using log4net.Config;
 
+[assembly: XmlConfigurator(Watch = true)]
 [assembly: AssemblyTitle("Ornament.Web.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]

@@ -257,11 +257,6 @@
     <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
     <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
     <Compile Include="PortableAreas\RegistScript.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="ResourceDescriptionManager.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="MemberShips\MemberShipProvider.cs" />
@@ -319,12 +314,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="PortableAreas\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.aspx">

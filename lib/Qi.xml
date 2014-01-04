@@ -141,6 +141,20 @@
             <summary>
             </summary>
         </member>
+        <member name="T:Qi.Net.IpAddressExtender">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Net.IpAddressExtender.In(System.Net.IPAddress,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Check ip is in min to max;
+            </summary>
+            <param name="ip"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <returns></returns>
+        </member>
         <member name="T:Qi.SharePools.Stores.CallStore">
             <summary>
             
@@ -733,6 +747,12 @@
         <member name="M:Qi.Domain.IDao`2.Flush">
             <summary>
             </summary>
+        </member>
+        <member name="M:Qi.Domain.IDao`2.Count">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Qi.EnumDescriptionAttribute">
             <summary>

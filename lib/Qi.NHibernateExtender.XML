@@ -756,7 +756,7 @@
         </member>
         <member name="T:Qi.Web.Mvc.NHibernateMvcRegister">
             <summary>
-            NHibernate Helper注册
+            NHibernate 更改DefaultBiner为NHModelBiner，并且更新ValueProviderFactories
             </summary>
         </member>
         <member name="M:Qi.Web.Mvc.NHibernateMvcRegister.Regist">
