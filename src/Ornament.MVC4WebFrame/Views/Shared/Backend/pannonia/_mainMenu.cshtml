@@ -21,11 +21,11 @@
 
 <ul class="navigation widget" id="mainMenu">
     @{
-        var isCurrentHomeMenu = SiteMap.RootNode.Equals(SiteMap.CurrentNode);
+        var isCurrentHomeMenu = Html.MvcSiteMap().SiteMap.RootNode.Equals(Html.MvcSiteMap().SiteMap.CurrentNode);
     }
 
     <li class="@(isCurrentHomeMenu ? "active" : "")">
-        <a href="@SiteMap.RootNode.Url" ><i class="icon-home"></i>@SiteMap.RootNode.Title</a>
+        <a href="@Html.MvcSiteMap().SiteMap.RootNode.Url" ><i class="icon-home"></i>@Html.MvcSiteMap().SiteMap.RootNode.Title</a>
     </li>
 
     @foreach (var node in nodes)

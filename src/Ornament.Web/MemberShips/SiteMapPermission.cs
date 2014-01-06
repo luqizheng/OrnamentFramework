@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using MvcSiteMapProvider;
 using Ornament.Contexts;
 using Ornament.MemberShip.Permissions;
 
@@ -22,12 +23,12 @@ namespace Ornament.Web.MemberShips
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public bool IsAccessibleToUser(SiteMapNode node)
+        public bool IsAccessibleToUser(ISiteMapNode node)
         {
-            string operatorExpress = node["permission"];
+            string operatorExpress = node.Attributes.ContainsKey("permission") ? (string)node.Attributes["permission"] : null;
             if (operatorExpress == null)
             {
-                return node.IsAccessibleToUser(HttpContext.Current);
+                return node.IsAccessibleToUser();
             }
             var permission = new MenuPermission(operatorExpress, _memberShipContext);
 

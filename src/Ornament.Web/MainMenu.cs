@@ -17,7 +17,7 @@ namespace Ornament.Web
 
         /// <summary>
         /// </summary>
-        public MvcSiteMapNode Current { get; set; }
+        public ISiteMapNode Current { get; set; }
 
         /// <summary>
         /// </summary>

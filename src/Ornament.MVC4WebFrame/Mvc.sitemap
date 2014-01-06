@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0"
-            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0 MvcSiteMapSchema.xsd"
-            enableLocalization="true">
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
   <!--
 1) 菜单上面的Operator 操作检查只支持类型Permission。写法是 User:Create,前面一个ResourceDessciption的Id，后面一个UserOperator的值
 2) 如果发现mvcNode上面有Disabled = false，那么在主菜单中是不会显示。
@@ -19,33 +18,33 @@
 
 
     <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-group">
-      <mvcSiteMapNode  area="MemberShips" action="Index" controller="User" resourceKey="userList" permission="User:Read">
-        <mvcSiteMapNode area="MemberShips" action="Create" controller="User" resourceKey="userCreate" permission="User:Modify" disabled="true"/>
-        <mvcSiteMapNode area="MemberShips" action="Edit" controller="User" resourceKey="userEdit" permission="User:Modify" disabled="true"/>
-        <mvcSiteMapNode area="MemberShips" action="Assign" controller="User" resourceKey="assign" permission="User:Modify" disabled="true"/>
+      <mvcSiteMapNode   action="Index" controller="User" title="Users" resourceKey="userList" permission="User:Read">
+        <mvcSiteMapNode action="Create" title="Create"  resourceKey="userCreate" permission="User:Modify" disabled="true"/>
+        <mvcSiteMapNode  action="Edit" title="Edit" resourceKey="userEdit" permission="User:Modify" disabled="true"/>
+        <mvcSiteMapNode  action="Assign"  title="Assing" resourceKey="assign" permission="User:Modify" disabled="true"/>
       </mvcSiteMapNode>
-      <mvcSiteMapNode  area="MemberShips" controller="Role" resourceKey="roleList" permission="Role:Read">
-        <mvcSiteMapNode area="MemberShips" controller="Role" action="Edit" resourceKey="roleEdit" permission="Role:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="Role" action="Create" resourceKey="roleEdit" permission="Role:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="Role" action="Delete" resourceKey="roleDelete" permission="Role:Delete"></mvcSiteMapNode>
+      <mvcSiteMapNode   controller="Role" action="Index" resourceKey="roleList" permission="Role:Read" title="Roles">
+        <mvcSiteMapNode  action="Edit" resourceKey="roleEdit" permission="Role:Modify" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Create" resourceKey="roleEdit" permission="Role:Modify" title="Create"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Delete" resourceKey="roleDelete" permission="Role:Delete" title="Delete"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="Index" resourceKey="groupList" permission="UserGroup:Read">
-        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="Edit" resourceKey="groupEdit" permission="UserGroup:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="Create" resourceKey="groupCreate" permission="UserGroup:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="AssignUser" resourceKey="groupAssignUser" permission="UserGroup:Assign"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="UserGroup" action="AssignRole" resourceKey="groupAssignRole" permission="UserGroup:Assign"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="UserGroup" action="Index" resourceKey="groupList" permission="UserGroup:Read" title="UserGroups">
+        <mvcSiteMapNode   action="Edit" resourceKey="groupEdit" permission="UserGroup:Modify" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Create" resourceKey="groupCreate" permission="UserGroup:Modify" title="Create"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="AssignUser" resourceKey="groupAssignUser" permission="UserGroup:Assign" title="Assign User"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="AssignRole" resourceKey="groupAssignRole" permission="UserGroup:Assign" title="Assign Role"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode area="MemberShips" controller="Org" action="Index" resourceKey="orgList" permission="Org:Read">
-        <mvcSiteMapNode area="MemberShips" controller="Org" action="Edit" resourceKey="orgEdit" permission="Org:Modify"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="Org" action="Create" resourceKey="orgCreate" permission="Org:Modify"></mvcSiteMapNode>
+      <mvcSiteMapNode  controller="Org" action="Index" resourceKey="orgList" permission="Org:Read" title="Orgs">
+        <mvcSiteMapNode  action="Edit" resourceKey="orgEdit" permission="Org:Modify" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Create" resourceKey="orgCreate" permission="Org:Modify" title="Create"></mvcSiteMapNode>
       </mvcSiteMapNode>
-      <mvcSiteMapNode area="MemberShips" controller="Permissions" resourceKey="permissionList" permission="Permission:Edit">
-        <mvcSiteMapNode area="MemberShips" controller="Permissions" action="Edit" resourceKey="permissionEdit" permission="Permission:Edit"></mvcSiteMapNode>
-        <mvcSiteMapNode area="MemberShips" controller="Permissions" action="Create" resourceKey="permissionCreate" permission="Permission:Create"></mvcSiteMapNode>
+      <mvcSiteMapNode  controller="Permissions" action="Index" resourceKey="permissionList" permission="Permission:Edit" title="Permissions">
+        <mvcSiteMapNode   action="Edit" resourceKey="permissionEdit" permission="Permission:Edit" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode  action="Create" resourceKey="permissionCreate" permission="Permission:Create" title="Create"></mvcSiteMapNode>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" >
+    <!--<mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" >
       <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>
@@ -64,7 +63,7 @@
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false">
+    <mvcSiteMapNode resourceKey="system"  imageUrl="icon-cogs" clickable="false"  title="">
       <mvcSiteMapNode controller="Site" area="Information" action="Index" title="Information"></mvcSiteMapNode>
       <mvcSiteMapNode controller="Manager" area="Files" action="Index" title="File Managers">
       </mvcSiteMapNode>
@@ -73,7 +72,7 @@
     <mvcSiteMapNode title="Documents" imageUrl="icon-indent-right">
       <mvcSiteMapNode controller="TypeLayout" area="Doc" action="BaseType" title="BaseType"></mvcSiteMapNode>
       <mvcSiteMapNode controller="TypeLayout" area="Doc" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
-    </mvcSiteMapNode>
+    </mvcSiteMapNode>-->
 
     <!--<mvcSiteMapNode title="场馆管理" imageUrl="icon-indent-right">
       <mvcSiteMapNode controller="Gymnasium" area="Badminton" action="Index" title ="场馆管理" >
