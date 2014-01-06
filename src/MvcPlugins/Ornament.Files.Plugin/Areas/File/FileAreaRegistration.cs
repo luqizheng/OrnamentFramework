@@ -21,7 +21,7 @@ namespace Ornament.Files.Plugin.Areas.File
         {
             context.MapRoute(
               this.AreaName + "_default",
-              this.AreaName + "/{controller}/{action}/{id}",
+              this.AreaRoutePrefix + "/{controller}/{action}/{id}",
               new { action = "Index", id = UrlParameter.Optional }
           );
             base.RegisterArea(context, bus);
