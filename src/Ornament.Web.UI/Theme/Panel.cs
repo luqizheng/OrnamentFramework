@@ -4,19 +4,20 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.WebPages;
 
-namespace Ornament.Web.HtmlExtends.Boxes
+namespace Ornament.Web.UI.Theme
 {
-    public class Box : IDisposable
+    public class Panel : IDisposable
     {
         private readonly TagBuilder _builder;
         private readonly ViewContext _context;
         private readonly HtmlHelper _helper;
-        private ViewContext context;
+        private readonly string _templateName;
 
-        public Box(HtmlHelper helper)
+        public Panel(HtmlHelper helper, string templateName)
         {
             _helper = helper;
-            context = helper.ViewContext;
+            _templateName = templateName;
+            ViewContext context = helper.ViewContext;
             _builder = new TagBuilder("div");
             _builder.AddCssClass("widget");
             context.Writer.Write(_builder.ToString(TagRenderMode.StartTag));
@@ -33,7 +34,7 @@ namespace Ornament.Web.HtmlExtends.Boxes
             TextWriter writer = _context.Writer;
             var buffer = new RecordWriter(writer);
             action(null).WriteTo(buffer);
-            return _helper.Partial(PartialViewPath("BoxHeader"), buffer.Builder);
+            return _helper.Partial(PartialViewPath("Header"), buffer.Builder);
         }
 
         public MvcHtmlString Body(Func<object, HelperResult> action)
@@ -41,17 +42,25 @@ namespace Ornament.Web.HtmlExtends.Boxes
             TextWriter writer = _context.Writer;
             var buffer = new RecordWriter(writer);
             action(null).WriteTo(buffer);
-            return _helper.Partial(PartialViewPath("BoxBody"), buffer.Builder);
+            return _helper.Partial(PartialViewPath("Body"), buffer.Builder);
+        }
+
+        public MvcHtmlString Footer(Func<object, HelperResult> action)
+        {
+            TextWriter writer = _context.Writer;
+            var buffer = new RecordWriter(writer);
+            action(null).WriteTo(buffer);
+            return _helper.Partial(PartialViewPath("Footer"), buffer.Builder);
         }
 
         /// <summary>
         /// </summary>
         /// <param name="viewType"></param>
         /// <returns></returns>
-        private static string PartialViewPath(string viewType)
+        private string PartialViewPath(string viewType)
         {
-            string template = OrnamentContext.Configuration.TemplateName();
-            return string.Format("/Views/Shared/DisplayTemplates/{0}/{1}", template, viewType + ".cshtml");
+            return string.Format("/Views/Shared/DisplayTemplates/{0}/{2}/{1}", _templateName, viewType + ".cshtml",
+                "Panel");
         }
     }
 }

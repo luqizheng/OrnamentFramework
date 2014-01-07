@@ -9,7 +9,7 @@
     ViewBag.Title = subject;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
-@using (var box = Html.Box())
+@using (var box = Html.Panel())
 {
     @box.Header(@<text>
     <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>

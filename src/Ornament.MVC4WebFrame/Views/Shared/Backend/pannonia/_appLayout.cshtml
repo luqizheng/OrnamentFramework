@@ -5,7 +5,7 @@
 @using Ornament.Web.Bundles
 @using SeajsBundles
 @{
-    var showMenu = OrnamentContext.MemberShip.CurrentUser() != null || this.Response.StatusCode != 200;
+    var showMenu = OrnamentContext.MemberShip.CurrentUser() != null || Response.StatusCode != 200;
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,7 +17,7 @@
     @*
     Backend admin templates.
     *@
-    @System.Web.Optimization.Styles.Render("~/Content/global.css", "~/content/templates/pannonia/css/main.css")
+    @Styles.Render("~/Content/global.css", "~/content/templates/pannonia/css/main.css")
     <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
       @Scripts.Render("/Scripts/Components/avalon.js")
     <script type="text/javascript"> avalon.config({ loader: false })   </script>
@@ -37,13 +37,13 @@
     {
         <div id="container">
             <div id="sidebar">
-                @Html.Partial("/Views/Shared/Backend/" + OrnamentContext.Configuration.TemplateName() + "/_mainMenu.cshtml")
+                @Html.Partial("/Views/Shared/Backend/pannonia/_mainMenu.cshtml")
                 @RenderSection("stuff", false)
             </div>
 
             <div id="content">
                 <div class="wrapper">
-                    @Html.Partial("/Views/Shared/Backend/" + OrnamentContext.Configuration.TemplateName() + "/_crumbs.cshtml")
+                    @Html.Partial("/Views/Shared/Backend/pannonia/_crumbs.cshtml")
                     <div class="page-header">
                         <div class="page-title">
                             @RenderSection("pageTitle", false)

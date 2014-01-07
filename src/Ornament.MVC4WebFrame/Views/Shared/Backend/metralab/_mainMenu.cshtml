@@ -21,11 +21,11 @@
 
 <ul class="sidebar-menu">
     @{
-        var isCurrentHomeMenu = SiteMap.RootNode.Equals(SiteMap.CurrentNode);
+        var isCurrentHomeMenu = Html.MvcSiteMap().SiteMap.RootNode.Equals(Html.MvcSiteMap().SiteMap.CurrentNode);
     }
 
     <li class="@(isCurrentHomeMenu ? "active" : "") sub-menu">
-        <a href="@SiteMap.RootNode.Url" ><i class="icon-home"></i><span>@SiteMap.RootNode.Title</span></a>
+        <a href="@Html.MvcSiteMap().SiteMap.RootNode.Url" ><i class="icon-home"></i><span>@Html.MvcSiteMap().SiteMap.RootNode.Title</span></a>
     </li>
 
     @foreach (var node in nodes)

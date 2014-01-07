@@ -867,7 +867,6 @@
     </None>
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\ActionMenus.cshtml" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.eot" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.ttf" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.woff" />
@@ -905,16 +904,16 @@
     <Content Include="Views\Shared\_topMenu.cshtml" />
     <Content Include="Views\HttpErrors\AjaxError.cshtml" />
     <Content Include="Scripts\seajs\sea.js.map" />
-    <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxHeader.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\pannonia\BoxBody.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\pannonia\Panel\Header.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\pannonia\Panel\Body.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_appLayout.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_topMenu.cshtml" />
     <Content Include="Views\Shared\Backend\metralab\_appLayout.cshtml" />
     <Content Include="Views\Shared\Backend\metralab\_mainMenu.cshtml" />
     <Content Include="Views\Shared\Backend\metralab\_crumbs.cshtml" />
     <Content Include="Views\Shared\Backend\metralab\_topMenu.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\metralab\BoxBody.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\metralab\BoxHeader.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\metralab\Panel\Body.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\metralab\Panel\Header.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\String.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Time.cshtml" />
@@ -923,6 +922,14 @@
     <Content Include="Views\Shared\DisplayTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1039,6 +1046,10 @@
     <ProjectReference Include="..\Ornament.MemberShip.Plugin\Ornament.MemberShip.Plugin.csproj">
       <Project>{60965723-bea2-4a7b-b6ee-9e1e237504f6}</Project>
       <Name>Ornament.MemberShip.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.Web.UI\Ornament.Web.UI.csproj">
+      <Project>{50c88067-6ec2-4ef1-a0e5-f88dca6ccfc8}</Project>
+      <Name>Ornament.Web.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>

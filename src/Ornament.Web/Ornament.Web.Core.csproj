@@ -175,12 +175,8 @@
     <Compile Include="MessageHandlers\NHConfigurationHandler.cs" />
     <Compile Include="Controllers\OrnamentEmbeddedResourceController.cs" />
     <Compile Include="HtmlEmbeddedResource.cs" />
-    <Compile Include="HtmlExtends\BootstrapHtmlHelper.cs" />
-    <Compile Include="HtmlExtends\Boxes\Box.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
-    <Compile Include="HtmlExtends\LazyWriter.cs" />
-    <Compile Include="HtmlExtends\TemplateHelper.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="PortableAreas\EmbeddedResourceController.cs" />
     <Compile Include="PortableAreas\InputBuilder\Attributes\CanDeleteAllAttribute.cs" />

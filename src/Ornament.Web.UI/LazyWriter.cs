@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Ornament.Web.HtmlExtends
+namespace Ornament.Web.UI
 {
 
     internal class RecordWriter : TextWriter

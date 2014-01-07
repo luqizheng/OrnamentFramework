@@ -6,6 +6,7 @@
 @using Ornament.Web
 @using Ornament.Web.Bundles
 @using Ornament.Web.HtmlExtends
+@using Ornament.Web.UI.Theme
 @using SeajsBundles
 @model IEnumerable<User>
 @{
@@ -50,7 +51,7 @@
 @section pageTitle{
     <h5>User List</h5>
 }
-@using (var box = Html.Box())
+@using (var box = Html.Panel())
 {
     @box.Header(@<text>
 

@@ -26,7 +26,7 @@
     </span>
 }
 
-@using (var box = Html.Box())
+@using (var box = Html.Panel())
 {
      @box.Header(@<text>
     <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
