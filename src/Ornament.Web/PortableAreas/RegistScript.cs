@@ -2,16 +2,25 @@
 
 namespace Ornament.Web.PortableAreas
 {
-    public class MessagesAreaRegistrationHelper
+    public class AreaRegistrationHelper
     {
         private readonly PortableAreaRegistration _protablAreaRegistration;
 
 
-        public MessagesAreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration)
+        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration)
         {
             _protablAreaRegistration = protablAreaRegistration;
         }
 
+        public void RegistryImages(string imageFolder, AreaRegistrationContext context)
+        {
+            context.MapRoute(
+                _protablAreaRegistration.AreaName + imageFolder.Replace("/","_"),
+                _protablAreaRegistration.AreaRoutePrefix + "/" + imageFolder + "/{resourceName}",
+                new { controller = "EmbeddedResource", action = "Index", resourcePath = "images" },
+                new[] { "Ornament.Web.Controllers" }
+                );
+        }
         public void RegistyScripts(string scriptName, AreaRegistrationContext context)
         {
             //page scripts  regist
@@ -25,10 +34,7 @@ namespace Ornament.Web.PortableAreas
                     resourcePath = "Ornament.MemberShip.Plugin.Scripts." + scriptName,
                 }
                 ,
-                new[]
-                {
-                    "Ornament.Web.Controllers"
-                }
+                new[] { "Ornament.Web.Controllers" }
                 );
         }
     }

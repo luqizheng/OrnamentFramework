@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
-            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd" >
   <!--
 1) 菜单上面的Operator 操作检查只支持类型Permission。写法是 User:Create,前面一个ResourceDessciption的Id，后面一个UserOperator的值
 2) 如果发现mvcNode上面有Disabled = false，那么在主菜单中是不会显示。

@@ -22,7 +22,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
             bus.Send(new MemberShipData());
 
-            var helper = new MessagesAreaRegistrationHelper(this);
+            var helper = new AreaRegistrationHelper(this);
             helper.RegistyScripts("User", context);
             helper.RegistyScripts("Share", context);
             helper.RegistyScripts("Permissions", context);
