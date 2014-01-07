@@ -14,9 +14,7 @@
 
     <mvcSiteMapNode resourceKey="personal" action="Index" controller="Account" imageUrl="fam-user" title="Personal Center" disabled="disabled">
     </mvcSiteMapNode>
-
-
-
+    
     <mvcSiteMapNode resourceKey="membership" action="Index" controller="User" title="MemberShips" area="MemberShips" imageUrl="icon-group">
       <mvcSiteMapNode   action="Index" controller="User" title="Users" resourceKey="userList" permission="User:Read">
         <mvcSiteMapNode action="Create" title="Create"  resourceKey="userCreate" permission="User:Modify" disabled="true"/>

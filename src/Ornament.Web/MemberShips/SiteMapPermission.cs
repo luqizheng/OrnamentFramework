@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using MvcSiteMapProvider;
 using Ornament.Contexts;
 using Ornament.MemberShip.Permissions;
@@ -18,14 +17,16 @@ namespace Ornament.Web.MemberShips
             if (manager == null) throw new ArgumentNullException("manager");
             _memberShipContext = memberShipContext;
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
         public bool IsAccessibleToUser(ISiteMapNode node)
         {
-            string operatorExpress = node.Attributes.ContainsKey("permission") ? (string)node.Attributes["permission"] : null;
+            string operatorExpress = node.Attributes.ContainsKey("permission")
+                ? (string) node.Attributes["permission"]
+                : null;
             if (operatorExpress == null)
             {
                 return node.IsAccessibleToUser();
