@@ -22,10 +22,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
             bus.Send(new MemberShipData());
 
-            var helper = new AreaRegistrationHelper(this);
-            helper.RegistyScripts("User", context);
-            helper.RegistyScripts("Share", context);
-            helper.RegistyScripts("Permissions", context);
+            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin");
+            helper.RegistyScripts("Scripts.User", context);
+            helper.RegistyScripts("Scripts.Share", context);
+            helper.RegistyScripts("Scripts.Permissions", context);
 
             context.MapRoute(
                 AreaName + "_images",

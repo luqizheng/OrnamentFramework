@@ -19,7 +19,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             //注册 Dao
-            var helper = new AreaRegistrationHelper(this);
+            var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin");
 
             helper.RegistyScripts("News", context);
             helper.RegistyScripts("NewsType", context);

@@ -40,7 +40,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
             }
             string protableAreaPath = virtualPath.Substring(areasPosition);
 
-            string[] d = protableAreaPath.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] d = protableAreaPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
 
             newPath = String.Format("~/areas/{0}/Views/Shared{1}/{2}", d[2], template,
@@ -52,7 +52,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
         public override bool FileExists(string virtualPath)
         {
             bool exists = base.FileExists(virtualPath);
-            
+
             if (!exists)
             {
                 exists = AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath);
@@ -104,7 +104,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
         public override CacheDependency GetCacheDependency(string virtualPath, IEnumerable virtualPathDependencies,
             DateTime utcStart)
         {
-            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath))
+            if (embedTempalteCache.ContainsKey(virtualPath.ToLower()) || AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath))
             {
                 return null;
             }

@@ -18,6 +18,8 @@ namespace Ornament.Regions.Plugin.Areas.Regions
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            var helper = new AreaRegistrationHelper(this, "Ornament.Regions.Plugin");
+            helper.RegistryDefault(context);
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
