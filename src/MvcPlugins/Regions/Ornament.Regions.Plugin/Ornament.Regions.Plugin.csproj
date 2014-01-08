@@ -62,6 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
+    <Reference Include="Qi.Web">
+      <HintPath>..\..\..\..\..\coder-projects\lib\Qi.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -129,6 +132,7 @@
     <Compile Include="Api\AreaController.cs" />
     <Compile Include="Api\CityController.cs" />
     <Compile Include="Areas\Regions\RegionsAreaRegistration.cs" />
+    <Compile Include="Models\RegionsExtensions.cs" />
     <Compile Include="Models\OramentContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
