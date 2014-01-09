@@ -34,7 +34,7 @@ namespace Ornament.Web.HttpModel
             if (HttpContext.Current != null)
             {
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie("offsetHour",
-                                                                        hour.ToString(CultureInfo.InvariantCulture)));
+                    hour.ToString(CultureInfo.InvariantCulture)));
             }
         }
 

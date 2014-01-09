@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JQuery\Plugins\DataTables\Column.cs" />
+    <Compile Include="JQuery\Plugins\DataTables\DataTableResult.cs" />
+    <Compile Include="JQuery\Plugins\DataTables\DataTablesPostData.cs" />
+    <Compile Include="JQuery\Plugins\DataTables\PostDataModelBinder.cs" />
     <Compile Include="LazyWriter.cs" />
     <Compile Include="Theme\ThemeContext.cs" />
     <Compile Include="Theme\Panel.cs" />

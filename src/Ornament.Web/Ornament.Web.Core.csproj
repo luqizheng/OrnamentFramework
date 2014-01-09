@@ -193,10 +193,6 @@
     <Compile Include="OrnamentWebApiFactory.cs" />
     <Compile Include="Pagination.cs" />
     <Compile Include="MessageHandlers\DataInitialateMessageHandler.cs" />
-    <Compile Include="UI\JQuery\Plugins\DataTables\Column.cs" />
-    <Compile Include="UI\JQuery\Plugins\DataTables\DataTableResult.cs" />
-    <Compile Include="UI\JQuery\Plugins\DataTables\DataTablesPostData.cs" />
-    <Compile Include="UI\JQuery\Plugins\DataTables\PostDataModelBinder.cs" />
     <Compile Include="ResourceDescriptionManager.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="MemberShips\MemberShipProvider.cs" />
