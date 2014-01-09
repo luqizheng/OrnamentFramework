@@ -1,4 +1,4 @@
-﻿namespace Ornament.MemberShip.Plugin.Areas.MemberShip.Models
+﻿namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
 {
     public static class ResourceSetting
     {

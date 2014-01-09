@@ -26,13 +26,13 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         }
 
         [UIHint("Textarea")]
-        [Display(Name = "Remark", ResourceType = typeof (Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Properties.Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Remark { get; set; }
 
         [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof (Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Properties.Resources))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
@@ -43,7 +43,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         public Org Org { get; set; }
 
         [UIHint("UsergroupMultiSelect")]
-        [Display(Name = "UserGroup", ResourceType = typeof (Resources))]
+        [Display(Name = "UserGroup", ResourceType = typeof(Properties.Resources))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }

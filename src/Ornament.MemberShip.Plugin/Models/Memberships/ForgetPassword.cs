@@ -8,9 +8,9 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
     {
         /// <summary>
         /// </summary>
-        [Display(Name = "label_AccountOrEmail", ResourceType = typeof (Resources))]
+        [Display(Name = "label_AccountOrEmail", ResourceType = typeof(Properties.Resources))]
         [DataType(DataType.Password)]
-        [Required(ErrorMessageResourceType = typeof (Resources),
+        [Required(ErrorMessageResourceType = typeof(Properties.Resources),
             ErrorMessageResourceName = "alertMsg_RequireAccountOrEmail")]
         public string AccountOrEmail { get; set; }
 

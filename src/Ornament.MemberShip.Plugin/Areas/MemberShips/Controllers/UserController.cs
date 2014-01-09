@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Profile;
 using System.Web.Security;
+using MvcSiteMapProvider;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Models;

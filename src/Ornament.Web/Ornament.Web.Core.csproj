@@ -84,9 +84,9 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="MvcSiteMapProvider, Version=4.4.7.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+    <Reference Include="MvcSiteMapProvider, Version=4.4.8.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.4.7\lib\net45\MvcSiteMapProvider.dll</HintPath>
+      <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.4.8\lib\net45\MvcSiteMapProvider.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -173,11 +173,12 @@
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
-    <Compile Include="IoC\CastleDependcyResyle.cs" />
+    <Compile Include="IoC\CastleDependcyResolver.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
     <Compile Include="HttpModel\OrnamentModule.cs" />
     <Compile Include="MemberShips\MenuPermission.cs" />
+    <Compile Include="MemberShips\OrnamentMvcSiteMapNode.cs" />
     <Compile Include="MemberShips\OrnamentProfile.cs" />
     <Compile Include="MemberShips\SiteMapException.cs" />
     <Compile Include="MemberShips\SiteMapPermission.cs" />
@@ -247,21 +248,11 @@
     <None Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
-    <None Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
-    <None Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <None Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
-    <None Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
-    <None Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.ascx" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.ascx" />
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.ascx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

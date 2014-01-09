@@ -8,6 +8,7 @@ namespace Ornament.Web.HttpModel
 {
     public class OrnamentModule : IHttpModule
     {
+        private const string langCookieName = "lang";
         #region IHttpModule Members
 
         public void Init(HttpApplication context)
@@ -20,13 +21,14 @@ namespace Ornament.Web.HttpModel
         }
 
         #endregion
-
+        [System.Obsolete]
         public static void SiwtchTo(string language)
         {
             if (HttpContext.Current != null)
             {
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie("_multiCookie", language));
+                HttpContext.Current.Response.Cookies.Add(new HttpCookie(langCookieName, language));
             }
+            
         }
 
         public static void SetClientOffsetHour(int hour)
@@ -55,11 +57,13 @@ namespace Ornament.Web.HttpModel
                     LogManager.GetLogger(GetType()).Error("Setting offset minis error.", ex);
                 }
             }
+
+            
         }
 
         private void MultiLanguage(HttpApplication context)
         {
-            HttpCookie cookie = context.Request.Cookies["_multiCookie"];
+            HttpCookie cookie = context.Request.Cookies[langCookieName];
             if (cookie == null || string.IsNullOrEmpty(cookie.Value))
             {
                 return;
@@ -70,7 +74,7 @@ namespace Ornament.Web.HttpModel
                 context.Request.UserLanguages.SetValue(lang, 0);
             }
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(lang);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
         }
 
         /// <summary>

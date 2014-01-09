@@ -29,6 +29,7 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
+            
             MvcWebConfig.Regist(() =>
             {
                 AreaRegistration.RegisterAllAreas();
@@ -77,9 +78,10 @@ namespace Ornament.MVCWebFrame
                     currenProfile.Save();
                     AnonymousIdentificationModule.ClearAnonymousIdentifier();
                 }
+                
 
-                //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
-                OrnamentModule.SiwtchTo(OrnamentContext.MemberShip.ProfileLanguage());
+                    //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
+                OrnamentContext.MemberShip.SwitchLanguage(OrnamentContext.MemberShip.Language());
             }
             catch (Exception ex)
             {

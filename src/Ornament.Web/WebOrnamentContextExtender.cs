@@ -1,16 +1,22 @@
 using System;
 using System.Configuration;
+using System.Globalization;
+using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
 using Ornament.Web;
 using Ornament.Web.HttpModel;
 
 // ReSharper disable CheckNamespace
+
 namespace Ornament
 // ReSharper restore CheckNamespace
 {
@@ -18,15 +24,17 @@ namespace Ornament
     /// </summary>
     public static class WebOrnamentContextExtender
     {
+        private const string langCookieName = "lang";
         public static readonly string VerifyCodeKey = "VerifyCode";
+        private static bool _combineSeajs;
 
         /// <summary>
         /// </summary>
         static WebOrnamentContextExtender()
         {
             OrnamentContext.IocContainer
-                           .Register(
-                               Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
+                .Register(
+                    Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
 
         /// <summary>
@@ -64,7 +72,7 @@ namespace Ornament
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
@@ -106,20 +114,55 @@ namespace Ornament
         }
 
         /// <summary>
+        ///     获取最终的Language
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static string ProfileLanguage(this MemberShipContext context)
+        public static string Language(this MemberShipContext context)
         {
-            string a = context.CurrentUser() != null ? context.CurrentUser().Language : "";
-            if (String.IsNullOrEmpty(a))
+            string language = context.CurrentUser() != null ? context.CurrentUser().Language : "";
+
+            if (String.IsNullOrEmpty(language))
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["_multiCookie"];
-                if (cookie != null)
-                    return cookie.Value;
-                return OrnamentContext.Configuration.DefaultLanguage.Key;
+                language = CookieLanguage(context);
             }
-            return a;
+
+            if (String.IsNullOrEmpty(language))
+            {
+                language = BroswerLanguage(context);
+            }
+            
+            return language;
+        }
+
+        public static string BroswerLanguage(this MemberShipContext context)
+        {
+            if (HttpContext.Current != null && HttpContext.Current.Request.UserLanguages != null)
+            {
+                return OrnamentContext.Configuration.Languages.DefaultOrMatch(HttpContext.Current.Request.UserLanguages).Key;
+            }
+            return OrnamentContext.Configuration.DefaultLanguage.Key;
+        }
+
+        public static string CookieLanguage(this MemberShipContext context)
+        {
+            HttpCookie reqCookie = HttpContext.Current.Request.Cookies[langCookieName];
+            HttpCookie respCookie = HttpContext.Current.Response.Cookies[langCookieName];
+
+            string reqValue = reqCookie != null ? reqCookie.Value : "";
+            string respValue = respCookie != null ? respCookie.Value : "";
+
+            if (String.IsNullOrEmpty(reqValue) && String.IsNullOrEmpty(respValue))
+            {
+                return null;
+            }
+
+            if (reqValue != respValue && !String.IsNullOrEmpty(respValue))
+            {
+                return respValue;
+            }
+
+            return reqValue;
         }
 
         /// <summary>
@@ -135,22 +178,28 @@ namespace Ornament
             {
                 OrnamentContext.MemberShip.CurrentUser().Language = language;
             }
-
-            OrnamentModule.SiwtchTo(language);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Response.Cookies.Add(new HttpCookie(langCookieName, language));
+            }
         }
 
-        private static bool combineSeajs = false;
+      
+
         public static void SetSeajsCombine(this OrnamentConfiguration config, bool combine)
         {
-            combineSeajs = combine;
+            _combineSeajs = combine;
         }
 
         public static bool GetSeajsCombine(this OrnamentConfiguration config)
         {
-            return combineSeajs;
+            return _combineSeajs;
         }
+
         /// <summary>
-        /// 后台Backend laoyout
+        ///     后台Backend laoyout
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
@@ -158,6 +207,7 @@ namespace Ornament
         {
             return "~/Views/Shared/Backend/" + TemplateName(config) + "/_applayout.cshtml";
         }
+
         /// <summary>
         /// </summary>
         /// <param name="context"></param>

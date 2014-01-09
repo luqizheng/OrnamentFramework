@@ -42,7 +42,7 @@ namespace Ornament.Web.Cfg
             ExtenderModelType();
 
             //
-            GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
+            GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
             //新的Attribute，用于JquerUI spinner控件一起用
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute),

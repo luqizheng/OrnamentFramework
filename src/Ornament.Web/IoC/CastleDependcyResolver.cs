@@ -5,7 +5,7 @@ using System.Web.Http.Dependencies;
 
 namespace Ornament.Web.IoC
 {
-    public class CastleDependcyResyle : IDependencyResolver
+    public class CastleDependcyResolver : IDependencyResolver
     {
         public void Dispose()
         {

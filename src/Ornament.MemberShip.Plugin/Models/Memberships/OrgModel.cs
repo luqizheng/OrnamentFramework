@@ -29,7 +29,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Role", ResourceType = typeof(Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Properties.Resources))]
         public Role[] Roles { get; set; }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof(Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Properties.Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }

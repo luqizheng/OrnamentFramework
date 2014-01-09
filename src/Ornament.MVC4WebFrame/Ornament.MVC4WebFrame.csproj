@@ -81,9 +81,9 @@
     <Reference Include="Mvc.JQuery.Datatables">
       <HintPath>..\packages\Mvc.JQuery.Datatables.1.2.90\lib\net40\Mvc.JQuery.Datatables.dll</HintPath>
     </Reference>
-    <Reference Include="MvcSiteMapProvider, Version=4.4.7.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+    <Reference Include="MvcSiteMapProvider, Version=4.4.8.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.4.7\lib\net45\MvcSiteMapProvider.dll</HintPath>
+      <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.4.8\lib\net45\MvcSiteMapProvider.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.6.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -204,18 +204,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basic.zh.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Mvc.sitemap.designer.cs">
-      <DependentUpon>Mvc.sitemap.resx</DependentUpon>
+    <Compile Include="App_GlobalResources\sitemap.designer.cs">
+      <DependentUpon>sitemap.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="App_GlobalResources\Mvc.sitemap.zh-CN.designer.cs">
-      <DependentUpon>Mvc.sitemap.zh-CN.resx</DependentUpon>
+    <Compile Include="App_GlobalResources\sitemap.zh-CN.designer.cs">
+      <DependentUpon>sitemap.zh-CN.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="App_GlobalResources\Mvc.sitemap.zh.designer.cs">
-      <DependentUpon>Mvc.sitemap.zh.resx</DependentUpon>
+    <Compile Include="App_GlobalResources\sitemap.zh.designer.cs">
+      <DependentUpon>sitemap.zh.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -277,6 +277,7 @@
     <Content Include="Content\templates\metralab\font\myriadproregular.svg" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
+    <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="Scripts\Components\avalon.js" />
     <Content Include="Scripts\Fx\bootstrap.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -949,9 +950,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Mvc.sitemap.zh.resx">
+    <Content Include="App_GlobalResources\sitemap.zh.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Mvc.sitemap.zh.designer.cs</LastGenOutput>
+      <LastGenOutput>sitemap.zh.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -969,16 +970,16 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Mvc.sitemap.resx">
+    <Content Include="App_GlobalResources\sitemap.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Mvc.sitemap.designer.cs</LastGenOutput>
+      <LastGenOutput>sitemap.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Mvc.sitemap.zh-CN.resx">
+    <Content Include="App_GlobalResources\sitemap.zh-CN.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Mvc.sitemap.zh-CN.designer.cs</LastGenOutput>
+      <LastGenOutput>sitemap.zh-CN.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

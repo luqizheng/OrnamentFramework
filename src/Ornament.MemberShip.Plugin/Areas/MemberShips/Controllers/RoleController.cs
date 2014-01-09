@@ -23,9 +23,15 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             _factory = factory;
         }
 
-        [ResourceAuthorize(RoleOperator.Read, "Role")]
+        [ResourceAuthorize(RoleOperator.Read, "Role"),
+         OrnamentMvcSiteMapNode(Title = "$resources:Ornament.MemberShip.Plugin.Properties.Resources,AccountInfo",
+             ParentKey = "MemberShips", ResourceKey = "CreateTime",
+             Resource = "Role", Operator = RoleOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
+            //Ornament.MemberShip.Plugin.Properties.Resources.AccountInfo
+            //Resources.SiteMap.String1
+            //global::Resources.SiteMap.String1
             IList<Role> result = _roleDao.Find(pagination.PageSize, pagination.CurrentPage);
             ViewData["Nav"] = pagination;
             return View(result);
