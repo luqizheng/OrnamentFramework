@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Information.Areas.Information.Controllers;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.ProtableAreas.Messages;
 
 namespace Information.Areas.Information
 {

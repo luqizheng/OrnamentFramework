@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5B962996-1D9B-415D-98A7-9001A640C84F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ornament.Web.ProtableAreas</RootNamespace>
+    <AssemblyName>Ornament.Web.ProtableAreas</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationBus.cs" />
+    <Compile Include="AreaRegistrationHelper.cs" />
+    <Compile Include="AssemblyHelper.cs" />
+    <Compile Include="AssemblyResourceManager.cs" />
+    <Compile Include="AssemblyResourceStore.cs" />
+    <Compile Include="Bus.cs" />
+    <Compile Include="EmbeddedResourceController.cs" />
+    <Compile Include="IApplicationBus.cs" />
+    <Compile Include="IEventMessage.cs" />
+    <Compile Include="IMessageHandler.cs" />
+    <Compile Include="IMessageHandlerFactory.cs" />
+    <Compile Include="InputBuilder\Attributes\CanDeleteAllAttribute.cs" />
+    <Compile Include="InputBuilder\Attributes\DisplayOrderAttribute.cs" />
+    <Compile Include="InputBuilder\Attributes\ExampleAttribute.cs" />
+    <Compile Include="InputBuilder\Attributes\LabelAttribute.cs" />
+    <Compile Include="InputBuilder\Attributes\NoAddAttribute.cs" />
+    <Compile Include="InputBuilder\Attributes\NoDeleteAttribute.cs" />
+    <Compile Include="InputBuilder\Attributes\PartialViewAttribute.cs" />
+    <Compile Include="InputBuilder\Conventions\PropertyName\DefaultNameConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\PropertyName\IPropertyViewModelNameConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\ArrayPropertyConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\DateTimePropertyConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\DefaultPropertyConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\EnumPropertyConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\GuidPropertyConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\IPropertyViewModelFactory.cs" />
+    <Compile Include="InputBuilder\Conventions\Property\PropertyInfoExtensions.cs" />
+    <Compile Include="InputBuilder\Conventions\Type\DefaultTypeViewModelFactoryConvention.cs" />
+    <Compile Include="InputBuilder\Conventions\Type\ITypeViewModelFactory.cs" />
+    <Compile Include="InputBuilder\DefaultPropertyConventionsFactory.cs" />
+    <Compile Include="InputBuilder\DefaultTypeConventionsFactory.cs" />
+    <Compile Include="InputBuilder\Helpers\DisplayOrderExtensions.cs" />
+    <Compile Include="InputBuilder\Helpers\ExpressionHelper.cs" />
+    <Compile Include="InputBuilder\Helpers\ReflectionHelper.cs" />
+    <Compile Include="InputBuilder\InputBuilder.cs" />
+    <Compile Include="InputBuilder\InputSpecification\IInputSpecification.cs" />
+    <Compile Include="InputBuilder\InputSpecification\Input.cs" />
+    <Compile Include="InputBuilder\InputSpecification\InputPropertySpecification.cs" />
+    <Compile Include="InputBuilder\InputSpecification\InputTypeSpecification.cs" />
+    <Compile Include="InputBuilder\InputSpecification\ViewModelFactory.cs" />
+    <Compile Include="InputBuilder\ViewEngine\AssemblyResourceProvider.cs" />
+    <Compile Include="InputBuilder\ViewEngine\AssemblyResourceVirtualFile.cs" />
+    <Compile Include="InputBuilder\ViewEngine\EmbeddedResourceViewEngine.cs" />
+    <Compile Include="InputBuilder\ViewEngine\RenderInputBuilderException.cs" />
+    <Compile Include="InputBuilder\Views\DisplayPartial.cs" />
+    <Compile Include="InputBuilder\Views\HtmlDisplayExtensions.cs" />
+    <Compile Include="InputBuilder\Views\HtmlExtensions.cs" />
+    <Compile Include="InputBuilder\Views\IInputSpecificationExtensions.cs" />
+    <Compile Include="InputBuilder\Views\Partial.cs" />
+    <Compile Include="InputBuilder\Views\PropertyViewModel.cs" />
+    <Compile Include="InputBuilder\Views\TypeViewModel.cs" />
+    <Compile Include="InputBuilder\Views\TypeViewModelExtensions.asax.cs" />
+    <Compile Include="MapExtensions.cs" />
+    <Compile Include="Messages\IocControllerInjectMessageEvent.cs" />
+    <Compile Include="Messages\NHConfigurationHandler.cs" />
+    <Compile Include="Messages\NHRegisterEventMessage.cs" />
+    <Compile Include="PortableAreaContent.cs" />
+    <Compile Include="PortableAreaMap.cs" />
+    <Compile Include="PortableAreaRegistration.cs" />
+    <Compile Include="PortableAreaStartupMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Array.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Array.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\ArrayAddButton.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\ArrayRemoveButton.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Boolean.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\DateTime.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Display.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\DisplayInline.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\DisplayLabel.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\DisplayParagraph.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Enum.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Field.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Form.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Guid.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\HiddenField.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Int32.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\MultilineText.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\RadioButtons.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\ReadOnly.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Row.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\String.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Submit.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
+      <Name>Ornament.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

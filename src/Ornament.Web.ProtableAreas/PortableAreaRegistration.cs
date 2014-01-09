@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
-using Ornament.Web.MessageHandlers;
+using Ornament.Web.ProtableAreas;
+using Ornament.Web.ProtableAreas.Messages;
 
 namespace Ornament.Web.PortableAreas
 {

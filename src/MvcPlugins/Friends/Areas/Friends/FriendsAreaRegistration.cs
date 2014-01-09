@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.ProtableAreas.Messages;
 
 namespace Friends.Areas.Friends
 {

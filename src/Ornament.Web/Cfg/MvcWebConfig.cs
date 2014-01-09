@@ -14,6 +14,7 @@ using Ornament.Validations;
 using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
 using Ornament.Web.ModelBinder;
+using Ornament.Web.ProtableAreas;
 using Ornament.Web.ValidationAdapter;
 using Qi;
 using Qi.Web.Mvc;

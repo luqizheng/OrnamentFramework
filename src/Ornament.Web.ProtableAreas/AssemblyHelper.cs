@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Web.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace Ornament.Web
+namespace Ornament.Web.ProtableAreas
 {
     public static class AssemblyHelper
     {

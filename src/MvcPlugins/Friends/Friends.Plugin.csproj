@@ -139,6 +139,10 @@
     <Content Include="Areas\Friends\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Ornament.Web.ProtableAreas\Ornament.Web.ProtableAreas.csproj">
+      <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
+      <Name>Ornament.Web.ProtableAreas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
       <Name>Ornament.Web.Core</Name>

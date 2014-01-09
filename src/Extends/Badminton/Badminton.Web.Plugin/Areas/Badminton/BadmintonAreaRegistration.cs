@@ -5,6 +5,7 @@ using Badminton.Dao;
 using Badminton.Dao.NhImpl;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.ProtableAreas.Messages;
 
 namespace Badminton.Web.Plugin.Areas.Badminton
 {

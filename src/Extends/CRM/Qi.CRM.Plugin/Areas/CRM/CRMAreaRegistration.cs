@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.ProtableAreas.Messages;
 using Qi.CRM.Dao;
 using Qi.CRM.Dao.NhImple;
 

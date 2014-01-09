@@ -90,7 +90,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -163,63 +163,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyHelper.cs" />
     <Compile Include="Bundles\Config\BaseScriptsManager.cs" />
     <Compile Include="Bundles\Config\DirectorySingleScriptFileRegistry.cs" />
     <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
     <Compile Include="Bundles\ScriptsFolderManager.cs" />
-    <Compile Include="Bus.cs" />
-    <Compile Include="MessageHandlers\IocControllerInjectMessageEvent.cs" />
-    <Compile Include="MessageHandlers\NHRegisterEventMessage.cs" />
     <Compile Include="Cfg\MvcWebConfig.cs" />
-    <Compile Include="MessageHandlers\NHConfigurationHandler.cs" />
     <Compile Include="Controllers\OrnamentEmbeddedResourceController.cs" />
     <Compile Include="HtmlEmbeddedResource.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
-    <Compile Include="PortableAreas\EmbeddedResourceController.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\CanDeleteAllAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\DisplayOrderAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\ExampleAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\LabelAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\NoAddAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\NoDeleteAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Attributes\PartialViewAttribute.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\PropertyName\DefaultNameConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\PropertyName\IPropertyViewModelNameConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\ArrayPropertyConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\DateTimePropertyConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\DefaultPropertyConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\EnumPropertyConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\GuidPropertyConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\IPropertyViewModelFactory.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Property\PropertyInfoExtensions.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Type\DefaultTypeViewModelFactoryConvention.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Conventions\Type\ITypeViewModelFactory.cs" />
-    <Compile Include="PortableAreas\InputBuilder\DefaultPropertyConventionsFactory.cs" />
-    <Compile Include="PortableAreas\InputBuilder\DefaultTypeConventionsFactory.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Helpers\DisplayOrderExtensions.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Helpers\ExpressionHelper.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Helpers\ReflectionHelper.cs" />
-    <Compile Include="PortableAreas\InputBuilder\InputBuilder.cs" />
-    <Compile Include="PortableAreas\InputBuilder\InputSpecification\IInputSpecification.cs" />
-    <Compile Include="PortableAreas\InputBuilder\InputSpecification\Input.cs" />
-    <Compile Include="PortableAreas\InputBuilder\InputSpecification\InputPropertySpecification.cs" />
-    <Compile Include="PortableAreas\InputBuilder\InputSpecification\InputTypeSpecification.cs" />
-    <Compile Include="PortableAreas\InputBuilder\InputSpecification\ViewModelFactory.cs" />
-    <Compile Include="PortableAreas\InputBuilder\ViewEngine\AssemblyResourceProvider.cs" />
-    <Compile Include="PortableAreas\InputBuilder\ViewEngine\AssemblyResourceVirtualFile.cs" />
-    <Compile Include="PortableAreas\InputBuilder\ViewEngine\EmbeddedResourceViewEngine.cs" />
-    <Compile Include="PortableAreas\InputBuilder\ViewEngine\RenderInputBuilderException.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\DisplayPartial.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\HtmlDisplayExtensions.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\HtmlExtensions.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\IInputSpecificationExtensions.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\Partial.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\PropertyViewModel.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\TypeViewModel.cs" />
-    <Compile Include="PortableAreas\InputBuilder\Views\TypeViewModelExtensions.asax.cs" />
     <Compile Include="IoC\CastleDependcyResyle.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />
@@ -244,19 +197,6 @@
     <Compile Include="UI\JQuery\Plugins\DataTables\DataTableResult.cs" />
     <Compile Include="UI\JQuery\Plugins\DataTables\DataTablesPostData.cs" />
     <Compile Include="UI\JQuery\Plugins\DataTables\PostDataModelBinder.cs" />
-    <Compile Include="PortableAreas\ApplicationBus.cs" />
-    <Compile Include="PortableAreas\AssemblyResourceManager.cs" />
-    <Compile Include="PortableAreas\AssemblyResourceStore.cs" />
-    <Compile Include="PortableAreas\IApplicationBus.cs" />
-    <Compile Include="PortableAreas\IEventMessage.cs" />
-    <Compile Include="PortableAreas\IMessageHandler.cs" />
-    <Compile Include="PortableAreas\IMessageHandlerFactory.cs" />
-    <Compile Include="PortableAreas\MapExtensions.cs" />
-    <Compile Include="PortableAreas\PortableAreaContent.cs" />
-    <Compile Include="PortableAreas\PortableAreaMap.cs" />
-    <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
-    <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
-    <Compile Include="PortableAreas\RegistScript.cs" />
     <Compile Include="ResourceDescriptionManager.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="MemberShips\MemberShipProvider.cs" />
@@ -282,6 +222,10 @@
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.ProtableAreas.csproj">
+      <Project>{5b962996-1d9b-415d-98a7-9001a640c84f}</Project>
+      <Name>Ornament.Web.ProtableAreas</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -301,19 +245,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.Master">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Display.Master">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Field.Master" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\HiddenField.Master" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Row.Master" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="PortableAreas\Web.config" />
     <None Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
@@ -322,29 +256,6 @@
     <None Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Array.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayAddButton.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\ArrayRemoveButton.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Boolean.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DateTime.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayInline.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayLabel.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\DisplayParagraph.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Enum.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Form.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Guid.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Int32.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\MultilineText.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\RadioButtons.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\ReadOnly.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\String.aspx" />
-    <EmbeddedResource Include="PortableAreas\InputBuilder\Views\InputBuilders\Submit.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.ascx" />
