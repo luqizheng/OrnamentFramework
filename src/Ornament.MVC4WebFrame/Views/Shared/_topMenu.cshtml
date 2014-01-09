@@ -5,7 +5,7 @@
 @using Ornament.Web.MemberShips
 @using Resources
 
-@helper RenderMenu(MvcSiteMapNode node, SiteMapPermission site, SiteMapNode currentNode)
+@helper RenderMenu(ISiteMapNode node, SiteMapPermission site, ISiteMapNode currentNode)
 {
     if (site.IsAccessibleToUser(node))
     {
@@ -19,17 +19,7 @@
     </a></li>
     }
 }
-<style type="text/css">
-    .mlang a {
-        height: 16px;
-        padding: 12px 14px;
-        width: 18px;
-    }
 
-    .mlang #uld:after {
-        left: 20%;
-    }
-</style>
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     //var unReadCout = OrnamentContext.DaoFactory.MessageDaoFactory.PersonalMessageDao.CountNewMessage(OrnamentContext.MemberShip.CurrentUser());

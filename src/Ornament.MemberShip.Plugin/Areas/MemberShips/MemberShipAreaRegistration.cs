@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.MemberShip.Plugin.Models.SampleData;
-using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.PortableAreas;
 
@@ -19,14 +17,13 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-
             bus.Send(new MemberShipData());
 
-            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin");
-            helper.RegistyScripts("Scripts.User", context);
-            helper.RegistyScripts("Scripts.Org", context);
-            helper.RegistyScripts("Scripts.Share", context);
-            helper.RegistyScripts("Scripts.Permissions", context);
+            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
+            helper.RegistyScripts("Scripts/User");
+            helper.RegistyScripts("Scripts/Org");
+            helper.RegistyScripts("Scripts/Share");
+            helper.RegistyScripts("Scripts/Permissions");
 
             context.MapRoute(
                 AreaName + "_images",
@@ -46,22 +43,22 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             //MemberShips/User/Edit/admin
             context.MapRoute(AreaName + "_EditUser",
                 AreaName + "/User/Edit/{loginId}",
-                new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" }
+                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"}
                 );
 
 
             context.MapRoute(
                 AreaName + "_AssingUser",
                 AreaName + "/User/Assign/{loginId}",
-                new { action = "Assign", loginId = UrlParameter.Optional, controller = "User" },
-                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
+                new {action = "Assign", loginId = UrlParameter.Optional, controller = "User"},
+                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
+                new {action = "Index", id = UrlParameter.Optional},
+                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
                 );
 
             base.RegisterArea(context, bus);
@@ -74,6 +71,5 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 new NHRegisterEventMessage(typeof (IMemberShipFactory), typeof (MemberShipFactory))
             };
         }
-
     }
 }

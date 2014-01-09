@@ -25,8 +25,18 @@ namespace Ornament.Web.Cfg
         public static void Regist(VoidFunc mvcNormalInit, Type httpErrorControllerType, Assembly webAssembly)
         {
             //AddProtableMessageHandler();
+            Exception nhibernateException = null;
             mvcNormalInit();
-            NHConfig.Instance.Regist(); //初始化NH配置
+            try
+            {
+                NHConfig.Instance.Regist(); //初始化NH配置
+            }
+            catch (Exception ex)
+            {
+                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate mapping error.", ex);
+                nhibernateException = ex;
+            }
+
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             ExtenderModelType();
 
@@ -34,16 +44,31 @@ namespace Ornament.Web.Cfg
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResyle();
 
             //新的Attribute，用于JquerUI spinner控件一起用
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (JqStepAttribute),
-                typeof (StepAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute),
+                typeof(StepAttributeAdapter));
 
             //把ControllerFactory和castle联系起来
             ChangeControllerFacotry(httpErrorControllerType, webAssembly);
             //Web MemberShip的加密方法
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
 
-            GlobalInitializer.UpdateAllSturcture();
-            GlobalInitializer.BuildData();
+            if (nhibernateException == null)
+            {
+                try
+                {
+                    GlobalInitializer.UpdateAllSturcture();
+                    GlobalInitializer.BuildData();
+                }
+                catch (Exception ex)
+                {
+                    LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                    throw ex;
+                }
+            }
+            else
+            {
+                throw nhibernateException;
+            }
         }
 
         //private static void AddProtableMessageHandler()
@@ -55,8 +80,8 @@ namespace Ornament.Web.Cfg
         private static void ExtenderModelType()
         {
             var timeModelBiner = new TimeModelBinder();
-            ModelBinders.Binders.Add(typeof (Time), timeModelBiner);
-            ModelBinders.Binders.Add(typeof (Time?), timeModelBiner);
+            ModelBinders.Binders.Add(typeof(Time), timeModelBiner);
+            ModelBinders.Binders.Add(typeof(Time?), timeModelBiner);
         }
 
 
@@ -84,7 +109,7 @@ namespace Ornament.Web.Cfg
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }
