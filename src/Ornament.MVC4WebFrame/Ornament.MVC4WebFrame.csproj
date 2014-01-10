@@ -292,7 +292,6 @@
     <Content Include="Content\templates\metralab\font\myriadproregular.svg" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Global.asax" />
-    <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="Scripts\Components\avalon.js" />
     <Content Include="Scripts\Fx\bootstrap.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -604,6 +603,9 @@
     <Content Include="Content\templates\metralab\assets\font-awesome\scss\_path.scss" />
     <Content Include="Content\templates\metralab\assets\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\Web.config" />
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\plugins\utility\jquery.dotdotdot-1.5.1.js" />
@@ -878,9 +880,6 @@
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="MvcSiteMapSchema.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Account\BaseInfo.cshtml" />
     <Content Include="Views\Account\_changePassword.cshtml" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.eot" />
@@ -938,14 +937,14 @@
     <Content Include="Views\Shared\DisplayTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\_layout.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
