@@ -1,7 +1,7 @@
 ﻿using Ornament.Configurations;
 using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.ProtableAreas.Messages
+namespace Ornament.Web.Messages
 {
     public class NHConfigurationHandler : MessageHandler<NHRegisterEventMessage>
     {
@@ -10,6 +10,4 @@ namespace Ornament.Web.ProtableAreas.Messages
             NHConfig.Instance.RegistDaoFactory(message.DaoFactoryInterface, message.ImpleDaoFactory);
         }
     }
-
-
 }

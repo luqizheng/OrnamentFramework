@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
-using Ornament.Web.ProtableAreas;
-using Ornament.Web.ProtableAreas.Messages;
+using Ornament.Web.Messages;
 
 namespace Ornament.Web.PortableAreas
 {
@@ -39,8 +38,6 @@ namespace Ornament.Web.PortableAreas
             bus.Send(new IocControllerInjectMessageEvent(controllers, apiControllers));
 
 
-
-
             bus.Send(new PortableAreaStartupMessage(AreaName));
 
             RegisterDefaultRoutes(context);
@@ -53,9 +50,9 @@ namespace Ornament.Web.PortableAreas
             context.MapRoute(
                 AreaName + "-" + SubfolderName,
                 AreaRoutePrefix + "/" + SubfolderName + "/{resourceName}",
-                new { controller = "EmbeddedResource", action = "Index", resourcePath = "Content." + SubfolderName },
+                new {controller = "EmbeddedResource", action = "Index", resourcePath = "Content." + SubfolderName},
                 null,
-                new[] { "Ornament.Web.PortableAreas" }
+                new[] {"Ornament.Web.Controllers"}
                 );
         }
 
@@ -66,7 +63,7 @@ namespace Ornament.Web.PortableAreas
             CreateStaticResourceRoute(context, "Scripts");
             context.MapRoute(AreaName + "-Default",
                 AreaRoutePrefix + "/{controller}/{action}",
-                new { controller = "default", action = "index" });
+                new {controller = "default", action = "index"});
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
@@ -102,7 +99,7 @@ namespace Ornament.Web.PortableAreas
         protected virtual void GetInjectControllers(out IEnumerable<Type> controller,
             out IEnumerable<Type> apiController)
         {
-            AssemblyHelper.FindController(this.GetType().Assembly, out controller, out apiController);
+            AssemblyHelper.FindController(GetType().Assembly, out controller, out apiController);
         }
     }
 }

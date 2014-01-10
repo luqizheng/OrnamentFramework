@@ -8,6 +8,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.Attributes
         {
             Order = order;
         }
+
         public int Order { get; set; }
     }
 }

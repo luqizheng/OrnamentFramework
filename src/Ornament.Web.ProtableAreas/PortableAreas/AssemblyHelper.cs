@@ -4,24 +4,23 @@ using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace Ornament.Web.ProtableAreas
+namespace Ornament.Web.PortableAreas
 {
     public static class AssemblyHelper
     {
-
-        public static void FindController(Assembly webAssembly, out IEnumerable<Type> apiControllers, out IEnumerable<Type> controllers)
+        public static void FindController(Assembly webAssembly, out IEnumerable<Type> apiControllers,
+            out IEnumerable<Type> controllers)
         {
             apiControllers = new List<Type>();
             controllers = new List<Type>();
 
             //Web Assembly assembly
-            FindController(webAssembly, (List<Type>)apiControllers, (List<Type>)controllers);
+            FindController(webAssembly, (List<Type>) apiControllers, (List<Type>) controllers);
         }
 
-    
 
         private static void FindController(Assembly assembly, List<Type> apiControllerResult,
-                                           List<Type> controllerResult)
+            List<Type> controllerResult)
         {
             foreach (Type t in assembly.GetTypes())
             {

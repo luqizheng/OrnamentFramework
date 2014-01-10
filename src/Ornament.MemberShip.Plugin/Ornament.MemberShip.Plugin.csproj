@@ -249,9 +249,9 @@
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.ProtableAreas.csproj">
+    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
       <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
-      <Name>Ornament.Web.ProtableAreas</Name>
+      <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Web.UI\Ornament.Web.UI.csproj">
       <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>

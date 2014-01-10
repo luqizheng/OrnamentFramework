@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using Ornament.Web;
 using Ornament.Web.Bundles;
 using Ornament.Web.Bundles.Config;
 using Qi;

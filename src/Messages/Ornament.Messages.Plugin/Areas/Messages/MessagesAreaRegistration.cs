@@ -5,8 +5,8 @@ using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
 using Ornament.Web;
 using Ornament.Web.MessageHandlers;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
-using Ornament.Web.ProtableAreas.Messages;
 
 namespace Ornament.Messages.Plugin.Areas.Messages
 {

@@ -1,7 +1,7 @@
 namespace Ornament.Web.PortableAreas.InputBuilder.InputSpecification
 {
-	public interface IInputSpecification<T>
-	{
-		T Model { get; }
-	}
+    public interface IInputSpecification<T>
+    {
+        T Model { get; }
+    }
 }

@@ -5,32 +5,29 @@ using Ornament.Web.PortableAreas.InputBuilder.Views;
 
 namespace Ornament.Web.InputBuilder.InputSpecification
 {
-	public class InputPropertySpecification : IInputSpecification<PropertyViewModel>,IInputSpecification<TypeViewModel>
-	{
-		public Func<HtmlHelper, PropertyViewModel, string> Render =
-			(helper, model) =>
-			{
-				helper.RenderPartial(model.PartialName, model, model.Layout);
-				return "";
-			};
+    public class InputPropertySpecification : IInputSpecification<PropertyViewModel>, IInputSpecification<TypeViewModel>
+    {
+        public Func<HtmlHelper, PropertyViewModel, string> Render =
+            (helper, model) =>
+            {
+                helper.RenderPartial(model.PartialName, model, model.Layout);
+                return "";
+            };
 
-		public HtmlHelper HtmlHelper { get; set; }
-
-
-		public PropertyViewModel Model { get; set; }
+        public HtmlHelper HtmlHelper { get; set; }
 
 
-		public override string ToString()
-		{
-			return Render(HtmlHelper, Model);
-		}
+        public PropertyViewModel Model { get; set; }
 
-		TypeViewModel IInputSpecification<TypeViewModel>.Model
-		{
-			get
-			{
-				return this.Model;
-			}
-		}
-	}
+
+        TypeViewModel IInputSpecification<TypeViewModel>.Model
+        {
+            get { return Model; }
+        }
+
+        public override string ToString()
+        {
+            return Render(HtmlHelper, Model);
+        }
+    }
 }

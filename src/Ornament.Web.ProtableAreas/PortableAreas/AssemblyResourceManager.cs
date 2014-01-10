@@ -5,18 +5,20 @@ using Ornament.Web.PortableAreas.InputBuilder.ViewEngine;
 namespace Ornament.Web.PortableAreas
 {
     /// <summary>
-    /// Manages all .NET assemblies that have registered their embedded resources.
+    ///     Manages all .NET assemblies that have registered their embedded resources.
     /// </summary>
     public static class AssemblyResourceManager
     {
-        private static Dictionary<string, AssemblyResourceStore> assemblyResourceStores = InitializeAssemblyResourceStores();
+        private static readonly Dictionary<string, AssemblyResourceStore> assemblyResourceStores =
+            InitializeAssemblyResourceStores();
 
         private static Dictionary<string, AssemblyResourceStore> InitializeAssemblyResourceStores()
         {
             var resourceStores = new Dictionary<string, AssemblyResourceStore>();
 
             // Add default AssemblyResourceStore for input builders
-            var inputBuildersStore = new AssemblyResourceStore(typeof(AssemblyResourceProvider), "/views/inputbuilders", "MvcContrib.UI.InputBuilder.Views.InputBuilders");
+            var inputBuildersStore = new AssemblyResourceStore(typeof (AssemblyResourceProvider), "/views/inputbuilders",
+                "MvcContrib.UI.InputBuilder.Views.InputBuilders");
             resourceStores.Add(inputBuildersStore.VirtualPath, inputBuildersStore);
 
             return resourceStores;
@@ -29,7 +31,7 @@ namespace Ornament.Web.PortableAreas
 
         public static AssemblyResourceStore GetResourceStoreFromVirtualPath(string virtualPath)
         {
-            var checkPath = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
+            string checkPath = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
             //HttpContext.Current.Response.Write("to:" + checkPath + "<br>");
             foreach (var resourceStore in assemblyResourceStores)
             {
@@ -43,7 +45,7 @@ namespace Ornament.Web.PortableAreas
 
         public static bool IsEmbeddedViewResourcePath(string virtualPath)
         {
-            var resourceStore = GetResourceStoreFromVirtualPath(virtualPath);
+            AssemblyResourceStore resourceStore = GetResourceStoreFromVirtualPath(virtualPath);
             return (resourceStore != null);
         }
 

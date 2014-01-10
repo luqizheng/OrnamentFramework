@@ -7,12 +7,13 @@
     <ProjectGuid>{5B962996-1D9B-415D-98A7-9001A640C84F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ornament.Web.ProtableAreas</RootNamespace>
-    <AssemblyName>Ornament.Web.ProtableAreas</AssemblyName>
+    <RootNamespace>Ornament.Web</RootNamespace>
+    <AssemblyName>Ornament.Web.PortableAreas</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,11 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SeajsBundles">
+      <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -50,6 +60,9 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.0\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -72,19 +85,23 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationBus.cs" />
+    <Compile Include="PortableAreas\ApplicationBus.cs" />
     <Compile Include="AreaRegistrationHelper.cs" />
-    <Compile Include="AssemblyHelper.cs" />
-    <Compile Include="AssemblyResourceManager.cs" />
-    <Compile Include="AssemblyResourceStore.cs" />
-    <Compile Include="Bus.cs" />
-    <Compile Include="EmbeddedResourceController.cs" />
-    <Compile Include="IApplicationBus.cs" />
-    <Compile Include="IEventMessage.cs" />
-    <Compile Include="IMessageHandler.cs" />
-    <Compile Include="IMessageHandlerFactory.cs" />
+    <Compile Include="PortableAreas\AssemblyHelper.cs" />
+    <Compile Include="PortableAreas\AssemblyResourceManager.cs" />
+    <Compile Include="PortableAreas\AssemblyResourceStore.cs" />
+    <Compile Include="PortableAreas\Bus.cs" />
+    <Compile Include="Controllers\SeajsModuleEmbeddedResourceController.cs" />
+    <Compile Include="Controllers\EmbeddedResourceController.cs" />
+    <Compile Include="PortableAreas\IApplicationBus.cs" />
+    <Compile Include="PortableAreas\IEventMessage.cs" />
+    <Compile Include="PortableAreas\IMessageHandler.cs" />
+    <Compile Include="PortableAreas\IMessageHandlerFactory.cs" />
     <Compile Include="InputBuilder\Attributes\CanDeleteAllAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\DisplayOrderAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\ExampleAttribute.cs" />
@@ -126,14 +143,15 @@
     <Compile Include="InputBuilder\Views\PropertyViewModel.cs" />
     <Compile Include="InputBuilder\Views\TypeViewModel.cs" />
     <Compile Include="InputBuilder\Views\TypeViewModelExtensions.asax.cs" />
-    <Compile Include="MapExtensions.cs" />
+    <Compile Include="PortableAreas\MapExtensions.cs" />
     <Compile Include="Messages\IocControllerInjectMessageEvent.cs" />
     <Compile Include="Messages\NHConfigurationHandler.cs" />
     <Compile Include="Messages\NHRegisterEventMessage.cs" />
-    <Compile Include="PortableAreaContent.cs" />
-    <Compile Include="PortableAreaMap.cs" />
-    <Compile Include="PortableAreaRegistration.cs" />
-    <Compile Include="PortableAreaStartupMessage.cs" />
+    <Compile Include="PortableAreas\OrnamentProtableContextExtender.cs" />
+    <Compile Include="PortableAreas\PortableAreaContent.cs" />
+    <Compile Include="PortableAreas\PortableAreaMap.cs" />
+    <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
+    <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,7 +229,7 @@
     <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Submit.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="PortableAreas\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">

@@ -26,7 +26,7 @@ namespace Ornament
     {
         private const string langCookieName = "lang";
         public static readonly string VerifyCodeKey = "VerifyCode";
-        private static bool _combineSeajs;
+       
 
         /// <summary>
         /// </summary>
@@ -188,15 +188,7 @@ namespace Ornament
 
       
 
-        public static void SetSeajsCombine(this OrnamentConfiguration config, bool combine)
-        {
-            _combineSeajs = combine;
-        }
-
-        public static bool GetSeajsCombine(this OrnamentConfiguration config)
-        {
-            return _combineSeajs;
-        }
+    
 
         /// <summary>
         ///     ºóÌ¨Backend laoyout

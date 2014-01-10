@@ -1058,9 +1058,9 @@
       <Project>{60965723-bea2-4a7b-b6ee-9e1e237504f6}</Project>
       <Name>Ornament.MemberShip.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.ProtableAreas.csproj">
+    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
       <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
-      <Name>Ornament.Web.ProtableAreas</Name>
+      <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Web.UI\Ornament.Web.UI.csproj">
       <Project>{50c88067-6ec2-4ef1-a0e5-f88dca6ccfc8}</Project>

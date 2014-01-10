@@ -13,11 +13,11 @@ namespace Ornament.Web.PortableAreas.InputBuilder.Helpers
             var orderableProperties = new Dictionary<int, PropertyInfo>();
             var nonOrderableProperties = new List<PropertyInfo>();
 
-            foreach (var property in properties)
+            foreach (PropertyInfo property in properties)
             {
                 if (property.AttributeExists<DisplayOrderAttribute>())
                 {
-                    var order = property.GetAttribute<DisplayOrderAttribute>().Order;
+                    int order = property.GetAttribute<DisplayOrderAttribute>().Order;
                     orderableProperties.Add(order, property);
                 }
                 else
@@ -33,7 +33,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.Helpers
                 result.Add(property.Value);
             }
 
-            foreach (var property in nonOrderableProperties.ToList())
+            foreach (PropertyInfo property in nonOrderableProperties.ToList())
             {
                 result.Add(property);
             }

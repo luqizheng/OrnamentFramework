@@ -4,8 +4,9 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models.SampleData;
+using Ornament.Web;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
-using Ornament.Web.ProtableAreas.Messages;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 {

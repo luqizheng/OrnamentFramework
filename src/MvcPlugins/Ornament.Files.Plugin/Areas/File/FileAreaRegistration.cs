@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Files.Plugin.Areas.File.Controllers;
-using Ornament.Web.MessageHandlers;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
-using Ornament.Web.ProtableAreas.Messages;
 
 namespace Ornament.Files.Plugin.Areas.File
 {
@@ -12,19 +11,16 @@ namespace Ornament.Files.Plugin.Areas.File
     {
         public override string AreaName
         {
-            get
-            {
-                return "Files";
-            }
+            get { return "Files"; }
         }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             context.MapRoute(
-              this.AreaName + "_default",
-              this.AreaRoutePrefix + "/{controller}/{action}/{id}",
-              new { action = "Index", id = UrlParameter.Optional }
-          );
+                AreaName + "_default",
+                AreaRoutePrefix + "/{controller}/{action}/{id}",
+                new {action = "Index", id = UrlParameter.Optional}
+                );
             base.RegisterArea(context, bus);
         }
 
@@ -33,9 +29,11 @@ namespace Ornament.Files.Plugin.Areas.File
             return null;
         }
 
-        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
+        protected override void GetInjectControllers(out IEnumerable<Type> controller,
+            out IEnumerable<Type> apiController)
         {
-            controller = new Type[]
+            //支持给Controller的类型,避免Assembly全局扫描,加快第一次启动速度
+            controller = new[]
             {
                 typeof (FileController), typeof (ManagerController)
             };

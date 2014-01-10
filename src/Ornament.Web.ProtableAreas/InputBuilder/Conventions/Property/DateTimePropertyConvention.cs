@@ -4,16 +4,16 @@ using Ornament.Web.PortableAreas.InputBuilder.Views;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.Conventions.Property
 {
-	public class DateTimePropertyConvention : DefaultPropertyConvention
-	{
-		public override bool CanHandle(PropertyInfo propertyInfo)
-		{
-			return propertyInfo.PropertyType == typeof(DateTime);
-		}
+    public class DateTimePropertyConvention : DefaultPropertyConvention
+    {
+        public override bool CanHandle(PropertyInfo propertyInfo)
+        {
+            return propertyInfo.PropertyType == typeof (DateTime);
+        }
 
-		public override PropertyViewModel CreateViewModel<T>()
-		{
-			return new PropertyViewModel<DateTime> {};
-		}
-	}
+        public override PropertyViewModel CreateViewModel<T>()
+        {
+            return new PropertyViewModel<DateTime>();
+        }
+    }
 }

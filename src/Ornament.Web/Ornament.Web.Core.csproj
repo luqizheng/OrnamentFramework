@@ -168,7 +168,6 @@
     <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
     <Compile Include="Bundles\ScriptsFolderManager.cs" />
     <Compile Include="Cfg\MvcWebConfig.cs" />
-    <Compile Include="Controllers\OrnamentEmbeddedResourceController.cs" />
     <Compile Include="HtmlEmbeddedResource.cs" />
     <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
@@ -219,9 +218,9 @@
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.ProtableAreas.csproj">
+    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
       <Project>{5b962996-1d9b-415d-98a7-9001a640c84f}</Project>
-      <Name>Ornament.Web.ProtableAreas</Name>
+      <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

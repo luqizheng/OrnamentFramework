@@ -4,20 +4,24 @@ using System.Web.Mvc;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
 {
-	public class InputBuilderViewEngine : WebFormViewEngine
-	{
-		public InputBuilderViewEngine(string[] subdirs)
-		{
-			IEnumerable<string> inputs = subdirs.Concat(new[] {"InputBuilders"});
+    public class InputBuilderViewEngine : WebFormViewEngine
+    {
+        public InputBuilderViewEngine(string[] subdirs)
+        {
+            IEnumerable<string> inputs = subdirs.Concat(new[] {"InputBuilders"});
 
-			PartialViewLocationFormats =
-				inputs.Select(s => "~/Views/" + s + "/{0}.aspx").Concat(subdirs.Select(s => "~/Views/" + s + "/{0}.ascx")).ToArray();
+            PartialViewLocationFormats =
+                inputs.Select(s => "~/Views/" + s + "/{0}.aspx")
+                    .Concat(subdirs.Select(s => "~/Views/" + s + "/{0}.ascx"))
+                    .ToArray();
 
-			MasterLocationFormats = inputs.Select(s => "~/Views/" + s + "/{0}.Master").ToArray();
+            MasterLocationFormats = inputs.Select(s => "~/Views/" + s + "/{0}.Master").ToArray();
 
-			ViewLocationFormats =
-				inputs.Select(s => "~/Views/" + s + "/{0}.aspx").Concat(subdirs.Select(s => "~/Views/" + s + "/{0}.ascx")).ToArray();
-			;
-		}
-	}
+            ViewLocationFormats =
+                inputs.Select(s => "~/Views/" + s + "/{0}.aspx")
+                    .Concat(subdirs.Select(s => "~/Views/" + s + "/{0}.ascx"))
+                    .ToArray();
+            ;
+        }
+    }
 }

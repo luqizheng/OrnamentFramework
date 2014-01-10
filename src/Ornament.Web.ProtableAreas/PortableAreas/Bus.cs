@@ -9,7 +9,7 @@ namespace Ornament.Web
     public class Bus
     {
         private static IApplicationBus _instance;
-        private static object _busLock = new object();
+        private static readonly object _busLock = new object();
 
         public static IApplicationBus Instance
         {
@@ -18,10 +18,7 @@ namespace Ornament.Web
                 InitializeTheDefaultBus();
                 return _instance;
             }
-            set
-            {
-                _instance = value;
-            }
+            set { _instance = value; }
         }
 
         private static void InitializeTheDefaultBus()
@@ -51,9 +48,9 @@ namespace Ornament.Web
 
         public static void AddAllMessageHandlers()
         {
-            var handlers = FindAllMessageHandlers();
+            IEnumerable<Type> handlers = FindAllMessageHandlers();
 
-            foreach (var handler in handlers)
+            foreach (Type handler in handlers)
                 Instance.Add(handler);
         }
 
@@ -76,7 +73,7 @@ namespace Ornament.Web
                 allTypes = allTypes.Concat(types);
             }
 
-            var handlerTypes = allTypes.Where(type => IsValidType(type));
+            IEnumerable<Type> handlerTypes = allTypes.Where(type => IsValidType(type));
 
             return handlerTypes;
         }
@@ -86,7 +83,7 @@ namespace Ornament.Web
             if (type == null || type.IsInterface || type.IsAbstract || type.IsNestedPrivate)
                 return false;
 
-            bool isIMessageHandler = type.GetInterface(typeof(IMessageHandler).Name) != null;
+            bool isIMessageHandler = type.GetInterface(typeof (IMessageHandler).Name) != null;
 
             return isIMessageHandler;
         }

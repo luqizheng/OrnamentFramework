@@ -14,7 +14,7 @@ using Ornament.Validations;
 using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
 using Ornament.Web.ModelBinder;
-using Ornament.Web.ProtableAreas;
+using Ornament.Web.PortableAreas;
 using Ornament.Web.ValidationAdapter;
 using Qi;
 using Qi.Web.Mvc;
@@ -34,7 +34,7 @@ namespace Ornament.Web.Cfg
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate mapping error.", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate mapping error.", ex);
                 nhibernateException = ex;
             }
 
@@ -45,8 +45,8 @@ namespace Ornament.Web.Cfg
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
             //新的Attribute，用于JquerUI spinner控件一起用
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(JqStepAttribute),
-                typeof(StepAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (JqStepAttribute),
+                typeof (StepAttributeAdapter));
 
             //把ControllerFactory和castle联系起来
             ChangeControllerFacotry(httpErrorControllerType, webAssembly);
@@ -62,7 +62,7 @@ namespace Ornament.Web.Cfg
                 }
                 catch (Exception ex)
                 {
-                    LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                    LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate update error.", ex);
                     throw ex;
                 }
             }
@@ -81,8 +81,8 @@ namespace Ornament.Web.Cfg
         private static void ExtenderModelType()
         {
             var timeModelBiner = new TimeModelBinder();
-            ModelBinders.Binders.Add(typeof(Time), timeModelBiner);
-            ModelBinders.Binders.Add(typeof(Time?), timeModelBiner);
+            ModelBinders.Binders.Add(typeof (Time), timeModelBiner);
+            ModelBinders.Binders.Add(typeof (Time?), timeModelBiner);
         }
 
 
@@ -110,7 +110,7 @@ namespace Ornament.Web.Cfg
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

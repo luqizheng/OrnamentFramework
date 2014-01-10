@@ -2,7 +2,7 @@
 using System.Reflection;
 using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.ProtableAreas.Messages
+namespace Ornament.Web.Messages
 {
     /// <summary>
     ///     注册NHibernate的Dao，如果Dao和mapping文件放在一起，那么会自动进行Mapping
@@ -10,7 +10,6 @@ namespace Ornament.Web.ProtableAreas.Messages
     public class NHRegisterEventMessage : IEventMessage
     {
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="daoFactoryInterface"></param>
         /// <param name="impleDaoFactory"></param>

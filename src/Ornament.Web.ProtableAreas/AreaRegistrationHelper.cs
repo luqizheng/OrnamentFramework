@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.PortableAreas
+namespace Ornament.Web
 {
     public class AreaRegistrationHelper
     {
@@ -26,32 +27,49 @@ namespace Ornament.Web.PortableAreas
         /// </summary>
         public void RegistryDefault()
         {
-            RegistyEmbedResource("Scripts");
-            RegistyEmbedResource("Content/Images");
+            RegistySeajsEmbedResource("Scripts");
+            RegistySeajsEmbedResource("Content/Images");
         }
 
         public void RegistryImages(string imageFolder)
         {
             if (imageFolder == null) throw new ArgumentNullException("imageFolder");
-            RegistyEmbedResource(imageFolder);
+            RegistyEmbedResouce(imageFolder);
         }
 
         public void RegistyScripts(string scriptPath)
         {
             if (scriptPath == null) throw new ArgumentNullException("scriptPath");
-            RegistyEmbedResource(scriptPath);
+            RegistySeajsEmbedResource(scriptPath);
         }
 
-        public void RegistyEmbedResource(string path)
+        public void RegistyEmbedResouce(string path)
         {
             if (path == null) throw new ArgumentNullException("path");
-            //page scripts  regist
+            //page scripts  registry
             _context.MapRoute(
                 _protablAreaRegistration.AreaName + "_" + path + "_embededResource",
                 string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
                 new
                 {
-                    controller = "OrnamentEmbeddedResource",
+                    controller = "EmbeddedResourceController",
+                    action = "Index",
+                    resourcePath = _assemblyRootNamespace + "/" + path,
+                }
+                ,
+                new[] { "Ornament.Web.Controllers" }
+                );
+        }
+        public void RegistySeajsEmbedResource(string path)
+        {
+            if (path == null) throw new ArgumentNullException("path");
+            //page scripts  registry
+            _context.MapRoute(
+                _protablAreaRegistration.AreaName + "_" + path + "_embededResource",
+                string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
+                new
+                {
+                    controller = "SeajsModuleEmbeddedResourceController",
                     action = "Index",
                     resourcePath = _assemblyRootNamespace + "/" + path,
                 }

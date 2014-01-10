@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
+using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.PortableAreas
+namespace Ornament.Web.Controllers
 {
     public class EmbeddedResourceController : Controller
     {
@@ -12,30 +14,30 @@ namespace Ornament.Web.PortableAreas
                 resourceName = resourcePath + "." + resourceName;
             }
 
-            var areaName = (string)this.RouteData.DataTokens["area"];
-            var resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
+            var areaName = (string) RouteData.DataTokens["area"];
+            AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
-            var resourceStream = resourceStore.GetResourceStream("~." + resourceName);
+            Stream resourceStream = resourceStore.GetResourceStream("~." + resourceName);
 
             if (resourceStream == null)
             {
-                this.Response.StatusCode = 404;
+                Response.StatusCode = 404;
                 return null;
             }
 
-            var contentType = GetContentType(resourceName);
-            return this.File(resourceStream, contentType);
+            string contentType = GetContentType(resourceName);
+            return File(resourceStream, contentType);
         }
 
         #region Private Members
 
+        private static readonly Dictionary<string, string> mimeTypes = InitializeMimeTypes();
+
         private static string GetContentType(string resourceName)
         {
-            var extension = resourceName.Substring(resourceName.LastIndexOf('.')).ToLower();
+            string extension = resourceName.Substring(resourceName.LastIndexOf('.')).ToLower();
             return mimeTypes[extension];
         }
-
-        private static Dictionary<string, string> mimeTypes = InitializeMimeTypes();
 
         private static Dictionary<string, string> InitializeMimeTypes()
         {
@@ -50,6 +52,7 @@ namespace Ornament.Web.PortableAreas
             mimes.Add(".zip", "application/zip");
             return mimes;
         }
+
         #endregion
     }
 }
