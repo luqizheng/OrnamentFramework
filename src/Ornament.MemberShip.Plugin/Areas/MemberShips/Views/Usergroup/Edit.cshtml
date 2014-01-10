@@ -13,34 +13,23 @@
 @using (var panel = Html.Panel())
 {
     @panel.Body(@<text>
-                      <div class="form-horizontal">
-            @using (Html.BeginForm())
-            {
-                @Html.ValidationSummary()
+    <div class="form-horizontal">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
     
-                @Html.EditorFor(s => s.Name)
-                @Html.EditorFor(s => s.Remark)
-                @Html.EditorFor(s=>s.Roles)
-                @Html.HiddenFor(model => model.Id)
+            @Html.EditorFor(s => s.Name)
+            @Html.EditorFor(s => s.Remark)
+            @Html.EditorFor(s => s.Roles)
+            @Html.HiddenFor(model => model.Id)
 
-                <div class="btn-toolbar form-actions">
-                    <a id="submit" class="btn btn-primary">@Resources.OK</a>
-                    <a  id="cancel" href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
-                </div>
+            <div class="btn-toolbar form-actions">
+                <button type="submit" id="submit" class="btn btn-primary">@Resources.OK</button>
+                <a id="cancel" href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
+            </div>
     
-            }
-        </div>
-                 </text>)
+        }
+    </div>
+    </text>)
 }
 
-@section scripts{
-    <script type="text/javascript">
-        seajs.use(['jquery'], function () {
-
-            $(".btn-toolbar a:first").click(function () {
-                $("form").submit();
-            });
-        });
-
-    </script>
-}

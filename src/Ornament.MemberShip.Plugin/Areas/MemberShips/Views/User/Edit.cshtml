@@ -1,6 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Properties
 @using Ornament.Web
+@using Ornament.Web.UI.Theme
 @model Ornament.MemberShip.Plugin.Models.Memberships.EditUserModel
 @{
     ViewBag.Title = Resources.Edit + Model.LoginId;
@@ -11,10 +12,13 @@
         @Model.LoginId
     </h5>
 }
-
-@using (Html.BeginForm("edit", "User", FormMethod.Post, new {@class = "form-horizontal"}))
+@using (var panel = Html.Panel())
 {
-    <div class="well">
+    @panel.Body(@<text>
+
+
+    <form method="POST" action="@Url.Action("Edit")" class="form-horizontal">
+
         <ul class="nav nav-tabs">
             <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
             <li><a href="#Options" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
@@ -59,10 +63,16 @@
 
         <p class="form-actions">
             <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
-            <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new {area = "MemberShips"})">@Resources.Cancel</a>
+            <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
         </p>
-    </div>
+    </form>
+
+
+
+    </text>)
 }
+
+
 
 @section scripts{
     <script type="text/javascript">

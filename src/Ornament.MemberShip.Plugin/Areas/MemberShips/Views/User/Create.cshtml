@@ -7,7 +7,7 @@
 }
 @section pageTitle
 {
-    <h5>Create a new User</h5>
+    <h5>@Html.GetEmbededResourceString("page_title")</h5>
 }
 <div class="widget">
     <form method="POST" class="form-horizontal">
@@ -37,9 +37,7 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        seajs.use(["/MemberShips/Scripts/User/Create.js"], function () {
-
-        });
+        seajs.use(["/MemberShips/Scripts/User/Create.js"]);
     </script>
 }
 

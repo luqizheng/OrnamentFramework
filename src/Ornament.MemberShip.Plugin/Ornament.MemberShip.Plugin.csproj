@@ -204,18 +204,22 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\EditPermission.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-CN.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Message.zh.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-cn.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-CN.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-cn.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh.resx" />
@@ -344,9 +348,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Mvc.sitemap" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
@@ -12,23 +13,28 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         {
             UpdateTime = user.Other.UpdateTime;
             CreateTime = user.Other.CreateTime;
-            LastPasswordChangedDate = user.Security.LastPasswordChangedDate;
+            LastPasswordChangedTime = user.Security.LastPasswordChangedDate;
             LastLockoutDate = user.Other.LastLockoutDate;
             LastLoginDate = user.Security.LastLoginDate;
-            LastActivityDate = user.Other.LastActivityDate;
+            LastActivityTime = user.Other.LastActivityDate;
         }
 
-
+        [Display(Name = "LastUpdateTime", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
         public DateTime? UpdateTime { get; set; }
 
+        [Display(Name = "CreateTime", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
         public DateTime CreateTime { get; set; }
 
-        public DateTime? LastPasswordChangedDate { get; set; }
+        [Display(Name = "LastPasswordChangedTime", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
+        public DateTime? LastPasswordChangedTime { get; set; }
 
+        [Display(Name = "LastLockTime", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
         public DateTime? LastLockoutDate { get; set; }
 
+        [Display(Name = "LastLoginTime", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
         public DateTime? LastLoginDate { get; set; }
 
-        public DateTime? LastActivityDate { get; set; }
+        [Display(Name = "LastActivityTime", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
+        public DateTime? LastActivityTime { get; set; }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Properties;
-using Ornament.Validations;
-
-using Resources = Ornament.MemberShip.Plugin.Properties.Resources;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships
 {
@@ -11,21 +8,21 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
     {
         public string ReturnUrl { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Ornament.MemberShip.Plugin.Properties.Resources))]
-        [Display(Name = "LoginId", ResourceType = typeof (Properties.Resources))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (Resources))]
+        [Display(Name = "LoginId", ResourceType = typeof (MemberShip.Properties.Resources))]
         public string User { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof(Properties.Resources))]
-        [Display(Name = "Password", ResourceType = typeof (Properties.Resources))]
+        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof (Resources))]
+        [Display(Name = "Password", ResourceType = typeof (MemberShip.Properties.Resources))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "RememberMe", ResourceType = typeof (Resources))]
         public bool RememberMe { get; set; }
 
-        [Display(Name = "VerifyCode", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "VerifyCode", ResourceType = typeof (Resources))]
         [VerifyCodeRequire(ErrorMessageResourceName = "alertMsg_requireVerifyCode",
-            ErrorMessageResourceType = typeof(Properties.Resources))]
+            ErrorMessageResourceType = typeof (Resources))]
         [UIHint("VerifyCode")]
         public string VerifyCodde { get; set; }
 
@@ -35,7 +32,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             {
                 if (expectVerifyCode.ToLower() != VerifyCodde.ToLower())
                 {
-                    errorMessage = Properties.Resources.error_notMatchVerifyCode;
+                    errorMessage = Resources.error_notMatchVerifyCode;
                     return false;
                 }
             }
@@ -44,18 +41,18 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             User u = userDao.GetByLoginId(User);
             if (u == null)
             {
-                errorMessage = Properties.Resources.error_LoginError;
+                errorMessage = Resources.error_LoginError;
                 return false;
             }
             if (u.IsLockout)
             {
-                errorMessage = Properties.Resources.error_UserIsLockout;
+                errorMessage = Resources.error_UserIsLockout;
                 return false;
             }
 
             if (!u.IsApproved)
             {
-                errorMessage = Properties.Resources.error_UserIsNotApproved;
+                errorMessage = Resources.error_UserIsNotApproved;
                 return false;
             }
 
@@ -63,7 +60,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             bool result = u.Security.ValidateUser(Password);
             if (!result)
             {
-                errorMessage = Properties.Resources.error_LoginError;
+                errorMessage = Resources.error_LoginError;
                 return false;
             }
             return true;

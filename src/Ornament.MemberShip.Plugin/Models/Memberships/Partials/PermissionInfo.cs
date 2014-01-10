@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Languages;
-using Ornament.MemberShip.Plugin.Properties;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
@@ -26,34 +26,34 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         }
 
         [UIHint("Textarea")]
-        [Display(Name = "Remark", ResourceType = typeof(Properties.Resources)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Remark { get; set; }
 
-        [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof(Properties.Resources))]
+
+        [Display(Name = "Role", ResourceType = typeof (Resources))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
             set { _roles = value; }
         }
 
-        [UIHint("OrgSelect")]
+        [Display(Name = "Org", ResourceType = typeof (Resources))]
         public Org Org { get; set; }
 
-        [UIHint("UsergroupMultiSelect")]
-        [Display(Name = "UserGroup", ResourceType = typeof(Properties.Resources))]
+
+        [Display(Name = "UserGroup", ResourceType = typeof (Resources))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }
             set { _userGroups = value; }
         }
 
-        [UIHint("bool")]
+        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
         public bool IsApprove { get; set; }
 
-        [UIHint("bool")]
+        [Display(Name = "IsLockout", ResourceType = typeof (Resources))]
         public bool IsLock { get; set; }
 
 

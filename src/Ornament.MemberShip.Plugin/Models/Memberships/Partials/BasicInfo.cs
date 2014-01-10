@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.MemberShip.Languages;
-using Ornament.MemberShip.Plugin.Properties;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
@@ -40,42 +40,44 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         /// <summary>
         ///     Gets or sets the LoginId
         /// </summary>
-        [Display(Name = "LoginId", ResourceType = typeof(Properties.Resources))]
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Properties.Resources))]
+        [Display(Name = "LoginId", ResourceType = typeof (Resources))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId",
+            ErrorMessageResourceType = typeof (Properties.Resources))]
         [RegularExpression(@"^[a-zA-z1-9_-]{3,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof (ErrorMessage))]
         [UIHint("String")]
         [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",
             ErrorMessageResourceName = "alertMsg_duplicate_loginId",
-            ErrorMessageResourceType = typeof(Properties.Resources))]
+            ErrorMessageResourceType = typeof (Properties.Resources))]
         public string LoginId { get; set; }
 
 
         /// <summary>
         ///     Gets or sets the Email of user.
         /// </summary>
-        [Display(Name = "Email", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "Email", ResourceType = typeof (Resources))]
         [Required(ErrorMessageResourceName = "error_missingEmailAddress",
-            ErrorMessageResourceType = typeof(Properties.Resources))]
+            ErrorMessageResourceType = typeof (Properties.Resources))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
             ErrorMessageResourceName = "EmailNotRightFormat",
             ErrorMessageResourceType = typeof (ErrorMessage))]
         [DataType(DataType.EmailAddress)]
         [UIHint("String")]
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
-            ErrorMessageResourceType = typeof(Properties.Resources), ErrorMessageResourceName = "alertMsg_duplicate_Email")]
+            ErrorMessageResourceType = typeof (Properties.Resources),
+            ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email { get; set; }
 
         /// <summary>
         /// </summary>
         [UIHint("String")]
-        [Display(Name = "Phone", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "Phone", ResourceType = typeof (Resources))]
         public string Phone { get; set; }
 
         /// <summary>
         /// </summary>
         [UIHint("String")]
-        [Display(Name = "Name", ResourceType = typeof(Properties.Resources)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
              ErrorMessageResourceType = typeof (ErrorMessage))]
         public string Name { get; set; }
@@ -83,16 +85,17 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         /// <summary>
         /// </summary>
         [UIHint("TimeZone")]
+        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
         public string TimeZoneId { get; set; }
 
         /// <summary>
         /// </summary>
-        [Display(Name = "VerifyEmail", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "VerifyEmail", ResourceType = typeof (Properties.Resources))]
         public bool VerifyEmail { get; set; }
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Language", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "Language", ResourceType = typeof (Resources))]
         public string Language { get; set; }
 
         public bool EmailHasChanged { get; private set; }
@@ -115,12 +118,11 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         /// <param name="user"></param>
         protected virtual void SendVerifyEmail(User user)
         {
-           
             MemberSecrityManager token = MemberSecrityManager.CreateEmailChangedToken(user,
-                                                                                      OrnamentContext
-                                                                                          .Configuration
-                                                                                          .ApplicationSetting
-                                                                                          .VerifyEmailTimeout);
+                OrnamentContext
+                    .Configuration
+                    .ApplicationSetting
+                    .VerifyEmailTimeout);
             token.SendToken();
         }
     }

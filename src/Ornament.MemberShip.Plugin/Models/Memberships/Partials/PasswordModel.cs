@@ -5,7 +5,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
     public class PasswordModel
     {
-        [Display(Name = "Password", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "Password", ResourceType = typeof(Ornament.MemberShip.Properties.Resources))]
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
             ErrorMessageResourceType = typeof(Properties.Resources))]
         [DataType(DataType.Password)]

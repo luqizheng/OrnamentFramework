@@ -3,21 +3,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Languages;
-using Ornament.Properties;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships
 {
     public class UserGroupModel
     {
-        private readonly UserGroup _ug;
-
         public UserGroupModel()
         {
         }
 
         public UserGroupModel(UserGroup ug)
         {
-            _ug = ug;
             Id = ug.Id;
             Name = ug.Name;
             Remark = ug.Remarks;
@@ -30,14 +27,13 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [UIHint("RoleMultiSelect")]
-        [Display(Name = "Role", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "Role", ResourceType = typeof (Resources))]
         public Role[] Roles { get; set; }
 
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof(Properties.Resources)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (ErrorMessage)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("string")]
@@ -45,7 +41,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof(Properties.Resources)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }

@@ -92,7 +92,7 @@ namespace Ornament.MemberShip
                 ModifyUpdateTime();
             }
         }
-
+        [Display(Name="TimeZone",ResourceType = typeof(Resources))]
         public virtual string TimeZoneId
         {
             get { return _timeZoneId; }

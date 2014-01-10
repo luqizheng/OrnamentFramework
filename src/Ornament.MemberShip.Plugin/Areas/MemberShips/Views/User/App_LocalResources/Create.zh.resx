@@ -132,4 +132,7 @@
   <data name="tab_Permission" xml:space="preserve">
     <value>权限</value>
   </data>
+  <data name="page_title" xml:space="preserve">
+    <value>創建新用戶</value>
+  </data>
 </root>
