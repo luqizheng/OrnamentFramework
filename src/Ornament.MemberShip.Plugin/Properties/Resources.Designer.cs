@@ -169,24 +169,6 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Assign 的本地化字符串。
-        /// </summary>
-        public static string Assigment {
-            get {
-                return ResourceManager.GetString("Assigment", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Assign Roles 的本地化字符串。
-        /// </summary>
-        public static string AssignRoles {
-            get {
-                return ResourceManager.GetString("AssignRoles", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Assign Users 的本地化字符串。
         /// </summary>
         public static string AssignUserGroup {

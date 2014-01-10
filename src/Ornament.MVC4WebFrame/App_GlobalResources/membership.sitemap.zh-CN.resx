@@ -117,100 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
-    <value>Password doesn't match the confirmation.</value>
+  <data name="assignTitle" xml:space="preserve">
+    <value>分配</value>
   </data>
-  <data name="alertMsg_duplicate_Email" xml:space="preserve">
-    <value>This email has been used by another user.</value>
+  <data name="dataInitTitle" xml:space="preserve">
+    <value>数据初始化</value>
   </data>
-  <data name="alertMsg_duplicate_loginId" xml:space="preserve">
-    <value>Logind is exist, please choice another one.</value>
+  <data name="EmailsTitle" xml:space="preserve">
+    <value>邮件通知</value>
   </data>
-  <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
-    <value>Current Password isn't right.</value>
+  <data name="eventLogTitle" xml:space="preserve">
+    <value>日志记录</value>
   </data>
-  <data name="alertMsg_Password_length_not_right" xml:space="preserve">
-    <value>Password is too short (minimum is {0} characters).</value>
+  <data name="groupAssignRoleTitle" xml:space="preserve">
+    <value>分配角色</value>
   </data>
-  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
-    <value>Please input confirm password.</value>
+  <data name="groupAssignUserTitle" xml:space="preserve">
+    <value>分配用户</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Password agan</value>
+  <data name="groupCreateTitle" xml:space="preserve">
+    <value>创建用户组</value>
   </data>
-  <data name="CreateTime" xml:space="preserve">
-    <value>Create time</value>
+  <data name="groupEditTitle" xml:space="preserve">
+    <value>编辑</value>
   </data>
-  <data name="CurrentPassword" xml:space="preserve">
-    <value>Current Password</value>
+  <data name="groupListTitle" xml:space="preserve">
+    <value>用户组列表</value>
   </data>
-  <data name="error_LoginError" xml:space="preserve">
-    <value>Login id or Password is not match.</value>
+  <data name="homeTitle" xml:space="preserve">
+    <value>首页</value>
   </data>
-  <data name="error_missingEmailAddress" xml:space="preserve">
-    <value>Please input email.</value>
+  <data name="MemberShipsTitle" xml:space="preserve">
+    <value>会员中心</value>
   </data>
-  <data name="error_MissLoginId" xml:space="preserve">
-    <value>Please input login id.</value>
+  <data name="membershipTitle" xml:space="preserve">
+    <value>用户管理</value>
   </data>
-  <data name="error_MissPassword" xml:space="preserve">
-    <value>Please input password.</value>
+  <data name="orgCreateTitle" xml:space="preserve">
+    <value>创建组织</value>
   </data>
-  <data name="error_notMatchVerifyCode" xml:space="preserve">
-    <value>Verify Code not match.</value>
+  <data name="orgEditTitle" xml:space="preserve">
+    <value>编辑</value>
   </data>
-  <data name="error_UserIsLockout" xml:space="preserve">
-    <value>User is lockout.</value>
+  <data name="orgListTitle" xml:space="preserve">
+    <value>组织单元列表</value>
   </data>
-  <data name="error_UserIsNotApproved" xml:space="preserve">
-    <value>User is not approved.</value>
+  <data name="permissionCreateTitle" xml:space="preserve">
+    <value>创建新许可证</value>
   </data>
-  <data name="input_password_again" xml:space="preserve">
-    <value>Confirm can't be blank.</value>
+  <data name="permissionEditTitle" xml:space="preserve">
+    <value>编辑许可证</value>
   </data>
-  <data name="label_AccountOrEmail" xml:space="preserve">
-    <value>Account Or Email</value>
+  <data name="permissionListTitle" xml:space="preserve">
+    <value>许可证列表</value>
   </data>
-  <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
-    <value>Child Org's Count</value>
+  <data name="personalTitle" xml:space="preserve">
+    <value>个人中心</value>
   </data>
-  <data name="PermissionName" xml:space="preserve">
-    <value>Permission Name</value>
+  <data name="roleCreateTitle" xml:space="preserve">
+    <value>创建角色</value>
   </data>
-  <data name="RegistryTime" xml:space="preserve">
-    <value>Registry time</value>
+  <data name="roleDeleteTitle" xml:space="preserve">
+    <value>刪除</value>
   </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
+  <data name="roleEditTitle" xml:space="preserve">
+    <value>编辑</value>
   </data>
-  <data name="VerifyCode" xml:space="preserve">
-    <value>Verify Code</value>
+  <data name="roleListTitle" xml:space="preserve">
+    <value>角色列表</value>
   </data>
-  <data name="VerifyEmail" xml:space="preserve">
-    <value>Verify Email if changed</value>
+  <data name="settingsTitle" xml:space="preserve">
+    <value>设置</value>
   </data>
-  <data name="AccountInfo" xml:space="preserve">
-    <value>Setting</value>
+  <data name="systemTitle" xml:space="preserve">
+    <value>系统</value>
   </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
-    <value>Please input login ID or email address.</value>
+  <data name="userCreateTitle" xml:space="preserve">
+    <value>创建用户</value>
   </data>
-  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
-    <value>Please input verify code.</value>
+  <data name="userEditTitle" xml:space="preserve">
+    <value>用户编辑</value>
   </data>
-  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
-    <value>Password can't be blank.</value>
+  <data name="userListTitle" xml:space="preserve">
+    <value>用户列表</value>
   </data>
-  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
-    <value>Current Password can't be blank.</value>
-  </data>
-  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
-    <value>Please input correct email address.</value>
-  </data>
-  <data name="AssignUserGroup" xml:space="preserve">
-    <value>Assign Users</value>
-  </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Change Password</value>
+  <data name="permissionDeleteTitle" xml:space="preserve">
+    <value>删除许可证</value>
   </data>
 </root>

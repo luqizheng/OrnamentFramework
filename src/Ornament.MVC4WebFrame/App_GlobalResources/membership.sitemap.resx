@@ -117,100 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
-    <value>Password doesn't match the confirmation.</value>
+  <data name="assignTitle" xml:space="preserve">
+    <value>Assign</value>
   </data>
-  <data name="alertMsg_duplicate_Email" xml:space="preserve">
-    <value>This email has been used by another user.</value>
+  <data name="dataInitTitle" xml:space="preserve">
+    <value>Data Initialization</value>
   </data>
-  <data name="alertMsg_duplicate_loginId" xml:space="preserve">
-    <value>Logind is exist, please choice another one.</value>
+  <data name="EmailsTitle" xml:space="preserve">
+    <value>Email Notify</value>
   </data>
-  <data name="alertMsg_OldPasswordNotRight" xml:space="preserve">
-    <value>Current Password isn't right.</value>
+  <data name="eventLogTitle" xml:space="preserve">
+    <value>Event Log</value>
   </data>
-  <data name="alertMsg_Password_length_not_right" xml:space="preserve">
-    <value>Password is too short (minimum is {0} characters).</value>
+  <data name="groupAssignRoleTitle" xml:space="preserve">
+    <value>Assign Roles</value>
   </data>
-  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
-    <value>Please input confirm password.</value>
-  </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Password agan</value>
-  </data>
-  <data name="CreateTime" xml:space="preserve">
-    <value>Create time</value>
-  </data>
-  <data name="CurrentPassword" xml:space="preserve">
-    <value>Current Password</value>
-  </data>
-  <data name="error_LoginError" xml:space="preserve">
-    <value>Login id or Password is not match.</value>
-  </data>
-  <data name="error_missingEmailAddress" xml:space="preserve">
-    <value>Please input email.</value>
-  </data>
-  <data name="error_MissLoginId" xml:space="preserve">
-    <value>Please input login id.</value>
-  </data>
-  <data name="error_MissPassword" xml:space="preserve">
-    <value>Please input password.</value>
-  </data>
-  <data name="error_notMatchVerifyCode" xml:space="preserve">
-    <value>Verify Code not match.</value>
-  </data>
-  <data name="error_UserIsLockout" xml:space="preserve">
-    <value>User is lockout.</value>
-  </data>
-  <data name="error_UserIsNotApproved" xml:space="preserve">
-    <value>User is not approved.</value>
-  </data>
-  <data name="input_password_again" xml:space="preserve">
-    <value>Confirm can't be blank.</value>
-  </data>
-  <data name="label_AccountOrEmail" xml:space="preserve">
-    <value>Account Or Email</value>
-  </data>
-  <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
-    <value>Child Org's Count</value>
-  </data>
-  <data name="PermissionName" xml:space="preserve">
-    <value>Permission Name</value>
-  </data>
-  <data name="RegistryTime" xml:space="preserve">
-    <value>Registry time</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
-  </data>
-  <data name="VerifyCode" xml:space="preserve">
-    <value>Verify Code</value>
-  </data>
-  <data name="VerifyEmail" xml:space="preserve">
-    <value>Verify Email if changed</value>
-  </data>
-  <data name="AccountInfo" xml:space="preserve">
-    <value>Setting</value>
-  </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
-    <value>Please input login ID or email address.</value>
-  </data>
-  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
-    <value>Please input verify code.</value>
-  </data>
-  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
-    <value>Password can't be blank.</value>
-  </data>
-  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
-    <value>Current Password can't be blank.</value>
-  </data>
-  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
-    <value>Please input correct email address.</value>
-  </data>
-  <data name="AssignUserGroup" xml:space="preserve">
+  <data name="groupAssignUserTitle" xml:space="preserve">
     <value>Assign Users</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Change Password</value>
+  <data name="groupCreateTitle" xml:space="preserve">
+    <value>New Usergroup</value>
+  </data>
+  <data name="groupEditTitle" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="groupListTitle" xml:space="preserve">
+    <value>Usergroups</value>
+  </data>
+  <data name="homeTtitle" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="MemberShipsTitle" xml:space="preserve">
+    <value>MemberShip</value>
+  </data>
+  <data name="membershipTitle" xml:space="preserve">
+    <value>Member</value>
+  </data>
+  <data name="orgCreateTitle" xml:space="preserve">
+    <value>New Org</value>
+  </data>
+  <data name="orgEditTitle" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="orgListTitle" xml:space="preserve">
+    <value>Org list</value>
+  </data>
+  <data name="permissionCreateTitle" xml:space="preserve">
+    <value>Create New Permission</value>
+  </data>
+  <data name="permissionEditTitle" xml:space="preserve">
+    <value>Edit Permission</value>
+  </data>
+  <data name="permissionListTitle" xml:space="preserve">
+    <value>Permission list</value>
+  </data>
+  <data name="personalTitle" xml:space="preserve">
+    <value>Personal</value>
+  </data>
+  <data name="roleCreateTitle" xml:space="preserve">
+    <value>New Role</value>
+  </data>
+  <data name="roleDeleteTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="roleEditTitle" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="roleListTitle" xml:space="preserve">
+    <value>Role list</value>
+  </data>
+  <data name="settingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="systemTitle" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="userCreateTitle" xml:space="preserve">
+    <value>Create User </value>
+  </data>
+  <data name="userEditTitle" xml:space="preserve">
+    <value>Edit User</value>
+  </data>
+  <data name="userListTitle" xml:space="preserve">
+    <value>User list</value>
+  </data>
+  <data name="permissionDeleteTitle" xml:space="preserve">
+    <value>Delete Permission</value>
   </data>
 </root>
