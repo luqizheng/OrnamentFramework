@@ -225,8 +225,8 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-CN.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh.resx" />
-    <EmbeddedResource Include="Properties\Resource.zh-CN.resx" />
-    <EmbeddedResource Include="Properties\Resource.zh.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -364,7 +364,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>13863</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:13435/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

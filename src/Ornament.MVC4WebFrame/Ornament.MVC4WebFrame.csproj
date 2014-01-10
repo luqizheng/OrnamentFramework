@@ -204,6 +204,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basic.zh.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\membership.sitemap.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>membership.sitemap.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\membership.sitemap.zh-CN.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>membership.sitemap.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\membership.sitemap.zh.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>membership.sitemap.zh.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\sitemap.designer.cs">
       <DependentUpon>sitemap.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -984,10 +999,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Extends\CRM\Qi.CRM.Dao.NHimple\Qi.CRM.Dao.NhImple.csproj">
-      <Project>{6ab594b1-72ef-4886-a6d1-cc6cff644d31}</Project>
-      <Name>Qi.CRM.Dao.NhImple</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Helpers\ElFinder.Net\ElFinder.Net.csproj">
       <Project>{4635B781-A1A1-40A3-B57D-26CF552695BB}</Project>
       <Name>ElFinder.Net</Name>
@@ -1138,6 +1149,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\MyMessage\App_LocalResources\Index.zh-CN.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\membership.sitemap.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>membership.sitemap.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\membership.sitemap.zh-CN.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>membership.sitemap.zh-CN.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\membership.sitemap.zh.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>membership.sitemap.zh.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

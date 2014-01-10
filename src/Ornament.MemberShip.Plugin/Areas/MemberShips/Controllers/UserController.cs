@@ -55,6 +55,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         #endregion
 
         [ResourceAuthorize(UserOperator.Read, "User")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userListTitle",
+             ParentKey = "MemberShips", Key = "User",
+             Resource = "User", Operator = UserOperator.Read)
+        ]
         public ActionResult Index()
         {
             var pagination = new Pagination();
@@ -110,7 +114,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
+        
+        /*[ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
+
         public ActionResult Users([ModelBinder(typeof(PostDataModelBinder))] DataTablesPostData postData)
         {
             var result = new DataTableResult { iTotalDisplayRecords = postData.DisplayLength };
@@ -150,10 +156,11 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             result.iTotalRecords = total;
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        }*/
 
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userEditTitle",ParentKey = "User",Resource = "User", Operator = UserOperator.Modify)]
         public ActionResult Edit(string loginId)
         {
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
@@ -244,7 +251,11 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
             return RedirectToAction("Index");
         }
-
+        
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userEditTitle",
+            ParentKey = "User",
+            Resource = "User", Operator = UserOperator.Modify)
+        ]
         [ResourceAuthorize(UserOperator.Modify, "User")]
         public ActionResult Create()
         {

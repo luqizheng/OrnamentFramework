@@ -25,9 +25,9 @@ namespace Ornament.Web.MemberShips
         public bool IsAccessibleToUser(ISiteMapNode node)
         {
             string operatorExpress = node.Attributes.ContainsKey("permission")
-                ? (string) node.Attributes["permission"]
+                ? (string)node.Attributes["permission"]
                 : null;
-            if (operatorExpress == null)
+            if (String.IsNullOrEmpty(operatorExpress))
             {
                 return node.IsAccessibleToUser();
             }

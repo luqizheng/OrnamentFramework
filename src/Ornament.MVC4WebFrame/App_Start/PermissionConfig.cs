@@ -1,8 +1,9 @@
-﻿using Ornament.MemberShip.Plugin.Models;
+﻿using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
+using Ornament.MemberShip.Plugin.Models;
 using Ornament.Messages.Newses;
 using Ornament.Web;
 
-namespace Ornament.MVCWebFrame.App_Start
+namespace Ornament.MVCWebFrame
 {
     /// <summary>
     /// Permission setting 
@@ -11,14 +12,7 @@ namespace Ornament.MVCWebFrame.App_Start
     {
         public static void Regist()
         {
-            OrnamentContext.ResourceManager
-                           .Add("User", typeof (UserOperator))
-                           .Add("Role", typeof (RoleOperator))
-                           .Add("Account", typeof (AccountOperator))
-                           .Add("Org", typeof (OrgOperator))
-                           .Add("UserGroup", typeof (UserGroupOperator))
-                           .Add("Permission", typeof (PermissionOperator))
-                ;
+            
 
             OrnamentContext.ResourceManager
                            .Add(typeof (NewsType), typeof (NewsOperator));

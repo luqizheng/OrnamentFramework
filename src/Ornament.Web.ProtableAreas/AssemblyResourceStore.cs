@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Resources;
+using System.Threading;
 
 namespace Ornament.Web.PortableAreas
 {
@@ -43,6 +46,23 @@ namespace Ornament.Web.PortableAreas
             }
         }
 
+        public ResourceSet GetMultiLanguageResouce(string resouceName)
+        {
+            string fullResourceName = GetFullyQualifiedTypeFromPath(resouceName);
+
+            string actualResourceName = null;
+
+            if (resources.TryGetValue(fullResourceName, out actualResourceName))
+            {
+                var t = fullResourceName.Length - ".resources".Length;
+                var manage = new ResourceManager(actualResourceName.Substring(0, t), typeToLocateAssembly.Assembly);
+
+                var result = manage.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
         public Stream GetResourceStream(string resourceName)
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resourceName);

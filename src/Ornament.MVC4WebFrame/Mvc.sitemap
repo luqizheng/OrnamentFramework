@@ -10,23 +10,25 @@
    a.这个节点拥有子菜单的，那么这个节点会自动设置为clickabled=false,也就是url会设置为"#"。
    b.这个节点没有任意一个子菜单。那么会显示设置的url
 -->
-  <mvcSiteMapNode  controller="Home" action="Index" title="Home" imageUrl="icon-home">
+  <mvcSiteMapNode  controller="Home" action="Index" title="$Resources:sitemap,homeTitle" imageUrl="icon-home">
 
     <mvcSiteMapNode  action="Index" controller="Account"
                      imageUrl="fam-user" title="Personal Center" disabled="disabled">
     </mvcSiteMapNode>
 
     <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips">
-      <mvcSiteMapNode   action="Index" controller="User" title="$Resources:sitemap,userListTitle"  permission="User:Read" >
+      <!--<mvcSiteMapNode   action="Index" controller="User" title="$Resources:sitemap,userListTitle"  permission="User:Read" >
         <mvcSiteMapNode action="Create" title="$Resources:sitemap,userCreateTitle"   permission="User:Modify" disabled="true"/>
         <mvcSiteMapNode  action="Edit" title="Edit"  permission="User:Modify" disabled="true"/>
         <mvcSiteMapNode  action="Assign"  title="Assing"  permission="User:Modify" disabled="true"/>
       </mvcSiteMapNode>
+      -->
       <!--<mvcSiteMapNode   controller="Role" action="Index"  permission="Role:Read" title="Roles">
         <mvcSiteMapNode  action="Edit"  permission="Role:Modify" title="Edit"></mvcSiteMapNode>
         <mvcSiteMapNode   action="Create"  permission="Role:Modify" title="Create"></mvcSiteMapNode>
         <mvcSiteMapNode   action="Delete"  permission="Role:Delete" title="Delete"></mvcSiteMapNode>
       </mvcSiteMapNode>-->
+      <!--
       <mvcSiteMapNode controller="UserGroup" action="Index"  permission="UserGroup:Read" title="UserGroups">
         <mvcSiteMapNode   action="Edit"  permission="UserGroup:Modify" title="Edit"></mvcSiteMapNode>
         <mvcSiteMapNode   action="Create"  permission="UserGroup:Modify" title="Create"></mvcSiteMapNode>
@@ -40,7 +42,7 @@
       <mvcSiteMapNode  controller="Permissions" action="Index"  permission="Permission:Edit" title="Permissions">
         <mvcSiteMapNode   action="Edit"  permission="Permission:Edit" title="Edit"></mvcSiteMapNode>
         <mvcSiteMapNode  action="Create"  permission="Permission:Create" title="Create"></mvcSiteMapNode>
-      </mvcSiteMapNode>
+      </mvcSiteMapNode>-->
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" >

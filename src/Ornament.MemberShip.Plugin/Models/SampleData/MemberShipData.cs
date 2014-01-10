@@ -52,7 +52,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
                                                            AccountOperator.ChangePrivateInfo);
 
             Permission permissionPermission = CreatePermission(ResourceSetting.Permission, "许可证完全控制", "许可证完全控制",
-                                                               PermissionOperator.Create | PermissionOperator.Delete |
+                                                               PermissionOperator.Read | PermissionOperator.Delete |
                                                                PermissionOperator.Edit);
 
             Role adminRole = CreateRole("admin", "管理员");

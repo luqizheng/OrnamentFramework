@@ -24,8 +24,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(RoleOperator.Read, "Role"),
-         OrnamentMvcSiteMapNode(Title = "$resources:Ornament.MemberShip.Plugin.Properties.Resources,AccountInfo",
-             ParentKey = "MemberShips", ResourceKey = "CreateTime",
+         OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleListTitle",
+             ParentKey = "MemberShips",Key = "Role",
              Resource = "Role", Operator = RoleOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
@@ -37,18 +37,32 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View(result);
         }
 
-        [ResourceAuthorize(RoleOperator.Modify, "Role")]
+        [
+            ResourceAuthorize(RoleOperator.Modify, "Role"),
+            OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleEditTitle",
+                ParentKey = "Role",
+                Resource = "Role", Operator = RoleOperator.Modify)
+        ]
         public ActionResult Edit(string id)
         {
             return View(_roleDao.Load(id));
         }
 
-        [ResourceAuthorize(RoleOperator.Modify, "Role")]
+        [ResourceAuthorize(RoleOperator.Modify, "Role"),
+         OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleCreateTitle",
+             ParentKey = "Role",
+             Resource = "Role", Operator = RoleOperator.Modify)
+        ]
         public ActionResult Create()
         {
             return View();
         }
 
+        [ResourceAuthorize(RoleOperator.Delete, "Role")]
+         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
+             ParentKey = "Role",
+             Resource = "Role", Operator = RoleOperator.Modify)
+        ]
         public ActionResult Delete(string id)
         {
             IList<IPerformer> a = _factory.CreateMemberDao().Find(id);
@@ -56,7 +70,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View(_roleDao.Get(id));
         }
 
-        [HttpDelete]
+        [HttpDelete, ResourceAuthorize(RoleOperator.Delete, "Role")]
         public ActionResult Delete(Role role)
         {
             IList<IPerformer> a = _factory.CreateMemberDao().Find(role.Id);
@@ -68,7 +82,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpPost,ResourceAuthorize(RoleOperator.Modify, "Role"),]
         public ActionResult Create(Role role, string[] permissionIds)
         {
             if (!ModelState.IsValid)

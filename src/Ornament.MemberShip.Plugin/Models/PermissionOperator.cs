@@ -6,8 +6,8 @@ namespace Ornament.MemberShip.Plugin.Models
     public enum PermissionOperator
     {
         None = 0,
-        Create = 1,
-        Edit = 2 | Create,
+        Read = 1,
+        Edit = 2 | Read,
         Delete = 4 | Edit,
 
     }

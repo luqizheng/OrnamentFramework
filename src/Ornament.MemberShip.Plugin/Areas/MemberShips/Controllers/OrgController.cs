@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
@@ -19,7 +21,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         //
         // GET: /Orgs/
-
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgListTitle",
+            ParentKey = "MemberShips", Key = "Org",
+            Resource = "Org", Operator = OrgOperator.Read), ResourceAuthorize(OrgOperator.Read, "Org")]
         public ActionResult Index(string id)
         {
             if (id == null)
@@ -33,6 +37,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View(org);
         }
 
+        [ResourceAuthorize(OrgOperator.Modify, "Org")]
+        [OrnamentMvcSiteMapNode(
+            Title = "$resources:membership.sitemap,orgEditTitle"
+            , ParentKey = "Org")]
         public ActionResult Edit(string id)
         {
             IOrgDao orgDao = _factory.CreateOrgDao();
@@ -43,7 +51,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         //
         // GET: /Orgs/Create. id is parentId
-
+        [ResourceAuthorize(OrgOperator.Modify, "Org")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgCreateTitle", ParentKey = "Org",
+            Operator = OrgOperator.Modify, Resource = "Org")]
         public ActionResult Create(string parentId)
         {
             var a = new OrgModel();
@@ -59,6 +69,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // POST: /Orgs/Create
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [ResourceAuthorize(OrgOperator.Modify, "Org")]
         public ActionResult Save(OrgModel org)
         {
             if (ModelState.IsValid)

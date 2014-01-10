@@ -28,12 +28,14 @@ namespace Ornament.MemberShip.Permissions
         /// <exception cref="NotFoundOperatorTypeException">Can not find OperatorType base on resource</exception>
         public virtual Type GetOperatorType(T res)
         {
+            if (object.ReferenceEquals(default(T), res))
+                throw new ArgumentNullException("res");
             if (_resOperatorMapping.ContainsKey(res))
             {
                 return _resOperatorMapping[res];
             }
             var s = res as string;
-            if (s != null)
+            if (s == null)
                 throw new NotFoundOperatorTypeException(s);
             throw new NotFoundOperatorTypeException(typeof(T));
         }

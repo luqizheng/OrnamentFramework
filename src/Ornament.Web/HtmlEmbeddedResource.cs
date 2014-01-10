@@ -16,8 +16,8 @@ namespace Ornament.Web
 
         public static string GetEmbededResourceString(this HtmlHelper htmlHelper, string viewName, string key)
         {
-            ViewContext a = htmlHelper.ViewContext;
-            return GetEmbededResourceString(a, viewName, key);
+            
+            return GetEmbededResourceString(htmlHelper.ViewContext, viewName, key);
         }
 
         public static string GetFromatResourceString(this HtmlHelper htmlHelper, string key,
@@ -44,7 +44,6 @@ namespace Ornament.Web
             string filePath = pagePath.Substring(0, pagePath.LastIndexOf('/') + 1) + "App_LocalResources";
 
             ResourceSet resxs = GetPath(page, filePath, pageName);
-
             if (resxs != null)
             {
                 return resxs.GetString(key);
@@ -66,19 +65,19 @@ namespace Ornament.Web
 
             string defaultReex =
                 resourceStore.GetFullyQualifiedTypeFromPath(string.Format(@"{0}/{1}.resources", filePath, pageName));
-            Stream stream = resourceStore.GetResourceStream(defaultReex);
-            if (stream == null)
+            return resourceStore.GetMultiLanguageResouce(defaultReex);
+            /*if (stream == null)
                 return null;
             try
             {
                 var reader = new ResourceSet(new ResourceReader(stream));
-
+                
                 return reader;
             }
             catch (Exception)
             {
                 return null;
-            }
+            }*/
         }
     }
 }

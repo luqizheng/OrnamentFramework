@@ -1,6 +1,8 @@
-﻿@using Ornament
+﻿@using MvcSiteMapProvider.Web.Html
+@using Ornament
 @using Ornament.MemberShip
 @using Ornament.Web
+@using Ornament.Web.UI.Theme
 
 @model Ornament.MemberShip.Plugin.Models.Memberships.OrgModel
 @{
@@ -20,29 +22,29 @@
     }
     @if (Model != null)
     {
-        <span>
-            Html.Partial("OrgNavigator", parent)
+        <span>Html.Partial("OrgNavigator", parent)
         </span>
     }
 }
-<div class="widget">
+@using (var panel = Html.Panel())
+{
+    @panel.Body(@<text>
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("Save", "Org", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(s => s.Id)
+        @Html.EditorFor(s => s.Name)
+        @Html.EditorFor(s => s.Remark)
+        @Html.EditorFor(s => s.Roles)
 
-    <div class="well">
-        @Html.ValidationSummary()
-        @using (Html.BeginForm("Save", "Org", FormMethod.Post, new {@class = "form-horizontal"}))
-        {
-            @Html.HiddenFor(s => s.Id)
-            @Html.EditorFor(s => s.Name)
-            @Html.EditorFor(s => s.Remark)
-            @Html.EditorFor(s => s.Roles)
 
+        @Html.Hidden("Parent", (Model != null && Model.Parent != null) ? Model.Parent.Id : "")
+        <div class="form-actions">
+            <button class="btn btn-primary">@Ornament.Properties.Resources.OK</button>
+            <button onclick = " location = '@Url.Action("Index")' " class="btn" type="button">@Ornament.Properties.Resources.Cancel</button>
+        </div>
+    }
+    </text>)
 
-            @Html.Hidden("Parent", (Model != null && Model.Parent != null) ? Model.Parent.Id : "")
-            <div class="form-actions">
-                <button class="btn btn-primary">@Ornament.Properties.Resources.OK</button>
-                <button onclick = " location = '@Url.Action("Index")' " class="btn" type="button">@Ornament.Properties.Resources.Cancel</button>
-            </div>
-        }
-
-    </div>
-</div>
+    
+}

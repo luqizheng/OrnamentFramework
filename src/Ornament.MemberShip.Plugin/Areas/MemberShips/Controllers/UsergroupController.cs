@@ -1,7 +1,11 @@
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
+using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.Web;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
@@ -18,17 +22,19 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         //
         // GET: /Usergroups/
-
+        [ResourceAuthorize(UserGroupOperator.Read, ResourceSetting.UserGroup)]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupListTitle", ParentKey = "MemberShips",
+            Key = "Usergroup",
+            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
             IUserGroupDao dao = _factory.CreateUserGroupDao();
             int total;
-            var result = dao.FindAll(pagination.CurrentPage, pagination.PageSize, out total);
+            IList<UserGroup> result = dao.FindAll(pagination.CurrentPage, pagination.PageSize, out total);
             pagination.TotalRows = total;
             ViewData["Nav"] = pagination;
             return View(result);
         }
-
 
 
         //
@@ -41,6 +47,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         //
         // GET: /Usergroups/Create
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupCreateTitle", ParentKey = "Usergroup",
+            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Create()
         {
             return View();
@@ -50,6 +59,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // POST: /Usergroups/Create
 
         [HttpPost]
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
         public ActionResult Create(UserGroup userGroup)
         {
             if (ModelState.IsValid)
@@ -60,6 +70,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View(userGroup);
         }
 
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupEditTitle", ParentKey = "Usergroup",
+Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Edit(string id)
         {
             UserGroup ug;
@@ -74,6 +87,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // POST: /Usergroups/Edit/5
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
         public ActionResult Edit(UserGroupModel userGroup)
         {
             if (ModelState.IsValid)
@@ -84,7 +98,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View(userGroup);
         }
 
-
+        [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignRole(string id)
         {
             if (id == null)
@@ -94,6 +108,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignRole(string[] roles, string id)
         {
             IRoleDao roleDao = _factory.CreateRoleDao();
@@ -107,6 +122,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return RedirectToAction("Index");
         }
 
+        [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignUser(string id)
         {
             if (id == null)
@@ -117,6 +133,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignUser(string[] loginIds, string id)
         {
             if (id == null)

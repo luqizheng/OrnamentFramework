@@ -1,5 +1,6 @@
 ﻿@using Ornament
 @using Ornament.Properties
+@using Ornament.Web.UI.Theme
 @model Ornament.MemberShip.Plugin.Models.Memberships.UserGroupModel
 @{
     ViewBag.Title = Resources.Edit + ":" + Model.Name;
@@ -7,12 +8,12 @@
 }
 @section pageTitle
 {
-    <h5>Edit UserGroup @Model.Name</h5>
+    <h5>@Model.Name</h5>
 }
-<div class="widget">
-
-    <div class="well">
-        <div class="form-horizontal">
+@using (var panel = Html.Panel())
+{
+    @panel.Body(@<text>
+                      <div class="form-horizontal">
             @using (Html.BeginForm())
             {
                 @Html.ValidationSummary()
@@ -29,8 +30,9 @@
     
             }
         </div>
-    </div>
-</div>
+                 </text>)
+}
+
 @section scripts{
     <script type="text/javascript">
         seajs.use(['jquery'], function () {

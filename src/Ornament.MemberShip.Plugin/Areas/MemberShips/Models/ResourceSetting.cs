@@ -1,15 +1,31 @@
-﻿namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
+﻿using Ornament.MemberShip.Plugin.Models;
+
+namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
 {
     public static class ResourceSetting
     {
-        public static readonly string Role = "Role";
+        public const string Role = "Role";
 
-        public static readonly string User = "User";
+        public const string User = "User";
 
-        public static readonly string UserGroup = "UserGroup";
+        public const string UserGroup = "UserGroup";
+        public const string Org = "Org";
 
 
-        public static readonly string Account = "Account";
-        public static readonly string Permission = "Permission";
+        public const string Account = "Account";
+        public const string Permission = "Permission";
+
+
+        public static void Registry()
+        {
+            OrnamentContext.ResourceManager
+                .Add("User", typeof (UserOperator))
+                .Add("Role", typeof (RoleOperator))
+                .Add("Account", typeof (AccountOperator))
+                .Add(Org, typeof (OrgOperator))
+                .Add(UserGroup, typeof (UserGroupOperator))
+                .Add("Permission", typeof (PermissionOperator))
+                ;
+        }
     }
 }
