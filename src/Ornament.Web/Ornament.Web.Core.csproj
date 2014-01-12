@@ -200,6 +200,8 @@
     <Compile Include="MemberShips\RoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceDescription.cs" />
+    <Compile Include="SeajsModules\CombineModuleAsssemblyFactory.cs" />
+    <Compile Include="SeajsModules\OrnamentPortableEmbedModule.cs" />
     <Compile Include="SiteMapResolveUrl.cs" />
     <Compile Include="TimeZoneHtmlExtender.cs" />
     <Compile Include="ValidationAdapter\StepAttributeAdapter.cs" />

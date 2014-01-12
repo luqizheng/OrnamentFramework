@@ -52,7 +52,7 @@ namespace Ornament.Web
                 string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
                 new
                 {
-                    controller = "EmbeddedResourceController",
+                    controller = "EmbeddedResource",
                     action = "Index",
                     resourcePath = _assemblyRootNamespace + "/" + path,
                 }
@@ -69,7 +69,7 @@ namespace Ornament.Web
                 string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
                 new
                 {
-                    controller = "SeajsModuleEmbeddedResourceController",
+                    controller = "SeajsModuleEmbeddedResource",
                     action = "Index",
                     resourcePath = _assemblyRootNamespace + "/" + path,
                 }
