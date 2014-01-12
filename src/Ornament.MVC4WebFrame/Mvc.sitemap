@@ -1,10 +1,104 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
-            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd" >
+  <!--
+1) 菜单上面的Operator 操作检查只支持类型Permission。写法是 User:Create,前面一个ResourceDessciption的Id，后面一个UserOperator的值
+2) 如果发现mvcNode上面有Disabled = false，那么在主菜单中是不会显示。
+3) 如果发现mvcNode上clickabled=false，那么就不会使用url二是"#"。
+4）主菜单中，如果某节点clickable=true 或者没有声明，
+   a.这个节点拥有子菜单的，那么这个节点会自动设置为clickabled=false,也就是url会设置为"#"。
+   b.这个节点没有任意一个子菜单。那么会显示设置的url
+-->
+  <mvcSiteMapNode  controller="Home" action="Index" title="$Resources:sitemap,homeTitle" imageUrl="icon-home">
 
-  <mvcSiteMapNode title="Home" controller="Home" action="Index">
-    <mvcSiteMapNode title="About" controller="Home" action="About"/>
+    <mvcSiteMapNode  action="Index" controller="Account"
+                     imageUrl="fam-user" title="Personal Center" disabled="disabled">
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips">
+      <!--<mvcSiteMapNode   action="Index" controller="User" title="$Resources:sitemap,userListTitle"  permission="User:Read" >
+        <mvcSiteMapNode action="Create" title="$Resources:sitemap,userCreateTitle"   permission="User:Modify" disabled="true"/>
+        <mvcSiteMapNode  action="Edit" title="Edit"  permission="User:Modify" disabled="true"/>
+        <mvcSiteMapNode  action="Assign"  title="Assing"  permission="User:Modify" disabled="true"/>
+      </mvcSiteMapNode>
+      -->
+      <!--<mvcSiteMapNode   controller="Role" action="Index"  permission="Role:Read" title="Roles">
+        <mvcSiteMapNode  action="Edit"  permission="Role:Modify" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Create"  permission="Role:Modify" title="Create"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Delete"  permission="Role:Delete" title="Delete"></mvcSiteMapNode>
+      </mvcSiteMapNode>-->
+      <!--
+      <mvcSiteMapNode controller="UserGroup" action="Index"  permission="UserGroup:Read" title="UserGroups">
+        <mvcSiteMapNode   action="Edit"  permission="UserGroup:Modify" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Create"  permission="UserGroup:Modify" title="Create"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="AssignUser"  permission="UserGroup:Assign" title="Assign User"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="AssignRole"  permission="UserGroup:Assign" title="Assign Role"></mvcSiteMapNode>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode  controller="Org" action="Index"  permission="Org:Read" title="Orgs">
+        <mvcSiteMapNode  action="Edit"  permission="Org:Modify" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode   action="Create"  permission="Org:Modify" title="Create"></mvcSiteMapNode>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode  controller="Permissions" action="Index"  permission="Permission:Edit" title="Permissions">
+        <mvcSiteMapNode   action="Edit"  permission="Permission:Edit" title="Edit"></mvcSiteMapNode>
+        <mvcSiteMapNode  action="Create"  permission="Permission:Create" title="Create"></mvcSiteMapNode>
+      </mvcSiteMapNode>-->
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" >
+      <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
+        <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" >
+        <mvcSiteMapNode controller="News" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="News" area="Messages" action="Create" title="Create"/>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+    <!--
+    <mvcSiteMapNode title="Notify Messages" controller="Notify" area="Messages" action="Index" clickable="false">
+      <mvcSiteMapNode controller="NotifyType" area="Messages" action="Index" title="NotifyType Setting"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="Template" area="Messages" action="Index" title="Templates">
+        <mvcSiteMapNode controller="Template" area="Messages" action="Edit" title="Edit"/>
+        <mvcSiteMapNode controller="Template" area="Messages" action="Create" title="Create"/>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode   imageUrl="icon-cogs" clickable="false"  title="">
+      <mvcSiteMapNode controller="Site" area="Information" action="Index" title="Information"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="Manager" area="Files" action="Index" title="File Managers">
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Documents" imageUrl="icon-indent-right">
+      <mvcSiteMapNode controller="TypeLayout" area="Doc" action="BaseType" title="BaseType"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="TypeLayout" area="Doc" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
+    </mvcSiteMapNode>-->
+
+    <!--<mvcSiteMapNode title="场馆管理" imageUrl="icon-indent-right">
+      <mvcSiteMapNode controller="Gymnasium" area="Badminton" action="Index" title ="场馆管理" >
+
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode controller="Consumables" area="Badminton" action="Index" title ="消耗品管理" >
+
+    </mvcSiteMapNode>
+
+
+    <mvcSiteMapNode title="基础数据" imageUrl="icon-indent-rigth">
+      <mvcSiteMapNode controller="Brand" area="Badminton" action="Index" title="品牌">
+      </mvcSiteMapNode>
+      <mvcSiteMapNode controller="Model" area="Badminton" action="Index" title="型号"></mvcSiteMapNode>
+      <mvcSiteMapNode controller="MeasurementUnit" area="Badminton" action="Index" title="计量单位"></mvcSiteMapNode>
+
+      <mvcSiteMapNode controller="Company" area="CRM" action="Index" title="公司"></mvcSiteMapNode>
+    </mvcSiteMapNode>-->
+
+
+
+
+
   </mvcSiteMapNode>
+
 
 </mvcSiteMap>

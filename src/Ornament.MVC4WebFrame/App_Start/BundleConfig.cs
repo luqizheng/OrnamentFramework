@@ -6,6 +6,7 @@ using Qi;
 using SeajsBundles;
 using SeajsBundles.JqueryBundles;
 using SeajsBundles.Seajs;
+using SeajsBundles.Seajs.Modules;
 
 namespace Ornament.MVCWebFrame
 {
@@ -16,7 +17,7 @@ namespace Ornament.MVCWebFrame
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
-            OrnamentContext.Configuration.SetSeajsCombine(false);
+            OrnamentContext.Configuration.SetSeajsCombine(true);
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
             {
@@ -40,7 +41,7 @@ namespace Ornament.MVCWebFrame
         private static void Comp(BundleCollection t1)
         {
             t1.Add(new ScriptBundle("~/Components/json2.js").Include("~/Scripts/Components/json2.js"));
-            RootModule.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
+            SeajsModuleFactory.Instance.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
         }
 
         private static void Fx(BundleCollection bundles)

@@ -16,7 +16,6 @@ using Ornament.MVCWebFrame.App_Start;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.Cfg;
 using Ornament.Web.DataInitializers;
-using Ornament.Web.HttpModel;
 using Ornament.Web.PortableAreas.InputBuilder;
 using Qi.NHibernateExtender;
 
@@ -29,7 +28,7 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
-            
+
             MvcWebConfig.Regist(() =>
             {
                 AreaRegistration.RegisterAllAreas();
@@ -41,10 +40,9 @@ namespace Ornament.MVCWebFrame
                 //设置member root的初始化密码
                 var memberDataInit = GlobalInitializer.Get<MemberShipData>();
                 /*if (memberDataInit != null)*/
-                    memberDataInit.AdminPassword = "123456";
-
+                memberDataInit.AdminPassword = "123456";
             },
-                typeof(HttpErrorsController),
+                typeof (HttpErrorsController),
                 Assembly.GetExecutingAssembly());
 
             PermissionConfig.Regist();
@@ -78,14 +76,14 @@ namespace Ornament.MVCWebFrame
                     currenProfile.Save();
                     AnonymousIdentificationModule.ClearAnonymousIdentifier();
                 }
-                
 
-                    //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
+
+                //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
                 OrnamentContext.MemberShip.SwitchLanguage(OrnamentContext.MemberShip.Language());
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof(GlobalContext));
+                ILog log = LogManager.GetLogger(typeof (GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally
