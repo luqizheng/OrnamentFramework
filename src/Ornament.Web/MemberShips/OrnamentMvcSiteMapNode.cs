@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using MvcSiteMapProvider;
 
 namespace Ornament.Web.MemberShips
 {
     public class OrnamentMvcSiteMapNodeAttribute : MvcSiteMapNodeAttribute
     {
-        private string _resource;
         private object _operator;
-        
+        private string _resource;
 
-
+        public OrnamentMvcSiteMapNodeAttribute(string resource,object @operator)
+        {
+            this.Resource = resource;
+            this.Operator = @operator;
+        }
         public OrnamentMvcSiteMapNodeAttribute()
         {
-            this.Attributes.Add("permission","");
+            Attributes.Add("permission", "");
         }
 
         public string Resource
@@ -44,7 +42,7 @@ namespace Ornament.Web.MemberShips
         {
             if (_resource != null && _operator != null)
             {
-                this.Attributes["permission"]= String.Format("{0}:{1}", Resource, Operator);
+                Attributes["permission"] = String.Format("{0}:{1}", Resource, Operator);
             }
         }
     }

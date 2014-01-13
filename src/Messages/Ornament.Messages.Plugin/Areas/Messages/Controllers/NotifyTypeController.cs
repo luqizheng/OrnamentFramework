@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -21,10 +22,9 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             _notifyTypeDao = messageDao.NotifyTypeDao;
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
+
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitmap,notifyTypeTitle", ParentKey = "Messages",
+            Key = "nodifyType")]
         public ActionResult Index(string parentId)
         {
             IList<NotifyType> msgType = _notifyTypeDao.GetAll();
@@ -32,10 +32,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View(msgType);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitmap,notifyTypeEditTitle", ParentKey = "nodifyType")]
         public ActionResult Edit(string id)
         {
             var result = new NotifyTypeModel(_notifyTypeDao.Get(id));
@@ -58,9 +55,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View("Edit", type);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitmap,notifyTypeCreateTitle", ParentKey = "nodifyType")]
         public ActionResult Create()
         {
             return View("Edit");

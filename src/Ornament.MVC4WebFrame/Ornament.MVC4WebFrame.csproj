@@ -219,6 +219,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>membership.sitemap.zh.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\message.sitemap.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>message.sitemap.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\sitemap.designer.cs">
       <DependentUpon>sitemap.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -235,7 +240,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\InitData.cs" />
     <Compile Include="App_Start\ApplicationConfig.cs" />
     <Compile Include="App_Start\NotifyConfig.cs" />
     <Compile Include="App_Start\PermissionConfig.cs" />
@@ -255,7 +259,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataInit\MeasurementUnitInit.cs" />
-    <Compile Include="Models\DataInit\MessageInit.cs" />
     <Compile Include="Models\ProtableAreaLogMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1165,6 +1168,12 @@
     <Content Include="App_GlobalResources\membership.sitemap.zh.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>membership.sitemap.zh.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\message.sitemap.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>message.sitemap.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <PropertyGroup>

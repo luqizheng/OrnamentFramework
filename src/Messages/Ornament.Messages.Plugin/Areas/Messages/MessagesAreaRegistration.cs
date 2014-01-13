@@ -19,7 +19,9 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-            //注册 Dao
+            //初始化诗句
+            bus.Send(new MessageInit());
+
             var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin", context);
 
             helper.RegistyScripts("News");
@@ -44,7 +46,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional}
+                new { action = "Index", id = UrlParameter.Optional }
                 );
             base.RegisterArea(context, bus);
         }

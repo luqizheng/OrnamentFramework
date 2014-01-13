@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Notification;
 using Qi.Web.Http;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -21,26 +23,26 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             User user = OrnamentContext.MemberShip.CurrentUser();
             int total;
-            var msgs = _messageDaoFactory.SimpleMessageDao.GetNotifyMessages(user, readStatus, 40,
-                                                                                                  0, out total);
+            IList<SimpleMessage> msgs = _messageDaoFactory.SimpleMessageDao.GetNotifyMessages(user, readStatus, 40,
+                0, out total);
             var result = new
-                {
-                    total,
-                    data = from message in msgs
-                           select new
-                               {
-                                   content = message.Content,
-                                   createTime = message.CreateTime,
-                               }
-                };
+            {
+                total,
+                data = from message in msgs
+                    select new
+                    {
+                        content = message.Content,
+                        createTime = message.CreateTime,
+                    }
+            };
             return result;
         }
 
         // GET api/default1/5
         public int Count()
         {
-            var result = _messageDaoFactory.SimpleMessageDao.CountNotifyMsg(OrnamentContext.MemberShip.CurrentUser(),
-                                                                      ReadStatus.UnRead);
+            int result = _messageDaoFactory.SimpleMessageDao.CountNotifyMsg(OrnamentContext.MemberShip.CurrentUser(),
+                ReadStatus.UnRead);
             return result;
         }
 

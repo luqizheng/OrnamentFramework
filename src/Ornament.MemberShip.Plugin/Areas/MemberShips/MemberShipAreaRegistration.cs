@@ -19,6 +19,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            //send the init data
             bus.Send(new MemberShipData());
             ResourceSetting.Registry();
             var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);

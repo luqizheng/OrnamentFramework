@@ -1,9 +1,6 @@
 ﻿using Ornament.MemberShip;
-using Ornament.Messages;
-using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Web.DataInitializers;
-using Ornament.Web.Models;
 
 // ReSharper disable CheckNamespace
 
@@ -28,10 +25,10 @@ namespace Ornament.Web
 
         public void CreateData()
         {
-            var a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
-            var b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
-            var c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
-            var d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
+            NotifyMessageTemplate a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
+            NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
+            NotifyMessageTemplate c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
+            NotifyMessageTemplate d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
 
 
             //InitMessageType();

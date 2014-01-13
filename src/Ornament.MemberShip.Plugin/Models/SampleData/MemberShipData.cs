@@ -4,7 +4,6 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.Web.DataInitializers;
-using Ornament.Web.Models;
 
 namespace Ornament.MemberShip.Plugin.Models.SampleData
 {
@@ -38,22 +37,22 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
         private void InitMemberShip()
         {
             Permission userPermission = CreatePermission(ResourceSetting.User, "用户完全控制许可", "用户管理员,所有与用户有关的权限、分组、组织单元",
-                                                         UserOperator.Approve | UserOperator.Lock | UserOperator.Modify |
-                                                         UserOperator.Read | UserOperator.SetPassword |
-                                                         UserOperator.Delete |
-                                                         UserOperator.ReadPrivat);
+                UserOperator.Approve | UserOperator.Lock | UserOperator.Modify |
+                UserOperator.Read | UserOperator.SetPassword |
+                UserOperator.Delete |
+                UserOperator.ReadPrivat);
 
             Permission rolePermission = CreatePermission(ResourceSetting.Role, "角色完全控制许可", "角色完全控制,包括分配，删除、新增操作",
-                                                         RoleOperator.Assign | RoleOperator.Modify | RoleOperator.Read);
+                RoleOperator.Assign | RoleOperator.Modify | RoleOperator.Read);
 
             Permission memberPermission = CreatePermission(ResourceSetting.Account, "账户维护许可证", "用户管理自己本身信息的许可证",
-                                                           AccountOperator.ChangePassword |
-                                                           AccountOperator.ViewPermission |
-                                                           AccountOperator.ChangePrivateInfo);
+                AccountOperator.ChangePassword |
+                AccountOperator.ViewPermission |
+                AccountOperator.ChangePrivateInfo);
 
             Permission permissionPermission = CreatePermission(ResourceSetting.Permission, "许可证完全控制", "许可证完全控制",
-                                                               PermissionOperator.Read | PermissionOperator.Delete |
-                                                               PermissionOperator.Edit);
+                PermissionOperator.Read | PermissionOperator.Delete |
+                PermissionOperator.Edit);
 
             Role adminRole = CreateRole("admin", "管理员");
             adminRole.Permissions.Add(rolePermission);
@@ -75,15 +74,15 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
         }
 
         private User CreateUser(string username, string password, string email
-                                , string question, string answord)
+            , string question, string answord)
         {
             IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
             User user = userDao.GetByLoginId(username);
             if (user == null)
             {
                 MembershipCreateStatus status;
-                MembershipUser u = System.Web.Security.Membership.CreateUser(username, password, email, question,
-                                                                             answord, true, out status);
+                MembershipUser u = Membership.CreateUser(username, password, email, question,
+                    answord, true, out status);
             }
             return userDao.GetByLoginId(username);
         }
@@ -103,7 +102,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
         {
             IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
 
-            Role role = roleDao.GetByName(name) ?? new Role(name) { Remark = remark };
+            Role role = roleDao.GetByName(name) ?? new Role(name) {Remark = remark};
             roleDao.SaveOrUpdate(role);
 
             return role;
@@ -114,11 +113,11 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
             IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
 
             Permission permission = dao.GetPermission(permisionName) ?? new GenericPermission<T>(resObj)
-                {
-                    Name = permisionName,
-                    Remark = remark,
-                    Operator = Convert.ToInt32(eEnum)
-                };
+            {
+                Name = permisionName,
+                Remark = remark,
+                Operator = Convert.ToInt32(eEnum)
+            };
             dao.SaveOrUpdate(permission);
             return permission;
         }
