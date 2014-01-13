@@ -25,7 +25,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(RoleOperator.Read, "Role"),
          OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleListTitle",
-             ParentKey = "MemberShips",Key = "Role",
+             ParentKey = "MemberShips", Key = "Role", Order = 2,
              Resource = "Role", Operator = RoleOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
@@ -59,10 +59,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(RoleOperator.Delete, "Role")]
-         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
-             ParentKey = "Role",
-             Resource = "Role", Operator = RoleOperator.Modify)
-        ]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
+            ParentKey = "Role",
+            Resource = "Role", Operator = RoleOperator.Modify)
+       ]
         public ActionResult Delete(string id)
         {
             IList<IPerformer> a = _factory.CreateMemberDao().Find(id);
@@ -82,7 +82,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost,ResourceAuthorize(RoleOperator.Modify, "Role"),]
+        [HttpPost, ResourceAuthorize(RoleOperator.Modify, "Role"),]
         public ActionResult Create(Role role, string[] permissionIds)
         {
             if (!ModelState.IsValid)

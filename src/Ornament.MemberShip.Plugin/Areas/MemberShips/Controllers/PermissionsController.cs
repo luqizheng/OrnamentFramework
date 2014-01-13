@@ -25,7 +25,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,permissionListTitle",
-            ParentKey = "MemberShips", Key = "Permission",
+            ParentKey = "MemberShips", Key = "Permission",Order = 5,
             Resource = "Permission", Operator = PermissionOperator.Read),
          ResourceAuthorize(PermissionOperator.Read, "Permission")]
         public ActionResult Index()

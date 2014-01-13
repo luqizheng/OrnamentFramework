@@ -24,7 +24,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // GET: /Usergroups/
         [ResourceAuthorize(UserGroupOperator.Read, ResourceSetting.UserGroup)]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupListTitle", ParentKey = "MemberShips",
-            Key = "Usergroup",
+            Key = "Usergroup", Order = 3,
             Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {

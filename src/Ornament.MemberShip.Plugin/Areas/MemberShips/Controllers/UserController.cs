@@ -55,7 +55,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(UserOperator.Read, "User")]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userListTitle",
-            ParentKey = "MemberShips", Key = ResourceSetting.User,
+            ParentKey = "MemberShips", Key = ResourceSetting.User,Order=1,
             Resource = ResourceSetting.User, Operator = UserOperator.Read)
         ]
         public ActionResult Index()

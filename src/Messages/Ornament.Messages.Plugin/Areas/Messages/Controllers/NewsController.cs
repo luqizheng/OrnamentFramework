@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
@@ -10,7 +9,7 @@ using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
-    [Authorize(Roles="admin",Users="admin")]
+    [Authorize(Roles = "admin", Users = "admin")]
     public class NewsController : Controller
     {
         private readonly IMessageDaoFactory _factory;
@@ -61,7 +60,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             ViewData["types"] = _factory.NewsTypeDao.GetAll();
             var news = new News();
             news.Contents.Add(OrnamentContext.Configuration.DefaultLanguage.Key,
-                              new Content(OrnamentContext.Configuration.DefaultLanguage.Key));
+                new Content(OrnamentContext.Configuration.DefaultLanguage.Key));
 
             return View("Edit", news);
         }
@@ -79,7 +78,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
         public ActionResult Save(News news, IDictionary<string, string> NewContents,
-                                 IDictionary<string, string> NewSubjects)
+            IDictionary<string, string> NewSubjects)
         {
             if (NewContents.Count == 0)
             {
@@ -100,10 +99,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                     if (!news.Contents.ContainsKey(key))
                     {
                         news.Contents.Add(key, new Content(key)
-                            {
-                                Subject = NewSubjects[key],
-                                Value = NewContents[key]
-                            });
+                        {
+                            Subject = NewSubjects[key],
+                            Value = NewContents[key]
+                        });
                     }
                     else
                     {
