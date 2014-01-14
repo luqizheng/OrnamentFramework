@@ -5,6 +5,7 @@ using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
 using Ornament.Web;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -21,14 +22,15 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/Template/
-
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateTitle", ParentKey = "Messages",
+            Key = "templates")]
         public ActionResult Index()
         {
             var pagination = new Pagination();
             ViewData["Nav"] = pagination;
             int total;
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
-                                                                                  pagination.PageSize, out total);
+                pagination.PageSize, out total);
             pagination.TotalRows = total;
             return View(result);
         }
@@ -39,14 +41,15 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             ViewData["Nav"] = pagination;
             int total;
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
-                                                                                  pagination.PageSize, out total);
+                pagination.PageSize, out total);
             pagination.TotalRows = total;
             return View(result);
         }
 
         //
         // GET: /Messages/Template/Create
-
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateCreateTitle", 
+            ParentKey = "templates")]
         public ActionResult Create()
         {
             return View();
@@ -75,7 +78,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/Template/Edit/5
-
+          [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateEditTitle",
+            ParentKey = "templates")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -110,9 +114,9 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         public ActionResult Delete(string id)
         {
-            var dao = _daoFactory.MessageTemplateDao;
+            IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

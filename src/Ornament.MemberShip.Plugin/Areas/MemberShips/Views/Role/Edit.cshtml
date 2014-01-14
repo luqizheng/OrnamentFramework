@@ -2,10 +2,11 @@
 @using Ornament.MemberShip.Plugin.Properties
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
+@using Ornament.Web.UI.Theme
 
 @model Ornament.MemberShip.Role
 @{
-    string subject = Ornament.Properties.Resources.Edit + Resources.Role + Model.Name;
+    string subject = Html.GetEmbededResourceString("page_title");
     ViewBag.Title = subject;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
@@ -16,16 +17,16 @@
 }
 @using (Html.BeginForm())
 {
-    using (Html.Panel())
+    using (var panel=Html.Panel())
     {
 
-    @Html.BoxHeader(@<text>
+    @panel.Header(@<text>
     <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
     <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
     </text>);
 
 
-    @Html.BoxBody(
+    @panel.Body(
          @<text>
 
     @Html.ValidationSummary(true)
@@ -46,7 +47,7 @@
     </div>
     @Html.HiddenFor(model => model.Id)
     <div class="control-group">
-        <label class="control-label">@Resources.Permission</label>
+        <label class="control-label">@Html.DisplayFor(s=>s.Permissions)</label>
         <div class="controls">
             @Html.Partial("ChoicePermissions", Model)
         </div>

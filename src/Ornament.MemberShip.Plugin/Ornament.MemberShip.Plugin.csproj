@@ -213,6 +213,9 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-cn.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-CN.resx" />

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
@@ -12,7 +13,7 @@ namespace Ornament.MemberShip
     [Serializable]
     public class Role : Performer<Role>
     {
-        
+
 
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
         private string _remark;
@@ -25,7 +26,7 @@ namespace Ornament.MemberShip
         /// </summary>
         /// <param name="roleName"></param>
         /// <exception cref="ArgumentNullException">roleName is null or length is 0</exception>
-        public  Role(string roleName)
+        public Role(string roleName)
         {
             if (String.IsNullOrWhiteSpace(roleName))
                 throw new ArgumentNullException("roleName");
@@ -36,8 +37,8 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets remark
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof (Resources))]
-        [StringLength(100, ErrorMessageResourceType = typeof (ErrorMessage),
+        [Display(Name = "Remark", ResourceType = typeof(Resources))]
+        [StringLength(100, ErrorMessageResourceType = typeof(ErrorMessage),
             ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
         public virtual string Remark
         {
@@ -55,13 +56,13 @@ namespace Ornament.MemberShip
                 }
             }
         }
-
+        [Display(Name = "Permission", ResourceType = typeof(Resources))]
         public virtual Iesi.Collections.Generic.ISet<Permission> Permissions
         {
             get { return _permissions ?? (_permissions = new HashedSet<Permission>()); }
         }
 
-     
+
 
         #region IPerformer Members
 

@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="notifyTypeCreateTitle" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="notifyTypeEditTitle" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="notifyTypeTitle" xml:space="preserve">
-    <value>Notify Type</value>
-  </data>
-  <data name="templateCreateTitle" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="templateEditTitle" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="templateTitle" xml:space="preserve">
-    <value>Templates</value>
+  <data name="page_title" xml:space="preserve">
+    <value>編輯角色</value>
   </data>
 </root>

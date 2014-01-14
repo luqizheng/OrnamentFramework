@@ -3,7 +3,7 @@
 @using Resources
 @model Ornament.MemberShip.Plugin.Models.Memberships.LogonModel
 @{
-    ViewBag.Title = Basic.Logon;
+    ViewBag.Title = Ornament.Properties.Resources.Logon;
     Layout = OrnamentContext.Configuration.BackendLayout();
     Html.EnableUnobtrusiveJavaScript(true);
     Html.EnableClientValidation(true);
@@ -16,7 +16,7 @@
             <div class="nav pull-right">
                 <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
                 <ul class="dropdown-menu pull-right">
-                    <li><a href="#"><i class="icon-plus"></i>@Basic.Regist</a></li>
+                    <li><a href="#"><i class="icon-plus"></i>@Ornament.Properties.Resources.Regist</a></li>
                     @if (Membership.EnablePasswordReset)
                     {
                         <li><a href="@Url.Action("ForgetPassword", "Account")"><i class="icon-refresh"></i>@Html.GetResourceString("ForgetPassword")</a></li>
@@ -60,7 +60,7 @@
             </div>
             @Html.HiddenFor(m => m.ReturnUrl)
             <div class="login-btn">
-                <input type="submit" value="@Basic.OK" class="btn btn-danger btn-block" />
+                <input type="submit" value="@Ornament.Properties.Resources.Submit" class="btn btn-danger btn-block" />
             </div>
         </form>
     </div>

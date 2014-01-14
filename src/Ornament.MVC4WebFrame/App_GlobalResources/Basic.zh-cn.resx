@@ -117,22 +117,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="notifyTypeCreateTitle" xml:space="preserve">
-    <value>Create</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
   </data>
-  <data name="notifyTypeEditTitle" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Comment" xml:space="preserve">
+    <value>备注</value>
   </data>
-  <data name="notifyTypeTitle" xml:space="preserve">
-    <value>Notify Type</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>再一次密码</value>
   </data>
-  <data name="templateCreateTitle" xml:space="preserve">
-    <value>Create</value>
+  <data name="Create" xml:space="preserve">
+    <value>添加</value>
   </data>
-  <data name="templateEditTitle" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Email" xml:space="preserve">
+    <value>电子邮箱</value>
   </data>
-  <data name="templateTitle" xml:space="preserve">
-    <value>Templates</value>
+  <data name="Finish" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="new_password" xml:space="preserve">
+    <value>新密码</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="old_password" xml:space="preserve">
+    <value>当前密码</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>电话</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>上一步</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Logon" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Regist" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>列表</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>星期五</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>星期一</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>星期六</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>星期天</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>星期四</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>星期二</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>星期三</value>
+  </data>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>保存成功.</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="Submitting" xml:space="preserve">
+    <value>提交中...</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>验证</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>明细</value>
   </data>
 </root>

@@ -86,5 +86,32 @@ namespace Resources.message {
                 return ResourceManager.GetString("notifyTypeTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Create 的本地化字符串。
+        /// </summary>
+        internal static string templateCreateTitle {
+            get {
+                return ResourceManager.GetString("templateCreateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Edit 的本地化字符串。
+        /// </summary>
+        internal static string templateEditTitle {
+            get {
+                return ResourceManager.GetString("templateEditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Templates 的本地化字符串。
+        /// </summary>
+        internal static string templateTitle {
+            get {
+                return ResourceManager.GetString("templateTitle", resourceCulture);
+            }
+        }
     }
 }
