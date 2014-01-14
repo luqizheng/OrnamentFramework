@@ -21,7 +21,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         //
         // GET: /Tasks/
         public IEnumerable<object> GetNewMessages(Pagination pagination, string language,
-                                                  string typeId, ReadStatus? readStates)
+            string typeId, ReadStatus? readStates)
         {
             if (pagination == null)
             {
@@ -32,18 +32,19 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
 
             IList<PersonalMessage> result =
-                _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(OrnamentContext.MemberShip.CurrentUser(),
-                                                                    pagination.CurrentPage, pagination.PageSize);
+                _messageDaoFactory.PersonalMessageDao.GetLastMessageForEachUser(
+                    OrnamentContext.MemberShip.CurrentUser(),
+                    pagination.CurrentPage, pagination.PageSize);
 
 
             var r = new List<object>();
             foreach (PersonalMessage msg in result)
             {
                 r.Add(new
-                    {
-                        msg.Content,
-                        relative = msg.Publisher
-                    });
+                {
+                    msg.Content,
+                    relative = msg.Publisher
+                });
             }
             return result;
         }

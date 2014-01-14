@@ -253,7 +253,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return RedirectToAction("Index");
         }
 
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userEditTitle",
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userCreateTitle",
             ParentKey = "User",
             Resource = "User", Operator = UserOperator.Modify)
         ]

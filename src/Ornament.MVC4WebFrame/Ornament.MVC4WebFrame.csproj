@@ -189,21 +189,6 @@
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
     <Compile Include="Api\Core\PersonalMessagesController.cs" />
-    <Compile Include="App_GlobalResources\Basic.Designer.cs">
-      <DependentUpon>Basic.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh-cn.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.zh-cn.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.zh.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_GlobalResources\membership.sitemap.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,7 +243,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataInit\MeasurementUnitInit.cs" />
     <Compile Include="Models\ProtableAreaLogMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -908,7 +892,6 @@
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimePeriod.cshtml" />
-    <Content Include="Views\Shared\filectrl.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
@@ -960,30 +943,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_GlobalResources\sitemap.zh.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>sitemap.zh.designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.zh-cn.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.zh-cn.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.zh.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.zh.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

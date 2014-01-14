@@ -23,7 +23,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         }
 
 
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitmap,notifyTypeTitle", ParentKey = "Messages",
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,notifyTypeTitle", ParentKey = "Messages",
             Key = "nodifyType")]
         public ActionResult Index(string parentId)
         {
@@ -32,7 +32,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View(msgType);
         }
 
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitmap,notifyTypeEditTitle", ParentKey = "nodifyType")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,notifyTypeEditTitle", ParentKey = "nodifyType")]
         public ActionResult Edit(string id)
         {
             var result = new NotifyTypeModel(_notifyTypeDao.Get(id));
@@ -55,7 +55,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View("Edit", type);
         }
 
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitmap,notifyTypeCreateTitle", ParentKey = "nodifyType")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,notifyTypeCreateTitle", ParentKey = "nodifyType")]
         public ActionResult Create()
         {
             return View("Edit");

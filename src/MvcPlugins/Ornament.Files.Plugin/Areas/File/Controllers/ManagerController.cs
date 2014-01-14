@@ -16,5 +16,9 @@ namespace Ornament.Files.Plugin.Areas.File.Controllers
             return View();
         }
 
+        public ActionResult FileCtrl()
+        {
+            return View();
+        }
     }
 }

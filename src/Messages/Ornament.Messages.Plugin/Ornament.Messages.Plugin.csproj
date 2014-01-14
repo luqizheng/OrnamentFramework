@@ -164,6 +164,7 @@
     <EmbeddedResource Include="Scripts\NotifyType\index.js" />
     <EmbeddedResource Include="Scripts\Template\Edit.js" />
     <EmbeddedResource Include="Scripts\Template\Index.js" />
+    <EmbeddedResource Include="Scripts\News\Edit.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -176,7 +177,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Messages\Views\Web.config" />
@@ -198,6 +201,10 @@
       <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
       <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web.UI\Ornament.Web.UI.csproj">
+      <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>
+      <Name>Ornament.Web.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
       <Name>Ornament.Web.Core</Name>
@@ -216,9 +223,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\News\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\NewsType\_messageTypeEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\NewsType\Create.cshtml" />

@@ -46,6 +46,7 @@
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="News Manager" controller="News" area="Messages" action="Index" imageUrl="icon-comments" key="Messages" >
+      
       <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>

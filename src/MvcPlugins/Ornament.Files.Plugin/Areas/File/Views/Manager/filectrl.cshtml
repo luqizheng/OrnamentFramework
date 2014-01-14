@@ -1,7 +1,8 @@
-﻿@using Ornament.Web
+﻿@using Ornament
+@using Ornament.Web
 <!DOCTYPE html>
 @{
-    var langCode = Ornament.OrnamentContext.MemberShip.ProfileLanguage();
+    var langCode = Ornament.OrnamentContext.MemberShip.Language();
     if (langCode.StartsWith("zh"))
     {
         langCode = langCode.Length == 2 ? "zh_TW" : langCode.Replace("-", "_");

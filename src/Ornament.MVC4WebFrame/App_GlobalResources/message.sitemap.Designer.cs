@@ -79,7 +79,7 @@ namespace Resources.message {
         }
         
         /// <summary>
-        ///   查找类似 News Type 的本地化字符串。
+        ///   查找类似 Notify Type 的本地化字符串。
         /// </summary>
         internal static string notifyTypeTitle {
             get {

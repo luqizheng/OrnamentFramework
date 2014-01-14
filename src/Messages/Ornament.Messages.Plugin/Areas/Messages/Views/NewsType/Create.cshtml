@@ -2,7 +2,7 @@
 @using Ornament
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
-@using Basic=Ornament.Properties.Resources
+@using Basic = Ornament.Properties.Resources
 @{
     ViewBag.Title = "Create";
     Layout = OrnamentContext.Configuration.BackendLayout();
@@ -15,11 +15,13 @@
 <div class="widget">
     <div class="well body">
         <form action="@Url.Action("Edit")" class="form-horizontal" method="POST">
-            @Html.Partial("_messageTypeEditor", this.Model)
-            
+            @Html.EditorFor(s => s.Name)
+            @Html.EditorFor(s => s.Remark)
+            @Html.HiddenFor(s => s.Id)
+
             <div class="form-actions">
                 <input type="submit" class="btn btn-info"  value="@Basic.Submit"/>
-                  <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
             </div>
         </form>
     </div>

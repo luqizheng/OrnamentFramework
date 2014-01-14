@@ -59,8 +59,7 @@ namespace Ornament.Web.UI.Theme
         /// <returns></returns>
         private string PartialViewPath(string viewType)
         {
-            return string.Format("/Views/Shared/DisplayTemplates/{0}/{2}/{1}", _templateName, viewType + ".cshtml",
-                "Panel");
+            var a= string.Format("~/Views/Shared/DisplayTemplates/{0}/{2}/{1}", _templateName, viewType + ".cshtml","Panel");return a;
         }
     }
 }

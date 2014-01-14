@@ -12,12 +12,17 @@
         @Model.LoginId
     </h5>
 }
+ <form method="POST" action="@Url.Action("Edit")" class="form-horizontal">
 @using (var panel = Html.Panel())
 {
+    @panel.Header(@<text>
+                        <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
+            <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
+                   </text>)
     @panel.Body(@<text>
 
 
-    <form method="POST" action="@Url.Action("Edit")" class="form-horizontal">
+   
 
         <ul class="nav nav-tabs">
             <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
@@ -65,14 +70,14 @@
             <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
             <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
         </p>
-    </form>
+    
 
 
 
     </text>)
 }
 
-
+</form>
 
 @section scripts{
     <script type="text/javascript">
