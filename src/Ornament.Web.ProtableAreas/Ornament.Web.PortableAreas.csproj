@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\IocControllerInjectMessageHandler.cs" />
     <Compile Include="PortableAreas\ApplicationBus.cs" />
     <Compile Include="AreaRegistrationHelper.cs" />
     <Compile Include="PortableAreas\AssemblyHelper.cs" />

@@ -19,7 +19,6 @@
     <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips">
     
     </mvcSiteMapNode>
-
     <mvcSiteMapNode title="Messages" controller="News" area="Messages" action="Index" imageUrl="icon-comments" key="Messages" >
       <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>

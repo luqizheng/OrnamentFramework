@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Web;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -22,6 +23,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         //
         // GET: /Messages/News/
         [Session]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsIndexTitle",
+          ParentKey = "news")]
         public ActionResult Index(Pagination pagination)
         {
             if (pagination == null)
@@ -55,6 +58,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         }
 
         [Session]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsCreateTitle",
+ ParentKey = "news")]
         public ActionResult Create()
         {
             ViewData["types"] = _factory.NewsTypeDao.GetAll();
@@ -67,6 +72,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
 
         [Session]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsEditTitle",
+ParentKey = "news")]
         public ActionResult Edit(string id)
         {
             News newws = _factory.NewsDao.Get(id);
@@ -78,7 +85,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         [HttpPost, Session(true, Transaction = true), ValidateInput(false)]
         public ActionResult Save(News news, IDictionary<string, string> NewContents,
-            IDictionary<string, string> NewSubjects)
+            IDictionary<string, string> newSubjects)
         {
             if (NewContents.Count == 0)
             {
@@ -88,7 +95,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             {
                 foreach (string key in NewContents.Keys)
                 {
-                    if (string.IsNullOrEmpty(NewSubjects[key]) && string.IsNullOrEmpty(NewContents[key]))
+                    if (string.IsNullOrEmpty(newSubjects[key]) && string.IsNullOrEmpty(NewContents[key]))
                     {
                         if (news.Contents.ContainsKey(key))
                         {
@@ -100,14 +107,14 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                     {
                         news.Contents.Add(key, new Content(key)
                         {
-                            Subject = NewSubjects[key],
+                            Subject = newSubjects[key],
                             Value = NewContents[key]
                         });
                     }
                     else
                     {
                         news.Contents[key].Value = NewContents[key];
-                        news.Contents[key].Subject = NewSubjects[key];
+                        news.Contents[key].Subject = newSubjects[key];
                     }
                 }
                 _factory.NewsDao.SaveOrUpdate(news);

@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
-using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -46,7 +45,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         public ActionResult Create()
         {
-            var result = new NewsTypeModel { Name = "new message type" };
+            var result = new NewsTypeModel {Name = "new message type"};
 
             return View(result);
         }
@@ -62,12 +61,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View(type);
         }
 
-     
+
         public ActionResult Delete(string id)
         {
             INewsTypeDao dao = _messageDao.NewsTypeDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

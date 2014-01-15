@@ -2,11 +2,11 @@
 
 namespace Ornament.Messages.Retrives
 {
-    public abstract class Retrive<T, TID> where T : DomainObject<T, TID>
+    public abstract class Retrive<T, TId> where T : DomainObject<T, TId>
     {
         private readonly string _name;
 
-        private TID _id;
+        private TId _id;
 
         protected Retrive(string name)
         {
@@ -16,7 +16,7 @@ namespace Ornament.Messages.Retrives
         public T Get()
         {
             T result = null;
-            if (!object.ReferenceEquals(_id, default(TID)) && _id != null)
+            if (!object.ReferenceEquals(_id, default(TId)) && _id != null)
             {
                 result = GetById(_id);
             }
@@ -34,7 +34,7 @@ namespace Ornament.Messages.Retrives
             return result;
         }
 
-        protected abstract T GetById(TID id);
+        protected abstract T GetById(TId id);
         protected abstract T CreateInstance(string name);
         protected abstract T GetByName(string name);
         protected abstract void SaveOrUpdate(T t);

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using Ornament.Messages;
-using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Retrives;
 using Ornament.Properties;
@@ -12,12 +10,12 @@ namespace Ornament.Contexts
 {
     public class MessagesConfig
     {
-        private static SimpleMessageFactoryRetrive _personalMessageId;
         private static SimpleMessageFactoryRetrive _verifyEmailAddress;
         private static SimpleMessageFactoryRetrive _passwordRetrive;
         private static NotifyTypeRetrive _systemId;
         private static SimpleMessageFactoryRetrive _registryAccount;
         private static SimpleMessageFactoryRetrive _accountChanged;
+
         public MessagesConfig()
         {
             _systemId = new NotifyTypeRetrive("System");
@@ -28,10 +26,7 @@ namespace Ornament.Contexts
         /// </summary>
         public NotifyType SystemType
         {
-            get
-            {
-                return _systemId.Get();
-            }
+            get { return _systemId.Get(); }
         }
 
         /// <summary>
@@ -99,9 +94,8 @@ namespace Ornament.Contexts
         /// </summary>
         public NotifyMessageTemplate AccountChanged
         {
-            get   
+            get
             {
-
                 if (_accountChanged == null)
                 {
                     _accountChanged = new SimpleMessageFactoryRetrive(
@@ -122,38 +116,10 @@ namespace Ornament.Contexts
         {
             using (var zhStream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
             {
-                var content = (Content)SerializationHelper.DeserializerXml(zhStream, typeof(Content));
+                var content = (Content) SerializationHelper.DeserializerXml(zhStream, typeof (Content));
                 content.Language = lang;
                 return content;
             }
         }
-
-
-        //private string CreateNotifyType(string name, string remark, IMessageTemplateDao dao,
-        //                                IDictionary<string, Content> contents)
-        //{
-        //    MessageTemplate personal = dao.GetByName(name);
-        //    if (personal != null)
-        //        return personal.Id;
-        //    personal = new MessageTemplate(SystemType) { Name = name };
-        //    personal.Remark = remark;
-
-        //    foreach (string key in contents.Keys)
-        //    {
-        //        if (!personal.Contents.ContainsKey(key))
-        //        {
-        //            personal.Contents.Add(key, contents[key]);
-        //        }
-        //        else
-        //        {
-        //            personal.Contents[key] = contents[key];
-        //        }
-        //    }
-
-        //    dao.SaveOrUpdate(personal);
-        //    dao.Flush();
-
-        //    return personal.Id;
-        //}
     }
 }
