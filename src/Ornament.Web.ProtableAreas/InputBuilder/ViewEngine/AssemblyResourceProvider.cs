@@ -5,13 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Hosting;
+using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.InputBuilder.ViewEngine;
 
-namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
+namespace Ornament.Web.InputBuilder.ViewEngine
 {
     public class AssemblyResourceProvider : VirtualPathProvider
     {
         private const string EmbededTemplateTag = "~/protableareas/";
-        private readonly Dictionary<string, string> embedTempalteCache = new Dictionary<string, string>();
+        private static readonly Dictionary<string, string> embedTempalteCache = new Dictionary<string, string>();
 
         private bool IsProtableTableTemplate(string virtualPath, out string newPath)
         {
@@ -40,7 +42,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
             }
             string protableAreaPath = virtualPath.Substring(areasPosition);
 
-            string[] d = protableAreaPath.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] d = protableAreaPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
 
             newPath = String.Format("~/areas/{0}/Views/Shared{1}/{2}", d[2], template,
@@ -104,11 +106,15 @@ namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
         public override CacheDependency GetCacheDependency(string virtualPath, IEnumerable virtualPathDependencies,
             DateTime utcStart)
         {
+            var path = "";
             if (embedTempalteCache.ContainsKey(virtualPath.ToLower()) ||
-                AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath))
+                AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath)
+                || IsProtableTableTemplate(virtualPath, out path)
+                )
             {
                 return null;
             }
+
             string[] dependencies =
                 virtualPathDependencies.OfType<string>()
                     .Where(s => !s.ToLower().Contains("/views/inputbuilders"))
@@ -118,7 +124,15 @@ namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
 
         public override string GetCacheKey(string virtualPath)
         {
-            return null;
+            var path = "";
+            if (embedTempalteCache.ContainsKey(virtualPath.ToLower()) ||
+                AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath)
+                || IsProtableTableTemplate(virtualPath, out path)
+                )
+            {
+                return null;
+            }
+            return path;
         }
     }
 }

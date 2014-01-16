@@ -1,13 +1,13 @@
 ﻿@using Ornament
 @using Ornament.Messages.Newses
 @using Ornament.Web
-@using Ornament.Web.Bundles
+@using Ornament.Web.UI.Theme
 @using SeajsBundles
-@using Basic=Ornament.Properties.Resources
+@using Basic = Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.News>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Html.GetEmbededResourceString("Page_Title");
     Layout = OrnamentContext.Configuration.BackendLayout();
     var types = (IList<NewsType>)ViewData["types"];
     var selectedType = ViewData["type"] as NewsType;
@@ -15,28 +15,11 @@
 }
 @section pageTitle
 {
-    <h5>News list</h5>
+    <h5>@Html.GetEmbededResourceString("Page_Title")</h5>
 }
-<div class="actions-wrapper">
-    <div class="actions">
-
-        <div id="user-stats">
-            <ul class="round-buttons">
-                <li>
-                    <div class="depth"><a href="@Url.Action("Create")" title="Add News" class="tip"><i class="icon-plus-sign"></i></a></div>
-                </li>
-                <li>
-                    <div class="depth"><a href="" title="Media posts" class="tip"><i class="icon-reorder"></i></a></div>
-                </li>
-            </ul>
-        </div>
-        <ul class="action-tabs">
-            <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="widget">
+@using (Panel panel = Html.Panel())
+{
+    @panel.Header(@<text>
     <ul class="options-bar">
         <li>
             <div class="bar-select pull-left">
@@ -60,31 +43,10 @@
                 <button type="button" class="btn btn-info">Apply</button>
             </div>
         </li>
-        <li class="bar-entries">
-            <span>Showing @pae.ShowsNumberStart - @pae.ShowNumberEnd of @pae.TotalRows entries &nbsp;&nbsp; </span>
-        </li>
-        @* <li>
-            <div class="pull-right bulk">
-                <div class="bar-select">
-                    <span>Bulk actions: </span>
-                    <select name="select2" class="styled">
-                        <option value="opt1">Edit</option>
-                        <option value="opt2">Unpublish</option>
-                        <option value="opt3">Publish</option>
-                        <option value="opt4">Move to trash</option>
-                    </select>
-                </div>
-
-                <div class="bar-button">
-                    <button type="button" class="btn btn-info">Apply</button>
-                </div>
-            </div>
-        </li>*@
     </ul>
-</div>
+    </text>)
 
-<div class="widget">
-
+    @panel.Body(@<text>
     @if (Model.Count() != 0)
     {
         <div class="table-overflow">
@@ -103,27 +65,27 @@
                     </th>
                     <th></th>
                 </tr>
-                @foreach (News item in Model)
+                @foreach (News news in Model)
                 {
                     <tr>
                         <td>
-                            @if (item.Contents.Count != 0)
+                            @if (news.Contents.Count != 0)
                             {
-                                @Html.DisplayFor(modelItem => item.Show().Subject)
+                                @Html.DisplayFor(modelItem => news.Show().Subject)
                             }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Type.Name)
+                            @Html.DisplayFor(modelItem => news.Type.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modeItem => item.State)
+                            @Html.DisplayFor(modeItem => news.State)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CreateTime)
+                            @Html.DisplayFor(modelItem => news.CreateTime)
                         </td>
                         <td>
-                            @Html.ActionLink(Basic.Edit, "Edit", new { id = item.Id }, new { @class = "btn" })
-                            <a data-toggle="popover" data-val="@item.Id" class="btn btn-danger" href="#">@Basic.Delete</a>
+                            @Html.ActionLink(Basic.Edit, "Edit", new { id = news.Id }, new { @class = "btn" })
+                            <a data-toggle="popover" data-val="@news.Id" class="btn btn-danger" href="#">@Basic.Delete</a>
                         </td>
                     </tr>
                 }
@@ -138,17 +100,10 @@
             </h6>
         </div>
     }
+    </text>)
+}
 
 
-    @if (Model.Count() != 0)
-    {
-        <div class="table-footer">
-            <form method="POST">
-                @Html.Partial("NavPagination", ViewData["nav"])
-            </form>
-        </div>
-    }
-</div>
 <div id="warning" class="hide">
     <p>Do you want to delete this news ?</p>
     <button class="btn   btn-danger  deleteYes">@Basic.Delete</button>
@@ -157,7 +112,7 @@
 </div>
 
 @section scripts
-{<script src="/Scripts/ckeditor/ckeditor.js"></script>
+{
     <script type="text/javascript">
         seajs.use("@ScriptsSeajs.RenderUrl("~/Messages/Scripts/News/Index.js")");
     </script>

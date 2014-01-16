@@ -36,10 +36,14 @@ namespace Ornament.Web
             if (imageFolder == null) throw new ArgumentNullException("imageFolder");
             RegistyEmbedResouce(imageFolder);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scriptPath"></param>
         public void RegistyScripts(string scriptPath)
         {
-            if (scriptPath == null) throw new ArgumentNullException("scriptPath");
+            if (scriptPath == null) 
+                throw new ArgumentNullException("scriptPath");
             RegistySeajsEmbedResource(scriptPath);
         }
 
@@ -72,7 +76,7 @@ namespace Ornament.Web
                     controller = "SeajsModuleEmbeddedResource",
                     action = "Index",
                     resourcePath = _assemblyRootNamespace + "/" + path,
-                }
+                } 
                 ,
                 new[] {"Ornament.Web.Controllers"}
                 );

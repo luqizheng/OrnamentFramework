@@ -159,6 +159,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\News\App_LocalResources\Edit.resx" />
     <EmbeddedResource Include="Scripts\NewsType\Index.js" />
     <EmbeddedResource Include="Scripts\News\Index.js" />
     <EmbeddedResource Include="Scripts\NotifyType\index.js" />
