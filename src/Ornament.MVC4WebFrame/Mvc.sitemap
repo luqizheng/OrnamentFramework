@@ -24,10 +24,7 @@
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Create" title="Create"/>
       </mvcSiteMapNode>
-      <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" >
-        <mvcSiteMapNode controller="News" area="Messages" action="Edit" title="Edit"/>
-        <mvcSiteMapNode controller="News" area="Messages" action="Create" title="Create"/>
-      </mvcSiteMapNode>
+      <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" key="news" ></mvcSiteMapNode>
     </mvcSiteMapNode>
     <!--
     <mvcSiteMapNode title="Notify Messages" controller="Notify" area="Messages" action="Index" clickable="false">

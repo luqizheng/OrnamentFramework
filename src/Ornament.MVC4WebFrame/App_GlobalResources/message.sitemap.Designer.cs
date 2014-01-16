@@ -63,6 +63,33 @@ namespace Resources.message {
         /// <summary>
         ///   查找类似 Create 的本地化字符串。
         /// </summary>
+        internal static string newsCreateTitle {
+            get {
+                return ResourceManager.GetString("newsCreateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Edit 的本地化字符串。
+        /// </summary>
+        internal static string newsEditTitle {
+            get {
+                return ResourceManager.GetString("newsEditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 News 的本地化字符串。
+        /// </summary>
+        internal static string newsIndexTitle {
+            get {
+                return ResourceManager.GetString("newsIndexTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Create 的本地化字符串。
+        /// </summary>
         internal static string notifyTypeCreateTitle {
             get {
                 return ResourceManager.GetString("notifyTypeCreateTitle", resourceCulture);

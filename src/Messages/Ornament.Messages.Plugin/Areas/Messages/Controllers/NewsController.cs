@@ -23,7 +23,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         //
         // GET: /Messages/News/
         [Session]
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsIndexTitle",
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsIndexTitle",Key="newsList",
           ParentKey = "news")]
         public ActionResult Index(Pagination pagination)
         {
@@ -58,8 +58,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         }
 
         [Session]
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsCreateTitle",
- ParentKey = "news")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsCreateTitle", ParentKey = "newsList")]
         public ActionResult Create()
         {
             ViewData["types"] = _factory.NewsTypeDao.GetAll();
@@ -72,8 +71,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
 
         [Session]
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsEditTitle",
-ParentKey = "news")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsEditTitle", ParentKey = "newsList")]
         public ActionResult Edit(string id)
         {
             News newws = _factory.NewsDao.Get(id);
