@@ -133,6 +133,7 @@
     <Compile Include="Api\AreaController.cs" />
     <Compile Include="Api\CityController.cs" />
     <Compile Include="Areas\Regions\RegionsAreaRegistration.cs" />
+    <Compile Include="Models\DataInit.cs" />
     <Compile Include="Models\RegionsExtensions.cs" />
     <Compile Include="Models\OramentContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

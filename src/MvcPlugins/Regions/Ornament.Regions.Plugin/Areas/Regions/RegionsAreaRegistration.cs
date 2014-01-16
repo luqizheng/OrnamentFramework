@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Regions.Dao;
 using Ornament.Regions.Dao.NHibernateImple;
+using Ornament.Regions.Plugin.Models;
 using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.Messages;
@@ -19,6 +20,7 @@ namespace Ornament.Regions.Plugin.Areas.Regions
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            bus.Send(new DataInit());
             var helper = new AreaRegistrationHelper(this, "Ornament.Regions.Plugin", context);
             helper.RegistryDefault();
             context.MapRoute(
