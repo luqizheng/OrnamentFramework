@@ -7,13 +7,13 @@
 @model Ornament.MemberShip.Plugin.Models.Memberships.OrgModel
 
 @{
-    ViewBag.Title = Ornament.Properties.Resources.Create + " " + Resources.Org;
+    ViewBag.Title = Ornament.Properties.Resources.Create + " " + Ornament.MemberShip.Properties.Resources.Org;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
 @section pageTitle
 {
-    <h6>@Ornament.Properties.Resources.Create @Resources.Org</h6>
+    <h6>@Ornament.Properties.Resources.Create @Ornament.MemberShip.Properties.Resources.Org</h6>
 }
 
 @using (var box = Html.Panel())
