@@ -19,25 +19,25 @@
     @box.Body(@<text>
 
 
-                   @Html.ValidationSummary(true)
-                   <form method="POST" action="@Url.Action("Save")" class=" form-horizontal">
-                       @Html.EditorFor(s => s.Name)
-                       @Html.EditorFor(s => s.Remark)
-                       @Html.EditorFor(s => s.Roles)
+    @Html.ValidationSummary(true)
+    <form method="POST" action="@Url.Action("Save")" class=" form-horizontal">
+        @Html.EditorFor(s => s.Name)
+        @Html.EditorFor(s => s.Remark)
+        @Html.EditorFor(s => s.Roles)
 
 
-                       @Html.Hidden("Parent", (Model != null && Model.Parent != null) ? Model.Parent.Id : "")
-                       <div class="form-actions">
-                           <button class="btn btn-primary" type="submit">@Resources.Create</button>
-                           <button onclick=" location = '@Url.Action("Index")' " type="button" class="btn">@Resources.Cancel</button>
-                       </div>
+        @Html.Hidden("Parent", (Model != null && Model.Parent != null) ? Model.Parent.Id : "")
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">@Resources.Create</button>
+            <button onclick=" location = '@Url.Action("Index")' " type="button" class="btn">@Resources.Cancel</button>
+        </div>
 
-                   </form>
-
-
+    </form>
 
 
-               </text>)
+
+
+    </text>)
 }
 @section scripts{
     <script type="text/javascript">
