@@ -26,6 +26,7 @@ namespace Ornament.Regions.Plugin.Models
         {
             var factory = OrnamentContext.DaoFactory.GetDaoFactory<IRegionDaoFactory>();
             IProvicenDao provinceDao = factory.CreateProvinceDao();
+            
             List<Province> provicnes = Province.ProvinceData;
             foreach (Province item in provicnes)
             {
@@ -39,11 +40,14 @@ namespace Ornament.Regions.Plugin.Models
                 cityDao.Save(city);
             }
             IAreaDao areaDao = factory.CreateAreaDao();
-            foreach (Area city in Area.CreateData(cities))
+            var areas = Area.CreateData(cities);
+            foreach (Area city in areas)
             {
                 areaDao.Save(city);
             }
             areaDao.Flush();
+
+
         }
     }
 }

@@ -4,26 +4,29 @@ define(function (require) {
         webApi = require("/Scripts/Modules/Combine/WebApi.js"),
         createDdl = function (responseCtrl, data) {
             var ary = [];
-            $(data).each(function () {
+            $(data).each(function (i) {
                 ary.push("<option value='" + this.id + "'>" + this.text + "</option>");
             });
             responseCtrl.html(ary.join(""));
+            $(responseCtrl).val(data[0].id);
         };
 
-    require("select2")($);
-
     return function (provinceSelector, citySelector, areaSelector) {
+
         var $city = $(citySelector).change(function () {
             var areaApi = new webApi("/api/area/" + $(this).val());
-            areaApi.Get(null, function (d) {
+            areaApi.Get(function (d) {
                 createDdl($area, d);
             });
+            
         }),
         $area = $(areaSelector);
+
         $(provinceSelector).change(function () {
             var cityApi = new webApi("/api/city/" + $(this).val());
-            cityApi.Get(null, function (d) {
+            cityApi.Get(function (d) {
                 createDdl($city, d);
+                $city.change();
             });
         }).change();
     };
