@@ -16,9 +16,7 @@
                      imageUrl="fam-user" title="Personal Center" disabled="disabled">
     </mvcSiteMapNode>
 
-    <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips">
-    
-    </mvcSiteMapNode>
+    <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips"/>
     <mvcSiteMapNode title="Messages" controller="News" area="Messages" action="Index" imageUrl="icon-comments" key="Messages" >
       <mvcSiteMapNode controller="NewsType" area="Messages" action="Index" title="News Type">
         <mvcSiteMapNode controller="NewsType" area="Messages" action="Edit" title="Edit"/>
@@ -26,47 +24,7 @@
       </mvcSiteMapNode>
       <mvcSiteMapNode controller="News" area="Messages" action="Index" title="News" key="news" ></mvcSiteMapNode>
     </mvcSiteMapNode>
-    <!--
-    <mvcSiteMapNode title="Notify Messages" controller="Notify" area="Messages" action="Index" clickable="false">
-      <mvcSiteMapNode controller="NotifyType" area="Messages" action="Index" title="NotifyType Setting"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="Template" area="Messages" action="Index" title="Templates">
-        <mvcSiteMapNode controller="Template" area="Messages" action="Edit" title="Edit"/>
-        <mvcSiteMapNode controller="Template" area="Messages" action="Create" title="Create"/>
-      </mvcSiteMapNode>
-    </mvcSiteMapNode>
-
-    <mvcSiteMapNode   imageUrl="icon-cogs" clickable="false"  title="">
-      <mvcSiteMapNode controller="Site" area="Information" action="Index" title="Information"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="Manager" area="Files" action="Index" title="File Managers">
-      </mvcSiteMapNode>
-    </mvcSiteMapNode>
-
-    <mvcSiteMapNode title="Documents" imageUrl="icon-indent-right">
-      <mvcSiteMapNode controller="TypeLayout" area="Doc" action="BaseType" title="BaseType"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="TypeLayout" area="Doc" action="ExtenderType" title="Extend Type"></mvcSiteMapNode>
-    </mvcSiteMapNode>-->
-
-    <!--<mvcSiteMapNode title="场馆管理" imageUrl="icon-indent-right">
-      <mvcSiteMapNode controller="Gymnasium" area="Badminton" action="Index" title ="场馆管理" >
-
-      </mvcSiteMapNode>
-    </mvcSiteMapNode>
-    <mvcSiteMapNode controller="Consumables" area="Badminton" action="Index" title ="消耗品管理" >
-
-    </mvcSiteMapNode>
-
-
-    <mvcSiteMapNode title="基础数据" imageUrl="icon-indent-rigth">
-      <mvcSiteMapNode controller="Brand" area="Badminton" action="Index" title="品牌">
-      </mvcSiteMapNode>
-      <mvcSiteMapNode controller="Model" area="Badminton" action="Index" title="型号"></mvcSiteMapNode>
-      <mvcSiteMapNode controller="MeasurementUnit" area="Badminton" action="Index" title="计量单位"></mvcSiteMapNode>
-
-      <mvcSiteMapNode controller="Company" area="CRM" action="Index" title="公司"></mvcSiteMapNode>
-    </mvcSiteMapNode>-->
-
-
-
+   
   </mvcSiteMapNode>
 
 

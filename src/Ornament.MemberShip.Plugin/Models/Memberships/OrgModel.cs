@@ -29,7 +29,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Role", ResourceType = typeof(Properties.Resources))]
+        [Display(Name = "Role", ResourceType = typeof (Resources))]
         public Role[] Roles { get; set; }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof(Ornament.Properties.Resources)),
+        [Display(Name = "Name", ResourceType = typeof (Ornament.Properties.Resources)),
          Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (ErrorMessage)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("string")]
@@ -47,7 +47,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof(Properties.Resources)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }
