@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using MvcSiteMapProvider;
 
 namespace Ornament.Files.Plugin.Areas.File.Controllers
 {
@@ -10,7 +7,7 @@ namespace Ornament.Files.Plugin.Areas.File.Controllers
     {
         //
         // GET: /File/Manager/
-
+        [MvcSiteMapNode(Title = "File Manager", ParentKey = "System")]
         public ActionResult Index()
         {
             return View();
