@@ -22,11 +22,11 @@ namespace Ornament.Regions.Plugin.Areas.Regions
         {
             bus.Send(new DataInit());
             var helper = new AreaRegistrationHelper(this, "Ornament.Regions.Plugin", context);
-            helper.RegistryDefault();
+            helper.RegistySeajsModule("Scripts");
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional}
+                new { action = "Index", id = UrlParameter.Optional }
                 );
 
             base.RegisterArea(context, bus);
@@ -40,6 +40,6 @@ namespace Ornament.Regions.Plugin.Areas.Regions
             };
         }
 
-      
+
     }
 }

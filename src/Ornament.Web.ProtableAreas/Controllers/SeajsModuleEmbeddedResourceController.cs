@@ -18,11 +18,18 @@ namespace Ornament.Web.Controllers
                 resourceName = resourcePath + "." + resourceName;
             }
 
-            var areaName = (string) RouteData.DataTokens["area"];
+            var areaName = (string)RouteData.DataTokens["area"];
 
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
+
+            if (resourceStream == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
             string path = VirtualPathUtility.ToAppRelative(HttpContext.Request.Url.LocalPath);
 
             var bundleModule = new RootModule(path, new BundleContext(HttpContext, BundleTable.Bundles, path),
@@ -36,11 +43,7 @@ namespace Ornament.Web.Controllers
 
             content = bundleModule.BuildContent(content);
 
-            if (resourceStream == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
+
 
             string contentType = GetContentType(resourceName);
             return File(new MemoryStream(Encoding.UTF8.GetBytes(content)), contentType);

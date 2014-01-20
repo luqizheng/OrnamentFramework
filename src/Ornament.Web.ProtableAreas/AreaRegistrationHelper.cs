@@ -27,29 +27,33 @@ namespace Ornament.Web
         /// </summary>
         public void RegistryDefault()
         {
-            RegistySeajsEmbedResource("Scripts");
-            RegistySeajsEmbedResource("Content/Images");
+            RegistySeajsModule("Scripts");
         }
 
         public void RegistryImages(string imageFolder)
         {
-            if (imageFolder == null) throw new ArgumentNullException("imageFolder");
+            if (imageFolder == null)
+                throw new ArgumentNullException("imageFolder");
+            imageFolder = imageFolder.TrimEnd('/').TrimStart('/');
             RegistyEmbedResouce(imageFolder);
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="scriptPath"></param>
         public void RegistyScripts(string scriptPath)
         {
-            if (scriptPath == null) 
+            if (scriptPath == null)
                 throw new ArgumentNullException("scriptPath");
-            RegistySeajsEmbedResource(scriptPath);
+            scriptPath = scriptPath.TrimEnd('/').TrimStart('/');
+            RegistyEmbedResouce(scriptPath);
         }
 
         public void RegistyEmbedResouce(string path)
         {
-            if (path == null) throw new ArgumentNullException("path");
+            if (path == null)
+                throw new ArgumentNullException("path");
+            path = path.TrimStart('/').TrimEnd('/');
             //page scripts  registry
             _context.MapRoute(
                 _protablAreaRegistration.AreaName + "_" + path + "_embededResource",
@@ -58,15 +62,18 @@ namespace Ornament.Web
                 {
                     controller = "EmbeddedResource",
                     action = "Index",
-                    resourcePath = _assemblyRootNamespace + "/" + path,
+                    resourcePath = _assemblyRootNamespace + "." + path,
                 }
                 ,
-                new[] { "Ornament.Web.Controllers" }
+                new[] {"Ornament.Web.Controllers"}
                 );
         }
-        public void RegistySeajsEmbedResource(string path)
+
+        public void RegistySeajsModule(string path)
         {
-            if (path == null) throw new ArgumentNullException("path");
+            if (path == null)
+                throw new ArgumentNullException("path");
+            path = path.TrimStart('/').TrimEnd('/');
             //page scripts  registry
             _context.MapRoute(
                 _protablAreaRegistration.AreaName + "_" + path + "_embededResource",
@@ -75,8 +82,8 @@ namespace Ornament.Web
                 {
                     controller = "SeajsModuleEmbeddedResource",
                     action = "Index",
-                    resourcePath = _assemblyRootNamespace + "/" + path,
-                } 
+                    resourcePath = _assemblyRootNamespace + "." + path,
+                }
                 ,
                 new[] {"Ornament.Web.Controllers"}
                 );

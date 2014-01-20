@@ -9,8 +9,8 @@ namespace Ornament.Web.PortableAreas
 {
     public abstract class PortableAreaRegistration : AreaRegistration
     {
-        public static Action RegisterEmbeddedViewEngine = () => { InputBuilder.InputBuilder.BootStrap(); };
-        public static Action CheckAreasWebConfigExists = () => { EnsureAreasWebConfigExists(); };
+        public static Action RegisterEmbeddedViewEngine = () => InputBuilder.InputBuilder.BootStrap();
+        public static Action CheckAreasWebConfigExists = () => EnsureAreasWebConfigExists();
 
         public virtual string AreaRoutePrefix
         {
@@ -40,30 +40,7 @@ namespace Ornament.Web.PortableAreas
 
             bus.Send(new PortableAreaStartupMessage(AreaName));
 
-            RegisterDefaultRoutes(context);
-
             RegisterAreaEmbeddedResources();
-        }
-
-        public void CreateStaticResourceRoute(AreaRegistrationContext context, string SubfolderName)
-        {
-            context.MapRoute(
-                AreaName + "-" + SubfolderName,
-                AreaRoutePrefix + "/" + SubfolderName + "/{resourceName}",
-                new {controller = "EmbeddedResource", action = "Index", resourcePath = "Content." + SubfolderName},
-                null,
-                new[] {"Ornament.Web.Controllers"}
-                );
-        }
-
-        public void RegisterDefaultRoutes(AreaRegistrationContext context)
-        {
-            CreateStaticResourceRoute(context, "Images");
-            CreateStaticResourceRoute(context, "Styles");
-            CreateStaticResourceRoute(context, "Scripts");
-            context.MapRoute(AreaName + "-Default",
-                AreaRoutePrefix + "/{controller}/{action}",
-                new {controller = "default", action = "index"});
         }
 
         public override void RegisterArea(AreaRegistrationContext context)

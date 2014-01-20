@@ -17,7 +17,8 @@ namespace Ornament.Web.Controllers
             var areaName = (string) RouteData.DataTokens["area"];
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
-            Stream resourceStream = resourceStore.GetResourceStream("~." + resourceName);
+            
+            Stream resourceStream = resourceStore.GetResourceStream(resourceName);
 
             if (resourceStream == null)
             {
