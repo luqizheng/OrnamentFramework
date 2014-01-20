@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Information.Areas.Information.Controllers
+namespace Ornament.Information.Plugin.Areas.Information.Controllers
 {
     public class PluginsController : Controller
     {

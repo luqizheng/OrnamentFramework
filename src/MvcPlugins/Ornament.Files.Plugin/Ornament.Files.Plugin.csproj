@@ -126,9 +126,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\File\Controllers\FileController.cs" />
-    <Compile Include="Areas\File\Controllers\ManagerController.cs" />
-    <Compile Include="Areas\File\FileAreaRegistration.cs" />
+    <Compile Include="Areas\Files\Controllers\FileController.cs" />
+    <Compile Include="Areas\Files\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\Files\FilesAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -143,14 +143,14 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\File\Models\" />
-    <Folder Include="Areas\File\Views\Shared\" />
+    <Folder Include="Areas\Files\Models\" />
+    <Folder Include="Areas\Files\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\File\Views\Web.config" />
+    <Content Include="Areas\Files\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Helpers\ElFinder.Net\ElFinder.Net.csproj">
@@ -175,10 +175,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\File\Views\Manager\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Files\Views\Manager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\File\Views\Manager\filectrl.cshtml" />
+    <EmbeddedResource Include="Areas\Files\Views\Manager\filectrl.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

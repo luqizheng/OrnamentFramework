@@ -12,6 +12,7 @@ namespace Ornament.Web.MemberShips
         {
             this.Resource = resource;
             this.Operator = @operator;
+
         }
         public OrnamentMvcSiteMapNodeAttribute()
         {

@@ -1002,13 +1002,13 @@
       <Project>{1f2f532b-8342-4469-bf93-9343129bc80c}</Project>
       <Name>Friends.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcPlugins\Information\Information.Plugin.csproj">
-      <Project>{9a7b397f-b083-4af3-8d91-910b7196ab46}</Project>
-      <Name>Information.Plugin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcPlugins\Ornament.Files.Plugin\Ornament.Files.Plugin.csproj">
       <Project>{8220cf6b-f27f-433e-ad13-a22691d3cf29}</Project>
       <Name>Ornament.Files.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Ornament.Information.Plugin\Ornament.Information.Plugin.csproj">
+      <Project>{9a7b397f-b083-4af3-8d91-910b7196ab46}</Project>
+      <Name>Ornament.Information.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcPlugins\Regions\Ornament.Regions.Core\Ornament.Regions.Core.csproj">
       <Project>{f4e55c5e-2676-448e-96b5-59b56f2c4990}</Project>

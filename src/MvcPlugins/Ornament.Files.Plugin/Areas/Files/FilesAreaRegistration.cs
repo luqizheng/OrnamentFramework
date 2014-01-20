@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Information.Areas.Information.Controllers;
-using Ornament.Web.MessageHandlers;
+using Ornament.Files.Plugin.Areas.Files.Controllers;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 
-namespace Information.Areas.Information
+namespace Ornament.Files.Plugin.Areas.Files
 {
-    public class InformationAreaRegistration : PortableAreaRegistration
+    public class FilesAreaRegistration : PortableAreaRegistration
     {
         public override string AreaName
         {
-            get { return "Information"; }
+            get { return "Files"; }
         }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
@@ -30,6 +29,15 @@ namespace Information.Areas.Information
             return null;
         }
 
-     
+        protected override void GetInjectControllers(out IEnumerable<Type> controller,
+            out IEnumerable<Type> apiController)
+        {
+            //支持给Controller的类型,避免Assembly全局扫描,加快第一次启动速度
+            controller = new[]
+            {
+                typeof (FileController), typeof (ManagerController)
+            };
+            apiController = null;
+        }
     }
 }

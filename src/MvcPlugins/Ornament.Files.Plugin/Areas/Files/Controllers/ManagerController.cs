@@ -1,13 +1,13 @@
 ﻿using System.Web.Mvc;
-using MvcSiteMapProvider;
+using Ornament.Web.MemberShips;
 
-namespace Ornament.Files.Plugin.Areas.File.Controllers
+namespace Ornament.Files.Plugin.Areas.Files.Controllers
 {
     public class ManagerController : Controller
     {
         //
         // GET: /File/Manager/
-        [MvcSiteMapNode(Title = "File Manager", ParentKey = "System")]
+        [OrnamentMvcSiteMapNode(Title = "File Manager", ParentKey = "System")]
         public ActionResult Index()
         {
             return View();

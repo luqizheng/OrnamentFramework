@@ -10,7 +10,7 @@
     });
     var selectedFile = null;
     var options = {
-        url: '/connector',
+        url: 'Files/File/connector',
         commands: myCommands,
         lang: 'en',
         uiOptions: {
