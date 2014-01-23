@@ -55,7 +55,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(UserOperator.Read, "User")]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userListTitle",
-            ParentKey = "MemberShips", Key = ResourceSetting.User,Order=1,
+            ParentKey = "MemberShips", Key = ResourceSetting.User, Order = 1,
             Resource = ResourceSetting.User, Operator = UserOperator.Read)
         ]
         public ActionResult Index()
@@ -83,12 +83,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";
-                userResult = _userDao.QuickSearchOffset(search, search, search, search, page.Value*size.Value,
+                userResult = _userDao.QuickSearchOffset(search, search, search, search, page.Value * size.Value,
                     size.Value, out total);
             }
             else
             {
-                userResult = _userDao.FindAllOffset(page.Value*size.Value, size.Value, out total);
+                userResult = _userDao.FindAllOffset(page.Value * size.Value, size.Value, out total);
             }
             var result = new
             {
@@ -288,7 +288,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 User user = dao.Get(loginid);
                 user.IsLockout = true;
             }
-            return Json(new {success = true});
+            return Json(new { success = true });
         }
 
         [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
@@ -300,7 +300,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 User user = dao.Get(loginid);
                 user.IsLockout = false;
             }
-            return Json(new {success = true});
+            return Json(new { success = true });
         }
 
         [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
@@ -312,7 +312,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 User user = dao.Get(id);
                 user.IsApproved = true;
             }
-            return Json(new {success = true});
+            return Json(new { success = true });
         }
 
         [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
@@ -324,7 +324,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 User user = dao.Get(id);
                 user.IsApproved = false;
             }
-            return Json(new {success = true});
+            return Json(new { success = true });
         }
 
         [HttpPost, ResourceAuthorize(UserOperator.Delete, "MessageReader")]
@@ -354,11 +354,11 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
-                where
-                    u.LoginId.Contains(loginIdOrEmail) ||
-                    u.Contact.Email.Contains(loginIdOrEmail)
-                select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
+                                               where
+                                                   u.LoginId.Contains(loginIdOrEmail) ||
+                                                   u.Contact.Email.Contains(loginIdOrEmail)
+                                               select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

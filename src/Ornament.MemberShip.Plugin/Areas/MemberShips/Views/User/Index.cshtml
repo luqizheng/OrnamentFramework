@@ -129,7 +129,8 @@
             <tfoot>
                 <tr>
                     <td colspan="7">
-                        <div class="pagination pull-right" ms-controller="page"
+                        <div class="pagination pull-right"
+                             ms-controller="page"
                             ms-widget="pagination,ddd,$opts">
                             <ul>
                                 <li>
@@ -138,8 +139,8 @@
                                 <li>
                                     <a ms-click="previous" href="#" ms-class-disabled="page==0">&lt;</a>
                                 </li>
-                                <li>
-                                    <a href="#" ms-text="page"></a>
+                                <li ms-repeat="pages">
+                                    <a href="" ms-text="el.text"></a>
                                 </li>
                                 <li>
                                     <a href="#" ms-class-disabled="page==totalPage" ms-click="next">&gt;</a>

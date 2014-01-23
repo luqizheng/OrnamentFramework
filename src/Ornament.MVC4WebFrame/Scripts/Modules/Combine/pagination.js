@@ -4,55 +4,12 @@
         avalon.ui["pagination"] = function (element, data, vmodels) {
 
             var innerHTML = element.innerHTML;
-            avalon.clearChild(element);
+            avalon.clearHTML(element);
 
             var model = avalon.define(data.paginationId, function (vm) {
-                vm.totalPage = 0;
-                vm.totalRecords = 0;
-                vm.page = 1;
-
-                vm.first = function () {
-                    if (vm.totalPage == 0)
-                        return;
-                    vm.page = 1;
-                    vm.search.call(vm, vm.page - 1, vm.size);
-                };
-                
-                vm.next = function () {
-                    if (vm.page + 1 > vm.totalPage)
-                        return;
-                    vm.page += 1;
-
-                    vm.search.call(vm, vm.page - 1, vm.size);
-                };
-
-                vm.previous = function () {
-                    if (vm.page - 1 > 1)
-                        return;
-                    vm.page -= 1;
-                    vm.search.call(vm, vm.page - 1, vm.size);
-                };
-
-                vm.last = function () {
-                    if (vm.totalPage == 0)
-                        return;
-                    vm.page = vm.totalPage;
-                    vm.search.call(vm, vm.page - 1, vm.size);
-                };
-
-                vm.size = 5;
-
-                vm.search = function () {
-                    alert('please set this function for getting data');
-                };
+                //此时此刻代入
+                defaultIt(vm);
                 avalon.mix(vm, data.paginationOptions);
-                vm.$watch("totalRecords", function (newValue, oldValue) {
-                    if (newValue != 0) {
-                        vm.totalPage = calPage();
-                    }
-                    vm.totalPage = 0;
-
-                });
 
                 function calPage() {
                     var r = (vm.totalRecord / vm.pageSize) + 1 //从1开始;
@@ -61,6 +18,57 @@
                         return r;
                     return ++r;
                 };
+
+                function defaultIt(viewModel) {
+                    viewModel.totalPage = 0;
+                    viewModel.totalRecords = 0;
+                    viewModel.page = 1;
+                    //function for nav
+                    viewModel.first = function () {
+                        if (viewModel.totalPage == 0)
+                            return;
+                        viewModel.page = 1;
+                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                    };
+
+                    viewModel.next = function () {
+                        if (viewModel.page + 1 > viewModel.totalPage)
+                            return;
+                        viewModel.page += 1;
+
+                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                    };
+
+                    viewModel.previous = function () {
+                        if (viewModel.page - 1 > 1)
+                            return;
+                        viewModel.page -= 1;
+                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                    };
+
+                    viewModel.last = function () {
+                        if (viewModel.totalPage == 0)
+                            return;
+                        viewModel.page = viewModel.totalPage;
+                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                    };
+
+                    viewModel.pageSize = 5;
+                    viewModel.pages = [{}];
+                    viewModel.search = function () {
+                        alert('please set this function for getting data');
+                    };
+                    viewModel.$watch("totalRecords", function (newValue, oldValue) {
+                        if (newValue != 0) {
+                            viewModel.totalPage = calPage();
+                        } else {
+                            viewModel.totalPage = 0;
+                        }
+                    });
+                    viewModel.$watch("totalPage", function(newValue, oldValue) {
+                        $("")
+                    });
+                }
             });
 
             avalon.nextTick(function () {

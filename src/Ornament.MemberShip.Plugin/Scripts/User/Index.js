@@ -53,7 +53,7 @@ define(function (require) {
                 alert(e.success ?
                     lang.verifyEmailMessage.success :
                     lang.verifyEmailMessage.fail);
-                
+
             }, function () {
                 showLoading.call(self, false);
             });
@@ -97,7 +97,8 @@ define(function (require) {
         vm.$opts = {
             search: function (pageIndex, pageSize) {
                 find(pageIndex, model.content);
-            }
+            },
+            showPages: 5
         };
     });
 
