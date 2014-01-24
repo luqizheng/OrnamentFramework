@@ -17,7 +17,7 @@
 
 @section scripts 
 {
-   @* @Html.Partial("_pm")*@
+    @* @Html.Partial("_pm")*@
 
     <script type="text/javascript">
 
@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody ms-each-el="users">
-                <tr ms-attr-data="{{el.Id}}" ms-attr-loginId="{{el.LoginId}}">
+                <tr ms-attr-data="{{el.Id}}" ms-attr-loginid="{{el.LoginId}}">
                     <td>
                         <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn tip btn-mini"><i class="fam-user-edit"></i></a>
                         <a ms-href="/MemberShips/User/Assign/{{el.LoginId}}" class="btn tip btn-mini" title=""><i class="fam-group-gear"></i></a>
@@ -130,23 +130,24 @@
                 <tr>
                     <td colspan="7">
                         <div class="pagination pull-right"
-                             ms-controller="page"
+                            ms-controller="page"
                             ms-widget="pagination,ddd,$opts">
+                            <span ms-text="page"></span>
                             <ul>
-                                <li>
-                                    <a ms-click="first" href="#" ms-class-disabled="page==0">&lt;&lt;</a>
+                                <li ms-class="disabled:page==0">
+                                    <a href="#0" ms-click="navTo">&lt;&lt;</a>
                                 </li>
-                                <li>
-                                    <a ms-click="previous" href="#" ms-class-disabled="page==0">&lt;</a>
+                                <li ms-class="disabled:page==0">
+                                    <a ms-click="pre" href="javascript:;">&lt;</a>
                                 </li>
-                                <li ms-repeat="pages">
-                                    <a href="" ms-text="el.text"></a>
+                                <li ms-repeat="pages" ms-class="active:page==el.index">
+                                    <a ms-href="#{{el.index}}" ms-text="el.text" ms-click="navTo"></a>
                                 </li>
-                                <li>
-                                    <a href="#" ms-class-disabled="page==totalPage" ms-click="next">&gt;</a>
+                                <li ms-class-disabled="!could('next')">
+                                    <a href="javascript:;" ms-click="next">&gt;</a>
                                 </li>
-                                <li>
-                                    <a href="#" ms-class-disabled="page==totalPage" ms-click="previous">&gt;&gt;</a>
+                                <li ms-class-disabled="!could('last')">
+                                    <a href="javascript:;" ms-click="last">&gt;&gt;</a>
                                 </li>
                             </ul>
                             <label ms-text="totalPage"></label>

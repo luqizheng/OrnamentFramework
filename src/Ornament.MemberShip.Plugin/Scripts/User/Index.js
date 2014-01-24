@@ -95,26 +95,22 @@ define(function (require) {
 
     var pageModule = avalon.define("page", function (vm) {
         vm.$opts = {
-            search: function (pageIndex, pageSize) {
-                find(pageIndex, model.content);
-            },
-            showPages: 5
+            search: function (pageIndex, pageSize, func) {
+                find(pageIndex, pageSize, model.content, func);
+            }
         };
     });
-
-
-
-
-    function find(page, content) {
+    function find(page, size, content, func) {
         $.get("/MemberShips/User/List", {
             page: page,
-            search: content
+            search: content,
+            size: size
         }, function (d) {
             model.users = [];
             for (var i = 0; i < d.data.length; i++) {
                 model.users.push(d.data[i]);
             }
-            pageModule.totalRecords = d.TotalRecords;
+            func(d.TotalRecords);
         });
     }
 
@@ -122,8 +118,6 @@ define(function (require) {
         init: function (lang1, currentUser, tableConfig) {
             lang = lang1;
             avalon.scan();
-            find(0, null);
-
         }
     };
 
