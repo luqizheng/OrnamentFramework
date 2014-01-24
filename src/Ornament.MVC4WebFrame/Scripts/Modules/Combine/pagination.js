@@ -1,7 +1,7 @@
 ﻿define(function () {
 
     return function (avalon) {
-        avalon.ui["pagination"] = function (element, data, vmodels) {
+        var widget = avalon.ui["pagination"] = function (element, data, vmodels) {
 
             var innerHTML = element.innerHTML;
             avalon.clearHTML(element);
@@ -10,9 +10,10 @@
                 //此时此刻代入
                 defaultIt(vm);
                 avalon.mix(vm, data.paginationOptions);
-
-                function calPage() {
-                    var r = (vm.totalRecord / vm.pageSize) + 1 //从1开始;
+                function calculatePage(totalRecord, pageSize) {
+                    if (totalRecord == 0)
+                        return 1;
+                    var r = (totalRecord / pageSize);
                     var remind = vm.totalRecord % vm.pageSize;
                     if (remind == 0)
                         return r;
@@ -20,53 +21,74 @@
                 };
 
                 function defaultIt(viewModel) {
-                    viewModel.totalPage = 0;
+
+                    var totalPage = 1;
                     viewModel.totalRecords = 0;
-                    viewModel.page = 1;
-                    //function for nav
-                    viewModel.first = function () {
-                        if (viewModel.totalPage == 0)
-                            return;
-                        viewModel.page = 1;
-                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
-                    };
+                    viewModel.page = 0;//Current PgaeIndex
 
                     viewModel.next = function () {
-                        if (viewModel.page + 1 > viewModel.totalPage)
+                        alert(viewModel.showPages);
+                        if (viewModel.page + 1 >= viewModel.totalPage)
                             return;
                         viewModel.page += 1;
-
-                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                        viewModel.nav();
                     };
 
                     viewModel.previous = function () {
-                        if (viewModel.page - 1 > 1)
+                        if (viewModel.page - 1 < 0) {
                             return;
+                        }
                         viewModel.page -= 1;
-                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                        viewModel.nav();
                     };
 
                     viewModel.last = function () {
-                        if (viewModel.totalPage == 0)
+                        viewModel.page = totalPage;
+                        viewModel.nav();
+                    };
+
+                    viewModel.navTo = function () {
+                        var index = this.attributes["href"].value.substr(1);
+                        if (index != viewModel) {
+                            viewModel.page = index;
+                            viewModel.nav();
+                        }
+
+                    };
+
+                    viewModel.nav = function (pageIndex) {
+
+                        if (pageIndex < 0 || pageIndex >= viewModel.pageSize)
                             return;
-                        viewModel.page = viewModel.totalPage;
-                        viewModel.search.call(viewModel, viewModel.page - 1, viewModel.pageSize);
+                        viewModel.search.call(viewModel, pageIndex, viewModel.pageSize, function (totalPages) {
+                            viewModel.totalRecords = totalPages;
+                        });
                     };
 
                     viewModel.pageSize = 5;
-                    viewModel.pages = [{}];
-                    viewModel.search = function () {
-                        alert('please set this function for getting data');
+                    viewModel.pages = [];
+                    viewModel.search = function (pageIndex, pageSize, func) {
+                        alert('please set this function for getting data.');
                     };
+
                     viewModel.$watch("totalRecords", function (newValue, oldValue) {
-                        if (newValue != 0) {
-                            viewModel.totalPage = calPage();
-                        } else {
-                            viewModel.totalPage = 0;
+                        totalPage = calculatePage(newValue, viewModel.pageSize);
+                        var showPage = 10 / 2;
+                        viewModel.pages = [];
+                        var min = viewModel.page - showPage, max = viewModel.page + showPage;
+                        if (min < 0) {
+                            min = 0;
                         }
-                    });
-                    viewModel.$watch("totalPage", function(newValue, oldValue) {
-                        $("")
+                        if (max > totalPage) {
+                            max = totalPage;
+                        }
+
+                        for (var i = min; i < max; i++) {
+                            viewModel.pages.push({
+                                text: (i + 1),
+                                index: i
+                            });
+                        }
                     });
                 }
             });
@@ -75,10 +97,13 @@
                 //widget的VM已经生成，可以添加回去让它被扫描
                 element.innerHTML = innerHTML;
                 avalon.scan(element, [model].concat(vmodels));
+                model.nav(0);
             });
             return model;
         };
-
+        widget.defaults = {
+            showPages: 10
+        };
         return avalon;
     };
 
