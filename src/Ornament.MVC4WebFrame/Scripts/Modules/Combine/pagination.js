@@ -7,9 +7,9 @@
             avalon.clearHTML(element);
 
             var model = avalon.define(data.paginationId, function (vm) {
-                //此时此刻代入
-                defaultIt(vm);
-                avalon.mix(vm, data.paginationOptions);
+
+
+
                 function calculatePage(totalRecord, pageSize) {
                     if (totalRecord == 0)
                         return 1;
@@ -20,77 +20,81 @@
                     return ++r;
                 };
 
-                function defaultIt(viewModel) {
 
-                    var totalPage = 1;
-                    viewModel.totalRecords = 0;
-                    viewModel.page = 0;//Current PgaeIndex
 
-                    viewModel.next = function () {
-                        alert(viewModel.showPages);
-                        if (viewModel.page + 1 >= viewModel.totalPage)
-                            return;
-                        viewModel.page += 1;
-                        viewModel.nav();
-                    };
 
-                    viewModel.previous = function () {
-                        if (viewModel.page - 1 < 0) {
-                            return;
-                        }
-                        viewModel.page -= 1;
-                        viewModel.nav();
-                    };
 
-                    viewModel.last = function () {
-                        viewModel.page = totalPage;
-                        viewModel.nav();
-                    };
 
-                    viewModel.navTo = function () {
-                        var index = this.attributes["href"].value.substr(1);
-                        if (index != viewModel) {
-                            viewModel.page = index;
-                            viewModel.nav();
-                        }
+                vm.next = function () {
+                    alert(vm.showPages);
+                    if (vm.page + 1 >= vm.totalPage)
+                        return;
+                    vm.page += 1;
+                    vm.nav();
+                };
 
-                    };
+                vm.previous = function () {
+                    if (vm.page - 1 < 0) {
+                        return;
+                    }
+                    vm.page -= 1;
+                    vm.nav();
+                };
 
-                    viewModel.nav = function (pageIndex) {
+                vm.last = function () {
+                    vm.page = totalPage;
+                    vm.nav();
+                };
 
-                        if (pageIndex < 0 || pageIndex >= viewModel.pageSize)
-                            return;
-                        viewModel.search.call(viewModel, pageIndex, viewModel.pageSize, function (totalPages) {
-                            viewModel.totalRecords = totalPages;
-                        });
-                    };
+                vm.navTo = function () {
+                    var index = parseInt(this.attributes["href"].value.substr(1));
+                    if (index != vm) {
+                        vm.page = index;
+                        vm.nav();
+                    }
 
-                    viewModel.pageSize = 5;
-                    viewModel.pages = [];
-                    viewModel.search = function (pageIndex, pageSize, func) {
-                        alert('please set this function for getting data.');
-                    };
+                };
 
-                    viewModel.$watch("totalRecords", function (newValue, oldValue) {
-                        totalPage = calculatePage(newValue, viewModel.pageSize);
-                        var showPage = 10 / 2;
-                        viewModel.pages = [];
-                        var min = viewModel.page - showPage, max = viewModel.page + showPage;
-                        if (min < 0) {
-                            min = 0;
-                        }
-                        if (max > totalPage) {
-                            max = totalPage;
-                        }
-
-                        for (var i = min; i < max; i++) {
-                            viewModel.pages.push({
-                                text: (i + 1),
-                                index: i
-                            });
-                        }
+                vm.nav = function (pageIndex) {
+                    if (!pageIndex) {
+                        pageIndex = vm.page;
+                    }
+                    if (pageIndex < 0 || pageIndex >= vm.pageSize)
+                        return;
+                    vm.search.call(vm, pageIndex, vm.pageSize, function (totalPages) {
+                        vm.totalRecords = totalPages;
                     });
-                }
+                };
+
+                vm.pageSize = 5;
+                vm.pages = [];
+                vm.search = function (pageIndex, pageSize, func) {
+                    alert('please set this function for getting data.');
+                };
+
+                vm.$watch("totalRecords", function (newValue, oldValue) {
+                    vm.totalPage = calculatePage(newValue, vm.pageSize);
+                    var showPage = 10 / 2;
+                    vm.pages = [];
+                    var min = vm.page - showPage, max = vm.page + showPage;
+                    if (min < 0) {
+                        min = 0;
+                    }
+                    if (max > vm.totalPage) {
+                        max = vm.totalPage;
+                    }
+
+                    for (var i = min; i < max; i++) {
+                        vm.pages.push({
+                            text: (i + 1),
+                            index: i
+                        });
+                    }
+                });
+
+
+
+                avalon.mix(vm, data.paginationOptions);
             });
 
             avalon.nextTick(function () {
@@ -102,7 +106,11 @@
             return model;
         };
         widget.defaults = {
-            showPages: 10
+            totalPage: 1,
+            showPages: 10,
+            totalRecords: 0,
+            pages: [],
+            page: 0 //Current PgaeIndex
         };
         return avalon;
     };
