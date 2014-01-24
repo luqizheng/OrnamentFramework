@@ -7,6 +7,7 @@ using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Web;
+using Ornament.Web.UI.Paginations;
 
 namespace Ornament.MVCWebFrame.Controllers
 {

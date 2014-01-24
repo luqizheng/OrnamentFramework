@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ornament.Web
+namespace Ornament.Web.UI.Paginations
 {
     public class Pagination
     {

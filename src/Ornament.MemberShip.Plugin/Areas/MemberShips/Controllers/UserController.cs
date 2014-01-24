@@ -6,13 +6,16 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Profile;
 using System.Web.Security;
+using Ornament.Contexts;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
@@ -60,6 +63,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         ]
         public ActionResult Index()
         {
+            
+
             var pagination = new Pagination();
             IList<User> result = _userDao.FindAll(pagination.CurrentPage, pagination.PageSize);
             pagination.TotalRows = _userDao.Count();

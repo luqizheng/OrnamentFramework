@@ -1083,7 +1083,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Operators.cshtml" />
     <Content Include="Views\Shared\Empty.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\NavPagination.cshtml" />
+    <Content Include="Views\Shared\Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />

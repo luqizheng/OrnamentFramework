@@ -6,6 +6,7 @@ using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers

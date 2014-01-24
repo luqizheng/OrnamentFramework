@@ -6,6 +6,7 @@ using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers

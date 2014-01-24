@@ -11,7 +11,7 @@
                 function calculatePage(totalRecord, pageSize) {
                     if (totalRecord == 0)
                         return 1;
-                    var r = (totalRecord / pageSize);
+                    var r = parseInt(totalRecord / pageSize);
                     var remind = vm.totalRecord % vm.pageSize;
                     if (remind == 0)
                         return r;
@@ -39,9 +39,8 @@
                             return;
                         vm.search.call(vm, pageIndex, vm.pageSize, function (totalPages) {
                             vm.page = pageIndex;
-
-
                             vm.totalRecords = totalPages;
+                            createNav(totalPages);
                         });
                     },
                     could: function (pageAction) {
@@ -54,19 +53,33 @@
                             var pageIndex = parseInt(pageAction);
                             return pageIndex && pageIndex > 0 && pageIndex < vm.totalPage;
                         }
+                    },
+                    startRecord: function() {
+                        return vm.page * vm.pageSize;
+                    },
+                    endRecord:function() {
+                        return (vm.page + 1) * vm.pageSize;
                     }
+                    
                 };
                 vm.pages = [];
-                vm.$watch("totalRecords", function (newValue, oldValue) {
-                    vm.totalPage = calculatePage(newValue, vm.pageSize);
-                    var showPage = vm.showPage / 2;
+
+                function createNav(totalRecord) {
+                    vm.totalPage = calculatePage(totalRecord, vm.pageSize);
+                    var showPage = vm.showPages / 2;
                     vm.pages = [];
                     var min = vm.page - showPage, max = vm.page + showPage;
                     if (min < 0) {
+                        max -= min;
                         min = 0;
                     }
                     if (max > vm.totalPage) {
+                        var remind = max - vm.totalPage;
                         max = vm.totalPage;
+                        min = min - remind;
+                        if (min < 0) {
+                            min = 0;
+                        }
                     }
 
                     for (var i = min; i < max; i++) {
@@ -75,7 +88,7 @@
                             index: i
                         });
                     }
-                });
+                };
 
 
                 avalon.mix(vm, inner);

@@ -5,6 +5,7 @@ using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
