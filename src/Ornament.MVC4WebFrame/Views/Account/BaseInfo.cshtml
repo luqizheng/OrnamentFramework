@@ -46,7 +46,7 @@
 
         }
     }
-    seajs.use(["jquery"], function () {
+    seajs.use(["jquery"], function ($) {
         $("#EmailChanged").click(function () {
             $.get("@Url.Action("VarifyEmail")", { email: $("#Email").val() }, function (d) {
                 if (d.success) {

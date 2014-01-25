@@ -883,7 +883,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Account\BaseInfo.cshtml" />
-    <Content Include="Views\Account\_changePassword.cshtml" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.eot" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.ttf" />
     <Content Include="Content\templates\pannonia\css\font\fontawesome-webfont.woff" />
@@ -1170,6 +1169,9 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Basic.zh.designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ChangePassword.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

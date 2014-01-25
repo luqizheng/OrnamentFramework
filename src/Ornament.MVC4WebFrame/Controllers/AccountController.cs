@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
-using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
@@ -18,8 +17,6 @@ namespace Ornament.MVCWebFrame.Controllers
     public class AccountController : Controller
     {
         private readonly IMemberShipFactory _memberShipFactory;
-        // This constructor is used by the MVC framework to instantiate the controller using
-        // the default forms authentication and membership providers.
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccountController" /> class.
@@ -59,36 +56,21 @@ namespace Ornament.MVCWebFrame.Controllers
         public IMembershipService MembershipService { get; private set; }
 
         /// <summary>
-        /// 验证Emial
+        ///     验证Emial
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
         public JsonResult VarifyEmail(string email)
         {
             MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
-                                                         OrnamentContext.Configuration.ApplicationSetting
-                                                                        .VerifyEmailTimeout);
+                OrnamentContext.Configuration.ApplicationSetting
+                    .VerifyEmailTimeout);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
-
-        /// <summary>
-        ///     change password.
-        /// </summary>
-        /// <param name="model"> </param>
-        /// <returns>
-        /// </returns>
-        [Authorize]
-        [AcceptVerbs(HttpVerbs.Post),
-         ResourceAuthorize(UserOperator.SetPassword, "Member")]
-        public ActionResult ChangePassword(ChangePasswordModel model)
+        public ActionResult GetView(string viewName)
         {
-            if (ModelState.IsValid)
-            {
-                MembershipService.ChangePassword(OrnamentContext.MemberShip.CurrentUser().LoginId, model.CurrentPassword,
-                                                 model.NewPassword);
-            }
-            return PartialView("_changePassword", model);
+            return View(viewName);
         }
 
         /// <summary>
@@ -110,9 +92,9 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult LogOn()
         {
             var a = new LogonModel
-                {
-                    ReturnUrl = Request.QueryString["ReturnUrl"]
-                };
+            {
+                ReturnUrl = Request.QueryString["ReturnUrl"]
+            };
             return View(a);
         }
 
@@ -134,8 +116,8 @@ namespace Ornament.MVCWebFrame.Controllers
                 emailChanged = true;
                 OrnamentContext.MemberShip.CurrentUser().Contact.Email = data["Email"];
                 MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
-                                                             OrnamentContext.Configuration.ApplicationSetting
-                                                                            .VerifyEmailTimeout);
+                    OrnamentContext.Configuration.ApplicationSetting
+                        .VerifyEmailTimeout);
             }
             OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
             return Json(new { success = true, emailChanged });
@@ -154,7 +136,7 @@ namespace Ornament.MVCWebFrame.Controllers
             string errorMessage = null;
             if (!ModelState.IsValid ||
                 !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao(),
-                                OrnamentContext.MemberShip.CurrentVerifyCode()))
+                    OrnamentContext.MemberShip.CurrentVerifyCode()))
             {
                 if (errorMessage != null)
                 {
@@ -165,8 +147,8 @@ namespace Ornament.MVCWebFrame.Controllers
             model.ReturnUrl = model.ReturnUrl;
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                       ? (ActionResult)Redirect(model.ReturnUrl)
-                       : RedirectToAction("Index", "Home");
+                ? (ActionResult)Redirect(model.ReturnUrl)
+                : RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -177,8 +159,8 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             return View();
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="forget"></param>
         /// <returns></returns>
@@ -192,8 +174,8 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             return View();
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public ActionResult ForgetPasswordSucccess()
@@ -223,7 +205,7 @@ namespace Ornament.MVCWebFrame.Controllers
             if (ModelState.IsValid)
             {
                 MembershipService.CreateUser(model.LoginId, model.Password.Password,
-                                             model.Email);
+                    model.Email);
 
                 return RedirectToAction("Index", "Home");
             }
