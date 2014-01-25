@@ -1,7 +1,6 @@
 ﻿@model Ornament.Web.UI.Paginations.HtmlExtender.PageClient
 <div class="pagination pull-right"
-    ms-controller="page"
-    ms-widget="pagination,@this.Model.WidgetId,$opts">
+    ms-widget="pagination,@this.Model.WidgetId,@this.Model.Options">
 
     <ul>
         <li ms-class="disabled:page==0">

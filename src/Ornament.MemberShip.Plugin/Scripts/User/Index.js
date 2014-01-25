@@ -59,6 +59,14 @@ define(function (require) {
             });
             return false;
         };
+
+        vm.$pageOpts = {
+            pageSize: 10,
+            search: function (pageIndex, pageSize, func) {
+                find(pageIndex, pageSize, model.content, func);
+            }
+        };
+
         function lock(self, bLock) {
             /// <summary>
             ///     锁定用户
@@ -93,13 +101,7 @@ define(function (require) {
 
     });
 
-    var pageModule = avalon.define("page", function (vm) {
-        vm.$opts = {
-            search: function (pageIndex, pageSize, func) {
-                find(pageIndex, pageSize, model.content, func);
-            }
-        };
-    });
+
     function find(page, size, content, func) {
         $.get("/MemberShips/User/List", {
             page: page,

@@ -11,23 +11,25 @@ namespace Ornament.Web.UI.Paginations
             return helper.Partial("Pagination", new PageClient
             {
                 WidgetId = id,
+                Options = opts
 
             });
         }
 
         public static MvcHtmlString Pages(this HtmlHelper helper)
         {
-            return helper.Partial("Pagination", new PageClient
-            {
-                WidgetId = Guid.NewGuid().ToString("N"),
-            });
+            return Pages(helper, Guid.NewGuid().ToString("N"), "$pageOpts");
+        }
+        public static MvcHtmlString Pages(this HtmlHelper helper, string id)
+        {
+            return Pages(helper, id, "$pageOpts");
         }
 
         public class PageClient
         {
+
             public string WidgetId { get; set; }
-
-
+            public string Options { get; set; }
         }
     }
 }
