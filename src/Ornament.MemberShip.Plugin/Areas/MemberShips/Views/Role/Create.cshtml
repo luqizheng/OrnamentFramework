@@ -1,36 +1,34 @@
 ﻿@using Ornament
-@using Ornament.MemberShip.Plugin.Properties
-@using Ornament.Web
-@using Ornament.Web.HtmlExtends
-
+@using Ornament.Properties
+@using Ornament.Web.UI.Theme
 @model Ornament.MemberShip.Role
 @{
-    string subject = Ornament.Properties.Resources.Create + Resources.Role;
+    string subject = Resources.Create + Ornament.MemberShip.Properties.Resources.Role;
     ViewBag.Title = subject;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
-@using (var box = Html.Panel())
+@using (Panel box = Html.Panel())
 {
     @box.Header(@<text>
-    <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
-    <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
+    <button class="btn btn-primary">@Resources.Save</button>
+    <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
     </text>)
 
     @box.Body(@<text>
     <form class="form-horizontal" method="POST">
         @Html.ValidationSummary(true)
         @Html.EditorFor(model => model.Name)
-        @Html.EditorFor(model => model.Remark)
+        @Html.EditorFor(model => model.Remarks)
 
         <div class="control-group">
-            <label class="control-label">@Resources.Permission</label>
+            <label class="control-label">@Ornament.MemberShip.Properties.Resources.Permission</label>
             <div class="controls">
                 @Html.Partial("ChoicePermissions", Model)
             </div>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
-            <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
+            <button type="submit" class="btn btn-primary">@Resources.Save</button>
+            <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
         </div>
     </form>
 

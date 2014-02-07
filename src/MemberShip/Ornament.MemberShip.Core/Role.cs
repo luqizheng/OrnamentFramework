@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Properties;
 
@@ -13,14 +11,13 @@ namespace Ornament.MemberShip
     [Serializable]
     public class Role : Performer<Role>
     {
-
-
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
-        private string _remark;
+
 
         public Role()
         {
         }
+
 
         /// <summary>
         /// </summary>
@@ -33,36 +30,11 @@ namespace Ornament.MemberShip
             Name = roleName;
         }
 
-
-        ///// <summary>
-        /////     Gets or sets remark
-        ///// </summary>
-        //[Display(Name = "Remark", ResourceType = typeof(Resources))]
-        //[StringLength(100, ErrorMessageResourceType = typeof(ErrorMessage),
-        //    ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
-        //public virtual string Remark
-        //{
-        //    get { return _remark; }
-        //    set
-        //    {
-        //        if (!String.IsNullOrEmpty(value))
-        //        {
-        //            if (value.Length > 100)
-        //            {
-        //                throw new ArgumentOutOfRangeException("value", value.Length,
-        //                                                      "Comment 's length should be less than 100");
-        //            }
-        //            _remark = value;
-        //        }
-        //    }
-        //}
-        [Display(Name = "Permission", ResourceType = typeof(Resources))]
+        [Display(Name = "Permission", ResourceType = typeof (Resources))]
         public virtual Iesi.Collections.Generic.ISet<Permission> Permissions
         {
             get { return _permissions ?? (_permissions = new HashedSet<Permission>()); }
         }
-
-
 
         #region IPerformer Members
 
