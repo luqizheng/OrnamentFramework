@@ -102,7 +102,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
         {
             IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
 
-            Role role = roleDao.GetByName(name) ?? new Role(name) {Remark = remark};
+            Role role = roleDao.GetByName(name) ?? new Role(name) {Remarks = remark};
             roleDao.SaveOrUpdate(role);
 
             return role;

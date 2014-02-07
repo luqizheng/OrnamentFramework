@@ -34,28 +34,28 @@ namespace Ornament.MemberShip
         }
 
 
-        /// <summary>
-        ///     Gets or sets remark
-        /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof(Resources))]
-        [StringLength(100, ErrorMessageResourceType = typeof(ErrorMessage),
-            ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
-        public virtual string Remark
-        {
-            get { return _remark; }
-            set
-            {
-                if (!String.IsNullOrEmpty(value))
-                {
-                    if (value.Length > 100)
-                    {
-                        throw new ArgumentOutOfRangeException("value", value.Length,
-                                                              "Comment 's length should be less than 100");
-                    }
-                    _remark = value;
-                }
-            }
-        }
+        ///// <summary>
+        /////     Gets or sets remark
+        ///// </summary>
+        //[Display(Name = "Remark", ResourceType = typeof(Resources))]
+        //[StringLength(100, ErrorMessageResourceType = typeof(ErrorMessage),
+        //    ErrorMessageResourceName = "RoleRemarkOverMaxLength")]
+        //public virtual string Remark
+        //{
+        //    get { return _remark; }
+        //    set
+        //    {
+        //        if (!String.IsNullOrEmpty(value))
+        //        {
+        //            if (value.Length > 100)
+        //            {
+        //                throw new ArgumentOutOfRangeException("value", value.Length,
+        //                                                      "Comment 's length should be less than 100");
+        //            }
+        //            _remark = value;
+        //        }
+        //    }
+        //}
         [Display(Name = "Permission", ResourceType = typeof(Resources))]
         public virtual Iesi.Collections.Generic.ISet<Permission> Permissions
         {

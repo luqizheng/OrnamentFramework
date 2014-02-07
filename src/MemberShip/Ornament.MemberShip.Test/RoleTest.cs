@@ -126,8 +126,8 @@ namespace MemberShip.Test
         {
             var target = new Role();
             string actual;
-            target.Remark = String.Empty;
-            actual = target.Remark;
+            target.Remarks = String.Empty;
+            actual = target.Remarks;
             Assert.AreEqual(null, actual);
         }
 
@@ -140,8 +140,8 @@ namespace MemberShip.Test
             var target = new Role();
             string except = "comment";
             string actual;
-            target.Remark = except;
-            actual = target.Remark;
+            target.Remarks = except;
+            actual = target.Remarks;
             Assert.AreEqual(except, actual);
         }
 
@@ -159,9 +159,9 @@ namespace MemberShip.Test
                 except.Append("a");
             }
 
-            target.Remark = except.ToString();
+            target.Remarks = except.ToString();
 
-            Assert.AreEqual(except.ToString(), target.Remark);
+            Assert.AreEqual(except.ToString(), target.Remarks);
         }
 
 
@@ -172,7 +172,7 @@ namespace MemberShip.Test
         public void RoleConstructorTest1()
         {
             var target = new Role();
-            Assert.AreEqual(null, target.Remark);
+            Assert.AreEqual(null, target.Remarks);
             Assert.AreEqual(null, target.Name);
         }
 

@@ -17,7 +17,7 @@
 }
 @using (Html.BeginForm())
 {
-    using (var panel=Html.Panel())
+    using (var panel = Html.Panel())
     {
 
     @panel.Header(@<text>
@@ -39,15 +39,15 @@
         </div>
     </div>
     <div class="control-group">
-        @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+        @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
         <div class="controls">
-            @Html.TextAreaFor(model => model.Remark)
-            @Html.ValidationMessageFor(model => model.Remark)
+            @Html.TextAreaFor(model => model.Remarks)
+            @Html.ValidationMessageFor(model => model.Remarks)
         </div>
     </div>
     @Html.HiddenFor(model => model.Id)
     <div class="control-group">
-        <label class="control-label">@Html.DisplayFor(s=>s.Permissions)</label>
+        <label class="control-label">@Html.DisplayFor(s => s.Permissions)</label>
         <div class="controls">
             @Html.Partial("ChoicePermissions", Model)
         </div>

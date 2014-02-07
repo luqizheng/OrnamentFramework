@@ -2,14 +2,14 @@
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.MemberShip.Properties
+@using Ornament.Web.UI.Paginations
 @using Qi.Web.Mvc
-@model IEnumerable<Ornament.MemberShip.Role>
+@model IEnumerable<Role>
 @{
     ViewBag.Title = Resources.Role;
     Layout = OrnamentContext.Configuration.BackendLayout();
     bool hasDelete = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Delete);
-    bool hasModify = true;
-    OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Modify);
+    bool hasModify = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Modify);
 }
 @section pageTitle
 {
@@ -19,7 +19,7 @@
     <div class="well body">
         <a href="@Url.Action("Create")" class="btn"><i class="icon-plus"></i>@Ornament.Properties.Resources.Create</a>
 
-        <table class="table table-condensed table-striped">
+        <table class="table table-condensed table-striped" ms-controller="role">
             <thead>
                 <tr>
                     @if (hasModify || hasDelete)
@@ -31,43 +31,36 @@
 
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Remark)
+                        @Html.DisplayNameFor(model => model.Remarks)
 
                     </th>
                 </tr>
             </thead>
-            @foreach (Role item in Model)
-            {
+            <tbody ms-each-el="roles">
                 <tr>
                     @if (hasModify || hasDelete)
                     {
                         <td>
                             @if (hasModify)
                             {
-                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Ornament.Properties.Resources.Edit" class="btn btn-info btn-mini">
+                                <a ms-href="@Url.Action("Edit")/{{el.Id}}" title="@Ornament.Properties.Resources.Edit" class="btn btn-info btn-mini">
                                     <i class="icon-edit icon-white"></i></a>
                             }
                             @if (hasDelete)
                             {
-                                <a href="@Url.Action("Delete", new { id = item.Id })" title="@Ornament.Properties.Resources.Edit" class="btn btn-danger btn-mini">
+                                <a ms-href="@Url.Action("Delete")/{{el.Id}}" title="@Ornament.Properties.Resources.Edit" class="btn btn-danger btn-mini">
                                     <i class="icon-remove icon-white"></i></a>
                             }
                         </td>
                     }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Remark)
-                    </td>
+                    <td ms-text="el.Name"></td>
+                    <td ms-text="el.Remarks"></td>
                 </tr>
-            }
+            </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">
-                        <form>
-                            @*Html.Partial("NavPagination", ViewData["Nav"])*@
-                        </form>
+                    <td colspan="@((hasModify || hasDelete) ? "3" : "2")">
+                        @Html.Pages()
                     </td>
                 </tr>
             </tfoot>
@@ -75,3 +68,8 @@
 
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("/MemberShips/Scripts/Role/index.js")")
+    </script>
+}

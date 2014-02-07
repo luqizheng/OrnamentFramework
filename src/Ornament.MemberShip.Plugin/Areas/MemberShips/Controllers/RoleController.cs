@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
@@ -35,13 +36,28 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
              Resource = "Role", Operator = RoleOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
-            //Ornament.MemberShip.Plugin.Properties.Resources.AccountInfo
-            //Resources.SiteMap.String1
-            //global::Resources.SiteMap.String1
-            IList<Role> result = _roleDao.Find(pagination.PageSize, pagination.CurrentPage);
-            ViewData["Nav"] = pagination;
-            return View(result);
+            return View();
         }
+        [ResourceAuthorize(RoleOperator.Read, "Role")]
+        public ActionResult List(Pagination pagination)
+        {
+            var result = from role in _roleDao.Find(pagination.PageSize, pagination.CurrentPage)
+                         select new
+                         {
+                             role.Id,
+                             role.Name,
+                             role.Remarks
+                         };
+
+            var count = _roleDao.Count();
+            return Json(new
+            {
+                totalRecords = count,
+                data = result
+            }, JsonRequestBehavior.AllowGet);
+
+        }
+
 
         [
             ResourceAuthorize(RoleOperator.Modify, "Role"),

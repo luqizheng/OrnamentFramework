@@ -18,6 +18,7 @@
                     return ++r;
                 };
 
+                vm.page = -1;
 
                 var inner = {
                     next: function () {
@@ -54,13 +55,13 @@
                             return pageIndex && pageIndex > 0 && pageIndex < vm.totalPage;
                         }
                     },
-                    startRecord: function() {
+                    startRecord: function () {
                         return vm.page * vm.pageSize;
                     },
-                    endRecord:function() {
+                    endRecord: function () {
                         return (vm.page + 1) * vm.pageSize;
                     }
-                    
+
                 };
                 vm.pages = [];
 
@@ -110,9 +111,9 @@
             totalRecords: 0,
             pages: [],
             search: function (pageIndex, pageSize, func) {
-                alert('please set this function for getting data.');
+                alert('please set the search:function(pageIndex,pageSize,func) in the options.');
             },
-            page: -1 //Current PgaeIndex
+
         };
         return avalon;
     };

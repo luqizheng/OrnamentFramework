@@ -1,6 +1,6 @@
 ﻿define(function (require) {
     var $ = require('jquery');
-    require("/Components/json2.js");
+    require("/Scripts/Components/json2.js");
 
     return function (url) {
         /// <summary>
@@ -22,7 +22,7 @@
             /// <param name="data"></param>
             /// <param name="func"></param>
 
-            var opts = ext.call(this, "PUT", data, func);
+            var opts = this.ext.call(this, "PUT", data, func);
 
             $.ajax(opts);
         };
@@ -45,7 +45,7 @@
             /// </summary>
             /// <param name="data"></param>
             /// <param name="func"></param>
-            var opts = ext.call(this, "POST", data, func);
+            var opts = this.ext.call(this, "POST", data, func);
             $.ajax(opts);
         };
         this.Get = function (data, func) {
