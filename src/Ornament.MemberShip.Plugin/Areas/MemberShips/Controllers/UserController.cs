@@ -34,7 +34,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             _userDao = _memberShipFactory.CreateUserDao();
         }
 
-        #region for ValidationChecking
+        #region Validation
 
         [HttpGet]
         public JsonResult NotDuplicate(string loginId, string id)

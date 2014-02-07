@@ -27,8 +27,13 @@ namespace Ornament.MemberShip.Dao
         /// <param name="unuseRoles"></param>
         /// <returns></returns>
         IList<Role> GetInUseRoles(string[] roleIds, out string[] unuseRoles);
-
-
+        /// <summary>
+        /// 检查是否存在相同的名称
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int Count(string name, string id);
         /// <summary>
         /// 
         /// </summary>

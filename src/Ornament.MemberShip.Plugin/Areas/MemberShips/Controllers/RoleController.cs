@@ -23,7 +23,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             _roleDao = factory.CreateRoleDao();
             _factory = factory;
         }
-
+        [HttpGet]
+        public JsonResult NotDuplicate(string name, string id)
+        {
+            name = Request.QueryString[0];
+            return Json(_factory.CreateRoleDao().Count(name, id) == 0, JsonRequestBehavior.AllowGet);
+        }
         [ResourceAuthorize(RoleOperator.Read, "Role"),
          OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleListTitle",
              ParentKey = "MemberShips", Key = "Role", Order = 2,

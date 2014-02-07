@@ -74,6 +74,16 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new List<Role>(result.Values);
         }
 
+        public int Count(string name, string id)
+        {
+            return
+                CreateDetachedCriteria()
+                    .SetProjection(Projections.RowCount())
+                    .Add(Restrictions.Eq(NameProperty, name))
+                    .Add(Restrictions.NotEqProperty(Projections.Id(), id)
+                    ).GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="roleName"></param>
@@ -123,7 +133,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public Role GetByName(string roleName)
         {
             return
-                CreateDetachedCriteria()
+                DetachedCriteria.For<Role>()
                     .Add(Restrictions.Eq("Name", roleName)).GetExecutableCriteria(CurrentSession).SetCacheMode(
                         CacheMode.Normal).
                      UniqueResult<Role>();
@@ -132,13 +142,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<Role> Find(int pageSize, int currentPage)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize*currentPage).
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize * currentPage).
                                          GetExecutableCriteria(CurrentSession).List<Role>();
         }
 
         public IList<Role> Find(string roleName, int pageIndex, int pageSize)
         {
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
                                            .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
                                            .GetExecutableCriteria(CurrentSession).List<Role>();
         }
