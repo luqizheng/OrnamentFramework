@@ -31,15 +31,17 @@ namespace Ornament.Web.MemberShips
 
         public override bool IsUserInRole(string username, string roleName)
         {
-            var s = SessionManager.GetSessionWrapper();
+            if (username == "admin")
+                return true;
+            SessionWrapper s = SessionManager.GetSessionWrapper();
             s.InitSession();
             try
             {
                 User u = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao()
                     .GetByLoginId(username);
                 IQueryable<Role> result = from role in OrnamentContext.DaoFactory.MemberShipFactory.Roles
-                                          where role.Name == roleName
-                                          select role;
+                    where role.Name == roleName
+                    select role;
                 if (!result.Any())
                     return false;
                 return u.InRole(result.First());
@@ -52,13 +54,24 @@ namespace Ornament.Web.MemberShips
 
         public override string[] GetRolesForUser(string username)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var openTrue = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool openTrue = s.InitSession();
             try
             {
-                User userInfo =
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId(username);
-                return (from a in userInfo.GetAllRoles() select a.Name).ToArray();
+                IEnumerable<Role> roless;
+
+                if (username != "admin")
+                {
+                    User userInfo =
+                        OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId(username);
+                    roless = userInfo.GetAllRoles();
+                }
+                else
+                {
+                    roless = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
+                }
+
+                return (from a in roless select a.Name).ToArray();
             }
             finally
             {
@@ -68,18 +81,17 @@ namespace Ornament.Web.MemberShips
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="roleName"></param>
         /// <exception cref="ProviderException"></exception>
         public override void CreateRole(string roleName)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var openSessionCurrentThread = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool openSessionCurrentThread = s.InitSession();
             try
             {
                 var role = new Role(roleName);
-                Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().Save(role);
+                OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().Save(role);
             }
             catch (MemberShipException ex)
             {
@@ -95,7 +107,7 @@ namespace Ornament.Web.MemberShips
         }
 
         /// <summary>
-        /// 从数据源中移除已配置的 applicationName 的角色。 
+        ///     从数据源中移除已配置的 applicationName 的角色。
         /// </summary>
         /// <param name="roleName"></param>
         /// <param name="throwOnPopulatedRole">如果为 true，则在 roleName 具有一个或多个成员时引发异常，并且不删除 roleName。</param>
@@ -103,11 +115,11 @@ namespace Ornament.Web.MemberShips
         /// <exception cref="ProviderException">more than one user reference role named</exception>
         public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var openSessionCurrentThread = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool openSessionCurrentThread = s.InitSession();
             try
             {
-                IRoleDao roleDao = Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+                IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
                 if (throwOnPopulatedRole)
                 {
                     if (roleDao.IsUsesInRole(roleName))
@@ -131,13 +143,13 @@ namespace Ornament.Web.MemberShips
 
         public override bool RoleExists(string roleName)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var opened = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool opened = s.InitSession();
             try
             {
                 IQueryable<Role> reuslt = from role in OrnamentContext.DaoFactory.MemberShipFactory.Roles
-                                          where role.Name == roleName
-                                          select role;
+                    where role.Name == roleName
+                    select role;
                 return reuslt.Count() != 0;
             }
             finally
@@ -148,7 +160,6 @@ namespace Ornament.Web.MemberShips
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="usernames"></param>
         /// <param name="roleNames"></param>
@@ -161,12 +172,12 @@ namespace Ornament.Web.MemberShips
             if (roleNames == null || roleNames.Length == 0)
                 throw new ArgumentNullException("roleNames");
 
-            var s = SessionManager.GetSessionWrapper();
-            var openSessionCurrentThread = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool openSessionCurrentThread = s.InitSession();
             try
             {
                 ReadOnlyCollection<Role> roles =
-                     OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
 
                 if (roleNames.Length != roleNames.Length)
                 {
@@ -188,7 +199,7 @@ namespace Ornament.Web.MemberShips
 
                 foreach (
                     User user in
-                         OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetUsers(usernames))
+                        OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetUsers(usernames))
                 {
                     foreach (string roleName in roleNames)
                     {
@@ -207,13 +218,13 @@ namespace Ornament.Web.MemberShips
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var openSessionCurrentThread = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool openSessionCurrentThread = s.InitSession();
             try
             {
                 IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
                 ReadOnlyCollection<Role> roles =
-                     OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
                 IList<User> users = userDao.GetUsers(usernames);
                 foreach (User u in users)
                 {
@@ -231,18 +242,17 @@ namespace Ornament.Web.MemberShips
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns></returns>
         public override string[] GetUsersInRole(string roleName)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var openSessionCurrentThread = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool openSessionCurrentThread = s.InitSession();
             try
             {
                 IList<User> users =
-                     OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetUsersInRole(roleName);
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetUsersInRole(roleName);
                 return UserssToString(users);
             }
             finally
@@ -256,12 +266,12 @@ namespace Ornament.Web.MemberShips
 
         public override string[] GetAllRoles()
         {
-            var s = SessionManager.GetSessionWrapper();
-            var init = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool init = s.InitSession();
             try
             {
                 IList<Role> roles =
-                     OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
                 var result = new string[roles.Count];
                 for (int i = 0; i < result.Length; i++)
                 {
@@ -280,19 +290,19 @@ namespace Ornament.Web.MemberShips
         }
 
         /// <summary>
-        /// 获取属于某个角色且与指定的用户名相匹配的用户名的数组。
+        ///     获取属于某个角色且与指定的用户名相匹配的用户名的数组。
         /// </summary>
         /// <param name="roleName">作为搜索范围的角色。</param>
         /// <param name="usernameToMatch">要搜索的用户名</param>
         /// <returns></returns>
         public override string[] FindUsersInRole(string roleName, string usernameToMatch)
         {
-            var s = SessionManager.GetSessionWrapper();
-            var init = s.InitSession();
+            SessionWrapper s = SessionManager.GetSessionWrapper();
+            bool init = s.InitSession();
             try
             {
                 IList<User> uses =
-                     OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().FindUsersInRole(
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().FindUsersInRole(
                         roleName,
                         usernameToMatch);
                 var result = new string[uses.Count];
@@ -312,14 +322,12 @@ namespace Ornament.Web.MemberShips
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="users"></param>
         /// <returns></returns>
         private static string[] UserssToString(IList<User> users)
         {
-
-            var sessionSegment = SessionManager.GetSessionWrapper();
+            SessionWrapper sessionSegment = SessionManager.GetSessionWrapper();
             bool init = sessionSegment.InitSession();
             try
             {

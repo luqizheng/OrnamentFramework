@@ -80,7 +80,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 CreateDetachedCriteria()
                     .SetProjection(Projections.RowCount())
                     .Add(Restrictions.Eq(NameProperty, name))
-                    .Add(Restrictions.NotEqProperty(Projections.Id(), id)
+                    .Add(Restrictions.Not(Restrictions.Eq(Projections.Id(), id))
                     ).GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
         }
 

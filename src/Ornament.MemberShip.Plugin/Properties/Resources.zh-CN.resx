@@ -165,4 +165,22 @@
   <data name="Welcone" xml:space="preserve">
     <value>欢迎</value>
   </data>
+  <data name="alertMsg_duplicate_roleName" xml:space="preserve">
+    <value>角色名称已经被使用，请输入另外一个</value>
+  </data>
+  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
+    <value>请输入登录名或者电子邮件</value>
+  </data>
+  <data name="alertMsg_requireVerifyCode1" xml:space="preserve">
+    <value>请输入验证码</value>
+  </data>
+  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
+    <value>请输入当前密码</value>
+  </data>
+  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
+    <value>请输入正确的邮件地址</value>
+  </data>
 </root>

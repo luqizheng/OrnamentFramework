@@ -106,6 +106,15 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Role name is exist, please input another one. 的本地化字符串。
+        /// </summary>
+        public static string alertMsg_duplicate_roleName {
+            get {
+                return ResourceManager.GetString("alertMsg_duplicate_roleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Current Password isn&apos;t right. 的本地化字符串。
         /// </summary>
         public static string alertMsg_OldPasswordNotRight {

@@ -88,6 +88,15 @@ namespace Resources.message {
         }
         
         /// <summary>
+        ///   查找类似 News Type 的本地化字符串。
+        /// </summary>
+        internal static string newsTypeIndexTitle {
+            get {
+                return ResourceManager.GetString("newsTypeIndexTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Create 的本地化字符串。
         /// </summary>
         internal static string notifyTypeCreateTitle {

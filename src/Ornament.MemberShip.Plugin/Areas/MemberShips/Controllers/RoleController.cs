@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Models;
-using Ornament.Web;
+using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
@@ -24,12 +24,14 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             _roleDao = factory.CreateRoleDao();
             _factory = factory;
         }
+
         [HttpGet]
         public JsonResult NotDuplicate(string name, string id)
         {
             name = Request.QueryString[0];
             return Json(_factory.CreateRoleDao().Count(name, id) == 0, JsonRequestBehavior.AllowGet);
         }
+
         [ResourceAuthorize(RoleOperator.Read, "Role"),
          OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleListTitle",
              ParentKey = "MemberShips", Key = "Role", Order = 2,
@@ -38,6 +40,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         {
             return View();
         }
+
         [ResourceAuthorize(RoleOperator.Read, "Role")]
         public ActionResult List(Pagination pagination)
         {
@@ -49,13 +52,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                              role.Remarks
                          };
 
-            var count = _roleDao.Count();
+            int count = _roleDao.Count();
             return Json(new
             {
                 totalRecords = count,
                 data = result
             }, JsonRequestBehavior.AllowGet);
-
         }
 
 
@@ -84,7 +86,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
             ParentKey = "Role",
             Resource = "Role", Operator = RoleOperator.Modify)
-       ]
+        ]
         public ActionResult Delete(string id)
         {
             IList<IPerformer> a = _factory.CreateMemberDao().Find(id);
@@ -105,7 +107,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [HttpPost, ResourceAuthorize(RoleOperator.Modify, "Role"),]
-        public ActionResult Create(Role role, string[] permissionIds)
+        public ActionResult Create(RoleModel role, string[] permissionIds)
         {
             if (!ModelState.IsValid)
             {

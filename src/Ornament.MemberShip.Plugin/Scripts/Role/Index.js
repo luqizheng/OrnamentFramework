@@ -1,4 +1,5 @@
 ﻿define(function (require) {
+    require("/scripts/views/_appLayout.js");
     var $ = require('jquery');
     require("/scripts/modules/combine/pagination.js")(avalon);
     avalon.define('role', function (vm) {

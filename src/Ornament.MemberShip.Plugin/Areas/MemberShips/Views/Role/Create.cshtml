@@ -1,7 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Properties
 @using Ornament.Web.UI.Theme
-@model Ornament.MemberShip.Role
+@model Ornament.MemberShip.Plugin.Models.Memberships.RoleModel
 @{
     string subject = Resources.Create + Ornament.MemberShip.Properties.Resources.Role;
     ViewBag.Title = subject;
@@ -19,7 +19,7 @@
         @Html.ValidationSummary(true)
         @Html.EditorFor(model => model.Name)
         @Html.EditorFor(model => model.Remarks)
-
+        @Html.HiddenFor(model => model.Id)
         <div class="control-group">
             <label class="control-label">@Ornament.MemberShip.Properties.Resources.Permission</label>
             <div class="controls">
@@ -33,4 +33,10 @@
     </form>
 
     </text>)
+}
+
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/Role/Create.js")")
+    </script>
 }

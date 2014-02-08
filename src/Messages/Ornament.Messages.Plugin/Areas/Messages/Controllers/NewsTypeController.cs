@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
+using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -17,7 +18,9 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             _messageDao = messageDao;
         }
-
+        [Session]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsTypeIndexTitle", Key = "newsTypeList",
+          ParentKey = "news")]
         public ActionResult Index()
         {
             IList<NewsType>
