@@ -17,13 +17,10 @@
     </mvcSiteMapNode>
 
     <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips"/>
+    <!-- Begin Message Plugin Parent Key -->
     <mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>
-    <mvcSiteMapNode title="Messages" controller="News" area="Messages" action="Index"
-                    imageUrl="icon-comments" >
-
-      <mvcSiteMapNode key="Messages" title="NotifyType" controller="NotifyType" action="Index"></mvcSiteMapNode>
-
-    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Notify Messages" controller="News" area="Messages" action="Index" imageUrl="icon-comments" key="Messages"></mvcSiteMapNode>
+    <!-- End Message Plugin Parent Key -->
 
 
 
