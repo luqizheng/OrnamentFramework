@@ -1,7 +1,8 @@
 ﻿@using Ornament
 @using Ornament.Web
+@using Ornament.Web.UI.Theme
 @using Qi.Web
-@using Basic=Ornament.Properties.Resources
+@using Basic = Ornament.Properties.Resources
 @model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.MessageTemplateModel
 
 @{
@@ -31,76 +32,75 @@
 
 @section pageTitle
 {
-    <h5>@Html.GetResourceString("title")</h5>
+    <h5>@Html.GetEmbededResourceString("title")</h5>
 }
 @using (Html.BeginForm("Create", "Template", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    <div class="widget">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <input type="submit" value="@Basic.Save" class="btn btn-info" />
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
-            </div>
-        </div>
-        <div class="body well">
 
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>@Html.GetEmbededResourceString("Tab_title_Basic")</a></li>
-                <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>@Html.GetEmbededResourceString("Tab_title_Content")</a></li>
-            </ul>
-            <div class="tab-content">
-
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                <div id="tab7" class="tab-pane active">
-                    <div class="row-fluid">
-                        @Html.EditorFor(model => model.Name)
-                        @Html.EditorFor(model=>model.Inside)
-                        <div class="control-group">
-                            @Html.LabelFor(s => s.Notify, new { @class = "control-label span12" })
-                            <div class="controls">
-                                @Html.ListBoxFor(s => s.Notify, nodifyList)
-                                @Html.ValidationMessageFor(s => s.Notify)
-                            </div>
-                        </div>
-                        @Html.EditorFor(model => model.Remark)
-                    </div>
-                </div>
-                <div id="tab8" class="tab-pane">
-
-                    <div class="control-group">
-                        <label class="control-label">Language:</label>
-                        <div class="controls">
-                            <select id="Language">
-                                @{
-    var langs = OrnamentContext.Configuration.Languages;
-    foreach (var lang in langs)
+    using (var panel = Html.Panel())
     {
-                                    <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
-    }
-                                }
-                            </select>
-                        </div>
+    @panel.Header(@<text>
+    <input type="submit" value="@Basic.Save" class="btn btn-info" />
+    <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+    </text>)
+    @panel.Body(@<text>
 
-
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>@Html.GetEmbededResourceString("Tab_title_Basic")</a></li>
+        <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>@Html.GetEmbededResourceString("Tab_title_Content")</a></li>
+    </ul>
+    <div class="tab-content">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div id="tab7" class="tab-pane active">
+            <div class="row-fluid">
+                @Html.EditorFor(model => model.Name)
+                @Html.EditorFor(model => model.Inside)
+                <div class="control-group">
+                    @Html.LabelFor(s => s.Notify, new { @class = "control-label span12" })
+                    <div class="controls">
+                        @Html.ListBoxFor(s => s.Notify, nodifyList)
+                        @Html.ValidationMessageFor(s => s.Notify)
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Subject</label>
-                        <div class="controls">
-                            <input id="subject" class="styled" type="text" style="width: 100%" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <textarea name="editor" id="editor"></textarea>
-                    </div>
-
                 </div>
-                <!-- End Content -->
+                @Html.EditorFor(model => model.Remark)
+            </div>
+        </div>
+        <div id="tab8" class="tab-pane">
+
+            <div class="control-group">
+                <label class="control-label">Language:</label>
+                <div class="controls">
+                    <select id="Language">
+                        @foreach (var lang in OrnamentContext.Configuration.Languages)
+                        {
+    
+                            <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
+    
+                        }
+                    </select>
+                </div>
+
+
+            </div>
+            <div class="control-group">
+                <label class="control-label">Subject</label>
+                <div class="controls">
+                    <input id="subject" class="styled" type="text" style="width: 100%" />
+                </div>
+            </div>
+            <div class="control-group">
+                <textarea name="editor" id="editor"></textarea>
             </div>
 
         </div>
+        <!-- End Content -->
     </div>
+    </text>)
+    }
 }
+
+
 
 
 @section scripts {

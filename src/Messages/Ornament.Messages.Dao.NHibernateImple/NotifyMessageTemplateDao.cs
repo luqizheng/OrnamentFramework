@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NHibernate.Criterion;
+using NHibernate.Linq;
 using Ornament.Messages.Notification;
 using Qi.Domain.NHibernates;
 
@@ -11,20 +13,31 @@ namespace Ornament.Messages.Dao.NHibernateImple
     /// </summary>
     internal class NotifyMessageTemplateDao : DaoBase<string, NotifyMessageTemplate>, IMessageTemplateDao
     {
-        /// <summary>
-        /// </summary>
-        /// <param name="notifyMessageTemplate"></param>
-        public override void Delete(NotifyMessageTemplate notifyMessageTemplate)
+        IProjection NameProperty
         {
-            if (!notifyMessageTemplate.Inside)
-            {
-                base.Delete(notifyMessageTemplate);
-                return;
-            }
-
-            throw new ArgumentException("simple message factory is inside template, it should not be deleted.");
+            get { return Projections.Property<NotifyMessageTemplate>(s => s.Name); }
+        }
+        public IQueryable<NotifyMessageTemplate> NotifyMessageTemplates
+        {
+            get { return CurrentSession.Query<NotifyMessageTemplate>(); }
         }
 
+        public int Count(string name, string excludeId)
+        {
+            if (name == null
+                ) throw new ArgumentNullException("name");
+            var re = this.CreateDetachedCriteria()
+                .Add(Restrictions.Eq(NameProperty, name));
+
+            if (!string.IsNullOrEmpty(excludeId))
+            {
+                var id = Restrictions.Not(Restrictions.Eq(Projections.Id(), excludeId));
+                re.Add(id);
+            }
+            return re.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+        }
+
+        
         /// <summary>
         /// </summary>
         /// <param name="name"></param>
@@ -52,7 +65,6 @@ namespace Ornament.Messages.Dao.NHibernateImple
                                 .GetExecutableCriteria(CurrentSession)
                                 .UniqueResult<int>();
             return DetachedCriteria.For<NotifyMessageTemplate>()
-                .AddOrder(Order.Desc(Projections.Property<NotifyMessageTemplate>(s => s.Inside)))
                 .AddOrder(Order.Desc(Projections.Property<NotifyMessageTemplate>(s => s.ModifyTime)))
                 .SetMaxResults(pageSize).SetFirstResult(pageSize * pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<NotifyMessageTemplate>();

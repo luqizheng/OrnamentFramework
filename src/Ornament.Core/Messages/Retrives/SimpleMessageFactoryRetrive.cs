@@ -31,7 +31,6 @@ namespace Ornament.Messages.Retrives
                 {
                     Name = name,
                     Remark = _remark,
-                    Inside = true,
                 };
             foreach (Content content in _contents)
             {

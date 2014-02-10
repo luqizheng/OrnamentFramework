@@ -1,94 +1,78 @@
 ﻿@using Ornament
 @using Ornament.Web
 @using Ornament.Web.Bundles
+@using Ornament.Web.UI.Theme
 @using SeajsBundles
 @using Basic = Ornament.Properties.Resources
 @model System.Collections.Generic.IEnumerable<Ornament.Messages.Notification.NotifyMessageTemplate>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Template for Simple Message";
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle{
     <h2>Template for Simple Message</h2>
 }
-<div class="actions-wrapper">
-    <div class="actions">
 
-        <div id="user-stats">
-            <ul class="round-buttons">
-                <li>
-                    <div class="depth"><a href="@Url.Action("Create")" title="Add new Message Template" class="tip"><i class="icon-plus-sign"></i></a></div>
-                </li>
-            </ul>
-        </div>
-        <ul class="action-tabs">
-            <li><a href="#user-stats" title="">@Html.GetResourceString("QuickActions")</a></li>
-        </ul>
-    </div>
-</div>
-<div class="widget">
-
-    <div class="navbar">
-        <div class="navbar-inner">
-
-            <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
-        </div>
-    </div>
-
-    <div class="well body">
-        @if (Model.Count() != 0)
-        {
-   
-            <table class="table table-condensed table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Remark)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Inside)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
+@using (var panel = Html.Panel())
+{
+    @panel.Header(@<text>
+                      <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
+                  </text>);
+    @panel.Body(@<text>
+                    @if (Model.Count() != 0)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Remark)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Inside)
-                            </td>
-                            <td>
-                                @Html.ActionLink(@Basic.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
-                                <a data-toggle="popover" data-val="@item.Id" 
-                                class="btn btn-danger btn-small" href="javascript:void">@Basic.Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-    
 
-        }
-        else
-        {
-            <div class="alert">
-                <h6>No message type found. 
-                </h6>
-            </div>
-        }
-    </div>
-</div>
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Remark)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Inside)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var template in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => template.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => template.Remark)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => template.Inside)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(@Basic.Edit, "Edit", new {id = template.Id}, new {@class = "btn btn-small"})
+                                            <a data-toggle="popover" data-val="@template.Id" 
+                                               class="btn btn-danger btn-small" href="javascript:void">@Basic.Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                    }
+                    else
+                    {
+                        <div class="alert">
+                            <h6>No message type found. 
+                            </h6>
+                        </div>
+                    }
+                </text>);
+}
+
 <div id="warning" class="hide">
     <p>Do you want to delete this message?</p>
     <button class="btn btn-danger deleteYes">@Basic.Delete</button>

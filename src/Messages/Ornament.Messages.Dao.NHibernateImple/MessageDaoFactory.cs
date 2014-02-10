@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Ornament.Messages.Newses;
+using Ornament.Messages.Notification;
 
 namespace Ornament.Messages.Dao.NHibernateImple
 {
@@ -54,6 +55,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
             get { return new NewsDao(); }
         }
 
-      
+
+
     }
 }

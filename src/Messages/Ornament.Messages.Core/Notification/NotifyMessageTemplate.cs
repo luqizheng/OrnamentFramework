@@ -47,10 +47,6 @@ namespace Ornament.Messages.Notification
         /// </summary>
         public virtual NotifyType Type { get; set; }
 
-        /// <summary>
-        ///     如果是内置message，那么Name是不允许修改的
-        /// </summary>
-        public virtual bool Inside { get; set; }
 
         /// <summary>
         ///     Gets or sets Name of  message template.

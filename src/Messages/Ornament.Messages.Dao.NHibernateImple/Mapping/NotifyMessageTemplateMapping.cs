@@ -8,10 +8,10 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         public NotifyMessageTemplateMapping()
         {
             Table("Msgs_NotifyMsgTemplate");
-            Id(x => x.Id).GeneratedBy.UuidHex("N");
+            Id(x => x.Id).GeneratedBy.UuidHex("N").Length(36);
             Map(x => x.Name).Length(64);
             Map(x => x.Remark).Length(255);
-            Map(x => x.Inside);
+            
             Map(x => x.ModifyTime);
             References(x => x.Type);
 

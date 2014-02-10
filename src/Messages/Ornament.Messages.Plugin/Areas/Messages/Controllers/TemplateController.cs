@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
@@ -49,7 +50,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/Template/Create
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateCreateTitle", 
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateCreateTitle",
             ParentKey = "templates")]
         public ActionResult Create()
         {
@@ -79,8 +80,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/Template/Edit/5
-          [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateEditTitle",
-            ParentKey = "templates")]
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateEditTitle",
+          ParentKey = "templates")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -117,7 +118,14 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult IsNotDuplicateName(string name, string id)
+        {
+            var count = _daoFactory.MessageTemplateDao.Count(name, id);
+            return Json(count != 0, JsonRequestBehavior.AllowGet);
+
         }
     }
 }

@@ -10,25 +10,28 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 {
     public class MessageTemplateModel
     {
+        private IDictionary<string, Content> _contents;
+
         public MessageTemplateModel()
         {
         }
-        private IDictionary<string, Content> _contents;
+
         public MessageTemplateModel(NotifyMessageTemplate template)
         {
-            this.Name = template.Name;
-            this.Remark = template.Remark;
-            foreach (var key in template.Contents.Keys)
+            Name = template.Name;
+            Remark = template.Remark;
+            foreach (string key in template.Contents.Keys)
             {
-                this.Contents.Add(key, template.Contents[key]);
+                Contents.Add(key, template.Contents[key]);
             }
-            this.Inside = template.Inside;
-
+            
         }
+
         /// <summary>
         /// </summary>
         [Editable(false)]
         public string Id { get; set; }
+
         [UIHint("string"), Required]
         [DisplayName("Notify Type")]
         public NotifyType Notify { get; set; }
@@ -36,6 +39,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         /// <summary>
         /// </summary>
         [UIHint("string"), Required]
+        [Remote("IsNotDuplicateName", "Template", "Messages", AdditionalFields = "Id")]
         public string Name { get; set; }
 
         /// <summary>
@@ -51,20 +55,21 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
             set { _contents = value; }
         }
-        [DisplayName("Inside Template")]
-        public bool Inside { get; set; }
+
+
 
         public void Save(IMessageTemplateDao dao)
         {
             if (dao == null)
                 throw new ArgumentNullException("dao");
 
-            NotifyMessageTemplate type = Id != null ?
-                dao.Get(Id) : new NotifyMessageTemplate(Notify);
+            NotifyMessageTemplate type = Id != null
+                ? dao.Get(Id)
+                : new NotifyMessageTemplate(Notify);
             type.Name = Name;
             type.Remark = Remark;
             dao.SaveOrUpdate(type);
-            foreach (var lang in Contents.Keys)
+            foreach (string lang in Contents.Keys)
             {
                 type.Contents.Add(lang, Contents[lang]);
             }

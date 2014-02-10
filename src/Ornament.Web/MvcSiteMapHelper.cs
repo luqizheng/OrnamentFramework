@@ -52,7 +52,7 @@ namespace Ornament.Web
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
                 ISiteMapNode childNode = node.ChildNodes[i];
-                if (Match(siteMapPermission, childNode) || true) //如果包含disabled 
+                if (Match(siteMapPermission, childNode)) //如果包含disabled 
                 {
                     var mainMenu = new MainMenu
                     {
@@ -79,7 +79,7 @@ namespace Ornament.Web
             {
                 ISiteMapNode childNode = mainMenu.Current.ChildNodes[i];
                 string a = childNode.Title;
-                if (Match(siteMapPermission, childNode) || true) //如果包含disabled 
+                if (Match(siteMapPermission, childNode)) //如果包含disabled 
                 {
                     var childMainMenu = new MainMenu
                     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Ornament.Messages.Notification;
 using Qi.Domain;
 
@@ -24,5 +25,9 @@ namespace Ornament.Messages.Dao
         /// <param name="total"></param>
         /// <returns></returns>
         IList<NotifyMessageTemplate> GetAll(int pageIndex, int pageSize, out int total);
+
+        IQueryable<NotifyMessageTemplate> NotifyMessageTemplates { get; }
+
+        int Count(string name, string excludeId);
     }
 }

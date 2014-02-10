@@ -5,7 +5,7 @@
 @model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.MessageTemplateModel
 
 @{
-    ViewBag.Title = Html.GetResourceString("title");
+    ViewBag.Title = Html.GetEmbededResourceString("title");
     Layout = OrnamentContext.Configuration.BackendLayout();
     string contents = "{}";
 

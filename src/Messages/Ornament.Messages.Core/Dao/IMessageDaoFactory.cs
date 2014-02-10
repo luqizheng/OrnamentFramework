@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Win32;
+using Ornament.MemberShip;
 using Ornament.Messages.Newses;
 using Ornament.Messages.Notification;
 
@@ -37,6 +38,6 @@ namespace Ornament.Messages.Dao
         /// 
         /// </summary>
         INewsDao NewsDao { get; }
-      
+
     }
 }
