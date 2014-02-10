@@ -4,7 +4,7 @@
 @using Ornament.Web.HtmlExtends
 @using Ornament.Web.UI.Theme
 
-@model Ornament.MemberShip.Role
+@model Ornament.MemberShip.Plugin.Models.Memberships.RoleModel
 @{
     string subject = Html.GetEmbededResourceString("page_title");
     ViewBag.Title = subject;
@@ -15,50 +15,41 @@
 {
     <h6>@subject</h6>
 }
-@using (Html.BeginForm())
-{
-    using (var panel = Html.Panel())
+<form class="form-horizontal" method="POST">
+    @using (var panel = Html.Panel())
     {
 
-    @panel.Header(@<text>
-    <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
-    <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
-    </text>);
-
-
-    @panel.Body(
-         @<text>
-
-    @Html.ValidationSummary(true)
-
-    <div class="control-group">
-        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-        <div class="controls">
-            @Html.TextBoxFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-    </div>
-    <div class="control-group">
-        @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
-        <div class="controls">
-            @Html.TextAreaFor(model => model.Remarks)
-            @Html.ValidationMessageFor(model => model.Remarks)
-        </div>
-    </div>
-    @Html.HiddenFor(model => model.Id)
-    <div class="control-group">
-        <label class="control-label">@Html.DisplayFor(s => s.Permissions)</label>
-        <div class="controls">
-            @Html.Partial("ChoicePermissions", Model)
-        </div>
-    </div>
-    <div class="form-actions">
+        @panel.Header(@<text>
         <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
         <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
-    </div>
+        </text>);
 
-    </text>);
+
+        @panel.Body(
+         @<text>
+
+        @Html.ValidationSummary(true)
+        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(model => model.Remarks)
+        @Html.HiddenFor(model => model.Id)
+        <div class="control-group">
+            <label class="control-label">@Html.DisplayFor(s => s.Permissions)</label>
+            <div class="controls">
+                @Html.Partial("ChoicePermissions", Model)
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
+            <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
+        </div>
+
+        </text>);
 
 
     }
+</form>
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/Role/Edit.js")")
+    </script>
 }

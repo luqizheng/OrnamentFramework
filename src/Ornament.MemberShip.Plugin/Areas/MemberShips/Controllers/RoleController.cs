@@ -69,7 +69,9 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         ]
         public ActionResult Edit(string id)
         {
-            return View(_roleDao.Load(id));
+            var role = _roleDao.Load(id);
+            var roleModel = new RoleModel(role);
+            return View(roleModel);
         }
 
         [ResourceAuthorize(RoleOperator.Modify, "Role"),

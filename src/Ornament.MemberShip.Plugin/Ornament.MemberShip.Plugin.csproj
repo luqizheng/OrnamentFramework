@@ -325,6 +325,7 @@
     <EmbeddedResource Include="Scripts\Org\Create.js" />
     <EmbeddedResource Include="Scripts\Role\Index.js" />
     <EmbeddedResource Include="Scripts\Role\Create.js" />
+    <EmbeddedResource Include="Scripts\Role\Edit.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
