@@ -31,6 +31,7 @@ namespace Ornament.Messages.Retrives
                 {
                     Name = name,
                     Remark = _remark,
+                    Type = _notifyType
                 };
             foreach (Content content in _contents)
             {

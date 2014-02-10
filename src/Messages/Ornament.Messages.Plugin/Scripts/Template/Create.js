@@ -1,9 +1,12 @@
 ﻿define(function(require) {
+    var $ = require('jquery');
+
+    require('select2')($);
     require("/scripts/views/_appLayout.js");
-    var $ = require("jquery");
-    require("ckeditor");
     require("bootstrap")($);
-    require("select2")($);
+    require('ckeditor');
+    require('validate')($);
+
 
     var editor = CKEDITOR.replace('editor');
     editor.on("blur", function () {

@@ -24,7 +24,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             {
                 Contents.Add(key, template.Contents[key]);
             }
-            
+
         }
 
         /// <summary>
@@ -71,7 +71,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             dao.SaveOrUpdate(type);
             foreach (string lang in Contents.Keys)
             {
-                type.Contents.Add(lang, Contents[lang]);
+                if (type.Contents.ContainsKey(lang))
+                    type.Contents[lang] = Contents[lang];
+                else
+                    type.Contents.Add(lang, Contents[lang]);
+
             }
             dao.Flush();
         }

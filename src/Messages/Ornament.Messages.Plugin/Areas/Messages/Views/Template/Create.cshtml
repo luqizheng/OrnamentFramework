@@ -43,23 +43,41 @@
     <input type="submit" value="@Basic.Save" class="btn btn-info" />
     <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
     </text>)
+
+    
     @panel.Body(@<text>
+
+
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>@Html.GetEmbededResourceString("Tab_title_Basic")</a></li>
         <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>@Html.GetEmbededResourceString("Tab_title_Content")</a></li>
     </ul>
     <div class="tab-content">
+
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
         @Html.ValidationSummary(true)
         <div id="tab7" class="tab-pane active">
             <div class="row-fluid">
-                @Html.EditorFor(model => model.Name)
-                @Html.EditorFor(model => model.Inside)
+                @* 如果是内置，一定是不能呢改名字，因为是有程序初始化生成的 *@
+
+
+                @Html.EditorFor(s => s.Name)
+
+
                 <div class="control-group">
                     @Html.LabelFor(s => s.Notify, new { @class = "control-label span12" })
                     <div class="controls">
-                        @Html.ListBoxFor(s => s.Notify, nodifyList)
+                        <select name="Notify" id="Notify">
+                            @foreach (var notify in OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao.GetAll())
+                            {
+
+                                                 
+                                <option value="@notify.Id">@notify.Name</option>
+                                                 
+                            }
+                        </select>
                         @Html.ValidationMessageFor(s => s.Notify)
                     </div>
                 </div>
@@ -72,11 +90,12 @@
                 <label class="control-label">Language:</label>
                 <div class="controls">
                     <select id="Language">
-                        @foreach (var lang in OrnamentContext.Configuration.Languages)
-                        {
-    
+                        @{
+                            var langs = OrnamentContext.Configuration.Languages;
+                            foreach (var lang in langs)
+                            {
                             <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
-    
+                            }
                         }
                     </select>
                 </div>
@@ -94,8 +113,8 @@
             </div>
 
         </div>
-        <!-- End Content -->
     </div>
+
     </text>)
     }
 }
@@ -107,6 +126,6 @@
 
     <script type="text/javascript">
         var content = @Html.Raw(contents)
-         seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("/Messages/Scripts/Template/create.js")")
+    seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("/Messages/Scripts/Template/create.js")")
     </script>
 }

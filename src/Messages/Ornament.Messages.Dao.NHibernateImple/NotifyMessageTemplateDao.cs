@@ -34,10 +34,10 @@ namespace Ornament.Messages.Dao.NHibernateImple
                 var id = Restrictions.Not(Restrictions.Eq(Projections.Id(), excludeId));
                 re.Add(id);
             }
-            return re.GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+            return re.SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
-        
+
         /// <summary>
         /// </summary>
         /// <param name="name"></param>

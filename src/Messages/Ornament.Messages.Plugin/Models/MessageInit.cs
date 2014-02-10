@@ -18,17 +18,17 @@ namespace Ornament.Web
         {
             get
             {
-                User user = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-                return user == null;
+                NotifyMessageTemplate a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
+                NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
+                NotifyMessageTemplate c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
+                NotifyMessageTemplate d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
+                return false;
             }
         }
 
         public void CreateData()
         {
-            NotifyMessageTemplate a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
-            NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
-            NotifyMessageTemplate c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
-            NotifyMessageTemplate d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
+           
 
 
             //InitMessageType();

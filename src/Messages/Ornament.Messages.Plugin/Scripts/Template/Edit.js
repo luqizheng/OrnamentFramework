@@ -5,10 +5,9 @@ define(function (require) {
     
     require('select2')($);
     require("/scripts/views/_appLayout.js");
-    if (!$.fn.popover) {
-        require("bootstrap")($);
-    }
+    require("bootstrap")($);
     require('ckeditor');
+    require('validate')($);
     return function (content) {
 
 

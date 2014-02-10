@@ -21,17 +21,12 @@
                       };
         contents = JsonHelper.ToJson(content.ToDictionary(s => s.language));
     }
-    var nodifyList = from a in OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao.GetAll()
-                     select new SelectListItem()
-                         {
-                             Text = a.Name,
-                             Value = a.Id
-                         };
+    
 }
 
 @section pageTitle
 {
-    <h5>@Html.GetResourceString("title")</h5>
+    <h5>@Html.GetEmbededResourceString("title")</h5>
 }
 @using (Html.BeginForm("Edit", "Template", FormMethod.Post, new { @class = "form-horizontal" }))
 {
@@ -56,24 +51,28 @@
                 <div id="tab7" class="tab-pane active">
                     <div class="row-fluid">
                         @* 如果是内置，一定是不能呢改名字，因为是有程序初始化生成的 *@
-                        @if (!this.Model.Inside)
-                        {
-                            @Html.EditorFor(model => model.Name)
-                        }
-                        else
-                        {
-                            <div class="control-group">
-                                @Html.LabelFor(s => s.Name, new { @class = "control-label" })
-                                <div class="controls">
-                                    @Html.DisplayTextFor(s => s.Name)
-                                </div>
-                            </div>
-                        }
+
+
+                        @Html.EditorFor(s => s.Name)
+
 
                         <div class="control-group">
                             @Html.LabelFor(s => s.Notify, new { @class = "control-label span12" })
                             <div class="controls">
-                                @Html.ListBoxFor(s => s.Notify, nodifyList)
+                                <select name="Notify" id="Notify">
+                                    @foreach (var item in OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao.GetAll())
+                                    {
+
+                                        if (this.Model.Notify != null && item.Id == this.Model.Notify.Id)
+                                        {
+                                        <option value="@item.Id" selected="selected">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                        <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
                                 @Html.ValidationMessageFor(s => s.Notify)
                             </div>
                         </div>
@@ -87,11 +86,11 @@
                         <div class="controls">
                             <select id="Language">
                                 @{
-                        var langs = OrnamentContext.Configuration.Languages;
-                        foreach (var lang in langs)
-                        {
+                                    var langs = OrnamentContext.Configuration.Languages;
+                                    foreach (var lang in langs)
+                                    {
                                     <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
-                        }
+                                    }
                                 }
                             </select>
                         </div>
@@ -109,7 +108,7 @@
                     </div>
 
                 </div>
-                <!-- End Content -->
+                
             </div>
 
         </div>
