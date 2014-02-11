@@ -9,14 +9,14 @@ using Qi.Domain.NHibernates;
 namespace Ornament.Messages.Dao.NHibernateImple
 {
     /// <summary>
-    /// 
     /// </summary>
     internal class NotifyMessageTemplateDao : DaoBase<string, NotifyMessageTemplate>, IMessageTemplateDao
     {
-        IProjection NameProperty
+        private IProjection NameProperty
         {
             get { return Projections.Property<NotifyMessageTemplate>(s => s.Name); }
         }
+
         public IQueryable<NotifyMessageTemplate> NotifyMessageTemplates
         {
             get { return CurrentSession.Query<NotifyMessageTemplate>(); }
@@ -26,14 +26,14 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             if (name == null
                 ) throw new ArgumentNullException("name");
-            var re = this.CreateDetachedCriteria()
+            DetachedCriteria re = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(NameProperty, name));
 
-            if (!string.IsNullOrEmpty(excludeId))
-            {
-                var id = Restrictions.Not(Restrictions.Eq(Projections.Id(), excludeId));
-                re.Add(id);
-            }
+            if (string.IsNullOrEmpty(excludeId))
+                return
+                    re.SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+            AbstractCriterion id = Restrictions.Not(Restrictions.Eq(Projections.Id(), excludeId));
+            re.Add(id);
             return re.SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
@@ -45,10 +45,10 @@ namespace Ornament.Messages.Dao.NHibernateImple
         public NotifyMessageTemplate GetByName(string name)
         {
             return DetachedCriteria.For<NotifyMessageTemplate>()
-                                   .Add(
-                                       Restrictions.Eq(
-                                           Projections.Property<NotifyMessageTemplate>(s => s.Name), name).IgnoreCase())
-                                   .GetExecutableCriteria(CurrentSession).UniqueResult<NotifyMessageTemplate>();
+                .Add(
+                    Restrictions.Eq(
+                        Projections.Property<NotifyMessageTemplate>(s => s.Name), name).IgnoreCase())
+                .GetExecutableCriteria(CurrentSession).UniqueResult<NotifyMessageTemplate>();
         }
 
         /// <summary>
@@ -61,12 +61,12 @@ namespace Ornament.Messages.Dao.NHibernateImple
         {
             total =
                 DetachedCriteria.For<NotifyMessageTemplate>()
-                                .SetProjection(Projections.RowCount())
-                                .GetExecutableCriteria(CurrentSession)
-                                .UniqueResult<int>();
+                    .SetProjection(Projections.RowCount())
+                    .GetExecutableCriteria(CurrentSession)
+                    .UniqueResult<int>();
             return DetachedCriteria.For<NotifyMessageTemplate>()
                 .AddOrder(Order.Desc(Projections.Property<NotifyMessageTemplate>(s => s.ModifyTime)))
-                .SetMaxResults(pageSize).SetFirstResult(pageSize * pageIndex)
+                .SetMaxResults(pageSize).SetFirstResult(pageSize*pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<NotifyMessageTemplate>();
         }
     }

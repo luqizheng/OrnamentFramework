@@ -16,7 +16,9 @@
                      imageUrl="fam-user" title="Personal Center" disabled="disabled">
     </mvcSiteMapNode>
 
+    <!--Memberage-->
     <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="icon-group" key="MemberShips"/>
+    
     <!-- Begin Message Plugin Parent Key -->
     <mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>
     <mvcSiteMapNode title="Notify Messages" controller="News" area="Messages" action="Index" imageUrl="icon-comments" key="Messages"></mvcSiteMapNode>

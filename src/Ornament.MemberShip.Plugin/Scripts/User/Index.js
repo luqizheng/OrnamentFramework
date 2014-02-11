@@ -112,7 +112,7 @@ define(function (require) {
             for (var i = 0; i < d.data.length; i++) {
                 model.users.push(d.data[i]);
             }
-            func(d.TotalRecords);
+            func(d.totalRecords);
         });
     }
 
