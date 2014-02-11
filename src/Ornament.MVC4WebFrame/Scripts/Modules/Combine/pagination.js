@@ -66,6 +66,9 @@
                 vm.pages = [];
 
                 function createNav(totalRecord) {
+                    if (!totalRecord) {
+                        totalRecord = 0;
+                    }
                     vm.totalPage = calculatePage(totalRecord, vm.pageSize);
                     var showPage = vm.showPages / 2;
                     vm.pages = [];
