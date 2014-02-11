@@ -69,13 +69,10 @@
                     if (!totalRecord) {
                         totalRecord = 0;
                     }
-
-                    vm.totalPage = calculatePage(totalRecord, vm.pageSize); //计算出总页数
-
-                    var showPage = vm.showPages / 2,//计算出中心是多少，因为CurrentPage的位置是导航条的中央位置。
-                        min = vm.page - showPage,
-                        max = vm.page + showPage;
-
+                    vm.totalPage = calculatePage(totalRecord, vm.pageSize);
+                    var showPage = vm.showPages / 2;
+                    vm.pages = [];
+                    var min = vm.page - showPage, max = vm.page + showPage;
                     if (min < 0) {
                         max -= min;
                         min = 0;
@@ -88,7 +85,7 @@
                             min = 0;
                         }
                     }
-                    vm.pages = [];
+
                     for (var i = min; i < max; i++) {
                         vm.pages.push({
                             text: (i + 1),
@@ -116,7 +113,7 @@
             pageSize: 5,
             totalRecords: 0,
             pages: [],
-            search: function (pageIndex, pageSize, setTotalRecords) {
+            search: function (pageIndex, pageSize, func) {
                 alert('please set the search:function(pageIndex,pageSize,func) in the options.');
             },
 
