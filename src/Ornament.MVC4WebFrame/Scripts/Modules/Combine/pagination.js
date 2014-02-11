@@ -22,22 +22,33 @@
 
                 var inner = {
                     next: function () {
-                        vm.nav(vm.page + 1);
+                        var pageIndex = vm.page + 1;
+                        if (pageIndex < vm.totalPage) {
+                            vm.nav(pageIndex);
+                        }
                         return false;
                     },
                     pre: function () {
-                        vm.nav(vm.page - 1);
+                        var pageIndex = vm.page - 1;
+                        if (pageIndex >= 0)
+                            vm.nav(vm.page - 1);
                     },
                     navTo: function () {
                         var index = parseInt(this.attributes["href"].value.substr(1));
-                        vm.nav(index);
+                        if (index != vm.page) {
+                            vm.nav(index);
+                        }
                     },
                     last: function () {
-                        vm.nav(vm.totalPage - 1);
+                        var pageIndex = vm.totalPage - 1;
+                        if (pageIndex >= 0) {
+                            vm.nav(pageIndex);
+                        }
                     },
                     nav: function (pageIndex) {
-                        if (pageIndex < 0 || pageIndex >= vm.totalPage || pageIndex == vm.page)
+                        if (pageIndex < 0) {
                             return;
+                        }
                         vm.search.call(vm, pageIndex, vm.pageSize, function (totalPages) {
                             vm.page = pageIndex;
                             vm.totalRecords = totalPages;
