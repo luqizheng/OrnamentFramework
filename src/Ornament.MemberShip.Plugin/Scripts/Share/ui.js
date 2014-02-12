@@ -1,4 +1,4 @@
-﻿                                               define(function (require) {
+﻿define(function (require) {
 
     var $ = require("jquery");
     require("select2")($);
@@ -9,6 +9,29 @@
         minimumInputLength: 1,
         multiple: true,
         placeholder: "Please input a char"
+    };
+    var userOptions = {
+        ajax: {
+            data: function (term, page) { // page is the one-based page number tracked by Select2
+                return {
+                    name: term + "%",
+                    email: term + "%",
+                    loginId: term + "%",
+                    phone: term + "%",
+                    page: (page - 1), // page number
+                };
+            },
+            url: "/api/users",
+            results: function (data, page) {
+                var more = (page * 10) < data.total; // whether or not there are more results available
+                // notice we return the value of more so Select2 knows if more results can be loaded
+                var r = [];
+                $(data).each(function () {
+                    r.push({ id: this.id, text: this.name });
+                });
+                return { results: r, more: more };
+            }
+        }
     };
     var ajaxOpts = {
         data: function (term, page) { // page is the one-based page number tracked by Select2
@@ -72,35 +95,17 @@
             role: function (selector, initData) {
                 return forData(selector, { ajax: { url: "/api/Roles" } }, initData);
             },
+            user: function (selector, initData) {
+                userOptions.maximumSelectionSize = 1;
+                return forData(selector, userOptions, initData);
+            },
             users: function (selector, initData) {
-                return forData(selector, {
-                    ajax: {
-                        data: function (term, page) { // page is the one-based page number tracked by Select2
-                            return {
-                                name: term + "%",
-                                email: term + "%",
-                                loginId: term + "%",
-                                phone: term + "%",
-                                page: (page - 1), // page number
-                            };
-                        },
-                        url: "/api/users",
-                        results: function (data, page) {
-                            var more = (page * 10) < data.total; // whether or not there are more results available
-                            // notice we return the value of more so Select2 knows if more results can be loaded
-                            var r = [];
-                            $(data).each(function () {
-                                r.push({ id: this.id, text: this.name });
-                            });
-                            return { results: r, more: more };
-                        }
-                    }
-                }, initData);
+                return forData(selector, userOptions, initData);
             },
             userGroup: function (selector, initData) {
                 return forData(selector, { ajax: { url: "/api/usergroups" } }, initData);
-
             }
+
         }
     };
 })

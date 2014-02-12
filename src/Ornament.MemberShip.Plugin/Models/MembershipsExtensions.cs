@@ -29,9 +29,13 @@ namespace Ornament.Web
             return helper.MemberShipEditorFor(func, "UserGroup[]");
         }
 
+        public static MvcHtmlString EditorForUser<TModel, TValue>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TValue>> func)
+        {
+            return helper.MemberShipEditorFor(func, "User");
+        }
 
         public static MvcHtmlString EditorForOrg<TModel, TValue>(this HtmlHelper<TModel> helper,
-            Expression<Func<TModel, TValue>> func)
+                Expression<Func<TModel, TValue>> func)
         {
             return helper.MemberShipEditorFor(func, "Org");
         }
