@@ -1,38 +1,33 @@
-﻿@using System.Collections
-@using System.Web.UI.WebControls
-@using Ornament.MemberShip
-@using Qi.Web
+﻿@using Qi.Web
 @model Ornament.MemberShip.Org
 @{
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    object Selection=new object();
-    
-    
+    var Selection = new object();
 }
 <div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
+    @Html.Label("", display, new {@class = "control-label"})
     <div class="controls">
-        @if (this.Model != null)
+        @if (Model != null)
         {
             Selection = new
-                {
-                    id = this.Model.Id,
-                    text = this.Model.Name
-                };
-            
-            @Html.Hidden("", this.Model.Id)
+            {
+                id = Model.Id,
+                text = Model.Name
+            };
+
+            @Html.Hidden("", Model.Id)
         }
         else
         {
-            @Html.Hidden("","")
+            @Html.Hidden("", "")
         }
     </div>
 </div>
 
 <script type="text/javascript">
-    seajs.use("/MemberShips/Scripts/Share/ui.js", function (r) {
+    seajs.use("/MemberShips/Scripts/Share/ui.js", function(r) {
         var d = @Html.Raw(JsonHelper.ToJson(Selection));
-        r.select2.org("#@Html.Id("")",d);
-        
+        r.select2.org("#@Html.Id("")", d);
+
     });
 </script>
