@@ -77,7 +77,9 @@
             $form.submit(function () {
                 var items = $tag.select2('val'),
                     ary = [],
-                    tmp = "<input type='hidden' name='" + $tag.attr("name") + "'/>";
+                    tmp = "<input type='hidden' name='" + $tag.attr("name") + "' class='_mbs_hide_post'/>";
+
+                $("._mbs_hide_post").remove();
                 if (items !== "") {
                     $tag.val(items.shift());
                     $(items).each(function () {

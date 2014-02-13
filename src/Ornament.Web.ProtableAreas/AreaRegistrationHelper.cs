@@ -37,11 +37,11 @@ namespace Ornament.Web
             imageFolder = imageFolder.TrimEnd('/').TrimStart('/');
             RegistyEmbedResouce(imageFolder);
         }
-
+        
         /// <summary>
         /// </summary>
         /// <param name="scriptPath"></param>
-        public void RegistyScripts(string scriptPath)
+        public void RegistScripts(string scriptPath)
         {
             if (scriptPath == null)
                 throw new ArgumentNullException("scriptPath");

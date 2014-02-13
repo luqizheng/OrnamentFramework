@@ -24,10 +24,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
             var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin", context);
 
-            helper.RegistyScripts("Scripts/News");
-            helper.RegistyScripts("Scripts/NewsType");
-            helper.RegistyScripts("Scripts/NotifyType");
-            helper.RegistyScripts("Scripts/Template");
+            helper.RegistScripts("Scripts/News");
+            helper.RegistScripts("Scripts/NewsType");
+            helper.RegistScripts("Scripts/NotifyType");
+            helper.RegistScripts("Scripts/Template");
 
             context.MapRoute(
                 AreaName + "_images",
