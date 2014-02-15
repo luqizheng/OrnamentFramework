@@ -50,10 +50,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             DetachedCriteria user =
                 DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq(UserLoginidProperty, loginid))
-                                .SetProjection(null)
-                                .CreateCriteria("Roles")
-                                .CreateCriteria("Permissions", "permission")
-                                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                    .SetProjection(null)
+                    .CreateCriteria("Roles")
+                    .CreateCriteria("Permissions", "permission")
+                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
 
             DetachedCriteria permission =
                 DetachedCriteria.For(typeof (Permission)).Add(Property.ForName("Id").In(user));
@@ -68,27 +68,27 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
             DetachedCriteria ug =
                 GetUserGroupPermisssions(loginid).SetProjection(
-                    Projections.Distinct(Projections.Property("permission.Id")));
+                    Projections.Distinct(Projections.Id()));
             ;
 
             DetachedCriteria org =
                 GetUserOrgPermissions(loginid)
-                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                    .SetProjection(Projections.Distinct(Projections.Id()));
             ;
 
 
             Type permissionInsType = Permission.CreatePermission(resourceObject).GetType();
 
             DetachedCriteria permission = DetachedCriteria.For(permissionInsType)
-                                                          .Add(Restrictions.Eq(ResourceProperty, resourceObject))
-                                                          .Add(Restrictions.Disjunction()
-                                                                           .Add(Subqueries.PropertyIn("Id", org))
-                                                                           .Add(Subqueries.PropertyIn("Id", user))
-                                                                           .Add(Subqueries.PropertyIn("Id", ug))
+                .Add(Restrictions.Eq(ResourceProperty, resourceObject))
+                .Add(Restrictions.Disjunction()
+                    .Add(Subqueries.PropertyIn("Id", org))
+                    .Add(Subqueries.PropertyIn("Id", user))
+                    .Add(Subqueries.PropertyIn("Id", ug))
                 );
 
             return permission.SetCacheMode(CacheMode.Normal).SetCacheable(true)
-                             .GetExecutableCriteria(CurrentSession).List<Permission>();
+                .GetExecutableCriteria(CurrentSession).List<Permission>();
         }
 
         public Permission GetPermission(string permissionName)
@@ -107,17 +107,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public DetachedCriteria GetUserOrgPermissions(string loginid)
         {
             return DetachedCriteria.For<User>().Add(Restrictions.Eq(UserLoginidProperty, loginid))
-                                   .CreateCriteria("Org", "org")
-                                   .CreateCriteria("org.Roles", "role")
-                                   .CreateCriteria("Permissions", "permission");
+                .CreateCriteria("Org", "org")
+                .CreateCriteria("org.Roles", "role")
+                .CreateCriteria("Permissions", "permission");
         }
 
         public DetachedCriteria GetUserGroupPermisssions(string loginid)
         {
             return DetachedCriteria.For<User>().Add(Restrictions.Eq(UserLoginidProperty, loginid))
-                                   .CreateCriteria("UserGroups", "ug")
-                                   .CreateCriteria("ug.Roles", "role")
-                                   .CreateCriteria("Permissions", "permission");
+                .CreateCriteria("UserGroups", "ug")
+                .CreateCriteria("ug.Roles", "role")
+                .CreateCriteria("Permissions", "permission");
         }
 
         /// <summary>
@@ -128,8 +128,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public DetachedCriteria GetUserPermissions(string loginid)
         {
             return DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq(UserLoginidProperty, loginid))
-                                   .CreateCriteria("Roles")
-                                   .CreateCriteria("Permissions", "permission");
+                .CreateCriteria("Roles")
+                .CreateCriteria("Permissions", "permission");
         }
     }
 }
