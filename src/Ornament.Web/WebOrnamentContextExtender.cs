@@ -1,17 +1,15 @@
 using System;
 using System.Configuration;
 using System.Globalization;
-using System.Net;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Permissions;
+using Ornament.Models;
 using Ornament.Web;
 using Ornament.Web.HttpModel;
 
@@ -24,7 +22,7 @@ namespace Ornament
     /// </summary>
     public static class WebOrnamentContextExtender
     {
-        private const string langCookieName = "lang";
+        private const string LangCookieName = "lang";
         public static readonly string VerifyCodeKey = "VerifyCode";
 
 
@@ -72,7 +70,7 @@ namespace Ornament
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
@@ -104,6 +102,7 @@ namespace Ornament
         }
 
         /// <summary>
+        /// 把客户端时间转换为服务器时间
         /// </summary>
         /// <param name="context"></param>
         /// <param name="clientTime"></param>
@@ -134,24 +133,31 @@ namespace Ornament
 
             return language;
         }
-
+        /// <summary>
+        /// 获取浏览器和系统的默认语言,如果浏览器默认语言在系统中不存在,就返回系统默认语言
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static string BroswerLanguage(this MemberShipContext context)
         {
             if (HttpContext.Current != null && HttpContext.Current.Request.UserLanguages != null)
             {
-
-
-                var lang = OrnamentContext.Configuration.Languages.DefaultOrMatch(HttpContext.Current.Request.UserLanguages);
+                Language lang =
+                    OrnamentContext.Configuration.Languages.DefaultOrMatch(HttpContext.Current.Request.UserLanguages);
                 if (lang != null)
                     return lang.Key;
             }
             return OrnamentContext.Configuration.DefaultLanguage.Key;
         }
-
+        /// <summary>
+        /// 保存在cookie中的默认语言
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static string CookieLanguage(this MemberShipContext context)
         {
-            HttpCookie reqCookie = HttpContext.Current.Request.Cookies[langCookieName];
-            HttpCookie respCookie = HttpContext.Current.Response.Cookies[langCookieName];
+            HttpCookie reqCookie = HttpContext.Current.Request.Cookies[LangCookieName];
+            HttpCookie respCookie = HttpContext.Current.Response.Cookies[LangCookieName];
 
             string reqValue = reqCookie != null ? reqCookie.Value : "";
             string respValue = respCookie != null ? respCookie.Value : "";
@@ -186,12 +192,9 @@ namespace Ornament
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
             if (HttpContext.Current != null)
             {
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie(langCookieName, language));
+                HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName, language));
             }
         }
-
-
-
 
 
         /// <summary>
