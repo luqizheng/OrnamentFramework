@@ -26,7 +26,7 @@ namespace Ornament
     {
         private const string langCookieName = "lang";
         public static readonly string VerifyCodeKey = "VerifyCode";
-       
+
 
         /// <summary>
         /// </summary>
@@ -72,7 +72,7 @@ namespace Ornament
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
@@ -131,7 +131,7 @@ namespace Ornament
             {
                 language = BroswerLanguage(context);
             }
-            
+
             return language;
         }
 
@@ -139,7 +139,11 @@ namespace Ornament
         {
             if (HttpContext.Current != null && HttpContext.Current.Request.UserLanguages != null)
             {
-                return OrnamentContext.Configuration.Languages.DefaultOrMatch(HttpContext.Current.Request.UserLanguages).Key;
+
+
+                var lang = OrnamentContext.Configuration.Languages.DefaultOrMatch(HttpContext.Current.Request.UserLanguages);
+                if (lang != null)
+                    return lang.Key;
             }
             return OrnamentContext.Configuration.DefaultLanguage.Key;
         }
@@ -186,9 +190,9 @@ namespace Ornament
             }
         }
 
-      
 
-    
+
+
 
         /// <summary>
         ///     后台Backend laoyout
