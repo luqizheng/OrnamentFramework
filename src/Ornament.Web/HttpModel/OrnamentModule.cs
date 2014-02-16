@@ -62,16 +62,7 @@ namespace Ornament.Web.HttpModel
 
         private void MultiLanguage(HttpApplication context)
         {
-            HttpCookie cookie = context.Request.Cookies[langCookieName];
-            if (cookie == null || string.IsNullOrEmpty(cookie.Value))
-            {
-                return;
-            }
-            string lang = cookie.Value;
-            if (context.Request.UserLanguages != null)
-            {
-                context.Request.UserLanguages.SetValue(lang, 0);
-            }
+            string lang = OrnamentContext.MemberShip.Language();
             try
             {
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
