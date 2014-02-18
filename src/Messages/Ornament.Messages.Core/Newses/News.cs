@@ -15,7 +15,6 @@ namespace Ornament.Messages.Newses
         public News()
         {
             CreateTime = DateTime.Now;
-        
         }
 
         public virtual NewsType Type { get; set; }
@@ -29,7 +28,7 @@ namespace Ornament.Messages.Newses
         /// </summary>
         [UIHint("Date")]
         public virtual DateTime CreateTime { get; protected set; }
-        
+
         /// <summary>
         ///     发布人
         /// </summary>

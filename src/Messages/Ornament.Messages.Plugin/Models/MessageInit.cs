@@ -1,4 +1,7 @@
-﻿using Ornament.MemberShip;
+﻿using System;
+using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Permissions;
 using Ornament.Messages.Notification;
 using Ornament.Web.DataInitializers;
 
@@ -9,6 +12,8 @@ namespace Ornament.Web
 {
     public class MessageInit : IDataInitializer
     {
+        public string NotifyTemplatePermissionName = "Notify Template Manager";
+
         public string Name
         {
             get { return "Message init."; }
@@ -16,72 +21,53 @@ namespace Ornament.Web
 
         public bool IsNeedInitialize
         {
-            get
-            {
-                NotifyMessageTemplate a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
-                NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
-                NotifyMessageTemplate c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
-                NotifyMessageTemplate d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
-                return false;
-            }
+            get { return true; }
         }
 
         public void CreateData()
         {
-           
+            NotifyMessageTemplate a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
+            NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
+            NotifyMessageTemplate c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
+            NotifyMessageTemplate d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
 
 
-            //InitMessageType();
-            //InitTask();
-            // InitNotify();
+            Permission notifyTemplatePermission = CreatePermission("Template", "NotifyTemplate",
+                "Notify Message Templage", NotifyTemplateOperator.Delete);
+            Role role = GetRole(notifyTemplatePermission);
         }
 
-        private void InitTask()
+        protected Role GetRole(params Permission[] permissions)
         {
-            //User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            //IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
-            //IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
-
-            //var m = new Announcement(admin) {State = EditState.Published};
-            //m.Contents.Add("zh-CN", new Content("zh-CN")
-            //    {
-            //        Subject = "请修改初始化密码",
-            //        Value = "请修改初始化密码，如果已经修改过，请忽略这条信息"
-            //    });
-
-            //msgDao.SaveOrUpdate(m);
-            //var reader = new Reader(admin, m);
-            //readerDao.SaveOrUpdate(reader);
-            //msgDao.Flush();
+            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+            Role role = roleDao.GetByName("NotifyTemplateManager") ?? new Role("NotifyTemplateManager");
+            if (role.IsTransient())
+            {
+                foreach (Permission p in permissions)
+                {
+                    role.Permissions.Add(p);
+                }
+                roleDao.SaveOrUpdate(role);
+            }
+            return role;
         }
 
-        private void InitNotify()
+        private Permission CreatePermission<T>(T resObj, string permisionName, string remark, Enum eEnum)
         {
-            //User admin = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-            //IMessageDao msgDao = OrnamentContext.DaoFactory.MessageDaoFactory.MessageDao;
-            //IReaderDao readerDao = OrnamentContext.DaoFactory.MessageDaoFactory.ReaderDao;
+            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
 
-
-            //for (int i = 0; i < 30; i++)
-            //{
-            //    var m = new Announcement(admin)
-            //        {
-            //            State = EditState.Published
-            //        };
-
-            //    m.Contents.Add("zh-CN", new Content("zh-CN")
-            //        {
-            //            Subject = "[Demo]请修改初始化密码",
-            //            Value =
-            //                "Demo 请修改初始化密码，如果已经修改过，请忽略这条信息.在直角三角形中，∠A（非直角）的对边与斜边的比叫做∠A的正弦，记作sinA，即sinA porta lacus fringilla vel.d"
-            //        });
-
-
-            //    msgDao.SaveOrUpdate(m);
-            //    var reader = new Reader(admin, m);
-            //    readerDao.SaveOrUpdate(reader);
-            //}
-            //msgDao.Flush();
+            Permission permission = dao.GetPermission(permisionName) ?? new GenericPermission<T>(resObj)
+            {
+                Name = permisionName,
+                Remark = remark,
+                Operator = Convert.ToInt32(eEnum)
+            };
+            if (permission.IsTransient())
+            {
+                dao.SaveOrUpdate(permission);
+            }
+            return permission;
         }
     }
+
 }
