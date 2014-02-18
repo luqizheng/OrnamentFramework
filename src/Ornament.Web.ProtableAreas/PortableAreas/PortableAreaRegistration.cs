@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Ornament.Web.Messages;
@@ -76,7 +77,18 @@ namespace Ornament.Web.PortableAreas
         protected virtual void GetInjectControllers(out IEnumerable<Type> controller,
             out IEnumerable<Type> apiController)
         {
-            AssemblyHelper.FindController(GetType().Assembly, out controller, out apiController);
+            //如果一个Assembly(Plugin)里面有多个Area，这样就不会重复注册Cotnroller的信息。
+            var assembly = GetType().Assembly;
+            if (!controllerCollection.ContainsKey(assembly))
+            {
+                AssemblyHelper.FindController(GetType().Assembly, out controller, out apiController);
+                controllerCollection.Add(assembly, 0);
+            }
+            apiController = null;
+            controller = null;
         }
+
+        private static System.Collections.Generic.Dictionary<Assembly, int> controllerCollection = new Dictionary<Assembly, int>();
+
     }
 }

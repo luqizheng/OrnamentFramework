@@ -51,6 +51,8 @@ namespace Ornament.MemberShip.Permissions
             {
                 throw new ArgumentException("enumType should be a enum");
             }
+            if (_resOperatorMapping.ContainsKey(mappingClass))
+                throw new ArgumentException("mapping class " + typeof(T).Name + " has been added, operator type is " + enumType.Name);
             _resOperatorMapping.Add(mappingClass, enumType);
             return this;
         }

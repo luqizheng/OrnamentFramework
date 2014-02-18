@@ -36,7 +36,7 @@ namespace Ornament.Configurations
                 return schemaExportPath;
             }
         }
-        
+
         /// <summary>
         /// 注册Dao
         /// </summary>
@@ -86,6 +86,8 @@ namespace Ornament.Configurations
             {
                 var config = new Configuration();
                 string configFileName = ConfigurationManager.AppSettings["nhConfig"];
+                if (!String.IsNullOrEmpty(configFileName))
+                    throw new ArgumentNullException("nhConfig section can't be find in the config file. please set it up in the appSettiong section.");
                 config.Configure(ApplicationHelper.MapPath(configFileName));
                 FluentConfiguration result = Fluently.Configure(config);
 
