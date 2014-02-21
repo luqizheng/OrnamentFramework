@@ -12,7 +12,7 @@ namespace Ornament.Web.PortableAreas
     {
         public static Action RegisterEmbeddedViewEngine = () => InputBuilder.InputBuilder.BootStrap();
         public static Action CheckAreasWebConfigExists = () => EnsureAreasWebConfigExists();
-        private static readonly Dictionary<Assembly, int> controllerCollection = new Dictionary<Assembly, int>();
+        private static readonly Dictionary<Assembly, int> ControllerCollection = new Dictionary<Assembly, int>();
 
         public virtual string AreaRoutePrefix
         {
@@ -80,10 +80,10 @@ namespace Ornament.Web.PortableAreas
         {
             //如果一个Assembly(Plugin)里面有多个Area，这样就不会重复注册Cotnroller的信息。
             Assembly assembly = GetType().Assembly;
-            if (!controllerCollection.ContainsKey(assembly))
+            if (!ControllerCollection.ContainsKey(assembly))
             {
                 AssemblyHelper.FindController(GetType().Assembly, out controller, out apiController);
-                controllerCollection.Add(assembly, 0);
+                ControllerCollection.Add(assembly, 0);
                 return;
             }
             apiController = null;

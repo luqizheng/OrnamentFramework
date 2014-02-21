@@ -67,10 +67,14 @@ namespace Ornament
             IUserDao a = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
 
             User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
+            if (user == null)
+            {
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
-            if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
+            if (user.Other.LastActivityDate == null || (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
