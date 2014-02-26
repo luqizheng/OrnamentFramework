@@ -1,44 +1,63 @@
-﻿/// <reference path="../Share/WebApi.js" />
-/// <reference path="/Scripts/Modules/Combine/WebApi.js" />
-//Seajs include /MemberShips/Scripts/Share/user.js
+﻿
 define(function (require) {
 
     var userUrl = "/api/Users",
-        secrityUrl = "/api/security";
-    var WebApi = require("/Scripts/Modules/Combine/WebApi.js");
+        memberUrl = "api/member", //需要登录
+        secrityUrl = "/api/security", //无需登录就可以使用的
+        WebApi = require("/Scripts/Modules/Combine/WebApi.js");
 
-    function User(obj) {
-        /// <summary>
-        ///     obj is a object with o
-        /// </summary>
-        /// <param name="obj"></param>
-        this.Id = this.Name = this.Email = this.LoginId = null;
-        if (!obj)
-            return;
-        if (obj.LoginId) {
+
+    function User() {
+
+        this.Id = "";
+        this.Name = "";
+        this.TimeZoneId = "";
+
+        this.Language = "";
+        this.Phone = "";
+        this.Email = "";
+        this.LoginId = "";
+
+        function Init(obj) {
+            this.Name = obj.Name;
+            this.TimeZoneId = obj.TimeZoneId;
+            this.Language = obj.Language;
+            this.Phone = obj.Phone;
+            this.Email = obj.Email;
             this.LoginId = obj.LoginId;
         }
-        if (obj.Id) {
-            this.Id = obj.Id;
-        }
-        if (this.Email) {
-            this.Email = obj.Email;
-        }
+
+        this.load = function () {
+            var self = this;
+            var webApi = new WebApi(memberUrl + "/get");
+            webApi.Get(function (d) {
+                Init.call(self, d);
+            });
+        };
+        this.verifyEmail = function () {
+
+        };
+
+        this.save = function (callBack) {
+            var webApi = new WebApi(memberUrl + "/save");
+            webApi.Post(this, callBack);
+        };
+
     }
 
     User.ChangePassword = function (strNewPwd, strConfirmPwd, strOldPwd, callbackFunc) {
-    	/// <summary>
-    	/// 
-    	/// </summary>
-    	/// <param name="strNewPwd"></param>
-    	/// <param name="strConfirmPwd"></param>
-    	/// <param name="strOldPwd"></param>
-    	/// <param name="callbackFunc"></param>
-        var webApi = new WebApi(userUrl);
-        webApi.Put({
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strNewPwd"></param>
+        /// <param name="strConfirmPwd"></param>
+        /// <param name="strOldPwd"></param>
+        /// <param name="callbackFunc"></param>
+        var webApi = new WebApi(memberUrl + "/ChangePassword");
+        webApi.Post({
             CurrentPassword: strOldPwd,
             NewPassword: strNewPwd,
-            ConfirmPassword: strOldPwd
+            ConfirmPassword: strConfirmPwd
         }, callbackFunc);
     };
 
@@ -75,11 +94,5 @@ define(function (require) {
     };
 
 
-
-    User.load = function (strLoginId) {
-        WebApi.get(userUrl, new { loginId: strLoginId }, function () {
-
-        });
-    };
     return User;
 });

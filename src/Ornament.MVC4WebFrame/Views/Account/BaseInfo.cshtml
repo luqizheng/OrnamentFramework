@@ -1,12 +1,45 @@
-﻿@using Resources
+﻿@using System.Security.AccessControl
+@using Ornament.Web
+@using Resources
 @using Ornament.Web.HtmlExtends;
 @model Ornament.MemberShip.User
+@{
+    var emailAttr = new Dictionary<string, object>
+    {
+        {"ms-duplex", "user.Email"}
+    };
+    var nameAttr = new Dictionary<string, object>()
+    {
+        {"ms-duplex","user.Name"}
+    };
+    var phoneAttr = new Dictionary<string, object>()
+    {
+        {"ms-duplex","user.Phone"}
+    };
+    var languageAttr = new
+    {
+        HtmlAttributes =
+        new Dictionary<string, object>()
+    {
+        {"ms-duplex","user.Language"}
+    }
+    };
+    var timezoneAttr = new
+    {
+        HtmlAttributes = new Dictionary<string, object>()
+        {
 
-<div class="form-horizontal">
+            {"ms-duplex", "user.TimeZone"}
+        }
+    };
+    
+}
+<form class="form-horizontal" ms-controller="basicInfo" ms-submit="save" >
+
     <div class="control-group">
         @Html.LabelFor(s => s.Name, new { @class = " control-label" })
         <div class="controls">
-            @Html.TextBoxFor(s => s.Name)
+            @Html.TextBoxFor(s => s.Name, nameAttr)
             @Html.ValidationMessageFor(s => s.Name)
         </div>
     </div>
@@ -15,7 +48,7 @@
         @Html.LabelFor(s => s.Contact.Email, new { @class = "control-label" })
         <div class="controls">
             <div class="input-append">
-                @Html.TextBoxFor(s => s.Contact.Email)
+                @Html.TextBoxFor(s => s.Contact.Email, emailAttr)
                 <button id="VerifyEmail" class="btn" type="button">@Basic.Validate</button>
             </div>
             @Html.ValidationMessageFor(s => s.Contact.Email)
@@ -25,36 +58,14 @@
     <div class="control-group">
         @Html.LabelFor(s => s.Contact.Phone, new { @class = " control-label" })
         <div class="controls">
-            @Html.TextBoxFor(s => s.Contact.Phone)
+            @Html.TextBoxFor(s => s.Contact.Phone, phoneAttr)
             @Html.ValidationMessageFor(s => s.Contact.Phone)
         </div>
     </div>
-    @Html.EditorFor(s => s.Language)
-    @Html.EditorFor(s => s.TimeZoneId)
+    @Html.EditorFor(s => s.Language, languageAttr)
+    @Html.EditorFor(s => s.TimeZoneId, timezoneAttr)
     <div class="form-actions">
-        <button class="btn btn-primary" data-loading-text="saving...">@Basic.Save</button>
+        <button class="btn btn-primary" data-loading-text="saving..." >@Basic.Save</button>
     </div>
-</div>
+</form>
 
-<script type="text/javascript">
-    if (typeof SaveSuccess == "undefined") {
-        function SaveSuccess(e) {
-            if (e.success) {
-                if (!e.emailChanged)
-                    alert("@Basic.SaveSuccess");
-            }
-
-        }
-    }
-    seajs.use(["jquery"], function ($) {
-        $("#EmailChanged").click(function () {
-            $.get("@Url.Action("VarifyEmail")", { email: $("#Email").val() }, function (d) {
-                if (d.success) {
-                    alert("Verify eMail has sent,Please check your eMail.");
-                } else {
-                    alert(d.message);
-                }
-            });
-        });
-    })
-</script>

@@ -24,14 +24,14 @@ mvc和bootstrap的报错
                 $(this).toggleClass('error', $(this).find('span.field-validation-error').length > 0);
             });
             $(this).find('span.field-validation-valid, span.field-validation-error')
-                .addClass('help-block');
+                .addClass('help-inline');
         },
         clear: function () {
             $("div.control-group", this).each(function () {
                 $(this).removeClass("error");
             });
             $(this).find('span.field-validation-valid, span.field-validation-error').text("")
-            .removeClass('help-block');
+            .removeClass('help-inline');
         }
     };
 
@@ -43,6 +43,8 @@ mvc和bootstrap的报错
             $(element).closest(".control-group").removeClass("error");
         }
     });
+
+    $("form").bootstrapMakeUp();
 
 })(jQuery)
 

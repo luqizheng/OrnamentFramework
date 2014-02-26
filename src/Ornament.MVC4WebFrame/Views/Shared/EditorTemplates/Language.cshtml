@@ -1,9 +1,41 @@
 ﻿@using Ornament
+@using System.Web.Mvc.Html;
 @model string
 @{
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     string inputName = string.Empty; // ViewData.TemplateInfo.HtmlFieldPrefix;    
-    var htmlAttris = new Dictionary<string, object> { { "class", "span10" } };
+    IDictionary<string, object> htmlAttris = new Dictionary<string, object>();
+
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object>;
+        if (htmlAttris == null)
+        {
+            htmlAttris = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        }
+    }
+    if (htmlAttris.ContainsKey("class"))
+    {
+        htmlAttris["class"] = htmlAttris["class"] + " span10";
+    }
+    else
+    {
+        htmlAttris.Add("class", "span10");
+    }
+
+    if (htmlAttris.ContainsKey("style"))
+    {
+        htmlAttris["style"] = htmlAttris["style"] + ";padding-top:4px";
+    }
+    else
+    {
+        htmlAttris.Add("style", "padding-top:4px");
+    }
+
+
+
+
+
 
     var langs = from lang in OrnamentContext.Configuration.Languages
                 select new SelectListItem()
@@ -15,6 +47,6 @@
 <div class="control-group">
     @Html.Label(inputName, display, new { @class = "control-label" })
     <div class="controls">
-        @Html.DropDownList(inputName, langs, new { style = "padding-top:4px" })
+        @Html.DropDownList(inputName, langs, htmlAttris)
     </div>
 </div>

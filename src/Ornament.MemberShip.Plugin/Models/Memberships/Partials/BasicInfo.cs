@@ -26,9 +26,8 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             TimeZoneId = user.TimeZoneId;
             Language = Language;
             LoginId = user.LoginId;
-
-            Phone = user.Contact.Phone;
-            Email = user.Contact.Email;
+            Phone = user.Contact.Phone??"";
+            Email = user.Contact.Email??"";
 
             VerifyEmail = true;
         }

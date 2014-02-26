@@ -2,8 +2,20 @@
 @{
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     string inputName = string.Empty; // ViewData.TemplateInfo.HtmlFieldPrefix;    
-    var htmlAttris = new Dictionary<string, object> {{"class", "span10"}};
-
+    
+    IDictionary<string, object> htmlAttris = new Dictionary<string, object>();
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+    }
+    if (htmlAttris.ContainsKey("class"))
+    {
+        htmlAttris["class"] = htmlAttris["class"] + " span10";
+    }
+    else
+    {
+        htmlAttris.Add("class", "span10");
+    }
     foreach (ModelValidator attr in ViewData.ModelMetadata.GetValidators(ViewContext))
     {
         var b = attr as StringLengthAttributeAdapter;

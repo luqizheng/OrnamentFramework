@@ -105,6 +105,8 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Index.js")")
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Index.js")",function(init) {
+            init();
+        })
     </script>
 }

@@ -35,7 +35,9 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             }
 
             if (!user.Security.ValidateUser(CurrentPassword))
+            {
                 return false;
+            }
             var result=user.Security.ChangePassword(NewPassword, CurrentPassword);
             dao.SaveOrUpdate(user);
             return result;

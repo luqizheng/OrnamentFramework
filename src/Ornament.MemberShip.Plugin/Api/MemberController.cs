@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using FluentNHibernate;
+﻿using System.Web.Http;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
+using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Plugin.Api
 {
+    /// <summary>
+    ///     處理會員自身信息
+    /// </summary>
+    [ApiSession]
     public class MemberController : ApiController
     {
         private readonly IMemberShipFactory _memberShipFactory;
@@ -18,11 +18,39 @@ namespace Ornament.MemberShip.Plugin.Api
         {
             _memberShipFactory = memberShipFactory;
         }
-
-        [HttpPut]
-        public bool Save(BasicInfo basicInfo)
+        [HttpPost]
+        public bool ChangePassword([FromBody] ChangePasswordModel password)
         {
-            return true;
+            return password.ChangePassword(OrnamentContext.MemberShip.CurrentUser(), _memberShipFactory.CreateUserDao());
+
+        }
+
+        [HttpGet]
+        public BasicInfo Get()
+        {
+            User user = OrnamentContext.MemberShip.CurrentUser();
+            return new BasicInfo(user);
+        }
+
+        [HttpPost]
+        public object Save(BasicInfo basicInfo)
+        {
+            bool success = true;
+            if (ModelState.IsValid)
+            {
+                User user = OrnamentContext.MemberShip.CurrentUser();
+                basicInfo.UpdateOn(user);
+                _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+            }
+            else
+            {
+                success = false;
+            }
+            return new
+            {
+                success,
+                messages = ModelState.Values
+            };
         }
     }
 }

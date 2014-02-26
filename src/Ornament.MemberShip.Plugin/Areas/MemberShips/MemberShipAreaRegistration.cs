@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
@@ -17,8 +18,21 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             get { return "MemberShips"; }
         }
 
+        void RegistApi()
+        {
+            var config = GlobalConfiguration.Configuration;
+            config.Routes.MapHttpRoute(name: AreaName + "Api",
+                routeTemplate: "api/{controller}/{action}",
+                defaults: new
+                {
+                    id = RouteParameter.Optional,
+                    action = RouteParameter.Optional
+                });
+        }
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            RegistApi();
+
             //send the init data
             bus.Send(new MemberShipData());
             ResourceSetting.Registry();
@@ -47,22 +61,22 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             //MemberShips/User/Edit/admin
             context.MapRoute(AreaName + "_EditUser",
                 AreaName + "/User/Edit/{loginId}",
-                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"}
+                new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" }
                 );
 
 
             context.MapRoute(
                 AreaName + "_AssingUser",
                 AreaName + "/User/Assign/{loginId}",
-                new {action = "Assign", loginId = UrlParameter.Optional, controller = "User"},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                new { action = "Assign", loginId = UrlParameter.Optional, controller = "User" },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             base.RegisterArea(context, bus);
