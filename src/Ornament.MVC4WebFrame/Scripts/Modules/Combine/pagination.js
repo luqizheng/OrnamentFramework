@@ -121,11 +121,11 @@
         widget.defaults = {
             totalPage: 1,
             showPages: 10,
-            pageSize: 5,
+            pageSize:40,
             totalRecords: 0,
             pages: [],
             search: function (pageIndex, pageSize, func) {
-                alert('please set the search:function(pageIndex,pageSize,func) in the options.');
+                alert('please set the search:function(pageIndex,pageSize,func) in the options.func(totalRecord) is set the TotlaRecords');
             },
 
         };

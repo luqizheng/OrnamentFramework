@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\FriendsController.cs" />
+    <Compile Include="Api\MemberController.cs" />
     <Compile Include="Api\OrgsController.cs" />
     <Compile Include="Api\RolesController.cs" />
     <Compile Include="Api\SecurityController.cs" />
@@ -292,7 +293,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_BasicInfo.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\BasicInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />

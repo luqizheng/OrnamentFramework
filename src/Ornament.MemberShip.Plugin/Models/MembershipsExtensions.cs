@@ -39,8 +39,16 @@ namespace Ornament.Web
         {
             return helper.MemberShipEditorFor(func, "Org");
         }
-
-        private static MvcHtmlString MemberShipEditorFor<TModel, TValue>(this HtmlHelper<TModel> helper,
+        /// <summary>
+        /// 使用MemberShip.Plugin里面的EditorTemplates，
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="helper"></param>
+        /// <param name="func"></param>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public static MvcHtmlString MemberShipEditorFor<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func, string template)
         {
             return helper.EditorFor(func, string.Format("~/protableAreas/{0}/{1}", MemberShips, template));

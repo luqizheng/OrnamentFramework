@@ -150,4 +150,7 @@
   <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
     <value>請輸入正確的電子郵件</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>語言</value>
+  </data>
 </root>

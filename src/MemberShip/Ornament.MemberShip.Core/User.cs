@@ -92,7 +92,8 @@ namespace Ornament.MemberShip
                 ModifyUpdateTime();
             }
         }
-        [Display(Name="TimeZone",ResourceType = typeof(Resources))]
+        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
+        [UIHint("TimeZone")]
         public virtual string TimeZoneId
         {
             get { return _timeZoneId; }
@@ -106,9 +107,12 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets language
         /// </summary>
+        [Display(Name = "Language", ResourceType = typeof(Resources))]
+        [UIHint("Language")]
         public virtual string Language { get; set; }
 
         /// <summary>
+        /// 获取Timezone对象
         /// </summary>
         public virtual TimeZoneInfo TimeZone
         {

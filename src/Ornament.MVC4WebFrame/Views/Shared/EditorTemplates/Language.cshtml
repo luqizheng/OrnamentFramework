@@ -1,0 +1,20 @@
+﻿@using Ornament
+@model string
+@{
+    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    string inputName = string.Empty; // ViewData.TemplateInfo.HtmlFieldPrefix;    
+    var htmlAttris = new Dictionary<string, object> { { "class", "span10" } };
+
+    var langs = from lang in OrnamentContext.Configuration.Languages
+                select new SelectListItem()
+                    {
+                        Text = lang.Name + "(" + lang.Key + ")",
+                        Value = lang.Key
+                    };
+}
+<div class="control-group">
+    @Html.Label(inputName, display, new { @class = "control-label" })
+    <div class="controls">
+        @Html.DropDownList(inputName, langs, new { style = "padding-top:4px" })
+    </div>
+</div>

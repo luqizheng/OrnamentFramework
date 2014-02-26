@@ -183,4 +183,7 @@
   <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
     <value>请输入正确的邮件地址</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
 </root>

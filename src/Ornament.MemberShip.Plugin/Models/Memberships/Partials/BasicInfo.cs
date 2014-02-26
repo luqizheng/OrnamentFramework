@@ -6,6 +6,7 @@ using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
+    
     public class BasicInfo
     {
         public BasicInfo()
@@ -95,6 +96,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
+         [UIHint("Language")]
         [Display(Name = "Language", ResourceType = typeof (Resources))]
         public string Language { get; set; }
 

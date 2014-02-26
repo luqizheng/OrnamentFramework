@@ -216,4 +216,7 @@
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>Role name is exist, please input another one.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>
