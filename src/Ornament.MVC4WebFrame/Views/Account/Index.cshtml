@@ -105,8 +105,13 @@
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Index.js")",function(init) {
+        var message = {
+            pwdSuccess: '@Html.GetResourceString("Msg_successChangePassword")',
+            pwdFiale: '@Html.GetResourceString("Msg_FailChangePassword")',
+            saveSuccess: '@Html.GetResourceString("Msg_SuccessSaving")',
+        };
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Index.js")", function(init) {
             init();
-        })
+        });
     </script>
 }

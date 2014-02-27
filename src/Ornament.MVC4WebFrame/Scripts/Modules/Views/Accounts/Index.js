@@ -5,20 +5,24 @@ define(function (require) {
         User = require('/MemberShips/Scripts/Share/user.js');
     require('bootstrap')($);
     require("validate")($);
-
+    var messages;
+    /*
+    message={
+    pwdSuccess:'',
+    pwdFiale:'',
+    saveSuccess:''
+}
+    */
     $('a[data-toggle="tab"]').on('shown', function (e) {
         $($(this).attr("href")).find("input:first").focus();
     });
 
     var baseInfo = avalon.define("basicInfo", function (vm) {
-
-
         vm.user = new User();
-
         vm.save = function (e) {
             vm.user.$model.save(function (data) {
                 if (data.success) {
-                    alert('保存成功');
+                    alert(messages.saveSuccess);
                 }
             });
             e.preventDefault();
@@ -32,7 +36,7 @@ define(function (require) {
         vm.save = function (e) {
             {
                 User.ChangePassword(vm.newPwd, vm.confirmPwd, vm.currentPwd, function (d) {
-                    alert(d ? '修改密码成功' : '修改密码失败');
+                    alert(d ? messages.pwdSuccess : messages.pwdFiale);
                 });
                 e.preventDefault();
 
@@ -42,8 +46,8 @@ define(function (require) {
     avalon.scan();
     //初始化
     baseInfo.user.load();
-    return function(opts) {
-       
+    return function (opts) {
+        messages = opts.messages;
     };
 
 
