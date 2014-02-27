@@ -28,8 +28,6 @@ define(function (require) {
         vm.confirmPwd = "";
         vm.save = function () {
             {
-                alert($("#pwd").valid());
-                return;
                 User.ChangePassword(vm.newPwd, vm.confirmPwd, vm.currentPwd, function (d) {
                     alert(d ? '修改密码成功' : '修改密码失败');
                 });
