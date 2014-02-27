@@ -282,13 +282,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <exception cref="ArgumentNullException">LoginId is null or empty</exception>
         public User GetByLoginId(string loginId)
         {
-            if (String.IsNullOrEmpty(loginId))
-                throw new ArgumentNullException("loginId", "loginid can not be empty or null.");
-            DetachedCriteria cri = CreateDetachedCriteria()
-                .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase())
-                .SetCacheMode(CacheMode.Normal)
-                .SetCacheable(true);
-            return cri.GetExecutableCriteria(CurrentSession).UniqueResult<User>();
+            try
+            {
+                if (String.IsNullOrEmpty(loginId))
+                    throw new ArgumentNullException("loginId", "loginid can not be empty or null.");
+                DetachedCriteria cri = CreateDetachedCriteria()
+                    .Add(Restrictions.Eq(LoginProperty, loginId).IgnoreCase())
+                    .SetCacheMode(CacheMode.Normal)
+                    .SetCacheable(true);
+                return cri.GetExecutableCriteria(CurrentSession).UniqueResult<User>();
+            }
+            catch (ObjectNotFoundException)
+            {
+                return null;
+            }
         }
 
 

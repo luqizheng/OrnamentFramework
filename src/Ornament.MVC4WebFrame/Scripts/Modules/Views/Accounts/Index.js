@@ -15,10 +15,13 @@ define(function (require) {
 
         vm.user = new User();
 
-        vm.save = function () {
+        vm.save = function (e) {
             vm.user.$model.save(function (data) {
-                alert('保存成功');
+                if (data.success) {
+                    alert('保存成功');
+                }
             });
+            e.preventDefault();
         };
     });
 
@@ -26,11 +29,13 @@ define(function (require) {
         vm.currentPwd = "";
         vm.newPwd = "";
         vm.confirmPwd = "";
-        vm.save = function () {
+        vm.save = function (e) {
             {
                 User.ChangePassword(vm.newPwd, vm.confirmPwd, vm.currentPwd, function (d) {
                     alert(d ? '修改密码成功' : '修改密码失败');
                 });
+                e.preventDefault();
+
             }
         };
     });
