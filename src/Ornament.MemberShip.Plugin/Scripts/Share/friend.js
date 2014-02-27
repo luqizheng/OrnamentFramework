@@ -3,7 +3,7 @@
 
 define(function (require) {
     var webApi = require("/Scripts/combine/webapi.js");
-    var url = "/Api/Friends";
+    var url = "/Api/memberships/Friends";
     var friendApi = new webApi(url);
     
     function friend(obj, pmIns) {

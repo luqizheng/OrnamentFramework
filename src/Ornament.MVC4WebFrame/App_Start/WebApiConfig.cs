@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Ornament.MVCWebFrame.App_Start
+namespace Ornament.MVCWebFrame
 {
     public static class WebApiConfig
     {

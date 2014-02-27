@@ -22,7 +22,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
         {
             var config = GlobalConfiguration.Configuration;
             config.Routes.MapHttpRoute(name: AreaName + "Api",
-                routeTemplate: "api/{controller}/{action}",
+                routeTemplate: "api/memberships/{controller}/{action}",
                 defaults: new
                 {
                     id = RouteParameter.Optional,

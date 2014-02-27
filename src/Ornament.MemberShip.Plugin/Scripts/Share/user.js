@@ -1,9 +1,9 @@
 ﻿
 define(function (require) {
 
-    var userUrl = "/api/Users",
-        memberUrl = "api/member", //需要登录
-        secrityUrl = "/api/security", //无需登录就可以使用的
+    var userUrl = "/api/memberships/Users",
+        memberUrl = "api/memberships/member", //需要登录
+        secrityUrl = "/api/memberships/security", //无需登录就可以使用的
         WebApi = require("/Scripts/Modules/Combine/WebApi.js");
 
 

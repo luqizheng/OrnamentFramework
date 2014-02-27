@@ -20,13 +20,13 @@ namespace Ornament.Regions.Plugin.Api
         public IEnumerable<object> Cities([FromUri] int? id)
         {
             Province province = _regionDaoFactory.CreateProvinceDao().Get(id.Value);
-
-            return from area in _regionDaoFactory.CreateCityDao().FindByProvince(province)
-                select new
-                {
-                    id = area.Id.ToString(),
-                    text = area.Name
-                };
+            var list = _regionDaoFactory.CreateCityDao().FindByProvince(province);
+            return from area in list
+                   select new
+                   {
+                       id = area.Id.ToString(),
+                       text = area.Name
+                   };
         }
     }
 }

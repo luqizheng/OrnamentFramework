@@ -44,9 +44,9 @@ define(function (require) {
         };
     });
     avalon.scan();
-    //初始化
-    baseInfo.user.load();
     return function (opts) {
+        //初始化
+        baseInfo.user.load();
         messages = opts.messages;
     };
 
