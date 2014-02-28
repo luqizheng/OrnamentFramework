@@ -1,4 +1,5 @@
-﻿using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
+﻿using System;
+using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.Messages.Newses;
 using Ornament.Web;
@@ -12,11 +13,6 @@ namespace Ornament.MVCWebFrame
     {
         public static void Regist()
         {
-            
-
-            OrnamentContext.ResourceManager
-                           .Add(typeof (NewsType), typeof (NewsOperator));
-
             RegistrySettingPage();
         }
 

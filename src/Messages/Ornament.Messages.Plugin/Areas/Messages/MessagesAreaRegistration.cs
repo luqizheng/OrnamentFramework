@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
+using Ornament;
 using Ornament.Web;
 using Ornament.Web.MessageHandlers;
 using Ornament.Web.Messages;
@@ -19,8 +20,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-            //初始化诗句
+            //初始化数据
             bus.Send(new MessageInit());
+
+            OrnamentContext.ResourceManager.Add("Template", typeof(MessageOperator));
 
             var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin", context);
 

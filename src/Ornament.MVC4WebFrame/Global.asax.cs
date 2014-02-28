@@ -36,13 +36,13 @@ namespace Ornament.MVCWebFrame
                 FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
                 RouteConfig.RegisterRoutes(RouteTable.Routes);
                 BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+                PermissionConfig.Regist();
                 //设置member root的初始化密码
                 var memberDataInit = GlobalInitializer.Get<MemberShipData>();
                 /*if (memberDataInit != null)*/
                 memberDataInit.AdminPassword = "123456";
             },
-                typeof (HttpErrorsController),
+                typeof(HttpErrorsController),
                 Assembly.GetExecutingAssembly());
 
             PermissionConfig.Regist();
@@ -83,7 +83,7 @@ namespace Ornament.MVCWebFrame
             }
             catch (Exception ex)
             {
-                ILog log = LogManager.GetLogger(typeof (GlobalContext));
+                ILog log = LogManager.GetLogger(typeof(GlobalContext));
                 log.Error(ex.Message, ex);
             }
             finally
