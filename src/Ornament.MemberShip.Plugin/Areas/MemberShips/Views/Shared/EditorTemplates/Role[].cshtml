@@ -7,7 +7,7 @@
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     object selected = new object();
     string ids = "";
-    if (this.Model != null && this.Model.Length != 0)
+    if (this.Model != null)
     {
         selected = from role in this.Model
                    select new

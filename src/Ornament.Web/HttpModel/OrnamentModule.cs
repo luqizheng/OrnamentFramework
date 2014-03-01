@@ -43,7 +43,7 @@ namespace Ornament.Web.HttpModel
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication)sender;
+            var context = (HttpApplication) sender;
             MultiLanguage(context);
             string utc = context.Request.QueryString["utc"];
             if (!String.IsNullOrEmpty(utc))
@@ -62,8 +62,7 @@ namespace Ornament.Web.HttpModel
 
         private void MultiLanguage(HttpApplication context)
         {
-
-            var lang = OrnamentContext.MemberShip.Language();
+            string lang = OrnamentContext.MemberShip.Language();
             try
             {
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
