@@ -15,17 +15,20 @@ namespace Ornament.MemberShip
     {
         private const string BaseMaxOrderId = "ffffffffffffffffffffffffffffffff";
         private const string BaseMinOrderId = "00000000000000000000000000000000";
+        private readonly object _orgChildLock = 0;
         private IOrgCollection _childs;
         private string _orderId;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
 
         protected Org()
         {
+
         }
 
         public Org(string name)
             : base(name)
         {
+
         }
 
         /// <summary>
@@ -38,12 +41,27 @@ namespace Ornament.MemberShip
         {
             get
             {
-                IOrgCollection result = _childs ?? (_childs = new OrgCollection(this));
-                if (result.Parent == null)
+                if (_childs == null)
                 {
-                    result.Parent = this;
+                    var result = new OrgCollection(this);
+
+                    if (result.Self == null)
+                    {
+                        result.Self = this;
+                    }
+                    lock (_orgChildLock)
+                    {
+                        if (_childs == null)
+                        {
+                            _childs = result;
+                        }
+                    }
                 }
-                return result;
+                if (_childs.Self == null)
+                {
+                    _childs.Self = this;
+                }
+                return _childs;
             }
             set { _childs = value; }
         }
@@ -56,8 +74,12 @@ namespace Ornament.MemberShip
             get { return _orderId; }
             set
             {
-                _orderId = value;
-                Childs.ResetOrderId();
+
+                if (_orderId != value)
+                {
+                    _orderId = value;
+                    Childs.ResetOrderId();
+                }
             }
         }
 

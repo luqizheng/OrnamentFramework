@@ -18,6 +18,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 
         public MessageTemplateModel(NotifyMessageTemplate template)
         {
+            if(template==null)
+                throw new ArgumentNullException("template");
             Name = template.Name;
             Remark = template.Remark;
             foreach (string key in template.Contents.Keys)

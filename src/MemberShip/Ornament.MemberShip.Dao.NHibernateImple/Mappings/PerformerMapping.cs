@@ -7,7 +7,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         public PerformerMapping()
         {
             Table("MBS_Performer");
-            this.attributes.Set("abstract", 1, "true");
+            
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
 
             DiscriminateSubClassesOnColumn("PerformerType", string.Empty).Not.Nullable().CustomType(typeof(string)).Length(10);

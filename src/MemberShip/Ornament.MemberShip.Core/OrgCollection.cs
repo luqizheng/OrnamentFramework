@@ -5,33 +5,48 @@ namespace Ornament.MemberShip
 {
     public interface IOrgCollection : ISet<Org>
     {
-        Org Parent { get; set; }
+        Org Self { get; set; }
         void ResetOrderId();
     }
 
     public class OrgCollection : HashedSet<Org>, IOrgCollection
     {
-        public OrgCollection(Org parent)
+        public OrgCollection(Org self)
         {
-            Parent = parent;
+            Self = self;
         }
 
         public OrgCollection()
         {
         }
 
-        public Org Parent { get; set; }
+
+        public override void Clear()
+        {
+            foreach (Org i in this)
+            {
+                i.Parent = null;
+            }
+            base.Clear();
+        }
+
+        public Org Self { get; set; }
 
         public override bool Add(Org o)
         {
-            if (o.Id == Parent.Id)
-                throw new ArgumentException("Org can not add self");
             if (o == null)
                 throw new ArgumentNullException("o");
+
+            if (Self != null && o.Id == Self.Id)
+                throw new ArgumentException("Org can not add self");
+
             if (String.IsNullOrEmpty(o.Id))
                 throw new ArgumentNullException("o", "org's Id must have value before being added");
-            if (String.IsNullOrEmpty(Parent.Id))
-                throw new ArgumentException("save parent org before add child org");
+            if (Self != null)
+            {
+                o.Parent = Self;
+                SetOrderId(Self, o);
+            }
             return base.Add(o);
         }
 
@@ -47,16 +62,20 @@ namespace Ornament.MemberShip
         {
             foreach (Org c in this)
             {
-                SetOrderId(Parent, c);
+                SetOrderId(Self, c);
             }
         }
 
-        private void SetOrderId(Org parent, Org newChild)
+        private void SetOrderId(Org self, Org newChild)
         {
-            if (String.IsNullOrEmpty(parent.OrderId))
-                newChild.OrderId = parent.Id;
+            if (String.IsNullOrEmpty(self.OrderId))
+            {
+                newChild.OrderId = self.Id;
+            }
             else
-                newChild.OrderId = parent.OrderId + "." + parent.Id;
+            {
+                newChild.OrderId = self.OrderId + "." + self.Id;
+            }
         }
     }
 }

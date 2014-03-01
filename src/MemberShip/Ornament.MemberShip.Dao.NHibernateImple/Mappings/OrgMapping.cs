@@ -14,18 +14,19 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public OrgMapping()
         {
-            Extends(typeof (IPerformer));
+            Extends(typeof(IPerformer));
             DiscriminatorValue("org");
-            Join("MBS_ORG",_=>
+            Join("MBS_ORG", _ =>
             {
                 _.KeyColumn("Id");
-                _.Map(s => s.OrderId).Length(4000);
+                _.Map(s => s.OrderId).Length(4000).Access.CamelCaseField(Prefix.Underscore);
+                ;
                 _.HasMany(s => s.Childs).CollectionType<OrgListType>()
                                       .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
                 _.References(s => s.Parent);
             });
-            
+
         }
 
         public class OrgListPersistent : PersistentGenericSet<Org>, IOrgCollection
@@ -40,13 +41,16 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             {
             }
 
-            public Org Parent { get; set; }
+            public Org Self { get; set; }
 
             public void ResetOrderId()
             {
-                foreach (Org c in this)
+                if (Self == null)
+                    return;
+                foreach (object c in this)
                 {
-                    SetOrderId(Parent, c);
+
+                    SetOrderId(Self, (Org)c);
                 }
             }
 
@@ -57,6 +61,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 else
                     newChild.OrderId = parent.OrderId + "." + parent.Id;
             }
+
         }
 
         public class OrgListType : IUserCollectionType
@@ -68,12 +73,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 
             public IPersistentCollection Wrap(ISessionImplementor session, object collection)
             {
-                return new OrgListPersistent(session, (OrgCollection) collection);
+                return new OrgListPersistent(session, (OrgCollection)collection);
             }
 
             public IEnumerable GetElements(object collection)
             {
-                return (IOrgCollection) collection;
+                return (IOrgCollection)collection;
             }
 
             public bool Contains(object collection, object entity)
@@ -91,7 +96,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             {
                 var result = (IOrgCollection)target;
                 result.Clear();
-                foreach (Org item in (IEnumerable<Org>) original)
+                foreach (Org item in (IEnumerable<Org>)original)
                 {
                     result.Add(item);
                 }
