@@ -24,7 +24,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             Id = user.Id;
             Name = user.Name;
             TimeZoneId = user.TimeZoneId;
-            Language = Language;
+            Language = user.Language;
             LoginId = user.LoginId;
             Phone = user.Contact.Phone??"";
             Email = user.Contact.Email??"";
