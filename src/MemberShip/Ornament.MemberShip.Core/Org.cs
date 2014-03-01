@@ -22,13 +22,11 @@ namespace Ornament.MemberShip
 
         protected Org()
         {
-
         }
 
         public Org(string name)
             : base(name)
         {
-
         }
 
         /// <summary>
@@ -74,7 +72,6 @@ namespace Ornament.MemberShip
             get { return _orderId; }
             set
             {
-
                 if (_orderId != value)
                 {
                     _orderId = value;

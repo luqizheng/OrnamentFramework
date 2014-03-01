@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="msg_not_found_ug" xml:space="preserve">
+    <value>沒有找到用戶組</value>
+  </data>
   <data name="page_title" xml:space="preserve">
     <value>用戶組</value>
   </data>
