@@ -82,7 +82,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     获取或设定用户是否已经获准使用
         /// </summary>
-        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
+        [Display(Name = "IsApproved", ResourceType = typeof(Resources))]
         public virtual bool IsApproved
         {
             get { return _isApproved; }
@@ -145,7 +145,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The is lockout.
         /// </value>
-        [Display(Name = "IsLockout", ResourceType = typeof (Resources))]
+        [Display(Name = "IsLockout", ResourceType = typeof(Resources))]
         public virtual bool IsLockout
         {
             get { return _isLockout; }
@@ -164,10 +164,10 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The login id.
         /// </value>
-        [Display(Name = "LoginId", ResourceType = typeof (Resources)),
+        [Display(Name = "LoginId", ResourceType = typeof(Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
-             ErrorMessageResourceType = typeof (ErrorMessage)), RegularExpression(@"^[a-zA-z1-9_-]{1,20}",
-                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
+             ErrorMessageResourceType = typeof(ErrorMessage)), RegularExpression(@"^[a-zA-z1-9_-]{1,20}",
+                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof(ErrorMessage))]
         public virtual string LoginId { get; set; }
 
 
@@ -208,6 +208,8 @@ namespace Ornament.MemberShip
         /// </exception>
         public override bool InRole(Role role)
         {
+            if (LoginId == AdminLoginId)
+                return true;
             return InRole(role, true);
         }
 
@@ -218,6 +220,8 @@ namespace Ornament.MemberShip
         /// <returns></returns>
         public virtual bool InRole(Role role, bool forAll)
         {
+            if (LoginId == AdminLoginId)
+                return true;
             bool result = base.InRole(role);
             if (result)
             {
@@ -250,16 +254,16 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
-        [Display(Name = "Org", ResourceType = typeof (Resources))]
+        [Display(Name = "Org", ResourceType = typeof(Resources))]
         public virtual Org Org { get; set; }
 
 
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Resources)),
+        [Display(Name = "Name", ResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof (ErrorMessage))]
+             ErrorMessageResourceType = typeof(ErrorMessage))]
         public override string Name
         {
             get
