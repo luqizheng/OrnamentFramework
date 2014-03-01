@@ -31,7 +31,7 @@ namespace Ornament.MemberShip
             if (String.IsNullOrEmpty(o.Id))
                 throw new ArgumentNullException("o", "org's Id must have value before being added");
             if (String.IsNullOrEmpty(Parent.Id))
-                throw new ArgumentException("save it before add child org");
+                throw new ArgumentException("save parent org before add child org");
             return base.Add(o);
         }
 

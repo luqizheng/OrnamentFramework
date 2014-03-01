@@ -14,6 +14,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return Projections.Property<Org>(s => s.Name); }
         }
+        protected IProjection ParentProperty
+        {
+            get { return Projections.Property<Org>(s => s.Parent); }
+        }
 
         protected IProjection OrderIdProperty
         {
@@ -41,8 +45,28 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             const string hql =
                 "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
 
-            var oo = (Int64) CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
+            var oo = (Int64)CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
             return oo > 0;
+        }
+
+        public Org GetByName(string name, Org parent)
+        {
+            return CreateDetachedCriteria()
+                .Add(Restrictions.Eq(NameProperty, name))
+                .Add(Restrictions.Eq(ParentProperty, parent))
+                .GetExecutableCriteria(this.CurrentSession)
+                .UniqueResult<Org>();
+        }
+
+
+
+        public Org GetRootOrgBy(string name)
+        {
+            return CreateDetachedCriteria()
+                .Add(Restrictions.Eq(NameProperty, name))
+                .Add(Restrictions.IsNull(ParentProperty))
+                .GetExecutableCriteria(this.CurrentSession)
+                .UniqueResult<Org>();
         }
 
         public IEnumerable<Org> Find(string name, int pageIndex, int pageSize)
@@ -51,7 +75,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
                 throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
                                            .Add(Restrictions.InsensitiveLike(NameProperty, name))
                                            .GetExecutableCriteria(CurrentSession).List<Org>();
         }
