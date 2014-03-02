@@ -15,6 +15,26 @@ namespace Ornament.Web.HttpModel
         public void Init(HttpApplication context)
         {
             context.BeginRequest += context_BeginRequest;
+            context.AuthenticateRequest += context_AuthenticateRequest;
+            context.PostAuthenticateRequest += context_AuthenticateRequest;
+        }
+
+        void context_AuthenticateRequest(object sender, EventArgs e)
+        {
+
+            if (OrnamentContext.MemberShip.CurrentUser() != null && OrnamentContext.MemberShip.CurrentUser().Language != Thread.CurrentThread.CurrentUICulture.Name)
+            {
+                try
+                {
+                    var lang = OrnamentContext.MemberShip.CurrentUser().Language;
+                    OrnamentContext.MemberShip.SwitchLanguage(lang);
+                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
+                    Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
         }
 
         public void Dispose()
@@ -43,7 +63,7 @@ namespace Ornament.Web.HttpModel
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication) sender;
+            var context = (HttpApplication)sender;
             MultiLanguage(context);
             string utc = context.Request.QueryString["utc"];
             if (!String.IsNullOrEmpty(utc))
@@ -62,7 +82,16 @@ namespace Ornament.Web.HttpModel
 
         private void MultiLanguage(HttpApplication context)
         {
-            string lang = OrnamentContext.MemberShip.Language();
+
+            string lang = OrnamentContext.MemberShip.CookieLanguage();
+            if (lang == null)
+            {
+                lang = OrnamentContext.MemberShip.BroswerLanguage();
+            }
+            if (lang == null)
+            {
+                lang = OrnamentContext.Configuration.DefaultLanguage.Key;
+            }
             try
             {
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
