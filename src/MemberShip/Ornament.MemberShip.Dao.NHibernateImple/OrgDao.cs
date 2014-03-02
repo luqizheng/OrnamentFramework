@@ -14,6 +14,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return Projections.Property<Org>(s => s.Name); }
         }
+
         protected IProjection ParentProperty
         {
             get { return Projections.Property<Org>(s => s.Parent); }
@@ -45,7 +46,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             const string hql =
                 "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
 
-            var oo = (Int64)CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
+            var oo = (Int64) CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
             return oo > 0;
         }
 
@@ -54,10 +55,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.Eq(NameProperty, name))
                 .Add(Restrictions.Eq(ParentProperty, parent))
-                .GetExecutableCriteria(this.CurrentSession)
+                .GetExecutableCriteria(CurrentSession)
                 .UniqueResult<Org>();
         }
-
 
 
         public Org GetRootOrgBy(string name)
@@ -65,7 +65,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return CreateDetachedCriteria()
                 .Add(Restrictions.Eq(NameProperty, name))
                 .Add(Restrictions.IsNull(ParentProperty))
-                .GetExecutableCriteria(this.CurrentSession)
+                .GetExecutableCriteria(CurrentSession)
                 .UniqueResult<Org>();
         }
 
@@ -75,9 +75,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
                 throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
-                                           .Add(Restrictions.InsensitiveLike(NameProperty, name))
-                                           .GetExecutableCriteria(CurrentSession).List<Org>();
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+                .Add(Restrictions.InsensitiveLike(NameProperty, name))
+                .GetExecutableCriteria(CurrentSession).List<Org>();
         }
 
         public IEnumerable<Org> GetOrgs(string[] ids)
@@ -86,7 +86,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 return new Org[0];
             return
                 CreateDetachedCriteria().Add(Restrictions.In(Projections.Property<Org>(s => s.Id), ids))
-                                        .GetExecutableCriteria(CurrentSession).List<Org>();
+                    .GetExecutableCriteria(CurrentSession).List<Org>();
+        }
+
+        public IEnumerable<Org> GetSubOrgs(Org org)
+        {
+            string maxOrderId;
+            string minOrderId;
+
+            Org.CreateGetChildCondition(org, out maxOrderId, out minOrderId);
+            return
+                CreateDetachedCriteria()
+                    .Add(Restrictions.Le(OrderIdProperty, maxOrderId))
+                    .Add(Restrictions.Ge(OrderIdProperty, minOrderId))
+                    .GetExecutableCriteria(CurrentSession).List<Org>();
         }
     }
 }

@@ -117,6 +117,7 @@ namespace Ornament.MemberShip
         #endregion
 
         /// <summary>
+        /// 获取下级OrderId的数值
         /// </summary>
         /// <returns></returns>
         public static void CreateGetChildCondition(Org org, out string maxOrderId, out string minOrderid)
