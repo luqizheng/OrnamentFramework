@@ -59,6 +59,12 @@ namespace Ornament.MemberShip
             Security.ChangePassword(password);
             Other.CreateTime = DateTime.Now;
             IsApproved = true;
+
+            //it should be init by creator;
+            _other = new OtherUserInfo();
+            _contact = new ContactInfo(this);
+            _security = new SecurityInfo(this);
+
         }
 
         /// <summary>
