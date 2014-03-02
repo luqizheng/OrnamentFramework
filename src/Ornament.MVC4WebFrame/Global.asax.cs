@@ -28,23 +28,29 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
-
-            MvcWebConfig.Regist(() =>
+            Exception exception = null;
+            try
             {
-                AreaRegistration.RegisterAllAreas();
-                WebApiConfig.Register(GlobalConfiguration.Configuration);
-                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
-                BundleConfig.RegisterBundles(BundleTable.Bundles);
-                PermissionConfig.Regist();
-                //设置member root的初始化密码
-                var memberDataInit = GlobalInitializer.Get<MemberShipData>();
-                /*if (memberDataInit != null)*/
-                memberDataInit.AdminPassword = "123456";
-            },
-                typeof(HttpErrorsController),
-                Assembly.GetExecutingAssembly());
-
+                MvcWebConfig.Regist(() =>
+                {
+                    AreaRegistration.RegisterAllAreas();
+                    WebApiConfig.Register(GlobalConfiguration.Configuration);
+                    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                    RouteConfig.RegisterRoutes(RouteTable.Routes);
+                    BundleConfig.RegisterBundles(BundleTable.Bundles);
+                    PermissionConfig.Regist();
+                    //设置member root的初始化密码
+                    var memberDataInit = GlobalInitializer.Get<MemberShipData>();
+                    /*if (memberDataInit != null)*/
+                    memberDataInit.AdminPassword = "123456";
+                },
+                    typeof(HttpErrorsController),
+                    Assembly.GetExecutingAssembly());
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+            }
             PermissionConfig.Regist();
             ApplicationConfig.Register(OrnamentContext.Configuration);
             //Ornament setting
@@ -53,6 +59,11 @@ namespace Ornament.MVCWebFrame
 
             InputBuilder.BootStrap();
             NotifyConfig.Register();
+
+            if (exception != null)
+            {
+                throw exception;
+            }
         }
 
 
