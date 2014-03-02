@@ -1,21 +1,21 @@
 ﻿@using Qi.Web
 @using SeajsBundles
-@model Ornament.MemberShip.User[]
+@model Ornament.MemberShip.User
 @{
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var selected = new object();
     string ids = "";
-    if (Model != null && Model.Length != 0)
+    if (this.Model != null)
     {
-        selected = from user in Model
-            select new
-            {
-                id = user.Id,
-                text = user.Name
-            };
-        ids = String.Join(",", from role in Model select role.Id);
+        ids = this.Model.Id;
+        selected = new
+        {
+            id = Model.Id,
+            text = Model.Name
+        };
     }
+   
 }
 <div class="control-group">
     @Html.Label("", display, new {@class = "control-label"})
