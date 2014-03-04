@@ -43,15 +43,6 @@ namespace Ornament.Web.HttpModel
 
         #endregion
 
-        [Obsolete]
-        public static void SiwtchTo(string language)
-        {
-            if (HttpContext.Current != null)
-            {
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie(langCookieName, language));
-            }
-        }
-
         public static void SetClientOffsetHour(int hour)
         {
             if (HttpContext.Current != null)

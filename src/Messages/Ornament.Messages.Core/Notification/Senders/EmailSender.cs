@@ -27,6 +27,7 @@ namespace Ornament.Messages.Notification.Senders
         /// <param name="notifyMessage"></param>
         public void Send(SimpleMessage notifyMessage)
         {
+            
             Content content = notifyMessage.Content;
             var mailMessage =
                 new MailMessage(new MailAddress(SupportEmail),
