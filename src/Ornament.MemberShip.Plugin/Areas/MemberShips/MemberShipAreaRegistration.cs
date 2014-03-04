@@ -32,6 +32,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             RegistApi();
+            bus.Send(new NHRegisterEventMessage(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
             //send the init data
             bus.Send(new MemberShipData());
@@ -82,12 +83,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             base.RegisterArea(context, bus);
         }
 
-        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
-        {
-            return new[]
-            {
-                new NHRegisterEventMessage(typeof (IMemberShipFactory), typeof (MemberShipFactory))
-            };
-        }
+      
     }
 }

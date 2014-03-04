@@ -20,9 +20,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            bus.Send(new NHRegisterEventMessage(typeof(IMessageDaoFactory), typeof(MessageDaoFactory)));
             //初始化数据
             bus.Send(new MessageInit());
-
+           
             OrnamentContext.ResourceManager.Add("Template", typeof(MessageOperator));
 
             var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin", context);
@@ -54,13 +55,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             base.RegisterArea(context, bus);
         }
 
-        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
-        {
-            return new[]
-            {
-                new NHRegisterEventMessage(typeof (IMessageDaoFactory), typeof (MessageDaoFactory))
-            };
-        }
+   
 
     }
 }

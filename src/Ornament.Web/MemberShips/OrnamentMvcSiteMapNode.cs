@@ -16,7 +16,7 @@ namespace Ornament.Web.MemberShips
         }
         public OrnamentMvcSiteMapNodeAttribute()
         {
-            Attributes.Add("permission", "");
+            //Attributes.Add("permission", "");
         }
 
         public string Resource
@@ -43,7 +43,7 @@ namespace Ornament.Web.MemberShips
         {
             if (_resource != null && _operator != null)
             {
-                Attributes["permission"] = String.Format("{0}:{1}", Resource, Operator);
+                //Attributes["permission"] = String.Format("{0}:{1}", Resource, Operator);
             }
         }
     }

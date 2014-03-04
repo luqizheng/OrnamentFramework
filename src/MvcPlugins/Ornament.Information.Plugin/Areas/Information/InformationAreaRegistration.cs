@@ -22,10 +22,7 @@ namespace Ornament.Information.Plugin.Areas.Information
             base.RegisterArea(context, bus);
         }
 
-        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
-        {
-            return null;
-        }
+       
 
      
     }

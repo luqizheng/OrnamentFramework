@@ -26,14 +26,6 @@ namespace Ornament.Web.PortableAreas
 
         public virtual void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-            IEnumerable<NHRegisterEventMessage> ite = RegistDaos();
-            if (ite != null)
-            {
-                foreach (NHRegisterEventMessage imple in ite)
-                {
-                    bus.Send(imple);
-                }
-            }
             IEnumerable<Type> apiControllers;
             IEnumerable<Type> controllers;
             GetInjectControllers(out controllers, out apiControllers);
@@ -72,8 +64,8 @@ namespace Ornament.Web.PortableAreas
             }
         }
 
-
-        protected abstract IEnumerable<NHRegisterEventMessage> RegistDaos();
+        
+        
 
         protected virtual void GetInjectControllers(out IEnumerable<Type> controller,
             out IEnumerable<Type> apiController)

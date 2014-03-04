@@ -21,6 +21,7 @@ namespace Ornament.Regions.Plugin.Areas.Regions
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             bus.Send(new DataInit());
+            bus.Send(new NHRegisterEventMessage(typeof(IRegionDaoFactory), typeof(RegionDaoFactory)));
             var helper = new AreaRegistrationHelper(this, "Ornament.Regions.Plugin", context);
             helper.RegistySeajsModule("Scripts");
             context.MapRoute(
@@ -28,16 +29,8 @@ namespace Ornament.Regions.Plugin.Areas.Regions
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
                 );
-
+            
             base.RegisterArea(context, bus);
-        }
-
-        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
-        {
-            return new[]
-            {
-                new NHRegisterEventMessage(typeof (IRegionDaoFactory), typeof (RegionDaoFactory))
-            };
         }
 
 

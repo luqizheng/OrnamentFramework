@@ -24,11 +24,7 @@ namespace Friends.Areas.Friends
                 );
         }
 
-        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
-        {
-            return null;
-        }
-
+     
         protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
         {
             controller = null;
