@@ -50,16 +50,19 @@ namespace Ornament.MVCWebFrame
             catch (Exception ex)
             {
                 exception = ex;
+                
             }
-            PermissionConfig.Regist();
-            ApplicationConfig.Register(OrnamentContext.Configuration);
-            //Ornament setting
-            //Registry the Provider to use Membership rule of asp.net.
-            //Assembly auto config.
+            if (exception == null)
+            {
+                PermissionConfig.Regist();
+                ApplicationConfig.Register(OrnamentContext.Configuration);
+                //Ornament setting
+                //Registry the Provider to use Membership rule of asp.net.
+                //Assembly auto config.
 
-            InputBuilder.BootStrap();
-            NotifyConfig.Register();
-
+                InputBuilder.BootStrap();
+                NotifyConfig.Register();
+            }
             if (exception != null)
             {
                 throw exception;
