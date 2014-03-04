@@ -15,6 +15,7 @@ using Ornament.Web.Controllers;
 using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
 using Ornament.Web.ModelBinder;
+using Ornament.Web.Models;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
 using Ornament.Web.ValidationAdapter;
@@ -56,23 +57,7 @@ namespace Ornament.Web.Cfg
             //Web MemberShip的加密方法
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
 
-            if (nhibernateException == null)
-            {
-                try
-                {
-                    GlobalInitializer.UpdateAllSturcture();
-                    GlobalInitializer.BuildData();
-                }
-                catch (Exception ex)
-                {
-                    LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
-                    throw ex;
-                }
-            }
-            else
-            {
-                throw nhibernateException;
-            }
+
 
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory());
         }
@@ -116,6 +101,20 @@ namespace Ornament.Web.Cfg
             catch (Exception ex)
             {
                 LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+            }
+        }
+
+        public static void InitData()
+        {
+            try
+            {
+                GlobalInitializer.UpdateAllSturcture();
+                GlobalInitializer.BuildData();
+            }
+            catch (Exception ex)
+            {
+                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                throw ex;
             }
         }
     }

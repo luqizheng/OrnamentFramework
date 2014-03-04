@@ -28,45 +28,34 @@ namespace Ornament.MVCWebFrame
         protected void Application_Start()
         {
             XmlConfigurator.Configure(); //Log4net registry.
-            Exception exception = null;
-            try
-            {
-                MvcWebConfig.Regist(() =>
-                {
-                    AreaRegistration.RegisterAllAreas();
-                    WebApiConfig.Register(GlobalConfiguration.Configuration);
-                    FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-                    RouteConfig.RegisterRoutes(RouteTable.Routes);
-                    BundleConfig.RegisterBundles(BundleTable.Bundles);
-                    PermissionConfig.Regist();
-                    //设置member root的初始化密码
-                    var memberDataInit = GlobalInitializer.Get<MemberShipData>();
-                    /*if (memberDataInit != null)*/
-                    memberDataInit.AdminPassword = "123456";
-                },
-                    typeof(HttpErrorsController),
-                    Assembly.GetExecutingAssembly());
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
-                
-            }
-            if (exception == null)
-            {
-                PermissionConfig.Regist();
-                ApplicationConfig.Register(OrnamentContext.Configuration);
-                //Ornament setting
-                //Registry the Provider to use Membership rule of asp.net.
-                //Assembly auto config.
 
-                InputBuilder.BootStrap();
-                NotifyConfig.Register();
-            }
-            if (exception != null)
+            MvcWebConfig.Regist(() =>
             {
-                throw exception;
-            }
+                AreaRegistration.RegisterAllAreas();
+                WebApiConfig.Register(GlobalConfiguration.Configuration);
+                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+                RouteConfig.RegisterRoutes(RouteTable.Routes);
+                BundleConfig.RegisterBundles(BundleTable.Bundles);
+                PermissionConfig.Regist();
+                //设置member root的初始化密码
+                var memberDataInit = GlobalInitializer.Get<MemberShipData>();
+                /*if (memberDataInit != null)*/
+                memberDataInit.AdminPassword = "123456";
+            },
+                typeof(HttpErrorsController),
+                Assembly.GetExecutingAssembly());
+
+
+            PermissionConfig.Regist();
+            ApplicationConfig.Register(OrnamentContext.Configuration);
+            //Ornament setting
+            //Registry the Provider to use Membership rule of asp.net.
+            //Assembly auto config.
+
+            InputBuilder.BootStrap();
+            NotifyConfig.Register();
+
+            MvcWebConfig.InitData();
         }
 
 
