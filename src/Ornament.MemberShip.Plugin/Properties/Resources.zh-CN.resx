@@ -162,9 +162,6 @@
   <data name="VerifyEmail" xml:space="preserve">
     <value>验证电子邮件</value>
   </data>
-  <data name="Welcone" xml:space="preserve">
-    <value>欢迎</value>
-  </data>
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>角色名称已经被使用，请输入另外一个</value>
   </data>
@@ -185,5 +182,63 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>语言</value>
+  </data>
+  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
+    <value>请输入确认密码</value>
+    <comment>ChangePasswordModel.s</comment>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>再一次密码</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="error_missingEmailAddress" xml:space="preserve">
+    <value>请输入电子邮件</value>
+  </data>
+  <data name="error_MissLoginId" xml:space="preserve">
+    <value>请输入登录名</value>
+  </data>
+  <data name="error_MissPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="error_notMatchVerifyCode" xml:space="preserve">
+    <value>请输入验证码</value>
+  </data>
+  <data name="error_UserIsLockout" xml:space="preserve">
+    <value>用户已经被锁定</value>
+  </data>
+  <data name="error_UserIsNotApproved" xml:space="preserve">
+    <value>用户的安全信息没有被验证</value>
+  </data>
+  <data name="input_password_again" xml:space="preserve">
+    <value>请输入确认密码</value>
+  </data>
+  <data name="label_AccountOrEmail" xml:space="preserve">
+    <value>Account Or Email</value>
+  </data>
+  <data name="Language1" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
+    <value>Child Org's Count</value>
+  </data>
+  <data name="PermissionName" xml:space="preserve">
+    <value>Permission Name</value>
+  </data>
+  <data name="RegistryTime" xml:space="preserve">
+    <value>Registry time</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>Verify Code</value>
+  </data>
+  <data name="VerifyEmail1" xml:space="preserve">
+    <value>Verify Email if changed</value>
   </data>
 </root>
