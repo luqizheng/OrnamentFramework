@@ -40,7 +40,7 @@
     var langs = from lang in OrnamentContext.Configuration.Languages
                 select new SelectListItem()
                     {
-                        Text = lang.Name + "(" + lang.Key + ")",
+                        Text = lang.Name ,
                         Value = lang.Key
                     };
 }
