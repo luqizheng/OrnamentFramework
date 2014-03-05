@@ -5,7 +5,6 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using NHibernate.Id.Insert;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -76,7 +75,8 @@ namespace Ornament
             }
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
-            if (user.Other.LastActivityDate == null || (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
+            if (user.Other.LastActivityDate == null ||
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
@@ -108,7 +108,7 @@ namespace Ornament
         }
 
         /// <summary>
-        /// 把客户端时间转换为服务器时间
+        ///     把客户端时间转换为服务器时间
         /// </summary>
         /// <param name="context"></param>
         /// <param name="clientTime"></param>
@@ -118,29 +118,9 @@ namespace Ornament
             return clientTime.AddHours(-context.OffSetHour());
         }
 
+
         /// <summary>
-        ///     获取最终的Language
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string Language(this MemberShipContext context)
-        {
-            string language = context.CurrentUser() != null ? context.CurrentUser().Language : "";
-
-            if (String.IsNullOrEmpty(language))
-            {
-                language = CookieLanguage(context);
-            }
-
-            if (String.IsNullOrEmpty(language))
-            {
-                language = BroswerLanguage(context);
-            }
-
-            return language;
-        }
-        /// <summary>
-        /// 获取浏览器和系统的默认语言,如果浏览器默认语言在系统中不存在,就返回系统默认语言
+        ///     获取浏览器和系统的默认语言,如果浏览器默认语言在系统中不存在,就返回系统默认语言
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -155,31 +135,17 @@ namespace Ornament
             }
             return OrnamentContext.Configuration.DefaultLanguage.Key;
         }
-        /// <summary>
-        /// 保存在cookie中的默认语言
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string CookieLanguage(this MemberShipContext context)
+
+        public static string CookieRequestLanguage(this MemberShipContext context)
         {
-            HttpCookie reqCookie = HttpContext.Current.Request.Cookies[LangCookieName];
-            HttpCookie respCookie = HttpContext.Current.Response.Cookies[LangCookieName];
-
-            string reqValue = reqCookie != null ? reqCookie.Value : "";
-            string respValue = respCookie != null ? respCookie.Value : "";
-
-            if (String.IsNullOrEmpty(reqValue) && String.IsNullOrEmpty(respValue))
+            HttpCookie request = HttpContext.Current.Request.Cookies[LangCookieName];
+            if (request != null)
             {
-                return null;
+                return request.Value;
             }
-
-            if (reqValue != respValue && !String.IsNullOrEmpty(respValue))
-            {
-                return respValue;
-            }
-
-            return reqValue;
+            return null;
         }
+
 
         /// <summary>
         ///     Switch lanugage.
@@ -188,17 +154,18 @@ namespace Ornament
         /// <param name="language"></param>
         public static void SwitchLanguage(this MemberShipContext context, string language)
         {
-            if (!OrnamentContext.Configuration.Languages.Contains(language))
-                throw new ArgumentOutOfRangeException("language", language + " do not support in this web-site.");
-            if (OrnamentContext.MemberShip.CurrentUser() != null)
+            if (OrnamentContext.Configuration.Languages.Contains(language))
             {
-                OrnamentContext.MemberShip.CurrentUser().Language = language;
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+                HttpContext.Current.Response.Cookies[LangCookieName].Value = language;
             }
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
-            if (HttpContext.Current != null)
+
+            User currentUser = OrnamentContext.MemberShip.CurrentUser();
+            if (currentUser != null && language != currentUser.Language)
             {
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName, language));
+                currentUser.Language = language;
+                OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
             }
         }
 

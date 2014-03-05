@@ -234,8 +234,8 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-CN.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

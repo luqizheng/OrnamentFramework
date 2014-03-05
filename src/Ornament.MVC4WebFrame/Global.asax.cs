@@ -82,7 +82,7 @@ namespace Ornament.MVCWebFrame
 
 
                 //最后，一更新Multi-lang的cookie，因此使用Profile的语言。
-                OrnamentContext.MemberShip.SwitchLanguage(OrnamentContext.MemberShip.Language());
+                OrnamentContext.MemberShip.SwitchLanguage(OrnamentContext.MemberShip.CurrentUser().Language);
             }
             catch (Exception ex)
             {

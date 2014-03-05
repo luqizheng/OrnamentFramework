@@ -188,30 +188,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basic.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh-cn.designer.cs">
+    <Compile Include="App_GlobalResources\Basic.zh-Hans.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.zh-cn.resx</DependentUpon>
+      <DependentUpon>Basic.zh-Hans.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh.designer.cs">
+    <Compile Include="App_GlobalResources\Basic.zh-Hant.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.zh.resx</DependentUpon>
+      <DependentUpon>Basic.zh-Hant.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\membership.sitemap.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>membership.sitemap.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\membership.sitemap.zh-CN.designer.cs">
+    <Compile Include="App_GlobalResources\membership.sitemap.zh-Hans.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>membership.sitemap.zh-CN.resx</DependentUpon>
+      <DependentUpon>membership.sitemap.zh-Hans.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\membership.sitemap.zh.designer.cs">
+    <Compile Include="App_GlobalResources\membership.sitemap.zh-Hant.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>membership.sitemap.zh.resx</DependentUpon>
+      <DependentUpon>membership.sitemap.zh-Hant.resx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\message.sitemap.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -223,13 +223,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="App_GlobalResources\sitemap.zh-CN.designer.cs">
-      <DependentUpon>sitemap.zh-CN.resx</DependentUpon>
+    <Compile Include="App_GlobalResources\sitemap.zh-Hans.designer.cs">
+      <DependentUpon>sitemap.zh-Hans.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="App_GlobalResources\sitemap.zh.designer.cs">
-      <DependentUpon>sitemap.zh.resx</DependentUpon>
+    <Compile Include="App_GlobalResources\sitemap.zh-Hant.designer.cs">
+      <DependentUpon>sitemap.zh-Hant.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -952,9 +952,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\sitemap.zh.resx">
+    <Content Include="App_GlobalResources\sitemap.zh-Hant.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>sitemap.zh.designer.cs</LastGenOutput>
+      <LastGenOutput>sitemap.zh-Hant.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -965,9 +965,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\sitemap.zh-CN.resx">
+    <Content Include="App_GlobalResources\sitemap.zh-Hans.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>sitemap.zh-CN.designer.cs</LastGenOutput>
+      <LastGenOutput>sitemap.zh-Hans.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
@@ -1130,15 +1130,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\membership.sitemap.zh-CN.resx">
+    <Content Include="App_GlobalResources\membership.sitemap.zh-Hans.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>membership.sitemap.zh-CN.designer.cs</LastGenOutput>
+      <LastGenOutput>membership.sitemap.zh-Hans.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\membership.sitemap.zh.resx">
+    <Content Include="App_GlobalResources\membership.sitemap.zh-Hant.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>membership.sitemap.zh.designer.cs</LastGenOutput>
+      <LastGenOutput>membership.sitemap.zh-Hant.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -1154,15 +1154,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.zh-cn.resx">
+    <Content Include="App_GlobalResources\Basic.zh-Hans.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.zh-cn.designer.cs</LastGenOutput>
+      <LastGenOutput>Basic.zh-Hans.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.zh.resx">
+    <Content Include="App_GlobalResources\Basic.zh-Hant.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.zh.designer.cs</LastGenOutput>
+      <LastGenOutput>Basic.zh-Hant.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
