@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
@@ -28,7 +27,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [UIHint("Textarea")]
         [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof (ErrorMessage))]
+             ErrorMessageResourceType = typeof(Resources))]
         public string Remark { get; set; }
 
 

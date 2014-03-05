@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Properties;
 
@@ -57,8 +56,6 @@ namespace Ornament.MemberShip
             if (loginId == null) throw new ArgumentNullException("loginId");
             if (password == null) throw new ArgumentNullException("password");
             Security.ChangePassword(password);
-           
-
         }
 
         /// <summary>
@@ -85,7 +82,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     获取或设定用户是否已经获准使用
         /// </summary>
-        [Display(Name = "IsApproved", ResourceType = typeof(Resources))]
+        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
         public virtual bool IsApproved
         {
             get { return _isApproved; }
@@ -95,7 +92,8 @@ namespace Ornament.MemberShip
                 ModifyUpdateTime();
             }
         }
-        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
+
+        [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
         [UIHint("TimeZone")]
         public virtual string TimeZoneId
         {
@@ -110,12 +108,12 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets language
         /// </summary>
-        [Display(Name = "Language", ResourceType = typeof(Resources))]
+        [Display(Name = "Language", ResourceType = typeof (Resources))]
         [UIHint("Language")]
         public virtual string Language { get; set; }
 
         /// <summary>
-        /// 获取Timezone对象
+        ///     获取Timezone对象
         /// </summary>
         public virtual TimeZoneInfo TimeZone
         {
@@ -148,7 +146,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The is lockout.
         /// </value>
-        [Display(Name = "IsLockout", ResourceType = typeof(Resources))]
+        [Display(Name = "IsLockout", ResourceType = typeof (Resources))]
         public virtual bool IsLockout
         {
             get { return _isLockout; }
@@ -167,10 +165,10 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The login id.
         /// </value>
-        [Display(Name = "LoginId", ResourceType = typeof(Resources)),
+        [Display(Name = "LoginId", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
-             ErrorMessageResourceType = typeof(ErrorMessage)), RegularExpression(@"^[a-zA-z1-9_-]{1,20}",
-                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof(Resources)), RegularExpression(@"^[a-zA-z1-9_-]{1,20}",
+                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof(Resources))]
         public virtual string LoginId { get; set; }
 
 
@@ -257,16 +255,16 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
-        [Display(Name = "Org", ResourceType = typeof(Resources))]
+        [Display(Name = "Org", ResourceType = typeof (Resources))]
         public virtual Org Org { get; set; }
 
 
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof(Resources)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof(Resources))]
         public override string Name
         {
             get
@@ -281,9 +279,9 @@ namespace Ornament.MemberShip
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {
             return new List<User>
-                {
-                    this,
-                };
+            {
+                this,
+            };
         }
 
         protected override string GetPerformerType()

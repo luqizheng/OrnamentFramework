@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Properties;
 using Qi.Domain;
 
@@ -72,7 +71,7 @@ namespace Ornament.MemberShip
         protected abstract IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory);
 
         public virtual bool OneOf(params
-                                      Role[] roles)
+            Role[] roles)
         {
             return (from role1 in Roles from role2 in roles where role1.Id == role2.Id select role1).Any();
         }
@@ -93,19 +92,19 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The comment.
         /// </value>
-        [Display(Name = "Remark", ResourceType = typeof(Resources)),
+        [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof(Resources))]
         public virtual string Remarks { get; set; }
 
 
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof(Resources)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(ErrorMessage)),
+        [Display(Name = "Name", ResourceType = typeof (Resources)),
+         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof(ErrorMessage))]
+             ErrorMessageResourceType = typeof(Resources))]
         public virtual string Name
         {
             get { return _name; }

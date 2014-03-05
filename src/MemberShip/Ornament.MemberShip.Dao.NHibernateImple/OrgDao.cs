@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NHibernate.Criterion;
-using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.Properties;
 using Qi.Domain.NHibernates;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
@@ -46,7 +46,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             const string hql =
                 "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
 
-            var oo = (Int64)CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
+            var oo = (Int64) CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
             return oo > 0;
         }
 
@@ -72,10 +72,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IEnumerable<Org> Find(string name, int pageIndex, int pageSize)
         {
             if (pageSize <= 0)
-                throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
+                throw new ArgumentOutOfRangeException("pageSize", Resources.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
-                throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+                throw new ArgumentOutOfRangeException("pageIndex", Resources.PageIndex_should_greater_than_zero_);
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<Org>();
         }
@@ -83,17 +83,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IEnumerable<Org> Find(Org scope, string name, int pageIndex, int pageSize)
         {
             if (pageSize <= 0)
-                throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
+                throw new ArgumentOutOfRangeException("pageSize", Resources.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
-                throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
+                throw new ArgumentOutOfRangeException("pageIndex", Resources.PageIndex_should_greater_than_zero_);
             string min, max;
             Org.CreateGetChildCondition(scope, out max, out min);
 
             return CreateDetachedCriteria()
-                  .Add(Restrictions.Le(OrderIdProperty, max))
-                    .Add(Restrictions.Ge(OrderIdProperty, min))
+                .Add(Restrictions.Le(OrderIdProperty, max))
+                .Add(Restrictions.Ge(OrderIdProperty, min))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageIndex * pageSize)
+                .SetFirstResult(pageIndex*pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<Org>();
         }

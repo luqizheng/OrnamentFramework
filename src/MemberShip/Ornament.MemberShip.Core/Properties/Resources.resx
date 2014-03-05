@@ -129,6 +129,9 @@
   <data name="Email" xml:space="preserve">
     <value>e-Mail</value>
   </data>
+  <data name="EmailNotRightFormat" xml:space="preserve">
+    <value>Please input right format email address</value>
+  </data>
   <data name="IsApproved" xml:space="preserve">
     <value>Approved</value>
   </data>
@@ -156,8 +159,14 @@
   <data name="LoginId" xml:space="preserve">
     <value>Login Id</value>
   </data>
+  <data name="LoginNotCorrectFormat" xml:space="preserve">
+    <value>LoginId should be between 6 and 20, It should be number underscrope and letter and case sense.</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="NameOverMaxLength" xml:space="preserve">
+    <value>Name's length should be 1~30</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New Password</value>
@@ -171,6 +180,12 @@
   <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
     <value>Child Org's Count</value>
   </data>
+  <data name="PageIndex_should_greater_than_zero_" xml:space="preserve">
+    <value>PageIndex should greater than zero or equal zero.</value>
+  </data>
+  <data name="PageSize_should_greater_than_zero" xml:space="preserve">
+    <value>pageSize should greater than zero.</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -179,6 +194,9 @@
   </data>
   <data name="PasswordQuestion" xml:space="preserve">
     <value>Password question </value>
+  </data>
+  <data name="PasswordQuestionAnswerOverMaxLength" xml:space="preserve">
+    <value>Length should be unbder 30 </value>
   </data>
   <data name="Permission" xml:space="preserve">
     <value>Permission</value>
@@ -195,8 +213,35 @@
   <data name="Remark" xml:space="preserve">
     <value>Remark</value>
   </data>
+  <data name="RemarkOverMaxLength" xml:space="preserve">
+    <value>Remark's length should be less than 200</value>
+  </data>
+  <data name="RequireLoginId" xml:space="preserve">
+    <value>Please input loginId.</value>
+  </data>
+  <data name="RequireName" xml:space="preserve">
+    <value>Please input name.</value>
+  </data>
+  <data name="RequirePassword" xml:space="preserve">
+    <value>Please input password.</value>
+  </data>
+  <data name="RequirePasswordAnswer" xml:space="preserve">
+    <value>Please input question's answer</value>
+  </data>
+  <data name="RequirePasswordQuestion" xml:space="preserve">
+    <value>Please entry question.</value>
+  </data>
+  <data name="RequireRoleName" xml:space="preserve">
+    <value>please input role's name</value>
+  </data>
   <data name="Role" xml:space="preserve">
     <value>Role</value>
+  </data>
+  <data name="RoleNameOverMaxLength" xml:space="preserve">
+    <value>The length of role's name should be less than 20</value>
+  </data>
+  <data name="RoleRemarkOverMaxLength" xml:space="preserve">
+    <value>The length of role's Remark should be less than 100</value>
   </data>
   <data name="TimeZone" xml:space="preserve">
     <value>Time zone</value>

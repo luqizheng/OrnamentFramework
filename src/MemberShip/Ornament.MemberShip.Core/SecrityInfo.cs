@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.Properties;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Properties;
 using Qi;
@@ -51,7 +51,7 @@ namespace Ornament.MemberShip
             /// </value>
             [Display(Name = "PasswordQuestion", ResourceType = typeof (Resources)),
              Required(AllowEmptyStrings = false,
-                 ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof (ErrorMessage))
+                 ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof(Resources))
             ]
             public virtual string PasswordQuestion
             {
@@ -68,9 +68,9 @@ namespace Ornament.MemberShip
             /// </summary>
             [Display(Name = "PasswordAnswer", ResourceType = typeof (Resources)),
              Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
-                 ErrorMessageResourceType = typeof (ErrorMessage)),
+                 ErrorMessageResourceType = typeof(Resources)),
              StringLength(50, MinimumLength = 0, ErrorMessageResourceName = "PasswordQuestionAnswerOverMaxLength",
-                 ErrorMessageResourceType = typeof (ErrorMessage))]
+                 ErrorMessageResourceType = typeof(Resources))]
             public virtual string PasswordAnswer
             {
                 protected set
@@ -89,7 +89,7 @@ namespace Ornament.MemberShip
             /// </value>
             [Display(Name = "Password", ResourceType = typeof (Resources)),
              Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePassword",
-                 ErrorMessageResourceType = typeof (ErrorMessage))]
+                 ErrorMessageResourceType = typeof(Resources))]
             public virtual string Password
             {
                 get { return MembershipContext.Provider.Decrypt(_password); }
