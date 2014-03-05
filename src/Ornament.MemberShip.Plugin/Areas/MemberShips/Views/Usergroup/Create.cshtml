@@ -8,39 +8,22 @@
     Layout = OrnamentContext.Configuration.BackendLayout();
     
 }
-
-@using (Html.BeginForm())
-{
+@section pageTitle{
+    <h3>
+        @Resources.Create @Ornament.MemberShip.Properties.Resources.UserGroup
+    </h3>
+}
+<form class="form-horizontal" method="POST">
     @Html.ValidationSummary(true)
-    <fieldset class="form-horizontal">
-        <legend>@Resources.Create @Ornament.MemberShip.Properties.Resources.UserGroup</legend>
-        <div class="control-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-            <div class="controls">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
-        <div class="control-group">
-            @Html.LabelFor(model => model.Remarks, new { @class = "control-label" })
-            <div class="controls">
-                @Html.TextAreaFor(model => model.Remarks)
-                @Html.ValidationMessageFor(model => model.Remarks)
-            </div>
-        </div>
-        <div class="form-actions">
-            <button class="btn btn-primary" type="submit">
-                <i class="icon-plus icon-white"></i>@Basic.Create</button>
-            <a href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i>@Resources.Cancel</a>
-        </div>
-    </fieldset>
-}
-@section scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".form-actions button:eq(1)").click(function () {
-                document.location = $(this).attr("href");
-            });
-        });
-    </script>
-}
+
+   
+            @Html.EditorFor(model => model.Name)
+        
+            @Html.EditorFor(model => model.Remarks)
+      
+    <div class="form-actions">
+        <button class="btn btn-primary" type="submit">
+            <i class="icon-plus icon-white"></i>@Ornament.Properties.Resources.Create</button>
+        <a href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i>@Resources.Cancel</a>
+    </div>
+</form>

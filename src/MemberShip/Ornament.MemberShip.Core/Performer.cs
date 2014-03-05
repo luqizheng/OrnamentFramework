@@ -95,6 +95,7 @@ namespace Ornament.MemberShip
         [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof(Resources))]
+        [UIHint("Textarea")]
         public virtual string Remarks { get; set; }
 
 
