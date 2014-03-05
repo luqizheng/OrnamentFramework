@@ -115,7 +115,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 return View(role);
             }
-            _roleDao.SaveOrUpdate(role);
+            role.Save(this._factory.CreateRoleDao());
+           
             return RedirectToAction("Index");
         }
 
