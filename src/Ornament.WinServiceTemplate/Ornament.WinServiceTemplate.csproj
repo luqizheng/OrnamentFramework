@@ -68,9 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrnamentService.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="OrnamentService.cs" />
     <Compile Include="OrnamentService.Designer.cs">
       <DependentUpon>OrnamentService.cs</DependentUpon>
     </Compile>

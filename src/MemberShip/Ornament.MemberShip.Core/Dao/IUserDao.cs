@@ -34,12 +34,6 @@ namespace Ornament.MemberShip.Dao
         User GetByLoginId(string loginId);
 
         /// <summary>
-        ///     Get all the number of the Db
-        /// </summary>
-        /// <returns></returns>
-        int Count();
-
-        /// <summary>
         /// </summary>
         /// <param name="name"></param>
         /// <param name="loginid"></param>
