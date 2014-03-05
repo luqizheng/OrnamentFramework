@@ -232,4 +232,7 @@
   <data name="VerifyCode" xml:space="preserve">
     <value>验证码</value>
   </data>
+  <data name="LastActivityTime" xml:space="preserve">
+    <value>最后活动时间</value>
+  </data>
 </root>

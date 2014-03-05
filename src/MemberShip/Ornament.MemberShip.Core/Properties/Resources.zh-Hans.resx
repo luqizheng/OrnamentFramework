@@ -162,7 +162,7 @@
   <data name="LoginId" xml:space="preserve">
     <value>登录名</value>
   </data>
-  <data name="LoginNotCorrectFormat1" xml:space="preserve">
+  <data name="LoginNotCorrectFormat" xml:space="preserve">
     <value>登录必须为6～20为的字符、数字、下划线、减号,并且区分大小写</value>
   </data>
   <data name="Name" xml:space="preserve">
