@@ -248,19 +248,19 @@
     <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-Hans.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Create.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-Hans.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh.resx" />
+    <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Template\Create.cshtml" />
