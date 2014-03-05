@@ -218,27 +218,18 @@
     <value>请输入确认密码</value>
   </data>
   <data name="label_AccountOrEmail" xml:space="preserve">
-    <value>Account Or Email</value>
-  </data>
-  <data name="Language1" xml:space="preserve">
-    <value>Language</value>
+    <value>账号或者安全邮箱</value>
   </data>
   <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
     <value>Child Org's Count</value>
   </data>
-  <data name="PermissionName" xml:space="preserve">
-    <value>Permission Name</value>
-  </data>
   <data name="RegistryTime" xml:space="preserve">
-    <value>Registry time</value>
+    <value>注册时间</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
+    <value>记住登录</value>
   </data>
   <data name="VerifyCode" xml:space="preserve">
-    <value>Verify Code</value>
-  </data>
-  <data name="VerifyEmail1" xml:space="preserve">
-    <value>Verify Email if changed</value>
+    <value>验证码</value>
   </data>
 </root>

@@ -123,15 +123,6 @@
   <data name="alertMsg_requireVerifyCode" xml:space="preserve">
     <value>請輸入驗證碼</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>修改密碼</value>
-  </data>
-  <data name="LastLoginTime" xml:space="preserve">
-    <value>登錄時間</value>
-  </data>
-  <data name="VerifyEmail" xml:space="preserve">
-    <value>驗證電子郵件</value>
-  </data>
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>角色名稱已經被佔用，請輸入另外一個</value>
   </data>
@@ -150,7 +141,50 @@
   <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
     <value>請輸入正確的電子郵件</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>語言</value>
+  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
+    <value>请输入确认密码</value>
+    <comment>ChangePasswordModel.s</comment>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>分配角色</value>
+  </data>
+  <data name="AssignUserGroup" xml:space="preserve">
+    <value>分配用户</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>再一次密碼</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="error_missingEmailAddress" xml:space="preserve">
+    <value>请输入电子邮件</value>
+  </data>
+  <data name="error_MissLoginId" xml:space="preserve">
+    <value>请输入登录名</value>
+  </data>
+  <data name="error_MissPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="error_notMatchVerifyCode" xml:space="preserve">
+    <value>请输入验证码</value>
+  </data>
+  <data name="error_UserIsLockout" xml:space="preserve">
+    <value>用户已经被锁定</value>
+  </data>
+  <data name="error_UserIsNotApproved" xml:space="preserve">
+    <value>用户的安全信息没有被验证</value>
+  </data>
+  <data name="input_password_again" xml:space="preserve">
+    <value>请输入确认密码</value>
+  </data>
+  <data name="label_AccountOrEmail" xml:space="preserve">
+    <value>账号或者安全邮箱</value>
+  </data>
+  <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
+    <value>Child Org's Count</value>
   </data>
 </root>
