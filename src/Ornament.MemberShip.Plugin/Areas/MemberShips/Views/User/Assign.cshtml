@@ -16,7 +16,7 @@
         select a;
 }
 @section pageTitle{
-    <h6></h6>
+    <h3>分配权限</h3>
 }
 @using (Html.BeginForm())
 {
@@ -51,7 +51,7 @@
                         {
                             string check = Model.InRole(role, false) ? "checked=\"checked\"" : "";
 
-                            <label for="@role.Id" class="checkbox" title="@role.Remark">
+                            <label for="@role.Id" class="checkbox" title="@role.Remarks">
                                 <input id="@role.Id" name="Roles"  value="@role.Id"  type="checkbox" @check/>@role.Name</label>
                         }
                     </div>
