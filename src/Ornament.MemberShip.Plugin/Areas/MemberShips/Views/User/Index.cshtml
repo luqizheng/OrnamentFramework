@@ -40,15 +40,13 @@
         };
 
         seajs.use('@ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/User/Index.js")', function (main) {
-            main.init(multiLanguate, curUser, {
-                url: '@Url.Action("Users", "User", new { area = "MemberShips" })'
-            });
+            main.init(multiLanguate);
         });
     </script>
 }
 
 @section pageTitle{
-    <h3>Users</h3>
+    <h3>@Html.GetEmbededResourceString("page_title")</h3>
 }
 @using (var box = Html.Panel())
 {

@@ -180,4 +180,7 @@
   <data name="VerifyAgain" xml:space="preserve">
     <value>重新驗證</value>
   </data>
+  <data name="page_title" xml:space="preserve">
+    <value>用戶列表</value>
+  </data>
 </root>
