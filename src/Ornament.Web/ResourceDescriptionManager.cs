@@ -13,11 +13,11 @@ namespace Ornament.Web
         private const string NhProxyType =
             "{0}Proxy, {0}ProxyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
 
-        private readonly IList<ResourceDescription> _resourcesSelector;
+        private readonly ISet<ResourceDescription> _resourcesSelector;
 
         public ResourceDescriptionManager()
         {
-            _resourcesSelector = new List<ResourceDescription>();
+            _resourcesSelector = new SortedSet<ResourceDescription>();
         }
         /// <summary>
         /// 
@@ -28,13 +28,17 @@ namespace Ornament.Web
         {
             if (resources == null)
                 throw new ArgumentNullException("resources");
-            _resourcesSelector = resources;
+            _resourcesSelector = new SortedSet<ResourceDescription>();
+            foreach (var item in resources)
+            {
+                _resourcesSelector.Add(item);
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public IList<ResourceDescription> ResourceSettings
+        public ISet<ResourceDescription> ResourceSettings
         {
             get { return _resourcesSelector; }
         }
