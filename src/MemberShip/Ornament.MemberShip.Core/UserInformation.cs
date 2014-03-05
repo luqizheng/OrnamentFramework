@@ -11,27 +11,28 @@ namespace Ornament.MemberShip
         {
             protected internal OtherUserInfo()
             {
+                this.CreateTime = DateTime.Now;
             }
 
             /// <summary>
             ///     获取用户创建时间
             /// </summary>
-            [Display(Name = "CreateTime", ResourceType = typeof (Resources))]
+            [Display(Name = "CreateTime", ResourceType = typeof(Resources))]
             public virtual DateTime CreateTime { get; protected internal set; }
 
 
             /// <summary>
             ///     获取用户被锁定的时间
             /// </summary>
-            [Display(Name = "LastLockTime", ResourceType = typeof (Resources))]
+            [Display(Name = "LastLockTime", ResourceType = typeof(Resources))]
             public virtual DateTime? LastLockoutDate { get; protected internal set; }
 
-           
+
 
             /// <summary>
             ///     获取或设定用户最后活跃时间
             /// </summary>
-            [Display(Name = "LastActivityTime", ResourceType = typeof (Resources))]
+            [Display(Name = "LastActivityTime", ResourceType = typeof(Resources))]
             public virtual DateTime? LastActivityDate { get; set; }
 
             /// <summary>
@@ -40,7 +41,7 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The update time.
             /// </value>
-            [Display(Name = "LastUpdateTime", ResourceType = typeof (Resources))]
+            [Display(Name = "LastUpdateTime", ResourceType = typeof(Resources))]
             public virtual DateTime? UpdateTime { get; protected internal set; }
         }
     }

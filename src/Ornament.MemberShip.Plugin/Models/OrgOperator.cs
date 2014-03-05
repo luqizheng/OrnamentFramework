@@ -7,8 +7,8 @@ namespace Ornament.MemberShip.Plugin.Models
     {
         None = 0,
         Read = 1,
-        Modify = 3,
-        AssignRole = 5,
-        Delete = 13,
+        Modify = 2 | OrgOperator.Read,
+        AssignRole = 4 | OrgOperator.Modify,
+        Delete = 8 | AssignRole,
     }
 }

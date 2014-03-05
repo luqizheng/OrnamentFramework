@@ -52,18 +52,12 @@ namespace Ornament.MemberShip
         ///     The password.
         /// </param>
         public User(string loginId, string password)
+            : this(loginId)
         {
             if (loginId == null) throw new ArgumentNullException("loginId");
             if (password == null) throw new ArgumentNullException("password");
-            LoginId = loginId.Trim();
             Security.ChangePassword(password);
-            Other.CreateTime = DateTime.Now;
-            IsApproved = true;
-
-            //it should be init by creator;
-            _other = new OtherUserInfo();
-            _contact = new ContactInfo(this);
-            _security = new SecurityInfo(this);
+           
 
         }
 
@@ -76,8 +70,11 @@ namespace Ornament.MemberShip
         public User(string loginId)
         {
             if (loginId == null) throw new ArgumentNullException("loginId");
-            LoginId = loginId;
+            LoginId = loginId.Trim();
+            _security = new SecurityInfo(this);
+            _contact = new ContactInfo(this);
             Other.CreateTime = DateTime.Now;
+            IsApproved = true;
         }
 
         public virtual SecurityInfo Security

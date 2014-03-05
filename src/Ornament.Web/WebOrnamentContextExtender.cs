@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using NHibernate.Id.Insert;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -71,6 +72,7 @@ namespace Ornament
             {
                 FormsAuthentication.SignOut();
                 FormsAuthentication.RedirectToLoginPage();
+                return null;
             }
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;

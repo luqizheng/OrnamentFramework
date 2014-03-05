@@ -39,29 +39,37 @@ namespace Ornament.MemberShip
         {
             get
             {
-                if (_childs == null)
-                {
-                    var result = new OrgCollection(this);
+                var result = _childs ?? (_childs = new OrgCollection(this));
+                if (result.Self == null)
+                    result.Self = this;
+                return result;
+                //if (_childs == null)
+                //{
+                //    var result = new OrgCollection(this);
 
-                    if (result.Self == null)
-                    {
-                        result.Self = this;
-                    }
-                    lock (_orgChildLock)
-                    {
-                        if (_childs == null)
-                        {
-                            _childs = result;
-                        }
-                    }
-                }
-                if (_childs.Self == null)
-                {
-                    _childs.Self = this;
-                }
-                return _childs;
+                //    if (result.Self == null)
+                //    {
+                //        result.Self = this;
+                //    }
+                //    lock (_orgChildLock)
+                //    {
+                //        if (_childs == null)
+                //        {
+                //            _childs = result;
+                //        }
+                //    }
+                //}
+                //if (_childs.Self == null)
+                //{
+                //    _childs.Self = this;
+                //}
+                //return _childs;
             }
-            set { _childs = value; }
+            protected set
+            {
+                _childs = value;
+                _childs.Self = this;
+            }
         }
 
 

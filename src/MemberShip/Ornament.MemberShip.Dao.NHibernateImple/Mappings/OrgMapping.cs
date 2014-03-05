@@ -21,27 +21,56 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 _.KeyColumn("Id");
                 _.Map(s => s.OrderId).Length(4000).Access.CamelCaseField(Prefix.Underscore);
                 ;
-                _.HasMany(s => s.Childs).CollectionType<OrgListType>()
-                                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                _.HasMany(s => s.Childs)
+                    .CollectionType<OrgListType>().KeyColumn("OrgParentId");
 
-                _.References(s => s.Parent);
+
+                _.References(s => s.Parent).Column("OrgParentId");
             });
-
         }
 
         public class OrgListPersistent : PersistentGenericSet<Org>, IOrgCollection
         {
+            private readonly OrgCollection _list;
+            private Org _self;
+
             public OrgListPersistent(ISessionImplementor session)
                 : base(session)
             {
+
             }
 
             public OrgListPersistent(ISessionImplementor session, OrgCollection list)
                 : base(session, list)
             {
+                _list = list;
             }
 
-            public Org Self { get; set; }
+            public override void BeforeInitialize(ICollectionPersister persister, int anticipatedSize)
+            {
+                base.BeforeInitialize(persister, anticipatedSize);
+                var d = set as IOrgCollection;
+                d.Self = this.Self;
+
+            }
+
+            public Org Self
+            {
+                get
+                {
+                    if (_list != null)
+                        return _list.Self;
+                    return _self;
+                }
+                set
+                {
+                    _self = value;
+                    if (_list != null)
+                    {
+                        _list.Self = value;
+                    }
+                }
+            }
 
             public void ResetOrderId()
             {
@@ -49,7 +78,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                     return;
                 foreach (object c in this)
                 {
-
                     SetOrderId(Self, (Org)c);
                 }
             }
@@ -61,13 +89,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 else
                     newChild.OrderId = parent.OrderId + "." + parent.Id;
             }
-
         }
 
         public class OrgListType : IUserCollectionType
         {
             public IPersistentCollection Instantiate(ISessionImplementor session, ICollectionPersister persister)
             {
+                var s = persister;
                 return new OrgListPersistent(session);
             }
 
@@ -92,7 +120,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             }
 
             public object ReplaceElements(object original, object target, ICollectionPersister persister, object owner,
-                                          IDictionary copyCache, ISessionImplementor session)
+                IDictionary copyCache, ISessionImplementor session)
             {
                 var result = (IOrgCollection)target;
                 result.Clear();

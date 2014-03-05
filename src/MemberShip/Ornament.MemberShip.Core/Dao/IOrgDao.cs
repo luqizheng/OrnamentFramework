@@ -29,6 +29,8 @@ namespace Ornament.MemberShip.Dao
         /// <param name="pageSize"></param>
         /// <returns></returns>
         IEnumerable<Org> Find(string name, int pageIndex, int pageSize);
+
+        IEnumerable<Org> Find(Org scope, string name, int pageIndex, int pageSize);
         IEnumerable<Org> GetOrgs(string[] ids);
         /// <summary>
         /// 查找下级组织单元

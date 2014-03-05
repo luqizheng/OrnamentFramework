@@ -29,7 +29,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Role", ResourceType = typeof (Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Resources))]
         public Role[] Roles { get; set; }
 
         /// <summary>
@@ -39,17 +39,17 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Ornament.Properties.Resources)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (ErrorMessage)),
+        [Display(Name = "Name", ResourceType = typeof(Ornament.Properties.Resources)),
+         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(ErrorMessage)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("string")]
+             ErrorMessageResourceType = typeof(ErrorMessage)), UIHint("string")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof (Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
+             ErrorMessageResourceType = typeof(ErrorMessage)), UIHint("Textarea")]
         public string Remark { get; set; }
 
         /// <summary>
@@ -64,9 +64,13 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             ug.Name = Name;
             ug.Remarks = Remark;
             dao.SaveOrUpdate(ug);
+            dao.Flush();
             if (Parent != null)
             {
-                Parent.Childs.Add(ug);
+                var list = Parent.Childs;
+                list.Add(ug);
+                dao.SaveOrUpdate(Parent);
+
             }
         }
     }
