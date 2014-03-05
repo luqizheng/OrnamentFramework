@@ -180,4 +180,7 @@
   <data name="VerifyAgain" xml:space="preserve">
     <value>Verify Again</value>
   </data>
+  <data name="page_title" xml:space="preserve">
+    <value>Users</value>
+  </data>
 </root>

@@ -98,11 +98,6 @@
     <Compile Include="Dao\IUserDao.cs" />
     <Compile Include="Dao\IUserGroupDao.cs" />
     <Compile Include="Dao\IUserProfileDao.cs" />
-    <Compile Include="Languages\ErrorMessage.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ErrorMessage.resx</DependentUpon>
-    </Compile>
     <Compile Include="MemberShipProviders\IMemberShipProvider.cs" />
     <Compile Include="MemberShipException.cs" />
     <Compile Include="MemberShipPermissionException.cs" />
@@ -129,19 +124,12 @@
     <Compile Include="UserInformation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Languages\ErrorMessage.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorMessage.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Languages\ErrorMessage.zh-cn.resx" />
-    <EmbeddedResource Include="Languages\ErrorMessage.zh.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

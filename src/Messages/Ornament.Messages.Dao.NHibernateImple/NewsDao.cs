@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
-using Ornament.MemberShip.Languages;
+using Ornament.MemberShip.Properties;
 using Ornament.Messages.Newses;
 using Qi.Domain.NHibernates;
 
@@ -36,9 +36,9 @@ namespace Ornament.Messages.Dao.NHibernateImple
         public IList<News> GetNews(int pageIndex, int pageSize, NewsType type, out int total)
         {
             if (pageSize <= 0)
-                throw new ArgumentOutOfRangeException("pageSize", ErrorMessage.PageSize_should_greater_than_zero);
+                throw new ArgumentOutOfRangeException("pageSize", Resources.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
-                throw new ArgumentOutOfRangeException("pageIndex", ErrorMessage.PageIndex_should_greater_than_zero_);
+                throw new ArgumentOutOfRangeException("pageIndex", Resources.PageIndex_should_greater_than_zero_);
 
 
             total = CountMessage(type);
@@ -59,7 +59,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
             if (type == null) throw new ArgumentNullException("type");
             return
                 CreateDetachedCriteria().Add(Restrictions.Eq(TypeProperty, type)).SetProjection(Projections.RowCount())
-                                        .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+                    .GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
     }
 }

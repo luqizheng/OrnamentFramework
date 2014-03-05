@@ -117,73 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountInfo" xml:space="preserve">
-    <value>设置</value>
+  <data name="Approve" xml:space="preserve">
+    <value>激活</value>
   </data>
-  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
-    <value>请输入验证码</value>
+  <data name="Assignment" xml:space="preserve">
+    <value>分配</value>
   </data>
-  <data name="AssignRoles" xml:space="preserve">
-    <value>分配角色</value>
+  <data name="Assignment_tips" xml:space="preserve">
+    <value>分配角色和用户组</value>
   </data>
-  <data name="AssignUserGroup" xml:space="preserve">
-    <value>分配用户</value>
+  <data name="Lock" xml:space="preserve">
+    <value>锁定</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>修改密码</value>
+  <data name="tab_basicInfo" xml:space="preserve">
+    <value>基础信息</value>
   </data>
-  <data name="LastLoginTime" xml:space="preserve">
-    <value>登录时间</value>
+  <data name="tab_option" xml:space="preserve">
+    <value>选填项</value>
   </data>
-  <data name="LoginId" xml:space="preserve">
-    <value>登录名</value>
+  <data name="Unlock" xml:space="preserve">
+    <value>解锁</value>
   </data>
-  <data name="Org" xml:space="preserve">
-    <value>组织</value>
+  <data name="QuickActions" xml:space="preserve">
+    <value>快捷方式</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>密码</value>
+  <data name="quickAction_CreateUser" xml:space="preserve">
+    <value>添加新用户</value>
   </data>
-  <data name="Permission" xml:space="preserve">
-    <value>许可证</value>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>找不到匹配的用户</value>
   </data>
-  <data name="Role" xml:space="preserve">
-    <value>角色</value>
+  <data name="selectActions" xml:space="preserve">
+    <value>选择...</value>
   </data>
-  <data name="User" xml:space="preserve">
-    <value>用户</value>
+  <data name="ApplyAction" xml:space="preserve">
+    <value>操作</value>
   </data>
-  <data name="UserGroup" xml:space="preserve">
-    <value>用户组</value>
+  <data name="BtnApply" xml:space="preserve">
+    <value>应用</value>
   </data>
-  <data name="UserName" xml:space="preserve">
-    <value>用户名</value>
+  <data name="QuickActions_MemberState" xml:space="preserve">
+    <value>成员状态</value>
   </data>
-  <data name="VerifyEmail" xml:space="preserve">
-    <value>验证电子邮件</value>
+  <data name="PersonalMessage" xml:space="preserve">
+    <value>发信息</value>
   </data>
-  <data name="Welcone" xml:space="preserve">
-    <value>欢迎</value>
+  <data name="search_placeHolder" xml:space="preserve">
+    <value>请输入 {0}、LoginId 或者 {1}</value>
   </data>
-  <data name="alertMsg_duplicate_roleName" xml:space="preserve">
-    <value>角色名称已经被使用，请输入另外一个</value>
+  <data name="retrieve_pwd_fail" xml:space="preserve">
+    <value>发送失败</value>
   </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
-    <value>请输入登录名或者电子邮件</value>
+  <data name="retrieve_pwd_success" xml:space="preserve">
+    <value>获取密码的信息已经成功发送.</value>
   </data>
-  <data name="alertMsg_requireVerifyCode1" xml:space="preserve">
-    <value>请输入验证码</value>
+  <data name="verify_email_fail" xml:space="preserve">
+    <value>验证电子邮件地址的信息发送失败.</value>
   </data>
-  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
-    <value>请输入密码</value>
+  <data name="verify_email_success" xml:space="preserve">
+    <value>验证电子邮件地址的信息成功发送.</value>
   </data>
-  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
-    <value>请输入当前密码</value>
+  <data name="OnlineUser" xml:space="preserve">
+    <value>在线会员</value>
   </data>
-  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
-    <value>请输入正确的邮件地址</value>
+  <data name="TodayRegist" xml:space="preserve">
+    <value>今天注册会员</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>语言</value>
+  <data name="VerifyAgain" xml:space="preserve">
+    <value>重新验证</value>
+  </data>
+  <data name="page_title" xml:space="preserve">
+    <value>用户列表</value>
   </data>
 </root>

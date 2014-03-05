@@ -21,6 +21,7 @@ namespace Ornament.MemberShip
         }
 
 
+
         public override void Clear()
         {
             foreach (Org i in this)
@@ -42,11 +43,13 @@ namespace Ornament.MemberShip
 
             if (String.IsNullOrEmpty(o.Id))
                 throw new ArgumentNullException("o", "org's Id must have value before being added");
-            if (Self != null)
+            if (Self == null)
             {
-                o.Parent = Self;
-                SetOrderId(Self, o);
+                throw new ArgumentNullException();
             }
+            o.Parent = Self;
+                SetOrderId(Self, o);
+            
             return base.Add(o);
         }
 

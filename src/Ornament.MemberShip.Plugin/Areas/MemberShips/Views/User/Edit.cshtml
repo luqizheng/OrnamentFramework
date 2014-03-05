@@ -8,9 +8,9 @@
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @section pageTitle{
-    <h5>
+    <h3>
         @Model.LoginId
-    </h5>
+    </h3>
 }
 <form method="POST" action="@Url.Action("Edit")" class="form-horizontal">
     @using (Panel panel = Html.Panel())

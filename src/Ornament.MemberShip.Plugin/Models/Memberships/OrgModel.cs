@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships
@@ -40,16 +39,16 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
         [Display(Name = "Name", ResourceType = typeof (Ornament.Properties.Resources)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (ErrorMessage)),
+         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("string")]
+             ErrorMessageResourceType = typeof(Resources)), UIHint("string")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
         [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof (ErrorMessage)), UIHint("Textarea")]
+             ErrorMessageResourceType = typeof(Resources)), UIHint("Textarea")]
         public string Remark { get; set; }
 
         /// <summary>
@@ -64,9 +63,12 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             ug.Name = Name;
             ug.Remarks = Remark;
             dao.SaveOrUpdate(ug);
+            dao.Flush();
             if (Parent != null)
             {
-                Parent.Childs.Add(ug);
+                IOrgCollection list = Parent.Childs;
+                list.Add(ug);
+                dao.SaveOrUpdate(Parent);
             }
         }
     }

@@ -14,17 +14,18 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
 
         public const string Account = "Account";
         public const string Permission = "Permission";
-
+        public const string AdminRoleAccount = "admin";
+        public const string AdminAccount = "admin";
 
         public static void Registry()
         {
             OrnamentContext.ResourceManager
-                .Add("User", typeof (UserOperator))
-                .Add("Role", typeof (RoleOperator))
-                .Add("Account", typeof (AccountOperator))
-                .Add(Org, typeof (OrgOperator))
-                .Add(UserGroup, typeof (UserGroupOperator))
-                .Add("Permission", typeof (PermissionOperator))
+                .Add("User", typeof(UserOperator))
+                .Add("Role", typeof(RoleOperator))
+                .Add("Account", typeof(AccountOperator))
+                .Add(Org, typeof(OrgOperator))
+                .Add(UserGroup, typeof(UserGroupOperator))
+                .Add("Permission", typeof(PermissionOperator))
                 ;
         }
     }

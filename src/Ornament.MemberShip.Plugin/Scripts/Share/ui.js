@@ -8,7 +8,7 @@
     var defaults = {
         minimumInputLength: 1,
         multiple: true,
-        placeholder: "Please input a char"
+        placeholder: "请输入关键字进行查询"
     },
     orgOpts = {
         ajax:

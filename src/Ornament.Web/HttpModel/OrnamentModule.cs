@@ -8,34 +8,32 @@ namespace Ornament.Web.HttpModel
 {
     public class OrnamentModule : IHttpModule
     {
-        private const string langCookieName = "lang";
-
         #region IHttpModule Members
 
         public void Init(HttpApplication context)
         {
             context.BeginRequest += context_BeginRequest;
-            context.AuthenticateRequest += context_AuthenticateRequest;
-            context.PostAuthenticateRequest += context_AuthenticateRequest;
+            //context.AuthenticateRequest += context_AuthenticateRequest;
+            //context.PostAuthenticateRequest += context_AuthenticateRequest;
         }
 
-        void context_AuthenticateRequest(object sender, EventArgs e)
-        {
+        //void context_AuthenticateRequest(object sender, EventArgs e)
+        //{
 
-            if (OrnamentContext.MemberShip.CurrentUser() != null && OrnamentContext.MemberShip.CurrentUser().Language != Thread.CurrentThread.CurrentUICulture.Name)
-            {
-                try
-                {
-                    var lang = OrnamentContext.MemberShip.CurrentUser().Language;
-                    OrnamentContext.MemberShip.SwitchLanguage(lang);
-                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
-                    Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
-                }
-                catch (Exception ex)
-                {
-                }
-            }
-        }
+        //    if (OrnamentContext.MemberShip.CurrentUser() != null && OrnamentContext.MemberShip.CurrentUser().Language != Thread.CurrentThread.CurrentUICulture.Name)
+        //    {
+        //        try
+        //        {
+        //            var lang = OrnamentContext.MemberShip.CurrentUser().Language;
+        //            OrnamentContext.MemberShip.SwitchLanguage(lang);
+        //            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
+        //            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //        }
+        //    }
+        //}
 
         public void Dispose()
         {
@@ -73,8 +71,7 @@ namespace Ornament.Web.HttpModel
 
         private void MultiLanguage(HttpApplication context)
         {
-
-            string lang = OrnamentContext.MemberShip.CookieLanguage();
+            string lang = OrnamentContext.MemberShip.CookieRequestLanguage();
             if (lang == null)
             {
                 lang = OrnamentContext.MemberShip.BroswerLanguage();
@@ -90,6 +87,10 @@ namespace Ornament.Web.HttpModel
             }
             catch (Exception ex)
             {
+                LogManager.GetLogger(typeof(OrnamentModule)).Error("Language setting error.", ex);
+                lang = "en-US";
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
             }
         }
 

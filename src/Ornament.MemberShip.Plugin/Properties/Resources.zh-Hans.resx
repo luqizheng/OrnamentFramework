@@ -117,67 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Approve" xml:space="preserve">
-    <value>激活</value>
+  <data name="AccountInfo" xml:space="preserve">
+    <value>设置</value>
   </data>
-  <data name="Assignment" xml:space="preserve">
-    <value>分配</value>
+  <data name="alertMsg_requireVerifyCode" xml:space="preserve">
+    <value>请输入验证码</value>
   </data>
-  <data name="Assignment_tips" xml:space="preserve">
-    <value>分配角色和用戶組</value>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>分配角色</value>
   </data>
-  <data name="Lock" xml:space="preserve">
-    <value>鎖定</value>
+  <data name="AssignUserGroup" xml:space="preserve">
+    <value>分配用户</value>
   </data>
-  <data name="QuickActions" xml:space="preserve">
-    <value>快捷方式</value>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>修改密码</value>
   </data>
-  <data name="quickAction_CreateUser" xml:space="preserve">
-    <value>添加新用戶</value>
+  <data name="LastLoginTime" xml:space="preserve">
+    <value>登录时间</value>
   </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>解鎖</value>
+  <data name="LoginId" xml:space="preserve">
+    <value>登录名</value>
   </data>
-  <data name="UserNotFound" xml:space="preserve">
-    <value>找不到匹配的用戶</value>
+  <data name="Org" xml:space="preserve">
+    <value>组织</value>
   </data>
-  <data name="selectActions" xml:space="preserve">
-    <value>選擇...</value>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
   </data>
-  <data name="ApplyAction" xml:space="preserve">
-    <value>操作</value>
+  <data name="Permission" xml:space="preserve">
+    <value>许可证</value>
   </data>
-  <data name="BtnApply" xml:space="preserve">
-    <value>應用</value>
+  <data name="Role" xml:space="preserve">
+    <value>角色</value>
   </data>
-  <data name="QuickActions_MemberState" xml:space="preserve">
-    <value>成員狀態</value>
+  <data name="User" xml:space="preserve">
+    <value>用户</value>
   </data>
-  <data name="PersonalMessage" xml:space="preserve">
-    <value>發信息</value>
+  <data name="UserGroup" xml:space="preserve">
+    <value>用户组</value>
   </data>
-  <data name="search_placeHolder" xml:space="preserve">
-    <value>請輸入 {0}、LoginId 或者 {1}</value>
+  <data name="UserName" xml:space="preserve">
+    <value>用户名</value>
   </data>
-  <data name="retrieve_pwd_fail" xml:space="preserve">
-    <value>取回密碼的信息發送失敗</value>
+  <data name="VerifyEmail" xml:space="preserve">
+    <value>验证电子邮件</value>
   </data>
-  <data name="retrieve_pwd_success" xml:space="preserve">
-    <value>取回密碼的信息已成功發送</value>
+  <data name="alertMsg_duplicate_roleName" xml:space="preserve">
+    <value>角色名称已经被使用，请输入另外一个</value>
   </data>
-  <data name="verify_email_fail" xml:space="preserve">
-    <value>驗證郵箱的電子郵件發送失敗.</value>
+  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
+    <value>请输入登录名或者电子邮件</value>
   </data>
-  <data name="verify_email_success" xml:space="preserve">
-    <value>驗證郵箱的電子郵件發送成功.</value>
+  <data name="alertMsg_requireVerifyCode1" xml:space="preserve">
+    <value>请输入验证码</value>
   </data>
-  <data name="OnlineUser" xml:space="preserve">
-    <value>在線會員</value>
+  <data name="alertMsg_Require_NewPassword" xml:space="preserve">
+    <value>请输入密码</value>
   </data>
-  <data name="TodayRegist" xml:space="preserve">
-    <value>今天註冊會員</value>
+  <data name="alertMsg_Require_OldPassword" xml:space="preserve">
+    <value>请输入当前密码</value>
   </data>
-  <data name="VerifyAgain" xml:space="preserve">
-    <value>重新驗證</value>
+  <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
+    <value>请输入正确的邮件地址</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="alert_Require_ConfirmPassword" xml:space="preserve">
+    <value>请输入确认密码</value>
+    <comment>ChangePasswordModel.s</comment>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>再一次密码</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="error_missingEmailAddress" xml:space="preserve">
+    <value>请输入电子邮件</value>
+  </data>
+  <data name="error_MissLoginId" xml:space="preserve">
+    <value>请输入登录名</value>
+  </data>
+  <data name="error_MissPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="error_notMatchVerifyCode" xml:space="preserve">
+    <value>请输入验证码</value>
+  </data>
+  <data name="error_UserIsLockout" xml:space="preserve">
+    <value>用户已经被锁定</value>
+  </data>
+  <data name="error_UserIsNotApproved" xml:space="preserve">
+    <value>用户的安全信息没有被验证</value>
+  </data>
+  <data name="input_password_again" xml:space="preserve">
+    <value>请输入确认密码</value>
+  </data>
+  <data name="label_AccountOrEmail" xml:space="preserve">
+    <value>账号或者安全邮箱</value>
+  </data>
+  <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
+    <value>Child Org's Count</value>
+  </data>
+  <data name="RegistryTime" xml:space="preserve">
+    <value>注册时间</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>记住登录</value>
+  </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>验证码</value>
   </data>
 </root>

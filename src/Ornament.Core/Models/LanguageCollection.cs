@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using NHibernate.Hql;
 
 namespace Ornament.Models
 {
@@ -21,7 +22,26 @@ namespace Ornament.Models
 
         public Language DefaultOrMatch(string[] language)
         {
-            return language.Select(lang => this.Find(lang)).FirstOrDefault(match => match != null);
+            foreach (var lang in language)
+            {
+                foreach (var settingLang in this)
+                {
+                    if (settingLang.Key == lang)
+                    {
+                        return settingLang;
+                    }
+
+                    if (settingLang.MatchKey.Contains(lang))
+                        return settingLang;
+                }
+            }
+
+            foreach (var settingLang in this)
+            {
+                if (settingLang.IsDefault)
+                    return settingLang;
+            }
+            return this.First();
         }
     }
 }

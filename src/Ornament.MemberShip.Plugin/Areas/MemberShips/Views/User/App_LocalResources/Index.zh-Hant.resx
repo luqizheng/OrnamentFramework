@@ -124,66 +124,63 @@
     <value>分配</value>
   </data>
   <data name="Assignment_tips" xml:space="preserve">
-    <value>分配角色和用户组</value>
+    <value>分配角色和用戶組</value>
   </data>
   <data name="Lock" xml:space="preserve">
-    <value>锁定</value>
-  </data>
-  <data name="tab_basicInfo" xml:space="preserve">
-    <value>基础信息</value>
-  </data>
-  <data name="tab_option" xml:space="preserve">
-    <value>选填项</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>解锁</value>
+    <value>鎖定</value>
   </data>
   <data name="QuickActions" xml:space="preserve">
     <value>快捷方式</value>
   </data>
   <data name="quickAction_CreateUser" xml:space="preserve">
-    <value>添加新用户</value>
+    <value>添加新用戶</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>解鎖</value>
   </data>
   <data name="UserNotFound" xml:space="preserve">
-    <value>找不到匹配的用户</value>
+    <value>找不到匹配的用戶</value>
   </data>
   <data name="selectActions" xml:space="preserve">
-    <value>选择...</value>
+    <value>選擇...</value>
   </data>
   <data name="ApplyAction" xml:space="preserve">
     <value>操作</value>
   </data>
   <data name="BtnApply" xml:space="preserve">
-    <value>应用</value>
+    <value>應用</value>
   </data>
   <data name="QuickActions_MemberState" xml:space="preserve">
-    <value>成员状态</value>
+    <value>成員狀態</value>
   </data>
   <data name="PersonalMessage" xml:space="preserve">
-    <value>发信息</value>
+    <value>發信息</value>
   </data>
   <data name="search_placeHolder" xml:space="preserve">
-    <value>请输入 {0}、LoginId 或者 {1}</value>
+    <value>請輸入 {0}、LoginId 或者 {1}</value>
   </data>
   <data name="retrieve_pwd_fail" xml:space="preserve">
-    <value>发送失败</value>
+    <value>取回密碼的信息發送失敗</value>
   </data>
   <data name="retrieve_pwd_success" xml:space="preserve">
-    <value>获取密码的信息已经成功发送.</value>
+    <value>取回密碼的信息已成功發送</value>
   </data>
   <data name="verify_email_fail" xml:space="preserve">
-    <value>验证电子邮件地址的信息发送失败.</value>
+    <value>驗證郵箱的電子郵件發送失敗.</value>
   </data>
   <data name="verify_email_success" xml:space="preserve">
-    <value>验证电子邮件地址的信息成功发送.</value>
+    <value>驗證郵箱的電子郵件發送成功.</value>
   </data>
   <data name="OnlineUser" xml:space="preserve">
-    <value>在线会员</value>
+    <value>在線會員</value>
   </data>
   <data name="TodayRegist" xml:space="preserve">
-    <value>今天注册会员</value>
+    <value>今天註冊會員</value>
   </data>
   <data name="VerifyAgain" xml:space="preserve">
-    <value>重新验证</value>
+    <value>重新驗證</value>
+  </data>
+  <data name="page_title" xml:space="preserve">
+    <value>用戶列表</value>
   </data>
 </root>

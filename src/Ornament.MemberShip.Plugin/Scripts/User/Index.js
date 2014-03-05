@@ -117,7 +117,7 @@ define(function (require) {
     }
 
     return {
-        init: function (lang1, currentUser, tableConfig) {
+        init: function (lang1) {
             lang = lang1;
             avalon.scan();
         }

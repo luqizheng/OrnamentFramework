@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Ornament.MemberShip.Languages;
+
 using Ornament.MemberShip.Properties;
 using Qi.Domain;
 
@@ -53,10 +53,10 @@ namespace Ornament.MemberShip
             ///     The email.
             /// </value>
             [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
-                ErrorMessageResourceType = typeof (ErrorMessage)),
+                ErrorMessageResourceType = typeof(Resources)),
              Display(Name = "Email", ResourceType = typeof (Resources)),
              RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (ErrorMessage))]
+                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (Resources))]
             [MaxLength(64)]
             public virtual string Email
             {

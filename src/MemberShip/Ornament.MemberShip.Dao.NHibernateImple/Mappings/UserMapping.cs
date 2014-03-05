@@ -23,7 +23,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 
                     d.Map(s => s.TimeZoneId).Length(64);
                     d.Map(s => s.Language).Length(32);
-                    d.References(s => s.Org).Column("UserOrdId");
+                    d.References(s => s.Org).Column("UserOrgId");
 
                     d.HasManyToMany(s => s.UserGroups).Table("MBS_UserGroupUserRelation")
                      .ParentKeyColumn("UserId")

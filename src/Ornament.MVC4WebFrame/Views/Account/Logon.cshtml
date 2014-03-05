@@ -1,6 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Web
 @using Resources
+@using SeajsBundles
 @model Ornament.MemberShip.Plugin.Models.Memberships.LogonModel
 @{
     ViewBag.Title = Ornament.Properties.Resources.Logon;
@@ -68,7 +69,8 @@
 
 @section Scripts{
     <script type="text/javascript">
-        seajs.use("/accounts/logon.js");
+        seajs.use("@ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Logon.js")");
+           
     </script>
 
 }

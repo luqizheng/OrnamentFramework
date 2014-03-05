@@ -215,35 +215,35 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-cn.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-CN.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-cn.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-CN.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hant.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

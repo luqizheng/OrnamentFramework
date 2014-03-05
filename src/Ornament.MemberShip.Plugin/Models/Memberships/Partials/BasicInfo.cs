@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Ornament.MemberShip.Languages;
 using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
@@ -43,7 +42,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [Required(ErrorMessageResourceName = "error_MissLoginId",
             ErrorMessageResourceType = typeof (Properties.Resources))]
         [RegularExpression(@"^[a-zA-z1-9_-]{3,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
-            ErrorMessageResourceType = typeof (ErrorMessage))]
+            ErrorMessageResourceType = typeof(Resources))]
         [UIHint("String")]
         [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",
             ErrorMessageResourceName = "alertMsg_duplicate_loginId",
@@ -59,7 +58,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             ErrorMessageResourceType = typeof (Properties.Resources))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
             ErrorMessageResourceName = "EmailNotRightFormat",
-            ErrorMessageResourceType = typeof (ErrorMessage))]
+            ErrorMessageResourceType = typeof(Resources))]
         [DataType(DataType.EmailAddress)]
         [UIHint("String")]
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
@@ -78,7 +77,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [UIHint("String")]
         [Display(Name = "Name", ResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof (ErrorMessage))]
+             ErrorMessageResourceType = typeof(Resources))]
         public string Name { get; set; }
 
         /// <summary>

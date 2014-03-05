@@ -117,91 +117,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>備註</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>設置</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>在一次密码</value>
+    <value>再一次密碼</value>
   </data>
-  <data name="CreateTime" xml:space="preserve">
-    <value>创建时间</value>
+  <data name="Create" xml:space="preserve">
+    <value>添加</value>
   </data>
-  <data name="CurrentPassword" xml:space="preserve">
-    <value>当前密码</value>
+  <data name="Delete" xml:space="preserve">
+    <value>刪除</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>明細</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>編輯</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>电子邮件</value>
+    <value>電子郵箱</value>
   </data>
-  <data name="IsApproved" xml:space="preserve">
-    <value>是否批准使用</value>
+  <data name="Finish" xml:space="preserve">
+    <value>完成</value>
   </data>
-  <data name="IsLockout" xml:space="preserve">
-    <value>锁定</value>
+  <data name="Friday" xml:space="preserve">
+    <value>星期五</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>列表</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>语言</value>
+    <value>語言</value>
   </data>
-  <data name="LastActivityTime" xml:space="preserve">
-    <value>最後活动時間</value>
+  <data name="Logon" xml:space="preserve">
+    <value>登錄</value>
   </data>
-  <data name="LastLockTime" xml:space="preserve">
-    <value>锁定时间</value>
+  <data name="logout" xml:space="preserve">
+    <value>註銷</value>
   </data>
-  <data name="LastLoginTime" xml:space="preserve">
-    <value>最后登录时间</value>
+  <data name="Messages" xml:space="preserve">
+    <value>信息</value>
   </data>
-  <data name="LastPasswordChangedTime" xml:space="preserve">
-    <value>最后密码修改时间</value>
-  </data>
-  <data name="LastUpdateTime" xml:space="preserve">
-    <value>最后修改时间</value>
-  </data>
-  <data name="LoginId" xml:space="preserve">
-    <value>登录名</value>
+  <data name="Monday" xml:space="preserve">
+    <value>星期一</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>名称</value>
+    <value>名稱</value>
   </data>
-  <data name="NewPassword" xml:space="preserve">
-    <value>新密码</value>
+  <data name="new_password" xml:space="preserve">
+    <value>新密碼</value>
   </data>
-  <data name="Operator" xml:space="preserve">
-    <value>操作</value>
+  <data name="Next" xml:space="preserve">
+    <value>下一步</value>
   </data>
-  <data name="Org" xml:space="preserve">
-    <value>组织</value>
+  <data name="OK" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="old_password" xml:space="preserve">
+    <value>當前密碼</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>密码</value>
-  </data>
-  <data name="PasswordAnswer" xml:space="preserve">
-    <value>密码答案</value>
-  </data>
-  <data name="PasswordQuestion" xml:space="preserve">
-    <value>密码问题</value>
-  </data>
-  <data name="Permission" xml:space="preserve">
-    <value>许可证</value>
-  </data>
-  <data name="PermissionName" xml:space="preserve">
-    <value>许可证名称</value>
+    <value>密碼</value>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>电话</value>
+    <value>電話</value>
   </data>
-  <data name="RegistryTime" xml:space="preserve">
-    <value>注册时间</value>
+  <data name="Previous" xml:space="preserve">
+    <value>上一步</value>
   </data>
-  <data name="Remark" xml:space="preserve">
-    <value>备注</value>
+  <data name="Regist" xml:space="preserve">
+    <value>註冊</value>
   </data>
-  <data name="Role" xml:space="preserve">
-    <value>角色</value>
+  <data name="Saturday" xml:space="preserve">
+    <value>星期六</value>
   </data>
-  <data name="TimeZone" xml:space="preserve">
-    <value>时区</value>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
   </data>
-  <data name="User" xml:space="preserve">
-    <value>用户</value>
+  <data name="SaveSuccess" xml:space="preserve">
+    <value>保存成功</value>
   </data>
-  <data name="UserGroup" xml:space="preserve">
-    <value>用户分组</value>
+  <data name="Search" xml:space="preserve">
+    <value>查詢</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>發送</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>設置</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>設置</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="Submitting" xml:space="preserve">
+    <value>提交中...</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>星期天</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>星期四</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>星期二</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>驗證</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>星期三</value>
   </data>
 </root>
