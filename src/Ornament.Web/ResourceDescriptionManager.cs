@@ -13,11 +13,11 @@ namespace Ornament.Web
         private const string NhProxyType =
             "{0}Proxy, {0}ProxyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
 
-        private readonly ISet<ResourceDescription> _resourcesSelector;
+        private readonly IDictionary<string, ResourceDescription> _resourcesSelector = new Dictionary<string, ResourceDescription>();
 
         public ResourceDescriptionManager()
         {
-            _resourcesSelector = new SortedSet<ResourceDescription>();
+
         }
         /// <summary>
         /// 
@@ -28,19 +28,39 @@ namespace Ornament.Web
         {
             if (resources == null)
                 throw new ArgumentNullException("resources");
-            _resourcesSelector = new SortedSet<ResourceDescription>();
+
             foreach (var item in resources)
             {
-                _resourcesSelector.Add(item);
+                if (_resourcesSelector.ContainsKey(item.Path))
+                {
+                    _resourcesSelector.Add(item.Path, item);
+                }
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public ISet<ResourceDescription> ResourceSettings
+       
+        public IEnumerable<ResourceDescription> ResourceSettings
         {
-            get { return _resourcesSelector; }
+            get
+            {
+                return _resourcesSelector.Values;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
+        public bool AddResourceSetting(ResourceDescription description)
+        {
+            if (!_resourcesSelector.ContainsKey(description.Path))
+            {
+                _resourcesSelector.Add(description.Path, description);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -71,7 +91,7 @@ namespace Ornament.Web
         {
             if (valueOfResource == null)
                 throw new ArgumentNullException("valueOfResource");
-            foreach (ResourceDescription resDesc in _resourcesSelector)
+            foreach (ResourceDescription resDesc in _resourcesSelector.Values)
             {
                 if (resDesc.ValueType == valueOfResource ||
                     valueOfResource.AssemblyQualifiedName == String.Format(NhProxyType, resDesc.ValueType.Name))
