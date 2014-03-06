@@ -13,7 +13,7 @@ namespace Ornament.Web.PortableAreas
         public static Action RegisterEmbeddedViewEngine = () => InputBuilder.InputBuilder.BootStrap();
         public static Action CheckAreasWebConfigExists = () => EnsureAreasWebConfigExists();
         private static readonly Dictionary<Assembly, int> ControllerCollection = new Dictionary<Assembly, int>();
-
+        public event EventHandler RegistedEmbedResource;
         public virtual string AreaRoutePrefix
         {
             get { return AreaName; }
@@ -52,6 +52,11 @@ namespace Ornament.Web.PortableAreas
             var resourceStore = new AssemblyResourceStore(areaType, "/areas/" + AreaName.ToLower(), areaType.Namespace,
                 GetMap());
             AssemblyResourceManager.RegisterAreaResources(resourceStore);
+
+            if (RegistedEmbedResource != null)
+            {
+                RegistedEmbedResource(this, EventArgs.Empty);
+            }
         }
 
         private static void EnsureAreasWebConfigExists()
@@ -64,8 +69,8 @@ namespace Ornament.Web.PortableAreas
             }
         }
 
-        
-        
+
+
 
         protected virtual void GetInjectControllers(out IEnumerable<Type> controller,
             out IEnumerable<Type> apiController)

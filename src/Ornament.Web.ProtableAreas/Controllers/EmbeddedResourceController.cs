@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using Ornament.Web.PortableAreas;
+using SeajsBundles;
 
 namespace Ornament.Web.Controllers
 {
@@ -19,6 +21,7 @@ namespace Ornament.Web.Controllers
             // pre-pend "~" so that it will be replaced with assembly namespace
             
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
+            var minfy = new SeajsMinify();
 
             if (resourceStream == null)
             {
@@ -32,12 +35,12 @@ namespace Ornament.Web.Controllers
 
         #region Private Members
 
-        private static readonly Dictionary<string, string> mimeTypes = InitializeMimeTypes();
+        private static readonly Dictionary<string, string> MimeTypes = InitializeMimeTypes();
 
         private static string GetContentType(string resourceName)
         {
             string extension = resourceName.Substring(resourceName.LastIndexOf('.')).ToLower();
-            return mimeTypes[extension];
+            return MimeTypes[extension];
         }
 
         private static Dictionary<string, string> InitializeMimeTypes()

@@ -63,6 +63,19 @@ namespace Ornament.Web.PortableAreas
             return null;
         }
 
+        public string[] MatchPath(string namespaceInSearch, string extendJs)
+        {
+            var list = new List<string>();
+            namespaceInSearch = namespaceInSearch.ToLower();
+            foreach (var dict in this.resources.Keys)
+            {
+                if (dict.StartsWith(namespaceInSearch) && dict.EndsWith(extendJs))
+                {
+                    list.Add(dict.Replace(namespaceInSearch+".", ""));
+                }
+            }
+            return list.ToArray();
+        }
         public Stream GetResourceStream(string resourceName)
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resourceName);

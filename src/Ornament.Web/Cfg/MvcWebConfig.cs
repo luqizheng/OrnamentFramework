@@ -58,7 +58,7 @@ namespace Ornament.Web.Cfg
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
 
 
-
+            //加入Assembly合并模块是
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory());
         }
 

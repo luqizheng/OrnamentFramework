@@ -31,19 +31,14 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
         }
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+            
             RegistApi();
             bus.Send(new NHRegisterEventMessage(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
             //send the init data
             bus.Send(new MemberShipData());
             ResourceSetting.Registry();
-            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
-            helper.RegistySeajsModule("Scripts/User");
-            helper.RegistySeajsModule("Scripts/Org");
-            helper.RegistySeajsModule("Scripts/Role");
-            helper.RegistySeajsModule("Scripts/Share");
-            helper.RegistySeajsModule("Scripts/Permissions");
-
+           
             context.MapRoute(
                 AreaName + "_images",
                 AreaRoutePrefix + "/images/{resourceName}",
@@ -79,6 +74,14 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 new { action = "Index", id = UrlParameter.Optional },
                 new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
+            
+
+            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
+            helper.RegistySeajsModule("Scripts/User");
+            helper.RegistySeajsModule("Scripts/Org");
+            helper.RegistySeajsModule("Scripts/Role");
+            helper.RegistySeajsModule("Scripts/Share");
+            helper.RegistySeajsModule("Scripts/Permissions");
 
             base.RegisterArea(context, bus);
         }

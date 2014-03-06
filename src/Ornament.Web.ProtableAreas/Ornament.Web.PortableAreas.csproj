@@ -45,6 +45,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ornament.Web.Core">
+      <HintPath>..\MvcPlugins\Friends\Bin\Ornament.Web.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SeajsBundles">
       <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
     </Reference>

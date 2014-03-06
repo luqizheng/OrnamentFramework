@@ -2,6 +2,7 @@
 using Ornament.Web;
 using Ornament.Web.Bundles;
 using Ornament.Web.Bundles.Config;
+using Ornament.Web.SeajsModules;
 using Qi;
 using SeajsBundles;
 using SeajsBundles.JqueryBundles;
@@ -17,6 +18,7 @@ namespace Ornament.MVCWebFrame
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
+
             OrnamentContext.Configuration.SetSeajsCombine(true);
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
@@ -61,6 +63,8 @@ namespace Ornament.MVCWebFrame
             bundles.Add(
                 new SeajsBundle("~/Scripts/_appLayout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
                     "~/Scripts/Modules/Views/_appLayout.js"));
+
+            
         }
 
 

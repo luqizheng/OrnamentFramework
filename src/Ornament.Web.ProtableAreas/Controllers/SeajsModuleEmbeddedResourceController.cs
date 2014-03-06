@@ -9,6 +9,7 @@ using SeajsBundles.Seajs;
 
 namespace Ornament.Web.Controllers
 {
+    [System.Obsolete("Please use SeajsEmbedBunldle to zip js")]
     public class SeajsModuleEmbeddedResourceController : Controller
     {
         public ActionResult Index(string resourceName, string resourcePath)
