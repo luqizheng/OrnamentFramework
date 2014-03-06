@@ -76,7 +76,7 @@ namespace Ornament
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
@@ -152,21 +152,27 @@ namespace Ornament
         /// </summary>
         /// <param name="context"></param>
         /// <param name="language"></param>
-        public static void SwitchLanguage(this MemberShipContext context, string language)
+        public static bool SwitchLanguage(this MemberShipContext context, string language)
         {
-            if (OrnamentContext.Configuration.Languages.Contains(language))
+            if (String.IsNullOrEmpty(language))
+                return false;
+            if (OrnamentContext.Configuration.Languages.Find(language) != null)
             {
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
-                HttpContext.Current.Response.Cookies[LangCookieName].Value = language;
+                if (HttpContext.Current != null)
+                {
+                    HttpContext.Current.Response.Cookies[LangCookieName].Value = language;
+                }
+                User currentUser = OrnamentContext.MemberShip.CurrentUser();
+                if (currentUser != null && language != currentUser.Language)
+                {
+                    currentUser.Language = language;
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
+                }
+                return true;
             }
-
-            User currentUser = OrnamentContext.MemberShip.CurrentUser();
-            if (currentUser != null && language != currentUser.Language)
-            {
-                currentUser.Language = language;
-                OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
-            }
+            return false;
         }
 
 

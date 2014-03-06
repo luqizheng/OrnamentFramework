@@ -13,13 +13,19 @@ namespace Ornament.Models
 
         public Language Find(string language)
         {
-            if (Contains(language))
+            foreach (var settingLang in this)
             {
-                return this[language];
+                if (settingLang.Key == language)
+                {
+                    return settingLang;
+                }
+
+                if (settingLang.MatchKey.Contains(language))
+                    return settingLang;
             }
             return null;
         }
-
+        
         public Language DefaultOrMatch(string[] language)
         {
             foreach (var lang in language)

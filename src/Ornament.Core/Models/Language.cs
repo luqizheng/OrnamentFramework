@@ -9,8 +9,17 @@
             Name = name;
             Key = key;
         }
+        /// <summary>
+        /// Language on UI
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        ///  CultureInfo.GetCultureInfo(Key);
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// 是不是默认语言。
+        /// </summary>
         public bool IsDefault { get; set; }
 
         /// <summary>
