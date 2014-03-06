@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -45,6 +46,27 @@ namespace Ornament
             return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
         }
 
+        public static Language CurrentLanguage(this MemberShipContext context)
+        {
+            var lang = CookieRequestLanguage(context);
+            if (lang == null)
+            {
+                var user = CurrentUser(context);
+                if (user != null)
+                {
+                    lang = user.Language;
+                }
+                else
+                {
+                    lang = BroswerLanguage(context);
+                }
+            }
+
+            return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] { lang });
+
+
+
+        }
         public static string CurrentVerifyCode(this MemberShipContext context)
         {
             return HttpContext.Current.Session[VerifyCodeKey] as string;

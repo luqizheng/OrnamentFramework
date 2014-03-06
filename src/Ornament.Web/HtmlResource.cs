@@ -86,14 +86,12 @@ namespace Ornament.Web
 
         private static IEnumerable<DictionaryEntry> GetPath(ViewContext page, string filePath, string pageName)
         {
-            string[] langs = page.HttpContext.Request.UserLanguages != null
-                                 ? page.HttpContext.Request.UserLanguages.Union(new[] {""}).ToArray()
-                                 : new[] {""};
-
+            
+           
             IEnumerable<DictionaryEntry> resxs = null;
             string defaultReex = string.Format(@"{0}\{1}.resx", filePath, pageName);
 
-            string lang = langs[0].Split(';')[0];
+            string lang = OrnamentContext.MemberShip.CurrentLanguage().Key;
             string resxKey =
                 string.IsNullOrWhiteSpace(lang)
                     ? string.Format(@"{0}\{1}.resx", filePath, pageName)
