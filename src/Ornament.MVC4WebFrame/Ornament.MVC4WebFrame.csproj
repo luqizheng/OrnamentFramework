@@ -102,7 +102,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.Web.dll</HintPath>
     </Reference>
-    <Reference Include="SeajsBundles">
+    <Reference Include="SeajsBundles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
     </Reference>
     <Reference Include="System" />
