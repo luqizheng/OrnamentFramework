@@ -9,7 +9,7 @@
 @using SeajsBundles
 @model IEnumerable<User>
 @{
-    ViewBag.Title = "";
+    ViewBag.Title = Html.GetEmbededResourceString("page_title");
     Layout = OrnamentContext.Configuration.BackendLayout();
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
     var status = ViewData["UserStatus"] as UsersStatusModel;
