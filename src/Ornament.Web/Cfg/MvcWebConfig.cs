@@ -11,17 +11,16 @@ using log4net;
 using Ornament.Configurations;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Validations;
-using Ornament.Web.Controllers;
 using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
 using Ornament.Web.ModelBinder;
-using Ornament.Web.Models;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
 using Ornament.Web.ValidationAdapter;
 using Qi;
 using Qi.Web.Mvc;
 using SeajsBundles.Seajs.Modules;
+using SeajsBundles.Seajs.Modules.CombineModuleFactories;
 
 namespace Ornament.Web.Cfg
 {
@@ -58,8 +57,9 @@ namespace Ornament.Web.Cfg
             MembershipContext.Provider = Membership.Provider as IMemberShipProvider;
 
 
-            //加入Assembly合并模块是
-            SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory());
+            //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
+            SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
+
         }
 
         //private static void AddProtableMessageHandler()

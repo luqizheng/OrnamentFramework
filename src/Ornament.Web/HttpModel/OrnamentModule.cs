@@ -52,7 +52,7 @@ namespace Ornament.Web.HttpModel
 
         private void context_BeginRequest(object sender, EventArgs e)
         {
-            var context = (HttpApplication)sender;
+            var context = (HttpApplication) sender;
             MultiLanguage(context);
             string utc = context.Request.QueryString["utc"];
             if (!String.IsNullOrEmpty(utc))
@@ -87,7 +87,7 @@ namespace Ornament.Web.HttpModel
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(OrnamentModule)).Error("Language setting error.", ex);
+                LogManager.GetLogger(typeof (OrnamentModule)).Error("Language setting error.", ex);
                 lang = "en-US";
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);

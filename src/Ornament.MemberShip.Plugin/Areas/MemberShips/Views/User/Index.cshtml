@@ -33,12 +33,8 @@
                 fail: '@Html.GetEmbededResourceString("retrieve_pwd_fail")'
             }
         };
-
-        var curUser = {
-            Id: "@OrnamentContext.MemberShip.CurrentUser().Id",
-            Name: "@OrnamentContext.MemberShip.CurrentUser().Name"
-        };
-
+        @Scripts.Render()
+     
         seajs.use('@ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/User/Index.js")', function (main) {
             main.init(multiLanguate);
         });

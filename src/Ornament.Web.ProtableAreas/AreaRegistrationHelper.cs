@@ -16,6 +16,12 @@ namespace Ornament.Web
         private readonly PortableAreaRegistration _protablAreaRegistration;
         private IList<string> _seajsEmbeddedModulePath = new List<string>();
 
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="protablAreaRegistration"></param>
+       /// <param name="assemblyRootNamespace">root namespace in Assembly</param>
+       /// <param name="context"></param>
         public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, string assemblyRootNamespace,
             AreaRegistrationContext context)
         {

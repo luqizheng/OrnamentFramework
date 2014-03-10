@@ -14,17 +14,15 @@ namespace Ornament.Web.MemberShips
     public class ResourceAuthorizeAttribute : FilterAttribute, IAuthorizationFilter
     {
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="operator">the operator will be checked in resource</param>
         /// <param name="resourceId">Resource's Id</param>
         public ResourceAuthorizeAttribute(object @operator, string resourceId)
-            : this(@operator, typeof(string), resourceId)
+            : this(@operator, typeof (string), resourceId)
         {
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="operator"></param>
         /// <param name="resourceType"></param>
@@ -37,24 +35,23 @@ namespace Ornament.Web.MemberShips
             if (resourceType == null) throw new ArgumentNullException("resourceType");
             if (resourceId == null) throw new ArgumentNullException("resourceId");
 
-            Operator = (Enum)@operator;
+            Operator = (Enum) @operator;
             ResourceType = resourceType;
             ResourceId = resourceId;
         }
 
 
         /// <summary>
-        /// Gets or sets rolesInfo's id which id is string express, e.g guid.ToString()
+        ///     Gets or sets rolesInfo's id which id is string express, e.g guid.ToString()
         /// </summary>
         public string ResourceId { get; set; }
 
         /// <summary>
-        /// Gets or sets Resource type, e.g. typeof(User)
+        ///     Gets or sets Resource type, e.g. typeof(User)
         /// </summary>
         public Type ResourceType { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         public Enum Operator { get; set; }
 
@@ -66,8 +63,8 @@ namespace Ornament.Web.MemberShips
             {
                 throw new ArgumentNullException("filterContext");
             }
-            var sessionWrapper = SessionManager.GetSessionWrapper();
-            var opened = sessionWrapper.InitSession();
+            SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
+            bool opened = sessionWrapper.InitSession();
             try
             {
                 if (AuthorizeCore(filterContext.HttpContext))
@@ -106,7 +103,7 @@ namespace Ornament.Web.MemberShips
             if (context.User == null || !context.User.Identity.IsAuthenticated)
                 return false;
 
-            IUserDao userdao =  Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+            IUserDao userdao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
 
             User user = userdao.GetByLoginId(context.User.Identity.Name);
 
@@ -117,13 +114,13 @@ namespace Ornament.Web.MemberShips
                 return true;
 
 
-            IPermissionDao dao =  Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
+            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
 
             IList<Permission> result;
-            if (ResourceType != typeof(string))
+            if (ResourceType != typeof (string))
             {
                 var res =
-                     Ornament.OrnamentContext.DaoFactory.MemberShipFactory.CreateResourceDao().Load(
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateResourceDao().Load(
                         ResourceType, ResourceId) as IDomainObject;
                 if (res == null)
                     throw new MemberShipException(ResourceType.FullName +

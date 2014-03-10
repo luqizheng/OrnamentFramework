@@ -20,20 +20,20 @@ namespace Ornament.Web
         {
             string result = dateTimeformat.ToLower();
             return Regex.Replace(result, "\\w+", s =>
-                {
-                    string f = s.Value.Substring(0, 1);
-                    if (f == "m")
-                        return "s";
-                    return f;
-                });
+            {
+                string f = s.Value.Substring(0, 1);
+                if (f == "m")
+                    return "s";
+                return f;
+            });
         }
 
         public static IHtmlString TimeInputFor<TModel>(this HtmlHelper<TModel> helper,
-                                                       Expression<Func<TModel, Time>> expression)
+            Expression<Func<TModel, Time>> expression)
         {
             return TimeInputHelper(helper,
-                                   ModelMetadata.FromLambdaExpression(expression, helper.ViewData),
-                                   ExpressionHelper.GetExpressionText(expression), null
+                ModelMetadata.FromLambdaExpression(expression, helper.ViewData),
+                ExpressionHelper.GetExpressionText(expression), null
                 );
         }
 
@@ -45,7 +45,7 @@ namespace Ornament.Web
         [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
             Justification = "If this fails, it is because the string-based version had an empty 'name' parameter")]
         private static MvcHtmlString TimeInputHelper(HtmlHelper htmlHelper, ModelMetadata modelMetadata, string name,
-                                                     IDictionary<string, object> htmlAttributes)
+            IDictionary<string, object> htmlAttributes)
         {
             string fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
             if (String.IsNullOrEmpty(fullName))

@@ -19,7 +19,7 @@ namespace Ornament.Web
 
         public OrnamentWebApiFactory(params Type[] controllers)
         {
-            this.Regist(controllers);
+            Regist(controllers);
         }
 
         public IWindsorContainer Container
@@ -28,10 +28,10 @@ namespace Ornament.Web
         }
 
         IHttpController IHttpControllerActivator.Create(HttpRequestMessage request,
-                                                        HttpControllerDescriptor controllerDescriptor,
-                                                        Type controllerType)
+            HttpControllerDescriptor controllerDescriptor,
+            Type controllerType)
         {
-            var controller = (IHttpController)Container.Resolve(controllerType);
+            var controller = (IHttpController) Container.Resolve(controllerType);
             return controller;
         }
 
@@ -54,8 +54,8 @@ namespace Ornament.Web
         {
             // Also register all the controller types as transient
             IEnumerable<Type> controllerTypes = from t in assemblies.GetTypes()
-                                                where typeof(ApiController).IsAssignableFrom(t)
-                                                select t;
+                where typeof (ApiController).IsAssignableFrom(t)
+                select t;
             return controllerTypes.ToArray();
         }
     }

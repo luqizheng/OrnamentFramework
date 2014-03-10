@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Resources;
 using System.Web.Mvc;
 using Ornament.Web.PortableAreas;
@@ -16,17 +15,15 @@ namespace Ornament.Web
 
         public static string GetEmbededResourceString(this HtmlHelper htmlHelper, string viewName, string key)
         {
-            
             return GetEmbededResourceString(htmlHelper.ViewContext, viewName, key);
         }
 
         public static string GetFromatResourceString(this HtmlHelper htmlHelper, string key,
-                                                     params object[] varibalValue)
+            params object[] varibalValue)
         {
             return String.Format(GetEmbededResourceString(htmlHelper, key), varibalValue);
         }
 
-   
 
         public static string GetEmbededResourceString(this ViewContext page, string key)
         {

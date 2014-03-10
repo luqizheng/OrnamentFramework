@@ -6,8 +6,8 @@ namespace Ornament.Web.MemberShips
 {
     public class MenuPermission
     {
-        private readonly string _express;
         private readonly MemberShipContext _context;
+        private readonly string _express;
 
         public MenuPermission(string express, MemberShipContext context)
         {
@@ -26,7 +26,7 @@ namespace Ornament.Web.MemberShips
             catch (ArgumentException)
             {
                 throw new FormatException(String.Format("{0} is not recognized in the {1}", ary[1],
-                                                        OrnamentContext.ResourceManager.GetOperator(ary[0]).Name));
+                    OrnamentContext.ResourceManager.GetOperator(ary[0]).Name));
             }
         }
 
@@ -35,7 +35,7 @@ namespace Ornament.Web.MemberShips
 
         public bool HasRight(User user)
         {
-            return _context.HasRight(user,Resource, OperatorValue);
+            return _context.HasRight(user, Resource, OperatorValue);
         }
     }
 }

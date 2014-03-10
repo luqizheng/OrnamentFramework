@@ -24,7 +24,7 @@ namespace Ornament.Web
         }
 
         public static string GetFromatResourceString(this HtmlHelper htmlHelper, string key,
-                                                     params object[] varibalValue)
+            params object[] varibalValue)
         {
             return String.Format(GetResourceString(htmlHelper, key), varibalValue);
         }
@@ -86,8 +86,6 @@ namespace Ornament.Web
 
         private static IEnumerable<DictionaryEntry> GetPath(ViewContext page, string filePath, string pageName)
         {
-            
-           
             IEnumerable<DictionaryEntry> resxs = null;
             string defaultReex = string.Format(@"{0}\{1}.resx", filePath, pageName);
 

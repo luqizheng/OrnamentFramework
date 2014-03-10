@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace Ornament.Web.Models
 {
@@ -29,7 +28,6 @@ namespace Ornament.Web.Models
         //public bool ResetAdminPassword { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         [Display(Name = "DB Structure:"), Required]
         public IList<string> Initializers
@@ -37,7 +35,5 @@ namespace Ornament.Web.Models
             get { return _initMethod ?? (_initMethod = new List<string>()); }
             set { _initMethod = value; }
         }
-
-       
     }
 }

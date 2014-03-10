@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Ornament.Web.PortableAreas;
@@ -26,37 +23,34 @@ namespace Ornament.Web.SeajsModules
         {
             get
             {
+                SeajsEmbedBundle bundle = BundleTable.Bundles.GetBundleFor(AbsolutePath) as SeajsEmbedBundle;
+
                 RouteData resData = RouteUtils.GetRouteDataByUrl(RequireId);
                 if (resData == null)
                     throw new ArgumentOutOfRangeException(RequireId +
                                                           " is not a assembly embeded resources with js file.");
-                var areaName = (string)resData.DataTokens["area"];
-                string resourcePath = resData.Values["resourcePath"].ToString();
-                string resourceName = resData.Values["resourceName"].ToString();
-                resourceName = resourcePath + "." + resourceName;
-                AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
-                Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-                using (var readerStream = new StreamReader(resourceStream))
-                {
-                    string content = readerStream.ReadToEnd();
-                    return content;
-                }
+                return bundle.GetContent(RequireId);
+
             }
         }
 
         public static bool IsAssemblyCombineModules(string uniqureId)
         {
             RouteData resData = RouteUtils.GetRouteDataByUrl(uniqureId);
-            if (resData == null || !resData.Values.ContainsKey("resourcePath"))
+            if (resData == null)
                 return false;
 
             var areaName = (string)resData.DataTokens["area"];
-            string resourcePath = resData.Values["resourcePath"].ToString();
-            string resourceName = resData.Values["resourceName"].ToString();
-            resourceName = resourcePath + "." + resourceName;
+            if (areaName == null)
+                return false;
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
-            Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-            return resourceStream != null;
+            if (resourceStore == null)
+                return false;
+
+            var bundleFile = BundleTable.Bundles.GetBundleFor(uniqureId);
+            return bundleFile is SeajsEmbedBundle;
+
+
         }
     }
 }

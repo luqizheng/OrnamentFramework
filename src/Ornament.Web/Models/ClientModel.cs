@@ -1,5 +1,4 @@
-﻿using System;
-using Ornament.MemberShip;
+﻿using Ornament.MemberShip;
 using Ornament.Messages;
 using Ornament.Messages.Dao;
 using Ornament.Web.HttpModel;
@@ -60,7 +59,6 @@ namespace Ornament.Web.Models
         ///     是否登录了
         /// </summary>
         public bool IsLogin { get; internal set; }
-
 
 
         /// <summary>

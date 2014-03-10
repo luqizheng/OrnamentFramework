@@ -1,13 +1,14 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using Ornament.Web.HttpModel;
 
 namespace Ornament.Web
 {
-    [System.Obsolete]
+    [Obsolete]
     public static class TimeZoneHtmlExtender
     {
-        [System.Obsolete]
+        [Obsolete]
         public static IHtmlString CorrectTimeZone(this HtmlHelper helper, bool refresh)
         {
             const string ssss =
@@ -15,11 +16,10 @@ namespace Ornament.Web
             const string a = ");});</script>";
             if (OrnamentModule.GetOffSetHour() == null)
             {
-                var edit = refresh ? "true" : "false";
+                string edit = refresh ? "true" : "false";
                 return helper.Raw(ssss + edit + a);
             }
             return helper.Raw("");
-
         }
     }
 }

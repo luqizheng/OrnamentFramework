@@ -17,8 +17,8 @@ namespace Ornament.Web
     public static class DateTimePickerExtender
     {
         public static IHtmlString DatePickerFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
-                                                                   Expression<Func<TModel, TProperty>> expression,
-                                                                   string format)
+            Expression<Func<TModel, TProperty>> expression,
+            string format)
         {
             ModelMetadata modelMetadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
             string name = ExpressionHelper.GetExpressionText(expression);
@@ -49,7 +49,7 @@ namespace Ornament.Web
         }
 
         public static MvcHtmlString DatePicker(this HtmlHelper helper, DateTime date, string format, string name,
-                                               object attris)
+            object attris)
         {
             return DatePickerHelper(helper, date, name, new RouteValueDictionary(attris), format);
         }
@@ -58,18 +58,18 @@ namespace Ornament.Web
         {
             string result = dateTimeformat.ToLower();
             return Regex.Replace(result, "\\w+", s =>
-                {
-                    string f = s.Value.Substring(0, 1);
-                    if (f == "m")
-                        return "s";
-                    return f;
-                });
+            {
+                string f = s.Value.Substring(0, 1);
+                if (f == "m")
+                    return "s";
+                return f;
+            });
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
             Justification = "If this fails, it is because the string-based version had an empty 'name' parameter")]
         private static MvcHtmlString DatePickerHelper(HtmlHelper htmlHelper, DateTime date, string name,
-                                                      IDictionary<string, object> htmlAttributes, string format)
+            IDictionary<string, object> htmlAttributes, string format)
         {
             var input = new TagBuilder("input");
             input.Attributes.Add("type", "text");

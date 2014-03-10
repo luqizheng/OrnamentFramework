@@ -83,8 +83,8 @@ namespace Ornament.Web.Bundles.Config
 
                 if (IsCombine(subFolder, log))
                 {
-                    var files = GetCombineFolderFiles(subFolder);
-                    string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name+".js");
+                    string[] files = GetCombineFolderFiles(subFolder);
+                    string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name + ".js");
                     Handle(bundles, virtualFolderName, log, files);
                 }
                 else
@@ -112,8 +112,9 @@ namespace Ornament.Web.Bundles.Config
 
             HandleDirectories(bundles, physicPath, bundleName, log);
         }
+
         /// <summary>
-        /// folder 里面是否需要合并。
+        ///     folder 里面是否需要合并。
         /// </summary>
         /// <param name="directoryInfo"></param>
         /// <param name="log"></param>
@@ -123,7 +124,7 @@ namespace Ornament.Web.Bundles.Config
         protected virtual string[] GetCombineFolderFiles(DirectoryInfo folder)
         {
             var list = new List<String>();
-            foreach (var file in folder.GetFiles("*.js"))
+            foreach (FileInfo file in folder.GetFiles("*.js"))
             {
                 list.Add(ToVirtualPath(file.FullName));
             }
@@ -131,11 +132,9 @@ namespace Ornament.Web.Bundles.Config
         }
 
 
+        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter,
+            params string[] includeVirtualPathes);
 
-
-
-
-        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter, params string[] includeVirtualPathes);
         /*
                 /// <summary>
                 /// </summary>

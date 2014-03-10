@@ -157,6 +157,10 @@
     <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
     <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeajsModules\CombineModuleAsssemblyFactory.cs" />
+    <Compile Include="SeajsModules\EmbeddedBuilder.cs" />
+    <Compile Include="SeajsModules\OrnamentPortableEmbedModule.cs" />
+    <Compile Include="SeajsModules\SeajsEmbedBundle.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Array.aspx">
@@ -233,7 +237,7 @@
     <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Submit.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PortableAreas\packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">

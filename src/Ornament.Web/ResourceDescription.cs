@@ -3,12 +3,12 @@
 namespace Ornament.Web
 {
     /// <summary>
-    /// Resource Setting for Web 
+    ///     Resource Setting for Web
     /// </summary>
     public class ResourceDescription
     {
         /// <summary>
-        /// Resource Type 
+        ///     Resource Type
         /// </summary>
         public Type ValueType { get; set; }
 

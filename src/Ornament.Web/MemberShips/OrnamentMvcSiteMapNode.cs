@@ -1,5 +1,4 @@
-﻿using System;
-using MvcSiteMapProvider;
+﻿using MvcSiteMapProvider;
 
 namespace Ornament.Web.MemberShips
 {
@@ -8,12 +7,12 @@ namespace Ornament.Web.MemberShips
         private object _operator;
         private string _resource;
 
-        public OrnamentMvcSiteMapNodeAttribute(string resource,object @operator)
+        public OrnamentMvcSiteMapNodeAttribute(string resource, object @operator)
         {
-            this.Resource = resource;
-            this.Operator = @operator;
-
+            Resource = resource;
+            Operator = @operator;
         }
+
         public OrnamentMvcSiteMapNodeAttribute()
         {
             //Attributes.Add("permission", "");

@@ -6,7 +6,7 @@ namespace Ornament.Web.SeajsModules
 {
     public class CombineModuleAsssemblyFactory : IModuleFactory
     {
-        public ISeajsModule Build(string requireId, BundleContext context, bool combine,ISeajsModule parent)
+        public ISeajsModule Build(string requireId, BundleContext context, bool combine, ISeajsModule parent)
         {
             return new CombineModuleAssembly(context, requireId, combine);
         }

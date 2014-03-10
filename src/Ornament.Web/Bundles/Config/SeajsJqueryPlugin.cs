@@ -13,7 +13,8 @@ namespace Ornament.Web.Bundles.Config
         {
         }
 
-        protected override void Handle(BundleCollection bundles, string bundleName, StreamWriter log, params string[] includeVirtualPathes)
+        protected override void Handle(BundleCollection bundles, string bundleName, StreamWriter log,
+            params string[] includeVirtualPathes)
         {
             if (bundleName.ToLower().EndsWith(".min.js"))
             {

@@ -4,7 +4,7 @@ using System.Web.Optimization;
 using Ornament.Web.PortableAreas;
 using SeajsBundles;
 
-namespace Ornament.Web.SeajsModules
+namespace Ornament.Web.Seajs
 {
     public class EmbeddedBuilder : IBundleBuilder
     {

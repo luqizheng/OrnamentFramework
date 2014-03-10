@@ -58,22 +58,21 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
                 OrgOperator.Delete);
 
 
-
-            Role adminRole = CreateRole(ResourceSetting.AdminRoleAccount, "管理员");
-            adminRole.Permissions.Add(rolePermission);
-            adminRole.Permissions.Add(userPermission);
-            adminRole.Permissions.Add(memberPermission);
-            adminRole.Permissions.Add(permissionPermission);
-            adminRole.Permissions.Add(orgPermission);
-            OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(adminRole);
+            Role godPermission = CreateRole(ResourceSetting.AdminRoleAccount, "管理员");
+            godPermission.Permissions.Add(rolePermission);
+            godPermission.Permissions.Add(userPermission);
+            godPermission.Permissions.Add(memberPermission);
+            godPermission.Permissions.Add(permissionPermission);
+            godPermission.Permissions.Add(orgPermission);
+            OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(godPermission);
 
             UserGroup adminGroup = CreateOrGetUserGroup("admin group");
-            adminGroup.Roles.Add(adminRole);
+            adminGroup.Roles.Add(godPermission);
             IUserGroupDao ugDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             ugDao.SaveOrUpdate(adminGroup);
 
-            User adminUser = CreateUser(ResourceSetting.AdminRoleAccount,"123456", "admin@admin.com", "admin", "admin");
-            adminUser.Roles.Add(adminRole);
+            User adminUser = CreateUser(ResourceSetting.AdminRoleAccount, "123456", "admin@admin.com", "admin", "admin");
+            adminUser.Roles.Add(godPermission);
             adminUser.UserGroups.Add(adminGroup);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Flush();
@@ -112,6 +111,23 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
             roleDao.SaveOrUpdate(role);
 
             return role;
+        }
+
+        protected Org CreateOrg(string name, string remark, Org parent)
+        {
+            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
+            Org org = orgDao.GetByName(name, parent) ?? new Org(name) { Remarks = remark };
+            parent.Childs.Add(org);
+            orgDao.SaveOrUpdate(org);
+            return org;
+        }
+
+        protected Org CreateRootOrg(string name, string remark)
+        {
+            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
+            Org org = orgDao.GetRootOrgBy(name) ?? new Org(name) { Remarks = remark };
+            orgDao.SaveOrUpdate(org);
+            return org;
         }
 
         protected Permission CreatePermission<T>(T resObj, string permisionName, string remark, Enum eEnum)

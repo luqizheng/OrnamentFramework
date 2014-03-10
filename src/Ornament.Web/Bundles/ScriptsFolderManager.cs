@@ -9,10 +9,7 @@ namespace Ornament.Web.Bundles
 
         public SeajsJqueryPlugin SeajsJqueryPlugin
         {
-            get
-            {
-                return _seajsJqueryPlugin ?? (_seajsJqueryPlugin = new SeajsJqueryPlugin("~/Scripts/plugins"));
-            }
+            get { return _seajsJqueryPlugin ?? (_seajsJqueryPlugin = new SeajsJqueryPlugin("~/Scripts/plugins")); }
         }
 
         public void RegisterBundles(BundleCollection bundles)

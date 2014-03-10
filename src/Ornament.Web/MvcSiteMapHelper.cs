@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Web.Mvc;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Web.Html;
@@ -37,7 +37,7 @@ namespace Ornament.Web
         }
 
         /// <summary>
-        ///     »ñÈ¡µ±Ç°ÓÃ»§·ÃÎÊµÄNodeÐÅÏ¢
+        ///     ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Êµï¿½Nodeï¿½ï¿½Ï¢
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="siteMapPermission"></param>
@@ -52,7 +52,7 @@ namespace Ornament.Web
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
                 ISiteMapNode childNode = node.ChildNodes[i];
-                if (Match(siteMapPermission, childNode)) //Èç¹û°üº¬disabled 
+                if (Match(siteMapPermission, childNode)) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½disabled 
                 {
                     var mainMenu = new MainMenu
                     {
@@ -79,7 +79,7 @@ namespace Ornament.Web
             {
                 ISiteMapNode childNode = mainMenu.Current.ChildNodes[i];
                 string a = childNode.Title;
-                if (Match(siteMapPermission, childNode)) //Èç¹û°üº¬disabled 
+                if (Match(siteMapPermission, childNode)) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½disabled 
                 {
                     var childMainMenu = new MainMenu
                     {
@@ -103,7 +103,7 @@ namespace Ornament.Web
         {
             return siteMapPermission.IsAccessibleToUser(childNode)
                    && !childNode.MetaRobotsValues.Contains("disabled");
-            //Èç¹û°üº¬disabled 
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½disabled 
         }
 
         //public static bool CurrentNodeMatchParent(this HtmlHelper helper, SiteMapNodeCollection nodes,

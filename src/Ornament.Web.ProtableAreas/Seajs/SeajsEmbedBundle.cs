@@ -1,13 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Optimization;
-using Microsoft.Ajax.Utilities;
-using SeajsBundles.Seajs;
+﻿using System.Web.Optimization;
 
-namespace Ornament.Web.SeajsModules
+namespace Ornament.Web.Seajs
 {
     public class SeajsEmbedBundle : SeajsBundles.SeajsBundle
     {

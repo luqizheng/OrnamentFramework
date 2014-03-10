@@ -6,21 +6,20 @@ using Castle.Core.Resource;
 namespace Ornament.Web
 {
     /// <summary>
-    /// 
     /// </summary>
     public class ResourceDescriptionManager
     {
         private const string NhProxyType =
             "{0}Proxy, {0}ProxyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null";
 
-        private readonly IDictionary<string, ResourceDescription> _resourcesSelector = new Dictionary<string, ResourceDescription>();
+        private readonly IDictionary<string, ResourceDescription> _resourcesSelector =
+            new Dictionary<string, ResourceDescription>();
 
         public ResourceDescriptionManager()
         {
-
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="resources"></param>
         /// <exception cref="ArgumentNullException">resources is null</exception>
@@ -29,7 +28,7 @@ namespace Ornament.Web
             if (resources == null)
                 throw new ArgumentNullException("resources");
 
-            foreach (var item in resources)
+            foreach (ResourceDescription item in resources)
             {
                 if (_resourcesSelector.ContainsKey(item.Path))
                 {
@@ -39,18 +38,13 @@ namespace Ornament.Web
         }
 
         /// <summary>
-        /// 
         /// </summary>
-       
         public IEnumerable<ResourceDescription> ResourceSettings
         {
-            get
-            {
-                return _resourcesSelector.Values;
-            }
+            get { return _resourcesSelector.Values; }
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="description"></param>
         public bool AddResourceSetting(ResourceDescription description)
@@ -64,7 +58,6 @@ namespace Ornament.Web
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="name">name of the resource descript.</param>
         /// <returns></returns>
@@ -82,7 +75,6 @@ namespace Ornament.Web
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="valueOfResource"></param>
         /// <exception cref="ArgumentNullException">valueOfResource is null</exception>
@@ -99,7 +91,7 @@ namespace Ornament.Web
             }
 
             throw new ResourceException(string.Format("cant' find the Type of {0} setting infromation",
-                                                                valueOfResource.FullName));
+                valueOfResource.FullName));
         }
     }
 }

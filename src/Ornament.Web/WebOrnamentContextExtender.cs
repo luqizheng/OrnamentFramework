@@ -5,7 +5,6 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -48,10 +47,10 @@ namespace Ornament
 
         public static Language CurrentLanguage(this MemberShipContext context)
         {
-            var lang = CookieRequestLanguage(context);
+            string lang = CookieRequestLanguage(context);
             if (lang == null)
             {
-                var user = CurrentUser(context);
+                User user = CurrentUser(context);
                 if (user != null)
                 {
                     lang = user.Language;
@@ -62,11 +61,9 @@ namespace Ornament
                 }
             }
 
-            return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] { lang });
-
-
-
+            return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] {lang});
         }
+
         public static string CurrentVerifyCode(this MemberShipContext context)
         {
             return HttpContext.Current.Session[VerifyCodeKey] as string;
@@ -98,7 +95,7 @@ namespace Ornament
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);

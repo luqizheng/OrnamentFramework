@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 using MvcSiteMapProvider;
 
 namespace Ornament.Web
 {
     /// <summary>
-    /// 
     /// </summary>
     public class MainMenu
     {
+        private IList<MainMenu> _subMenus;
+
         public MainMenu()
         {
-            this.Actived = false;
+            Actived = false;
         }
-        private IList<MainMenu> _subMenus;
 
         /// <summary>
         /// </summary>
@@ -33,12 +32,11 @@ namespace Ornament.Web
                 {
                     return "#";
                 }
-                return this.Current.Url;
-
+                return Current.Url;
             }
         }
+
         /// <summary>
-        /// 
         /// </summary>
         public IList<MainMenu> SubMenus
         {

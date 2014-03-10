@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 
-
 namespace Ornament.Web.Models
 {
     public class VerifyCodeBuilder
@@ -12,13 +11,13 @@ namespace Ornament.Web.Models
         private string codeSerial =
             "2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,j,k,l,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z";
 
-        private Color[] colors = new[]
-            {
-                Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan,
-                Color.Purple
-            };
+        private Color[] colors =
+        {
+            Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan,
+            Color.Purple
+        };
 
-        private string[] fonts = new[] {"Arial", "Georgia"};
+        private string[] fonts = {"Arial", "Georgia"};
 
         public VerifyCodeBuilder()
         {
