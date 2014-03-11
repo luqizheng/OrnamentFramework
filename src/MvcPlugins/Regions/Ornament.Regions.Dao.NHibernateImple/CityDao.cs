@@ -13,5 +13,13 @@ namespace Ornament.Regions.Dao.NHibernateImple
                 .GetExecutableCriteria(this.CurrentSession)
                 .List<City>();
         }
+
+        public City FindByName(string name)
+        {
+            return CreateDetachedCriteria()
+                .Add(Restrictions.Eq(Projections.Property<City>(s => s.Name), name))
+                .GetExecutableCriteria(this.CurrentSession)
+                .UniqueResult<City>();
+        }
     }
 }
