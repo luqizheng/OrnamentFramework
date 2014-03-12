@@ -57,7 +57,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return CurrentSession.Query<User>(); }
         }
 
-        public IList<User> QuickSearch(int pageIndex, int pageSize, out int total, UserSearch userSearch)
+        public IList<User> Search(int pageIndex, int pageSize, out int total, UserSearch userSearch)
         {
 
             total = QuickSearch(userSearch).SetProjection(Projections.RowCount())
@@ -93,7 +93,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .List<User>();
         }
 
-      
+
 
         /// <summary>
         ///     获取用户
@@ -217,7 +217,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .GetExecutableCriteria(CurrentSession).List<User>();
         }
 
-   
+
 
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     GetExecutableCriteria(CurrentSession).List<User>();
         }
 
-       
+
 
         public int Count(string loginId, string userIdForExclude)
         {
@@ -363,34 +363,46 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
 
             Disjunction userInfo = Restrictions.Disjunction();
-            result.Add(userInfo);
+            var inSercher = false;
+
 
             if (!string.IsNullOrEmpty(userSearch.Login))
             {
+                inSercher = true;
                 userInfo.Add(Restrictions.InsensitiveLike(LoginProperty, userSearch.Login));
             }
 
             if (!string.IsNullOrEmpty(userSearch.Name))
             {
+                inSercher = true;
                 userInfo.Add(Restrictions.InsensitiveLike(NameProperty, userSearch.Name));
             }
 
 
             if (!string.IsNullOrEmpty(userSearch.Email))
             {
+                inSercher = true;
                 userInfo.Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), userSearch.Email));
             }
 
             if (!string.IsNullOrEmpty(userSearch.Phone))
             {
+                inSercher = true;
                 userInfo.Add(Restrictions.InsensitiveLike(ContactPhoneProperty("contact"), userSearch.Phone));
             }
 
             if (userSearch.Org != null)
             {
+                inSercher = true;
+                string max;
+                string min;
+                result.CreateAlias("Org", "org");
+                Org.CreateGetChildCondition(userSearch.Org, out max, out min);
+                userInfo.Add(Restrictions.Le("org.OrderId", max)).Add(Restrictions.Ge("org.OrderId", min));
 
             }
-
+            if (inSercher)
+                result.Add(userInfo);
             return result;
         }
 
@@ -398,6 +410,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         #endregion
 
 
-   
+
     }
 }

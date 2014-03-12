@@ -12,7 +12,7 @@
     ViewBag.Title = Html.GetEmbededResourceString("page_title");
     Layout = OrnamentContext.Configuration.BackendLayout();
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
-    var status = ViewData["UserStatus"] as UsersStatusModel;
+    
 }
 
 
@@ -34,7 +34,7 @@
             }
         };
         @Scripts.Render()
-     
+
         seajs.use('@ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/User/Index.js")', function (main) {
             main.init(multiLanguate);
         });
@@ -56,7 +56,16 @@
         @<text>
     <div ms-controller="index">
         <table class="table table-condensed table-striped table-bordered table-checks">
+
             <thead>
+                <tr>
+                    <td colspan="8">
+                        <form class="form-search" ms-on-submit="search">
+                            <input type="text" ms-duplex="content" placeholder="@Html.DisplayNameFor(model => model.LoginId),@Html.DisplayNameFor(model => model.Name),@Html.DisplayNameFor(model => model.Contact.Email) "/>
+                            <button class="btn btn-primary">@Ornament.Properties.Resources.Search</button>
+                        </form>
+                    </td>
+                </tr>
                 <tr>
                     <th style="width: 180px;"></th>
                     <th>
@@ -69,6 +78,9 @@
                         @Html.DisplayNameFor(model => model.Contact.Email)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Contact.Phone)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.IsLockout)
                     </th>
                     <th>
@@ -79,7 +91,8 @@
                     </th>
                 </tr>
             </thead>
-            <tbody ms-each-el="users">
+
+            <tbody ms-if="users.length!=0" ms-each-el="users">
                 <tr ms-attr-data="{{el.Id}}" ms-attr-loginid="{{el.LoginId}}">
                     <td>
                         <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn tip btn-mini"><i class="fam-user-edit"></i></a>
@@ -90,6 +103,7 @@
                     <td ms-text="el.LoginId"></td>
                     <td ms-text="el.Name"></td>
                     <td ms-text="el.Email"></td>
+                    <td ms-text="el.Phone"></td>
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-primary btn-mini" ms-click="swtchLock">
@@ -121,10 +135,15 @@
                     <td ms-text="LastActivityDate"></td>
                 </tr>
             </tbody>
+            <tbody ms-if="users.length==0">
+                <tr>
+                    <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
+                </tr>
+            </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7">
-                        @Html.Pages()
+                    <td colspan="8">
+                        @Html.Pages("page")
                     </td>
                 </tr>
             </tfoot>

@@ -175,7 +175,7 @@ namespace Ornament.Web.MemberShips
             //password 支持不可rHashed
             _passwordFormat =
                 (MembershipPasswordFormat)
-                    Enum.Parse(typeof (MembershipPasswordFormat), GetConfigValue(config["passwordFormat"], "Encrypted"),
+                    Enum.Parse(typeof(MembershipPasswordFormat), GetConfigValue(config["passwordFormat"], "Encrypted"),
                         true);
         }
 
@@ -215,8 +215,7 @@ namespace Ornament.Web.MemberShips
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
             IUserDao userDao = Facotry.CreateUserDao();
-            IList<User> users = userDao.FindAll(pageIndex, pageSize);
-            totalRecords = users.Count;
+            IList<User> users = userDao.Search(new UserSearch(), pageIndex, pageSize, out totalRecords);
             var result = new MembershipUserCollection();
             foreach (User user in users)
             {
@@ -590,7 +589,7 @@ namespace Ornament.Web.MemberShips
 
         private User ToUser(MembershipUser memberShipUser)
         {
-            User result = Facotry.CreateUserDao().GetByLoginId((string) memberShipUser.ProviderUserKey) ??
+            User result = Facotry.CreateUserDao().GetByLoginId((string)memberShipUser.ProviderUserKey) ??
                           new User(memberShipUser.UserName);
 
             result.Name = memberShipUser.ProviderName;

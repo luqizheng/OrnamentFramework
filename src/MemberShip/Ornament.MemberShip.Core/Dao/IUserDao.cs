@@ -55,7 +55,7 @@ namespace Ornament.MemberShip.Dao
         /// <param name="total"></param>
         /// <param name="userSearch"></param>
         /// <returns></returns>
-        IList<User> QuickSearch(int pageIndex, int pageSize, out int total, UserSearch userSearch);
+        IList<User> Search(int pageIndex, int pageSize, out int total, UserSearch userSearch);
 
         /// <summary>
         /// </summary>

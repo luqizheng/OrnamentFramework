@@ -59,7 +59,10 @@ define(function (require) {
             });
             return false;
         };
-
+        vm.search = function (e) {
+            avalon.vmodels.page.nav(0);
+            e.preventDefault();
+        };
         vm.$pageOpts = {
             pageSize: 10,
             search: function (pageIndex, pageSize, func) {
@@ -101,6 +104,7 @@ define(function (require) {
 
     });
 
+   
 
     function find(page, size, content, func) {
         $.get("/MemberShips/User/List", {

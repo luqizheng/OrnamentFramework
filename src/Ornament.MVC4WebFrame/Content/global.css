@@ -26,3 +26,6 @@ td.cd .btn {
         margin-right: 0;
         font-size: 14px;
     }
+    [ms-controller]{
+    display:none
+}

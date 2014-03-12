@@ -183,4 +183,7 @@
   <data name="page_title" xml:space="preserve">
     <value>用戶列表</value>
   </data>
+  <data name="Not_User_Found" xml:space="preserve">
+    <value>找不到符合查詢條件的用戶</value>
+  </data>
 </root>

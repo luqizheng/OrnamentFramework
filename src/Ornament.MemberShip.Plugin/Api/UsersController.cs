@@ -20,21 +20,20 @@ namespace Ornament.MemberShip.Plugin.Api
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match([FromUri] string name,
-            [FromUri] string email,
-            [FromUri] string loginId, [FromUri] string phone)
+        public IEnumerable<object> Match(UserSearch search)
         {
+            int total;
             IList<User> result = _factory.CreateUserDao()
-                .QuickSearch(name, loginId, email, phone, 0, 15);
+                .Search(search, 0, 15, out total);
 
             return from user in result
-                select new
-                {
-                    id = user.Id,
-                    name = user.Name,
-                    email = user.Contact.Email,
-                    loginId = user.LoginId
-                };
+                   select new
+                   {
+                       id = user.Id,
+                       name = user.Name,
+                       email = user.Contact.Email,
+                       loginId = user.LoginId
+                   };
         }
 
         /// <summary>
