@@ -126,4 +126,7 @@
   <data name="ForgetPassword" xml:space="preserve">
     <value>Forget password</value>
   </data>
+  <data name="logonTitle_NotPermission" xml:space="preserve">
+    <value>Not Permission</value>
+  </data>
 </root>

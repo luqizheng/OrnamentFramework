@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -35,12 +36,16 @@ namespace Ornament.Web.SeajsModules
             if (data == null)
                 return "";
             var areaName = (string)data.DataTokens["area"];
+            if (areaName == null)
+                throw new OrnamentException("Cannot find areaName in virtual path " + filePath);
+            areaName = areaName.ToLower();
+            filePath = filePath.ToLower();
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             string resoureContent = filePath.Replace(areaName, AssemblyStartNamespace).TrimStart('/');
             Stream resourceStream = resourceStore.GetResourceStream(resoureContent);
 
             if (resourceStream == null)
-                return string.Format("console.log('Can't find embed file {0} in {1} assembly')",
+                return string.Format("console.log('Cannot find embed file {0} in {1} assembly')",
                     resourceStore.GetFullyQualifiedTypeFromPath(resoureContent), areaName);
 
 

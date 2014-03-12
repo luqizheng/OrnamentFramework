@@ -58,21 +58,23 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
                 OrgOperator.Delete);
 
 
-            Role godPermission = CreateRole(ResourceSetting.AdminRoleAccount, "管理员");
-            godPermission.Permissions.Add(rolePermission);
-            godPermission.Permissions.Add(userPermission);
-            godPermission.Permissions.Add(memberPermission);
-            godPermission.Permissions.Add(permissionPermission);
-            godPermission.Permissions.Add(orgPermission);
-            OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(godPermission);
+
+            Role godRole = CreateRole(ResourceSetting.AdminRoleAccount, "管理员");
+            godRole.Permissions.Add(rolePermission);
+            godRole.Permissions.Add(userPermission);
+            godRole.Permissions.Add(memberPermission);
+            godRole.Permissions.Add(permissionPermission);
+            godRole.Permissions.Add(orgPermission);
+
+            OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(godRole);
 
             UserGroup adminGroup = CreateOrGetUserGroup("admin group");
-            adminGroup.Roles.Add(godPermission);
+            adminGroup.Roles.Add(godRole);
             IUserGroupDao ugDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             ugDao.SaveOrUpdate(adminGroup);
 
             User adminUser = CreateUser(ResourceSetting.AdminRoleAccount, "123456", "admin@admin.com", "admin", "admin");
-            adminUser.Roles.Add(godPermission);
+            adminUser.Roles.Add(godRole);
             adminUser.UserGroups.Add(adminGroup);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Flush();

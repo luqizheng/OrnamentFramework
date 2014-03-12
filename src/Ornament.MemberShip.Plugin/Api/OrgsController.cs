@@ -6,6 +6,7 @@ using NHibernate.Criterion;
 using NHibernate.Mapping;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
+using Ornament.MemberShip.Plugin.Models;
 using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Plugin.Api
@@ -25,17 +26,13 @@ namespace Ornament.MemberShip.Plugin.Api
         public IEnumerable<object> Match(string name, int? page)
         {
             var currentUser = OrnamentContext.MemberShip.CurrentUser();
-            var role = _factory.CreateRoleDao().GetByName(ResourceSetting.AdminAccount);
-            var orgDao = _factory.CreateOrgDao();
-            bool fiandAllOrg = currentUser.InRole(role);
-
-            int page1 = page ?? 0;
-            IEnumerable<Org> result;
-            if (currentUser.Org != null)
+            if (OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Read))
             {
-                result = fiandAllOrg
-                    ? orgDao.Find(name, page1, 10)
-                    : orgDao.Find(currentUser.Org, name, page1, 10);
+                var orgDao = _factory.CreateOrgDao();
+                int pageIndex = page ?? 0;
+                IEnumerable<Org> result = currentUser.Org == null
+                    ? orgDao.Find(name, pageIndex, 10)
+                    : orgDao.Find(currentUser.Org, name, pageIndex, 10);
 
                 var c = from org in result
                         select new
@@ -45,20 +42,14 @@ namespace Ornament.MemberShip.Plugin.Api
                         };
                 return c;
             }
-            else
+            return new List<object>()
             {
-                return new List<object>()
+                new
                 {
-                    new
-                    {
-                        id="",
-                        Name="没有权限访问组织"
-                    }
-                };
-            }
-
-
-
+                    id = "",
+                    Name = "没有权限访问组织"
+                }
+            };
         }
     }
 }

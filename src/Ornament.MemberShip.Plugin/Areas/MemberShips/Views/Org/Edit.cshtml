@@ -30,8 +30,7 @@
 {
     @panel.Body(@<text>
     @Html.ValidationSummary()
-    @using (Html.BeginForm("Save", "Org", FormMethod.Post, new { @class = "form-horizontal" }))
-    {
+    <form class="form-horizontal" method="POST" action="@Url.Action("Save")">
         @Html.HiddenFor(s => s.Id)
         @Html.EditorFor(s => s.Name)
         @Html.EditorFor(s => s.Remark)
@@ -43,7 +42,8 @@
             <button class="btn btn-primary">@Ornament.Properties.Resources.OK</button>
             <button onclick = " location = '@Url.Action("Index")' " class="btn" type="button">@Ornament.Properties.Resources.Cancel</button>
         </div>
-    }
+    </form>
+
     </text>)
 
     

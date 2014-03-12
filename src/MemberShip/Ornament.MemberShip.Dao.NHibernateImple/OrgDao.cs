@@ -46,7 +46,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             const string hql =
                 "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
 
-            var oo = (Int64) CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
+            var oo = (Int64)CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
             return oo > 0;
         }
 
@@ -75,7 +75,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentOutOfRangeException("pageSize", Resources.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
                 throw new ArgumentOutOfRangeException("pageIndex", Resources.PageIndex_should_greater_than_zero_);
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+
+            if (!name.Contains("%"))
+            {
+                name = "%" + name + "%";
+            }
+
+
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<Org>();
         }
@@ -86,6 +93,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentOutOfRangeException("pageSize", Resources.PageSize_should_greater_than_zero);
             if (pageIndex < 0)
                 throw new ArgumentOutOfRangeException("pageIndex", Resources.PageIndex_should_greater_than_zero_);
+
+
+            if (!name.Contains("%"))
+            {
+                name = "%" + name + "%";
+            }
+
+
             string min, max;
             Org.CreateGetChildCondition(scope, out max, out min);
 
@@ -93,7 +108,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .Add(Restrictions.Le(OrderIdProperty, max))
                 .Add(Restrictions.Ge(OrderIdProperty, min))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageIndex*pageSize)
+                .SetFirstResult(pageIndex * pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<Org>();
         }

@@ -8,12 +8,20 @@
     Layout = OrnamentContext.Configuration.BackendLayout();
     Html.EnableUnobtrusiveJavaScript(true);
     Html.EnableClientValidation(true);
+    bool logined = OrnamentContext.MemberShip.CurrentUser() != null;
 }
-
+@if (logined)
+{
+    <style type="text/css">
+        .login {
+            margin-top: 150px;
+        }
+    </style>
+}
 <div class="login">
     <div class="navbar">
         <div class="navbar-inner">
-            <h6><i class="icon-user"></i>@Html.GetResourceString("logonTitle")</h6>
+            <h6><i class="icon-user"></i>@(logined? Html.GetResourceString("logonTitle_NotPermission"):Html.GetResourceString("logonTitle"))</h6>
             <div class="nav pull-right">
                 <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
                 <ul class="dropdown-menu pull-right">

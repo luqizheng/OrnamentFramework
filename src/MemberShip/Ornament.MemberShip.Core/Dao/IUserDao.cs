@@ -18,6 +18,21 @@ namespace Ornament.MemberShip.Dao
         public Expression<Func<object>> Property { get; set; }
     }
 
+    public enum JunctionType
+    {
+        Or,
+        And,
+    }
+    public class UserSearch
+    {
+        public JunctionType Junction { get; set; }
+        public Org Org { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Login { get; set; }
+        public string Phone { get; set; }
+    }
+
     public interface IUserDao : IDao<string, User>
     {
         /// <summary>
@@ -35,40 +50,24 @@ namespace Ornament.MemberShip.Dao
 
         /// <summary>
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="loginid"></param>
-        /// <param name="email"></param>
-        /// <param name="phone"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="total"></param>
+        /// <param name="userSearch"></param>
         /// <returns></returns>
-        IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize,
-                                out int total);
+        IList<User> QuickSearch(int pageIndex, int pageSize, out int total, UserSearch userSearch);
 
         /// <summary>
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="loginid"></param>
-        /// <param name="email"></param>
-        /// <param name="phone"></param>
-        /// <param name="startRecord"></param>
-        /// <param name="recordLength"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        IList<User> QuickSearchOffset(string name, string loginid, string email, string phone, int startRecord,
-                                      int recordLength, out int total, params SortTarget[] sortTargets);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="loginid"></param>
-        /// <param name="email"></param>
-        /// <param name="phone"></param>
+        /// <param name="userSearch"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="total"></param>
+        /// <param name="sortTargets"></param>
         /// <returns></returns>
-        IList<User> QuickSearch(string name, string loginid, string email, string phone, int pageIndex, int pageSize);
+        IList<User> Search(UserSearch userSearch, int pageIndex, int pageSize, out int total, params SortTarget[] sortTargets);
+
+   
 
         /// <summary>
         /// </summary>
@@ -124,22 +123,9 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IList<User> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize);
 
-        IList<User> Search(string loginId, string email, string phone, bool? islockout, bool? isApproved, int? startRow,
-                           int? pageSize);
+ 
 
-        /// <summary>
-        /// </summary>
-        /// <param name="searchProperty"></param>
-        /// <param name="searchValue"></param>
-        /// <param name="isSortAsc"></param>
-        /// <param name="sortProperty"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        IList<User> Search(string searchProperty, string searchValue, bool isSortAsc, string sortProperty, int pageIndex,
-                           int pageSize, out int total);
-
+    
         /// <summary>
         /// </summary>
         /// <param name="userGroup"></param>
@@ -152,21 +138,7 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IList<User> GetUsers(Org org);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        IList<User> FindAll(int pageIndex, int pageSize);
-
-        /// <summary>
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="length"></param>
-        /// <param name="total"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException">length should be larger than 0</exception>
-        IList<User> FindAllOffset(int start, int length, out int total);
+     
 
         /// <summary>
         /// </summary>
