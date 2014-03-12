@@ -25,10 +25,10 @@
         ajax: {
             data: function (term, page) { // page is the one-based page number tracked by Select2
                 return {
-                    name: term + "%",
-                    email: term + "%",
-                    loginId: term + "%",
-                    phone: term + "%",
+                    Name: term ,
+                    Email: term ,
+                    LoginId: term ,
+                    Phone: term ,
                     page: (page - 1), // page number
                 };
             },

@@ -20,8 +20,9 @@ namespace Ornament.MemberShip.Plugin.Api
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match(UserSearch search)
+        public IEnumerable<object> Match([FromUri]UserSearch search)
         {
+            search = search ?? new UserSearch();
             int total;
             IList<User> result = _factory.CreateUserDao()
                 .Search(search, 0, 15, out total);

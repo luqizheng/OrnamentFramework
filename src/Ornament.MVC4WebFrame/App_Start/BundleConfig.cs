@@ -17,9 +17,9 @@ namespace Ornament.MVCWebFrame
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 
-            OrnamentContext.Configuration.SetSeajsCombine(true);
+            OrnamentContext.Configuration.SetSeajsCombine(false);
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
             {
@@ -64,7 +64,7 @@ namespace Ornament.MVCWebFrame
                 new SeajsBundle("~/Scripts/_appLayout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
                     "~/Scripts/Modules/Views/_appLayout.js"));
 
-            
+
         }
 
 

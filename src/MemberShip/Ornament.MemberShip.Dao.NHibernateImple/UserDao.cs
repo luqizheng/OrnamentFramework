@@ -374,21 +374,36 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
             if (!string.IsNullOrEmpty(userSearch.Name))
             {
+                var searchContent = userSearch.Name;
+                if (!searchContent.Contains("%"))
+                {
+                    searchContent = "%" + searchContent + "%";
+                }
                 inSercher = true;
-                userInfo.Add(Restrictions.InsensitiveLike(NameProperty, userSearch.Name));
+                userInfo.Add(Restrictions.InsensitiveLike(NameProperty, searchContent));
             }
 
 
             if (!string.IsNullOrEmpty(userSearch.Email))
             {
+                var searchContent = userSearch.Email;
+                if (!searchContent.Contains("%"))
+                {
+                    searchContent = "%" + searchContent + "%";
+                }
                 inSercher = true;
-                userInfo.Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), userSearch.Email));
+                userInfo.Add(Restrictions.InsensitiveLike(ContactEmailProperty("contact"), searchContent));
             }
 
             if (!string.IsNullOrEmpty(userSearch.Phone))
             {
+                var searchContent = userSearch.Phone;
+                if (!searchContent.Contains("%"))
+                {
+                    searchContent = "%" + searchContent + "%";
+                }
                 inSercher = true;
-                userInfo.Add(Restrictions.InsensitiveLike(ContactPhoneProperty("contact"), userSearch.Phone));
+                userInfo.Add(Restrictions.InsensitiveLike(ContactPhoneProperty("contact"), searchContent));
             }
 
             if (userSearch.Org != null)
