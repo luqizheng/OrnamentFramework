@@ -19,7 +19,7 @@ namespace Ornament.MemberShip.Plugin.Api
         public IEnumerable<object> Match(string name, int? page)
         {
             var page1 = page ?? 0;
-            var result = _factory.CreateRoleDao().Find(name + "%", page1, 10);
+            var result = _factory.CreateRoleDao().Find("%"+ name + "%", page1, 10);
 
             var c = from role in result
 

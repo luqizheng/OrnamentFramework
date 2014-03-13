@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Plugin.Models.Security;
+using Ornament.MemberShip.Plugin.Properties;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Plugin.Api
@@ -20,21 +22,34 @@ namespace Ornament.MemberShip.Plugin.Api
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match([FromUri]UserSearch search)
+        public IEnumerable<object> Match([FromUri] UserSearch search)
         {
-            search = search ?? new UserSearch();
-            int total;
-            IList<User> result = _factory.CreateUserDao()
-                .Search(search, 0, 15, out total);
+            if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Read))
+            {
+                search = search ?? new UserSearch();
+                int total;
+                IList<User> result = _factory.CreateUserDao()
+                    .Search(search, 0, 15, out total);
 
-            return from user in result
-                   select new
-                   {
-                       id = user.Id,
-                       name = user.Name,
-                       email = user.Contact.Email,
-                       loginId = user.LoginId
-                   };
+                return from user in result
+                    select new
+                    {
+                        id = user.Id,
+                        name = user.Name,
+                        email = user.Contact.Email,
+                        loginId = user.LoginId
+                    };
+            }
+            return new object[]
+            {
+                new
+                {
+                    id = Resources.alertMsg_PermissionNotPermintAccessUsers,
+                    name = Resources.alertMsg_PermissionNotPermintAccessUsers,
+                    email = Resources.alertMsg_PermissionNotPermintAccessUsers,
+                    loginId = Resources.alertMsg_PermissionNotPermintAccessUsers
+                }
+            };
         }
 
         /// <summary>

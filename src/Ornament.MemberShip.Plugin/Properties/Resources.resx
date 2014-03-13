@@ -216,4 +216,7 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="alertMsg_PermissionNotPermintAccessUsers" xml:space="preserve">
+    <value>permission denied can not access users</value>
+  </data>
 </root>

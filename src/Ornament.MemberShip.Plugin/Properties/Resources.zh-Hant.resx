@@ -149,42 +149,45 @@
     <value>分配角色</value>
   </data>
   <data name="AssignUserGroup" xml:space="preserve">
-    <value>分配用户</value>
+    <value>分配密碼</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>再一次密碼</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
-    <value>创建时间</value>
+    <value>創建時間</value>
   </data>
   <data name="CurrentPassword" xml:space="preserve">
-    <value>密码</value>
+    <value>密碼</value>
   </data>
   <data name="error_missingEmailAddress" xml:space="preserve">
-    <value>请输入电子邮件</value>
+    <value>請輸入電子郵件</value>
   </data>
   <data name="error_MissLoginId" xml:space="preserve">
-    <value>请输入登录名</value>
+    <value>請輸入登錄名</value>
   </data>
   <data name="error_MissPassword" xml:space="preserve">
-    <value>请输入密码</value>
+    <value>請輸入密碼</value>
   </data>
   <data name="error_notMatchVerifyCode" xml:space="preserve">
-    <value>请输入验证码</value>
+    <value>請輸入驗證碼</value>
   </data>
   <data name="error_UserIsLockout" xml:space="preserve">
-    <value>用户已经被锁定</value>
+    <value>用戶已經被鎖定</value>
   </data>
   <data name="error_UserIsNotApproved" xml:space="preserve">
-    <value>用户的安全信息没有被验证</value>
+    <value>用戶安全信息沒有經過驗證</value>
   </data>
   <data name="input_password_again" xml:space="preserve">
-    <value>请输入确认密码</value>
+    <value>請輸入確認密碼</value>
   </data>
   <data name="label_AccountOrEmail" xml:space="preserve">
     <value>账号或者安全邮箱</value>
   </data>
   <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
     <value>Child Org's Count</value>
+  </data>
+  <data name="alertMsg_PermissionNotPermintAccessUsers" xml:space="preserve">
+    <value>沒有足夠的權限訪問用戶信息</value>
   </data>
 </root>

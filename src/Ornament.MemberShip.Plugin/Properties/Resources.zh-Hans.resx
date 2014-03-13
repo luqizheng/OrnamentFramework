@@ -235,4 +235,7 @@
   <data name="LastActivityTime" xml:space="preserve">
     <value>最后活动时间</value>
   </data>
+  <data name="alertMsg_PermissionNotPermintAccessUsers" xml:space="preserve">
+    <value>没有足够的权限访问用户信息</value>
+  </data>
 </root>
