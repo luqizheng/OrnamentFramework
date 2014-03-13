@@ -18,6 +18,7 @@ namespace Ornament.Web
             _combineSeajs = combine;
         }
 
+
         /// <summary>
         ///     是否启动Seajs压缩
         /// </summary>

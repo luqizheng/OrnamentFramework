@@ -23,25 +23,29 @@ namespace Ornament.Web.SeajsModules
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
             string filePath = context.HttpContext.Request.CurrentExecutionFilePath;
-            RouteData data = RouteUtils.GetRouteDataByUrl(filePath);
-            if (data == null)
+            var areaName = GetAreaName(filePath);
+            if (areaName == null)
                 return "";
-            return BuildBundleContent(context.HttpContext.Request.CurrentExecutionFilePath);
+            return BuildBundleContent(context.HttpContext.Request.CurrentExecutionFilePath, areaName);
         }
 
         public string BuildBundleContent(string filePath)
         {
+            var areaName = GetAreaName(filePath);
+            return BuildBundleContent(filePath, areaName);
+        }
 
-            RouteData data = RouteUtils.GetRouteDataByUrl(filePath);
-            if (data == null)
-                return "";
-            var areaName = (string)data.DataTokens["area"];
+        public string BuildBundleContent(string filePath, string areaName)
+        {
             if (areaName == null)
                 throw new OrnamentException("Cannot find areaName in virtual path " + filePath);
+
             areaName = areaName.ToLower();
             filePath = filePath.ToLower();
+
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
-            string resoureContent = filePath.Replace(areaName, AssemblyStartNamespace).TrimStart('/');
+
+            string resoureContent = AssemblyStartNamespace + filePath.TrimStart('/').Substring(areaName.Length);
             Stream resourceStream = resourceStore.GetResourceStream(resoureContent);
 
             if (resourceStream == null)
@@ -53,6 +57,22 @@ namespace Ornament.Web.SeajsModules
             {
                 return stream.ReadToEnd();
             }
+        }
+
+        private string GetAreaName(string virtualPath)
+        {
+            if (!virtualPath.StartsWith("~"))
+            {
+                virtualPath = "~" + virtualPath;
+            }
+
+            var bundle = BundleTable.Bundles.GetBundleFor(virtualPath);
+            var seajsEmbedBundle = bundle as SeajsEmbedBundle;
+            if (seajsEmbedBundle != null)
+            {
+                return seajsEmbedBundle.AreaName;
+            }
+            return null;
         }
     }
 }

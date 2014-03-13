@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Resources;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Ornament.Web.PortableAreas
@@ -62,17 +63,28 @@ namespace Ornament.Web.PortableAreas
             }
             return null;
         }
-
+        /// <summary>
+        /// 查找某个命名空间下面的js，因此js的文件名称只能是 xxx.js,而不能带有点的文件名称，否则他们会被认为是另外一个命名空间
+        /// </summary>
+        /// <param name="namespaceInSearch"></param>
+        /// <param name="extendJs"></param>
+        /// <returns></returns>
         public string[] MatchPath(string namespaceInSearch, string extendJs)
         {
             var list = new List<string>();
             namespaceInSearch = namespaceInSearch.ToLower();
             foreach (var dict in this.resources.Keys)
             {
+
                 if (dict.StartsWith(namespaceInSearch) && dict.EndsWith(extendJs))
                 {
-                    list.Add(dict.Replace(namespaceInSearch+".", ""));
+                    var pos = dict.IndexOf(".", namespaceInSearch.Length + 1, dict.Length - extendJs.Length - namespaceInSearch.Length - 1, System.StringComparison.Ordinal);
+                    if (pos == -1)
+                    {
+                        list.Add(dict.Replace(namespaceInSearch + ".", ""));
+                    }
                 }
+
             }
             return list.ToArray();
         }
@@ -80,7 +92,7 @@ namespace Ornament.Web.PortableAreas
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resourceName);
 
-            string actualResourceName = null;
+             string actualResourceName = null;
 
             if (resources.TryGetValue(fullResourceName, out actualResourceName))
             {
