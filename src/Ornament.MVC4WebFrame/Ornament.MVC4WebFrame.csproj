@@ -287,9 +287,10 @@
     <Content Include="Content\templates\metralab\font\myriadproit.svg" />
     <Content Include="Content\templates\metralab\font\myriadprolight.svg" />
     <Content Include="Content\templates\metralab\font\myriadproregular.svg" />
+    <Content Include="Content\templates\pannonia\css\select2.css" />
     <Content Include="Content\templates\pannonia\css\datepicker.css" />
     <Content Include="Content\templates\pannonia\css\select2-bootstrap.css" />
-    <Content Include="Content\templates\pannonia\css\select2.css" />
+    <Content Include="Content\templates\pannonia\css\select2-old.css" />
     <Content Include="Content\templates\pannonia\css\StyleSheet1.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Components\avalon.js" />

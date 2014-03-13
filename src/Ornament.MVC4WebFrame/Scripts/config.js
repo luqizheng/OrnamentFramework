@@ -47,7 +47,7 @@
         "membership": "/scripts/ctrls/memberships.js",
         "formInput": "/scripts/ctrls/form.js",
         //components 不依赖jquery
-        "ckeditor": "/scripts/ckeditor/ckeditor.js",
+        "ckeditor": "/scripts/ckeditor/ckeditor.js"
     }
 });
 
