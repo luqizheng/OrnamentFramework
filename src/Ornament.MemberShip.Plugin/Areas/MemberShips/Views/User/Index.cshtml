@@ -18,8 +18,8 @@
 
 @section scripts 
 {
-    @* @Html.Partial("_pm")*@
-
+    @Scripts.Render("/Scripts/avalon.js")
+    <script type="text/javascript"> avalon.config({ loader: false })   </script>
     <script type="text/javascript">
 
         var multiLanguate = {

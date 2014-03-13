@@ -531,6 +531,7 @@
     <Content Include="Scripts\ckeditor\skins\moono\images\close.png" />
     <Content Include="Scripts\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\Fx\jquery-1.11.0.js" />
     <Content Include="Scripts\Modules\Combine\pagination.js" />
     <Content Include="Scripts\Modules\Combine\PersonalMessage.js" />
     <Content Include="Scripts\Modules\Combine\ajaxErrorHandler.js" />
@@ -557,7 +558,6 @@
     <Content Include="Scripts\plugins\forms\jquery.validate\valid.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\plugins\forms\jquery.bootstrap.datepicker\bootstrap-datepicker.js" />
-    <Content Include="Scripts\Fx\jquery-1.10.2.js" />
     <Content Include="Scripts\Components\html5shiv.js" />
     <Content Include="CodeTemplates\AddView\CSHTML\oCreate.tt" />
     <Content Include="CodeTemplates\AddView\CSHTML\oDelete.tt" />

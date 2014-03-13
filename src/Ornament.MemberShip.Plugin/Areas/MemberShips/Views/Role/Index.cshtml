@@ -69,6 +69,8 @@
     </div>
 </div>
 @section scripts{
+     @Scripts.Render("/Scripts/avalon.js")
+    <script type="text/javascript"> avalon.config({ loader: false })   </script>
     <script type="text/javascript">
         seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("/MemberShips/Scripts/Role/index.js")")
     </script>
