@@ -1,4 +1,5 @@
-﻿@using Ornament
+﻿@using System.Web.Optimization
+@using Ornament
 @using Ornament.MemberShip.Permissions
 
 @using Ornament.MemberShip.Plugin.Areas.MemberShips.Models
@@ -104,6 +105,8 @@
 
 @section scripts
 {
+      @Scripts.Render("~/Scripts/avalon.js")
+    <script type="text/javascript"> avalon.config({ loader: false })   </script>
     <script type="text/javascript">
 
         var opts = {

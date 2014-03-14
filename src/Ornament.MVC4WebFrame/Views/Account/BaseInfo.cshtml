@@ -1,41 +1,35 @@
-﻿@using System.Security.AccessControl
-@using Ornament.Web
-@using Resources
-@using Ornament.Web.HtmlExtends;
+﻿@using Resources
 @model Ornament.MemberShip.User
 @{
     var emailAttr = new Dictionary<string, object>
     {
         {"ms-duplex", "user.Email"}
     };
-    var nameAttr = new Dictionary<string, object>()
+    var nameAttr = new Dictionary<string, object>
     {
-        {"ms-duplex","user.Name"}
+        {"ms-duplex", "user.Name"}
     };
-    var phoneAttr = new Dictionary<string, object>()
+    var phoneAttr = new Dictionary<string, object>
     {
-        {"ms-duplex","user.Phone"}
+        {"ms-duplex", "user.Phone"}
     };
     var languageAttr = new
     {
         HtmlAttributes =
-        new Dictionary<string, object>()
-    {
-        {"ms-duplex","user.Language"}
-    }
+            new Dictionary<string, object>
+            {
+                {"ms-duplex", "user.Language"}
+            }
     };
     var timezoneAttr = new
     {
-        HtmlAttributes = new Dictionary<string, object>()
+        HtmlAttributes = new Dictionary<string, object>
         {
-
             {"ms-duplex", "user.TimeZone"}
         }
     };
-    
 }
-<form class="form-horizontal" ms-controller="basicInfo" ms-on-submit="save" >
-
+<form class="form-horizontal" ms-controller="basicInfo" ms-on-submit="save">
     <div class="control-group">
         @Html.LabelFor(s => s.Name, new { @class = " control-label" })
         <div class="controls">
@@ -65,7 +59,6 @@
     @Html.EditorFor(s => s.Language, languageAttr)
     @Html.EditorFor(s => s.TimeZoneId, timezoneAttr)
     <div class="form-actions">
-        <button class="btn btn-primary" data-loading-text="saving..." >@Basic.Save</button>
+        <button class="btn btn-primary" data-loading-text="saving...">@Basic.Save</button>
     </div>
 </form>
-

@@ -13,21 +13,17 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         #region IDataInitializer Members
 
-        public string Name
+        public virtual string Name
         {
             get { return "Initialze Membership"; }
         }
 
-        public bool IsNeedInitialize
+        public virtual bool IsNeedInitialize
         {
-            get
-            {
-                User user = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId("admin");
-                return user == null;
-            }
+            get { return true; }
         }
 
-        public void CreateData()
+        public virtual void CreateData()
         {
             InitMemberShip();
         }
@@ -79,12 +75,12 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
             adminUser.UserGroups.Add(adminGroup);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Flush();
-
+            //组织管理员
             var roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
             var orgRole = CreateRole(ResourceSetting.Org, "组织单元管理员");
             orgRole.Permissions.Add(orgPermission);
             roleDao.SaveOrUpdate(orgRole);
-            
+
         }
 
         private User CreateUser(string username, string password, string email

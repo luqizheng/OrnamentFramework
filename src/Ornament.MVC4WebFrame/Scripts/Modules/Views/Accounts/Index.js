@@ -48,6 +48,7 @@ define(function (require) {
         //初始化
         baseInfo.user.load();
         messages = opts.messages;
+        
     };
 
 
