@@ -1,8 +1,9 @@
 ﻿@using Ornament
 @using Ornament.Properties
 
+@using Ornament.Web.UI.Theme
 @using Qi.Web.Mvc
-@model Ornament.MemberShip.UserGroup
+@model Ornament.MemberShip.Plugin.Models.Memberships.UserGroupModel
 @{
     ViewBag.Title = Resources.Create + Ornament.MemberShip.Properties.Resources.UserGroup;
     Layout = OrnamentContext.Configuration.BackendLayout();
@@ -13,17 +14,26 @@
         @Resources.Create @Ornament.MemberShip.Properties.Resources.UserGroup
     </h3>
 }
-<form class="form-horizontal" method="POST">
-    @Html.ValidationSummary(true)
+@using (var panel = Html.Panel())
+{
+    @panel.Header(@<text>
+    <button class="btn" type="submit">@Ornament.Properties.Resources.Create</button>
+    <a href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i>@Resources.Cancel</a>
+    </text>)
+    @panel.Body(@<text>
+    <form class="form-horizontal" method="POST">
+        @Html.ValidationSummary(true)
 
-   
-            @Html.EditorFor(model => model.Name)
-        
-            @Html.EditorFor(model => model.Remarks)
-      
-    <div class="form-actions">
-        <button class="btn btn-primary" type="submit">
-            <i class="icon-plus icon-white"></i>@Ornament.Properties.Resources.Create</button>
-        <a href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i>@Resources.Cancel</a>
-    </div>
-</form>
+
+        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(s => s.Roles)
+        @Html.EditorFor(model => model.Remark)
+
+        <div class="form-actions">
+            <button class="btn btn-primary" type="submit">
+                <i class="icon-plus icon-white"></i>@Ornament.Properties.Resources.Create</button>
+            <a href="@Url.Action("index")" class="btn btn-warning" type="button"><i class="icon-white icon-warning-sign"></i>@Resources.Cancel</a>
+        </div>
+    </form>
+    </text>)
+}

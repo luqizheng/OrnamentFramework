@@ -42,6 +42,7 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The roles.
         /// </value>
+        [UIHint("Role[]")]
         public virtual Iesi.Collections.Generic.ISet<Role> Roles
         {
             get { return _roles ?? (_roles = new HashedSet<Role>()); }

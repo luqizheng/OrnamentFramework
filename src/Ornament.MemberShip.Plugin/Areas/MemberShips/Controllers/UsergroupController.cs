@@ -61,11 +61,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [HttpPost]
         [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        public ActionResult Create(UserGroup userGroup)
+        public ActionResult Create(UserGroupModel userGroup)
         {
             if (ModelState.IsValid)
             {
-                _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
+                userGroup.Save(_factory.CreateUserGroupDao());
+                
                 return RedirectToAction("Index");
             }
             return View(userGroup);
