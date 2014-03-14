@@ -36,25 +36,25 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         private void InitMemberShip()
         {
-            Permission userPermission = CreatePermission(ResourceSetting.User, "用户完全控制许可", "用户管理员,所有与用户有关的权限、分组、组织单元",
+            Permission userPermission = CreatePermission(ResourceSetting.User, "用户管理员许可", "用户管理员,所有与用户有关的权限、分组、组织单元",
                 UserOperator.Approve | UserOperator.Lock | UserOperator.Modify |
                 UserOperator.Read | UserOperator.SetPassword |
                 UserOperator.Delete |
                 UserOperator.ReadPrivat);
 
-            Permission rolePermission = CreatePermission(ResourceSetting.Role, "角色完全控制许可", "角色完全控制,包括分配，删除、新增操作",
+            Permission rolePermission = CreatePermission(ResourceSetting.Role, "角色管理员许可", "角色完全控制,包括分配，删除、新增操作",
                 RoleOperator.Assign | RoleOperator.Modify | RoleOperator.Read);
 
-            Permission memberPermission = CreatePermission(ResourceSetting.Account, "账户维护许可证", "用户管理自己本身信息的许可证",
+            Permission memberPermission = CreatePermission(ResourceSetting.Account, "账户管理员可证", "用户管理自己本身信息的许可证",
                 AccountOperator.ChangePassword |
                 AccountOperator.ViewPermission |
                 AccountOperator.ChangePrivateInfo);
 
-            Permission permissionPermission = CreatePermission(ResourceSetting.Permission, "许可证完全控制", "许可证完全控制",
+            Permission permissionPermission = CreatePermission(ResourceSetting.Permission, "许可证管理员", "许可证完全控制",
                 PermissionOperator.Read | PermissionOperator.Delete |
                 PermissionOperator.Edit);
 
-            Permission orgPermission = CreatePermission(ResourceSetting.Org, "组织管理证书", "用户所在部门及下属部门都可以控制",
+            Permission orgPermission = CreatePermission(ResourceSetting.Org, "组织管理许可", "用户所在部门及下属部门都可以控制",
                 OrgOperator.Delete);
 
 
@@ -68,8 +68,9 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
             OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().SaveOrUpdate(godRole);
 
-            UserGroup adminGroup = CreateOrGetUserGroup("admin group");
+            UserGroup adminGroup = CreateUserGroup("admin group");
             adminGroup.Roles.Add(godRole);
+
             IUserGroupDao ugDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             ugDao.SaveOrUpdate(adminGroup);
 
@@ -78,6 +79,12 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
             adminUser.UserGroups.Add(adminGroup);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Flush();
+
+            var roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+            var orgRole = CreateRole(ResourceSetting.Org, "组织单元管理员");
+            orgRole.Permissions.Add(orgPermission);
+            roleDao.SaveOrUpdate(orgRole);
+            
         }
 
         private User CreateUser(string username, string password, string email
@@ -94,7 +101,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
             return userDao.GetByLoginId(username);
         }
 
-        protected UserGroup CreateOrGetUserGroup(string name)
+        protected UserGroup CreateUserGroup(string name)
         {
             IUserGroupDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
             UserGroup ug = dao.GetByName(name);

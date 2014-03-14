@@ -30,7 +30,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         /// <returns></returns>
         public IList<Org> GetRootOrgs()
         {
-            return CreateCriteria().Add(Restrictions.IsNull(OrderIdProperty)).List<Org>();
+            return CreateCriteria().Add(Restrictions.IsNull(ParentProperty)).List<Org>();
         }
 
         public bool InUse(string orgId)

@@ -29,6 +29,20 @@ namespace Ornament.MemberShip
         {
         }
 
+        private string _id;
+        public override string Id
+        {
+            get { return _id; }
+            protected set
+            {
+                _id = value;
+                if (String.IsNullOrEmpty(OrderId))
+                {
+                    OrderId = _id;
+                }
+            }
+        }
+
         /// <summary>
         /// </summary>
         public virtual Org Parent { get; protected internal set; }
