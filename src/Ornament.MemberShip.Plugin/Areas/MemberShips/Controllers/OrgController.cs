@@ -22,7 +22,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         //
         // GET: /Orgs/
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgListTitle",
-            ParentKey = "MemberShips", Key = "Org",Order=4,
+            ParentKey = "MemberShips", Key = "Org", Order = 4,
             Resource = "Org", Operator = OrgOperator.Read), ResourceAuthorize(OrgOperator.Read, "Org")]
         public ActionResult Index(string id)
         {
@@ -30,7 +30,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 IList<Org> orgs = _factory.CreateOrgDao().GetRootOrgs();
                 ViewData["Orgs"] = orgs;
-                return View((Org) null);
+                return View((Org)null);
             }
             Org org = _factory.CreateOrgDao().Get(id);
             ViewData["Orgs"] = org.Childs;
@@ -76,8 +76,13 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 IOrgDao orgDao = _factory.CreateOrgDao();
                 org.Save(orgDao);
-                return RedirectToAction("Index");
+                if (org.Parent == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Index", new { id = org.Parent.Id });
             }
+
             return View(String.IsNullOrEmpty(org.Id) ? "Create" : "Edit", org);
         }
     }

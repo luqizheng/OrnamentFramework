@@ -76,7 +76,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
             int total;
 
-            UserSearch userSearch=new UserSearch();
+            UserSearch userSearch = new UserSearch();
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";
@@ -86,10 +86,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 userSearch.Login = search;
                 userSearch.Phone = search;
                 userSearch.Junction = JunctionType.Or;
-                userSearch.Org = OrnamentContext.MemberShip.CurrentUser().Org;
+
 
             }
-
+            userSearch.Org = OrnamentContext.MemberShip.CurrentUser().Org;
 
             IList<User> userResult = _userDao.Search(userSearch, page.Value, size.Value, out total);
 
@@ -119,7 +119,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        
+
 
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
