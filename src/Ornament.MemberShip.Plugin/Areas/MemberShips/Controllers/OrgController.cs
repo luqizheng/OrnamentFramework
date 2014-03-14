@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
@@ -23,6 +24,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // GET: /Orgs/
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgListTitle",
             ParentKey = "MemberShips", Key = "Org", Order = 4,
+            DynamicNodeProvider = "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
             Resource = "Org", Operator = OrgOperator.Read), ResourceAuthorize(OrgOperator.Read, "Org")]
         public ActionResult Index(string id)
         {
@@ -35,6 +37,20 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             Org org = _factory.CreateOrgDao().Get(id);
             ViewData["Orgs"] = org.Childs;
             return View(org);
+        }
+
+
+        [ResourceAuthorize(OrgOperator.Modify, "Org")]
+        [OrnamentMvcSiteMapNode(DynamicNodeProvider = "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
+            Title = "$resources:membership.sitemap,orgEditTitle"
+            , ParentKey = "Org")]
+        public ActionResult Details(string id)
+        {
+            IOrgDao orgDao = _factory.CreateOrgDao();
+            Org org = orgDao.Get(id);
+            var users = _factory.CreateUserDao().GetUsers(org);
+            ViewData["ParentOrg"] = org.Parent;
+            return View(new OrgDetailsModel(org, users));
         }
 
         [ResourceAuthorize(OrgOperator.Modify, "Org")]

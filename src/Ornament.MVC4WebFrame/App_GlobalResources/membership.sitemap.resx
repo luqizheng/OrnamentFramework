@@ -204,4 +204,7 @@
   <data name="permissionDeleteTitle" xml:space="preserve">
     <value>Delete Permission</value>
   </data>
+  <data name="groupDetailsTitle" xml:space="preserve">
+    <value>Details</value>
+  </data>
 </root>

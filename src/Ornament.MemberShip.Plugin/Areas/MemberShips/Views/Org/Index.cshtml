@@ -1,14 +1,16 @@
-﻿@using Ornament
+﻿@using NHibernate.Mapping
+@using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
-@using Ornament.Web.HtmlExtends
+@using Ornament.Properties
+@using Ornament.Web
 @using Ornament.Web.UI.Theme
 @model Ornament.MemberShip.Org
 @{
-    ViewBag.Title = "Organization";
+    ViewBag.Title = Html.GetResourceString("Page_title");
     Layout = OrnamentContext.Configuration.BackendLayout();
     string parentId = Model != null ? Model.Id : "";
-    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]);
+    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
 @section pageTitle
@@ -25,12 +27,12 @@
         @Html.Partial("OrgNavigator", Model)
     </span>
 }
-@using (var box = Html.Panel())
+@using (Panel box = Html.Panel())
 {
     @box.Header(
         @<text>
-    <a  class="btn btn-primary" href="@Url.Action("Create", new { parentId })"><i class="icon-white icon-plus"></i>
-        @Ornament.Properties.Resources.Create
+    <a class="btn btn-primary" href="@Url.Action("Create", new { parentId })"><i class="icon-white icon-plus"></i>
+        @Resources.Create
     </a>
     </text>)
 
@@ -38,7 +40,6 @@
 
     @if (childOrgs.Count() != 0)
     {
-        
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -71,7 +72,6 @@
                 </tr>
             }
         </table>
-        
     }
     else
     {

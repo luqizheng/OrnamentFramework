@@ -1,0 +1,100 @@
+﻿@using Ornament
+@using Ornament.Properties
+@using Ornament.Web.UI.Theme
+@model Ornament.MemberShip.Plugin.Models.Memberships.UserGroupDetailInfor
+@{
+    ViewBag.Title = Model.Name;
+    Layout = OrnamentContext.Configuration.BackendLayout();
+}
+@section pageTitle
+{
+    <h5>@Model.Name</h5>
+}
+
+
+
+@using (var panel = Html.Panel())
+{
+    
+    @panel.Header(@<text>
+    <h4>Basic Information:
+    </h4>
+    </text>)
+
+    @panel.Body(@<text>
+    <dl class="dl-horizontal">
+        <dt>Name:</dt>
+        <dd>@Model.Name</dd>
+        <dt>Remarks:</dt>
+        <dd>@Model.Remark</dd>
+    </dl>
+    </text>)
+    
+}
+
+
+
+
+<div class="row-fluid">
+
+    <div class="span6">
+        @using (var panel = Html.Panel())
+        {
+            @panel.Header(@<text>
+            <h4>Roles</h4>
+            </text>)
+            @panel.Body(@<text>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name:</th>
+                        <th>Remarks:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.Roles)
+                    {
+                        <tr>
+                            <td>@a.Name</td>
+                            <td>@a.Remarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </text>)
+        }
+
+
+    </div>
+
+    <div class="span6">
+
+        @using (var panel = Html.Panel())
+        {
+            @panel.Header(@<text>
+            <h4>Users</h4>
+            </text>)
+            @panel.Body(@<text>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name:</th>
+                        <th>Remarks:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.Users)
+                    {
+                        <tr>
+                            <td>@a.Name</td>
+                            <td>@a.Remarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </text>)
+        }
+
+
+    </div>
+</div>

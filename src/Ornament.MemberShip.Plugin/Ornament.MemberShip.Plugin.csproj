@@ -169,12 +169,14 @@
     <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
     <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
+    <Compile Include="Areas\MemberShips\Models\OrgDetailsModel.cs" />
     <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
     <Compile Include="Areas\MemberShips\Models\ResourceSetting.cs" />
     <Compile Include="Areas\MemberShips\MemberShipAreaRegistration.cs" />
     <Compile Include="Models\AccountOperator.cs" />
     <Compile Include="Models\MembershipsExtensions.cs" />
     <Compile Include="Models\Memberships\RoleModel.cs" />
+    <Compile Include="Models\Memberships\UserGroupDetailInfor.cs" />
     <Compile Include="Models\SampleData\MemberShipData.cs" />
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
@@ -197,6 +199,7 @@
     <Compile Include="Models\Security\RetrievePasswordModel.cs" />
     <Compile Include="Models\Security\VerifyEmailModel.cs" />
     <Compile Include="Models\Security\VerifyResult.cs" />
+    <Compile Include="Models\SiteMapNodes\OrgNode.cs" />
     <Compile Include="Models\UserGroupOperator.cs" />
     <Compile Include="Models\UserOperator.cs" />
     <Compile Include="Models\VerifyCodeRequireAttribute.cs" />
@@ -214,6 +217,9 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hant.resx" />
@@ -355,6 +361,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\MemberShips\Views\Org\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

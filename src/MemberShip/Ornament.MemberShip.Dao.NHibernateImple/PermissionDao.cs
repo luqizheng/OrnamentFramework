@@ -63,17 +63,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<Permission> GetUserPermissions(string loginid, object resourceObject)
         {
             DetachedCriteria user =
-                GetUserPermissions(loginid).SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                GetUserPermissions(loginid).SetProjection(Projections.Property("permission.Id"));
             ;
 
             DetachedCriteria ug =
-                GetUserGroupPermisssions(loginid).SetProjection(
-                    Projections.Distinct(Projections.Id()));
+                GetUserGroupPermisssions(loginid)
+                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
             ;
 
             DetachedCriteria org =
                 GetUserOrgPermissions(loginid)
-                    .SetProjection(Projections.Distinct(Projections.Id()));
+                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
             ;
 
 
@@ -103,7 +103,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         }
 
         #endregion
-
+        /// <summary>
+        /// Criteria Path is Org/role/permission
+        /// </summary>
+        /// <param name="loginid"></param>
+        /// <returns></returns>
         public DetachedCriteria GetUserOrgPermissions(string loginid)
         {
             return DetachedCriteria.For<User>().Add(Restrictions.Eq(UserLoginidProperty, loginid))
@@ -111,7 +115,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .CreateCriteria("org.Roles", "role")
                 .CreateCriteria("Permissions", "permission");
         }
-
+        /// <summary>
+        ///  Criteria Path is Org/role/permission
+        /// </summary>
+        /// <param name="loginid"></param>
+        /// <returns></returns>
         public DetachedCriteria GetUserGroupPermisssions(string loginid)
         {
             return DetachedCriteria.For<User>().Add(Restrictions.Eq(UserLoginidProperty, loginid))

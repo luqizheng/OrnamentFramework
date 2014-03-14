@@ -3,23 +3,25 @@
 
 @if (Model != null)
 {
+    var orgs = new Stack<Org>();
     Org current = Model;
-    <ul class="breadcrumb">
-        <li style="background: none">
-            @Html.ActionLink("root", "Index", "Org", new { id = "", area = "MemberShips" }, null)
-
-        </li>
-        @{
     while (current != null)
     {
-        bool hasParent = current.Parent != null;
-        Org item = current;
+        orgs.Push(current);
         current = current.Parent;
-
-
-            <li @(!hasParent ? "class=active" : "")>
-                @Html.ActionLink(item.Name, "Index", "Org", new { id = item.Id }, null)
-
+    }
+    
+    <ul class="breadcrumb">
+        <li style="background: none">
+            @Html.ActionLink("组织单元列表", "Index", "Org", new { id = "", area = "MemberShips" }, null)
+        </li>
+        @{
+    while (orgs.Count != 0)
+    {
+        current = orgs.Pop();
+        bool last = orgs.Count == 0;
+            <li @(last ? "class=active" : "")>
+                @Html.ActionLink(current.Name, "Index", "Org", new { id = current.Id }, null)
             </li>
     }
         }

@@ -13,13 +13,29 @@ namespace Ornament.Web.UI.Theme
         private readonly HtmlHelper _helper;
         private readonly string _templateName;
 
-        public Panel(HtmlHelper helper, string templateName)
+        public Panel(HtmlHelper helper, string templateName, params string[] classNames)
         {
             _helper = helper;
             _templateName = templateName;
             ViewContext context = helper.ViewContext;
             _builder = new TagBuilder("div");
-            _builder.AddCssClass("widget");
+            if (classNames == null || classNames.Length == 0)
+            {
+                classNames = new[] { "widget" };
+            }
+            var includeWidget = false;
+            foreach (var cls in classNames)
+            {
+                if (cls == "widget")
+                {
+                    includeWidget = true;
+                }
+                _builder.AddCssClass(cls);
+            }
+            if (!includeWidget)
+            {
+                _builder.AddCssClass("widget");
+            }
             context.Writer.Write(_builder.ToString(TagRenderMode.StartTag));
             _context = context;
         }
@@ -59,7 +75,7 @@ namespace Ornament.Web.UI.Theme
         /// <returns></returns>
         private string PartialViewPath(string viewType)
         {
-            var a= string.Format("~/Views/Shared/DisplayTemplates/{0}/{2}/{1}", _templateName, viewType + ".cshtml","Panel");return a;
+            var a = string.Format("~/Views/Shared/DisplayTemplates/{0}/{2}/{1}", _templateName, viewType + ".cshtml", "Panel"); return a;
         }
     }
 }

@@ -204,4 +204,7 @@
   <data name="permissionDeleteTitle" xml:space="preserve">
     <value>删除许可证</value>
   </data>
+  <data name="groupDetailsTitle" xml:space="preserve">
+    <value>详细</value>
+  </data>
 </root>

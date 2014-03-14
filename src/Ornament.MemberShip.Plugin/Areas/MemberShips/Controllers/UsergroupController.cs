@@ -38,12 +38,18 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
 
+
+
         //
         // GET: /Usergroups/Details/5
+         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupDetailsTitle", ParentKey = "Usergroup",
+            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Details(string id)
         {
+
             UserGroup ug = _factory.CreateUserGroupDao().Get(id);
-            return Json(ug);
+            var users = _factory.CreateUserDao().GetUsers(ug);
+            return View(new UserGroupDetailInfor(ug, users) { });
         }
 
         //
@@ -66,7 +72,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             if (ModelState.IsValid)
             {
                 userGroup.Save(_factory.CreateUserGroupDao());
-                
+
                 return RedirectToAction("Index");
             }
             return View(userGroup);

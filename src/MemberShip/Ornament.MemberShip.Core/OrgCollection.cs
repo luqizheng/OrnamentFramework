@@ -48,8 +48,8 @@ namespace Ornament.MemberShip
                 throw new ArgumentNullException();
             }
             o.Parent = Self;
-                SetOrderId(Self, o);
-            
+            SetOrderId(Self, o);
+
             return base.Add(o);
         }
 
@@ -77,7 +77,7 @@ namespace Ornament.MemberShip
             }
             else
             {
-                newChild.OrderId = self.OrderId + "." + self.Id;
+                newChild.OrderId = self.OrderId + "." + newChild.Id;
             }
         }
     }
