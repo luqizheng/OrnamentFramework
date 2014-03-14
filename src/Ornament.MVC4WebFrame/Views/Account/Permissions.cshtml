@@ -5,9 +5,10 @@
     Layout = "~/Views/Shared/Empty.cshtml";
 }
 
-<ul style="padding-top:10px">
-@foreach (var p in this.Model)
-{
-    <li>@p.Name</li>
-}
-</ul>
+<dl style="padding-top: 10px">
+    @foreach (var p in this.Model)
+    {
+        <dt>@p.Name</dt>
+        <dd>@p.Remark</dd>
+    }
+</dl>
