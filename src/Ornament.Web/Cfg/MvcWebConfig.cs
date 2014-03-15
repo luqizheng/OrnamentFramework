@@ -13,6 +13,7 @@ using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Validations;
 using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
+using Ornament.Web.Messages;
 using Ornament.Web.ModelBinder;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
@@ -59,7 +60,7 @@ namespace Ornament.Web.Cfg
 
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
-
+            SeajsModuleBundleMessageHandle.HandlAllBundle();
         }
 
         //private static void AddProtableMessageHandler()

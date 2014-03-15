@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Optimization;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
 
@@ -30,14 +31,13 @@ namespace Ornament.Web
             _protablAreaRegistration = protablAreaRegistration;
             _assemblyRootNamespace = assemblyRootNamespace;
             _context = context;
-
-            protablAreaRegistration.RegistedEmbedResource += protablAreaRegistration_RegistedEmbedResource;
+            protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
         }
 
-        private void protablAreaRegistration_RegistedEmbedResource(object sender, EventArgs e)
+        private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
         {
-            ResgistSeajsFiles();
-            ((PortableAreaRegistration)sender).RegistedEmbedResource -= protablAreaRegistration_RegistedEmbedResource;
+            ResgistSeajsFiles(e.Bus);
+            ((PortableAreaRegistration)sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Ornament.Web
             _seajsEmbeddedModulePath.Add(path.Trim('/'));
         }
 
-        protected void ResgistSeajsFiles()
+        protected void ResgistSeajsFiles(IApplicationBus bus)
         {
             foreach (string path in _seajsEmbeddedModulePath)
             {
@@ -103,8 +103,15 @@ namespace Ornament.Web
                 foreach (string file in files)
                 {
                     string filePath = string.Format("~/{0}/{1}", virtualPath, file);
-                    BundleTable.Bundles.Add(new SeajsEmbedBundle(filePath, _assemblyRootNamespace, _context.AreaName,
-                        OrnamentContext.Configuration.GetSeajsCombine()));
+
+                    var bundle = new SeajsEmbedBundle(filePath,
+                        _assemblyRootNamespace,
+                        _context.AreaName,
+                        OrnamentContext.Configuration.GetSeajsCombine()
+                        );
+
+                    var message = new SeajsModuleBundleEventMessage(bundle);
+                    bus.Send(message);
                 }
             }
         }

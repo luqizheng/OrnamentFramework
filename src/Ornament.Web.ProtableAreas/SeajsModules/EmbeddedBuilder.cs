@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Web.Optimization;
-using System.Web.Routing;
 using Ornament.Web.PortableAreas;
-using SeajsBundles;
 
 namespace Ornament.Web.SeajsModules
 {
@@ -23,7 +20,7 @@ namespace Ornament.Web.SeajsModules
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
             string filePath = context.HttpContext.Request.CurrentExecutionFilePath;
-            var areaName = GetAreaName(filePath);
+            string areaName = GetAreaName(filePath);
             if (areaName == null)
                 return "";
             return BuildBundleContent(context.HttpContext.Request.CurrentExecutionFilePath, areaName);
@@ -31,7 +28,7 @@ namespace Ornament.Web.SeajsModules
 
         public string BuildBundleContent(string filePath)
         {
-            var areaName = GetAreaName(filePath);
+            string areaName = GetAreaName(filePath);
             return BuildBundleContent(filePath, areaName);
         }
 
@@ -66,7 +63,7 @@ namespace Ornament.Web.SeajsModules
                 virtualPath = "~" + virtualPath;
             }
 
-            var bundle = BundleTable.Bundles.GetBundleFor(virtualPath);
+            Bundle bundle = BundleTable.Bundles.GetBundleFor(virtualPath);
             var seajsEmbedBundle = bundle as SeajsEmbedBundle;
             if (seajsEmbedBundle != null)
             {

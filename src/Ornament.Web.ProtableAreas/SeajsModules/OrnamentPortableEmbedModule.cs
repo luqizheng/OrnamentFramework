@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Ornament.Web.PortableAreas;
@@ -23,14 +21,13 @@ namespace Ornament.Web.SeajsModules
         {
             get
             {
-                SeajsEmbedBundle bundle = BundleTable.Bundles.GetBundleFor(AbsolutePath) as SeajsEmbedBundle;
+                var bundle = BundleTable.Bundles.GetBundleFor(AbsolutePath) as SeajsEmbedBundle;
 
                 RouteData resData = RouteUtils.GetRouteDataByUrl(RequireId);
                 if (resData == null)
                     throw new ArgumentOutOfRangeException(RequireId +
                                                           " is not a assembly embeded resources with js file.");
                 return bundle.GetContent(RequireId);
-
             }
         }
 
@@ -40,17 +37,15 @@ namespace Ornament.Web.SeajsModules
             if (resData == null)
                 return false;
 
-            var areaName = (string)resData.DataTokens["area"];
+            var areaName = (string) resData.DataTokens["area"];
             if (areaName == null)
                 return false;
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             if (resourceStore == null)
                 return false;
 
-            var bundleFile = BundleTable.Bundles.GetBundleFor(uniqureId);
+            Bundle bundleFile = BundleTable.Bundles.GetBundleFor(uniqureId);
             return bundleFile is SeajsEmbedBundle;
-
-
         }
     }
 }

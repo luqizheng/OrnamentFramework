@@ -7,6 +7,7 @@ namespace Ornament.Web.SeajsModules
     public class SeajsEmbedBundle : SeajsBundle
     {
         public string AreaName { get; set; }
+
         private readonly IBundleBuilder _bulder;
 
         public SeajsEmbedBundle(string virtualPath, string assemblyRootNameSpace,string areaName, bool combine)

@@ -8,12 +8,23 @@ using Ornament.Web.Messages;
 
 namespace Ornament.Web.PortableAreas
 {
+    public class RegistedEmbedresourceEventArgs : EventArgs
+    {
+        public IApplicationBus Bus { get; set; }
+
+        public RegistedEmbedresourceEventArgs(IApplicationBus bus)
+        {
+            Bus = bus;
+        }
+    }
     public abstract class PortableAreaRegistration : AreaRegistration
     {
         public static Action RegisterEmbeddedViewEngine = () => InputBuilder.InputBuilder.BootStrap();
         public static Action CheckAreasWebConfigExists = () => EnsureAreasWebConfigExists();
         private static readonly Dictionary<Assembly, int> ControllerCollection = new Dictionary<Assembly, int>();
-        public event EventHandler RegistedEmbedResource;
+
+        public event EventHandler<RegistedEmbedresourceEventArgs> EmbedResourceRegisted;
+
         public virtual string AreaRoutePrefix
         {
             get { return AreaName; }
@@ -34,7 +45,8 @@ namespace Ornament.Web.PortableAreas
 
             bus.Send(new PortableAreaStartupMessage(AreaName));
 
-            RegisterAreaEmbeddedResources();
+            RegisterAreaEmbeddedResources(bus);
+
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
@@ -46,16 +58,16 @@ namespace Ornament.Web.PortableAreas
             CheckAreasWebConfigExists();
         }
 
-        public void RegisterAreaEmbeddedResources()
+        public void RegisterAreaEmbeddedResources(IApplicationBus bus)
         {
             Type areaType = GetType();
             var resourceStore = new AssemblyResourceStore(areaType, "/areas/" + AreaName.ToLower(), areaType.Namespace,
                 GetMap());
             AssemblyResourceManager.RegisterAreaResources(resourceStore);
 
-            if (RegistedEmbedResource != null)
+            if (EmbedResourceRegisted != null)
             {
-                RegistedEmbedResource(this, EventArgs.Empty);
+                EmbedResourceRegisted(this, new RegistedEmbedresourceEventArgs(bus));
             }
         }
 

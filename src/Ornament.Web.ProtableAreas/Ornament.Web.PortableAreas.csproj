@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messages\IocControllerInjectMessageHandler.cs" />
+    <Compile Include="Messages\SeajsModuleBundleMessageHandle.cs" />
     <Compile Include="PortableAreas\ApplicationBus.cs" />
     <Compile Include="AreaRegistrationHelper.cs" />
     <Compile Include="PortableAreas\AssemblyHelper.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="SeajsModules\EmbeddedBuilder.cs" />
     <Compile Include="SeajsModules\OrnamentPortableEmbedModule.cs" />
     <Compile Include="SeajsModules\SeajsEmbedBundle.cs" />
+    <Compile Include="Messages\SeajsModuleBundleEventMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Array.aspx">
