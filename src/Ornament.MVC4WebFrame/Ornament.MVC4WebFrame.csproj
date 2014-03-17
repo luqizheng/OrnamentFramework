@@ -292,6 +292,21 @@
     <Content Include="Content\templates\pannonia\css\select2-bootstrap.css" />
     <Content Include="Content\templates\pannonia\css\select2-old.css" />
     <Content Include="Content\templates\pannonia\css\StyleSheet1.css" />
+    <Content Include="Content\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Content\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Content\zTreeStyle\img\diy\2.png" />
+    <Content Include="Content\zTreeStyle\img\diy\3.png" />
+    <Content Include="Content\zTreeStyle\img\diy\4.png" />
+    <Content Include="Content\zTreeStyle\img\diy\5.png" />
+    <Content Include="Content\zTreeStyle\img\diy\6.png" />
+    <Content Include="Content\zTreeStyle\img\diy\7.png" />
+    <Content Include="Content\zTreeStyle\img\diy\8.png" />
+    <Content Include="Content\zTreeStyle\img\diy\9.png" />
+    <Content Include="Content\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Content\zTreeStyle\img\loading.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Content\zTreeStyle\zTreeStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Components\avalon.js" />
     <Content Include="Scripts\Fx\bootstrap.js" />
@@ -609,6 +624,8 @@
     </None>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <Content Include="Scripts\Fx\jquery-ui-1.10.3.js" />
+    <Content Include="Scripts\plugins\ui\jquery.ztree-3.5.js" />
+    <Content Include="Scripts\plugins\ui\jquery.ztree-3.5.min.js" />
     <Content Include="Scripts\plugins\utility\jquery.dotdotdot-1.5.1.js" />
     <Content Include="Scripts\Modules\Combine\personal.js" />
     <Content Include="Scripts\Modules\Combine\pm.js" />

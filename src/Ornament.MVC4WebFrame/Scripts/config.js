@@ -42,6 +42,7 @@
         "tmpl": "/bundles/utility/tmpl.js",
         "toDictionary": "/bundles/utility/toDictionary.js",
         "unobtrusive-ajax": "/bundles/utility/unobtrusive-ajax.js",
+        "ztree": "/bundles/ui/ztree.js",
         //following is Model
         //"pm": "/scripts/ctrls/pm.js",
         "membership": "/scripts/ctrls/memberships.js",

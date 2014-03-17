@@ -25,10 +25,10 @@
         ajax: {
             data: function (term, page) { // page is the one-based page number tracked by Select2
                 return {
-                    Name: term ,
-                    Email: term ,
-                    LoginId: term ,
-                    Phone: term ,
+                    Name: term,
+                    Email: term,
+                    LoginId: term,
+                    Phone: term,
                     page: (page - 1), // page number
                 };
             },
@@ -93,11 +93,22 @@
         return $tag;
     };
 
+    var orgTree = function (selector, boxSelector, zNodes) {
+        require("ztree")($);
+        var setting = {
+            callback: {
+                onClick: function (event, treeId, treeNode, clickFlag) {
+                    $(boxSelector).val(treeNode.id).next().text(treeNode.name);
+                }
+            }
+        };
+        $.fn.zTree.init($(selector), setting, zNodes);
+    };
 
     return {
         select2: {
-            org: function(selector, initData) {
-                 return forData(selector, orgOpts, initData);
+            org: function (selector, initData) {
+                return forData(selector, orgOpts, initData);
             },
             roles: function (selector, initData) {
                 return forData(selector, roleOpts, initData);
@@ -111,6 +122,11 @@
             },
             userGroups: function (selector, initData) {
                 return forData(selector, ugOpts, initData);
+            }
+        },
+        tree: {
+            org: function (treeSelector, boxSelector, initData) {
+                orgTree(treeSelector, boxSelector, initData);
             }
         }
     };

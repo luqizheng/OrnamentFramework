@@ -37,7 +37,7 @@ namespace Ornament.Web
         }
 
         /// <summary>
-        ///     ��ȡ��ǰ�û����ʵ�Node��Ϣ
+        ///    
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="siteMapPermission"></param>
@@ -52,7 +52,7 @@ namespace Ornament.Web
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
                 ISiteMapNode childNode = node.ChildNodes[i];
-                if (Match(siteMapPermission, childNode)) //�������disabled 
+                if (Match(siteMapPermission, childNode)) 
                 {
                     var mainMenu = new MainMenu
                     {

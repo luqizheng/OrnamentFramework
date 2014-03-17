@@ -25,34 +25,34 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         }
 
         [UIHint("Textarea")]
-        [Display(Name = "Remark", ResourceType = typeof (Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof(Resources))]
         public string Remark { get; set; }
 
 
-        [Display(Name = "Role", ResourceType = typeof (Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Resources))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
             set { _roles = value; }
         }
 
-        [Display(Name = "Org", ResourceType = typeof (Resources))]
+        [Display(Name = "Org", ResourceType = typeof(Resources)), UIHint("OrgTree")]
         public Org Org { get; set; }
 
 
-        [Display(Name = "UserGroup", ResourceType = typeof (Resources))]
+        [Display(Name = "UserGroup", ResourceType = typeof(Resources))]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }
             set { _userGroups = value; }
         }
 
-        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
+        [Display(Name = "IsApproved", ResourceType = typeof(Resources))]
         public bool IsApprove { get; set; }
 
-        [Display(Name = "IsLockout", ResourceType = typeof (Resources))]
+        [Display(Name = "IsLockout", ResourceType = typeof(Resources))]
         public bool IsLock { get; set; }
 
 

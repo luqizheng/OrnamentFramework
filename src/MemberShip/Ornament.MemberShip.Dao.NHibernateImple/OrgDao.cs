@@ -134,5 +134,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .Add(Restrictions.Ge(OrderIdProperty, minOrderId))
                     .GetExecutableCriteria(CurrentSession).List<Org>();
         }
+
+      
     }
 }

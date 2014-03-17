@@ -7,6 +7,9 @@
     ViewBag.Title = Resources.Edit + Model.LoginId;
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
+@section head{
+    <link href="/Content/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+}
 @section pageTitle{
     <h3>
         @Model.LoginId
@@ -16,29 +19,29 @@
     @using (Panel panel = Html.Panel())
     {
         @panel.Header(@<text>
-                           <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
-                           <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new {area = "MemberShips"})">@Resources.Cancel</a>
-                       </text>)
+        <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
+        <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
+        </text>)
         @panel.Body(@<text>
 
 
-   
 
-                         <ul class="nav nav-tabs">
-                             <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
-                             <li><a href="#Options" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
-                             @*<li><a data-toggle="tab" href="#Profile">@Html.GetEmbededResourceString("tab_profile")</a></li>*@
-                             <li><a data-toggle="tab" href="#anotherInfo">@Html.GetEmbededResourceString("tab_anotherInfo")</a></li>
-                         </ul>
 
-                         <div class="tab-content">
-                             <div id="editUser" class="tab-pane active">
-                                 @Html.EditorFor(s => s, "BasicInfo")
-                             </div>
-                             <div id="Options" class="tab-pane">
-                                 @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
-                             </div>
-                             @* 
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
+            <li><a href="#Options" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
+            @*<li><a data-toggle="tab" href="#Profile">@Html.GetEmbededResourceString("tab_profile")</a></li>*@
+            <li><a data-toggle="tab" href="#anotherInfo">@Html.GetEmbededResourceString("tab_anotherInfo")</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="editUser" class="tab-pane active">
+                @Html.EditorFor(s => s, "BasicInfo")
+            </div>
+            <div id="Options" class="tab-pane">
+                @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+            </div>
+            @* 
            // Do not use profile 
             <div id="Profile" class="tab-pane"> 
                 
@@ -59,22 +62,22 @@
                     }
                 }
             </div>*@
-                             <div id="permissions" class="tab-pane">
-                             </div>
-                             <div id="anotherInfo" class="tab-pane">
-                                 @Html.EditorFor(s => s.OtherInfo)
-                             </div>
-                         </div>
+            <div id="permissions" class="tab-pane">
+            </div>
+            <div id="anotherInfo" class="tab-pane">
+                @Html.EditorFor(s => s.OtherInfo)
+            </div>
+        </div>
 
-                         <p class="form-actions">
-                             <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
-                             <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new {area = "MemberShips"})">@Resources.Cancel</a>
-                         </p>
-    
-
+        <p class="form-actions">
+            <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
+            <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
+        </p>
 
 
-                     </text>)
+
+
+        </text>)
     }
 
 </form>

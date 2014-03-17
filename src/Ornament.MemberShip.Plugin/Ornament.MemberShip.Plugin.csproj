@@ -74,7 +74,7 @@
     </Reference>
     <Reference Include="Qi.Web, Version=1.1.7.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Qi.Web.dll</HintPath>
+      <HintPath>..\..\..\coder-projects\lib\Qi.Web.dll</HintPath>
     </Reference>
     <Reference Include="SeajsBundles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -177,6 +177,7 @@
     <Compile Include="Models\MembershipsExtensions.cs" />
     <Compile Include="Models\Memberships\RoleModel.cs" />
     <Compile Include="Models\Memberships\UserGroupDetailInfor.cs" />
+    <Compile Include="Models\OrgTreeItem.cs" />
     <Compile Include="Models\SampleData\MemberShipData.cs" />
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
@@ -214,6 +215,7 @@
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\OrgTree.cshtml" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

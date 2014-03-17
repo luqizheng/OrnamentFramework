@@ -10,5 +10,10 @@ namespace Ornament.MemberShip.Plugin.Models
         Modify = 2 | OrgOperator.Read,
         AssignRole = 4 | OrgOperator.Modify,
         Delete = 8 | AssignRole,
+
+        AssignOrg = 16 | Read | Modify,
+
+        AssignAllOrg = 32 | Read | Modify
+
     }
 }
