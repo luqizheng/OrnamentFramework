@@ -32,10 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\..\packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="Qi">
       <HintPath>..\..\..\packages\Qi.1.5.0.0\lib\net40-Client\Qi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -47,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\IFileDaoFactory.cs" />
+    <Compile Include="Excels\ExcelFileImport.cs" />
+    <Compile Include="Excels\IRowProcess.cs" />
     <Compile Include="FileRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

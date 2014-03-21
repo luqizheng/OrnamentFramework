@@ -13,7 +13,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Join("MBS_User", d =>
                 {
                     d.KeyColumn("Id");
-                    d.Map(s => s.LoginId).Length(50).Unique();
+                    d.Map(s => s.LoginId).Length(50).Unique().Index("idx_loginId");
                     d.Map(s => s.IsApproved)
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
                         //Map to _isApprove,avoid change theUpdate time.
