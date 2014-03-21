@@ -164,7 +164,7 @@ namespace Ornament.MemberShip.Dao
         /// <summary>
         /// </summary>
         /// <param name="now"></param>
-        /// <returns></returns>
+        /// <returns>return LoginId array</returns>
         IList<string> GetOnlineUsers(DateTime now);
     }
 }
