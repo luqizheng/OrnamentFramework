@@ -20,7 +20,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             Roles = user.GetRoles().ToArray();
             Org = user.Org;
             IsApprove = user.IsApproved;
-            IsLock = user.IsLockout;
+            IsLock = user.Security.IsLocked;
             Remark = user.Remarks;
         }
 
@@ -63,7 +63,6 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 
             user.Remarks = Remark;
             user.IsApproved = IsApprove;
-            user.IsLockout = IsLock;
             user.Org = Org;
 
             user.Roles.Clear();

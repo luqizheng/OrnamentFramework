@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
+using NHibernate.Properties;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 {
@@ -11,6 +12,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Map(s => s.LastPasswordChangedDate);
             Map(s => s.Password)
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Length(64); ;
+            
+            Map(s => s.LastLockoutDate);
+            Map(s => s.InvalidPasswordAttempts);
 
             Map(s => s.PasswordAnswer).Length(100)
                                       .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore); ;

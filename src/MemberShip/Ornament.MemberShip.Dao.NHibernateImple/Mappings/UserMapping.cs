@@ -18,8 +18,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
                         //Map to _isApprove,avoid change theUpdate time.
 
-                    d.Map(s => s.IsLockout)
-                        .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+               
 
                     d.Map(s => s.TimeZoneId).Length(64);
                     d.Map(s => s.Language).Length(32);

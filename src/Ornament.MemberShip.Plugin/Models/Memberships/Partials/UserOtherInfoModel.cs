@@ -14,7 +14,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             UpdateTime = user.Other.UpdateTime;
             CreateTime = user.Other.CreateTime;
             LastPasswordChangedTime = user.Security.LastPasswordChangedDate;
-            LastLockoutDate = user.Other.LastLockoutDate;
+            LastLockoutDate = user.Security.LastLockoutDate;
             LastLoginDate = user.Security.LastLoginDate;
             LastActivityTime = user.Other.LastActivityDate;
         }

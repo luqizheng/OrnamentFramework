@@ -107,7 +107,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                     user.Name,
                     user.LoginId,
                     user.Contact.Email,
-                    user.IsLockout,
+                    user.Security.IsLocked,
                     user.IsApproved,
                     LastActivityDate =
                         user.Other.LastActivityDate != null
@@ -243,25 +243,25 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
-        public ActionResult Lock(string[] ids)
+        public ActionResult Deny(string[] ids)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
             foreach (string loginid in ids)
             {
                 User user = dao.Get(loginid);
-                user.IsLockout = true;
+                user.Deny = true;
             }
             return Json(new { success = true });
         }
 
         [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
-        public ActionResult UnLock(string[] ids)
+        public ActionResult Allow(string[] ids)
         {
             IUserDao dao = _memberShipFactory.CreateUserDao();
             foreach (string loginid in ids)
             {
                 User user = dao.Get(loginid);
-                user.IsLockout = false;
+                user.Deny = false;
             }
             return Json(new { success = true });
         }

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Properties;
+using Ornament.MemberShip.Security;
 using Qi;
 using Qi.Domain;
 using Qi.Secret;
@@ -10,6 +11,19 @@ namespace Ornament.MemberShip
 {
     public partial class User
     {
+        private static ValidateUserPolicy _validateUserPolicy;
+
+        public static ValidateUserPolicy ValidateUserPolicy
+        {
+            get
+            {
+                if (_validateUserPolicy == null)
+                    throw new UserSecurityException("Please set the User.ValidateUserPolicy first.");
+                return _validateUserPolicy;
+            }
+            set { _validateUserPolicy = value; }
+        }
+
         public class SecurityInfo : DomainObject<SecurityInfo, string>
         {
             private string _password;
@@ -22,20 +36,60 @@ namespace Ornament.MemberShip
 
             internal SecurityInfo(User user)
             {
-                if (user == null) throw new ArgumentNullException("user");
+                if (user == null)
+                {
+                    throw new ArgumentNullException("user");
+                }
                 User = user;
             }
 
             /// <summary>
+            ///     Gets or sets IsLockout.
+            /// </summary>
+            /// <value>
+            ///     The is lockout.
+            /// </value>
+            [Display(Name = "IsLockout", ResourceType = typeof(Resources))]
+            public virtual bool IsLocked
+            {
+                get
+                {
+                    if (!ValidateUserPolicy.EnabledPasswordAtteempts)
+                        return false;
+                    //如果最后锁定时间为空，那么一定是没有被锁定过，因此吧最后锁定时间设定为最后。
+                    DateTime lastLockDateTime = LastLockoutDate ??
+                                                (DateTime.Now.AddMinutes(
+                                                    -(ValidateUserPolicy.PasswordAttemptWindow + 15)));
+
+                    return
+                        InvalidPasswordAttempts >= ValidateUserPolicy.MaxInvalidPasswordAttempts //是否大于尝试次数
+                        && ValidateUserPolicy.PasswordAttemptWindow != 0 //不为0，那么是设置了锁定时间。
+                        && (DateTime.Now - lastLockDateTime).Minutes < ValidateUserPolicy.PasswordAttemptWindow;
+                    //如果少于锁定时间，那么是被锁定了。
+                }
+            }
+
+            /// <summary>
+            ///     获取用户被锁定的时间
+            /// </summary>
+            [Display(Name = "LastLockTime", ResourceType = typeof(Resources))]
+            public virtual DateTime? LastLockoutDate { get; protected set; }
+
+            /// <summary>
+            ///     最经尝试Password的次数
+            /// </summary>
+            public virtual int InvalidPasswordAttempts { get; protected set; }
+
+            /// <summary>
             ///     获取用户最后改变时间
             /// </summary>
-            [Display(Name = "LastPasswordChangedTime", ResourceType = typeof (Resources))]
+            [Display(Name = "LastPasswordChangedTime", ResourceType = typeof(Resources))]
             public virtual DateTime? LastPasswordChangedDate { get; set; }
 
             /// <summary>
             ///     获取用户最后登录时间
             /// </summary>
-            [Display(Name = "LastLoginTime", ResourceType = typeof (Resources))]
+            [Display(Name = "LastLoginTime", ResourceType = typeof(Resources))]
             public virtual DateTime? LastLoginDate { get; protected internal set; }
 
             /// <summary>
@@ -48,9 +102,9 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The password question.
             /// </value>
-            [Display(Name = "PasswordQuestion", ResourceType = typeof (Resources)),
+            [Display(Name = "PasswordQuestion", ResourceType = typeof(Resources)),
              Required(AllowEmptyStrings = false,
-                 ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof (Resources))
+                 ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof(Resources))
             ]
             public virtual string PasswordQuestion
             {
@@ -65,11 +119,11 @@ namespace Ornament.MemberShip
             /// <summary>
             ///     Gets the answer of <see cref="PasswordQuestion" />. It alwasy entrypted by md5
             /// </summary>
-            [Display(Name = "PasswordAnswer", ResourceType = typeof (Resources)),
+            [Display(Name = "PasswordAnswer", ResourceType = typeof(Resources)),
              Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
-                 ErrorMessageResourceType = typeof (Resources)),
+                 ErrorMessageResourceType = typeof(Resources)),
              StringLength(50, MinimumLength = 0, ErrorMessageResourceName = "PasswordQuestionAnswerOverMaxLength",
-                 ErrorMessageResourceType = typeof (Resources))]
+                 ErrorMessageResourceType = typeof(Resources))]
             public virtual string PasswordAnswer
             {
                 protected set
@@ -86,45 +140,67 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The password.
             /// </value>
-            [Display(Name = "Password", ResourceType = typeof (Resources)),
+            [Display(Name = "Password", ResourceType = typeof(Resources)),
              Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePassword",
-                 ErrorMessageResourceType = typeof (Resources))]
+                 ErrorMessageResourceType = typeof(Resources))]
             public virtual string Password
             {
-                get { return MembershipContext.Provider.Decrypt(_password); }
+                get { return ValidateUserPolicy.Provider.Decrypt(_password); }
             }
 
-            /// <summary>
-            ///     该用户是否能够登录
-            /// </summary>
-            /// <param name="inputPassword">
-            /// </param>
-            /// <returns>
-            /// </returns>
-            public virtual bool ValidateUser(string inputPassword)
+            public virtual void Unlock()
             {
-                if (String.IsNullOrEmpty(inputPassword))
+                InvalidPasswordAttempts = 0;
+            }
+
+
+            public virtual ValidateUserResult ValidateUser(string inputPassword, out string errorMessage)
+            {
+                if (!String.IsNullOrEmpty(inputPassword))
                 {
                     throw new ArgumentNullException("inputPassword");
                 }
-
-                if (User.IsLockout)
+                if (User.Deny)
                 {
-                    throw new MemberShipException("User is locked");
+                    errorMessage = Resources.error_UserIsDeny;
+                    return ValidateUserResult.DenyUser;
                 }
 
-                if (!User.IsApproved)
+                if (IsLocked)
                 {
-                    throw new MemberShipException("User isn't approved");
+                    errorMessage = Resources.error_UserIsLockout;
+                    if (ValidateUserPolicy.EnabledPasswordAtteempts)
+                    {
+                        errorMessage += "," +
+                                        String.Format(Resources.error_UserIsLockout_retry_after_mins,
+                                            ValidateUserPolicy.PasswordAttemptWindow);
+                    }
+                    else
+                    {
+                        errorMessage += "," + Resources.error_UserIsLockout_contact_administrator;
+                    }
+                    return ValidateUserResult.LockedUser;
                 }
 
-                if (MembershipContext.Provider.Encrypt(inputPassword) == Password)
+
+                ValidateUserResult result = 
+                    ValidateUserPolicy.ValidateUser(User, inputPassword, out errorMessage);
+                switch (result)
                 {
-                    LastLoginDate = DateTime.Now;
-                    return true;
+                    case ValidateUserResult.Success:
+                        LastLoginDate = DateTime.Now;
+                        InvalidPasswordAttempts = 0;
+                        break;
+                    case ValidateUserResult.InvalidatePasswordOrAccount:
+                        InvalidPasswordAttempts += 1;
+                        if (InvalidPasswordAttempts == ValidateUserPolicy.MaxInvalidPasswordAttempts)
+                        {
+                            LastLockoutDate = DateTime.Now;
+                        }
+                        break;
                 }
 
-                return false;
+                return result;
             }
 
 
@@ -141,7 +217,7 @@ namespace Ornament.MemberShip
                 }
                 if (newPassword.Length < 3)
                     throw new PasswordFormatException("newPassword's length is too short.");
-                _password = MembershipContext.Provider.Encrypt(newPassword);
+                _password = ValidateUserPolicy.Provider.Encrypt(newPassword);
                 if (!IsTransient())
                 {
                     LastPasswordChangedDate = DateTime.Now;
@@ -184,7 +260,7 @@ namespace Ornament.MemberShip
             /// </returns>
             public virtual bool ChangePassword(string newPassword, string oldPassword)
             {
-                if (MembershipContext.Provider.Encrypt(oldPassword) == Password)
+                if (ValidateUserPolicy.Provider.Encrypt(oldPassword) == Password)
                 {
                     ChangePassword(newPassword);
                     LastPasswordChangedDate = DateTime.Now;

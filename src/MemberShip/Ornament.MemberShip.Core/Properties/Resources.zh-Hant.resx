@@ -126,11 +126,20 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>當前密碼</value>
   </data>
+  <data name="error_UserIsDeny" xml:space="preserve">
+    <value>禁止使用</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>電子郵件</value>
   </data>
   <data name="EmailNotRightFormat" xml:space="preserve">
     <value>請輸入正確的電子郵件地址</value>
+  </data>
+  <data name="error_LoginError" xml:space="preserve">
+    <value>賬號或者密碼錯誤</value>
+  </data>
+  <data name="error_UserIsLockout" xml:space="preserve">
+    <value>用戶已經被鎖定</value>
   </data>
   <data name="IsApproved" xml:space="preserve">
     <value>是否驗證</value>
@@ -242,5 +251,14 @@
   </data>
   <data name="UserGroup" xml:space="preserve">
     <value>用戶分組</value>
+  </data>
+  <data name="error_UserIsLockout_contact_administrator" xml:space="preserve">
+    <value>请联络管理员</value>
+  </data>
+  <data name="error_UserIsLockout_retry_after_mins" xml:space="preserve">
+    <value>请在{0}分钟后再试</value>
+  </data>
+  <data name="error_login_remind_attempts" xml:space="preserve">
+    <value>, 你還剩下{0}次，之後會被鎖定。</value>
   </data>
 </root>

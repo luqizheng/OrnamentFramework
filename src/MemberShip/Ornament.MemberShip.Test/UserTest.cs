@@ -33,6 +33,7 @@ namespace MemberShip.Test
                 return content;
             }
         }
+
         #region Additional test attributes
 
         // 
@@ -42,7 +43,11 @@ namespace MemberShip.Test
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            MembershipContext.Provider = new MembershipContextProvider();
+            User.ValidateUserPolicy = new ValidateUserPolicy(new MembershipContextProvider())
+            {
+                MaxInvalidPasswordAttempts = 3
+            };
+
         }
         //
         //Use ClassCleanup to run code after all tests in a class have run
@@ -180,9 +185,11 @@ namespace MemberShip.Test
         public void LastLoginDateTest()
         {
             var target = new User("kkkkk", "123456");
-            Assert.IsNull(target.Security.LastLoginDate);
 
-            target.Security.ValidateUser("123456");
+            Assert.IsNull(target.Security.LastLoginDate);
+            string message;
+            target.Security.ValidateUser("123456", out message);
+
             DateTime? actual;
             actual = target.Security.LastLoginDate;
 
@@ -196,9 +203,14 @@ namespace MemberShip.Test
         public void LastLockoutDateTest()
         {
             var target = new User("kkkkk");
-            target.IsLockout = true;
+            string message;
+            for (int i = 0; i < 5; i++)
+            {
+                target.Security.ValidateUser("incorrect-pwd", out message);
+            }
+
             DateTime? actual;
-            actual = target.Other.LastLockoutDate;
+            actual = target.Security.LastLockoutDate;
             Assert.AreNotEqual(DateTime.MinValue, actual.Value);
         }
 
@@ -223,11 +235,13 @@ namespace MemberShip.Test
         public void IsLockoutTest()
         {
             var target = new User("kkkkk");
-            bool expected = true;
-            bool actual;
-            target.IsLockout = expected;
-            actual = target.IsLockout;
-            Assert.AreEqual(expected, actual);
+            string message;
+            for (int i = 0; i < 5; i++)
+            {
+                target.Security.ValidateUser("incorrect-pwd", out message);
+            }
+
+            Assert.AreEqual(true, target.Security.IsLocked);
         }
 
         /// <summary>
@@ -307,7 +321,7 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk");
             var expected = new ReadOnlyCollection<UserGroup>(new List<UserGroup>());
-            
+
             var actual = target.UserGroups;
             Assert.AreEqual(expected.Count
                             , actual.Count);
@@ -408,12 +422,12 @@ namespace MemberShip.Test
         {
             var target = new User("kkkkk", "123456");
             string inputPassword = "123456";
-            bool expected = true;
-            bool actual;
-            actual = target.Security.ValidateUser(inputPassword);
-            Assert.AreEqual(expected, actual);
+            string message;
 
-            Assert.IsFalse(target.Security.ValidateUser("error_password"));
+            var actual = target.Security.ValidateUser(inputPassword, out message);
+            Assert.AreEqual(ValidateUserResult.Success, actual);
+
+            Assert.AreEqual(ValidateUserResult.InvalidatePasswordOrAccount, target.Security.ValidateUser("error_password", out message));
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -435,35 +449,28 @@ namespace MemberShip.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(MemberShipException), "User is locked.")]
         public void CanLoginTest_Lockout()
         {
-            var target = new User("kkkkk", "123456") { IsLockout = true };
+            var target = new User("kkkkk", "123456");
+            string message;
+            for (int i = 0; i < 31; i++)
+            {
+                target.Security.ValidateUser("incorrect-pwd", out message);
+            }
 
             string inputPassword = "123456";
 
-            bool expected = false;
-            bool actual;
-            actual = target.Security.ValidateUser(inputPassword);
-            Assert.AreEqual(expected, actual);
+            var actual = target.Security.ValidateUser(inputPassword, out message);
+            Assert.AreEqual(ValidateUserResult.MaxInValidatePasswordAttempt, actual);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(MemberShipException), "User isn't approved.")]
-        public void CanLoginTest_Unapproved()
-        {
-            var target = new User("kkkkk", "123456") { IsApproved = false };
-            const string inputPassword = "123456";
-            const bool expected = false;
-            bool actual = target.Security.ValidateUser(inputPassword);
-            Assert.AreEqual(expected, actual);
-        }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void CanLoginTest_checking_password_is_empty()
         {
             var target = new User("kkkkk", "123456");
-            target.Security.ValidateUser(null);
+            var message = "";
+            target.Security.ValidateUser(null, out message);
         }
 
         /// <summary>

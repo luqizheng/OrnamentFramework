@@ -18,13 +18,13 @@ define(function (require) {
         vm.content = "";
         vm.swtchLock = function () {
             var mySet = this.$vmodel.el.IsLockout;
-            lock(this, !mySet);
+            deny(this, !mySet);
         };
         vm.lock = function () {
-            lock(data, true, this);
+            deny(data, true, this);
         };
         vm.unlock = function () {
-            lock(this, false);
+            deny(this, false);
         };
         vm.switchApprove = function () {
             var mySet = this.$vmodel.el.IsApprove;
@@ -70,7 +70,7 @@ define(function (require) {
             }
         };
 
-        function lock(self, bLock) {
+        function deny(self, bDeny) {
             /// <summary>
             ///     锁定用户
             /// </summary>
@@ -78,10 +78,10 @@ define(function (require) {
             /// <param name="bLock"></param>
             /// <param name="process"></param>
             var id = $(self).closest("tr").attr("data");
-            var url = bLock ? "/memberships/user/lock" : "/memberships/user/unlock";
+            var url = bDeny ? "/memberships/user/deny" : "/memberships/user/allow";
             $.post(url, { ids: id }, function (result) {
                 if (result.success) {
-                    self.$vmodel.el.IsLockout = bLock;
+                    self.$vmodel.el.IsLockout = bDeny;
                 }
             });
         }

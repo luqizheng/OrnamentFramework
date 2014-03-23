@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Plugin.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships
@@ -27,18 +28,18 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             ErrorMessageResourceType = typeof(Resources))]
         public string ConfirmPassword { get; set; }
 
-        public bool ChangePassword(User user,IUserDao dao)
+        public bool ChangePassword(User user, IUserDao dao)
         {
             if (ConfirmPassword != this.ConfirmPassword)
             {
                 return false;
             }
-
-            if (!user.Security.ValidateUser(CurrentPassword))
+            string message;
+            if (user.Security.ValidateUser(CurrentPassword, out message) != ValidateUserResult.Success)
             {
                 return false;
             }
-            var result=user.Security.ChangePassword(NewPassword, CurrentPassword);
+            var result = user.Security.ChangePassword(NewPassword, CurrentPassword);
             dao.SaveOrUpdate(user);
             return result;
         }

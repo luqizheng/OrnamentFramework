@@ -8,6 +8,7 @@ using System.Web.Security;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
+using Qi.IO.Serialization;
 
 namespace Ornament.Web.MemberShips
 {
@@ -269,8 +270,11 @@ namespace Ornament.Web.MemberShips
         {
             User user = Facotry.CreateUserDao().GetByLoginId(username);
             if (user == null)
+            {
                 return false;
-            if (!user.Security.ValidateUser(password))
+            }
+            string message = "";
+            if (user.Security.ValidateUser(password, out message) != ValidateUserResult.Success)
             {
                 return false;
             }
@@ -361,7 +365,8 @@ namespace Ornament.Web.MemberShips
             User u = userDao.GetByLoginId(username);
             if (u == null)
                 return false;
-            bool result = u.Security.ValidateUser(password);
+            string message;
+            bool result = u.Security.ValidateUser(password, out message) == ValidateUserResult.Success;
             userDao.SaveOrUpdate(u);
             return result;
         }
@@ -378,7 +383,7 @@ namespace Ornament.Web.MemberShips
             User user = Facotry.CreateUserDao().GetByLoginId(userName);
             if (user.IsApproved)
             {
-                user.IsLockout = true;
+                user.Security.Unlock();
                 return true;
             }
             return false;
@@ -572,7 +577,7 @@ namespace Ornament.Web.MemberShips
                 user.Security.PasswordQuestion,
                 user.Remarks,
                 user.IsApproved,
-                user.IsLockout,
+                user.Security.IsLocked,
                 user.Other.CreateTime,
                 user.Security
                     .LastLoginDate.HasValue
@@ -582,7 +587,7 @@ namespace Ornament.Web.MemberShips
                 user.Security.LastPasswordChangedDate.HasValue
                     ? user.Security.LastPasswordChangedDate.Value
                     : DateTime.MinValue,
-                user.Other.LastLockoutDate.HasValue ? user.Other.LastLockoutDate.Value : DateTime.MinValue
+                user.Security.LastLockoutDate.HasValue ? user.Security.LastLockoutDate.Value : DateTime.MinValue
                 );
             return result;
         }

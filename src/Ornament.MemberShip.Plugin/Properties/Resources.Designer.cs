@@ -232,15 +232,6 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Login id or Password is not match. 的本地化字符串。
-        /// </summary>
-        public static string error_LoginError {
-            get {
-                return ResourceManager.GetString("error_LoginError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Please input email. 的本地化字符串。
         /// </summary>
         public static string error_missingEmailAddress {
@@ -273,15 +264,6 @@ namespace Ornament.MemberShip.Plugin.Properties {
         public static string error_notMatchVerifyCode {
             get {
                 return ResourceManager.GetString("error_notMatchVerifyCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 User is lockout. 的本地化字符串。
-        /// </summary>
-        public static string error_UserIsLockout {
-            get {
-                return ResourceManager.GetString("error_UserIsLockout", resourceCulture);
             }
         }
         

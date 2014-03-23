@@ -183,6 +183,7 @@
     <Compile Include="MemberShips\SiteMapException.cs" />
     <Compile Include="MemberShips\SiteMapPermission.cs" />
     <Compile Include="MemberShips\ApiResourceAuthorizeAttribute.cs" />
+    <Compile Include="MemberShips\WebValidateUserPolicy.cs" />
     <Compile Include="ModelBinder\TimeModelBinder.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="DataInitializers\GlobalInitializer.cs" />

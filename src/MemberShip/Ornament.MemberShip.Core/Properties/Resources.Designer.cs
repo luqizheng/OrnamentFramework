@@ -106,6 +106,60 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 , {0} attempts remain before account is locked 的本地化字符串。
+        /// </summary>
+        public static string error_login_remind_attempts {
+            get {
+                return ResourceManager.GetString("error_login_remind_attempts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Login id or Password is not match. 的本地化字符串。
+        /// </summary>
+        public static string error_LoginError {
+            get {
+                return ResourceManager.GetString("error_LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Deny 的本地化字符串。
+        /// </summary>
+        public static string error_UserIsDeny {
+            get {
+                return ResourceManager.GetString("error_UserIsDeny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 User is lockout,  的本地化字符串。
+        /// </summary>
+        public static string error_UserIsLockout {
+            get {
+                return ResourceManager.GetString("error_UserIsLockout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please contact your administrator. 的本地化字符串。
+        /// </summary>
+        public static string error_UserIsLockout_contact_administrator {
+            get {
+                return ResourceManager.GetString("error_UserIsLockout_contact_administrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Please try again after {0} miniutes. 的本地化字符串。
+        /// </summary>
+        public static string error_UserIsLockout_retry_after_mins {
+            get {
+                return ResourceManager.GetString("error_UserIsLockout_retry_after_mins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Approved 的本地化字符串。
         /// </summary>
         public static string IsApproved {

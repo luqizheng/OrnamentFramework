@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
+using System.Web.Security;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
@@ -144,6 +145,7 @@ namespace Ornament.MVCWebFrame.Controllers
                 }
                 return View(model);
             }
+            var result=Membership.ValidateUser(model.User, model.Password);
             model.ReturnUrl = model.ReturnUrl;
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)

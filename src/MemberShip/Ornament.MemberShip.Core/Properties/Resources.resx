@@ -126,11 +126,26 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>Current Password</value>
   </data>
+  <data name="error_UserIsDeny" xml:space="preserve">
+    <value>Deny</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>e-Mail</value>
   </data>
   <data name="EmailNotRightFormat" xml:space="preserve">
     <value>Please input right format email address</value>
+  </data>
+  <data name="error_LoginError" xml:space="preserve">
+    <value>Login id or Password is not match.</value>
+  </data>
+  <data name="error_UserIsLockout" xml:space="preserve">
+    <value>User is lockout, </value>
+  </data>
+  <data name="error_UserIsLockout_contact_administrator" xml:space="preserve">
+    <value>Please contact your administrator.</value>
+  </data>
+  <data name="error_UserIsLockout_retry_after_mins" xml:space="preserve">
+    <value>Please try again after {0} miniutes.</value>
   </data>
   <data name="IsApproved" xml:space="preserve">
     <value>Approved</value>
@@ -251,5 +266,8 @@
   </data>
   <data name="UserGroup" xml:space="preserve">
     <value>User Group</value>
+  </data>
+  <data name="error_login_remind_attempts" xml:space="preserve">
+    <value>, {0} attempts remain before account is locked</value>
   </data>
 </root>

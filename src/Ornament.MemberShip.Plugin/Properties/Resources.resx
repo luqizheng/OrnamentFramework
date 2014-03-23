@@ -144,9 +144,6 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>Current Password</value>
   </data>
-  <data name="error_LoginError" xml:space="preserve">
-    <value>Login id or Password is not match.</value>
-  </data>
   <data name="error_missingEmailAddress" xml:space="preserve">
     <value>Please input email.</value>
   </data>
@@ -158,9 +155,6 @@
   </data>
   <data name="error_notMatchVerifyCode" xml:space="preserve">
     <value>Verify Code not match.</value>
-  </data>
-  <data name="error_UserIsLockout" xml:space="preserve">
-    <value>User is lockout.</value>
   </data>
   <data name="error_UserIsNotApproved" xml:space="preserve">
     <value>User is not approved.</value>
