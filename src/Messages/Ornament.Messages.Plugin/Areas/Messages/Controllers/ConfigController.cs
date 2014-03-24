@@ -14,7 +14,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         public ActionResult Index()
         {
-            return View();
+
+            return View(NotifySenderManager.Instance.Variables);
         }
 
         public ActionResult SaveVariable(string key, string val)

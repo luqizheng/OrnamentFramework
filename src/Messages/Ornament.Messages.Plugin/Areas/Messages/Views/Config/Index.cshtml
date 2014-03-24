@@ -1,11 +1,13 @@
 ﻿@using Microsoft.Ajax.Utilities
 @using Ornament
 @using Ornament.Web.UI.Theme
-@model IDictionary<string,string> 
+@using Qi.Web
+@model IDictionary<string,string>
 
 @{
     ViewBag.Title = "Variable Config";
     Layout = OrnamentContext.Configuration.BackendLayout();
+    var a = JsonHelper.ToJson(this.Model.Select(v=>new {key=v.Key,val=v.Value}));
 }
 
 @using (var panel = Html.Panel())
@@ -23,7 +25,7 @@
         </thead>
         <tbody>
             <tr ms-repeat="data">
-                
+                <td></td>
             </tr>
         </tbody>
     </table>
@@ -37,6 +39,9 @@
         avalon.config({ loader: false });
     </script>
     <script type="text/javascript">
-        seajs.use("/Messages/Scripts/Config/")
+        var js=@Html.Raw(a);
+        seajs.use("/Messages/Scripts/Config/", function(init) {
+            init(js);
+        });
     </script>
 }
