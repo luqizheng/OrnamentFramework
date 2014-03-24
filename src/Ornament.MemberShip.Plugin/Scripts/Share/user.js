@@ -93,6 +93,14 @@ define(function (require) {
         }, func);
     };
 
+    User.Deny = function (aryStrId, bDeny, func) {
+        var webApi = new WebApi(userUrl + "/deny");
+        webApi.Post({ Ids: [aryStrId], IsDeny: bDeny }, func);
+    };
 
+    User.Lock = function (aryStrId, bLock, func) {
+        var webApi = new WebApi(userUrl + "/Lock");
+        webApi.Post({ Ids: [aryStrId], Lockout: bLock }, func);
+    };
     return User;
 });

@@ -30,10 +30,11 @@ namespace Ornament.MemberShip.Plugin.Api
         ///     重新獲取密碼
         /// </summary>
         /// <returns></returns>
-        public object Post([FromBody] ForgetPassword forgetPassword)
+        public object ForgetPassword([FromBody] ForgetPassword forgetPassword)
         {
             forgetPassword.Retrieve(_factory);
             return new { success = true };
         }
+
     }
 }

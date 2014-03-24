@@ -45,6 +45,10 @@ namespace Ornament.MemberShip.Plugin.Models
 
         /// <summary>
         /// </summary>
-        Delete = 64 | Modify
+        Delete = 64 | Modify,
+        /// <summary>
+        /// 是否有权利禁止这个用户
+        /// </summary>
+        Deny = 128 | Modify,
     }
 }

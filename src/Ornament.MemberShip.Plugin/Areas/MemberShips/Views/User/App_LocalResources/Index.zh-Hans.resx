@@ -192,4 +192,10 @@
   <data name="Not_User_Found" xml:space="preserve">
     <value>找不到符合查询条件的用户</value>
   </data>
+  <data name="Allow" xml:space="preserve">
+    <value>允许访问</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>禁止访问</value>
+  </data>
 </root>

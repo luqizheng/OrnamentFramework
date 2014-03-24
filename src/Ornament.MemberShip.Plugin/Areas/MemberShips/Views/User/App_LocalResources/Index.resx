@@ -186,4 +186,10 @@
   <data name="Not_User_Found" xml:space="preserve">
     <value>DRAFT:Can't find any user match </value>
   </data>
+  <data name="Allow" xml:space="preserve">
+    <value>Allow</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>Deny</value>
+  </data>
 </root>

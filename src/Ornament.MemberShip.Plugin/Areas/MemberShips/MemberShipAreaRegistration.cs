@@ -25,20 +25,19 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 routeTemplate: "api/memberships/{controller}/{action}",
                 defaults: new
                 {
-                    id = RouteParameter.Optional,
                     action = RouteParameter.Optional
                 });
         }
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-            
+
             RegistApi();
             bus.Send(new NHRegisterEventMessage(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
             //send the init data
             bus.Send(new MemberShipData());
             ResourceSetting.Registry();
-           
+
             context.MapRoute(
                 AreaName + "_images",
                 AreaRoutePrefix + "/images/{resourceName}",
@@ -74,7 +73,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 new { action = "Index", id = UrlParameter.Optional },
                 new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
-            
+
 
             var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
             helper.RegistySeajsModule("Scripts/User");
@@ -86,6 +85,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             base.RegisterArea(context, bus);
         }
 
-      
+
+
+
     }
 }

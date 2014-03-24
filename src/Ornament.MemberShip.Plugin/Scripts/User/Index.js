@@ -16,26 +16,19 @@ define(function (require) {
         vm.users = [];
         //Search content
         vm.content = "";
-        vm.swtchLock = function () {
-            var mySet = this.$vmodel.el.IsLockout;
-            deny(this, !mySet);
+
+        vm.switchDeny = function () {
+            var mySet = this.$vmodel.el.Deny;
+            deny.call(this, !mySet);
         };
-        vm.lock = function () {
-            deny(data, true, this);
-        };
-        vm.unlock = function () {
-            deny(this, false);
-        };
+
+
+
         vm.switchApprove = function () {
             var mySet = this.$vmodel.el.IsApprove;
-            approve(this, !mySet);
+            vm.approve.call(!mySet);
         };
-        vm.approve = function () {
-            approve(this, true);
-        };
-        vm.verify = function () {
-            approve(this, false);
-        };
+
         vm.retievePwd = function () {
             userApi.RetrievePassword(loginId, function (e) {
                 alert(e.success ?
@@ -69,42 +62,39 @@ define(function (require) {
                 find(pageIndex, pageSize, model.content, func);
             }
         };
+        vm.lock = function (bLock) {
+            var user = this.$vmodel.el.$model, self = this;
+            if (typeof bLock !== "boolean") {
+                bLock = !user.IsLocked;
+            };
+            userApi.Lock(user.Id, bLock, function (result) {
+                if (result.success) {
+                    self.$vmodel.el.IsLocked = bLock;
+                }
+            });
+        };
 
-        function deny(self, bDeny) {
+        vm.deny = function (bDeny) {
             /// <summary>
             ///     锁定用户
             /// </summary>
             /// <param name="id"></param>
             /// <param name="bLock"></param>
             /// <param name="process"></param>
-            var id = $(self).closest("tr").attr("data");
-            var url = bDeny ? "/memberships/user/deny" : "/memberships/user/allow";
-            $.post(url, { ids: id }, function (result) {
+            var user = this.$vmodel.el.$model, self = this;
+            if (typeof bDeny !== "boolean") {
+                bDeny = !user.Deny;
+            }
+            userApi.Deny(user.Id, bDeny, function (result) {
                 if (result.success) {
-                    self.$vmodel.el.IsLockout = bDeny;
+                    self.$vmodel.el.Deny = bDeny;
                 }
             });
-        }
-
-        function approve(self, bApprove) {
-            /// <summary>
-            ///     锁定用户
-            /// </summary>
-            /// <param name="id"></param>
-            /// <param name="bLock"></param>
-            /// <param name="process"></param>
-            var id = $(self).closest("tr").attr("data");
-            var url = bApprove ? "/memberships/user/Approve" : "/memberships/user/reject";
-            $.post(url, { ids: id }, function (result) {
-                if (result.success) {
-                    self.$vmodel.el.IsApproved = bApprove;
-                }
-            });
-        }
+        };
 
     });
 
-   
+
 
     function find(page, size, content, func) {
         $.get("/MemberShips/User/List", {

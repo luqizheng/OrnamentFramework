@@ -62,6 +62,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View();
         }
 
+
         [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
         public ActionResult List(int? page, string search, int? size)
         {
@@ -76,7 +77,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
             int total;
 
-            UserSearch userSearch = new UserSearch();
+            var userSearch = new UserSearch();
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";
@@ -86,8 +87,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                 userSearch.Login = search;
                 userSearch.Phone = search;
                 userSearch.Junction = JunctionType.Or;
-
-
             }
             userSearch.Org = OrnamentContext.MemberShip.CurrentUser().Org;
 
@@ -109,6 +108,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                     user.Contact.Email,
                     user.Security.IsLocked,
                     user.IsApproved,
+                    Deny = user.IsDeny,
                     LastActivityDate =
                         user.Other.LastActivityDate != null
                             ? user.Other.LastActivityDate.Value.ToString("yyyy-MM-dd HH:mm:ss")
@@ -118,8 +118,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-
 
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
@@ -242,53 +240,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             return View(createUser);
         }
 
-        [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
-        public ActionResult Deny(string[] ids)
-        {
-            IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string loginid in ids)
-            {
-                User user = dao.Get(loginid);
-                user.Deny = true;
-            }
-            return Json(new { success = true });
-        }
-
-        [ResourceAuthorize(UserOperator.Lock, "MessageReader")]
-        public ActionResult Allow(string[] ids)
-        {
-            IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string loginid in ids)
-            {
-                User user = dao.Get(loginid);
-                user.Deny = false;
-            }
-            return Json(new { success = true });
-        }
-
-        [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
-        public ActionResult Approve(string[] ids)
-        {
-            IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string id in ids)
-            {
-                User user = dao.Get(id);
-                user.IsApproved = true;
-            }
-            return Json(new { success = true });
-        }
-
-        [ResourceAuthorize(UserOperator.Approve, "MessageReader")]
-        public ActionResult Reject(string[] ids)
-        {
-            IUserDao dao = _memberShipFactory.CreateUserDao();
-            foreach (string id in ids)
-            {
-                User user = dao.Get(id);
-                user.IsApproved = false;
-            }
-            return Json(new { success = true });
-        }
 
         [HttpPost, ResourceAuthorize(UserOperator.Delete, "MessageReader")]
         public ActionResult Delete(string[] loginIds)
@@ -317,11 +268,11 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
-                                               where
-                                                   u.LoginId.Contains(loginIdOrEmail) ||
-                                                   u.Contact.Email.Contains(loginIdOrEmail)
-                                               select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+                where
+                    u.LoginId.Contains(loginIdOrEmail) ||
+                    u.Contact.Email.Contains(loginIdOrEmail)
+                select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

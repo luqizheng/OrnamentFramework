@@ -144,7 +144,7 @@ namespace Ornament.MemberShip
         /// Gets or sets Deny, if set to True, user can't be access 
         /// </summary>
         [Display(Name = "error_UserIsDeny", ResourceType = typeof(Resources))]
-        public virtual bool Deny { get; set; }
+        public virtual bool IsDeny { get; set; }
 
         /// <summary>
         ///     Gets or sets LoginId.

@@ -81,11 +81,14 @@
                         @Html.DisplayNameFor(model => model.Contact.Phone)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.IsLockout)
+                        @Html.DisplayNameFor(model => model.IsDeny)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.IsApproved)
+                        @Html.DisplayNameFor(model => model.Security.IsLocked)
                     </th>
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.IsApproved)
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.Other.LastActivityDate)
                     </th>
@@ -106,19 +109,33 @@
                     <td ms-text="el.Phone"></td>
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-primary btn-mini" ms-click="swtchLock">
-                                <i ms-class="icon-lock:el.IsLockout" ms-class-1="icon-unlock:!el.IsLockout"></i>
+                            <a class="btn btn-primary btn-mini" ms-click="deny">
+                                <i ms-class="icon-remove:el.Deny" ms-class-1="icon-ok:el.Deny==false"></i>
                             </a>
                             <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="icon-caret-down icon-white"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" ms-click="lock"><i class="icon-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                <li><a href="#" ms-click="unlock"><i class="icon-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                <li><a href="#" ms-click="deny(true)"><i class="icon-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
+                                <li><a href="#" ms-click="deny(false)"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
                             </ul>
                         </div>
                     </td>
                     <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-mini" ms-click="lock">
+                                <i ms-class="icon-lock:el.IsLocked" ms-class-1="icon-unlock:!el.IsLocked"></i>
+                            </a>
+                            <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-caret-down icon-white"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ms-click="lock(true)"><i class="icon-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                <li><a href="#" ms-click="lock(false)"><i class="icon-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    @*<td>
                         <div class="btn-group">
                             <a class="btn btn-primary btn-mini" ms-click="switchApprove">
                                 <i ms-class="icon-ok:el.IsApproved" ms-class-1="icon-remove:!el.IsApproved"></i>
@@ -127,11 +144,11 @@
                                 <i class="icon-caret-down icon-white"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" ms-click="approve"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Approve")</a></li>
-                                <li><a href="#" ms-click="verify"><i class="icon-remove"></i>@Html.GetEmbededResourceString("VerifyAgain")</a></li>
+                                <li><a href="#" ms-click="approve(true)"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Approve")</a></li>
+                                <li><a href="#" ms-click="approve(false)"><i class="icon-remove"></i>@Html.GetEmbededResourceString("VerifyAgain")</a></li>
                             </ul>
                         </div>
-                    </td>
+                    </td>*@
                     <td ms-text="LastActivityDate"></td>
                 </tr>
             </tbody>

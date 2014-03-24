@@ -63,8 +63,7 @@ namespace Ornament.MemberShip
 
                     return
                         InvalidPasswordAttempts >= ValidateUserPolicy.MaxInvalidPasswordAttempts //是否大于尝试次数
-                        && ValidateUserPolicy.PasswordAttemptWindow != 0 //不为0，那么是设置了锁定时间。
-                        && (DateTime.Now - lastLockDateTime).Minutes < ValidateUserPolicy.PasswordAttemptWindow;
+                        && (ValidateUserPolicy.PasswordAttemptWindow == 0 || (DateTime.Now - lastLockDateTime).Minutes <= ValidateUserPolicy.PasswordAttemptWindow);
                     //如果少于锁定时间，那么是被锁定了。
                 }
             }
@@ -156,11 +155,11 @@ namespace Ornament.MemberShip
 
             public virtual ValidateUserResult ValidateUser(string inputPassword, out string errorMessage)
             {
-                if (!String.IsNullOrEmpty(inputPassword))
+                if (String.IsNullOrEmpty(inputPassword))
                 {
                     throw new ArgumentNullException("inputPassword");
                 }
-                if (User.Deny)
+                if (User.IsDeny)
                 {
                     errorMessage = Resources.error_UserIsDeny;
                     return ValidateUserResult.DenyUser;
@@ -171,8 +170,7 @@ namespace Ornament.MemberShip
                     errorMessage = Resources.error_UserIsLockout;
                     if (ValidateUserPolicy.EnabledPasswordAtteempts)
                     {
-                        errorMessage += "," +
-                                        String.Format(Resources.error_UserIsLockout_retry_after_mins,
+                        errorMessage += String.Format(Resources.error_UserIsLockout_retry_after_mins,
                                             ValidateUserPolicy.PasswordAttemptWindow);
                     }
                     else
@@ -183,7 +181,7 @@ namespace Ornament.MemberShip
                 }
 
 
-                ValidateUserResult result = 
+                ValidateUserResult result =
                     ValidateUserPolicy.ValidateUser(User, inputPassword, out errorMessage);
                 switch (result)
                 {
@@ -324,6 +322,12 @@ namespace Ornament.MemberShip
                 {
                     throw new MemberShipPermissionException("answer is not correct");
                 }
+            }
+
+            public virtual void Lockout()
+            {
+                this.InvalidPasswordAttempts = ValidateUserPolicy.MaxInvalidPasswordAttempts;
+                this.LastLockoutDate = DateTime.Now;
             }
         }
     }
