@@ -9,10 +9,19 @@ namespace Ornament.Messages.Config
     {
         public static readonly NotifySenderManager Instance = new NotifySenderManager();
         private readonly IDictionary<CommunicationType, ISender> _senders;
+        private Dictionary<string, string> _variables;
 
         private NotifySenderManager()
         {
             _senders = new Dictionary<CommunicationType, ISender>();
+        }
+
+        /// <summary>
+        ///     固定变量列表,当遇到的相同的就会替换到
+        /// </summary>
+        public Dictionary<string, string> Variables
+        {
+            get { return _variables ?? (_variables = new Dictionary<string, string>()); }
         }
 
         /// <summary>

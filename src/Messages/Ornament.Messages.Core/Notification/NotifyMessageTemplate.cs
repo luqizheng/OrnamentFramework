@@ -134,42 +134,29 @@ namespace Ornament.Messages.Notification
                     targetuser.Add(user);
             }
 
-            var helper = new NamedFormatterHelper();
+
             foreach (User u in targetuser)
             {
-                Content content = GetContent(u);
-                Dictionary<string, string> variable = replaceVariabled(u);
-
-                var simpleMessage = new SimpleMessage(u)
-                {
-                    Content = new Content
-                    {
-                        Language = content.Language,
-                        Subject = helper.Replace(content.Subject, variable),
-                        Value = helper.Replace(content.Value, variable)
-                    }
-                };
-                Type.Send(simpleMessage);
+                var d = replaceVariabled;
+                Publish(daoFactory, d, u);
             }
         }
 
         public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
-            params IPerformer[] performers)
+            User performers)
         {
-            var targetuser = new HashSet<User>();
-            foreach (IPerformer performer in performers)
+            var helper = new NamedFormatterHelper();
+            Content content = GetContent(performers);
+
+            foreach (var key in Config.NotifySenderManager.Instance.Variables.Keys)
             {
-                foreach (User user in performer.GetUsers(daoFactory))
-                    targetuser.Add(user);
+                if (!variable.ContainsKey(key))
+                {
+                    variable.Add(key, Config.NotifySenderManager.Instance.Variables[key]);
+                }
             }
 
-            var helper = new NamedFormatterHelper();
-            foreach (User u in targetuser)
-            {
-                Content content = GetContent(u);
-
-
-                var simpleMessage = new SimpleMessage(u)
+            var simpleMessage = new SimpleMessage(performers)
                 {
                     Content = new Content
                     {
@@ -178,8 +165,10 @@ namespace Ornament.Messages.Notification
                         Value = helper.Replace(content.Value, variable)
                     }
                 };
-                Type.Send(simpleMessage);
-            }
+            Type.Send(simpleMessage);
+
         }
+
+
     }
 }
