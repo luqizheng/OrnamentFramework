@@ -145,6 +145,9 @@ namespace Ornament.Messages.Notification
         public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
             User performers)
         {
+            if (daoFactory == null) throw new ArgumentNullException("daoFactory");
+            if (variable == null) throw new ArgumentNullException("variable");
+            if (performers == null) throw new ArgumentNullException("performers");
             var helper = new NamedFormatterHelper();
             Content content = GetContent(performers);
 

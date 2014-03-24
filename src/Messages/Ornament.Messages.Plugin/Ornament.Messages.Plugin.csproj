@@ -152,6 +152,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Messages\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\NotifyMessagesController.cs" />
@@ -175,6 +176,7 @@
     <EmbeddedResource Include="Scripts\Template\Index.js" />
     <EmbeddedResource Include="Scripts\News\Edit.js" />
     <EmbeddedResource Include="Scripts\Template\Create.js" />
+    <EmbeddedResource Include="Scripts\Config\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -278,6 +280,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Template\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Config\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

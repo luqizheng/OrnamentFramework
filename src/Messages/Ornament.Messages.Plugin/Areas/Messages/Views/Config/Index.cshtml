@@ -1,0 +1,42 @@
+﻿@using Microsoft.Ajax.Utilities
+@using Ornament
+@using Ornament.Web.UI.Theme
+@model IDictionary<string,string> 
+
+@{
+    ViewBag.Title = "Variable Config";
+    Layout = OrnamentContext.Configuration.BackendLayout();
+}
+
+@using (var panel = Html.Panel())
+{
+    panel.Header(@<text>
+    <h4>Global Variable setting</h4>
+    </text>);
+    panel.Body(@<text>
+    <table class="table table-condensed table-bordered" ms-controller="index">
+        <thead>
+            <tr>
+                <th>Variable Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ms-repeat="data">
+                
+            </tr>
+        </tbody>
+    </table>
+    </text>);
+
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/avalon.js")
+
+    <script type="text/javascript">
+        avalon.config({ loader: false });
+    </script>
+    <script type="text/javascript">
+        seajs.use("/Messages/Scripts/Config/")
+    </script>
+}

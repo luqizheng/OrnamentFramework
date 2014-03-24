@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Ornament.Messages.Notification;
+using Qi.IO.Serialization;
 
 namespace Ornament.Messages.Config
 {
     public class NotifySenderManager
     {
         public static readonly NotifySenderManager Instance = new NotifySenderManager();
+        public static string StoreFile = "~/messageVariables.xml";
         private readonly IDictionary<CommunicationType, ISender> _senders;
         private Dictionary<string, string> _variables;
+
+        static NotifySenderManager()
+        {
+        }
 
         private NotifySenderManager()
         {
             _senders = new Dictionary<CommunicationType, ISender>();
+            ReloadVariables();
         }
 
         /// <summary>
@@ -46,6 +54,23 @@ namespace Ornament.Messages.Config
         public ISender[] GetSenders(NotifyType type)
         {
             return (from a in _senders.Keys where type.CommunicationType.HasFlag(a) select _senders[a]).ToArray();
+        }
+
+        public void SaveVariable()
+        {
+            string str = SerializationHelper.SerializerToXml(Variables);
+            using (var writer = new StreamWriter(StoreFile))
+            {
+                writer.Write(str);
+            }
+        }
+
+        public void ReloadVariables()
+        {
+            if (File.Exists(StoreFile))
+            {
+                _variables = SerializationHelper.DeserializerXml<Dictionary<string, string>>(StoreFile);
+            }
         }
     }
 }
