@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
 using Ornament.Messages.Notification;
@@ -12,8 +11,8 @@ namespace Ornament.MemberShip.Plugin.Models.Security
 
         public VerifyEmailModel()
         {
-            
         }
+
         public VerifyEmailModel(EmailVerifier emailVerifier)
         {
             _emailVerifier = emailVerifier;
@@ -30,15 +29,13 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             {
                 return VerifyResult.Failed;
             }
-            if (_emailVerifier.Status == SecretTokenStatus.Expire)
-            {
-                return VerifyResult.Failed;
-            }
-            if (_emailVerifier.Type == VerifyType.Email && _emailVerifier.Verify(token, daoFactory))
-            
+
+            if (_emailVerifier.Type == VerifyType.Email
+                && _emailVerifier.Verify(token, daoFactory) == VerifyResult.Success)
             {
                 return VerifyResult.Success;
             }
+
             return VerifyResult.Failed;
         }
 
@@ -54,12 +51,6 @@ namespace Ornament.MemberShip.Plugin.Models.Security
 
             var deleage = new CreateVariablesHandler(user => new Dictionary<string, string>
             {
-                {"site", OrnamentContext.Configuration.ApplicationSetting.SiteName},
-                {
-                    "url",
-                    token.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl +
-                                            "/Security/VerifyEmail")
-                },
                 {"name", user.Name}
             });
             OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress.Publish(daoFactory, deleage, myUsers);

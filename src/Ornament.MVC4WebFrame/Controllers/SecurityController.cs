@@ -19,8 +19,6 @@ namespace Ornament.MVCWebFrame.Controllers
         public ActionResult VerifyEmail(string id, string token)
         {
             EmailVerifier userToken = _factory.CreateEmailVerifierDao().Get(id);
-
-
             try
             {
                 if (userToken == null)
@@ -47,28 +45,20 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 return View("~/Views/HttpErrors/404.cshtml");
             }
+            var result = userToken.Verify(token);
+            ViewData["VerifyResult"] = result;
 
-            if (userToken.Status == SecretTokenStatus.Expire || userToken.Status == SecretTokenStatus.Success)
-            {
-                _factory.CreateEmailVerifierDao().SaveOrUpdate(userToken);
-                ViewData["VerifyResult"] = VerifyResult.Expire;
-                return View(new RetrievePasswordModel
-                {
-                    Id = id,
-                    TokenId = token
-                });
-            }
-
-            ViewData["VerifyResult"] = VerifyResult.Success;
-            return View(new RetrievePasswordModel
+            var model = new ResetPasswordModel
             {
                 Id = id,
                 TokenId = token
-            });
+            };
+            return View(model);
         }
 
+
         [Session, HttpPost]
-        public ActionResult RetrievePassword(RetrievePasswordModel model)
+        public ActionResult RetrievePassword(ResetPasswordModel model)
         {
             if (ModelState.IsValid)
             {
@@ -76,6 +66,11 @@ namespace Ornament.MVCWebFrame.Controllers
                 return View("RetrievePasswordResult", true);
             }
             return View(model);
+        }
+
+        public ActionResult TokenError()
+        {
+            return View();
         }
     }
 }

@@ -182,7 +182,7 @@
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
     <Compile Include="Models\Memberships\EditUserModel.cs" />
-    <Compile Include="Models\Memberships\ForgetPasswordModel.cs" />
+    <Compile Include="Models\Security\ForgetPasswordModel.cs" />
     <Compile Include="Models\Memberships\LogonModel.cs" />
     <Compile Include="Models\Memberships\OrgModel.cs" />
     <Compile Include="Models\Memberships\Partials\BasicInfo.cs" />
@@ -197,7 +197,7 @@
     <Compile Include="Models\OrgOperator.cs" />
     <Compile Include="Models\PermissionOperator.cs" />
     <Compile Include="Models\RoleOperator.cs" />
-    <Compile Include="Models\Security\RetrievePasswordModel.cs" />
+    <Compile Include="Models\Security\ResetPasswordModel.cs" />
     <Compile Include="Models\Security\VerifyEmailModel.cs" />
     <Compile Include="Models\SiteMapNodes\OrgNode.cs" />
     <Compile Include="Models\UserGroupOperator.cs" />

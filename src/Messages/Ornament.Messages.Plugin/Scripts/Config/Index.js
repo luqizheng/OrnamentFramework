@@ -1,18 +1,41 @@
 ﻿define(function (require) {
     var $ = require("jquery");
+    require('bootstrap')($);
     require('bootbox')($);
     var model = avalon.define('index', function (vm) {
         vm.data = [];
-        vm.save = function() {
-            var key = this.$vmodel.el.key, val = this.$vmodel.el.val;
+        vm.add = function () {
+            vm.data.push({ Name: "", Value: "" });
+        };
+        vm.reload = function () {
+            $.get("/Messages/Config/Reload", function (data) {
+                vm.data = data;
+            });
+        };
+        vm.save = function () {
 
-            $.post("/Messages/Config/SaveVariable", { key: key, val: val }, function (result) {
-                bootbox.alert('save success.');
+            var obj = {
+                Variables: []
+            };
+
+            for (var i = 0; i < vm.data.length; i++) {
+                obj.Variables.push(vm.data[i].$model);
+            }
+            $.ajax({
+                url: "/Messages/Config/SaveVariable",
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(obj),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    bootbox.alert('save success.');
+                }
             });
         };
     });
 
-    return function(data) {
+    return function (data) {
         model.data = data;
+        avalon.scan();
     };
 });

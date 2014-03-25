@@ -333,6 +333,9 @@ namespace Ornament.MemberShip
 
             public virtual EmailVerifier ResetPassword(IMemberShipFactory daoFactory, int expireMiniutes)
             {
+                if (daoFactory == null) throw new ArgumentNullException("daoFactory");
+                if (expireMiniutes <= 0)
+                    expireMiniutes = 30;
                 EmailVerifier result = new EmailVerifier(this.User, expireMiniutes, VerifyType.ResetPassword);
                 daoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
                 return result;

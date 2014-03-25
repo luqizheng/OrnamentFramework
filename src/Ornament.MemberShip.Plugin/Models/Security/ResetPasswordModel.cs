@@ -4,7 +4,10 @@ using Ornament.MemberShip.Security;
 
 namespace Ornament.MemberShip.Plugin.Models.Security
 {
-    public class RetrievePasswordModel
+    /// <summary>
+    ///     这个model用于重新设定密码的时候是用
+    /// </summary>
+    public class ResetPasswordModel
     {
         public string TokenId { get; set; }
         public string Id { get; set; }
@@ -18,13 +21,10 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             {
                 return VerifyResult.NotFoundTokenId;
             }
-
-            if (userToken.Status == SecretTokenStatus.Expire)
+            if (userToken.Verify(TokenId, factory) == VerifyResult.Success)
             {
-                return VerifyResult.Expire;
-            }
-            if (userToken.Verify(TokenId,factory))
-            {
+                userToken.Account.Security.ChangePassword(PasswordModel.Password);
+                factory.CreateUserDao().Update(userToken.Account);
                 return VerifyResult.Success;
             }
             return VerifyResult.Failed;

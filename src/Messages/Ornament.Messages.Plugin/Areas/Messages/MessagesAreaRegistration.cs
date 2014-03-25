@@ -23,7 +23,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             bus.Send(new NHRegisterEventMessage(typeof(IMessageDaoFactory), typeof(MessageDaoFactory)));
             //初始化数据
             bus.Send(new MessageInit());
-           
+
             OrnamentContext.ResourceManager.Add("Template", typeof(MessageOperator));
 
             var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin", context);
@@ -32,6 +32,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             helper.RegistScripts("Scripts/NewsType");
             helper.RegistScripts("Scripts/NotifyType");
             helper.RegistScripts("Scripts/Template");
+            helper.RegistScripts("Scripts/Config");
 
             context.MapRoute(
                 AreaName + "_images",
@@ -55,7 +56,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             base.RegisterArea(context, bus);
         }
 
-   
+
 
     }
 }

@@ -42,8 +42,8 @@ namespace Ornament.MVCWebFrame
 
         private static void Comp(BundleCollection t1)
         {
-            t1.Add(new ScriptBundle("~/Components/json2.js").Include("~/Scripts/Components/json2.js"));
-            SeajsModuleFactory.Instance.ReferenceModules.Add(new ReferenceModule("~/Components/json2.js"));
+            t1.Add(new ScriptBundle("~/Scripts/json2.js").Include("~/Scripts/Components/json2.js"));
+            SeajsModuleFactory.Instance.ReferenceModules.Add(new ReferenceModule("~/Scripts/json2.js"));
         }
 
         private static void Fx(BundleCollection bundles)

@@ -308,6 +308,7 @@
     <Content Include="Content\zTreeStyle\img\zTreeStandard.png" />
     <Content Include="Content\zTreeStyle\zTreeStyle.css" />
     <Content Include="Global.asax" />
+    <Content Include="messageVariables.xml" />
     <Content Include="Scripts\Components\avalon.js" />
     <Content Include="Scripts\Fx\bootstrap.js" />
     <Content Include="Scripts\ckeditor\build-config.js" />
@@ -963,6 +964,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Language.cshtml" />
     <Content Include="Views\Security\VerifyEmail.cshtml" />
+    <Content Include="Views\Security\TokenError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

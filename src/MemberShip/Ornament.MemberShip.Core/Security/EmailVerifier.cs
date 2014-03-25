@@ -113,11 +113,11 @@ namespace Ornament.MemberShip.Security
 
         /// <summary>
         /// </summary>
-        private bool IsExpire
+        public virtual bool IsExpire
         {
             get
             {
-                if (VerifyTime != null)
+                if (VerifyTime != null || this.Status == SecretTokenStatus.Expire)
                     return true;
                 TimeSpan now = DateTime.Now - CreateTime;
                 return now.TotalMinutes > ExpireTime;
@@ -130,28 +130,37 @@ namespace Ornament.MemberShip.Security
         /// <param name="daoFactory"></param>
         /// <returns></returns>
         /// <exception cref="EmailSecurityTimeoutException">User Token is Timeout</exception>
-        public virtual bool Verify(string token, IMemberShipFactory daoFactory)
+        public virtual VerifyResult Verify(string token, IMemberShipFactory daoFactory)
+        {
+            var re = Verify(token);
+            daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
+            return re;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual VerifyResult Verify(string token)
         {
             if (String.IsNullOrEmpty(token))
                 throw new ArgumentNullException("token");
-            if (Status == SecretTokenStatus.Expire)
+            if (this.IsExpire)
             {
-                throw new EmailSecurityTimeoutException();
+                return VerifyResult.Expire;
             }
             if (Status == SecretTokenStatus.Success)
             {
-                throw new EmailSecurityException("this token is veirfy by another one, can't be use again");
+                return VerifyResult.Expire;
             }
             if (CreateToken(Account) == token)
             {
                 _status = SecretTokenStatus.Success;
                 VerifyTime = DateTime.Now;
-                daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
-                return true;
+                return VerifyResult.Success;
             }
-            return false;
+            return VerifyResult.Failed;
         }
-
         private string CreateToken(User user)
         {
             return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();

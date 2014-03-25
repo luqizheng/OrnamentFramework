@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ArrayOfMessageVariable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MessageVariable>
+    <Name>site</Name>
+    <Value>http://localhost:13012</Value>
+  </MessageVariable>
+  <MessageVariable>
+    <Name>RetrievePassowrd</Name>
+    <Value>http://localhost:13012/Security/RetrievePassword</Value>
+  </MessageVariable>
+  <MessageVariable>
+    <Name>VerifyEmail</Name>
+    <Value>http://localhost:13012/Security/VerifyEmail</Value>
+  </MessageVariable>
+</ArrayOfMessageVariable>

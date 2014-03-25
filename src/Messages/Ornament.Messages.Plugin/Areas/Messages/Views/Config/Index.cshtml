@@ -2,22 +2,30 @@
 @using Ornament
 @using Ornament.Web.UI.Theme
 @using Qi.Web
-@model IDictionary<string,string>
+@model IDictionary<string, string>
 
 @{
     ViewBag.Title = "Variable Config";
     Layout = OrnamentContext.Configuration.BackendLayout();
-    var a = JsonHelper.ToJson(this.Model.Select(v=>new {key=v.Key,val=v.Value}));
+    var a = JsonHelper.ToJson(this.Model.Select(v => new { Name = v.Key, Value = v.Value }));
 }
 
 @using (var panel = Html.Panel())
 {
-    panel.Header(@<text>
+    @panel.Header(@<text>
     <h4>Global Variable setting</h4>
     </text>);
-    panel.Body(@<text>
+    @panel.Body(@<text>
+
     <table class="table table-condensed table-bordered" ms-controller="index">
         <thead>
+            <tr>
+                <td colspan="2">
+                    <button ms-click="add" class="btn">Add Variables</button>
+                    <button ms-click="reload" class="btn">Reload </button>
+                    <button ms-click="save" class="btn">Save</button>
+                </td>
+            </tr>
             <tr>
                 <th>Variable Name</th>
                 <th>Value</th>
@@ -25,7 +33,12 @@
         </thead>
         <tbody>
             <tr ms-repeat="data">
-                <td></td>
+                <td>
+                    <input ms-duplex="el.Name" class="row-fluid" />
+                </td>
+                <td>
+                    <input ms-duplex="el.Value" class="row-fluid" />
+                </td>
             </tr>
         </tbody>
     </table>
@@ -34,13 +47,13 @@
 }
 @section scripts{
     @Scripts.Render("~/Scripts/avalon.js")
-
+    @Scripts.Render("~/Scripts/json2.js")
     <script type="text/javascript">
         avalon.config({ loader: false });
     </script>
     <script type="text/javascript">
         var js=@Html.Raw(a);
-        seajs.use("/Messages/Scripts/Config/", function(init) {
+        seajs.use("/Messages/Scripts/Config/index.js", function(init) {
             init(js);
         });
     </script>

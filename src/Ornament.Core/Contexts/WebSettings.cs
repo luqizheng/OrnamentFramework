@@ -42,7 +42,7 @@ namespace Ornament.Contexts
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["VerifyCode"] ?? "false"); }
         }
-
+        [System.Obsolete]
         public string WebDomainUrl
         {
             get
@@ -55,7 +55,7 @@ namespace Ornament.Contexts
                 return result;
             }
         }
-
+        [System.Obsolete]
         public string SiteName
         {
             get

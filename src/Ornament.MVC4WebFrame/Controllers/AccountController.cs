@@ -6,6 +6,7 @@ using System.Web.Security;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
+using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 

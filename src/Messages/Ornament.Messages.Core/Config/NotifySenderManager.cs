@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ornament.Messages.Notification;
+using Qi;
 using Qi.IO.Serialization;
 
 namespace Ornament.Messages.Config
@@ -10,16 +11,13 @@ namespace Ornament.Messages.Config
     public class NotifySenderManager
     {
         public static readonly NotifySenderManager Instance = new NotifySenderManager();
-        public static string StoreFile = "~/messageVariables.xml";
+        public static string StoreFile;
         private readonly IDictionary<CommunicationType, ISender> _senders;
         private Dictionary<string, string> _variables;
 
-        static NotifySenderManager()
-        {
-        }
-
         private NotifySenderManager()
         {
+            StoreFile = ApplicationHelper.MapPath("~/messageVariables.xml");
             _senders = new Dictionary<CommunicationType, ISender>();
             ReloadVariables();
         }
@@ -58,7 +56,17 @@ namespace Ornament.Messages.Config
 
         public void SaveVariable()
         {
-            string str = SerializationHelper.SerializerToXml(Variables);
+            var result = new List<MessageVariable>();
+            foreach (string key in _variables.Keys)
+            {
+                result.Add(new MessageVariable
+                {
+                    Name = key,
+                    Value = _variables[key]
+                });
+            }
+
+            string str = SerializationHelper.SerializerToXml(result);
             using (var writer = new StreamWriter(StoreFile))
             {
                 writer.Write(str);
@@ -69,8 +77,30 @@ namespace Ornament.Messages.Config
         {
             if (File.Exists(StoreFile))
             {
-                _variables = SerializationHelper.DeserializerXml<Dictionary<string, string>>(StoreFile);
+                var result = SerializationHelper.DeserializerXml<List<MessageVariable>>(StoreFile);
+
+                _variables = new Dictionary<string, string>();
+                lock (_variables)
+                {
+                    foreach (MessageVariable item in result)
+                    {
+                        if (!_variables.ContainsKey(item.Name))
+                        {
+                            _variables.Add(item.Name, item.Value);
+                        }
+                        else
+                        {
+                            _variables[item.Name] = item.Value;
+                        }
+                    }
+                }
             }
+        }
+
+        public class MessageVariable
+        {
+            public string Name { get; set; }
+            public string Value { get; set; }
         }
     }
 }

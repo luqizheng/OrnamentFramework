@@ -1,6 +1,6 @@
 ﻿define(function (require) {
     var $ = require('jquery');
-    require("/Scripts/Components/json2.js");
+    require("/Scripts/json2.js");
 
     return function(url) {
         /// <summary>
