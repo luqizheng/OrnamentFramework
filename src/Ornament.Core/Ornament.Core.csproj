@@ -125,7 +125,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ResourceContextExtender.cs" />
-    <Compile Include="MemberSecrityManager.cs" />
     <Compile Include="Messages\Retrives\NotifyTypeRetrive.cs" />
     <Compile Include="Messages\Retrives\Retrive.cs" />
     <Compile Include="Messages\Retrives\SimpleMessageFactoryRetrive.cs" />

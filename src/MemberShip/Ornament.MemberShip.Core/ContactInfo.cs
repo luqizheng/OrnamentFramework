@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
+using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Properties;
+using Ornament.MemberShip.Security;
 using Qi.Domain;
 
 namespace Ornament.MemberShip
@@ -53,7 +54,7 @@ namespace Ornament.MemberShip
             ///     The email.
             /// </value>
             [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
-                ErrorMessageResourceType = typeof(Resources)),
+                ErrorMessageResourceType = typeof (Resources)),
              Display(Name = "Email", ResourceType = typeof (Resources)),
              RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
                  ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (Resources))]
@@ -69,6 +70,24 @@ namespace Ornament.MemberShip
                     }
                     _email = value;
                 }
+            }
+
+            public virtual bool EmailVerified { get; set; }
+
+            public virtual bool PhoneVerified { get; set; }
+
+            /// <summary>
+            ///     Veirfy Email
+            /// </summary>
+            /// <param name="expireMiniutes"></param>
+            /// <param name="daoFactory"></param>
+            /// <returns></returns>
+            public virtual EmailVerifier VerifyEmail(int expireMiniutes, IMemberShipFactory daoFactory)
+            {
+                var result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
+                daoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
+                EmailVerified = false;
+                return result;
             }
         }
     }

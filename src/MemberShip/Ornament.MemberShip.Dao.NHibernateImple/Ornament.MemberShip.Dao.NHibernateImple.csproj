@@ -130,7 +130,7 @@
     <Compile Include="RoleDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="UserGroupDao.cs" />
-    <Compile Include="UserSecurityTokenDao.cs" />
+    <Compile Include="EmailVerifierDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">

@@ -21,7 +21,7 @@ namespace Ornament.MemberShip.Dao
 
         IQueryable<ProfileValue> Profiles { get; }
 
-        IQueryable<UserSecretToken> UserSecretTokens { get; }
+        IQueryable<EmailVerifier> UserSecretTokens { get; }
 
 
         IFriendGroupDao CreateFriendGroupDao();
@@ -41,7 +41,7 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IOrgDao CreateOrgDao();
 
-        IUserSecurityTokenDao CreateUserSecurityTokenDao();
+        IUserSecurityTokenDao CreateEmailVerifierDao();
 
         /// <summary>
         /// </summary>

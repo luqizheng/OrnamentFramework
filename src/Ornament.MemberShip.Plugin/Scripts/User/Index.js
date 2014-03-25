@@ -16,19 +16,7 @@ define(function (require) {
         vm.users = [];
         //Search content
         vm.content = "";
-
-        vm.switchDeny = function () {
-            var mySet = this.$vmodel.el.Deny;
-            deny.call(this, !mySet);
-        };
-
-
-
-        vm.switchApprove = function () {
-            var mySet = this.$vmodel.el.IsApprove;
-            vm.approve.call(!mySet);
-        };
-
+        
         vm.retievePwd = function () {
             userApi.RetrievePassword(loginId, function (e) {
                 alert(e.success ?
@@ -39,14 +27,11 @@ define(function (require) {
             });
         };
         vm.verifyEmail = function () {
-
-            var email = $(this).attr("href").substr(1);
-            var loginId = $("td:first input", $(this).closest("tr")).val();
-            userApi.VerifyEmail(loginId, email, function (e) {
+            var model = this.$vmodel.el;
+            userApi.VerifyEmail(model.Id, function (e) {
                 alert(e.success ?
                     lang.verifyEmailMessage.success :
                     lang.verifyEmailMessage.fail);
-
             }, function () {
                 showLoading.call(self, false);
             });

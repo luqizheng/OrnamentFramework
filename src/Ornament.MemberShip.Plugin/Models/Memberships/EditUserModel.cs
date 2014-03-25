@@ -36,7 +36,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             SessionManager.GetSessionWrapper().CurrentSession.SaveOrUpdate(user.Contact);
             if (this.VerifyEmail && EmailHasChanged)
             {
-                this.SendVerifyEmail(user);
+                this.SendVerifyEmail(user, memberShipFactory);
             }
             return user;
         }

@@ -14,6 +14,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 
             Map(s => s.Phone).Length(20)
                              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+
+            Map(s => s.EmailVerified);
+            Map(s => s.PhoneVerified);
         }
     }
 }

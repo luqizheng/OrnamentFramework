@@ -1,4 +1,5 @@
 ﻿using System;
+using Ornament.MemberShip.Dao;
 using Qi;
 using Qi.Domain;
 using Qi.Secret;
@@ -23,20 +24,43 @@ namespace Ornament.MemberShip.Security
         Success,
     }
 
+    public enum VerifyType
+    {
+        Email,
+        ResetPassword,
+    }
+    public enum VerifyResult
+    {
+        NotFoundTokenId,
+        Success,
+        Failed,
+        Expire
+    }
+
     /// <summary>
     /// </summary>
-    public class UserSecretToken : DomainObject<UserSecretToken, string>
+    public class EmailVerifier : DomainObject<EmailVerifier, string>
     {
         private SecretTokenStatus _status;
 
-        protected UserSecretToken()
+        protected EmailVerifier()
         {
         }
-
-        public UserSecretToken(User account, string action, int expireTimeMinutes)
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual VerifyType Type { get; protected set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="account"></param>
+        /// <param name="expireTimeMinutes"></param>
+        /// <param name="verifyType"></param>
+        public EmailVerifier(User account, int expireTimeMinutes, VerifyType verifyType)
         {
-            if (account == null) throw new ArgumentNullException("account");
-            if (action == null) throw new ArgumentNullException("action");
+            if (account == null)
+                throw new ArgumentNullException("account");
+
             if (expireTimeMinutes <= 0)
             {
                 throw new ArgumentOutOfRangeException("expireTimeMinut should be larger than 0.");
@@ -44,8 +68,8 @@ namespace Ornament.MemberShip.Security
             CreateTime = DateTime.Now;
             PrivateKey = Guid.NewGuid().ToString("N");
             Account = account;
-            Action = action;
             ExpireTime = expireTimeMinutes;
+            this.Type = verifyType;
         }
 
         public virtual SecretTokenStatus Status
@@ -62,17 +86,13 @@ namespace Ornament.MemberShip.Security
                 return _status;
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual string Action { get; protected set; }
 
         /// <summary>
         /// </summary>
         public virtual User Account { get; protected set; }
 
         /// <summary>
-        /// Gets the token createTime
+        ///     Gets the token createTime
         /// </summary>
         public virtual DateTime CreateTime { get; protected set; }
 
@@ -107,24 +127,26 @@ namespace Ornament.MemberShip.Security
         /// <summary>
         /// </summary>
         /// <param name="token"></param>
+        /// <param name="daoFactory"></param>
         /// <returns></returns>
-        /// <exception cref="UserSecurityTimeoutException">User Token is Timeout</exception>
-        public virtual bool Verify(string token)
+        /// <exception cref="EmailSecurityTimeoutException">User Token is Timeout</exception>
+        public virtual bool Verify(string token, IMemberShipFactory daoFactory)
         {
             if (String.IsNullOrEmpty(token))
                 throw new ArgumentNullException("token");
             if (Status == SecretTokenStatus.Expire)
             {
-                throw new UserSecurityTimeoutException();
+                throw new EmailSecurityTimeoutException();
             }
             if (Status == SecretTokenStatus.Success)
             {
-                throw new UserSecurityException("this token is veirfy by another one, can't be use again");
+                throw new EmailSecurityException("this token is veirfy by another one, can't be use again");
             }
             if (CreateToken(Account) == token)
             {
                 _status = SecretTokenStatus.Success;
                 VerifyTime = DateTime.Now;
+                daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
                 return true;
             }
             return false;
@@ -132,7 +154,7 @@ namespace Ornament.MemberShip.Security
 
         private string CreateToken(User user)
         {
-            return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey + Action).Sha1Unicode().ToStringEx();
+            return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();
         }
 
         /// <summary>
@@ -157,7 +179,8 @@ namespace Ornament.MemberShip.Security
             {
                 domainUrl = domainUrl.TrimEnd('/');
             }
-            return string.Format("{2}?id={0}&token={1}", Id, CreateToken(Account), domainUrl);
+
+            return string.Format("{2}{3}id={0}&token={1}&type={4}", Id, CreateToken(Account), domainUrl, domainUrl.Contains("?") ? "&" : "?", Type);
         }
 
         /// <summary>

@@ -1,53 +1,13 @@
-﻿@using Ornament.MemberShip.Plugin.Models.Security
-@using Ornament.Models.Security
-@using Ornament.Web
-@model Ornament.MemberShip.Plugin.Models.Security.VerifyResult?
+﻿@using Ornament
+@using Qi
+@model Ornament.MemberShip.Security.VerifyResult
+
 @{
-    ViewBag.Title = "";
-    Layout = "~/Views/Shared/_layout.cshtml";
-    var dict = new Dictionary<VerifyResult, string>
-        {
-            {
-                VerifyResult.Expire, Url.Action("Index", "Account")
-            },
-             {
-                VerifyResult.Failed, Url.Action("Index", "Account")
-            },
-            
-            {
-                VerifyResult.Success, Url.Action("Index", "Home")
-            },
-        };
+    ViewBag.Title = "Verify Email";
+    Layout = Ornament.OrnamentContext.Configuration.BackendLayout();
 }
 
-<div class="row-fluid">
-    <div class="span12">
-        <div style="margin: 0 auto; text-align: center">
-            <h2>
-                @Html.GetResourceString(Model.ToString())
-            </h2>
-        </div>
-    </div>
+<div>
+    验证Email @this.Model.ToDescription()
 </div>
-
-@section head
-{
-    <script type="text/javascript">
-        setTimeout(function () {
-            @{
-#if !DEBUG
-            }
-
-            location = '@dict[Model.Value]';
-            @{
-#else
-                }
-            console.log('@dict[this.Model.Value]');
-            
-            @{
-#endif
-            }
-        }, 2000)
-    </script>
-}
 

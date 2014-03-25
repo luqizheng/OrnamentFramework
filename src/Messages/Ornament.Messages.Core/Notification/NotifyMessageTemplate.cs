@@ -127,6 +127,9 @@ namespace Ornament.Messages.Notification
             CreateVariablesHandler replaceVariabled,
             params IPerformer[] performers)
         {
+            if (daoFactory == null) throw new ArgumentNullException("daoFactory");
+            if (replaceVariabled == null) throw new ArgumentNullException("replaceVariabled");
+            if (performers == null) throw new ArgumentNullException("performers");
             var targetuser = new HashSet<User>();
             foreach (IPerformer performer in performers)
             {
@@ -135,10 +138,10 @@ namespace Ornament.Messages.Notification
             }
 
 
-            foreach (User u in targetuser)
+            foreach (User user in targetuser)
             {
-                var d = replaceVariabled;
-                Publish(daoFactory, d, u);
+                var data = replaceVariabled(user);
+                Publish(daoFactory, data, user);
             }
         }
 

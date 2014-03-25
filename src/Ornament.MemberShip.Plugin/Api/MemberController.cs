@@ -2,6 +2,7 @@
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
+using Ornament.MemberShip.Plugin.Models.Security;
 using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Plugin.Api
@@ -18,11 +19,11 @@ namespace Ornament.MemberShip.Plugin.Api
         {
             _memberShipFactory = memberShipFactory;
         }
+
         [HttpPost]
         public bool ChangePassword([FromBody] ChangePasswordModel password)
         {
             return password.ChangePassword(OrnamentContext.MemberShip.CurrentUser(), _memberShipFactory.CreateUserDao());
-
         }
 
         [HttpGet]
@@ -52,6 +53,15 @@ namespace Ornament.MemberShip.Plugin.Api
                 success,
                 messages = ModelState.Values
             };
+        }
+
+        [HttpGet]
+        public object VerifyEmail()
+        {
+            var model = new VerifyEmailModel();
+            model.Id = OrnamentContext.MemberShip.CurrentUser().Id;
+            model.Send(_memberShipFactory);
+            return true;
         }
     }
 }

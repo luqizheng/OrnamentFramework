@@ -10,6 +10,7 @@ using Ornament.MemberShip.Plugin.Properties;
 using Ornament.Web.MemberShips;
 using Qi.Web.Http;
 using Qi.Web.Mvc;
+using VerifyEmailModel = Ornament.MemberShip.Plugin.Models.Security.VerifyEmailModel;
 
 namespace Ornament.MemberShip.Plugin.Api
 {
@@ -71,7 +72,7 @@ namespace Ornament.MemberShip.Plugin.Api
         [HttpPost]
         public object VerifyEmail([FromBody] VerifyEmailModel model)
         {
-            if (model.Veirfy(_factory))
+            if (model.Send(_factory))
             {
                 return new
                 {

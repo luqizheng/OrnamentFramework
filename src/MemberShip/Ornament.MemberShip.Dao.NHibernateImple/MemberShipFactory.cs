@@ -13,7 +13,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             get { return CreateProfileDao().Profiles; }
         }
 
-        public IQueryable<UserSecretToken> UserSecretTokens { get { return CreateUserSecurityTokenDao().Tokens; } }
+        public IQueryable<EmailVerifier> UserSecretTokens { get { return CreateEmailVerifierDao().Tokens; } }
 
       
         public IFriendGroupDao CreateFriendGroupDao()
@@ -46,9 +46,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new OrgDao();
         }
 
-        public IUserSecurityTokenDao CreateUserSecurityTokenDao()
+        public IUserSecurityTokenDao CreateEmailVerifierDao()
         {
-            return new UserSecurityTokenDao();
+            return new EmailVerifierDao();
         }
 
 

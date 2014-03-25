@@ -34,8 +34,9 @@ define(function (require) {
                 Init.call(self, d);
             });
         };
-        this.verifyEmail = function () {
-
+        this.verifyEmail = function (func) {
+            var webApi = new WebApi(memberUrl + "/VerifyEmail");
+            webApi.Get(func);
         };
 
         this.save = function (callBack) {
@@ -76,20 +77,18 @@ define(function (require) {
         }, func);
     };
 
-    User.VerifyEmail = function (loginId, email, func, completeFunc) {
+    User.VerifyEmail = function (id, func, completeFunc) {
         /// <summary>
         /// 发送验证Email账号
         /// </summary>
         /// <param name="loginId"></param>
         /// <param name="email"></param>
-
-        var webApi = new WebApi(userUrl);
+        var webApi = new WebApi(userUrl + "/VerifyEmail");
         if (completeFunc) {
             webApi.CompleteCallBack = completeFunc;
         }
         webApi.Post({
-            loginId: loginId,
-            email: email
+            Id: id,
         }, func);
     };
 

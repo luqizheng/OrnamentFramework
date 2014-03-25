@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.MemberShip.Properties;
 using Ornament.MemberShip.Security;
@@ -18,7 +19,7 @@ namespace Ornament.MemberShip
             get
             {
                 if (_validateUserPolicy == null)
-                    throw new UserSecurityException("Please set the User.ValidateUserPolicy first.");
+                    throw new EmailSecurityException("Please set the User.ValidateUserPolicy first.");
                 return _validateUserPolicy;
             }
             set { _validateUserPolicy = value; }
@@ -328,6 +329,13 @@ namespace Ornament.MemberShip
             {
                 this.InvalidPasswordAttempts = ValidateUserPolicy.MaxInvalidPasswordAttempts;
                 this.LastLockoutDate = DateTime.Now;
+            }
+
+            public virtual EmailVerifier ResetPassword(IMemberShipFactory daoFactory, int expireMiniutes)
+            {
+                EmailVerifier result = new EmailVerifier(this.User, expireMiniutes, VerifyType.ResetPassword);
+                daoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
+                return result;
             }
         }
     }

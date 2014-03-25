@@ -3,7 +3,7 @@
  <Subject>[site] 通知 </Subject>
     <Value> <![CDATA[
     [name]，您好
-	<p>
+	  <p>
 		你的安全电子邮件已经被修改。请点击下面链接进行确认
 		</p>
 

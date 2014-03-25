@@ -3,7 +3,7 @@ using Ornament.MemberShip.Security;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 {
-    public class UserSecretTokenMapping : ClassMap<UserSecretToken>
+    public class UserSecretTokenMapping : ClassMap<EmailVerifier>
     {
         public UserSecretTokenMapping()
         {
@@ -16,7 +16,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Map(s => s.ExpireTime);
             Map(s => s.VerifyTime);
             Map(s => s.Status);
-            Map(s => s.Action).Length(64);
+            Map(s => s.Type);
+
 
 
         }

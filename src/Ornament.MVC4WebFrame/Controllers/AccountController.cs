@@ -56,19 +56,7 @@ namespace Ornament.MVCWebFrame.Controllers
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
 
-        /// <summary>
-        ///     —È÷§Emial
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        public JsonResult VarifyEmail(string email)
-        {
-            MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
-                OrnamentContext.Configuration.ApplicationSetting
-                    .VerifyEmailTimeout);
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        }
-
+      
         public ActionResult GetView(string viewName)
         {
             return View(viewName);
@@ -116,9 +104,7 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 emailChanged = true;
                 OrnamentContext.MemberShip.CurrentUser().Contact.Email = data["Email"];
-                MemberSecrityManager.CreateEmailChangedToken(OrnamentContext.MemberShip.CurrentUser(),
-                    OrnamentContext.Configuration.ApplicationSetting
-                        .VerifyEmailTimeout);
+              
             }
             OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
             return Json(new { success = true, emailChanged });
@@ -167,7 +153,7 @@ namespace Ornament.MVCWebFrame.Controllers
         /// <param name="forget"></param>
         /// <returns></returns>
         [HttpPost, Session]
-        public ActionResult ForgetPassword(ForgetPassword forget)
+        public ActionResult ForgetPassword(ForgetPasswordModel forget)
         {
             if (ModelState.IsValid)
             {

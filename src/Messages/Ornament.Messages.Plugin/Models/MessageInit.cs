@@ -27,7 +27,7 @@ namespace Ornament.Web
         public void CreateData()
         {
             NotifyMessageTemplate a = OrnamentContext.Configuration.MessagesConfig.AccountChanged;
-            NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.EmailAddressChanged;
+            NotifyMessageTemplate b = OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress;
             NotifyMessageTemplate c = OrnamentContext.Configuration.MessagesConfig.RegistAccount;
             NotifyMessageTemplate d = OrnamentContext.Configuration.MessagesConfig.RetrivePassword;
 

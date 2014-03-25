@@ -916,7 +916,7 @@
     <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EnumCheckBox.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
-    <Content Include="Views\Security\VerifyEmail.cshtml" />
+    <Content Include="Views\Security\Email.cshtml" />
     <Content Include="Views\Security\RetrievePassword.cshtml" />
     <Content Include="Views\Security\RetrievePasswordResult.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
@@ -962,6 +962,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Language.cshtml" />
+    <Content Include="Views\Security\VerifyEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

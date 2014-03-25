@@ -41,16 +41,16 @@ namespace Ornament.Contexts
                         "Regist New User (Template)",
                         "Regist New user, and verify safe email address.",
                         SystemType,
-                        DeserializerXml(Resources.registAccount_zh_CN, "zh-CN"),
+                        DeserializerXml(Resources.registAccount_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.registAccount, "en"),
-                        DeserializerXml(Resources.registAccount_zh, "zh")
+                        DeserializerXml(Resources.registAccount_zh, "zh-Hant")
                         );
                 }
                 return _registryAccount.Get();
             }
         }
 
-        public NotifyMessageTemplate EmailAddressChanged
+        public NotifyMessageTemplate VerifyEmailAddress
         {
             get
             {
@@ -60,9 +60,9 @@ namespace Ornament.Contexts
                         "Verify Email Address (Template)",
                         "Email has changed, It should verify again.",
                         SystemType,
-                        DeserializerXml(Resources.emailChanged_zh_CN, "zh-CN"),
-                        DeserializerXml(Resources.emailChanged_zh, "zh"),
-                        DeserializerXml(Resources.emailChanged, "en")
+                        DeserializerXml(Resources.verifyEmail_zh_CN, "zh-Hans"),
+                        DeserializerXml(Resources.verifyEmail_zh, "zh-Hant"),
+                        DeserializerXml(Resources.verifyEmail, "en")
                         );
                 }
 
@@ -80,8 +80,8 @@ namespace Ornament.Contexts
                         "Retrive Password (Template)",
                         "User forget password and try to use email to retrieve.",
                         SystemType,
-                        DeserializerXml(Resources.forgetPassword_zh_CN, "zh-CN"),
-                        DeserializerXml(Resources.forgetPassword_zh, "zh"),
+                        DeserializerXml(Resources.forgetPassword_zh_CN, "zh-Hans"),
+                        DeserializerXml(Resources.forgetPassword_zh, "zh-Hant"),
                         DeserializerXml(Resources.forgetPassword, "en")
                         );
                 }
@@ -102,8 +102,8 @@ namespace Ornament.Contexts
                         "Account Information changed (Template)",
                         "Account Information Changed for user",
                         SystemType,
-                        DeserializerXml(Resources.changeAccount_zh_CN, "zh-CN"),
-                        DeserializerXml(Resources.changeAccount_zh, "zh"),
+                        DeserializerXml(Resources.changeAccount_zh_CN, "zh-Hans"),
+                        DeserializerXml(Resources.changeAccount_zh, "zh-Hant"),
                         DeserializerXml(Resources.changeAccount, "en")
                         );
                 }

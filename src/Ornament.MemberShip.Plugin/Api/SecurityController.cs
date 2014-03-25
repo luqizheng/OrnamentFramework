@@ -1,7 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Memberships;
+using Ornament.MemberShip.Plugin.Models.Security;
+using Ornament.Messages.Notification;
+using Ornament.Messages.Retrives;
 using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Plugin.Api
@@ -30,11 +34,19 @@ namespace Ornament.MemberShip.Plugin.Api
         ///     重新獲取密碼
         /// </summary>
         /// <returns></returns>
-        public object ForgetPassword([FromBody] ForgetPassword forgetPassword)
+        public object ForgetPassword([FromBody] ForgetPasswordModel forgetPasswordModel)
         {
-            forgetPassword.Retrieve(_factory);
+            forgetPasswordModel.Retrieve(_factory);
             return new { success = true };
         }
+
+        [HttpGet]
+        public bool VerifyEmail(VerifyEmailModel model)
+        {
+            model.Send(_factory);
+            return true;
+        }
+
 
     }
 }

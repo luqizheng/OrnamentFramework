@@ -12,7 +12,7 @@ namespace Ornament.MemberShip.Plugin.Models.Security
 
         public VerifyResult Save(IMemberShipFactory factory)
         {
-            UserSecretToken userToken = factory.CreateUserSecurityTokenDao().Get(Id);
+            EmailVerifier userToken = factory.CreateEmailVerifierDao().Get(Id);
 
             if (userToken == null)
             {
@@ -23,11 +23,8 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             {
                 return VerifyResult.Expire;
             }
-            if (userToken.Verify(TokenId))
+            if (userToken.Verify(TokenId,factory))
             {
-                userToken.Account.Security.ChangePassword(PasswordModel.Password);
-                factory.CreateUserDao().SaveOrUpdate(userToken.Account);
-                factory.CreateUserSecurityTokenDao().SaveOrUpdate(userToken);
                 return VerifyResult.Success;
             }
             return VerifyResult.Failed;
