@@ -13,7 +13,9 @@ namespace Ornament.MemberShip
     public partial class User
     {
         private static ValidateUserPolicy _validateUserPolicy;
-
+        /// <summary>
+        /// 检查用户的策略。
+        /// </summary>
         public static ValidateUserPolicy ValidateUserPolicy
         {
             get

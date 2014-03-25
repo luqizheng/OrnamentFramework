@@ -25,7 +25,7 @@ namespace Ornament.Web
                 throw new ArgumentNullException("controllers");
             _container = (WindsorContainer) OrnamentContext.IocContainer;
             Regist(controllers.ToArray());
-            Regist(typeof (SeajsModuleEmbeddedResourceController));
+            //Regist(typeof (SeajsModuleEmbeddedResourceController));
             Regist(typeof (EmbeddedResourceController));
         }
 

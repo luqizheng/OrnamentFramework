@@ -9,6 +9,7 @@ using SeajsBundles.Seajs;
 
 namespace Ornament.Web.Controllers
 {
+    /*
     [System.Obsolete("Please use SeajsEmbedBunldle to zip js")]
     public class SeajsModuleEmbeddedResourceController : Controller
     {
@@ -77,5 +78,5 @@ namespace Ornament.Web.Controllers
         }
 
         #endregion
-    }
+    }*/
 }

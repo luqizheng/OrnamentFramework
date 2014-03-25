@@ -20,12 +20,7 @@ namespace Ornament.MemberShip
         ///     god of the system login id
         /// </summary>
         public static readonly string AdminLoginId = "admin";
-
         private ContactInfo _contact;
-        private bool _isApproved;
-
-        //private UserInformation _information;
-        private bool _isLockout;
         private OtherUserInfo _other;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
         private SecurityInfo _security;

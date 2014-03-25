@@ -52,7 +52,8 @@ namespace Ornament.Web
         {
             if (imageFolder == null)
                 throw new ArgumentNullException("imageFolder");
-            imageFolder = imageFolder.TrimEnd('/').TrimStart('/');
+
+            imageFolder = imageFolder.Trim('/',' ');
             RegistyEmbedResouce(imageFolder);
         }
 
@@ -63,7 +64,7 @@ namespace Ornament.Web
         {
             if (scriptPath == null)
                 throw new ArgumentNullException("scriptPath");
-            scriptPath = scriptPath.TrimEnd('/').TrimStart('/');
+            scriptPath = scriptPath.Trim('/', ' ');
             RegistyEmbedResouce(scriptPath);
         }
 
@@ -71,7 +72,7 @@ namespace Ornament.Web
         {
             if (path == null)
                 throw new ArgumentNullException("path");
-            path = path.TrimStart('/').TrimEnd('/');
+            path = path.Trim('/', ' ');
             //page scripts  registry
             _context.MapRoute(
                 _protablAreaRegistration.AreaName + "_" + path + "_embededResource",
@@ -89,7 +90,7 @@ namespace Ornament.Web
 
         public void RegistySeajsModule(string path)
         {
-            _seajsEmbeddedModulePath.Add(path.Trim('/'));
+            _seajsEmbeddedModulePath.Add(path.Trim('/', ' '));
         }
 
         protected void ResgistSeajsFiles(IApplicationBus bus)
