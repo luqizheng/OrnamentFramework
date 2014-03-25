@@ -68,9 +68,6 @@ namespace Ornament.MVCWebFrame.Controllers
             return View(model);
         }
 
-        public ActionResult TokenError()
-        {
-            return View();
-        }
+      
     }
 }

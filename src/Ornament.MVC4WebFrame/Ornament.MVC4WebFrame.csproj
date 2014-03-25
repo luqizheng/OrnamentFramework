@@ -1126,15 +1126,15 @@
     <Content Include="Views\Security\App_LocalResources\RetrievePassword.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Security\App_LocalResources\RetrievePassword.zh.resx" />
+    <Content Include="Views\Security\App_LocalResources\RetrievePassword.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Security\App_LocalResources\RetrievePassword.zh-CN.resx" />
+    <Content Include="Views\Security\App_LocalResources\RetrievePassword.zh-Hans.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
-    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-CN.resx" />
-    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh.resx" />
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-Hans.resx" />
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
