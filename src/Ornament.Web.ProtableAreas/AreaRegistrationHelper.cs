@@ -29,7 +29,7 @@ namespace Ornament.Web
                 throw new ArgumentNullException("assemblyRootNamespace");
             if (context == null) throw new ArgumentNullException("context");
             _protablAreaRegistration = protablAreaRegistration;
-            _assemblyRootNamespace = assemblyRootNamespace;
+            _assemblyRootNamespace = assemblyRootNamespace.Trim();
             _context = context;
             protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
         }
