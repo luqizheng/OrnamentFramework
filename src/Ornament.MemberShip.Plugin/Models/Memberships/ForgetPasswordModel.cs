@@ -29,6 +29,8 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             var direct = new System.Collections.Generic.Dictionary<string, string>();
             direct.Add("site", OrnamentContext.Configuration.ApplicationSetting.SiteName);
             direct.Add("url", tokern.CreateQueryString(OrnamentContext.Configuration.ApplicationSetting.WebDomainUrl + "/Security/RetrievePassword"));
+            direct.Add("name",user.Name);
+
             OrnamentContext.Configuration.MessagesConfig.RetrivePassword.Publish(daoFactory, direct, user);
         }
     }

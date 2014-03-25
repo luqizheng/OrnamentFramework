@@ -68,7 +68,7 @@ define(function (require) {
         /// </summary>
         /// <param name="accountOrEmail"></param>
         /// <param name="func"></param>
-        var webApi = new WebApi(secrityUrl);
+        var webApi = new WebApi(secrityUrl + "/RetrievePassword");
         if (completeFunc) {
             webApi.CompleteCallBack = completeFunc;
         }
