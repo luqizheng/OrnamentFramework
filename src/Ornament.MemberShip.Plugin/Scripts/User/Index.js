@@ -18,6 +18,7 @@ define(function (require) {
         vm.content = "";
         
         vm.retievePwd = function () {
+            var loginId = this.$vmodel.el.LoginId;
             userApi.RetrievePassword(loginId, function (e) {
                 alert(e.success ?
                     lang.retrievePwdMessage.success :

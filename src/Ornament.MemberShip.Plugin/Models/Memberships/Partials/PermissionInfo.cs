@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using FluentNHibernate.Utils;
 using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
@@ -19,7 +20,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             UserGroups = user.UserGroups.ToArray();
             Roles = user.GetRoles().ToArray();
             Org = user.Org;
-            IsApprove = user.IsApproved;
+
             IsLock = user.Security.IsLocked;
             Remark = user.Remarks;
         }
@@ -49,11 +50,12 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             set { _userGroups = value; }
         }
 
-        [Display(Name = "IsApproved", ResourceType = typeof(Resources))]
-        public bool IsApprove { get; set; }
+
 
         [Display(Name = "IsLockout", ResourceType = typeof(Resources))]
         public bool IsLock { get; set; }
+        [Display(Name = "Deny", ResourceType = typeof(Resources))]
+        public bool Deny { get; set; }
 
 
         public void UpdateOn(User user)
@@ -62,9 +64,9 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
                 throw new ArgumentNullException("user");
 
             user.Remarks = Remark;
-            user.IsApproved = IsApprove;
-            user.Org = Org;
 
+            user.Org = Org;
+            user.IsDeny = Deny;
             user.Roles.Clear();
             foreach (Role role in Roles)
             {

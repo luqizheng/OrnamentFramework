@@ -88,6 +88,15 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Deny Access 的本地化字符串。
+        /// </summary>
+        public static string Deny {
+            get {
+                return ResourceManager.GetString("Deny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 e-Mail 的本地化字符串。
         /// </summary>
         public static string Email {
@@ -160,11 +169,11 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Approved 的本地化字符串。
+        ///   查找类似 Email Approved 的本地化字符串。
         /// </summary>
-        public static string IsApproved {
+        public static string IsEmailApproved {
             get {
-                return ResourceManager.GetString("IsApproved", resourceCulture);
+                return ResourceManager.GetString("IsEmailApproved", resourceCulture);
             }
         }
         

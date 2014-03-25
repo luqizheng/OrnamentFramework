@@ -14,12 +14,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 {
                     d.KeyColumn("Id");
                     d.Map(s => s.LoginId).Length(50).Unique().Index("idx_loginId");
-                    d.Map(s => s.IsApproved)
-                     .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-                    //Map to _isApprove,avoid change theUpdate time.
-
                     d.Map(s => s.IsDeny);
-
                     d.Map(s => s.TimeZoneId).Length(64);
                     d.Map(s => s.Language).Length(32);
                     d.References(s => s.Org).Column("UserOrgId");

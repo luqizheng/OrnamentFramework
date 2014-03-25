@@ -72,7 +72,7 @@ namespace Ornament.MemberShip
             _security = new SecurityInfo(this);
             _contact = new ContactInfo(this);
             Other.CreateTime = DateTime.Now;
-            IsApproved = true;
+           
         }
 
         public virtual SecurityInfo Security
@@ -80,19 +80,7 @@ namespace Ornament.MemberShip
             get { return _security ?? (_security = new SecurityInfo(this)); }
         }
 
-        /// <summary>
-        ///     获取或设定用户是否已经获准使用
-        /// </summary>
-        [Display(Name = "IsApproved", ResourceType = typeof (Resources))]
-        public virtual bool IsApproved
-        {
-            get { return _isApproved; }
-            set
-            {
-                _isApproved = value;
-                ModifyUpdateTime();
-            }
-        }
+       
 
         [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
         [UIHint("TimeZone")]

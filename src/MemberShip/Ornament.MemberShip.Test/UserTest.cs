@@ -244,20 +244,7 @@ namespace MemberShip.Test
             Assert.AreEqual(true, target.Security.IsLocked);
         }
 
-        /// <summary>
-        ///A test for IsApproved
-        ///</summary>
-        [TestMethod]
-        public void IsApprovedTest()
-        {
-            var target = new User("kkkkk");
-            bool expected = true;
-            bool actual;
-            target.IsApproved = expected;
-            actual = target.IsApproved;
-            Assert.AreEqual(expected, actual);
-        }
-
+      
         /// <summary>
         ///A test for Email
         ///</summary>

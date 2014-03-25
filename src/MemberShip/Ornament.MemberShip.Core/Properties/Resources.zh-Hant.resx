@@ -142,7 +142,7 @@
     <value>用戶已經被鎖定</value>
   </data>
   <data name="IsApproved" xml:space="preserve">
-    <value>是否驗證</value>
+    <value>電子郵件是否通過驗證</value>
   </data>
   <data name="IsLockout" xml:space="preserve">
     <value>鎖定</value>
@@ -260,5 +260,8 @@
   </data>
   <data name="error_login_remind_attempts" xml:space="preserve">
     <value>, 你還剩下{0}次，之後會被鎖定。</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>禁止訪問</value>
   </data>
 </root>

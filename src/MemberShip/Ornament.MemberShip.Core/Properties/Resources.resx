@@ -147,8 +147,8 @@
   <data name="error_UserIsLockout_retry_after_mins" xml:space="preserve">
     <value>Please try again after {0} miniutes.</value>
   </data>
-  <data name="IsApproved" xml:space="preserve">
-    <value>Approved</value>
+  <data name="IsEmailApproved" xml:space="preserve">
+    <value>Email Approved</value>
   </data>
   <data name="IsLockout" xml:space="preserve">
     <value>Lockout</value>
@@ -269,5 +269,8 @@
   </data>
   <data name="error_login_remind_attempts" xml:space="preserve">
     <value>, {0} attempts remain before account is locked</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>Deny Access</value>
   </data>
 </root>

@@ -135,8 +135,8 @@
   <data name="errorMsg_RequirePasswordAnswer" xml:space="preserve">
     <value>请输入取回密码的答案</value>
   </data>
-  <data name="IsApproved" xml:space="preserve">
-    <value>是否批准使用</value>
+  <data name="IsEmailApproved" xml:space="preserve">
+    <value>电子邮件是否通过验证</value>
   </data>
   <data name="IsLockout" xml:space="preserve">
     <value>锁定</value>
@@ -260,5 +260,8 @@
   </data>
   <data name="error_login_remind_attempts" xml:space="preserve">
     <value>, 你还剩下{0}次，之后会被锁定。</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>禁止访问</value>
   </data>
 </root>

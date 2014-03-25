@@ -107,7 +107,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
                     user.LoginId,
                     user.Contact.Email,
                     user.Security.IsLocked,
-                    user.IsApproved,
+                    user.Contact.EmailVerified,
                     Deny = user.IsDeny,
                     LastActivityDate =
                         user.Other.LastActivityDate != null

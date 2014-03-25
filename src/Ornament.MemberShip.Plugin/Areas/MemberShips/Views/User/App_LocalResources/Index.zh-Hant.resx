@@ -192,4 +192,10 @@
   <data name="Deny" xml:space="preserve">
     <value>禁止訪問</value>
   </data>
+  <data name="Verify" xml:space="preserve">
+    <value>驗證</value>
+  </data>
+  <data name="ResetPassword_title" xml:space="preserve">
+    <value>通過電子郵件重置密碼</value>
+  </data>
 </root>

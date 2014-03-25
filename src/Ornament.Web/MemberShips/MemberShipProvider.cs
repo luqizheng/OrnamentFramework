@@ -381,12 +381,8 @@ namespace Ornament.Web.MemberShips
         public override bool UnlockUser(string userName)
         {
             User user = Facotry.CreateUserDao().GetByLoginId(userName);
-            if (user.IsApproved)
-            {
-                user.Security.Unlock();
-                return true;
-            }
-            return false;
+            user.Security.Unlock();
+            return true;
         }
 
         /// <summary>
@@ -466,10 +462,8 @@ namespace Ornament.Web.MemberShips
 
             try
             {
-                result = new User(username, password)
-                {
-                    IsApproved = isApproved,
-                };
+                result = new User(username, password);
+
                 result.Contact.Email = email;
                 result.Security.SetQuestionAndAnswer(passwordQuestion, passwordAnswer);
                 userDao.SaveOrUpdate(result);
@@ -576,7 +570,7 @@ namespace Ornament.Web.MemberShips
                 user.Contact.Email,
                 user.Security.PasswordQuestion,
                 user.Remarks,
-                user.IsApproved,
+               user.Contact.EmailVerified,
                 user.Security.IsLocked,
                 user.Other.CreateTime,
                 user.Security
