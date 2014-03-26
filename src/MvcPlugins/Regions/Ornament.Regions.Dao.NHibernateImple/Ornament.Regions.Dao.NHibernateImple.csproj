@@ -48,9 +48,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Qi.1.5.0.0\lib\net40-Client\Qi.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.NHibernateExtender, Version=1.5.2.11, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qi.NHibernateExtender, Version=1.5.2.24, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Qi.NHibernateExtender.1.5.2.11\lib\net40\Qi.NHibernateExtender.dll</HintPath>
+      <HintPath>..\..\..\packages\Qi.NHibernateExtender.1.5.2.24\lib\net40\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

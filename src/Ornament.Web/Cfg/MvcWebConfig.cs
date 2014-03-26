@@ -29,7 +29,7 @@ namespace Ornament.Web.Cfg
 {
     public class MvcWebConfig
     {
-        public static void Regist(VoidFunc mvcNormalInit, Type httpErrorControllerType, Assembly webAssembly,HttpApplication application)
+        public static void Regist(VoidFunc mvcNormalInit, Type httpErrorControllerType, Assembly webAssembly)
         {
             //AddProtableMessageHandler();
             Exception nhibernateException = null;
@@ -44,7 +44,7 @@ namespace Ornament.Web.Cfg
                 nhibernateException = ex;
             }
 
-            NHibernateMvcRegister.Regist(application); //修改MVC ModelHandler等配置
+            NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             ExtenderModelType();
 
             //
