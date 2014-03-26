@@ -43,7 +43,7 @@ namespace Ornament.MVCWebFrame
                 memberDataInit.AdminPassword = "123456";
             },
                 typeof(HttpErrorsController),
-                Assembly.GetExecutingAssembly());
+                Assembly.GetExecutingAssembly(), this);
 
 
             PermissionConfig.Regist();

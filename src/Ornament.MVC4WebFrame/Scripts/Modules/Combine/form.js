@@ -7,7 +7,6 @@ define(function (require) {
     require("inputmask")($);
     require("timepicker")($);
     require("validate")($);
-    require("unobtrusive")($);
 
 
     //form for boostratp
