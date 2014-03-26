@@ -64,9 +64,9 @@
     <Reference Include="Ornament.Messages.Core">
       <HintPath>..\Ornament.MemberShip.Test\bin\Debug\Ornament.Messages.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Qi, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qi, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Qi.1.5.0.0\lib\net40-Client\Qi.dll</HintPath>
+      <HintPath>..\..\packages\Qi.1.5.1.0\lib\net40-Client\Qi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
