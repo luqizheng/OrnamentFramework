@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Ornament.Messages.Config;
 using Ornament.Web.MemberShips;
@@ -21,13 +20,13 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             NotifySenderManager.Instance.ReloadVariables();
 
-            return Json(from a in NotifySenderManager.Instance.Variables select new { Name = a.Key, Value = a.Value });
-
+            return Json(from a in NotifySenderManager.Instance.Variables select new {Name = a.Key, a.Value});
         }
+
         [HttpPost]
         public ActionResult SaveVariable(VariablesModels models)
         {
-            foreach (var variable in models.Variables)
+            foreach (VairableModel variable in models.Variables)
             {
                 string key = variable.Name;
                 string val = variable.Value;
@@ -40,7 +39,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                     NotifySenderManager.Instance.Variables.Add(key, val);
                 }
                 NotifySenderManager.Instance.SaveVariable();
-
             }
             return Json(true);
         }
