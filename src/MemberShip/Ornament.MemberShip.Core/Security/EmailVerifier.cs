@@ -113,11 +113,12 @@ namespace Ornament.MemberShip.Security
 
         /// <summary>
         /// </summary>
-        public virtual bool IsExpire
+        
+        private bool IsExpire
         {
             get
             {
-                if (VerifyTime != null || this.Status == SecretTokenStatus.Expire)
+                if (VerifyTime != null)
                     return true;
                 TimeSpan now = DateTime.Now - CreateTime;
                 return now.TotalMinutes > ExpireTime;
