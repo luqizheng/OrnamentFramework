@@ -47,7 +47,7 @@
     </Reference>
     <Reference Include="Qi.NHibernateExtender, Version=1.5.2.24, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Qi.NHibernateExtender.1.5.2.24\lib\net40\Qi.NHibernateExtender.dll</HintPath>
+      <HintPath>..\..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

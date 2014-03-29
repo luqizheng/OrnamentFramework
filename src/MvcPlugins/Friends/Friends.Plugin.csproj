@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Qi.1.5.1.0\lib\net40-Client\Qi.dll</HintPath>
     </Reference>
+    <Reference Include="Qi.NHibernateExtender, Version=1.6.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
