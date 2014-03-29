@@ -62,7 +62,7 @@ namespace Ornament.MVCWebFrame
         private void Profile_MigrateAnonymous(object sender, ProfileMigrateEventArgs args)
         {
             SessionWrapper wrapper = SessionManager.GetSessionWrapper();
-            bool a = wrapper.InitSession();
+
             try
             {
                 IUserProfileDao profileDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateProfileDao();
@@ -91,7 +91,7 @@ namespace Ornament.MVCWebFrame
             }
             finally
             {
-                if (a)
+                if (wrapper.OpenInThisContext)
                 {
                     wrapper.Close(true);
                 }

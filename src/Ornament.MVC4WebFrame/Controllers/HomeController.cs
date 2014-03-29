@@ -23,7 +23,7 @@ namespace Ornament.MVCWebFrame.Controllers
             }
         }
     }
-    [HandleError, Session]
+    [HandleError, Session(Tag="Controller")]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -35,15 +35,15 @@ namespace Ornament.MVCWebFrame.Controllers
         [Authorize]
         public ActionResult Admin()
         {
-            
+
             return View(new Test());
         }
 
-        [Session]
+        [Session(Tag="Action")]
         public ActionResult SwitchLanguage(string id)
         {
             OrnamentContext.MemberShip.SwitchLanguage(id);
-                
+            
             if (Request.UrlReferrer != null)
                 return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Index");

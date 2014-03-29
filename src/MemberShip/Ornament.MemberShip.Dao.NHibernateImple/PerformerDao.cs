@@ -13,7 +13,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
     {
         public ISession CurrentSession
         {
-            get { return SessionManager.Instance.GetCurrentSession(); }
+            get { return SessionManager.GetSessionWrapper().CurrentSession; }
         }
 
         #region IPerformerDao Members

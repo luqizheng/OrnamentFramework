@@ -50,9 +50,7 @@ namespace Ornament.Web.MemberShips
         /// </param>
         public override int DeleteProfiles(ProfileInfoCollection profiles)
         {
-            SessionWrapper wrapper =
-                SessionManager.GetSessionWrapper();
-            bool openCurrent = wrapper.InitSession();
+            SessionWrapper wrapper = SessionManager.GetSessionWrapper();
             try
             {
                 var userName = new string[profiles.Count];
@@ -66,7 +64,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (openCurrent)
+                if (wrapper.OpenInThisContext)
                 {
                     wrapper.Close(true);
                 }
@@ -84,7 +82,7 @@ namespace Ornament.Web.MemberShips
         public override int DeleteProfiles(string[] usernames)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+          
             try
             {
                 return MemberShipFactory.CreateProfileDao().Delete(usernames);
@@ -92,7 +90,7 @@ namespace Ornament.Web.MemberShips
 
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -121,7 +119,7 @@ namespace Ornament.Web.MemberShips
             DateTime userInactiveSinceDate)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+         
             try
             {
                 switch (authenticationOption)
@@ -140,7 +138,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -169,7 +167,7 @@ namespace Ornament.Web.MemberShips
             DateTime userInactiveSinceDate)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+           
             try
             {
                 switch (authenticationOption)
@@ -187,7 +185,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -212,7 +210,7 @@ namespace Ornament.Web.MemberShips
             int pageIndex, int pageSize, out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+          
             try
             {
                 IList<ProfileValue> users;
@@ -243,7 +241,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -253,7 +251,7 @@ namespace Ornament.Web.MemberShips
         private static ProfileInfo ToProfileInfo(ProfileValue profileValue)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+    
             try
             {
                 var reuslt =
@@ -264,7 +262,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -298,7 +296,7 @@ namespace Ornament.Web.MemberShips
             int pageSize, out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+        
             try
             {
                 var infos = new ProfileInfoCollection();
@@ -323,7 +321,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -351,7 +349,7 @@ namespace Ornament.Web.MemberShips
             out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+         
             try
             {
                 return FindInactiveProfilesByUserName(authenticationOption, usernameToMatch, DateTime.MaxValue,
@@ -360,7 +358,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -395,7 +393,7 @@ namespace Ornament.Web.MemberShips
             int pageIndex, int pageSize, out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+           
             try
             {
                 var infos = new ProfileInfoCollection();
@@ -455,7 +453,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -482,7 +480,7 @@ namespace Ornament.Web.MemberShips
             SettingsPropertyCollection collection)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+           
             IUserProfileDao profileDao = MemberShipFactory.CreateProfileDao();
             try
             {
@@ -508,7 +506,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }
@@ -530,7 +528,7 @@ namespace Ornament.Web.MemberShips
         public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+           
             try
             {
                 string userName = LoginId(context);
@@ -556,7 +554,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }

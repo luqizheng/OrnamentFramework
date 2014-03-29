@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Mapping;
 using NHibernate.Metadata;
@@ -12,6 +13,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 {
     public class ResourceDao : IResourceDao
     {
+        protected ISession CurrentSession
+        {
+            get { return SessionManager.GetSessionWrapper().CurrentSession; }
+        }
         #region IResourceDao Members
 
         public object Get(Type resourceType, string id)
@@ -20,7 +25,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            if (typeof (string) == resourceType)
+            if (typeof(string) == resourceType)
                 return id;
             IType idType = GetIdType(resourceType);
             return Get(resourceType, ConvertIdFromStringValue(id, idType));
@@ -32,9 +37,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            if (typeof (string) == resourceType)
+            if (typeof(string) == resourceType)
                 return id;
-            return SessionManager.Instance.GetCurrentSession().Get(resourceType, id);
+            return CurrentSession.Get(resourceType, id);
         }
 
         public object Load(Type resourceType, string id)
@@ -43,7 +48,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            if (typeof (string) == resourceType)
+            if (typeof(string) == resourceType)
                 return id;
 
             IType idType = GetIdType(resourceType);
@@ -56,12 +61,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            return SessionManager.Instance.GetCurrentSession().Load(resourceType, id);
+            return CurrentSession.Load(resourceType, id);
         }
 
         public object GetResourceByStringId(Type resource, string resId)
         {
-            if (resource == typeof (string))
+            if (resource == typeof(string))
                 return resId;
             IClassMetadata perisisteType = SessionManager.GetSessionWrapper()
                                                          .SessionFactory.GetClassMetadata(resource);
@@ -79,14 +84,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 var emub = perisisteType.IdentifierType as ImmutableType;
                 id = emub.FromStringValue(resId);
             }
-            return SessionManager.Instance.GetCurrentSession().Get(resource, id);
+            return CurrentSession.Get(resource, id);
         }
 
         public IList<T> FindResources<T>(User user, Enum @operator)
         {
             var permissionDao = new PermissionDao();
             DetachedCriteria userPermissionId =
-                DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq("LoginId", user.LoginId))
+                DetachedCriteria.For(typeof(User)).Add(Restrictions.Eq("LoginId", user.LoginId))
                                 .CreateCriteria("Roles")
                                 .CreateCriteria("Permissions", "permission")
                                 .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
@@ -115,7 +120,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                                                     .Add(Subqueries.PropertyIn("Id", ugPermissionId))
                 )
                                    .SetProjection(Projections.Property<GenericPermission<T>>(m => m.Resource))
-                                   .GetExecutableCriteria(SessionManager.Instance.GetCurrentSession()).List<T>();
+                                   .GetExecutableCriteria(SessionManager.GetSessionWrapper().CurrentSession).List<T>();
         }
 
         #endregion
@@ -134,7 +139,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             foreach (string key in SessionManager.SessionFactoryNames)
             {
                 PersistentClass mappingClass =
-                    SessionManager.GetSessionWrapper(key).Configuration.GetClassMapping(resourceType);
+                    SessionManager.GetSessionWrapperFactory(key).Configuration.GetClassMapping(resourceType);
                 if (mappingClass != null)
                 {
                     idType = mappingClass.Identifier.Type;

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using FluentNHibernate.Cfg;
+using log4net;
 using NHibernate.Tool.hbm2ddl;
 using Qi;
 using Qi.NHibernateExtender;
@@ -121,18 +122,12 @@ namespace Ornament.Configurations
         {
             foreach (string name in SessionManager.SessionFactoryNames)
             {
-                var a = new SchemaUpdate(SessionManager.GetSessionWrapper(name).Configuration);
+                var a = new SchemaUpdate(SessionManager.GetSessionWrapperFactory(name).Configuration);
                 a.Execute(true, true);
-            }
-            SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            try
-            {
-                sessionWrapper.InitSession();
-                //InitData.Initialize();
-            }
-            finally
-            {
-                sessionWrapper.Close(true);
+                foreach (Exception exception in a.Exceptions)
+                {
+                    LogManager.GetLogger(this.GetType()).Error(exception.Message, exception);
+                }
             }
         }
     }

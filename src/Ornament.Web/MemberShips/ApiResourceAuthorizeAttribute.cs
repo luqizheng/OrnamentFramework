@@ -64,7 +64,7 @@ namespace Ornament.Web.MemberShips
                 throw new ArgumentNullException("filterContext");
             }
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-            bool opened = sessionWrapper.InitSession();
+            
             try
             {
                 if (AuthorizeCore(filterContext.HttpContext))
@@ -89,7 +89,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (opened)
+                if (sessionWrapper.OpenInThisContext)
                 {
                     sessionWrapper.Close(true);
                 }

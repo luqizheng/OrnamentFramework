@@ -29,44 +29,13 @@ namespace Ornament.Web.DataInitializers
                     .FirstOrDefault(result => !ReferenceEquals(result, null));
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="sessionFactoryName"></param>
-        public static void UpdateStructure(string sessionFactoryName)
-        {
-            try
-            {
-                Configuration config = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
-                var cc = new SchemaUpdate(config);
-                cc.Execute(true, true);
-                foreach (Exception a in cc.Exceptions)
-                {
-                    LogManager.GetLogger(LoggerName).Error(a.Message, a);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new OrnamentException("Init " + sessionFactoryName + " fail, so the website can't be run. ", ex);
-            }
-        }
-
-
-        /// <summary>
-        ///     Update all database structure.
-        /// </summary>
-        public static void UpdateAllSturcture()
-        {
-            foreach (string sessionFactory in SessionManager.SessionFactoryNames)
-            {
-                UpdateStructure(sessionFactory);
-            }
-        }
+       
 
         public static void RecreateStructure(string sessionFactoryName)
         {
             if (sessionFactoryName == null)
                 throw new ArgumentNullException("sessionFactoryName");
-            Configuration nhConfiguration = SessionManager.GetSessionWrapper(sessionFactoryName).Configuration;
+            Configuration nhConfiguration = SessionManager.GetSessionWrapperFactory(sessionFactoryName).Configuration;
             var cc = new SchemaExport(nhConfiguration);
             cc.Drop(true, true);
             cc.Create(true, true);

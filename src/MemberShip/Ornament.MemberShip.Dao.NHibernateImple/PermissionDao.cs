@@ -7,7 +7,6 @@ using NHibernate.Linq;
 using Ornament.MemberShip.Permissions;
 using Qi;
 using Qi.Domain.NHibernates;
-using Qi.NHibernateExtender;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
@@ -68,7 +67,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
             DetachedCriteria ug =
                 GetUserGroupPermisssions(loginid)
-                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
             ;
 
             DetachedCriteria org =
@@ -99,12 +98,13 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IQueryable<Permission> Permissions
         {
-            get { return SessionManager.Instance.GetCurrentSession().Query<Permission>(); }
+            get { return CurrentSession.Query<Permission>(); }
         }
 
         #endregion
+
         /// <summary>
-        /// Criteria Path is Org/role/permission
+        ///     Criteria Path is Org/role/permission
         /// </summary>
         /// <param name="loginid"></param>
         /// <returns></returns>
@@ -115,8 +115,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .CreateCriteria("org.Roles", "role")
                 .CreateCriteria("Permissions", "permission");
         }
+
         /// <summary>
-        ///  Criteria Path is Org/role/permission
+        ///     Criteria Path is Org/role/permission
         /// </summary>
         /// <param name="loginid"></param>
         /// <returns></returns>

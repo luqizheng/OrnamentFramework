@@ -22,6 +22,7 @@ using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
 using Ornament.Web.ValidationAdapter;
 using Qi;
+using Qi.NHibernateExtender;
 using Qi.Web.Mvc;
 using SeajsBundles.Seajs.Modules;
 
@@ -65,7 +66,7 @@ namespace Ornament.Web.Cfg
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
             SeajsModuleBundleMessageHandle.HandlAllBundle();
 
-            
+
 
         }
 
@@ -113,15 +114,19 @@ namespace Ornament.Web.Cfg
 
         public static void InitData()
         {
+            var wrapper = SessionManager.GetSessionWrapper();
             try
             {
-                GlobalInitializer.UpdateAllSturcture();
                 GlobalInitializer.BuildData();
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate update error.", ex);
                 throw ex;
+            }
+            finally
+            {
+                wrapper.Close(true);
             }
         }
     }
