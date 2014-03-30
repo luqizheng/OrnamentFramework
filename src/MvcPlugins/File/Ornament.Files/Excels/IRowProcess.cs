@@ -4,6 +4,9 @@ using NPOI.SS.UserModel;
 
 namespace Ornament.Files.Excels
 {
+    /// <summary>
+    /// Excel每行的处理函数
+    /// </summary>
     public interface IRowProcess
     {
         /// <summary>
@@ -11,7 +14,10 @@ namespace Ornament.Files.Excels
         /// </summary>
         bool Process(ICell[] cells, out List<ValidationResult> errorMessages);
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class RowProcessBase<T> : IRowProcess
     {
         public bool Process(ICell[] cells, out List<ValidationResult> errorMessages)

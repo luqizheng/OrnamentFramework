@@ -61,6 +61,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Qi.1.5.1.0\lib\net40-Client\Qi.dll</HintPath>
     </Reference>
+    <Reference Include="Qi.NHibernateExtender, Version=1.6.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -138,8 +142,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\UploadFilesController.cs" />
     <Compile Include="Areas\Files\Controllers\FileController.cs" />
     <Compile Include="Areas\Files\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\Files\Controllers\UploadFilesController.cs" />
     <Compile Include="Areas\Files\FilesAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -181,9 +187,21 @@
       <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
       <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web.UI\Ornament.Web.UI.csproj">
+      <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>
+      <Name>Ornament.Web.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
       <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\File\Ornament.Files.Dao.NhImple\Ornament.Files.Dao.NhImple.csproj">
+      <Project>{fa217e6e-e537-4a58-9ab1-7f79334220cd}</Project>
+      <Name>Ornament.Files.Dao.NhImple</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\File\Ornament.Files\Ornament.Files.csproj">
+      <Project>{ef1e2cf0-f713-4c1c-82ea-68f5e921c184}</Project>
+      <Name>Ornament.Files</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Files\Views\Manager\filectrl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Files\Views\UploadFiles\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

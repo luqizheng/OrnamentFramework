@@ -6,11 +6,17 @@ using NPOI.SS.UserModel;
 
 namespace Ornament.Files.Excels
 {
+    /// <summary>
+    ///     文件类型
+    /// </summary>
     public enum OfficeType
     {
         Office2003,
     }
 
+    /// <summary>
+    ///     Excel 导入文件
+    /// </summary>
     public abstract class ExcelFileImport
     {
         private readonly IRowProcess _process;
@@ -28,9 +34,16 @@ namespace Ornament.Files.Excels
 
         public OfficeType OfficeType { get; set; }
 
+        public void Read(string filePath, int sheetIndex, int skipRow)
+        {
+            using (var stream = File.OpenRead(filePath))
+            {
+                Read(stream, sheetIndex, skipRow);
+            }
+        }
         /// <summary>
         /// </summary>
-        /// <param name="excelFile"></param>
+        /// <param name="excelFile">文件路径</param>
         /// <param name="sheetIndex">0 start</param>
         /// <param name="skipRow">0 start</param>
         public void Read(Stream excelFile, int sheetIndex, int skipRow)

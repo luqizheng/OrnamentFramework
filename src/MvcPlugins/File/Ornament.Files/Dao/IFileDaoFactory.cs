@@ -10,7 +10,7 @@ namespace Ornament.Files.Dao
     public interface IFileDao
     : IDao<string, FileRecord>
     {
-
+        void Find(string name);
     }
 
     public interface IFileDaoFactory
