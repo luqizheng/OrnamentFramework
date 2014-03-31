@@ -7,14 +7,21 @@ namespace Ornament.Web.SeajsModules
 {
     public class EmbeddedBuilder : IBundleBuilder
     {
+        [System.Obsolete]
         public EmbeddedBuilder(string assemblyStartNamespace)
         {
             AssemblyStartNamespace = assemblyStartNamespace;
         }
 
+        public EmbeddedBuilder()
+        {
+            
+        }
+
         /// <summary>
         ///     会用这个Namespace 替换AreaName,这样就会从这个Namespace开始找Embed的Seajs模块
         /// </summary>
+         [System.Obsolete]
         public string AssemblyStartNamespace { get; private set; }
 
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
@@ -42,7 +49,7 @@ namespace Ornament.Web.SeajsModules
 
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
 
-            string resoureContent = AssemblyStartNamespace + filePath.TrimStart('/').Substring(areaName.Length);
+            string resoureContent = "~" + filePath.TrimStart('/').Substring(areaName.Length);
             Stream resourceStream = resourceStore.GetResourceStream(resoureContent);
 
             if (resourceStream == null)

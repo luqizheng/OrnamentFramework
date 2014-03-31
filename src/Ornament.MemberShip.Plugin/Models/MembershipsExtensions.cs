@@ -51,7 +51,7 @@ namespace Ornament.Web
         public static MvcHtmlString MemberShipEditorFor<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func, string template)
         {
-            return helper.EditorFor(func, string.Format("~/protableAreas/{0}/{1}", MemberShips, template));
+            return helper.EditorFor(func, string.Format("~/{0}/{1}", MemberShips, template));
         }
     }
 }

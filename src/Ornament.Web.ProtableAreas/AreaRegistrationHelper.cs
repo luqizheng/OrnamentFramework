@@ -11,7 +11,7 @@ namespace Ornament.Web
 {
     public class AreaRegistrationHelper
     {
-        private readonly string _assemblyRootNamespace;
+
         private readonly AreaRegistrationContext _context;
         private readonly PortableAreaRegistration _protablAreaRegistration;
         private readonly IList<string> _seajsEmbeddedModulePath = new List<string>();
@@ -21,16 +21,14 @@ namespace Ornament.Web
         /// <param name="protablAreaRegistration"></param>
         /// <param name="assemblyRootNamespace">root namespace in Assembly</param>
         /// <param name="context"></param>
-        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, string assemblyRootNamespace,
-            AreaRegistrationContext context)
+        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, AreaRegistrationContext context)
         {
             if (protablAreaRegistration == null)
                 throw new ArgumentNullException("protablAreaRegistration");
-            if (assemblyRootNamespace == null)
-                throw new ArgumentNullException("assemblyRootNamespace");
+
             if (context == null) throw new ArgumentNullException("context");
             _protablAreaRegistration = protablAreaRegistration;
-            _assemblyRootNamespace = assemblyRootNamespace.Trim();
+
             _context = context;
             protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
         }
@@ -82,7 +80,7 @@ namespace Ornament.Web
                 {
                     controller = "EmbeddedResource",
                     action = "Index",
-                    resourcePath = _assemblyRootNamespace + "." + path,
+                    resourcePath = path,
                 }
                 ,
                 new[] { "Ornament.Web.Controllers" }
@@ -99,18 +97,15 @@ namespace Ornament.Web
             foreach (string path in _seajsEmbeddedModulePath)
             {
                 string virtualPath = string.Format("{0}/{1}", _context.AreaName, path.TrimStart('/'));
-                string namespacePath = string.Format("{0}.{1}", _assemblyRootNamespace, path.Replace("/", "."));
                 AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(_context.AreaName);
-                string[] files = resourceStore.MatchPath(namespacePath, ".js");
+                string[] files = resourceStore.MatchPath("~/" + path.TrimStart('/'), ".js");
                 if (files == null || files.Length == 0)
-                    throw new FileNotFoundException(String.Format("Not found an embed js file in {0}", namespacePath));
+                    throw new FileNotFoundException(String.Format("Not found an embed js file in {0}", virtualPath));
                 foreach (string file in files)
                 {
                     string filePath = string.Format("~/{0}/{1}", virtualPath, file);
 
-                    var bundle = new SeajsEmbedBundle(filePath,
-                        _assemblyRootNamespace,
-                        _context.AreaName,
+                    var bundle = new SeajsEmbedBundle(filePath, _context.AreaName,
                         OrnamentContext.Configuration.GetSeajsCombine()
                         );
 

@@ -195,14 +195,6 @@
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
       <Name>Ornament.Web.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\File\Ornament.Files.Dao.NhImple\Ornament.Files.Dao.NhImple.csproj">
-      <Project>{fa217e6e-e537-4a58-9ab1-7f79334220cd}</Project>
-      <Name>Ornament.Files.Dao.NhImple</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\File\Ornament.Files\Ornament.Files.csproj">
-      <Project>{ef1e2cf0-f713-4c1c-82ea-68f5e921c184}</Project>
-      <Name>Ornament.Files</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Files\Views\Manager\Index.cshtml" />

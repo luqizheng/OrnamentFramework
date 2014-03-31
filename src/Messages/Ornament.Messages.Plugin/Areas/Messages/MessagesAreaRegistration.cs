@@ -26,7 +26,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
             OrnamentContext.ResourceManager.Add("Template", typeof(MessageOperator));
 
-            var helper = new AreaRegistrationHelper(this, "Ornament.Messages.Plugin", context);
+            var helper = new AreaRegistrationHelper(this,context);
 
             helper.RegistScripts("Scripts/News");
             helper.RegistScripts("Scripts/NewsType");

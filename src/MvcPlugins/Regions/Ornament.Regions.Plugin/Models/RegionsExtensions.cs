@@ -13,7 +13,7 @@ namespace Ornament.Web
             Expression<Func<TModel, TValue>> func)
         {
 
-            return helper.EditorFor(func, string.Format("~/protableAreas/{0}/{1}", "Regions", "Area"));
+            return helper.EditorFor(func, string.Format("~/{0}/{1}", "Regions", "Area"));
         }
     }
 }

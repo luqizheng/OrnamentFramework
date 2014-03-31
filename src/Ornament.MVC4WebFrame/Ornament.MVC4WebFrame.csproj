@@ -98,9 +98,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.Web, Version=1.1.7.8, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Qi.Web.dll</HintPath>
+    <Reference Include="Qi.Web">
+      <HintPath>..\packages\Qi.Web.1.2.0.0\lib\net40\Qi.Web.dll</HintPath>
     </Reference>
     <Reference Include="SeajsBundles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -1012,10 +1011,6 @@
     <ProjectReference Include="..\Messages\Ornament.Messages.Plugin\Ornament.Messages.Plugin.csproj">
       <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
       <Name>Ornament.Messages.Plugin</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MvcPlugins\Ornament.Files.Plugin\Ornament.Files.Plugin.csproj">
-      <Project>{8220cf6b-f27f-433e-ad13-a22691d3cf29}</Project>
-      <Name>Ornament.Files.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcPlugins\Friends\Friends.Plugin.csproj">
       <Project>{1f2f532b-8342-4469-bf93-9343129bc80c}</Project>

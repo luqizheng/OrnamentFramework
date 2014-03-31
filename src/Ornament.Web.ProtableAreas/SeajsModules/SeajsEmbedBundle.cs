@@ -10,18 +10,18 @@ namespace Ornament.Web.SeajsModules
 
         private readonly IBundleBuilder _bulder;
 
-        public SeajsEmbedBundle(string virtualPath, string assemblyRootNameSpace,string areaName, bool combine)
+        public SeajsEmbedBundle(string virtualPath, string areaName, bool combine)
             : base(virtualPath, combine)
         {
             AreaName = areaName;
-            _bulder = new EmbeddedBuilder(assemblyRootNameSpace);
+            _bulder = new EmbeddedBuilder();
         }
 
-        public SeajsEmbedBundle(string virtualPath, string assemblyRootNameSpace, string areaName, string cdnPath)
+        public SeajsEmbedBundle(string virtualPath, string areaName, string cdnPath)
             : base(virtualPath, cdnPath)
         {
             AreaName = areaName;
-            _bulder = new EmbeddedBuilder(assemblyRootNameSpace);
+            _bulder = new EmbeddedBuilder();
         }
 
         public override IBundleBuilder Builder

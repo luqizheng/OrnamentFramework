@@ -75,7 +75,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 );
 
 
-            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
+            var helper = new AreaRegistrationHelper(this,  context);
             helper.RegistySeajsModule("Scripts/User");
             helper.RegistySeajsModule("Scripts/Org");
             helper.RegistySeajsModule("Scripts/Role");
