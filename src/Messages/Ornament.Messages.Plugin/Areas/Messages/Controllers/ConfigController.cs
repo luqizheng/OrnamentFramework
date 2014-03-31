@@ -2,9 +2,11 @@
 using System.Web.Mvc;
 using Ornament.Messages.Config;
 using Ornament.Web.MemberShips;
+using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
+    [Session]
     public class ConfigController : Controller
     {
         //

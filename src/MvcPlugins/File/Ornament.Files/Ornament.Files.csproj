@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\IFileDao.cs" />
     <Compile Include="Dao\IFileDaoFactory.cs" />
     <Compile Include="Excels\ExcelFileImport.cs" />
     <Compile Include="Excels\IRowProcess.cs" />

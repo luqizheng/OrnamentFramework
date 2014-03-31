@@ -11,7 +11,7 @@ using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
-    
+    [Session]
     public class NewsController : Controller
     {
         private readonly IMessageDaoFactory _factory;
@@ -23,7 +23,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/News/
-        [Session]
+       
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsIndexTitle",Key="newsList",
           ParentKey = "news")]
         public ActionResult Index(Pagination pagination)
@@ -50,7 +50,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View(news);
         }
 
-        [Session]
+       
         public ActionResult Delete(string id)
         {
             INewsDao dao = _factory.NewsDao;
@@ -58,7 +58,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return Json(new {success = true});
         }
 
-        [Session]
+      
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsCreateTitle", ParentKey = "newsList")]
         public ActionResult Create()
         {
@@ -71,7 +71,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         }
 
 
-        [Session]
+     
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsEditTitle", ParentKey = "newsList")]
         public ActionResult Edit(string id)
         {

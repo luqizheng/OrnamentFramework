@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using Ornament.Web.Messages;
@@ -53,7 +54,7 @@ namespace Ornament.Web
             if (imageFolder == null)
                 throw new ArgumentNullException("imageFolder");
 
-            imageFolder = imageFolder.Trim('/',' ');
+            imageFolder = imageFolder.Trim('/', ' ');
             RegistyEmbedResouce(imageFolder);
         }
 
@@ -64,7 +65,7 @@ namespace Ornament.Web
         {
             if (scriptPath == null)
                 throw new ArgumentNullException("scriptPath");
-            scriptPath = scriptPath.Trim('/', ' ');
+            scriptPath = scriptPath.Trim('/', ' ', '~');
             RegistyEmbedResouce(scriptPath);
         }
 
@@ -101,6 +102,8 @@ namespace Ornament.Web
                 string namespacePath = string.Format("{0}.{1}", _assemblyRootNamespace, path.Replace("/", "."));
                 AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(_context.AreaName);
                 string[] files = resourceStore.MatchPath(namespacePath, ".js");
+                if (files == null || files.Length == 0)
+                    throw new FileNotFoundException(String.Format("Not found an embed js file in {0}", namespacePath));
                 foreach (string file in files)
                 {
                     string filePath = string.Format("~/{0}/{1}", virtualPath, file);
