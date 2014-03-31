@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
@@ -18,19 +17,17 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             get { return "MemberShips"; }
         }
 
-        void RegistApi()
+        private void RegistApi()
         {
-            var config = GlobalConfiguration.Configuration;
-            config.Routes.MapHttpRoute(name: AreaName + "Api",
-                routeTemplate: "api/memberships/{controller}/{action}",
-                defaults: new
-                {
-                    action = RouteParameter.Optional
-                });
+            HttpConfiguration config = GlobalConfiguration.Configuration;
+            config.Routes.MapHttpRoute(AreaName + "Api", "api/memberships/{controller}/{action}", new
+            {
+                action = RouteParameter.Optional
+            });
         }
+
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-
             RegistApi();
             bus.Send(new NHRegisterEventMessage(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
@@ -76,7 +73,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
 
             var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
-            helper.RegistySeajsModule("Scripts/User");
+            helper.RegistySeajsModule("Scripts/User", "Bundle/User");
             helper.RegistySeajsModule("Scripts/Org");
             helper.RegistySeajsModule("Scripts/Role");
             helper.RegistySeajsModule("Scripts/Share");
@@ -84,9 +81,5 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
             base.RegisterArea(context, bus);
         }
-
-
-
-
     }
 }

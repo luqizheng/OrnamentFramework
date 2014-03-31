@@ -14,7 +14,7 @@ namespace Ornament.Web.InputBuilder.ViewEngine
     {
         private const string EmbededTemplateTag = "~/protableareas/";
         private static readonly Dictionary<string, string> embedTempalteCache = new Dictionary<string, string>();
-
+        
         private bool IsProtableTableTemplate(string virtualPath, out string newPath)
         {
             newPath = null;
@@ -54,7 +54,7 @@ namespace Ornament.Web.InputBuilder.ViewEngine
         public override bool FileExists(string virtualPath)
         {
             bool exists = base.FileExists(virtualPath);
-
+            
             if (!exists)
             {
                 exists = AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath);

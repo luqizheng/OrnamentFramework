@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -13,7 +15,7 @@ namespace Ornament.Web.PortableAreas
     public class AssemblyResourceStore
     {
         private PortableAreaMap map;
-        private string namespaceName;
+        private string _namespaceName;
         private Dictionary<string, string> resources;
         private Type typeToLocateAssembly;
 
@@ -36,16 +38,37 @@ namespace Ornament.Web.PortableAreas
             this.typeToLocateAssembly = typeToLocateAssembly;
             // should we disallow an empty virtual path?
             VirtualPath = virtualPath.ToLower();
-            this.namespaceName = namespaceName.ToLower();
-
+            this._namespaceName = namespaceName.ToLower();
             string[] resourceNames = this.typeToLocateAssembly.Assembly.GetManifestResourceNames();
+
             resources = new Dictionary<string, string>(resourceNames.Length);
             foreach (string name in resourceNames)
             {
-                resources.Add(name.ToLower(), name);
+                if (name.StartsWith(_namespaceName))
+                {
+                    resources.Add(name.ToLower(), name);
+                }
+                else
+                {
+                    Reduce(name);
+                    resources.Add(name.ToLower(), name);
+                }
             }
         }
 
+        private void Reduce(string name)
+        {
+            name = name.ToLower();
+            var ary = new Stack<string>(_namespaceName.Split('.'));
+            while (ary.Count != 0 && !name.StartsWith(String.Join(".", ary.Reverse())))
+            {
+                ary.Pop();
+            }
+            if (ary.Count != 0)
+            {
+                _namespaceName = String.Join(".", ary.Reverse());
+            }
+        }
         public ResourceSet GetMultiLanguageResouce(string resouceName)
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resouceName);
@@ -92,7 +115,7 @@ namespace Ornament.Web.PortableAreas
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resourceName);
 
-             string actualResourceName = null;
+            string actualResourceName = null;
 
             if (resources.TryGetValue(fullResourceName, out actualResourceName))
             {
@@ -109,7 +132,7 @@ namespace Ornament.Web.PortableAreas
 
         public string GetFullyQualifiedTypeFromPath(string path)
         {
-            string resourceName = path.ToLower().Replace("~", namespaceName);
+            string resourceName = path.ToLower().Replace("~", _namespaceName);
             // we can make this more succinct if we don't have to check for emtpy virtual path (by preventing in constuctor)
             if (!string.IsNullOrEmpty(VirtualPath))
                 resourceName = resourceName.Replace(VirtualPath, "");
