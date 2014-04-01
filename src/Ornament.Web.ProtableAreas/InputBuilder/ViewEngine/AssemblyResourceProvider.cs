@@ -123,7 +123,7 @@ namespace Ornament.Web.InputBuilder.ViewEngine
         {
             if (AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath))
             {
-                return "";
+                return null;
             }
             return base.GetCacheKey(virtualPath);
         }
