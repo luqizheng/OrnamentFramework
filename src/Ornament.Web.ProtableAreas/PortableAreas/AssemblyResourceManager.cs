@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using Ornament.Web.InputBuilder.ViewEngine;
 using Ornament.Web.PortableAreas.InputBuilder.ViewEngine;
@@ -18,7 +19,7 @@ namespace Ornament.Web.PortableAreas
             var resourceStores = new Dictionary<string, AssemblyResourceStore>();
 
             // Add default AssemblyResourceStore for input builders
-            var inputBuildersStore = new AssemblyResourceStore(typeof (AssemblyResourceProvider), "/views/inputbuilders",
+            var inputBuildersStore = new AssemblyResourceStore(typeof(AssemblyResourceProvider), "/views/inputbuilders",
                 "MvcContrib.UI.InputBuilder.Views.InputBuilders");
             resourceStores.Add(inputBuildersStore.VirtualPath, inputBuildersStore);
 
@@ -34,7 +35,7 @@ namespace Ornament.Web.PortableAreas
         {
             string checkPath = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
             //HttpContext.Current.Response.Write("to:" + checkPath + "<br>");
-            foreach (var resourceStore in assemblyResourceStores)
+            foreach (var resourceStore in assemblyResourceStores.Reverse())
             {
                 if (checkPath.Contains(resourceStore.Key) && resourceStore.Value.IsPathResourceStream(checkPath))
                 {

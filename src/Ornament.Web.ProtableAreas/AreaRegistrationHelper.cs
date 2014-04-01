@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
@@ -11,15 +10,13 @@ namespace Ornament.Web
 {
     public class AreaRegistrationHelper
     {
-
         private readonly AreaRegistrationContext _context;
         private readonly PortableAreaRegistration _protablAreaRegistration;
-        private readonly IList<string> _seajsEmbeddedModulePath = new List<string>();
+        private readonly IList<SeajsModel> _seajsEmbeddedModulePath = new List<SeajsModel>();
 
         /// <summary>
         /// </summary>
         /// <param name="protablAreaRegistration"></param>
-        /// <param name="assemblyRootNamespace">root namespace in Assembly</param>
         /// <param name="context"></param>
         public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, AreaRegistrationContext context)
         {
@@ -44,7 +41,7 @@ namespace Ornament.Web
         /// </summary>
         public void RegistryDefault()
         {
-            RegistySeajsModule("Scripts");
+            RegistSeajsModule("Scripts");
         }
 
         public void RegistryImages(string imageFolder)
@@ -87,32 +84,56 @@ namespace Ornament.Web
                 );
         }
 
-        public void RegistySeajsModule(string path)
+        public void RegistSeajsModule(string path)
         {
-            _seajsEmbeddedModulePath.Add(path.Trim('/', ' '));
+            var seajsModule = new SeajsModel(path, path);
+            _seajsEmbeddedModulePath.Add(seajsModule);
+        }
+
+        public void RegistSeajsModule(string bundlePath, string virtualPath)
+        {
+            var seajsModule = new SeajsModel(bundlePath, virtualPath);
+            _seajsEmbeddedModulePath.Add(seajsModule);
         }
 
         protected void ResgistSeajsFiles(IApplicationBus bus)
         {
-            foreach (string path in _seajsEmbeddedModulePath)
+            foreach (SeajsModel path in _seajsEmbeddedModulePath)
             {
-                string virtualPath = string.Format("{0}/{1}", _context.AreaName, path.TrimStart('/'));
+                string virtualPath = string.Format("{0}/{1}", _context.AreaName, path.BundleNamee);
                 AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(_context.AreaName);
-                string[] files = resourceStore.MatchPath("~/" + path.TrimStart('/'), ".js");
+                string[] files = resourceStore.MatchPath("~/" + path.FilePath, ".js");
                 if (files == null || files.Length == 0)
                     throw new FileNotFoundException(String.Format("Not found an embed js file in {0}", virtualPath));
                 foreach (string file in files)
                 {
-                    string filePath = string.Format("~/{0}/{1}", virtualPath, file);
+                    string virtualFilePath = string.Format("~/{0}/{1}", virtualPath, file);
 
-                    var bundle = new SeajsEmbedBundle(filePath, _context.AreaName,
+                    var bundle = new SeajsEmbedBundle(virtualFilePath, _context.AreaName,
                         OrnamentContext.Configuration.GetSeajsCombine()
                         );
+                    if (path.BundleNamee != path.FilePath)
+                    {
+                        string filePath = string.Format("~/areas/{0}/{1}/{2}", _context.AreaName, path.FilePath, file);
+                        bundle.Include(filePath);
+                    }
 
                     var message = new SeajsModuleBundleEventMessage(bundle);
                     bus.Send(message);
                 }
             }
+        }
+
+        private class SeajsModel
+        {
+            public SeajsModel(string bundleNamee, string filePath)
+            {
+                BundleNamee = bundleNamee.TrimStart('/', '~', ' ').TrimEnd(' ');
+                FilePath = filePath.TrimStart('/', '~', ' ').TrimEnd(' ');
+            }
+
+            public string BundleNamee { get; private set; }
+            public string FilePath { get; private set; }
         }
     }
 }

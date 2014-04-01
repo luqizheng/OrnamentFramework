@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Optimization;
 using Ornament.Web.PortableAreas;
 
@@ -15,22 +16,26 @@ namespace Ornament.Web.SeajsModules
 
         public EmbeddedBuilder()
         {
-            
+
         }
 
         /// <summary>
         ///     会用这个Namespace 替换AreaName,这样就会从这个Namespace开始找Embed的Seajs模块
         /// </summary>
-         [System.Obsolete]
+        [System.Obsolete]
         public string AssemblyStartNamespace { get; private set; }
 
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
             string filePath = context.HttpContext.Request.CurrentExecutionFilePath;
-            string areaName = GetAreaName(filePath);
+            if (files.Count() != 0)
+            {
+                filePath = files.First().IncludedVirtualPath;
+            }
+            string areaName = GetAreaName(context.HttpContext.Request.CurrentExecutionFilePath);
             if (areaName == null)
                 return "";
-            return BuildBundleContent(context.HttpContext.Request.CurrentExecutionFilePath, areaName);
+            return BuildBundleContent(filePath, areaName);
         }
 
         public string BuildBundleContent(string filePath)
@@ -49,12 +54,16 @@ namespace Ornament.Web.SeajsModules
 
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
 
-            string resoureContent = "~" + filePath.TrimStart('/').Substring(areaName.Length);
-            Stream resourceStream = resourceStore.GetResourceStream(resoureContent);
+            if (!filePath.StartsWith("~/areas/"))
+            {
+                filePath = "~/areas" + filePath.TrimStart('~');
+            }
+
+            Stream resourceStream = resourceStore.GetResourceStream(filePath);
 
             if (resourceStream == null)
                 return string.Format("console.log('Cannot find embed file {0} in {1} assembly')",
-                    resourceStore.GetFullyQualifiedTypeFromPath(resoureContent), areaName);
+                    resourceStore.GetFullyQualifiedTypeFromPath(filePath), areaName);
 
 
             using (var stream = new StreamReader(resourceStream))
