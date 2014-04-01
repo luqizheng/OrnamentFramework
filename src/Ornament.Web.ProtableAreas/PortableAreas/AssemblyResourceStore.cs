@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Resources;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Ornament.Web.PortableAreas
@@ -13,7 +15,7 @@ namespace Ornament.Web.PortableAreas
     public class AssemblyResourceStore
     {
         private PortableAreaMap map;
-        private string namespaceName;
+        private string _namespaceName;
         private Dictionary<string, string> resources;
         private Type typeToLocateAssembly;
 
@@ -30,56 +32,43 @@ namespace Ornament.Web.PortableAreas
 
         public string VirtualPath { get; private set; }
 
-        private void Initialize(Type typeToLocateAssembly, string virtualPath, string areaNamespace, PortableAreaMap map)
+        private void Initialize(Type typeToLocateAssembly, string virtualPath, string namespaceName, PortableAreaMap map)
         {
             this.map = map;
             this.typeToLocateAssembly = typeToLocateAssembly;
             // should we disallow an empty virtual path?
             VirtualPath = virtualPath.ToLower();
-
-
+            this._namespaceName = namespaceName.ToLower();
             string[] resourceNames = this.typeToLocateAssembly.Assembly.GetManifestResourceNames();
+
             resources = new Dictionary<string, string>(resourceNames.Length);
-            this.namespaceName = FindRootNamespace(resourceNames, areaNamespace);
             foreach (string name in resourceNames)
             {
-                if (name.StartsWith(areaNamespace))
-                {
-                    var theName = this.namespaceName + name.ToLower().Substring(areaNamespace.Length);
-                    resources.Add(theName, name);
-                }
-                else
+                if (name.StartsWith(_namespaceName))
                 {
                     resources.Add(name.ToLower(), name);
                 }
-
-            }
-        }
-
-        private string FindRootNamespace(IEnumerable<string> resourceNames, string areaNamespace)
-        {
-
-            string result = areaNamespace.ToLower();
-            foreach (string name in resourceNames)
-            {
-                string theName = name.ToLower();
-                if (!theName.StartsWith(result))
+                else
                 {
-                    var ary = new Stack<string>(result.Split('.'));
-                    ary.Pop();
-                    while (ary.Count != 0 && !theName.StartsWith(String.Join(".", ary.Reverse())))
-                    {
-                        ary.Pop();
-                    }
-                    if (ary.Count != 0)
-                    {
-                        result = string.Join(".", ary.Reverse());
-                    }
+                    Reduce(name);
+                    resources.Add(name.ToLower(), name);
                 }
             }
-            return result;
         }
 
+        private void Reduce(string name)
+        {
+            name = name.ToLower();
+            var ary = new Stack<string>(_namespaceName.Split('.'));
+            while (ary.Count != 0 && !name.StartsWith(String.Join(".", ary.Reverse())))
+            {
+                ary.Pop();
+            }
+            if (ary.Count != 0)
+            {
+                _namespaceName = String.Join(".", ary.Reverse());
+            }
+        }
         public ResourceSet GetMultiLanguageResouce(string resouceName)
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resouceName);
@@ -88,7 +77,7 @@ namespace Ornament.Web.PortableAreas
 
             if (resources.TryGetValue(fullResourceName, out actualResourceName))
             {
-                int t = actualResourceName.Length - ".resources".Length;
+                int t = fullResourceName.Length - ".resources".Length;
                 var manage = new ResourceManager(actualResourceName.Substring(0, t), typeToLocateAssembly.Assembly);
 
                 ResourceSet result = manage.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true);
@@ -97,33 +86,31 @@ namespace Ornament.Web.PortableAreas
             }
             return null;
         }
-
         /// <summary>
-        ///     查找某个命名空间下面的js，因此js的文件名称只能是 xxx.js,而不能带有点的文件名称，否则他们会被认为是另外一个命名空间
+        /// 查找某个命名空间下面的js，因此js的文件名称只能是 xxx.js,而不能带有点的文件名称，否则他们会被认为是另外一个命名空间
         /// </summary>
         /// <param name="namespaceInSearch"></param>
         /// <param name="extendJs"></param>
         /// <returns></returns>
         public string[] MatchPath(string namespaceInSearch, string extendJs)
         {
-
             var list = new List<string>();
-            namespaceInSearch = this.GetFullyQualifiedTypeFromPath(namespaceInSearch.ToLower());
-            foreach (string dict in resources.Keys)
+            namespaceInSearch = namespaceInSearch.ToLower();
+            foreach (var dict in this.resources.Keys)
             {
+
                 if (dict.StartsWith(namespaceInSearch) && dict.EndsWith(extendJs))
                 {
-                    int pos = dict.IndexOf(".", namespaceInSearch.Length + 1,
-                        dict.Length - extendJs.Length - namespaceInSearch.Length - 1, StringComparison.Ordinal);
+                    var pos = dict.IndexOf(".", namespaceInSearch.Length + 1, dict.Length - extendJs.Length - namespaceInSearch.Length - 1, System.StringComparison.Ordinal);
                     if (pos == -1)
                     {
                         list.Add(dict.Replace(namespaceInSearch + ".", ""));
                     }
                 }
+
             }
             return list.ToArray();
         }
-
         public Stream GetResourceStream(string resourceName)
         {
             string fullResourceName = GetFullyQualifiedTypeFromPath(resourceName);
@@ -145,7 +132,7 @@ namespace Ornament.Web.PortableAreas
 
         public string GetFullyQualifiedTypeFromPath(string path)
         {
-            string resourceName = path.ToLower().Replace("~", namespaceName);
+            string resourceName = path.ToLower().Replace("~", _namespaceName);
             // we can make this more succinct if we don't have to check for emtpy virtual path (by preventing in constuctor)
             if (!string.IsNullOrEmpty(VirtualPath))
                 resourceName = resourceName.Replace(VirtualPath, "");

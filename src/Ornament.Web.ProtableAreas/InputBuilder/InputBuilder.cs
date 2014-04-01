@@ -38,8 +38,7 @@ namespace Ornament.Web.PortableAreas.InputBuilder
 
                 RegisterPathProvider(pathProvider);
 
-                var resourceStore = new AssemblyResourceStore(typeof (PortableAreaRegistration), "/areas",
-                    typeof (PortableAreaRegistration).Namespace);
+                var resourceStore = new AssemblyResourceStore(typeof (PortableAreaRegistration), "/areas", typeof (PortableAreaRegistration).Namespace);
                 AssemblyResourceManager.RegisterAreaResources(resourceStore);
 
                 ViewEngines.Engines.Add(new InputBuilderViewEngine(new string[0]));

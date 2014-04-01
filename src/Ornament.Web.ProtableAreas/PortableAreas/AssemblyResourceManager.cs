@@ -18,7 +18,7 @@ namespace Ornament.Web.PortableAreas
             var resourceStores = new Dictionary<string, AssemblyResourceStore>();
 
             // Add default AssemblyResourceStore for input builders
-            var inputBuildersStore = new AssemblyResourceStore(typeof (AssemblyResourceProvider), "/views/inputbuilders",
+            var inputBuildersStore = new AssemblyResourceStore(typeof(AssemblyResourceProvider), "/views/inputbuilders",
                 "MvcContrib.UI.InputBuilder.Views.InputBuilders");
             resourceStores.Add(inputBuildersStore.VirtualPath, inputBuildersStore);
 
@@ -36,7 +36,9 @@ namespace Ornament.Web.PortableAreas
             //HttpContext.Current.Response.Write("to:" + checkPath + "<br>");
             foreach (var resourceStore in assemblyResourceStores)
             {
-                if (checkPath.Contains(resourceStore.Key) && resourceStore.Value.IsPathResourceStream(checkPath))
+                var area = resourceStore.Key.Replace("/areas/", "");
+                var fixTheArea = checkPath.Replace("~/" + area + "/", "~/");
+                if (resourceStore.Value.IsPathResourceStream(fixTheArea))
                 {
                     return resourceStore.Value;
                 }
