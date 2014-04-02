@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
@@ -17,17 +18,19 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
             get { return "MemberShips"; }
         }
 
-        private void RegistApi()
+        void RegistApi()
         {
-            HttpConfiguration config = GlobalConfiguration.Configuration;
-            config.Routes.MapHttpRoute(AreaName + "Api", "api/memberships/{controller}/{action}", new
-            {
-                action = RouteParameter.Optional
-            });
+            var config = GlobalConfiguration.Configuration;
+            config.Routes.MapHttpRoute(name: AreaName + "Api",
+                routeTemplate: "api/memberships/{controller}/{action}",
+                defaults: new
+                {
+                    action = RouteParameter.Optional
+                });
         }
-
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
+
             RegistApi();
             bus.Send(new NHRegisterEventMessage(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
@@ -72,14 +75,18 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
                 );
 
 
-            var helper = new AreaRegistrationHelper(this, "Ornament.MemberShip.Plugin", context);
-            helper.RegistySeajsModule("Scripts/User", "Bundle/User");
-            helper.RegistySeajsModule("Scripts/Org");
-            helper.RegistySeajsModule("Scripts/Role");
-            helper.RegistySeajsModule("Scripts/Share");
-            helper.RegistySeajsModule("Scripts/Permissions");
+            var helper = new AreaRegistrationHelper(this, context);
+            helper.RegistSeajsModule("Scripts/User");
+            helper.RegistSeajsModule("Scripts/Org");
+            helper.RegistSeajsModule("Scripts/Role");
+            helper.RegistSeajsModule("Scripts/Share");
+            helper.RegistSeajsModule("Scripts/Permissions");
 
             base.RegisterArea(context, bus);
         }
+
+
+
+
     }
 }

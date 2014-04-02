@@ -12,6 +12,7 @@ using Ornament.MemberShip.Permissions;
 using Ornament.Models;
 using Ornament.Web;
 using Ornament.Web.HttpModel;
+using Qi.NHibernateExtender;
 
 // ReSharper disable CheckNamespace
 
@@ -61,7 +62,7 @@ namespace Ornament
                 }
             }
 
-            return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] {lang});
+            return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] { lang });
         }
 
         public static string CurrentVerifyCode(this MemberShipContext context)
@@ -95,13 +96,14 @@ namespace Ornament
             //如果最后一次访问大于设置值，那么需要更新一下LastActivitiyDate的值。
             DateTime now = DateTime.Now;
             if (user.Other.LastActivityDate == null ||
-                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow/3)
+                (now - user.Other.LastActivityDate.Value).Minutes >= Membership.UserIsOnlineTimeWindow / 3)
             {
                 user.Other.LastActivityDate = now;
                 a.SaveOrUpdate(user);
                 a.Flush();
             }
             return user;
+
         }
 
         /// <summary>

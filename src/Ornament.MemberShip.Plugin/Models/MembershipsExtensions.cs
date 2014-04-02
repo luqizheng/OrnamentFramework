@@ -9,8 +9,6 @@ namespace Ornament.Web
 {
     public static class MembershipsExtensions
     {
-        private const string MemberShips = "Memberships";
-
         public static MvcHtmlString EditorForUsers<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func)
         {
@@ -51,7 +49,7 @@ namespace Ornament.Web
         public static MvcHtmlString MemberShipEditorFor<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func, string template)
         {
-            return helper.EditorFor(func, string.Format("~/{0}/{1}", MemberShips, template));
+            return helper.EditorFor(func, string.Format("~/Areas/MemberShips/Views/Shared/EditorTemplates/{0}", template));
         }
     }
 }
