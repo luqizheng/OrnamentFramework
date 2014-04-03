@@ -1,0 +1,39 @@
+﻿@using Ornament
+@using Ornament.Web.UI.Theme
+@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = OrnamentContext.Configuration.BackendLayout();
+}
+
+@using (var panel = Html.Panel())
+{
+    @panel.Body(@<text>
+                     
+                     <table ms-controller="index">
+                         <thead>
+                             <tr>
+                                 <td>Name
+                                 </td>
+                                 <td>Upload DateTime
+                                 </td>
+                                 <td>SignCode
+                                 </td>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>
+                                     
+                                 </td>
+                                 <td>
+                                     
+                                 </td>
+                                 <td></td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </text>)
+
+}
