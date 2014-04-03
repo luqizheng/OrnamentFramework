@@ -19,7 +19,6 @@ namespace Ornament.Web
         /// <summary>
         /// </summary>
         /// <param name="protablAreaRegistration"></param>
-        /// <param name="assemblyRootNamespace">root namespace in Assembly</param>
         /// <param name="context"></param>
         public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, AreaRegistrationContext context)
         {

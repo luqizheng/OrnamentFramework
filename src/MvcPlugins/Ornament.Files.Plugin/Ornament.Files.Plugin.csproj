@@ -145,7 +145,6 @@
     <Compile Include="Api\UploadFilesController.cs" />
     <Compile Include="Areas\Files\Controllers\FileController.cs" />
     <Compile Include="Areas\Files\Controllers\ManagerController.cs" />
-    <Compile Include="Areas\Files\Controllers\UploadFilesController.cs" />
     <Compile Include="Areas\Files\FilesAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
