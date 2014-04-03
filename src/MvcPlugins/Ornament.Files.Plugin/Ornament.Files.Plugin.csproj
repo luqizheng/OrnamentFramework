@@ -145,6 +145,7 @@
     <Compile Include="Api\UploadFilesController.cs" />
     <Compile Include="Areas\Files\Controllers\FileController.cs" />
     <Compile Include="Areas\Files\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\Files\Controllers\UploadFilesController.cs" />
     <Compile Include="Areas\Files\FilesAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -193,6 +194,10 @@
     <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
       <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\File\Ornament.Files\Ornament.Files.csproj">
+      <Project>{EF1E2CF0-F713-4C1C-82EA-68F5E921C184}</Project>
+      <Name>Ornament.Files</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
