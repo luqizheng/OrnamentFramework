@@ -139,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Information\InformationAreaRegistration.cs" />
-    <Compile Include="Areas\Information\Controllers\PluginsController.cs" />
     <Compile Include="Areas\Information\Controllers\SiteController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
