@@ -41,9 +41,10 @@ namespace Ornament.Web
         /// <summary>
         ///     注册Default路径，位于根目录下面的 Scripts 、Content/Images
         /// </summary>
+        [System.Obsolete]
         public void RegistryDefault()
         {
-            RegistySeajsModule("Scripts");
+            RegistSeajsModule("Scripts");
         }
 
         public void RegistryImages(string imageFolder)
@@ -86,7 +87,7 @@ namespace Ornament.Web
                 );
         }
 
-        public void RegistySeajsModule(string path)
+        public void RegistSeajsModule(string path)
         {
             _seajsEmbeddedModulePath.Add(path.Trim('/', ' '));
         }

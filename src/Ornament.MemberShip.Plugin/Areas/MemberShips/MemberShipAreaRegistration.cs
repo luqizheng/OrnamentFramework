@@ -76,11 +76,11 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips
 
 
             var helper = new AreaRegistrationHelper(this,  context);
-            helper.RegistySeajsModule("Scripts/User");
-            helper.RegistySeajsModule("Scripts/Org");
-            helper.RegistySeajsModule("Scripts/Role");
-            helper.RegistySeajsModule("Scripts/Share");
-            helper.RegistySeajsModule("Scripts/Permissions");
+            helper.RegistSeajsModule("Scripts/User");
+            helper.RegistSeajsModule("Scripts/Org");
+            helper.RegistSeajsModule("Scripts/Role");
+            helper.RegistSeajsModule("Scripts/Share");
+            helper.RegistSeajsModule("Scripts/Permissions");
 
             base.RegisterArea(context, bus);
         }
