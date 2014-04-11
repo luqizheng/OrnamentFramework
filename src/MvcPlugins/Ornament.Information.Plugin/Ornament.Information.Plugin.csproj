@@ -169,8 +169,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Information\Views\Application\DatabaseInit.cshtml" />
-    <EmbeddedResource Include="Areas\Information\Views\Plugins\Index.cshtml" />
     <EmbeddedResource Include="Areas\Information\Views\Shared\_membershipSetting.cshtml" />
     <EmbeddedResource Include="Areas\Information\Views\Site\Index.cshtml" />
   </ItemGroup>
