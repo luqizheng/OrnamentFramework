@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
@@ -11,7 +10,6 @@ namespace Ornament.Web
 {
     public class AreaRegistrationHelper
     {
-
         private readonly AreaRegistrationContext _context;
         private readonly PortableAreaRegistration _protablAreaRegistration;
         private readonly IList<string> _seajsEmbeddedModulePath = new List<string>();
@@ -35,13 +33,13 @@ namespace Ornament.Web
         private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
         {
             ResgistSeajsFiles(e.Bus);
-            ((PortableAreaRegistration)sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
+            ((PortableAreaRegistration) sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
         }
 
         /// <summary>
         ///     注册Default路径，位于根目录下面的 Scripts 、Content/Images
         /// </summary>
-        [System.Obsolete]
+        [Obsolete]
         public void RegistryDefault()
         {
             RegistSeajsModule("Scripts");
@@ -83,7 +81,7 @@ namespace Ornament.Web
                     resourcePath = path,
                 }
                 ,
-                new[] { "Ornament.Web.Controllers" }
+                new[] {"Ornament.Web.Controllers"}
                 );
         }
 
