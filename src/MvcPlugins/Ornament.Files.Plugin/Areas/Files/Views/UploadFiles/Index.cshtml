@@ -1,0 +1,34 @@
+﻿@using Ornament
+@using Ornament.Web.UI.Theme
+
+@{
+    ViewBag.Title = "title";
+    Layout = OrnamentContext.Configuration.BackendLayout();
+}
+
+@using (var panel = Html.Panel())
+{
+    @panel.Body(@<text>
+
+    <table ms-controller="index" class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <td>Name
+                </td>
+                <td>Upload DateTime
+                </td>
+                <td>SignCode
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    </text>)
+
+}

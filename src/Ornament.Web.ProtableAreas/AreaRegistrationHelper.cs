@@ -5,32 +5,28 @@ using System.Web.Mvc;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
-using SeajsBundles;
 
 namespace Ornament.Web
 {
     public class AreaRegistrationHelper
     {
-        private readonly string _assemblyRootNamespace;
+        // Fields
         private readonly AreaRegistrationContext _context;
         private readonly PortableAreaRegistration _protablAreaRegistration;
-        private readonly IList<SeajsEmbedName> _seajsEmbeddedModulePath = new List<SeajsEmbedName>();
+        private readonly IList<SeajsModel> _seajsEmbeddedModulePath = new List<SeajsModel>();
 
-        /// <summary>
-        /// </summary>
-        /// <param name="protablAreaRegistration"></param>
-        /// <param name="assemblyRootNamespace">root namespace in Assembly</param>
-        /// <param name="context"></param>
-        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, string assemblyRootNamespace,
-            AreaRegistrationContext context)
+        // Methods
+        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, AreaRegistrationContext context)
         {
             if (protablAreaRegistration == null)
+            {
                 throw new ArgumentNullException("protablAreaRegistration");
-            if (assemblyRootNamespace == null)
-                throw new ArgumentNullException("assemblyRootNamespace");
-            if (context == null) throw new ArgumentNullException("context");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
             _protablAreaRegistration = protablAreaRegistration;
-            _assemblyRootNamespace = assemblyRootNamespace.Trim();
             _context = context;
             protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
         }
@@ -38,119 +34,100 @@ namespace Ornament.Web
         private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
         {
             ResgistSeajsFiles(e.Bus);
-            ((PortableAreaRegistration)sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
+            ((PortableAreaRegistration) sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
         }
 
-        /// <summary>
-        ///     注册Default路径，位于根目录下面的 Scripts 、Content/Images
-        /// </summary>
         public void RegistryDefault()
         {
-            RegistySeajsModule("Scripts");
+            RegistSeajsModule("Scripts");
         }
 
         public void RegistryImages(string imageFolder)
         {
             if (imageFolder == null)
+            {
                 throw new ArgumentNullException("imageFolder");
-
-            imageFolder = imageFolder.Trim('/', ' ');
+            }
+            imageFolder = imageFolder.Trim(new[] {'/', ' '});
             RegistyEmbedResouce(imageFolder);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="scriptPath"></param>
         public void RegistScripts(string scriptPath)
         {
             if (scriptPath == null)
+            {
                 throw new ArgumentNullException("scriptPath");
-            scriptPath = scriptPath.Trim('/', ' ', '~');
+            }
+            scriptPath = scriptPath.Trim(new[] {'/', ' ', '~'});
             RegistyEmbedResouce(scriptPath);
+        }
+
+        public void RegistSeajsModule(string path)
+        {
+            var seajsModule = new SeajsModel(path, path);
+            _seajsEmbeddedModulePath.Add(seajsModule);
+        }
+
+        public void RegistSeajsModule(string bundlePath, string virtualPath)
+        {
+            var seajsModule = new SeajsModel(bundlePath, virtualPath);
+            _seajsEmbeddedModulePath.Add(seajsModule);
         }
 
         public void RegistyEmbedResouce(string path)
         {
             if (path == null)
+            {
                 throw new ArgumentNullException("path");
-            path = path.Trim('/', ' ');
-            //page scripts  registry
-            _context.MapRoute(
-                _protablAreaRegistration.AreaName + "_" + path + "_embededResource",
+            }
+            path = path.Trim(new[] {'/', ' '});
+            _context.MapRoute(_protablAreaRegistration.AreaName + "_" + path + "_embededResource",
                 string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
-                new
-                {
-                    controller = "EmbeddedResource",
-                    action = "Index",
-                    resourcePath = _assemblyRootNamespace + "." + path,
-                }
-                ,
-                new[] { "Ornament.Web.Controllers" }
-                );
+                new {controller = "EmbeddedResource", action = "Index", resourcePath = path},
+                new[] {"Ornament.Web.Controllers"});
         }
-
-
-        /// <summary>
-        /// </summary>
-        /// <param name="assemblyFolderPath">From the root name.</param>
-        public void RegistySeajsModule(string assemblyFolderPath)
-        {
-            var assembly = new SeajsEmbedName(assemblyFolderPath);
-            _seajsEmbeddedModulePath.Add(assembly);
-        }
-
-        public void RegistySeajsModule(string assemblyFolderPath, string bundleName)
-        {
-            var assembly = new SeajsEmbedName(assemblyFolderPath, bundleName);
-            _seajsEmbeddedModulePath.Add(assembly);
-        }
-
 
         protected void ResgistSeajsFiles(IApplicationBus bus)
         {
-            foreach (SeajsEmbedName seajsEmbedInfo in _seajsEmbeddedModulePath)
+            foreach (SeajsModel path in _seajsEmbeddedModulePath)
             {
-                string virtualPath = string.Format("{0}/{1}", _context.AreaName, seajsEmbedInfo.VirtualFolder);
-                string namespacePath = string.Format("{0}.{1}", _assemblyRootNamespace, seajsEmbedInfo.AssemblyFolder);
-                string embedVirtualPath = String.Format("~/{1}/{0}", seajsEmbedInfo.AssemblyFolder, _context.AreaName);
-
-                AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(_context.AreaName);
-                string[] files = resourceStore.MatchPath(namespacePath.Replace("/", "."), ".js");
-                if (files == null || files.Length == 0)
-                    throw new FileNotFoundException(String.Format("Not found an embed js file in {0}", namespacePath));
+                string virtualPath = string.Format("{0}/{1}", _context.AreaName, path.BundleNamee);
+                string[] files =
+                    AssemblyResourceManager.GetResourceStoreForArea(_context.AreaName)
+                        .MatchPath("~/" + path.FilePath, ".js");
+                if ((files == null) || (files.Length == 0))
+                {
+                    throw new FileNotFoundException(string.Format("Not found an embed js file in {0}", virtualPath));
+                }
                 foreach (string file in files)
                 {
-                    string fileVietualPath = string.Format("~/{0}/{1}", virtualPath, file);
-                    string assemblyFilePath = string.Format("{0}/{1}", embedVirtualPath, file);
-
-                    var bundle = new SeajsEmbedBundle(fileVietualPath,
-                        _assemblyRootNamespace,
-                        _context.AreaName,
-                        OrnamentContext.Configuration.GetSeajsCombine()
-                        );
-                    bundle.Include(assemblyFilePath);
-
+                    var bundle = new SeajsEmbedBundle(string.Format("~/{0}/{1}", virtualPath, file), _context.AreaName,
+                        OrnamentContext.Configuration.GetSeajsCombine());
+                    if (path.BundleNamee != path.FilePath)
+                    {
+                        string filePath = string.Format("~/areas/{0}/{1}/{2}", _context.AreaName, path.FilePath, file);
+                        bundle.Include(filePath);
+                    }
                     var message = new SeajsModuleBundleEventMessage(bundle);
                     bus.Send(message);
                 }
             }
         }
 
-        private class SeajsEmbedName
+        // Nested Types
+        private class SeajsModel
         {
-            public SeajsEmbedName(string embededAssemblyFilePath)
-                : this(embededAssemblyFilePath, embededAssemblyFilePath)
+            // Methods
+            public SeajsModel(string bundleNamee, string filePath)
             {
+                BundleNamee = bundleNamee.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' '});
+                FilePath = filePath.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' '});
             }
 
-            public SeajsEmbedName(string embededAssemblyFilePath, string virtualPath)
-            {
-                AssemblyFolder = embededAssemblyFilePath.Trim('~', ' ', '/');
-                VirtualFolder = virtualPath.Trim('~', ' ', '/');
-            }
+            // Properties
+            public string BundleNamee { get; private set; }
 
-            public string AssemblyFolder { get; private set; }
-            public string VirtualFolder { get; private set; }
+            public string FilePath { get; private set; }
         }
     }
 }
