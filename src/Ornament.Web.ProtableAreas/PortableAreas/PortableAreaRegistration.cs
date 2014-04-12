@@ -24,7 +24,7 @@ namespace Ornament.Web.PortableAreas
         private static readonly Dictionary<Assembly, int> ControllerCollection = new Dictionary<Assembly, int>();
 
         public event EventHandler<RegistedEmbedresourceEventArgs> EmbedResourceRegisted;
-
+        
         public virtual string AreaRoutePrefix
         {
             get { return AreaName; }

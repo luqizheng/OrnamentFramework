@@ -23,7 +23,7 @@ namespace Ornament.Regions.Plugin.Areas.Regions
             bus.Send(new DataInit());
             bus.Send(new NHRegisterEventMessage(typeof(IRegionDaoFactory), typeof(RegionDaoFactory)));
             var helper = new AreaRegistrationHelper(this,  context);
-            helper.RegistSeajsModule("Scripts");
+            helper.RegistySeajsModule("Scripts");
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",

@@ -12,10 +12,10 @@ namespace Ornament.Web.InputBuilder.ViewEngine
 {
     public class AssemblyResourceProvider : VirtualPathProvider
     {
-        //private const string EmbededTemplateTag = "~/protableareas/";
-        //private static readonly Dictionary<string, string> embedTempalteCache = new Dictionary<string, string>();
-
-        /*private bool IsProtableTableTemplate(string virtualPath, out string newPath)
+        private const string EmbededTemplateTag = "~/protableareas/";
+        private static readonly Dictionary<string, string> embedTempalteCache = new Dictionary<string, string>();
+        
+        private bool IsProtableTableTemplate(string virtualPath, out string newPath)
         {
             newPath = null;
             virtualPath = virtualPath.ToLower();
@@ -49,19 +49,22 @@ namespace Ornament.Web.InputBuilder.ViewEngine
                 VirtualPathUtility.GetFileName(virtualPath));
 
             return true;
-        }*/
+        }
 
         public override bool FileExists(string virtualPath)
         {
             bool exists = base.FileExists(virtualPath);
-
+            
             if (!exists)
             {
-                return AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath);
+                exists = AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath);
             }
-            return exists;
 
-            /*if (IsProtableTableTemplate(virtualPath, out path))
+            if (exists) return true;
+
+            string path = null;
+
+            if (IsProtableTableTemplate(virtualPath, out path))
             {
                 bool result = AssemblyResourceManager.IsEmbeddedViewResourcePath(path);
                 if (result)
@@ -76,23 +79,23 @@ namespace Ornament.Web.InputBuilder.ViewEngine
                 }
                 return result;
             }
-            return false;*/
+            return false;
         }
 
         public override VirtualFile GetFile(string virtualPath)
         {
             string path = virtualPath;
-            //bool isTemplateFolder = embedTempalteCache.ContainsKey(virtualPath.ToLower());
-            //if (embedTempalteCache.ContainsKey(virtualPath.ToLower()))
-            //{
-            //    path = embedTempalteCache[virtualPath.ToLower()];
-            //}
+            bool isTemplateFolder = embedTempalteCache.ContainsKey(virtualPath.ToLower());
+            if (embedTempalteCache.ContainsKey(virtualPath.ToLower()))
+            {
+                path = embedTempalteCache[virtualPath.ToLower()];
+            }
 
-            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(path))
+            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(path) && !base.FileExists(path))
             {
                 AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreFromVirtualPath(path);
-                /*if (isTemplateFolder)
-                    return new AssemblyResourceVirtualFile(virtualPath, resourceStore, path);*/
+                if (isTemplateFolder)
+                    return new AssemblyResourceVirtualFile(virtualPath, resourceStore, path);
                 return new AssemblyResourceVirtualFile(virtualPath, resourceStore);
             }
 
@@ -103,13 +106,13 @@ namespace Ornament.Web.InputBuilder.ViewEngine
         public override CacheDependency GetCacheDependency(string virtualPath, IEnumerable virtualPathDependencies,
             DateTime utcStart)
         {
-
-            foreach (var path in virtualPathDependencies)
+            var path = "";
+            if (embedTempalteCache.ContainsKey(virtualPath.ToLower()) ||
+                AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath)
+                || IsProtableTableTemplate(virtualPath, out path)
+                )
             {
-                if (AssemblyResourceManager.IsEmbeddedViewResourcePath(path.ToString()))
-                {
-                    return null;
-                }
+                return null;
             }
 
             string[] dependencies =
@@ -121,11 +124,15 @@ namespace Ornament.Web.InputBuilder.ViewEngine
 
         public override string GetCacheKey(string virtualPath)
         {
-            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath))
+            var path = "";
+            if (embedTempalteCache.ContainsKey(virtualPath.ToLower()) ||
+                AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath)
+                || IsProtableTableTemplate(virtualPath, out path)
+                )
             {
                 return null;
             }
-            return base.GetCacheKey(virtualPath);
+            return path;
         }
     }
 }

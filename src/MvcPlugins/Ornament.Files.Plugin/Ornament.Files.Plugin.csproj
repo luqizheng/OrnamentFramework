@@ -195,10 +195,6 @@
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
       <Name>Ornament.Web.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\File\Ornament.Files\Ornament.Files.csproj">
-      <Project>{EF1E2CF0-F713-4C1C-82EA-68F5E921C184}</Project>
-      <Name>Ornament.Files</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Files\Views\Manager\Index.cshtml" />

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using Ornament.Web.InputBuilder.ViewEngine;
 using Ornament.Web.PortableAreas.InputBuilder.ViewEngine;
@@ -35,9 +34,11 @@ namespace Ornament.Web.PortableAreas
         {
             string checkPath = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
             //HttpContext.Current.Response.Write("to:" + checkPath + "<br>");
-            foreach (var resourceStore in assemblyResourceStores.Reverse())
+            foreach (var resourceStore in assemblyResourceStores)
             {
-                if (checkPath.Contains(resourceStore.Key) && resourceStore.Value.IsPathResourceStream(checkPath))
+                var area = resourceStore.Key.Replace("/areas/", "");
+                var fixTheArea = checkPath.Replace("~/" + area + "/", "~/");
+                if (resourceStore.Value.IsPathResourceStream(fixTheArea))
                 {
                     return resourceStore.Value;
                 }
