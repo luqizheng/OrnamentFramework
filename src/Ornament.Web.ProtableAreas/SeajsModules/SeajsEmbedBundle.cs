@@ -6,8 +6,6 @@ namespace Ornament.Web.SeajsModules
 {
     public class SeajsEmbedBundle : SeajsBundle
     {
-        public string AreaName { get; set; }
-
         private readonly IBundleBuilder _bulder;
 
         public SeajsEmbedBundle(string virtualPath, string areaName, bool combine)
@@ -24,6 +22,8 @@ namespace Ornament.Web.SeajsModules
             _bulder = new EmbeddedBuilder();
         }
 
+        public string AreaName { get; set; }
+
         public override IBundleBuilder Builder
         {
             get { return _bulder; }
@@ -31,11 +31,12 @@ namespace Ornament.Web.SeajsModules
 
         public string GetContent(string virtualPath)
         {
-            var embeddedBuilder = this.Builder as EmbeddedBuilder;
-
-            if(embeddedBuilder!=null)
-                return embeddedBuilder.BuildBundleContent(virtualPath);
-            throw new Exception("builder should be EmbeddedBuilder");
+            var builder = Builder as EmbeddedBuilder;
+            if (builder == null)
+            {
+                throw new Exception("builder should be EmbeddedBuilder");
+            }
+            return builder.BuildBundleContent(virtualPath);
         }
     }
 }

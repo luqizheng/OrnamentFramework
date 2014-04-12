@@ -32,6 +32,12 @@ namespace Ornament.Web.PortableAreas
 
         public static AssemblyResourceStore GetResourceStoreFromVirtualPath(string virtualPath)
         {
+            string embedPath;
+            return GetResourceStoreFromVirtualPath(virtualPath, out embedPath);
+        }
+
+        public static AssemblyResourceStore GetResourceStoreFromVirtualPath(string virtualPath, out string embedPath)
+        {
             string checkPath = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
             //HttpContext.Current.Response.Write("to:" + checkPath + "<br>");
             foreach (var resourceStore in assemblyResourceStores)
@@ -40,17 +46,24 @@ namespace Ornament.Web.PortableAreas
                 var fixTheArea = checkPath.Replace("~/" + area + "/", "~/");
                 if (resourceStore.Value.IsPathResourceStream(fixTheArea))
                 {
+                    embedPath = fixTheArea;
                     return resourceStore.Value;
                 }
             }
+            embedPath = null;
             return null;
+        }
+
+        public static bool IsEmbeddedViewResourcePath(string virtualPath, out string embedPath)
+        {
+            return GetResourceStoreFromVirtualPath(virtualPath, out embedPath) != null;
         }
 
         public static bool IsEmbeddedViewResourcePath(string virtualPath)
         {
-            AssemblyResourceStore resourceStore = GetResourceStoreFromVirtualPath(virtualPath);
-            return (resourceStore != null);
-        }
+            string embedPath;
+            return GetResourceStoreFromVirtualPath(virtualPath, out embedPath) != null;
+        } 
 
         public static void RegisterAreaResources(AssemblyResourceStore assemblyResourceStore)
         {

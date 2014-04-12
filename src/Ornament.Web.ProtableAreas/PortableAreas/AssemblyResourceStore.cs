@@ -1,36 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Resources;
-using System.Threading;
-
-namespace Ornament.Web.PortableAreas
+﻿namespace Ornament.Web.PortableAreas
 {
-    /// <summary>
-    ///     Stores all the embedded resources for a single assembly/area.
-    /// </summary>
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Resources;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+
     public class AssemblyResourceStore
     {
-        // Fields
         private PortableAreaMap map;
         private string namespaceName;
         private Dictionary<string, string> resources;
         private Type typeToLocateAssembly;
 
-        // Methods
         public AssemblyResourceStore(Type typeToLocateAssembly, string virtualPath, string namespaceName)
         {
-            Initialize(typeToLocateAssembly, virtualPath, namespaceName, null);
+            this.Initialize(typeToLocateAssembly, virtualPath, namespaceName, null);
         }
 
-        public AssemblyResourceStore(Type typeToLocateAssembly, string virtualPath, string namespaceName,
-            PortableAreaMap map)
+        public AssemblyResourceStore(Type typeToLocateAssembly, string virtualPath, string namespaceName, PortableAreaMap map)
         {
-            Initialize(typeToLocateAssembly, virtualPath, namespaceName, map);
+            this.Initialize(typeToLocateAssembly, virtualPath, namespaceName, map);
         }
-
-        public string VirtualPath { get; private set; }
 
         private string FindRootNamespace(IEnumerable<string> resourceNames, string areaNamespace)
         {
@@ -40,15 +33,15 @@ namespace Ornament.Web.PortableAreas
                 string str3 = str2.ToLower();
                 if (!str3.StartsWith(str))
                 {
-                    var source = new Stack<string>(str.Split(new[] { '.' }));
+                    Stack<string> source = new Stack<string>(str.Split(new char[] { '.' }));
                     source.Pop();
-                    while ((source.Count != 0) && !str3.StartsWith(string.Join(".", source.Reverse())))
+                    while ((source.Count != 0) && !str3.StartsWith(string.Join(".", source.Reverse<string>())))
                     {
                         source.Pop();
                     }
                     if (source.Count != 0)
                     {
-                        str = string.Join(".", source.Reverse());
+                        str = string.Join(".", source.Reverse<string>());
                     }
                 }
             }
@@ -57,24 +50,22 @@ namespace Ornament.Web.PortableAreas
 
         public string GetFullyQualifiedTypeFromPath(string path)
         {
-            string str = path.ToLower().Replace("~", namespaceName);
-            if (!string.IsNullOrEmpty(VirtualPath))
+            string str = path.ToLower().Replace("~", this.namespaceName);
+            if (!string.IsNullOrEmpty(this.VirtualPath))
             {
-                str = str.Replace(VirtualPath, "");
+                str = str.Replace(this.VirtualPath, "");
             }
             return str.Replace("/", ".");
         }
 
         public ResourceSet GetMultiLanguageResouce(string resouceName)
         {
-            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(resouceName);
+            string fullyQualifiedTypeFromPath = this.GetFullyQualifiedTypeFromPath(resouceName);
             string str2 = null;
-            if (resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
+            if (this.resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
             {
                 int length = str2.Length - ".resources".Length;
-                ResourceSet set =
-                    new ResourceManager(str2.Substring(0, length), typeToLocateAssembly.Assembly).GetResourceSet(
-                        Thread.CurrentThread.CurrentUICulture, true, true);
+                ResourceSet set = new ResourceManager(str2.Substring(0, length), this.typeToLocateAssembly.Assembly).GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true);
                 if (set != null)
                 {
                     return set;
@@ -82,18 +73,17 @@ namespace Ornament.Web.PortableAreas
             }
             return null;
         }
-
+        
         public Stream GetResourceStream(string resourceName)
         {
-            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(resourceName);
+            string fullyQualifiedTypeFromPath = this.GetFullyQualifiedTypeFromPath(resourceName);
             string str2 = null;
-            if (resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
+            if (this.resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
             {
-                Stream manifestResourceStream = typeToLocateAssembly.Assembly.GetManifestResourceStream(str2);
-                if ((map != null) &&
-                    (resourceName.ToLower().EndsWith(".aspx") || resourceName.ToLower().EndsWith(".master")))
+                Stream manifestResourceStream = this.typeToLocateAssembly.Assembly.GetManifestResourceStream(str2);
+                if ((this.map != null) && (resourceName.ToLower().EndsWith(".aspx") || resourceName.ToLower().EndsWith(".master")))
                 {
-                    return map.Transform(manifestResourceStream);
+                    return this.map.Transform(manifestResourceStream);
                 }
                 return manifestResourceStream;
             }
@@ -104,39 +94,41 @@ namespace Ornament.Web.PortableAreas
         {
             this.map = map;
             this.typeToLocateAssembly = typeToLocateAssembly;
-            VirtualPath = virtualPath.ToLower();
+            this.VirtualPath = virtualPath.ToLower();
             string[] manifestResourceNames = this.typeToLocateAssembly.Assembly.GetManifestResourceNames();
-            resources = new Dictionary<string, string>(manifestResourceNames.Length);
-            namespaceName = FindRootNamespace(manifestResourceNames, areaNamespace);
+            this.resources = new Dictionary<string, string>(manifestResourceNames.Length);
+            this.namespaceName = this.FindRootNamespace(manifestResourceNames, areaNamespace);
             foreach (string str in manifestResourceNames)
             {
                 if (str.StartsWith(areaNamespace))
                 {
-                    string key = namespaceName + str.ToLower().Substring(areaNamespace.Length);
-                    resources.Add(key, str);
+                    string key = this.namespaceName + str.ToLower().Substring(areaNamespace.Length);
+                    this.resources.Add(key, str);
                 }
                 else
                 {
-                    resources.Add(str.ToLower(), str);
+                    this.resources.Add(str.ToLower(), str);
                 }
             }
         }
 
         public bool IsPathResourceStream(string path)
         {
-            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(path);
-            return resources.ContainsKey(fullyQualifiedTypeFromPath);
+            string fullyQualifiedTypeFromPath = this.GetFullyQualifiedTypeFromPath(path);
+            return this.resources.ContainsKey(fullyQualifiedTypeFromPath);
         }
-
+        public bool IsPathResourceStream(string path, out string fullyQualifiedTypeFromPath)
+        {
+            fullyQualifiedTypeFromPath = this.GetFullyQualifiedTypeFromPath(path);
+            return this.resources.ContainsKey(fullyQualifiedTypeFromPath);
+        }
         public string[] MatchPath(string namespaceInSearch, string extendJs)
         {
-            var list = new List<string>();
-            namespaceInSearch = GetFullyQualifiedTypeFromPath(namespaceInSearch.ToLower());
-            foreach (string str in resources.Keys)
+            List<string> list = new List<string>();
+            namespaceInSearch = this.GetFullyQualifiedTypeFromPath(namespaceInSearch.ToLower());
+            foreach (string str in this.resources.Keys)
             {
-                if ((str.StartsWith(namespaceInSearch) && str.EndsWith(extendJs)) &&
-                    (str.IndexOf(".", namespaceInSearch.Length + 1,
-                        ((str.Length - extendJs.Length) - namespaceInSearch.Length) - 1, StringComparison.Ordinal) == -1))
+                if ((str.StartsWith(namespaceInSearch) && str.EndsWith(extendJs)) && (str.IndexOf(".", namespaceInSearch.Length + 1, ((str.Length - extendJs.Length) - namespaceInSearch.Length) - 1, StringComparison.Ordinal) == -1))
                 {
                     list.Add(str.Replace(namespaceInSearch + ".", ""));
                 }
@@ -144,6 +136,7 @@ namespace Ornament.Web.PortableAreas
             return list.ToArray();
         }
 
-        // Properties
+        public string VirtualPath { get; private set; }
     }
 }
+
