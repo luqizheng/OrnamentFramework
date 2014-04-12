@@ -112,8 +112,8 @@
         {
             public SeajsModel(string bundleNamee, string filePath)
             {
-                this.BundleNamee = bundleNamee.TrimStart(new char[] { '/', '~', ' ' }).TrimEnd(new char[] { ' ' });
-                this.FilePath = filePath.TrimStart(new char[] { '/', '~', ' ' }).TrimEnd(new char[] { ' ' });
+                this.BundleNamee = bundleNamee.TrimStart(new char[] { '/', '~', ' ' }).TrimEnd(new char[] { ' ', '/' });
+                this.FilePath = filePath.TrimStart(new char[] { '/', '~', ' ' }).TrimEnd(new char[] { ' ', '/' });
             }
 
             public string BundleNamee { get; private set; }
