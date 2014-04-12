@@ -10,12 +10,22 @@ namespace Ornament.Web.InputBuilder.ViewEngine
 
     public class AssemblyResourceProvider : VirtualPathProvider
     {
+        bool IsCrosssAssemblyPath(string virtualPath, out string newPath)
+        {
+            var pos = virtualPath.IndexOf("~");
+
+            var result = pos != -1 && pos != 0;
+            newPath = result ? virtualPath.Substring(pos) : null;
+            return result;
+        }
         public override bool FileExists(string virtualPath)
         {
             bool flag = base.FileExists(virtualPath);
             if (!flag)
             {
-                return AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath);
+                var checkPath = this.GetTheEmbedPath(virtualPath);
+                return AssemblyResourceManager.IsEmbeddedViewResourcePath(checkPath);
+
             }
             return flag;
         }
@@ -24,7 +34,9 @@ namespace Ornament.Web.InputBuilder.ViewEngine
         {
             foreach (object obj2 in virtualPathDependencies)
             {
-                if (AssemblyResourceManager.IsEmbeddedViewResourcePath(obj2.ToString()))
+                var checkpath = GetTheEmbedPath(obj2.ToString());
+
+                if (AssemblyResourceManager.IsEmbeddedViewResourcePath(checkpath))
                 {
                     return null;
                 }
@@ -37,19 +49,41 @@ namespace Ornament.Web.InputBuilder.ViewEngine
 
         public override string GetCacheKey(string virtualPath)
         {
-            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath))
+            var checkPath = GetTheEmbedPath(virtualPath);
+            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(checkPath))
             {
                 return null;
             }
             return base.GetCacheKey(virtualPath);
         }
 
+        private string GetTheEmbedPath(string virtualPath)
+        {
+            string newPath = null;
+            string checkPath = virtualPath;
+            if (IsCrosssAssemblyPath(virtualPath, out newPath)) // 不是夸Assembly获取embed 资源,也就是一个 A Assembly 从 获取BAssembly中的内嵌资源
+            {
+                checkPath = newPath;
+            }
+            return checkPath;
+        }
         public override VirtualFile GetFile(string virtualPath)
         {
-            string str = virtualPath;
-            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(str))
+            string str;
+            string embedPath = virtualPath;
+            if (IsCrosssAssemblyPath(embedPath, out str))
             {
-                return new AssemblyResourceVirtualFile(virtualPath, AssemblyResourceManager.GetResourceStoreFromVirtualPath(str));
+                embedPath = str;
+            }
+            var assemblyStore = AssemblyResourceManager.GetResourceStoreFromVirtualPath(embedPath);
+            if (assemblyStore != null)
+            {
+                if (embedPath == virtualPath)
+                {
+                    return new AssemblyResourceVirtualFile(virtualPath, assemblyStore);
+                }
+                return new AssemblyResourceVirtualFile(virtualPath, assemblyStore, embedPath);
+
             }
             return base.GetFile(virtualPath);
         }

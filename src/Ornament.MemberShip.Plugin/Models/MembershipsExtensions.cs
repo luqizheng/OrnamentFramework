@@ -37,6 +37,8 @@ namespace Ornament.Web
         {
             return helper.MemberShipEditorFor(func, "Org");
         }
+
+
         /// <summary>
         /// 使用MemberShip.Plugin里面的EditorTemplates，
         /// </summary>
@@ -49,7 +51,7 @@ namespace Ornament.Web
         public static MvcHtmlString MemberShipEditorFor<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func, string template)
         {
-            return helper.EditorFor(func, string.Format("~/Areas/MemberShips/Views/Shared/EditorTemplates/{0}", template));
+            return helper.EditorFor(func, string.Format("~/Areas/MemberShips/Areas/MemberShips/Views/Shared/EditorTemplates/{0}", template));
         }
     }
 }
