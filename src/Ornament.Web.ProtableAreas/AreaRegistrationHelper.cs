@@ -119,8 +119,8 @@ namespace Ornament.Web
             // Methods
             public SeajsModel(string bundleNamee, string filePath)
             {
-                BundleNamee = bundleNamee.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ' });
-                FilePath = filePath.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ' });
+                BundleNamee = bundleNamee.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
+                FilePath = filePath.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
             }
 
             // Properties

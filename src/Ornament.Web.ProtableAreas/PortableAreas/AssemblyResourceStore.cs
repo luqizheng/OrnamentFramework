@@ -73,7 +73,7 @@
             }
             return null;
         }
-        
+
         public Stream GetResourceStream(string resourceName)
         {
             string fullyQualifiedTypeFromPath = this.GetFullyQualifiedTypeFromPath(resourceName);
@@ -130,7 +130,7 @@
             {
                 if ((str.StartsWith(namespaceInSearch) && str.EndsWith(extendJs)) && (str.IndexOf(".", namespaceInSearch.Length + 1, ((str.Length - extendJs.Length) - namespaceInSearch.Length) - 1, StringComparison.Ordinal) == -1))
                 {
-                    list.Add(str.Replace(namespaceInSearch + ".", ""));
+                    list.Add(str.Replace(namespaceInSearch, "").TrimStart('.'));
                 }
             }
             return list.ToArray();

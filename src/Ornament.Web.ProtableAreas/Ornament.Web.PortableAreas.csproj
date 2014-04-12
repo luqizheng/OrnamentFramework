@@ -239,7 +239,6 @@
     <EmbeddedResource Include="InputBuilder\Views\InputBuilders\Submit.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
