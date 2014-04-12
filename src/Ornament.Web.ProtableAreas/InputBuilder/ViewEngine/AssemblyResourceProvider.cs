@@ -15,8 +15,7 @@ namespace Ornament.Web.InputBuilder.ViewEngine
             bool flag = base.FileExists(virtualPath);
             if (!flag)
             {
-                string theKeName;
-                return AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath,out theKeName);
+                return AssemblyResourceManager.IsEmbeddedViewResourcePath(virtualPath);
             }
             return flag;
         }
@@ -47,11 +46,10 @@ namespace Ornament.Web.InputBuilder.ViewEngine
 
         public override VirtualFile GetFile(string virtualPath)
         {
-            string embedPath;
-            var resourceStore = AssemblyResourceManager.GetResourceStoreFromVirtualPath(virtualPath,out embedPath);
-            if (resourceStore!=null)
+            string str = virtualPath;
+            if (AssemblyResourceManager.IsEmbeddedViewResourcePath(str))
             {
-                return new AssemblyResourceVirtualFile(virtualPath,embedPath, AssemblyResourceManager.GetResourceStoreFromVirtualPath(virtualPath));
+                return new AssemblyResourceVirtualFile(virtualPath, AssemblyResourceManager.GetResourceStoreFromVirtualPath(str));
             }
             return base.GetFile(virtualPath);
         }
