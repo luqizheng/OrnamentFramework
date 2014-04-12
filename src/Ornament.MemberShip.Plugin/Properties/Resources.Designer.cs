@@ -232,6 +232,15 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Verify code is expire. 的本地化字符串。
+        /// </summary>
+        public static string error_expireVerifyCode {
+            get {
+                return ResourceManager.GetString("error_expireVerifyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Please input email. 的本地化字符串。
         /// </summary>
         public static string error_missingEmailAddress {

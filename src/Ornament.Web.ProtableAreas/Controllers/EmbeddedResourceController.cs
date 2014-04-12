@@ -13,13 +13,13 @@ namespace Ornament.Web.Controllers
         {
             if (!string.IsNullOrEmpty(resourcePath))
             {
-                resourceName = resourcePath + "." + resourceName;
+                resourceName = "~/" + resourcePath + "." + resourceName;
             }
 
-            var areaName = (string) RouteData.DataTokens["area"];
+            var areaName = (string)RouteData.DataTokens["area"];
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
-            
+
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
             var minfy = new SeajsMinify();
 
