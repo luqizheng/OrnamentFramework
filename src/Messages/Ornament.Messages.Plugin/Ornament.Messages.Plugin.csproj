@@ -72,9 +72,6 @@
     <Reference Include="Qi.NHibernateExtender">
       <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.Web">
-      <HintPath>..\..\..\lib\Qi.Web.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

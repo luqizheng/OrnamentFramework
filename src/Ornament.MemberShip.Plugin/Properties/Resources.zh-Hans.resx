@@ -235,4 +235,7 @@
   <data name="alertMsg_PermissionNotPermintAccessUsers" xml:space="preserve">
     <value>没有足够的权限访问用户信息</value>
   </data>
+  <data name="error_expireVerifyCode" xml:space="preserve">
+    <value>验证码过期 </value>
+  </data>
 </root>

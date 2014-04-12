@@ -20,7 +20,7 @@ namespace Ornament.Regions.Dao.NHibernateImple
         {
             if (name == null) throw new ArgumentNullException("name");
             return CreateDetachedCriteria()
-                .Add(Restrictions.Eq(Projections.Property<Area>(s => s.City), name))
+                .Add(Restrictions.Eq(Projections.Property<Area>(s => s.Name), name))
                 .GetExecutableCriteria(CurrentSession)
                 .UniqueResult<Area>();
         }

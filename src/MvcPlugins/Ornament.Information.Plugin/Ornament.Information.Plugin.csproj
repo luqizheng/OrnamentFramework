@@ -139,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Information\InformationAreaRegistration.cs" />
-    <Compile Include="Areas\Information\Controllers\PluginsController.cs" />
     <Compile Include="Areas\Information\Controllers\SiteController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -169,8 +168,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Information\Views\Application\DatabaseInit.cshtml" />
-    <EmbeddedResource Include="Areas\Information\Views\Plugins\Index.cshtml" />
     <EmbeddedResource Include="Areas\Information\Views\Shared\_membershipSetting.cshtml" />
     <EmbeddedResource Include="Areas\Information\Views\Site\Index.cshtml" />
   </ItemGroup>

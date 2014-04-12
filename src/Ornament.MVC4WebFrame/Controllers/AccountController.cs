@@ -18,15 +18,14 @@ namespace Ornament.MVCWebFrame.Controllers
     [HandleError, Session]
     public class AccountController : Controller
     {
-        private readonly IMemberShipFactory _memberShipFactory;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccountController" /> class.
         /// </summary>
-        public AccountController(IMemberShipFactory memberShipFactory)
+        public AccountController()
             : this(null, null)
         {
-            _memberShipFactory = memberShipFactory;
+           
         }
 
         // This constructor is not used by the MVC framework but is instead provided for ease
