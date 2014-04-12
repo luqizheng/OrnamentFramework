@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Resources;
-using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace Ornament.Web.PortableAreas
@@ -14,11 +12,13 @@ namespace Ornament.Web.PortableAreas
     /// </summary>
     public class AssemblyResourceStore
     {
+        // Fields
         private PortableAreaMap map;
-        private string _namespaceName;
+        private string namespaceName;
         private Dictionary<string, string> resources;
         private Type typeToLocateAssembly;
 
+        // Methods
         public AssemblyResourceStore(Type typeToLocateAssembly, string virtualPath, string namespaceName)
         {
             Initialize(typeToLocateAssembly, virtualPath, namespaceName, null);
@@ -32,117 +32,118 @@ namespace Ornament.Web.PortableAreas
 
         public string VirtualPath { get; private set; }
 
-        private void Initialize(Type typeToLocateAssembly, string virtualPath, string namespaceName, PortableAreaMap map)
+        private string FindRootNamespace(IEnumerable<string> resourceNames, string areaNamespace)
         {
-            this.map = map;
-            this.typeToLocateAssembly = typeToLocateAssembly;
-            // should we disallow an empty virtual path?
-            VirtualPath = virtualPath.ToLower();
-            this._namespaceName = namespaceName.ToLower();
-            string[] resourceNames = this.typeToLocateAssembly.Assembly.GetManifestResourceNames();
-
-            resources = new Dictionary<string, string>(resourceNames.Length);
-            foreach (string name in resourceNames)
+            string str = areaNamespace.ToLower();
+            foreach (string str2 in resourceNames)
             {
-                if (name.StartsWith(_namespaceName))
+                string str3 = str2.ToLower();
+                if (!str3.StartsWith(str))
                 {
-                    resources.Add(name.ToLower(), name);
-                }
-                else
-                {
-                    Reduce(name);
-                    resources.Add(name.ToLower(), name);
-                }
-            }
-        }
-
-        private void Reduce(string name)
-        {
-            name = name.ToLower();
-            var ary = new Stack<string>(_namespaceName.Split('.'));
-            while (ary.Count != 0 && !name.StartsWith(String.Join(".", ary.Reverse())))
-            {
-                ary.Pop();
-            }
-            if (ary.Count != 0)
-            {
-                _namespaceName = String.Join(".", ary.Reverse());
-            }
-        }
-        public ResourceSet GetMultiLanguageResouce(string resouceName)
-        {
-            string fullResourceName = GetFullyQualifiedTypeFromPath(resouceName);
-
-            string actualResourceName = null;
-
-            if (resources.TryGetValue(fullResourceName, out actualResourceName))
-            {
-                int t = fullResourceName.Length - ".resources".Length;
-                var manage = new ResourceManager(actualResourceName.Substring(0, t), typeToLocateAssembly.Assembly);
-
-                ResourceSet result = manage.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true);
-                if (result != null)
-                    return result;
-            }
-            return null;
-        }
-        /// <summary>
-        /// 查找某个命名空间下面的js，因此js的文件名称只能是 xxx.js,而不能带有点的文件名称，否则他们会被认为是另外一个命名空间
-        /// </summary>
-        /// <param name="namespaceInSearch"></param>
-        /// <param name="extendJs"></param>
-        /// <returns></returns>
-        public string[] MatchPath(string namespaceInSearch, string extendJs)
-        {
-            var list = new List<string>();
-            namespaceInSearch = namespaceInSearch.ToLower();
-            foreach (var dict in this.resources.Keys)
-            {
-
-                if (dict.StartsWith(namespaceInSearch) && dict.EndsWith(extendJs))
-                {
-                    var pos = dict.IndexOf(".", namespaceInSearch.Length + 1, dict.Length - extendJs.Length - namespaceInSearch.Length - 1, System.StringComparison.Ordinal);
-                    if (pos == -1)
+                    var source = new Stack<string>(str.Split(new[] { '.' }));
+                    source.Pop();
+                    while ((source.Count != 0) && !str3.StartsWith(string.Join(".", source.Reverse())))
                     {
-                        list.Add(dict.Replace(namespaceInSearch + ".", ""));
+                        source.Pop();
+                    }
+                    if (source.Count != 0)
+                    {
+                        str = string.Join(".", source.Reverse());
                     }
                 }
-
             }
-            return list.ToArray();
-        }
-        public Stream GetResourceStream(string resourceName)
-        {
-            string fullResourceName = GetFullyQualifiedTypeFromPath(resourceName);
-
-            string actualResourceName = null;
-
-            if (resources.TryGetValue(fullResourceName, out actualResourceName))
-            {
-                Stream stream = typeToLocateAssembly.Assembly.GetManifestResourceStream(actualResourceName);
-
-                if (map != null &&
-                    (resourceName.ToLower().EndsWith(".aspx")
-                     || resourceName.ToLower().EndsWith(".master")))
-                    return map.Transform(stream);
-                return stream;
-            }
-            return null;
+            return str;
         }
 
         public string GetFullyQualifiedTypeFromPath(string path)
         {
-            string resourceName = path.ToLower().Replace("~", _namespaceName);
-            // we can make this more succinct if we don't have to check for emtpy virtual path (by preventing in constuctor)
+            string str = path.ToLower().Replace("~", namespaceName);
             if (!string.IsNullOrEmpty(VirtualPath))
-                resourceName = resourceName.Replace(VirtualPath, "");
-            return resourceName.Replace("/", ".");
+            {
+                str = str.Replace(VirtualPath, "");
+            }
+            return str.Replace("/", ".");
+        }
+
+        public ResourceSet GetMultiLanguageResouce(string resouceName)
+        {
+            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(resouceName);
+            string str2 = null;
+            if (resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
+            {
+                int length = str2.Length - ".resources".Length;
+                ResourceSet set =
+                    new ResourceManager(str2.Substring(0, length), typeToLocateAssembly.Assembly).GetResourceSet(
+                        Thread.CurrentThread.CurrentUICulture, true, true);
+                if (set != null)
+                {
+                    return set;
+                }
+            }
+            return null;
+        }
+
+        public Stream GetResourceStream(string resourceName)
+        {
+            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(resourceName);
+            string str2 = null;
+            if (resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
+            {
+                Stream manifestResourceStream = typeToLocateAssembly.Assembly.GetManifestResourceStream(str2);
+                if ((map != null) &&
+                    (resourceName.ToLower().EndsWith(".aspx") || resourceName.ToLower().EndsWith(".master")))
+                {
+                    return map.Transform(manifestResourceStream);
+                }
+                return manifestResourceStream;
+            }
+            return null;
+        }
+
+        private void Initialize(Type typeToLocateAssembly, string virtualPath, string areaNamespace, PortableAreaMap map)
+        {
+            this.map = map;
+            this.typeToLocateAssembly = typeToLocateAssembly;
+            VirtualPath = virtualPath.ToLower();
+            string[] manifestResourceNames = this.typeToLocateAssembly.Assembly.GetManifestResourceNames();
+            resources = new Dictionary<string, string>(manifestResourceNames.Length);
+            namespaceName = FindRootNamespace(manifestResourceNames, areaNamespace);
+            foreach (string str in manifestResourceNames)
+            {
+                if (str.StartsWith(areaNamespace))
+                {
+                    string key = namespaceName + str.ToLower().Substring(areaNamespace.Length);
+                    resources.Add(key, str);
+                }
+                else
+                {
+                    resources.Add(str.ToLower(), str);
+                }
+            }
         }
 
         public bool IsPathResourceStream(string path)
         {
-            string fullResourceName = GetFullyQualifiedTypeFromPath(path);
-            return resources.ContainsKey(fullResourceName);
+            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(path);
+            return resources.ContainsKey(fullyQualifiedTypeFromPath);
         }
+
+        public string[] MatchPath(string namespaceInSearch, string extendJs)
+        {
+            var list = new List<string>();
+            namespaceInSearch = GetFullyQualifiedTypeFromPath(namespaceInSearch.ToLower());
+            foreach (string str in resources.Keys)
+            {
+                if ((str.StartsWith(namespaceInSearch) && str.EndsWith(extendJs)) &&
+                    (str.IndexOf(".", namespaceInSearch.Length + 1,
+                        ((str.Length - extendJs.Length) - namespaceInSearch.Length) - 1, StringComparison.Ordinal) == -1))
+                {
+                    list.Add(str.Replace(namespaceInSearch + ".", ""));
+                }
+            }
+            return list.ToArray();
+        }
+
+        // Properties
     }
 }
