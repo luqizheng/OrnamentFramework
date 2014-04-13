@@ -14,7 +14,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public OrgMapping()
         {
-            Extends(typeof(IPerformer));
+            Extends(typeof (IPerformer));
             DiscriminatorValue("org");
             Join("MBS_ORG", _ =>
             {
@@ -22,10 +22,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 _.Map(s => s.OrderId).Length(4000).Access.CamelCaseField(Prefix.Underscore);
                 ;
                 _.HasMany(s => s.Childs)
-                    .CollectionType<OrgListType>().KeyColumn("OrgParentId");
+                    .CollectionType<OrgListType>().KeyColumn("OrgParentId").Cascade.Delete();
 
 
-                _.References(s => s.Parent).Column("OrgParentId");
+                _.References(s => s.Parent).Column("OrgParentId").ForeignKey("OrgParentFK");
             });
         }
 
@@ -37,21 +37,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             public OrgListPersistent(ISessionImplementor session)
                 : base(session)
             {
-
             }
 
             public OrgListPersistent(ISessionImplementor session, OrgCollection list)
                 : base(session, list)
             {
                 _list = list;
-            }
-
-            public override void BeforeInitialize(ICollectionPersister persister, int anticipatedSize)
-            {
-                base.BeforeInitialize(persister, anticipatedSize);
-                var d = set as IOrgCollection;
-                d.Self = this.Self;
-
             }
 
             public Org Self
@@ -78,8 +69,15 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                     return;
                 foreach (object c in this)
                 {
-                    SetOrderId(Self, (Org)c);
+                    SetOrderId(Self, (Org) c);
                 }
+            }
+
+            public override void BeforeInitialize(ICollectionPersister persister, int anticipatedSize)
+            {
+                base.BeforeInitialize(persister, anticipatedSize);
+                var d = set as IOrgCollection;
+                d.Self = Self;
             }
 
             private void SetOrderId(Org parent, Org newChild)
@@ -95,23 +93,23 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             public IPersistentCollection Instantiate(ISessionImplementor session, ICollectionPersister persister)
             {
-                var s = persister;
+                ICollectionPersister s = persister;
                 return new OrgListPersistent(session);
             }
 
             public IPersistentCollection Wrap(ISessionImplementor session, object collection)
             {
-                return new OrgListPersistent(session, (OrgCollection)collection);
+                return new OrgListPersistent(session, (OrgCollection) collection);
             }
 
             public IEnumerable GetElements(object collection)
             {
-                return (IOrgCollection)collection;
+                return (IOrgCollection) collection;
             }
 
             public bool Contains(object collection, object entity)
             {
-                return ((IOrgCollection)collection).Contains((Org)entity);
+                return ((IOrgCollection) collection).Contains((Org) entity);
             }
 
             public object IndexOf(object collection, object entity)
@@ -122,9 +120,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             public object ReplaceElements(object original, object target, ICollectionPersister persister, object owner,
                 IDictionary copyCache, ISessionImplementor session)
             {
-                var result = (IOrgCollection)target;
+                var result = (IOrgCollection) target;
                 result.Clear();
-                foreach (Org item in (IEnumerable<Org>)original)
+                foreach (Org item in (IEnumerable<Org>) original)
                 {
                     result.Add(item);
                 }

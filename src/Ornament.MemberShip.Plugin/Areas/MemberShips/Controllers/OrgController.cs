@@ -24,7 +24,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // GET: /Orgs/
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgListTitle",
             ParentKey = "MemberShips", Key = "Org", Order = 4,
-            DynamicNodeProvider = "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
+            DynamicNodeProvider =
+                "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
             Resource = "Org", Operator = OrgOperator.Read), ResourceAuthorize(OrgOperator.Read, "Org")]
         public ActionResult Index(string id)
         {
@@ -41,14 +42,16 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
 
         [ResourceAuthorize(OrgOperator.Modify, "Org")]
-        [OrnamentMvcSiteMapNode(DynamicNodeProvider = "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
+        [OrnamentMvcSiteMapNode(
+            DynamicNodeProvider =
+                "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
             Title = "$resources:membership.sitemap,orgEditTitle"
             , ParentKey = "Org")]
         public ActionResult Details(string id)
         {
             IOrgDao orgDao = _factory.CreateOrgDao();
             Org org = orgDao.Get(id);
-            var users = _factory.CreateUserDao().GetUsers(org);
+            IList<User> users = _factory.CreateUserDao().GetUsers(org);
             ViewData["ParentOrg"] = org.Parent;
             return View(new OrgDetailsModel(org, users));
         }
@@ -77,8 +80,25 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 a.Parent = _factory.CreateOrgDao().Get(parentId);
             }
-
             return View(a);
+        }
+
+        [ResourceAuthorize(OrgOperator.Delete, "Org")]
+        public ActionResult DeleteDetails(string id)
+        {
+            IOrgDao orgDao = _factory.CreateOrgDao();
+            Org org = orgDao.Get(id);
+            return View(org);
+        }
+
+        [ResourceAuthorize(OrgOperator.Delete, "Org")]
+        [HttpPost]
+        public ActionResult Delete(string id, string parentId)
+        {
+            IOrgDao orgDao = _factory.CreateOrgDao();
+            Org org = orgDao.Get(id);
+            orgDao.Delete(org);
+            return RedirectToAction("Index", new { id = parentId });
         }
 
         //

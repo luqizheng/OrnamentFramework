@@ -373,6 +373,9 @@
   <ItemGroup>
     <Content Include="Areas\MemberShips\Views\Org\Details.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -11,7 +11,8 @@ using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Plugin.Api
 {
-    [ApiSession]
+    [ApiSession,]
+    [Authorize]
     public class OrgsController : ApiController
     {
         private readonly IMemberShipFactory _factory;
