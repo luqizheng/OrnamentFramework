@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using Ornament.Web.PortableAreas;
 using SeajsBundles;
 
@@ -16,7 +15,7 @@ namespace Ornament.Web.Controllers
                 resourceName = "~/" + resourcePath + "." + resourceName;
             }
 
-            var areaName = (string)RouteData.DataTokens["area"];
+            var areaName = (string) RouteData.DataTokens["area"];
             AssemblyResourceStore resourceStore = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             // pre-pend "~" so that it will be replaced with assembly namespace
 

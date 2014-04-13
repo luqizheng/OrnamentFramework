@@ -7,18 +7,13 @@ using System.Threading;
 
 namespace Ornament.Web.PortableAreas
 {
-    /// <summary>
-    ///     Stores all the embedded resources for a single assembly/area.
-    /// </summary>
     public class AssemblyResourceStore
     {
-        // Fields
         private PortableAreaMap map;
         private string namespaceName;
         private Dictionary<string, string> resources;
         private Type typeToLocateAssembly;
 
-        // Methods
         public AssemblyResourceStore(Type typeToLocateAssembly, string virtualPath, string namespaceName)
         {
             Initialize(typeToLocateAssembly, virtualPath, namespaceName, null);
@@ -128,6 +123,12 @@ namespace Ornament.Web.PortableAreas
             return resources.ContainsKey(fullyQualifiedTypeFromPath);
         }
 
+        public bool IsPathResourceStream(string path, out string fullyQualifiedTypeFromPath)
+        {
+            fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(path);
+            return resources.ContainsKey(fullyQualifiedTypeFromPath);
+        }
+
         public string[] MatchPath(string namespaceInSearch, string extendJs)
         {
             var list = new List<string>();
@@ -138,12 +139,10 @@ namespace Ornament.Web.PortableAreas
                     (str.IndexOf(".", namespaceInSearch.Length + 1,
                         ((str.Length - extendJs.Length) - namespaceInSearch.Length) - 1, StringComparison.Ordinal) == -1))
                 {
-                    list.Add(str.Replace(namespaceInSearch + ".", ""));
+                    list.Add(str.Replace(namespaceInSearch, "").TrimStart('.'));
                 }
             }
             return list.ToArray();
         }
-
-        // Properties
     }
 }
