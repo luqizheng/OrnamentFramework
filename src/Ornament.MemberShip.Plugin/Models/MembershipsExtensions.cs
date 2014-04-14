@@ -38,6 +38,11 @@ namespace Ornament.Web
             return helper.MemberShipEditorFor(func, "Org");
         }
 
+        public static MvcHtmlString EditorForOrgTree<TModel, TValue>(this HtmlHelper<TModel> helper,
+                Expression<Func<TModel, TValue>> func)
+        {
+            return helper.MemberShipEditorFor(func, "OrgTree");
+        }
 
         /// <summary>
         /// 使用MemberShip.Plugin里面的EditorTemplates，

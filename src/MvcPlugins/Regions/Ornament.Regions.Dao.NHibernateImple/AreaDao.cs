@@ -16,11 +16,12 @@ namespace Ornament.Regions.Dao.NHibernateImple
                 .List<Area>();
         }
 
-        public Area FindByName(string name)
+        public Area FindByName(string name,City city)
         {
             if (name == null) throw new ArgumentNullException("name");
             return CreateDetachedCriteria()
                 .Add(Restrictions.Eq(Projections.Property<Area>(s => s.Name), name))
+                .Add(Restrictions.Eq(Projections.Property<Area>(s => s.City), city))
                 .GetExecutableCriteria(CurrentSession)
                 .UniqueResult<Area>();
         }

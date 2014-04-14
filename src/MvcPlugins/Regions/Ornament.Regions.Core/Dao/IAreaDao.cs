@@ -7,6 +7,6 @@ namespace Ornament.Regions.Dao
     {
         IList<Area> FindByCity(City city);
 
-        Area FindByName(string name);
+        Area FindByName(string name, City city);
     }
 }
