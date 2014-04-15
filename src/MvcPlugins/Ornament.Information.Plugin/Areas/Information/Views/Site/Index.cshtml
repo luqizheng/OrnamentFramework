@@ -2,15 +2,16 @@
 @using System.Text
 @using Ornament
 @using Ornament.Web
+@using Ornament.Web.UI.Theme
+@using Qi.Web
 @{
     ViewBag.Title = "Index";
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
-@section pageTitle{
-    <h5>Information</h5>
-}
+
 <div class="row-fluid">
+
 
     <div class="widget span4">
         <div class="navbar">
@@ -135,8 +136,34 @@
 </div>
 @Html.Partial("_membershipSetting")
 <div class="row-fluid">
+    <div class="span4">
+        @using (var panel = Html.Panel())
+        {
+            @panel.Header(@<text>
 
-    <div class="span8">
+            <h6>IP Info</h6>
+
+
+            </text>)
+
+            @panel.Body(@<text>
+            <dl class="dl-horizontal">
+                <dt>User IP:</dt>
+                <dd>
+                    @{
+                        var serverVariables = Request.ServerVariables;
+                        string ip = serverVariables["HTTP_VIA"] != null
+                            ? serverVariables["HTTP_X_FORWARDED_FOR"]
+                            : serverVariables["REMOTE_ADDR"];
+                    }
+                    @ip
+                </dd>
+            </dl>
+
+            </text>)
+        }
+    </div>
+    <div class="span4">
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
@@ -178,5 +205,6 @@
             </div>
         </div>
     </div>
+
 </div>
 
