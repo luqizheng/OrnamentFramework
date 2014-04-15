@@ -1,0 +1,115 @@
+﻿@using Ornament
+@using Ornament.Properties
+@using Ornament.Web.UI.Theme
+@model Ornament.MemberShip.Org
+@{
+    ViewBag.Title = Model.Name;
+    Layout = OrnamentContext.Configuration.BackendLayout();
+    var parentId = this.Model.Parent != null ? this.Model.Parent.Id : "";
+}
+@section pageTitle
+{
+    <h5>@Model.Name</h5>
+}
+
+<div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Warning!</strong> 你将要删除组织单元及它的子，请确保你这样做正确，因为一旦删除，可能会有产生大量无组织单元的用户。
+</div>
+
+
+@using (var panel = Html.Panel())
+{
+    
+    @panel.Header(@<text>
+    <h4>Basic Information:
+    </h4>
+    </text>)
+
+    @panel.Body(@<text>
+    <dl class="dl-horizontal">
+        <dt>Name:</dt>
+        <dd>@Model.Name</dd>
+        <dt>Remarks:</dt>
+        <dd>@Model.Remarks</dd>
+    </dl>
+
+    <form method="POST" action="@Url.Action("Delete")">
+        @Html.HiddenFor(s => s.Id)
+        @Html.Hidden("ParentId", parentId)
+        <a href="@Url.Action("Index", new { id = parentId })" class="btn btn-primary">Cancel</a>
+
+        <button class="btn btn-danger">
+            <i class="icon-remove"></i>
+            删除
+        </button>
+
+    </form>
+    </text>)
+    
+}
+
+
+
+
+<div class="row-fluid">
+
+    <div class="span6">
+        @using (var panel = Html.Panel())
+        {
+            @panel.Header(@<text>
+            <h4>Roles</h4>
+            </text>)
+            @panel.Body(@<text>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name:</th>
+                        <th>Remarks:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.Roles)
+                    {
+                        <tr>
+                            <td>@a.Name</td>
+                            <td>@a.Remarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </text>)
+        }
+
+
+    </div>
+
+    <div class="span6">
+
+        @using (var panel = Html.Panel())
+        {
+            @panel.Header(@<text>
+            <h4>下属组织单元</h4>
+            </text>)
+            @panel.Body(@<text>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name:</th>
+                        <th>Remarks:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var a in Model.Childs)
+                    {
+                        <tr>
+                            <td>@a.Name</td>
+                            <td>@a.Remarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </text>)
+        }
+    </div>
+</div>
