@@ -1,5 +1,4 @@
 ﻿using FluentNHibernate.Mapping;
-using NHibernate.Properties;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 {
@@ -11,16 +10,18 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
             Map(s => s.LastPasswordChangedDate);
             Map(s => s.Password)
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Length(64); ;
-            
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore).Length(64);
+            ;
+
             Map(s => s.LastLockoutDate);
             Map(s => s.InvalidPasswordAttempts);
 
             Map(s => s.PasswordAnswer).Length(100)
-                                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore); ;
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+            ;
             Map(s => s.PasswordQuestion).Length(100)
-                                        .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-            References(s => s.User);
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+            References(s => s.User).ForeignKey("UserIdFK");
             Map(s => s.LastLoginDate);
         }
     }

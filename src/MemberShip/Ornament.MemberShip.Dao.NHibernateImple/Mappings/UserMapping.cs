@@ -17,20 +17,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                     d.Map(s => s.IsDeny);
                     d.Map(s => s.TimeZoneId).Length(64);
                     d.Map(s => s.Language).Length(32);
-                    d.References(s => s.Org).Column("UserOrgId");
+                    d.References(s => s.Org).Column("UserOrgId").ForeignKey("UserOrgFK");
 
                     d.HasManyToMany(s => s.UserGroups).Table("MBS_UserGroupUserRelation")
                      .ParentKeyColumn("UserId")
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-                    d.References(s => s.Other)
+                    d.References(s => s.Other).ForeignKey("UserOtherInfoFK")
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
                      .Cascade.All();
 
-                    d.References(s => s.Contact).Cascade.All()
+                    d.References(s => s.Contact).Cascade.All().ForeignKey("UserContactFK")
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
-                    d.References(s => s.Security).Cascade.All()
+                    d.References(s => s.Security).Cascade.All().ForeignKey("UserSecurityFK")
                      .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
                 });
         }
