@@ -11,7 +11,7 @@ define(function (require) {
 
         this.Id = "";
         this.Name = "";
-        this.TimeZoneId = "";
+        this.TimeZoneId = ""; 
 
         this.Language = "";
         this.Phone = "";
