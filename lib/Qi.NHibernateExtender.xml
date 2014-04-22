@@ -11,6 +11,11 @@
             <typeparam name="TId"></typeparam>
             <typeparam name="TObject"></typeparam>
         </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.#ctor(Qi.NHibernateExtender.SessionWrapper)">
+            <summary>
+            </summary>
+            <param name="sessionWrapper"></param>
+        </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.#ctor">
             <summary>
             </summary>
@@ -69,8 +74,39 @@
             <summary>
             </summary>
         </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.Dispose">
+            <summary>
+            </summary>
+        </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.Count">
             <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.BeginTransaction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            
+            </summary>
+            <param name="isolationLevel"></param>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.Commit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.RollBack">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.DaoBase`2.Close">
+            <summary>
+            关闭链接
             </summary>
             <returns></returns>
         </member>
@@ -92,7 +128,7 @@
         </member>
         <member name="P:Qi.Domain.NHibernates.DaoBase`2.SessionWrapper">
             <summary>
-            Session Wrapper
+                Session Wrapper
             </summary>
         </member>
         <member name="P:Qi.Domain.NHibernates.DaoBase`2.CurrentSession">
@@ -117,6 +153,11 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
+        <member name="P:Qi.NHibernateExtender.Criterion.BitwiseFlags.Op">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Qi.NHibernateExtender.SessionFactoryProxy">
             <summary>
             </summary>
@@ -133,6 +174,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Qi.NHibernateExtender.SessionFactoryProxy.CreateIndependentSession">
+            <summary>
+                Open it and close itself. It do not bind in ths SessionContext;
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Qi.NHibernateExtender.SessionFactoryProxy.GetWrapper">
             <summary>
             </summary>
@@ -140,10 +187,12 @@
         </member>
         <member name="P:Qi.NHibernateExtender.SessionFactoryProxy.Configuration">
             <summary>
+            
             </summary>
         </member>
         <member name="P:Qi.NHibernateExtender.SessionFactoryProxy.SessionFactory">
             <summary>
+            
             </summary>
         </member>
         <member name="P:Qi.NHibernateExtender.SessionFactoryProxy.Name">
@@ -187,6 +236,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Qi.NHibernateExtender.SessionManager.OpneManagerSelfSessionWrapper">
+            <summary>
+            并不会编订到SessionContext
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionManager.OpneManagerSelfSessionWrapper(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sessionFactoryKey"></param>
+            <returns></returns>
+        </member>
         <member name="M:Qi.NHibernateExtender.SessionManager.OpenNewSessionWrapper(System.String)">
             <summary>
             </summary>
@@ -195,7 +257,7 @@
         </member>
         <member name="M:Qi.NHibernateExtender.SessionManager.GetSessionWrapperFactory(System.String)">
             <summary>
-                gets the session factory by session factory name defined in the configruation file.
+                gets the session factory by session factory name defined in the configuration file.
             </summary>
             <param name="sessionFactoryName"></param>
             <returns></returns>
@@ -244,12 +306,61 @@
             <summary>
             </summary>
         </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.#ctor(NHibernate.ISession)">
+            <summary>
+            </summary>
+            <param name="session"></param>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.#ctor(NHibernate.ISessionFactory,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sessionFactory"></param>
+            <param name="openInThisContext"></param>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.Dispose">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+            </summary>
+            <param name="isolationLevel"></param>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.BeginTransaction">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.HandleUnsaveData(System.Boolean,NHibernate.ISession)">
+            <summary>
+            </summary>
+            <param name="submitData"></param>
+            <param name="session"></param>
+        </member>
         <member name="M:Qi.NHibernateExtender.SessionWrapper.Close(System.Boolean)">
             <summary>
                 关闭这个Wrapper，但是不一定关闭NSession，如果这个Session
                 并不是是在这里开启的，那么这个Close方法指挥提交数据，而不是关闭Session
             </summary>
             <param name="submit"></param>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.Close">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.Commit">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.NHibernateExtender.SessionWrapper.Rollback">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.NHibernateExtender.SessionWrapper.BindToSessionContext">
+            <summary>
+                个Wrapper是不是使用SessionContext进行bind。
+            </summary>
         </member>
         <member name="P:Qi.NHibernateExtender.SessionWrapper.SessionFactory">
             <summary>
@@ -517,12 +628,35 @@
                 Default to disabled transaction and use defualt sessionfactory key
             </summary>
         </member>
+        <member name="M:Qi.Wcfs.NHibernateContextAttribute.Validate(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint)">
+            <summary>
+            
+            </summary>
+            <param name="contractDescription"></param>
+            <param name="endpoint"></param>
+        </member>
         <member name="M:Qi.Wcfs.NHibernateContextAttribute.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)">
             <summary>
             </summary>
             <param name="contractDescription"></param>
             <param name="endpoint"></param>
             <param name="dispatchRuntime"></param>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextAttribute.ApplyClientBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)">
+            <summary>
+            
+            </summary>
+            <param name="contractDescription"></param>
+            <param name="endpoint"></param>
+            <param name="clientRuntime"></param>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextAttribute.AddBindingParameters(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            
+            </summary>
+            <param name="contractDescription"></param>
+            <param name="endpoint"></param>
+            <param name="bindingParameters"></param>
         </member>
         <member name="T:Qi.Wcfs.NHibernateContextExension">
             <summary>
@@ -535,6 +669,27 @@
             </summary>
             <param name="sessionfactoryName"></param>
             <param name="enabledTransaction"></param>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextExension.ProvideFault(System.Exception,System.ServiceModel.Channels.MessageVersion,System.ServiceModel.Channels.Message@)">
+            <summary>
+            
+            </summary>
+            <param name="error"></param>
+            <param name="version"></param>
+            <param name="fault"></param>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextExension.HandleError(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextExension.Attach(System.ServiceModel.InstanceContext)">
+            <summary>
+            
+            </summary>
+            <param name="owner"></param>
         </member>
         <member name="M:Qi.Wcfs.NHibernateContextExension.Detach(System.ServiceModel.InstanceContext)">
             <summary>
@@ -553,6 +708,13 @@
             </summary>
             <param name="sessionfactoryName"></param>
             <param name="enabledTransaction"></param>
+        </member>
+        <member name="M:Qi.Wcfs.NHibernateContextInitializer.Initialize(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)">
+            <summary>
+            
+            </summary>
+            <param name="instanceContext"></param>
+            <param name="message"></param>
         </member>
         <member name="T:Qi.Web.Http.ApiSessionAttribute">
             <summary>
@@ -578,6 +740,26 @@
             </summary>
             <param name="filterContext"></param>
         </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.ExecuteExceptionFilterAsync(System.Web.Http.Filters.HttpActionExecutedContext,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="actionExecutedContext"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="M:Qi.Web.Http.ApiSessionAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="actionExecutedContext"></param>
+        </member>
         <member name="P:Qi.Web.Http.ApiSessionAttribute.Enable">
             <summary>
                 Enable session or not.
@@ -596,79 +778,6 @@
         <member name="P:Qi.Web.Http.ApiSessionAttribute.IsolationLevel">
             <summary>
                 Gets or sets the IsolationLevel, default use the config setting.
-            </summary>
-        </member>
-        <member name="T:Qi.Web.Mvc.Criterions.ConvertTo">
-            <summary>
-            把字符串转为object类型。
-            </summary>
-            <param name="val"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Qi.Web.Mvc.Criterions.Property">
-            <summary>
-            查询接口
-            </summary>
-        </member>
-        <member name="M:Qi.Web.Mvc.Criterions.Property.Clone">
-            <summary>
-            克隆
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Qi.Web.Mvc.Criterions.Property.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Qi.Web.Mvc.Criterions.Property.Content">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Qi.Web.Mvc.Criterions.Property.StringToBoject">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Qi.Web.Mvc.Criterions.SortOrder">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Qi.Web.Mvc.Criterions.SortOrder.Asc">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Qi.Web.Mvc.Criterions.SortOrder.Desc">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Qi.Web.Mvc.Criterions.PropertyData">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Qi.Web.Mvc.Criterions.PropertyData.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Qi.Web.Mvc.Criterions.PropertyData.Value">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Qi.Web.Mvc.Criterions.PropertyData.Order">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Qi.Web.Mvc.Criterions.CriterionPostData">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:Qi.Web.Mvc.Founders.FounderAttribute">
@@ -1024,6 +1133,11 @@
             
             </summary>
         </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHFormValueProvider">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProvider">
             <summary>
             </summary>
@@ -1034,10 +1148,38 @@
             <param name="controllerContext"></param>
             <param name="collection"></param>
         </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProvider.GetValue(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHValueProvider.GetValue(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="skipValidation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHFormValueProvider.#ctor(System.Web.Mvc.ControllerContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+        </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHFormValueProviderFactory">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHFormValueProviderFactory.GetValueProvider(System.Web.Mvc.ControllerContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+            <returns></returns>
         </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHQueryValueProvider">
             <summary>
@@ -1055,15 +1197,42 @@
             
             </summary>
         </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHQueryValuePrivoderFactory.GetValueProvider(System.Web.Mvc.ControllerContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+            <returns></returns>
+        </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHRouterDataValueProvider">
             <summary>
             
             </summary>
         </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHRouterDataValueProvider.#ctor(System.Web.Mvc.ControllerContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHRouterDataValueProvider.GetValue(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHRouterDataProviderFactory">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.NHMvcExtender.NHRouterDataProviderFactory.GetValueProvider(System.Web.Mvc.ControllerContext)">
+            <summary>
+            
+            </summary>
+            <param name="controllerContext"></param>
+            <returns></returns>
         </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHValueProviderResult">
             <summary>
@@ -1113,6 +1282,12 @@
             </summary>
             <param name="filterContext"></param>
         </member>
+        <member name="M:Qi.Web.Mvc.SessionAttribute.OnResultExecuted(System.Web.Mvc.ResultExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
         <member name="P:Qi.Web.Mvc.SessionAttribute.Enable">
             <summary>
                 Enable session or not.
@@ -1131,6 +1306,36 @@
         <member name="P:Qi.Web.Mvc.SessionAttribute.IsolationLevel">
             <summary>
                 Gets or sets the IsolationLevel, default use the config setting.
+            </summary>
+        </member>
+        <member name="T:Qi.Web.NHSessionHttpModule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Web.NHSessionHttpModule.Init(System.Web.HttpApplication)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Qi.Web.NHSessionHttpModule.context_EndRequest(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Qi.Web.NHSessionHttpModule.context_BeginRequest(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Qi.Web.NHSessionHttpModule.Dispose">
+            <summary>
+            
             </summary>
         </member>
     </members>
