@@ -23,7 +23,7 @@ namespace Ornament.MVCWebFrame.Controllers
             }
         }
     }
-    [HandleError, Session(Tag="Controller")]
+    [HandleError, Session]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -39,7 +39,7 @@ namespace Ornament.MVCWebFrame.Controllers
             return View(new Test());
         }
 
-        [Session(Tag="Action")]
+        [Session]
         public ActionResult SwitchLanguage(string id)
         {
             OrnamentContext.MemberShip.SwitchLanguage(id);

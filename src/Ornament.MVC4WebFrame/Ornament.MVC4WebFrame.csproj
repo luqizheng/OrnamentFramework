@@ -93,14 +93,11 @@
     </Reference>
     <Reference Include="Qi, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Qi.1.5.2.0\lib\net40-Client\Qi.dll</HintPath>
+      <HintPath>..\..\lib\Qi.dll</HintPath>
     </Reference>
     <Reference Include="Qi.NHibernateExtender, Version=1.6.0.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
-    </Reference>
-    <Reference Include="Qi.Web">
-      <HintPath>..\packages\Qi.Web.1.2.0.0\lib\net40\Qi.Web.dll</HintPath>
     </Reference>
     <Reference Include="SeajsBundles, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

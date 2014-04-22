@@ -50,10 +50,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Qi, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Qi.1.5.2.0\lib\net40-Client\Qi.dll</HintPath>
-    </Reference>
     <Reference Include="Qi.NHibernateExtender">
       <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
