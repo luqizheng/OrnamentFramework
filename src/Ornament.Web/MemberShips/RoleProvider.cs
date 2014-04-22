@@ -44,17 +44,18 @@ namespace Ornament.Web.MemberShips
                                           select role;
                 if (!result.Any())
                     return false;
+                s.Commit();
                 return u.InRole(result.First());
             }
             finally
             {
-                s.Close(true);
+                s.Close();
             }
         }
 
         public override string[] GetRolesForUser(string username)
         {
-            SessionWrapper s = SessionManager.GetSessionWrapper();
+            SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
 
             try
             {
@@ -75,8 +76,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                    s.Close(true);
+                sessionWrapper.Close();
             }
         }
 
@@ -86,8 +86,8 @@ namespace Ornament.Web.MemberShips
         /// <exception cref="ProviderException"></exception>
         public override void CreateRole(string roleName)
         {
-            SessionWrapper s = SessionManager.GetSessionWrapper();
-            
+            SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
+
             try
             {
                 var role = new Role(roleName);
@@ -99,10 +99,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -134,10 +131,8 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                s.Close();
+
             }
         }
 
@@ -153,10 +148,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                s.Close();
             }
         }
 
@@ -210,10 +202,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                s.Close();
             }
         }
 
@@ -235,10 +224,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                s.Close();
             }
         }
 
@@ -258,10 +244,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                s.Close();
             }
         }
 
@@ -283,10 +266,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (s.OpenInThisContext)
-                {
-                    s.Close(true);
-                }
+                s.Close();
             }
         }
 
@@ -314,10 +294,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -341,10 +318,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (wrapper.OpenInThisContext)
-                {
-                    wrapper.Close(true);
-                }
+                wrapper.Close();
             }
         }
     }

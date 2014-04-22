@@ -118,6 +118,7 @@ namespace Ornament.Web.Cfg
             try
             {
                 GlobalInitializer.BuildData();
+                wrapper.Commit();
             }
             catch (Exception ex)
             {
@@ -126,7 +127,7 @@ namespace Ornament.Web.Cfg
             }
             finally
             {
-                wrapper.Close(true);
+                wrapper.Close();
             }
         }
     }

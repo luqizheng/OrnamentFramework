@@ -64,10 +64,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (wrapper.OpenInThisContext)
-                {
-                    wrapper.Close(true);
-                }
+                wrapper.Close();
             }
         }
 
@@ -82,7 +79,7 @@ namespace Ornament.Web.MemberShips
         public override int DeleteProfiles(string[] usernames)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-          
+
             try
             {
                 return MemberShipFactory.CreateProfileDao().Delete(usernames);
@@ -90,10 +87,7 @@ namespace Ornament.Web.MemberShips
 
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -119,7 +113,7 @@ namespace Ornament.Web.MemberShips
             DateTime userInactiveSinceDate)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-         
+
             try
             {
                 switch (authenticationOption)
@@ -138,10 +132,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -167,7 +158,7 @@ namespace Ornament.Web.MemberShips
             DateTime userInactiveSinceDate)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-           
+
             try
             {
                 switch (authenticationOption)
@@ -185,10 +176,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -210,7 +198,7 @@ namespace Ornament.Web.MemberShips
             int pageIndex, int pageSize, out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-          
+
             try
             {
                 IList<ProfileValue> users;
@@ -241,17 +229,14 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
         private static ProfileInfo ToProfileInfo(ProfileValue profileValue)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-    
+
             try
             {
                 var reuslt =
@@ -262,10 +247,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -296,20 +278,20 @@ namespace Ornament.Web.MemberShips
             int pageSize, out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-        
+
             try
             {
                 var infos = new ProfileInfoCollection();
                 IQueryable<ProfileValue> profiles =
                     from profile in
-                        MemberShipFactory.Profiles.Take(pageSize).Skip(pageIndex*pageSize)
+                        MemberShipFactory.Profiles.Take(pageSize).Skip(pageIndex * pageSize)
                     where profile.LastActivityDate < userInactiveSinceDate
                     select profile;
                 totalRecords =
                     (from profile in
-                        MemberShipFactory.Profiles.Take(pageSize).Skip(pageIndex*pageSize)
-                        where profile.LastActivityDate < userInactiveSinceDate
-                        select profile).Count();
+                         MemberShipFactory.Profiles.Take(pageSize).Skip(pageIndex * pageSize)
+                     where profile.LastActivityDate < userInactiveSinceDate
+                     select profile).Count();
 
 
                 foreach (ProfileValue prof in profiles)
@@ -321,10 +303,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -349,19 +328,17 @@ namespace Ornament.Web.MemberShips
             out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-         
+
             try
             {
                 return FindInactiveProfilesByUserName(authenticationOption, usernameToMatch, DateTime.MaxValue,
                     pageIndex,
                     pageSize, out totalRecords);
+
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -393,7 +370,7 @@ namespace Ornament.Web.MemberShips
             int pageIndex, int pageSize, out int totalRecords)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-           
+
             try
             {
                 var infos = new ProfileInfoCollection();
@@ -404,40 +381,40 @@ namespace Ornament.Web.MemberShips
                 {
                     case ProfileAuthenticationOption.All:
                         profiles = (from pf in MemberShipFactory.Profiles
-                            where
-                                pf.LastActivityDate < userInactiveSinceDate &&
-                                pf.LoginId.StartsWith(usernameToMatch)
-                            select pf);
+                                    where
+                                        pf.LastActivityDate < userInactiveSinceDate &&
+                                        pf.LoginId.StartsWith(usernameToMatch)
+                                    select pf);
 
                         totalRecords = (from pf in MemberShipFactory.Profiles
-                            where
-                                pf.LastActivityDate < userInactiveSinceDate &&
-                                pf.LoginId.StartsWith(usernameToMatch)
-                            select pf).Count();
+                                        where
+                                            pf.LastActivityDate < userInactiveSinceDate &&
+                                            pf.LoginId.StartsWith(usernameToMatch)
+                                        select pf).Count();
                         break;
                     case ProfileAuthenticationOption.Anonymous:
                         profiles = (from pf in MemberShipFactory.Profiles
-                            where
-                                pf.LastActivityDate < userInactiveSinceDate &&
-                                pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous
-                            select pf);
+                                    where
+                                        pf.LastActivityDate < userInactiveSinceDate &&
+                                        pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous
+                                    select pf);
                         totalRecords = (from pf in MemberShipFactory.Profiles
-                            where
-                                pf.LastActivityDate < userInactiveSinceDate &&
-                                pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous
-                            select pf).Count();
+                                        where
+                                            pf.LastActivityDate < userInactiveSinceDate &&
+                                            pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous
+                                        select pf).Count();
                         break;
                     default:
                         profiles = (from pf in MemberShipFactory.Profiles
-                            where
-                                pf.LastActivityDate < userInactiveSinceDate &&
-                                pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous == false
-                            select pf);
+                                    where
+                                        pf.LastActivityDate < userInactiveSinceDate &&
+                                        pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous == false
+                                    select pf);
                         totalRecords = (from pf in MemberShipFactory.Profiles
-                            where
-                                pf.LastActivityDate < userInactiveSinceDate &&
-                                pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous == false
-                            select pf).Count();
+                                        where
+                                            pf.LastActivityDate < userInactiveSinceDate &&
+                                            pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous == false
+                                        select pf).Count();
                         break;
                 }
 
@@ -448,15 +425,12 @@ namespace Ornament.Web.MemberShips
                     infos.Add(new ProfileInfo(u.Name, prof.IsAnonymous, u.Other.LastActivityDate.Value,
                         prof.LastActivityDate.Value, 30));
                 }
-
+                sessionWrapper.Commit();
                 return infos;
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -480,7 +454,7 @@ namespace Ornament.Web.MemberShips
             SettingsPropertyCollection collection)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-           
+
             IUserProfileDao profileDao = MemberShipFactory.CreateProfileDao();
             try
             {
@@ -501,15 +475,12 @@ namespace Ornament.Web.MemberShips
                     }
                     result.Add(item);
                 }
-
+                sessionWrapper.Commit();
                 return result;
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -528,7 +499,7 @@ namespace Ornament.Web.MemberShips
         public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection collection)
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-           
+
             try
             {
                 string userName = LoginId(context);
@@ -551,24 +522,22 @@ namespace Ornament.Web.MemberShips
                         profileValue.Properities.Add(settingsPropertyValue.Name, settingsPropertyValue.PropertyValue);
                 }
                 profileDao.SaveOrUpdate(profileValue);
+                sessionWrapper.Commit();
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
         private bool userIsAuthenticated(SettingsContext context)
         {
-            return (bool) context["IsAuthenticated"];
+            return (bool)context["IsAuthenticated"];
         }
 
         private string LoginId(SettingsContext context)
         {
-            return (string) context["UserName"];
+            return (string)context["UserName"];
         }
     }
 }

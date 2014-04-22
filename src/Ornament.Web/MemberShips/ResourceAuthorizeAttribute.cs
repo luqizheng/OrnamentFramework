@@ -18,7 +18,7 @@ namespace Ornament.Web.MemberShips
         /// <param name="operator">the operator will be checked in resource</param>
         /// <param name="resourceId">Resource's Id</param>
         public ResourceAuthorizeAttribute(object @operator, string resourceId)
-            : this(@operator, typeof (string), resourceId)
+            : this(@operator, typeof(string), resourceId)
         {
         }
 
@@ -35,7 +35,7 @@ namespace Ornament.Web.MemberShips
             if (resourceType == null) throw new ArgumentNullException("resourceType");
             if (resourceId == null) throw new ArgumentNullException("resourceId");
 
-            Operator = (Enum) @operator;
+            Operator = (Enum)@operator;
             ResourceType = resourceType;
             ResourceId = resourceId;
         }
@@ -64,7 +64,7 @@ namespace Ornament.Web.MemberShips
                 throw new ArgumentNullException("filterContext");
             }
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
-           
+
             try
             {
                 if (AuthorizeCore(filterContext.HttpContext))
@@ -89,10 +89,7 @@ namespace Ornament.Web.MemberShips
             }
             finally
             {
-                if (sessionWrapper.OpenInThisContext)
-                {
-                    sessionWrapper.Close(true);
-                }
+                sessionWrapper.Close();
             }
         }
 
@@ -117,7 +114,7 @@ namespace Ornament.Web.MemberShips
             IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
 
             IList<Permission> result;
-            if (ResourceType != typeof (string))
+            if (ResourceType != typeof(string))
             {
                 var res =
                     OrnamentContext.DaoFactory.MemberShipFactory.CreateResourceDao().Load(
