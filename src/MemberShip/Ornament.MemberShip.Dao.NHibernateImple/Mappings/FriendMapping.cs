@@ -16,7 +16,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 {
                     x.Map(_ => _.Name);
                     x.Map(_ => _.Remakrs).Length(255);
-                    x.References(_ => _.User).ForeignKey("UserIdFK");
+                    x.References(_ => _.User).ForeignKey("FriendGroupUserIdFK");
                 }).Table("MBS_Friends")
                 .ParentKeyColumn("groupId")
                 .ChildKeyColumn("friendId");
