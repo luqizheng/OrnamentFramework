@@ -163,9 +163,19 @@
                 <dd>
                     @if (OrnamentContext.MemberShip.CurrentUser() != null)
                     {
-                        <span>@OrnamentContext.MemberShip.CurrentUser().TimeZoneId</span>
+                        @Html.Raw(OrnamentContext.MemberShip.CurrentUser().TimeZoneId)
+                        <br/>@OrnamentContext.MemberShip.CurrentUser().TimeZone.Id;
+                        
+                        
+                        
                     }
                     &nbsp;
+                </dd>
+                <dt>
+                    Server Time:
+                </dt>
+                <dd>
+                    @DateTime.Now
                 </dd>
                 <dt>
                     Client Time:
