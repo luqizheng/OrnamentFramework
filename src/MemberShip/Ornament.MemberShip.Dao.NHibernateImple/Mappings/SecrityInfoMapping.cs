@@ -21,7 +21,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             ;
             Map(s => s.PasswordQuestion).Length(100)
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
-            References(s => s.User).ForeignKey("UserIdFK");
+            References(s => s.User).ForeignKey("SecrityInfoUserIdFK");
             Map(s => s.LastLoginDate);
         }
     }
