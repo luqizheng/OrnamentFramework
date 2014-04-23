@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -12,6 +13,7 @@ using Ornament.MemberShip.Permissions;
 using Ornament.Models;
 using Ornament.Web;
 using Ornament.Web.HttpModel;
+using Qi;
 using Qi.NHibernateExtender;
 
 // ReSharper disable CheckNamespace
@@ -65,6 +67,8 @@ namespace Ornament
             return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] { lang });
         }
 
+
+
         public static string CurrentVerifyCode(this MemberShipContext context)
         {
             return HttpContext.Current.Session[VerifyCodeKey] as string;
@@ -113,8 +117,18 @@ namespace Ornament
         /// <returns></returns>
         public static DateTime ToClientDateTime(this MemberShipContext context, DateTime serverTime)
         {
+            var user = context.CurrentUser();
+            if (user!=null)
+            {
+                var timeZoneId = user.TimeZoneId;
+                if (!String.IsNullOrEmpty(timeZoneId))
+                {
+                    return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(serverTime, timeZoneId);
+                }
+            }
             return serverTime.AddHours(context.OffSetHour());
         }
+
 
         /// <summary>
         /// </summary>

@@ -41,7 +41,8 @@
                 select new SelectListItem()
                     {
                         Text = lang.Name ,
-                        Value = lang.Key
+                        Value = lang.Key,
+                        Selected = lang.MatchKey.Any(s => s == this.Model)
                     };
 }
 <div class="control-group">

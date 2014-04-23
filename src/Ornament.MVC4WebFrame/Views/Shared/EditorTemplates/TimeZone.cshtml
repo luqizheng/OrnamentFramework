@@ -13,16 +13,9 @@
                         };
 }
 <div class="control-group">
-
     @Html.Label(inputName, display, new { @class = "control-label" })
     <div class="controls">
         @Html.DropDownList("", timeZones)
         @Html.ValidationMessage(inputName)
     </div>
 </div>
-<script type="text/javascript">
-    seajs.use(["jquery","select2"], function ($,sFunc) {
-        sFunc($);
-        $("#@ViewData.TemplateInfo.HtmlFieldPrefix.Replace(".", "_")").select2({ width: "350px" });
-    });
-</script>

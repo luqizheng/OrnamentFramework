@@ -1,4 +1,4 @@
-﻿d12e@using System.Configuration
+﻿@using System.Configuration
 @using System.Configuration
 @using System.Text
 @using Ornament
@@ -142,7 +142,7 @@
         {
             @panel.Header(@<text>
 
-            <h6>IP Info</h6>
+            <h6>Client Info</h6>
 
 
             </text>)
@@ -158,6 +158,20 @@
                             : serverVariables["REMOTE_ADDR"];
                     }
                     @ip
+                </dd>
+                <dt>Time Zone</dt>
+                <dd>
+                    @if (OrnamentContext.MemberShip.CurrentUser() != null)
+                    {
+                        <span>@OrnamentContext.MemberShip.CurrentUser().TimeZoneId</span>
+                    }
+                    &nbsp;
+                </dd>
+                <dt>
+                    Client Time:
+                </dt>
+                <dd>
+                    @OrnamentContext.MemberShip.ToClientDateTime(DateTime.Now)
                 </dd>
             </dl>
 
