@@ -46,7 +46,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             const string hql =
                 "select count(*) from User user where user.Org.OrderId>='{0}' and user.Org.OrderId<='{1}'";
 
-            var oo = (Int64)CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
+            var oo = (Int64) CurrentSession.CreateQuery(String.Format(hql, minOrderId, maxOrderId)).UniqueResult();
             return oo > 0;
         }
 
@@ -82,7 +82,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             }
 
 
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<Org>();
         }
@@ -108,7 +108,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .Add(Restrictions.Le(OrderIdProperty, max))
                 .Add(Restrictions.Ge(OrderIdProperty, min))
                 .SetMaxResults(pageSize)
-                .SetFirstResult(pageIndex * pageSize)
+                .SetFirstResult(pageIndex*pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<Org>();
         }
@@ -134,7 +134,5 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .Add(Restrictions.Ge(OrderIdProperty, minOrderId))
                     .GetExecutableCriteria(CurrentSession).List<Org>();
         }
-
-      
     }
 }

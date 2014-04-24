@@ -95,7 +95,7 @@ namespace Ornament.MemberShip
         /// </value>
         [Display(Name = "Remark", ResourceType = typeof (Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof(Resources))]
+             ErrorMessageResourceType = typeof (Resources))]
         [UIHint("Textarea")]
         public virtual string Remarks { get; set; }
 
@@ -104,9 +104,9 @@ namespace Ornament.MemberShip
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
         [Display(Name = "Name", ResourceType = typeof (Resources)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(Resources)),
+         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof(Resources))]
+             ErrorMessageResourceType = typeof (Resources))]
         public virtual string Name
         {
             get { return _name; }

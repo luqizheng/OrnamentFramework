@@ -11,9 +11,8 @@ namespace Ornament.MemberShip
         }
 
         public MemberShipException(string message, Exception innerException)
-            :base(message,innerException)
+            : base(message, innerException)
         {
-            
         }
     }
 
@@ -28,7 +27,6 @@ namespace Ornament.MemberShip
         public NotFoundUserShipException(string message, Exception innerException)
             : base(message, innerException)
         {
-
         }
     }
 }

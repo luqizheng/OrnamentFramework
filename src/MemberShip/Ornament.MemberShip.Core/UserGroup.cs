@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
@@ -48,7 +47,7 @@ namespace Ornament.MemberShip
 
         public override IEnumerable<Role> GetAllRoles()
         {
-            return this.Roles;
+            return Roles;
         }
     }
 }

@@ -7,8 +7,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public GeneralPermissionMapping()
         {
-            this.Extends(typeof(Permission));
-            this.DiscriminatorValue("Kind");
+            Extends(typeof (Permission));
+            DiscriminatorValue("Kind");
             Map(s => s.Resource).Column("TypeResource").Length(64);
         }
     }

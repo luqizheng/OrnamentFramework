@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ornament.MemberShip.Permissions
+﻿namespace Ornament.MemberShip.Permissions
 {
     public class TypeResourceManager : ResourceOperatorManager<string>
     {

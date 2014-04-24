@@ -4,10 +4,10 @@ using Qi.Domain;
 
 namespace Ornament.MemberShip.Dao
 {
-    public interface IFriendGroupDao:IDao<string,FriendGroup>
+    public interface IFriendGroupDao : IDao<string, FriendGroup>
     {
         /// <summary>
-        /// 获取User 所有的朋友分组的信息。
+        ///     获取User 所有的朋友分组的信息。
         /// </summary>
         /// <param name="owner">用户</param>
         /// <returns>所有属于owner的分组</returns>

@@ -1,16 +1,14 @@
-﻿using Qi.Domain;
-
-namespace Ornament.MemberShip.Relatives
+﻿namespace Ornament.MemberShip.Relatives
 {
-    public class Friend 
+    public class Friend
     {
         public Friend()
         {
-            
         }
+
         public Friend(User user)
         {
-            this.User = user;
+            User = user;
         }
 
         public User User { get; set; }

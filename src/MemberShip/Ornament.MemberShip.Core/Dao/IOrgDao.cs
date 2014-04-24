@@ -15,14 +15,16 @@ namespace Ornament.MemberShip.Dao
         bool InUse(string orgId);
 
         Org GetByName(string name, Org parent);
+
         /// <summary>
-        /// 根据名字获取第一层组织的
+        ///     根据名字获取第一层组织的
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         Org GetRootOrgBy(string name);
+
         /// <summary>
-        /// 查找名字
+        ///     查找名字
         /// </summary>
         /// <param name="name"></param>
         /// <param name="pageIndex"></param>
@@ -32,8 +34,9 @@ namespace Ornament.MemberShip.Dao
 
         IEnumerable<Org> Find(Org scope, string name, int pageIndex, int pageSize);
         IEnumerable<Org> GetOrgs(string[] ids);
+
         /// <summary>
-        /// 查找下级组织单元
+        ///     查找下级组织单元
         /// </summary>
         /// <param name="org"></param>
         /// <returns></returns>

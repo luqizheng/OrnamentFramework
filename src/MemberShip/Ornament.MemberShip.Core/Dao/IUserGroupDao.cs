@@ -39,7 +39,7 @@ namespace Ornament.MemberShip.Dao
 
         UserGroup GetByName(string groupName);
 
-        IList<UserGroup> FindAll(int pageIndex, int pageSize,out int total);
+        IList<UserGroup> FindAll(int pageIndex, int pageSize, out int total);
 
         IEnumerable<UserGroup> Find(string name, int pageIndex, int pageSize);
         IEnumerable<UserGroup> GetByIds(string[] ids);

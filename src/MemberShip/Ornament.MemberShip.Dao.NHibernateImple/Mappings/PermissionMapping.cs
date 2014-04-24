@@ -9,7 +9,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             Table("MBS_Permission");
             Id(s => s.Id).GeneratedBy.UuidHex("N");
-            this.DiscriminateSubClassesOnColumn("diff").Length(32).CustomType(typeof(string));
+            DiscriminateSubClassesOnColumn("diff").Length(32).CustomType(typeof (string));
             Map(s => s.Name).Insert();
             Map(s => s.Remark);
             Map(s => s.Operator);

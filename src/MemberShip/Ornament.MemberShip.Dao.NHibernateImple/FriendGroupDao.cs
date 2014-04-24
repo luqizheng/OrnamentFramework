@@ -11,13 +11,14 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return Projections.Property<FriendGroup>(s => s.Owner); }
         }
+
         private IProjection NameProperty
         {
             get { return Projections.Property<FriendGroup>(s => s.Name); }
         }
 
         /// <summary>
-        /// 获取User 所有的朋友分组的信息。
+        ///     获取User 所有的朋友分组的信息。
         /// </summary>
         /// <param name="owner">用户</param>
         /// <returns>所有属于owner的分组</returns>
@@ -25,12 +26,16 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<FriendGroup> GetGroups(User owner)
         {
             return CreateDetachedCriteria().Add(Restrictions.Eq(OwnerProperty, owner))
-                                           .GetExecutableCriteria(CurrentSession).List<FriendGroup>();
+                .GetExecutableCriteria(CurrentSession).List<FriendGroup>();
         }
 
         public FriendGroup GetByName(string groupName)
         {
-            return CreateDetachedCriteria().Add(Restrictions.Eq(NameProperty, groupName)).GetExecutableCriteria(CurrentSession).UniqueResult<FriendGroup>();
+            return
+                CreateDetachedCriteria()
+                    .Add(Restrictions.Eq(NameProperty, groupName))
+                    .GetExecutableCriteria(CurrentSession)
+                    .UniqueResult<FriendGroup>();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Ornament.MemberShip
         private const string BaseMinOrderId = "00000000000000000000000000000000";
         private readonly object _orgChildLock = 0;
         private IOrgCollection _childs;
+        private string _id;
         private string _orderId;
         private Iesi.Collections.Generic.ISet<Permission> _permissions;
 
@@ -29,7 +30,6 @@ namespace Ornament.MemberShip
         {
         }
 
-        private string _id;
         public override string Id
         {
             get { return _id; }
@@ -53,7 +53,7 @@ namespace Ornament.MemberShip
         {
             get
             {
-                var result = _childs ?? (_childs = new OrgCollection(this));
+                IOrgCollection result = _childs ?? (_childs = new OrgCollection(this));
                 if (result.Self == null)
                     result.Self = this;
                 return result;
@@ -139,7 +139,7 @@ namespace Ornament.MemberShip
         #endregion
 
         /// <summary>
-        /// 获取下级OrderId的数值
+        ///     获取下级OrderId的数值
         /// </summary>
         /// <returns></returns>
         public static void CreateGetChildCondition(Org org, out string maxOrderId, out string minOrderid)

@@ -10,22 +10,26 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
     {
         public EmailVerifier Get(User user, VerifyType type)
         {
-            var cri = CreateDetachedCriteria()
+            DetachedCriteria cri = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Status), SecretTokenStatus.Effective))
                 .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Account), user))
-                .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Type), type)); ;
+                .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Type), type));
+            ;
 
 
-            return cri.GetExecutableCriteria(this.CurrentSession).UniqueResult<EmailVerifier>();
+            return cri.GetExecutableCriteria(CurrentSession).UniqueResult<EmailVerifier>();
         }
 
-        public IQueryable<EmailVerifier> Tokens { get { return this.CurrentSession.Query<EmailVerifier>(); } }
+        public IQueryable<EmailVerifier> Tokens
+        {
+            get { return CurrentSession.Query<EmailVerifier>(); }
+        }
 
         public override void SaveOrUpdate(EmailVerifier t)
         {
             if (t.Id == null)
             {
-                var previousToke = this.Get(t.Account, t.Type);
+                EmailVerifier previousToke = Get(t.Account, t.Type);
                 //if found the prevous Token, it should be let it invalidate.
                 if (previousToke != null)
                 {
@@ -40,7 +44,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             if (t.Id == null)
             {
-                var previousToke = this.Get(t.Account, t.Type);
+                EmailVerifier previousToke = Get(t.Account, t.Type);
                 //if found the prevous Token, it should be let it invalidate.
                 if (previousToke != null)
                 {

@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.MemberShipProviders
@@ -17,12 +16,13 @@ namespace Ornament.MemberShip.MemberShipProviders
         }
 
         /// <summary>
-        /// 是否启用失效Password尝试次数统计，为0时候为false
+        ///     是否启用失效Password尝试次数统计，为0时候为false
         /// </summary>
         public virtual bool EnabledPasswordAtteempts
         {
             get { return MaxInvalidPasswordAttempts != 0; }
         }
+
         /// <summary>
         /// </summary>
         public virtual IMemberShipProvider Provider { get; set; }
@@ -48,11 +48,12 @@ namespace Ornament.MemberShip.MemberShipProviders
             if (Provider.Encrypt(inputPassword) != user.Security.Password)
             {
                 errorMessage = Resources.error_LoginError;
-                if (this.EnabledPasswordAtteempts)
+                if (EnabledPasswordAtteempts)
                 {
-                    errorMessage += String.Format(Resources.error_login_remind_attempts, MaxInvalidPasswordAttempts - user.Security.InvalidPasswordAttempts);
+                    errorMessage += String.Format(Resources.error_login_remind_attempts,
+                        MaxInvalidPasswordAttempts - user.Security.InvalidPasswordAttempts);
                 }
-                if (user.Security.InvalidPasswordAttempts + 1 == this.MaxInvalidPasswordAttempts)
+                if (user.Security.InvalidPasswordAttempts + 1 == MaxInvalidPasswordAttempts)
                 {
                     errorMessage += "," + Resources.error_UserIsLockout;
                 }
@@ -72,5 +73,4 @@ namespace Ornament.MemberShip.MemberShipProviders
         InvalidatePasswordOrAccount,
         LockedUser
     }
-
 }

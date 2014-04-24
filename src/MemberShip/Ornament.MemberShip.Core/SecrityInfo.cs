@@ -13,8 +13,9 @@ namespace Ornament.MemberShip
     public partial class User
     {
         private static ValidateUserPolicy _validateUserPolicy;
+
         /// <summary>
-        /// 检查用户的策略。
+        ///     检查用户的策略。
         /// </summary>
         public static ValidateUserPolicy ValidateUserPolicy
         {
@@ -52,7 +53,7 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The is lockout.
             /// </value>
-            [Display(Name = "IsLockout", ResourceType = typeof(Resources))]
+            [Display(Name = "IsLockout", ResourceType = typeof (Resources))]
             public virtual bool IsLocked
             {
                 get
@@ -66,7 +67,9 @@ namespace Ornament.MemberShip
 
                     return
                         InvalidPasswordAttempts >= ValidateUserPolicy.MaxInvalidPasswordAttempts //是否大于尝试次数
-                        && (ValidateUserPolicy.PasswordAttemptWindow == 0 || (DateTime.Now - lastLockDateTime).Minutes <= ValidateUserPolicy.PasswordAttemptWindow);
+                        &&
+                        (ValidateUserPolicy.PasswordAttemptWindow == 0 ||
+                         (DateTime.Now - lastLockDateTime).Minutes <= ValidateUserPolicy.PasswordAttemptWindow);
                     //如果少于锁定时间，那么是被锁定了。
                 }
             }
@@ -74,7 +77,7 @@ namespace Ornament.MemberShip
             /// <summary>
             ///     获取用户被锁定的时间
             /// </summary>
-            [Display(Name = "LastLockTime", ResourceType = typeof(Resources))]
+            [Display(Name = "LastLockTime", ResourceType = typeof (Resources))]
             public virtual DateTime? LastLockoutDate { get; protected set; }
 
             /// <summary>
@@ -85,13 +88,13 @@ namespace Ornament.MemberShip
             /// <summary>
             ///     获取用户最后改变时间
             /// </summary>
-            [Display(Name = "LastPasswordChangedTime", ResourceType = typeof(Resources))]
+            [Display(Name = "LastPasswordChangedTime", ResourceType = typeof (Resources))]
             public virtual DateTime? LastPasswordChangedDate { get; set; }
 
             /// <summary>
             ///     获取用户最后登录时间
             /// </summary>
-            [Display(Name = "LastLoginTime", ResourceType = typeof(Resources))]
+            [Display(Name = "LastLoginTime", ResourceType = typeof (Resources))]
             public virtual DateTime? LastLoginDate { get; protected internal set; }
 
             /// <summary>
@@ -104,9 +107,9 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The password question.
             /// </value>
-            [Display(Name = "PasswordQuestion", ResourceType = typeof(Resources)),
+            [Display(Name = "PasswordQuestion", ResourceType = typeof (Resources)),
              Required(AllowEmptyStrings = false,
-                 ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof(Resources))
+                 ErrorMessageResourceName = "RequirePasswordQuestion", ErrorMessageResourceType = typeof (Resources))
             ]
             public virtual string PasswordQuestion
             {
@@ -121,11 +124,11 @@ namespace Ornament.MemberShip
             /// <summary>
             ///     Gets the answer of <see cref="PasswordQuestion" />. It alwasy entrypted by md5
             /// </summary>
-            [Display(Name = "PasswordAnswer", ResourceType = typeof(Resources)),
+            [Display(Name = "PasswordAnswer", ResourceType = typeof (Resources)),
              Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePasswordAnswer",
-                 ErrorMessageResourceType = typeof(Resources)),
+                 ErrorMessageResourceType = typeof (Resources)),
              StringLength(50, MinimumLength = 0, ErrorMessageResourceName = "PasswordQuestionAnswerOverMaxLength",
-                 ErrorMessageResourceType = typeof(Resources))]
+                 ErrorMessageResourceType = typeof (Resources))]
             public virtual string PasswordAnswer
             {
                 protected set
@@ -142,9 +145,9 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The password.
             /// </value>
-            [Display(Name = "Password", ResourceType = typeof(Resources)),
+            [Display(Name = "Password", ResourceType = typeof (Resources)),
              Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequirePassword",
-                 ErrorMessageResourceType = typeof(Resources))]
+                 ErrorMessageResourceType = typeof (Resources))]
             public virtual string Password
             {
                 get { return ValidateUserPolicy.Provider.Decrypt(_password); }
@@ -174,7 +177,7 @@ namespace Ornament.MemberShip
                     if (ValidateUserPolicy.EnabledPasswordAtteempts)
                     {
                         errorMessage += String.Format(Resources.error_UserIsLockout_retry_after_mins,
-                                            ValidateUserPolicy.PasswordAttemptWindow);
+                            ValidateUserPolicy.PasswordAttemptWindow);
                     }
                     else
                     {
@@ -329,8 +332,8 @@ namespace Ornament.MemberShip
 
             public virtual void Lockout()
             {
-                this.InvalidPasswordAttempts = ValidateUserPolicy.MaxInvalidPasswordAttempts;
-                this.LastLockoutDate = DateTime.Now;
+                InvalidPasswordAttempts = ValidateUserPolicy.MaxInvalidPasswordAttempts;
+                LastLockoutDate = DateTime.Now;
             }
 
             public virtual EmailVerifier ResetPassword(IMemberShipFactory daoFactory, int expireMiniutes)
@@ -338,7 +341,7 @@ namespace Ornament.MemberShip
                 if (daoFactory == null) throw new ArgumentNullException("daoFactory");
                 if (expireMiniutes <= 0)
                     expireMiniutes = 30;
-                EmailVerifier result = new EmailVerifier(this.User, expireMiniutes, VerifyType.ResetPassword);
+                var result = new EmailVerifier(User, expireMiniutes, VerifyType.ResetPassword);
                 daoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
                 return result;
             }

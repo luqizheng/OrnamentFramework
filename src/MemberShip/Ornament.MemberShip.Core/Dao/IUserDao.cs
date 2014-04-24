@@ -23,6 +23,7 @@ namespace Ornament.MemberShip.Dao
         Or,
         And,
     }
+
     public class UserSearch
     {
         public JunctionType Junction { get; set; }
@@ -65,9 +66,9 @@ namespace Ornament.MemberShip.Dao
         /// <param name="total"></param>
         /// <param name="sortTargets"></param>
         /// <returns></returns>
-        IList<User> Search(UserSearch userSearch, int pageIndex, int pageSize, out int total, params SortTarget[] sortTargets);
+        IList<User> Search(UserSearch userSearch, int pageIndex, int pageSize, out int total,
+            params SortTarget[] sortTargets);
 
-   
 
         /// <summary>
         /// </summary>
@@ -123,9 +124,7 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IList<User> FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize);
 
- 
 
-    
         /// <summary>
         /// </summary>
         /// <param name="userGroup"></param>
@@ -138,7 +137,6 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IList<User> GetUsers(Org org);
 
-     
 
         /// <summary>
         /// </summary>

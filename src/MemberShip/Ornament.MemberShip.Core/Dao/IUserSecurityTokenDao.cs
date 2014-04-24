@@ -6,12 +6,12 @@ namespace Ornament.MemberShip.Dao
 {
     public interface IUserSecurityTokenDao : IDao<string, EmailVerifier>
     {
+        IQueryable<EmailVerifier> Tokens { get; }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        EmailVerifier Get(User user,VerifyType type);
-        IQueryable<EmailVerifier> Tokens { get; }
+        EmailVerifier Get(User user, VerifyType type);
     }
 }

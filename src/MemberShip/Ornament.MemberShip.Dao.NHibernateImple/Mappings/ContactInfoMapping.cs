@@ -10,10 +10,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
             References(s => s.User).ForeignKey("UserFK").Cascade.None();
             Map(s => s.Email).Length(64)
-                             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
             Map(s => s.Phone).Length(20)
-                             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
             Map(s => s.EmailVerified);
             Map(s => s.PhoneVerified);

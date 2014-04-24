@@ -6,8 +6,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
     {
         public ProfileValueMapping()
         {
-            this.Id(s => s.Id).GeneratedBy.UuidHex("n");
-            this.Table("MBS_Profile");
+            Id(s => s.Id).GeneratedBy.UuidHex("n");
+            Table("MBS_Profile");
             DynamicInsert();
             DynamicUpdate();
 

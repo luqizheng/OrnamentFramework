@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Criterion;
 using Qi.NHibernateExtender;
@@ -7,7 +6,6 @@ using Qi.NHibernateExtender;
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
     /// <summary>
-    /// 
     /// </summary>
     public class PerformerDao : IPerformerDao
     {

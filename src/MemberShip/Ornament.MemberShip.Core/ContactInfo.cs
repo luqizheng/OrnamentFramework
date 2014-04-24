@@ -12,8 +12,8 @@ namespace Ornament.MemberShip
         public class ContactInfo : DomainObject<ContactInfo, string>
         {
             private string _email;
-            private string _phone;
             private bool _emailVerified;
+            private string _phone;
 
             protected ContactInfo()
             {
@@ -33,7 +33,7 @@ namespace Ornament.MemberShip
             ///     The phone.
             /// </value>
             [Display(Name = "Phone",
-                ResourceType = typeof(Resources)),
+                ResourceType = typeof (Resources)),
              StringLength(30)]
             public virtual string Phone
             {
@@ -55,10 +55,10 @@ namespace Ornament.MemberShip
             ///     The email.
             /// </value>
             [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
-                ErrorMessageResourceType = typeof(Resources)),
-             Display(Name = "Email", ResourceType = typeof(Resources)),
+                ErrorMessageResourceType = typeof (Resources)),
+             Display(Name = "Email", ResourceType = typeof (Resources)),
              RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof(Resources))]
+                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (Resources))]
             [MaxLength(64)]
             public virtual string Email
             {
@@ -75,10 +75,7 @@ namespace Ornament.MemberShip
 
             public virtual bool EmailVerified
             {
-                get
-                {
-                    return _emailVerified && String.IsNullOrEmpty(Email);
-                }
+                get { return _emailVerified && String.IsNullOrEmpty(Email); }
                 set { _emailVerified = value; }
             }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -63,7 +62,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             var builder = new StringBuilder("From UserGroup ug where ug in (");
             bool isFirst = true;
-            foreach (var id in ids)
+            foreach (string id in ids)
             {
                 if (!isFirst)
                 {
@@ -91,17 +90,17 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             total =
                 CreateDetachedCriteria()
                     .SetProjection(Projections.RowCount())
-                    .GetExecutableCriteria(this.CurrentSession)
+                    .GetExecutableCriteria(CurrentSession)
                     .UniqueResult<int>();
             return
-                CreateDetachedCriteria().SetFirstResult(pageIndex * pageSize).SetMaxResults(pageSize).
+                CreateDetachedCriteria().SetFirstResult(pageIndex*pageSize).SetMaxResults(pageSize).
                     GetExecutableCriteria(
                         CurrentSession).List<UserGroup>();
         }
 
         public IEnumerable<UserGroup> Find(string name, int pageIndex, int pageSize)
         {
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, name))
                 .GetExecutableCriteria(CurrentSession).List<UserGroup>();
         }

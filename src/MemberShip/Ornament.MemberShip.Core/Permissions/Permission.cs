@@ -72,7 +72,7 @@ namespace Ornament.MemberShip.Permissions
             }
             Type t = CreatePermissionType(res.GetType());
             t.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
-                             null, new Type[0], new ParameterModifier[0]);
+                null, new Type[0], new ParameterModifier[0]);
             var a = (Permission) Activator.CreateInstance(t);
             a.Resource = res;
             return a;
@@ -83,7 +83,7 @@ namespace Ornament.MemberShip.Permissions
             if (resType == null) throw new ArgumentNullException("resType");
             string typeString =
                 String.Format("Ornament.MemberShip.Permissions.GenericPermission`1[[{0}]],Ornament.MemberShip.Core",
-                              resType.AssemblyQualifiedName);
+                    resType.AssemblyQualifiedName);
             Type t = Type.GetType(typeString);
             if (t == null)
                 throw new MemberShipPermissionException("Can not find the type with " + typeString);
@@ -99,7 +99,7 @@ namespace Ornament.MemberShip.Permissions
         {
             string typeString =
                 String.Format("Ornament.MemberShip.Permissions.GenericPermission`1[[{0}]],Ornament.MemberShip.Core",
-                              res.AssemblyQualifiedName);
+                    res.AssemblyQualifiedName);
             Type t = Type.GetType(typeString);
             if (t == null)
                 throw new MemberShipPermissionException("Can not find the type with " + typeString);

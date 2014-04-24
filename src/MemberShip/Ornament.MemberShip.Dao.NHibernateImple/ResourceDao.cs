@@ -17,6 +17,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return SessionManager.GetSessionWrapper().CurrentSession; }
         }
+
         #region IResourceDao Members
 
         public object Get(Type resourceType, string id)
@@ -25,7 +26,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            if (typeof(string) == resourceType)
+            if (typeof (string) == resourceType)
                 return id;
             IType idType = GetIdType(resourceType);
             return Get(resourceType, ConvertIdFromStringValue(id, idType));
@@ -37,7 +38,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            if (typeof(string) == resourceType)
+            if (typeof (string) == resourceType)
                 return id;
             return CurrentSession.Get(resourceType, id);
         }
@@ -48,7 +49,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 throw new ArgumentNullException("resourceType");
             if (id == null)
                 throw new ArgumentNullException("id");
-            if (typeof(string) == resourceType)
+            if (typeof (string) == resourceType)
                 return id;
 
             IType idType = GetIdType(resourceType);
@@ -66,10 +67,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public object GetResourceByStringId(Type resource, string resId)
         {
-            if (resource == typeof(string))
+            if (resource == typeof (string))
                 return resId;
             IClassMetadata perisisteType = SessionManager.GetSessionWrapper()
-                                                         .SessionFactory.GetClassMetadata(resource);
+                .SessionFactory.GetClassMetadata(resource);
             if (perisisteType == null)
                 throw new OrnamentException("Resource type " + resource.GetType().Name +
                                             " is not belong to nhibernate mapping class");
@@ -91,36 +92,36 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             var permissionDao = new PermissionDao();
             DetachedCriteria userPermissionId =
-                DetachedCriteria.For(typeof(User)).Add(Restrictions.Eq("LoginId", user.LoginId))
-                                .CreateCriteria("Roles")
-                                .CreateCriteria("Permissions", "permission")
-                                .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
-                                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq("LoginId", user.LoginId))
+                    .CreateCriteria("Roles")
+                    .CreateCriteria("Permissions", "permission")
+                    .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
+                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
 
             DetachedCriteria orgPermissionId =
                 DetachedCriteria.For<User>().Add(Restrictions.Eq("LoginId", user.LoginId))
-                                .CreateCriteria("UserGroups", "ug")
-                                .CreateCriteria("ug.Roles", "role")
-                                .CreateCriteria("Permissions", "permission")
-                                .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
-                                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                    .CreateCriteria("UserGroups", "ug")
+                    .CreateCriteria("ug.Roles", "role")
+                    .CreateCriteria("Permissions", "permission")
+                    .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
+                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
 
             DetachedCriteria ugPermissionId =
                 DetachedCriteria.For<User>().Add(Restrictions.Eq("LoginId", user.LoginId))
-                                .CreateCriteria("UserGroups", "ug")
-                                .CreateCriteria("ug.Roles", "role")
-                                .CreateCriteria("Permissions", "permission")
-                                .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
-                                .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
+                    .CreateCriteria("UserGroups", "ug")
+                    .CreateCriteria("ug.Roles", "role")
+                    .CreateCriteria("Permissions", "permission")
+                    .Add(BitwiseFlags.IsSet("Operator", Convert.ToInt32(@operator)))
+                    .SetProjection(Projections.Distinct(Projections.Property("permission.Id")));
 
             return DetachedCriteria.For<GenericPermission<T>>()
-                                   .Add(Restrictions.Disjunction()
-                                                    .Add(Subqueries.PropertyIn("Id", userPermissionId))
-                                                    .Add(Subqueries.PropertyIn("Id", orgPermissionId))
-                                                    .Add(Subqueries.PropertyIn("Id", ugPermissionId))
+                .Add(Restrictions.Disjunction()
+                    .Add(Subqueries.PropertyIn("Id", userPermissionId))
+                    .Add(Subqueries.PropertyIn("Id", orgPermissionId))
+                    .Add(Subqueries.PropertyIn("Id", ugPermissionId))
                 )
-                                   .SetProjection(Projections.Property<GenericPermission<T>>(m => m.Resource))
-                                   .GetExecutableCriteria(SessionManager.GetSessionWrapper().CurrentSession).List<T>();
+                .SetProjection(Projections.Property<GenericPermission<T>>(m => m.Resource))
+                .GetExecutableCriteria(SessionManager.GetSessionWrapper().CurrentSession).List<T>();
         }
 
         #endregion

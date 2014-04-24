@@ -2,6 +2,9 @@
 {
     public enum PerformerType
     {
-        User,Role,UserGroup,Org
+        User,
+        Role,
+        UserGroup,
+        Org
     }
 }

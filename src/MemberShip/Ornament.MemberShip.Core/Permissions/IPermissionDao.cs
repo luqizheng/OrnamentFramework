@@ -6,14 +6,14 @@ using Qi.Domain;
 namespace Ornament.MemberShip.Permissions
 {
     /// <summary>
-    /// Permission for 
+    ///     Permission for
     /// </summary>
     public interface IPermissionDao : IDao<string, Permission>
     {
         IQueryable<Permission> Permissions { get; }
 
         /// <summary>
-        /// Gets all resource's permissions which belong to user.
+        ///     Gets all resource's permissions which belong to user.
         /// </summary>
         /// <param name="loginid">logind of user</param>
         /// <param name="resource">资源是一个DomainObject</param>
@@ -21,7 +21,6 @@ namespace Ornament.MemberShip.Permissions
         IList<Permission> GetUserPermissions(string loginid, object resource);
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="loginId"></param>
         /// <param name="resourceType"></param>
@@ -29,14 +28,13 @@ namespace Ornament.MemberShip.Permissions
         IList<Permission> GetUserPermissions(string loginId, Type resourceType);
 
         /// <summary>
-        /// Gets all permission belong to loginid
+        ///     Gets all permission belong to loginid
         /// </summary>
         /// <param name="loginid"></param>
         /// <returns></returns>
         IList<Permission> GetPermissionByLoginId(string loginid);
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="permissionName"></param>
         /// <returns></returns>

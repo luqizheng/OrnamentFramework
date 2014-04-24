@@ -7,6 +7,7 @@ namespace Ornament.MemberShip.Dao
 {
     public interface IUserProfileDao : IDao<string, ProfileValue>
     {
+        IQueryable<ProfileValue> Profiles { get; }
         int Delete(string[] userName);
         int DeleteAnonymous(DateTime userInactiveSinceDate);
         int DeleteAuthenticated(DateTime userInactiveSinceDate);
@@ -17,8 +18,7 @@ namespace Ornament.MemberShip.Dao
         IList<ProfileValue> GetAllAnonymous(int pageIndex, int pageSize, out int totalRecords);
         IList<ProfileValue> GetAllAuthenticated(int pageIndex, int pageSize, out int totalRecords);
         IList<ProfileValue> GetAll(int pageIndex, int pageSize, out int totalRecords);
-    
-        IQueryable<ProfileValue> Profiles { get; }
+
         ProfileValue FindByLoginId(string loginId);
     }
 }

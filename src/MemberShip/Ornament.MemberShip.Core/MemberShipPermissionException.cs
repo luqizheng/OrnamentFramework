@@ -10,10 +10,9 @@ namespace Ornament.MemberShip
         {
         }
 
-        public MemberShipPermissionException(string message,Exception innerException)
-            :base(message,innerException)
+        public MemberShipPermissionException(string message, Exception innerException)
+            : base(message, innerException)
         {
-            
         }
     }
 }

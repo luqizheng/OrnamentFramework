@@ -52,7 +52,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return CurrentSession.Delete(
                 string.Format("from ProfileValue p where p.{0}<:date and p.{1}=:anonymous", LastActivityDateProperty,
-                              AnonymousProperty),
+                    AnonymousProperty),
                 new object[] {userInactiveSinceDate, true}, new IType[] {NHibernateUtil.Date, NHibernateUtil.Boolean});
         }
 
@@ -60,7 +60,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return CurrentSession.Delete(
                 string.Format("from ProfileValue p where p.{0}<:date and p.{1}=:anonymous", LastActivityDateProperty,
-                              AnonymousProperty),
+                    AnonymousProperty),
                 new object[] {userInactiveSinceDate, false}, new IType[] {NHibernateUtil.Date, NHibernateUtil.Boolean});
         }
 
@@ -143,7 +143,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             return
                 CreateDetachedCriteria().Add(Restrictions.Eq(LoginIdProperty, loginId).IgnoreCase()).
-                                         GetExecutableCriteria(CurrentSession).UniqueResult<ProfileValue>();
+                    GetExecutableCriteria(CurrentSession).UniqueResult<ProfileValue>();
         }
 
         #endregion

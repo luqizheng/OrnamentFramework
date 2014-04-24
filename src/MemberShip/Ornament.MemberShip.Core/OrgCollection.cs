@@ -21,7 +21,6 @@ namespace Ornament.MemberShip
         }
 
 
-
         public override void Clear()
         {
             foreach (Org i in this)

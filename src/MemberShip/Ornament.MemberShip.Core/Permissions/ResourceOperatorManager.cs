@@ -16,19 +16,19 @@ namespace Ornament.MemberShip.Permissions
             get
             {
                 return _resOperatorMapping.Keys
-                                          .ToArray();
+                    .ToArray();
             }
         }
 
         /// <summary>
-        /// Gets the OperatorType from Resources
+        ///     Gets the OperatorType from Resources
         /// </summary>
         /// <param name="res"></param>
         /// <returns></returns>
         /// <exception cref="NotFoundOperatorTypeException">Can not find OperatorType base on resource</exception>
         public virtual Type GetOperatorType(T res)
         {
-            if (object.ReferenceEquals(default(T), res))
+            if (ReferenceEquals(default(T), res))
                 throw new ArgumentNullException("res");
             if (_resOperatorMapping.ContainsKey(res))
             {
@@ -37,7 +37,7 @@ namespace Ornament.MemberShip.Permissions
             var s = res as string;
             if (s == null)
                 throw new NotFoundOperatorTypeException(s);
-            throw new NotFoundOperatorTypeException(typeof(T));
+            throw new NotFoundOperatorTypeException(typeof (T));
         }
 
         public virtual IResourceOperatorManager<T> Add(T mappingClass, Type enumType)
@@ -52,7 +52,8 @@ namespace Ornament.MemberShip.Permissions
                 throw new ArgumentException("enumType should be a enum");
             }
             if (_resOperatorMapping.ContainsKey(mappingClass))
-                throw new ArgumentException("mapping class " + typeof(T).Name + " has been added, operator type is " + enumType.Name);
+                throw new ArgumentException("mapping class " + typeof (T).Name + " has been added, operator type is " +
+                                            enumType.Name);
             _resOperatorMapping.Add(mappingClass, enumType);
             return this;
         }

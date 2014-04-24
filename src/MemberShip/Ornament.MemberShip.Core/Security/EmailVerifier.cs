@@ -29,6 +29,7 @@ namespace Ornament.MemberShip.Security
         Email,
         ResetPassword,
     }
+
     public enum VerifyResult
     {
         NotFoundTokenId,
@@ -46,12 +47,8 @@ namespace Ornament.MemberShip.Security
         protected EmailVerifier()
         {
         }
+
         /// <summary>
-        /// 
-        /// </summary>
-        public virtual VerifyType Type { get; protected set; }
-        /// <summary>
-        /// 
         /// </summary>
         /// <param name="account"></param>
         /// <param name="expireTimeMinutes"></param>
@@ -69,8 +66,12 @@ namespace Ornament.MemberShip.Security
             PrivateKey = Guid.NewGuid().ToString("N");
             Account = account;
             ExpireTime = expireTimeMinutes;
-            this.Type = verifyType;
+            Type = verifyType;
         }
+
+        /// <summary>
+        /// </summary>
+        public virtual VerifyType Type { get; protected set; }
 
         public virtual SecretTokenStatus Status
         {
@@ -113,7 +114,6 @@ namespace Ornament.MemberShip.Security
 
         /// <summary>
         /// </summary>
-        
         private bool IsExpire
         {
             get
@@ -133,12 +133,12 @@ namespace Ornament.MemberShip.Security
         /// <exception cref="EmailSecurityTimeoutException">User Token is Timeout</exception>
         public virtual VerifyResult Verify(string token, IMemberShipFactory daoFactory)
         {
-            var re = Verify(token);
+            VerifyResult re = Verify(token);
             daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
             return re;
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
@@ -146,7 +146,7 @@ namespace Ornament.MemberShip.Security
         {
             if (String.IsNullOrEmpty(token))
                 throw new ArgumentNullException("token");
-            if (this.IsExpire)
+            if (IsExpire)
             {
                 return VerifyResult.Expire;
             }
@@ -162,6 +162,7 @@ namespace Ornament.MemberShip.Security
             }
             return VerifyResult.Failed;
         }
+
         private string CreateToken(User user)
         {
             return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();
@@ -190,7 +191,8 @@ namespace Ornament.MemberShip.Security
                 domainUrl = domainUrl.TrimEnd('/');
             }
 
-            return string.Format("{2}{3}id={0}&token={1}&type={4}", Id, CreateToken(Account), domainUrl, domainUrl.Contains("?") ? "&" : "?", Type);
+            return string.Format("{2}{3}id={0}&token={1}&type={4}", Id, CreateToken(Account), domainUrl,
+                domainUrl.Contains("?") ? "&" : "?", Type);
         }
 
         /// <summary>

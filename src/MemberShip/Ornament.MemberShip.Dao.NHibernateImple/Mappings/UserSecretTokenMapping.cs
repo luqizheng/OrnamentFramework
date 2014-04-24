@@ -8,8 +8,9 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         public UserSecretTokenMapping()
         {
             Table("MBS_UserSecretToken");
-            Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32); ;
-            this.References(s => s.Account).Cascade.SaveUpdate().ForeignKey("SecretTokenUserIdFK");
+            Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
+            ;
+            References(s => s.Account).Cascade.SaveUpdate().ForeignKey("SecretTokenUserIdFK");
 
             Map(s => s.CreateTime).Insert();
             Map(s => s.PrivateKey);
@@ -17,9 +18,6 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             Map(s => s.VerifyTime);
             Map(s => s.Status);
             Map(s => s.Type);
-
-
-
         }
     }
 }

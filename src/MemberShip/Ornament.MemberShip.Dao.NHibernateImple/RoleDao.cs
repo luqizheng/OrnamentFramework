@@ -81,7 +81,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .SetProjection(Projections.RowCount())
                     .Add(Restrictions.Eq(NameProperty, name))
                     .Add(Restrictions.Not(Restrictions.Eq(Projections.Id(), id))
-                    ).GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
+                    ).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
         /// <summary>
@@ -136,21 +136,21 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 DetachedCriteria.For<Role>()
                     .Add(Restrictions.Eq("Name", roleName)).GetExecutableCriteria(CurrentSession).SetCacheMode(
                         CacheMode.Normal).
-                     UniqueResult<Role>();
+                    UniqueResult<Role>();
         }
 
         public IList<Role> Find(int pageSize, int currentPage)
         {
             return
-                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize * currentPage).
-                                         GetExecutableCriteria(CurrentSession).List<Role>();
+                CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageSize*currentPage).
+                    GetExecutableCriteria(CurrentSession).List<Role>();
         }
 
         public IList<Role> Find(string roleName, int pageIndex, int pageSize)
         {
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize)
-                                           .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
-                                           .GetExecutableCriteria(CurrentSession).List<Role>();
+            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+                .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
+                .GetExecutableCriteria(CurrentSession).List<Role>();
         }
 
         public IList<Role> GetInUseRoles(string[] roleIds)

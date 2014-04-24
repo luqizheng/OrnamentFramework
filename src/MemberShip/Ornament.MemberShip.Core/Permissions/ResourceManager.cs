@@ -68,7 +68,7 @@ namespace Ornament.MemberShip.Permissions
         }
 
         /// <summary>
-        /// 根据资源获取资源的操作
+        ///     根据资源获取资源的操作
         /// </summary>
         /// <param name="resources"></param>
         /// <returns></returns>
@@ -76,8 +76,9 @@ namespace Ornament.MemberShip.Permissions
         {
             return TypeResourcesOperator.GetOperatorType(resources);
         }
+
         /// <summary>
-        /// 添加资源和资源操作
+        ///     添加资源和资源操作
         /// </summary>
         /// <param name="resource"></param>
         /// <param name="operatorType"></param>
