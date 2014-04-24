@@ -7,9 +7,14 @@ namespace Ornament.Files.Dao
 {
     public class FileRecordDao : Qi.Domain.NHibernates.DaoBase<string, FileRecord>, IFileDao
     {
-        private IProjection PropertyName
+        static private IProjection PropertyName
         {
             get { return Projections.Property<FileRecord>(s => s.Name); }
+        }
+
+        static private IProjection PropertySignCode
+        {
+            get { return Projections.Property<FileRecord>(s => s.SignCode); }
         }
 
         public IList<FileRecord> Find(string name, int pageIndex, int pageSize, out int total)
@@ -29,6 +34,13 @@ namespace Ornament.Files.Dao
             total = countCritrer.GetExecutableCriteria(this.CurrentSession).UniqueResult<int>();
             return searchCriter.GetExecutableCriteria(this.CurrentSession).List<FileRecord>();
 
+        }
+
+        public bool IsExist(string signCode)
+        {
+            var cr = CreateDetachedCriteria().SetProjection(Projections.RowCount())
+                .Add(Restrictions.Eq(PropertySignCode, signCode));
+            return cr.GetExecutableCriteria(this.CurrentSession).UniqueResult<int>() > 0;
         }
     }
 }

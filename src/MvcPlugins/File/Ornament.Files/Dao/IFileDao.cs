@@ -7,5 +7,6 @@ namespace Ornament.Files.Dao
         : IDao<string, FileRecord>
     {
         IList<FileRecord> Find(string name, int pageIndex, int pageSize, out int total);
+        bool IsExist(string signCode);
     }
 }

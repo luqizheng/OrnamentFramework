@@ -30,17 +30,32 @@ namespace Ornament.Files
             : this(filepath, creator, (new FileInfo(filepath).Name))
         {
         }
-
+        /// <summary>
+        /// 文件名字。会吧FullPath中的文件，按照这个文件输出。
+        /// </summary>
         public virtual string Name { get; set; }
+        /// <summary>
+        /// 创建时间。
+        /// </summary>
         public virtual DateTime? CreateTime { get; set; }
+        /// <summary>
+        /// 创建人
+        /// </summary>
         public virtual User Creator { get; set; }
+        /// <summary>
+        /// Md5 文件内容签名
+        /// </summary>
         public virtual string SignCode { get; protected set; }
 
         /// <summary>
         ///     并不保存扩展名
         /// </summary>
         public virtual string FullPath { get; set; }
-
+        /// <summary>
+        /// md5
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static string Sign(string file)
         {
             using (FileStream reader = File.OpenRead(file))

@@ -31,7 +31,14 @@ namespace Ornament.IPLocation
         public bool In(IPAddress ipAddress)
         {
             long companreId = ToLong(ipAddress);
-            return Scopes.Any(item => companreId >= item.Min && companreId <= item.Max);
+            foreach (var item in Scopes)
+            {
+                if (companreId < item.Max && companreId > item.Min)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void AddScopes(string startIp, string endIp)
@@ -57,7 +64,7 @@ namespace Ornament.IPLocation
             while (startIpAras.Count != 0)
             {
                 long item = Convert.ToInt64(startIpAras.Pop());
-                result += item + Convert.ToInt64(Math.Pow(256, i));
+                result += item * Convert.ToInt64(Math.Pow(256, i));
                 i++;
             }
             return result;
