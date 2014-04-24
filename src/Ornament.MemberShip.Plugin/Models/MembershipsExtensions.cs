@@ -56,7 +56,12 @@ namespace Ornament.Web
         public static MvcHtmlString MemberShipEditorFor<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func, string template)
         {
-            return helper.EditorFor(func, string.Format("~/Areas/MemberShips/Areas/MemberShips/Views/Shared/EditorTemplates/{0}", template));
+            return helper.EditorFor(func, CreateEditorTemplates(template));
+        }
+
+        public static string CreateEditorTemplates(string uiName)
+        {
+            return string.Format("~/Areas/MemberShips/Areas/MemberShips/Views/Shared/EditorTemplates/{0}", uiName);
         }
     }
 }

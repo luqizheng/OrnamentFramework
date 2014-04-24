@@ -12,8 +12,7 @@ namespace Ornament.Web
         public static MvcHtmlString EditorForArea<TModel, TValue>(this HtmlHelper<TModel> helper,
             Expression<Func<TModel, TValue>> func)
         {
-
-            return helper.EditorFor(func, string.Format("~/{0}/{1}", "Regions", "Area"));
+            return helper.EditorFor(func, "~/Areas/Regions/Areas/Regions/Views/Shared/EditorTemplates/Area");
         }
     }
 }
