@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace Ornament.IPLocation
@@ -21,6 +22,7 @@ namespace Ornament.IPLocation
 
         public string CountryName { get; set; }
         public string ShotName { get; set; }
+
         public bool In(string ip)
         {
             return In(IPAddress.Parse(ip));
@@ -29,14 +31,7 @@ namespace Ornament.IPLocation
         public bool In(IPAddress ipAddress)
         {
             long companreId = ToLong(ipAddress);
-            foreach (Scope item in Scopes)
-            {
-                if (companreId >= item.Min && companreId <= item.Max)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return Scopes.Any(item => companreId >= item.Min && companreId <= item.Max);
         }
 
         public void AddScopes(string startIp, string endIp)
