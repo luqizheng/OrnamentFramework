@@ -61,7 +61,7 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Password agan 的本地化字符串。
+        ///   查找类似 Re-enter Password 的本地化字符串。
         /// </summary>
         public static string ConfirmPassword {
             get {
@@ -97,7 +97,7 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
-        ///   查找类似 e-Mail 的本地化字符串。
+        ///   查找类似 Email Address 的本地化字符串。
         /// </summary>
         public static string Email {
             get {
@@ -124,7 +124,7 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Login id or Password is not match. 的本地化字符串。
+        ///   查找类似 Login ID or Password is not match. 的本地化字符串。
         /// </summary>
         public static string error_LoginError {
             get {
@@ -241,7 +241,7 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Login Id 的本地化字符串。
+        ///   查找类似 Login ID 的本地化字符串。
         /// </summary>
         public static string LoginId {
             get {
@@ -250,7 +250,7 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
-        ///   查找类似 LoginId should be between 6 and 20, It should be number underscrope and letter and case sense. 的本地化字符串。
+        ///   查找类似 LoginID should be between 6 and 20, It should be number underscrope and letter and case sense. 的本地化字符串。
         /// </summary>
         public static string LoginNotCorrectFormat {
             get {

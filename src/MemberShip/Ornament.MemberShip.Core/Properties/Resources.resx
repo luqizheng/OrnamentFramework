@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Password agan</value>
+    <value>Re-enter Password</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
     <value>Create time</value>
@@ -130,13 +130,13 @@
     <value>Deny</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>e-Mail</value>
+    <value>Email Address</value>
   </data>
   <data name="EmailNotRightFormat" xml:space="preserve">
     <value>Please input right format email address</value>
   </data>
   <data name="error_LoginError" xml:space="preserve">
-    <value>Login id or Password is not match.</value>
+    <value>Login ID or Password is not match.</value>
   </data>
   <data name="error_UserIsLockout" xml:space="preserve">
     <value>User is lockout, </value>
@@ -172,10 +172,10 @@
     <value>Last update time</value>
   </data>
   <data name="LoginId" xml:space="preserve">
-    <value>Login Id</value>
+    <value>Login ID</value>
   </data>
   <data name="LoginNotCorrectFormat" xml:space="preserve">
-    <value>LoginId should be between 6 and 20, It should be number underscrope and letter and case sense.</value>
+    <value>LoginID should be between 6 and 20, It should be number underscrope and letter and case sense.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
