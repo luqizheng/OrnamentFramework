@@ -25,7 +25,7 @@ namespace Ornament.MVCWebFrame.Controllers
         public AccountController()
             : this(null, null)
         {
-           
+
         }
 
         // This constructor is not used by the MVC framework but is instead provided for ease
@@ -56,7 +56,7 @@ namespace Ornament.MVCWebFrame.Controllers
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
 
-      
+
         public ActionResult GetView(string viewName)
         {
             return View(viewName);
@@ -104,7 +104,7 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 emailChanged = true;
                 OrnamentContext.MemberShip.CurrentUser().Contact.Email = data["Email"];
-              
+
             }
             OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
             return Json(new { success = true, emailChanged });
@@ -131,7 +131,7 @@ namespace Ornament.MVCWebFrame.Controllers
                 }
                 return View(model);
             }
-            var result=Membership.ValidateUser(model.User, model.Password);
+            var result = Membership.ValidateUser(model.User, model.Password);
             model.ReturnUrl = model.ReturnUrl;
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
@@ -192,7 +192,7 @@ namespace Ornament.MVCWebFrame.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipService.CreateUser(model.LoginId, model.Password.Password,
+                MembershipService.CreateUser(model.LoginId, model.Password.NewPassword,
                     model.Email);
 
                 return RedirectToAction("Index", "Home");

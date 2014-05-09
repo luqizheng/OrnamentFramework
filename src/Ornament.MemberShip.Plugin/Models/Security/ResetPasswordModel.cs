@@ -23,7 +23,7 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             }
             if (userToken.Verify(TokenId, factory) == VerifyResult.Success)
             {
-                userToken.Account.Security.ChangePassword(PasswordModel.Password);
+                userToken.Account.Security.ChangePassword(PasswordModel.NewPassword);
                 factory.CreateUserDao().Update(userToken.Account);
                 return VerifyResult.Success;
             }
