@@ -178,6 +178,15 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Password should be numbers, letters and symbols 的本地化字符串。
+        /// </summary>
+        public static string alertPassword_CharError {
+            get {
+                return ResourceManager.GetString("alertPassword_CharError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Please input correct email address. 的本地化字符串。
         /// </summary>
         public static string altMessage_EmailFormatNotCorrect {
@@ -336,15 +345,6 @@ namespace Ornament.MemberShip.Plugin.Properties {
         public static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  的本地化字符串。
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

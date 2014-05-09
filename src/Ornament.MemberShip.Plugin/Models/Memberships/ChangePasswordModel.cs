@@ -14,9 +14,13 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         public string CurrentPassword { get; set; }
 
         [Display(Name = "NewPassword", ResourceType = typeof(MemberShip.Properties.Resources))]
+        [MinLength(6)]
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
             ErrorMessageResourceType = typeof(Resources))]
         [DataType(DataType.Password), UIHint("Password")]
+        [RegularExpression(@"[\dA-z\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]{6,30}",
+            ErrorMessageResourceName = "alertPassword_CharError",
+            ErrorMessageResourceType = typeof(Resources))]
         public string NewPassword { get; set; }
 
 
@@ -24,13 +28,14 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         [DataType(DataType.Password), UIHint("Password")]
         [Required(ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "alert_Require_ConfirmPassword")]
-        [Compare("NewPassword", ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
+        [Compare("NewPassword",
+            ErrorMessageResourceName = "alertMsg_Confirm_Password_Not_Equal_New_password",
             ErrorMessageResourceType = typeof(Resources))]
         public string ConfirmPassword { get; set; }
 
         public bool ChangePassword(User user, IUserDao dao)
         {
-            if (ConfirmPassword != this.ConfirmPassword)
+            if (ConfirmPassword != ConfirmPassword)
             {
                 return false;
             }
@@ -39,7 +44,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             {
                 return false;
             }
-            var result = user.Security.ChangePassword(NewPassword, CurrentPassword);
+            bool result = user.Security.ChangePassword(NewPassword, CurrentPassword);
             dao.SaveOrUpdate(user);
             return result;
         }

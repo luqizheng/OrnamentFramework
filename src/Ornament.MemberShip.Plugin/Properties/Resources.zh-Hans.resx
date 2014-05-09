@@ -238,4 +238,7 @@
   <data name="error_expireVerifyCode" xml:space="preserve">
     <value>验证码过期 </value>
   </data>
+  <data name="alertPassword_CharError" xml:space="preserve">
+    <value>密码只能是 字母 数字 或者符号</value>
+  </data>
 </root>

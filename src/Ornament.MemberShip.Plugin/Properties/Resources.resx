@@ -213,10 +213,10 @@
   <data name="alertMsg_PermissionNotPermintAccessUsers" xml:space="preserve">
     <value>permission denied can not access users</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="error_expireVerifyCode" xml:space="preserve">
     <value>Verify code is expire.</value>
+  </data>
+  <data name="alertPassword_CharError" xml:space="preserve">
+    <value>Password should be numbers, letters and symbols</value>
   </data>
 </root>
