@@ -136,7 +136,7 @@
     <value>Please input confirm password.</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Password agan</value>
+    <value>Re-enter Password</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
     <value>Create time</value>

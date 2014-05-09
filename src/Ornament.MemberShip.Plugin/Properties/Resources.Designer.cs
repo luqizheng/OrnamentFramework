@@ -205,7 +205,7 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Password agan 的本地化字符串。
+        ///   查找类似 Re-enter Password 的本地化字符串。
         /// </summary>
         public static string ConfirmPassword {
             get {

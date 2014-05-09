@@ -8,7 +8,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             Table(("MBS_UserContactInfo"));
             Id(s => s.Id).GeneratedBy.UuidHex("N").Length(32);
-            References(s => s.User).ForeignKey("UserFK").Cascade.None();
+            References(s => s.User).ForeignKey("ContactUserFK").Cascade.None();
             Map(s => s.Email).Length(64)
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 

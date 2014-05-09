@@ -19,7 +19,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                     x.References(_ => _.User).ForeignKey("FriendGroupUserIdFK");
                 }).Table("MBS_Friends")
                 .ParentKeyColumn("groupId")
-                .ChildKeyColumn("friendId");
+                .ChildKeyColumn("friendId")
+                .ForeignKeyConstraintNames("fg_rel_groupFK","fg_rel_friFK")
+                ;
+
         }
     }
 }

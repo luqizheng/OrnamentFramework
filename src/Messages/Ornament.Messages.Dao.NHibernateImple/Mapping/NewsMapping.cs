@@ -15,8 +15,8 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
 
             Map(x => x.State);
 
-            References(x => x.Publisher);
-            References(x => x.Type);
+            References(x => x.Publisher).ForeignKey("msg_news_user_FK");
+            References(x => x.Type).ForeignKey("msg_newsType_FK");
             HasMany(x => x.Contents)
                 .AsMap(s => s.Language).Cascade.AllDeleteOrphan()
                 .Table("Msgs_NewsContent")

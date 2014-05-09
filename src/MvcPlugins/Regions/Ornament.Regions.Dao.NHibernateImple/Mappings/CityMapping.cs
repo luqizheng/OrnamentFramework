@@ -8,7 +8,7 @@ namespace Ornament.Regions.Dao.NHibernateImple.Mappings
         {
             Table("region_city");
             Id(s => s.Id).GeneratedBy.Assigned();
-            Map(s => s.Name).Length(100);
+            Map(s => s.Name).Length(100).Index("region_city_name_itx");
             References(s => s.Province).Not.Nullable();
         }
     }

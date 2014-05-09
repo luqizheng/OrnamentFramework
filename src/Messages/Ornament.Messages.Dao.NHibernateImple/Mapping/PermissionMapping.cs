@@ -10,7 +10,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         {
             this.Table("Msgs_Permission");
             this.DiscriminatorValue("Info");
-            this.References(x => x.Resource)
+            this.References(x => x.Resource).ForeignKey("msg_res_newsTypeFK")
                 .Column("InfoTypeId");
         }
     }

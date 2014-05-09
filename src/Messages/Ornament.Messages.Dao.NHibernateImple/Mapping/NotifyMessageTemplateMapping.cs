@@ -13,7 +13,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Map(x => x.Remark).Length(255);
             
             Map(x => x.ModifyTime);
-            References(x => x.Type);
+            References(x => x.Type).ForeignKey("msg_notifyTypeFK");
 
 
             HasMany(x => x.Contents)

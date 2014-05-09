@@ -12,7 +12,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Map(x => x.ReadStatus);
             Map(s => s.CreateTime);
 
-            References(x => x.User);
+            References(x => x.User).ForeignKey("msg_simpleMsg_UserFK");
             Component(s => s.Content, f =>
                 {
                     f.Map(a => a.Language);

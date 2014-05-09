@@ -19,7 +19,7 @@ namespace Ornament.Files.Dao.Mapping
             this.Map(s => s.CreateTime).Unique().Index("idx_createTime").Not.Update();
             this.Map(s => s.SignCode).Unique().Index("idx_signCode").Not.Update();
 
-            this.References(s => s.Creator);
+            this.References(s => s.Creator).ForeignKey("fr_creator_userFK");
         }
     }
 }
