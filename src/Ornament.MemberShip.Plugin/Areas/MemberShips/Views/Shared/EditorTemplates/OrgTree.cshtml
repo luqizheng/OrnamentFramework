@@ -14,17 +14,17 @@
     {
         selection.AddRange(orgDao.GetAll().Select(item => new OrgTreeItem(item)));
     }
-    else
+    else if (this.Model != null)
     {
         selection.Add(new OrgTreeItem(this.Model));
     }
-
+    var value = this.Model != null ? this.Model.Id : "";
 }
 
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        @Html.Hidden("")
+        <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Id("")"/>
         <span>@(Model != null ? Model.Name : "")</span>
         <ul id="@Html.Id("")_Tree" class="ztree">
         </ul>
