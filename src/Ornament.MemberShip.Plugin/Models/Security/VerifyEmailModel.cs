@@ -51,7 +51,8 @@ namespace Ornament.MemberShip.Plugin.Models.Security
 
             var deleage = new CreateVariablesHandler(user => new Dictionary<string, string>
             {
-                {"name", user.Name}
+                {"name", user.Name},
+                {"paramers",token.CreateQueryString()}
             });
             OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress.Publish(daoFactory, deleage, myUsers);
 
