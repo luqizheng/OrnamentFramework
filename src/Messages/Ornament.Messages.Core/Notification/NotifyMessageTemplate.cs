@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Messages.Config;
 using Qi.Domain;
 using Qi.Text;
 
@@ -140,7 +141,7 @@ namespace Ornament.Messages.Notification
 
             foreach (User user in targetuser)
             {
-                var data = replaceVariabled(user);
+                Dictionary<string, string> data = replaceVariabled(user);
                 Publish(daoFactory, data, user);
             }
         }
@@ -154,27 +155,24 @@ namespace Ornament.Messages.Notification
             var helper = new NamedFormatterHelper();
             Content content = GetContent(performers);
 
-            foreach (var key in Config.NotifySenderManager.Instance.Variables.Keys)
+            foreach (string key in NotifySenderManager.Instance.Variables.Keys)
             {
                 if (!variable.ContainsKey(key))
                 {
-                    variable.Add(key, Config.NotifySenderManager.Instance.Variables[key]);
+                    variable.Add(key, NotifySenderManager.Instance.Variables[key]);
                 }
             }
 
             var simpleMessage = new SimpleMessage(performers)
+            {
+                Content = new Content
                 {
-                    Content = new Content
-                    {
-                        Language = content.Language,
-                        Subject = helper.Replace(content.Subject, variable),
-                        Value = helper.Replace(content.Value, variable)
-                    }
-                };
+                    Language = content.Language,
+                    Subject = helper.Replace(content.Subject, variable),
+                    Value = helper.Replace(content.Value, variable)
+                }
+            };
             Type.Send(simpleMessage);
-
         }
-
-
     }
 }

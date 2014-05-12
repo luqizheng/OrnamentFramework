@@ -13,6 +13,9 @@ namespace Ornament.MemberShip.Plugin.Models.Security
         {
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="emailVerifier"></param>
         public VerifyEmailModel(EmailVerifier emailVerifier)
         {
             _emailVerifier = emailVerifier;
@@ -23,6 +26,12 @@ namespace Ornament.MemberShip.Plugin.Models.Security
         /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="loginUser"></param>
+        /// <param name="token"></param>
+        /// <param name="daoFactory"></param>
+        /// <returns></returns>
         public VerifyResult Verify(User loginUser, string token, IMemberShipFactory daoFactory)
         {
             if (loginUser != _emailVerifier.Account)
@@ -52,7 +61,7 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             var deleage = new CreateVariablesHandler(user => new Dictionary<string, string>
             {
                 {"name", user.Name},
-                {"paramers",token.CreateQueryString()}
+                {"paramers", token.CreateQueryString()}
             });
             OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress.Publish(daoFactory, deleage, myUsers);
 

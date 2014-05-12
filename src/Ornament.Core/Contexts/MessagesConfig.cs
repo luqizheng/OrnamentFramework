@@ -58,7 +58,11 @@ namespace Ornament.Contexts
                 {
                     _verifyEmailAddress = new SimpleMessageFactoryRetrive(
                         "Verify Email Address (Template)",
-                        "Email has changed, It should verify again.",
+                        @"Email has changed, It should verify again.
+inside veriable:
+1) [paramers]: token infomation
+2) [email]:user name",
+
                         SystemType,
                         DeserializerXml(Resources.verifyEmail_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.verifyEmail_zh, "zh-Hant"),
