@@ -20,6 +20,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             Permissions = new PermissionInfo(user);
             OtherInfo = new UserOtherInfoModel(user);
         }
+
         [UIHint("UserOtherInfo")]
         public UserOtherInfoModel OtherInfo { get; set; }
 
@@ -34,9 +35,9 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             Permissions.UpdateOn(user);
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
             SessionManager.GetSessionWrapper().CurrentSession.SaveOrUpdate(user.Contact);
-            if (this.VerifyEmail && EmailHasChanged)
+            if (VerifyEmail && EmailHasChanged)
             {
-                this.SendVerifyEmail(user, memberShipFactory);
+                SendVerifyEmail(user, memberShipFactory);
             }
             return user;
         }

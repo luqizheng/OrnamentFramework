@@ -17,12 +17,12 @@
     if (Model != null)
     {
         var content = from a in Model.Contents.Values
-                      select new
-                      {
-                          subject = a.Subject,
-                          content = a.Value,
-                          language = a.Language
-                      };
+            select new
+            {
+                subject = a.Subject,
+                content = a.Value,
+                language = a.Language
+            };
         contents = JsonHelper.ToJson(content.ToDictionary(s => s.language));
     }
 }
@@ -36,100 +36,102 @@
     {
         <input name="Id" value="@Model.Id" type="hidden"/>
     }
-    @using (var panel = Html.Panel())
+    @using (Panel panel = Html.Panel())
     {
         @panel.Header(@<text>
-        <button id="submitButton" class="btn btn-info" type="submit">@Ornament.Properties.Resources.Submit</button>
-        <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
-        </text>);
+                           <button id="submitButton" class="btn btn-info" type="submit">@Basic.Submit</button>
+                           <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                       </text>)
+        ;
 
         @panel.Body(@<text>
 
-        <div class="tabbable tabs-left">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>Basic</a></li>
-                <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>Content</a></li>
-            </ul>
-            <div class="tab-content">
-                <!-- Basic -->
-                <div id="tab7" class="tab-pane active">
-                    <div class="form-horizontal row-fluid">
-                        <div class="control-group">
-                            <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
-                            <div class="controls">
-                                <select name="Type" class="bulk" id="Type">
-                                    @foreach (NewsType type in types ?? (new List<NewsType>()))
-                                    {
-                                        <option value="@type.Id">@type.Name</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
+                         <div class="tabbable tabs-left">
+                             <ul class="nav nav-tabs">
+                                 <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>Basic</a></li>
+                                 <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>Content</a></li>
+                             </ul>
+                             <div class="tab-content">
+                                 <!-- Basic -->
+                                 <div id="tab7" class="tab-pane active">
+                                     <div class="form-horizontal row-fluid">
+                                         <div class="control-group">
+                                             <label class="control-label">@Html.DisplayNameFor(s => s.Type)</label>
+                                             <div class="controls">
+                                                 <select name="Type" class="bulk" id="Type">
+                                                     @foreach (NewsType type in types ?? (new List<NewsType>()))
+                                                     {
+                                                         <option value="@type.Id">@type.Name</option>
+                                                     }
+                                                 </select>
+                                             </div>
+                                         </div>
 
-                        <div class="control-group">
-                            <label class="control-label">News State:</label>
-                            <div class="controls">
+                                         <div class="control-group">
+                                             <label class="control-label">News State:</label>
+                                             <div class="controls">
 
-                                @{
-                                    EditState selected = Model != null ? Model.State : EditState.Published;
-                                }
-                                @foreach (object state in Enum.GetValues(typeof(EditState)))
-                                {
-                                    <label class="radio inline">
-                                        @if (state.Equals(selected))
-                                        {
-                                            <input type="radio" value="@state" name="State" class="styled" />
-                                            @state
-                                        }
-                                        else
-                                        {
-                                            <input type="radio" value="@state"  checked="checked" name="State" class="styled"/>
-                                            @state
-                                        }
-                                    </label>
-                                }
+                                                 @{
+                                                     EditState selected = Model != null ? Model.State : EditState.Published;
+                                                 }
+                                                 @foreach (object state in Enum.GetValues(typeof (EditState)))
+                                                 {
+                                                     <label class="radio inline">
+                                                         @if (state.Equals(selected))
+                                                         {
+                                                             <input type="radio" value="@state" name="State" class="styled" />
+                                                             @state
+                                                         }
+                                                         else
+                                                         {
+                                                             <input type="radio" value="@state"  checked="checked" name="State" class="styled"/>
+                                                             @state
+                                                         }
+                                                     </label>
+                                                 }
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Basic -->
-                <!-- Content -->
-                <div id="tab8" class="tab-pane">
-                    <div>
-                        <div class="control-group">
-                            <label class="control-label">Language:</label>
-                            <div class="controls">
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <!-- End Basic -->
+                                 <!-- Content -->
+                                 <div id="tab8" class="tab-pane">
+                                     <div>
+                                         <div class="control-group">
+                                             <label class="control-label">Language:</label>
+                                             <div class="controls">
 
-                                <select id="Language">
-                                    @{
-                                        LanguageCollection langs = OrnamentContext.Configuration.Languages;
-                                        foreach (Language lang in langs)
-                                        {
-                                        <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
+                                                 <select id="Language">
+                                                     @{
+                                                         LanguageCollection langs = OrnamentContext.Configuration.Languages;
+                                                         foreach (Language lang in langs)
+                                                         {
+                                                             <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
+                                                         }
+                                                     }
+                                                 </select>
+                                             </div>
 
 
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">Subject</label>
-                            <div class="controls">
-                                <input id="subject" class="styled" type="text" style="width: 100%" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <textarea name="editor" id="editor"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Content -->
-            </div>
-        </div>
+                                         </div>
+                                         <div class="control-group">
+                                             <label class="control-label">Subject</label>
+                                             <div class="controls">
+                                                 <input id="subject" class="styled" type="text" style="width: 100%" />
+                                             </div>
+                                         </div>
+                                         <div class="control-group">
+                                             <textarea name="editor" id="editor"></textarea>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <!-- End Content -->
+                             </div>
+                         </div>
 
-        </text>);
+                     </text>)
+        ;
     }
 
 </form>
