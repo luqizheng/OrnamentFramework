@@ -126,8 +126,14 @@
   <data name="newsIndexTitle" xml:space="preserve">
     <value>News</value>
   </data>
+  <data name="newsTypeCreateTitle" xml:space="preserve">
+    <value>Create News</value>
+  </data>
   <data name="newsTypeIndexTitle" xml:space="preserve">
     <value>News Type</value>
+  </data>
+  <data name="newsTypeList" xml:space="preserve">
+    <value />
   </data>
   <data name="notifyTypeCreateTitle" xml:space="preserve">
     <value>Create</value>

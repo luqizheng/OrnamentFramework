@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
-using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
@@ -23,9 +22,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/News/
-       
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsIndexTitle",Key="newsList",
-          ParentKey = "news")]
+
+        [OrnamentMvcSiteMapNode(
+            Title = "$resources:message.sitemap,newsIndexTitle",
+            Key = "newsList",
+            ParentKey = "news")]
         public ActionResult Index(Pagination pagination)
         {
             if (pagination == null)
@@ -50,7 +51,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View(news);
         }
 
-       
+
         public ActionResult Delete(string id)
         {
             INewsDao dao = _factory.NewsDao;
@@ -58,7 +59,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return Json(new {success = true});
         }
 
-      
+
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsCreateTitle", ParentKey = "newsList")]
         public ActionResult Create()
         {
@@ -71,7 +72,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         }
 
 
-     
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsEditTitle", ParentKey = "newsList")]
         public ActionResult Edit(string id)
         {

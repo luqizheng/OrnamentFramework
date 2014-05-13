@@ -45,10 +45,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             }
             return View(type);
         }
-
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsTypeCreateTitle", Key = "newsCreateList",
+         ParentKey = "newsTypeList")]
         public ActionResult Create()
         {
-            var result = new NewsTypeModel {Name = "new message type"};
+            var result = new NewsTypeModel { Name = "new message type" };
 
             return View(result);
         }
@@ -69,7 +70,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             INewsTypeDao dao = _messageDao.NewsTypeDao;
             dao.Delete(dao.Get(id));
-            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

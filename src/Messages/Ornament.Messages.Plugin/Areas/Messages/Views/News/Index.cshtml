@@ -21,30 +21,28 @@
 @using (Panel panel = Html.Panel())
 {
     @panel.Header(@<text>
-    <ul class="options-bar">
-        <li>
-            <div class="bar-select pull-left">
-                <span>News Type: </span>
-                <select name="Type" id="Type">
-                    @foreach (NewsType type in types ?? (new List<NewsType>()))
-                    {
-                        if (selectedType == type)
-                        {
-                        <option value="@type.Id" selected="selected">@type.Name</option>
-                        }
-                        else
-                        {
-                        <option value="@type.Id" >@type.Name</option>
-                        }
-                    }
-                </select>
 
-            </div>
-            <div class="bar-button">
-                <button type="button" class="btn btn-info">Apply</button>
-            </div>
-        </li>
-    </ul>
+    <div class="bar-select pull-left">
+        <span>News Type: </span>
+        <select name="Type" id="Type">
+            @foreach (NewsType type in types ?? (new List<NewsType>()))
+            {
+                if (selectedType == type)
+                {
+                <option value="@type.Id" selected="selected">@type.Name</option>
+                }
+                else
+                {
+                <option value="@type.Id" >@type.Name</option>
+                }
+            }
+        </select>
+
+    </div>
+    <div class="bar-button">
+        <button type="button" class="btn btn-info">Apply</button>
+    </div>
+
     </text>)
 
     @panel.Body(@<text>
