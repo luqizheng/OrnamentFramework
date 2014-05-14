@@ -6,7 +6,7 @@ namespace Ornament.Messages.Newses
     [Serializable]
     public class NewsType : DomainObject<NewsType, string>
     {
-    
+
         protected NewsType()
         {
         }
@@ -16,7 +16,8 @@ namespace Ornament.Messages.Newses
         /// <param name="name"></param>
         public NewsType(string name)
         {
-            Name = name;
+            if (name == null) throw new ArgumentNullException("name");
+            Name = name.Trim();
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using MvcSiteMapProvider;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Properties;
@@ -9,6 +10,10 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
     public class BasicInfo
     {
+        private string _email;
+        private string _phone;
+        private string _name;
+
         public BasicInfo()
         {
         }
@@ -66,13 +71,31 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
             ErrorMessageResourceType = typeof(Properties.Resources),
             ErrorMessageResourceName = "alertMsg_duplicate_Email")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (value != null)
+                    value = value.Trim();
+                _email = value;
+            }
+        }
 
         /// <summary>
         /// </summary>
         [UIHint("String")]
         [Display(Name = "Phone", ResourceType = typeof(Resources))]
-        public string Phone { get; set; }
+        public string Phone
+        {
+            get { return _phone; }
+            set
+            {
+                if (value != null)
+                    value = value.Trim();
+                _phone = value;
+            }
+        }
 
         /// <summary>
         /// </summary>
@@ -80,7 +103,16 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [Display(Name = "Name", ResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
              ErrorMessageResourceType = typeof(Resources))]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value != null)
+                    value = value.Trim();
+                _name = value;
+            }
+        }
 
         /// <summary>
         /// </summary>

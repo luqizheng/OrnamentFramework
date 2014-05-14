@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Ornament.Messages
 {
@@ -13,6 +10,5 @@ namespace Ornament.Messages
         Add = 3,
         Edit = 4 | 1,
         Delete = 8 | 1 | 4,
-
     }
 }

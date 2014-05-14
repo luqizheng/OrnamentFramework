@@ -80,7 +80,7 @@ namespace Ornament.MemberShip
 
         public override string ToString()
         {
-            return Name;
+            return Name ?? "";
         }
 
         #region IMember Members
@@ -93,9 +93,9 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The comment.
         /// </value>
-        [Display(Name = "Remark", ResourceType = typeof (Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof (Resources))]
+             ErrorMessageResourceType = typeof(Resources))]
         [UIHint("Textarea")]
         public virtual string Remarks { get; set; }
 
@@ -103,10 +103,10 @@ namespace Ornament.MemberShip
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Resources)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (Resources)),
+        [Display(Name = "Name", ResourceType = typeof(Resources)),
+         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof (Resources))]
+             ErrorMessageResourceType = typeof(Resources))]
         public virtual string Name
         {
             get { return _name; }
