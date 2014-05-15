@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using NHibernate.Criterion;
 using NHibernate.Linq;
@@ -10,12 +11,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
     {
         public EmailVerifier Get(User user, VerifyType type)
         {
+            if (user == null) throw new ArgumentNullException("user");
             DetachedCriteria cri = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Status), SecretTokenStatus.Effective))
                 .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Account), user))
                 .Add(Restrictions.Eq(Projections.Property<EmailVerifier>(s => s.Type), type));
-            ;
-
 
             return cri.GetExecutableCriteria(CurrentSession).UniqueResult<EmailVerifier>();
         }

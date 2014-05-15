@@ -7,12 +7,12 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 {
     public class FriendGroupDao : DaoBase<string, FriendGroup>, IFriendGroupDao
     {
-        private IProjection OwnerProperty
+        private static IProjection OwnerProperty
         {
             get { return Projections.Property<FriendGroup>(s => s.Owner); }
         }
 
-        private IProjection NameProperty
+        private static IProjection NameProperty
         {
             get { return Projections.Property<FriendGroup>(s => s.Name); }
         }

@@ -21,7 +21,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         public ActionResult Reload()
         {
             NotifySenderManager.Instance.ReloadVariables();
-
             return Json(from a in NotifySenderManager.Instance.Variables select new {Name = a.Key, a.Value});
         }
 
