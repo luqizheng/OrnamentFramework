@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Properties;
 using Ornament.MemberShip.Security;
+using Ornament.Messages.Config;
 
 namespace Ornament.MemberShip.Plugin.Models.Security
 {
@@ -43,10 +44,11 @@ namespace Ornament.MemberShip.Plugin.Models.Security
                 return RetrievePasswordResult.NotExistAccountOrEmail;
             }
 
-            user.Security.ResetPassword(daoFactory, 50);
+            var emailToken = user.Security.ResetPassword(daoFactory, 50);
             var direct = new Dictionary<string, string>
             {
-                {"name", user.Name}
+                {"name", user.Name},
+                {"parameters",emailToken.CreateQueryString()}
             };
             OrnamentContext.Configuration.MessagesConfig.RetrivePassword.Publish(daoFactory, direct, user);
             return RetrievePasswordResult.Success;

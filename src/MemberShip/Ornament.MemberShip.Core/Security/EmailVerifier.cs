@@ -163,6 +163,25 @@ namespace Ornament.MemberShip.Security
             return VerifyResult.Failed;
         }
 
+        public virtual VerifyResult TryVerify(string token)
+        {
+            if (String.IsNullOrEmpty(token))
+                throw new ArgumentNullException("token");
+            if (IsExpire)
+            {
+                return VerifyResult.Expire;
+            }
+            if (Status == SecretTokenStatus.Success)
+            {
+                return VerifyResult.Expire;
+            }
+            if (CreateToken(Account) == token)
+            {
+                return VerifyResult.Success;
+            }
+            return VerifyResult.Failed;
+        }
+
         private string CreateToken(User user)
         {
             return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();
