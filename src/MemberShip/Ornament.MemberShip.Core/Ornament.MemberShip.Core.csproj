@@ -117,6 +117,7 @@
     <Compile Include="ProfileValue.cs" />
     <Compile Include="Relatives\Friend.cs" />
     <Compile Include="Relatives\FriendGroup.cs" />
+    <Compile Include="RolePermission.cs" />
     <Compile Include="SecrityInfo.cs" />
     <Compile Include="Security\EmailVerifier.cs" />
     <Compile Include="Security\EmailSecurityException.cs" />

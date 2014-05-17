@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -35,6 +36,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         [HttpGet]
         public JsonResult NotDuplicate(string loginId, string id)
         {
+            if (loginId == null)
+                throw new ArgumentNullException("loginId");
             loginId = Request.QueryString[0];
             return Json(_memberShipFactory.CreateUserDao().Count(loginId, id) == 0, JsonRequestBehavior.AllowGet);
         }
@@ -81,7 +84,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             if (!string.IsNullOrEmpty(search))
             {
                 search = search + "%";
-
                 userSearch.Name = search;
                 userSearch.Email = search;
                 userSearch.Login = search;

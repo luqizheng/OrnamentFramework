@@ -60,6 +60,6 @@ namespace Ornament.MemberShip.Dao
         /// <returns></returns>
         IList<Role> Find(int pageSize, int currentPage);
 
-        IList<Role> Find(string roleName, int pageIndex, int pageSize);
+        IList<Role> Find(string roleName, int pageIndex, int pageSize, User user);
     }
 }

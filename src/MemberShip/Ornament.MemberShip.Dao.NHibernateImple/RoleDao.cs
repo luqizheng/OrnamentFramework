@@ -146,9 +146,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     GetExecutableCriteria(CurrentSession).List<Role>();
         }
 
-        public IList<Role> Find(string roleName, int pageIndex, int pageSize)
+        public IList<Role> Find(string roleName, int pageIndex, int pageSize, User user)
         {
-            return CreateDetachedCriteria().SetMaxResults(pageSize).SetFirstResult(pageIndex*pageSize)
+            return CreateDetachedCriteria()
+                .SetMaxResults(pageSize)
+                .SetFirstResult(pageIndex*pageSize)
                 .Add(Restrictions.InsensitiveLike(NameProperty, roleName))
                 .GetExecutableCriteria(CurrentSession).List<Role>();
         }

@@ -110,6 +110,7 @@
     <Compile Include="Mappings\RoleMapping.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Mappings\RolePermissionMapping.cs" />
     <Compile Include="Mappings\SecrityInfoMapping.cs" />
     <Compile Include="Mappings\UserGroupMapping.cs">
       <SubType>Code</SubType>

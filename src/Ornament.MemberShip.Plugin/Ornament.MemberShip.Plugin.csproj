@@ -347,6 +347,7 @@
     <EmbeddedResource Include="Scripts\Role\Index.js" />
     <EmbeddedResource Include="Scripts\Role\Create.js" />
     <EmbeddedResource Include="Scripts\Role\Edit.js" />
+    <EmbeddedResource Include="Scripts\Share\roleCheckboxes.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -376,6 +377,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\RolesCheckBoxes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

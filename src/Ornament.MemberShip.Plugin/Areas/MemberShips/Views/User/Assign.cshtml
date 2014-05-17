@@ -11,7 +11,8 @@
     IList<UserGroup> allUserGroups = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao().GetAll();
     IList<Role> allRoles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
 
-    IOrderedQueryable<Permission> allPermissions = from a in OrnamentContext.DaoFactory.MemberShipFactory.Permissions
+    IOrderedQueryable<Permission> allPermissions =
+        from a in OrnamentContext.DaoFactory.MemberShipFactory.Permissions
         orderby a.Name
         select a;
 }
