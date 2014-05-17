@@ -82,7 +82,7 @@ define(function (require) {
                             var value = theValue & permissions;
                             this.checked = (value == theValue) && (permissions > theValue) && (theValue != 0);
                         });
-                    })(Model != null ? this.Model.Operator : 0);
+                    })(Model != null ? Model.Operator : 0);
                 });
             }
         });
