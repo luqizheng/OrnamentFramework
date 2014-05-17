@@ -14,7 +14,7 @@ namespace Ornament.MVCWebFrame
         public static void Regist()
         {
             RegistrySettingPage();
-        }
+        } 
 
         private static void RegistrySettingPage()
         {

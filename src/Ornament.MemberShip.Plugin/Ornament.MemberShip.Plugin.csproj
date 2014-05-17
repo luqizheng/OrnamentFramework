@@ -381,6 +381,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\RolesCheckBoxes.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\MemberShips\Views\Shared\RoleListRadio.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

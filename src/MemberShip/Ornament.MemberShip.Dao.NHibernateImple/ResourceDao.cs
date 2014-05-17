@@ -90,7 +90,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IList<T> FindResources<T>(User user, Enum @operator)
         {
-            var permissionDao = new PermissionDao();
+            if (user.LoginId == User.AdminLoginId)
+            {
+                return CurrentSession.CreateCriteria(typeof (T)).List<T>();
+            }
+
             DetachedCriteria userPermissionId =
                 DetachedCriteria.For(typeof (User)).Add(Restrictions.Eq("LoginId", user.LoginId))
                     .CreateCriteria("Roles")
