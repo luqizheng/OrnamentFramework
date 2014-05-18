@@ -55,8 +55,8 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(Resources.Edit, "Edit", new { id = permission.Id },new{ @class="btn"}) |
-                             @Html.ActionLink(Resources.Delete, "Delete", new { id = permission.Id })
+                    @Html.ActionLink(Resources.Edit, "Edit", new { id = permission.Id }, new { @class = "btn" }) |
+                             @Html.ActionLink(Resources.Delete, "Delete", new { id = permission.Id, @class = "btn danger" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => permission.Name)

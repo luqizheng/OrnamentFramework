@@ -67,7 +67,7 @@ namespace Ornament.Web.MemberShips
 
             try
             {
-                if (AuthorizeCore(filterContext.HttpContext))
+                if (AuthorizeCore( filterContext.HttpContext))
                 {
                     // ** IMPORTANT **
                     // Since we're performing authorization at the action level, the authorization code runs

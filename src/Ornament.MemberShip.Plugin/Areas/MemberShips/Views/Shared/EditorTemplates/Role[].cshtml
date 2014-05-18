@@ -8,21 +8,10 @@
 @{
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    object selected = new object();
-    string ids = "";
-    if (this.Model != null)
-    {
-        selected = from role in this.Model
-                   select new
-                       {
-                           id = role.Id,
-                           text = role.Name
-                       };
-
-
-        ids = String.Join(",", from role in this.Model select role.Id);
-    }
-    var roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>().CreateResourceDao().FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var ids = this.Model.Select(s => s.Id);
+    var roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>().CreateResourceDao()
+        .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
 }
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
@@ -30,9 +19,10 @@
         @*Html.Hidden("", ids, new { style = "width:100%", role = "role.select2" })*@
         @foreach (var a in roles)
         {
+            var check = ids.Contains(a.Id) ? "checked='checked'" : "";
             <label class="inline checkbox">
                 @a.Name
-                <input type="checkbox" class="inline checkbox" value="@a.Id"/>
+                <input type="checkbox" class="inline checkbox" value="@a.Id" name="@name" @check />
             </label>
             
         }

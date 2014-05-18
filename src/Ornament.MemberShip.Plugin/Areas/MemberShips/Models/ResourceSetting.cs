@@ -47,7 +47,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
                 .Add(Org, typeof(OrgOperator))
                 .Add(UserGroup, typeof(UserGroupOperator))
                 .Add(Permission, typeof(PermissionOperator))
-                ;
+                .Add(typeof(Role), typeof(RoleOperator));
         }
     }
 }
