@@ -24,7 +24,7 @@
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
-        <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Id("")"/>
+        <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Name("")"/>
         <span>@(Model != null ? Model.Name : "")</span>
         <ul id="@Html.Id("")_Tree" class="ztree">
         </ul>
