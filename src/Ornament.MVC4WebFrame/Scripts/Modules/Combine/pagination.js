@@ -19,11 +19,17 @@
                 };
 
                 vm.page = -1;
-
+                vm.pages = [];
+                vm.dataLength = 0;//现在页面显示多少数据
+                isNavMode = function () {
+                    //是否为导航模型,无法统计总数据的多寡
+                    return vm.totalRecords == 0;
+                };
                 var inner = {
                     next: function () {
+
                         var pageIndex = vm.page + 1;
-                        if (pageIndex < vm.totalPage) {
+                        if (pageIndex < vm.totalPage || isNavMode()) {
                             vm.nav(pageIndex);
                         }
                         return false;
@@ -49,9 +55,10 @@
                         if (pageIndex < 0) {
                             return;
                         }
-                        vm.search.call(vm, pageIndex, vm.pageSize, function (totalPages) {
+                        vm.search.call(vm, pageIndex, vm.pageSize, function (totalPages, dataLength) {
                             vm.page = pageIndex;
                             vm.totalRecords = totalPages;
+                            vm.dataLength = dataLength;
                             createNav(totalPages);
                         });
                     },
@@ -60,7 +67,7 @@
                             return vm.page != 0;
                         }
                         else if (pageAction == 'next' || pageAction == 'last') {
-                            return (vm.page + 1) != vm.totalPage;
+                            return (isNavMode() && vm.pageSize == vm.dataLength) || (vm.page + 1) != vm.totalPage;
                         } else {
                             var pageIndex = parseInt(pageAction);
                             return pageIndex && pageIndex > 0 && pageIndex < vm.totalPage;
@@ -74,11 +81,11 @@
                     }
 
                 };
-                vm.pages = [];
 
                 function createNav(totalRecord) {
                     if (!totalRecord) {
-                        totalRecord = 0;
+                        return;// 没有totalRecord,因此不生成导航条,只有下一页,上一页等信息
+                        //totalRecord = 0;
                     }
                     vm.totalPage = calculatePage(totalRecord, vm.pageSize);
                     var showPage = vm.showPages / 2;
@@ -121,11 +128,11 @@
         widget.defaults = {
             totalPage: 1,
             showPages: 10,
-            pageSize:40,
+            pageSize: 25,
             totalRecords: 0,
             pages: [],
             search: function (pageIndex, pageSize, func) {
-                alert('please set the search:function(pageIndex,pageSize,func) in the options.func(totalRecord) is set the TotlaRecords');
+                alert('please set the search:function(pageIndex,pageSize,func) in the options.');
             },
 
         };

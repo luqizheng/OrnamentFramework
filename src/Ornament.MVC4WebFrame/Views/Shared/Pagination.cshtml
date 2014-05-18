@@ -3,6 +3,7 @@
     ms-widget="pagination,@this.Model.WidgetId,@this.Model.Options">
 
     <ul>
+        <li><a>第{{page+1}}页</a></li>
         <li ms-class="disabled:page==0">
             <a href="#0" ms-click="navTo">&lt;&lt;</a>
         </li>
@@ -15,7 +16,8 @@
         <li ms-class-disabled="!could('next')">
             <a href="javascript:;" ms-click="next">&gt;</a>
         </li>
-        <li ms-class-disabled="!could('last')">
+
+        <li ms-class-disabled="!could('last')" ms-if="totalRecords!=0">
             <a href="javascript:;" ms-click="last">&gt;&gt;</a>
         </li>
     </ul>
