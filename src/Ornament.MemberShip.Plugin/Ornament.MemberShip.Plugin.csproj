@@ -215,7 +215,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\OrgTree.cshtml" />
-    <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -387,9 +386,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mvc.sitemap" />
-    <None Include="MvcSiteMapSchema.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
