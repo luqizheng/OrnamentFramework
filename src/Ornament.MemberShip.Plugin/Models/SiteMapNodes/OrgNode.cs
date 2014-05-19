@@ -6,6 +6,7 @@ using MvcSiteMapProvider;
 
 namespace Ornament.MemberShip.Plugin.Models.SiteMapNodes
 {
+    
     public class OrgNodeProvider : DynamicNodeProviderBase
     {
         public override IEnumerable<DynamicNode> GetDynamicNodeCollection(ISiteMapNode node)

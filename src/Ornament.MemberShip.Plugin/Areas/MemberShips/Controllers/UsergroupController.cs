@@ -42,7 +42,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         //
         // GET: /Usergroups/Details/5
-         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupDetailsTitle", ParentKey = "Usergroup",
+         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupDetailsTitle", ParentKey = "Usergroup", PreservedRouteParameters = "id",
             Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Details(string id)
         {
@@ -79,7 +79,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupEditTitle", ParentKey = "Usergroup",
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupEditTitle", ParentKey = "Usergroup", PreservedRouteParameters = "id",
 Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Edit(string id)
         {

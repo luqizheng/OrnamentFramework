@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Profile;
 using System.Web.Security;
+using MvcSiteMapProvider.Web.Mvc.Filters;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
@@ -124,7 +125,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userEditTitle", ParentKey = ResourceSetting.User,
-            Resource = ResourceSetting.User, Operator = UserOperator.Modify)]
+            Resource = ResourceSetting.User, Operator = UserOperator.Modify,PreservedRouteParameters = "loginId")]
         public ActionResult Edit(string loginId)
         {
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);

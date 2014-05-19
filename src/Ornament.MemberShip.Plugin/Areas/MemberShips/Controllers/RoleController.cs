@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿                                                                                                                                                                             using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
@@ -64,7 +64,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         [
             ResourceAuthorize(RoleOperator.Modify, "Role"),
             OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleEditTitle",
-                ParentKey = "Role",
+                ParentKey = "Role",PreservedRouteParameters = "id",
                 Resource = "Role", Operator = RoleOperator.Modify)
         ]
         public ActionResult Edit(string id)
@@ -86,7 +86,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(RoleOperator.Delete, "Role")]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
-            ParentKey = "Role",
+            ParentKey = "Role", PreservedRouteParameters = "id",
             Resource = "Role", Operator = RoleOperator.Modify)
         ]
         public ActionResult Delete(string id)

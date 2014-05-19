@@ -212,7 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\OrgTree.cshtml" />
@@ -350,14 +349,6 @@
     <EmbeddedResource Include="Scripts\Role\Create.js" />
     <EmbeddedResource Include="Scripts\Role\Edit.js" />
     <EmbeddedResource Include="Scripts\Share\roleCheckboxes.js" />
-    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -393,30 +384,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\RoleListRadio.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mvc.sitemap" />

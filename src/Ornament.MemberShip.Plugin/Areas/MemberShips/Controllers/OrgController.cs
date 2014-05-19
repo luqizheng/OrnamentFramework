@@ -23,7 +23,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         //
         // GET: /Orgs/
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgListTitle",
-            ParentKey = "MemberShips", Key = "Org", Order = 4,
+            ParentKey = "MemberShips", Key = "Org", Order = 4, PreservedRouteParameters = "id",
             Resource = "Org", Operator = OrgOperator.Read), ResourceAuthorize(OrgOperator.Read, "Org")]
         public ActionResult Index(string id)
         {
