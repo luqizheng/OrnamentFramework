@@ -13,6 +13,7 @@ namespace Ornament.MemberShip.Plugin.Models.SiteMapNodes
             var result = new List<DynamicNode>();
             result.Add(new DynamicNode()
             {
+                ParentKey = "Org",
                 Title = node.Title
             });
             return result;

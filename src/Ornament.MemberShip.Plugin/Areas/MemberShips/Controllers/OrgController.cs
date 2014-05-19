@@ -24,8 +24,6 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         // GET: /Orgs/
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,orgListTitle",
             ParentKey = "MemberShips", Key = "Org", Order = 4,
-            DynamicNodeProvider =
-                "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
             Resource = "Org", Operator = OrgOperator.Read), ResourceAuthorize(OrgOperator.Read, "Org")]
         public ActionResult Index(string id)
         {

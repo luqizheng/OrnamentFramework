@@ -103,7 +103,6 @@ namespace Ornament.Web
         {
             return siteMapPermission.IsAccessibleToUser(childNode)
                    && !childNode.MetaRobotsValues.Contains("disabled");
-            //�������disabled 
         }
 
         //public static bool CurrentNodeMatchParent(this HtmlHelper helper, SiteMapNodeCollection nodes,
