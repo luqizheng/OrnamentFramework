@@ -191,6 +191,6 @@
     <value>驗證碼過期</value>
   </data>
   <data name="alertPassword_CharError" xml:space="preserve">
-    <value>密碼只能是 字母 數字 或者符號</value>
+    <value>密碼必須是字母、數字或者符號，並且長度要做6到30位之間</value>
   </data>
 </root>
