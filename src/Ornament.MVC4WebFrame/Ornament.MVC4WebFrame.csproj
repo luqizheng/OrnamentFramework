@@ -1169,6 +1169,7 @@
     <Content Include="App_GlobalResources\Basic.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Basic.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

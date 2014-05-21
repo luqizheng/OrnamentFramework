@@ -123,9 +123,6 @@
   <data name="Comment" xml:space="preserve">
     <value>备注</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>再一次密码</value>
-  </data>
   <data name="Create" xml:space="preserve">
     <value>添加</value>
   </data>
@@ -138,20 +135,11 @@
   <data name="Name" xml:space="preserve">
     <value>名称</value>
   </data>
-  <data name="new_password" xml:space="preserve">
-    <value>新密码</value>
-  </data>
   <data name="Next" xml:space="preserve">
     <value>下一步</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>确认</value>
-  </data>
-  <data name="old_password" xml:space="preserve">
-    <value>当前密码</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>密码</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>电话</value>

@@ -175,15 +175,6 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Password again 的本地化字符串。
-        /// </summary>
-        public static string ConfirmPassword {
-            get {
-                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Create 的本地化字符串。
         /// </summary>
         public static string Create {
@@ -376,15 +367,6 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 New Password 的本地化字符串。
-        /// </summary>
-        public static string new_password {
-            get {
-                return ResourceManager.GetString("new_password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Next 的本地化字符串。
         /// </summary>
         public static string Next {
@@ -399,24 +381,6 @@ namespace Ornament.Properties {
         public static string OK {
             get {
                 return ResourceManager.GetString("OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Current Password 的本地化字符串。
-        /// </summary>
-        public static string old_password {
-            get {
-                return ResourceManager.GetString("old_password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Password 的本地化字符串。
-        /// </summary>
-        public static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         

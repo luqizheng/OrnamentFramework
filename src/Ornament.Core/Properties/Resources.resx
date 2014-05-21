@@ -166,9 +166,6 @@
   <data name="Configuration" xml:space="preserve">
     <value>Configuration</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>Password again</value>
-  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -211,20 +208,11 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="new_password" xml:space="preserve">
-    <value>New Password</value>
-  </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
-  </data>
-  <data name="old_password" xml:space="preserve">
-    <value>Current Password</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>

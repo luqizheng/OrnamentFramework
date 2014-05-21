@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>在一次密码</value>
+    <value>再一次密码</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
     <value>创建时间</value>
