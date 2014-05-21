@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Properties;
@@ -26,12 +25,12 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         [Remote("NotDuplicate", "Role", "MemberShips",
             AdditionalFields = "Id",
             ErrorMessageResourceName = "alertMsg_duplicate_roleName",
-            ErrorMessageResourceType = typeof(Resources))]
+            ErrorMessageResourceType = typeof (Resources))]
         public override string Name { get; set; }
 
         public void Save(IRoleDao createRoleDao)
         {
-            var role = new Role(this.Name)
+            var role = new Role(Name)
             {
                 Remarks = Remarks
             };

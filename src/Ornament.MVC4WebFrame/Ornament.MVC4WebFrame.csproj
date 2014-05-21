@@ -181,21 +181,6 @@
   <ItemGroup>
     <Compile Include="Api\Core\ClientController.cs" />
     <Compile Include="Api\Core\PersonalMessagesController.cs" />
-    <Compile Include="App_GlobalResources\Basic.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh-Hans.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.zh-Hans.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\Basic.zh-Hant.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.zh-Hant.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_GlobalResources\membership.sitemap.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1163,25 +1148,6 @@
     <Content Include="App_GlobalResources\message.sitemap.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>message.sitemap.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.zh-Hans.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.zh-Hans.designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Basic.zh-Hant.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Basic.zh-Hant.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

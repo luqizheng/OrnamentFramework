@@ -9,8 +9,6 @@ using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Plugin.Properties;
 using Ornament.Web.MemberShips;
 using Qi.Web.Http;
-using Qi.Web.Mvc;
-using VerifyEmailModel = Ornament.MemberShip.Plugin.Models.Security.VerifyEmailModel;
 
 namespace Ornament.MemberShip.Plugin.Api
 {
@@ -36,13 +34,13 @@ namespace Ornament.MemberShip.Plugin.Api
                     .Search(search, 0, 15, out total);
 
                 return from user in result
-                       select new
-                       {
-                           id = user.Id,
-                           name = user.Name,
-                           email = user.Contact.Email,
-                           loginId = user.LoginId
-                       };
+                    select new
+                    {
+                        id = user.Id,
+                        name = user.Name,
+                        email = user.Contact.Email,
+                        loginId = user.LoginId
+                    };
             }
             return new object[]
             {
@@ -125,9 +123,10 @@ namespace Ornament.MemberShip.Plugin.Api
                 }
             }
 
-            return new { success = true };
+            return new {success = true};
         }
     }
+
     public class DenyUser
     {
         public string[] Ids { get; set; }
@@ -145,7 +144,7 @@ namespace Ornament.MemberShip.Plugin.Api
                 dao.SaveOrUpdate(user);
             }
 
-            return new { success = true };
+            return new {success = true};
         }
     }
 }

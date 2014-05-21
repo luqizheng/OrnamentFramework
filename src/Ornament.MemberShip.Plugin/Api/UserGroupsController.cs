@@ -18,19 +18,16 @@ namespace Ornament.MemberShip.Plugin.Api
         // GET api/usersapi
         public IEnumerable<object> Get(string name, int? page)
         {
-            var page1 = page ?? 0;
-            var result = _factory.CreateUserGroupDao().Find(name, page1, 10);
+            int page1 = page ?? 0;
+            IEnumerable<UserGroup> result = _factory.CreateUserGroupDao().Find(name, page1, 10);
 
             var c = from user in result
-
-                    select new
-                        {
-                            id = user.Id,
-                            Name = user.Name,
-                        };
+                select new
+                {
+                    id = user.Id,
+                    user.Name,
+                };
             return c;
         }
-
-        
     }
 }

@@ -249,7 +249,9 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hant.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

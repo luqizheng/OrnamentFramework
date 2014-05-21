@@ -1,37 +1,26 @@
-﻿@using System.Web.UI.WebControls
-@using Ornament
+﻿@using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Dao
 @using Ornament.MemberShip.Plugin.Models
-@using Qi.Web
 @model Ornament.MemberShip.Role[]
 @{
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    string name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
-    var ids = this.Model.Select(s => s.Id);
-    var roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>().CreateResourceDao()
+    IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
+    IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>().CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
 }
 <div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
+    @Html.Label("", display, new {@class = "control-label"})
     <div class="controls">
-        @*Html.Hidden("", ids, new { style = "width:100%", role = "role.select2" })*@
-        @foreach (var a in roles)
+
+        @foreach (Role a in roles)
         {
-            var check = ids.Contains(a.Id) ? "checked='checked'" : "";
+            string check = ids.Contains(a.Id) ? "checked='checked'" : "";
             <label class="inline checkbox">
                 @a.Name
                 <input type="checkbox" class="inline checkbox" value="@a.Id" name="@Html.Name("")" @check />
             </label>
-            
         }
     </div>
 </div>
-
-<script type="text/javascript">
-    @*seajs.use("/MemberShips/Scripts/Share/ui.js", function(r) {
-        var d = @Html.Raw(JsonHelper.ToJson(selected));
-        r.select2.roles("#@Html.Id("")",d);
-    });*@
-</script>

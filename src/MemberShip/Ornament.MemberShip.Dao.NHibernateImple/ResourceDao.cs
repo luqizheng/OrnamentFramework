@@ -72,7 +72,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             IClassMetadata perisisteType = SessionManager.GetSessionWrapper()
                 .SessionFactory.GetClassMetadata(resource);
             if (perisisteType == null)
-                throw new OrnamentException("Resource type " + resource.GetType().Name +
+                throw new MemberShipException("Resource type " + resource.GetType().Name +
                                             " is not belong to nhibernate mapping class");
             var identity = perisisteType.IdentifierType as PrimitiveType;
             object id;

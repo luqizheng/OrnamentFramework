@@ -7,13 +7,15 @@
 @{
     IList<Role> roles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
     IOrderedQueryable<Permission> permissions = from permission in OrnamentContext.DaoFactory.MemberShipFactory.Permissions
-        orderby permission.Name
-        select permission;
+                                                orderby permission.Name
+                                                select permission;
 
     Dictionary<string, object> mapping = roles.ToDictionary<Role, string, object>(a => a.Id, a => new List<string>(from s in a.Permissions select s.Id));
 }
 <style type="text/css">
-    #permissionPanel ul { list-style: none; }
+    #permissionPanel ul {
+        list-style: none;
+    }
 </style>
 <script type="text/javascript">
 
@@ -36,7 +38,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>@Resources.Role</h6>
+                    <h6>@Ornament.MemberShip.Properties.Resources.Role</h6>
                 </div>
             </div>
             <div class="well body" id="roles">
@@ -62,7 +64,7 @@
         <div class="widget">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <h6>@Resources.Permission</h6>
+                    <h6>@Ornament.MemberShip.Properties.Resources.Permission</h6>
                 </div>
             </div>
             <div class="body well" id="permissionPanel">

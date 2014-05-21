@@ -9,6 +9,7 @@ using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
+using Resources;
 
 namespace Ornament.MVCWebFrame.Controllers
 {

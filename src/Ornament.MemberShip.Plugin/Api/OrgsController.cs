@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using NHibernate.Criterion;
-using NHibernate.Mapping;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
@@ -26,24 +23,24 @@ namespace Ornament.MemberShip.Plugin.Api
         [HttpGet]
         public IEnumerable<object> Match(string name, int? page)
         {
-            var currentUser = OrnamentContext.MemberShip.CurrentUser();
+            User currentUser = OrnamentContext.MemberShip.CurrentUser();
             if (OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Read))
             {
-                var orgDao = _factory.CreateOrgDao();
+                IOrgDao orgDao = _factory.CreateOrgDao();
                 int pageIndex = page ?? 0;
                 IEnumerable<Org> result = currentUser.Org == null
                     ? orgDao.Find(name, pageIndex, 10)
                     : orgDao.Find(currentUser.Org, name, pageIndex, 10);
 
                 var c = from org in result
-                        select new
-                        {
-                            id = org.Id,
-                            Name = org.Name,
-                        };
+                    select new
+                    {
+                        id = org.Id,
+                        org.Name,
+                    };
                 return c;
             }
-            return new List<object>()
+            return new List<object>
             {
                 new
                 {

@@ -4,7 +4,6 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
-using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
@@ -38,18 +37,16 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
 
-
-
         //
         // GET: /Usergroups/Details/5
-         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupDetailsTitle", ParentKey = "Usergroup", PreservedRouteParameters = "id",
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupDetailsTitle", ParentKey = "Usergroup",
+            PreservedRouteParameters = "id",
             Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Details(string id)
         {
-
             UserGroup ug = _factory.CreateUserGroupDao().Get(id);
-            var users = _factory.CreateUserDao().GetUsers(ug);
-            return View(new UserGroupDetailInfor(ug, users) { });
+            IList<User> users = _factory.CreateUserDao().GetUsers(ug);
+            return View(new UserGroupDetailInfor(ug, users));
         }
 
         //
@@ -79,14 +76,14 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         }
 
         [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupEditTitle", ParentKey = "Usergroup", PreservedRouteParameters = "id",
-Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
+        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupEditTitle", ParentKey = "Usergroup",
+            PreservedRouteParameters = "id",
+            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
         public ActionResult Edit(string id)
         {
-            UserGroup ug;
             if (id == null)
                 return Redirect("index");
-            ug = _factory.CreateUserGroupDao().Get(id);
+            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
             return View(new UserGroupModel(ug));
         }
 

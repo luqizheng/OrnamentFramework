@@ -110,11 +110,10 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             ResourceDescription resourceDescription = OrnamentContext.ResourceManager.Configuration()
                 .Get(id);
 
-            Permission permission = null;
-            if (!string.IsNullOrEmpty(permissionId))
-                permission = _memberShipFactory.CreatePermissionDao().Get(permissionId);
-            else
-                permission = Permission.CreatePermission(resourceDescription.ValueType);
+            Permission permission =
+                !string.IsNullOrEmpty(permissionId)
+                    ? _memberShipFactory.CreatePermissionDao().Get(permissionId)
+                    : Permission.CreatePermission(resourceDescription.ValueType);
             var model = new PermissionResourceSelectModel
             {
                 Description = resourceDescription,

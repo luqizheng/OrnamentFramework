@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Ornament.MemberShip.Plugin.Models
 {
     /// <summary>
-    /// for zTree only
+    ///     for zTree only
     /// </summary>
     public class OrgTreeItem
     {
@@ -15,20 +13,19 @@ namespace Ornament.MemberShip.Plugin.Models
             name = org.Name;
             parentId = org.Parent != null ? org.Id : "";
 
-            foreach (var item in org.Childs)
+            foreach (Org item in org.Childs)
             {
                 children = new List<object>();
                 children.Add(new OrgTreeItem(item));
             }
-            this.id = org.Id;
+            id = org.Id;
         }
+
         public string id { get; set; }
         public string name { get; set; }
 
         public string parentId { get; set; }
 
         public List<Object> children { get; set; }
-
-        
     }
 }

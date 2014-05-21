@@ -4,12 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Properties;
 using Ornament.MemberShip.Security;
-using Ornament.Messages.Config;
 
 namespace Ornament.MemberShip.Plugin.Models.Security
 {
     public class ForgetPasswordModel
     {
+        public enum RetrievePasswordResult
+        {
+            Success,
+            NotExistAccountOrEmail
+        }
+
         private readonly EmailVerifier _verifier;
 
         public ForgetPasswordModel(EmailVerifier verifier)
@@ -25,9 +30,9 @@ namespace Ornament.MemberShip.Plugin.Models.Security
 
         /// <summary>
         /// </summary>
-        [Display(Name = "label_AccountOrEmail", ResourceType = typeof(Resources))]
+        [Display(Name = "label_AccountOrEmail", ResourceType = typeof (Resources))]
         [DataType(DataType.Password)]
-        [Required(ErrorMessageResourceType = typeof(Resources),
+        [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "alertMsg_RequireAccountOrEmail")]
         public string AccountOrEmail { get; set; }
 
@@ -44,21 +49,14 @@ namespace Ornament.MemberShip.Plugin.Models.Security
                 return RetrievePasswordResult.NotExistAccountOrEmail;
             }
 
-            var emailToken = user.Security.ResetPassword(daoFactory, 50);
+            EmailVerifier emailToken = user.Security.ResetPassword(daoFactory, 50);
             var direct = new Dictionary<string, string>
             {
                 {"name", user.Name},
-                {"parameters",emailToken.CreateQueryString()}
+                {"parameters", emailToken.CreateQueryString()}
             };
             OrnamentContext.Configuration.MessagesConfig.RetrivePassword.Publish(daoFactory, direct, user);
             return RetrievePasswordResult.Success;
-        }
-
-        public enum RetrievePasswordResult
-        {
-            Success,
-            NotExistAccountOrEmail
-
         }
     }
 }

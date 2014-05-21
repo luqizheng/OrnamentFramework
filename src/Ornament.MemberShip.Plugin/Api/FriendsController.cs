@@ -20,22 +20,24 @@ namespace Ornament.MemberShip.Plugin.Api
         public IEnumerable<object> Get()
         {
             var result = new List<object>();
-            foreach (var friendGroup in _dao.CreateFriendGroupDao().GetGroups(OrnamentContext.MemberShip.CurrentUser()))
+            foreach (
+                FriendGroup friendGroup in
+                    _dao.CreateFriendGroupDao().GetGroups(OrnamentContext.MemberShip.CurrentUser()))
             {
                 var item = new
-                    {
-                        Id = friendGroup.Id,
-                        Name = friendGroup.Name,
-                        Friends = new List<object>()
-                    };
-                foreach (var friend in friendGroup.Friends)
+                {
+                    friendGroup.Id,
+                    friendGroup.Name,
+                    Friends = new List<object>()
+                };
+                foreach (Friend friend in friendGroup.Friends)
                 {
                     item.Friends.Add(new
-                        {
-                            Id = friend.User.Id,
-                            Name = friend.Name ?? friend.User.Name,
-                            Remarks = friend.Remakrs
-                        });
+                    {
+                        friend.User.Id,
+                        Name = friend.Name ?? friend.User.Name,
+                        Remarks = friend.Remakrs
+                    });
                 }
 
                 result.Add(item);
@@ -43,7 +45,6 @@ namespace Ornament.MemberShip.Plugin.Api
             return result;
         }
 
-       
 
         // GET api/friends/5
         public string Get(int id)
@@ -59,13 +60,13 @@ namespace Ornament.MemberShip.Plugin.Api
         // PUT api/friends/5
         public void Put(string userId, [FromBody] string @group)
         {
-            var friendGroup = _dao.CreateFriendGroupDao().GetByName(@group);
-            var user = _dao.CreateUserDao().Get(userId);
+            FriendGroup friendGroup = _dao.CreateFriendGroupDao().GetByName(@group);
+            User user = _dao.CreateUserDao().Get(userId);
             if (friendGroup == null)
-                friendGroup = new FriendGroup()
-                    {
-                        Name = @group
-                    };
+                friendGroup = new FriendGroup
+                {
+                    Name = @group
+                };
 
             friendGroup.Friends.Add(new Friend(user));
         }

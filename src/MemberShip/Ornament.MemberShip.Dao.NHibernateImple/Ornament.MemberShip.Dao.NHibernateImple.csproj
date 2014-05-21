@@ -134,10 +134,6 @@
     <Compile Include="EmailVerifierDao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
-      <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>
-      <Name>Ornament.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
