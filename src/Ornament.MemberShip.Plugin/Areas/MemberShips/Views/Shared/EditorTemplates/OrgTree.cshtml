@@ -1,5 +1,4 @@
 ﻿@using Ornament
-@using Ornament.MemberShip
 @using Ornament.MemberShip.Dao
 @using Ornament.MemberShip.Plugin.Areas.MemberShips.Models
 @using Ornament.MemberShip.Plugin.Models
@@ -7,22 +6,22 @@
 @model Ornament.MemberShip.Org
 @{
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
-    var assignAllOrg = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.AssignAllOrg);
+    IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
+    bool assignAllOrg = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.AssignAllOrg);
     var selection = new List<OrgTreeItem>();
     if (assignAllOrg)
     {
         selection.AddRange(orgDao.GetAll().Select(item => new OrgTreeItem(item)));
     }
-    else if (this.Model != null)
+    else if (Model != null)
     {
-        selection.Add(new OrgTreeItem(this.Model));
+        selection.Add(new OrgTreeItem(Model));
     }
-    var value = this.Model != null ? this.Model.Id : "";
+    string value = Model != null ? Model.Id : "";
 }
 
 <div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
+    @Html.Label("", display, new {@class = "control-label"})
     <div class="controls">
         <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Name("")"/>
         <span>@(Model != null ? Model.Name : "")</span>
