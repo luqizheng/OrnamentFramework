@@ -239,7 +239,7 @@
     <value>验证码过期 </value>
   </data>
   <data name="alertPassword_CharError" xml:space="preserve">
-    <value>密码必须是字母、数字或者符号，并且长度要做6到30位之间</value>
+    <value>密码必须是至少包含一个字母、数字或者符号，并且长度要做8到30位之间. </value>
   </data>
   <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
     <value>再一次密码和新密码不一样</value>

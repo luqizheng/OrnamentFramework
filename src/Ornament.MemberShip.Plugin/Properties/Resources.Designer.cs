@@ -178,7 +178,7 @@ namespace Ornament.MemberShip.Plugin.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Password should be numbers, letters and symbols with a minimum length of 6 and a maximum length of 30. 的本地化字符串。
+        ///   查找类似 Password must be at Least one letter, number or symbol, and within 8 to 30 characters. 的本地化字符串。
         /// </summary>
         public static string alertPassword_CharError {
             get {

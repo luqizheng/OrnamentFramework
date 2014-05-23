@@ -217,6 +217,6 @@
     <value>Verify code is expire.</value>
   </data>
   <data name="alertPassword_CharError" xml:space="preserve">
-    <value>Password should be numbers, letters and symbols with a minimum length of 6 and a maximum length of 30.</value>
+    <value>Password must be at Least one letter, number or symbol, and within 8 to 30 characters.</value>
   </data>
 </root>
