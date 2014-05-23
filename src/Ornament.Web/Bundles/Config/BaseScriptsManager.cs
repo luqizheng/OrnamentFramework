@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Optimization;
+using Iesi.Collections;
 using Qi;
+using Qi.IO;
 
 namespace Ornament.Web.Bundles.Config
 {
     public abstract class BaseScriptsManager
     {
-        private readonly string _regPath;
+        
         private readonly string _searchDirPath;
 
         /// <summary>
@@ -26,8 +29,17 @@ namespace Ornament.Web.Bundles.Config
                 throw new ArgumentOutOfRangeException("regPath", "pease start with ~/ ");
 
             _searchDirPath = searchDirPath;
-            _regPath = regPath;
+            if (!regPath.EndsWith("/"))
+            {
+                regPath += "/";
+            }
+            RegPathPrefix = regPath;
             LogFile = "/log/" + (new DirectoryInfo(searchDirPath)).Name + ".log";
+        }
+
+        protected virtual string ExtendFileName
+        {
+            get { return "*.js"; }
         }
 
         /// <summary>
@@ -43,10 +55,7 @@ namespace Ornament.Web.Bundles.Config
 
         /// <summary>
         /// </summary>
-        public string RegPathPrefix
-        {
-            get { return _regPath; }
-        }
+        public string RegPathPrefix { get; private set; }
 
         /// <summary>
         ///     把物理路径改为虚拟路径
@@ -84,8 +93,12 @@ namespace Ornament.Web.Bundles.Config
                 if (IsCombine(subFolder, log))
                 {
                     string[] files = GetCombineFolderFiles(subFolder);
-                    string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name + ".js");
-                    Handle(bundles, virtualFolderName, log, files);
+                    //string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name + ".js");
+                    var aa = ManagerSetting.Split(files, VirtualPathUtility.Combine(bundlePath, subFolder.Name));
+                    foreach (var asdf in aa)
+                    {
+                        Handle(bundles, asdf.BundleName, log, asdf.FileStrings.ToArray());
+                    }
                 }
                 else
                 {
@@ -100,11 +113,10 @@ namespace Ornament.Web.Bundles.Config
         {
             //处理文件的
 
-            string[] files = Directory.GetFiles(physicPath, "*.js");
+            var files = (new DirectoryInfo(physicPath).GetFilesEx(this.ExtendFileName));
             string virtualPath = ToVirtualPath(physicPath);
-            foreach (string file in files)
+            foreach (var fileInfo in files)
             {
-                var fileInfo = new FileInfo(file);
                 string subVirtualPath = VirtualPathUtility.Combine(virtualPath, fileInfo.Name);
                 string bundlePath = VirtualPathUtility.Combine(bundleName, fileInfo.Name);
                 Handle(bundles, bundlePath, log, subVirtualPath);
@@ -123,28 +135,46 @@ namespace Ornament.Web.Bundles.Config
 
         protected virtual string[] GetCombineFolderFiles(DirectoryInfo folder)
         {
-            var list = new List<String>();
-            foreach (FileInfo file in folder.GetFiles("*.js"))
-            {
-                list.Add(ToVirtualPath(file.FullName));
-            }
-            return list.ToArray();
+            return folder.GetFilesEx(this.ExtendFileName).Select(file => ToVirtualPath(file.FullName)).ToArray();
         }
 
+        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter, params string[] includeVirtualPathes);
 
-        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter,
-            params string[] includeVirtualPathes);
+        private class ManagerSetting
+        {
+            public string BundleName { get; set; }
+            private List<string> _fileStrings;
+            public List<string> FileStrings
+            {
+                get { return _fileStrings ?? (_fileStrings = new List<string>()); }
+            }
 
-        /*
-                /// <summary>
-                /// </summary>
-                /// <param name="bundles"></param>
-                /// <param name="physicPath"></param>
-                /// <param name="virtualPath"></param>
-                /// <param name="logWriter"></param>
-                /// <returns>返回true，继续处理folder里面的文件</returns>
-                protected abstract bool HandleFolder(BundleCollection bundles,
-                    DirectoryInfo physicPath,
-                    string virtualPath, StreamWriter logWriter);*/
+            public static ManagerSetting[] Split(string[] files, string suggestBundleName)
+            {
+                var result = new System.Collections.Generic.Dictionary<string, ManagerSetting>();
+
+                foreach (var file in files)
+                {
+                    var fileInfo = new FileInfo(file);
+                    ManagerSetting setting;
+                    if (!result.ContainsKey(fileInfo.Extension))
+                    {
+                        setting = new ManagerSetting()
+                        {
+                            BundleName = suggestBundleName + fileInfo.Extension
+                        };
+                        result.Add(fileInfo.Extension, setting);
+                    }
+                    else
+                    {
+                        setting = result[fileInfo.Extension];
+                    }
+
+                    setting.FileStrings.Add(file);
+                }
+                return result.Values.ToArray();
+            }
+        }
+
     }
 }

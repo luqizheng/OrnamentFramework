@@ -25,6 +25,7 @@ namespace Ornament.Web.Bundles.Config
         {
             logWriter.WriteLine("{0}:{1}", bundlePath, String.Join(",", includeVirtualPathes));
             bundles.Add(new SeajsBundle(bundlePath, _isCombine).Include(includeVirtualPathes));
+
         }
     }
 }

@@ -2,7 +2,6 @@
 using Ornament.Web;
 using Ornament.Web.Bundles;
 using Ornament.Web.Bundles.Config;
-using Ornament.Web.SeajsModules;
 using Qi;
 using SeajsBundles;
 using SeajsBundles.JqueryBundles;
@@ -13,7 +12,6 @@ namespace Ornament.MVCWebFrame
 {
     public class BundleConfig
     {
-
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
@@ -63,8 +61,6 @@ namespace Ornament.MVCWebFrame
             bundles.Add(
                 new SeajsBundle("~/Scripts/_appLayout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
                     "~/Scripts/Modules/Views/_appLayout.js"));
-
-
         }
 
 
@@ -92,7 +88,8 @@ namespace Ornament.MVCWebFrame
         /// <param name="bundles"></param>
         private static void SeajsModules(BundleCollection bundles)
         {
-            var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/", OrnamentContext.Configuration.GetSeajsCombine())
+            var file = new DirectorySingleScriptFileRegistry("~/Scripts/Modules/", "~/Scripts/",
+                OrnamentContext.Configuration.GetSeajsCombine())
             {
                 LogFile = "/Log/modual.log"
             };

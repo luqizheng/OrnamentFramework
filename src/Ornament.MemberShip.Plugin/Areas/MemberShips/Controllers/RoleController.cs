@@ -1,4 +1,4 @@
-﻿                                                                                                                                                                             using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
@@ -45,12 +45,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         public ActionResult List(Pagination pagination)
         {
             var result = from role in _roleDao.Find(pagination.PageSize, pagination.CurrentPage)
-                         select new
-                         {
-                             role.Id,
-                             role.Name,
-                             role.Remarks
-                         };
+                select new
+                {
+                    role.Id,
+                    role.Name,
+                    role.Remarks
+                };
 
             int count = _roleDao.Count();
             return Json(new
@@ -64,12 +64,12 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         [
             ResourceAuthorize(RoleOperator.Modify, "Role"),
             OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleEditTitle",
-                ParentKey = "Role",PreservedRouteParameters = "id",
+                ParentKey = "Role", PreservedRouteParameters = "id",
                 Resource = "Role", Operator = RoleOperator.Modify)
         ]
         public ActionResult Edit(string id)
         {
-            var role = _roleDao.Load(id);
+            Role role = _roleDao.Load(id);
             var roleModel = new RoleModel(role);
             return View(roleModel);
         }
@@ -115,8 +115,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             {
                 return View(role);
             }
-            role.Save(this._factory.CreateRoleDao());
-           
+            role.Save(_factory.CreateRoleDao());
+
             return RedirectToAction("Index");
         }
 

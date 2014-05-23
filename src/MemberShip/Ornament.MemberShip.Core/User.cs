@@ -51,7 +51,10 @@ namespace Ornament.MemberShip
         {
             if (loginId == null) throw new ArgumentNullException("loginId");
             if (password == null) throw new ArgumentNullException("password");
-            Security.ChangePassword(password);
+
+            if(_security==null)
+                _security=new SecurityInfo(this);
+            _security.ChangePassword(password);
         }
 
         /// <summary>
@@ -67,7 +70,8 @@ namespace Ornament.MemberShip
             LoginId = loginId.Trim();
             _security = new SecurityInfo(this);
             _contact = new ContactInfo(this);
-            Other.CreateTime = DateTime.Now;
+
+            _other = new OtherUserInfo {CreateTime = DateTime.Now};
         }
 
         public virtual SecurityInfo Security

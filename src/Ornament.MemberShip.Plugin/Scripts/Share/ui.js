@@ -95,6 +95,7 @@
 
     var orgTree = function (selector, boxSelector, zNodes) {
         require("ztree")($);
+        require("ztree.css");
         var setting = {
             callback: {
                 onClick: function (event, treeId, treeNode, clickFlag) {

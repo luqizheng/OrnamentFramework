@@ -13,31 +13,31 @@
 @using (var panel = Html.Panel())
 {
     @panel.Body(@<text>
-                    <form method="POST" class="form-horizontal">
-                        <div class="well">
-                            @Html.ValidationSummary(true)
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
-                                <li><a href="#tab4" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
-                            </ul>
+    <form method="POST" class="form-horizontal">
+        <div class="well">
+            @Html.ValidationSummary(true)
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
+                <li><a href="#tab4" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
+            </ul>
 
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tab3">
-                                    @Html.EditorFor(s => s, "BasicInfo")
-                                </div>
-                                <div class="tab-pane" id="tab4">
-                                    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <input type="submit" value="@Ornament.Properties.Resources.Create" class="btn btn-info"/>
-                                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new {area = "MemberShips"})">@Resources.Cancel</a>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab3">
+                    @Html.EditorFor(s => s, "BasicInfo")
+                </div>
+                <div class="tab-pane" id="tab4">
+                    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+                </div>
+            </div>
+            <div class="form-actions">
+                <input type="submit" value="@Ornament.Properties.Resources.Create" class="btn btn-info"/>
+                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
 
-                            </div>
-                        </div>
-                    </form>
+            </div>
+        </div>
+    </form>
 
-                </text>);
+    </text>);
 
 }
 
