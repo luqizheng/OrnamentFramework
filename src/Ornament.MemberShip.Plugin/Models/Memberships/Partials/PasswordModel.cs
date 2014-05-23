@@ -9,7 +9,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
             ErrorMessageResourceType = typeof (Properties.Resources))]
         [DataType(DataType.Password), UIHint("Password")]
-        [RegularExpression(@"[\dA-z\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]{6,30}",
+        [RegularExpression(@"(?=.*\d)(?=.*[a-zA-Z])(?=.*[\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]).{8,30}",
             ErrorMessageResourceName = "alertPassword_CharError",
             ErrorMessageResourceType = typeof (Properties.Resources))]
         public string NewPassword { get; set; }
