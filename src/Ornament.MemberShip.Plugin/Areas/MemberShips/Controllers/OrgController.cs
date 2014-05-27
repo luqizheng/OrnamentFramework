@@ -29,8 +29,17 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         {
             if (id == null)
             {
-                IList<Org> orgs = _factory.CreateOrgDao().GetRootOrgs();
+                User user = OrnamentContext.MemberShip.CurrentUser();
+                var isOrgUser = user.LoginId != MemberShip.User.AdminLoginId && user.Org != null;
+                IEnumerable<Org> orgs = isOrgUser
+                    ? _factory.CreateOrgDao().GetSubOrgs(OrnamentContext.MemberShip.CurrentUser().Org)
+                    : _factory.CreateOrgDao().GetRootOrgs();
                 ViewData["Orgs"] = orgs;
+                if (isOrgUser)
+                {
+                    return View(user.Org);
+                }
+              
                 return View((Org)null);
             }
             Org org = _factory.CreateOrgDao().Get(id);
