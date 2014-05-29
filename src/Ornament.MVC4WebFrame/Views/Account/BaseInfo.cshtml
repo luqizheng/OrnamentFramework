@@ -43,7 +43,7 @@
         <div class="controls">
             <div class="input-append">
                 @Html.TextBoxFor(s => s.Contact.Email, emailAttr)
-                <button id="VerifyEmail" class="btn" type="button">@Basic.Validate</button>
+                <button id="VerifyEmail" class="btn" type="button">@Ornament.Properties.Resources.Validate</button>
             </div>
             @Html.ValidationMessageFor(s => s.Contact.Email)
 
@@ -59,6 +59,6 @@
     @Html.EditorFor(s => s.Language, languageAttr)
     @Html.EditorFor(s => s.TimeZoneId, timezoneAttr)
     <div class="form-actions">
-        <button class="btn btn-primary" data-loading-text="saving...">@Basic.Save</button>
+        <button class="btn btn-primary" data-loading-text="saving...">@Ornament.Properties.Resources.Save</button>
     </div>
 </form>

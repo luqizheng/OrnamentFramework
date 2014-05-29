@@ -9,7 +9,7 @@
 @using Resources
 @model Ornament.MemberShip.User
 @{
-    ViewBag.Title = Basic.Index;
+    
     Layout = OrnamentContext.Configuration.BackendLayout();
     IList<Permission> permissions =
         OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().GetPermissionByLoginId
@@ -58,7 +58,7 @@
 }
 @section pageTitle
 {
-    <h5>@Basic.Setting</h5>
+    <h5>@Ornament.Properties.Resources.Setting</h5>
 }
 
 <ul class="nav nav-tabs">
@@ -69,11 +69,11 @@
             if (isFirst)
             {
                 isFirst = false;
-                <li class="active"><a href="#@item.url" data-toggle="tab">@item.text</a></li>
+        <li class="active"><a href="#@item.url" data-toggle="tab">@item.text</a></li>
             }
             else
             {
-                <li><a href="#@item.url" data-toggle="tab">@item.text</a></li>
+        <li><a href="#@item.url" data-toggle="tab">@item.text</a></li>
             }
         }
     }
@@ -89,15 +89,15 @@
             if (isFirst)
             {
                 isFirst = false;
-                <div id="@item.url" class="tab-pane active">
-                    @Html.Partial(item.url, item.Model)
-                </div>
+        <div id="@item.url" class="tab-pane active">
+            @Html.Partial(item.url, item.Model)
+        </div>
             }
             else
             {
-                <div id="@item.url" class="tab-pane">
-                    @Html.Partial(item.url, item.Model)
-                </div>
+        <div id="@item.url" class="tab-pane">
+            @Html.Partial(item.url, item.Model)
+        </div>
             }
         }
     }
@@ -105,7 +105,7 @@
 
 @section scripts
 {
-      @Scripts.Render("~/Scripts/avalon.js")
+    @Scripts.Render("~/Scripts/avalon.js")
     <script type="text/javascript"> avalon.config({ loader: false })   </script>
     <script type="text/javascript">
 
@@ -116,7 +116,7 @@
                 saveSuccess: '@Html.GetResourceString("Msg_SuccessSaving")',
             }
         };
-        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Index.js")", function(init) {
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/Scripts/Modules/Views/Accounts/Index.js")", function (init) {
             init(opts);
         });
     </script>
