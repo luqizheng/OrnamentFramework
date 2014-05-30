@@ -17,7 +17,7 @@
 {
     @if (Model == null || Model.Parent == null)
     {
-        <h5>Org List </h5>
+        <h5>Html.GetEmbededResourceString("Page_title");</h5>
     }
     else
     {
@@ -79,7 +79,7 @@
     else
     {
         <div class="alert">
-            Not found org.
+           @Html.GetEmbededResourceString("NotFoundOrg")
         </div>
     }
 
