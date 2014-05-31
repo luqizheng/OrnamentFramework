@@ -506,7 +506,7 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Save successly. 的本地化字符串。
+        ///   查找类似 Save successfully. 的本地化字符串。
         /// </summary>
         public static string SaveSuccess {
             get {
