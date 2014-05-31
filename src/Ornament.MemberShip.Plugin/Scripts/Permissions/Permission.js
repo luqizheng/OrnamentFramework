@@ -63,7 +63,7 @@ define(function (require) {
                 $("#resViewContent").load("/Memberships/Permissions/ChoiceResourceView/" + $("[name=DescriptionResourceName]:checked").val());
 
             } else if (curName == "editPermission") {
-                var input = {
+                var input = 
                     resourceId: $("[name=ResourceId]:checked").val(),
                     permissionId: this.Model != null ? this.Model.Id : ""
                 };

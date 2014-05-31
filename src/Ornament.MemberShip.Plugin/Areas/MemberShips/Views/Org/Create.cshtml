@@ -1,7 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Properties
 @using Ornament.Web.UI.Theme
-@using SeajsBundles
+
 @model Ornament.MemberShip.Plugin.Models.Memberships.OrgModel
 
 @{
@@ -24,14 +24,11 @@
         @Html.EditorFor(s => s.Name)
         @Html.EditorFor(s => s.Remark)
         @Html.EditorFor(s => s.Roles)
-
-
         @Html.Hidden("Parent", (Model != null && Model.Parent != null) ? Model.Parent.Id : "")
         <div class="form-actions">
             <button class="btn btn-primary" type="submit">@Resources.Create</button>
             <button onclick=" location = '@Url.Action("Index")' " type="button" class="btn">@Resources.Cancel</button>
         </div>
-
     </form>
 
 
@@ -41,6 +38,6 @@
 }
 @section scripts{
     <script type="text/javascript">
-        seajs.use("@ScriptsSeajs.RenderUrl("/MemberShips/Scripts/Org/Create.js")");
+        seajs.use("/MemberShips/Scripts/Org/Create.js");
     </script>
 }

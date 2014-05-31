@@ -53,6 +53,7 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             var direct = new Dictionary<string, string>
             {
                 {"name", user.Name},
+                {"loginId", user.LoginId},
                 {"parameters", emailToken.CreateQueryString()}
             };
             OrnamentContext.Configuration.MessagesConfig.RetrivePassword.Publish(daoFactory, direct, user);

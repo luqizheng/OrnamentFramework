@@ -24,16 +24,17 @@ namespace Ornament.Messages.Dao.NHibernateImple
 
         public int Count(string name, string excludeId)
         {
-            if (name == null
-                ) throw new ArgumentNullException("name");
+            if (name == null)
+                throw new ArgumentNullException("name");
+
             DetachedCriteria re = CreateDetachedCriteria()
                 .Add(Restrictions.Eq(NameProperty, name));
 
             if (string.IsNullOrEmpty(excludeId))
-                return
-                    re.SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
-            AbstractCriterion id = Restrictions.Not(Restrictions.Eq(Projections.Id(), excludeId));
-            re.Add(id);
+            {
+                return re.SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
+            }
+            re = re.Add(Restrictions.Not(Restrictions.Eq(Projections.Id(), excludeId)));
             return re.SetProjection(Projections.RowCount()).GetExecutableCriteria(CurrentSession).UniqueResult<int>();
         }
 
@@ -66,7 +67,7 @@ namespace Ornament.Messages.Dao.NHibernateImple
                     .UniqueResult<int>();
             return DetachedCriteria.For<NotifyMessageTemplate>()
                 .AddOrder(Order.Desc(Projections.Property<NotifyMessageTemplate>(s => s.ModifyTime)))
-                .SetMaxResults(pageSize).SetFirstResult(pageSize*pageIndex)
+                .SetMaxResults(pageSize).SetFirstResult(pageSize * pageIndex)
                 .GetExecutableCriteria(CurrentSession).List<NotifyMessageTemplate>();
         }
     }

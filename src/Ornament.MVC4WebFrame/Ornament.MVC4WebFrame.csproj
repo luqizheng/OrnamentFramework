@@ -274,6 +274,7 @@
     <Content Include="Content\templates\pannonia\css\select2-bootstrap.css" />
     <Content Include="Content\templates\pannonia\css\select2-old.css" />
     <Content Include="Content\templates\pannonia\css\StyleSheet1.css" />
+    <Content Include="Scripts\Modules\ui\paginations\pagination.js" />
     <Content Include="Scripts\plugins\forms\jquery.ztree-3.5\img\diy\1_close.png" />
     <Content Include="Scripts\plugins\forms\jquery.ztree-3.5\img\diy\1_open.png" />
     <Content Include="Scripts\plugins\forms\jquery.ztree-3.5\img\diy\2.png" />

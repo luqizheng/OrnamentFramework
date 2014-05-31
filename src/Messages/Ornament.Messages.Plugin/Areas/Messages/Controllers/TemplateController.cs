@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
-using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
@@ -81,7 +79,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         //
         // GET: /Messages/Template/Edit/5
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateEditTitle",
-          ParentKey = "templates")]
+            ParentKey = "templates")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -118,14 +116,14 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public ActionResult IsNotDuplicateName(string name, string id)
         {
-            var count = _daoFactory.MessageTemplateDao.Count(name, id);
-            return Json(count != 0, JsonRequestBehavior.AllowGet);
-
+            int count = _daoFactory.MessageTemplateDao.Count(name, id);
+            return Json(count == 0, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -2,8 +2,6 @@
 define(function (require) {
 
     var $ = require('jquery');
-    
-    require('select2')($);
     require("/scripts/views/_appLayout.js");
     require("bootstrap")($);
     require('ckeditor');
@@ -19,7 +17,7 @@ define(function (require) {
             };
         });
 
-        $("#Language").select2({ allowClear: false }).change(function () {
+        $("#Language").change(function () {
             var cont = content[$(this).val()];
             editor.setData(cont ? cont.content : "");
             $("#subject").val(cont ? cont.subject : "");
@@ -27,7 +25,7 @@ define(function (require) {
             delete content[$("#Language").val()];
         });
 
-        $("#Notify").select2({ allowClear: false });
+        
 
         $("form").submit(function () {
             //Make sure the editor save to content.

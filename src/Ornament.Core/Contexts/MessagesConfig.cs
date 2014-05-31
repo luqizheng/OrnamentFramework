@@ -60,8 +60,10 @@ namespace Ornament.Contexts
                         "Verify Email Address (Template)",
                         @"Email has changed, It should verify again.
 inside veriable:
-1) [paramers]: token infomation
-2) [email]:user name",
+1) [parameters]: token infomation
+2) [email]:user name
+3) [loginId]:user loginid",
+                     
 
                         SystemType,
                         DeserializerXml(Resources.verifyEmail_zh_CN, "zh-Hans"),
