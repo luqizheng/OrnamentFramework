@@ -43,12 +43,13 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         public string Id { get; set; }
 
         /// <summary>
-        ///     Gets or sets the LoginId
+        ///     Gets or sets the LoginId,
+        /// 检查LoginiId是否重复的用 Remote
         /// </summary>
         [Display(Name = "LoginId", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_MissLoginId",
             ErrorMessageResourceType = typeof(Properties.Resources))]
-        [RegularExpression(@"^[a-zA-z1-9_-]{3,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
+        [RegularExpression(@"^[a-zA-Z0-9_-]{3,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof(Resources))]
         [UIHint("String")]
         [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",
