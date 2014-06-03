@@ -1,21 +1,16 @@
 ﻿@using Ornament
-@using Ornament.Messages
-@using Ornament.Web
-@using Ornament.Web.Bundles
-@using SeajsBundles
+@using Ornament.Messages.Newses
 @using Basic = Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.NewsType>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "News Type List";
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 
-
-
 @section pageTitle
 {
-    <h5>News Type(@this.Model.Count())</h5>
+    <h5>News Type(@Model.Count())</h5>
 }
 <div class="widget">
 
@@ -29,7 +24,6 @@
     <div class="well body">
         @if (Model.Count() != 0)
         {
-   
             <table class="table table-condensed table-striped table-bordered">
                 <thead>
                     <tr>
@@ -43,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (NewsType item in Model)
                     {
                         <tr>
                             <td>
@@ -53,16 +47,14 @@
                                 @Html.DisplayFor(modelItem => item.Remark)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-small" })
+                                @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-small"})
                                 <a data-toggle="popover" data-val="@item.Id" 
-                                class="btn btn-danger btn-small" href="#">@Basic.Delete</a>
+                                   class="btn btn-danger btn-small" href="#">@Basic.Delete</a>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-    
-
         }
         else
         {
@@ -82,7 +74,7 @@
 </div>
 @section scripts{
     <script type="text/javascript">
-        seajs.use("@ScriptsSeajs.RenderUrl("~/Messages/Scripts/NewsType/Index.js")", function (main) {
+        seajs.use("~/Messages/Scripts/NewsType/Index.js", function(main) {
             main("@Url.Action("Delete")");
         })
     </script>
