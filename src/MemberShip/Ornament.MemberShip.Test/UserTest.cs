@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.Remoting.Contexts;
-using Iesi.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ornament.MemberShip;
 using Ornament.MemberShip.MemberShipProviders;
@@ -10,72 +9,21 @@ using Ornament.MemberShip.MemberShipProviders;
 namespace MemberShip.Test
 {
     /// <summary>
-    ///This is a test class for UserTest and is intended
-    ///to contain all UserTest Unit Tests
-    ///</summary>
+    ///     This is a test class for UserTest and is intended
+    ///     to contain all UserTest Unit Tests
+    /// </summary>
     [TestClass]
     public class UserTest
     {
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext { get; set; }
-        public class MembershipContextProvider : IMemberShipProvider
-        {
-            public string Encrypt(string content)
-            {
-                return content;
-            }
-
-            public string Decrypt(string content)
-            {
-                return content;
-            }
-        }
-
-        #region Additional test attributes
-
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        [ClassInitialize()]
-        public static void MyClassInitialize(TestContext testContext)
-        {
-            User.ValidateUserPolicy = new ValidateUserPolicy(new MembershipContextProvider())
-            {
-                MaxInvalidPasswordAttempts = 3
-            };
-
-        }
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-
-        #endregion
-
-
 
         /// <summary>
-        ///A test for UpdateTime
-        ///</summary>
+        ///     A test for UpdateTime
+        /// </summary>
         [TestMethod]
         public void UpdateTimeTest()
         {
@@ -86,11 +34,9 @@ namespace MemberShip.Test
         }
 
 
-
-
         /// <summary>
-        ///A test for Phone
-        ///</summary>
+        ///     A test for Phone
+        /// </summary>
         [TestMethod]
         public void PhoneTest()
         {
@@ -102,9 +48,21 @@ namespace MemberShip.Test
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void LoginIdValidation()
+        {
+            var t = new User("用中文，看看会不会死", "kdjfkdj");
+            t.Contact.Email = "kjfkdjf";
+            var context = new ValidationContext(t, null, null);
+            var colleection = new List<ValidationResult>();
+            var result = Validator.TryValidateObject(t, context, colleection, true);
+
+            Assert.IsFalse(result);
+        }
+
         /// <summary>
-        ///A test for PasswordQuestion
-        ///</summary>
+        ///     A test for PasswordQuestion
+        /// </summary>
         [TestMethod]
         public void PasswordQuestionTest()
         {
@@ -116,8 +74,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for PasswordAnswer
-        ///</summary>
+        ///     A test for PasswordAnswer
+        /// </summary>
         [TestMethod]
         public void PasswordAnswerTest()
         {
@@ -137,8 +95,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for Password
-        ///</summary>
+        ///     A test for Password
+        /// </summary>
         [TestMethod]
         public void PasswordTest()
         {
@@ -149,8 +107,8 @@ namespace MemberShip.Test
 
 
         /// <summary>
-        ///A test for Name
-        ///</summary>
+        ///     A test for Name
+        /// </summary>
         [TestMethod]
         public void NameTest()
         {
@@ -163,10 +121,9 @@ namespace MemberShip.Test
         }
 
 
-
         /// <summary>
-        ///A test for LastPasswordChangedDate
-        ///</summary>
+        ///     A test for LastPasswordChangedDate
+        /// </summary>
         [TestMethod]
         public void LastPasswordChangedDateTest()
         {
@@ -179,8 +136,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for LastLoginDate
-        ///</summary>
+        ///     A test for LastLoginDate
+        /// </summary>
         [TestMethod]
         public void LastLoginDateTest()
         {
@@ -197,8 +154,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for LastLockoutDate
-        ///</summary>
+        ///     A test for LastLockoutDate
+        /// </summary>
         [TestMethod]
         public void LastLockoutDateTest()
         {
@@ -215,8 +172,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for LastActivityDate
-        ///</summary>
+        ///     A test for LastActivityDate
+        /// </summary>
         [TestMethod]
         public void LastActivityDateTest()
         {
@@ -229,8 +186,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for IsLockout
-        ///</summary>
+        ///     A test for IsLockout
+        /// </summary>
         [TestMethod]
         public void IsLockoutTest()
         {
@@ -244,10 +201,10 @@ namespace MemberShip.Test
             Assert.AreEqual(true, target.Security.IsLocked);
         }
 
-      
+
         /// <summary>
-        ///A test for Email
-        ///</summary>
+        ///     A test for Email
+        /// </summary>
         [TestMethod]
         public void EmailTest()
         {
@@ -260,10 +217,9 @@ namespace MemberShip.Test
         }
 
 
-
         /// <summary>
-        ///A test for CreateTime
-        ///</summary>
+        ///     A test for CreateTime
+        /// </summary>
         [TestMethod]
         public void CreateTimeTest()
         {
@@ -274,8 +230,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for Comment
-        ///</summary>
+        ///     A test for Comment
+        /// </summary>
         [TestMethod]
         public void CommentTest()
         {
@@ -288,8 +244,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for Remove
-        ///</summary>
+        ///     A test for Remove
+        /// </summary>
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Remove_Null_UserGroup_Test()
         {
@@ -299,25 +255,24 @@ namespace MemberShip.Test
         }
 
 
-
         /// <summary>
-        ///A test for GetUserGroups
-        ///</summary>
+        ///     A test for GetUserGroups
+        /// </summary>
         [TestMethod]
         public void GetUserGroupsTest()
         {
             var target = new User("kkkkk");
             var expected = new ReadOnlyCollection<UserGroup>(new List<UserGroup>());
 
-            var actual = target.UserGroups;
+            Iesi.Collections.Generic.ISet<UserGroup> actual = target.UserGroups;
             Assert.AreEqual(expected.Count
-                            , actual.Count);
+                , actual.Count);
         }
 
 
         /// <summary>
-        ///A test for ClearUserGroup
-        ///</summary>
+        ///     A test for ClearUserGroup
+        /// </summary>
         [TestMethod]
         public void ClearUserGroupTest()
         {
@@ -329,8 +284,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for ChangePasswordByAnswer
-        ///</summary>
+        ///     A test for ChangePasswordByAnswer
+        /// </summary>
         [TestMethod]
         public void ChangePasswordByAnswerTest()
         {
@@ -372,8 +327,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for ChangePassword
-        ///</summary>
+        ///     A test for ChangePassword
+        /// </summary>
         [TestMethod]
         public void ChangePasswordTest()
         {
@@ -402,8 +357,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for ValidateUser
-        ///</summary>
+        ///     A test for ValidateUser
+        /// </summary>
         [TestMethod]
         public void CanLoginTest()
         {
@@ -411,10 +366,11 @@ namespace MemberShip.Test
             string inputPassword = "123456";
             string message;
 
-            var actual = target.Security.ValidateUser(inputPassword, out message);
+            ValidateUserResult actual = target.Security.ValidateUser(inputPassword, out message);
             Assert.AreEqual(ValidateUserResult.Success, actual);
 
-            Assert.AreEqual(ValidateUserResult.InvalidatePasswordOrAccount, target.Security.ValidateUser("error_password", out message));
+            Assert.AreEqual(ValidateUserResult.InvalidatePasswordOrAccount,
+                target.Security.ValidateUser("error_password", out message));
         }
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -447,7 +403,7 @@ namespace MemberShip.Test
 
             string inputPassword = "123456";
 
-            var actual = target.Security.ValidateUser(inputPassword, out message);
+            ValidateUserResult actual = target.Security.ValidateUser(inputPassword, out message);
             Assert.AreEqual(ValidateUserResult.MaxInValidatePasswordAttempt, actual);
         }
 
@@ -456,13 +412,13 @@ namespace MemberShip.Test
         public void CanLoginTest_checking_password_is_empty()
         {
             var target = new User("kkkkk", "123456");
-            var message = "";
+            string message = "";
             target.Security.ValidateUser(null, out message);
         }
 
         /// <summary>
-        ///A test for Add
-        ///</summary>
+        ///     A test for Add
+        /// </summary>
         [TestMethod]
         public void Add_Remove_UserGroup()
         {
@@ -470,7 +426,7 @@ namespace MemberShip.Test
             var ug = new UserGroup("usergroup2");
             Assert.IsTrue(target.UserGroups.Add(ug));
 
-            var s = target.UserGroups;
+            Iesi.Collections.Generic.ISet<UserGroup> s = target.UserGroups;
             Assert.IsTrue(s.Contains(ug));
 
             target.UserGroups.Remove(ug);
@@ -481,7 +437,6 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        /// 
         /// </summary>
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void Add_Null_UserGroup()
@@ -492,8 +447,8 @@ namespace MemberShip.Test
 
 
         /// <summary>
-        ///A test for User Constructor
-        ///</summary>
+        ///     A test for User Constructor
+        /// </summary>
         [TestMethod]
         public void UserConstructorTest1()
         {
@@ -505,8 +460,8 @@ namespace MemberShip.Test
         }
 
         /// <summary>
-        ///A test for User Constructor
-        ///</summary>
+        ///     A test for User Constructor
+        /// </summary>
         [TestMethod]
         public void UserConstructorTest()
         {
@@ -514,5 +469,55 @@ namespace MemberShip.Test
             var target = new User(loginId);
             Assert.AreEqual(loginId, target.LoginId);
         }
+
+        public class MembershipContextProvider : IMemberShipProvider
+        {
+            public string Encrypt(string content)
+            {
+                return content;
+            }
+
+            public string Decrypt(string content)
+            {
+                return content;
+            }
+        }
+
+        #region Additional test attributes
+
+        // 
+        //You can use the following additional attributes as you write your tests:
+        //
+        //Use ClassInitialize to run code before running the first test in the class
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            User.ValidateUserPolicy = new ValidateUserPolicy(new MembershipContextProvider())
+            {
+                MaxInvalidPasswordAttempts = 3
+            };
+        }
+
+        //
+        //Use ClassCleanup to run code after all tests in a class have run
+        //[ClassCleanup()]
+        //public static void MyClassCleanup()
+        //{
+        //}
+        //
+        //Use TestInitialize to run code before running each test
+        //[TestInitialize()]
+        //public void MyTestInitialize()
+        //{
+        //}
+        //
+        //Use TestCleanup to run code after each test has run
+        //[TestCleanup()]
+        //public void MyTestCleanup()
+        //{
+        //}
+        //
+
+        #endregion
     }
 }

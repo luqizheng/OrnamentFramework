@@ -125,7 +125,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(UserOperator.Modify, "User")]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userEditTitle", ParentKey = ResourceSetting.User,
-            Resource = ResourceSetting.User, Operator = UserOperator.Modify,PreservedRouteParameters = "loginId")]
+            Resource = ResourceSetting.User, Operator = UserOperator.Modify, PreservedRouteParameters = "loginId")]
         public ActionResult Edit(string loginId)
         {
             User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
@@ -231,7 +231,7 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(CreateUserModel createUser)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid || true)
             {
                 string errormessage;
                 if (createUser.Create(_memberShipFactory, out errormessage))
@@ -271,11 +271,11 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
-                where
-                    u.LoginId.Contains(loginIdOrEmail) ||
-                    u.Contact.Email.Contains(loginIdOrEmail)
-                select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
+                                               where
+                                                   u.LoginId.Contains(loginIdOrEmail) ||
+                                                   u.Contact.Email.Contains(loginIdOrEmail)
+                                               select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

@@ -141,7 +141,7 @@ namespace Ornament.MemberShip
         /// </value>
         [Display(Name = "LoginId", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
-             ErrorMessageResourceType = typeof (Resources)), RegularExpression(@"^[a-zA-z1-9_-]{1,20}",
+             ErrorMessageResourceType = typeof (Resources)), RegularExpression(@"^[a-zA-Z0-9_-]{1,20}",
                  ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (Resources))]
         public virtual string LoginId { get; set; }
 
