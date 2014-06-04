@@ -11,7 +11,7 @@
 }
 @section scripts{
     <script type="text/javascript">
-        seajs.use("@ScriptsSeajs.RenderUrl("/memberships/scripts/permissions/index.js")", function (init) {
+        seajs.use("@Scripts.Url("~/memberships/scripts/permissions/index.js")", function (init) {
             init({
                 warnDel: '@Html.GetEmbededResourceString("warnning_deleting_msg")',
                 delUrl: '@Url.Action("Delete")'
