@@ -7,7 +7,8 @@
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
-    IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>().CreateResourceDao()
+    IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
+        .CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
 }
 <div class="control-group">

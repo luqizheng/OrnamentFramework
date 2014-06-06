@@ -1,0 +1,55 @@
+﻿@using Ornament
+@using Ornament.MemberShip
+@using Ornament.Messages.Newses
+@using Basic = Ornament.Properties.Resources
+@model Ornament.MemberShip.Plugin.Areas.MemberShips.Models.PermissionResourceSelectModel
+
+
+@{
+    var items = OrnamentContext.DaoFactory.MemberShipFactory.UserGroups;
+    string selected = "";
+    if (items.Count() != 0)
+    {
+        selected = items.First().Id;
+        if (this.Model != null && this.Model.Permission != null && this.Model.Permission.Resource != null)
+        {
+            selected = ((UserGroup)this.Model.Permission.Resource).Id;
+        }
+    }
+}
+@if (items.Count() != 0)
+{
+    <table class="table table-condensed table-striped table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name
+                </th>
+                <th>Remark
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButton("ResourceId", item.Id, item.Id == selected)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <label class="alert-warning label">Can not find any UserGroup.</label>
+}

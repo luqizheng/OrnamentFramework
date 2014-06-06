@@ -39,6 +39,13 @@ namespace Ornament.MVCWebFrame
                 Path = "~/Areas/MemberShips/Views/Shared/RoleListRadio.cshtml",
                 ValueType = typeof(Role)
             });
+
+            OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
+            {
+                Name = "用户组资源",
+                Path = "~/Areas/MemberShips/Views/Shared/UserGroupListRadio.cshtml",
+                ValueType = typeof(Role)
+            });
         }
     }
 }
