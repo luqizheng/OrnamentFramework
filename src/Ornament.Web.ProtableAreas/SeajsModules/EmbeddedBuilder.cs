@@ -58,7 +58,7 @@
             {
                 currentExecutionFilePath = files.First<BundleFile>().IncludedVirtualPath;
             }
-            string areaName = this.GetAreaName(context.HttpContext.Request.CurrentExecutionFilePath);
+            string areaName = this.GetAreaName(bundle.Path);
             if (areaName == null)
             {
                 return "";

@@ -32,7 +32,7 @@ namespace Ornament.Web
         private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
         {
             ResgistSeajsFiles(e.Bus);
-            ((PortableAreaRegistration)sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
+            ((PortableAreaRegistration) sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
         }
 
         public void RegistryDefault()
@@ -46,7 +46,7 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("imageFolder");
             }
-            imageFolder = imageFolder.Trim(new[] { '/', ' ' });
+            imageFolder = imageFolder.Trim(new[] {'/', ' '});
             RegistyEmbedResouce(imageFolder);
         }
 
@@ -56,7 +56,7 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("scriptPath");
             }
-            scriptPath = scriptPath.Trim(new[] { '/', ' ', '~' });
+            scriptPath = scriptPath.Trim(new[] {'/', ' ', '~'});
             RegistyEmbedResouce(scriptPath);
         }
 
@@ -71,9 +71,10 @@ namespace Ornament.Web
             var item = new SeajsModel(bundlePath, virtualPath);
             _seajsEmbeddedModulePath.Add(item);
         }
+
         /// <summary>
-        /// 注册内嵌资源，如图片等，请注意，Mapping的时候，
-        /// 要主要必须在其他Route 注册之前，最好是第一个注册项目。
+        ///     注册内嵌资源，如图片等，请注意，Mapping的时候，
+        ///     要主要必须在其他Route 注册之前，最好是第一个注册项目。
         /// </summary>
         /// <param name="path"></param>
         public void RegistyEmbedResouce(string path)
@@ -82,11 +83,11 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("path");
             }
-            path = path.Trim(new[] { '/', ' ' });
+            path = path.Trim(new[] {'/', ' '});
             _context.MapRoute(_protablAreaRegistration.AreaName + "_" + path.Replace("/", "_") + "_embededResource",
                 string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
-                new { controller = "EmbeddedResource", action = "Index", resourcePath = path },
-                new[] { "Ornament.Web.Controllers" });
+                new {controller = "EmbeddedResource", action = "Index", resourcePath = path},
+                new[] {"Ornament.Web.Controllers"});
         }
 
         protected void ResgistSeajsFiles(IApplicationBus bus)
@@ -121,8 +122,8 @@ namespace Ornament.Web
         {
             public SeajsModel(string bundleNamee, string filePath)
             {
-                BundleNamee = bundleNamee.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
-                FilePath = filePath.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
+                BundleNamee = bundleNamee.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
+                FilePath = filePath.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
             }
 
             public string BundleNamee { get; private set; }

@@ -1,29 +1,35 @@
-﻿namespace Ornament.Web.SeajsModules
-{
-    using SeajsBundles;
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Web.Optimization;
+﻿using System;
+using System.Web.Optimization;
+using SeajsBundles;
 
+namespace Ornament.Web.SeajsModules
+{
     public class SeajsEmbedBundle : SeajsBundle
     {
         private readonly IBundleBuilder _bulder;
 
         public SeajsEmbedBundle(string virtualPath, string areaName, bool combine) : base(virtualPath, combine)
         {
-            this.AreaName = areaName;
-            this._bulder = new EmbeddedBuilder();
+            AreaName = areaName;
+            _bulder = new EmbeddedBuilder();
         }
 
         public SeajsEmbedBundle(string virtualPath, string areaName, string cdnPath) : base(virtualPath, cdnPath)
         {
-            this.AreaName = areaName;
-            this._bulder = new EmbeddedBuilder();
+            AreaName = areaName;
+            _bulder = new EmbeddedBuilder();
+        }
+
+        public string AreaName { get; set; }
+
+        public override IBundleBuilder Builder
+        {
+            get { return _bulder; }
         }
 
         public string GetContent(string virtualPath)
         {
-            EmbeddedBuilder builder = this.Builder as EmbeddedBuilder;
+            var builder = Builder as EmbeddedBuilder;
             if (builder == null)
             {
                 throw new Exception("builder should be EmbeddedBuilder");
@@ -31,15 +37,14 @@
             return builder.BuildBundleContent(virtualPath);
         }
 
-        public string AreaName { get; set; }
-
-        public override IBundleBuilder Builder
+        public override BundleResponse GenerateBundleResponse(BundleContext context)
         {
-            get
-            {
-                return this._bulder;
-            }
+            return base.GenerateBundleResponse(context);
+        }
+
+        public override void UpdateCache(BundleContext context, BundleResponse response)
+        {
+            base.UpdateCache(context, response);
         }
     }
 }
-
