@@ -139,12 +139,19 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         /// <param name="user"></param>
         public void UpdateOn(User user)
         {
+
             if (user == null)
                 throw new ArgumentNullException("user");
             user.Name = Name;
             user.TimeZoneId = TimeZoneId;
             user.Language = Language;
             EmailHasChanged = user.Contact.Email != Email;
+
+            if (EmailHasChanged)
+            {
+                user.Contact.EmailVerified = false;
+            }
+
             user.Contact.Email = Email;
             user.Contact.Phone = Phone;
 
