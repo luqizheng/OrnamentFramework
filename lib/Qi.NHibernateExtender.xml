@@ -51,11 +51,13 @@
             <summary>
             </summary>
             <param name="t"></param>
+            <exception cref="T:System.ArgumentNullException">t is null</exception>
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.SaveOrUpdate(`1)">
             <summary>
             </summary>
             <param name="t"></param>
+            <exception cref="T:System.ArgumentNullException">t is null</exception>
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.Save(`1)">
             <summary>
@@ -85,28 +87,24 @@
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.BeginTransaction">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.BeginTransaction(System.Data.IsolationLevel)">
             <summary>
-            
             </summary>
             <param name="isolationLevel"></param>
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.Commit">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.RollBack">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.Domain.NHibernates.DaoBase`2.Close">
             <summary>
-            关闭链接
+                关闭链接
             </summary>
             <returns></returns>
         </member>
@@ -133,6 +131,11 @@
         </member>
         <member name="P:Qi.Domain.NHibernates.DaoBase`2.CurrentSession">
             <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.Domain.NHibernates.DaoBase`2.AutoValidation">
+            <summary>
+            enabed validation DataAnnotations.
             </summary>
         </member>
         <member name="T:Qi.NHibernateExtender.Criterion.BitwiseFlags">
