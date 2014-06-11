@@ -166,7 +166,7 @@
     <value>最後修改時間</value>
   </data>
   <data name="LoginId" xml:space="preserve">
-    <value>登录名</value>
+    <value>登錄名</value>
   </data>
   <data name="LoginNotCorrectFormat" xml:space="preserve">
     <value>登錄必須為6～20為的字符、數字、下劃線、減號,並且區分大小寫</value>

@@ -7,7 +7,7 @@
         @Html.ValidationMessage("")
     </div>
     <div>
-        <img id="verifyCode" src="@Url.Action("Index", "VerifyCode", new { area = "" })" onclick='this.src = this.attributes["src"].value + "?" + Math.random()' style="cursor: pointer"/>
+        <img id="verifyCode" src="@Url.Action("Index", "VerifyCode", new { area = "" })/?@Guid.NewGuid().ToString("N") /> onclick='this.src = this.attributes["src"].value + "?" + Math.random()' style="cursor: pointer"/>
     </div>
 </div>
 <script type="text/javascript">
