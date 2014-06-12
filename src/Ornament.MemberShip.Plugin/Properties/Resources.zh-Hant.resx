@@ -202,4 +202,7 @@
   <data name="alertMsg_duplicate_Email" xml:space="preserve">
     <value>電子郵箱已經被使用，請輸入另外一個</value>
   </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>驗證碼</value>
+  </data>
 </root>
