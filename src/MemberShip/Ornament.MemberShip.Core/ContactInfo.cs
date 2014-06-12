@@ -75,7 +75,7 @@ namespace Ornament.MemberShip
 
             public virtual bool EmailVerified
             {
-                get { return _emailVerified && String.IsNullOrEmpty(Email); }
+                get { return _emailVerified && !String.IsNullOrEmpty(Email); }
                 set { _emailVerified = value; }
             }
 
