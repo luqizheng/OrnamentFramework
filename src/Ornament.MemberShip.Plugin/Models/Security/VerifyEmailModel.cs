@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
@@ -43,6 +44,7 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             if (_emailVerifier.Type == VerifyType.Email
                 && _emailVerifier.Verify(token, daoFactory) == VerifyResult.Success)
             {
+
                 daoFactory.CreateUserDao().SaveOrUpdate(loginUser);
                 return VerifyResult.Success;
             }
@@ -56,8 +58,14 @@ namespace Ornament.MemberShip.Plugin.Models.Security
         /// <returns></returns>
         public bool Send(IMemberShipFactory daoFactory)
         {
+            if (daoFactory == null) throw new ArgumentNullException("daoFactory");
+            if (String.IsNullOrEmpty(Id))
+                throw new ArgumentException("Id", "Id is empty");
             User myUsers = daoFactory.CreateUserDao().Get(Id);
-
+            if (myUsers == null)
+            {
+                throw new ArgumentException("Id", String.Format("can not find any use with id={0}", Id));
+            }
             EmailVerifier token = myUsers.Contact.VerifyEmail(30, daoFactory);
 
             var deleage = new CreateVariablesHandler(user => new Dictionary<string, string>

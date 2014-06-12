@@ -134,6 +134,10 @@ namespace Ornament.MemberShip.Security
         public virtual VerifyResult Verify(string token, IMemberShipFactory daoFactory)
         {
             VerifyResult re = Verify(token);
+            if (re == VerifyResult.Success)
+            {
+                this.Account.Contact.EmailVerified = true;
+            }
             daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
             return re;
         }

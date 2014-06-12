@@ -90,21 +90,7 @@ namespace Ornament.MemberShip
             public virtual EmailVerifier VerifyEmail(int expireMiniutes, IMemberShipFactory daoFactory)
             {
                 var dao = daoFactory.CreateEmailVerifierDao();
-                var result = dao.Get(this.User, VerifyType.Email);
-                if (result != null)
-                {
-                    if (!result.IsTransient())
-                    {
-                        if (result.Status == SecretTokenStatus.Expire || result.Status == SecretTokenStatus.Success)
-                        {
-                            dao.SaveOrUpdate(result);
-                        }
-                        else
-                        {
-                            result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
-                        }
-                    }
-                }
+                var result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
                 dao.SaveOrUpdate(result);
                 EmailVerified = false;
                 return result;
