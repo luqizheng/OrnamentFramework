@@ -184,6 +184,8 @@ namespace Ornament.MemberShip.Security
 
         private string CreateToken(User user)
         {
+
+
             return (user.LoginId + CreateTime.ToString("yyyy-MM-dd") + PrivateKey).Sha1Unicode().ToStringEx();
         }
 

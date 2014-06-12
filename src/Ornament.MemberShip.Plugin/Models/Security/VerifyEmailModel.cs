@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.UI.WebControls;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
 using Ornament.Messages.Notification;
@@ -42,6 +43,7 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             if (_emailVerifier.Type == VerifyType.Email
                 && _emailVerifier.Verify(token, daoFactory) == VerifyResult.Success)
             {
+                daoFactory.CreateUserDao().SaveOrUpdate(loginUser);
                 return VerifyResult.Success;
             }
 
@@ -61,10 +63,11 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             var deleage = new CreateVariablesHandler(user => new Dictionary<string, string>
             {
                 {"name", user.Name},
-                {"paramers", token.CreateQueryString()}
+                {"parameters", token.CreateQueryString()}
             });
             OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress.Publish(daoFactory, deleage, myUsers);
 
+            daoFactory.CreateUserDao().SaveOrUpdate(myUsers);
             return true;
         }
     }

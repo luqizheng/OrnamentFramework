@@ -33,7 +33,7 @@ namespace Ornament.MemberShip
             ///     The phone.
             /// </value>
             [Display(Name = "Phone",
-                ResourceType = typeof (Resources)),
+                ResourceType = typeof(Resources)),
              StringLength(30)]
             public virtual string Phone
             {
@@ -55,10 +55,10 @@ namespace Ornament.MemberShip
             ///     The email.
             /// </value>
             [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
-                ErrorMessageResourceType = typeof (Resources)),
-             Display(Name = "Email", ResourceType = typeof (Resources)),
+                ErrorMessageResourceType = typeof(Resources)),
+             Display(Name = "Email", ResourceType = typeof(Resources)),
              RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (Resources))]
+                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof(Resources))]
             [MaxLength(64)]
             public virtual string Email
             {
@@ -89,8 +89,23 @@ namespace Ornament.MemberShip
             /// <returns></returns>
             public virtual EmailVerifier VerifyEmail(int expireMiniutes, IMemberShipFactory daoFactory)
             {
-                var result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
-                daoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
+                var dao = daoFactory.CreateEmailVerifierDao();
+                var result = dao.Get(this.User, VerifyType.Email);
+                if (result != null)
+                {
+                    if (!result.IsTransient())
+                    {
+                        if (result.Status == SecretTokenStatus.Expire || result.Status == SecretTokenStatus.Success)
+                        {
+                            dao.SaveOrUpdate(result);
+                        }
+                        else
+                        {
+                            result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
+                        }
+                    }
+                }
+                dao.SaveOrUpdate(result);
                 EmailVerified = false;
                 return result;
             }

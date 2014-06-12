@@ -197,7 +197,12 @@ namespace Ornament
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
                 if (HttpContext.Current != null)
                 {
-                    HttpContext.Current.Response.Cookies[LangCookieName].Value = language;
+                    
+                    HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
+                    {
+                        Value=language,
+                        HttpOnly = true,
+                    }); 
                 }
                 User currentUser = OrnamentContext.MemberShip.CurrentUser();
                 if (currentUser != null && language != currentUser.Language)
