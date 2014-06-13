@@ -137,8 +137,10 @@ namespace Ornament.MemberShip.Security
             if (re == VerifyResult.Success)
             {
                 this.Account.Contact.EmailVerified = true;
+                daoFactory.CreateUserDao().SaveOrUpdate(this.Account);
             }
             daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
+
             return re;
         }
 

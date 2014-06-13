@@ -74,18 +74,13 @@ namespace Ornament.MVCWebFrame.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        /// <summary>
-        ///     log on.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        public ActionResult LogOn()
+        public ActionResult LogOn(string returnUrl)
         {
-            var a = new LogonModel
+            return View(new LogonModel()
             {
-                ReturnUrl = Request.QueryString["ReturnUrl"]
-            };
-            return View(a);
+                ReturnUrl = returnUrl
+
+            });
         }
 
         [Authorize]
@@ -132,8 +127,6 @@ namespace Ornament.MVCWebFrame.Controllers
                 }
                 return View(model);
             }
-            var result = Membership.ValidateUser(model.User, model.Password);
-            model.ReturnUrl = model.ReturnUrl;
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
                 ? (ActionResult)Redirect(model.ReturnUrl)
