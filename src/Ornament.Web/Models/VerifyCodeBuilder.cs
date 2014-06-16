@@ -109,7 +109,7 @@ namespace Ornament.Web.Models
                 num9 = num6*num2;
                 graphics.DrawString(code.Substring(num6, 1), font, brush, num9, num10);
             }
-            graphics.DrawRectangle(new Pen(Color.Gray, 0f), 0, 0, image.Width - 1, image.Height - 1);
+            //graphics.DrawRectangle(new Pen(Color.Gray, 0f), 0, 0, image.Width - 1, image.Height - 1);
             graphics.Dispose();
             if (Twist)
             {
