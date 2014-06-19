@@ -18,6 +18,7 @@
                     return ++r;
                 };
 
+                vm.$skipArray = ["firstLoad"];
                 vm.page = -1;
                 vm.pages = [];
                 vm.dataLength = 0;//现在页面显示多少数据
@@ -121,11 +122,14 @@
                 //widget的VM已经生成，可以添加回去让它被扫描
                 element.innerHTML = innerHTML;
                 avalon.scan(element, [model].concat(vmodels));
-                model.nav(0);
+                if (model.firstLoad) {
+                    model.nav(0);
+                }
             });
             return model;
         };
         widget.defaults = {
+            firstLoad: true,
             totalPage: 1,
             showPages: 10,
             pageSize: 25,

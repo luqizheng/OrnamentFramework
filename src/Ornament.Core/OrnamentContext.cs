@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Ornament.Contexts;
@@ -142,12 +143,7 @@ namespace Ornament
         {
             if(utcOffsetHout>23||utcOffsetHout<0)
                 throw new ArgumentOutOfRangeException("utcOffsetHout","utcOffsetHour should be bewteen 0 and 23.");
-            foreach (var a in TimeZoneInfo.GetSystemTimeZones())
-            {
-                if (a.BaseUtcOffset.Hours == utcOffsetHout)
-                    return a;
-            }
-            return null;
+            return TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(a => a.BaseUtcOffset.Hours == utcOffsetHout);
         }
     }
 }
