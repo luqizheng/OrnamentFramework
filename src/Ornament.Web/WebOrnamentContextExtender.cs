@@ -118,7 +118,7 @@ namespace Ornament
         public static DateTime ToClientDateTime(this MemberShipContext context, DateTime serverTime)
         {
             var user = context.CurrentUser();
-            if (user!=null)
+            if (user != null)
             {
                 var timeZoneId = user.TimeZoneId;
                 if (!String.IsNullOrEmpty(timeZoneId))
@@ -134,7 +134,7 @@ namespace Ornament
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        private static int OffSetHour(this MemberShipContext context)
+        public static int OffSetHour(this MemberShipContext context)
         {
             int? clientSetting = OrnamentModule.GetOffSetHour();
             if (clientSetting == null)
@@ -197,12 +197,12 @@ namespace Ornament
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
                 if (HttpContext.Current != null)
                 {
-                    
+
                     HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
                     {
-                        Value=language,
+                        Value = language,
                         HttpOnly = true,
-                    }); 
+                    });
                 }
                 User currentUser = OrnamentContext.MemberShip.CurrentUser();
                 if (currentUser != null && language != currentUser.Language)
