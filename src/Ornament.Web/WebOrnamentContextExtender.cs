@@ -195,20 +195,22 @@ namespace Ornament
             {
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
-                if (HttpContext.Current != null)
-                {
 
-                    HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
-                    {
-                        Value = language,
-                        HttpOnly = true,
-                    });
-                }
-                User currentUser = OrnamentContext.MemberShip.CurrentUser();
-                if (currentUser != null && language != currentUser.Language)
+
+                HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
                 {
-                    currentUser.Language = language;
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
+                    Value = language,
+                    HttpOnly = false,
+                });
+
+                User currentUser = OrnamentContext.MemberShip.CurrentUser();
+                if (currentUser != null)
+                {
+                    if (language != currentUser.Language)
+                    {
+                        currentUser.Language = language;
+                        OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
+                    }
                 }
                 return true;
             }
