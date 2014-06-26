@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Ornament.Web.PortableAreas;
@@ -24,7 +25,9 @@ namespace Ornament.Web.SeajsModules
                     throw new ArgumentOutOfRangeException(base.RequireId +
                                                           " is not a assembly embeded resources with js file.");
                 }
-                return bundleFor.GetContent(base.RequireId);
+
+
+                return bundleFor.Builder.BuildBundleContent(bundleFor, this.Context, bundleFor.EnumerateFiles(Context));
             }
         }
 
@@ -35,7 +38,7 @@ namespace Ornament.Web.SeajsModules
             {
                 return false;
             }
-            var areaName = (string) routeDataByUrl.DataTokens["area"];
+            var areaName = (string)routeDataByUrl.DataTokens["area"];
             if (areaName == null)
             {
                 return false;

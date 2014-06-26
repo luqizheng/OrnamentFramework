@@ -49,7 +49,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [Display(Name = "LoginId", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_MissLoginId",
             ErrorMessageResourceType = typeof(Properties.Resources))]
-        [RegularExpression(@"^[a-zA-Z0-9_-]{3,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
+        [RegularExpression(@"^[a-zA-Z0-9_-]{6,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
             ErrorMessageResourceType = typeof(Resources))]
         [UIHint("String")]
         [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",

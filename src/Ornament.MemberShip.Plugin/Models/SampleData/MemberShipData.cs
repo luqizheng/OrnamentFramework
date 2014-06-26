@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Security;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
@@ -7,23 +6,39 @@ using Ornament.Web.DataInitializers;
 
 namespace Ornament.MemberShip.Plugin.Models.SampleData
 {
-    public class MemberShipData : IDataInitializer
+    public class MemberShipData : MemberShipDataInitializer, IDataInitializer
     {
         public string AdminPassword { get; set; }
 
         #region IDataInitializer Members
 
-        public virtual string Name
+        public override Permission[] Permissions
+        {
+            get
+            {
+                return new Permission[]
+                {
+                    //new GenericPermission<string>(ResourceSetting.User)
+                    //{
+                    //    Name = "用户管理员许可",
+                    //    Remark = "用户管理员,所有与用户有关的权限、分组、组织单元",
+                    //    Operator = Convert.ToInt32(GetAll<UserOperator>())
+                    //}
+                };
+            }
+        }
+
+        public override string Name
         {
             get { return "Initialze Membership"; }
         }
 
-        public virtual bool IsNeedInitialize
+        public override bool IsNeedInitialize
         {
             get { return true; }
         }
 
-        public virtual void CreateData()
+        public override void CreateData()
         {
             InitMemberShip();
         }
@@ -32,27 +47,31 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         private void InitMemberShip()
         {
-            Permission userPermission = CreatePermission(ResourceSetting.User, "用户管理员许可", "用户管理员,所有与用户有关的权限、分组、组织单元",
+            Permission userPermission = MemberShipDataInitializer.CreatePermission(ResourceSetting.User, "用户管理员许可",
+                "用户管理员,所有与用户有关的权限、分组、组织单元",
                 UserOperator.Approve | UserOperator.Lock | UserOperator.Modify |
                 UserOperator.Read | UserOperator.SetPassword |
                 UserOperator.Delete |
                 UserOperator.ReadPrivat);
 
-            Permission rolePermission = CreatePermission(ResourceSetting.Role, "角色管理员许可", "角色完全控制,包括分配，删除、新增操作",
+            Permission rolePermission = MemberShipDataInitializer.CreatePermission(ResourceSetting.Role, "角色管理员许可",
+                "角色完全控制,包括分配，删除、新增操作",
                 RoleOperator.Assign | RoleOperator.Modify | RoleOperator.Read);
 
-            Permission memberPermission = CreatePermission(ResourceSetting.Account, "账户管理员可证", "用户管理自己本身信息的许可证",
+            Permission memberPermission = MemberShipDataInitializer.CreatePermission(ResourceSetting.Account, "账户管理员可证",
+                "用户管理自己本身信息的许可证",
                 AccountOperator.ChangePassword |
                 AccountOperator.ViewPermission |
                 AccountOperator.ChangePrivateInfo);
 
-            Permission permissionPermission = CreatePermission(ResourceSetting.Permission, "许可证管理员", "许可证完全控制",
+            Permission permissionPermission = MemberShipDataInitializer.CreatePermission(ResourceSetting.Permission,
+                "许可证管理员", "许可证完全控制",
                 PermissionOperator.Read | PermissionOperator.Delete |
                 PermissionOperator.Edit);
 
-            Permission orgPermission = CreatePermission(ResourceSetting.Org, "组织管理许可", "用户所在部门及下属部门都可以控制",
+            Permission orgPermission = MemberShipDataInitializer.CreatePermission(ResourceSetting.Org, "组织管理许可",
+                "用户所在部门及下属部门都可以控制",
                 OrgOperator.Delete);
-
 
 
             Role godRole = CreateRole(ResourceSetting.AdminRoleAccount, "管理员");
@@ -76,77 +95,10 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(adminUser);
             OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().Flush();
             //组织管理员
-            var roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
-            var orgRole = CreateRole(ResourceSetting.Org, "组织单元管理员");
+            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+            Role orgRole = CreateRole(ResourceSetting.Org, "组织单元管理员");
             orgRole.Permissions.Add(orgPermission);
             roleDao.SaveOrUpdate(orgRole);
-
-        }
-
-        private User CreateUser(string username, string password, string email
-            , string question, string answord)
-        {
-            IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
-            User user = userDao.GetByLoginId(username);
-            if (user == null)
-            {
-                MembershipCreateStatus status;
-                MembershipUser u = Membership.CreateUser(username, password, email, question,
-                    answord, true, out status);
-            }
-            return userDao.GetByLoginId(username);
-        }
-
-        protected UserGroup CreateUserGroup(string name)
-        {
-            IUserGroupDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
-            UserGroup ug = dao.GetByName(name);
-            if (ug != null)
-            {
-                return ug;
-            }
-            return new UserGroup(name);
-        }
-
-        protected Role CreateRole(string name, string remark)
-        {
-            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
-
-            Role role = roleDao.GetByName(name) ?? new Role(name) { Remarks = remark };
-            roleDao.SaveOrUpdate(role);
-
-            return role;
-        }
-
-        protected Org CreateOrg(string name, string remark, Org parent)
-        {
-            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
-            Org org = orgDao.GetByName(name, parent) ?? new Org(name) { Remarks = remark };
-            parent.Childs.Add(org);
-            orgDao.SaveOrUpdate(org);
-            return org;
-        }
-
-        protected Org CreateRootOrg(string name, string remark)
-        {
-            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
-            Org org = orgDao.GetRootOrgBy(name) ?? new Org(name) { Remarks = remark };
-            orgDao.SaveOrUpdate(org);
-            return org;
-        }
-
-        protected Permission CreatePermission<T>(T resObj, string permisionName, string remark, Enum eEnum)
-        {
-            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
-
-            Permission permission = dao.GetPermission(permisionName) ?? new GenericPermission<T>(resObj)
-            {
-                Name = permisionName,
-                Remark = remark,
-                Operator = Convert.ToInt32(eEnum)
-            };
-            dao.SaveOrUpdate(permission);
-            return permission;
         }
     }
 }

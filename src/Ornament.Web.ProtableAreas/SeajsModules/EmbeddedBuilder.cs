@@ -1,33 +1,36 @@
-﻿namespace Ornament.Web.SeajsModules
-{
-    using Ornament;
-    using Ornament.Web.PortableAreas;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
-    using System.Web.Optimization;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Optimization;
+using Ornament.Web.PortableAreas;
 
+namespace Ornament.Web.SeajsModules
+{
     public class EmbeddedBuilder : IBundleBuilder
     {
         public EmbeddedBuilder()
         {
         }
 
-        [Obsolete]
-        public EmbeddedBuilder(string assemblyStartNamespace)
+     
+        public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
-            this.AssemblyStartNamespace = assemblyStartNamespace;
+            string currentExecutionFilePath = context.HttpContext.Request.CurrentExecutionFilePath;
+            if (files.Count() != 0)
+            {
+                currentExecutionFilePath = files.First().IncludedVirtualPath;
+            }
+            string areaName = GetAreaName(bundle.Path);
+            if (areaName == null)
+            {
+                return "";
+            }
+            
+            return BuildBundleContent(currentExecutionFilePath, areaName,context);
         }
 
-        public string BuildBundleContent(string filePath)
-        {
-            string areaName = this.GetAreaName(filePath);
-            return this.BuildBundleContent(filePath, areaName);
-        }
-
-        public string BuildBundleContent(string filePath, string areaName)
+        public string BuildBundleContent(string filePath, string areaName, BundleContext context)
         {
             if (areaName == null)
             {
@@ -38,32 +41,18 @@
             AssemblyResourceStore resourceStoreForArea = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             if (!filePath.StartsWith("~/areas/"))
             {
-                filePath = "~/areas" + filePath.TrimStart(new char[] { '~' });
+                filePath = "~/areas" + filePath.TrimStart(new[] {'~'});
             }
             Stream resourceStream = resourceStoreForArea.GetResourceStream(filePath);
             if (resourceStream == null)
             {
-                return string.Format("console.log('Cannot find embed file {0} in {1} assembly')", resourceStoreForArea.GetFullyQualifiedTypeFromPath(filePath), areaName);
+                return string.Format("console.log('Cannot find embed file {0} in {1} assembly')",
+                    resourceStoreForArea.GetFullyQualifiedTypeFromPath(filePath), areaName);
             }
-            using (StreamReader reader = new StreamReader(resourceStream))
+            using (var reader = new StreamReader(resourceStream))
             {
                 return reader.ReadToEnd();
             }
-        }
-
-        public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
-        {
-            string currentExecutionFilePath = context.HttpContext.Request.CurrentExecutionFilePath;
-            if (files.Count<BundleFile>() != 0)
-            {
-                currentExecutionFilePath = files.First<BundleFile>().IncludedVirtualPath;
-            }
-            string areaName = this.GetAreaName(bundle.Path);
-            if (areaName == null)
-            {
-                return "";
-            }
-            return this.BuildBundleContent(currentExecutionFilePath, areaName);
         }
 
         private string GetAreaName(string virtualPath)
@@ -72,16 +61,12 @@
             {
                 virtualPath = "~" + virtualPath;
             }
-            SeajsEmbedBundle bundleFor = BundleTable.Bundles.GetBundleFor(virtualPath) as SeajsEmbedBundle;
+            var bundleFor = BundleTable.Bundles.GetBundleFor(virtualPath) as SeajsEmbedBundle;
             if (bundleFor != null)
             {
                 return bundleFor.AreaName;
             }
             return null;
         }
-
-        [Obsolete]
-        public string AssemblyStartNamespace { get; private set; }
     }
 }
-

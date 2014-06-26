@@ -50,7 +50,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
                 return false;
             }
             ValidateUserResult result = user.Security.ValidateUser(Password, out errorMessage);
-            var cookieLanguae = OrnamentContext.MemberShip.CookieRequestLanguage();
+            var cookieLanguae = OrnamentContext.MemberShip.CurrentLanguage().Key;
             if (cookieLanguae != null && user.Language != cookieLanguae)
             {
                 OrnamentContext.MemberShip.SwitchLanguage(cookieLanguae);

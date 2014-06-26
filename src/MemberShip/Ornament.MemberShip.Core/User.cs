@@ -52,8 +52,8 @@ namespace Ornament.MemberShip
             if (loginId == null) throw new ArgumentNullException("loginId");
             if (password == null) throw new ArgumentNullException("password");
 
-            if(_security==null)
-                _security=new SecurityInfo(this);
+            if (_security == null)
+                _security = new SecurityInfo(this);
             _security.ChangePassword(password);
         }
 
@@ -71,7 +71,12 @@ namespace Ornament.MemberShip
             _security = new SecurityInfo(this);
             _contact = new ContactInfo(this);
 
-            _other = new OtherUserInfo {CreateTime = DateTime.Now};
+            _other = new OtherUserInfo { CreateTime = DateTime.Now };
+        }
+
+        public bool IsRoot
+        {
+            get { return LoginId == AdminLoginId; }
         }
 
         public virtual SecurityInfo Security
@@ -80,7 +85,7 @@ namespace Ornament.MemberShip
         }
 
 
-        [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
+        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
         [UIHint("TimeZone")]
         public virtual string TimeZoneId
         {
@@ -95,7 +100,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets language
         /// </summary>
-        [Display(Name = "Language", ResourceType = typeof (Resources))]
+        [Display(Name = "Language", ResourceType = typeof(Resources))]
         [UIHint("Language")]
         public virtual string Language { get; set; }
 
@@ -130,7 +135,7 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets Deny, if set to True, user can't be access
         /// </summary>
-        [Display(Name = "error_UserIsDeny", ResourceType = typeof (Resources))]
+        [Display(Name = "error_UserIsDeny", ResourceType = typeof(Resources))]
         public virtual bool IsDeny { get; set; }
 
         /// <summary>
@@ -139,10 +144,10 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The login id.
         /// </value>
-        [Display(Name = "LoginId", ResourceType = typeof (Resources)),
+        [Display(Name = "LoginId", ResourceType = typeof(Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
-             ErrorMessageResourceType = typeof (Resources)), RegularExpression(@"^[a-zA-Z0-9_-]{1,20}",
-                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (Resources))]
+             ErrorMessageResourceType = typeof(Resources)), RegularExpression(@"^[a-zA-Z0-9_-]{1,20}",
+                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof(Resources))]
         public virtual string LoginId { get; set; }
 
 
@@ -229,16 +234,16 @@ namespace Ornament.MemberShip
 
         #region IPerformer Members
 
-        [Display(Name = "Org", ResourceType = typeof (Resources))]
+        [Display(Name = "Org", ResourceType = typeof(Resources))]
         public virtual Org Org { get; set; }
 
 
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Resources)),
+        [Display(Name = "Name", ResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof (Resources))]
+             ErrorMessageResourceType = typeof(Resources))]
         public override string Name
         {
             get

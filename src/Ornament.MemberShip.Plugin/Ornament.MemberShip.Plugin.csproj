@@ -191,6 +191,7 @@
     <Compile Include="Models\Memberships\RoleModel.cs" />
     <Compile Include="Models\Memberships\UserGroupDetailInfor.cs" />
     <Compile Include="Models\OrgTreeItem.cs" />
+    <Compile Include="Models\SampleData\MemberShipDataInitializer.cs" />
     <Compile Include="Models\SampleData\MemberShipData.cs" />
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
     <Compile Include="Models\Memberships\CreateUserModel.cs" />
