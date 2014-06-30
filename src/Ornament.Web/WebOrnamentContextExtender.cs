@@ -5,7 +5,6 @@ using System.Threading;
 using System.Web;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
