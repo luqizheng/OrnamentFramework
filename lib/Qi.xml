@@ -825,6 +825,21 @@
             <param name="enumValue"></param>
             <returns></returns>
         </member>
+        <member name="M:Qi.EnumHelper.ToSimpleDescription(System.Enum,System.Globalization.CultureInfo)">
+            <summary>
+            Skip FlagsAttribute
+            </summary>
+            <param name="enumValue"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.EnumHelper.ToSimpleDescription(System.Enum)">
+            <summary>
+            Skip flags
+            </summary>
+            <param name="enumValue"></param>
+            <returns></returns>
+        </member>
         <member name="M:Qi.EnumHelper.ToDescriptionAry(System.Enum)">
             <summary>
             
