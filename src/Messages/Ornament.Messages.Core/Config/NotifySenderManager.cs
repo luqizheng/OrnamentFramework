@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using Ornament.Messages.Notification;
@@ -8,6 +9,9 @@ using Qi.IO.Serialization;
 
 namespace Ornament.Messages.Config
 {
+    /// <summary>
+    /// Default is ~/messageVariables.xml or use appSetting Key="MessageVariables"
+    /// </summary>
     public class NotifySenderManager
     {
         public static readonly NotifySenderManager Instance = new NotifySenderManager();
@@ -17,7 +21,8 @@ namespace Ornament.Messages.Config
 
         private NotifySenderManager()
         {
-            StoreFile = ApplicationHelper.MapPath("~/messageVariables.xml");
+            var path = ConfigurationManager.AppSettings["MessageVariables"] ?? ("~/messageVariables.xml");
+            StoreFile = ApplicationHelper.MapPath(path);
             _senders = new Dictionary<CommunicationType, ISender>();
             ReloadVariables();
         }
