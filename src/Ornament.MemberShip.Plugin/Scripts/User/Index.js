@@ -2,7 +2,7 @@
 /// <reference path="../Share/dataTables.js" />
 define(function(require) {
     require("/scripts/views/_appLayout.js");
-    //require("/scripts/modules/combine/pagination.js")(avalon);
+    require("/scripts/avalons/Pagination/pagination.js")(avalon);
 
     var lang = {};
     var $ = require("jquery"),
