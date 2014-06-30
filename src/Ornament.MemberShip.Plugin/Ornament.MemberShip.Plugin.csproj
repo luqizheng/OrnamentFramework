@@ -364,6 +364,7 @@
     <EmbeddedResource Include="Scripts\Role\Create.js" />
     <EmbeddedResource Include="Scripts\Role\Edit.js" />
     <EmbeddedResource Include="Scripts\Share\roleCheckboxes.js" />
+    <Content Include="Scripts\Share\_NewPassword.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

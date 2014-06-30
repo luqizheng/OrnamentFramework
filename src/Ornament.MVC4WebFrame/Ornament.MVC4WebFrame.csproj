@@ -274,6 +274,7 @@
     <Content Include="Content\templates\pannonia\css\select2-bootstrap.css" />
     <Content Include="Content\templates\pannonia\css\select2-old.css" />
     <Content Include="Content\templates\pannonia\css\StyleSheet1.css" />
+    <Content Include="Scripts\avalons\Pagination\pagination.js" />
     <Content Include="Scripts\Modules\ui\paginations\pagination.js" />
     <Content Include="Scripts\plugins\forms\jquery.ztree-3.5\img\diy\1_close.png" />
     <Content Include="Scripts\plugins\forms\jquery.ztree-3.5\img\diy\1_open.png" />
@@ -914,7 +915,6 @@
     <Content Include="Views\Shared\Backend\pannonia\_crumbs.cshtml" />
     <Content Include="Views\Shared\Backend\pannonia\_mainMenu.cshtml" />
     <Content Include="Views\Shared\Backend\Error.cshtml" />
-    <Content Include="Views\Shared\Backend\NavPagination.cshtml" />
     <Content Include="Views\Shared\_topMenu.cshtml" />
     <Content Include="Views\HttpErrors\AjaxError.cshtml" />
     <Content Include="Scripts\seajs\sea.js.map" />
@@ -947,6 +947,7 @@
     <Content Include="Views\Shared\EditorTemplates\Language.cshtml" />
     <Content Include="Views\Security\VerifyEmail.cshtml" />
     <Content Include="Views\Security\TokenError.cshtml" />
+    <Content Include="Scripts\avalons\Pagination\Pagination.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1171,7 +1172,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>13012</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:37027/</IISUrl>
+          <IISUrl>http://localhost:37017/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

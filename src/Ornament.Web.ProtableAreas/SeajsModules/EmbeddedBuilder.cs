@@ -13,10 +13,10 @@ namespace Ornament.Web.SeajsModules
         {
         }
 
-     
+
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
-            string currentExecutionFilePath = context.HttpContext.Request.CurrentExecutionFilePath;
+            string currentExecutionFilePath = bundle.Path;
             if (files.Count() != 0)
             {
                 currentExecutionFilePath = files.First().IncludedVirtualPath;
@@ -26,8 +26,8 @@ namespace Ornament.Web.SeajsModules
             {
                 return "";
             }
-            
-            return BuildBundleContent(currentExecutionFilePath, areaName,context);
+
+            return BuildBundleContent(currentExecutionFilePath, areaName, context);
         }
 
         public string BuildBundleContent(string filePath, string areaName, BundleContext context)
@@ -41,7 +41,7 @@ namespace Ornament.Web.SeajsModules
             AssemblyResourceStore resourceStoreForArea = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             if (!filePath.StartsWith("~/areas/"))
             {
-                filePath = "~/areas" + filePath.TrimStart(new[] {'~'});
+                filePath = "~/areas" + filePath.TrimStart(new[] { '~' });
             }
             Stream resourceStream = resourceStoreForArea.GetResourceStream(filePath);
             if (resourceStream == null)
