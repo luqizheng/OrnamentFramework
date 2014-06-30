@@ -73,8 +73,10 @@ namespace Ornament.MemberShip
 
             _other = new OtherUserInfo { CreateTime = DateTime.Now };
         }
-
-        public bool IsRoot
+        /// <summary>
+        /// ÊÇ·ñÎªadministrator
+        /// </summary>
+        public virtual bool IsRoot
         {
             get { return LoginId == AdminLoginId; }
         }
