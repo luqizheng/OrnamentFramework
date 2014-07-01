@@ -63,18 +63,6 @@ namespace Ornament.Web
             string defaultReex =
                 resourceStore.GetFullyQualifiedTypeFromPath(string.Format(@"{0}/{1}.resources", filePath, pageName));
             return resourceStore.GetMultiLanguageResouce(defaultReex);
-            /*if (stream == null)
-                return null;
-            try
-            {
-                var reader = new ResourceSet(new ResourceReader(stream));
-                
-                return reader;
-            }
-            catch (Exception)
-            {
-                return null;
-            }*/
         }
     }
 }

@@ -4,7 +4,7 @@
 
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = Html.GetResourceString("Home");
     Layout = OrnamentContext.Configuration.BackendLayout();
 }
 @*section pageTitle
@@ -14,7 +14,7 @@
     <span>@Html.GetResourceString("Home_subtitle")</span>
 }*@
 
-@OrnamentContext.MemberShip.ToClientDateTime(DateTime.Now);
+@Html.GetResourceString("Home")
 <div class="actions-wrapper">
     <div class="actions">
 

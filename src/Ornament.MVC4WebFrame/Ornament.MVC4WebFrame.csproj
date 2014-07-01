@@ -56,6 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.6.3\lib\net45\MvcSiteMapProvider.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Qi, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.dll</HintPath>
@@ -903,6 +906,10 @@
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{c8cdafc3-3071-4246-91ef-c9e8dfbdbae4}</Project>
       <Name>Ornament.Messages.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Plugin\Ornament.Messages.Plugin.csproj">
+      <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
+      <Name>Ornament.Messages.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
