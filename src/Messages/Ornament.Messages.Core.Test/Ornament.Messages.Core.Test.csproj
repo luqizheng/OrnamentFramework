@@ -58,41 +58,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Qi.NHibernateExtender">
-      <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
-      <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
-      <Name>Ornament.MemberShip.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
-      <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
-      <Name>Ornament.Messages.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ornament.Messages.Dao.NHibernateImple\Ornament.Messages.Dao.NHibernateImple.csproj">
-      <Project>{65B35676-172D-4C01-BA1E-02D99083C155}</Project>
-      <Name>Ornament.Messages.Dao.NHibernateImple</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

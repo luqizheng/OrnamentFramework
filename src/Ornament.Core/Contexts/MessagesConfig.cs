@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using Ornament.Messages;
+using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Retrives;
 using Ornament.Properties;
@@ -21,12 +22,16 @@ namespace Ornament.Contexts
             _systemId = new NotifyTypeRetrive("System");
         }
 
+        private IMessageDaoFactory MessageDaoFactory
+        {
+            get { return OrnamentContext.DaoFactory.GetDaoFactory<IMessageDaoFactory>(); }
+        }
         /// <summary>
         ///     System Notify Type.
         /// </summary>
         public NotifyType SystemType
         {
-            get { return _systemId.Get(); }
+            get { return _systemId.Get(MessageDaoFactory); }
         }
 
         /// <summary>
@@ -46,7 +51,7 @@ namespace Ornament.Contexts
                         DeserializerXml(Resources.registAccount_zh, "zh-Hant")
                         );
                 }
-                return _registryAccount.Get();
+                return _registryAccount.Get(MessageDaoFactory);
             }
         }
 
@@ -72,7 +77,7 @@ inside veriable:
                         );
                 }
 
-                return _verifyEmailAddress.Get();
+                return _verifyEmailAddress.Get(MessageDaoFactory);
             }
         }
 
@@ -92,7 +97,7 @@ inside veriable:
                         );
                 }
 
-                return _passwordRetrive.Get();
+                return _passwordRetrive.Get(MessageDaoFactory);
             }
         }
 
@@ -113,7 +118,7 @@ inside veriable:
                         DeserializerXml(Resources.changeAccount, "en")
                         );
                 }
-                return _accountChanged.Get();
+                return _accountChanged.Get(MessageDaoFactory);
             }
         }
 
