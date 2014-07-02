@@ -68,15 +68,17 @@ namespace Ornament.Web.HttpModel
             }
             try
             {
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
-                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+                var cultureInfo = CultureInfo.GetCultureInfo(lang);
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+                Thread.CurrentThread.CurrentCulture = cultureInfo;
             }
             catch (Exception ex)
             {
                 LogManager.GetLogger(typeof(OrnamentModule)).Error("Language setting error.", ex);
                 lang = "en-US";
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(lang);
-                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(lang);
+                var cultureInfo = CultureInfo.GetCultureInfo(lang);
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+                Thread.CurrentThread.CurrentCulture = cultureInfo;
             }
         }
 
