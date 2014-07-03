@@ -10,44 +10,6 @@ namespace Ornament.Models
         {
             return item.Key;
         }
-
-        public Language Find(string language)
-        {
-            foreach (var settingLang in this)
-            {
-                if (settingLang.Key == language)
-                {
-                    return settingLang;
-                }
-
-                if (settingLang.MatchKey.Contains(language))
-                    return settingLang;
-            }
-            return null;
-        }
         
-        public Language DefaultOrMatch(string[] language)
-        {
-            foreach (var lang in language)
-            {
-                foreach (var settingLang in this)
-                {
-                    if (settingLang.Key == lang)
-                    {
-                        return settingLang;
-                    }
-
-                    if (settingLang.MatchKey.Contains(lang))
-                        return settingLang;
-                }
-            }
-
-            foreach (var settingLang in this)
-            {
-                if (settingLang.IsDefault)
-                    return settingLang;
-            }
-            return this.First();
-        }
     }
 }

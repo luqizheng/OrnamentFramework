@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
@@ -47,23 +48,16 @@ namespace Ornament
             return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
         }
 
-        public static Language CurrentLanguage(this MemberShipContext context)
+        public static string CurrentLanguage(this MemberShipContext context)
         {
             string lang = CookieRequestLanguage(context);
             if (lang == null)
             {
                 User user = CurrentUser(context);
-                if (user != null)
-                {
-                    lang = user.Language;
-                }
-                else
-                {
-                    lang = BroswerLanguage(context);
-                }
+                lang = user != null ? user.Language : BroswerLanguage(context);
             }
 
-            return OrnamentContext.Configuration.Languages.DefaultOrMatch(new[] { lang });
+            return lang;
         }
 
 
@@ -162,10 +156,7 @@ namespace Ornament
         {
             if (HttpContext.Current != null && HttpContext.Current.Request.UserLanguages != null)
             {
-                Language lang =
-                    OrnamentContext.Configuration.Languages.DefaultOrMatch(HttpContext.Current.Request.UserLanguages);
-                if (lang != null)
-                    return lang.Key;
+                return HttpContext.Current.Request.UserLanguages.FirstOrDefault() ?? "en";
             }
             return OrnamentContext.Configuration.DefaultLanguage.Key;
         }
@@ -190,30 +181,28 @@ namespace Ornament
         {
             if (String.IsNullOrEmpty(language))
                 return false;
-            if (OrnamentContext.Configuration.Languages.Find(language) != null)
+
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+
+
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
             {
-                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+                Value = language,
+                HttpOnly = false,
+            });
 
-
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
+            User currentUser = OrnamentContext.MemberShip.CurrentUser();
+            if (currentUser != null)
+            {
+                if (language != currentUser.Language)
                 {
-                    Value = language,
-                    HttpOnly = false,
-                });
-
-                User currentUser = OrnamentContext.MemberShip.CurrentUser();
-                if (currentUser != null)
-                {
-                    if (language != currentUser.Language)
-                    {
-                        currentUser.Language = language;
-                        OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
-                    }
+                    currentUser.Language = language;
+                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
                 }
-                return true;
             }
-            return false;
+            return true;
+
         }
 
 

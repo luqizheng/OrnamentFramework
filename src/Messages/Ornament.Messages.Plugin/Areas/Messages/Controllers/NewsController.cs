@@ -11,6 +11,7 @@ using Qi.Web.Mvc;
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Session]
+    [Authorize(Roles = "admin")]
     public class NewsController : Controller
     {
         private readonly IMessageDaoFactory _factory;

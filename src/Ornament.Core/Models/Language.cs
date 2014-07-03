@@ -22,13 +22,26 @@
         /// </summary>
         public bool IsDefault { get; set; }
 
-        /// <summary>
-        /// 以下的Key都会被认为这个语言匹配一致
-        /// </summary>
-        public string[] MatchKey
-        {
-            get { return _matchKey??(new string[0]); }
-            set { _matchKey = value; }
-        }
+        ///// <summary>
+        ///// 以下的Key都会被认为这个语言匹配一致
+        ///// </summary>
+        //public string[] MatchKey
+        //{
+        //    get { return _matchKey ?? (new string[0]); }
+        //    set { _matchKey = value; }
+        //}
+
+        //public bool Match(string[] str)
+        //{
+        //    foreach (var lang in str)
+        //    {
+        //        if (lang == Key)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
+
     }
 }

@@ -61,6 +61,8 @@ namespace Ornament.MVCWebFrame
             bundles.Add(
                 new SeajsBundle("~/Scripts/_appLayout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
                     "~/Scripts/Modules/Views/_appLayout.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Seajs.js").Include("~/Scripts/seajs/sea.js", "~/Scripts/seajs/plugin-text.js"));
         }
 
 

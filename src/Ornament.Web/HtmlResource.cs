@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Resources;
 using System.Runtime.Caching;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace Ornament.Web
@@ -44,7 +46,7 @@ namespace Ornament.Web
                 if (File.Exists(resxKey))
                 {
                     resxs = new ResXResourceReader(resxKey).Cast<DictionaryEntry>();
-                    cache.Add(resxKey, resxs, new CacheItemPolicy {Priority = CacheItemPriority.NotRemovable});
+                    cache.Add(resxKey, resxs, new CacheItemPolicy { Priority = CacheItemPriority.NotRemovable });
                 }
             }
 
@@ -54,7 +56,7 @@ namespace Ornament.Web
         public static string GetResourceString(this ViewContext page, string key)
         {
             var view = page.View as WebFormView;
-            string pagePath = view != null ? view.ViewPath : ((RazorView) page.View).ViewPath;
+            string pagePath = view != null ? view.ViewPath : ((RazorView)page.View).ViewPath;
             string pageName = GetFileNameWithoutExtension(pagePath);
             return GetResourceString(page, pageName, key);
         }
@@ -62,7 +64,7 @@ namespace Ornament.Web
         public static string GetResourceString(this ViewContext page, string viewName, string key)
         {
             var view = page.View as WebFormView;
-            string pagePath = view != null ? view.ViewPath : ((RazorView) page.View).ViewPath;
+            string pagePath = view != null ? view.ViewPath : ((RazorView)page.View).ViewPath;
             string pageName = viewName;
             string filePath =
                 page.RequestContext.HttpContext.Server.MapPath(pagePath.Substring(0, pagePath.LastIndexOf('/') + 1)) +
@@ -72,7 +74,7 @@ namespace Ornament.Web
 
             if (resxs != null)
             {
-                return (string) resxs.FirstOrDefault(x => x.Key.ToString() == key).Value;
+                return (string)resxs.FirstOrDefault(x => x.Key.ToString() == key).Value;
             }
             return key;
         }
@@ -89,18 +91,20 @@ namespace Ornament.Web
             IEnumerable<DictionaryEntry> resxs = null;
             string defaultReex = string.Format(@"{0}\{1}.resx", filePath, pageName);
 
-            string lang = OrnamentContext.MemberShip.CurrentLanguage().Key;
-            string resxKey =
-                string.IsNullOrWhiteSpace(lang)
-                    ? string.Format(@"{0}\{1}.resx", filePath, pageName)
-                    : string.Format(@"{0}\{1}.{2}.resx", filePath, pageName, lang);
+            //string lang = OrnamentContext.MemberShip.CurrentLanguage().Key;
 
-            resxs = GetResx(resxKey);
-
-            if (resxs != null)
+            CultureInfo current = Thread.CurrentThread.CurrentUICulture;
+            string resxKey = string.Format(@"{0}\{1}.{2}.resx", filePath, pageName, current.Name);
+            do
             {
-                return resxs;
-            }
+                if (File.Exists(resxKey))
+                {
+                    return GetResx(resxKey);
+                }
+                current = current.Parent;
+                resxKey = string.Format(@"{0}\{1}.{2}.resx", filePath, pageName, current.Name);
+
+            } while (current != null);
 
             return GetResx(defaultReex);
         }

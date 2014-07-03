@@ -7,6 +7,7 @@ using Qi.Web.Mvc;
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Session]
+    [Authorize(Roles = "admin")]
     public class ConfigController : Controller
     {
         //
