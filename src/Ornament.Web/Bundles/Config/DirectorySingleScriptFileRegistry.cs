@@ -23,7 +23,7 @@ namespace Ornament.Web.Bundles.Config
         protected override void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter,
             params string[] includeVirtualPathes)
         {
-            logWriter.WriteLine("{0}:{1}", bundlePath, String.Join(",", includeVirtualPathes));
+            logWriter.WriteLine("Directory:{0}:{1}", bundlePath, String.Join(",", includeVirtualPathes));
             bundles.Add(new SeajsBundle(bundlePath, _isCombine).Include(includeVirtualPathes));
 
         }

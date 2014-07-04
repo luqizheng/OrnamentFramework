@@ -69,5 +69,4 @@ namespace Ornament.Web
             return permission;
         }
     }
-
 }

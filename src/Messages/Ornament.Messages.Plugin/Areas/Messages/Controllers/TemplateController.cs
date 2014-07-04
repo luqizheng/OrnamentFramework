@@ -25,6 +25,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         // GET: /Messages/Template/
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateTitle", ParentKey = "Messages",
             Key = "templates")]
+        [ResourceAuthorize(NotifyTemplateOperator.Read, "NotifyType")]
         public ActionResult Index()
         {
             var pagination = new Pagination();
@@ -32,7 +33,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             int total;
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
                 pagination.PageSize, out total);
-            pagination.TotalRows = total; 
+            pagination.TotalRows = total;
             return View(result);
         }
 

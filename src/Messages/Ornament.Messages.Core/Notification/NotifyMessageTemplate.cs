@@ -11,14 +11,6 @@ using Qi.Text;
 
 namespace Ornament.Messages.Notification
 {
-    public enum NotifyTemplateOperator
-    {
-        None,
-        Read = 1,
-        Modify = 2 | Read,
-        Delete = 4 | Modify,
-    }
-
     public class NotifyMessageTemplate : DomainObject<NotifyMessageTemplate, string>
     {
         private IDictionary<string, Content> _contents;
@@ -85,6 +77,7 @@ namespace Ornament.Messages.Notification
         /// <returns></returns>
         protected virtual Content GetContent(User user)
         {
+            if (user == null) throw new ArgumentNullException("user");
             if (Contents.Count == 0)
                 throw new ArgumentOutOfRangeException("Message do not have any content.");
 

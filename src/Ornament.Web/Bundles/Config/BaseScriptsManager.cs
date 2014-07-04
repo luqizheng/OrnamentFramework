@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
-using Iesi.Collections;
 using Qi;
 using Qi.IO;
 
@@ -12,7 +11,6 @@ namespace Ornament.Web.Bundles.Config
 {
     public abstract class BaseScriptsManager
     {
-        
         private readonly string _searchDirPath;
 
         /// <summary>
@@ -94,8 +92,9 @@ namespace Ornament.Web.Bundles.Config
                 {
                     string[] files = GetCombineFolderFiles(subFolder);
                     //string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name + ".js");
-                    var aa = ManagerSetting.Split(files, VirtualPathUtility.Combine(bundlePath, subFolder.Name));
-                    foreach (var asdf in aa)
+                    ManagerSetting[] aa = ManagerSetting.Split(files,
+                        VirtualPathUtility.Combine(bundlePath, subFolder.Name));
+                    foreach (ManagerSetting asdf in aa)
                     {
                         Handle(bundles, asdf.BundleName, log, asdf.FileStrings.ToArray());
                     }
@@ -113,9 +112,9 @@ namespace Ornament.Web.Bundles.Config
         {
             //处理文件的
 
-            var files = (new DirectoryInfo(physicPath).GetFilesEx(this.ExtendFileName));
+            FileInfo[] files = (new DirectoryInfo(physicPath).GetFilesEx(ExtendFileName));
             string virtualPath = ToVirtualPath(physicPath);
-            foreach (var fileInfo in files)
+            foreach (FileInfo fileInfo in files)
             {
                 string subVirtualPath = VirtualPathUtility.Combine(virtualPath, fileInfo.Name);
                 string bundlePath = VirtualPathUtility.Combine(bundleName, fileInfo.Name);
@@ -135,15 +134,17 @@ namespace Ornament.Web.Bundles.Config
 
         protected virtual string[] GetCombineFolderFiles(DirectoryInfo folder)
         {
-            return folder.GetFilesEx(this.ExtendFileName).Select(file => ToVirtualPath(file.FullName)).ToArray();
+            return folder.GetFilesEx(ExtendFileName).Select(file => ToVirtualPath(file.FullName)).ToArray();
         }
 
-        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter, params string[] includeVirtualPathes);
+        protected abstract void Handle(BundleCollection bundles, string bundlePath, StreamWriter logWriter,
+            params string[] includeVirtualPathes);
 
         private class ManagerSetting
         {
-            public string BundleName { get; set; }
             private List<string> _fileStrings;
+            public string BundleName { get; set; }
+
             public List<string> FileStrings
             {
                 get { return _fileStrings ?? (_fileStrings = new List<string>()); }
@@ -151,15 +152,15 @@ namespace Ornament.Web.Bundles.Config
 
             public static ManagerSetting[] Split(string[] files, string suggestBundleName)
             {
-                var result = new System.Collections.Generic.Dictionary<string, ManagerSetting>();
+                var result = new Dictionary<string, ManagerSetting>();
 
-                foreach (var file in files)
+                foreach (string file in files)
                 {
                     var fileInfo = new FileInfo(file);
                     ManagerSetting setting;
                     if (!result.ContainsKey(fileInfo.Extension))
                     {
-                        setting = new ManagerSetting()
+                        setting = new ManagerSetting
                         {
                             BundleName = suggestBundleName + fileInfo.Extension
                         };
@@ -175,6 +176,5 @@ namespace Ornament.Web.Bundles.Config
                 return result.Values.ToArray();
             }
         }
-
     }
 }
