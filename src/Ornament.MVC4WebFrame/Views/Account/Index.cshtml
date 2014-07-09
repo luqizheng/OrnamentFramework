@@ -10,7 +10,7 @@
 @model Ornament.MemberShip.User
 @{
     
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     IList<Permission> permissions =
         OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao().GetPermissionByLoginId
             (OrnamentContext.MemberShip.CurrentUser().LoginId);

@@ -865,7 +865,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Int64.cshtml" />
-    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\_empty.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
@@ -878,6 +878,9 @@
     <Content Include="Views\Security\VerifyEmail.cshtml" />
     <Content Include="Views\Security\TokenError.cshtml" />
     <Content Include="Scripts\avalons\Pagination\Pagination.html" />
+    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Shared\_crumbs.cshtml" />
+    <Content Include="Views\Shared\_mainMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

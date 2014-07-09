@@ -17,7 +17,7 @@ namespace Ornament.MVCWebFrame
         {
             BundleTable.EnableOptimizations = false;
 
-            OrnamentContext.Configuration.SetSeajsCombine(true);
+            OrnamentContext.Configuration.SetSeajsCombine(false);
             bundles.UseCdn = true;
             var registryParty = new VoidFunc<BundleCollection>[]
             {

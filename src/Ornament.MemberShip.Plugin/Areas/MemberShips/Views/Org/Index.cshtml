@@ -7,7 +7,7 @@
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = Html.GetEmbededResourceString("Page_title");
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     string parentId = Model != null ? Model.Id : "";
     IEnumerable<Org> childOrgs = ((IEnumerable<Org>) ViewData["Orgs"]) ?? new List<Org>();
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);

@@ -7,7 +7,7 @@
 @model IEnumerable<Role>
 @{
     ViewBag.Title = Resources.Role;
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     bool hasDelete = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Delete);
     bool hasModify = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Modify);
 }

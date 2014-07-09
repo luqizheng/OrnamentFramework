@@ -9,7 +9,7 @@
 @model Ornament.Messages.Newses.News
 @{
     ViewBag.Title = "Create new message";
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     var types = ViewData["types"] as IEnumerable<NewsType>;
     string contents = "{}";
 

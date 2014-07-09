@@ -5,7 +5,7 @@
 @model Ornament.MemberShip.Role
 @{
     ViewBag.Title = "Delete";
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     var members = (IList<IPerformer>)ViewData["members"];
     int index = 0;
 }

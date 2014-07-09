@@ -5,7 +5,7 @@
 @model Ornament.MemberShip.Plugin.Models.Memberships.LogonModel
 @{
     ViewBag.Title = Ornament.Properties.Resources.Logon;
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     Html.EnableUnobtrusiveJavaScript(true);
     Html.EnableClientValidation(true);
     bool logined = OrnamentContext.MemberShip.CurrentUser() != null;

@@ -4,7 +4,7 @@
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = Model.Name;
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     var parentId = this.Model.Parent != null ? this.Model.Parent.Id : "";
 }
 @section pageTitle

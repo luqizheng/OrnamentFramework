@@ -33,7 +33,7 @@ if(mvcHost.IsPartialView) {
 if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
 #>
     //Layout = "<#= mvcHost.MasterPageFile#>"; //for theme switch. 
-	Layout = OrnamentContext.Configuration.BackendLayout();
+	Layout = OrnamentContext.Configuration.Layout();
 <#
 }
 #>

@@ -2,7 +2,7 @@
 define(function (require) {
 
     var $ = require('jquery');
-    require("/scripts/views/_appLayout.js");
+    
     if (!$.fn.popover) {
         require("bootstrap")($);
     }

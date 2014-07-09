@@ -7,7 +7,7 @@
 @model Ornament.MemberShip.User
 @{
     ViewBag.Title = String.Format(Html.GetEmbededResourceString("AssignTitle"), Model.Name);
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     IList<UserGroup> allUserGroups = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao().GetAll();
     IList<Role> allRoles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
 

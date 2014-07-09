@@ -9,7 +9,7 @@
 
 @{
     ViewBag.Title = Html.GetEmbededResourceString("Page_Title");
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     var types = (IList<NewsType>)ViewData["types"];
     var selectedType = ViewData["type"] as NewsType;
     var pae = ViewData["nav"] as Pagination;

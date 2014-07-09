@@ -2,7 +2,7 @@
     var $ = require('jquery');
 
     require('select2')($);
-    require("/scripts/views/_appLayout.js");
+    
     require("bootstrap")($);
     require('ckeditor');
     require('validate')($);

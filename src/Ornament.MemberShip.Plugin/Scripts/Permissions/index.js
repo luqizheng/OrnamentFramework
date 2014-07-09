@@ -3,7 +3,7 @@
     if ($.fn.tooltip) {
         require("bootstrap")($);
     }
-    require("/scripts/views/_appLayout.js");
+    
     return function (opts) {
         $(".delete").on('click', function () {
             if (confirm(opts.warnDel)) {

@@ -221,9 +221,15 @@ namespace Ornament
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
+        [System.Obsolete("Please use Layout")]
         public static string BackendLayout(this OrnamentConfiguration config)
         {
-            return "~/Views/Shared/Backend/" + TemplateName(config) + "/_applayout.cshtml";
+            return Layout(config);
+        }
+
+        public static string Layout(this OrnamentConfiguration config)
+        {
+            return "~/Views/Shared/_layout.cshtml";
         }
 
         /// <summary>

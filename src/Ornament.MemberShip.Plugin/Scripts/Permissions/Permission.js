@@ -6,7 +6,7 @@ define(function (require) {
         var $ = require("jquery");
         require("/bundles/jqueryui")($);
         require("form.wizard")($);
-        require("/scripts/views/_appLayout.js");
+        
 
         $("form").submit(function () {
             var i = 0;

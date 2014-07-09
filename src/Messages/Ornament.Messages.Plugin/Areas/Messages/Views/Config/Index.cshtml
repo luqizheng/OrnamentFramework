@@ -5,7 +5,7 @@
 
 @{
     ViewBag.Title = "Variable Config";
-    Layout = OrnamentContext.Configuration.BackendLayout();
+    Layout = OrnamentContext.Configuration.Layout();
     var a = JsonHelper.ToJson(this.Model.Select(v => new { Name = v.Key, Value = v.Value }));
 }
 

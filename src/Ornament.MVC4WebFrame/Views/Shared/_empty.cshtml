@@ -1,0 +1,44 @@
+﻿@using System.Globalization
+@using System.Web.Optimization
+@using Ornament.Web
+@using Ornament.Web.Bundles
+@using Resources
+@using SeajsBundles
+
+@{
+    ViewBag.BodyClass = "no-background";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+  @*  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />*@
+    <link href="@Url.Content("~/content/templates/pannonia/css/main.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/content/templates/pannonia/css/plugins.css")" rel="stylesheet" type="text/css" />
+    <!--[if IE 8]><link href="@Url.Content("~/content/templates/pannonia/css/ie8.css")" rel="stylesheet" type="text/css" /><![endif]-->
+    <script type="text/javascript" src="/scripts/seajs/sea.js"> </script>
+    <script src="/Scripts/config.js" type="text/javascript"></script>
+    @RenderSection("head", false)
+</head>
+
+<body class="no-background">
+    <div id="top">
+        <div class="fixed">
+            <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
+            @Html.Partial("_topMenu")
+        </div>
+    </div>
+    
+    @RenderBody()
+    <div id="footer"></div>
+    @if (!IsSectionDefined("scripts"))
+    {
+        <script type="text/javascript">
+            seajs.use(@Scripts.Url("~/Scripts/Modules/Views/_layout.js"));
+        </script>
+    }
+    @RenderSection("scripts", false)
+
+</body>
+</html>
