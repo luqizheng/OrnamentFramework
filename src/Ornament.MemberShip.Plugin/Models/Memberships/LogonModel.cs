@@ -50,10 +50,10 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
                 return false;
             }
             ValidateUserResult result = user.Security.ValidateUser(Password, out errorMessage);
-            var cookieLanguae = OrnamentContext.MemberShip.CurrentLanguage();
-            if (cookieLanguae != null && user.Language.ToLower() != cookieLanguae.Name.ToLower())
+            var languae = OrnamentContext.MemberShip.CurrentLanguage();
+            if (languae != null && user.Language.ToLower() != languae.Name.ToLower())
             {
-                OrnamentContext.MemberShip.SwitchLanguage(cookieLanguae);
+                OrnamentContext.MemberShip.SwitchLanguage(languae);
             }
 
             return result == ValidateUserResult.Success;

@@ -1,8 +1,6 @@
 using System;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
@@ -11,11 +9,8 @@ using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.Models;
 using Ornament.Web;
 using Ornament.Web.HttpModel;
-using Qi;
-using Qi.NHibernateExtender;
 
 // ReSharper disable CheckNamespace
 
@@ -48,10 +43,10 @@ namespace Ornament
         {
             return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
         }
-       
+
         public static CultureInfo CurrentLanguage(this MemberShipContext context)
         {
-            var lang = CookieRequestLanguage(context);
+            CultureInfo lang = CookieRequestLanguage(context);
             if (lang == null)
             {
                 User user = CurrentUser(context);
@@ -99,7 +94,6 @@ namespace Ornament
                 a.Flush();
             }
             return user;
-
         }
 
         /// <summary>
@@ -109,10 +103,10 @@ namespace Ornament
         /// <returns></returns>
         public static DateTime ToClientDateTime(this MemberShipContext context, DateTime serverTime)
         {
-            var user = context.CurrentUser();
+            User user = context.CurrentUser();
             if (user != null)
             {
-                var timeZoneId = user.TimeZoneId;
+                string timeZoneId = user.TimeZoneId;
                 if (!String.IsNullOrEmpty(timeZoneId))
                 {
                     return TimeZoneInfo.ConvertTimeBySystemTimeZoneId(serverTime, timeZoneId);
@@ -145,27 +139,33 @@ namespace Ornament
             return clientTime.AddHours(-context.OffSetHour());
         }
 
-
-
-        
-
+        /// <summary>
+        /// 获取当前浏览器的默认语言,如果和网站支持语言一致,那么返回网站第一个支持的语言
+        /// 否知返回线程语言,一般是英语
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static CultureInfo BroswerLanguage(this MemberShipContext context)
         {
             if (HttpContext.Current != null && HttpContext.Current.Request.UserLanguages != null)
             {
-                foreach (var lang in HttpContext.Current.Request.UserLanguages)
+                foreach (string lang in HttpContext.Current.Request.UserLanguages)
                 {
-
                     try
                     {
-
-                        return CultureInfo.GetCultureInfo(lang);
+                        var culture = CultureInfo.GetCultureInfo(lang);
+                        foreach (var language in OrnamentContext.Configuration.Languages)
+                        {
+                            if (language.CultureInfo.Name == culture.Name)
+                            {
+                                return culture;
+                            }
+                        }
                     }
                     catch (CultureNotFoundException)
                     {
                     }
                 }
-
             }
             return CultureInfo.DefaultThreadCurrentUICulture;
         }
@@ -188,7 +188,6 @@ namespace Ornament
             return null;
         }
 
-      
 
         public static bool SwitchLanguage(this MemberShipContext context, CultureInfo language)
         {
@@ -208,14 +207,13 @@ namespace Ornament
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
             if (currentUser != null)
             {
-                if (language.Name != currentUser.Language)
+                if (language.Name != currentUser.GetLanguage().Name)
                 {
                     currentUser.Language = language.Name;
                     OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
                 }
             }
             return true;
-
         }
 
         /// <summary>

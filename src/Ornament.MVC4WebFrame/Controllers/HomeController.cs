@@ -1,11 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Runtime.InteropServices;
+﻿using System.Globalization;
 using System.Web.Mvc;
-using System.Web.Profile;
-using Ornament.MemberShip;
-using Ornament.Web;
-using Ornament.Web.HttpModel;
 using Qi.Web.Mvc;
 
 namespace Ornament.MVCWebFrame.Controllers
@@ -22,7 +16,7 @@ namespace Ornament.MVCWebFrame.Controllers
         [Session]
         public ActionResult SwitchLanguage(string id)
         {
-            var culture = CultureInfo.GetCultureInfo(id);
+            CultureInfo culture = CultureInfo.GetCultureInfo(id);
             OrnamentContext.MemberShip.SwitchLanguage(culture);
             if (Request.UrlReferrer != null)
                 return Redirect(Request.UrlReferrer.ToString());
