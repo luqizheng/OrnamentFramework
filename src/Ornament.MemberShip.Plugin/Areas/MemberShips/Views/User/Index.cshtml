@@ -91,8 +91,10 @@
                 </tr>
             </thead>
 
-            <tbody ms-if="users.length!=0" ms-repeat-el="users">
-                <tr ms-attr-data="{{el.Id}}" ms-attr-loginid="{{el.LoginId}}">
+            <tbody ms-if="users.length!=0">
+                <tr ms-repeat-el="users"
+                    ms-attr-data="{{el.Id}}"
+                    ms-attr-loginid="{{el.LoginId}}">
                     <td>
                         <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn tip btn-mini"><i class="fam-user-edit"></i></a>
                         <a ms-href="/MemberShips/User/Assign/{{el.LoginId}}" class="btn tip btn-mini" title=""><i class="fam-group-gear"></i></a>

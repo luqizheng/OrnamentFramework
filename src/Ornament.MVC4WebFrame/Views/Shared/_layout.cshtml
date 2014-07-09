@@ -23,6 +23,7 @@
     @Scripts.Render("~/Scripts/avalon.js")
     <script type="text/javascript">avalon.config({ loader: false });</script>
     @Scripts.Render("~/Scripts/Seajs.js")
+    <script src="/Scripts/config.js" type="text/javascript"></script>
     @RenderSection("head", false)
 </head>
 <body @Html.Raw(showMenu ? "" : "class=no-background")>
