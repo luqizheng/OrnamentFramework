@@ -1,4 +1,6 @@
-﻿namespace Ornament.Models
+﻿using System.Globalization;
+
+namespace Ornament.Models
 {
     public class Language
     {
@@ -8,6 +10,7 @@
         {
             Name = name;
             Key = key;
+            CultureInfo = CultureInfo.GetCultureInfo(key);
         }
         /// <summary>
         /// Language on UI
@@ -21,6 +24,14 @@
         /// 是不是默认语言。
         /// </summary>
         public bool IsDefault { get; set; }
+
+        public CultureInfo CultureInfo
+        {
+            get;
+
+            private set;
+        }
+
 
         ///// <summary>
         ///// 以下的Key都会被认为这个语言匹配一致

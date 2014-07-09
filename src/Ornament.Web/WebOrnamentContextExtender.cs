@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
@@ -47,20 +48,18 @@ namespace Ornament
         {
             return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
         }
-
-        public static string CurrentLanguage(this MemberShipContext context)
+       
+        public static CultureInfo CurrentLanguage(this MemberShipContext context)
         {
-            string lang = CookieRequestLanguage(context);
+            var lang = CookieRequestLanguage(context);
             if (lang == null)
             {
                 User user = CurrentUser(context);
-                lang = user != null ? user.Language : BroswerLanguage(context);
+                lang = user != null ? user.GetLanguage() : BroswerLanguage(context);
             }
 
             return lang;
         }
-
-
 
         public static string CurrentVerifyCode(this MemberShipContext context)
         {
@@ -147,64 +146,77 @@ namespace Ornament
         }
 
 
-        /// <summary>
-        ///     获取浏览器和系统的默认语言,如果浏览器默认语言在系统中不存在,就返回系统默认语言
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static string BroswerLanguage(this MemberShipContext context)
+
+        
+
+        public static CultureInfo BroswerLanguage(this MemberShipContext context)
         {
             if (HttpContext.Current != null && HttpContext.Current.Request.UserLanguages != null)
             {
-                return HttpContext.Current.Request.UserLanguages.FirstOrDefault() ?? "en";
+                foreach (var lang in HttpContext.Current.Request.UserLanguages)
+                {
+
+                    try
+                    {
+
+                        return CultureInfo.GetCultureInfo(lang);
+                    }
+                    catch (CultureNotFoundException)
+                    {
+                    }
+                }
+
             }
-            return OrnamentContext.Configuration.DefaultLanguage.Key;
+            return CultureInfo.DefaultThreadCurrentUICulture;
         }
 
-        public static string CookieRequestLanguage(this MemberShipContext context)
+
+        public static CultureInfo CookieRequestLanguage(this MemberShipContext context)
         {
             HttpCookie request = HttpContext.Current.Request.Cookies[LangCookieName];
             if (request != null)
             {
-                return request.Value;
+                try
+                {
+                    return CultureInfo.GetCultureInfo(request.Value);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
             return null;
         }
 
+      
 
-        /// <summary>
-        ///     Switch lanugage.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="language"></param>
-        public static bool SwitchLanguage(this MemberShipContext context, string language)
+        public static bool SwitchLanguage(this MemberShipContext context, CultureInfo language)
         {
-            if (String.IsNullOrEmpty(language))
-                return false;
+            if (language == null)
+                throw new ArgumentNullException("language");
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(language);
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
+            Thread.CurrentThread.CurrentCulture = language;
+            Thread.CurrentThread.CurrentUICulture = language;
 
 
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(LangCookieName)
             {
-                Value = language,
+                Value = language.Name,
                 HttpOnly = false,
             });
 
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
             if (currentUser != null)
             {
-                if (language != currentUser.Language)
+                if (language.Name != currentUser.Language)
                 {
-                    currentUser.Language = language;
+                    currentUser.Language = language.Name;
                     OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
                 }
             }
             return true;
 
         }
-
 
         /// <summary>
         ///     后台Backend laoyout

@@ -57,28 +57,23 @@ namespace Ornament.Web.HttpModel
 
         private void MultiLanguage(HttpApplication context)
         {
-            string lang = OrnamentContext.MemberShip.CookieRequestLanguage();
+            CultureInfo lang = OrnamentContext.MemberShip.CookieRequestLanguage();
             if (lang == null)
             {
                 lang = OrnamentContext.MemberShip.BroswerLanguage();
             }
             if (lang == null)
             {
-                lang = OrnamentContext.Configuration.DefaultLanguage.Key;
+                lang = OrnamentContext.Configuration.DefaultLanguage.CultureInfo;
             }
             try
             {
-                var cultureInfo = CultureInfo.GetCultureInfo(lang);
-                Thread.CurrentThread.CurrentUICulture = cultureInfo;
-                Thread.CurrentThread.CurrentCulture = cultureInfo;
+                Thread.CurrentThread.CurrentUICulture = lang;
+                Thread.CurrentThread.CurrentCulture = lang;
             }
             catch (Exception ex)
             {
                 LogManager.GetLogger(typeof(OrnamentModule)).Error("Language setting error.", ex);
-                lang = "en-US";
-                var cultureInfo = CultureInfo.GetCultureInfo(lang);
-                Thread.CurrentThread.CurrentUICulture = cultureInfo;
-                Thread.CurrentThread.CurrentCulture = cultureInfo;
             }
         }
 

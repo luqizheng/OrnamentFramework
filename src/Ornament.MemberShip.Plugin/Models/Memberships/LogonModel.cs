@@ -51,7 +51,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             }
             ValidateUserResult result = user.Security.ValidateUser(Password, out errorMessage);
             var cookieLanguae = OrnamentContext.MemberShip.CurrentLanguage();
-            if (cookieLanguae != null && user.Language != cookieLanguae)
+            if (cookieLanguae != null && user.Language.ToLower() != cookieLanguae.Name.ToLower())
             {
                 OrnamentContext.MemberShip.SwitchLanguage(cookieLanguae);
             }

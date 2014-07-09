@@ -42,7 +42,7 @@ namespace Ornament.MemberShip.Plugin.Api
                 User user = OrnamentContext.MemberShip.CurrentUser();
                 basicInfo.UpdateOn(user);
                 _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
-                OrnamentContext.MemberShip.SwitchLanguage(user.Language);
+                OrnamentContext.MemberShip.SwitchLanguage(user.GetLanguage());
             }
             else
             {
