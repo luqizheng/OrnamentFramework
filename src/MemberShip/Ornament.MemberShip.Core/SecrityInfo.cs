@@ -176,8 +176,7 @@ namespace Ornament.MemberShip
                     errorMessage = Resources.error_UserIsLockout;
                     if (ValidateUserPolicy.EnabledPasswordAtteempts)
                     {
-                        errorMessage += String.Format(Resources.error_UserIsLockout_retry_after_mins,
-                            ValidateUserPolicy.PasswordAttemptWindow);
+                        errorMessage += String.Format(Resources.error_UserIsLockout_retry_after_mins,ValidateUserPolicy.PasswordAttemptWindow);
                     }
                     else
                     {
