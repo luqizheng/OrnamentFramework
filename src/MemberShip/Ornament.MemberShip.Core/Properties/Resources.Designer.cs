@@ -61,6 +61,15 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Password must be at Least one letter, number or symbol, and within 8 to 30 characters. 的本地化字符串。
+        /// </summary>
+        public static string alertPassword_CharError {
+            get {
+                return ResourceManager.GetString("alertPassword_CharError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Re-enter Password 的本地化字符串。
         /// </summary>
         public static string ConfirmPassword {

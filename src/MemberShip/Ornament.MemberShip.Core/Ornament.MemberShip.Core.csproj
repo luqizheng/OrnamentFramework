@@ -124,6 +124,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInformation.cs" />
     <Compile Include="MemberShipProviders\ValidateUserPolicy.cs" />
+    <Compile Include="Validations\LoginIdValidationAttribute.cs" />
+    <Compile Include="Validations\PasswordValidationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

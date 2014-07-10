@@ -8,6 +8,7 @@ using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Properties;
+using Ornament.MemberShip.Validations;
 
 namespace Ornament.MemberShip
 {
@@ -150,8 +151,11 @@ namespace Ornament.MemberShip
         /// </value>
         [Display(Name = "LoginId", ResourceType = typeof (Resources)),
          Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
-             ErrorMessageResourceType = typeof (Resources)), RegularExpression(@"^[a-zA-Z0-9_-]{1,20}",
-                 ErrorMessageResourceName = "LoginNotCorrectFormat", ErrorMessageResourceType = typeof (Resources))]
+             ErrorMessageResourceType = typeof (Resources))]
+        [LoginIdValidation]
+        //RegularExpression(@"^[a-zA-Z0-9_-]{1,20}",
+        //         ErrorMessageResourceName = "LoginNotCorrectFormat",
+        //         ErrorMessageResourceType = typeof (Resources))]
         public virtual string LoginId { get; set; }
 
 

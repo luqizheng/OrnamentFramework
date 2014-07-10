@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using MemberShip.Test.helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ornament.MemberShip.Permissions;
@@ -120,6 +121,20 @@ namespace MemberShip.Test
             Assert.IsTrue(target.HasOperator(MockOperator.None));
             Assert.IsFalse(target.HasOperator(MockOperator.All));
             Assert.IsFalse(target.HasOperator((MockOperator.ABC | MockOperator.E)));
+        }
+
+        [TestMethod]
+        public void Test()
+        {
+            XmlDocument xml=new XmlDocument();
+            var a =xml.CreateElement("xml");
+            var attr= xml.CreateAttribute("eeeee");
+            attr.Value = @"(?=.*\d)(?=.*[a-zA-Z])(?=.*[\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]*).{8,30}";
+            a.Attributes.Append(attr);
+            xml.AppendChild(a);
+
+            xml.Save("C:\\a.xml");
+
         }
     }
 }

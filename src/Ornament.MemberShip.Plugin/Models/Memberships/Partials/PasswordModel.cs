@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Properties;
+using Ornament.MemberShip.Validations;
 
 namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 {
@@ -9,9 +10,10 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         [Required(ErrorMessageResourceName = "alertMsg_Require_NewPassword",
             ErrorMessageResourceType = typeof (Properties.Resources))]
         [DataType(DataType.Password), UIHint("Password")]
-        [RegularExpression(@"(?=.*\d)(?=.*[a-zA-Z])(?=.*[\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]*).{8,30}",
-            ErrorMessageResourceName = "alertPassword_CharError",
-            ErrorMessageResourceType = typeof (Properties.Resources))]
+        //[RegularExpression(@"(?=.*\d)(?=.*[a-zA-Z])(?=.*[\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]*).{8,30}",
+        //    ErrorMessageResourceName = "alertPassword_CharError",
+        //    ErrorMessageResourceType = typeof (Properties.Resources))]
+        [PasswordValidation]
         public string NewPassword { get; set; }
 
 

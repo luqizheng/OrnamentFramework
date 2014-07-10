@@ -190,9 +190,6 @@
   <data name="error_expireVerifyCode" xml:space="preserve">
     <value>驗證碼過期</value>
   </data>
-  <data name="alertPassword_CharError" xml:space="preserve">
-    <value>密碼必須是至少包含一个字母、數字或者符號，並且長度要做8到30位之間</value>
-  </data>
   <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
     <value>再一次密码和新密码不匹配</value>
   </data>
@@ -201,8 +198,5 @@
   </data>
   <data name="alertMsg_duplicate_Email" xml:space="preserve">
     <value>電子郵箱已經被使用，請輸入另外一個</value>
-  </data>
-  <data name="VerifyCode" xml:space="preserve">
-    <value>驗證碼</value>
   </data>
 </root>

@@ -5,43 +5,43 @@
     ViewBag.Title = Html.GetResourceString("title");
     Layout = OrnamentContext.Configuration.Layout();
 }
-<fieldset class="cssform">
+<fieldset>
     <legend>@Html.GetResourceString("title")</legend>
     @Html.ValidationSummary()
     @using (Html.BeginForm())
     {
         <div class="control-group">
-            @Html.LabelFor(s => s.UserBasicInfo.LoginId, new { @class = "control-label" })
+            @Html.LabelFor(s => s.LoginId, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(s => s.UserBasicInfo.LoginId)
-                @Html.ValidationMessageFor(s => s.UserBasicInfo.LoginId)
+                @Html.TextBoxFor(s => s.LoginId)
+                @Html.ValidationMessageFor(s => s.LoginId)
             </div>
         </div>
         
         <div class="control-group">
-            @Html.LabelFor(s => s.UserBasicInfo.Email, new { @class = "control-label" })
+            @Html.LabelFor(s => s.Email, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(s => s.UserBasicInfo.Email)
-                @Html.ValidationMessageFor(s => s.UserBasicInfo.Email)
+                @Html.TextBoxFor(s => s.Email)
+                @Html.ValidationMessageFor(s => s.Email)
             </div>
         </div>
             
         <div class="control-group">
-            @Html.LabelFor(s => s.PasswordModel.Password)
+            @Html.LabelFor(s => s.Password.NewPassword)
             <div class="controls">
-                @Html.TextBoxFor(s => s.PasswordModel.Password)
-                @Html.ValidationMessageFor(s => s.PasswordModel.Password)
+                @Html.TextBoxFor(s => s.Password.NewPassword)
+                @Html.ValidationMessageFor(s => s.Password.NewPassword)
             </div>
         </div>    
         <div class="control-group">
-            @Html.LabelFor(s => s.PasswordModel.ConfirmPassword)
+            @Html.LabelFor(s => s.Password.ConfirmPassword)
             <div class="controls">
-                @Html.TextBoxFor(s => s.PasswordModel.ConfirmPassword)
-                @Html.ValidationMessageFor(s => s.PasswordModel.ConfirmPassword)
+                @Html.TextBoxFor(s => s.Password.ConfirmPassword)
+                @Html.ValidationMessageFor(s => s.Password.ConfirmPassword)
             </div>
         </div>            
         <div class="form-actions">
-            <input type="submit" value="@Resources.Basic.Regist" />
+            <input type="submit" value="@Html.GetResourceString("Regist")" />
         </div>
     }
 </fieldset>

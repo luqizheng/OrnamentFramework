@@ -12,9 +12,11 @@ namespace Ornament.MemberShip.MemberShipProviders
         {
             MaxInvalidPasswordAttempts = 5;
             PasswordAttemptWindow = 30;
+            MinRequiredPasswordLength = 8;
             Provider = provider;
-        }
 
+        }
+        public virtual int MinRequiredPasswordLength { get; set; }
         /// <summary>
         ///     是否启用失效Password尝试次数统计，为0时候为false
         /// </summary>
@@ -28,12 +30,18 @@ namespace Ornament.MemberShip.MemberShipProviders
         public virtual IMemberShipProvider Provider { get; set; }
 
         /// <summary>
+        ///密码最大尝试次数
         /// </summary>
         public virtual int MaxInvalidPasswordAttempts { get; set; }
 
         /// <summary>
+        /// 当密码尝试次数过了之后，要多少分钟后恢复。
         /// </summary>
         public virtual int PasswordAttemptWindow { get; set; }
+        /// <summary>
+        /// 密码强度的正则表达式
+        /// </summary>
+        public virtual string PasswordStrengthRegularExpression { get; set; }
 
         /// <summary>
         /// </summary>

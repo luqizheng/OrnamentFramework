@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.UI.WebControls;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
 using Ornament.Messages.Notification;
@@ -44,7 +43,6 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             if (_emailVerifier.Type == VerifyType.Email
                 && _emailVerifier.Verify(token, daoFactory) == VerifyResult.Success)
             {
-
                 daoFactory.CreateUserDao().SaveOrUpdate(loginUser);
                 return VerifyResult.Success;
             }

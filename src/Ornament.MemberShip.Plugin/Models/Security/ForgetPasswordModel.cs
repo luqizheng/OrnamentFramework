@@ -15,15 +15,8 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             NotExistAccountOrEmail
         }
 
-        private readonly EmailVerifier _verifier;
-
-        public ForgetPasswordModel(EmailVerifier verifier)
-        {
-            if (verifier == null)
-                throw new ArgumentNullException("verifier");
-            _verifier = verifier;
-        }
-
+       
+  
         public ForgetPasswordModel()
         {
         }

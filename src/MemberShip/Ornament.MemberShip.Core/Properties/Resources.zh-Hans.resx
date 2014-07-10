@@ -264,4 +264,7 @@
   <data name="Deny" xml:space="preserve">
     <value>禁止访问</value>
   </data>
+  <data name="alertPassword_CharError" xml:space="preserve">
+    <value>密码必须是至少包含一个字母、数字或者符号，并且长度要做8到30位之间. </value>
+  </data>
 </root>

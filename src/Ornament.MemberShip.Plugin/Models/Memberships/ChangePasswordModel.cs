@@ -12,6 +12,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             ErrorMessageResourceType = typeof(Resources))]
         [Display(Name = "CurrentPassword", ResourceType = typeof(MemberShip.Properties.Resources))]
         [DataType(DataType.Password), UIHint("Password")]
+        
         public string CurrentPassword { get; set; }
 
        

@@ -16,6 +16,9 @@ namespace Ornament.Web.MemberShips
         {
             this.MaxInvalidPasswordAttempts = provider.MaxInvalidPasswordAttempts;
             this.PasswordAttemptWindow = provider.PasswordAttemptWindow;
+            this.PasswordStrengthRegularExpression = provider.PasswordStrengthRegularExpression;
+            this.MinRequiredPasswordLength = provider.MinRequiredPasswordLength;
+
         }
     }
 }
