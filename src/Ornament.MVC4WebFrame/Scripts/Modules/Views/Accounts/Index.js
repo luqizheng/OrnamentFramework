@@ -1,6 +1,6 @@
-﻿/// <reference path="../_appLayout.js" />
+﻿
 define(function (require) {
-    require("../_applayout.js");
+    
     var $ = require("jquery"),
         User = require('/MemberShips/Scripts/Share/user.js');
     require('bootstrap')($);

@@ -1,4 +1,4 @@
-﻿/// <reference path="../../_appLayout.js" />
+﻿
 define(function (require) {
 
     return function (Model) {

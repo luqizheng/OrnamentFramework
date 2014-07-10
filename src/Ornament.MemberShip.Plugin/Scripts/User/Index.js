@@ -7,9 +7,10 @@ define(function(require) {
     var lang = {};
     var $ = require("jquery"),
         userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
-    //pm = require("/share/pm.js");
-    //var pmDialog;
+    require('validate');
 
+    
+    
     var model = avalon.define("index", function(vm) {
         vm.users = [];
         //Search content

@@ -59,8 +59,8 @@ namespace Ornament.MVCWebFrame
                 .Include("~/Scripts/Components/avalon.js"));
 
             bundles.Add(
-                new SeajsBundle("~/Scripts/_appLayout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
-                    "~/Scripts/Modules/Views/_appLayout.js"));
+                new SeajsBundle("~/Scripts/_layout.js", OrnamentContext.Configuration.GetSeajsCombine()).Include(
+                    "~/Scripts/Modules/Views/_Layout.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/Seajs.js").Include("~/Scripts/seajs/sea.js", "~/Scripts/seajs/plugin-text.js"));
         }
