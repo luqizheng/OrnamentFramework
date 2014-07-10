@@ -7,18 +7,18 @@ namespace Ornament.Web.PortableAreas
 {
     public static class AssemblyResourceManager
     {
-        private static readonly Dictionary<string, AssemblyResourceStore> assemblyResourceStores =
+        private static readonly Dictionary<string, AssemblyResourceStore> AssemblyResourceStores =
             InitializeAssemblyResourceStores();
 
         public static AssemblyResourceStore GetResourceStoreForArea(string areaName)
         {
-            return assemblyResourceStores["/areas/" + areaName.ToLower()];
+            return AssemblyResourceStores["/areas/" + areaName.ToLower()];
         }
 
         public static AssemblyResourceStore GetResourceStoreFromVirtualPath(string virtualPath)
         {
             string path = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
-            foreach (var pair in assemblyResourceStores.Reverse())
+            foreach (var pair in AssemblyResourceStores.Reverse())
             {
                 if (path.Contains(pair.Key) && pair.Value.IsPathResourceStream(path))
                 {
@@ -44,7 +44,7 @@ namespace Ornament.Web.PortableAreas
 
         public static void RegisterAreaResources(AssemblyResourceStore assemblyResourceStore)
         {
-            assemblyResourceStores.Add(assemblyResourceStore.VirtualPath, assemblyResourceStore);
+            AssemblyResourceStores.Add(assemblyResourceStore.VirtualPath, assemblyResourceStore);
         }
     }
 }
