@@ -13,7 +13,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         //[RegularExpression(@"(?=.*\d)(?=.*[a-zA-Z])(?=.*[\-`=\[\];',./~!@#$%^&*()_+|{}:""<>?]*).{8,30}",
         //    ErrorMessageResourceName = "alertPassword_CharError",
         //    ErrorMessageResourceType = typeof (Properties.Resources))]
-        [PasswordValidation]
+        [PasswordValidation(ErrorMessageResourceName = "alertPassword_CharError", ErrorMessageResourceType = typeof(Properties.Resources))]
         public string NewPassword { get; set; }
 
 

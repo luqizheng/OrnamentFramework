@@ -10,25 +10,26 @@ namespace Ornament.Web.PortableAreas
 {
     public class RegistedEmbedresourceEventArgs : EventArgs
     {
-        public IApplicationBus Bus { get; set; }
-
         public RegistedEmbedresourceEventArgs(IApplicationBus bus)
         {
             Bus = bus;
         }
+
+        public IApplicationBus Bus { get; set; }
     }
+
     public abstract class PortableAreaRegistration : AreaRegistration
     {
         public static Action RegisterEmbeddedViewEngine = () => InputBuilder.InputBuilder.BootStrap();
         public static Action CheckAreasWebConfigExists = () => EnsureAreasWebConfigExists();
         private static readonly Dictionary<Assembly, int> ControllerCollection = new Dictionary<Assembly, int>();
 
-        public event EventHandler<RegistedEmbedresourceEventArgs> EmbedResourceRegisted;
-        
         public virtual string AreaRoutePrefix
         {
             get { return AreaName; }
         }
+
+        public event EventHandler<RegistedEmbedresourceEventArgs> EmbedResourceRegisted;
 
         public virtual PortableAreaMap GetMap()
         {
@@ -46,7 +47,6 @@ namespace Ornament.Web.PortableAreas
             bus.Send(new PortableAreaStartupMessage(AreaName));
 
             RegisterAreaEmbeddedResources(bus);
-
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
@@ -80,8 +80,6 @@ namespace Ornament.Web.PortableAreas
                     "Portable Areas require a ~/Areas/Web.config file in your host application. Copy the config from ~/views/web.config into a ~/Areas/ folder.");
             }
         }
-
-
 
 
         protected virtual void GetInjectControllers(out IEnumerable<Type> controller,

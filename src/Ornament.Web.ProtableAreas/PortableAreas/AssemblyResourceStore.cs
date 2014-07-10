@@ -37,11 +37,11 @@ namespace Ornament.Web.PortableAreas
         {
             get
             {
-                if (!String.IsNullOrEmpty(_assemblyRootNamespaceName))
+                if (String.IsNullOrEmpty(_assemblyRootNamespaceName))
                 {
                     lock (_namespaceName)
                     {
-                        if (!String.IsNullOrEmpty(_assemblyRootNamespaceName))
+                        if (String.IsNullOrEmpty(_assemblyRootNamespaceName))
                         {
                             Initialize(_namespaceName);
                         }
@@ -74,7 +74,6 @@ namespace Ornament.Web.PortableAreas
             return str;
         }
 
-      
 
         private void Initialize(string areaNamespace)
         {
@@ -111,6 +110,7 @@ namespace Ornament.Web.PortableAreas
             }
             return null;
         }
+
         public string GetFullyQualifiedTypeFromPath(string path)
         {
             string str = path.ToLower().Replace("~", AssemblyRootNamespaceName);
@@ -139,7 +139,7 @@ namespace Ornament.Web.PortableAreas
             return null;
         }
 
-     
+
         public bool IsPathResourceStream(string path)
         {
             string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(path);

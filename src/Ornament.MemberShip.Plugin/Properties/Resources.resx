@@ -216,4 +216,7 @@
   <data name="error_expireVerifyCode" xml:space="preserve">
     <value>Verify code is expire.</value>
   </data>
+  <data name="alertPassword_CharError" xml:space="preserve">
+    <value>Password must be at Least one letter, number or symbol, and within 8 to 30 characters.</value>
+  </data>
 </root>
