@@ -1,6 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Web
 @using Ornament.Properties
+@using Qi.Web
 @model Ornament.MemberShip.Permissions.Permission
 @{
     ViewBag.Title = "Permission";
@@ -106,7 +107,7 @@
     <script type="text/javascript">
         seajs.use("/memberships/scripts/permissions/permission.js", function (main) {
 
-            main(@(jsonObject != null ? Html.Raw(Json.Encode(jsonObject)) : new MvcHtmlString("null")));
+            main(@(jsonObject != null ? Html.Raw(JsonHelper.ToJson(jsonObject)) : new MvcHtmlString("null")));
 
         });
     </script>
