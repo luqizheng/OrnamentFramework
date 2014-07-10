@@ -14,7 +14,7 @@ namespace Ornament.Messages.Retrives
         public SimpleMessageFactoryRetrive(string name, string remark, NotifyType notifyType, params Content[] contents)
             : base(name)
         {
-            if (remark == null) 
+            if (remark == null)
                 throw new ArgumentNullException("remark");
             if (notifyType == null)
                 throw new ArgumentNullException("notifyType");
@@ -22,12 +22,22 @@ namespace Ornament.Messages.Retrives
             _notifyType = notifyType;
             _contents = contents;
         }
-
+        /// <summary>
+        /// 根据Id获取NotifyMessageTemplate
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="messageDaoFactory"></param>
+        /// <returns></returns>
         protected override NotifyMessageTemplate GetById(string id, IMessageDaoFactory messageDaoFactory)
         {
             return messageDaoFactory.MessageTemplateDao.Get(id);
         }
-
+        /// <summary>
+        /// 根据名字获取NotifymessageTemplate
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="messageDaoFactory"></param>
+        /// <returns></returns>
         protected override NotifyMessageTemplate CreateInstance(string name, IMessageDaoFactory messageDaoFactory)
         {
             var result = new NotifyMessageTemplate(_notifyType)
