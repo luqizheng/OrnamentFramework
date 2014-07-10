@@ -104,7 +104,7 @@ namespace Ornament.Web
                 current = current.Parent;
                 resxKey = string.Format(@"{0}\{1}.{2}.resx", filePath, pageName, current.Name);
 
-            } while (current != null);
+            } while (current.Name!="");
 
             return GetResx(defaultReex);
         }
