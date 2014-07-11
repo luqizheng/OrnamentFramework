@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Security;
@@ -154,12 +155,9 @@ namespace Ornament
                     try
                     {
                         var culture = CultureInfo.GetCultureInfo(lang);
-                        foreach (var language in OrnamentContext.Configuration.Languages)
+                        if (OrnamentContext.Configuration.Languages.Any(language => language.CultureInfo.Name == culture.Name))
                         {
-                            if (language.CultureInfo.Name == culture.Name)
-                            {
-                                return culture;
-                            }
+                            return culture;
                         }
                     }
                     catch (CultureNotFoundException)
@@ -167,7 +165,7 @@ namespace Ornament
                     }
                 }
             }
-            return CultureInfo.DefaultThreadCurrentUICulture;
+            return CultureInfo.GetCultureInfo("en");
         }
 
 
