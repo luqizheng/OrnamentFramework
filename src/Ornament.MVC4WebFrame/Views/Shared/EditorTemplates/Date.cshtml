@@ -5,6 +5,21 @@
     var displayValue = this.Model != null ? this.Model.Value.ToString(this.ViewData.ModelMetadata.DisplayFormatString) : "";
     var format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd").ToLower();
     var inputMask = Regex.Replace(format, @"(\w{2})(\1)+", "$1");
+    IDictionary<string, object> htmlAttris = new Dictionary<string, object>()
+    {
+        {"inputmask-format", Regex.Replace(format, @"(\w)(\1)+", "$1")},
+        {"placeholder", format},
+        {"data-date-format", inputMask}
+
+    };
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object>;
+        if (htmlAttris == null)
+        {
+            htmlAttris = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        }
+    }
 }
 <div class="control-group">
     @Html.Label("", display, new { @class = "control-label" })
@@ -14,13 +29,7 @@
         //using jquerUI
         *@
         <div data-date="@displayValue" class="jqui-date input-append">
-            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new Dictionary<string, object>()
-                {
-                    {"inputmask-format",  Regex.Replace(format, @"(\w)(\1)+", "$1")},
-                    {"placeholder",format},
-                    {"data-date-format",inputMask}
-                    
-                })
+            @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue,htmlAttris)
             <span class="add-on"><i class="icon-calendar"></i></span>
             @Html.ValidationSummary("")
         </div>

@@ -45,7 +45,7 @@
         //following is Model
         //"pm": "/scripts/ctrls/pm.js",
         "membership": "/scripts/ctrls/memberships.js",
-        "formInput": "/scripts/ctrls/form.js",
+        "formInput": "/scripts/Modules/Combine/form.js",
         //components 不依赖jquery
         "ckeditor": "/scripts/ckeditor/ckeditor.js"
     }

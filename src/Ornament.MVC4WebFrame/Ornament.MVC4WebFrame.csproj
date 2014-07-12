@@ -471,8 +471,6 @@
     <Content Include="Scripts\Modules\Combine\time.js" />
     <Content Include="Scripts\Modules\Combine\WebApi.js" />
     <Content Include="Scripts\Modules\Combine\dataTables.js" />
-    <Content Include="Scripts\Modules\Views\_templates\metralab\_applayout.js" />
-    <Content Include="Scripts\Modules\Views\_templates\pannonia\_applayout.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Index.js" />
     <Content Include="Scripts\Modules\Views\Accounts\Logon.js" />
     <Content Include="Scripts\Modules\Views\Docs\TypeLayout\BaseType.js" />
