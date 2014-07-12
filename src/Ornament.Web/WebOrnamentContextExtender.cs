@@ -40,6 +40,7 @@ namespace Ornament
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
+        [System.Obsolete]
         public static string TemplateName(this OrnamentConfiguration config)
         {
             return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
@@ -54,7 +55,7 @@ namespace Ornament
                 lang = user != null ? user.GetLanguage() : BroswerLanguage(context);
             }
 
-            return lang;
+            return lang ?? CultureInfo.GetCultureInfo("en");
         }
 
         public static string CurrentVerifyCode(this MemberShipContext context)
@@ -155,7 +156,7 @@ namespace Ornament
                     try
                     {
                         var culture = CultureInfo.GetCultureInfo(lang);
-                        if (OrnamentContext.Configuration.Languages.Any(language => language.CultureInfo.Name == culture.Name))
+                        if (OrnamentContext.Configuration.Languages.Any(language => language.CultureInfo.Name.ToLower() == culture.Name.ToLower()))
                         {
                             return culture;
                         }
