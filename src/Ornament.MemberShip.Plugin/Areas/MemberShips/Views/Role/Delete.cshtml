@@ -51,7 +51,7 @@
                     {
                         if (member is User)
                         {
-                        <li title="@member.Remarks">@member.Name</li>
+                            <li title="@member.Remarks">@member.Name</li>
                             index++;
                         }
                         else
@@ -84,7 +84,36 @@
                 </ul>
             </div>
         </div>
+    </div>
 
+</div>
+
+<div class="row-fluid">
+    <div class="span5">
+        <div class="widget">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <h6>@Ornament.MemberShip.Properties.Resources.User</h6>
+                </div>
+            </div>
+
+            <div class="well body">
+                <ul>
+                    @foreach (IPerformer member in members)
+                    {
+                        if (member is User)
+                        {
+                        <li title="@member.Remarks">@member.Name</li>
+                            index++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 

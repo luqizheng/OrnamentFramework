@@ -30,7 +30,7 @@ namespace Ornament.IPLocation
         public bool In(IPAddress ipAddress)
         {
             long companreId = ToLong(ipAddress);
-            foreach (var item in Scopes)
+            foreach (Scope item in Scopes)
             {
                 if (companreId < item.Max && companreId > item.Min)
                 {
@@ -63,7 +63,7 @@ namespace Ornament.IPLocation
             while (startIpAras.Count != 0)
             {
                 long item = Convert.ToInt64(startIpAras.Pop());
-                result += item * Convert.ToInt64(Math.Pow(256, i));
+                result += item*Convert.ToInt64(Math.Pow(256, i));
                 i++;
             }
             return result;
