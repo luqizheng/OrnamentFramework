@@ -68,8 +68,12 @@
     <Content Include="Config\hibernate.cfg.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="App.config" />
-    <None Include="log4net.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="log4net.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="serviceInstall.bat" />
     <None Include="serviceUnInstall.bat" />

@@ -92,7 +92,7 @@ namespace Ornament.Web.Bundles.Config
                 {
                     string[] files = GetCombineFolderFiles(subFolder);
                     //string virtualFolderName = VirtualPathUtility.Combine(bundlePath, subFolder.Name + ".js");
-                    ManagerSetting[] aa = ManagerSetting.Split(files,
+                    IEnumerable<ManagerSetting> aa = ManagerSetting.Split(files,
                         VirtualPathUtility.Combine(bundlePath, subFolder.Name));
                     foreach (ManagerSetting asdf in aa)
                     {
@@ -114,6 +114,12 @@ namespace Ornament.Web.Bundles.Config
 
             FileInfo[] files = (new DirectoryInfo(physicPath).GetFilesEx(ExtendFileName));
             string virtualPath = ToVirtualPath(physicPath);
+            if (!virtualPath.EndsWith("/"))
+            {
+                virtualPath = virtualPath + "/";
+            }
+
+
             foreach (FileInfo fileInfo in files)
             {
                 string subVirtualPath = VirtualPathUtility.Combine(virtualPath, fileInfo.Name);
@@ -150,7 +156,7 @@ namespace Ornament.Web.Bundles.Config
                 get { return _fileStrings ?? (_fileStrings = new List<string>()); }
             }
 
-            public static ManagerSetting[] Split(string[] files, string suggestBundleName)
+            public static IEnumerable<ManagerSetting> Split(string[] files, string suggestBundleName)
             {
                 var result = new Dictionary<string, ManagerSetting>();
 
