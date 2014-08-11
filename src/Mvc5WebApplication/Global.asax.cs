@@ -16,6 +16,7 @@ using Ornament.Web;
 using Ornament.Web.Cfg;
 using Ornament.Web.PortableAreas;
 using Qi.Web.Mvc;
+using WebApplication.Controllers;
 
 
 namespace WebApplication
@@ -25,13 +26,16 @@ namespace WebApplication
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            NHConfig.Instance.Regist(); //初始化NH配置
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             LauguageConfig.Register(OrnamentContext.Configuration);
-
-            NHConfig.Instance.Regist(); //初始化NH配置
+            
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
+
+            ChangeControllerFacotry(typeof(HttpErrorsController),Assembly.GetExecutingAssembly());
         }
 
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)
