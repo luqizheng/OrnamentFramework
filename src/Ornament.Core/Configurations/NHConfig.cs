@@ -39,7 +39,7 @@ namespace Ornament.Configurations
         }
 
         /// <summary>
-        /// 注册Dao
+        ///     注册Dao
         /// </summary>
         /// <param name="interfaceType"></param>
         /// <param name="impleType"></param>
@@ -88,7 +88,8 @@ namespace Ornament.Configurations
                 var config = new Configuration();
                 string configFileName = ConfigurationManager.AppSettings["nhConfig"];
                 if (String.IsNullOrEmpty(configFileName))
-                    throw new ArgumentNullException("nhConfig section can't be find in the config file. please set it up in the appSettiong section.");
+                    throw new ArgumentNullException(
+                        "nhConfig section can't be find in the config file. please set it up in the appSettiong section.");
                 config.Configure(ApplicationHelper.MapPath(configFileName));
                 FluentConfiguration result = Fluently.Configure(config);
 
@@ -126,7 +127,7 @@ namespace Ornament.Configurations
                 a.Execute(true, true);
                 foreach (Exception exception in a.Exceptions)
                 {
-                    LogManager.GetLogger(this.GetType()).Error(exception.Message, exception);
+                    LogManager.GetLogger(GetType()).Error(exception.Message, exception);
                 }
             }
         }

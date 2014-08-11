@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using log4net;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Qi.NHibernateExtender;
@@ -29,7 +28,6 @@ namespace Ornament.Web.DataInitializers
                     .FirstOrDefault(result => !ReferenceEquals(result, null));
         }
 
-       
 
         public static void RecreateStructure(string sessionFactoryName)
         {

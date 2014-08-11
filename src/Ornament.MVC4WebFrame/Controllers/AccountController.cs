@@ -2,14 +2,11 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
-using System.Web.Security;
-using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
-using Ornament.MemberShip.Plugin.Models.Security;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships;
+using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
-using Resources;
 
 namespace Ornament.MVCWebFrame.Controllers
 {
@@ -19,14 +16,12 @@ namespace Ornament.MVCWebFrame.Controllers
     [HandleError, Session]
     public class AccountController : Controller
     {
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="AccountController" /> class.
         /// </summary>
         public AccountController()
             : this(null, null)
         {
-
         }
 
         // This constructor is not used by the MVC framework but is instead provided for ease
@@ -76,10 +71,9 @@ namespace Ornament.MVCWebFrame.Controllers
 
         public ActionResult LogOn(string returnUrl)
         {
-            return View(new LogonModel()
+            return View(new LogonModel
             {
                 ReturnUrl = returnUrl
-
             });
         }
 
@@ -100,10 +94,9 @@ namespace Ornament.MVCWebFrame.Controllers
             {
                 emailChanged = true;
                 OrnamentContext.MemberShip.CurrentUser().Contact.Email = data["Email"];
-
             }
             OrnamentContext.MemberShip.CurrentUser().Contact.Phone = data["Phone"];
-            return Json(new { success = true, emailChanged });
+            return Json(new {success = true, emailChanged});
         }
 
         /// <summary>
@@ -129,7 +122,7 @@ namespace Ornament.MVCWebFrame.Controllers
             }
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                ? (ActionResult)Redirect(model.ReturnUrl)
+                ? (ActionResult) Redirect(model.ReturnUrl)
                 : RedirectToAction("Index", "Home");
         }
 

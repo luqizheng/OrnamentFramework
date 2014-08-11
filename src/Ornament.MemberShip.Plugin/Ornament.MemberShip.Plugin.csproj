@@ -108,53 +108,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\FriendsController.cs" />
-    <Compile Include="Api\MemberController.cs" />
-    <Compile Include="Api\OrgsController.cs" />
-    <Compile Include="Api\RolesController.cs" />
-    <Compile Include="Api\SecurityController.cs" />
-    <Compile Include="Api\UserGroupsController.cs" />
-    <Compile Include="Api\UsersController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
-    <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
-    <Compile Include="Areas\MemberShips\Models\OrgDetailsModel.cs" />
-    <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
-    <Compile Include="Areas\MemberShips\Models\ResourceSetting.cs" />
-    <Compile Include="Areas\MemberShips\MemberShipAreaRegistration.cs" />
-    <Compile Include="Models\AccountOperator.cs" />
-    <Compile Include="Models\MembershipsExtensions.cs" />
-    <Compile Include="Models\Memberships\RoleModel.cs" />
-    <Compile Include="Models\Memberships\UserGroupDetailInfor.cs" />
-    <Compile Include="Models\OrgTreeItem.cs" />
-    <Compile Include="Models\SampleData\MemberShipDataInitializer.cs" />
-    <Compile Include="Models\SampleData\MemberShipData.cs" />
-    <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
-    <Compile Include="Models\Memberships\CreateUserModel.cs" />
-    <Compile Include="Models\Memberships\EditUserModel.cs" />
-    <Compile Include="Models\Security\ForgetPasswordModel.cs" />
-    <Compile Include="Models\Memberships\LogonModel.cs" />
-    <Compile Include="Models\Memberships\OrgModel.cs" />
-    <Compile Include="Models\Memberships\Partials\BasicInfo.cs" />
-    <Compile Include="Models\Memberships\Partials\PasswordModel.cs" />
-    <Compile Include="Models\Memberships\Partials\PermissionInfo.cs" />
-    <Compile Include="Models\Memberships\Partials\QuestionAnswerModel.cs" />
-    <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
-    <Compile Include="Models\Memberships\RegistAccount.cs" />
-    <Compile Include="Models\Memberships\UserGroupModel.cs" />
-    <Compile Include="Models\Memberships\UsersStatusModel.cs" />
-    <Compile Include="Models\NewsOperator.cs" />
-    <Compile Include="Models\OrgOperator.cs" />
-    <Compile Include="Models\PermissionOperator.cs" />
-    <Compile Include="Models\RoleOperator.cs" />
-    <Compile Include="Models\Security\ResetPasswordModel.cs" />
-    <Compile Include="Models\Security\VerifyEmailModel.cs" />
-    <Compile Include="Models\SiteMapNodes\OrgNode.cs" />
-    <Compile Include="Models\UserGroupOperator.cs" />
-    <Compile Include="Models\UserOperator.cs" />
-    <Compile Include="Models\VerifyCodeRequireAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -162,45 +115,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\OrgTree.cshtml" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hans.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -242,73 +161,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\Assign.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\Create.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\User\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Create.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Index.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Create.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\BasicInfo.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\Share\friend.js" />
-    <EmbeddedResource Include="Scripts\Share\permission.js" />
-    <EmbeddedResource Include="Scripts\Share\user.js" />
-    <EmbeddedResource Include="Scripts\Permissions\index.js" />
-    <EmbeddedResource Include="Scripts\Permissions\Permission.js" />
-    <EmbeddedResource Include="Scripts\User\Assign.js" />
-    <EmbeddedResource Include="Scripts\User\Create.js" />
-    <EmbeddedResource Include="Scripts\User\Edit.js" />
-    <EmbeddedResource Include="Scripts\User\Index.js" />
-    <EmbeddedResource Include="Scripts\Share\dataTables.js" />
-    <EmbeddedResource Include="Scripts\Share\ui.js" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Role[].cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserGroup[].cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Org.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\Org\Create.js" />
-    <EmbeddedResource Include="Scripts\Role\Index.js" />
-    <EmbeddedResource Include="Scripts\Role\Create.js" />
-    <EmbeddedResource Include="Scripts\Role\Edit.js" />
-    <EmbeddedResource Include="Scripts\Share\roleCheckboxes.js" />
-    <Content Include="Scripts\Share\_NewPassword.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -319,31 +176,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User[].cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\Org\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\RolesCheckBoxes.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\RoleListRadio.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Mvc.sitemap" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\UserGroupListRadio.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

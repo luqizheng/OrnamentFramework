@@ -12,6 +12,7 @@ using log4net.Config;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.SampleData;
+using Ornament.MemberShip.Web.Plugin.Models.SampleData;
 using Ornament.MVCWebFrame.App_Start;
 using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.Cfg;

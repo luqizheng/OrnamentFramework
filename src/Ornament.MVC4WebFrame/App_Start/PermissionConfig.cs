@@ -1,14 +1,11 @@
-﻿using System;
-using Ornament.MemberShip;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
-using Ornament.MemberShip.Plugin.Models;
+﻿using Ornament.MemberShip;
 using Ornament.Messages.Newses;
 using Ornament.Web;
 
 namespace Ornament.MVCWebFrame
 {
     /// <summary>
-    /// Permission setting 
+    ///     Permission setting
     /// </summary>
     public class PermissionConfig
     {
@@ -20,31 +17,31 @@ namespace Ornament.MVCWebFrame
         private static void RegistrySettingPage()
         {
             OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
-                {
-                    ValueType = typeof(string),
-                    Name = "类型资源",
-                    Path = "~/Areas/MemberShips/Views/Permissions/_defaultResourceSelector.cshtml"
-                });
+            {
+                ValueType = typeof (string),
+                Name = "类型资源",
+                Path = "~/Areas/MemberShips/Views/Permissions/_defaultResourceSelector.cshtml"
+            });
 
             OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
-                {
-                    Name = "新闻资源",
-                    Path = "~/Areas/Messages/Views/Shared/resNewsType.cshtml",
-                    ValueType = typeof(NewsType)
-                });
+            {
+                Name = "新闻资源",
+                Path = "~/Areas/Messages/Views/Shared/resNewsType.cshtml",
+                ValueType = typeof (NewsType)
+            });
 
             OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
             {
                 Name = "角色资源",
                 Path = "~/Areas/MemberShips/Views/Shared/RoleListRadio.cshtml",
-                ValueType = typeof(Role)
+                ValueType = typeof (Role)
             });
 
             OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
             {
                 Name = "用户组资源",
                 Path = "~/Areas/MemberShips/Views/Shared/UserGroupListRadio.cshtml",
-                ValueType = typeof(Role)
+                ValueType = typeof (Role)
             });
         }
     }

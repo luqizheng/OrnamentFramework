@@ -1,0 +1,42 @@
+﻿@using Ornament
+@using Ornament.Properties
+@using Ornament.Web.UI.Theme
+@model Ornament.MemberShip.Web.Plugin.Models.Memberships.RoleModel
+@{
+    string subject = Resources.Create + Ornament.MemberShip.Properties.Resources.Role;
+    ViewBag.Title = subject;
+    Layout = OrnamentContext.Configuration.Layout();
+}
+@using (Panel box = Html.Panel())
+{
+    @box.Header(@<text>
+    <button class="btn btn-primary">@Resources.Save</button>
+    <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
+    </text>)
+
+    @box.Body(@<text>
+    <form class="form-horizontal" method="POST">
+        @Html.ValidationSummary(true)
+        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(model => model.Remarks)
+        @Html.HiddenFor(model => model.Id)
+        <div class="control-group">
+            <label class="control-label">@Ornament.MemberShip.Properties.Resources.Permission</label>
+            <div class="controls">
+                @Html.Partial("ChoicePermissions", Model)
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">@Resources.Save</button>
+            <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
+        </div>
+    </form>
+
+    </text>)
+}
+
+@section scripts{
+    <script type="text/javascript">
+        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/Role/Create.js")")
+    </script>
+}

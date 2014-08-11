@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89E3B336-7AEB-4804-AF20-F6EEFAC05B8E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ornament.MemberShip.Web.Plugin</RootNamespace>
+    <AssemblyName>Ornament.MemberShip.Web.Plugin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcSiteMapProvider, Version=4.6.11.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\MvcSiteMapProvider.MVC5.Core.4.6.11\lib\net45\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Qi.dll</HintPath>
+    </Reference>
+    <Reference Include="Qi.NHibernateExtender, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
+    <EmbeddedResource Include="Scripts\Org\Create.js" />
+    <EmbeddedResource Include="Scripts\Permissions\index.js" />
+    <EmbeddedResource Include="Scripts\Permissions\Permission.js" />
+    <EmbeddedResource Include="Scripts\Role\Create.js" />
+    <EmbeddedResource Include="Scripts\Role\Edit.js" />
+    <EmbeddedResource Include="Scripts\Role\Index.js" />
+    <EmbeddedResource Include="Scripts\Share\dataTables.js" />
+    <EmbeddedResource Include="Scripts\Share\friend.js" />
+    <EmbeddedResource Include="Scripts\Share\permission.js" />
+    <EmbeddedResource Include="Scripts\Share\roleCheckboxes.js" />
+    <EmbeddedResource Include="Scripts\Share\ui.js" />
+    <EmbeddedResource Include="Scripts\Share\user.js" />
+    <Content Include="Scripts\Share\_NewPassword.js" />
+    <EmbeddedResource Include="Scripts\User\Assign.js" />
+    <EmbeddedResource Include="Scripts\User\Create.js" />
+    <EmbeddedResource Include="Scripts\User\Edit.js" />
+    <EmbeddedResource Include="Scripts\User\Index.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\FriendsController.cs" />
+    <Compile Include="Api\MemberController.cs" />
+    <Compile Include="Api\OrgsController.cs" />
+    <Compile Include="Api\RolesController.cs" />
+    <Compile Include="Api\SecurityController.cs" />
+    <Compile Include="Api\UserGroupsController.cs" />
+    <Compile Include="Api\UsersController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\OrgController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\PermissionsController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\RoleController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UserController.cs" />
+    <Compile Include="Areas\MemberShips\Controllers\UsergroupController.cs" />
+    <Compile Include="Areas\MemberShips\MemberShipAreaRegistration.cs" />
+    <Compile Include="Areas\MemberShips\Models\OrgDetailsModel.cs" />
+    <Compile Include="Areas\MemberShips\Models\PermissionResourceSelectModel.cs" />
+    <Compile Include="Areas\MemberShips\Models\ResourceSetting.cs" />
+    <Compile Include="Models\AccountOperator.cs" />
+    <Compile Include="Models\MembershipsExtensions.cs" />
+    <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
+    <Compile Include="Models\Memberships\CreateUserModel.cs" />
+    <Compile Include="Models\Memberships\EditUserModel.cs" />
+    <Compile Include="Models\Memberships\LogonModel.cs" />
+    <Compile Include="Models\Memberships\OrgModel.cs" />
+    <Compile Include="Models\Memberships\Partials\BasicInfo.cs" />
+    <Compile Include="Models\Memberships\Partials\PasswordModel.cs" />
+    <Compile Include="Models\Memberships\Partials\PermissionInfo.cs" />
+    <Compile Include="Models\Memberships\Partials\QuestionAnswerModel.cs" />
+    <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
+    <Compile Include="Models\Memberships\RegistAccount.cs" />
+    <Compile Include="Models\Memberships\RoleModel.cs" />
+    <Compile Include="Models\Memberships\UserGroupDetailInfor.cs" />
+    <Compile Include="Models\Memberships\UserGroupModel.cs" />
+    <Compile Include="Models\Memberships\UsersStatusModel.cs" />
+    <Compile Include="Models\NewsOperator.cs" />
+    <Compile Include="Models\OrgOperator.cs" />
+    <Compile Include="Models\OrgTreeItem.cs" />
+    <Compile Include="Models\PermissionOperator.cs" />
+    <Compile Include="Models\RoleOperator.cs" />
+    <Compile Include="Models\SampleData\MemberShipData.cs" />
+    <Compile Include="Models\SampleData\MemberShipDataInitializer.cs" />
+    <Compile Include="Models\Security\ForgetPasswordModel.cs" />
+    <Compile Include="Models\Security\ResetPasswordModel.cs" />
+    <Compile Include="Models\Security\VerifyEmailModel.cs" />
+    <Compile Include="Models\SiteMapNodes\OrgNode.cs" />
+    <Compile Include="Models\UserGroupOperator.cs" />
+    <Compile Include="Models\UserOperator.cs" />
+    <Compile Include="Models\VerifyCodeRequireAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Details.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hans.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hant.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hans.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hant.resx" />
+    <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hans.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hant.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
+    <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Role\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\BasicInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\Org.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\OrgTree.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\Role[].cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\RolesCheckBoxes.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\User.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\User[].cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserGroup[].cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\RoleListRadio.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\UserGroupListRadio.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.resx" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hans.resx" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Create.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Edit.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\Index.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\Assign.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\Create.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\User\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Details.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
+    <Content Include="Areas\MemberShips\Views\Web.config" />
+    <Content Include="Areas\Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.resx" />
+    <Content Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hans.resx" />
+    <Content Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
+      <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
+      <Name>Ornament.Messages.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
+      <Name>Ornament.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
+      <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
+      <Name>Ornament.Web.PortableAreas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web.UI\Ornament.Web.UI.csproj">
+      <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>
+      <Name>Ornament.Web.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
+      <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
+      <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
+      <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
+      <Name>Ornament.MemberShip.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.MemberShip.Dao.NHibernateImple\Ornament.MemberShip.Dao.NHibernateImple.csproj">
+      <Project>{6C6439C4-0EA1-44F9-B406-664512594A1B}</Project>
+      <Name>Ornament.MemberShip.Dao.NHibernateImple</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:8260/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。启用“NuGet 程序包还原”可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
