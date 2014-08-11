@@ -1,0 +1,41 @@
+﻿@using MvcSiteMapProvider
+@using Ornament
+@using Ornament.Web
+@using Ornament.Web.MemberShips
+@{
+    var site = new SiteMapPermission(OrnamentContext.MemberShip, OrnamentContext.ResourceManager);
+    var nodes = Html.GetUserMenus(site, 3);
+}
+@*
+1) 菜单上面的Operator 操作检查只支持类型Permission。写法是 User:Create,前面一个ResourceDessciption的Id，后面一个UserOperator的值
+2) 如果发现mvcNode上面有Disabled = false，那么在主菜单中是不会显示。
+3) 如果发现mvcNode上clickabled=false，那么就不会使用url二是"#"。
+4）主菜单中，如果某节点clickable=true 或者没有声明，
+   a.这个节点拥有子菜单的，那么这个节点会自动设置为clickabled=false,也就是url会设置为"#"。
+   b.这个节点没有任意一个菜单。那么会显示设置的url
+
+上面的解释来源于mvc.sitemap
+但是使用的ui template有部分不同，因此修改第4）点
+1） 这个节点没有子菜单，那么不会出现。
+*@
+
+<nav>
+    <ul>
+        <li class="">
+            <a href="ajax/dashboard.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i>
+                <span class="menu-item-parent">Dashboard</span></a>
+        </li>
+
+        @foreach (var node in nodes)
+        {
+            <li>
+                <a href="@node.Url" title="@node.Current.Description">
+                    <i class="fa fa-lg fa-fw @node.Current.ImageUrl">
+                    </i>
+                    <span class="menu-item-parent">@node.Current.Title</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
+<span class="minifyme" data-action="minifyMenu"><i class="fa fa-arrow-circle-left hit"></i></span>
