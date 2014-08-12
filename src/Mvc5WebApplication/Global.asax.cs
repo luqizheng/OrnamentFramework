@@ -8,12 +8,15 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 using Castle.MicroKernel.Registration;
 using log4net;
 using Ornament;
 using Ornament.Configurations;
+using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
 using Ornament.Web.Cfg;
+using Ornament.Web.MemberShips;
 using Ornament.Web.PortableAreas;
 using Qi.Web.Mvc;
 using WebApplication.Controllers;
@@ -33,8 +36,8 @@ namespace WebApplication
             LauguageConfig.Register(OrnamentContext.Configuration);
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
-
-            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
+            Ornament.MemberShip.User.ValidateUserPolicy = new ValidateUserPolicy((IMemberShipProvider)Membership.Provider);
+            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
         }
 
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)
@@ -56,7 +59,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

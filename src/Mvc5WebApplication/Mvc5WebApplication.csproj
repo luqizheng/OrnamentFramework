@@ -853,8 +853,13 @@
     <Compile Include="App_Start\ValidationConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountMembershipService.cs" />
+    <Compile Include="Controllers\FormsAuthenticationService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HttpErrorsController.cs" />
+    <Compile Include="Controllers\IMembershipService.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\VerifyCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -915,6 +920,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Logon.cshtml" />
     <Content Include="Views\Shared\_standLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -980,6 +987,23 @@
       <Name>Ornament.Web.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ChangePassword.resx" />
+    <Content Include="Views\Account\App_LocalResources\ForgetPassword.resx" />
+    <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh-Hans.resx" />
+    <Content Include="Views\Account\App_LocalResources\ForgetPassword.zh-Hant.resx" />
+    <Content Include="Views\Account\App_LocalResources\Index.resx" />
+    <Content Include="Views\Account\App_LocalResources\Index.zh-Hans.resx" />
+    <Content Include="Views\Account\App_LocalResources\Index.zh-Hant.resx" />
+    <Content Include="Views\Account\App_LocalResources\Regist.resx" />
+    <Content Include="Views\Account\App_LocalResources\Regist.zh-Hans.resx" />
+    <Content Include="Views\Account\App_LocalResources\Regist.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\Logon.resx" />
+    <Content Include="Views\Account\App_LocalResources\Logon.zh-Hans.resx" />
+    <Content Include="Views\Account\App_LocalResources\Logon.zh-Hant.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -991,9 +1015,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>5078</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1686/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
