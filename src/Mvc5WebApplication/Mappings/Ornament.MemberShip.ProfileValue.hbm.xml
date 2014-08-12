@@ -1,0 +1,22 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" dynamic-insert="true" dynamic-update="true" name="Ornament.MemberShip.ProfileValue, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" table="MBS_Profile">
+    <id name="Id" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="uuid.hex">
+        <param name="format">n</param>
+      </generator>
+    </id>
+    <property name="IsAnonymous" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="IsAnonymous" />
+    </property>
+    <property name="LoginId" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LoginId" />
+    </property>
+    <property name="LastActivityDate" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LastActivityDate" />
+    </property>
+    <property name="StreamValues" type="System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="StreamValues" />
+    </property>
+  </class>
+</hibernate-mapping>

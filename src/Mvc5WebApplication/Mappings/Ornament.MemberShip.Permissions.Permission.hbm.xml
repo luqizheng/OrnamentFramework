@@ -1,0 +1,32 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Ornament.MemberShip.Permissions.Permission, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" table="MBS_Permission">
+    <id name="Id" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" />
+      <generator class="uuid.hex">
+        <param name="format">N</param>
+      </generator>
+    </id>
+    <discriminator type="String">
+      <column name="diff" length="32" />
+    </discriminator>
+    <property name="Name" insert="true" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Name" />
+    </property>
+    <property name="Remark" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Remark" />
+    </property>
+    <property name="Operator" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Operator" />
+    </property>
+    <subclass name="Ornament.MemberShip.Permissions.GenericPermission`1[[Ornament.MemberShip.Role, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null]], Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" discriminator-value="RoleRes">
+      <many-to-one class="Ornament.MemberShip.Role, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="mbs_role_resFK" name="Resource">
+        <column name="RoleId" />
+      </many-to-one>
+    </subclass>
+    <subclass name="Ornament.MemberShip.Permissions.GenericPermission`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" discriminator-value="Kind">
+      <property name="Resource" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <column name="TypeResource" length="64" />
+      </property>
+    </subclass>
+  </class>
+</hibernate-mapping>

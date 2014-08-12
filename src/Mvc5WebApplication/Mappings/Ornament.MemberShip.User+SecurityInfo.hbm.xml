@@ -1,0 +1,34 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Ornament.MemberShip.User+SecurityInfo, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" table="MBS_UserSecrityInfo">
+    <id name="Id" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" length="32" />
+      <generator class="uuid.hex">
+        <param name="format">N</param>
+      </generator>
+    </id>
+    <property name="LastPasswordChangedDate" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LastPasswordChangedDate" />
+    </property>
+    <property access="nosetter.camelcase-underscore" name="Password" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Password" length="64" />
+    </property>
+    <property name="LastLockoutDate" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LastLockoutDate" />
+    </property>
+    <property name="InvalidPasswordAttempts" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="InvalidPasswordAttempts" />
+    </property>
+    <property access="nosetter.camelcase-underscore" name="PasswordAnswer" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="PasswordAnswer" length="100" />
+    </property>
+    <property access="nosetter.camelcase-underscore" name="PasswordQuestion" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="PasswordQuestion" length="100" />
+    </property>
+    <property name="LastLoginDate" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="LastLoginDate" />
+    </property>
+    <many-to-one class="Ornament.MemberShip.User, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="SecrityInfoUserIdFK" name="User">
+      <column name="User_id" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

@@ -18,10 +18,9 @@ using Ornament.Web.PortableAreas;
 using Qi.Web.Mvc;
 using WebApplication.Controllers;
 
-
 namespace WebApplication
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -32,10 +31,10 @@ namespace WebApplication
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             LauguageConfig.Register(OrnamentContext.Configuration);
-            
+
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
 
-            ChangeControllerFacotry(typeof(HttpErrorsController),Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
         }
 
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)
@@ -50,19 +49,14 @@ namespace WebApplication
             };
 
             var apiController = new OrnamentWebApiFactory(apiControllers.ToArray());
-
-
             try
             {
-                OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>()
-                    .Instance(apiController).LifestyleSingleton());
-
-                ////change the default controller.
+                OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>().Instance(apiController).LifestyleSingleton());
                 ControllerBuilder.Current.SetControllerFactory(defaultController);
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

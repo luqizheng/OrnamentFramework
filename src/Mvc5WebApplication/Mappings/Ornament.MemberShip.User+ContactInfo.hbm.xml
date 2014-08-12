@@ -1,0 +1,25 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="Ornament.MemberShip.User+ContactInfo, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" table="MBS_UserContactInfo">
+    <id name="Id" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" length="32" />
+      <generator class="uuid.hex">
+        <param name="format">N</param>
+      </generator>
+    </id>
+    <property access="nosetter.camelcase-underscore" name="Email" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Email" length="64" />
+    </property>
+    <property access="nosetter.camelcase-underscore" name="Phone" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Phone" length="20" />
+    </property>
+    <property name="EmailVerified" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="EmailVerified" />
+    </property>
+    <property name="PhoneVerified" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="PhoneVerified" />
+    </property>
+    <many-to-one cascade="none" class="Ornament.MemberShip.User, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="ContactUserFK" name="User">
+      <column name="User_id" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

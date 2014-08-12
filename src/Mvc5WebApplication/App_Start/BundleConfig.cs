@@ -33,7 +33,7 @@ namespace WebApplication
             bundles.Add(jquery);
 
             bundles.Add(new ScriptBundle("~/js/jqueryui").Include("~/js/libs/jquery-ui-{version}.js"));
-            bundles.Add(new ScriptBundle("~/js/bootstrap.js").Include("~/js/bootstrap/bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/js/bootstrap").Include("~/js/bootstrap/bootstrap.min.js"));
             bundles.Add(new ScriptBundle("~/js/avalon.js").Include("~/js/avalon.js"));
             bundles.Add(new ScriptBundle("~/js/json2.js").Include("~/js/json2.js"));
         }

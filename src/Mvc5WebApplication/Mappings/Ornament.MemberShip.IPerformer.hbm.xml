@@ -1,0 +1,107 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class xmlns="urn:nhibernate-mapping-2.2" discriminator-value="" name="Ornament.MemberShip.IPerformer, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" table="MBS_Performer">
+    <id name="Id" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Id" length="32" />
+      <generator class="uuid.hex">
+        <param name="format">N</param>
+      </generator>
+    </id>
+    <discriminator type="String">
+      <column name="PerformerType" length="10" not-null="true" />
+    </discriminator>
+    <set name="Roles" table="MBS_PerformerRoleRelation">
+      <key>
+        <column name="PerformerId" />
+      </key>
+      <many-to-many class="Ornament.MemberShip.Role, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null">
+        <column name="RoleId" />
+      </many-to-many>
+    </set>
+    <property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Name" />
+    </property>
+    <property name="Remarks" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <column name="Remarks" length="2000" />
+    </property>
+    <subclass name="Ornament.MemberShip.Org, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" discriminator-value="org">
+      <join table="MBS_ORG">
+        <key>
+          <column name="Id" />
+        </key>
+        <bag cascade="delete" collection-type="Ornament.MemberShip.Dao.NHibernateImple.Mappings.OrgMapping+OrgListType, Ornament.MemberShip.Dao.NHibernateImple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Childs">
+          <key>
+            <column name="OrgParentId" />
+          </key>
+          <one-to-many class="Ornament.MemberShip.Org, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" />
+        </bag>
+        <property access="field.camelcase-underscore" name="OrderId" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <column name="OrderId" length="4000" />
+        </property>
+        <many-to-one class="Ornament.MemberShip.Org, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="OrgParentFK" name="Parent">
+          <column name="OrgParentId" />
+        </many-to-one>
+      </join>
+    </subclass>
+    <subclass name="Ornament.MemberShip.Role, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" discriminator-value="role">
+      <join table="MBS_Role">
+        <key>
+          <column name="Id" />
+        </key>
+        <set access="nosetter.camelcase-underscore" name="Permissions" table="MBS_PermissionRoleRelation">
+          <key foreign-key="FK_ROLEID_PermissionRoleRelation">
+            <column name="roleId" />
+          </key>
+          <many-to-many class="Ornament.MemberShip.Permissions.Permission, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="FK_ROLEID_PermissionRoleRelation">
+            <column name="PermissionId" />
+          </many-to-many>
+        </set>
+      </join>
+    </subclass>
+    <subclass name="Ornament.MemberShip.UserGroup, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" discriminator-value="usergroup">
+      <join table="MBS_UserGroup">
+        <key>
+          <column name="Id" />
+        </key>
+      </join>
+    </subclass>
+    <subclass name="Ornament.MemberShip.User, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" dynamic-update="true" discriminator-value="User">
+      <join table="MBS_User">
+        <key>
+          <column name="Id" />
+        </key>
+        <set access="nosetter.camelcase-underscore" name="UserGroups" table="MBS_UserGroupUserRelation">
+          <key>
+            <column name="UserId" />
+          </key>
+          <many-to-many class="Ornament.MemberShip.UserGroup, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null">
+            <column name="UserGroup_id" />
+          </many-to-many>
+        </set>
+        <property name="LoginId" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <column name="LoginId" length="50" index="idx_loginId" unique="true" />
+        </property>
+        <property name="IsDeny" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <column name="IsDeny" />
+        </property>
+        <property name="TimeZoneId" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <column name="TimeZoneId" length="64" />
+        </property>
+        <property name="Language" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <column name="Language" length="32" />
+        </property>
+        <many-to-one class="Ornament.MemberShip.Org, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="UserOrgFK" name="Org">
+          <column name="UserOrgId" />
+        </many-to-one>
+        <many-to-one access="nosetter.camelcase-underscore" cascade="all" class="Ornament.MemberShip.User+OtherUserInfo, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="UserOtherInfoFK" name="Other">
+          <column name="Other_id" />
+        </many-to-one>
+        <many-to-one access="nosetter.camelcase-underscore" cascade="all" class="Ornament.MemberShip.User+ContactInfo, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="UserContactFK" name="Contact">
+          <column name="Contact_id" />
+        </many-to-one>
+        <many-to-one access="nosetter.camelcase-underscore" cascade="all" class="Ornament.MemberShip.User+SecurityInfo, Ornament.MemberShip.Core, Version=1.2.2.1, Culture=neutral, PublicKeyToken=null" foreign-key="UserSecurityFK" name="Security">
+          <column name="Security_id" />
+        </many-to-one>
+      </join>
+    </subclass>
+  </class>
+</hibernate-mapping>
