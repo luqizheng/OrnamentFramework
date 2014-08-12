@@ -3,9 +3,9 @@
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.Properties
 @using Ornament.Web
-@using Ornament.Web.UI.Paginations
+
 @using Ornament.Web.UI.Theme
-@using SeajsBundles
+
 @model IEnumerable<Ornament.MemberShip.User>
 @{
     ViewBag.Title = Html.GetEmbededResourceString("page_title");
@@ -28,16 +28,13 @@
                 fail: '@Html.GetEmbededResourceString("retrieve_pwd_fail")'
             }
         };
-        @Scripts.Render();
-        seajs.use('@Scripts.Url("~/MemberShips/Scripts/User/Index.js")', function (main) {
+        
+        avalon.require('@Scripts.Url("~/MemberShips/Scripts/User/Index.js")', function (main) {
             main.init(multiLanguate);
         });
-    </script>
-}
+    </script>}
 
-@section pageTitle{
-    <h3>@Html.GetEmbededResourceString("page_title")</h3>
-}
+
 @using (Panel box = Html.Panel())
 {
     @box.Header(@<text>
@@ -104,7 +101,7 @@
                     <td>
                         <div class="row-fluid">
                             <span ms-text="el.Email"></span>
-                            <a class="btn pull-right" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail" title="@Ornament.MemberShip.Plugin.Properties.Resources.VerifyEmail">
+                            <a class="btn pull-right" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail" title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
                                 @Html.GetEmbededResourceString("Verify")
                             </a>
                         </div>
@@ -167,6 +164,6 @@
             </tfoot>
         </table>
     </div>
-    </text>
+</text>
         )
 }
