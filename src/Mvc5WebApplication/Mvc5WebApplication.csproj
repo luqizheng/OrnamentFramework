@@ -410,7 +410,6 @@
     <Content Include="js\avalon.mobile.min.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
     <Content Include="js\demo.min.js" />
-    <Content Include="js\json2.js" />
     <Content Include="js\libs\jquery-2.0.2.js" />
     <Content Include="js\libs\jquery-ui-1.10.3.js" />
     <Content Include="js\notification\SmartNotification.min.js" />
@@ -806,8 +805,8 @@
     <Content Include="js\smartwidgets\jarvis.widget.min.js" />
     <Content Include="js\speech\voicecommand.min.js" />
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
-    <Content Include="Scripts\json2.js" />
-    <Content Include="Scripts\json2.min.js" />
+    <Content Include="js\json2.js" />
+    <Content Include="js\json2.min.js" />
     <Content Include="sound\bigbox.mp3" />
     <Content Include="sound\license.txt" />
     <Content Include="sound\messagebox.mp3" />
