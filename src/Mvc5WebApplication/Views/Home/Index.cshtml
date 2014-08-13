@@ -500,16 +500,17 @@
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
     @Scripts.Render("~/js/jquery")
     @Scripts.Render("~/js/jqueryui")
+    <!-- BOOTSTRAP JS -->
     @Scripts.Render("~/js/bootstrap")
     @Scripts.Render("~/js/avalon")
     <!-- IMPORTANT: APP CONFIG -->
     <script src="/js/app.config.js"></script>
-
+    <script src="~/js/require.js"></script>
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
-
-    <!-- BOOTSTRAP JS -->
-    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    
+    
+    
 
     <!-- CUSTOM NOTIFICATION -->
     <script src="/js/notification/SmartNotification.min.js"></script>

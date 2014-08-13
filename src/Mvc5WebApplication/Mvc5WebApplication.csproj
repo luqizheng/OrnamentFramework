@@ -405,9 +405,9 @@
     <Content Include="js\app.config.js" />
     <Content Include="js\app.min.js" />
     <Content Include="js\avalon.js" />
-    <Content Include="js\avalon.min.js" />
     <Content Include="js\avalon.mobile.js" />
-    <Content Include="js\avalon.mobile.min.js" />
+    <Content Include="js\avalons\Pagination\Pagination.html" />
+    <Content Include="js\avalons\Pagination\pagination.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
     <Content Include="js\demo.min.js" />
     <Content Include="js\libs\jquery-2.0.2.js" />
@@ -807,6 +807,8 @@
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="js\json2.js" />
     <Content Include="js\json2.min.js" />
+    <Content Include="js\r.js" />
+    <Content Include="js\require.js" />
     <Content Include="sound\bigbox.mp3" />
     <Content Include="sound\license.txt" />
     <Content Include="sound\messagebox.mp3" />
@@ -939,7 +941,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\Layout\panel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\membership.sitemap.resx">

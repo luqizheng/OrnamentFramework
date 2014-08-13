@@ -29,7 +29,7 @@
         @foreach (var node in nodes)
         {
             <li>
-                <a href="@node.Url" title="@node.Current.Description">
+                <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
                     <i class="fa fa-lg fa-fw @node.Current.ImageUrl">
                     </i>
                     <span class="menu-item-parent">@node.Current.Title</span>

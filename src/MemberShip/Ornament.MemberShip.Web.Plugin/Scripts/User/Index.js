@@ -1,9 +1,9 @@
 ﻿/// <reference path="../Share/user.js" />
 /// <reference path="../Share/dataTables.js" />
-define(function () {
+define(function (require) {
 
-    //require("/scripts/avalons/Pagination/pagination.js")(avalon);
-    alert($);
+    require("/js/avalons/Pagination/pagination.js")(avalon);
+    
     var lang = {};
     var userApi = "";// require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
     //require('validate');
@@ -96,7 +96,7 @@ define(function () {
     return {
         init: function (lang1) {
             lang = lang1;
-           // avalon.scan();
+            avalon.scan();
         }
     };
 

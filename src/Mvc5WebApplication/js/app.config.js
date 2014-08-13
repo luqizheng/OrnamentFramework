@@ -268,16 +268,17 @@ if (voice_command) {
 //ajax setting 
 
 $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
-    if (event.status.status == 401) {
+    if (jqxhr.status == 401) {
         // perform a redirect to the login page since we're no longer authorized
         window.location.replace("/Account/logon");
     }
-    
+
 });
+avalon.config({ loader: false });
 avalon.modules.jquery = {
     exports: jQuery,
     state: 2
-}
+};
 
 /*
  * END APP.CONFIG
