@@ -50,6 +50,17 @@ namespace WebApplication
             SeajsModuleBundleMessageHandle.HandlAllBundle();
         }
 
+        protected void Application_EndRequest()
+        {
+            var context = new HttpContextWrapper(Context);
+            // If we're an ajax request, and doing a 302, then we actually need to do a 401
+            if (Context.Response.StatusCode == 302 && context.Request.IsAjaxRequest())
+            {
+                Context.Response.Clear();
+                Context.Response.StatusCode = 401;
+            }
+        }
+
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)
         {
             IEnumerable<Type> controllers;
