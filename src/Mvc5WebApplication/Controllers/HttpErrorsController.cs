@@ -10,7 +10,7 @@ namespace WebApplication.Controllers
         {
             Response.StatusCode = 404;
             Response.TrySkipIisCustomErrors = true;
-            return View("404");
+            return View();
         }
 
         [HttpPost, ValidateInput(false)]

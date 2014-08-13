@@ -5,8 +5,7 @@ define(function(require) {
     require("/scripts/avalons/Pagination/pagination.js")(avalon);
 
     var lang = {};
-    var $ = require("jquery"),
-        userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
+    var userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
     require('validate');
 
     

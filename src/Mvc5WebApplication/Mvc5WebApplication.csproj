@@ -75,6 +75,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
+    <Reference Include="SeajsBundles, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Extensions.dll</HintPath>
@@ -802,6 +806,8 @@
     <Content Include="js\smartwidgets\jarvis.widget.min.js" />
     <Content Include="js\speech\voicecommand.min.js" />
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
+    <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\json2.min.js" />
     <Content Include="sound\bigbox.mp3" />
     <Content Include="sound\license.txt" />
     <Content Include="sound\messagebox.mp3" />
@@ -924,6 +930,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\Body.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\Header.cshtml" />
+    <Content Include="Views\HttpErrors\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -11,14 +11,19 @@ using System.Web.Routing;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
 using log4net;
+using log4net.Config;
 using Ornament;
 using Ornament.Configurations;
 using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
 using Ornament.Web.Cfg;
 using Ornament.Web.MemberShips;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.InputBuilder;
+using Ornament.Web.SeajsModules;
 using Qi.Web.Mvc;
+using SeajsBundles.Seajs.Modules;
 using WebApplication.Controllers;
 
 namespace WebApplication
@@ -27,6 +32,7 @@ namespace WebApplication
     {
         protected void Application_Start()
         {
+            XmlConfigurator.Configure(); //Log4net registry.
             AreaRegistration.RegisterAllAreas();
             NHConfig.Instance.Regist(); //初始化NH配置
 
@@ -36,8 +42,12 @@ namespace WebApplication
             LauguageConfig.Register(OrnamentContext.Configuration);
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
-            Ornament.MemberShip.User.ValidateUserPolicy = new ValidateUserPolicy((IMemberShipProvider)Membership.Provider);
+            Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
             ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
+            InputBuilder.BootStrap();
+            //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
+            SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
+            SeajsModuleBundleMessageHandle.HandlAllBundle();
         }
 
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)
