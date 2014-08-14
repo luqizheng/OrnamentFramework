@@ -275,11 +275,6 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
 
 });
 avalon.config({ loader: false });
-avalon.modules.jquery = {
-    exports: jQuery,
-    state: 2
-};
-
 /*
  * END APP.CONFIG
  */

@@ -30,7 +30,7 @@
         {
             <li>
                 <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
-                    <i class="fa fa-lg fa-fw @node.Current.ImageUrl">
+                    <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')">
                     </i>
                     <span class="menu-item-parent">@node.Current.Title</span>
                 </a>

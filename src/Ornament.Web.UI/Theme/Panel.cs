@@ -13,18 +13,27 @@ namespace Ornament.Web.UI.Theme
         private readonly HtmlHelper _helper;
 
         public Panel(HtmlHelper helper, params string[] classNames)
+            : this(helper, "", classNames)
+        {
+
+        }
+        public Panel(HtmlHelper helper, string id, params string[] classNames)
         {
             _helper = helper;
             ViewContext context = helper.ViewContext;
             _builder = new TagBuilder("div");
             if (classNames == null || classNames.Length == 0)
             {
-                classNames = new[] { "widget" };
+                classNames = new[] { "jarviswidget" };
+            }
+            if (!String.IsNullOrEmpty(id))
+            {
+                _builder.Attributes.Add("id", id);
             }
             var includeWidget = false;
             foreach (var cls in classNames)
             {
-                if (cls == "widget")
+                if (cls == "jarviswidget")
                 {
                     includeWidget = true;
                 }
@@ -32,7 +41,7 @@ namespace Ornament.Web.UI.Theme
             }
             if (!includeWidget)
             {
-                _builder.AddCssClass("widget");
+                _builder.AddCssClass("jarviswidget");
             }
             context.Writer.Write(_builder.ToString(TagRenderMode.StartTag));
             _context = context;
@@ -42,7 +51,13 @@ namespace Ornament.Web.UI.Theme
         {
             _context.Writer.Write(_builder.ToString(TagRenderMode.EndTag));
         }
-
+        public MvcHtmlString HeaderToolbar(Func<object, HelperResult> action)
+        {
+            TextWriter writer = _context.Writer;
+            var buffer = new RecordWriter(writer);
+            action(null).WriteTo(buffer);
+            return _helper.Partial(PartialViewPath("HeaderToolbar"), buffer.Builder);
+        }
         public MvcHtmlString Header(Func<object, HelperResult> action)
         {
             TextWriter writer = _context.Writer;
