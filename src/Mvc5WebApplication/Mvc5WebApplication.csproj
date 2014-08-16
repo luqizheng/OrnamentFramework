@@ -75,6 +75,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
+    <Reference Include="Qi.Web, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TestDemo\lib\Qi.Web.dll</HintPath>
+    </Reference>
     <Reference Include="SeajsBundles, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
@@ -933,6 +937,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Panel\Header.cshtml" />
     <Content Include="Views\HttpErrors\NotFound.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\HeaderToolbar.cshtml" />
+    <Content Include="Views\Shared\Layout\_userInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

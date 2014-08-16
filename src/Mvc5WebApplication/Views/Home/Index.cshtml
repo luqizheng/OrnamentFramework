@@ -348,19 +348,7 @@
     <aside id="left-panel">
 
         <!-- User info -->
-        <div class="login-info">
-            <span>
-                <!-- User image size is adjusted inside CSS, it should stay as is -->
-
-                <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                    <img src="/img/avatars/sunny.png" alt="me" class="online" />
-                    <span>john.doe 
-                    </span>
-                    <i class="fa fa-angle-down"></i>
-                </a>
-
-            </span>
-        </div>
+        @Html.Partial("~/Views/Shared/Layout/_userInfo.cshtml")
         @Html.Partial("~/Views/Shared/Layout/_mainMenu.cshtml")
 
     </aside>
@@ -387,12 +375,12 @@
 
 				Example below:
 
-				<span class="ribbon-button-alignment pull-right" style="margin-right:25px">
-					<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa fa-grid"></i> Change Grid</span>
-					<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa fa-plus"></i> Add</span>
-					<span id="search" class="btn btn-ribbon" data-title="search"><i class="fa fa-search"></i> <span class="hidden-mobile">Search</span></span>
-				</span> -->
-
+            <span class="ribbon-button-alignment pull-right" style="margin-right: 25px">
+                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa fa-grid"></i>Change Grid</span>
+                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa fa-plus"></i>Add</span>
+                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa fa-search"></i><span class="hidden-mobile">Search</span></span>
+            </span>
+-->
         </div>
         <!-- END RIBBON -->
 
