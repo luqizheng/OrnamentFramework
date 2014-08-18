@@ -3,6 +3,7 @@
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.Properties
 @using Ornament.Web
+@using Ornament.Web.PortableAreas.InputBuilder.Views
 @using Ornament.Web.UI.Theme
 @model IEnumerable<Ornament.MemberShip.User>
 @{
@@ -40,95 +41,95 @@
                 <header>
                     <h2>User Lists</h2>
                 </header>
-                <div class="widget-body">
-                    <table class="table table-condensed table-striped" ms-controller="index">
-                     <thead>
-                         <tr>
-                             <td colspan="8">
-                                 <form class="form-search" ms-on-submit="search">
-                                     <input type="text" ms-duplex="content" 
-                                         placeholder="@Html.DisplayNameFor(model => model.LoginId),@Html.DisplayNameFor(model => model.Name),@Html.DisplayNameFor(model => model.Contact.Email) "/>
-                                     <button class="btn btn-primary">@Resources.Search</button>
-                                 </form>
-                             </td>
-                         </tr>
-                         <tr>
-                             <th></th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.LoginId)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Name)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Contact.Email)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Contact.Phone)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.IsDeny)
-                             </th>
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Security.IsLocked)
-                             </th>
-                             @* <th>
-                        @Html.DisplayNameFor(model => model.IsApproved)
-                    </th>*@
-                             <th>
-                                 @Html.DisplayNameFor(model => model.Other.LastActivityDate)
-                             </th>
-                         </tr>
-                     </thead>
+                <div class="widget-body"  ms-controller="index">
+                    <div class="input-group input-group-lg" >
+                        <input type="text" id="search-user" placeholder="Search again..." class="form-control input-lg">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-fw fa-search fa-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h1 class="font-md"> Search Results for <span class="semi-bold">Users</span><small class="text-danger"> &nbsp;&nbsp;(181 results)</small></h1>
+                    <br />
+                    <div class="table-responsive">
+                    
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LoginId)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Contact.Email)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Contact.Phone)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IsDeny)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Security.IsLocked)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                                    </th>
+                                </tr>
+                            </thead>
 
-                     <tbody ms-if="users.length!=0">
-                         <tr ms-repeat-el="users"
-                             ms-attr-data="{{el.Id}}"
-                             ms-attr-loginid="{{el.LoginId}}">
-                             <td>
-                                 <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
-                             </td>
-                             <td ms-text="el.LoginId"></td>
-                             <td ms-text="el.Name"></td>
-                             <td>
+                            <tbody ms-if="users.length!=0">
+                                <tr ms-repeat-el="users"
+                                    ms-attr-data="{{el.Id}}"
+                                    ms-attr-loginid="{{el.LoginId}}">
+                                    <td>
+                                        <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                    <td ms-text="el.LoginId"></td>
+                                    <td ms-text="el.Name"></td>
+                                    <td>
                                  
-                                 <span ms-text="el.Email"></span>
-                                 <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
-                                    title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
-                                     <i class="fa  fa-flag-o"></i>
-                                     @Html.GetEmbededResourceString("Verify")
-                                 </a>
-                             </td>
-                             <td ms-text="el.Phone"></td>
-                             <td>
-                                 <div class="btn-group">
-                                     <a class="btn btn-default btn-xs" ms-click="deny">
-                                         <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
-                                     </a>
-                                     <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
-                                         <i class="caret"></i>
-                                     </a>
-                                     <ul class="dropdown-menu">
-                                         <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
-                                         <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
-                                     </ul>
-                                 </div>
-                             </td>
-                             <td>
-                                 <div class="btn-group">
-                                     <a class="btn btn-default btn-xs" ms-click="lock">
-                                         <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
-                                     </a>
-                                     <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
-                                         <i class="caret"></i>
-                                     </a>
-                                     <ul class="dropdown-menu">
-                                         <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                         <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
-                                     </ul>
-                                 </div>
-                             </td>
-                             @*<td>
+                                        <span ms-text="el.Email"></span>
+                                        <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
+                                           title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
+                                            <i class="fa  fa-flag-o"></i>
+                                            @Html.GetEmbededResourceString("Verify")
+                                        </a>
+                                    </td>
+                                    <td ms-text="el.Phone"></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-default btn-xs" ms-click="deny">
+                                                <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <i class="caret"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
+                                                <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-default btn-xs" ms-click="lock">
+                                                <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
+                                            </a>
+                                            <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <i class="caret"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                                <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    @*<td>
                         <div class="btn-group">
                             <a class="btn btn-primary btn-mini" ms-click="switchApprove">
                                 <i ms-class="icon-ok:el.IsApproved" ms-class-1="icon-remove:!el.IsApproved"></i>
@@ -142,23 +143,23 @@
                             </ul>
                         </div>
                     </td>*@
-                             <td ms-text="el.LastActivityDate"></td>
-                         </tr>
-                     </tbody>
-                     <tbody ms-if="users.length==0">
-                         <tr>
-                             <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
-                         </tr>
-                     </tbody>
-                     <tfoot>
-                         <tr>
-                             <td colspan="8" ms-widget="pagination,$,$pageOpts" ms-include-src="/Scripts/avalons/Pagination/Pagination.html"></td>
-                         </tr>
-                     </tfoot>
-                 </table>
+                                    <td ms-text="el.LastActivityDate"></td>
+                                </tr>
+                            </tbody>
+                            <tbody ms-if="users.length==0">
+                                <tr>
+                                    <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="8" ms-widget="pagination,$,$pageOpts" ms-include-src="/Scripts/avalons/Pagination/Pagination.html"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        </div>
                 </div>
             </div>
         </article><!-- GRID END -->
     </div><!-- end row -->
   </section>
-    

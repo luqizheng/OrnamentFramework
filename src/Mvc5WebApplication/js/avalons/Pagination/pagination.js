@@ -1,13 +1,13 @@
 ﻿define(function () {
 
     return function (avalon) {
-        var widget = avalon.ui["pagination"] = function (element, data, vmodels) {
 
-            var innerHTML = element.innerHTML;
-            avalon.clearHTML(element);
-            avalon.$skipArray = ["totalPage"];
+        var widget = avalon.ui.pagination = function (element, data, vmodels) {
+
+            var options = data.paginationOptions;
+
             var model = avalon.define(data.paginationId, function (vm) {
-
+                avalon.mix(vm, options);
                 function calculatePage(totalRecord, pageSize) {
                     if (totalRecord == 0)
                         return 1;
@@ -18,7 +18,7 @@
                     return ++r;
                 };
 
-                vm.$skipArray = ["firstLoad", "dataLength"];
+                vm.$skipArray = ["firstLoad", "dataLength", "totalPage"];
                 vm.page = -1;
                 vm.pages = [];
                 vm.dataLength = 0;//现在页面显示多少数据
@@ -122,16 +122,20 @@
 
                 avalon.mix(vm, inner);
                 avalon.mix(vm, data.paginationOptions);
+                
+                vm.$init = function () {
+                    avalon.nextTick(function () {
+                        //widget的VM已经生成，可以添加回去让它被扫描
+                        element.innerHTML = innerHTML;
+                        avalon.scan(element, [model].concat(vmodels));
+                        if (model.firstLoad) {
+                            model.nav(0);
+                        }
+                    });
+                };
             });
-
-            avalon.nextTick(function () {
-                //widget的VM已经生成，可以添加回去让它被扫描
-                element.innerHTML = innerHTML;
-                avalon.scan(element, [model].concat(vmodels));
-                if (model.firstLoad) {
-                    model.nav(0);
-                }
-            });
+            
+        
             return model;
         };
         widget.defaults = {

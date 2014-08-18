@@ -1,8 +1,13 @@
 ﻿@using System.Web.Optimization
-require.config({
-    baseUrl: "/js",
-    paths: {
-        "some": "@Scripts.Url("~/js/json2.js")"
+
+
+    require.config({
+        baseUrl: "/js",
+        paths: {
+            json2: "@Scripts.Url("~/js/json2.js")",
+        fastClick: "/js/plugin/fastclick/fastclick.min.js",
+        sparkline: "/js/plugin/sparkline/jquery.sparkline.min.js",//SPARKLINES
     },
     waitSeconds: 15
-  });
+});
+
