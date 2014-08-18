@@ -808,6 +808,7 @@
     <Content Include="js\plugin\x-editable\x-editable.min.js" />
     <Content Include="js\smartwidgets\jarvis.widget.min.js" />
     <Content Include="js\speech\voicecommand.min.js" />
+    <Content Include="js\webApi.js" />
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="js\json2.js" />
     <Content Include="js\json2.min.js" />
@@ -938,6 +939,8 @@
     <Content Include="Views\HttpErrors\NotFound.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\HeaderToolbar.cshtml" />
     <Content Include="Views\Shared\Layout\_userInfo.cshtml" />
+    <Content Include="Views\Home\Config.cshtml" />
+    <Content Include="Views\Shared\Layout\_language.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

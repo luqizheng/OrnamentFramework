@@ -19,43 +19,41 @@
             var multiLanguate = {
                 verifyEmailMessage: {
                     success: '@Html.GetEmbededResourceString("verify_email_success")',
-                fail: '@Html.GetEmbededResourceString("verify_email_fail")'
-            },
-                    retrievePwdMessage: {
-                        success: '@Html.GetEmbededResourceString("retrieve_pwd_success")',
-                fail: '@Html.GetEmbededResourceString("retrieve_pwd_fail")'
-            }
-                };
+                    fail: '@Html.GetEmbededResourceString("verify_email_fail")'
+                },
+                retrievePwdMessage: {
+                    success: '@Html.GetEmbededResourceString("retrieve_pwd_success")',
+                    fail: '@Html.GetEmbededResourceString("retrieve_pwd_fail")'
+                }
+            };
 
             main.init(multiLanguate);
         });
     </script>}
 
-
-@using (Panel box = Html.Panel())
-{
-    @box.Header(@<text>
-
-                     <a href="@Url.Action("Create")" class="btn btn-primary">@Resources.Add</a>
-
-                 </text>)
-
-    @box.Body(
-        @<text>
-             <div ms-controller="index">
-                 <table class="table table-condensed table-striped table-bordered table-checks">
-
+  <section id="widget-grid">
+    <!-- row -->
+    <div class="row">
+    <!-- SINGLE GRID -->
+        <article class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="jarviswidget" id="wid-id-0">
+                <header>
+                    <h2>User Lists</h2>
+                </header>
+                <div class="widget-body">
+                    <table class="table table-condensed table-striped" ms-controller="index">
                      <thead>
                          <tr>
                              <td colspan="8">
                                  <form class="form-search" ms-on-submit="search">
-                                     <input type="text" ms-duplex="content" placeholder="@Html.DisplayNameFor(model => model.LoginId),@Html.DisplayNameFor(model => model.Name),@Html.DisplayNameFor(model => model.Contact.Email) "/>
+                                     <input type="text" ms-duplex="content" 
+                                         placeholder="@Html.DisplayNameFor(model => model.LoginId),@Html.DisplayNameFor(model => model.Name),@Html.DisplayNameFor(model => model.Contact.Email) "/>
                                      <button class="btn btn-primary">@Resources.Search</button>
                                  </form>
                              </td>
                          </tr>
                          <tr>
-                             <th style="width: 180px;"></th>
+                             <th></th>
                              <th>
                                  @Html.DisplayNameFor(model => model.LoginId)
                              </th>
@@ -88,47 +86,45 @@
                              ms-attr-data="{{el.Id}}"
                              ms-attr-loginid="{{el.LoginId}}">
                              <td>
-                                 <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn tip btn-mini"><i class="fam-user-edit"></i></a>
-                                 <a ms-href="/MemberShips/User/Assign/{{el.LoginId}}" class="btn tip btn-mini" title=""><i class="fam-group-gear"></i></a>
-
-                                 <a class="btn tip btn-mini" title="@Html.GetEmbededResourceString("ResetPassword_title")" ms-if="el.Email!=''" ms-click="retievePwd"><i class="fam-key-go"></i></a>
+                                 <a ms-href="/MemberShips/User/Edit/{{el.LoginId}}" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
                              </td>
                              <td ms-text="el.LoginId"></td>
                              <td ms-text="el.Name"></td>
                              <td>
-                                 <div class="row-fluid">
-                                     <span ms-text="el.Email"></span>
-                                     <a class="btn pull-right" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail" title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
-                                         @Html.GetEmbededResourceString("Verify")
-                                     </a>
-                                 </div>
+                                 
+                                 <span ms-text="el.Email"></span>
+                                 <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
+                                    title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
+                                     <i class="fa  fa-flag-o"></i>
+                                     @Html.GetEmbededResourceString("Verify")
+                                 </a>
                              </td>
                              <td ms-text="el.Phone"></td>
                              <td>
                                  <div class="btn-group">
-                                     <a class="btn btn-primary btn-mini" ms-click="deny">
-                                         <i ms-class="icon-remove:el.Deny" ms-class-1="icon-ok:el.Deny==false"></i>
+                                     <a class="btn btn-default btn-xs" ms-click="deny">
+                                         <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
                                      </a>
-                                     <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-                                         <i class="icon-caret-down icon-white"></i>
+                                     <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                         <i class="caret"></i>
                                      </a>
                                      <ul class="dropdown-menu">
-                                         <li><a href="#" ms-click="deny(true)"><i class="icon-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
-                                         <li><a href="#" ms-click="deny(false)"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
+                                         <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
+                                         <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
                                      </ul>
                                  </div>
                              </td>
                              <td>
                                  <div class="btn-group">
-                                     <a class="btn btn-primary btn-mini" ms-click="lock">
-                                         <i ms-class="icon-lock:el.IsLocked" ms-class-1="icon-unlock:!el.IsLocked"></i>
+                                     <a class="btn btn-default btn-xs" ms-click="lock">
+                                         <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
                                      </a>
-                                     <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-                                         <i class="icon-caret-down icon-white"></i>
+                                     <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                         <i class="caret"></i>
                                      </a>
                                      <ul class="dropdown-menu">
-                                         <li><a href="#" ms-click="lock(true)"><i class="icon-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                         <li><a href="#" ms-click="lock(false)"><i class="icon-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                         <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                         <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
                                      </ul>
                                  </div>
                              </td>
@@ -160,7 +156,9 @@
                          </tr>
                      </tfoot>
                  </table>
-             </div>
-         </text>
-        )
-}
+                </div>
+            </div>
+        </article><!-- GRID END -->
+    </div><!-- end row -->
+  </section>
+    

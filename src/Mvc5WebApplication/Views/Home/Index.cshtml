@@ -91,7 +91,7 @@
 		* 'fixed-footer'      - Fixes footer
 		* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
 	-->
-<body class="">
+<body class="fixed-header fixed-navigation">
 
     <!-- #HEADER -->
     <header id="header">
@@ -221,7 +221,7 @@
 
             <!-- logout button -->
             <div id="logout" class="btn-header transparent pull-right">
-                <span><a href="login.html" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a></span>
+                <span><a href="@Url.Action("Logout", "Account", new { area = "" })" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a></span>
             </div>
             <!-- end logout button -->
 
@@ -274,66 +274,7 @@
             <!-- end voice command -->
 
             <!-- multiple lang dropdown : find all flags in the flags page -->
-            <ul class="header-dropdown-list hidden-xs">
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/img/blank.gif" class="flag flag-us" alt="United States">
-                        <span>US</span> <i class="fa fa-angle-down"></i></a>
-                    <ul class="dropdown-menu pull-right">
-                        <li class="active">
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-us" alt="United States">
-                                English (US)</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-fr" alt="France">
-                                Français</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="img/blank.gif" class="flag flag-es" alt="Spanish">
-                                Español</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-de" alt="German">
-                                Deutsch</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-jp" alt="Japan">
-                                日本語</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-cn" alt="China">
-                                中文</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-it" alt="Italy">
-                                Italiano</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-pt" alt="Portugal">
-                                Portugal</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-ru" alt="Russia">
-                                Русский язык</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <img src="/img/blank.gif" class="flag flag-kp" alt="Korea">
-                                한국어</a>
-                        </li>
-
-                    </ul>
-                </li>
-            </ul>
+            @Html.Partial("~/Views/Shared/Layout/_language.cshtml")
             <!-- end multiple lang -->
 
         </div>
@@ -483,6 +424,12 @@
     <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
 		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
 
+    <!-- avalon-->
+    @Scripts.Render("~/js/avalon")
+    <script type="text/javascript">
+        avalon.config({ loader: false })
+    </script>
+
 
     <!-- #PLUGINS -->
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -490,9 +437,9 @@
     @Scripts.Render("~/js/jqueryui")
     <!-- BOOTSTRAP JS -->
     @Scripts.Render("~/js/bootstrap")
-    @Scripts.Render("~/js/avalon")
     <!-- IMPORTANT: APP CONFIG -->
     <script src="/js/app.config.js"></script>
+    <script src="~/js/require.js" data-main="/Home/Config"></script>
 
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
@@ -539,7 +486,7 @@
     <!-- Voice command : plugin -->
     <script src="/js/speech/voicecommand.min.js"></script>
 
-    <script src="~/js/require.js"></script>
+
 
 </body>
 

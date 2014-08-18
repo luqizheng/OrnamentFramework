@@ -8,11 +8,6 @@
     Layout = OrnamentContext.Configuration.Layout();
 }
 
-@section pageTitle{
-    <h3>
-        @Model.LoginId
-    </h3>
-}
 <form method="POST" action="@Url.Action("Edit")" class="form-horizontal">
     @using (Panel panel = Html.Panel())
     {

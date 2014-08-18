@@ -57,8 +57,10 @@ namespace WebApplication.Controllers
 
         public ActionResult Logout()
         {
+            FormsAuth.SignOut();
             return View();
         }
+
         [AcceptVerbs(HttpVerbs.Post)]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]

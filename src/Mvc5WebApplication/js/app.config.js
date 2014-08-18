@@ -274,7 +274,7 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     }
 
 });
-avalon.config({ loader: false });
+
 /*
  * END APP.CONFIG
  */
