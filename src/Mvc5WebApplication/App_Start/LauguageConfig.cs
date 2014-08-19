@@ -23,7 +23,6 @@ namespace WebApplication
             {
                 context.Languages.Add(new Language("中文(简)", "zh-Hans"));
             }
-
           
         }
     }

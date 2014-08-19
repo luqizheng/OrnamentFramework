@@ -126,7 +126,6 @@
                 vm.$init = function () {
                     avalon.nextTick(function () {
                         //widget的VM已经生成，可以添加回去让它被扫描
-                        element.innerHTML = innerHTML;
                         avalon.scan(element, [model].concat(vmodels));
                         if (model.firstLoad) {
                             model.nav(0);
