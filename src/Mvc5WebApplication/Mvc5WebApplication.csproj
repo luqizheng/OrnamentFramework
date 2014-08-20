@@ -812,7 +812,6 @@
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="js\json2.js" />
     <Content Include="js\json2.min.js" />
-    <Content Include="js\r.js" />
     <Content Include="js\require.js" />
     <Content Include="sound\bigbox.mp3" />
     <Content Include="sound\license.txt" />
@@ -932,7 +931,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Logon.cshtml" />
     <Content Include="Views\Shared\_standLayout.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\Body.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\Header.cshtml" />
@@ -941,6 +939,11 @@
     <Content Include="Views\Shared\Layout\_userInfo.cshtml" />
     <Content Include="Views\Home\Config.cshtml" />
     <Content Include="Views\Shared\Layout\_language.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Language.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimeZone.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimePeriod.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

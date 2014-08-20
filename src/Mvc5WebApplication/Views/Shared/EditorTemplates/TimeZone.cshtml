@@ -1,0 +1,21 @@
+﻿@using System.Net.Mime
+@model string
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var inputName = string.Empty;// ViewData.TemplateInfo.HtmlFieldPrefix;    
+    var zoneId = this.Model ?? TimeZoneInfo.Local.Id;
+    var timeZones = from a in TimeZoneInfo.GetSystemTimeZones()
+                    select new SelectListItem()
+                        {
+                            Text = a.ToString(),
+                            Value = a.Id,
+                            Selected = zoneId == a.Id
+                        };
+}
+<div class="control-group">
+    @Html.Label(inputName, display, new { @class = "control-label" })
+    <div class="controls">
+        @Html.DropDownList("", timeZones)
+        @Html.ValidationMessage(inputName)
+    </div>
+</div>

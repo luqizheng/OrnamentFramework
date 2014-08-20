@@ -31,7 +31,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             RegistApi();
-            bus.Send(new NHRegisterEventMessage(typeof (IMemberShipFactory), typeof (MemberShipFactory)));
+            bus.Send(new NHRegisterEventMessage(typeof(IMemberShipFactory), typeof(MemberShipFactory)));
 
             //send the init data
             bus.Send(new MemberShipData());
@@ -54,23 +54,16 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
 
             //MemberShips/User/Edit/admin
             context.MapRoute(AreaName + "_EditUser",
-                AreaName + "/User/Edit/{loginId}",
-                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"}
-                );
-
-
-            context.MapRoute(
-                AreaName + "_AssingUser",
-                AreaName + "/User/Assign/{loginId}",
-                new {action = "Assign", loginId = UrlParameter.Optional, controller = "User"},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                AreaName + "/User/{action}/{loginId}",
+                new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional},
-                new[] {"Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers"}
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
                 );
 
 

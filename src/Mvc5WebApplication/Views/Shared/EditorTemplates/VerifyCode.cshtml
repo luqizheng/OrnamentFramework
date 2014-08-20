@@ -1,0 +1,26 @@
+﻿@model string
+
+<div class="control-group" id="verifyCode">
+    <div class="controls">
+        @Html.Label("", new { @class = "control-label" })
+        @Html.TextBox("", "", new { @class = "span12", autocomplete = "off" })
+        @Html.ValidationMessage("")
+    </div>
+    <div>
+        <img id="verifyCode" src="@Url.Action("Index", "VerifyCode", new { area = "" })/?@Guid.NewGuid().ToString("N") /> onclick='this.src = this.attributes["src"].value + "?" + Math.random()' style="cursor: pointer"/>
+    </div>
+</div>
+<script type="text/javascript">
+    setInterval(function () {
+        var ele = document.getElementById("verifyCode");
+        if (document.all) {
+            ele.click();
+        }
+        else {
+            var evt = document.createEvent("MouseEvents");
+            evt.initEvent("click", true, true);
+            ele.dispatchEvent(evt);
+        }
+
+    }, 600 * 1000);
+</script>

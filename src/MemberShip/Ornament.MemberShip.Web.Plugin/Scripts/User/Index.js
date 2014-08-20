@@ -36,6 +36,10 @@ define(function (require) {
             });
             return false;
         };
+        vm.edit = function () {
+            var loginid = this.$vmodel.el.LoginId;
+            loadURL("/MemberShips/User/Edit/" + loginid, $("#content"));
+        };
         vm.search = function (e) {
             avalon.vmodels.page.nav(0);
             e.preventDefault();

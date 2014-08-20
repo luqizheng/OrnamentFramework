@@ -181,7 +181,7 @@
     <value>Verify Again</value>
   </data>
   <data name="page_title" xml:space="preserve">
-    <value>Users</value>
+    <value>Users List</value>
   </data>
   <data name="Not_User_Found" xml:space="preserve">
     <value>DRAFT:Can't find any user match </value>

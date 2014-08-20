@@ -437,9 +437,10 @@
     @Scripts.Render("~/js/jqueryui")
     <!-- BOOTSTRAP JS -->
     @Scripts.Render("~/js/bootstrap")
+    
     <!-- IMPORTANT: APP CONFIG -->
     <script src="/js/app.config.js"></script>
-    <script src="~/js/require.js" data-main="/Home/Config"></script>
+
 
     <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
     <script src="/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
@@ -474,15 +475,17 @@
 			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 		<![endif]-->
 
-
-    <!-- MAIN APP JS FILE -->
-    <script src="/js/app.min.js"></script>
+    <script type="text/javascript" src="/js/plugin/fastclick/fastclick.min.js"></script>
+    <script type="text/javascript" src="/js/plugin/sparkline/jquery.sparkline.min.js"></script>
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
     <!-- Voice command : plugin -->
     <script src="/js/speech/voicecommand.min.js"></script>
 
-
+        <!-- MAIN APP JS FILE -->
+    <script src="/js/app.min.js"></script>
+    
+    <script src="~/js/require.js" data-main="/Home/Config"></script>
 
 </body>
 
