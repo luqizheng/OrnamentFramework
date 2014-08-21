@@ -19,10 +19,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         public IList<IPerformer> Find(string roleId)
         {
             IList<User> user = DetachedCriteria.For<User>().CreateCriteria("Roles", "role").
-                Add(Restrictions.Eq("Id", roleId))
+                Add(Restrictions.Eq(Projections.Id(), roleId))
                 .GetExecutableCriteria(CurrentSession).List<User>();
             IList<UserGroup> userGroup = DetachedCriteria.For<UserGroup>().CreateCriteria("Roles", "role").
-                Add(Restrictions.Eq("Id", roleId))
+                Add(Restrictions.Eq(Projections.Id(), roleId))
                 .GetExecutableCriteria(CurrentSession).List<UserGroup>();
             var result = new List<IPerformer>();
             result.AddRange(user);
