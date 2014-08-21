@@ -56,14 +56,14 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             context.MapRoute(AreaName + "_EditUser",
                 AreaName + "/User/{action}/{loginId}",
                 new { action = "Edit", loginId = UrlParameter.Optional, controller = "User" },
-                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
+                new[] { "Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers" }
                 );
 
             context.MapRoute(
                 AreaName + "_default",
                 AreaName + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers" }
+                new[] { "Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers" }
                 );
 
 

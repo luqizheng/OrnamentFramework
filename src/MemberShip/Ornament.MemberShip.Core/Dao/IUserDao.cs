@@ -164,5 +164,12 @@ namespace Ornament.MemberShip.Dao
         /// <param name="now"></param>
         /// <returns>return LoginId array</returns>
         IList<string> GetOnlineUsers(DateTime now);
+
+        /// <summary>
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        IList<UsersStatus> NewRegistry(DateTime start, DateTime end);
     }
 }

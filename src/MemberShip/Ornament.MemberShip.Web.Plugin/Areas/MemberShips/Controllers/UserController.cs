@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Profile;
 using System.Web.Security;
-using MvcSiteMapProvider.Web.Mvc.Filters;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
@@ -17,7 +16,7 @@ using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
-namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
+namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 {
     /// <summary>
     /// </summary>
@@ -62,8 +61,13 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
             ParentKey = "MemberShips", Key = ResourceSetting.User, Order = 1,
             Resource = ResourceSetting.User, Operator = UserOperator.Read)
         ]
+        [OutputCache(Duration = 30)]
         public ActionResult Index()
         {
+            var userDao = _memberShipFactory.CreateUserDao();
+            var data = userDao.NewRegistry(DateTime.Today.AddDays(-7), DateTime.Today);
+            ViewData["NewRegistry"] = string.Join(",", from a in data select a.Count);
+            ViewData["TotalUser"] = String.Join(",", userDao.Count());
             return View();
         }
 

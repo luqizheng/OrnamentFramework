@@ -61,7 +61,7 @@ define(function (require) {
                 }
             });
         };
-
+        vm.total = 0;
         vm.deny = function (bDeny) {
             /// <summary>
             ///     锁定用户
@@ -80,22 +80,24 @@ define(function (require) {
             });
         };
 
+        function find(page, size, content, func) {
+            $.get("/MemberShips/User/List", {
+                page: page,
+                search: content,
+                size: size
+            }, function (d) {
+                model.users = [];
+                for (var i = 0; i < d.data.length; i++) {
+                    model.users.push(d.data[i]);
+                }
+                vm.total = d.totalRecords;
+                func(d.totalRecords);
+            });
+        }
     });
 
 
-    function find(page, size, content, func) {
-        $.get("/MemberShips/User/List", {
-            page: page,
-            search: content,
-            size: size
-        }, function (d) {
-            model.users = [];
-            for (var i = 0; i < d.data.length; i++) {
-                model.users.push(d.data[i]);
-            }
-            func(d.totalRecords);
-        });
-    }
+   
 
     return {
         init: function (lang1) {

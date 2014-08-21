@@ -5,6 +5,7 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
+using NHibernate.Transform;
 using NHibernate.Type;
 using Ornament.MemberShip.Properties;
 using Qi;
@@ -27,6 +28,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         private IProjection NameProperty
         {
             get { return _pools.Once(() => Projections.Property<User>(u => u.Name)); }
+        }
+
+        private IProjection LastActivityDateProjection
+        {
+            get { return _pools.Once(() => Projections.Property<User.OtherUserInfo>(u => u.LastActivityDate)); }
         }
 
         private IProjection IdProperty
@@ -340,6 +346,20 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                     .SetProjection(Projections.Property<User>(s => s.LoginId))
                     .GetExecutableCriteria(CurrentSession)
                     .List<string>();
+        }
+
+        public IList<UsersStatus> NewRegistry(DateTime start, DateTime end)
+        {
+            var datePart =
+                Projections.GroupProperty(Projections.SqlFunction("date", NHibernateUtil.Date, LastActivityDateProjection));
+
+            var lastActive = DetachedCriteria.For(typeof(User.OtherUserInfo))
+                .SetProjection(Projections.ProjectionList()
+                    .Add(Projections.Alias(datePart, "Date"))
+                    .Add(Projections.Alias(Projections.RowCount(), "Count")))
+                .Add(Restrictions.Between(LastActivityDateProjection, start, end));
+            return lastActive.SetResultTransformer(Transformers.AliasToBean<UsersStatus>())
+                .GetExecutableCriteria(this.CurrentSession).List<UsersStatus>();
         }
 
         public IList<User> FindAll(int pageIndex, int pageSize)

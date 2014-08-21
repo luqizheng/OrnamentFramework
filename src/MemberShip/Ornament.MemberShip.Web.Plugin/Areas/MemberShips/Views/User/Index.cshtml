@@ -5,7 +5,7 @@
 @using Ornament.Web
 
 @using Ornament.Web.UI.Theme
-@model IEnumerable<Ornament.MemberShip.User>
+@model IEnumerable<ornament.membership.user>
 @{
     ViewBag.Title = Html.GetEmbededResourceString("page_title");
     Layout = OrnamentContext.Configuration.Layout();
@@ -53,7 +53,7 @@
                                 </button>
                             </div>
                         </div>
-                        <h1 class="font-md"> Search Results for <span class="semi-bold">Users</span><small class="text-danger"> &nbsp;&nbsp;({{Total}} results)</small></h1>
+                        <h1 class="font-md"> Search Results for <span class="semi-bold">Users</span><small class="text-danger"> &nbsp;&nbsp;({{total}} users)</small></h1>
                         <br />
                         <div class="table-responsive">
                     
@@ -132,20 +132,6 @@
                                                 </ul>
                                             </div>
                                         </td>
-                                        @*<td>
-                        <div class="btn-group">
-                            <a class="btn btn-primary btn-mini" ms-click="switchApprove">
-                                <i ms-class="icon-ok:el.IsApproved" ms-class-1="icon-remove:!el.IsApproved"></i>
-                            </a>
-                            <a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="icon-caret-down icon-white"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" ms-click="approve(true)"><i class="icon-ok"></i>@Html.GetEmbededResourceString("Approve")</a></li>
-                                <li><a href="#" ms-click="approve(false)"><i class="icon-remove"></i>@Html.GetEmbededResourceString("VerifyAgain")</a></li>
-                            </ul>
-                        </div>
-                    </td>*@
                                         <td ms-text="el.LastActivityDate"></td>
                                     </tr>
                                 </tbody>
@@ -163,4 +149,27 @@
                         </div>
                     </div>
 </text>);
+}
+    
+    @section sparks{
+          <ul id="sparks">
+            <li class="sparks-info">
+                <h5>用户数 <span class="txt-color-blue"><%=ViewData["TotalUser"]%></span></h5>
+                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                  @Html.Raw(ViewData["NewRegistry"])
+                </div>
+            </li>
+            <li class="sparks-info">
+                <h5>Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                    110,150,300,130,400,240,220,310,220,300, 270, 210
+                </div>
+            </li>
+            <li class="sparks-info">
+                <h5>Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+                <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                    110,150,300,130,400,240,220,310,220,300, 270, 210
+                </div>
+            </li>
+        </ul>
 }
