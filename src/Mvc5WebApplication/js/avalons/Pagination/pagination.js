@@ -86,7 +86,7 @@
                 };
 
                 vm.reload = function () {
-                    vm.nav(page);
+                    inner.nav(vm.page);
                 };
 
                 function createNav(totalRecord) {
