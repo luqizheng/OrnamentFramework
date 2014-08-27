@@ -124,7 +124,7 @@
     <value>Assign</value>
   </data>
   <data name="Assignment_tips" xml:space="preserve">
-    <value>assign role and usergroup to this user.</value>
+    <value>Assign role and usergroup to this user.</value>
   </data>
   <data name="Lock" xml:space="preserve">
     <value>Lock</value>
@@ -184,7 +184,7 @@
     <value>Users List</value>
   </data>
   <data name="Not_User_Found" xml:space="preserve">
-    <value>DRAFT:Can't find any user match </value>
+    <value>Can't find any match user .</value>
   </data>
   <data name="Allow" xml:space="preserve">
     <value>Allow</value>
@@ -197,5 +197,8 @@
   </data>
   <data name="ResetPassword_title" xml:space="preserve">
     <value>Reset Password</value>
+  </data>
+  <data name="Search_tips" xml:space="preserve">
+    <value>Please input email or loginId</value>
   </data>
 </root>

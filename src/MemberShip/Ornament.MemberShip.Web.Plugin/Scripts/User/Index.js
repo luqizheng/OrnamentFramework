@@ -79,19 +79,22 @@ define(function (require) {
                 }
             });
         };
-
+        vm.loading = false;
         function find(page, size, content, func) {
+            vm.loading = true;
             $.get("/MemberShips/User/List", {
                 page: page,
                 search: content,
                 size: size
             }, function (d) {
+                vm.loading = false;
                 model.users = [];
                 for (var i = 0; i < d.data.length; i++) {
                     model.users.push(d.data[i]);
                 }
                 vm.total = parseInt(d.TotalRecords);
                 func(d.TotalRecords);
+                
             });
         }
     });

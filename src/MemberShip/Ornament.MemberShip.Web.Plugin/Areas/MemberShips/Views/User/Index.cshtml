@@ -46,7 +46,8 @@
     @panel.Body(@<text>
                      <div ms-controller="index">
                          <form class="input-group input-group-lg" ms-submit="search">
-                                   <input type="text" id="search-user" placeholder="Search again..." class="form-control input-lg" ms-duplex="content">
+                             <input type="text" ms-class-ui-autocomplete-loading="loading"
+                                 placeholder="@Html.GetEmbededResourceString("Search_tips")" class="form-control input-lg" ms-duplex="content">
                                    <div class="input-group-btn">
                                        <button class="btn btn-default" type="submit">
                                            <i class="fa fa-fw fa-search fa-lg"></i>

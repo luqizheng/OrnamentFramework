@@ -198,4 +198,7 @@
   <data name="ResetPassword_title" xml:space="preserve">
     <value>通過電子郵件重置密碼</value>
   </data>
+  <data name="Search_tips" xml:space="preserve">
+    <value>請輸入電子郵件或者登錄名</value>
+  </data>
 </root>
