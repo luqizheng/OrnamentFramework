@@ -14,7 +14,6 @@ using log4net;
 using log4net.Config;
 using Ornament;
 using Ornament.Configurations;
-using Ornament.MemberShip.MemberShipProviders;
 using Ornament.Web;
 using Ornament.Web.Cfg;
 using Ornament.Web.MemberShips;
@@ -43,7 +42,7 @@ namespace WebApplication
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
-            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
@@ -75,12 +74,13 @@ namespace WebApplication
             var apiController = new OrnamentWebApiFactory(apiControllers.ToArray());
             try
             {
-                OrnamentContext.IocContainer.Register(Component.For<IHttpControllerActivator>().Instance(apiController).LifestyleSingleton());
+                OrnamentContext.IocContainer.Register(
+                    Component.For<IHttpControllerActivator>().Instance(apiController).LifestyleSingleton());
                 ControllerBuilder.Current.SetControllerFactory(defaultController);
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

@@ -5,27 +5,48 @@
 
 @Html.HiddenFor(model => model.Id)
 
-@Html.EditorFor(model => model.LoginId)
-
-@*<div class="control-group">
-    @Html.LabelFor(s => s.Email, new { @class = "control-label" })
-    <div class="controls"> 
-        <div class="input-append">
-            @Html.TextBoxFor(s => s.Email, this.Model)
-            @Html.ValidationMessageFor(s => s.Email)
-        </div>
+<div class="form-group">
+    <label class="col-md-2">@Html.DisplayNameFor(s => s.LoginId)</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LoginId)
+        @Html.ValidationMessageFor(model => model.LoginId)
     </div>
-</div>*@
-@Html.EditorFor(s => s.Email)
+</div>
 
-@*<div class="control-group">
-    @Html.LabelFor(s => s.VerifyEmail, new { @class = "control-label" })
-    <div class="controls">
-        @Html.CheckBoxFor(s => s.VerifyEmail, new { @class = "tip", title = "如果email被修改，会自动发送验证email" })
+<div class="form-group">
+    <label class="col-md-2">@Html.DisplayNameFor(s => s.Email)</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
     </div>
-</div>*@
-@Html.EditorFor(s => s.Name)
-@Html.EditorFor(s => s.Phone)
-@Html.EditorFor(s => s.TimeZoneId)
-@Html.EditorFor(s=>s.Language)
+</div>
+
+<div class="form-group">
+    <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2">@Html.DisplayNameFor(s => s.Phone)</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Phone)
+        @Html.ValidationMessageFor(model => model.Phone)
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2">@Html.DisplayNameFor(s => s.Language)</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Language)
+        @Html.ValidationMessageFor(model => model.Language)
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2">@Html.DisplayNameFor(s => s.TimeZoneId)</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.TimeZoneId)
+        @Html.ValidationMessageFor(model => model.TimeZoneId)
+    </div>
+</div>
 

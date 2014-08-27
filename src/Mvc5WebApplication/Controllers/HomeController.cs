@@ -4,10 +4,12 @@ using Ornament;
 
 namespace WebApplication.Controllers
 {
+    
     public class HomeController : Controller
     {
         //
         // GET: /Home/
+        [Authorize]
         public ActionResult Index()
         {
             return View();
