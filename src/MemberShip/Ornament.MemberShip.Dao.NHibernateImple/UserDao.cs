@@ -34,7 +34,10 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
         {
             get { return _pools.Once(() => Projections.Property<User.OtherUserInfo>(u => u.LastActivityDate)); }
         }
-
+        private IProjection CreateDateTimeProjection
+        {
+            get { return _pools.Once(() => Projections.Property<User.OtherUserInfo>(u => u.CreateTime)); }
+        }
         private IProjection IdProperty
         {
             get { return _pools.Once(() => Projections.Property<User>(u => u.Id)); }
@@ -357,7 +360,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 .SetProjection(Projections.ProjectionList()
                     .Add(Projections.Alias(datePart, "Date"))
                     .Add(Projections.Alias(Projections.RowCount(), "Count")))
-                .Add(Restrictions.Between(LastActivityDateProjection, start, end));
+                .Add(Restrictions.Between(CreateDateTimeProjection, start, end));
             return lastActive.SetResultTransformer(Transformers.AliasToBean<UsersStatus>())
                 .GetExecutableCriteria(this.CurrentSession).List<UsersStatus>();
         }
