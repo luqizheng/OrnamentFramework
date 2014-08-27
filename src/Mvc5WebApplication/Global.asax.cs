@@ -16,6 +16,7 @@ using Ornament;
 using Ornament.Configurations;
 using Ornament.Web;
 using Ornament.Web.Cfg;
+using Ornament.Web.IoC;
 using Ornament.Web.MemberShips;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
@@ -40,9 +41,12 @@ namespace WebApplication
             GlobalConfiguration.Configure(WebApiConfig.Register);
             LauguageConfig.Register(OrnamentContext.Configuration);
 
+            GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
+
+            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
+
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
-            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
@@ -76,6 +80,7 @@ namespace WebApplication
             {
                 OrnamentContext.IocContainer.Register(
                     Component.For<IHttpControllerActivator>().Instance(apiController).LifestyleSingleton());
+
                 ControllerBuilder.Current.SetControllerFactory(defaultController);
             }
             catch (Exception ex)
