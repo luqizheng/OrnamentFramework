@@ -90,8 +90,8 @@ define(function (require) {
                 for (var i = 0; i < d.data.length; i++) {
                     model.users.push(d.data[i]);
                 }
-                vm.total = d.totalRecords;
-                func(d.totalRecords);
+                vm.total = parseInt(d.TotalRecords);
+                func(d.TotalRecords);
             });
         }
     });
