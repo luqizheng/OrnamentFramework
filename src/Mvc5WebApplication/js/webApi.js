@@ -1,5 +1,5 @@
 ﻿define(function (require) {
-    var $ = require('jquery');
+    
     require("json2");
 
     return function (url) {
