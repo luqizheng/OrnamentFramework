@@ -129,4 +129,10 @@
   <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>
   </data>
+  <data name="LoginIdTips" xml:space="preserve">
+    <value>Please input login ID</value>
+  </data>
+  <data name="PasswordTips" xml:space="preserve">
+    <value>Please input password</value>
+  </data>
 </root>

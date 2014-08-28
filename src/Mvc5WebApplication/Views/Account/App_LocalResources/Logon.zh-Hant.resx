@@ -129,4 +129,10 @@
   <data name="SignIn" xml:space="preserve">
     <value>登錄</value>
   </data>
+  <data name="LoginIdTips" xml:space="preserve">
+    <value>請輸入登錄名</value>
+  </data>
+  <data name="PasswordTips" xml:space="preserve">
+    <value>請輸入密碼</value>
+  </data>
 </root>
