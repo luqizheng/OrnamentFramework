@@ -276,4 +276,13 @@
   <data name="alertPassword_CharError" xml:space="preserve">
     <value>Password must be at Least one letter, number or symbol, and within 8 to 30 characters.</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
 </root>

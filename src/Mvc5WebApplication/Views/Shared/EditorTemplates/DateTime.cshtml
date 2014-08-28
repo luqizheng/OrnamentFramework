@@ -1,0 +1,16 @@
+﻿@using System.Text.RegularExpressions
+@model DateTime?
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var displayValue = this.Model != null ? this.Model.Value.ToString(this.ViewData.ModelMetadata.DisplayFormatString) : "";
+    var format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd").ToLower();
+    var inputMask = Regex.Replace(format, @"(\w{2})(\1)+", "$1");
+    var dir = new System.Collections.Generic.Dictionary<string, object>()
+    {
+        {"class", "form-control datepicker"},
+        {"data-dateformat",inputMask}
+    };
+}
+
+@Html.TextBox("", displayValue, dir)
+<span class="input-group-addon"><i class="fa fa-calendar"></i></span>

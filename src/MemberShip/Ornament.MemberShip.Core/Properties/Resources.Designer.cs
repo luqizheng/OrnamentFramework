@@ -70,6 +70,15 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Birthday 的本地化字符串。
+        /// </summary>
+        public static string Birthday {
+            get {
+                return ResourceManager.GetString("Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Re-enter Password 的本地化字符串。
         /// </summary>
         public static string ConfirmPassword {
@@ -178,6 +187,15 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 First Name 的本地化字符串。
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Email Approved 的本地化字符串。
         /// </summary>
         public static string IsEmailApproved {
@@ -228,6 +246,15 @@ namespace Ornament.MemberShip.Properties {
         public static string LastLoginTime {
             get {
                 return ResourceManager.GetString("LastLoginTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Last Name 的本地化字符串。
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         

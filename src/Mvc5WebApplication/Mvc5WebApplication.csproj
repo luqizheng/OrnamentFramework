@@ -813,6 +813,8 @@
     <Content Include="js\json2.js" />
     <Content Include="js\json2.min.js" />
     <Content Include="js\require.js" />
+    <Content Include="js\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="js\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="sound\bigbox.mp3" />
     <Content Include="sound\license.txt" />
     <Content Include="sound\messagebox.mp3" />
@@ -944,6 +946,7 @@
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimePeriod.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

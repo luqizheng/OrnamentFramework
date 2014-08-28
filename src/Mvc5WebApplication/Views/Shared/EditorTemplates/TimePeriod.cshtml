@@ -11,9 +11,6 @@
     var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
 }
 
-<div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
-    <div class="controls">
         <ul class="dates-range">
             <li>
 
@@ -28,6 +25,4 @@
 
             </li>
         </ul>
-    </div>
-</div>
 <script type="text/javascript">seajs.use(["formInput"])</script>

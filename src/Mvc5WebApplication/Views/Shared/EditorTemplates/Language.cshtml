@@ -16,27 +16,13 @@
     }
     if (htmlAttris.ContainsKey("class"))
     {
-        htmlAttris["class"] = htmlAttris["class"] + " span10";
+        htmlAttris["class"] = htmlAttris["class"] + " form-control";
     }
     else
     {
-        htmlAttris.Add("class", "span10");
+        htmlAttris.Add("class", "form-control");
     }
-
-    if (htmlAttris.ContainsKey("style"))
-    {
-        htmlAttris["style"] = htmlAttris["style"] + ";padding-top:4px";
-    }
-    else
-    {
-        htmlAttris.Add("style", "padding-top:4px");
-    }
-
-
-
-
-
-
+ 
     var langs = from lang in OrnamentContext.Configuration.Languages
                 select new SelectListItem()
                     {
@@ -45,9 +31,5 @@
                         Selected = lang.Key == this.Model
                     };
 }
-<div class="control-group">
-    @Html.Label(inputName, display, new { @class = "control-label" })
-    <div class="controls">
-        @Html.DropDownList(inputName, langs, htmlAttris)
-    </div>
-</div>
+
+@Html.DropDownList(inputName, langs, htmlAttris)

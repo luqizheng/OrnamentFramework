@@ -95,6 +95,15 @@ namespace Ornament.MemberShip
                 EmailVerified = false;
                 return result;
             }
+            [Display(Name = "FirstName", ResourceType = typeof(Resources))]
+            [MaxLength(64)]
+            public virtual string FirstName { get; set; }
+            [Display(Name = "LastName", ResourceType = typeof(Resources))]
+            [MaxLength(64)]
+            public virtual string LastName { get; set; }
+            [Display(Name = "Birthday", ResourceType = typeof(Resources))]
+            public virtual DateTime? Birthday { get; set; }
+
         }
     }
 }

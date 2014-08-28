@@ -267,4 +267,13 @@
   <data name="alertPassword_CharError" xml:space="preserve">
     <value>密码必须是至少包含一个字母、数字或者符号，并且长度要做8到30位之间. </value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>名</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>姓</value>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>生日</value>
+  </data>
 </root>

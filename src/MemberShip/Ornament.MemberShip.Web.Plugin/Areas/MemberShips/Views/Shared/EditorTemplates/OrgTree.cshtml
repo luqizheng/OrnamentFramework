@@ -31,7 +31,7 @@
 </div>
 
 <script type="text/javascript">
-    seajs.use("/MemberShips/Scripts/Share/ui.js", function(r) {
+    require(["/MemberShips/Scripts/Share/ui.js"], function(r) {
         var d = @Html.Raw(JsonHelper.ToJson(selection));
         r.tree.org("#@Html.Id("")_Tree", "#@Html.Id("")", d);
 

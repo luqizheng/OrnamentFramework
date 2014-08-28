@@ -11,7 +11,7 @@ namespace Ornament.Web.UI.Theme
 
         public static Panel Panel(this HtmlHelper htmlHelper, PanelOption options, params string[] classNames)
         {
-            return new Panel(htmlHelper,options);
+            return new Panel(htmlHelper,options,classNames);
         }
     }
 }

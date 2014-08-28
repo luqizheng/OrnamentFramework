@@ -12,17 +12,11 @@
 
     IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
 }
-<div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
-
-    <div class="controls">
-        @foreach (var a in usergroups)
-        {
-            string check = ids.Contains(a.Id) ? "checked='checked'" : "";
-            <label class="inline checkbox">
-                @a.Name
-                <input type="checkbox" class="inline checkbox" value="@a.Id" name="@Html.Name("")" @check />
-            </label>
-        }
-    </div>
-</div>
+@foreach (var a in usergroups)
+{
+    string check = ids.Contains(a.Id) ? "checked='checked'" : "";
+    <label class="inline checkbox">
+        @a.Name
+        <input type="checkbox" class="inline checkbox" value="@a.Id" name="@Html.Name("")" @check />
+    </label>
+}

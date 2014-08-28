@@ -4,28 +4,24 @@
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var Selection = new object();
 }
-<div class="control-group">
-    @Html.Label("", display, new {@class = "control-label"})
-    <div class="controls">
-        @if (Model != null)
-        {
-            Selection = new
-            {
-                id = Model.Id,
-                text = Model.Name
-            };
 
-            @Html.Hidden("", Model.Id)
-        }
-        else
-        {
-            @Html.Hidden("", "")
-        }
-    </div>
-</div>
+@if (Model != null)
+{
+    Selection = new
+    {
+        id = Model.Id,
+        text = Model.Name
+    };
+
+    @Html.Hidden("", Model.Id)
+}
+else
+{
+    @Html.Hidden("", "")
+}
 
 <script type="text/javascript">
-    seajs.use("/MemberShips/Scripts/Share/ui.js", function(r) {
+    require(["/MemberShips/Scripts/Share/ui.js"], function(r) {
         var d = @Html.Raw(JsonHelper.ToJson(Selection));
         r.select2.org("#@Html.Id("")", d);
 

@@ -6,42 +6,62 @@
 @{
     ViewBag.Title = Resources.Edit + " " + Model.LoginId;
     Layout = OrnamentContext.Configuration.Layout();
+    var basicInfo = new PanelOption()
+    {
+        DeleteButton = false,
+        EditButton = false,
+        ToggleButton = true
+    };
+
+    var classes = new[]
+    {
+       "col-md-6", "col-sm-12", "col-xs-12"
+    };
+        
 }
 
-<form method="POST" action="@Url.Action("Edit")" class="form-horizontal">
-    @using (Panel panel = Html.Panel())
-    {
-        @panel.Header(@<text>
-        <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
-        <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
-        </text>)
-        @panel.Body(@<text>
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#editUser" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
-            <li><a href="#Options" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
-            <li><a data-toggle="tab" href="#anotherInfo">@Html.GetEmbededResourceString("tab_anotherInfo")</a></li>
-        </ul>
+@* 基本信息 *@
 
-        <div class="tab-content">
-            <div id="editUser" class="tab-pane active">
-                @Html.EditorFor(s => s, "BasicInfo")
-            </div>
-            <div id="Options" class="tab-pane">
-                @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
-            </div>
-            <div id="anotherInfo" class="tab-pane">
-                @Html.EditorFor(s => s.OtherInfo)
-            </div>
-        </div>
+@using (var panel = Html.Panel(basicInfo, classes))
+{
+    
+    @panel.Header(@<text>
+    <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+    </text>)
+    @panel.Body(@<text>
 
-        <p class="form-actions">
-            <button id="submitButton" class="btn btn-info" type="submit">@Resources.Save</button>
-            <a id="cancelButton" class="btn" href="@Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
-        </p>
-        </text>)
-    }
+    @Html.EditorFor(s => s, "BasicInfo")
 
-</form>
+    </text>)
+}
+
+@using (var panel = Html.Panel(basicInfo, classes))
+{
+    
+    @panel.Header(@<text>
+    <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
+    </text>)
+    @panel.Body(@<text>
+
+    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+
+    </text>)
+}
+
+@using (var panel = Html.Panel(basicInfo, classes))
+{
+    
+    @panel.Header(@<text>
+    <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+    </text>)
+    @panel.Body(@<text>
+
+    @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+
+    </text>)
+}
+
+
 
 @section scripts{
     <script type="text/javascript">

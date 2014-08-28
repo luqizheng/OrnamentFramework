@@ -35,6 +35,14 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 
             VerifyEmail = true;
         }
+        
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public DateTime? Birthday { get; set; }
+
+        public string Remarks { get; set; }
 
         /// <summary>
         ///     Gets or sets the User's Id
@@ -45,31 +53,31 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         ///     Gets or sets the LoginId,
         ///     检查LoginiId是否重复的用 Remote
         /// </summary>
-        [Display(Name = "LoginId", ResourceType = typeof (Resources))]
+        [Display(Name = "LoginId", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_MissLoginId",
-            ErrorMessageResourceType = typeof (Properties.Resources))]
+            ErrorMessageResourceType = typeof(Properties.Resources))]
         [RegularExpression(@"^[a-zA-Z0-9_-]{6,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
-            ErrorMessageResourceType = typeof (Resources))]
-        
+            ErrorMessageResourceType = typeof(Resources))]
+
         [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",
             ErrorMessageResourceName = "alertMsg_duplicate_loginId",
-            ErrorMessageResourceType = typeof (Properties.Resources))]
+            ErrorMessageResourceType = typeof(Properties.Resources))]
         public string LoginId { get; set; }
 
 
         /// <summary>
         ///     Gets or sets the Email of user.
         /// </summary>
-        [Display(Name = "Email", ResourceType = typeof (Resources))]
+        [Display(Name = "Email", ResourceType = typeof(Resources))]
         [Required(ErrorMessageResourceName = "error_missingEmailAddress",
-            ErrorMessageResourceType = typeof (Properties.Resources))]
+            ErrorMessageResourceType = typeof(Properties.Resources))]
         [RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
             ErrorMessageResourceName = "EmailNotRightFormat",
-            ErrorMessageResourceType = typeof (Resources))]
+            ErrorMessageResourceType = typeof(Resources))]
         [DataType(DataType.EmailAddress)]
-        [UIHint("String")]
+
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
-            ErrorMessageResourceType = typeof (Properties.Resources),
+            ErrorMessageResourceType = typeof(Properties.Resources),
             ErrorMessageResourceName = "alertMsg_duplicate_Email")]
         public string Email
         {
@@ -84,8 +92,8 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
-        [UIHint("String")]
-        [Display(Name = "Phone", ResourceType = typeof (Resources))]
+
+        [Display(Name = "Phone", ResourceType = typeof(Resources))]
         public string Phone
         {
             get { return _phone; }
@@ -100,9 +108,9 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <summary>
         /// </summary>
         [UIHint("String")]
-        [Display(Name = "Name", ResourceType = typeof (Resources)),
+        [Display(Name = "Name", ResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof (Resources))]
+             ErrorMessageResourceType = typeof(Resources))]
         public string Name
         {
             get { return _name; }
@@ -117,7 +125,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <summary>
         /// </summary>
         [UIHint("TimeZone")]
-        [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
+        [Display(Name = "TimeZone", ResourceType = typeof(Resources))]
         public string TimeZoneId { get; set; }
 
         /// <summary>
@@ -128,7 +136,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <summary>
         /// </summary>
         [UIHint("Language")]
-        [Display(Name = "Language", ResourceType = typeof (Resources))]
+        [Display(Name = "Language", ResourceType = typeof(Resources))]
         public string Language { get; set; }
 
         public bool EmailHasChanged { get; private set; }

@@ -113,7 +113,7 @@ namespace Ornament.Web.UI.Theme
         public void Dispose()
         {
             _context.Writer.Write(_builder.ToString(TagRenderMode.EndTag));
-            _context.Writer.Write(_root.ToString(TagRenderMode.StartTag));
+            _context.Writer.Write(_root.ToString(TagRenderMode.EndTag));
         }
 
         public MvcHtmlString HeaderToolbar(Func<object, HelperResult> action)

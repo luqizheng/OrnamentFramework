@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="tab_basicInfo" xml:space="preserve">
-    <value>Basic Info</value>
+    <value>User information</value>
   </data>
   <data name="tab_Permission" xml:space="preserve">
     <value>Permissions</value>
