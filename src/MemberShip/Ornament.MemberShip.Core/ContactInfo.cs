@@ -60,6 +60,7 @@ namespace Ornament.MemberShip
              RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
                  ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof(Resources))]
             [MaxLength(64)]
+
             public virtual string Email
             {
                 get { return _email; }

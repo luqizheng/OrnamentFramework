@@ -2,26 +2,19 @@
 
 
 <div class="form-horizontal">
-
-
     <div class="form-group">
         <label class="col-md-2">@Html.DisplayNameFor(s => s.Deny)</label>
         <div class="col-md-10">
-            <label class="toggle ">
-                @Html.EditorFor(model => model.Deny, new { HtmlAttributes = new { @class = "form-control onoffswitch-checkbox" } })
-                <label class="onoffswitch-label" for="Deny">
-                    <span class="onoffswitch-inner" data-swchon-text="YES" data-swchoff-text="NO"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
-                @Html.ValidationMessageFor(model => model.Deny)
-            </label>
+            @Html.CheckBoxFor(model => model.Deny, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Deny)
+
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-2">@Html.DisplayNameFor(s => s.IsLock)</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.IsLock, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.CheckBoxFor(model => model.IsLock, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.IsLock)
         </div>
     </div>

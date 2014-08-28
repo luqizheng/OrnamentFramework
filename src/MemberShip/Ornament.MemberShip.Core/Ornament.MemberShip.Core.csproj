@@ -78,6 +78,7 @@
     <Compile Include="ContactInfo.cs" />
     <Compile Include="Dao\IFriendDao.cs" />
     <Compile Include="Dao\IFriendGroupDao.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="OrgCollection.cs" />
     <Compile Include="Performer.cs" />
     <Compile Include="PerformerType.cs" />

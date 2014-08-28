@@ -15,7 +15,10 @@ namespace Ornament.MemberShip
     /// <summary>
     /// </summary>
     [Serializable]
-    public partial class User : Performer<User>
+    public partial class User : Performer<User>,
+        IUser, 
+        IUserSystemSetting, 
+        IUserOptionInfo
     {
         /// <summary>
         ///     god of the system login id
@@ -90,8 +93,7 @@ namespace Ornament.MemberShip
         }
 
 
-        [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
-        [UIHint("TimeZone")]
+     
         public virtual string TimeZoneId
         {
             get { return _timeZoneId; }
@@ -102,11 +104,7 @@ namespace Ornament.MemberShip
             }
         }
 
-        /// <summary>
-        ///     Gets or sets language
-        /// </summary>
-        [Display(Name = "Language", ResourceType = typeof (Resources))]
-        [UIHint("Language")]
+      
         public virtual string Language { get; set; }
 
         /// <summary>
@@ -140,22 +138,10 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets or sets Deny, if set to True, user can't be access
         /// </summary>
-        [Display(Name = "error_UserIsDeny", ResourceType = typeof (Resources))]
+       
         public virtual bool IsDeny { get; set; }
 
-        /// <summary>
-        ///     Gets or sets LoginId.
-        /// </summary>
-        /// <value>
-        ///     The login id.
-        /// </value>
-        [Display(Name = "LoginId", ResourceType = typeof (Resources)),
-         Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequireLoginId",
-             ErrorMessageResourceType = typeof (Resources))]
-        [LoginIdValidation]
-        //RegularExpression(@"^[a-zA-Z0-9_-]{1,20}",
-        //         ErrorMessageResourceName = "LoginNotCorrectFormat",
-        //         ErrorMessageResourceType = typeof (Resources))]
+      
         public virtual string LoginId { get; set; }
 
 
@@ -244,14 +230,7 @@ namespace Ornament.MemberShip
 
         [Display(Name = "Org", ResourceType = typeof (Resources))]
         public virtual Org Org { get; set; }
-
-
-        /// <summary>
-        /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Resources)),
-         RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof (Resources))]
+      
         public override string Name
         {
             get
