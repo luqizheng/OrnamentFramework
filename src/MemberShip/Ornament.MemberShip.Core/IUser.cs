@@ -5,7 +5,7 @@ using Ornament.MemberShip.Validations;
 
 namespace Ornament.MemberShip
 {
-    public interface IUserSystemSetting
+    public interface IUserSetting
     {
         [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
         [UIHint("TimeZone")]
@@ -17,16 +17,16 @@ namespace Ornament.MemberShip
         [Display(Name = "Language", ResourceType = typeof (Resources))]
         [UIHint("Language")]
         string Language { get; set; }
+    }
 
+    public interface IUserStatus
+    {
         /// <summary>
         ///     Gets or sets Deny, if set to True, user can't be access
         /// </summary>
         [Display(Name = "error_UserIsDeny", ResourceType = typeof (Resources))]
         bool IsDeny { get; set; }
-    }
 
-    public interface IUserOptionInfo
-    {
         /// <summary>
         ///     Gets or sets Comment.
         /// </summary>
@@ -45,6 +45,7 @@ namespace Ornament.MemberShip
     public interface IUser
     {
         string Id { get; }
+
         /// <summary>
         ///     Gets or sets LoginId.
         /// </summary>
@@ -56,5 +57,49 @@ namespace Ornament.MemberShip
              ErrorMessageResourceType = typeof (Resources))]
         [LoginIdValidation]
         string LoginId { get; set; }
+
+        [Display(Name = "UserName", ResourceType = typeof (Resources))]
+        [MaxLength(64)]
+        string Name { get; set; }
+    }
+
+    public interface IContactInfo
+    {
+        /// <summary>
+        ///     Gets or sets Phone.
+        /// </summary>
+        /// <value>
+        ///     The phone.
+        /// </value>
+        [Display(Name = "Phone", ResourceType = typeof (Resources)), StringLength(30)]
+        string Phone { get; set; }
+
+        /// <summary>
+        ///     Gets or sets Email.
+        /// </summary>
+        /// <value>
+        ///     The email.
+        /// </value>
+        [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
+            ErrorMessageResourceType = typeof (Resources)), Display(Name = "Email",
+                ResourceType = typeof (Resources)),
+         RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
+             ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof (Resources))]
+        [MaxLength(64)]
+        string Email { get; set; }
+
+        bool EmailVerified { get; set; }
+        bool PhoneVerified { get; set; }
+
+        [Display(Name = "FirstName", ResourceType = typeof (Resources))]
+        [MaxLength(64)]
+        string FirstName { get; set; }
+
+        [Display(Name = "LastName", ResourceType = typeof (Resources))]
+        [MaxLength(64)]
+        string LastName { get; set; }
+
+        [Display(Name = "Birthday", ResourceType = typeof (Resources))]
+        DateTime? Birthday { get; set; }
     }
 }

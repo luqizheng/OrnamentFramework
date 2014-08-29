@@ -276,4 +276,7 @@
   <data name="Birthday" xml:space="preserve">
     <value>生日</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
 </root>

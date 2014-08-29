@@ -17,8 +17,8 @@ namespace Ornament.MemberShip
     [Serializable]
     public partial class User : Performer<User>,
         IUser, 
-        IUserSystemSetting, 
-        IUserOptionInfo
+        IUserSetting, 
+        IUserStatus
     {
         /// <summary>
         ///     god of the system login id

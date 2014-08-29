@@ -39,6 +39,19 @@
 {
     
     @panel.Header(@<text>
+    <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+    </text>)
+    @panel.Body(@<text>
+
+    @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+
+    </text>)
+}
+
+@using (var panel = Html.Panel(basicInfo, classes))
+{
+    
+    @panel.Header(@<text>
     <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
     </text>)
     @panel.Body(@<text>
@@ -48,18 +61,6 @@
     </text>)
 }
 
-@using (var panel = Html.Panel(basicInfo, classes))
-{
-    
-    @panel.Header(@<text>
-    <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
-    </text>)
-    @panel.Body(@<text>
-
-    @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
-
-    </text>)
-}
 
 
 

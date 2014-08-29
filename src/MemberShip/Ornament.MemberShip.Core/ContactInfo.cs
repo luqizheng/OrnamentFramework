@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Properties;
 using Ornament.MemberShip.Security;
 using Qi.Domain;
 
@@ -9,7 +7,7 @@ namespace Ornament.MemberShip
 {
     public partial class User
     {
-        public class ContactInfo : DomainObject<ContactInfo, string>
+        public class ContactInfo : DomainObject<ContactInfo, string>, IContactInfo
         {
             private string _email;
             private bool _emailVerified;
@@ -32,9 +30,6 @@ namespace Ornament.MemberShip
             /// <value>
             ///     The phone.
             /// </value>
-            [Display(Name = "Phone",
-                ResourceType = typeof(Resources)),
-             StringLength(30)]
             public virtual string Phone
             {
                 get { return _phone; }
@@ -48,18 +43,6 @@ namespace Ornament.MemberShip
                 }
             }
 
-            /// <summary>
-            ///     Gets or sets Email.
-            /// </summary>
-            /// <value>
-            ///     The email.
-            /// </value>
-            [DataType(DataType.EmailAddress, ErrorMessageResourceName = "EmailNotRightFormat",
-                ErrorMessageResourceType = typeof(Resources)),
-             Display(Name = "Email", ResourceType = typeof(Resources)),
-             RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-                 ErrorMessageResourceName = "EmailNotRightFormat", ErrorMessageResourceType = typeof(Resources))]
-            [MaxLength(64)]
 
             public virtual string Email
             {
@@ -82,6 +65,12 @@ namespace Ornament.MemberShip
 
             public virtual bool PhoneVerified { get; set; }
 
+            public virtual string FirstName { get; set; }
+
+            public virtual string LastName { get; set; }
+
+            public virtual DateTime? Birthday { get; set; }
+
             /// <summary>
             ///     Veirfy Email
             /// </summary>
@@ -90,21 +79,12 @@ namespace Ornament.MemberShip
             /// <returns></returns>
             public virtual EmailVerifier VerifyEmail(int expireMiniutes, IMemberShipFactory daoFactory)
             {
-                var dao = daoFactory.CreateEmailVerifierDao();
+                IUserSecurityTokenDao dao = daoFactory.CreateEmailVerifierDao();
                 var result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
                 dao.SaveOrUpdate(result);
                 EmailVerified = false;
                 return result;
             }
-            [Display(Name = "FirstName", ResourceType = typeof(Resources))]
-            [MaxLength(64)]
-            public virtual string FirstName { get; set; }
-            [Display(Name = "LastName", ResourceType = typeof(Resources))]
-            [MaxLength(64)]
-            public virtual string LastName { get; set; }
-            [Display(Name = "Birthday", ResourceType = typeof(Resources))]
-            public virtual DateTime? Birthday { get; set; }
-
         }
     }
 }

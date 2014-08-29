@@ -563,5 +563,14 @@ namespace Ornament.MemberShip.Properties {
                 return ResourceManager.GetString("UserGroup", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 User Name 的本地化字符串。
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
     }
 }

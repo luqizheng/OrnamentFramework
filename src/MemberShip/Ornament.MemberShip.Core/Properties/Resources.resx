@@ -285,4 +285,7 @@
   <data name="Birthday" xml:space="preserve">
     <value>Birthday</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
 </root>

@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
-using Ornament.MemberShip.Properties;
+using Ornament.MemberShip.Web.Plugin.Properties;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 {
-    public class BasicInfo : User.ContactInfo,IUser
+
+    public class BasicInfo : IUser, IContactInfo, IUserSetting
     {
         private string _email;
         private string _name;
@@ -34,36 +35,16 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             Phone = user.Contact.Phone ?? "";
             Email = user.Contact.Email ?? "";
 
-            VerifyEmail = true;
+            
         }
-
+        public bool VerifyEmail { get; set; }
         //public string FirstName { get; set; }
 
         //public string LastName { get; set; }
 
         //public DateTime? Birthday { get; set; }
 
-        public string Remarks { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the User's Id
-        /// </summary>
-        public override string Id { get; protected set; }
-
-        ///// <summary>
-        /////     Gets or sets the LoginId,
-        /////     检查LoginiId是否重复的用 Remote
-        ///// </summary>
-        //[Display(Name = "LoginId", ResourceType = typeof (Resources))]
-        //[Required(ErrorMessageResourceName = "error_MissLoginId",
-        //    ErrorMessageResourceType = typeof (Properties.Resources))]
-        //[RegularExpression(@"^[a-zA-Z0-9_-]{6,20}", ErrorMessageResourceName = "LoginNotCorrectFormat",
-        //    ErrorMessageResourceType = typeof (Resources))]
-        [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",
-            ErrorMessageResourceName = "alertMsg_duplicate_loginId",
-            ErrorMessageResourceType = typeof (Properties.Resources))]
-        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "LoginId")]
-        public string LoginId { get; set; }
+        //public string Remarks { get; set; }
 
 
         /// <summary>
@@ -77,9 +58,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         //    ErrorMessageResourceType = typeof (Resources))]
         //[DataType(DataType.EmailAddress)]
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
-            ErrorMessageResourceType = typeof (Properties.Resources),
+            ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "alertMsg_duplicate_Email")]
-        public override string Email
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "Email")]
+        public string Email
         {
             get { return _email; }
             set
@@ -89,11 +71,19 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
                 _email = value;
             }
         }
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "EmailVerified")]
+        public bool EmailVerified { get; set; }
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "PhoneVerified")]
+        public bool PhoneVerified { get; set; }
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "FirstName")]
+        public string FirstName { get; set; }
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "LastName")]
+        public string LastName { get; set; }
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "Birthday")]
+        public DateTime? Birthday { get; set; }
 
-        /// <summary>
-        /// </summary>
-        //[Display(Name = "Phone", ResourceType = typeof (Resources))]
-        public override string Phone
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "Phone")]
+        public string Phone
         {
             get { return _phone; }
             set
@@ -106,9 +96,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
-        /*[Display(Name = "Name", ResourceType = typeof (Resources)),
-         RegularExpression(".{1,30}", ErrorMessageResourceName = "RequireName",
-             ErrorMessageResourceType = typeof (Resources))]*/
+        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "LoginId")]
         public string Name
         {
             get { return _name; }
@@ -120,24 +108,27 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             }
         }
 
-        /// <summary>
-        /// </summary>
-        [UIHint("TimeZone")]
-        [Display(Name = "TimeZone", ResourceType = typeof (Resources))]
+        [AttributeProvider("Ornament.MemberShip.IUserSetting,Ornament.MemberShip.Core", "TimeZoneId")]
         public string TimeZoneId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [Display(Name = "VerifyEmail", ResourceType = typeof (Properties.Resources))]
-        public bool VerifyEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [UIHint("Language")]
-        [Display(Name = "Language", ResourceType = typeof (Resources))]
+        [AttributeProvider("Ornament.MemberShip.IUserSetting,Ornament.MemberShip.Core", "Language")]
         public string Language { get; set; }
 
         public bool EmailHasChanged { get; private set; }
+
+        /// <summary>
+        ///     Gets or sets the User's Id
+        /// </summary>
+        public string Id { get; protected set; }
+
+        ///// <summary>
+        /////     Gets or sets the LoginId,
+        /////     检查LoginiId是否重复的用 Remote
+        ///// </summary>
+        [Remote("NotDuplicate", "User", "MemberShips", AdditionalFields = "Id",
+            ErrorMessageResourceName = "alertMsg_duplicate_loginId",
+            ErrorMessageResourceType = typeof(Resources))]
+        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "LoginId")]
+        public string LoginId { get; set; }
 
         /// <summary>
         /// </summary>
