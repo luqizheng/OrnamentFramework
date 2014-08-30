@@ -285,6 +285,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Web.config" />
+    <Content Include="Areas\MemberShips\Views\Org\OrgTreeView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
