@@ -9,78 +9,78 @@
     ViewBag.Title = Html.GetEmbededResourceString("Page_title");
     Layout = OrnamentContext.Configuration.Layout();
     string parentId = Model != null ? Model.Id : "";
-    IEnumerable<Org> childOrgs = ((IEnumerable<Org>) ViewData["Orgs"]) ?? new List<Org>();
+    IEnumerable<Org> childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
 @section pageTitle
 {
     @if (Model == null || Model.Parent == null)
     {
-        <h5>@Html.GetEmbededResourceString("Page_title");</h5>
+        @Html.GetEmbededResourceString("Page_title");
     }
     else
     {
-        <h5>@Model.Name</h5>
+        @Model.Name
     }
-    <span>
-        @Html.Partial("OrgNavigator", Model)
-    </span>
+
+    @Html.Partial("OrgNavigator", Model)
+
 }
 @using (Panel box = Html.Panel())
 {
     @box.Header(
         @<text>
-             <a class="btn btn-primary" href="@Url.Action("Create", new {parentId})"><i class="icon-white icon-plus"></i>
-                 @Resources.Create
-             </a>
-         </text>)
+    <a class="btn btn-primary" href="@Url.Action("Create", new { parentId })"><i class="icon-white icon-plus"></i>
+        @Resources.Create
+    </a>
+    </text>)
 
     @box.Body(@<text>
 
-                   @if (childOrgs.Count() != 0)
-                   {
-                       <table class="table table-striped table-bordered">
-                           <thead>
-                               <tr>
-                                   <th style="width: 100px"></th>
-                                   <th>
-                                       @Html.LabelFor(s => s.Name)
-                                   </th>
-                                   <th>
-                                       @Html.LabelFor(s => s.Remarks)
-                                   </th>
-                                   <th></th>
-                               </tr>
-                           </thead>
-                           @foreach (Org org in childOrgs)
-                           {
-                               <tr>
-                                   <th>
-                                       <a href="@Url.Action("index", new {id = org.Id})" class="btn btn-info btn-mini"><i class="icon-arrow-right icon-white"></i></a>
-                                       <a href="@Url.Action("DeleteDetails", new {id = org.Id})" class="btn btn-danger btn-mini">
-                                           <i class="icon-remove icon-white"></i>
-                                       </a>
-                                   </th>
-                                   <td>@org.Name
-                                   </td>
-                                   <td>@org.Remarks
-                                   </td>
-                                   <td>
-                                       @if (editPermission)
-                                       {
-                                           <a href="@Url.Action("Edit", new {id = org.Id})" class="btn btn-info btn-mini"><i class=" icon-edit icon-white"></i></a>
-                                       }
-                                   </td>
-                               </tr>
-                           }
-                       </table>
-                   }
-                   else
-                   {
-                       <div class="alert">
-                           @Html.GetEmbededResourceString("NotFoundOrg")
-                       </div>
-                   }
+    @if (childOrgs.Count() != 0)
+    {
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 100px"></th>
+                    <th>
+                        @Html.LabelFor(s => s.Name)
+                    </th>
+                    <th>
+                        @Html.LabelFor(s => s.Remarks)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (Org org in childOrgs)
+            {
+                <tr>
+                    <th>
+                        <a href="@Url.Action("index", new { id = org.Id })" class="btn btn-info btn-mini"><i class="icon-arrow-right icon-white"></i></a>
+                        <a href="@Url.Action("DeleteDetails", new { id = org.Id })" class="btn btn-danger btn-mini">
+                            <i class="icon-remove icon-white"></i>
+                        </a>
+                    </th>
+                    <td>@org.Name
+                    </td>
+                    <td>@org.Remarks
+                    </td>
+                    <td>
+                        @if (editPermission)
+                        {
+                            <a href="@Url.Action("Edit", new { id = org.Id })" class="btn btn-info btn-mini"><i class=" icon-edit icon-white"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div class="alert">
+            @Html.GetEmbededResourceString("NotFoundOrg")
+        </div>
+    }
 
-               </text>)
+    </text>)
 }

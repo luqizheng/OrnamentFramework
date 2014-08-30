@@ -22,7 +22,10 @@
 {
     <li>
         <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
-            <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i>
+            @if (renderSub)
+            {
+                <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i>
+            }
             <span class="menu-item-parent">@node.Current.Title</span>
         </a>
         @if (renderSub)

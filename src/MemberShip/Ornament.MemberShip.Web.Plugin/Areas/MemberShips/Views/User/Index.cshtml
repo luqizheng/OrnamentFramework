@@ -13,7 +13,11 @@
     Layout = OrnamentContext.Configuration.Layout();
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
 }
-
+    
+    @section pageTitle{
+        <i class="fa fa-users"></i>
+        @ViewBag.Title
+    }
 
 @section scripts 
 {
