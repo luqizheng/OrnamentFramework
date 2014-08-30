@@ -35,7 +35,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(RoleOperator.Read, "Role"),
          OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleListTitle",
-             ParentKey = "MemberShips", Key = ResourceSetting.Role, Order = 2,
+             ParentKey = "MemberShips", Key = ResourceSetting.Role, Order = 4,
              Resource = "Role", Operator = RoleOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
