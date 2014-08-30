@@ -18,7 +18,15 @@
 但是使用的ui template有部分不同，因此修改第4）点
 1） 这个节点没有子菜单，那么不会出现。
 *@
-
+@helper RenderTitle(MainMenu node)
+{
+    <li>
+        <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
+            <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i><span>@node.SubMenus.Count</span>
+            <span class="menu-item-parent">@node.Current.Title</span>
+        </a>
+    </li>
+}
 <nav>
     <ul>
         <li class="">
@@ -26,15 +34,18 @@
                 <span class="menu-item-parent">Dashboard</span></a>
         </li>
 
-        @foreach (var node in nodes)
+        @foreach (MainMenu node in nodes)
         {
-            <li>
-                <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
-                    <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')">
-                    </i>
-                    <span class="menu-item-parent">@node.Current.Title</span>
-                </a>
-            </li>
+            @RenderTitle(node);
+            if (node.SubMenus.Count != 0)
+            {
+                <ul>
+                    @foreach (var child in node.SubMenus)
+                    {
+                        @RenderTitle(child);
+                    }
+                </ul>
+            }
         }
     </ul>
 </nav>

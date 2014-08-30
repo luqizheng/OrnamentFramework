@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Models;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI.Paginations;
@@ -34,7 +35,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(RoleOperator.Read, "Role"),
          OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleListTitle",
-             ParentKey = "MemberShips", Key = "Role", Order = 2,
+             ParentKey = "MemberShips", Key = ResourceSetting.Role, Order = 2,
              Resource = "Role", Operator = RoleOperator.Read)]
         public ActionResult Index(Pagination pagination)
         {
@@ -45,12 +46,12 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult List(Pagination pagination)
         {
             var result = from role in _roleDao.Find(pagination.PageSize, pagination.CurrentPage)
-                select new
-                {
-                    role.Id,
-                    role.Name,
-                    role.Remarks
-                };
+                         select new
+                         {
+                             role.Id,
+                             role.Name,
+                             role.Remarks
+                         };
 
             int count = _roleDao.Count();
             return Json(new

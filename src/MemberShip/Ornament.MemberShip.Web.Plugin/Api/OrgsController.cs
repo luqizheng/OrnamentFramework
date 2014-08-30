@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Qi.Web.Http;
 
-namespace Ornament.MemberShip.Plugin.Api
+namespace Ornament.MemberShip.Web.Plugin.Api
 {
     [ApiSession,]
     [Authorize]

@@ -2,7 +2,7 @@
 using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Security;
 
-namespace Ornament.MemberShip.Plugin.Models.Security
+namespace Ornament.MemberShip.Web.Plugin.Models.Security
 {
     /// <summary>
     ///     这个model用于重新设定密码的时候是用

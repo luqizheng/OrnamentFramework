@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ornament.MemberShip.Plugin.Models
+namespace Ornament.MemberShip.Web.Plugin.Models
 {
     /// <summary>
     ///     for zTree only

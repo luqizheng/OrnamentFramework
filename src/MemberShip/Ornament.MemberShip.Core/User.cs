@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.MemberShip.Properties;
-using Ornament.MemberShip.Validations;
 
 namespace Ornament.MemberShip
 {
@@ -16,8 +13,8 @@ namespace Ornament.MemberShip
     /// </summary>
     [Serializable]
     public partial class User : Performer<User>,
-        IUser, 
-        IUserSetting, 
+        IUser,
+        IUserSetting,
         IUserStatus
     {
         /// <summary>
@@ -93,20 +90,6 @@ namespace Ornament.MemberShip
         }
 
 
-     
-        public virtual string TimeZoneId
-        {
-            get { return _timeZoneId; }
-            set
-            {
-                _timeZoneId = value;
-                ModifyUpdateTime();
-            }
-        }
-
-      
-        public virtual string Language { get; set; }
-
         /// <summary>
         ///     获取Timezone对象
         /// </summary>
@@ -133,16 +116,6 @@ namespace Ornament.MemberShip
         {
             get { return _contact ?? (_contact = new ContactInfo(this)); }
         }
-
-
-        /// <summary>
-        ///     Gets or sets Deny, if set to True, user can't be access
-        /// </summary>
-       
-        public virtual bool IsDeny { get; set; }
-
-      
-        public virtual string LoginId { get; set; }
 
 
         public virtual IEnumerable<Permission> Permissions
@@ -226,11 +199,30 @@ namespace Ornament.MemberShip
 
         #endregion
 
+        public virtual string LoginId { get; set; }
+
+        public virtual Org Org { get; set; }
+
+        public virtual string TimeZoneId
+        {
+            get { return _timeZoneId; }
+            set
+            {
+                _timeZoneId = value;
+                ModifyUpdateTime();
+            }
+        }
+
+
+        public virtual string Language { get; set; }
+
+        /// <summary>
+        ///     Gets or sets Deny, if set to True, user can't be access
+        /// </summary>
+        public virtual bool IsDeny { get; set; }
+
         #region IPerformer Members
 
-        [Display(Name = "Org", ResourceType = typeof (Resources))]
-        public virtual Org Org { get; set; }
-      
         public override string Name
         {
             get

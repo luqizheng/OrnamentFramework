@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
@@ -8,7 +7,6 @@ using Ornament.MemberShip.Web.Plugin.Properties;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 {
-
     public class BasicInfo : IUser, IContactInfo, IUserSetting
     {
         private string _email;
@@ -34,17 +32,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             LoginId = user.LoginId;
             Phone = user.Contact.Phone ?? "";
             Email = user.Contact.Email ?? "";
-
-            
         }
+
         public bool VerifyEmail { get; set; }
-        //public string FirstName { get; set; }
-
-        //public string LastName { get; set; }
-
-        //public DateTime? Birthday { get; set; }
-
-        //public string Remarks { get; set; }
+        public bool EmailHasChanged { get; private set; }
 
 
         /// <summary>
@@ -71,14 +62,19 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
                 _email = value;
             }
         }
+
         [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "EmailVerified")]
         public bool EmailVerified { get; set; }
+
         [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "PhoneVerified")]
         public bool PhoneVerified { get; set; }
+
         [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "FirstName")]
         public string FirstName { get; set; }
+
         [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "LastName")]
         public string LastName { get; set; }
+
         [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "Birthday")]
         public DateTime? Birthday { get; set; }
 
@@ -108,12 +104,8 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             }
         }
 
-        [AttributeProvider("Ornament.MemberShip.IUserSetting,Ornament.MemberShip.Core", "TimeZoneId")]
-        public string TimeZoneId { get; set; }
-        [AttributeProvider("Ornament.MemberShip.IUserSetting,Ornament.MemberShip.Core", "Language")]
-        public string Language { get; set; }
-
-        public bool EmailHasChanged { get; private set; }
+        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "Org")]
+        public Org Org { get; set; }
 
         /// <summary>
         ///     Gets or sets the User's Id
@@ -129,6 +121,12 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             ErrorMessageResourceType = typeof(Resources))]
         [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "LoginId")]
         public string LoginId { get; set; }
+
+        [AttributeProvider("Ornament.MemberShip.IUserSetting,Ornament.MemberShip.Core", "TimeZoneId")]
+        public string TimeZoneId { get; set; }
+
+        [AttributeProvider("Ornament.MemberShip.IUserSetting,Ornament.MemberShip.Core", "Language")]
+        public string Language { get; set; }
 
         /// <summary>
         /// </summary>

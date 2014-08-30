@@ -3,6 +3,7 @@ using Ornament;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Security;
+using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Qi.Web.Mvc;
 
 namespace WebApplication.Controllers

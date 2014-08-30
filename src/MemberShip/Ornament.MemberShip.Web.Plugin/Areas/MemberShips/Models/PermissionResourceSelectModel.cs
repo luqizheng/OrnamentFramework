@@ -1,7 +1,7 @@
 ﻿using Ornament.MemberShip.Permissions;
 using Ornament.Web;
 
-namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
+namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
 {
     public class PermissionResourceSelectModel
     {

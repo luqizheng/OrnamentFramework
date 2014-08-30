@@ -1,15 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Web.Plugin.Models.Security;
-using Ornament.Messages.Notification;
-using Ornament.Messages.Retrives;
 using Qi.Web.Http;
 
-namespace Ornament.MemberShip.Plugin.Api
+namespace Ornament.MemberShip.Web.Plugin.Api
 {
     /// <summary>
     ///     不需要login 的所有關於安全的信息。

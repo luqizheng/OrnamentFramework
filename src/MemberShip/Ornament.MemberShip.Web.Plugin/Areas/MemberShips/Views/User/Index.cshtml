@@ -1,11 +1,13 @@
 ﻿@using Ornament
-@using Ornament.MemberShip.Plugin.Areas.MemberShips.Models
+
 @using Ornament.MemberShip.Plugin.Models
+@using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
 @using Ornament.Properties
 @using Ornament.Web
 
 @using Ornament.Web.UI.Theme
 @model IEnumerable<Ornament.MemberShip.User>
+@*model IEnumerable<Ornament.MemberShip.User>*@
 @{
     ViewBag.Title = Html.GetEmbededResourceString("page_title");
     Layout = OrnamentContext.Configuration.Layout();
@@ -91,7 +93,7 @@
                                          ms-attr-data="{{el.Id}}"
                                          ms-attr-loginid="{{el.LoginId}}">
                                          <td>
-                                             <a ms-click="edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
+                                             <a class="btn btn-default btn-xs ajaxNav" ms-href="/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
                                          </td>
                                          <td ms-text="el.LoginId"></td>
                                          <td ms-text="el.Name"></td>

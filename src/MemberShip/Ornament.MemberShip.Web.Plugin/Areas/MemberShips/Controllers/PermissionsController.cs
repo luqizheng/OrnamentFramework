@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
 using Qi;
 using Qi.Web.Mvc;
 
-namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
+namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 {
     [Authorize]
     [Session]

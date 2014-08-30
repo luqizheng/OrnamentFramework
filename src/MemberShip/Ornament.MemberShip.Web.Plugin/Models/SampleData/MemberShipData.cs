@@ -1,8 +1,8 @@
 ﻿using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.SampleData;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.Web.DataInitializers;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.SampleData

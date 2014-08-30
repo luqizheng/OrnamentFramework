@@ -23,7 +23,13 @@
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="col-md-2">@Html.DisplayNameFor(s=>s.Org)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model=>model.Org)
+                @Html.ValidationMessageFor(model => model.Org)
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
             <div class="col-md-10">

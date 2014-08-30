@@ -244,7 +244,6 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\BasicInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Org.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\OrgTree.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Role[].cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\RolesCheckBoxes.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User.cshtml" />

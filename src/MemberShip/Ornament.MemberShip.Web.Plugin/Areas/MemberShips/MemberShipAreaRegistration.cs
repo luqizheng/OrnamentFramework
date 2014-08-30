@@ -2,8 +2,8 @@
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models.SampleData;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.SampleData;
 using Ornament.Web;
 using Ornament.Web.Messages;

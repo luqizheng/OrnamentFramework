@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 
-namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
+namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
 {
     public class OrgDetailsModel : OrgModel
     {

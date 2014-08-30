@@ -2,10 +2,9 @@
 using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
-using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Plugin.Models.Security;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Web.Plugin.Properties;
 using Ornament.Web.MemberShips;

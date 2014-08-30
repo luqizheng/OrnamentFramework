@@ -1,6 +1,6 @@
 ﻿using Ornament.MemberShip.Plugin.Models;
 
-namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Models
+namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
 {
     public static class ResourceSetting
     {

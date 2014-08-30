@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
+using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
-namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
+namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 {
     [Session]
     public class OrgController : Controller
@@ -49,9 +49,8 @@ namespace Ornament.MemberShip.Plugin.Areas.MemberShips.Controllers
 
 
         [ResourceAuthorize(OrgOperator.Modify, "Org")]
-        [OrnamentMvcSiteMapNode(
-            DynamicNodeProvider =
-                "Ornament.MemberShip.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Plugin",
+        [OrnamentMvcSiteMapNode(DynamicNodeProvider =
+                "Ornament.MemberShip.Web.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Web.Plugin",
             Title = "$resources:membership.sitemap,orgEditTitle"
             , ParentKey = "Org")]
         public ActionResult Details(string id)

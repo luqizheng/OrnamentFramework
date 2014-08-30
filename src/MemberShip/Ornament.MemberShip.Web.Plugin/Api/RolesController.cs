@@ -4,7 +4,7 @@ using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Qi.Web.Http;
 
-namespace Ornament.MemberShip.Plugin.Api
+namespace Ornament.MemberShip.Web.Plugin.Api
 {
     [Authorize]
     public class RolesController : ApiController
