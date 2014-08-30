@@ -18,14 +18,31 @@
 但是使用的ui template有部分不同，因此修改第4）点
 1） 这个节点没有子菜单，那么不会出现。
 *@
-@helper RenderTitle(MainMenu node)
+@helper RenderTitle(MainMenu node, bool renderSub)
 {
     <li>
         <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
-            <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i><span>@node.SubMenus.Count</span>
+            <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i>
             <span class="menu-item-parent">@node.Current.Title</span>
         </a>
+        @if (renderSub)
+        {
+            @HelperRenderSub(node)   
+        }
     </li>
+}
+
+@helper HelperRenderSub(MainMenu node)
+{
+    if (node.SubMenus.Count != 0)
+    {
+    <ul>
+        @foreach (var child in node.SubMenus)
+        {
+            @RenderTitle(child, false);
+        }
+    </ul>
+    }
 }
 <nav>
     <ul>
@@ -36,17 +53,10 @@
 
         @foreach (MainMenu node in nodes)
         {
-            @RenderTitle(node);
-            if (node.SubMenus.Count != 0)
-            {
-                <ul>
-                    @foreach (var child in node.SubMenus)
-                    {
-                        @RenderTitle(child);
-                    }
-                </ul>
-            }
+            @RenderTitle(node, true);
         }
     </ul>
 </nav>
-<span class="minifyme" data-action="minifyMenu"><i class="fa fa-arrow-circle-left hit"></i></span>
+<span class="minifyme" data-action="minifyMenu">
+    <i class="fa fa-arrow-circle-left hit"></i> 
+</span>

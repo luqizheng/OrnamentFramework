@@ -216,11 +216,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Areas\MemberShips\Views\Org\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Org\Details.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Org\Index.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Create.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Details.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hans.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hant.resx" />
@@ -230,16 +230,16 @@
     <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hans.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hant.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
-    <Content Include="Areas\MemberShips\Views\Role\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Role\Index.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Create.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\BasicInfo.cshtml" />
@@ -257,10 +257,10 @@
     <Content Include="Areas\MemberShips\Views\Shared\RoleListRadio.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\UserGroupListRadio.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\UserSearch.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.resx" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hans.resx" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\AssignRole.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\App_LocalResources\Index.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\App_LocalResources\AssignRole.zh-Hant.resx" />
@@ -277,12 +277,12 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\User\Create.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Details.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Details.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <Content Include="Areas\Web.config" />
     <None Include="Web.Debug.config">
@@ -296,9 +296,9 @@
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.resx" />
-    <Content Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hans.resx" />
-    <Content Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hant.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">

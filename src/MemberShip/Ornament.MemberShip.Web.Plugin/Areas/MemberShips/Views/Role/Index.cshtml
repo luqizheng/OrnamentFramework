@@ -11,10 +11,10 @@
     bool hasDelete = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Delete);
     bool hasModify = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Modify);
 }
-@section pageTitle
-{
+
+
     <h3>@Resources.Role</h3>
-}
+
 <div class="widget">
     <div class="well body">
         <a href="@Url.Action("Create")" class="btn"><i class="icon-plus"></i>@Ornament.Properties.Resources.Create</a>
@@ -59,8 +59,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="@((hasModify || hasDelete) ? "3" : "2")">
-                        @Html.Pages()
+                    <td colspan="@((hasModify || hasDelete) ? "3" : "2")" ms-widget="pagination,page,$pageOpts"  ms-include-src="'/js/avalons/Pagination/Pagination.html'">
+                        
                     </td>
                 </tr>
             </tfoot>
