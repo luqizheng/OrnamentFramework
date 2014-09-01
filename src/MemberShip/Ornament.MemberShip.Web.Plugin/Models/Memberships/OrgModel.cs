@@ -4,7 +4,7 @@ using System.Linq;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Properties;
 
-namespace Ornament.MemberShip.Plugin.Models.Memberships
+namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 {
     public class OrgModel
     {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ornament.MemberShip.Plugin.Models.Memberships;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 
 namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
 {

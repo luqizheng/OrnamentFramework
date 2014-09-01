@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Ornament.Web.UI.Theme
 {
@@ -11,7 +12,12 @@ namespace Ornament.Web.UI.Theme
 
         public static Panel Panel(this HtmlHelper htmlHelper, PanelOption options, params string[] classNames)
         {
-            return new Panel(htmlHelper,options,classNames);
+            return new Panel(htmlHelper,options,new Dictionary<string, object>()
+            {
+                {"class",string.Join(" ",classNames)}
+            });
         }
+
+   
     }
 }

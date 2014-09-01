@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.WebPages;
@@ -82,29 +83,35 @@ namespace Ornament.Web.UI.Theme
 
 
         public Panel(HtmlHelper helper, params string[] classNames)
-            : this(helper, new PanelOption(), classNames)
+            : this(helper, new PanelOption(), new Dictionary<string, object>()
+            {
+                {"class",String.Join(" ",classNames)}
+            })
         {
         }
 
-        public Panel(HtmlHelper helper, PanelOption options, params string[] classNames)
+        public Panel(HtmlHelper helper, PanelOption options, IDictionary<string, object> htmlAttributes)
         {
             _helper = helper;
             ViewContext context = helper.ViewContext;
             _root = new TagBuilder("article");
 
-            string[] clz = classNames != null && classNames.Length != 0
-                ? classNames
-                : new[] {"col-xs-12", "col-sm-12", "col-md-12", "col-lg-12"};
+            string clz = htmlAttributes.ContainsKey("class")
+                ? htmlAttributes["class"].ToString()
+                : "col-xs-12 col-sm-12 col-md-12 col-lg-12";
 
-            foreach (string a in clz)
-            {
-                _root.AddCssClass(a);
-            }
+
+            _root.AddCssClass(clz);
+
 
             _builder = new TagBuilder("div");
             _builder.AddCssClass("jarviswidget");
             options.InitPanle(_builder);
+            if (htmlAttributes.Count != 0)
+            {
+                _builder.MergeAttributes(htmlAttributes);
 
+            }
             context.Writer.Write(_root.ToString(TagRenderMode.StartTag));
             context.Writer.Write(_builder.ToString(TagRenderMode.StartTag));
             _context = context;
