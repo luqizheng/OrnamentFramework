@@ -279,4 +279,7 @@
   <data name="UserName" xml:space="preserve">
     <value>用户名</value>
   </data>
+  <data name="ParentOrg" xml:space="preserve">
+    <value>所属部门</value>
+  </data>
 </root>

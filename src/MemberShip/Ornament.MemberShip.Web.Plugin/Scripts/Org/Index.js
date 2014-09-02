@@ -14,6 +14,7 @@
                 model.Remarks = data.Remarks;
                 model.Parent = data.Parent.Id;
                 model.ParentName = data.Parent.Name;
+                model.Roles = data.Roles;
             });
 
         };
@@ -25,9 +26,12 @@
         vm.Parent = null; //Parent Org's Id
         vm.ParentName = "";
         vm.Id = "";
+        vm.Roles = [];//Role's id
+        
         vm.save = function (e) {
-           
-            org.save(vm.Name, vm.Remarks, vm.Parent, vm.Id, function (d) {
+            var roles = [];
+            $("#roleList :checked").val();
+            org.save(vm.Name, vm.Remarks, vm.Parent, vm.Id, roles, function (d) {
                 if (d) {
                     alert("save success.");
                 }

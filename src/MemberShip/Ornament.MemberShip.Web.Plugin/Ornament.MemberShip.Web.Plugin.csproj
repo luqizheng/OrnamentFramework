@@ -255,7 +255,6 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Shared\OrgNavigator.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\RoleListRadio.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\UserGroupListRadio.cshtml" />

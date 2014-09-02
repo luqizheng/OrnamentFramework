@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
@@ -28,6 +29,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                     org.Name,
                     org.Id,
                     org.Remarks,
+                    Roles = org.Roles.ToArray()
                 };
                 return restlt;
             }
@@ -42,7 +44,8 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                     {
                         org.Parent.Name,
                         org.Parent.Id
-                    }
+                    },
+                    Roles=org.Roles.Select(s=>s.Id).ToArray()
                 };
                 return restlt;
             }

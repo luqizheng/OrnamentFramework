@@ -1,4 +1,5 @@
 ﻿@using System.Collections.Generic;
+@using System.Security.AccessControl
 @using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
@@ -24,7 +25,11 @@
         @Model.Name
     }
 }
-@using (Panel box = Html.Panel("col-md-6 col-lg-6 col-xs-6 col-sm-6"))
+@using (Panel box = Html.Panel(new PanelOption()
+{
+    EditButton = true,FullScreenButton = true,
+    Id = "orgPanel"
+}, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @box.Header(
         @<text>
@@ -33,68 +38,79 @@
     </a>
     </text>)
 
-    @box.Body(@<text>
-                   <div ms-controller="index">
-                       @Html.Partial("OrgTreeView", childOrgs)
-                   </div>
+    @box.Edit(@<text>
 
-               </text>)
-}
-
-@using (Panel box = Html.Panel("col-md-3 col-lg-3 col-xs-3 col-sm-3"))
-{
-    @box.Header(
-        @<text>
-    <h2>Edit Org</h2>
-    </text>
-    )
-    @box.Body(@<text>
-                   <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save">
-                       <div class="form-group">
-                           <label class="col-md-2">
-                               @Html.DisplayNameFor(s=>s.Parent)
-                           </label>
-                           <div class="col-md-10">
-                                <p class="form-control-static" ms-text="ParentName"></p>
-                           </div>
-                       </div>
-                       <div class="form-group">
-                           <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
-                           <div class="col-md-10">
-                               @Html.EditorFor(model => model.Name, new { HtmlAttributes = new Dictionary<string,object>
+    <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save">
+        <div class="form-group">
+            <label class="col-md-2  control-label">
+                @Html.DisplayNameFor(s => s.Parent)
+            </label>
+            <div class="col-md-10">
+                <p class="form-control-static" ms-text="ParentName"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new
+           {
+               HtmlAttributes = new Dictionary<string, object>
                                {
                                    { "class","form-control"},
                                    {"ms-duplex","Name"}
-                               } })
-                               @Html.ValidationMessageFor(model => model.Name)
-                           </div>
-                       </div>
+                               }
+           })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
 
-                       <div class="form-group">
-                           <label class="col-md-2">@Html.DisplayNameFor(s => s.Remarks)</label>
-                           <div class="col-md-10">
-                               @Html.EditorFor(model => model.Remarks, new { HtmlAttributes = new Dictionary<string,object>
+        <div class="form-group">
+            <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remarks)</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remarks, new
+           {
+               HtmlAttributes = new Dictionary<string, object>
                                {
                                    { "class", "form-control" },
                                    {"ms-duplex","Remarks"}
                      
-                               } })
-                               @Html.ValidationMessageFor(model => model.Remarks)
-                           </div>
-                       </div>
-                       <div class="form-actions">
-                           <button class="btn" type="submit">
-                               <i class="fa fa-save"></i>
-                               @Ornament.Properties.Resources.Save
-                           </button>
-                       </div>
-                   </form>
+                               }
+           })
+                @Html.ValidationMessageFor(model => model.Remarks)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
+            <div class="col-md-12" id="roleList">
+                @Html.EditorFor(s => s.Roles, new System.Collections.Generic.Dictionary<string, object>()
+                {
+                    {"ms-duplex-text","Roles"}
+                })
+                @Html.ValidationMessageFor(s => s.Roles)
+            </div>
+        </div>
+        <div class="form-actions">
+            <button class="btn" type="submit">
+                <i class="fa fa-save"></i>
+                @Ornament.Properties.Resources.Save
+            </button>
+        </div>
+    </form>
+    </text>)
+
+    @box.Body(@<text>
+    <div ms-controller="index">
+        @Html.Partial("OrgTreeView", childOrgs)
+    </div>
+
     </text>)
 }
 
+
+
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'],function(init) {
+        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function (init) {
             init();
         })
     </script>

@@ -163,5 +163,13 @@ namespace Ornament.Web.UI.Theme
         {
             return string.Format("~/Views/Shared/DisplayTemplates/{1}/{0}", viewType + ".cshtml", "Panel");
         }
+
+        public MvcHtmlString Edit(Func<object, HelperResult> action)
+        {
+            TextWriter writer = _context.Writer;
+            var buffer = new RecordWriter(writer);
+            action(null).WriteTo(buffer);
+            return _helper.Partial(PartialViewPath("EditPlace"), buffer.Builder);
+        }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
+using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip
 {
@@ -45,6 +48,7 @@ namespace Ornament.MemberShip
 
         /// <summary>
         /// </summary>
+        [Display(Name = "ParentOrg", ResourceType = typeof (Resources))]
         public virtual Org Parent { get; protected internal set; }
 
         /// <summary>

@@ -288,4 +288,7 @@
   <data name="UserName" xml:space="preserve">
     <value>User Name</value>
   </data>
+  <data name="ParentOrg" xml:space="preserve">
+    <value>Parent Org</value>
+  </data>
 </root>

@@ -367,6 +367,15 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Parent Org 的本地化字符串。
+        /// </summary>
+        public static string ParentOrg {
+            get {
+                return ResourceManager.GetString("ParentOrg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Password 的本地化字符串。
         /// </summary>
         public static string Password {

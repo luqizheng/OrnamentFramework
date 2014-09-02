@@ -7,15 +7,30 @@
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
+ 
     IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
         .CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
+
+    IDictionary<string, object> htmlAttris;
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object>;
+        if (htmlAttris == null)
+        {
+            htmlAttris = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        }
+    }
+    else
+    {
+        htmlAttris=new Dictionary<string, object>();
+    }
 }
 @foreach (Role a in roles)
 {
-    string check = ids.Contains(a.Id) ? "checked='checked'" : "";
-    <label class="inline checkbox">
+    <label class="checkbox-inline" title="@a.Remarks">
+        @Html.CheckBox("",htmlAttris)
         @a.Name
-        <input type="checkbox" class="inline checkbox" value="@a.Id" name="@Html.Name("")" @check />
     </label>
+    
 }
