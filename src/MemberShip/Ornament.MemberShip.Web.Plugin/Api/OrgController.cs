@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Mvc;
+﻿using System.Web.Http;
+using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
-using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Qi.Web.Http;
-using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Web.Plugin.Api
 {
+    [ApiSession, Authorize]
     public class OrgController : ApiController
     {
-        private readonly MemberShipFactory _factory;
+        private readonly IMemberShipFactory _factory;
 
-        public OrgController(MemberShipFactory factory)
+        public OrgController(IMemberShipFactory factory)
         {
             _factory = factory;
         }
 
-        [System.Web.Http.HttpGet]
-        [ApiSession]
+        [HttpGet]
         public object Get(string id)
         {
-            var dao = _factory.CreateOrgDao();
-            var org = dao.Get(id);
+            IOrgDao dao = _factory.CreateOrgDao();
+            Org org = dao.Get(id);
             if (org.Parent == null)
             {
                 var restlt = new
@@ -35,7 +28,6 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                     org.Name,
                     org.Id,
                     org.Remarks,
-
                 };
                 return restlt;
             }
@@ -48,15 +40,16 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                     org.Remarks,
                     Parent = new
                     {
-                        Name = org.Name,
-                        Id = org.Id
+                        org.Parent.Name,
+                        org.Parent.Id
                     }
                 };
                 return restlt;
             }
         }
-        [ApiSession]
-        [System.Web.Http.HttpPost]
+
+
+        [HttpPost]
         public object Save(OrgModel model)
         {
             model.Save(_factory.CreateOrgDao());

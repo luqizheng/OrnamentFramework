@@ -1,6 +1,20 @@
 ﻿define(function (require) {
+    var org = require("/MemberShips/Scripts/Share/Org.js");
+    
     avalon.define('index', function (vm) {
         vm.add = function () {
+
+        };
+
+        vm.orgSelected = function() {
+            var id = $(this).attr("id");
+            org.get(id, function(data) {
+                var model = avalon.vmodels["edit"];
+                model.Name = data.Name;
+                model.Remarks = data.Remarks;
+                model.Parent = data.Parent.Id;
+                model.ParentName = data.Parent.Name;
+            });
 
         };
     });
@@ -8,15 +22,17 @@
     avalon.define('edit', function (vm) {
         vm.Name = "";
         vm.Remarks = "";
-        vm.Parent = null;
+        vm.Parent = null; //Parent Org's Id
+        vm.ParentName = "";
         vm.Id = "";
-        vm.save = function () {
-            var org = require("/MemberShips/Scripts/Share/Org.js");
+        vm.save = function (e) {
+           
             org.save(vm.Name, vm.Remarks, vm.Parent, vm.Id, function (d) {
                 if (d) {
                     alert("save success.");
                 }
             });
+            e.preventDefault();
         };
     });
 
@@ -37,7 +53,7 @@
             e.stopPropagation();
         });
 
-    return function () {
-
-    }
+    return function() {
+        avalon.scan();
+    };
 })

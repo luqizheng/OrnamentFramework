@@ -1,4 +1,5 @@
-﻿@using Ornament
+﻿@using System.Collections.Generic;
+@using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.Properties
@@ -33,19 +34,11 @@
     </text>)
 
     @box.Body(@<text>
-    @Html.Partial("OrgTreeView", childOrgs)
-    @if (childOrgs.Count() != 0)
-    {
+                   <div ms-controller="index">
+                       @Html.Partial("OrgTreeView", childOrgs)
+                   </div>
 
-    }
-    else
-    {
-        <div class="alert">
-            @Html.GetEmbededResourceString("NotFoundOrg")
-        </div>
-    }
-
-    </text>)
+               </text>)
 }
 
 @using (Panel box = Html.Panel("col-md-3 col-lg-3 col-xs-3 col-sm-3"))
@@ -56,36 +49,53 @@
     </text>
     )
     @box.Body(@<text>
-    <form method="POST" ms-controller="edit" class="form-horizontal">
-        <div class="form-group">
-            <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { HtmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
+                   <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save">
+                       <div class="form-group">
+                           <label class="col-md-2">
+                               @Html.DisplayNameFor(s=>s.Parent)
+                           </label>
+                           <div class="col-md-10">
+                                <p class="form-control-static" ms-text="ParentName"></p>
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
+                           <div class="col-md-10">
+                               @Html.EditorFor(model => model.Name, new { HtmlAttributes = new Dictionary<string,object>
+                               {
+                                   { "class","form-control"},
+                                   {"ms-duplex","Name"}
+                               } })
+                               @Html.ValidationMessageFor(model => model.Name)
+                           </div>
+                       </div>
 
-        <div class="form-group">
-            <label class="col-md-2">@Html.DisplayNameFor(s => s.Remarks)</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Remarks, new { HtmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Remarks)
-            </div>
-        </div>
-        <div class="form-actions">
-            <button class="btn">
-                <i class="fa fa-save"></i>
-                @Ornament.Properties.Resources.Save
-            </button>
-        </div>
-    </form>
+                       <div class="form-group">
+                           <label class="col-md-2">@Html.DisplayNameFor(s => s.Remarks)</label>
+                           <div class="col-md-10">
+                               @Html.EditorFor(model => model.Remarks, new { HtmlAttributes = new Dictionary<string,object>
+                               {
+                                   { "class", "form-control" },
+                                   {"ms-duplex","Remarks"}
+                     
+                               } })
+                               @Html.ValidationMessageFor(model => model.Remarks)
+                           </div>
+                       </div>
+                       <div class="form-actions">
+                           <button class="btn" type="submit">
+                               <i class="fa fa-save"></i>
+                               @Ornament.Properties.Resources.Save
+                           </button>
+                       </div>
+                   </form>
     </text>)
 }
 
 @section scripts{
     <script type="text/javascript">
         require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'],function(init) {
-            
+            init();
         })
     </script>
 }

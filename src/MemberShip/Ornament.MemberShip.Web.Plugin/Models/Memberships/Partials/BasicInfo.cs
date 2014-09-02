@@ -41,13 +41,6 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <summary>
         ///     Gets or sets the Email of user.
         /// </summary>
-        //[Display(Name = "Email", ResourceType = typeof (Resources))]
-        //[Required(ErrorMessageResourceName = "error_missingEmailAddress",
-        //    ErrorMessageResourceType = typeof (Properties.Resources))]
-        //[RegularExpression(@"\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b",
-        //    ErrorMessageResourceName = "EmailNotRightFormat",
-        //    ErrorMessageResourceType = typeof (Resources))]
-        //[DataType(DataType.EmailAddress)]
         [Remote("NotDuplicateEmail", "User", "MemberShips", AdditionalFields = "Id",
             ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "alertMsg_duplicate_Email")]

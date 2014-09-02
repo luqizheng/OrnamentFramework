@@ -11,6 +11,9 @@
                 Parent: parentId,
                 id: id
             }, func);
+        },
+        get:function(id, func) {
+            webApi.Get({ id: id }, func);
         }
     };
 })
