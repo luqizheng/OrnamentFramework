@@ -25,22 +25,40 @@
         @Model.Name
     }
 }
+
 @using (Panel box = Html.Panel(new PanelOption()
 {
-    EditButton = true,FullScreenButton = true,
     Id = "orgPanel"
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @box.Header(
         @<text>
-    <a class="btn btn-primary" href="@Url.Action("Create", new { parentId })"><i class="icon-white icon-plus"></i>
-        @Resources.Create
-    </a>
+
     </text>)
 
-    @box.Edit(@<text>
 
-    <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save">
+    @box.Body(@<text>
+    <div class="widget-body-toolbar">
+        <a class="btn btn-primary" href="@Url.Action("Create", new { parentId })"><i class="icon-white icon-plus"></i>
+            @Resources.Create
+        </a>
+    </div>
+
+    <div ms-controller="index">
+        @Html.Partial("OrgTreeView", childOrgs)
+    </div>
+
+
+    </text>)
+}
+
+@using (Panel box = Html.Panel("col-md-6 col-lg-6 col-xs-6 col-sm-6"))
+{
+    @box.Header(@<text>
+
+    </text>)
+    @box.Body(@<text>
+    <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save" action="/MemberShips/Org/Save">
         <div class="form-group">
             <label class="col-md-2  control-label">
                 @Html.DisplayNameFor(s => s.Parent)
@@ -53,13 +71,13 @@
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new
-           {
-               HtmlAttributes = new Dictionary<string, object>
-                               {
-                                   { "class","form-control"},
-                                   {"ms-duplex","Name"}
-                               }
-           })
+                                     {
+                                         HtmlAttributes = new Dictionary<string, object>
+                                         {
+                                             { "class","form-control"},
+                                             {"ms-duplex","Name"}
+                                         }
+                                     })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -68,24 +86,24 @@
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remarks)</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Remarks, new
-           {
-               HtmlAttributes = new Dictionary<string, object>
-                               {
-                                   { "class", "form-control" },
-                                   {"ms-duplex","Remarks"}
+                                     {
+                                         HtmlAttributes = new Dictionary<string, object>
+                                         {
+                                             { "class", "form-control" },
+                                             {"ms-duplex","Remarks"}
                      
-                               }
-           })
+                                         }
+                                     })
                 @Html.ValidationMessageFor(model => model.Remarks)
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
-            <div class="col-md-12" id="roleList">
-                @Html.EditorFor(s => s.Roles, new System.Collections.Generic.Dictionary<string, object>()
-                {
-                    {"ms-duplex-text","Roles"}
-                })
+            <div class="col-md-10" id="roleList">
+                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>()
+                                     {
+                                         {"ms-duplex-text","Roles"}
+                                     })
                 @Html.ValidationMessageFor(s => s.Roles)
             </div>
         </div>
@@ -96,13 +114,6 @@
             </button>
         </div>
     </form>
-    </text>)
-
-    @box.Body(@<text>
-    <div ms-controller="index">
-        @Html.Partial("OrgTreeView", childOrgs)
-    </div>
-
     </text>)
 }
 

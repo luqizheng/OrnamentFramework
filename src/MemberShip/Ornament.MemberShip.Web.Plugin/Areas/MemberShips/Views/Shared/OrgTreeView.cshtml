@@ -6,33 +6,46 @@
     
 }
 
- @helper RenderTree(Org org, bool show)
+@helper RenderTree(Org org, bool show)
 {
     var clz = org.Childs.Count != 0 ? "fa-plus-circle" : "fa-users";
     var isShow = show ? "" : "display:none";
-     <li style="@isShow"><span id="@org.Id" style="cursor:pointer" ms-click="orgSelected"><i class="fa fa-lg @clz"></i>@org.Name</span>
-     @if (org.Childs.Count != 0)
-     {
-         <ul>
-         @foreach (var child in org.Childs)
-         {
-             @RenderTree(child, false);
-         }
-         </ul>
-     }</li>
- }
+    <li style="@isShow">
+        <span style="cursor:pointer"><i class="fa fa-lg @clz"></i>@org.Name
+        </span>
+        <div id="@org.Id" class="btn-group">
+            <a href="#" ms-click="edit" class="btn btn-xs btn-info">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a href="#" ms-click="addSub" class="btn btn-xs btn-info">
+                <i class="fa fa-plus "></i>
+            </a>
+             <a href="#" ms-click="delete" class="btn btn-xs btn-danger">
+                <i class="fa fa-remove"></i>
+            </a>
+        </div>
+        @if (org.Childs.Count != 0)
+        {
+            <ul>
+                @foreach (var child in org.Childs)
+                {
+                    @RenderTree(child, false);
+                }
+            </ul>
+        }
+    </li>
+}
 <div class="tree">
     <ul>
-    <li>
-        <span><i class="fa fa-lg fa-folder-open"></i>Root</span>
-           
-        <ul>
-            @foreach (var org in this.Model)
-            {
-                @RenderTree(org, true);
-            }
-        </ul>
-    </li>
-        </ul>
-    
+        <li>
+            <span ms-click="AddSub"><i class="fa fa-lg fa-sitemap"></i>Root</span>
+
+            <ul>
+                @foreach (var org in this.Model)
+                {
+                    @RenderTree(org, true);
+                }
+            </ul>
+        </li>
+    </ul>
 </div>

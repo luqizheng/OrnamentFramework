@@ -74,6 +74,7 @@
     <Compile Include="LazyWriter.cs" />
     <Compile Include="Paginations\HtmlExtender.cs" />
     <Compile Include="Paginations\Pagination.cs" />
+    <Compile Include="Theme\BootstrapModel.cs" />
     <Compile Include="Theme\ThemeContext.cs" />
     <Compile Include="Theme\Panel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

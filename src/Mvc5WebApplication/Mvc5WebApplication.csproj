@@ -947,7 +947,9 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimePeriod.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\EditPlace.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Modal\Body.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -2,12 +2,19 @@
     var org = require("/MemberShips/Scripts/Share/Org.js");
     
     avalon.define('index', function (vm) {
-        vm.add = function () {
-
+        vm.addSub = function (e) {
+            var id = $(this).parent().attr("id");
+            $(this).
+            e.preventDefault();
         };
 
-        vm.orgSelected = function() {
-            var id = $(this).attr("id");
+        vm.delete = function (e) {
+            var id = $(this).parent().attr("id");
+            e.preventDefault();
+        };
+
+        vm.edit = function(e) {
+            var id = $(this).parent().attr("id");
             org.get(id, function(data) {
                 var model = avalon.vmodels["edit"];
                 model.Name = data.Name;
@@ -16,7 +23,7 @@
                 model.ParentName = data.Parent.Name;
                 model.Roles = data.Roles;
             });
-
+            e.preventDefault();
         };
     });
 
