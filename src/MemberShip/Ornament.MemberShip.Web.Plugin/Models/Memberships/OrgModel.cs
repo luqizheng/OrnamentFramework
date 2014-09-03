@@ -9,6 +9,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
     public class OrgModel
     {
         private readonly Org _org;
+        private Org _parent;
 
         public OrgModel()
         {
@@ -23,9 +24,32 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             Roles = org.GetAllRoles().ToArray();
             Parent = org.Parent;
         }
-
-        public Org Parent { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public Org Parent
+        {
+            get
+            {
+                if (_parent == null)
+                {
+                    if (String.IsNullOrEmpty(ParentId) && ParentId.Length == 32)
+                    {
+                        _parent=OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
+                            .CreateOrgDao().Get(ParentId);
+                    }
+                }
+                return _parent;
+            }
+            set
+            {
+                _parent = value;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ParentId { get; set; }
         /// <summary>
         /// </summary>
         [Display(Name = "Role", ResourceType = typeof (Resources))]
@@ -41,7 +65,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         [Display(Name = "Name", ResourceType = typeof (Ornament.Properties.Resources)),
          Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof(Resources)), UIHint("string")]
+             ErrorMessageResourceType = typeof(Resources))]
         public string Name { get; set; }
 
         /// <summary>
@@ -55,21 +79,30 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         /// </summary>
         /// <param name="dao"></param>
         /// <exception cref="ArgumentNullException">dao is null.</exception>
-        public void Save(IOrgDao dao)
+        public Org Save(IOrgDao dao)
         {
             if (dao == null)
                 throw new ArgumentNullException("dao");
-            Org ug = !String.IsNullOrEmpty(Id) ? dao.Get(Id) : new Org(Name);
-            ug.Name = Name;
-            ug.Remarks = Remark;
-            dao.SaveOrUpdate(ug);
+            Org org = !String.IsNullOrEmpty(Id) ? dao.Get(Id) : new Org(Name);
+            org.Name = Name;
+            org.Remarks = Remark;
+            org.Roles.Clear();
+            if (Roles != null)
+            {
+                foreach (var role in Roles)
+                {
+                    org.Roles.Add(role);
+                }
+            }
+            dao.SaveOrUpdate(org);
             dao.Flush();
             if (Parent != null)
             {
                 IOrgCollection list = Parent.Childs;
-                list.Add(ug);
+                list.Add(org);
                 dao.SaveOrUpdate(Parent);
             }
+            return org;
         }
     }
 }

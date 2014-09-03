@@ -51,6 +51,8 @@ namespace WebApplication
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
             SeajsModuleBundleMessageHandle.HandlAllBundle();
+
+            NHibernateMvcRegister.Regist();
         }
 
         protected void Application_EndRequest()

@@ -12,6 +12,9 @@
                 id: id
             }, func);
         },
+        del: function (id, func) {
+            webApi.Delete({ id: id }, func);
+        },
         get:function(id, func) {
             webApi.Get({ id: id }, func);
         }

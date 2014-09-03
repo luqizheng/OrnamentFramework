@@ -11,16 +11,16 @@
     var clz = org.Childs.Count != 0 ? "fa-plus-circle" : "fa-users";
     var isShow = show ? "" : "display:none";
     <li style="@isShow">
-        <span style="cursor:pointer"><i class="fa fa-lg @clz"></i>@org.Name
+        <span style="cursor: pointer"><i class="fa fa-lg @clz"></i>@org.Name
         </span>
         <div id="@org.Id" class="btn-group">
-            <a href="#" ms-click="edit" class="btn btn-xs btn-info">
+            <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
                 <i class="fa fa-edit"></i>
             </a>
-            <a href="#" ms-click="addSub" class="btn btn-xs btn-info">
+            <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
                 <i class="fa fa-plus "></i>
             </a>
-             <a href="#" ms-click="delete" class="btn btn-xs btn-danger">
+            <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
                 <i class="fa fa-remove"></i>
             </a>
         </div>
@@ -39,7 +39,9 @@
     <ul>
         <li>
             <span ms-click="AddSub"><i class="fa fa-lg fa-sitemap"></i>Root</span>
-
+            <div class="btn-group" id="Root">
+                <a href="javascript:;" ms-click="addSub" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
+            </div>
             <ul>
                 @foreach (var org in this.Model)
                 {

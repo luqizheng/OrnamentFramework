@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Qi.Web.Http;
+using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Web.Plugin.Api
 {
@@ -22,20 +22,25 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         {
             IOrgDao dao = _factory.CreateOrgDao();
             Org org = dao.Get(id);
+            object result;
             if (org.Parent == null)
             {
-                var restlt = new
+                result = new
                 {
                     org.Name,
                     org.Id,
-                    org.Remarks,
-                    Roles = org.Roles.ToArray()
+                    Remarks = org.Remarks ?? "",
+                    Roles = org.Roles.ToArray(),
+                    Parent = new
+                    {
+                        Name = "",
+                        Id = "",
+                    }
                 };
-                return restlt;
             }
             else
             {
-                var restlt = new
+                result = new
                 {
                     org.Name,
                     org.Id,
@@ -45,20 +50,58 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                         org.Parent.Name,
                         org.Parent.Id
                     },
-                    Roles=org.Roles.Select(s=>s.Id).ToArray()
+                    Roles = org.Roles.Select(s => s.Id).ToArray()
                 };
-                return restlt;
             }
+            return result;
         }
 
 
         [HttpPost]
         public object Save(OrgModel model)
         {
-            model.Save(_factory.CreateOrgDao());
+            Org org = model.Save(_factory.CreateOrgDao());
+            object result;
+            if (org.Parent == null)
+            {
+                result = new
+                {
+                    org.Name,
+                    org.Id,
+                    org.Remarks,
+                    Roles = org.Roles.ToArray()
+                };
+            }
+            else
+            {
+                result = new
+                {
+                    org.Name,
+                    org.Id,
+                    org.Remarks,
+                    Parent = new
+                    {
+                        org.Parent.Name,
+                        org.Parent.Id
+                    },
+                    Roles = org.Roles.Select(s => s.Id).ToArray()
+                };
+            }
             return new
             {
                 Success = true,
+                Data = result
+            };
+        }
+
+        [HttpDelete]
+        public object Delete(string id)
+        {
+            var org = _factory.CreateOrgDao().Get(id);
+            _factory.CreateOrgDao().Delete(org);
+            return new
+            {
+                Success = true
             };
         }
     }
