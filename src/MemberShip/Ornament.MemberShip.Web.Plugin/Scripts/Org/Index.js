@@ -35,6 +35,7 @@
                     span.push('</div></li>');
                     child.append(span.join(""));
                 }
+                avalon.scan($("#orgTreeView")[0]);
             });
 
 

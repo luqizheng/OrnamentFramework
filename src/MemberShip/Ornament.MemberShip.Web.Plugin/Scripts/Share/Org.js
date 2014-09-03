@@ -8,7 +8,7 @@
             webApi.Post({
                 Name: name,
                 Remarks: remarks,
-                Parent: parentId,
+                ParentId: parentId,
                 id: id
             }, func);
         },

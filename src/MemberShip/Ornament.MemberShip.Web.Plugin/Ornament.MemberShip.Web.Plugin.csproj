@@ -154,13 +154,7 @@
     <EmbeddedResource Include="Scripts\Share\user.js" />
     <EmbeddedResource Include="Scripts\Org\Index.js" />
     <EmbeddedResource Include="Scripts\Share\Org.js" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\MemberShips\Views\_ViewStart.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\Share\_NewPassword.js" />

@@ -23,6 +23,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             Remark = org.Remarks;
             Roles = org.GetAllRoles().ToArray();
             Parent = org.Parent;
+            ParentId = org.Parent.Id;
         }
         /// <summary>
         /// 
@@ -33,7 +34,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             {
                 if (_parent == null)
                 {
-                    if (String.IsNullOrEmpty(ParentId) && ParentId.Length == 32)
+                    if (!String.IsNullOrEmpty(ParentId) && ParentId.Length == 32)
                     {
                         _parent=OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
                             .CreateOrgDao().Get(ParentId);
