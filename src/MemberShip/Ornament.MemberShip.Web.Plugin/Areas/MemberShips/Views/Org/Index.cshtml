@@ -3,15 +3,20 @@
 @using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
+@using Ornament.MemberShip.Web.Plugin.Models.Memberships
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
+@using Qi.Web
 @model Ornament.MemberShip.Org
 @{
     ViewBag.Title = Html.GetEmbededResourceString("Page_title");
     Layout = OrnamentContext.Configuration.Layout();
     string parentId = Model != null ? Model.Id : "";
     IEnumerable<Org> childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
+
+    var childDTO = OrgDTO.ToTree(childOrgs);
+    
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
 @section pageTitle
@@ -45,7 +50,7 @@
     </div>
 
     <div ms-controller="index" id="orgTreeView">
-        @Html.Partial("OrgTreeView", childOrgs)
+        @Html.Partial("OrgTreeView")
     </div>
 
 
@@ -122,7 +127,8 @@
 @section scripts{
     <script type="text/javascript">
         require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function (init) {
-            init();
+            var orgDTO=@Html.Raw(JsonHelper.ToJson(childDTO));
+            init(orgDTO);
         })
     </script>
 }

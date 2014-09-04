@@ -14,7 +14,7 @@ namespace Ornament.MemberShip
     ///     组织单元，越上层的组织单元，自动继承下级单元的角色
     /// </summary>
     [Serializable]
-    public class Org : Performer<Org>, IEnumerable<object>
+    public class Org : Performer<Org>
     {
         private const string BaseMaxOrderId = "ffffffffffffffffffffffffffffffff";
         private const string BaseMinOrderId = "00000000000000000000000000000000";
@@ -158,9 +158,6 @@ namespace Ornament.MemberShip
             maxOrderId = !String.IsNullOrEmpty(org.OrderId) ? org.OrderId + "." + BaseMaxOrderId : BaseMaxOrderId;
         }
 
-        public IEnumerator<object> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

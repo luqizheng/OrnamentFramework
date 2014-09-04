@@ -1,7 +1,11 @@
 ﻿define(function (require) {
     var org = require("/MemberShips/Scripts/Share/Org.js");
 
-    avalon.define('index', function (vm) {
+    var indexModel=avalon.define('index', function (vm) {
+        vm.treeRender = function () {
+            return arguments[0];
+        };
+        vm.orgs = null;
         vm.addSub = function (e) {
             var parentItem = $(this).parent();
 
@@ -104,7 +108,8 @@
             e.stopPropagation();
         });
 
-    return function () {
+    return function (orgDTO) {
+        indexModel.orgs = orgDTO;
         avalon.scan();
     };
 })

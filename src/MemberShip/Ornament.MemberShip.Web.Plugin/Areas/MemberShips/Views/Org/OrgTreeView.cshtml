@@ -1,11 +1,6 @@
 ﻿@using Ornament.MemberShip;
 @using Ornament.MemberShip.Web.Plugin.Models.Memberships
 
-@model IEnumerable<Org>
-
-@{
-    var list = OrgDTO.ToTree(this.Model);
-}
 
 <script type="avalon" id="tpl">          
     
@@ -22,9 +17,13 @@
                     <i class="fa fa-remove"></i>
                 </a>
             </div>
-           <ul ms-include="'tpl'" ms-visible="org.Childs.length" ms-repeat-el="org.Childs"></ul>            
+           <ul ms-visible="org.Childs.length" >
+                 <div ms-repeat-el="org.Childs" ms-include="'tpl'" >
+                    
+                </div>
+            </ul>            
         </li>
-    </ul>
+    
 </script>
 
 @helper RenderTree(Org org, bool show)
@@ -63,8 +62,10 @@
             <div class="btn-group" id="Root">
                 <a href="javascript:;" ms-click="addSub" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
             </div>
-            <ul ms-repeat-el="orgs" ms-visible="org.Childs.length" ms-repeat-el="org.Childs">
-                
+            <ul  ms-visible="orgs.length" >
+                <div ms-repeat-el="orgs" ms-include="'tpl'">
+                    
+                </div>
             </ul>
         </li>
     </ul>
