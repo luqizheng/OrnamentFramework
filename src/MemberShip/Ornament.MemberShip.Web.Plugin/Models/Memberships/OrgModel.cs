@@ -13,7 +13,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
     {
         private IList<OrgDTO> _childs;
         public string Name { get; set; }
-
+        public string Id { get; set; }
         public IList<OrgDTO> Childs
         {
             get { return _childs ?? (_childs = new List<OrgDTO>()); }
@@ -34,7 +34,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         {
             var result = new OrgDTO()
             {
-                Name = org.Name
+                Name = org.Name,Id=org.Id
             };
 
 
@@ -42,7 +42,9 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             {
                 var childDTO = new OrgDTO()
                 {
-                    Name = child.Name
+                    Name = child.Name,
+                    Id = child.Id
+                    
                 };
                 result.Childs.Add(childDTO);
 

@@ -409,7 +409,7 @@
     <Content Include="js\app.config.js" />
     <Content Include="js\app.min.js" />
     <Content Include="js\avalon.js" />
-    <Content Include="js\avalon.mobile.js" />
+    <Content Include="js\avalon.modern.js" />
     <Content Include="js\avalons\Pagination\Pagination.html" />
     <Content Include="js\avalons\Pagination\pagination.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />

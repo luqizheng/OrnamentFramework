@@ -154,8 +154,6 @@
     <EmbeddedResource Include="Scripts\Share\user.js" />
     <EmbeddedResource Include="Scripts\Org\Index.js" />
     <EmbeddedResource Include="Scripts\Share\Org.js" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Areas\MemberShips\Views\_ViewStart.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\Share\_NewPassword.js" />
     <EmbeddedResource Include="Scripts\User\Assign.js" />

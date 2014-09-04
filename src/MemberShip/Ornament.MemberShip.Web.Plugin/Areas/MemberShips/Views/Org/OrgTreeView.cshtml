@@ -4,25 +4,27 @@
 
 <script type="avalon" id="tpl">          
     
-        <li >
-           <span style="cursor: pointer"><i class="fa fa-lg"></i>{{el.Name}}</span>
-            <div class="btn-group">
-                <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
-                    <i class="fa fa-edit"></i>
-                </a> 
-                <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
-                    <i class="fa fa-plus "></i>
-                </a>
-                <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
-                    <i class="fa fa-remove"></i>
-                </a>
-            </div>
-           <ul ms-visible="org.Childs.length" >
-                 <div ms-repeat-el="org.Childs" ms-include="'tpl'" >
-                    
-                </div>
-            </ul>            
-        </li>
+        
+<span style="cursor: pointer"><i class="fa fa-lg"
+    ms-class-1="fa-plus-circle:el.Childs.length"
+    ms-class-2="fa-users:el.Childs.length==0"></i>
+    {{el.Name}}
+</span>
+<div class="btn-group">
+    <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+        <i class="fa fa-edit"></i>
+    </a> 
+    <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+        <i class="fa fa-plus "></i>
+    </a>
+    <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+        <i class="fa fa-remove"></i>
+    </a>
+</div>
+<ul ms-visible="el.Childs.length!=0">
+     <li ms-include="'tpl'" ms-repeat-el="el.Childs"></li>
+</ul>
+        
     
 </script>
 
@@ -58,14 +60,35 @@
 <div class="tree">
     <ul>
         <li>
-            <span ms-click="AddSub"><i class="fa fa-lg fa-sitemap"></i>Root</span>
+            <span ms-click="AddSub">
+                <i class="fa fa-lg fa-sitemap">
+                </i>组织结构
+            </span>
             <div class="btn-group" id="Root">
                 <a href="javascript:;" ms-click="addSub" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
             </div>
-            <ul  ms-visible="orgs.length" >
-                <div ms-repeat-el="orgs" ms-include="'tpl'">
-                    
-                </div>
+            <ul ms-visible="orgs.length">
+                <li ms-repeat-el="orgs">
+                    <span style="cursor: pointer">
+                        <i class="fa fa-lg"
+                            ms-class-1="fa-plus-circle:el.Childs.length"
+                            ms-class-2="fa-users:el.Childs.length==0"></i>{{el.Name}}
+                    </span>
+                    <div ms-attr-id="el.Id" class="btn-group">
+                        <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+                            <i class="fa fa-plus "></i>
+                        </a>
+                        <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                    <ul ms-visible="el.Childs.length">
+                        <li ms-include="'tpl'" ms-repeat-el="el.Childs"></li>
+                    </ul>
+                </li>
             </ul>
         </li>
     </ul>

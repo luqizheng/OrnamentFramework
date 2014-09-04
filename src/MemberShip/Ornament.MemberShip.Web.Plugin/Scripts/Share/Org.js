@@ -4,12 +4,14 @@
     webApi = new api(orgUrl);
 
     return {
-        save: function (name, remarks, parentId, id, func) {
+        save: function (name, remarks, parentId, id,roles, func) {
             webApi.Post({
                 Name: name,
                 Remarks: remarks,
                 ParentId: parentId,
-                id: id
+                Id: id,
+                Roles:roles
+
             }, func);
         },
         del: function (id, func) {
