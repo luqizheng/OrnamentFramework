@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Dao;
@@ -6,6 +9,52 @@ using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 {
+    public class OrgDTO
+    {
+        private IList<OrgDTO> _childs;
+        public string Name { get; set; }
+
+        public IList<OrgDTO> Childs
+        {
+            get { return _childs ?? (_childs = new List<OrgDTO>()); }
+            set { _childs = value; }
+        }
+
+        public static IList<OrgDTO> ToTree(IEnumerable<Org> orgs)
+        {
+            var result = new List<OrgDTO>();
+            foreach (var org in orgs)
+            {
+                result.Add(Make(org));
+            }
+            return result;
+        }
+
+        private static OrgDTO Make(Org org)
+        {
+            var result = new OrgDTO()
+            {
+                Name = org.Name
+            };
+
+
+            foreach (var child in org.Childs)
+            {
+                var childDTO = new OrgDTO()
+                {
+                    Name = child.Name
+                };
+                result.Childs.Add(childDTO);
+
+                if (child.Childs.Count != 0)
+                {
+                    childDTO.Childs.Add(Make(child));
+                }
+            }
+            return result;
+        }
+    }
+
     public class OrgModel
     {
         private readonly Org _org;
@@ -36,7 +85,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
                 {
                     if (!String.IsNullOrEmpty(ParentId) && ParentId.Length == 32)
                     {
-                        _parent=OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
+                        _parent = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
                             .CreateOrgDao().Get(ParentId);
                     }
                 }
@@ -53,7 +102,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         public string ParentId { get; set; }
         /// <summary>
         /// </summary>
-        [Display(Name = "Role", ResourceType = typeof (Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Resources))]
         public Role[] Roles { get; set; }
 
         /// <summary>
@@ -63,7 +112,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Ornament.Properties.Resources)),
+        [Display(Name = "Name", ResourceType = typeof(Ornament.Properties.Resources)),
          Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof(Resources)),
          RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
              ErrorMessageResourceType = typeof(Resources))]
@@ -71,7 +120,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 
         /// <summary>
         /// </summary>
-        [Display(Name = "Remark", ResourceType = typeof (Resources)),
+        [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof(Resources)), UIHint("Textarea")]
         public string Remark { get; set; }

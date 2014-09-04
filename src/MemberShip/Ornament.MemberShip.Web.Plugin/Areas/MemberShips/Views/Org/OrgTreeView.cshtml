@@ -1,10 +1,31 @@
 ﻿@using Ornament.MemberShip;
+@using Ornament.MemberShip.Web.Plugin.Models.Memberships
 
 @model IEnumerable<Org>
 
 @{
-    
+    var list = OrgDTO.ToTree(this.Model);
 }
+
+<script type="avalon" id="tpl">          
+    
+        <li >
+           <span style="cursor: pointer"><i class="fa fa-lg"></i>{{el.Name}}</span>
+            <div class="btn-group">
+                <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+                    <i class="fa fa-edit"></i>
+                </a> 
+                <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+                    <i class="fa fa-plus "></i>
+                </a>
+                <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+                    <i class="fa fa-remove"></i>
+                </a>
+            </div>
+           <ul ms-include="'tpl'" ms-visible="org.Childs.length" ms-repeat-el="org.Childs"></ul>            
+        </li>
+    </ul>
+</script>
 
 @helper RenderTree(Org org, bool show)
 {
@@ -42,11 +63,8 @@
             <div class="btn-group" id="Root">
                 <a href="javascript:;" ms-click="addSub" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
             </div>
-            <ul>
-                @foreach (var org in this.Model)
-                {
-                    @RenderTree(org, true);
-                }
+            <ul ms-repeat-el="orgs" ms-visible="org.Childs.length" ms-repeat-el="org.Childs">
+                
             </ul>
         </li>
     </ul>
