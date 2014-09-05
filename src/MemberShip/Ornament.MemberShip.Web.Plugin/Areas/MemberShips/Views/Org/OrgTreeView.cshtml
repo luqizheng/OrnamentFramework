@@ -5,7 +5,7 @@
 <script type="avalon" id="tpl">          
     
         
-<span style="cursor: pointer"><i class="fa fa-lg"
+<span style="cursor: pointer" ms-click="toggle"><i class="fa fa-lg"
     ms-class-1="fa-plus-circle:el.Childs.length"
     ms-class-2="fa-users:el.Childs.length==0"></i>
     {{el.Name}}
@@ -21,42 +21,12 @@
         <i class="fa fa-remove"></i>
     </a>
 </div>
-<ul ms-visible="el.Childs.length!=0">
+<ul ms-if-loop="el.Childs.length">
      <li ms-include="'tpl'" ms-repeat-el="el.Childs"></li>
-</ul>
-        
+</ul>        
     
 </script>
 
-@helper RenderTree(Org org, bool show)
-{
-    var clz = org.Childs.Count != 0 ? "fa-plus-circle" : "fa-users";
-    var isShow = show ? "" : "display:none";
-    <li style="@isShow">
-        <span style="cursor: pointer"><i class="fa fa-lg @clz"></i>@org.Name
-        </span>
-        <div id="@org.Id" class="btn-group">
-            <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
-                <i class="fa fa-edit"></i>
-            </a>
-            <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
-                <i class="fa fa-plus "></i>
-            </a>
-            <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
-                <i class="fa fa-remove"></i>
-            </a>
-        </div>
-        @if (org.Childs.Count != 0)
-        {
-            <ul>
-                @foreach (var child in org.Childs)
-                {
-                    @RenderTree(child, false);
-                }
-            </ul>
-        }
-    </li>
-}
 <div class="tree">
     <ul>
         <li>
@@ -69,10 +39,11 @@
             </div>
             <ul ms-visible="orgs.length">
                 <li ms-repeat-el="orgs">
-                    <span style="cursor: pointer">
+                    <span style="cursor: pointer" ms-click="toggle">
                         <i class="fa fa-lg"
-                            ms-class-1="fa-plus-circle:el.Childs.length"
-                            ms-class-2="fa-users:el.Childs.length==0"></i>{{el.Name}}
+                            ms-class-1="fa-plus-circle:el.Childs.length&&el.Hide==false"
+                            ms-class-2="fa-minus-circle:el.Childs.length&&el.Hide==true"
+                            ms-class-3="fa-users:el.Childs.length==0"></i>{{el.Name}}
                     </span>
                     <div ms-attr-id="el.Id" class="btn-group">
                         <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
@@ -85,7 +56,7 @@
                             <i class="fa fa-remove"></i>
                         </a>
                     </div>
-                    <ul ms-visible="el.Childs.length">
+                    <ul ms-if-loop="el.Childs.length">
                         <li ms-include="'tpl'" ms-repeat-el="el.Childs"></li>
                     </ul>
                 </li>

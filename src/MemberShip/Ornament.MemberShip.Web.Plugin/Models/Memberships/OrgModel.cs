@@ -11,9 +11,14 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 {
     public class OrgDTO
     {
+        public OrgDTO()
+        {
+            Hide = true;
+        }
         private IList<OrgDTO> _childs;
         public string Name { get; set; }
         public string Id { get; set; }
+        public bool Hide { get; set; }
         public IList<OrgDTO> Childs
         {
             get { return _childs ?? (_childs = new List<OrgDTO>()); }
@@ -25,7 +30,9 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             var result = new List<OrgDTO>();
             foreach (var org in orgs)
             {
-                result.Add(Make(org));
+                var firstLevel = Make(org);
+                firstLevel.Hide = true;
+                result.Add(firstLevel);
             }
             return result;
         }

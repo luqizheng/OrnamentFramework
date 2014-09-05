@@ -5,7 +5,7 @@
         vm.treeRender = function () {
             return arguments[0];
         };
-        vm.orgs = [{Name:"",Id:"",Childs:[]}];
+        vm.orgs = [{ Name: "", Id: "", Childs: [] }];
         vm.addSub = function (e) {
             var self = this.$vmodel.el || null;
             var newOrg = {
@@ -15,23 +15,21 @@
                 Roles: []
             };
 
-            org.save(newOrg.Name, newOrg.Remarks, newOrg.Parent,"", newOrg.Roles, function (d) {
+            org.save(newOrg.Name, newOrg.Remarks, newOrg.Parent, "", newOrg.Roles, function (d) {
                 if (d) {
                     var newItem = {
                         Name: d.Data.Name,
                         Id: d.Data.Id,
                         Childs: []
-                    }; 
-                    
+                    };
                     if (newOrg.Parent == null) {
                         vm.orgs.push(newItem);
                     } else {
                         self.Childs.push(newItem);
                     }
-                    setTimeout(init(), 1000);
                 }
             });
-            
+
             e.preventDefault();
         };
 
@@ -60,12 +58,20 @@
 
             e.preventDefault();
         };
-        vm.updateModel = function(name) {
+        vm.updateModel = function (name) {
             vm.editModel.Name = name;
         };
-        vm.$skipArray=["editModel"];
+        vm.toggle = function() {
+            this.$vmodel.el.Hide = !this.$vmodel.el.Hide;
+            if (this.$vmodel.el.Hide) {
+                $(this).closest("li").find("ul:first").show('fast');
+            } else {
+                $(this).closest("li").find("ul:first").hide('fast');
+            }
+        };
+        vm.$skipArray = ["editModel"];
     });
-    
+
     avalon.define('edit', function (vm) {
         vm.Name = "";
         vm.Remarks = "";
@@ -76,7 +82,7 @@
 
         vm.save = function (e) {
             org.save(vm.Name, vm.Remarks, vm.Parent, vm.Id, vm.Roles, function (d) {
-                
+
                 indexModel.updateModel(vm.Name);
                 if (d.Success) {
                     alert("save success.");
@@ -86,29 +92,8 @@
         };
     });
 
-    function init() {
-        $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
-
-        $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span')
-            .attr('title', 'Collapse this branch')
-            .on('click', function(e) {
-                var children = $(this).parent('li.parent_li').find(' > ul > li');
-                if (children.is(':visible')) {
-                    children.hide('fast');
-                    $(this).attr('title', 'Expand this branch').find(' > i').removeClass()
-                        .addClass('fa fa-lg fa-plus-circle');
-                } else {
-                    children.show('fast');
-                    $(this).attr('title', 'Collapse this branch').find(' > i').removeClass()
-                        .addClass('fa fa-lg fa-minus-circle');
-                }
-                e.stopPropagation();
-            });
-    }
-
     return function (orgDTO) {
         indexModel.orgs = orgDTO;
-        init();
         avalon.scan();
     };
 })
