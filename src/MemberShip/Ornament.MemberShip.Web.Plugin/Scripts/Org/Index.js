@@ -62,12 +62,12 @@
             vm.editModel.Name = name;
         };
         vm.toggle = function() {
-            this.$vmodel.el.Hide = !this.$vmodel.el.Hide;
             if (this.$vmodel.el.Hide) {
                 $(this).closest("li").find("ul:first").show('fast');
             } else {
                 $(this).closest("li").find("ul:first").hide('fast');
             }
+            this.$vmodel.el.Hide = !this.$vmodel.el.Hide;
         };
         vm.$skipArray = ["editModel"];
     });

@@ -15,7 +15,7 @@
     string parentId = Model != null ? Model.Id : "";
     IEnumerable<Org> childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
 
-    var childDTO = OrgDTO.ToTree(childOrgs);
+    var childDTO = OrgDto.ToTree(childOrgs);
     
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }

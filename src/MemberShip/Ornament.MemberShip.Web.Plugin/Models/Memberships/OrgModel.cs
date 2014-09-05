@@ -9,25 +9,25 @@ using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 {
-    public class OrgDTO
+    public class OrgDto
     {
-        public OrgDTO()
+        public OrgDto()
         {
             Hide = true;
         }
-        private IList<OrgDTO> _childs;
+        private IList<OrgDto> _childs;
         public string Name { get; set; }
         public string Id { get; set; }
         public bool Hide { get; set; }
-        public IList<OrgDTO> Childs
+        public IList<OrgDto> Childs
         {
-            get { return _childs ?? (_childs = new List<OrgDTO>()); }
+            get { return _childs ?? (_childs = new List<OrgDto>()); }
             set { _childs = value; }
         }
 
-        public static IList<OrgDTO> ToTree(IEnumerable<Org> orgs)
+        public static IList<OrgDto> ToTree(IEnumerable<Org> orgs)
         {
-            var result = new List<OrgDTO>();
+            var result = new List<OrgDto>();
             foreach (var org in orgs)
             {
                 var firstLevel = Make(org);
@@ -37,9 +37,9 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             return result;
         }
 
-        private static OrgDTO Make(Org org)
+        private static OrgDto Make(Org org)
         {
-            var result = new OrgDTO()
+            var result = new OrgDto()
             {
                 Name = org.Name,Id=org.Id
             };
@@ -47,7 +47,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 
             foreach (var child in org.Childs)
             {
-                var childDTO = new OrgDTO()
+                var childDTO = new OrgDto()
                 {
                     Name = child.Name,
                     Id = child.Id
