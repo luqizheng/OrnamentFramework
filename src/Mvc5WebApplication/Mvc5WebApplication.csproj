@@ -822,7 +822,9 @@
     <Content Include="sound\voice_alert.mp3" />
     <Content Include="sound\voice_off.mp3" />
     <Content Include="sound\voice_on.mp3" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\membership.sitemap.Designer.cs">
@@ -927,6 +929,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Areas\Web.config" />
+    <Content Include="Config\hibernate.other.cfg.config" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
