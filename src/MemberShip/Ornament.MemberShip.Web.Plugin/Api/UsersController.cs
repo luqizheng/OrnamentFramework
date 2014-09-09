@@ -22,6 +22,15 @@ namespace Ornament.MemberShip.Web.Plugin.Api
             _factory = factory;
         }
 
+        [HttpPost]
+        public object Save(BasicInfo userBasicInfo)
+        {
+            var user = _factory.CreateUserDao().Get(userBasicInfo.Id);
+            userBasicInfo.UpdateOn(user);
+            _factory.CreateUserDao().SaveOrUpdate(user);
+            return new BasicInfo(user);
+        }
+
         // GET api/usersapi
         [HttpGet]
         public IEnumerable<object> Match([FromUri] UserSearch search)
@@ -34,13 +43,13 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                     .Search(search, 0, 15, out total);
 
                 return from user in result
-                    select new
-                    {
-                        id = user.Id,
-                        name = user.Name,
-                        email = user.Contact.Email,
-                        loginId = user.LoginId
-                    };
+                       select new
+                       {
+                           id = user.Id,
+                           name = user.Name,
+                           email = user.Contact.Email,
+                           loginId = user.LoginId
+                       };
             }
             return new object[]
             {
@@ -123,7 +132,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                 }
             }
 
-            return new {success = true};
+            return new { success = true };
         }
     }
 
@@ -144,7 +153,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
                 dao.SaveOrUpdate(user);
             }
 
-            return new {success = true};
+            return new { success = true };
         }
     }
 }

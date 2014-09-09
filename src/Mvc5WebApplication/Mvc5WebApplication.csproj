@@ -409,7 +409,6 @@
     <Content Include="js\app.config.js" />
     <Content Include="js\app.min.js" />
     <Content Include="js\avalon.js" />
-    <Content Include="js\avalon.modern.js" />
     <Content Include="js\avalons\Pagination\Pagination.html" />
     <Content Include="js\avalons\Pagination\pagination.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
@@ -814,7 +813,6 @@
     <Content Include="js\json2.min.js" />
     <Content Include="js\require.js" />
     <Content Include="js\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js" />
-    <Content Include="js\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="sound\bigbox.mp3" />
     <Content Include="sound\license.txt" />
     <Content Include="sound\messagebox.mp3" />

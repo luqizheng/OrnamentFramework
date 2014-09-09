@@ -85,7 +85,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 
         /// <summary>
         /// </summary>
-        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "LoginId")]
+        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "Name")]
         public string Name
         {
             get { return _name; }
