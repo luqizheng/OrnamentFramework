@@ -404,6 +404,32 @@
         }
     });
 
+    var defaultOptions = {
+        errorClass: 'has-error',
+        validClass: 'has-success',
+        highlight: function (element, errorClass, validClass) {
+            var span = $(element).siblings("span:first").addClass("help-block");
+            if (span.find("i:first").length == 0) {
+                span.prepend("<i class='fa fa-warning'></i>");
+            }
+            $(element).closest(".form-group")
+            .addClass(errorClass)
+            .removeClass(validClass);
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).siblings("span:first").addClass("help-block").closest(".form-group")
+            .removeClass(errorClass)
+            .addClass(validClass);
+        }
+    };
+
+    $.validator.setDefaults(defaultOptions);
+
+    $.validator.unobtrusive.options = {
+        errorClass: defaultOptions.errorClass,
+        validClass: defaultOptions.validClass,
+    };
+
     $(function () {
         $jQval.unobtrusive.parse(document);
     });

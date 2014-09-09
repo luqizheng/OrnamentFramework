@@ -22,15 +22,19 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
         private void RegistApi()
         {
             HttpConfiguration config = GlobalConfiguration.Configuration;
+            
+            //for users
+            config.Routes.MapHttpRoute(AreaName + "_user_api", "api/memberships/users/{action}", new
+            {
+                controller = "users"
+            });
+            
+
             config.Routes.MapHttpRoute(AreaName + "befix_Api", "api/memberships/{controller}/{id}", new
             {
                 id = RouteParameter.Optional
             });
-            config.Routes.MapHttpRoute(AreaName + "Api", "api/memberships/{controller}/{action}/{id}", new
-            {
-                action = RouteParameter.Optional,
-                id = RouteParameter.Optional
-            });
+           
         }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)

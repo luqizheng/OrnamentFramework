@@ -1,13 +1,12 @@
 ﻿@using System.Web.Optimization
 
-
-    require.config({
-        baseUrl: "/js",
-        paths: {
-            json2: "@Scripts.Url("~/js/json2.js")",
-            
-            
+require.config({
+    baseUrl: "/js",
+    paths: {
+    json2: "@Scripts.Url("~/js/json2.js")",
+    form:"@Scripts.Url("~/js/plugin/jquery-form/jquery-form.min")"
     },
     waitSeconds: 15
 });
+
 

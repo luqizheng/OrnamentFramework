@@ -244,4 +244,7 @@
   <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
     <value>再一次密码和新密码不一样</value>
   </data>
+  <data name="alertMsg_duplicate_Email" xml:space="preserve">
+    <value>这个电子邮件已经被使用,请尝试输入其他.</value>
+  </data>
 </root>

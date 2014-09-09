@@ -21,47 +21,53 @@
 }
 
 @* 基本信息 *@
+@Html.ValidationSummary(false)
+<div class="alert alert-warning fade in">
+    <button data-dismiss="alert" class="close">×</button>
+    <i class="fa-fw fa fa-warning"></i>
+    <strong>Warning</strong> Your monthly traffic is reaching limit.
+</div>
 
-@using (var panel = Html.Panel(basicInfo, classes))
-{
+<div class="row">
+    @using (var panel = Html.Panel(basicInfo, classes))
+    {
     
-    @panel.Header(@<text>
-    <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
-    </text>)
-    @panel.Body(@<text>
+        @panel.Header(@<text>
+        <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+        </text>)
+        @panel.Body(@<text>
 
-    @Html.EditorFor(s => s, "BasicInfo")
+        @Html.EditorFor(s => s, "BasicInfo")
 
-    </text>)
-}
+        </text>)
+    }
 
-@using (var panel = Html.Panel(basicInfo, classes))
-{
+    @using (var panel = Html.Panel(basicInfo, classes))
+    {
     
-    @panel.Header(@<text>
-    <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
-    </text>)
-    @panel.Body(@<text>
+        @panel.Header(@<text>
+        <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+        </text>)
+        @panel.Body(@<text>
 
-    @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+        @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
 
-    </text>)
-}
+        </text>)
+    }
 
-@using (var panel = Html.Panel(basicInfo, classes))
-{
+    @using (var panel = Html.Panel(basicInfo, classes))
+    {
     
-    @panel.Header(@<text>
-    <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
-    </text>)
-    @panel.Body(@<text>
+        @panel.Header(@<text>
+        <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
+        </text>)
+        @panel.Body(@<text>
 
-    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+        @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
 
-    </text>)
-}
-
-
+        </text>)
+    }
+</div>
 
 
 @section scripts{

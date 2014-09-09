@@ -3,7 +3,7 @@
 @using Ornament.Web
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.BasicInfo
 
-<div class="form-horizontal">
+<form class="form-horizontal" action="/Api/Memberships/users/Save" method="POST">
     
     @Html.HiddenFor(model => model.Id)
     <fieldset>
@@ -92,4 +92,9 @@
             </div>
         </div>
     </fieldset>
-</div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
+            @Ornament.Properties.Resources.Save
+        </button>
+    </div>
+</form>

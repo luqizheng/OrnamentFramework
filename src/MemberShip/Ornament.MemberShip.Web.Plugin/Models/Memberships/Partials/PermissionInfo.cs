@@ -43,6 +43,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
 
 
         [Display(Name = "UserGroup", ResourceType = typeof(Resources))]
+        [UIHint("UserGroup[]")]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }
