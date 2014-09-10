@@ -43,7 +43,9 @@ namespace Ornament.Configurations
                 _regTypes.Add(nameAttr.Value, new NHConfigInfo(nameAttr.Value, fullPath));
             }
         }
-
+        /// <summary>
+        /// 是否输出HBM文件
+        /// </summary>
         public bool BuildHBMFile { get; set; }
 
         public string ExportHbmFolder
@@ -91,7 +93,10 @@ namespace Ornament.Configurations
             }
             UpdateDatabase();
         }
-
+        /// <summary>
+        /// 更新所有的 database
+        /// 
+        /// </summary>
         private void UpdateDatabase()
         {
             foreach (string name in SessionManager.SessionFactoryNames)
