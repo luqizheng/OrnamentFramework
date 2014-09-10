@@ -113,18 +113,22 @@
 	 * });
 	 */
 
-    // pagefunction
+  @*  // pagefunction
 
     var pagefunction = function () {
         // clears the variable if left blank
+        @RenderSection("clearVariable", required: false)
     };
 
     // end pagefunction
 
     // run pagefunction
-    pagefunction();
+    pagefunction();*@
 
+    //if you want to clear variabled, please use define clearPageVar function.
+    //function clearPageVar(){
+    // delete some varibale.
+    //}
 </script>
 
 @RenderSection("scripts", required: false)
-@RenderSection("clearVariable", required: false)

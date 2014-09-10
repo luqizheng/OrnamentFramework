@@ -12,6 +12,14 @@
     <h6>@Html.GetEmbededResourceString("page_title")</h6>
 }
 
+@section scripts{
+    <script type="text/javascript">
+        function clearPageVar() {
+            delete avalon.vmodels["index"];
+        }
+    </script>
+}
+
 @using (var panel = Html.Panel())
 {
     @panel.Header(@<text>

@@ -13,11 +13,11 @@
     Layout = OrnamentContext.Configuration.Layout();
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
 }
-    
-    @section pageTitle{
-        <i class="fa fa-users"></i>
-        @ViewBag.Title
-    }
+
+@section pageTitle{
+    <i class="fa fa-users"></i>
+    @ViewBag.Title
+}
 
 @section scripts 
 {
@@ -35,7 +35,16 @@
             };
 
             main.init(multiLanguate);
+
         });
+
+
+        function clearPageVar() {
+            alert('clear start');
+            delete avalon.vmodels["index"];
+            alert('clear start');
+        }
+
     </script>}
 
 @using (var panel = Html.Panel(new PanelOption()
@@ -46,138 +55,137 @@
 }))
 {
     @panel.Header(@<text>
-                      <h2>@Html.GetEmbededResourceString("page_title")</h2>
-                  </text>);
+    <h2>@Html.GetEmbededResourceString("page_title")</h2>
+    </text>);
 
     @panel.Body(@<text>
-                     <div ms-controller="index">
-                         <form class="input-group input-group-lg" ms-submit="search">
-                             <input type="text" ms-class-ui-autocomplete-loading="loading"
+    <div ms-controller="index" id="userIndex">
+        <form class="input-group input-group-lg" ms-submit="search">
+            <input type="text" ms-class-ui-autocomplete-loading="loading"
                                  placeholder="@Html.GetEmbededResourceString("Search_tips")" class="form-control input-lg" ms-duplex="content">
-                                   <div class="input-group-btn">
-                                       <button class="btn btn-default" type="submit">
-                                           <i class="fa fa-fw fa-search fa-lg"></i>
-                                       </button>
-                                   </div>
-                               </form>
-                         <h1 class="font-md"> Search Results for <span class="semi-bold">Users</span><small class="text-danger"> &nbsp;&nbsp;({{total}} users)</small></h1>
-                         <br />
-                         <div class="table-responsive">
-                    
-                             <table class="table table-striped table-bordered table-hover">
-                                 <thead>
-                                     <tr>
-                                         <th></th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.LoginId)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Name)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Contact.Email)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Contact.Phone)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.IsDeny)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Security.IsLocked)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Other.LastActivityDate)
-                                         </th>
-                                     </tr>
-                                 </thead>
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-fw fa-search fa-lg"></i>
+                </button>
+            </div>
+        </form>
+        <h1 class="font-md">Search Results for <span class="semi-bold">Users</span><small class="text-danger"> &nbsp;&nbsp;({{total}} users)</small></h1>
+        <br />
+        <div class="table-responsive">
 
-                                 <tbody ms-if="users.length!=0">
-                                     <tr ms-repeat-el="users"
-                                         ms-attr-data="{{el.Id}}"
-                                         ms-attr-loginid="{{el.LoginId}}">
-                                         <td>
-                                             <a class="btn btn-default btn-xs ajaxNav" ms-href="/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
-                                         </td>
-                                         <td ms-text="el.LoginId"></td>
-                                         <td ms-text="el.Name"></td>
-                                         <td>
-                                 
-                                             <span ms-text="el.Email"></span>
-                                             <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoginId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contact.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contact.Phone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsDeny)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Security.IsLocked)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody ms-if="users.length!=0">
+                    <tr ms-repeat-el="users"
+                        ms-attr-data="{{el.Id}}"
+                        ms-attr-loginid="{{el.LoginId}}">
+                        <td>
+                            <a class="btn btn-default btn-xs ajaxNav" ms-href="/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
+                        </td>
+                        <td ms-text="el.LoginId"></td>
+                        <td ms-text="el.Name"></td>
+                        <td>
+
+                            <span ms-text="el.Email"></span>
+                            <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
                                                 title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
-                                                 <i class="fa  fa-flag-o"></i>
-                                                 @Html.GetEmbededResourceString("Verify")
-                                             </a>
-                                         </td>
-                                         <td ms-text="el.Phone"></td>
-                                         <td>
-                                             <div class="btn-group">
-                                                 <a class="btn btn-default btn-xs" ms-click="deny">
-                                                     <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
-                                                 </a>
-                                                 <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
-                                                     <i class="caret"></i>
-                                                 </a>
-                                                 <ul class="dropdown-menu">
-                                                     <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
-                                                     <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
-                                                 </ul>
-                                             </div>
-                                         </td>
-                                         <td>
-                                             <div class="btn-group">
-                                                 <a class="btn btn-default btn-xs" ms-click="lock">
-                                                     <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
-                                                 </a>
-                                                 <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
-                                                     <i class="caret"></i>
-                                                 </a>
-                                                 <ul class="dropdown-menu">
-                                                     <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                                     <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
-                                                 </ul>
-                                             </div>
-                                         </td>
-                                         <td ms-text="el.LastActivityDate"></td>
-                                     </tr>
-                                 </tbody>
-                                 <tbody ms-if="users.length==0">
-                                     <tr>
-                                         <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
-                                     </tr>
-                                 </tbody>
-                                 <tfoot>
-                                     <tr>
-                                         <td colspan="8" ms-widget="pagination,page,$pageOpts"  ms-include-src="'/js/avalons/Pagination/Pagination.html'">
-                                         </td>
-                                     </tr>
-                                 </tfoot>
-                             </table>
-                         </div>
-                     </div>
-</text>);
+                                <i class="fa  fa-flag-o"></i>
+                                @Html.GetEmbededResourceString("Verify")
+                            </a>
+                        </td>
+                        <td ms-text="el.Phone"></td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" ms-click="deny">
+                                    <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
+                                </a>
+                                <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="caret"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
+                                    <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" ms-click="lock">
+                                    <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
+                                </a>
+                                <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="caret"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                    <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td ms-text="el.LastActivityDate"></td>
+                    </tr>
+                </tbody>
+                <tbody ms-if="users.length==0">
+                    <tr>
+                        <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" ms-widget="pagination,page,$pageOpts" ms-include-src="'/js/avalons/Pagination/Pagination.html'"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    </text>);
 }
-    
-    @section sparks{
-          <ul id="sparks">
-            <li class="sparks-info">
-                <h5>用户数 <span class="txt-color-blue"><i class="fa fa-users"></i> @ViewData["TotalUser"]</span></h5>
-                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
-                  @Html.Raw(ViewData["NewRegistry"])
-                </div>
-            </li>
-            <li class="sparks-info">
-                <h5>Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
-                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
-                    110,150,300,130,400,240,220,310,220,300, 270, 210
-                </div>
-            </li>
-            <li class="sparks-info">
-                <h5>Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
-                <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
-                    110,150,300,130,400,240,220,310,220,300, 270, 210
-                </div>
-            </li>
-        </ul>
+
+@section sparks{
+    <ul id="sparks">
+        <li class="sparks-info">
+            <h5>用户数 <span class="txt-color-blue"><i class="fa fa-users"></i>@ViewData["TotalUser"]</span></h5>
+            <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                @Html.Raw(ViewData["NewRegistry"])
+            </div>
+        </li>
+        <li class="sparks-info">
+            <h5>Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+            <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                110,150,300,130,400,240,220,310,220,300, 270, 210
+            </div>
+        </li>
+        <li class="sparks-info">
+            <h5>Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+            <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                110,150,300,130,400,240,220,310,220,300, 270, 210
+            </div>
+        </li>
+    </ul>
 }

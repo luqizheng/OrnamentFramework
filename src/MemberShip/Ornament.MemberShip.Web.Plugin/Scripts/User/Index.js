@@ -94,7 +94,6 @@ define(function (require) {
                 }
                 vm.total = parseInt(d.TotalRecords);
                 func(d.TotalRecords);
-                
             });
         }
     });
@@ -105,7 +104,7 @@ define(function (require) {
     return {
         init: function (lang1) {
             lang = lang1;
-            avalon.scan();
+            avalon.scan($("#userIndex")[0]);
         }
     };
 
