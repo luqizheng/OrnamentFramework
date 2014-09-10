@@ -2,7 +2,7 @@
 /// <reference path="../Share/dataTables.js" />
 define(function (require) {
 
-    require("/js/avalons/Pagination/pagination.js")(avalon);
+    require("/js/avalons/pager/pager.js")(avalon);
     
     var lang = {};
     var userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
@@ -44,7 +44,7 @@ define(function (require) {
             avalon.vmodels.page.nav(0);
             e.preventDefault();
         };
-        vm.$pageOpts = {
+        vm.pager = {
             pageSize: 50,
             search: function (pageIndex, pageSize, func) {
                 find(pageIndex, pageSize, model.content, func);
@@ -94,6 +94,7 @@ define(function (require) {
                 }
                 vm.total = parseInt(d.TotalRecords);
                 func(d.TotalRecords);
+                
             });
         }
     });
@@ -104,7 +105,8 @@ define(function (require) {
     return {
         init: function (lang1) {
             lang = lang1;
-            avalon.scan($("#userIndex")[0]);
+            alert("aaa:" + model.pager.pageSize);
+            avalon.scan();
         }
     };
 
