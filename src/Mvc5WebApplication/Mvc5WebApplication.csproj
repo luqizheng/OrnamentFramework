@@ -409,8 +409,8 @@
     <Content Include="js\app.config.js" />
     <Content Include="js\app.min.js" />
     <Content Include="js\avalon.js" />
-    <Content Include="js\avalons\Pagination\Pagination.html" />
-    <Content Include="js\avalons\Pagination\pagination.js" />
+    <Content Include="js\avalons\pager\pager.html" />
+    <Content Include="js\avalons\pager\pager.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
     <Content Include="js\demo.min.js" />
     <Content Include="js\libs\jquery-2.0.2.js" />
