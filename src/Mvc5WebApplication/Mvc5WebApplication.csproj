@@ -807,6 +807,7 @@
     <Content Include="js\plugin\x-editable\x-editable.min.js" />
     <Content Include="js\smartwidgets\jarvis.widget.min.js" />
     <Content Include="js\speech\voicecommand.min.js" />
+    <Content Include="js\text.js" />
     <Content Include="js\webApi.js" />
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="js\json2.js" />
