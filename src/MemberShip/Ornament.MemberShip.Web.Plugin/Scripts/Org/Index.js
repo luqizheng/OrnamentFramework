@@ -1,7 +1,8 @@
 ﻿define(function (require) {
     var org = require("/MemberShips/Scripts/Share/Org.js");
 
-    var indexModel = avalon.define('index', function (vm) {
+    function Init(){
+        var indexModel = avalon.define('index', function (vm) {
         vm.treeRender = function () {
             return arguments[0];
         };
@@ -71,8 +72,7 @@
         };
         vm.$skipArray = ["editModel"];
     });
-
-    avalon.define('edit', function (vm) {
+        avalon.define('edit', function (vm) {
         vm.Name = "";
         vm.Remarks = "";
         vm.Parent = null; //Parent Org's Id
@@ -91,9 +91,12 @@
             e.preventDefault();
         };
     });
+    }
 
     return function (orgDTO) {
+        Init();
         indexModel.orgs = orgDTO;
         avalon.scan();
+        
     };
 })
