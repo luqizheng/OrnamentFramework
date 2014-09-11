@@ -22,7 +22,7 @@
 @section scripts 
 {
     <script type="text/javascript">
-        require(['@Scripts.Url("~/MemberShips/Scripts/User/Index.js")'], function (main) {
+        require(['@Scripts.Url("~/MemberShips/Scripts/User/Index.js")'], function(main) {
             var multiLanguate = {
                 verifyEmailMessage: {
                     success: '@Html.GetEmbededResourceString("verify_email_success")',
@@ -36,9 +36,11 @@
 
             main.init(multiLanguate);
         });
-        
+
         function clearPageVariable() {
-            delete avalon.vmodels["index"];
+            require(['@Scripts.Url("~/MemberShips/Scripts/User/Index.js")'], function (main) {
+                main.clear();
+            });
         }
     </script>}
 

@@ -110,6 +110,9 @@ define(function (require) {
             Init();
             lang = lang1;
             avalon.scan();
+        },
+        clear:function() {
+            delete avalon.vmodels["index"];
         }
     };
 
