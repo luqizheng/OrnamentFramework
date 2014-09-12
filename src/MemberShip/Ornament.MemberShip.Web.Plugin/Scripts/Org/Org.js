@@ -1,23 +1,32 @@
 ﻿define(["text!./Templates/Org.html"], function (template) {
 
-    var widget = avalon.ui.pager = function(element, data, vmodels) {
-        var options = data.pagerOptions,
-          //方便用户对原始模板进行修改,提高制定性
+    var widget = avalon.ui.org = function (element, data, vmodels) {
+        
+        var options = data.orgOptions,
           optionsTemplate = template;
 
-        var vmodel = avalon.define(data.pagerId, function (vm) {
+        var vmodel = avalon.define(data.orgId, function (vm) {
 
             avalon.mix(vm, options);
 
-            orgs = [{ Name: "", Childs: [] }];
-
+            vm.orgs = [{ Name: "", Childs: [] }];
+            vm.selectOrg = null;
             vm.$init = function () {
                 var pageHTML = optionsTemplate;
                 element.style.display = "none";
                 element.innerHTML = pageHTML;
-                $.get("/Api/Memberships/Orgs", function(data) {
-                    orgs = data;
-                });
+                setTimeout(function () {
+                    alert('ok');
+                    avalon.scan(element, [vmodel].concat(vmodels));
+                    element.style.display = "";
+
+                    $.get("/Api/Memberships/Orgs", function (data) {
+                        vm.orgs = data;
+                    });
+
+                }, 150);
+
+
             };
             vm.$remove = function () { element.innerHTML = ""; };
 
@@ -39,5 +48,5 @@
         editable: false,
         select: true
     };
-
+    return avalon;
 });

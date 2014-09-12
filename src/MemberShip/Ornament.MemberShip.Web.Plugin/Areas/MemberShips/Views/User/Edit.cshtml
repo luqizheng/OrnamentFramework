@@ -1,6 +1,4 @@
 ﻿@using Ornament
-@using Ornament.MemberShip
-@using Ornament.MemberShip.Web.Plugin.Models.Memberships
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
@@ -8,7 +6,7 @@
 @{
     ViewBag.Title = Resources.Edit + " " + Model.LoginId;
     Layout = OrnamentContext.Configuration.Layout();
-    var basicInfo = new PanelOption()
+    var basicInfo = new PanelOption
     {
         DeleteButton = false,
         EditButton = false,
@@ -17,9 +15,8 @@
 
     var classes = new[]
     {
-       "col-md-6", "col-sm-12", "col-xs-12"
+        "col-md-6", "col-sm-12", "col-xs-12"
     };
-        
 }
 
 @* 基本信息 *@
@@ -31,50 +28,47 @@
 </div>
 
 <div class="row">
-    @using (var panel = Html.Panel(basicInfo, classes))
+    @using (Panel panel = Html.Panel(basicInfo, classes))
     {
-    
         @panel.Header(@<text>
-        <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
-        </text>)
+                           <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+                       </text>)
         @panel.Body(@<text>
-        <div ms-controller="BasicInfoEditor">
-        @Html.EditorFor(s => s, "BasicInfo")
-            </div>
-        </text>)
+                         <div ms-controller="BasicInfoEditor">
+                             @Html.EditorFor(s => s, "BasicInfo")
+                         </div>
+                     </text>)
     }
 
-    @using (var panel = Html.Panel(basicInfo, classes))
+    @using (Panel panel = Html.Panel(basicInfo, classes))
     {
-    
         @panel.Header(@<text>
-        <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
-        </text>)
+                           <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+                       </text>)
         @panel.Body(@<text>
 
-        @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+                         @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
 
-        </text>)
+                     </text>)
     }
 
-    @using (var panel = Html.Panel(basicInfo, classes))
+    @using (Panel panel = Html.Panel(basicInfo, classes))
     {
-    
         @panel.Header(@<text>
-        <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
-        </text>)
+                           <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
+                       </text>)
         @panel.Body(@<text>
 
-        @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+                         @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
 
-        </text>)
+                     </text>)
     }
 </div>
 
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
+        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function(main) {
             main.Init();
         });
     </script>

@@ -20,7 +20,11 @@
             e.preventDefault();
         });
 
-        avalon.define("BasicInfoEditor", function(vm) {});
+        avalon.define("BasicInfoEditor", function(vm) {
+            vm.org= {
+                selectOrg: { Name: 'ok', Id: "ok2" }
+            };
+        });
     }
 
     return {

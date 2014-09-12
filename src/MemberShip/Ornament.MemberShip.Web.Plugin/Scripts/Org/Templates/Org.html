@@ -1,0 +1,63 @@
+﻿<script type="avalon" id="tpl">          
+    
+        
+<span style="cursor: pointer" ms-click="toggle">
+     <i class="fa fa-lg"   ms-class-1="fa-plus-circle:(el.Childs.length && el.Hide==true)"
+                           ms-class-2="fa-minus-circle:(el.Childs.length && el.Hide==false)"
+                           ms-class-3="fa-users:el.Childs.length==0">                            
+                        </i>&nbsp;{{el.Name}}
+</span>
+<div class="btn-group" ms-if="editable">
+    <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+        <i class="fa fa-edit"></i>
+    </a> 
+    <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+        <i class="fa fa-plus "></i>
+    </a>
+    <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+        <i class="fa fa-remove"></i>
+    </a>
+</div>
+  <ul ms-if-loop="el.Childs.length" style="display:none">
+      <li ms-include="'tpl'" ms-repeat-el="el.Childs"></li>
+  </ul>
+</script>
+
+<div class="tree">
+    <ul>
+        <li>
+            <span ms-click="AddSub">
+                <i class="fa fa-lg fa-sitemap"></i>&nbsp;组织结构
+            </span>
+            <div class="btn-group" id="Root">
+                <a href="javascript:;" ms-click="addSub" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
+            </div>
+            <ul ms-visible="orgs.length">
+                <li ms-repeat-el="orgs">
+                    <span style="cursor: pointer" ms-click="toggle">
+                        <i class="fa fa-lg"
+                           ms-class-1="fa-plus-circle:(el.Childs.length && el.Hide==true)"
+                           ms-class-2="fa-minus-circle:(el.Childs.length && el.Hide==false)"
+                           ms-class-3="fa-users:el.Childs.length==0">
+                            
+                        </i>&nbsp;{{el.Name}}
+                    </span>
+                    <div ms-attr-id="el.Id" class="btn-group" ms-if="editable">
+                        <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+                            <i class="fa fa-plus "></i>
+                        </a>
+                        <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                    <ul ms-if-loop="el.Childs.length" style="display:none">
+                        <li ms-include="'tpl'" ms-repeat-el="el.Childs"></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
