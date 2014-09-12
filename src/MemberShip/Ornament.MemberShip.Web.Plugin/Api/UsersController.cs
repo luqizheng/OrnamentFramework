@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
@@ -23,12 +24,26 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         }
 
         [HttpPost]
-        public object Save(BasicInfo userBasicInfo)
+        public object Save([FromBody]BasicInfo userBasicInfo)
         {
-            var user = _factory.CreateUserDao().Get(userBasicInfo.Id);
-            userBasicInfo.UpdateOn(user);
-            _factory.CreateUserDao().SaveOrUpdate(user);
-            return new BasicInfo(user);
+            
+            if (userBasicInfo == null)
+                return null;
+            try
+            {
+                if (this.ModelState.IsValid)
+                {
+                    var user = _factory.CreateUserDao().Get(userBasicInfo.Id);
+                    userBasicInfo.UpdateOn(user);
+                    _factory.CreateUserDao().SaveOrUpdate(user);
+                    return new BasicInfo(user);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
 
         // GET api/usersapi

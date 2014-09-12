@@ -72,6 +72,8 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")']);
+        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'],function(main) {
+            main.Init();
+        });
     </script>
 }

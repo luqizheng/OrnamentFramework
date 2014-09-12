@@ -35,7 +35,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         }
 
         public bool VerifyEmail { get; set; }
-        public bool EmailHasChanged { get; private set; }
+        public bool EmailHasChanged { get; set; }
 
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <summary>
         ///     Gets or sets the User's Id
         /// </summary>
-        public string Id { get; protected set; }
+        public string Id { get; set; }
 
         ///// <summary>
         /////     Gets or sets the LoginId,
@@ -147,8 +147,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <param name="user"></param>
         protected virtual void SendVerifyEmail(User user, IMemberShipFactory _daFactory)
         {
-            var model = new VerifyEmailModel();
-            model.Id = user.Id;
+            var model = new VerifyEmailModel {Id = user.Id};
             model.Send(_daFactory);
         }
     }

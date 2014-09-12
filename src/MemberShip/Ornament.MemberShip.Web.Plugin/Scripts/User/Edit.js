@@ -1,18 +1,22 @@
 ﻿define(function (require) {
+    require("form");
+    var js = require("js/webapi.js");
+   
 
     function Init() {
-        require("form");
+
         $("form").removeData("validator");
         $("form").removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parse("form");
-
-        $("form").ajaxForm({
-            beforeSubmit: function(arr, $form, options) {
-                $form.prop("disabled", true);
-            },
-            success: function(responseText, statusText, xhr, $form) {
-                $form.prop("disabled", false);
-            }
+        $.validator.unobtrusive.parseElement("#BasicInfo");
+       
+        $("#BasicInfo").submit(function (e) {
+            
+            var data = $(this).serializeObject();
+            var webApi = new js("/Api/Memberships/users/Save");
+            webApi.Post(data, function() {
+                alert('保存成功');
+            });
+            e.preventDefault();
         });
     }
 

@@ -1,17 +1,17 @@
-﻿@using Ornament
+﻿@using System.Drawing.Printing
+@using Ornament
 @using Ornament.MemberShip
 @using Ornament.Web
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.BasicInfo
 
-<form class="form-horizontal" action="/Api/Memberships/users/Save" method="POST">
-    
-    @Html.HiddenFor(model => model.Id)
+<form class="form-horizontal" action="/Api/Memberships/users/Save" method="POST" id="BasicInfo">
     <fieldset>
         <legend>基本信息</legend>
+        @Html.HiddenFor(s => s.Id)
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.LoginId)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LoginId, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.LoginId, new { HtmlAttributes = new System.Collections.Generic.Dictionary<string, object> { { "class", "form-control" } } })
                 @Html.ValidationMessageFor(model => model.LoginId)
             </div>
         </div>
@@ -24,9 +24,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2">@Html.DisplayNameFor(s=>s.Org)</label>
+            <label class="col-md-2">@Html.DisplayNameFor(s => s.Org)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model=>model.Org)
+                @Html.EditorFor(model => model.Org)
                 @Html.ValidationMessageFor(model => model.Org)
             </div>
         </div>
@@ -93,7 +93,8 @@
         </div>
     </fieldset>
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i>
             @Ornament.Properties.Resources.Save
         </button>
     </div>

@@ -6,7 +6,6 @@
         var options = data.pagerOptions,
             //方便用户对原始模板进行修改,提高制定性
             optionsTemplate = template;
-        alert(options.pageSize);
         var vmodel = avalon.define(data.pagerId, function(vm) {
 
             avalon.mix(vm, options);
