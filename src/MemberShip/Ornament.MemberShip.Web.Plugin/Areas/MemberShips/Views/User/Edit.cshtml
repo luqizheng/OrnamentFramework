@@ -1,4 +1,6 @@
 ﻿@using Ornament
+@using Ornament.MemberShip
+@using Ornament.MemberShip.Web.Plugin.Models.Memberships
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
@@ -36,9 +38,9 @@
         <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
         </text>)
         @panel.Body(@<text>
-
+        <div ms-controller="BasicInfoEditor">
         @Html.EditorFor(s => s, "BasicInfo")
-
+            </div>
         </text>)
     }
 
@@ -72,7 +74,7 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'],function(main) {
+        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
             main.Init();
         });
     </script>

@@ -1,9 +1,10 @@
 ﻿define(function (require) {
     require("form");
     var js = require("js/webapi.js");
+    require("/MemberShips/Scripts/Org/Org.js");
    
 
-    function Init() {
+    function init() {
 
         $("form").removeData("validator");
         $("form").removeData("unobtrusiveValidation");
@@ -18,11 +19,14 @@
             });
             e.preventDefault();
         });
+
+        avalon.define("BasicInfoEditor", function(vm) {});
     }
 
     return {
         Init: function () {
-            Init();
+            init();
+            avalon.scan();
         }
     };
 

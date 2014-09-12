@@ -126,9 +126,9 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function (init) {
+        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function (main) {
             var orgDTO=@Html.Raw(JsonHelper.ToJson(childDTO));
-            init(orgDTO);
+            main.init(orgDTO);
         })
     </script>
 }

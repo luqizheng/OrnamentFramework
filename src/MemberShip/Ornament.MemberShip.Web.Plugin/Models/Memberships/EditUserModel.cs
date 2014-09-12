@@ -22,10 +22,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             OtherInfo = new UserOtherInfoModel(user);
         }
 
-        [UIHint("UserOtherInfo")]
+        
         public UserOtherInfoModel OtherInfo { get; set; }
 
-        [UIHint("_PermissionInfo")]
+        
         public PermissionInfo Permissions { get; set; }
 
         public User Save(IMemberShipFactory memberShipFactory)

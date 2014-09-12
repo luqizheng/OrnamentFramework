@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
+namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 {
     public class UserOtherInfoModel
     {

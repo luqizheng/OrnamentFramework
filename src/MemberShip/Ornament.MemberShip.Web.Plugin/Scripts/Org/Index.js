@@ -2,7 +2,7 @@
     var org = require("/MemberShips/Scripts/Share/Org.js");
 
     function Init() {
-        var indexModel = avalon.define('index', function (vm) {
+        avalon.define('index', function (vm) {
             vm.treeRender = function () {
                 return arguments[0];
             };
@@ -94,9 +94,10 @@
         });
     }
 
-    return{init: function (orgDTO) {
+    return {
+        init: function (orgDTO) {
         Init();
-        indexModel.orgs = orgDTO;
+        avalon.vmodels["index"].orgs = orgDTO;
         avalon.scan($("#content")[0]);
 
     },clear:function() {

@@ -1,53 +1,35 @@
 ﻿@using Ornament
+@using Ornament.MemberShip
 @using Ornament.MemberShip.Dao
 
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
 @using Ornament.MemberShip.Web.Plugin.Models
+@using Ornament.MemberShip.Web.Plugin.Models.Memberships
 @using Qi.Web
 @model Ornament.MemberShip.Org
 @{
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
     bool assignAllOrg = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.AssignAllOrg);
-    var selection = new List<OrgTreeItem>();
+    
+    var showOrgs = new List<Org>();
     if (assignAllOrg)
     {
-        selection.AddRange(orgDao.GetAll().Select(item => new OrgTreeItem(item)));
+        showOrgs.AddRange(orgDao.GetRootOrgs());
     }
     else if (Model != null)
     {
-        selection.Add(new OrgTreeItem(Model));
+        showOrgs.Add(Model);
     }
     string value = Model != null ? Model.Id : "";
-}
 
-@helper renderTree(OrgTreeItem item)
-{
-    <li>
-        <span><i class="fa">
-                  @item.name
-              </i></span>
-        @if (item.children.Count != 0)
-        {
-            <ul>
-                @foreach (var a in item.children)
-                {
-                    renderTree(a as OrgTreeItem);
-                }
-            </ul>
-        }
-    </li>
+    var childDTO = OrgDto.ToTree(showOrgs);
 }
-
 
 <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Name("")"/>
 <span>@(Model != null ? Model.Name : "")</span>
-<div class="tree smart-form">
-    <ul id="@Html.Id("")_Tree">
-        @foreach (var item in selection)
-        {
-            renderTree(item);
-        }
-    </ul>
+
+<div ms-widget="Org">
+    
 </div>

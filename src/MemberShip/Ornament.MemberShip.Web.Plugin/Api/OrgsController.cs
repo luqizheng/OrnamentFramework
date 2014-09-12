@@ -4,6 +4,7 @@ using System.Web.Http;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Web.Plugin.Api
@@ -21,24 +22,19 @@ namespace Ornament.MemberShip.Web.Plugin.Api
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match(string name, int? page)
+        public IEnumerable<object> List()
         {
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
+            
             if (OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Read))
             {
                 IOrgDao orgDao = _factory.CreateOrgDao();
-                int pageIndex = page ?? 0;
+                
                 IEnumerable<Org> result = currentUser.Org == null
-                    ? orgDao.Find(name, pageIndex, 10)
-                    : orgDao.Find(currentUser.Org, name, pageIndex, 10);
+                    ? orgDao.GetRootOrgs()
+                    : orgDao.GetSubOrgs(currentUser.Org);
 
-                var c = from org in result
-                    select new
-                    {
-                        id = org.Id,
-                        org.Name,
-                    };
-                return c;
+                return OrgDto.ToTree(result);
             }
             return new List<object>
             {

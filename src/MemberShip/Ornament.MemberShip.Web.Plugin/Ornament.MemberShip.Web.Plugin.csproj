@@ -155,6 +155,12 @@
     <EmbeddedResource Include="Scripts\Org\Index.js" />
     <EmbeddedResource Include="Scripts\Share\Org.js" />
     <Content Include="Areas\MemberShips\Views\Shared\_Layout.cshtml" />
+    <EmbeddedResource Include="Scripts\Org\Templates\Org.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\Org\Org.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Scripts\Share\_NewPassword.js" />
     <EmbeddedResource Include="Scripts\User\Assign.js" />
     <EmbeddedResource Include="Scripts\User\Create.js" />
@@ -245,7 +251,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\ChoicePermissions.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\_PermissionInfo.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\PermissionInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\BasicInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Org.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\Role[].cshtml" />
@@ -253,7 +259,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\User[].cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserGroup[].cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserOtherInfo.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\OtherInfo.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserPassword.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\UserQuestionAnswer.cshtml" />
     <Content Include="Areas\MemberShips\Views\Shared\RoleAssign.cshtml" />

@@ -20,7 +20,7 @@ namespace Ornament.Web.Controllers
             // pre-pend "~" so that it will be replaced with assembly namespace
 
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-            var minfy = new SeajsMinify();
+            
 
             if (resourceStream == null)
             {
@@ -53,6 +53,7 @@ namespace Ornament.Web.Controllers
             mimes.Add(".txt", "text/plain");
             mimes.Add(".xml", "application/xml");
             mimes.Add(".zip", "application/zip");
+            mimes.Add(".html", "text/html");
             return mimes;
         }
 

@@ -12,10 +12,9 @@ namespace Ornament.MemberShip.Web.Plugin.Models
         {
             name = org.Name;
             parentId = org.Parent != null ? org.Id : "";
-
+            children = new List<object>();
             foreach (Org item in org.Childs)
             {
-                children = new List<object>();
                 children.Add(new OrgTreeItem(item));
             }
             id = org.Id;

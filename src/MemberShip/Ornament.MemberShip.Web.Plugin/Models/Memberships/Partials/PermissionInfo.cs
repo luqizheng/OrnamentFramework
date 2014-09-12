@@ -38,7 +38,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             set { _roles = value; }
         }
 
-        [Display(Name = "Org", ResourceType = typeof(Resources)), UIHint("OrgTree")]
+        [Display(Name = "Org", ResourceType = typeof(Resources)), UIHint("OrgTreeView")]
         public Org Org { get; set; }
 
 
