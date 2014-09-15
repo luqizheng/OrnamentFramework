@@ -33,6 +33,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             LoginId = user.LoginId;
             Phone = user.Contact.Phone ?? "";
             Email = user.Contact.Email ?? "";
+            Birthday = user.Contact.Birthday;
+            FirstName = user.Contact.FirstName;
+            LastName = user.Contact.LastName;
+            Org = user.Org;
         }
 
         public bool VerifyEmail { get; set; }
@@ -141,6 +145,13 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 
             user.Contact.Email = Email;
             user.Contact.Phone = Phone;
+
+            user.Contact.Birthday = this.Birthday;
+            user.Contact.FirstName = this.FirstName;
+            user.Contact.LastName = this.LastName;
+
+            user.Org = this.Org;
+
         }
 
         /// <summary>

@@ -1,12 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
 using Qi.Domain;
 
 namespace Ornament.MemberShip
 {
+
     public partial class User
     {
+        
         public class ContactInfo : DomainObject<ContactInfo, string>, IContactInfo
         {
             private string _email;

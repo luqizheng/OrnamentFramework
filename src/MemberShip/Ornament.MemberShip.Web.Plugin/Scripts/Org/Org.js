@@ -8,7 +8,6 @@
 
 
         var vmodel = avalon.define(data.orgId, function (vm) {
-            vm.id = "";
             avalon.mix(vm, options);
             vm.orgs = [{ Name: "",selected:false, Childs: [],Id:"" }];
             vm.selectOrg = null;
@@ -46,24 +45,14 @@
             vm.$remove = function () {
                 element.innerHTML = "";
             };
-            vm.orgName = {
-                get: function() {
-                    return vm.curOrg ?
-                        vm.curOrg.Name : "请选择";
-                }
-            };
-            vm.orgId = {
-                get: function () {
-                    return vm.curOrg ?
-                            vm.curOrg.Name : "";
-                }
-            };
+       
             vm.curOrg = false;//已经选择了的node
             vm.toggle = function () {
                 
                 if (vm.curOrg) {
                     vm.curOrg.selected = false;
                 }
+                
                 vm.curOrg = this.$vmodel.el;
                 vm.curOrg.selected = true;
                 
@@ -80,23 +69,25 @@
 
             vm.ok = function () {
                 if (vm.curOrg) {
-                    options.OnOk(vm.curOrg);
+                    vm.selectedId = vm.curOrg.Id;
+                    vm.selectedName = vm.curOrg.Name;
+                    console.log(vm.selectedId + ":" + vm.selectedName);
                 }
             };
-
-            vm.$skipArray = ["curName", "curId"];
-
-         
+            
+            
         });
 
-
+      
         return vmodel;
     };
 
     widget.defaults = {
         editable: false,
         select: true,
-        OnOk: false
-    };
+        selectedName: "请选择",
+        selectedId: "",
+        id:"" // razor's id for bootstrap modal.
+};
     return avalon;
 });

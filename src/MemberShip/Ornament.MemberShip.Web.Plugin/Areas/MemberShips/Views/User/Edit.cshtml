@@ -71,5 +71,10 @@
         require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function(main) {
             main.Init();
         });
+        function clearPageVariable() {
+            require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
+                main.Clear();
+            });
+        }
     </script>
 }

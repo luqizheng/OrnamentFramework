@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Security;
@@ -23,32 +24,11 @@ namespace Ornament.MemberShip.Web.Plugin.Api
             _factory = factory;
         }
 
-        [HttpPost]
-        public object Save([FromBody]BasicInfo userBasicInfo)
-        {
-            
-            if (userBasicInfo == null)
-                return null;
-            try
-            {
-                if (this.ModelState.IsValid)
-                {
-                    var user = _factory.CreateUserDao().Get(userBasicInfo.Id);
-                    userBasicInfo.UpdateOn(user);
-                    _factory.CreateUserDao().SaveOrUpdate(user);
-                    return new BasicInfo(user);
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return ex;
-            }
-        }
+   
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match([FromUri] UserSearch search)
+        public IEnumerable<object> Match([FromUri][ModelBinder] UserSearch search)
         {
             if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Read))
             {

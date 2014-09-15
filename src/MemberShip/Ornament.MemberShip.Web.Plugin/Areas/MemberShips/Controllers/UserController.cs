@@ -13,6 +13,7 @@ using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.Web.MemberShips;
 using Qi.Web.Mvc;
 
@@ -64,8 +65,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [OutputCache(Duration = 30)]
         public ActionResult Index()
         {
-            var userDao = _memberShipFactory.CreateUserDao();
-            var data = userDao.NewRegistry(DateTime.Today.AddDays(-7), DateTime.Today);
+            IUserDao userDao = _memberShipFactory.CreateUserDao();
+            IList<UsersStatus> data = userDao.NewRegistry(DateTime.Today.AddDays(-7), DateTime.Today);
             ViewData["NewRegistry"] = string.Join(",", from a in data select a.Count);
             ViewData["TotalUser"] = String.Join(",", userDao.Count());
             return View();
@@ -139,33 +140,25 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(new EditUserModel(user));
         }
 
-        [AcceptVerbs(HttpVerbs.Post), ResourceAuthorize(UserOperator.Modify, "User")]
-        public ActionResult Edit(EditUserModel user, FormCollection collection)
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User")]
+        public ActionResult Save(BasicInfo userBasicInfo)
         {
+            if (userBasicInfo == null)
+                return null;
             if (ModelState.IsValid)
             {
-                User actualUser = user.Save(_memberShipFactory);
-                if (ProfileManager.Enabled)
+                User user = _memberShipFactory.CreateUserDao().Get(userBasicInfo.Id);
+                userBasicInfo.UpdateOn(user);
+                _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+                return Json(new
                 {
-                    ProfileBase profile = ProfileBase.Create(actualUser.LoginId, true);
-
-                    IEnumerator properites = ProfileBase.Properties.GetEnumerator();
-                    if (properites != null)
-                    {
-                        while (properites.MoveNext())
-                        {
-                            var property = properites.Current as SettingsProperty;
-                            string v = collection[property.Name];
-                            profile[property.Name] = v;
-                        }
-                        profile.Save();
-                    }
-                }
-                return RedirectToAction("Index");
+                    success = true
+                });
             }
-            return View(user);
+            return null;
         }
 
+       
 
         public ActionResult Assign(string loginId)
         {
@@ -276,11 +269,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
-                                               where
-                                                   u.LoginId.Contains(loginIdOrEmail) ||
-                                                   u.Contact.Email.Contains(loginIdOrEmail)
-                                               select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+                where
+                    u.LoginId.Contains(loginIdOrEmail) ||
+                    u.Contact.Email.Contains(loginIdOrEmail)
+                select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

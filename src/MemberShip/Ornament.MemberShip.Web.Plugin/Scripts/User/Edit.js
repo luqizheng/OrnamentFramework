@@ -1,9 +1,7 @@
 ﻿define(function (require) {
     require("form");
-    var js = require("js/webapi.js");
+    
     require("/MemberShips/Scripts/Org/Org.js");
-   
-
     function init() {
 
         $("form").removeData("validator");
@@ -13,25 +11,28 @@
         $("#BasicInfo").submit(function (e) {
             
             var data = $(this).serializeObject();
-            var webApi = new js("/Api/Memberships/users/Save");
-            webApi.Post(data, function() {
-                alert('保存成功');
+            $.post("/Memberships/user/Save",data,function(rData) {
+                if (rData.success) {
+                    alert('保存成功');
+                } else {
+                    alert(rData.Message);
+                }
             });
             e.preventDefault();
         });
 
-        avalon.define("BasicInfoEditor", function(vm) {
-            vm.org= {
-                selectOrg: { Name: 'ok', Id: "ok2" }
-            };
-        });
+        avalon.define("BasicInfoEditor", function(vm) {});
     }
 
     return {
         Init: function () {
             init();
             avalon.scan();
+        },
+        Clear:function() {
+            delete avalon.vmodels["BasicInfoEditor"];
         }
+        
     };
 
 });

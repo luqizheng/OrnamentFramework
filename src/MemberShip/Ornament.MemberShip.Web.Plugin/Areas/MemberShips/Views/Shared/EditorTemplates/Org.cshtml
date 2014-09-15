@@ -11,11 +11,12 @@
 
 @{
     var value = Model != null ? Model.Id : "";
+    var orgName = Model != null ? Model.Name : "请选择组织";
 }
 
-<div ms-widget="org" data-org-id="@Html.Id("")">
-    <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Name("")"/>
+<div ms-widget="org" data-org-id="@Html.Id("")" data-org-selected-id="@value" data-org-selected-name="@orgName">
+    <input type="hidden" ms-value="{{selectedId}}" id="@Html.Id("")" name="@Html.Name("")"/>
     <a href="javascript:;" id="@Html.Id("")_pop" data-toggle="modal" data-target="#@Html.Id("")_modal">
-        <i class="fa fa-sitemap"></i> @(Model != null ? Model.Name : "请选择")
+        <i class="fa fa-sitemap"></i> {{selectedName}}
     </a>
 </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
@@ -10,6 +11,7 @@ using Ornament.MemberShip.Properties;
 
 namespace Ornament.MemberShip
 {
+   
     /// <summary>
     ///     组织单元，越上层的组织单元，自动继承下级单元的角色
     /// </summary>

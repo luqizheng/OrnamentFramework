@@ -1,8 +1,10 @@
 ﻿using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Web.Plugin.Models.SampleData;
 using Ornament.Web;
 using Ornament.Web.Messages;
@@ -32,6 +34,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             {
                 id = RouteParameter.Optional
             });
+            
         }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
