@@ -8,28 +8,14 @@
 @using Ornament.MemberShip.Web.Plugin.Models.Memberships
 @using Qi.Web
 @model Ornament.MemberShip.Org
-@{
-    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
-    bool assignAllOrg = OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.AssignAllOrg);
-    
-    var showOrgs = new List<Org>();
-    if (assignAllOrg)
-    {
-        showOrgs.AddRange(orgDao.GetRootOrgs());
-    }
-    else if (Model != null)
-    {
-        showOrgs.Add(Model);
-    }
-    string value = Model != null ? Model.Id : "";
 
-    var childDTO = OrgDto.ToTree(showOrgs);
+@{
+    var value = Model != null ? Model.Id : "";
 }
 
-<input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Name("")"/>
-<span>@(Model != null ? Model.Name : "")</span>
-
-<div ms-widget="org">
-    
+<div ms-widget="org" data-org-id="@Html.Id("")">
+    <input type="hidden" value="@value" id="@Html.Id("")" name="@Html.Name("")"/>
+    <a href="javascript:;" id="@Html.Id("")_pop" data-toggle="modal" data-target="#@Html.Id("")_modal">
+        <i class="fa fa-sitemap"></i> @(Model != null ? Model.Name : "请选择")
+    </a>
 </div>
