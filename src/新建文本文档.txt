@@ -1,0 +1,499 @@
+
+
+
+
+<!-- Bread crumb is created dynamically -->
+<!-- row -->
+<div class="row">
+
+    <!-- col -->
+
+    <!-- end col -->
+
+    <!-- right side of the page with the sparkline graphs -->
+    <!-- col -->
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+        <!-- sparks -->
+        
+        <!-- end sparks -->
+    </div>
+    <!-- end col -->
+
+</div>
+<!-- end row -->
+
+<!--
+	The ID "widget-grid" will start to initialize all widgets below 
+	You do not need to use widgets if you dont want to. Simply remove 
+	the <section></section> and you can use wells or panels instead 
+	-->
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+   
+        <!-- NEW WIDGET START -->
+        
+
+
+
+<div class="row">
+<article class="col-md-6 col-sm-12 col-xs-12"><div class="jarviswidget" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false"><header>
+    
+                           <h2>基本信息</h2>
+                       
+</header>
+<div class="widget-body">
+    
+                         <div ms-controller="BasicInfoEditor">
+
+<form class="form-horizontal" action="/Memberships/users/Save" method="POST" id="BasicInfo">
+   
+    <div class="validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
+</ul></div>
+
+    <fieldset>
+        <legend>基本信息</legend>
+        <input id="Id" name="Id" type="hidden" value="2544424647e842a4bbf0beac5f3f32d4" />
+        <div class="form-group">
+            <label class="col-md-2">登录名</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-remote="Logind is exist, please choice another one." data-val-remote-additionalfields="*.LoginId,*.Id" data-val-remote-url="/MemberShips/User/NotDuplicate" data-val-required="请填写登录名" id="LoginId" name="LoginId" type="text" value="yangguowen" />
+                <span class="field-validation-valid" data-valmsg-for="LoginId" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2">电子邮件</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-maxlength="字段 电子邮件 必须是最大长度为“64”的字符串或数组类型。" data-val-maxlength-max="64" data-val-regex="请输入正确的电子邮件地址" data-val-regex-pattern="\b[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b" data-val-remote="这个电子邮件已经被使用,请尝试输入其他." data-val-remote-additionalfields="*.Email,*.Id" data-val-remote-url="/MemberShips/User/NotDuplicateEmail" id="Email" name="Email" type="email" value="yangguowen@noexist.com.cn" />
+                <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">组织</label>
+            <div class="col-md-10">
+                
+
+
+<div ms-widget="org" data-org-id="Org" data-org-selected-id="" data-org-selected-name="请选择组织">
+    <input type="hidden" ms-value="{{selectedId}}" id="Org" name="Org"/>
+    <a href="javascript:;" id="Org_pop" data-toggle="modal" data-target="#Org_modal">
+        <i class="fa fa-sitemap"></i> {{selectedName}}
+    </a>
+</div>
+
+                <span class="field-validation-valid" data-valmsg-for="Org" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">用户名</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-maxlength="字段 用户名 必须是最大长度为“64”的字符串或数组类型。" data-val-maxlength-max="64" id="Name" name="Name" type="text" value="yangguowen" />
+                <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">电话</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-length="字段 电话 必须是最大长度为 30 的字符串。" data-val-length-max="30" id="Phone" name="Phone" type="text" value="" />
+                <span class="field-validation-valid" data-valmsg-for="Phone" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">语言</label>
+            <div class="col-md-10">
+                
+
+<select class="form-control form-control" id="Language" name="Language"><option selected="selected" value="en">English</option>
+<option value="zh-Hant">中文(繁)</option>
+<option value="zh-Hans">中文(简)</option>
+</select>
+
+                <span class="field-validation-valid" data-valmsg-for="Language" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2">时区</label>
+            <div class="col-md-10">
+                
+<select class="form-control" id="TimeZoneId" name="TimeZoneId"><option value="Dateline Standard Time">(UTC-12:00)国际日期变更线西</option>
+<option value="UTC-11">(UTC-11:00)协调世界时-11</option>
+<option value="Hawaiian Standard Time">(UTC-10:00)夏威夷</option>
+<option value="Alaskan Standard Time">(UTC-09:00)阿拉斯加</option>
+<option value="Pacific Standard Time (Mexico)">(UTC-08:00)下加利福尼亚州</option>
+<option value="Pacific Standard Time">(UTC-08:00)太平洋时间(美国和加拿大)</option>
+<option value="US Mountain Standard Time">(UTC-07:00)亚利桑那</option>
+<option value="Mountain Standard Time (Mexico)">(UTC-07:00)奇瓦瓦，拉巴斯，马萨特兰</option>
+<option value="Mountain Standard Time">(UTC-07:00)山地时间(美国和加拿大)</option>
+<option value="Central America Standard Time">(UTC-06:00)中美洲</option>
+<option value="Central Standard Time">(UTC-06:00)中部时间(美国和加拿大)</option>
+<option value="Central Standard Time (Mexico)">(UTC-06:00)瓜达拉哈拉，墨西哥城，蒙特雷</option>
+<option value="Canada Central Standard Time">(UTC-06:00)萨斯喀彻温</option>
+<option value="Eastern Standard Time">(UTC-05:00)东部时间(美国和加拿大)</option>
+<option value="US Eastern Standard Time">(UTC-05:00)印地安那州(东部)</option>
+<option value="SA Pacific Standard Time">(UTC-05:00)波哥大，利马，基多，里奥布朗库</option>
+<option value="Venezuela Standard Time">(UTC-04:30)加拉加斯</option>
+<option value="SA Western Standard Time">(UTC-04:00)乔治敦，拉巴斯，马瑙斯，圣胡安</option>
+<option value="Paraguay Standard Time">(UTC-04:00)亚松森</option>
+<option value="Pacific SA Standard Time">(UTC-04:00)圣地亚哥</option>
+<option value="Atlantic Standard Time">(UTC-04:00)大西洋时间(加拿大)</option>
+<option value="Central Brazilian Standard Time">(UTC-04:00)库亚巴</option>
+<option value="Newfoundland Standard Time">(UTC-03:30)纽芬兰</option>
+<option value="SA Eastern Standard Time">(UTC-03:00)卡宴，福塔雷萨</option>
+<option value="E. South America Standard Time">(UTC-03:00)巴西利亚</option>
+<option value="Argentina Standard Time">(UTC-03:00)布宜诺斯艾利斯</option>
+<option value="Greenland Standard Time">(UTC-03:00)格陵兰</option>
+<option value="Bahia Standard Time">(UTC-03:00)萨尔瓦多</option>
+<option value="Montevideo Standard Time">(UTC-03:00)蒙得维的亚</option>
+<option value="Mid-Atlantic Standard Time">(UTC-02:00)中大西洋 - 旧用</option>
+<option value="UTC-02">(UTC-02:00)协调世界时-02</option>
+<option value="Azores Standard Time">(UTC-01:00)亚速尔群岛</option>
+<option value="Cape Verde Standard Time">(UTC-01:00)佛得角群岛</option>
+<option value="UTC">(UTC)协调世界时</option>
+<option value="Morocco Standard Time">(UTC)卡萨布兰卡</option>
+<option value="Greenwich Standard Time">(UTC)蒙罗维亚，雷克雅未克</option>
+<option value="GMT Standard Time">(UTC)都柏林，爱丁堡，里斯本，伦敦</option>
+<option value="W. Central Africa Standard Time">(UTC+01:00)中非西部</option>
+<option value="Romance Standard Time">(UTC+01:00)布鲁塞尔，哥本哈根，马德里，巴黎</option>
+<option value="Namibia Standard Time">(UTC+01:00)温得和克</option>
+<option value="Central European Standard Time">(UTC+01:00)萨拉热窝，斯科普里，华沙，萨格勒布</option>
+<option value="Central Europe Standard Time">(UTC+01:00)贝尔格莱德，布拉迪斯拉发，布达佩斯，卢布尔雅那，布拉格</option>
+<option value="W. Europe Standard Time">(UTC+01:00)阿姆斯特丹，柏林，伯尔尼，罗马，斯德哥尔摩，维也纳</option>
+<option value="E. Europe Standard Time">(UTC+02:00)东欧</option>
+<option value="Turkey Standard Time">(UTC+02:00)伊斯坦布尔</option>
+<option value="South Africa Standard Time">(UTC+02:00)哈拉雷，比勒陀利亚</option>
+<option value="Syria Standard Time">(UTC+02:00)大马士革</option>
+<option value="Jordan Standard Time">(UTC+02:00)安曼</option>
+<option value="Egypt Standard Time">(UTC+02:00)开罗</option>
+<option value="Libya Standard Time">(UTC+02:00)的黎波里</option>
+<option value="Israel Standard Time">(UTC+02:00)耶路撒冷</option>
+<option value="Middle East Standard Time">(UTC+02:00)贝鲁特</option>
+<option value="FLE Standard Time">(UTC+02:00)赫尔辛基，基辅，里加，索非亚，塔林，维尔纽斯</option>
+<option value="GTB Standard Time">(UTC+02:00)雅典，布加勒斯特</option>
+<option value="E. Africa Standard Time">(UTC+03:00)内罗毕</option>
+<option value="Kaliningrad Standard Time">(UTC+03:00)加里宁格勒，明斯克</option>
+<option value="Arabic Standard Time">(UTC+03:00)巴格达</option>
+<option value="Arab Standard Time">(UTC+03:00)科威特，利雅得</option>
+<option value="Iran Standard Time">(UTC+03:30)德黑兰</option>
+<option value="Caucasus Standard Time">(UTC+04:00)埃里温</option>
+<option value="Azerbaijan Standard Time">(UTC+04:00)巴库</option>
+<option value="Georgian Standard Time">(UTC+04:00)第比利斯</option>
+<option value="Russian Standard Time">(UTC+04:00)莫斯科，圣彼得堡，伏尔加格勒</option>
+<option value="Mauritius Standard Time">(UTC+04:00)路易港</option>
+<option value="Arabian Standard Time">(UTC+04:00)阿布扎比，马斯喀特</option>
+<option value="Afghanistan Standard Time">(UTC+04:30)喀布尔</option>
+<option value="Pakistan Standard Time">(UTC+05:00)伊斯兰堡，卡拉奇</option>
+<option value="West Asia Standard Time">(UTC+05:00)阿什哈巴德，塔什干</option>
+<option value="Sri Lanka Standard Time">(UTC+05:30)斯里加亚渥登普拉</option>
+<option value="India Standard Time">(UTC+05:30)钦奈，加尔各答，孟买，新德里</option>
+<option value="Nepal Standard Time">(UTC+05:45)加德满都</option>
+<option value="Ekaterinburg Standard Time">(UTC+06:00)叶卡捷琳堡</option>
+<option value="Bangladesh Standard Time">(UTC+06:00)达卡</option>
+<option value="Central Asia Standard Time">(UTC+06:00)阿斯塔纳</option>
+<option value="Myanmar Standard Time">(UTC+06:30)仰光</option>
+<option value="N. Central Asia Standard Time">(UTC+07:00)新西伯利亚</option>
+<option value="SE Asia Standard Time">(UTC+07:00)曼谷，河内，雅加达</option>
+<option value="Ulaanbaatar Standard Time">(UTC+08:00)乌兰巴托</option>
+<option value="North Asia Standard Time">(UTC+08:00)克拉斯诺亚尔斯克</option>
+<option selected="selected" value="China Standard Time">(UTC+08:00)北京，重庆，香港特别行政区，乌鲁木齐</option>
+<option value="Taipei Standard Time">(UTC+08:00)台北</option>
+<option value="Singapore Standard Time">(UTC+08:00)吉隆坡，新加坡</option>
+<option value="W. Australia Standard Time">(UTC+08:00)珀斯</option>
+<option value="North Asia East Standard Time">(UTC+09:00)伊尔库茨克</option>
+<option value="Tokyo Standard Time">(UTC+09:00)大阪，札幌，东京</option>
+<option value="Korea Standard Time">(UTC+09:00)首尔</option>
+<option value="AUS Central Standard Time">(UTC+09:30)达尔文</option>
+<option value="Cen. Australia Standard Time">(UTC+09:30)阿德莱德</option>
+<option value="West Pacific Standard Time">(UTC+10:00)关岛，莫尔兹比港</option>
+<option value="AUS Eastern Standard Time">(UTC+10:00)堪培拉，墨尔本，悉尼</option>
+<option value="E. Australia Standard Time">(UTC+10:00)布里斯班</option>
+<option value="Yakutsk Standard Time">(UTC+10:00)雅库茨克</option>
+<option value="Tasmania Standard Time">(UTC+10:00)霍巴特</option>
+<option value="Central Pacific Standard Time">(UTC+11:00)所罗门群岛，新喀里多尼亚</option>
+<option value="Vladivostok Standard Time">(UTC+11:00)符拉迪沃斯托克</option>
+<option value="UTC+12">(UTC+12:00)协调世界时+12</option>
+<option value="New Zealand Standard Time">(UTC+12:00)奥克兰，惠灵顿</option>
+<option value="Kamchatka Standard Time">(UTC+12:00)彼得罗巴甫洛夫斯克-堪察加 - 旧用</option>
+<option value="Fiji Standard Time">(UTC+12:00)斐济</option>
+<option value="Magadan Standard Time">(UTC+12:00)马加丹</option>
+<option value="Tonga Standard Time">(UTC+13:00)努库阿洛法</option>
+<option value="Samoa Standard Time">(UTC+13:00)萨摩亚群岛</option>
+<option value="Line Islands Standard Time">(UTC+14:00)圣诞岛</option>
+</select>
+
+
+                <span class="field-validation-valid" data-valmsg-for="TimeZoneId" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>可选信息</legend>
+        <div class="form-group">
+            <label class="col-md-2">名</label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class=" fa fa-user"></i></span>
+                    <input class="form-control text-box single-line" data-val="true" data-val-maxlength="字段 名 必须是最大长度为“64”的字符串或数组类型。" data-val-maxlength-max="64" id="FirstName" name="FirstName" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">姓</label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class=" fa fa-user"></i></span>
+                    <input class="form-control style-0 text-box single-line" data-val="true" data-val-maxlength="字段 姓 必须是最大长度为“64”的字符串或数组类型。" data-val-maxlength-max="64" id="LastName" name="LastName" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">生日</label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    
+
+<input class="form-control datepicker" data-dateformat="yy-mm-dd" data-val="true" data-val-date="The field 生日 must be a date." id="Birthday" name="Birthday" type="text" value="" />
+<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <span class="field-validation-valid" data-valmsg-for="Birthday" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i>
+            保存
+        </button>
+    </div>
+</form>
+
+                         </div>
+                     
+</div>
+
+</div></article>
+<article class="col-md-6 col-sm-12 col-xs-12"><div class="jarviswidget" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false"><header>
+    
+                           <h2></h2>
+                       
+</header>
+<div class="widget-body">
+    
+
+<div class="form-group">
+    <label class="col-md-2" for="OtherInfo_UpdateTime">最后修改时间</label>
+    <div class="col-md-10">
+        <p class="form-control-static">
+            2014/9/16 20:32:35
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2" for="OtherInfo_CreateTime">创建时间</label>
+    <div class="col-md-10">
+        <p class="form-control-static">2014/8/21 22:28:05</p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-3" for="OtherInfo_LastPasswordChangedTime">最后密码修改时间</label>
+    <div class="col-md-9">
+        <p class="form-control-static">
+            &amp;nbsp;
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2" for="OtherInfo_LastLockoutDate">锁定时间</label>
+    <div class="col-md-10">
+        <p class="form-control-static">
+            N/A
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2" for="OtherInfo_LastLoginDate">最后登录时间</label>
+    <div class="col-md-10">
+        <p class="form-control-static">
+            2014/5/19 22:29:59
+        </p>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-md-2" for="OtherInfo_LastActivityTime">最後活动時間</label>
+    <div class="col-md-10">
+        <p class="form-control-static">
+            2014/5/19 22:29:59
+        </p>
+    </div>
+</div>
+
+
+                     
+</div>
+
+</div></article>
+<article class="col-md-6 col-sm-12 col-xs-12"><div class="jarviswidget" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false"><header>
+    
+                           <h2>权限</h2>
+                       
+</header>
+<div class="widget-body">
+    
+
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2">禁止访问</label>
+        <div class="col-md-10">
+            <input HtmlAttributes="{ class = form-control }" data-val="true" data-val-required="禁止访问 字段是必需的。" id="Permissions_Deny" name="Permissions.Deny" type="checkbox" value="true" /><input name="Permissions.Deny" type="hidden" value="false" />
+            <span class="field-validation-valid" data-valmsg-for="Permissions.Deny" data-valmsg-replace="true"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2">锁定</label>
+        <div class="col-md-10">
+            <input HtmlAttributes="{ class = form-control }" data-val="true" data-val-required="锁定 字段是必需的。" id="Permissions_IsLock" name="Permissions.IsLock" type="checkbox" value="true" /><input name="Permissions.IsLock" type="hidden" value="false" />
+            <span class="field-validation-valid" data-valmsg-for="Permissions.IsLock" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+   
+
+    <div class="form-group">
+        <label class="col-md-2">角色</label>
+        <div class="col-md-10">
+            <input class="form-control check-box" data-val="true" data-val-required="禁止访问 字段是必需的。" id="Permissions_Deny" name="Permissions.Deny" type="checkbox" value="true" /><input name="Permissions.Deny" type="hidden" value="false" />
+            <span class="field-validation-valid" data-valmsg-for="Permissions.Roles" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2">用户分组</label>
+        <div class="col-md-10">
+            
+    <label class="inline checkbox">
+        admin group
+        <input type="checkbox" class="inline checkbox" value="ca31f1ac13194894bdb95540f385e0d6" name="Permissions.UserGroups"  />
+    </label>
+
+            <span class="field-validation-valid" data-valmsg-for="Permissions.UserGroups" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2">备注</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" data-val="true" data-val-regex="备注长度不能大于200字符" data-val-regex-pattern=".{0,200}" id="Permissions_Remark" name="Permissions.Remark" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Permissions.Remark" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    
+    <div class="form-actions">
+        <button class="btn btn-primary">
+            <i class="fa fa-save"></i>保存
+        </button>
+    </div>
+
+</form>
+
+
+                     
+</div>
+
+</div></article></div>
+
+
+
+        <!-- WIDGET END -->
+
+  
+
+    <!-- end row -->
+
+
+
+</section>
+<!-- end widget grid -->
+
+<script type="text/javascript">
+
+    /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+    pageSetUp();
+
+    /*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 * TO LOAD A SCRIPT:
+	 * var pagefunction = function (){ 
+	 *  loadScript(".../plugin.js", run_after_loaded);	
+	 * }
+	 * 
+	 * OR you can load chain scripts by doing
+	 * 
+	 * loadScript(".../plugin.js", function(){
+	 * 	 loadScript("../plugin.js", function(){
+	 * 	   ...
+	 *   })
+	 * });
+	 */
+
+  
+
+    //if you want to clear variabled, please use define clearPageVar function.
+    //function clearPageVar(){
+    // delete some varibale.
+    //}
+</script>
+
+
+    <script type="text/javascript">
+        require(['/memberships/Scripts/user/edit.js?v=Oke-ko1htkWD3VG3VlG4ZeWNqy4h3Pwpxmv5y7Wh2201'], function(main) {
+            main.Init();
+        });
+        function clearPageVariable() {
+            require(['/memberships/Scripts/user/edit.js?v=Oke-ko1htkWD3VG3VlG4ZeWNqy4h3Pwpxmv5y7Wh2201'], function (main) {
+                main.Clear();
+            });
+        }
+    </script>
+
