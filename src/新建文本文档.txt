@@ -49,8 +49,7 @@
 
 <form class="form-horizontal" action="/Memberships/users/Save" method="POST" id="BasicInfo">
    
-    <div class="validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
-</ul></div>
+    
 
     <fieldset>
         <legend>基本信息</legend>

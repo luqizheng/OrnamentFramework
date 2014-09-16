@@ -7,7 +7,7 @@
 
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
- 
+
     IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
         .CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
@@ -23,14 +23,24 @@
     }
     else
     {
-        htmlAttris=new Dictionary<string, object>();
+        htmlAttris = new Dictionary<string, object>();
     }
+    
+    
 }
-@foreach (Role a in roles)
+}
+@if (roles.Count != 0)
 {
+    foreach (Role a in roles)
+    {
+        var check = ids.Contains(a.Id) ? "checked='checked'" : "";
     <label class="checkbox-inline" title="@a.Remarks">
-        @Html.CheckBox("",htmlAttris)
+        <input type="checkbox" value="@a.Id" name="@Html.Name("")" @check />
         @a.Name
     </label>
-    
+    }
+}
+else
+{
+    <p class="form-control-static">沒有角色分配權限</p>
 }

@@ -409,6 +409,7 @@
     <Content Include="js\app.config.js" />
     <Content Include="js\app.min.js" />
     <Content Include="js\avalon.js" />
+    <Content Include="js\avalon.modern.js" />
     <Content Include="js\avalons\pager\pager.html" />
     <Content Include="js\avalons\pager\pager.js" />
     <Content Include="js\bootstrap\bootstrap.min.js" />
@@ -771,8 +772,11 @@
     <Content Include="js\plugin\jquery-form\jquery-form.min.js" />
     <Content Include="js\plugin\jquery-nestable\jquery.nestable.min.js" />
     <Content Include="js\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
+    <None Include="js\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="js\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="js\plugin\jquery-validate\jquery.validate.min.js" />
+    <Content Include="js\plugin\jquery.validate.unobtrusive.bootstrap\jquery.validate.unobtrusive.bootstrap.js" />
+    <Content Include="js\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="js\plugin\js-migrate\jquery-migrate-1.2.1.min.js" />
     <Content Include="js\plugin\knob\jquery.knob.min.js" />
     <Content Include="js\plugin\markdown\bootstrap-markdown.min.js" />

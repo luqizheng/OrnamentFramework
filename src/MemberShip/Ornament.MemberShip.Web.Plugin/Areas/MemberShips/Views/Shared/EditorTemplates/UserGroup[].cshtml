@@ -15,8 +15,8 @@
 @foreach (var a in usergroups)
 {
     string check = ids.Contains(a.Id) ? "checked='checked'" : "";
-    <label class="inline checkbox">
-        @a.Name
-        <input type="checkbox" class="inline checkbox" value="@a.Id" name="@Html.Name("")" @check />
+    <label class="checkbox-inline">
+        <input type="checkbox" value="@a.Id" name="@Html.Name("")" @check />
+        @a.Name 
     </label>
 }

@@ -126,4 +126,7 @@
   <data name="page_title" xml:space="preserve">
     <value>Create New User</value>
   </data>
+  <data name="tab_anotherInfo" xml:space="preserve">
+    <value>Informations</value>
+  </data>
 </root>

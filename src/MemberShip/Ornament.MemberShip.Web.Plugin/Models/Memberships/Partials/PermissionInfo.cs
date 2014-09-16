@@ -29,7 +29,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         public string Remark { get; set; }
 
 
-        [Display(Name = "Role", ResourceType = typeof(Resources))]
+        [Display(Name = "Role", ResourceType = typeof(Resources)),UIHint("Role[]")]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }

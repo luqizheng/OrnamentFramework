@@ -25,7 +25,7 @@
     @using (Panel panel = Html.Panel(basicInfo, classes))
     {
         @panel.Header(@<text>
-                           <h2>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+                           <h2><i class="fa fa-desktop"></i> @Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
                        </text>)
         @panel.Body(@<text>
                          <div ms-controller="BasicInfoEditor">
@@ -37,7 +37,7 @@
     @using (Panel panel = Html.Panel(basicInfo, classes))
     {
         @panel.Header(@<text>
-                           <h2>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+                           <h2><i class="fa fa-times-circle"></i>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
                        </text>)
         @panel.Body(@<text>
 

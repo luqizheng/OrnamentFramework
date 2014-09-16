@@ -132,4 +132,7 @@
   <data name="page_title" xml:space="preserve">
     <value>创建新用户</value>
   </data>
+  <data name="tab_anotherInfo" xml:space="preserve">
+    <value>活动信息</value>
+  </data>
 </root>

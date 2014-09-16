@@ -135,4 +135,7 @@
   <data name="page_title" xml:space="preserve">
     <value>創建新用戶</value>
   </data>
+  <data name="tab_anotherInfo" xml:space="preserve">
+    <value>活動信息</value>
+  </data>
 </root>

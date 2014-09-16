@@ -8,15 +8,15 @@
 
 <form class="form-horizontal" action="/Memberships/users/Save" method="POST" id="BasicInfo">
    
-    @Html.ValidationSummary(false)
+    @Html.OrnamentValidationSummary("用户信息出现问题,请根据下列提示进行修改")
 
     <fieldset>
-        <legend>基本信息</legend>
+        <legend>信息</legend>
         @Html.HiddenFor(s => s.Id)
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.LoginId)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LoginId, new { HtmlAttributes = new System.Collections.Generic.Dictionary<string, object> { { "class", "form-control" } } })
+                @Html.EditorFor(model => model.LoginId, new { HtmlAttributes = new Dictionary<string, object> { { "class", "form-control" } } })
                 @Html.ValidationMessageFor(model => model.LoginId)
             </div>
         </div>

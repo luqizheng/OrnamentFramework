@@ -67,13 +67,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrnamentValidation.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ValidateAjaxAttribute.cs" />
     <Compile Include="JQuery\Plugins\DataTables\Column.cs" />
     <Compile Include="JQuery\Plugins\DataTables\DataTableResult.cs" />
     <Compile Include="JQuery\Plugins\DataTables\DataTablesPostData.cs" />
     <Compile Include="JQuery\Plugins\DataTables\PostDataModelBinder.cs" />
     <Compile Include="LazyWriter.cs" />
-    <Compile Include="OrnamentValidation.cs" />
     <Compile Include="Paginations\HtmlExtender.cs" />
     <Compile Include="Paginations\Pagination.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

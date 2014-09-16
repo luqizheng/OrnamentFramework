@@ -11,7 +11,9 @@
 
         $form.validate().settings.submitHandler = function (form) {
             var data = $(form).serializeObject();
+            $(form).find("input").prop("disabled", true);
             $.post("/Memberships/user/Save", data, function (rData) {
+                $(form).find("input").prop("disabled", false);
                 if (rData.success) {
                     alert('保存成功');
                 } else {
@@ -29,7 +31,7 @@
             init();
             avalon.scan();
         },
-        Clear: function () {
+        Clear: function () { //要delete controller
             delete avalon.vmodels["BasicInfoEditor"];
         }
 

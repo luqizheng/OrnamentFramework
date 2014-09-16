@@ -1,15 +1,15 @@
 ﻿@model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.UserOtherInfoModel
 <div class="form-group">
-    @Html.LabelFor(model => model.UpdateTime, new { @class = "col-md-2" })
-    <div class="col-md-10">
+    @Html.LabelFor(model => model.UpdateTime, new { @class = "col-md-3" })
+    <div class="col-md-9">
         <p class="form-control-static">
             @(Model.UpdateTime!=null?Model.UpdateTime.ToString():" ")
         </p>
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.CreateTime, new { @class = "col-md-2" })
-    <div class="col-md-10">
+    @Html.LabelFor(model => model.CreateTime, new { @class = "col-md-3" })
+    <div class="col-md-9">
         <p class="form-control-static">@Model.CreateTime</p>
     </div>
 </div>
@@ -17,29 +17,29 @@
     @Html.LabelFor(model => model.LastPasswordChangedTime, new { @class = "col-md-3" })
     <div class="col-md-9">
         <p class="form-control-static">
-            @(Model.LastPasswordChangedTime!=null?Model.LastPasswordChangedTime.ToString():"&nbsp;")
+            @(Model.LastPasswordChangedTime!=null?Model.LastPasswordChangedTime.ToString():"N/A")
         </p>
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.LastLockoutDate, new { @class = "col-md-2" })
-    <div class="col-md-10">
+    @Html.LabelFor(model => model.LastLockoutDate, new { @class = "col-md-3" })
+    <div class="col-md-9">
         <p class="form-control-static">
             @(Model.LastLockoutDate!=null?Model.LastLockoutDate.ToString():"N/A")
         </p>
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.LastLoginDate, new { @class = "col-md-2" })
-    <div class="col-md-10">
+    @Html.LabelFor(model => model.LastLoginDate, new { @class = "col-md-3" })
+    <div class="col-md-9">
         <p class="form-control-static">
             @(Model.LastLoginDate!=null?Model.LastLoginDate.ToString():"N/A")
         </p>
     </div>
 </div>
 <div class="form-group">
-    @Html.LabelFor(model => model.LastActivityTime, new { @class = "col-md-2" })
-    <div class="col-md-10">
+    @Html.LabelFor(model => model.LastActivityTime, new { @class = "col-md-3" })
+    <div class="col-md-9">
         <p class="form-control-static">
             @(Model.LastActivityTime!=null?Model.LastActivityTime.ToString():"N/A")
         </p>
