@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ValidateAjaxAttribute.cs" />
     <Compile Include="JQuery\Plugins\DataTables\Column.cs" />
     <Compile Include="JQuery\Plugins\DataTables\DataTableResult.cs" />
     <Compile Include="JQuery\Plugins\DataTables\DataTablesPostData.cs" />
