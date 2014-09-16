@@ -1,4 +1,4 @@
-﻿@model Ornament.MemberShip.Plugin.Models.Memberships.Partials.PermissionInfo
+﻿@model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.PermissionInfo
 
 
 <form class="form-horizontal">
@@ -18,14 +18,7 @@
             @Html.ValidationMessageFor(model => model.IsLock)
         </div>
     </div>
-
-    <div class="form-group">
-        <label class="col-md-2">@Html.DisplayNameFor(s => s.Org)</label>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Org, new { HtmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Org)
-        </div>
-    </div>
+   
 
     <div class="form-group">
         <label class="col-md-2">@Html.DisplayNameFor(s => s.Roles)</label>

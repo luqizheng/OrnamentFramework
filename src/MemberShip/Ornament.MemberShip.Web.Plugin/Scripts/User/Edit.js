@@ -1,27 +1,27 @@
 ﻿define(function (require) {
     require("form");
-    
+
     require("/MemberShips/Scripts/Org/Org.js");
     function init() {
 
-        $("form").removeData("validator");
-        $("form").removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parseElement("#BasicInfo");
-       
-        $("#BasicInfo").submit(function (e) {
-            
-            var data = $(this).serializeObject();
-            $.post("/Memberships/user/Save",data,function(rData) {
+        var $form = $("#BasicInfo")
+            .removeData("validator")
+            .removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("#BasicInfo");
+
+        $form.validate().settings.submitHandler = function (form) {
+            var data = $(form).serializeObject();
+            $.post("/Memberships/user/Save", data, function (rData) {
                 if (rData.success) {
                     alert('保存成功');
                 } else {
                     alert(rData.Message);
                 }
             });
-            e.preventDefault();
-        });
+        };
 
-        avalon.define("BasicInfoEditor", function(vm) {});
+
+        avalon.define("BasicInfoEditor", function (vm) { });
     }
 
     return {
@@ -29,10 +29,10 @@
             init();
             avalon.scan();
         },
-        Clear:function() {
+        Clear: function () {
             delete avalon.vmodels["BasicInfoEditor"];
         }
-        
+
     };
 
 });

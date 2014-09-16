@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using System.Web.Profile;
 using System.Web.Security;
@@ -15,6 +16,7 @@ using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
@@ -140,7 +142,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(new EditUserModel(user));
         }
 
-        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User")]
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
         public ActionResult Save(BasicInfo userBasicInfo)
         {
             if (userBasicInfo == null)
@@ -155,9 +157,13 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                     success = true
                 });
             }
-            return null;
+            return Json(userBasicInfo);
         }
-
+        [HttpPost,ResourceAuthorize(UserOperator.Modify,"User")]
+        public ActionResult SavePermission(PermissionInfo permissionInfo)
+        {
+            return View();
+        }
        
 
         public ActionResult Assign(string loginId)

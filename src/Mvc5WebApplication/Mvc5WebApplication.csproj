@@ -771,6 +771,7 @@
     <Content Include="js\plugin\jquery-form\jquery-form.min.js" />
     <Content Include="js\plugin\jquery-nestable\jquery.nestable.min.js" />
     <Content Include="js\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
+    <Content Include="js\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="js\plugin\jquery-validate\jquery.validate.min.js" />
     <Content Include="js\plugin\js-migrate\jquery-migrate-1.2.1.min.js" />
     <Content Include="js\plugin\knob\jquery.knob.min.js" />

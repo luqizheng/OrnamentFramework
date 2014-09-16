@@ -126,9 +126,15 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function (main) {
-            var orgDTO=@Html.Raw(JsonHelper.ToJson(childDTO));
+        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
+            var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
             main.init(orgDTO);
         })
+
+        function clearPageVariable() {
+            require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
+                main.clear();
+            });
+        }
     </script>
 }

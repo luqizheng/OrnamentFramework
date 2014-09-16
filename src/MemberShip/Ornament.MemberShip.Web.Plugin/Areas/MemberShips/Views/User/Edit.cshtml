@@ -20,12 +20,6 @@
 }
 
 @* 基本信息 *@
-@Html.ValidationSummary(false)
-<div class="alert alert-warning fade in">
-    <button data-dismiss="alert" class="close">×</button>
-    <i class="fa-fw fa fa-warning"></i>
-    <strong>Warning</strong> Your monthly traffic is reaching limit.
-</div>
 
 <div class="row">
     @using (Panel panel = Html.Panel(basicInfo, classes))

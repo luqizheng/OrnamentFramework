@@ -226,10 +226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Create.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\DeleteDetails.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Details.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Org\Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Index.zh-Hans.resx" />

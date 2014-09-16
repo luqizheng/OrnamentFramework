@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Properties;
 
-namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
+namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 {
     public class PermissionInfo
     {
@@ -18,8 +18,6 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         {
             UserGroups = user.UserGroups.ToArray();
             Roles = user.GetRoles().ToArray();
-            Org = user.Org;
-
             IsLock = user.Security.IsLocked;
             Remark = user.Remarks;
         }
@@ -37,9 +35,6 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
             get { return _roles ?? new Role[0]; }
             set { _roles = value; }
         }
-
-        [Display(Name = "Org", ResourceType = typeof(Resources)), UIHint("OrgTreeView")]
-        public Org Org { get; set; }
 
 
         [Display(Name = "UserGroup", ResourceType = typeof(Resources))]
@@ -64,8 +59,6 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
                 throw new ArgumentNullException("user");
 
             user.Remarks = Remark;
-
-            user.Org = Org;
             user.IsDeny = Deny;
             user.Roles.Clear();
             foreach (Role role in Roles)

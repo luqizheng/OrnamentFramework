@@ -2,9 +2,14 @@
 @using Ornament
 @using Ornament.MemberShip
 @using Ornament.Web
+@using Ornament.Web.UI
+
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.BasicInfo
 
-<form class="form-horizontal" action="/Api/Memberships/users/Save" method="POST" id="BasicInfo">
+<form class="form-horizontal" action="/Memberships/users/Save" method="POST" id="BasicInfo">
+   
+    @Html.ValidationSummary(false)
+
     <fieldset>
         <legend>基本信息</legend>
         @Html.HiddenFor(s => s.Id)
