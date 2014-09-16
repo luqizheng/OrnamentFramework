@@ -1,4 +1,4 @@
-﻿/* NUGET: BEGIN LICENSE TEXT
+/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
  * purpose of either: (i) interacting through your browser with the Microsoft
@@ -69,7 +69,7 @@
         }
     }
 
-    /*function onErrors(event, validator) {  // 'this' is the form element
+    function onErrors(event, validator) {  // 'this' is the form element
         var container = $(this).find("[data-valmsg-summary=true]"),
             list = container.find("ul");
 
@@ -77,19 +77,6 @@
             list.empty();
             container.addClass("validation-summary-errors").removeClass("validation-summary-valid");
 
-            $.each(validator.errorList, function () {
-                $("<li />").html(this.message).appendTo(list);
-            });
-        }
-    }*/
-
-    function onErrors(event, validator) {  // 'this' is the form element
-        var container = $(this).find("[data-valmsg-summary=true]"),
-            list = container.find("ul");
-
-        if (list && list.length && validator.errorList.length) {
-            list.empty();
-            container.addClass("alert alert-warning fade in").removeClass("validation-summary-valid").show('fast');
             $.each(validator.errorList, function () {
                 $("<li />").html(this.message).appendTo(list);
             });
@@ -416,32 +403,6 @@
             setValidationValues(options, "regex", options.params.regex);
         }
     });
-    //修改用于bootstrap 提示
-    var defaultOptions = {
-        errorClass: 'has-error',
-        validClass: 'has-success',
-        highlight: function (element, errorClass, validClass) {
-            var span = $(element).siblings("span:first").addClass("help-block");
-            if (span.find("i:first").length == 0) {
-                span.prepend("<i class='fa fa-warning'></i>");
-            }
-            $(element).closest(".form-group")
-            .addClass(errorClass)
-            .removeClass(validClass);
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).siblings("span:first").addClass("help-block").closest(".form-group")
-            .removeClass(errorClass)
-            .addClass(validClass);
-        }
-    };
-
-    $.validator.setDefaults(defaultOptions);
-
-    $.validator.unobtrusive.options = {
-        errorClass: defaultOptions.errorClass,
-        validClass: defaultOptions.validClass,
-    };
 
     $(function () {
         $jQval.unobtrusive.parse(document);
