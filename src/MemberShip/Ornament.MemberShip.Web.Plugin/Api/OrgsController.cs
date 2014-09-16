@@ -30,7 +30,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
             {
                 IOrgDao orgDao = _factory.CreateOrgDao();
                 
-                IEnumerable<Org> result = currentUser.Org == null
+                IEnumerable<Org> result = currentUser.Org == null && currentUser.IsRoot
                     ? orgDao.GetRootOrgs()
                     : orgDao.GetSubOrgs(currentUser.Org);
 

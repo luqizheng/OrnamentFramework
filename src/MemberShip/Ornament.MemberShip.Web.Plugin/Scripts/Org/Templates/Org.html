@@ -43,6 +43,12 @@
                                         </ul>
                                     </li>
                                 </ul>
+                                <ul ms-visible="!orgs.length">
+                                    <li>
+                                        <span class="label label-warning">
+                                        没有组织结构</span>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -50,10 +56,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Cancel
+                        取消
                     </button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" ms-click="ok">
-                        OK
+                        选择
                     </button>
                 </div>
             </div>

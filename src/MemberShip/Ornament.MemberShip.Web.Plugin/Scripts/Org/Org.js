@@ -85,7 +85,7 @@
     widget.defaults = {
         editable: false,
         select: true,
-        selectedName: "请选择",
+        selectedName: "",
         selectedId: "",
         id:"" // razor's id for bootstrap modal.
 };
