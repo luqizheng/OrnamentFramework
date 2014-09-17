@@ -143,15 +143,13 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         }
 
         [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
-        public ActionResult Save(BasicInfo userBasicInfo)
+        public ActionResult Save(EditUserModel userBasicInfo)
         {
             if (userBasicInfo == null)
                 return null;
             if (ModelState.IsValid)
             {
-                User user = _memberShipFactory.CreateUserDao().Get(userBasicInfo.Id);
-                userBasicInfo.UpdateOn(user);
-                _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+                userBasicInfo.Save(_memberShipFactory);
                 return Json(new
                 {
                     success = true
@@ -172,60 +170,60 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         }
 
 
-        public ActionResult Assign(string loginId)
-        {
-            User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
-            if (user == null)
-            {
-                throw new HttpException(404, "Cant' find the user with loginid is " + loginId);
-            }
-            var userGroupRoleMap = new Dictionary<string, List<string>>();
-            var rolePermissionsMap = new Dictionary<string, List<string>>();
-            foreach (UserGroup ug in _memberShipFactory.CreateUserGroupDao().GetAll())
-            {
-                userGroupRoleMap.Add(ug.Id, new List<string>());
-                foreach (Role role in ug.GetAllRoles())
-                {
-                    userGroupRoleMap[ug.Id].Add(role.Id);
-                }
-            }
-            foreach (Role role in _memberShipFactory.CreateRoleDao().GetAll())
-            {
-                rolePermissionsMap.Add(role.Id, new List<string>());
-                foreach (Permission permission in role.Permissions)
-                {
-                    rolePermissionsMap[role.Id].Add(permission.Id);
-                }
-            }
-            ViewData["userGroupRoleMap"] = userGroupRoleMap;
-            ViewData["rolePermissionMap"] = rolePermissionsMap;
+        //public ActionResult Assign(string loginId)
+        //{
+        //    User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
+        //    if (user == null)
+        //    {
+        //        throw new HttpException(404, "Cant' find the user with loginid is " + loginId);
+        //    }
+        //    var userGroupRoleMap = new Dictionary<string, List<string>>();
+        //    var rolePermissionsMap = new Dictionary<string, List<string>>();
+        //    foreach (UserGroup ug in _memberShipFactory.CreateUserGroupDao().GetAll())
+        //    {
+        //        userGroupRoleMap.Add(ug.Id, new List<string>());
+        //        foreach (Role role in ug.GetAllRoles())
+        //        {
+        //            userGroupRoleMap[ug.Id].Add(role.Id);
+        //        }
+        //    }
+        //    foreach (Role role in _memberShipFactory.CreateRoleDao().GetAll())
+        //    {
+        //        rolePermissionsMap.Add(role.Id, new List<string>());
+        //        foreach (Permission permission in role.Permissions)
+        //        {
+        //            rolePermissionsMap[role.Id].Add(permission.Id);
+        //        }
+        //    }
+        //    ViewData["userGroupRoleMap"] = userGroupRoleMap;
+        //    ViewData["rolePermissionMap"] = rolePermissionsMap;
 
 
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Assign(string[] roles, string[] userGroups, string loginId)
-        {
-            IRoleDao roleDao = _memberShipFactory.CreateRoleDao();
-            IUserGroupDao userGroupDao =
-                _memberShipFactory.CreateUserGroupDao();
-            User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
-            user.Roles.Clear();
-            foreach (Role role in roleDao.GetRolesByIds(roles))
-            {
-                user.Roles.Add(role);
-            }
-            user.UserGroups.Clear();
-            foreach (UserGroup ug in userGroupDao.GetUserGroups(userGroups))
-            {
-                user.UserGroups.Add(ug);
-            }
-            _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
-            _memberShipFactory.CreateUserDao().Flush();
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //public ActionResult Assign(string[] roles, string[] userGroups, string loginId)
+        //{
+        //    IRoleDao roleDao = _memberShipFactory.CreateRoleDao();
+        //    IUserGroupDao userGroupDao =
+        //        _memberShipFactory.CreateUserGroupDao();
+        //    User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
+        //    user.Roles.Clear();
+        //    foreach (Role role in roleDao.GetRolesByIds(roles))
+        //    {
+        //        user.Roles.Add(role);
+        //    }
+        //    user.UserGroups.Clear();
+        //    foreach (UserGroup ug in userGroupDao.GetUserGroups(userGroups))
+        //    {
+        //        user.UserGroups.Add(ug);
+        //    }
+        //    _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+        //    _memberShipFactory.CreateUserDao().Flush();
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userCreateTitle",
             ParentKey = "User",

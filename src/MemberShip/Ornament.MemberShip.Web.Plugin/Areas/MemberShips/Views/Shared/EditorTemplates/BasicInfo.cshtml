@@ -6,7 +6,7 @@
 
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.BasicInfo
 
-<form class="form-horizontal" action="/Memberships/users/Save" method="POST" id="BasicInfo">
+<div class="form-horizontal">
    
     @Html.OrnamentValidationSummary("用户信息出现问题,请根据下列提示进行修改")
 
@@ -103,4 +103,4 @@
             @Ornament.Properties.Resources.Save
         </button>
     </div>
-</form>
+</div>

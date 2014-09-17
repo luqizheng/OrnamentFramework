@@ -235,9 +235,10 @@ namespace Ornament.Properties {
         ///    &lt;Value&gt; &lt;![CDATA[
         ///   &lt;p&gt; Dear [name],
         ///
-        ///   &lt;p&gt; Please click following emial and reset you password again.
+        ///   &lt;p&gt; Please click following emial and reset you password.
+        ///   &lt;p&gt; LoginId : [loginId]
         ///
-        ///    &lt;p&gt;[Url]
+        ///    &lt;p&gt;[RetrievePassowrd]?[parameters]
         ///
         ///
         ///    &lt;p&gt;[site] administrators group
@@ -260,7 +261,9 @@ namespace Ornament.Properties {
         ///	 &lt;p&gt;  您好，請點擊以下鏈接進行重置密碼操作
         ///    
         ///
-        ///  &lt;p&gt;  [Url]
+        ///&lt;p&gt; LoginId : [loginId]
+        ///
+        ///    &lt;p&gt;[RetrievePassowrd]?[parameters]
         ///
         /// &lt;p&gt;   [site]管理員團隊
         /// ]]&gt;&lt;/Value&gt;
@@ -282,7 +285,9 @@ namespace Ornament.Properties {
         ///	 &lt;p&gt;  您好，请点击下面url进行密码重置
         ///    
         ///
-        /// &lt;p&gt;   [url]
+        /// &lt;p&gt; LoginId : [loginId]
+        ///
+        ///    &lt;p&gt;[RetrievePassowrd]?[parameters]
         ///
         /// &lt;p&gt;   [site]管理团队
         /// ]]&gt;&lt;/Value&gt;
@@ -488,6 +493,15 @@ namespace Ornament.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Reset 的本地化字符串。
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Saturday 的本地化字符串。
         /// </summary>
         public static string Saturday {
@@ -615,7 +629,9 @@ namespace Ornament.Properties {
         ///    You eEmail has be changed, please click following Url to verify this email address.
         ///	&lt;/p&gt;
         ///
-        ///    [url]
+        ///   
+        ///
+        ///    &lt;p&gt;[VerifyEmail]?[parameters]
         ///
         ///	&lt;p&gt;
         ///    [site] administrator.
@@ -640,9 +656,7 @@ namespace Ornament.Properties {
         ///    你的安全電子郵件已經被修改了，請點擊下面的url進行確認。
         ///	&lt;/p&gt;
         ///
-        ///	&lt;p&gt;
-        ///    [url]
-        ///	&lt;/p&gt;
+        ///	 &lt;p&gt;[VerifyEmail]?[parameters]
         ///
         ///	&lt;p&gt;
         ///	請不要回覆此郵件。
@@ -670,7 +684,7 @@ namespace Ornament.Properties {
         ///		你的安全电子邮件已经被修改。请点击下面链接进行确认
         ///		&lt;/p&gt;
         ///
-        ///    &lt;p&gt;[url]&lt;/p&gt;
+        ///     &lt;p&gt;[VerifyEmail]?[parameters]
         ///
         ///	&lt;p&gt;请不要回复此邮件&lt;/p&gt;
         ///

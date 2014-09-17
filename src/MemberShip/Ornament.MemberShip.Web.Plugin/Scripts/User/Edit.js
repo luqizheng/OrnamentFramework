@@ -4,10 +4,10 @@
     require("/MemberShips/Scripts/Org/Org.js");
     function init() {
 
-        var $form = $("#BasicInfo")
+        var $form = $("#editUser")
             .removeData("validator")
             .removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parse("#BasicInfo");
+        $.validator.unobtrusive.parse("#editUser");
 
         $form.validate().settings.submitHandler = function (form) {
             var data = $(form).serializeObject();
@@ -23,7 +23,7 @@
         };
 
         $("#jusTest").affix({
-            top: 100
+            top: 10
         });
 
         avalon.define("BasicInfoEditor", function (vm) { });

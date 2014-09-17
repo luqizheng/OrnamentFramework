@@ -265,4 +265,7 @@
   <data name="Wednesday" xml:space="preserve">
     <value>Wednesday</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>
