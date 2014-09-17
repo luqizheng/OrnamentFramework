@@ -159,12 +159,18 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             }
             return Json(userBasicInfo);
         }
-        [HttpPost,ResourceAuthorize(UserOperator.Modify,"User")]
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
         public ActionResult SavePermission(PermissionInfo permissionInfo)
         {
+            if (permissionInfo == null)
+                throw new HttpException(404, "permission can't be null");
+            if (this.ModelState.IsValid)
+            {
+                return Json(new {success = true});
+            }
             return View();
         }
-       
+
 
         public ActionResult Assign(string loginId)
         {
@@ -275,11 +281,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
-                where
-                    u.LoginId.Contains(loginIdOrEmail) ||
-                    u.Contact.Email.Contains(loginIdOrEmail)
-                select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
+                                               where
+                                                   u.LoginId.Contains(loginIdOrEmail) ||
+                                                   u.Contact.Email.Contains(loginIdOrEmail)
+                                               select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

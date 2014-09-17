@@ -22,6 +22,9 @@
             });
         };
 
+        $("#jusTest").affix({
+            top: 100
+        });
 
         avalon.define("BasicInfoEditor", function (vm) { });
     }

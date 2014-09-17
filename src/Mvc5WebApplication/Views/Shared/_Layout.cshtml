@@ -3,35 +3,41 @@
 
 
 
-<!-- Bread crumb is created dynamically -->
-<!-- row -->
-<div class="row">
 
-    <!-- col -->
-    @if (IsSectionDefined("pageTitle"))
-    {
-        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-            <h1 class="page-title txt-color-blueDark">
+@if (IsSectionDefined("pageTitle") || IsSectionDefined("sparks"))
+{
+    <!-- Bread crumb is created dynamically -->
+    <!-- row -->
+    <div class="row">
 
-                <!-- PAGE HEADER -->
-                @RenderSection("pageTitle", required: false)
-            </h1>
-        </div>
-    }
+        <!-- col -->
+        @if (IsSectionDefined("pageTitle"))
+        {
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <h1 class="page-title txt-color-blueDark">
 
-    <!-- end col -->
+                    <!-- PAGE HEADER -->
+                    @RenderSection("pageTitle", required: false)
+                </h1>
+            </div>
+        }
 
-    <!-- right side of the page with the sparkline graphs -->
-    <!-- col -->
-    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-        <!-- sparks -->
-        @RenderSection("sparks", required: false)
-        <!-- end sparks -->
+        <!-- end col -->
+
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        @if (IsSectionDefined("sparks"))
+        {
+            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                <!-- sparks -->
+                @RenderSection("sparks", required: false)
+                <!-- end sparks -->
+            </div>
+            <!-- end col -->
+        }
     </div>
-    <!-- end col -->
-
-</div>
-<!-- end row -->
+    <!-- end row -->
+}
 
 <!--
 	The ID "widget-grid" will start to initialize all widgets below 
@@ -42,12 +48,12 @@
 <!-- widget grid -->
 <section id="widget-grid" class="">
 
-   
-        <!-- NEW WIDGET START -->
-        @RenderBody()
-        <!-- WIDGET END -->
 
-  
+    <!-- NEW WIDGET START -->
+    @RenderBody()
+    <!-- WIDGET END -->
+
+
 
     <!-- end row -->
 
@@ -113,7 +119,7 @@
 	 * });
 	 */
 
-  @*  // pagefunction
+    @*  // pagefunction
 
     var pagefunction = function () {
         // clears the variable if left blank

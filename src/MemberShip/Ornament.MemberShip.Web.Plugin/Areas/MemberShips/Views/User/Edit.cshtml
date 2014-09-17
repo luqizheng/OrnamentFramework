@@ -22,47 +22,53 @@
 @* 基本信息 *@
 
 <div class="row">
+
+    <div class="alert alert-block alert-success col-lg-12 col-md-12 col-xs-12 col-sm-12" id="jusTest" style="z-index: 9999;">
+        <button class="btn btn-info btn-sm"><i class="fa fa-save">@Ornament.Properties.Resources.Save</i></button>
+    </div>
+
     @using (Panel panel = Html.Panel(basicInfo, classes))
     {
         @panel.Header(@<text>
-                           <h2><i class="fa fa-desktop"></i> @Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
-                       </text>)
+        <h2><i class="fa fa-desktop"></i>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+        </text>)
         @panel.Body(@<text>
-                         <div ms-controller="BasicInfoEditor">
-                             @Html.EditorFor(s => s, "BasicInfo")
-                         </div>
-                     </text>)
+        <div ms-controller="BasicInfoEditor">
+            @Html.EditorFor(s => s, "BasicInfo")
+        </div>
+        </text>)
     }
 
     @using (Panel panel = Html.Panel(basicInfo, classes))
     {
         @panel.Header(@<text>
-                           <h2><i class="fa fa-times-circle"></i>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
-                       </text>)
+        <h2><i class="fa fa-times-circle"></i>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+        </text>)
         @panel.Body(@<text>
 
-                         @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+        @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
 
-                     </text>)
+        </text>)
     }
 
     @using (Panel panel = Html.Panel(basicInfo, classes))
     {
         @panel.Header(@<text>
-                           <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
-                       </text>)
+        <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
+        </text>)
         @panel.Body(@<text>
 
-                         @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+        @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
 
-                     </text>)
+        </text>)
     }
+
 </div>
 
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function(main) {
+        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
             main.Init();
         });
         function clearPageVariable() {

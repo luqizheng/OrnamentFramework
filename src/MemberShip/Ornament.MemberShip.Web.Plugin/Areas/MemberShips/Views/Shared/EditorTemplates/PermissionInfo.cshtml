@@ -1,7 +1,7 @@
 ﻿@model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.PermissionInfo
 
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="/MemberShips/User/SavePermission">
     <div class="form-group">
         <label class="col-md-2">@Html.DisplayNameFor(s => s.Deny)</label>
         <div class="col-md-10">

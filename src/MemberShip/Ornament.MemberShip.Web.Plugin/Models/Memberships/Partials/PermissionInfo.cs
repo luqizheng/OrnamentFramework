@@ -21,15 +21,14 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             IsLock = user.Security.IsLocked;
             Remark = user.Remarks;
         }
-
-        [UIHint("Textarea")]
+        
         [Display(Name = "Remark", ResourceType = typeof(Resources)),
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof(Resources))]
         public string Remark { get; set; }
 
 
-        [Display(Name = "Role", ResourceType = typeof(Resources)),UIHint("Role[]")]
+        [Display(Name = "Role", ResourceType = typeof(Resources))]
         public Role[] Roles
         {
             get { return _roles ?? new Role[0]; }
@@ -38,7 +37,6 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
 
 
         [Display(Name = "UserGroup", ResourceType = typeof(Resources))]
-        [UIHint("UserGroup[]")]
         public UserGroup[] UserGroups
         {
             get { return _userGroups ?? new UserGroup[0]; }
