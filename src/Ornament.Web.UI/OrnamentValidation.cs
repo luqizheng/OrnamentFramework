@@ -9,12 +9,24 @@ namespace Ornament.Web.UI
 {
     public static class OrnamentValidation
     {
+        /// <summary>
+        /// 验证Summary，如果有generalMessage
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="generalMessage"></param>
+        /// <returns></returns>
         public static MvcHtmlString OrnamentValidationSummary(this HtmlHelper helper,string generalMessage)
         {
             return OrnamentValidationSummary(helper, generalMessage,true);
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="generalMenssage"></param>
+        /// <param name="excludeProperty">是否排除property 的错误</param>
+        /// <returns></returns>
         public static MvcHtmlString OrnamentValidationSummary(this HtmlHelper helper, string generalMenssage,
             bool excludeProperty)
         {

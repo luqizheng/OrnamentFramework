@@ -408,7 +408,7 @@
         errorClass: 'has-error',
         validClass: 'has-success',
         highlight: function (element, errorClass, validClass) {
-            var span = $(element).siblings("span:first").addClass("help-inline");
+            var span = $(element).siblings("span:first").addClass("help-block");
             if (span.find("i:first").length == 0) {
                 span.prepend("<i class='fa fa-warning'></i>");
             }
@@ -417,7 +417,7 @@
             .removeClass(validClass);
         },
         unhighlight: function (element, errorClass, validClass) {
-            $(element).siblings("span:first").addClass("help-inline").closest(".form-group")
+            $(element).siblings("span:first").removeClass("help-block").closest(".form-group")
             .removeClass(errorClass)
             .addClass(validClass);
         }

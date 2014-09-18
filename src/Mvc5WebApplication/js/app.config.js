@@ -272,6 +272,9 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         // perform a redirect to the login page since we're no longer authorized
         window.location.replace("/Account/logon");
     }
+    if (jqxhr.status == 400) { //validation and defined from jquery.validateboostrap
+        
+    }
 
 });
 

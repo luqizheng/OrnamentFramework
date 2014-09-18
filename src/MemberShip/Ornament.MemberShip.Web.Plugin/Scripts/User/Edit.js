@@ -7,25 +7,31 @@
         var $form = $("#editUser")
             .removeData("validator")
             .removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parse("#editUser");
+        //$.validator.unobtrusive.parse("#editUser");
 
-        $form.validate().settings.submitHandler = function (form) {
-            var data = $(form).serializeObject();
-            $(form).find("input").prop("disabled", true);
+        $form.submit(function (e) {
+            var data = $(this).serializeObject();
             $.post("/Memberships/user/Save", data, function (rData) {
-                $(form).find("input").prop("disabled", false);
-                if (rData.success) {
-                    alert('保存成功');
-                } else {
-                    alert(rData.Message);
-                }
+                alert(rData.success ? rData.Message : '保存成功');
             });
-        };
+            e.preventDefault();
+        });
+
+        //$form.validate().settings.submitHandler = function (form) {
+        //    var data = $(form).serializeObject();
+        //    $(form).find("input").prop("disabled", true);
+        //    $.post("/Memberships/user/Save", data, function (rData) {
+        //        $(form).find("input").prop("disabled", false);
+        //        alert(rData.success ? rData.Message : '保存成功');
+        //    });
+        //};
 
         $("#jusTest").affix({
             top: 10
         });
+        avalon.define("edit", function (vm) {
 
+        });
         avalon.define("BasicInfoEditor", function (vm) { });
     }
 

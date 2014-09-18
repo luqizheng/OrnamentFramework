@@ -84,3 +84,5 @@
 /src/Extends/CRM/Qi.CRM/bin
 obj
 bin
+/src/Mvc5WebApplication/Mappings
+/src/Mvc5WebApplication/log
