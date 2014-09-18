@@ -27,9 +27,9 @@
                 }
             });
         };
-        $("#jusTest").affix({
-            top: 10
-        });
+
+        $("#jusTest").affix({ top: 10 });
+        
         avalon.define("edit", function(vm) {
         });
         avalon.define("BasicInfoEditor", function (vm) { });

@@ -3,6 +3,7 @@
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.MemberShip.Properties
 @using Ornament.Web.UI.Paginations
+@using Ornament.Web.UI.Theme
 @using Qi.Web.Mvc
 @model IEnumerable<Role>
 @{
@@ -13,63 +14,69 @@
 }
 
 
-    <h3>@Resources.Role</h3>
+@using (var panel = Html.Panel())
+{
+    
+    @panel.Header(@<text>
+                       <h2>Role List</h2>
+                   </text>)
+    @panel.Body(@<text>
+                     <table class="table table-condensed table-striped" ms-controller="index">
+                         <thead>
+                             <tr>
+                                 @if (hasModify || hasDelete)
+                                 {
+                                     <th style="width: 100px"></th>
+                                 }
+                                 <th>
+                                     @Html.DisplayNameFor(model => model.Name)
 
-<div class="widget">
-    <div class="well body">
-        <a href="@Url.Action("Create")" class="btn"><i class="icon-plus"></i>@Ornament.Properties.Resources.Create</a>
+                                 </th>
+                                 <th>
+                                     @Html.DisplayNameFor(model => model.Remarks)
 
-        <table class="table table-condensed table-striped" ms-controller="role">
-            <thead>
-                <tr>
-                    @if (hasModify || hasDelete)
-                    {
-                        <th style="width: 100px"></th>
-                    }
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
+                                 </th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr ms-repeat-el="roles">
+                                 @if (hasModify || hasDelete)
+                                 {
+                                     <td>
+                                         @if (hasModify)
+                                         {
+                                             <a ms-href="@Url.Action("Edit")/{{el.Id}}" title="@Ornament.Properties.Resources.Edit" class="btn btn-info">
+                                                 <i class="fa-edit fa"></i></a>
+                                         }
+                                         @if (hasDelete)
+                                         {
+                                             <a ms-href="@Url.Action("Delete")/{{el.Id}}" title="@Ornament.Properties.Resources.Edit" class="btn btn-danger">
+                                                 <i class="fa-remove fa"></i></a>
+                                         }
+                                     </td>
+                                 }
+                                 <td ms-text="el.Name"></td>
+                                 <td ms-text="el.Remarks"></td>
+                             </tr>
+                         </tbody>
+                         <tfoot>
+                             <tr>
+                                 <td colspan="@((hasModify || hasDelete) ? "3" : "2")" ms-widget="pager"></td>
+                             </tr>
+                         </tfoot>
+                     </table>
 
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Remarks)
+    </text>)
+}
 
-                    </th>
-                </tr>
-            </thead>
-            <tbody ms-each-el="roles">
-                <tr>
-                    @if (hasModify || hasDelete)
-                    {
-                        <td>
-                            @if (hasModify)
-                            {
-                                <a ms-href="@Url.Action("Edit")/{{el.Id}}" title="@Ornament.Properties.Resources.Edit" class="btn btn-info btn-mini">
-                                    <i class="icon-edit icon-white"></i></a>
-                            }
-                            @if (hasDelete)
-                            {
-                                <a ms-href="@Url.Action("Delete")/{{el.Id}}" title="@Ornament.Properties.Resources.Edit" class="btn btn-danger btn-mini">
-                                    <i class="icon-remove icon-white"></i></a>
-                            }
-                        </td>
-                    }
-                    <td ms-text="el.Name"></td>
-                    <td ms-text="el.Remarks"></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="@((hasModify || hasDelete) ? "3" : "2")" ms-widget="pagination,page,$pageOpts"  ms-include-src="'/js/avalons/Pagination/Pagination.html'">
-                        
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
 
-    </div>
-</div>
+
+
 @section scripts{
     <script type="text/javascript">
-        seajs.use('@Scripts.Url("/MemberShips/Scripts/Role/index.js")')
+        require(['@Scripts.Url("/MemberShips/Scripts/Role/index.js")'], function(main) {
+            main.init();
+            clearPageVariable.push(main.clear);
+        });
     </script>
 }
