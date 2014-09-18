@@ -147,6 +147,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             if (userBasicInfo == null)
                 return null;
+            
             if (ModelState.IsValid)
             {
                 userBasicInfo.Save(_memberShipFactory);

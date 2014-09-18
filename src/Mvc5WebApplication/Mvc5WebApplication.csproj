@@ -775,6 +775,8 @@
     <None Include="js\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="js\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="js\plugin\jquery-validate\jquery.validate.min.js" />
+    <Content Include="js\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.js" />
+    <Content Include="js\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.min.js" />
     <Content Include="js\plugin\jquery.validate.unobtrusive.bootstrap\jquery.validate.unobtrusive.bootstrap.js" />
     <Content Include="js\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="js\plugin\js-migrate\jquery-migrate-1.2.1.min.js" />

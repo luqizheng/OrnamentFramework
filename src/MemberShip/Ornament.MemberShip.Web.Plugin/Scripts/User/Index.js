@@ -62,7 +62,7 @@ define(function (require) {
                     }
                 });
             };
-            vm.total = 0;
+            vm.total =7;
             vm.deny = function (bDeny) {
                 /// <summary>
                 ///     锁定用户
@@ -93,7 +93,7 @@ define(function (require) {
                     for (var i = 0; i < d.data.length; i++) {
                         model.users.push(d.data[i]);
                     }
-                    vm.total = parseInt(d.TotalRecords);
+                    model.total = d.TotalRecords;
                     func(d.TotalRecords);
 
                 });
