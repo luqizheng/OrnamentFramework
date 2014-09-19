@@ -48,7 +48,7 @@
             vm.next = function() {
 
                 var pageIndex = vm.page + 1;
-                if (pageIndex < vm.totalPage || isNavMode()) {
+                if (pageIndex < vm.totalPage || vm.isNavMode()) {
                     vm.nav(pageIndex);
                 }
                 return false;
@@ -85,7 +85,7 @@
                 if (pageAction == 'pre' || pageAction == 0 || pageAction == 'first') {
                     return vm.page != 0;
                 } else if (pageAction == 'next' || pageAction == 'last') {
-                    if (isNavMode) {
+                    if (vm.isNavMode()) {
                         return vm.pageSize == vm.dataLength;
                     }
                     return (vm.page + 1) != vm.totalPage;

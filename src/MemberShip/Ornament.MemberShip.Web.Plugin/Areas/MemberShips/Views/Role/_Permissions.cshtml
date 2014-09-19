@@ -28,7 +28,7 @@
                 @{
               var checkedAttr = (this.Model != null && this.Model.Permissions.Contains(permission)) ? "checked='checked'" : "";
                 }
-                <input name="permissionIds" value="@permission.Id" @checkedAttr type="checkbox"/>
+                <input name="permissionIds" value="@permission.Id" @checkedAttr type="checkbox" ms-duplex-text="Permissions"/>
             </td>
             <td>
                 @permission.Name

@@ -7,6 +7,7 @@ using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
@@ -50,7 +51,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                          {
                              role.Id,
                              role.Name,
-                             role.Remarks
+                             role.Remarks,
+                             Permissions = role.Permissions.Select(s => s.Id)
                          };
 
             int count = _roleDao.Count();
@@ -62,18 +64,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         }
 
 
-        [
-            ResourceAuthorize(RoleOperator.Modify, "Role"),
-            OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleEditTitle",
-                ParentKey = "Role", PreservedRouteParameters = "id",
-                Resource = "Role", Operator = RoleOperator.Modify)
-        ]
-        public ActionResult Edit(string id)
-        {
-            Role role = _roleDao.Load(id);
-            var roleModel = new RoleModel(role);
-            return View(roleModel);
-        }
+
 
         [ResourceAuthorize(RoleOperator.Modify, "Role"),
          OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleCreateTitle",
@@ -123,7 +114,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         [HttpPost]
         [ResourceAuthorize(RoleOperator.Modify, "Role")]
-        public ActionResult Edit(Role role, string[] permissionIds)
+        [ValidateAjax]
+        public ActionResult Save(Role role, string[] permissionIds)
         {
             if (!ModelState.IsValid)
             {
@@ -137,7 +129,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             {
                 role.Permissions.Add(permissionDao.Load(id));
             }
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.WebPages;
@@ -26,6 +25,9 @@ namespace Ornament.Web.UI.Theme
         public bool Collapsed { get; set; }
         public bool Sortable { get; set; }
 
+        public Dictionary<string, object> HtmlAttributes { get; set; }
+
+
         public void InitPanle(TagBuilder div)
         {
             /*data-widget-editbutton="false">
@@ -38,7 +40,7 @@ namespace Ornament.Web.UI.Theme
 					data-widget-custombutton="false"
 					data-widget-collapsed="true" 
 					data-widget-sortable="false"*/
-            var direct = new Dictionary<string, string>();
+            var direct = new Dictionary<string, object>();
             if (!EditButton)
             {
                 direct.Add("data-widget-editbutton", EditButton.ToString().ToLower());
@@ -83,21 +85,24 @@ namespace Ornament.Web.UI.Theme
 
 
         public Panel(HtmlHelper helper, params string[] classNames)
-            : this(helper, new PanelOption(), new Dictionary<string, object>()
+            : this(helper, new PanelOption
             {
-                {"class",String.Join(" ",classNames)}
+                HtmlAttributes = new Dictionary<string, object>
+                {
+                    {"class", String.Join(" ", classNames)}
+                }
             })
         {
         }
 
-        public Panel(HtmlHelper helper, PanelOption options, IDictionary<string, object> htmlAttributes)
+        public Panel(HtmlHelper helper, PanelOption options)
         {
             _helper = helper;
             ViewContext context = helper.ViewContext;
             _root = new TagBuilder("article");
 
-            string clz = htmlAttributes.ContainsKey("class")
-                ? htmlAttributes["class"].ToString()
+            string clz = options.HtmlAttributes.ContainsKey("class")
+                ? options.HtmlAttributes["class"].ToString()
                 : "col-xs-12 col-sm-12 col-md-12 col-lg-12";
 
 
@@ -107,10 +112,9 @@ namespace Ornament.Web.UI.Theme
             _builder = new TagBuilder("div");
             _builder.AddCssClass("jarviswidget");
             options.InitPanle(_builder);
-            if (htmlAttributes.Count != 0)
+            if (options.HtmlAttributes.Count != 0)
             {
-                _builder.MergeAttributes(htmlAttributes);
-
+                _builder.MergeAttributes(options.HtmlAttributes);
             }
             context.Writer.Write(_root.ToString(TagRenderMode.StartTag));
             context.Writer.Write(_builder.ToString(TagRenderMode.StartTag));

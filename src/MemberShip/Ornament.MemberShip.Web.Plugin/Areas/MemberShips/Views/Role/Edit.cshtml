@@ -1,55 +1,48 @@
 ﻿@using Ornament
-@using Ornament.MemberShip.Plugin.Properties
+@using Ornament.MemberShip.Web.Plugin.Properties
 @using Ornament.Web
 @using Ornament.Web.HtmlExtends
 @using Ornament.Web.UI.Theme
 
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.RoleModel
-@{
-    string subject = Html.GetEmbededResourceString("page_title");
-    ViewBag.Title = subject;
-    Layout = OrnamentContext.Configuration.Layout();
-}
-
-@section pageTitle
-{
-    <h6>@subject</h6>
-}
-<form class="form-horizontal" method="POST">
-    @using (var panel = Html.Panel())
-    {
-
-        @panel.Header(@<text>
-        <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
-        <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
-        </text>)
 
 
-        @panel.Body(
-         @<text>
 
-        @Html.ValidationSummary(true)
-        @Html.EditorFor(model => model.Name)
-        @Html.EditorFor(model => model.Remarks)
-        @Html.HiddenFor(model => model.Id)
-        <div class="control-group">
-            <label class="control-label">@Html.DisplayFor(s => s.Permissions)</label>
-            <div class="controls">
-                @Html.Partial("ChoicePermissions", Model)
-            </div>
+
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        <label class="col-md-2  control-label">
+            @Html.DisplayNameFor(s => s.Name)</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Name, new Dictionary<string, object>()
+            {
+                {"ms-duplex","Name"},{"ms-disabled","!editing"}
+            })
         </div>
-        <div class="form-actions">
-            <button class="btn btn-primary">@Ornament.Properties.Resources.Save</button>
-            <a href="@Url.Action("Index")" class="btn">@Ornament.Properties.Resources.Cancel</a>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2  control-label">
+            @Html.DisplayNameFor(s => s.Remarks)
+        </label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Remarks, new Dictionary<string, object>()
+            {
+                {"ms-duplex","Remarks"},
+                {"ms-disabled","!editing"}
+            })
         </div>
+    </div>
 
-        </text>)
+    @Html.HiddenFor(model => model.Id, new Dictionary<string, object>()
+            {
+                {"ms-duplex","Id"}
+            })
+    <div class="form-group">
+        <label class="control-label">@Html.DisplayFor(s => s.Permissions)</label>
+        <div class="col-md-10">
+            @Html.Partial("_Permissions", Model)
+        </div>
+    </div>
 
 
-    }
-</form>
-@section scripts{
-    <script type="text/javascript">
-        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/MemberShips/Scripts/Role/Edit.js")")
-    </script>
-}
+

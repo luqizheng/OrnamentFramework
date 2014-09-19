@@ -1,7 +1,8 @@
 ﻿using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
-using Ornament.MemberShip.Properties;
+using Ornament.MemberShip.Web.Plugin.Properties;
+
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 {

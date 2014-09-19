@@ -21,8 +21,7 @@
     };
 }
 
-
-@using (var panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-3", "col-xs-4", "col-sm-4"))
+@using (var panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
 {
     
     @panel.Header(@<text>
@@ -41,10 +40,11 @@
                     {
                         <button ms-click="del" 
                                 title="@Ornament.Properties.Resources.Delete" 
-                                class="btn btn-danger">
+                            class="btn btn-danger">
                             <i class="fa-remove fa"></i>
-                        </button>
-                    }
+                        </button>}
+
+
                     <span ms-text="el.Name"></span>
                 </div>
 
@@ -58,15 +58,42 @@
 
     </text>)
 }
-
-@using (var panel = Html.Panel("col-md-7", "col-lg-6", "col-xs-8", "col-sm-8"))
+<style>
+    .loaading::before {
+  content: url('/img/ajax-loader.gif');
+  padding-top: 18%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  background: rgba(255, 255, 255, 0.4);
+  height: 100%;
+  z-index: 1;
+  width: 100%;
+  position: absolute;
+}
+</style>
+@using (var panel = Html.Panel("col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
 {
     @panel.Header(@<text>
     <h2>编辑</h2>
+
     </text>)
+    
     @panel.Body(@<text>
-    @Html.Partial("Edit")
-    </text>)
+                     
+                     <form class="form-horizontal loaading" method="POST" ms-controller="edit"id="roleEdit" ms-submit="save">
+                         
+                         <div class="widget-body-toolbar">
+
+                             <button class="btn btn-primary" type="submit" ms-disabled="!editing">@Ornament.Properties.Resources.Save</button>
+                             <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing">@Ornament.Properties.Resources.Reset</button>
+                             <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
+                         </div>
+                         @Html.Partial("Edit")
+                     </form>
+                 </text>)
 }
 
 
