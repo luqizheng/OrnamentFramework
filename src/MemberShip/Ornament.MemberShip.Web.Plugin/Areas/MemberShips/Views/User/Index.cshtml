@@ -35,13 +35,9 @@
             };
 
             main.init(multiLanguate);
+            clearPageVariable.push(main.clear);
         });
-
-        function clearPageVariable() {
-            require(['@Scripts.Url("~/MemberShips/Scripts/User/Index.js")'], function (main) {
-                main.clear();
-            });
-        }
+        
     </script>}
 
 @using (var panel = Html.Panel(new PanelOption()
@@ -103,7 +99,7 @@
                                          ms-attr-data="{{el.Id}}"
                                          ms-attr-loginid="{{el.LoginId}}">
                                          <td>
-                                             <a class="btn btn-default btn-xs ajaxNav" ms-href="/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
+                                             <a class="btn btn-default btn-xs" ms-href="#/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
                                          </td>
                                          <td ms-text="el.LoginId"></td>
                                          <td ms-text="el.Name"></td>
