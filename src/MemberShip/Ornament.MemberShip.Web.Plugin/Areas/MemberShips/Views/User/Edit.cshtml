@@ -26,7 +26,7 @@
         <div class="alert alert-block alert-success col-lg-12 col-md-12 col-xs-12 col-sm-12" id="jusTest" style="z-index: 99;">
             <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-save"></i>&nbsp;@Ornament.Properties.Resources.Save</button>
             <button class="btn btn-sm" type="reset"><i class="fa fa-mail-reply"></i>&nbsp;@Ornament.Properties.Resources.Reset</button>
-            <button class="btn btn-sm" type="button">&nbsp;@Ornament.Properties.Resources.Cancel</button>
+            <a class="btn btn-sm ajaxNav" href="/MemberShips/User/Index">&nbsp;@Ornament.Properties.Resources.Cancel</a>
         </div>
 
         @using (Panel panel = Html.Panel(basicInfo, classes))
