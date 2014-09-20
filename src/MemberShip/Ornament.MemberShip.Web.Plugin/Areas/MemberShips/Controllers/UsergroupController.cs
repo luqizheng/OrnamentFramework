@@ -4,6 +4,7 @@ using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
@@ -36,72 +37,6 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(result);
         }
 
-
-        //
-        // GET: /Usergroups/Details/5
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupDetailsTitle", ParentKey = "Usergroup",
-            PreservedRouteParameters = "id",
-            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
-        public ActionResult Details(string id)
-        {
-            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
-            IList<User> users = _factory.CreateUserDao().GetUsers(ug);
-            return View(new UserGroupDetailInfor(ug, users));
-        }
-
-        //
-        // GET: /Usergroups/Create
-        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupCreateTitle", ParentKey = "Usergroup",
-            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Usergroups/Create
-
-        [HttpPost]
-        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        public ActionResult Create(UserGroupModel userGroup)
-        {
-            if (ModelState.IsValid)
-            {
-                userGroup.Save(_factory.CreateUserGroupDao());
-
-                return RedirectToAction("Index");
-            }
-            return View(userGroup);
-        }
-
-        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupEditTitle", ParentKey = "Usergroup",
-            PreservedRouteParameters = "id",
-            Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Modify)]
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-                return Redirect("index");
-            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
-            return View(new UserGroupModel(ug));
-        }
-
-
-        //
-        // POST: /Usergroups/Edit/5
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup)]
-        public ActionResult Edit(UserGroupModel userGroup)
-        {
-            if (ModelState.IsValid)
-            {
-                userGroup.Save(_factory.CreateUserGroupDao());
-                return RedirectToAction("Index");
-            }
-            return View(userGroup);
-        }
 
         [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignRole(string id)

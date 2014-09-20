@@ -60,3 +60,54 @@
     </div>
     </text>);
 }
+
+@using (Panel panel = Html.Panel(new PanelOption()
+{
+    HtmlAttributes = new Dictionary<string, object>()
+    {
+        {"ms-controller","edit"},
+    }
+},
+
+    "col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
+{
+    @panel.Header(@<text><h2 ms-text="editTitle">编辑</h2></text>, new Dictionary<string, object>()
+                        {
+                             {"ms-class","widget-body-ajax-loading:loading"}
+                        })
+
+    @panel.Body(@<text>
+
+    <form class="form-horizontal loaading" method="POST" id="roleEdit" ms-submit="save">
+
+        <div class="widget-body-toolbar">
+
+            <button class="btn btn-primary" type="submit" ms-disabled="!editing">@Ornament.Properties.Resources.Save</button>
+            <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
+        </div>
+        @Html.Partial("Edit")
+    </form>
+    </text>, new Dictionary<string, object>()
+                        {
+                             {"ms-class","widget-body-ajax-loading:loading"}
+                        })
+}
+
+
+
+
+@section scripts{
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="/js/plugin/jquery-nestable/jquery.nestable.min.js"></script>
+    <script type="text/javascript">
+        require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function (main) {
+            var message = {
+                createRole: '@Html.GetEmbededResourceString("CreateRole")',
+                editRole: '@Html.GetEmbededResourceString("EditRole")'
+            };
+            main.init(message);
+            clearPageVariable.push(main.clear);
+        });
+    </script>
+}

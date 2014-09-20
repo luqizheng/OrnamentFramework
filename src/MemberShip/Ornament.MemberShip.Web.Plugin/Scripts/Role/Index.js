@@ -76,10 +76,10 @@
             vm.loading = false;
             vm.editTitle = messages.createRole;
             vm.save = function () {
-
-                model.curRole.Name = vm.Name;
-                model.curRole.Remarks = vm.Remarks;
-                model.curRole.Permissions = vm.Permissions;
+                    model.curRole.Name = vm.Name;
+                    model.curRole.Remarks = vm.Remarks;
+                    model.curRole.Permissions = vm.Permissions;
+                
             };
             vm.clear = function() {
                 avalon.mix(editable, { Name: "", Id: "", Remarks: "", Permissions: [] });

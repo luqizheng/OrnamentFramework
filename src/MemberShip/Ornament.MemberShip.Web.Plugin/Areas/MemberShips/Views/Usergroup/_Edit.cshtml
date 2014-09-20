@@ -1,4 +1,4 @@
-﻿@model Ornament.MemberShip.Web.Plugin.Models.Memberships.RoleModel
+﻿@model Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models.UserGroupModel
 
 @Html.ValidationSummary(true)
 <div class="form-group">
@@ -28,9 +28,11 @@
 {
     {"ms-duplex", "Id"}
 })
+
 <div class="form-group">
     <label class="control-label">@Html.DisplayFor(s => s.Permissions)</label>
     <div class="col-md-10">
         @Html.Partial("_Permissions", Model)
     </div>
 </div>
+

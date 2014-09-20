@@ -756,6 +756,7 @@
     <Content Include="js\plugin\dygraphs\demo-data.min.js" />
     <Content Include="js\plugin\dygraphs\dygraph-combined.min.js" />
     <Content Include="js\plugin\easy-pie-chart\jquery.easy-pie-chart.min.js" />
+    <Content Include="js\plugin\fastclick\fastclick.js" />
     <Content Include="js\plugin\fastclick\fastclick.min.js" />
     <Content Include="js\plugin\flot\jquery.flot.cust.min.js" />
     <Content Include="js\plugin\flot\jquery.flot.fillbetween.min.js" />

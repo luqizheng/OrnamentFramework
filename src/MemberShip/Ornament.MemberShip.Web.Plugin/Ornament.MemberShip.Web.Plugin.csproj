@@ -146,7 +146,6 @@
     <EmbeddedResource Include="Scripts\Org\Create.js" />
     <EmbeddedResource Include="Scripts\Permissions\index.js" />
     <EmbeddedResource Include="Scripts\Permissions\Permission.js" />
-    <EmbeddedResource Include="Scripts\Role\Create.js" />
     <EmbeddedResource Include="Scripts\Role\Index.js" />
     <EmbeddedResource Include="Scripts\Share\dataTables.js" />
     <EmbeddedResource Include="Scripts\Share\friend.js" />
@@ -200,9 +199,6 @@
     <Compile Include="Models\Memberships\Partials\QuestionAnswerModel.cs" />
     <Compile Include="Models\Memberships\Partials\UserOtherInfoModel.cs" />
     <Compile Include="Models\Memberships\RegistAccount.cs" />
-    <Compile Include="Models\Memberships\RoleModel.cs" />
-    <Compile Include="Models\Memberships\UserGroupDetailInfor.cs" />
-    <Compile Include="Models\Memberships\UserGroupModel.cs" />
     <Compile Include="Models\Memberships\UsersStatusModel.cs" />
     <Compile Include="Models\NewsOperator.cs" />
     <Compile Include="Models\OrgOperator.cs" />
@@ -244,7 +240,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\_Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Index.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\_Permissions.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Shared\EditorTemplates\PermissionInfo.cshtml" />
@@ -285,8 +281,7 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Details.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\_Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\OrgTreeView.cshtml" />

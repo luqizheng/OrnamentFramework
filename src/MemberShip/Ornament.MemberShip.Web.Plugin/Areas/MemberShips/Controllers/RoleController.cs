@@ -64,19 +64,6 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-        [ResourceAuthorize(RoleOperator.Modify, "Role"),
-         OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleCreateTitle",
-             ParentKey = "Role",
-             Resource = "Role", Operator = RoleOperator.Modify)
-        ]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [ResourceAuthorize(RoleOperator.Delete, "Role")]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
             ParentKey = "Role", PreservedRouteParameters = "id",
@@ -101,18 +88,6 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost, ResourceAuthorize(RoleOperator.Modify, "Role"),]
-        public ActionResult Create(RoleModel role, string[] permissionIds)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(role);
-            }
-            role.Save(_factory.CreateRoleDao());
-
-            return RedirectToAction("Index");
-        }
-
         [HttpPost]
         [ResourceAuthorize(RoleOperator.Modify, "Role")]
         [ValidateAjax]
@@ -121,10 +96,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 #if DEBUG
             Thread.Sleep(2*1000);
 #endif
-            if (!ModelState.IsValid)
-            {
-                return View(role);
-            }
+          
 
             IPermissionDao permissionDao =
                 OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
@@ -133,6 +105,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             {
                 role.Permissions.Add(permissionDao.Load(id));
             }
+            _factory.CreateRoleDao().SaveOrUpdate(role);
             return Json(new { success = true });
         }
     }
