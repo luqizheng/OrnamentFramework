@@ -417,6 +417,8 @@
     <Content Include="js\libs\jquery-2.0.2.js" />
     <Content Include="js\libs\jquery-ui-1.10.3.js" />
     <Content Include="js\notification\SmartNotification.min.js" />
+    <Content Include="js\plugin\bootbox\bootbox.js" />
+    <Content Include="js\plugin\bootbox\bootbox.min.js" />
     <Content Include="js\plugin\bootstrap-progressbar\bootstrap-progressbar.min.js" />
     <Content Include="js\plugin\bootstrap-slider\bootstrap-slider.min.js" />
     <Content Include="js\plugin\bootstrap-tags\bootstrap-tagsinput-angular.min.js" />

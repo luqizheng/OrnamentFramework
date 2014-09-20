@@ -129,6 +129,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Index.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Index.zh-Hans.resx" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Index.zh-Hant.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

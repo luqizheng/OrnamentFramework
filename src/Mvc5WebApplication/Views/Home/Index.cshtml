@@ -427,6 +427,7 @@
     <!-- avalon-->
     @Scripts.Render("~/js/avalon")
     <script type="text/javascript">avalon.config({ loader: false })</script>
+    <script src="~/js/require.js" data-main="/Home/Config"></script>
 
     <!-- #PLUGINS -->
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
@@ -485,7 +486,7 @@
         <!-- MAIN APP JS FILE -->
     <script src="/js/app.min.js"></script>
     
-    <script src="~/js/require.js" data-main="/Home/Config"></script>
+
     
     <script src="/js/util.js" type="text/javascript"></script>
 </body>
