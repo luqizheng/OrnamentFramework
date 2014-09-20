@@ -42,14 +42,16 @@
            .removeData("unobtrusiveValidation");
         $.validator.unobtrusive.parse("#roleEdit");
 
+        /* update Role */
         $form.validate().settings.submitHandler = function (form) {
 
             var data = $form.serializeObject();
+            editable.loading = true;
             $.post('/memberShips/Role/Save', data, function (rData) {
                 alert(rData.success ? "保存成功" : rData.Message);
-
             }).done(function () {
                 $form.find("input").prop("disabled", false);
+                editable.loading = false;
             }).fail(function (status) {
                 if (status.status == 400) {
                     var errors = {};
@@ -67,7 +69,9 @@
             vm.Remarks = "";
             vm.Permissions = [];
             vm.editing = false;
+            vm.loading = false;
             vm.save = function () {
+
                 model.curRole.Name = vm.Name;
                 model.curRole.Remarks = vm.Remarks;
                 model.curRole.Permissions = vm.Permissions;
@@ -84,7 +88,7 @@
     return {
         init: function () {
             init();
-            avalon.scan();
+            avalon.scan($("#content")[0]);
         },
         clear: function () {
             delete avalon.vmodels['role'];

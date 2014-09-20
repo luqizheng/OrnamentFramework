@@ -1,29 +1,25 @@
 ﻿@using Ornament
-@using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.MemberShip.Properties
-@using Ornament.Web.UI.Paginations
 @using Ornament.Web.UI.Theme
-@using Qi.Web.Mvc
-@model IEnumerable<Role>
+@model IEnumerable<Ornament.MemberShip.Role>
 @{
     ViewBag.Title = Resources.Role;
     Layout = OrnamentContext.Configuration.Layout();
     bool hasDelete = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Delete);
     bool hasModify = OrnamentContext.MemberShip.HasRight("Role", RoleOperator.Modify);
-    var listPanelOptions = new PanelOption()
+    var listPanelOptions = new PanelOption
     {
         ColorButton = true,
-        HtmlAttributes = new Dictionary<string, object>()
+        HtmlAttributes = new Dictionary<string, object>
         {
-            {"ms-controller","index"}
+            {"ms-controller", "index"}
         }
     };
 }
 
-@using (var panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
+@using (Panel panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
 {
-    
     @panel.Header(@<text>
     <h2>Role List</h2>
     </text>)
@@ -33,16 +29,17 @@
         <ul class="dd-list">
             <ol ms-repeat-el="roles" class="dd-item">
                 @{
-                    var handler = hasModify ? "ms-click=edit" : "";
+                    string handler = hasModify ? "ms-click=edit" : "";
                 }
-                <div class="dd-handle" style="cursor:pointer" @handler ms-title="el.Remarks">
+                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks">
                     @if (hasDelete)
                     {
                         <button ms-click="del" 
-                                title="@Ornament.Properties.Resources.Delete" 
-                            class="btn btn-danger">
+                                                 title="@Ornament.Properties.Resources.Delete" 
+                                                 class="btn btn-danger">
                             <i class="fa-remove fa"></i>
-                        </button>}
+                        </button>
+                    }
 
 
                     <span ms-text="el.Name"></span>
@@ -58,42 +55,38 @@
 
     </text>)
 }
-<style>
-    .loaading::before {
-  content: url('/img/ajax-loader.gif');
-  padding-top: 18%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 16px;
-  color: #fff;
-  display: block;
-  background: rgba(255, 255, 255, 0.4);
-  height: 100%;
-  z-index: 1;
-  width: 100%;
-  position: absolute;
-}
-</style>
-@using (var panel = Html.Panel("col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
+
+@using (Panel panel = Html.Panel(new PanelOption()
 {
-    @panel.Header(@<text>
-    <h2>编辑</h2>
+    HtmlAttributes = new Dictionary<string, object>()
+    {
+        {"ms-controller","edit"},
+    }
+},
 
-    </text>)
-    
+    "col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
+{
+    @panel.Header(@<text><h2>编辑</h2></text>, new Dictionary<string, object>()
+                        {
+                             {"ms-class","widget-body-ajax-loading:loading"}
+                        })
+
     @panel.Body(@<text>
-                     
-                     <form class="form-horizontal loaading" method="POST" ms-controller="edit"id="roleEdit" ms-submit="save">
-                         
-                         <div class="widget-body-toolbar">
 
-                             <button class="btn btn-primary" type="submit" ms-disabled="!editing">@Ornament.Properties.Resources.Save</button>
-                             <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing">@Ornament.Properties.Resources.Reset</button>
-                             <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
-                         </div>
-                         @Html.Partial("Edit")
-                     </form>
-                 </text>)
+    <form class="form-horizontal loaading" method="POST" id="roleEdit" ms-submit="save">
+
+        <div class="widget-body-toolbar">
+
+            <button class="btn btn-primary" type="submit" ms-disabled="!editing">@Ornament.Properties.Resources.Save</button>
+            <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing">@Ornament.Properties.Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
+        </div>
+        @Html.Partial("Edit")
+    </form>
+    </text>, new Dictionary<string, object>()
+                        {
+                             {"ms-class","widget-body-ajax-loading:loading"}
+                        })
 }
 
 

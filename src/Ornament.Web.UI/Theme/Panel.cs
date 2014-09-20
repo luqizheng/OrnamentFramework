@@ -135,20 +135,44 @@ namespace Ornament.Web.UI.Theme
             return _helper.Partial(PartialViewPath("HeaderToolbar"), buffer.Builder);
         }
 
-        public MvcHtmlString Header(Func<object, HelperResult> action)
+        public MvcHtmlString Header(Func<object, HelperResult> action, Dictionary<string, object> htmlAttributes)
         {
             TextWriter writer = _context.Writer;
             var buffer = new RecordWriter(writer);
             action(null).WriteTo(buffer);
-            return _helper.Partial(PartialViewPath("Header"), buffer.Builder);
+            var tag = new TagBuilder("header");
+            tag.MergeAttributes(htmlAttributes);
+            var s = _helper.Partial(PartialViewPath("Header"), buffer.Builder);
+            return
+              new MvcHtmlString(string.Format("{0}{1}{2}", tag.ToString(TagRenderMode.StartTag), s,
+                  tag.ToString(TagRenderMode.EndTag)));
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public MvcHtmlString Header(Func<object, HelperResult> action)
+        {
+            return Header(action, new Dictionary<string, object>());
+        }
+
+        public MvcHtmlString Body(Func<object, HelperResult> action, Dictionary<string, object> htmlAttributes)
+        {
+            TextWriter writer = _context.Writer;
+            var buffer = new RecordWriter(writer);
+            action(null).WriteTo(buffer);
+            MvcHtmlString s = _helper.Partial(PartialViewPath("Body"), buffer.Builder);
+            var tag = new TagBuilder("div");
+            tag.MergeAttributes(htmlAttributes);
+            return
+                new MvcHtmlString(string.Format("{0}{1}{2}", tag.ToString(TagRenderMode.StartTag), s,
+                    tag.ToString(TagRenderMode.EndTag)));
         }
 
         public MvcHtmlString Body(Func<object, HelperResult> action)
         {
-            TextWriter writer = _context.Writer;
-            var buffer = new RecordWriter(writer);
-            action(null).WriteTo(buffer);
-            return _helper.Partial(PartialViewPath("Body"), buffer.Builder);
+            return Body(action, new Dictionary<string, object>());
         }
 
         public MvcHtmlString Footer(Func<object, HelperResult> action)

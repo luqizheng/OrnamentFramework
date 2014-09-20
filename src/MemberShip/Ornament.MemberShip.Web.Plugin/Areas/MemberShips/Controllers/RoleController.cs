@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
@@ -117,6 +118,9 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [ValidateAjax]
         public ActionResult Save(Role role, string[] permissionIds)
         {
+#if DEBUG
+            Thread.Sleep(2*1000);
+#endif
             if (!ModelState.IsValid)
             {
                 return View(role);
