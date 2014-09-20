@@ -24,7 +24,10 @@
     @panel.Header(@<text>
     <h2>@Html.GetEmbededResourceString("Role_List")</h2>
     <div class="widget-toolbar">
-        <button class="btn btn-primary" ms-click="create">@Ornament.Properties.Resources.Create</button>
+        <button class="btn btn-primary" ms-click="create">
+            <i class="fa fa-plug"></i>
+            @Ornament.Properties.Resources.Create
+        </button>
     </div>
     </text>)
     @panel.Body(@<text>
@@ -44,15 +47,13 @@
                             <i class="fa-remove fa"></i>
                         </button>
                     }
-
-
                     <span ms-text="el.Name"></span>
                 </div>
 
             </ol>
         </ul>
     </div>
-    <div  colspan="@((hasModify || hasDelete) ? "3" : "2")" ms-widget="pager">
+    <div   ms-widget="pager">
     </div>
 
 

@@ -165,7 +165,6 @@
     </EmbeddedResource>
     <Content Include="Scripts\Share\_NewPassword.js" />
     <EmbeddedResource Include="Scripts\User\Assign.js" />
-    <EmbeddedResource Include="Scripts\User\Create.js" />
     <EmbeddedResource Include="Scripts\User\Edit.js" />
     <EmbeddedResource Include="Scripts\User\Index.js" />
     <Content Include="Web.config" />
@@ -300,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
+    <Folder Include="Scripts\UserGroup\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.resx" />
