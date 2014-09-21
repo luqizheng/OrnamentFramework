@@ -801,6 +801,7 @@
     <Content Include="js\plugin\select2\select2.min.js" />
     <Content Include="js\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
     <Content Include="js\plugin\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="js\plugin\sparkline\jquery.sparkline.js" />
     <Content Include="js\plugin\sparkline\jquery.sparkline.min.js" />
     <Content Include="js\plugin\summernote\summernote.min.js" />
     <Content Include="js\plugin\superbox\superbox.min.js" />
