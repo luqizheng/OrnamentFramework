@@ -1,8 +1,9 @@
 ﻿@using Ornament
+@using Ornament.MemberShip
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
-@model IEnumerable<Ornament.MemberShip.UserGroup>
+
 
 @{
     ViewBag.Title = Html.GetEmbededResourceString("page_title");
@@ -22,13 +23,7 @@
     <h6>@Html.GetEmbededResourceString("page_title")</h6>
 }
 
-@section scripts{
-    <script type="text/javascript">
-        function clearPageVar() {
-            delete avalon.vmodels["index"];
-        }
-    </script>
-}
+
 
 @using (Panel panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
 {
@@ -46,7 +41,7 @@
 
     <div id="userGroup">
         <ul class="dd-list">
-            <ol ms-repeat-el="usergroups" class="dd-item">
+            <ol ms-repeat-el="userGroups" class="dd-item">
                 <div class="dd-handle" style="cursor: pointer">
                     <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs">
                         <i class="fa-share fa"></i>
@@ -78,7 +73,7 @@
 
     @panel.Body(@<text>
 
-    <form class="form-horizontal loaading" method="POST" id="roleEdit" ms-submit="save">
+    <form class="form-horizontal loaading" method="POST" id="editor" ms-submit="save">
 
         <div class="widget-body-toolbar">
 
@@ -86,7 +81,7 @@
             <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
             <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
         </div>
-        @Html.Partial("Edit")
+        @Html.Partial("_Edit",(UserGroup)null)
     </form>
     </text>, new Dictionary<string, object>()
                         {
@@ -98,9 +93,8 @@
 
 
 @section scripts{
-    <!-- PAGE RELATED PLUGIN(S) -->
-    <script src="/js/plugin/jquery-nestable/jquery.nestable.min.js"></script>
-    <script type="text/javascript">
+   
+   <script type="text/javascript">
         require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function (main) {
             var message = {
                 createRole: '@Html.GetEmbededResourceString("CreateRole")',

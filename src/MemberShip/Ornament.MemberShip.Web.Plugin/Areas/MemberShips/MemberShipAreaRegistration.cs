@@ -70,6 +70,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             helper.RegistSeajsModule("Scripts/Role");
             helper.RegistSeajsModule("Scripts/Share");
             helper.RegistSeajsModule("Scripts/Permissions");
+            helper.RegistSeajsModule("Scripts/UserGroup");
 
             base.RegisterArea(context, bus);
         }

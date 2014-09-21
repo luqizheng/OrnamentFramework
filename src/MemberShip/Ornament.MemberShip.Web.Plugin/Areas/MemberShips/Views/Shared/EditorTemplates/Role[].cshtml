@@ -11,21 +11,6 @@
     IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
         .CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
-
-    //IDictionary<string, object> htmlAttris;
-    //if (ViewData.ContainsKey("HtmlAttributes"))
-    //{
-    //    htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object>;
-    //    if (htmlAttris == null)
-    //    {
-    //        htmlAttris = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
-    //    }
-    //}
-    //else
-    //{
-    //    htmlAttris = new Dictionary<string, object>();
-    //}
-    
     
 }
 

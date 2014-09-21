@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using NHibernate.Hql.Ast.ANTLR;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
-using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
-using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
@@ -27,16 +29,44 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,groupListTitle", ParentKey = "MemberShips",
             Key = "Usergroup", Order = 3,
             Resource = ResourceSetting.UserGroup, Operator = UserGroupOperator.Read)]
-        public ActionResult Index(Pagination pagination)
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [ResourceAuthorize(UserGroupOperator.Read, ResourceSetting.UserGroup)]
+        public ActionResult List(int? index, int? size)
         {
             IUserGroupDao dao = _factory.CreateUserGroupDao();
             int total;
-            IList<UserGroup> result = dao.FindAll(pagination.CurrentPage, pagination.PageSize, out total);
-            pagination.TotalRows = total;
-            ViewData["Nav"] = pagination;
-            return View(result);
+            IList<UserGroup> result = dao.FindAll(index ?? 0, size ?? 30, out total);
+
+            var returnData = from a in result
+                select new
+                {
+                    a.Id,
+                    a.Name,
+                    a.Remarks,
+                    Roles = a.GetAllRoles().Select(s => s.Id)
+                };
+
+            return Json(returnData, JsonRequestBehavior.AllowGet);
         }
 
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup),ValidateAjax]
+        [HttpPost]
+        public ActionResult Save(UserGroup userGroup, string[] roles)
+        {
+            userGroup.Roles.Clear();
+            var roleDao=_factory.CreateRoleDao();
+            foreach (var role in roles)
+            {
+                userGroup.Roles.Add(roleDao.Get(role));
+            }
+
+            _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
+
+            return Json(new {success = true});
+        }
 
         [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignRole(string id)
