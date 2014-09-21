@@ -425,6 +425,7 @@
 		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
 
     <!-- avalon-->
+
     @Scripts.Render("~/js/avalon")
     <script type="text/javascript">avalon.config({ loader: false })</script>
     <script src="~/js/require.js" data-main="/Home/Config"></script>
@@ -435,7 +436,7 @@
     @Scripts.Render("~/js/jqueryui")
     <!-- BOOTSTRAP JS -->
     @Scripts.Render("~/js/bootstrap")
-    
+
     <!-- IMPORTANT: APP CONFIG -->
     <script src="/js/app.config.js"></script>
 
@@ -470,24 +471,23 @@
     <!-- browser msie issue fix -->
     <script src="/js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 
-   
+
 
     <!--[if IE 8]>
 			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
 		<![endif]-->
-
-    <script type="text/javascript" src="/js/plugin/fastclick/fastclick.js"></script>
-    <script type="text/javascript" src="/js/plugin/sparkline/jquery.sparkline.min.js"></script>
+  @*  <script type="text/javascript" src="/js/plugin/fastclick/fastclick.js"></script>
+    <script type="text/javascript" src="/js/plugin/sparkline/jquery.sparkline.min.js"></script>*@
 
     <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
     <!-- Voice command : plugin -->
     <script src="/js/speech/voicecommand.min.js"></script>
 
-        <!-- MAIN APP JS FILE -->
+    <!-- MAIN APP JS FILE -->
     <script src="/js/app.min.js"></script>
-    
 
-    
+
+
     <script src="/js/util.js" type="text/javascript"></script>
 </body>
 

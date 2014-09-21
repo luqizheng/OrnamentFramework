@@ -63,7 +63,7 @@
             };
         });
 
-        editor = avalon.define('edit', function() {
+        editor = avalon.define('edit', function(vm) {
             vm.Id = "";
             vm.Name = "";
             vm.Roles = [];
@@ -94,11 +94,12 @@
             }
             changeVal();
             defineAvalon();
+            avalon.scan();
         },
 
         clear: function() {
-            delete avalon.$vmodels['index'];
-            delete avalon.$vmodels['edit'];
+            delete avalon.vmodels['index'];
+            delete avalon.vmodels['edit'];
         }
     };
 })
