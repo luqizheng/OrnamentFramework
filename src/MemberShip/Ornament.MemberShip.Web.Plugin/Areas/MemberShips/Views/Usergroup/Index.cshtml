@@ -31,7 +31,10 @@
     <h2>@Html.GetEmbededResourceString("page_title")</h2>
     <div class="widget-toolbar">
         <button id="add" class="btn btn-primary" ms-click="create">
-            <i class="fa-plus fa"></i>@Resources.Create
+            <i class="fa-plus fa"></i>
+        </button>
+        <button id="refresh" class="btn btn-default" ms-click="refresh">
+            <i class="fa fa-refresh"></i>
         </button>
     </div>
     </text>);
@@ -42,7 +45,7 @@
     <div id="userGroup">
         <ul class="dd-list" ms-each-el="userGroups" >
             <ol class="dd-item">
-                <div class="dd-handle" style="cursor: pointer" ms-click="edit" ms-class-1  ="bg-color-pink:el.Id==curUg.Id">
+                <div class="dd-handle" style="cursor: pointer" ms-click="edit" ms-class-1="txt-color-white bg-color-pink:curUg!=null && el.Id==curUg.Id">
                     <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs btn-danger">
                         <i class="fa-remove fa"></i>
                     </button>
@@ -51,7 +54,7 @@
             </ol>
         </ul>
     </div>
-    <div  ms-widget="pager">
+    <div  ms-widget="pager,ugList">
     </div>
     </text>);
 }
@@ -78,7 +81,7 @@
         <div class="widget-body-toolbar">
 
             <button class="btn btn-primary" type="submit" ms-disabled="!editing">@Ornament.Properties.Resources.Save</button>
-            <button class="btn btn-default" type="button" ms-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Ornament.Properties.Resources.Reset</button>
             <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
         </div>
         @Html.Partial("_Edit",(UserGroup)null)

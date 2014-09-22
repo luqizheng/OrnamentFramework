@@ -1,13 +1,13 @@
 ﻿define(function (require) {
     require("pager");
- 
+
     var bootbox = require("bootbox");
     var messages = {
         success: '保存成功',
         createTitle: "创建",
         editTitle: "编辑"
-    }, $form, editor,list;
-    
+    }, $form, editor, list;
+
     function changeVal() {
         require(["vaform"], function () {
 
@@ -17,8 +17,13 @@
                     editor.loading = true;
                 },
                 success: function (rData) {
+                    var isCreated = editor.Id=="";
                     editor.Id = rData.Id;
-                    list.AddToCur(editor.getPureModel());
+                    if (isCreated) {
+                        list.AddToCur(editor.getPureModel());
+                    } else {
+                        avalon.mix(list.curUg , editor.getPureModel());
+                    }
                     bootbox.alert(rData.success ? messages.success : rData.Message);
                 },
                 done: function (form) {
@@ -27,17 +32,20 @@
                 }
             });
         });
-        
+
     }
 
     function defineAvalon() {
-        
+
 
         list = avalon.define('index', function (vm) {
-            vm.userGroups = [{"Id":"","Name":"","Remarks":"","Roles":[]}];
-          
+            vm.userGroups = [{ "Id": "", "Name": "", "Remarks": "", "Roles": [] }];
+
             vm.del = function () {
 
+            };
+            vm.refresh = function () {
+                avalon.vmodels["ugList"].nav(0);
             };
             vm.create = function () {
                 editor.clear();
@@ -47,14 +55,14 @@
                 var ug = this.$vmodel.el;
                 avalon.mix(editor, ug);
                 editor.editing = true;
-                vm.curRole = ug;
-                
+                vm.curUg = ug;
+
             };
-            vm.AddToCur = function(ugModel) {
+            vm.AddToCur = function (ugModel) {
                 vm.userGroups.push(ugModel);
-                vm.curRole = ugModel;
+                vm.curUg = ugModel;
             };
-            vm.curRole = null;
+            vm.curUg = null;
             vm.pager = {
                 search: function (index, maxRecords, func) {
                     $.get("/MemberShips/UserGroup/List", {
@@ -64,7 +72,7 @@
                         list.userGroups = d.data;
                         func(d.totalRecords);
                     });
-                    
+
                 }
             };
         });
@@ -76,12 +84,16 @@
             vm.Remarks = "";
             vm.editing = false;
             vm.loading = false;
-            vm.cancel = function() {
+            vm.cancel = function () {
+                vm.editing = false;
                 vm.clear();
+            };
+            vm.reset = function() {
+                avalon.mix(vm, list.curUg);
             };
             vm.editTitle =
             {
-                get: function() {
+                get: function () {
                     return vm.editing ? messages.editTitle : messages.createTitle;
                 }
             };
@@ -93,9 +105,9 @@
                     Remarks: ""
                 });
             };
-            vm.IsCreated =  {
-                get:function() {
-                    return vm.Id != "";
+            vm.IsCreated = {
+                get: function () {
+                    return vm.Id == "";
                 }
             };
             vm.getPureModel = function () {
@@ -105,7 +117,7 @@
                     Remarks: vm.Remarks,
                     Roles: vm.Roles
                 };
-                
+
             };
         });
     }
@@ -122,6 +134,7 @@
         },
 
         clear: function () {
+            console.log('clean up');
             delete avalon.vmodels['index'];
             delete avalon.vmodels['edit'];
         }
