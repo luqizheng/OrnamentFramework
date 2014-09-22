@@ -6,8 +6,8 @@
         success: '保存成功',
         createTitle: "创建",
         editTitle: "编辑"
-    }, $form, editor;
-
+    }, $form, editor,list;
+    
     function changeVal() {
         require(["vaform"], function () {
 
@@ -17,6 +17,8 @@
                     editor.loading = true;
                 },
                 success: function (rData) {
+                    editor.Id = rData.Id;
+                    list.AddToCur(editor.getPureModel());
                     bootbox.alert(rData.success ? messages.success : rData.Message);
                 },
                 done: function (form) {
@@ -31,7 +33,7 @@
     function defineAvalon() {
         
 
-        var list = avalon.define('index', function (vm) {
+        list = avalon.define('index', function (vm) {
             vm.userGroups = [{"Id":"","Name":"","Remarks":"","Roles":[]}];
           
             vm.del = function () {
@@ -45,7 +47,14 @@
                 var ug = this.$vmodel.el;
                 avalon.mix(editor, ug);
                 editor.editing = true;
+                vm.curRole = ug;
+                
             };
+            vm.AddToCur = function(ugModel) {
+                vm.userGroups.push(ugModel);
+                vm.curRole = ugModel;
+            };
+            vm.curRole = null;
             vm.pager = {
                 search: function (index, maxRecords, func) {
                     $.get("/MemberShips/UserGroup/List", {
@@ -67,6 +76,9 @@
             vm.Remarks = "";
             vm.editing = false;
             vm.loading = false;
+            vm.cancel = function() {
+                vm.clear();
+            };
             vm.editTitle =
             {
                 get: function() {
@@ -81,9 +93,19 @@
                     Remarks: ""
                 });
             };
-
-            vm.save = function () {
-
+            vm.IsCreated =  {
+                get:function() {
+                    return vm.Id != "";
+                }
+            };
+            vm.getPureModel = function () {
+                return {
+                    Id: vm.Id,
+                    Name: vm.Name,
+                    Remarks: vm.Remarks,
+                    Roles: vm.Roles
+                };
+                
             };
         });
     }

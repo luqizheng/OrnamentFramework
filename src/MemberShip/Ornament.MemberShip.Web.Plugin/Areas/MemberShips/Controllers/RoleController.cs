@@ -106,7 +106,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 role.Permissions.Add(permissionDao.Load(id));
             }
             _factory.CreateRoleDao().SaveOrUpdate(role);
-            return Json(new { success = true });
+            return Json(new { success = true,Id=role.Id });
         }
     }
 }

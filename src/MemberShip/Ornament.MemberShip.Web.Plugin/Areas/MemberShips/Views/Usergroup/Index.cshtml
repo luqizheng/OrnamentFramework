@@ -42,7 +42,7 @@
     <div id="userGroup">
         <ul class="dd-list" ms-each-el="userGroups" >
             <ol class="dd-item">
-                <div class="dd-handle" style="cursor: pointer" ms-click="edit">
+                <div class="dd-handle" style="cursor: pointer" ms-click="edit" ms-class-1  ="bg-color-pink:el.Id==curUg.Id">
                     <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs btn-danger">
                         <i class="fa-remove fa"></i>
                     </button>
@@ -78,7 +78,7 @@
         <div class="widget-body-toolbar">
 
             <button class="btn btn-primary" type="submit" ms-disabled="!editing">@Ornament.Properties.Resources.Save</button>
-            <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
             <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
         </div>
         @Html.Partial("_Edit",(UserGroup)null)

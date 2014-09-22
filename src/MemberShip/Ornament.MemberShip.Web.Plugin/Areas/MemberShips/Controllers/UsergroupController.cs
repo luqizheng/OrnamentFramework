@@ -66,7 +66,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
             _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
 
-            return Json(new {success = true});
+            return Json(new {success = true,Id=userGroup.Id});//返回Id.更新View的时候需要Id
         }
 
         [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
