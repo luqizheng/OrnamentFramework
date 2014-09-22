@@ -7,7 +7,7 @@
     <div class="col-md-10">
         @Html.TextBoxFor(model => model.Name, new Dictionary<string, object>
         {
-            {"ms-duplex", "Name"}, {"ms-disabled", "!editing"}
+            {"ms-duplex", "Name"}, {"ms-disabled", "!editing"},{"class","form-control"}
         })
     </div>
 </div>
@@ -19,7 +19,7 @@
         @Html.TextAreaFor(model => model.Remarks, new Dictionary<string, object>
         {
             {"ms-duplex", "Remarks"},
-            {"ms-disabled", "!editing"}
+            {"ms-disabled", "!editing"},{"class","form-control"}
         })
     </div>
 </div>
@@ -30,7 +30,7 @@
 })
 
 <div class="form-group">
-    <label class="control-label">@Html.DisplayFor(s => s.Roles)</label>
+    <label class="control-label col-md-2">@Html.DisplayNameFor(s => s.Roles)</label>
     <div class="col-md-10">
         @Html.EditorFor(s=>s.Roles)
     </div>

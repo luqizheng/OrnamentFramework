@@ -30,9 +30,9 @@
     @panel.Header(@<text>
     <h2>@Html.GetEmbededResourceString("page_title")</h2>
     <div class="widget-toolbar">
-        <a id="add" class="btn btn-primary" href="@Url.Action("Create")">
+        <button id="add" class="btn btn-primary" ms-click="create">
             <i class="fa-plus fa"></i>@Resources.Create
-        </a>
+        </button>
     </div>
     </text>);
 
@@ -40,14 +40,14 @@
     @panel.Body(@<text>
 
     <div id="userGroup">
-        <ul class="dd-list">
-            <ol ms-repeat-el="userGroups" class="dd-item">
-                <div class="dd-handle" style="cursor: pointer">
-                    <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs">
-                        <i class="fa-share fa"></i>
+        <ul class="dd-list" ms-each-el="userGroups" >
+            <ol class="dd-item">
+                <div class="dd-handle" style="cursor: pointer" ms-click="edit">
+                    <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs btn-danger">
+                        <i class="fa-remove fa"></i>
                     </button>
+                     <span ms-text="el.Name"></span>
                 </div>
-                <span ms-text="el.Name"></span>
             </ol>
         </ul>
     </div>
@@ -73,7 +73,7 @@
 
     @panel.Body(@<text>
 
-    <form class="form-horizontal loaading" method="POST" id="editor" ms-submit="save">
+    <form class="form-horizontal" method="POST" id="ugEditor">
 
         <div class="widget-body-toolbar">
 
@@ -96,11 +96,7 @@
    
    <script type="text/javascript">
         require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function (main) {
-            var message = {
-                createRole: '@Html.GetEmbededResourceString("CreateRole")',
-                editRole: '@Html.GetEmbededResourceString("EditRole")'
-            };
-            main.init(message);
+            main.init();
             clearPageVariable.push(main.clear);
         });
     </script>

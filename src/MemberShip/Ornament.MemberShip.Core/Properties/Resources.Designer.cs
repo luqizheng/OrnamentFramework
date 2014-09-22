@@ -547,6 +547,15 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Roles 的本地化字符串。
+        /// </summary>
+        public static string Roles {
+            get {
+                return ResourceManager.GetString("Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Time zone 的本地化字符串。
         /// </summary>
         public static string TimeZone {

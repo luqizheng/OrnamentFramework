@@ -49,16 +49,17 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                     Roles = a.GetAllRoles().Select(s => s.Id)
                 };
 
-            return Json(returnData, JsonRequestBehavior.AllowGet);
+            return Json(new {data = returnData, totalRecords = total}, JsonRequestBehavior.AllowGet);
         }
 
-        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup),ValidateAjax]
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup),ValidateAjax,Session]
         [HttpPost]
         public ActionResult Save(UserGroup userGroup, string[] roles)
         {
             userGroup.Roles.Clear();
             var roleDao=_factory.CreateRoleDao();
-            foreach (var role in roles)
+
+            foreach (var role in roles??new string[0])
             {
                 userGroup.Roles.Add(roleDao.Get(role));
             }

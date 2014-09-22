@@ -282,4 +282,7 @@
   <data name="ParentOrg" xml:space="preserve">
     <value>所屬部門</value>
   </data>
+  <data name="Roles" xml:space="preserve">
+    <value>角色</value>
+  </data>
 </root>

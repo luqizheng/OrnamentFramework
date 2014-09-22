@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
@@ -43,6 +44,7 @@ namespace Ornament.MemberShip
         ///     The roles.
         /// </value>
         [UIHint("Role[]")]
+        [Display(ResourceType = typeof(Resources), Name = "Roles")]
         public virtual Iesi.Collections.Generic.ISet<Role> Roles
         {
             get { return _roles ?? (_roles = new HashedSet<Role>()); }

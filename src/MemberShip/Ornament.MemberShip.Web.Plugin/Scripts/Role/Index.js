@@ -1,7 +1,7 @@
 ﻿define(function (require) {
 
-    require("form");
-    require("/js/avalons/pager/pager.js");
+    //require("form");
+    require("pager");
     var bootbox=require("bootbox");
 
     function init() {
@@ -104,7 +104,7 @@
         init: function (message) {
             messages = message;
             init();
-            avalon.scan($("#content")[0]);
+            avalon.scan();
         },
         clear: function () {
             delete avalon.vmodels['index'];

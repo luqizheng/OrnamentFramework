@@ -9,7 +9,7 @@ namespace Ornament.Web.PortableAreas
         public const string MasterPageTemplate = @"MasterPageFile=""{0}""";
         public const string ContentPlaceHolderTemplate = @"ContentPlaceHolderID=""{0}""";
         public const string ContentPlaceHolderPattern = @"<asp:Content .*ContentPlaceHolderID=""{0}.*>";
-        protected Dictionary<string, string> _mappings = new Dictionary<string, string>();
+        protected Dictionary<string, string> Mappings = new Dictionary<string, string>();
 
         public PortableAreaMap()
         {
@@ -28,8 +28,8 @@ namespace Ornament.Web.PortableAreas
         {
             get
             {
-                if (_mappings.ContainsKey(DefaultTitleID))
-                    return _mappings[DefaultTitleID];
+                if (Mappings.ContainsKey(DefaultTitleID))
+                    return Mappings[DefaultTitleID];
 
                 return null;
             }
@@ -39,8 +39,8 @@ namespace Ornament.Web.PortableAreas
         {
             get
             {
-                if (_mappings.ContainsKey(DefaultBodyID))
-                    return _mappings[DefaultBodyID];
+                if (Mappings.ContainsKey(DefaultBodyID))
+                    return Mappings[DefaultBodyID];
 
                 return null;
             }
@@ -68,7 +68,7 @@ namespace Ornament.Web.PortableAreas
         {
             string result = ReplaceMasterPage(input);
 
-            foreach (var pair in _mappings)
+            foreach (var pair in Mappings)
             {
                 string pattern = string.Format(ContentPlaceHolderPattern, pair.Key);
 
@@ -95,10 +95,10 @@ namespace Ornament.Web.PortableAreas
 
         public void Add(string defaultID, string newID)
         {
-            if (_mappings.ContainsKey(defaultID))
-                _mappings[defaultID] = newID;
+            if (Mappings.ContainsKey(defaultID))
+                Mappings[defaultID] = newID;
             else
-                _mappings.Add(defaultID, newID);
+                Mappings.Add(defaultID, newID);
         }
     }
 }
