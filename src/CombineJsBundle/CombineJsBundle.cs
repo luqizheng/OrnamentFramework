@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Optimization;
-using SeajsBundles;
 using SeajsBundles.Seajs;
 
 namespace CombineJs
@@ -40,7 +39,7 @@ namespace CombineJs
             }
             else
             {
-                this.Transforms.Clear();
+                Transforms.Clear();
             }
             string path = Path;
             BundleFile[] enumerable = bundleFiles as BundleFile[] ?? bundleFiles.ToArray();

@@ -42,19 +42,20 @@
            
     @panel.Body(@<text>
 
-    <div id="userGroup">
-        <ul class="dd-list" ms-each-el="userGroups" >
-            <ol class="dd-item">
-                <div class="dd-handle" style="cursor: pointer" ms-click="edit" ms-class-1="txt-color-white bg-color-pink:curUg!=null && el.Id==curUg.Id">
+    <div id="userGroup" class="dd">
+        <ul class="dd-list">
+            <ol class="dd-item" ms-repeat-el="userGroups">
+                <div class="dd-handle" style="cursor: pointer"
+                     ms-click="edit" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
                     <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs btn-danger">
                         <i class="fa-remove fa"></i>
                     </button>
-                     <span ms-text="el.Name"></span>
+                    <span ms-text="el.Name"></span>
                 </div>
             </ol>
         </ul>
     </div>
-    <div  ms-widget="pager,ugList">
+    <div ms-widget="pager,ugList">
     </div>
     </text>);
 }
@@ -84,7 +85,7 @@
             <button class="btn btn-default" type="button" ms-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Ornament.Properties.Resources.Reset</button>
             <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
         </div>
-        @Html.Partial("_Edit",(UserGroup)null)
+        @Html.Partial("_Edit", (UserGroup)null)
     </form>
     </text>, new Dictionary<string, object>()
                         {
@@ -92,13 +93,19 @@
                         })
 }
 
-
-
+<style type="text/css">
+    .selected {
+        background: none repeat scroll 0 0 #fddfb3 !important;
+        border: 1px solid #faa937;
+        color: #333 !important;
+    }
+</style>
 
 @section scripts{
-   
-   <script type="text/javascript">
+
+    <script type="text/javascript">
         require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function (main) {
+            console.log('usergroup init success.');
             main.init();
             clearPageVariable.push(main.clear);
         });

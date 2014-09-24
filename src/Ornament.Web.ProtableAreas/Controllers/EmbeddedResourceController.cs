@@ -44,16 +44,18 @@ namespace Ornament.Web.Controllers
 
         private static Dictionary<string, string> InitializeMimeTypes()
         {
-            var mimes = new Dictionary<string, string>();
-            mimes.Add(".gif", "image/gif");
-            mimes.Add(".png", "image/png");
-            mimes.Add(".jpg", "image/jpeg");
-            mimes.Add(".js", "text/javascript");
-            mimes.Add(".css", "text/css");
-            mimes.Add(".txt", "text/plain");
-            mimes.Add(".xml", "application/xml");
-            mimes.Add(".zip", "application/zip");
-            mimes.Add(".html", "text/html");
+            var mimes = new Dictionary<string, string>
+            {
+                {".gif", "image/gif"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".js", "text/javascript"},
+                {".css", "text/css"},
+                {".txt", "text/plain"},
+                {".xml", "application/xml"},
+                {".zip", "application/zip"},
+                {".html", "text/html"}
+            };
             return mimes;
         }
 

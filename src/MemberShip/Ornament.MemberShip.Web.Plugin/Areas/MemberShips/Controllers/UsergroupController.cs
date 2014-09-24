@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using NHibernate.Hql.Ast.ANTLR;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
-using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
@@ -33,6 +32,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             return View();
         }
+
         [ResourceAuthorize(UserGroupOperator.Read, ResourceSetting.UserGroup)]
         public ActionResult List(int? index, int? size)
         {
@@ -52,21 +52,34 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return Json(new {data = returnData, totalRecords = total}, JsonRequestBehavior.AllowGet);
         }
 
-        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup),ValidateAjax,Session]
+        [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup), ValidateAjax, Session]
         [HttpPost]
         public ActionResult Save(UserGroup userGroup, string[] roles)
         {
             userGroup.Roles.Clear();
-            var roleDao=_factory.CreateRoleDao();
+            IRoleDao roleDao = _factory.CreateRoleDao();
 
-            foreach (var role in roles??new string[0])
+            foreach (string role in roles ?? new string[0])
             {
                 userGroup.Roles.Add(roleDao.Get(role));
             }
 
             _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
 
-            return Json(new {success = true,Id=userGroup.Id});//返回Id.更新View的时候需要Id
+            return Json(new {success = true, userGroup.Id}); //返回Id.更新View的时候需要Id
+        }
+
+        public ActionResult Delete(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                throw new HttpException(403, "id is not allow empty");
+            }
+
+            IUserGroupDao dao = _factory.CreateUserGroupDao();
+            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
+            dao.Delete(ug);
+            return Json(ug, JsonRequestBehavior.AllowGet);
         }
 
         [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]

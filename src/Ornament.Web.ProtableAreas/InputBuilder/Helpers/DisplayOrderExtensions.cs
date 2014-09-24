@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.InputBuilder.Attributes;
 using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
 
 namespace Ornament.Web.PortableAreas.InputBuilder.Helpers

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Ornament.Web.PortableAreas.InputBuilder.Attributes
+namespace Ornament.Web.InputBuilder.Attributes
 {
     public class ExampleAttribute : ValidationAttribute
     {

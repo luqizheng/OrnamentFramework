@@ -1,4 +1,4 @@
-using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.InputBuilder.Attributes;
 using Ornament.Web.PortableAreas.InputBuilder.Conventions.Property;
 using Ornament.Web.PortableAreas.InputBuilder.Helpers;
 using Ornament.Web.PortableAreas.InputBuilder.Views;

@@ -18,7 +18,13 @@
         }
     };
 }
-
+<style type="text/css">
+    .selected {
+        background: none repeat scroll 0 0 #fddfb3 !important;
+        border: 1px solid #faa937;
+        color: #333 !important;
+    }
+</style>
 @using (Panel panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
 {
     @panel.Header(@<text>
@@ -38,12 +44,10 @@
                 @{
                     string handler = hasModify ? "ms-click=edit" : "";
                 }
-                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks">
+                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
                     @if (hasDelete)
                     {
-                        <button ms-click="del" 
-                                                 title="@Ornament.Properties.Resources.Delete" 
-                                                 class="btn btn-danger">
+                        <button ms-click="del" title="@Ornament.Properties.Resources.Delete" class="btn btn-danger btn-xs">
                             <i class="fa-remove fa"></i>
                         </button>
                     }
@@ -53,12 +57,15 @@
             </ol>
         </ul>
     </div>
-    <div   ms-widget="pager">
+    <div ms-widget="pager">
     </div>
 
 
 
-    </text>)
+    </text>, new Dictionary<string, object>()
+                        {
+                             {"ms-class","widget-body-ajax-loading:loading"}
+                        })
 }
 
 @using (Panel panel = Html.Panel(new PanelOption()

@@ -2,7 +2,7 @@
 /// <reference path="../Share/dataTables.js" />
 define(function (require) {
 
-    require("/js/avalons/pager/pager.js")(avalon);
+    
     
 
     var lang = {};
@@ -107,9 +107,11 @@ define(function (require) {
 
     return {
         init: function (lang1) {
-            Init();
             lang = lang1;
-            avalon.scan();
+            require(["pager"],function() {
+                Init();
+                avalon.scan();
+            });
         },
         clear:function() {
             delete avalon.vmodels["index"];

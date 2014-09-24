@@ -40,7 +40,7 @@
 
         list = avalon.define('index', function (vm) {
             vm.userGroups = [{ "Id": "", "Name": "", "Remarks": "", "Roles": [] }];
-
+            vm.loading = false;
             vm.del = function () {
 
             };

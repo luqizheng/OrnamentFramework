@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using System.Web.Mvc;
-using Ornament.Web.PortableAreas.InputBuilder.Attributes;
+using Ornament.Web.InputBuilder.Attributes;
 using Ornament.Web.PortableAreas.InputBuilder.Helpers;
 using Ornament.Web.PortableAreas.InputBuilder.Views;
 
