@@ -4,12 +4,12 @@ using System.Text;
 using System.Web.Optimization;
 using Microsoft.Ajax.Utilities;
 
-namespace SeajsBundles
+namespace CombineJs
 {
-    public class SeajsMinify : IBundleTransform
+    public class CommonJsMinify : IBundleTransform
     {
         // Fields
-        internal static readonly SeajsMinify Instance = new SeajsMinify();
+        internal static readonly CommonJsMinify Instance = new CommonJsMinify();
         internal static string JsContentType = "text/javascript";
 
         // Methods

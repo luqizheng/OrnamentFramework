@@ -1,5 +1,5 @@
 ﻿define(function (require) {
-    require("pager");
+   
 
     var bootbox = require("bootbox");
     var messages = {
@@ -128,11 +128,13 @@
             if (message) {
                 messages = message;
             }
-            changeVal();
-            defineAvalon();
-            avalon.scan();
-        },
 
+            require(['pager'], function() {
+                changeVal();
+                defineAvalon();
+                avalon.scan();
+            });
+        },
         clear: function () {
             console.log('clean up');
             delete avalon.vmodels['index'];

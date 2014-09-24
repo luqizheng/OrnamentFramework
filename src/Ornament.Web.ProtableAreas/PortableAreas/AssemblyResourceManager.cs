@@ -25,6 +25,7 @@ namespace Ornament.Web.PortableAreas
                     return pair.Value;
                 }
             }
+
             return null;
         }
 

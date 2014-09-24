@@ -33,7 +33,7 @@ namespace CombineJs
                 {
                     if (Transforms[i] is JsMinify)
                     {
-                        Transforms[i] = new SeajsMinify();
+                        Transforms[i] = new CommonJsMinify();
                         break;
                     }
                 }
