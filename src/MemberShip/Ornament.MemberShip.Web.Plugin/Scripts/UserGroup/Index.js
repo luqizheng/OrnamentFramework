@@ -5,8 +5,12 @@
     var messages = {
         success: '保存成功',
         createTitle: "创建",
-        editTitle: "编辑"
-    }, $form, editor, list;
+        editTitle: "编辑",
+        deleteWarning: "是否删除用户组",
+        delSuccess: "删除用户组成功",
+        delFail:"删除用户组失败"
+
+    }, $form, editor, list,warningDialog;
 
     function changeVal() {
         require(["vaform"], function () {
@@ -33,6 +37,30 @@
             });
         });
 
+        warningDialog = bootbox.dialog({
+            message: messages.deleteWarning,
+            title: "Warning",
+            show: false,
+            buttons: {
+                success: {
+                    label: "否",
+                    className: "btn-success",
+                    callback: function () {
+                        warningDialog.modal("hide");
+                    }
+                },
+                danger: {
+                    label: "是",
+                    className: "btn-danger",
+                    callback: function () {
+                        $.get("/memberships/usergroup/delete/" + list.curUg.Id, function (rData) {
+                            bootbox.alert(rData.success ? messages.delSuccess : messages.delFail);
+                        });
+                    }
+                }
+            }
+        });
+
     }
 
     function defineAvalon() {
@@ -42,7 +70,8 @@
             vm.userGroups = [{ "Id": "", "Name": "", "Remarks": "", "Roles": [] }];
             vm.loading = false;
             vm.del = function () {
-
+                vm.curUg = this.$vmodel.el;
+                warningDialog.modal('show');
             };
             vm.refresh = function () {
                 avalon.vmodels["ugList"].nav(0);
