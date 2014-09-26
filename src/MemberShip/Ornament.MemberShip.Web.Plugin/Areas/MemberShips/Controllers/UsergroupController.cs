@@ -41,15 +41,15 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             IList<UserGroup> result = dao.FindAll(index ?? 0, size ?? 30, out total);
 
             var returnData = from a in result
-                select new
-                {
-                    a.Id,
-                    a.Name,
-                    a.Remarks,
-                    Roles = a.GetAllRoles().Select(s => s.Id)
-                };
+                             select new
+                             {
+                                 a.Id,
+                                 a.Name,
+                                 a.Remarks,
+                                 Roles = a.GetAllRoles().Select(s => s.Id)
+                             };
 
-            return Json(new {data = returnData, totalRecords = total}, JsonRequestBehavior.AllowGet);
+            return Json(new { data = returnData, totalRecords = total }, JsonRequestBehavior.AllowGet);
         }
 
         [ResourceAuthorize(UserGroupOperator.Modify, ResourceSetting.UserGroup), ValidateAjax, Session]
@@ -66,7 +66,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
             _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
 
-            return Json(new {success = true, userGroup.Id}); //返回Id.更新View的时候需要Id
+            return Json(new { success = true, userGroup.Id }); //返回Id.更新View的时候需要Id
         }
 
         public ActionResult Delete(string id)
@@ -79,7 +79,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             IUserGroupDao dao = _factory.CreateUserGroupDao();
             UserGroup ug = _factory.CreateUserGroupDao().Get(id);
             dao.Delete(ug);
-            return Json(ug, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]

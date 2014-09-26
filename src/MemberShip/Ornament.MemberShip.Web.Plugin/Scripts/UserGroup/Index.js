@@ -8,7 +8,9 @@
         editTitle: "编辑",
         deleteWarning: "是否删除用户组",
         delSuccess: "删除用户组成功",
-        delFail:"删除用户组失败"
+        delFail:"删除用户组失败",
+        saveBtnEdit:"保存",
+        saaveBtnCreate:"创建"
 
     }, $form, editor, list,warningDialog;
 
@@ -28,6 +30,7 @@
                     } else {
                         avalon.mix(list.curUg , editor.getPureModel());
                     }
+                    editRole.
                     bootbox.alert(rData.success ? messages.success : rData.Message);
                 },
                 done: function (form) {
@@ -55,6 +58,7 @@
                     callback: function () {
                         $.get("/memberships/usergroup/delete/" + list.curUg.Id, function (rData) {
                             bootbox.alert(rData.success ? messages.delSuccess : messages.delFail);
+                            list.delete(list.curUg.Id);
                         });
                     }
                 }
@@ -72,6 +76,15 @@
             vm.del = function () {
                 vm.curUg = this.$vmodel.el;
                 warningDialog.modal('show');
+            };
+            vm.delete = function (id) {
+                var ary = [];
+                for (var i = 0; i < vm.userGroups.length; i++) {
+                    if (vm.userGroups[i].Id != id) {
+                        ary.push(vm.userGroups[i]);
+                    }
+                }
+                vm.userGroups = ary;
             };
             vm.refresh = function () {
                 avalon.vmodels["ugList"].nav(0);
@@ -123,7 +136,12 @@
             vm.editTitle =
             {
                 get: function () {
-                    return vm.editing ? messages.editTitle : messages.createTitle;
+                    return  vm.Id != "" ? messages.editTitle : messages.createTitle;
+                }
+            };
+            vm.saveBtnText = {
+                get: function () {
+                    return vm.Id != "" ? messages.saveBtnEdit : messages.saaveBtnCreate;
                 }
             };
             vm.clear = function () {
@@ -155,7 +173,7 @@
     return {
         init: function (message) {
             if (message) {
-                messages = message;
+                avalon.mix(messages,message);
             }
 
             require(['pager'], function() {
