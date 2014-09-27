@@ -1,17 +1,43 @@
 ﻿define(function (require) {
 
-    //require("form");
-    require("pager");
-    var bootbox = require("bootbox");
-    var messages = {
+    var bootbox = require("bootbox"), $form, model, editable
+    , messages = {
         saveBtnCreate: "添加",
         saveBtnEdit: "保存",
         createTitle: "创建新的角色",
         editTitle: "编辑角色"
     };
-    function init() {
 
-        var model = avalon.define('index', function (vm) {
+    function changeVal() {
+
+        require(["vaform"], function () {
+            $form = $("#roleEdit").vaform({
+                url: '/memberShips/Role/Save',
+                before: function () {
+                    editable.loading = true;
+                },
+                success: function (rData) {
+                    bootbox.alert(rData.success ? "保存成功" : rData.Message);
+                    var isCreated = editable.Id == "";
+                    editable.Id = rData.Id;
+                    if (isCreated) {
+                        model.AddToCur(editable.getPureModel());
+                    } else {
+                        avalon.mix(editable.curUg, editable.getPureModel());
+                    }
+
+                    bootbox.alert(rData.success ? messages.success : rData.Message);
+                },
+                done: function (form) {
+                    form.find("input").prop("disabled", false);
+                    editable.loading = false;
+                }
+            });
+        });
+    }
+
+    function init() {
+        model = avalon.define('index', function (vm) {
             vm.edit = function (e) {
                 var m = this.$vmodel.el;
                 vm.curRole = m;
@@ -24,10 +50,21 @@
                 editable.editTitle = messages.createRole;
                 editable.editing = true;
                 editable.clear();
+                vm.curRole = null;
             };
             vm.curRole = null;
             vm.del = function () {
-
+                var ary = [];
+                for (var i = 0; i < vm.roles.length; i++) {
+                    if (vm.roles[i].Id != id) {
+                        ary.push(vm.roles[i]);
+                    }
+                }
+                vm.roles = ary;
+            };
+            vm.AddToCur = function (role) {
+                vm.roles.push(role);
+                vm.curRole = role;
             };
             vm.roles = [{ Id: "", Name: "", Remarks: "", Permissions: [] }];
             vm.pager = {
@@ -44,33 +81,7 @@
             };
         });
 
-        var $form = $("#roleEdit")
-           .removeData("validator")
-           .removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parse("#roleEdit");
-
-        /* update Role */
-        $form.validate().settings.submitHandler = function (form) {
-
-            var data = $form.serializeObject();
-            editable.loading = true;
-            $.post('/memberShips/Role/Save', data, function (rData) {
-                bootbox.alert(rData.success ? "保存成功" : rData.Message);
-            }).done(function () {
-                $form.find("input").prop("disabled", false);
-                editable.loading = false;
-            }).fail(function (status) {
-                if (status.status == 400) {
-                    var errors = {};
-                    $(status.responseJSON).each(function () {
-                        errors[this.key] = this.errors.join(";");
-                    });
-                    $form.validate().showErrors(errors);
-                }
-            });
-        };
-
-        var editable = avalon.define('edit', function (vm) {
+        editable = avalon.define('edit', function (vm) {
             var _id;
             vm.Id = {
                 get: function () {
@@ -110,17 +121,31 @@
                 vm.editing = false;
                 editable.clear();
             };
+            vm.getPureModel = function () {
+                return {
+                    Id: vm.Id,
+                    Name: vm.Name,
+                    Remarks: vm.Remarks,
+                    Permissions: vm.Permissions
+                };
+            };
         });
+
     }
 
 
     return {
         init: function (message) {
             if (message) {
-                messages =avalon.mix(messages,message);
+                messages = avalon.mix(messages, message);
             }
-            init();
-            avalon.scan();
+
+            changeVal();
+            require(["pager"], function () {
+                init();
+                avalon.scan();
+            });
+
         },
         clear: function () {
             delete avalon.vmodels['index'];

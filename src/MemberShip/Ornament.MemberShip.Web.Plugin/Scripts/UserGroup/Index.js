@@ -93,6 +93,7 @@
             vm.create = function () {
                 editor.clear();
                 editor.editing = true;
+                vm.curUg = null;
             };
             vm.edit = function () {
                 var ug = this.$vmodel.el;
