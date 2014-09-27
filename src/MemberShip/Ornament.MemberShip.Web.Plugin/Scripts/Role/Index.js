@@ -2,17 +2,18 @@
 
     //require("form");
     require("pager");
-    var bootbox=require("bootbox");
-
+    var bootbox = require("bootbox");
+    var messages = {
+        saveBtnCreate: "添加",
+        saveBtnEdit: "保存",
+        createTitle: "创建新的角色",
+        editTitle: "编辑角色"
+    };
     function init() {
-        
+
         var model = avalon.define('index', function (vm) {
             vm.edit = function (e) {
                 var m = this.$vmodel.el;
-                /*editable.Id = m.Id;
-                editable.Name = m.Name;
-                editable.Remarks = m.Remarks;
-                editable.Permissions = m.Permissions;*/
                 vm.curRole = m;
                 avalon.mix(editable, vm.curRole);
                 editable.editing = true;
@@ -25,8 +26,10 @@
                 editable.clear();
             };
             vm.curRole = null;
-            
-            vm.roles = [{ Id: "", Name: "", Remarks: "",Permissions:[] }];
+            vm.del = function () {
+
+            };
+            vm.roles = [{ Id: "", Name: "", Remarks: "", Permissions: [] }];
             vm.pager = {
                 pageSize: 50,
                 search: function (index, maxRecords, func) {
@@ -68,41 +71,54 @@
         };
 
         var editable = avalon.define('edit', function (vm) {
-            vm.Id = "";
+            var _id;
+            vm.Id = {
+                get: function () {
+                    return _id;
+                },
+                set: function (v) {
+                    _id = v;
+                    editable.title = _id != "" ? messages.editTitle : messages.createTitle;
+                    editable.saveBtnText = _id != "" ? messages.saveBtnEdit : messages.saveBtnCreate;
+                }
+            };
+            vm.saveBtnText = "";
             vm.Name = "";
             vm.Remarks = "";
             vm.Permissions = [];
             vm.editing = false;
             vm.loading = false;
-            vm.editTitle = messages.createRole;
+            vm.title = "";
             vm.save = function () {
-                    model.curRole.Name = vm.Name;
-                    model.curRole.Remarks = vm.Remarks;
-                    model.curRole.Permissions = vm.Permissions;
-                
+                model.curRole.Name = vm.Name;
+                model.curRole.Remarks = vm.Remarks;
+                model.curRole.Permissions = vm.Permissions;
+
             };
-            vm.clear = function() {
+            vm.clear = function () {
                 avalon.mix(editable, { Name: "", Id: "", Remarks: "", Permissions: [] });
             };
             vm.IsCreated = {
                 get: function () {
-                    return !vm.Id ;
+                    return !vm.Id;
                 }
             };
-            vm.reset = function() {
+            vm.reset = function () {
                 avalon.mix(editable, model.curRole);
             };
-            vm.cancel = function() {
+            vm.cancel = function () {
                 vm.editing = false;
                 editable.clear();
             };
         });
     }
 
-    var messages;
+
     return {
         init: function (message) {
-            messages = message;
+            if (message) {
+                messages =avalon.mix(messages,message);
+            }
             init();
             avalon.scan();
         },

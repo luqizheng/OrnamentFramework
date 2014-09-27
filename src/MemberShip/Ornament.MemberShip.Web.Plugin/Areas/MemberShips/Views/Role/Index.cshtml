@@ -30,9 +30,8 @@
     @panel.Header(@<text>
     <h2>@Html.GetEmbededResourceString("Role_List")</h2>
     <div class="widget-toolbar">
-        <button class="btn btn-primary" ms-click="create">
-            <i class="fa fa-plug"></i>
-            @Ornament.Properties.Resources.Create
+        <button class="btn btn-primary btn-xs" ms-click="create">
+            <i class="fa fa-plus"></i>
         </button>
     </div>
     </text>)
@@ -44,7 +43,7 @@
                 @{
                     string handler = hasModify ? "ms-click=edit" : "";
                 }
-                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
+                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
                     @if (hasDelete)
                     {
                         <button ms-click="del" title="@Ornament.Properties.Resources.Delete" class="btn btn-danger btn-xs">
@@ -78,14 +77,14 @@
 
     "col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
 {
-    @panel.Header(@<text><h2 ms-text="editTitle">编辑</h2></text>, new Dictionary<string, object>()
+    @panel.Header(@<text><h2 ms-text="title">编辑</h2></text>, new Dictionary<string, object>()
                         {
-                             {"ms-class","widget-body-ajax-loading:loading"}
+                             {"ms-class-1","widget-body-ajax-loading:loading"}
                         })
 
     @panel.Body(@<text>
 
-    <form class="form-horizontal loaading" method="POST" id="roleEdit" ms-submit="save">
+    <form class="form-horizontal" method="POST" id="roleEdit" ms-submit="save">
 
         <div class="widget-body-toolbar">
 
@@ -105,8 +104,8 @@
 
 
 @section scripts{
-    <!-- PAGE RELATED PLUGIN(S) -->
-    <script src="/js/plugin/jquery-nestable/jquery.nestable.min.js"></script>
+    
+    
     <script type="text/javascript">
         require(['@Scripts.Url("/MemberShips/Scripts/Role/index.js")'], function (main) {
             var message = {

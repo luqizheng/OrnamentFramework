@@ -4,13 +4,13 @@
     var bootbox = require("bootbox");
     var messages = {
         success: '保存成功',
-        createTitle: "创建",
-        editTitle: "编辑",
+        createTitle: "创建新的用户组",
+        editTitle: "编辑用户组",
         deleteWarning: "是否删除用户组",
         delSuccess: "删除用户组成功",
         delFail:"删除用户组失败",
         saveBtnEdit:"保存",
-        saaveBtnCreate:"创建"
+        saveBtnCreate:"创建"
 
     }, $form, editor, list,warningDialog;
 
@@ -30,7 +30,7 @@
                     } else {
                         avalon.mix(list.curUg , editor.getPureModel());
                     }
-                    editRole.
+                    
                     bootbox.alert(rData.success ? messages.success : rData.Message);
                 },
                 done: function (form) {
@@ -40,30 +40,31 @@
             });
         });
 
-        warningDialog = bootbox.dialog({
-            message: messages.deleteWarning,
-            title: "Warning",
-            show: false,
-            buttons: {
-                success: {
-                    label: "否",
-                    className: "btn-success",
-                    callback: function () {
-                        warningDialog.modal("hide");
-                    }
-                },
-                danger: {
-                    label: "是",
-                    className: "btn-danger",
-                    callback: function () {
-                        $.get("/memberships/usergroup/delete/" + list.curUg.Id, function (rData) {
-                            bootbox.alert(rData.success ? messages.delSuccess : messages.delFail);
-                            list.delete(list.curUg.Id);
-                        });
+        function call() {
+            bootbox.dialog({
+                message: messages.deleteWarning,
+                title: "Warning",
+                buttons: {
+                    success: {
+                        label: "否",
+                        className: "btn-success",
+                        callback: function() {
+                            warningDialog.modal("hide");
+                        }
+                    },
+                    danger: {
+                        label: "是",
+                        className: "btn-danger",
+                        callback: function() {
+                            $.get("/memberships/usergroup/delete/" + list.curUg.Id, function(rData) {
+                                bootbox.alert(rData.success ? messages.delSuccess : messages.delFail);
+                                list.delete(list.curUg.Id);
+                            });
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
     }
 
@@ -75,7 +76,7 @@
             vm.loading = false;
             vm.del = function () {
                 vm.curUg = this.$vmodel.el;
-                warningDialog.modal('show');
+                call();
             };
             vm.delete = function (id) {
                 var ary = [];
@@ -120,7 +121,17 @@
         });
 
         editor = avalon.define('edit', function (vm) {
-            vm.Id = "";
+            var _id;
+            vm.Id = {
+                get: function() { return _id },
+                set: function(v) {
+                    _id = v;
+                    editor.saveBtnText = _id != "" ? messages.saveBtnEdit : messages.saveBtnCreate;
+                    editor.editTitle = _id != "" ? messages.editTitle : messages.createTitle;
+                }
+
+            };
+
             vm.Name = "";
             vm.Roles = [];
             vm.Remarks = "";
@@ -133,17 +144,8 @@
             vm.reset = function() {
                 avalon.mix(vm, list.curUg);
             };
-            vm.editTitle =
-            {
-                get: function () {
-                    return  vm.Id != "" ? messages.editTitle : messages.createTitle;
-                }
-            };
-            vm.saveBtnText = {
-                get: function () {
-                    return vm.Id != "" ? messages.saveBtnEdit : messages.saaveBtnCreate;
-                }
-            };
+            vm.editTitle = messages.editTitle;
+            vm.saveBtnText = messages.saveBtnEdit;
             vm.clear = function () {
                 avalon.mix(vm, {
                     Id: "",
