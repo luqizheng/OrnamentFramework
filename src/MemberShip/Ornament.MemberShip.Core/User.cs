@@ -234,6 +234,8 @@ namespace Ornament.MemberShip
             set { base.Name = value; }
         }
 
+        public object UpdateTime { get; set; }
+
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {
             return new List<User>
@@ -267,7 +269,7 @@ namespace Ornament.MemberShip
         {
             if (!String.IsNullOrEmpty(Id))
             {
-                Other.UpdateTime = DateTime.Now;
+                //Other.UpdateTime = DateTime.Now;
             }
         }
 

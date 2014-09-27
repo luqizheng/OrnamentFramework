@@ -45,7 +45,12 @@ namespace Ornament.MemberShip
                     _phone = value;
                 }
             }
-
+            /// <summary>
+            /// 国际冠码
+            /// </summary>
+            public virtual string InternationalPrefix { get; set; }
+            
+            public virtual string CityCode { get; set; }
 
             public virtual string Email
             {
