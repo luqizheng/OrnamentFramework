@@ -1,48 +1,34 @@
 ﻿define(function (require) {
-    require("form");
-
-    require("/MemberShips/Scripts/Org/Org.js");
     function init() {
 
-        var $form = $("#editUser")
-            .removeData("validator")
-            .removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parse("#editUser");
-        
-        $form.validate().settings.submitHandler = function (form) {
-            var data = $(form).serializeObject();
-            $(form).find("input").prop("disabled", true);
-
-            $.post("/Memberships/user/Save", data, function (rData) {
+        $("#editUser").vaform({
+            url: "/Memberships/user/Save",
+            success:function() {
                 alert(rData.success ? "保存成功" : rData.Message);
-            }).done(function() {
-                $(form).find("input").prop("disabled", false);
-            }).fail(function (status) {
-                if (status.status == 400) {
-                    var errors = {};
-                    $(status.responseJSON).each(function () {
-                        errors[this.key] = this.errors.join(";");
-                    });
-                    $form.validate().showErrors(errors);
-                }
-            });
-        };
+            },
+            before: function ($form) {
+                $form.find("input").prop("disabled", true);
+            },
+            done: function($form) {
+                $form.find("input").prop("disabled", false);
+            }
+        });
 
         $("#jusTest").affix({ top: 10 });
         
-        avalon.define("edit", function(vm) {
-        });
-        avalon.define("BasicInfoEditor", function (vm) { });
+    
     }
 
     return {
         Init: function () {
-            init();
-            avalon.scan();
+            require(["vaform", "/MemberShips/Scripts/Org/Org.js"], function () {
+                init();
+            });
+
+
         },
         Clear: function () { //要delete controller
-            delete avalon.vmodels["BasicInfoEditor"];
-            delete avalon.vmodels["edit"];
+    
         }
 
     };

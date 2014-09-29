@@ -23,7 +23,7 @@ namespace Ornament.Web.UI.Paginations
         }
 
         /// <summary>
-        ///     /
+        ///     
         /// </summary>
         public int TotalPage
         {

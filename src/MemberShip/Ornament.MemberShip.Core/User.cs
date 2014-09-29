@@ -234,7 +234,7 @@ namespace Ornament.MemberShip
             set { base.Name = value; }
         }
 
-        public object UpdateTime { get; set; }
+        public virtual DateTime? UpdateTime { get; set; }
 
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {

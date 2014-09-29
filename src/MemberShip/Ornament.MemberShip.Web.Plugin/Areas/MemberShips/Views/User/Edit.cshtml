@@ -22,7 +22,7 @@
 @* 基本信息 *@
 
 <div class="row">
-    <form action="@Url.Action("Save", "User", "MemberShips")" method="POST" id="editUser" ms-controller="edit" data-ajax=true>
+    <form action="@Url.Action("Save", "User", "MemberShips")" method="POST" id="editUser">
         <div class="alert alert-block alert-success col-lg-12 col-md-12 col-xs-12 col-sm-12" id="jusTest" style="z-index: 99;">
             <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-save"></i>&nbsp;@Ornament.Properties.Resources.Save</button>
             <button class="btn btn-sm btn-default" type="reset"><i class="fa fa-mail-reply"></i>&nbsp;@Ornament.Properties.Resources.Reset</button>
@@ -35,9 +35,9 @@
             <h2><i class="fa fa-desktop"></i>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
             </text>)
             @panel.Body(@<text>
-            <div ms-controller="BasicInfoEditor">
+            
                 @Html.EditorFor(s => s, "BasicInfo")
-            </div>
+            
             </text>)
         }
 
