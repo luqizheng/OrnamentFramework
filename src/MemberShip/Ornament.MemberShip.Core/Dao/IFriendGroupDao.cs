@@ -13,7 +13,11 @@ namespace Ornament.MemberShip.Dao
         /// <returns>所有属于owner的分组</returns>
         /// <exception cref="System.ArgumentNullException">owner 为空</exception>
         IList<FriendGroup> GetGroups(User owner);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
         FriendGroup GetByName(string groupName);
     }
 }

@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Web;
-using System.Web.Http.Results;
 using System.Web.Mvc;
-using System.Web.Profile;
 using System.Web.Security;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Permissions;
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
-using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
 using Qi.Web.Mvc;
@@ -67,10 +61,20 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [OutputCache(Duration = 30), Session]
         public ActionResult Index()
         {
-            IUserDao userDao = _memberShipFactory.CreateUserDao();
-            IList<UsersStatus> data = userDao.NewRegistry(DateTime.Today.AddDays(-7), DateTime.Today);
-            ViewData["NewRegistry"] = string.Join(",", from a in data select a.Count);
-            ViewData["TotalUser"] = String.Join(",", userDao.Count());
+            var statisticsDao
+                = _memberShipFactory.CreateStatisticsDao();
+
+            IList<UserStatistics> data = statisticsDao.FindByDate(DateTime.Today.AddDays(-7), DateTime.Today);
+            ViewData["NewRegistry"] = string.Join(",", from a in data select a.Registers);
+            ViewData["TotalUser"] = String.Join(",", _memberShipFactory.CreateUserDao().Count());
+            
+            ViewData["7DayActive"] = String.Join(",", from a in data select a.Actives);
+            ViewData["toDayActive"] = data[data.Count - 1].Actives;
+
+
+            ViewData["7DayMaxActive"] = String.Join(",", from a in data select a.MaxActives);
+            ViewData["todayMax"] = data[data.Count - 1].MaxActives;
+
             return View();
         }
 
@@ -142,12 +146,12 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(new EditUserModel(user));
         }
 
-        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax,Session(Transaction = true)]
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax, Session(Transaction = true)]
         public ActionResult Save(EditUserModel userBasicInfo)
         {
             if (userBasicInfo == null)
                 return null;
-            
+
             if (ModelState.IsValid)
             {
                 userBasicInfo.Save(_memberShipFactory);
@@ -158,6 +162,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             }
             return Json(userBasicInfo);
         }
+
         //[HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
         //public ActionResult SavePermission(PermissionInfo permissionInfo)
         //{

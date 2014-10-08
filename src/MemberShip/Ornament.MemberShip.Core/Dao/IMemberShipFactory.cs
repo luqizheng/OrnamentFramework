@@ -65,5 +65,7 @@ namespace Ornament.MemberShip.Dao
         IResourceDao CreateResourceDao();
 
         IUserProfileDao CreateProfileDao();
+
+        IUserStatisticsDao CreateStatisticsDao();
     }
 }

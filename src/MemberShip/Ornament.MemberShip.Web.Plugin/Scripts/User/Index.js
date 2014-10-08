@@ -42,7 +42,7 @@ define(function (require) {
                 loadURL("/MemberShips/User/Edit/" + loginid, $("#content"));
             };
             vm.search = function (e) {
-                avalon.vmodels.page.nav(0);
+                avalon.vmodels.pager.nav(0);
                 e.preventDefault();
             };
             vm.pager = {

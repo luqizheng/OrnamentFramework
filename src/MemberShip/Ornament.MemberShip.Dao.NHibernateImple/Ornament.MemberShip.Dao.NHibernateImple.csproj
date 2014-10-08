@@ -125,6 +125,7 @@
     <Compile Include="PermissionDao.cs" />
     <Compile Include="ResourceDao.cs" />
     <Compile Include="RoleDao.cs" />
+    <Compile Include="StatisticsDao.cs" />
     <Compile Include="UserDao.cs" />
     <Compile Include="UserGroupDao.cs" />
     <Compile Include="EmailVerifierDao.cs" />

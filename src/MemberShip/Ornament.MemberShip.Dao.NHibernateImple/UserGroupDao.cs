@@ -58,6 +58,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new ReadOnlyCollection<UserGroup>(ica.List<UserGroup>());
         }
 
+
         public void Delete(string[] ids)
         {
             var builder = new StringBuilder("From UserGroup ug where ug in (");

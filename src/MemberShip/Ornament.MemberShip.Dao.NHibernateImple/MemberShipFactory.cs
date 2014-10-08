@@ -121,6 +121,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             return new ProfileDao();
         }
 
+        public IUserStatisticsDao CreateStatisticsDao()
+        {
+            return new StatisticsDao();
+        }
+
         #endregion
     }
 }

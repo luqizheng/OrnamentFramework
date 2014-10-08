@@ -6,9 +6,27 @@ using System.Linq;
 using Iesi.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Permissions;
+using Qi.Domain;
 
 namespace Ornament.MemberShip
 {
+    public class UserStatistics : DomainObject<UserStatistics, int>
+    {
+        public virtual DateTime CreateDate { get; set; }
+
+        /// <summary>
+        ///     每天的活动人数
+        /// </summary>
+        public virtual int Actives { get; set; }
+
+        /// <summary>
+        ///     用户的活动总次数，一个用户可能会引发很多次活动
+        /// </summary>
+        public virtual int MaxActives { get; set; }
+
+        public virtual int Registers { get; set; }
+    }
+
     /// <summary>
     /// </summary>
     [Serializable]
@@ -234,7 +252,6 @@ namespace Ornament.MemberShip
             set { base.Name = value; }
         }
 
-   
 
         protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
         {
