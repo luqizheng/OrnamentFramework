@@ -33,8 +33,8 @@
                     
                     bootbox.alert(rData.success ? messages.success : rData.Message);
                 },
-                done: function (form) {
-                    form.find("input").prop("disabled", false);
+                done: function () {
+                    this.find("input").prop("disabled", false);
                     editor.loading = false;
                 }
             });
