@@ -37,7 +37,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         #region Validation
 
-        [HttpGet]
+        [HttpGet, Session]
         public JsonResult NotDuplicate(string loginId, string id)
         {
             if (loginId == null)
@@ -46,7 +46,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return Json(_memberShipFactory.CreateUserDao().Count(loginId, id) == 0, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpGet, Session]
         public JsonResult NotDuplicateEmail(string email, string id)
         {
             if (Membership.Provider.RequiresUniqueEmail)
@@ -64,7 +64,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             ParentKey = "MemberShips", Key = ResourceSetting.User, Order = 1,
             Resource = ResourceSetting.User, Operator = UserOperator.Read)
         ]
-        [OutputCache(Duration = 30)]
+        [OutputCache(Duration = 30), Session]
         public ActionResult Index()
         {
             IUserDao userDao = _memberShipFactory.CreateUserDao();
@@ -75,7 +75,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         }
 
 
-        [ResourceAuthorize(UserOperator.Read, "User"), HttpGet]
+        [ResourceAuthorize(UserOperator.Read, "User"), HttpGet, Session]
         public ActionResult List(int? page, string search, int? size)
         {
             if (size == null)
@@ -131,7 +131,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         }
 
 
-        [ResourceAuthorize(UserOperator.Modify, "User")]
+        [ResourceAuthorize(UserOperator.Modify, "User"), Session]
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userEditTitle", ParentKey = ResourceSetting.User,
             Resource = ResourceSetting.User, Operator = UserOperator.Modify, PreservedRouteParameters = "loginId")]
         public ActionResult Edit(string loginId)
@@ -142,7 +142,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(new EditUserModel(user));
         }
 
-        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax,Session(Transaction = true)]
         public ActionResult Save(EditUserModel userBasicInfo)
         {
             if (userBasicInfo == null)
@@ -158,17 +158,17 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             }
             return Json(userBasicInfo);
         }
-        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
-        public ActionResult SavePermission(PermissionInfo permissionInfo)
-        {
-            if (permissionInfo == null)
-                throw new HttpException(404, "permission can't be null");
-            if (this.ModelState.IsValid)
-            {
-                return Json(new {success = true});
-            }
-            return View();
-        }
+        //[HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
+        //public ActionResult SavePermission(PermissionInfo permissionInfo)
+        //{
+        //    if (permissionInfo == null)
+        //        throw new HttpException(404, "permission can't be null");
+        //    if (this.ModelState.IsValid)
+        //    {
+        //        return Json(new {success = true});
+        //    }
+        //    return View();
+        //}
 
 
         //public ActionResult Assign(string loginId)

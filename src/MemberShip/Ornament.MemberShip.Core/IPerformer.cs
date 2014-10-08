@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ornament.MemberShip.Dao;
 
 namespace Ornament.MemberShip
@@ -22,6 +23,8 @@ namespace Ornament.MemberShip
         string Remarks { get; set; }
 
         Iesi.Collections.Generic.ISet<Role> Roles { get; set; }
+
+        DateTime? UpdateTime { get; set; }
 
         /// <summary>
         /// </summary>

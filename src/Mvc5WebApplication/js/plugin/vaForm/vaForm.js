@@ -1,6 +1,6 @@
-﻿(function() {
+﻿(function () {
     //只对这个项目有效。
-    (function(factory) {
+    (function (factory) {
         if (typeof define === 'function' && define.amd) {
             //Need ajax form 
             define(['jquery'], factory);
@@ -32,21 +32,27 @@
             opts = $.extend({}, widget, opt);
             $.validator.unobtrusive.parse(this);
 
-            $form.validate().settings.submitHandler = function (form) {
-                
+            $form.validate().settings.submitHandler = function () {
                 var data = $form.serializeObject();
-                opts.before.call(form, data);
+                opts.before.call($form,data);
+
                 $.post(opts.url, data, function (d) {
-                    opts.success.call(this, d, form);
+
+                    opts.success.call($form, d);
+
                 }).done(function () {
-                    opts.done.call(this, $form);
+                    
+                    opts.done.call($form);
+
                 }).fail(function (status) {
+                    opts.done.call($form);
                     if (status.status == 400) {
                         var errors = {};
                         $(status.responseJSON).each(function () {
                             errors[this.key] = this.errors.join(";");
                         });
                         $form.validate().showErrors(errors);
+
                     }
                 });
             };
@@ -54,10 +60,10 @@
         };
 
         var widget = {
-            url:"",
-            before: function() {},
-            done: function() {},
-            success: function() {},
+            url: "",
+            before: function () { },
+            done: function () { },
+            success: function () { },
         };
     });
 

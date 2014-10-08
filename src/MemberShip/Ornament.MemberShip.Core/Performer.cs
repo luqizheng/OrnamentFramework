@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
@@ -44,7 +43,7 @@ namespace Ornament.MemberShip
         ///     The roles.
         /// </value>
         [UIHint("Role[]")]
-        [Display(ResourceType = typeof(Resources), Name = "Roles")]
+        [Display(ResourceType = typeof (Resources), Name = "Roles")]
         public virtual Iesi.Collections.Generic.ISet<Role> Roles
         {
             get { return _roles ?? (_roles = new HashedSet<Role>()); }
@@ -63,11 +62,18 @@ namespace Ornament.MemberShip
             return GetInsideUsers(memberShipFactory);
         }
 
-
+        /// <summary>
+        ///     获取类型
+        /// </summary>
         string IPerformer.Type
         {
             get { return GetPerformerType(); }
         }
+
+        /// <summary>
+        ///     更新时间
+        /// </summary>
+        public virtual DateTime? UpdateTime { get; set; }
 
         protected abstract string GetPerformerType();
 
@@ -78,7 +84,6 @@ namespace Ornament.MemberShip
         {
             return (from role1 in Roles from role2 in roles where role1.Id == role2.Id select role1).Any();
         }
-
 
         public override string ToString()
         {

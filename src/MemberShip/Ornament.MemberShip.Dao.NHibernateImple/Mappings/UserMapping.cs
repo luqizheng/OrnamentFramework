@@ -18,7 +18,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 d.Map(s => s.TimeZoneId).Length(64);
                 d.Map(s => s.Language).Length(32);
                 d.References(s => s.Org).Column("UserOrgId").ForeignKey("UserOrgFK");
-                d.Map(s => s.UpdateTime);
+            
                 d.HasManyToMany(s => s.UserGroups).Table("MBS_UserGroupUserRelation")
                     .ParentKeyColumn("UserId")
                     .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);

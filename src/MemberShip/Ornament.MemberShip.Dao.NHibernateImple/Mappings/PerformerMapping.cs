@@ -16,6 +16,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
                 .Length(10);
             Map(s => s.Name);
             Map(s => s.Remarks).Length(2000);
+            Version(s => s.UpdateTime);
             HasManyToMany(s => s.Roles)
                 .Table("MBS_PerformerRoleRelation")
                 .ParentKeyColumn("PerformerId")
