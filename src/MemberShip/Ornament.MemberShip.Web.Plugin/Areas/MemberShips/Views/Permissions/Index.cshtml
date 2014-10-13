@@ -11,7 +11,7 @@
 }
 @section scripts{
     <script type="text/javascript">
-        seajs.use("@Scripts.Url("~/Memberships/scripts/permissions/index.js")", function (init) {
+        require(["@Scripts.Url("~/Memberships/scripts/permissions/index.js")"], function (init) {
             init({
                 warnDel: '@Html.GetEmbededResourceString("warnning_deleting_msg")',
                 delUrl: '@Url.Action("Delete")'
@@ -56,8 +56,8 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(Resources.Edit, "Edit", new { id = permission.Id }, new { @class = "btn" }) |
-                             @Html.ActionLink(Resources.Delete, "Delete", new { id = permission.Id, @class = "btn danger" })
+                    <a href="#@Url.Action("edit", new { id = permission.Id })" class="btn btn-primary">@Resources.Edit</a>
+                    <a href="#@Url.Action("delete", new { id = permission.Id })" class="btn btn-danger">@Resources.Delete</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => permission.Name)
@@ -66,6 +66,7 @@
                     @Html.DisplayFor(modelItem => permission.Remark)
                 </td>
                 <td>
+                    
                     @Html.DisplayFor(modelItem => permission, "Operators")
                 </td>
             </tr>

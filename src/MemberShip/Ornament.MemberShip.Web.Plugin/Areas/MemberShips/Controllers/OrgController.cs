@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
-using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
@@ -31,7 +30,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             if (id == null)
             {
                 User user = OrnamentContext.MemberShip.CurrentUser();
-                var isOrgUser = user.LoginId != MemberShip.User.AdminLoginId && user.Org != null;
+                bool isOrgUser = user.LoginId != MemberShip.User.AdminLoginId && user.Org != null;
                 IEnumerable<Org> orgs = isOrgUser
                     ? _factory.CreateOrgDao().GetSubOrgs(OrnamentContext.MemberShip.CurrentUser().Org)
                     : _factory.CreateOrgDao().GetRootOrgs();
@@ -40,8 +39,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 {
                     return View(user.Org);
                 }
-              
-                return View((Org)null);
+
+                return View((Org) null);
             }
             Org org = _factory.CreateOrgDao().Get(id);
             ViewData["Orgs"] = org.Childs;
@@ -51,7 +50,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         [ResourceAuthorize(OrgOperator.Modify, "Org")]
         [OrnamentMvcSiteMapNode(DynamicNodeProvider =
-                "Ornament.MemberShip.Web.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Web.Plugin",
+            "Ornament.MemberShip.Web.Plugin.Models.SiteMapNodes.OrgNodeProvider,Ornament.MemberShip.Web.Plugin",
             Title = "$resources:membership.sitemap,orgEditTitle"
             , ParentKey = "Org")]
         public ActionResult Details(string id)
@@ -105,7 +104,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             IOrgDao orgDao = _factory.CreateOrgDao();
             Org org = orgDao.Get(id);
             orgDao.Delete(org);
-            return RedirectToAction("Index", new { id = parentId });
+            return RedirectToAction("Index", new {id = parentId});
         }
 
         //
@@ -123,7 +122,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index", new { id = org.Parent.Id });
+                return RedirectToAction("Index", new {id = org.Parent.Id});
             }
 
             return View(String.IsNullOrEmpty(org.Id) ? "Create" : "Edit", org);

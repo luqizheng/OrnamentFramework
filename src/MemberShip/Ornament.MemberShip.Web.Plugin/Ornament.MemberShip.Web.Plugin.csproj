@@ -143,7 +143,6 @@
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Org\Create.js" />
     <EmbeddedResource Include="Scripts\Permissions\index.js" />
     <EmbeddedResource Include="Scripts\Permissions\Permission.js" />
     <EmbeddedResource Include="Scripts\Role\Index.js" />
@@ -232,8 +231,8 @@
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hans.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hant.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
-    <Content Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.zh-Hant.resx" />
