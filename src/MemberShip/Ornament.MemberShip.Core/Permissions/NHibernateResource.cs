@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Ornament.MemberShip.Permissions
 {
@@ -61,8 +62,12 @@ namespace Ornament.MemberShip.Permissions
             if (enumType == null)
                 throw new ArgumentNullException("enumType");
             string key = string.Format(NHProxyType, mappingClass.Name);
-            _typeMapping.Add(key, enumType);
-            _proxyTypeAndActualTypeMapping.Add(key, mappingClass);
+            if (!_typeMapping.Contains(key))
+            {
+                _typeMapping.Add(key, enumType);
+                _proxyTypeAndActualTypeMapping.Add(key, mappingClass);
+
+            }
             return this;
         }
 

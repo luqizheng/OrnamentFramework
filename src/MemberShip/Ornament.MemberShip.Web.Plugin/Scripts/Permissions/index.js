@@ -1,9 +1,5 @@
 ﻿define(function (require) {
-    var $ = require("jquery");
-    if ($.fn.tooltip) {
-        require("bootstrap")($);
-    }
-    
+
     return function (opts) {
         $(".delete").on('click', function () {
             if (confirm(opts.warnDel)) {

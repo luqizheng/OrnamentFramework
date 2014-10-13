@@ -1,10 +1,9 @@
 ﻿using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Dao.NHibernateImple;
+using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
-using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Web.Plugin.Models.SampleData;
 using Ornament.Web;
 using Ornament.Web.Messages;
@@ -34,7 +33,6 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             {
                 id = RouteParameter.Optional
             });
-            
         }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
@@ -47,6 +45,27 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             ResourceSetting.Registry();
 
 
+            OrnamentContext.ResourceManager.Add(typeof(Role), typeof(RoleOperator));
+            OrnamentContext.ResourceManager.Add(typeof(UserGroup), typeof(UserGroupOperator));
+
+            OrnamentContext.ResourceManager.Add(ResourceSetting.UserGroup, typeof(UserGroupOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.Role, typeof(RoleOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.User, typeof(UserOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.Permission, typeof(PermissionOperator));
+
+            OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
+            {
+                Name = "角色资源",
+                Path = "~/Areas/MemberShips/Views/Shared/RoleListRadio.cshtml",
+                ValueType = typeof(Role)
+            });
+
+            OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
+            {
+                Name = "用户组资源",
+                Path = "~/Areas/MemberShips/Views/Shared/UserGroupListRadio.cshtml",
+                ValueType = typeof(UserGroup)
+            });
 
             //MemberShips/User/Edit/admin
             context.MapRoute(AreaName + "_EditUser",

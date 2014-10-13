@@ -40,6 +40,10 @@ namespace Ornament.MemberShip.Permissions
             throw new NotFoundOperatorTypeException(typeof (T));
         }
 
+        public virtual bool Contains(T mappingClass)
+        {
+            return _resOperatorMapping.ContainsKey(mappingClass);
+        }
         public virtual IResourceOperatorManager<T> Add(T mappingClass, Type enumType)
         {
             if (Equals(mappingClass, default(T)))
@@ -51,10 +55,11 @@ namespace Ornament.MemberShip.Permissions
             {
                 throw new ArgumentException("enumType should be a enum");
             }
-            if (_resOperatorMapping.ContainsKey(mappingClass))
-                throw new ArgumentException("mapping class " + typeof (T).Name + " has been added, operator type is " +
-                                            enumType.Name);
-            _resOperatorMapping.Add(mappingClass, enumType);
+           
+            if (!_resOperatorMapping.ContainsKey(mappingClass))
+            {
+                _resOperatorMapping.Add(mappingClass, enumType);
+            }
             return this;
         }
 

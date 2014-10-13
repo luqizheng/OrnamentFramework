@@ -1,6 +1,7 @@
 ﻿@using Ornament
 @using Ornament.Web
 @using Ornament.Properties
+@using Ornament.Web.UI.Theme
 @using Qi.Web
 @model Ornament.MemberShip.Permissions.Permission
 @{
@@ -22,76 +23,106 @@
 @section pageTitle{
     <h5>Permission</h5>
 }
+@using (var panel = Html.Panel())
+{
+    @panel.Header(@<text>
+    Edit Permissions
+                   </text>)
 
-<div class="widget">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <h6>Permission wizard</h6>
-        </div>
-    </div>
     <form id="wizard2" method="post" action="@Url.Action("Save")" class="form-horizontal row-fluid well">
-        <fieldset class="step" id="theFirst">
-            <div class="step-title">
-                <i>1</i>
-                <h5>选择资源类别</h5>
-                <span>Permission 由 资源和操作组成，因此这里选择需要资源的类别。</span>
+        <div id="bootstrap-wizard-1">
+            <div class="form-bootstrapWizard" col-sm-12>
+                <ul class="bootstrapWizard form-wizard">
+                    <li class="active" data-target="#step1">
+                        <a href="#tab1" data-toggle="tab"><span class="step">1</span> <span class="title">选择资源类别</span> </a>
+                    </li>
+                    <li data-target="#step2">
+                        <a href="#tab2" data-toggle="tab"><span class="step">2</span> <span class="title">选择你要对应资源</span> </a>
+                    </li>
+                    <li data-target="#step3">
+                        <a href="#tab3" data-toggle="tab"><span class="step">3</span> <span class="title">设置许可证基础信息</span> </a>
+                    </li>
+                    <li data-target="#step4">
+                        <a href="#tab4" data-toggle="tab"><span class="step">4</span> <span class="title">Save Form</span> </a>
+                    </li>
+                    <li class="clearfix"></li>
+                </ul>
             </div>
-            <div>
-                @{
-                    var i = -1;
-                    foreach (var resourceDescription in OrnamentContext.ResourceManager.Configuration().ResourceSettings)
-                    {
-                        bool foundSelected = i == -1 || (this.Model != null && resourceDescription.ValueType == this.Model.Resource.GetType());
-                        i++;
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    @{
+    var i = -1;
+    foreach (var resourceDescription in OrnamentContext.ResourceManager.Configuration().ResourceSettings)
+    {
+        bool foundSelected = i == -1 || (this.Model != null && resourceDescription.ValueType == this.Model.Resource.GetType());
+        i++;
 
-                    <div class="control-group">
-                        <label for="@("ResourceType" + i)">
-                            @Html.RadioButton("DescriptionResourceName", resourceDescription.Name, foundSelected, new { id = "ResourceType" + i })
-                            @resourceDescription.Name
-                        </label>
-                    </div>
+                        <div class="control-group">
+                            <label for="@("ResourceType" + i)">
+                                @Html.RadioButton("DescriptionResourceName", resourceDescription.Name, foundSelected, new { id = "ResourceType" + i })
+                                @resourceDescription.Name
+                            </label>
+                        </div>
+    }
                     }
-                }
-            </div>
-        </fieldset>
-        <fieldset id="resourceView" class="step">
-            <div class="step-title">
-                <i>2</i>
-                <h5>选择你要对应资源</h5>
-                <span>Aenean sem dui, semper sit amet luctus sit amet, molestie vitae nunc</span>
-            </div>
-            <div id="resViewContent">
-            </div>
-        </fieldset>
-        <fieldset id="editPermission" class="step">
-            <div class="step-title">
-                <i>3</i>
-                <h5>设置许可证基础信息</h5>
-                <span>设置许可证的基本信息及操作
-                </span>
-            </div>
-            <div id="editPermissionView">
-                <div class="control-group">
-                    @Html.LabelFor(s => s.Name, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextBoxFor(s => s.Name)
-                        @Html.ValidationMessageFor(s => s.Name)
+                </div>
+
+                <div class="tab-pane" id="tab2">
+                    <div id="resViewContent">
                     </div>
                 </div>
-                <div class="control-group">
-                    @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
-                    <div class="controls">
-                        @Html.TextAreaFor(s => s.Remark)
-                        @Html.ValidationMessageFor(s => s.Remark)
+
+                <div class="tab-pane" id="tab3">
+                    <div id="editPermissionView">
+                        <div class="form-group">
+                            @Html.LabelFor(s => s.Name, new { @class = "form-control" })
+                            <div >
+                                @Html.TextBoxFor(s => s.Name)
+                                @Html.ValidationMessageFor(s => s.Name)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(s => s.Remark, new { @class = "form-control" })
+                            <div>
+                                @Html.TextAreaFor(s => s.Remark)
+                                @Html.ValidationMessageFor(s => s.Remark)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control">@Html.GetEmbededResourceString("Operators")</label>
+                            <div id="operators">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">@Html.GetEmbededResourceString("Operators")</label>
-                    <div class="controls" id="operators">
+
+                
+                <div class="tab-pane" id="tab4">
+                    <h5>Complete, click next for submit.</h5>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="pager wizard no-margin">
+
+                                <li class="previous disabled">
+                                    <a href="javascript:void(0);" class="btn btn-lg btn-default">Previous </a>
+                                </li>
+
+                                <li class="next">
+                                    <a href="javascript:void(0);" class="btn btn-lg txt-color-darken">Next </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </fieldset>
+        </div>
+
+
+
+
         <div class="form-actions align-right">
             <div id="status1" class="status"></div>
             <input class="btn" id="back-2" value="Back" type="reset" />
@@ -100,12 +131,13 @@
         @Html.Hidden("operators", Model != null ? Model.Operator : 0)
         @Html.HiddenFor(s => s.Id)
     </form>
-    <div class="submit-data" id="w1"></div>
-</div>
+}
+
+
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use("/memberships/scripts/permissions/permission.js", function (main) {
+        require(["@Scripts.Url("/memberships/scripts/permissions/permission.js")"], function (main) {
 
             main(@(jsonObject != null ? Html.Raw(JsonHelper.ToJson(jsonObject)) : new MvcHtmlString("null")));
 

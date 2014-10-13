@@ -3,9 +3,8 @@ define(function (require) {
 
     return function (Model) {
         
-        var $ = require("jquery");
-        require("/bundles/jqueryui")($);
-        require("form.wizard")($);
+        
+        require("wizard");
         
 
         $("form").submit(function () {
@@ -17,13 +16,9 @@ define(function (require) {
             });
             $("[name = operators]").val(i);
         });
-        $("#wizard2").formwizard({
-            formPluginEnabled: false,
-            validationEnabled: true,
-            focusFirstInput: true,
-            disableUIStyles: true,
-            formOptions: {
-                resetForm: true
+        $("#wizard2").bootstrapWizard({
+            'tabClass': 'form-wizard',
+            'onNext': function (tab, navigation, index) {
             }
         });
 

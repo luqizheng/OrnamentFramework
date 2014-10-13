@@ -876,6 +876,7 @@
     </Compile>
     <Compile Include="App_Start\LauguageConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\PermissionConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ValidationConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

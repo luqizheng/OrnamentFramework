@@ -14,6 +14,7 @@ using log4net;
 using log4net.Config;
 using Ornament;
 using Ornament.Configurations;
+using Ornament.MVCWebFrame;
 using Ornament.Web;
 using Ornament.Web.Cfg;
 using Ornament.Web.IoC;
@@ -39,7 +40,9 @@ namespace WebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            LauguageConfig.Register(OrnamentContext.Configuration);
+            
+            LauguageConfig.Register(OrnamentContext.Configuration);//设置语言
+            PermissionConfig.Register();//设置资源选择器等
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
