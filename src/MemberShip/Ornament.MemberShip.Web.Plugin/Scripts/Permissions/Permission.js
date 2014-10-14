@@ -2,10 +2,10 @@
 define(function (require) {
 
     return function (Model) {
-        
-        
+
+
         require("wizard");
-        
+
 
         $("form").submit(function () {
             var i = 0;
@@ -19,9 +19,16 @@ define(function (require) {
         $("#wizard2").bootstrapWizard({
             'tabClass': 'form-wizard',
             'onNext': function (tab, navigation, index) {
+                if (index == 1) {
+                    loadResourceChoicer();
+                }
             }
         });
 
+        function loadResourceChoicer() {
+            $("#resViewContent").load("/Memberships/Permissions/ChoiceResourceView/" + $("[name=DescriptionResourceName]:checked").val());
+
+        }
         $(document).delegate("#operators input", "change", function () {
 
             var check = this.checked;

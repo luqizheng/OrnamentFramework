@@ -230,7 +230,7 @@
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hans.resx" />
     <Content Include="Areas\MemberShips\Views\Permissions\App_LocalResources\Permission.zh-Hant.resx" />
-    <Content Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
+    <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\_defaultResourceSelector.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Index.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Permission.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Delete.resx" />
