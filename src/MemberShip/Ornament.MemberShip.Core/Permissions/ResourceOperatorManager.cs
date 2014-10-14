@@ -10,7 +10,9 @@ namespace Ornament.MemberShip.Permissions
         ///     Key is the resource, value is operatorType;
         /// </summary>
         private readonly Dictionary<T, Type> _resOperatorMapping = new Dictionary<T, Type>();
-
+        /// <summary>
+        /// 
+        /// </summary>
         public T[] Resources
         {
             get
@@ -39,11 +41,21 @@ namespace Ornament.MemberShip.Permissions
                 throw new NotFoundOperatorTypeException(s);
             throw new NotFoundOperatorTypeException(typeof (T));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mappingClass"></param>
+        /// <returns></returns>
         public virtual bool Contains(T mappingClass)
         {
             return _resOperatorMapping.ContainsKey(mappingClass);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mappingClass"></param>
+        /// <param name="enumType"></param>
+        /// <returns></returns>
         public virtual IResourceOperatorManager<T> Add(T mappingClass, Type enumType)
         {
             if (Equals(mappingClass, default(T)))
@@ -62,7 +74,11 @@ namespace Ornament.MemberShip.Permissions
             }
             return this;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatorType"></param>
+        /// <returns></returns>
         public T GetResource(Type operatorType)
         {
             foreach (T resName in Resources)

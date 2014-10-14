@@ -10,19 +10,19 @@ app.get("/",function(req,res){
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  
+
   socket.on('auth',function(data){
 	console.log(data.key);
   });
-	
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
- 
+
  socket.on('chat message', function(data){
     io.emit('chat message', data.msg);
   });
- 
+
 });
 
 

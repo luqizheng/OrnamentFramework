@@ -7,12 +7,12 @@ using Ornament.MemberShip.Permissions;
 
 namespace Ornament
 {
-    public sealed class OrnamentContext
-    {
-        static OrnamentContext()
-        {
-            Ioc.Instance.GetContainer()
-               .Register(Component.For<ResourceManager>());
+	public sealed class OrnamentContext
+	{
+		static OrnamentContext()
+		{
+			Ioc.Instance.GetContainer()
+               .Register(Component.For<ResourceManager>());			   
         }
 
         public static MemberShipContext MemberShip

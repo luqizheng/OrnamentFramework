@@ -1021,6 +1021,10 @@
       <Project>{89E3B336-7AEB-4804-AF20-F6EEFAC05B8E}</Project>
       <Name>Ornament.MemberShip.Web.Plugin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Messages\Ornament.Messages.Plugin\Ornament.Messages.Plugin.csproj">
+      <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
+      <Name>Ornament.Messages.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>
       <Name>Ornament.Core</Name>
