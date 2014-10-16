@@ -13,7 +13,7 @@ exports.valid(user, createDate){
 }
 
 function getCustomeCache(inputData) {
-    
+
     var data = aesEncrypt(inputData).split(";");
     var customerName = data[0];
     var createDate = data[1];
@@ -32,6 +32,7 @@ function getCustomeCache(inputData) {
 var buildKey = function(customName) {
     var data = customName + ";";
 };
+
 var fromdate = function(date) {
     return date.getUTCFullYear() + date.getUTCMonth() + date.getUTCDay() + " " + date.getUTCHours()
         + date.getUTCMinutes() + date.getUTCSeconds();

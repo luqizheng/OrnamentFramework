@@ -21,13 +21,36 @@ define(function (require) {
             'onNext': function (tab, navigation, index) {
                 if (index == 1) {
                     loadResourceChoicer();
+                    buildOperatorList();
                 }
             }
         });
 
         function loadResourceChoicer() {
             $("#resViewContent").load("/Memberships/Permissions/ChoiceResourceView/" + $("[name=DescriptionResourceName]:checked").val());
+        }
+        function buildOperatorList() {
+            var input = {
+                resourceId: $("[name=ResourceId]:checked").val(),
+                permissionId: this.Model != null ? this.Model.Id : ""
+            };
+            var url = "/Memberships/Permissions/Operators/" + $("[name=DescriptionResourceName]:checked").val();
+            $.get(url, input, function (d) {
+                var labels = [];
+                for (var key in d) {
+                    labels.push('<label class="checkbox"><input type="checkbox" value="' + d[key] + '"/>' + key + '</label>');
+                }
 
+                $("#operators").html("").append(labels.join(""));
+
+                (function (permissions) {
+                    $("#operators :checkbox").each(function () {
+                        var theValue = parseInt(this.value);
+                        var value = theValue & permissions;
+                        this.checked = (value == theValue) && (permissions > theValue) && (theValue != 0);
+                    });
+                })(Model != null ? Model.Operator : 0);
+            });
         }
         $(document).delegate("#operators input", "change", function () {
 
@@ -59,35 +82,7 @@ define(function (require) {
             });
         });
 
-        $("#wizard2").bind("before_step_shown", function (event, data) {
-            var curName = data.currentStep;
-            if (curName == "resourceView") {
-                $("#resViewContent").load("/Memberships/Permissions/ChoiceResourceView/" + $("[name=DescriptionResourceName]:checked").val());
-
-            } else if (curName == "editPermission") {
-                var input = {
-                    resourceId: $("[name=ResourceId]:checked").val(),
-                    permissionId: this.Model != null ? this.Model.Id : ""
-                };
-                var url = "/Memberships/Permissions/Operators/" + $("[name=DescriptionResourceName]:checked").val();
-                $.get(url, input, function (d) {
-                    var labels = [];
-                    for (var key in d) {
-                        labels.push('<label class="checkbox"><input type="checkbox" value="' + d[key] + '"/>' + key + '</label>');
-                    }
-
-                    $("#operators").html("").append(labels.join(""));
-
-                    (function (permissions) {
-                        $("#operators :checkbox").each(function () {
-                            var theValue = parseInt(this.value);
-                            var value = theValue & permissions;
-                            this.checked = (value == theValue) && (permissions > theValue) && (theValue != 0);
-                        });
-                    })(Model != null ? Model.Operator : 0);
-                });
-            }
-        });
+       
 
     };
 
