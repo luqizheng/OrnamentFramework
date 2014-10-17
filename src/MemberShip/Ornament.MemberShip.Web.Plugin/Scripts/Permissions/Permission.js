@@ -1,5 +1,13 @@
 ﻿
 define(function (require) {
+    function Permission(operator) {
+        this.Operators = operator;
+    }
+    Permission.prototype.hasPermission = function (iOperator) {
+        if (typeof iOperator == 'string')
+            iOperator = parseInt(iOperator);
+        return iOperator != 0 && this.Operator >= iOperator && (this.Operator & iOperator) == iOperator;
+    };
 
     return function (Model) {
 
@@ -57,6 +65,8 @@ define(function (require) {
             var check = this.checked;
             var beCheckValue = $(this).val();
 
+            var permission=new Permission(parseInt(beCheckValue));
+
             $("#operators input").each(function () {
                 var checkValue = $(this).val();
                 if (checkValue == beCheckValue)
@@ -68,13 +78,14 @@ define(function (require) {
                 }
 
                 var include;
+
                 if (beCheckValue >= checkValue) {
-                    include = hasPermission(beCheckValue, checkValue);
+                    include = permission.hasPermission(checkValue);
                     if (include && check) {
                         this.checked = true;
                     }
                 } else {
-                    include = hasPermission(checkValue, beCheckValue);
+                    include = permission.hasPermission(beCheckValue);
                     if (include && !check) {
                         this.checked = false;
                     }

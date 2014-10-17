@@ -87,7 +87,7 @@
                         <div id="editPermissionView" class="form-horizontal">
                             <div class="form-group">
                                 @Html.LabelFor(s => s.Name, new { @class = "col-md-2" })
-                                @Html.TextBoxFor(s => s.Name, new { @class = "col-md-80000000000000" +
+                                @Html.TextBoxFor(s => s.Name, new { @class = "col-md-8" +
                                                                              "" })
                                 @Html.ValidationMessageFor(s => s.Name)
 
@@ -101,7 +101,7 @@
                                 <label class="col-md-2">
                                     @Html.GetEmbededResourceString("Operators")
                                 </label>
-                                <div id="operators">
+                                <div id="operators" class="col-md-8">
                                 </div>
                             </div>
                         </div>
