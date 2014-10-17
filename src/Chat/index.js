@@ -3,6 +3,11 @@ var app=require('express')();
 var http = require('http').Server(app),
 io = require('socket.io')(http);
 var path = require('path');
+
+var
+
+
+
 app.get("/",function(req,res){
 	 res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -22,6 +27,14 @@ io.on('connection', function(socket){
  socket.on('chat message', function(data){
     io.emit('chat message', data.msg);
   });
+
+ socket.on('reg user',function(data){
+
+ })
+
+ socket.on('online',function(data){
+   return
+ })
 
 });
 
