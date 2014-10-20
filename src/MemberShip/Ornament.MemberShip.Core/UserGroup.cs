@@ -9,7 +9,7 @@ namespace Ornament.MemberShip
     /// </summary>
     public class UserGroup : Performer<UserGroup>
     {
-        private Iesi.Collections.Generic.ISet<Permission> _permissions;
+        private ISet<Permission> _permissions;
 
         protected UserGroup()
         {
@@ -26,9 +26,14 @@ namespace Ornament.MemberShip
             {
                 if (_permissions == null)
                 {
-                    _permissions = new HashedSet<Permission>();
+                    _permissions = new LinkedHashSet<Permission>();
                     foreach (Role role in Roles)
-                        _permissions.AddAll(role.Permissions);
+                    {
+                        foreach (var p in role.Permissions)
+                        {
+                            _permissions.Add(p);
+                        }
+                    }
                 }
                 return _permissions;
             }

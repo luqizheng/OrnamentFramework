@@ -42,12 +42,12 @@ namespace Ornament.MemberShip
 
         private ContactInfo _contact;
         private OtherUserInfo _other;
-        private Iesi.Collections.Generic.ISet<Permission> _permissions;
+        private ISet<Permission> _permissions;
         private SecurityInfo _security;
 
         private TimeZoneInfo _timeZone;
         private string _timeZoneId;
-        private Iesi.Collections.Generic.ISet<UserGroup> _userGroups;
+        private ISet<UserGroup> _userGroups;
 
 
         /// <summary>
@@ -142,11 +142,12 @@ namespace Ornament.MemberShip
             {
                 if (_permissions == null)
                 {
-                    _permissions = new HashedSet<Permission>();
+                    _permissions = new HashSet<Permission>();
 
                     foreach (Role role in Roles)
                     {
-                        _permissions.AddAll(role.Permissions);
+                        foreach (Permission a in role.Permissions)
+                            _permissions.Add(a);
                     }
                     foreach (UserGroup g in UserGroups)
                     {
@@ -210,9 +211,9 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The user groups.
         /// </value>
-        public virtual Iesi.Collections.Generic.ISet<UserGroup> UserGroups
+        public virtual ISet<UserGroup> UserGroups
         {
-            get { return _userGroups ?? (_userGroups = new HashedSet<UserGroup>()); }
+            get { return _userGroups ?? (_userGroups = new LinkedHashSet<UserGroup>()); }
         }
 
         #endregion
@@ -301,7 +302,7 @@ namespace Ornament.MemberShip
         /// <returns></returns>
         public override IEnumerable<Role> GetAllRoles()
         {
-            Iesi.Collections.Generic.ISet<Role> result = new HashedSet<Role>(Roles);
+            ISet < Role > result = new HashSet<Role>(Roles);
             foreach (UserGroup ug in UserGroups)
             {
                 foreach (Role role in ug.GetAllRoles())

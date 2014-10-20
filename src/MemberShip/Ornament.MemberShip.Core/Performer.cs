@@ -21,7 +21,7 @@ namespace Ornament.MemberShip
 
         /// <summary>
         /// </summary>
-        private Iesi.Collections.Generic.ISet<Role> _roles;
+        private ISet<Role> _roles;
 
 
         protected Performer()
@@ -44,14 +44,14 @@ namespace Ornament.MemberShip
         /// </value>
         [UIHint("Role[]")]
         [Display(ResourceType = typeof (Resources), Name = "Roles")]
-        public virtual Iesi.Collections.Generic.ISet<Role> Roles
+        public virtual ISet<Role> Roles
         {
-            get { return _roles ?? (_roles = new HashedSet<Role>()); }
+            get { return _roles ?? (_roles = new LinkedHashSet<Role>()); }
         }
 
         string IPerformer.Id { get; set; }
 
-        Iesi.Collections.Generic.ISet<Role> IPerformer.Roles
+        ISet<Role> IPerformer.Roles
         {
             get { return Roles; }
             set { _roles = value; }

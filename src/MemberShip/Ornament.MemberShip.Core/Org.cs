@@ -24,7 +24,7 @@ namespace Ornament.MemberShip
         private IOrgCollection _childs;
         private string _id;
         private string _orderId;
-        private Iesi.Collections.Generic.ISet<Permission> _permissions;
+        private ISet<Permission> _permissions;
 
         protected Org()
         {
@@ -114,10 +114,13 @@ namespace Ornament.MemberShip
             {
                 if (_permissions == null)
                 {
-                    _permissions = new HashedSet<Permission>();
+                    _permissions = new HashSet<Permission>();
                     foreach (Role role in Roles)
                     {
-                        _permissions.AddAll(role.Permissions);
+                        foreach (var p in role.Permissions)
+                        {
+                            _permissions.Add(p);
+                        }
                     }
                 }
                 return _permissions;

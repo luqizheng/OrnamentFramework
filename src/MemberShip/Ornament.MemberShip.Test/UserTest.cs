@@ -264,7 +264,7 @@ namespace MemberShip.Test
             var target = new User("kkkkk");
             var expected = new ReadOnlyCollection<UserGroup>(new List<UserGroup>());
 
-            Iesi.Collections.Generic.ISet<UserGroup> actual = target.UserGroups;
+            ISet<UserGroup> actual = target.UserGroups;
             Assert.AreEqual(expected.Count
                 , actual.Count);
         }
@@ -426,7 +426,7 @@ namespace MemberShip.Test
             var ug = new UserGroup("usergroup2");
             Assert.IsTrue(target.UserGroups.Add(ug));
 
-            Iesi.Collections.Generic.ISet<UserGroup> s = target.UserGroups;
+            ISet<UserGroup> s = target.UserGroups;
             Assert.IsTrue(s.Contains(ug));
 
             target.UserGroups.Remove(ug);

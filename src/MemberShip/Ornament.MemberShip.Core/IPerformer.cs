@@ -22,7 +22,7 @@ namespace Ornament.MemberShip
         /// </summary>
         string Remarks { get; set; }
 
-        Iesi.Collections.Generic.ISet<Role> Roles { get; set; }
+        ISet<Role> Roles { get; set; }
 
         DateTime? UpdateTime { get; set; }
 

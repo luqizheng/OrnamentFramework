@@ -20,8 +20,8 @@
 @foreach (string resourceInfo in resources)
 {
     string checkedTag = selectedResourceId == resourceInfo ? "checked='checked'" : "";
-    <div class="control-group">
-        <label for="@resourceInfo">
+    <div class="form-group">
+        <label for="@resourceInfo" class="col-md-12">
             <input type="radio" value="@resourceInfo" id="@resourceInfo" name="ResourceId" @checkedTag/>
             @resourceInfo
         </label>

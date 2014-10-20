@@ -11,7 +11,7 @@ namespace Ornament.MemberShip
     [Serializable]
     public class Role : Performer<Role>
     {
-        private Iesi.Collections.Generic.ISet<Permission> _permissions;
+        private ISet<Permission> _permissions;
 
 
         public Role()
@@ -31,9 +31,9 @@ namespace Ornament.MemberShip
         }
 
         [Display(Name = "Permission", ResourceType = typeof (Resources))]
-        public virtual Iesi.Collections.Generic.ISet<Permission> Permissions
+        public virtual ISet<Permission> Permissions
         {
-            get { return _permissions ?? (_permissions = new HashedSet<Permission>()); }
+            get { return _permissions ?? (_permissions = new LinkedHashSet<Permission>()); }
         }
 
         #region IPerformer Members

@@ -1,5 +1,6 @@
 ﻿using System;
-using Iesi.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Ornament.MemberShip
 {
@@ -9,8 +10,10 @@ namespace Ornament.MemberShip
         void ResetOrderId();
     }
 
-    public class OrgCollection : HashedSet<Org>, IOrgCollection
+    public class OrgCollection : IOrgCollection
     {
+        private readonly HashSet<Org> _orgs = new HashSet<Org>();
+
         public OrgCollection(Org self)
         {
             Self = self;
@@ -21,18 +24,83 @@ namespace Ornament.MemberShip
         }
 
 
-        public override void Clear()
+        public void UnionWith(IEnumerable<Org> other)
+        {
+            _orgs.UnionWith(other);
+        }
+
+        public void IntersectWith(IEnumerable<Org> other)
+        {
+            _orgs.IntersectWith(other);
+        }
+
+        public void ExceptWith(IEnumerable<Org> other)
+        {
+            _orgs.ExceptWith(other);
+        }
+
+        public void SymmetricExceptWith(IEnumerable<Org> other)
+        {
+            _orgs.SymmetricExceptWith(other);
+        }
+
+        public bool IsSubsetOf(IEnumerable<Org> other)
+        {
+            return _orgs.IsSubsetOf(other);
+        }
+
+        public bool IsSupersetOf(IEnumerable<Org> other)
+        {
+            return _orgs.IsSupersetOf(other);
+        }
+
+        public bool IsProperSupersetOf(IEnumerable<Org> other)
+        {
+            return _orgs.IsProperSupersetOf(other);
+        }
+
+        public bool IsProperSubsetOf(IEnumerable<Org> other)
+        {
+            return _orgs.IsProperSubsetOf(other);
+        }
+
+        public bool Overlaps(IEnumerable<Org> other)
+        {
+            return _orgs.Overlaps(other);
+        }
+
+        public bool SetEquals(IEnumerable<Org> other)
+        {
+            return _orgs.SetEquals(other);
+        }
+
+        void ICollection<Org>.Add(Org item)
+        {
+            _orgs.Add(item);
+        }
+
+        public void Clear()
         {
             foreach (Org i in this)
             {
                 i.Parent = null;
             }
-            base.Clear();
+            _orgs.Clear();
+        }
+
+        public bool Contains(Org item)
+        {
+            return _orgs.Contains(item);
+        }
+
+        public void CopyTo(Org[] array, int arrayIndex)
+        {
+            _orgs.CopyTo(array, arrayIndex);
         }
 
         public Org Self { get; set; }
 
-        public override bool Add(Org o)
+        public bool Add(Org o)
         {
             if (o == null)
                 throw new ArgumentNullException("o");
@@ -49,15 +117,18 @@ namespace Ornament.MemberShip
             o.Parent = Self;
             SetOrderId(Self, o);
 
-            return base.Add(o);
+            return _orgs.Add(o);
         }
 
-        public override bool Remove(Org o)
+        public bool Remove(Org o)
         {
             o.Parent = null;
             o.OrderId = null;
-            return base.Remove(o);
+            return _orgs.Remove(o);
         }
+
+        public int Count { get; private set; }
+        public bool IsReadOnly { get; private set; }
 
 
         public void ResetOrderId()
@@ -67,6 +138,12 @@ namespace Ornament.MemberShip
                 SetOrderId(Self, c);
             }
         }
+
+        public IEnumerator<Org> GetEnumerator()
+        {
+            return _orgs.GetEnumerator();
+        }
+
 
         private void SetOrderId(Org self, Org newChild)
         {
@@ -78,6 +155,11 @@ namespace Ornament.MemberShip
             {
                 newChild.OrderId = self.OrderId + "." + newChild.Id;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
