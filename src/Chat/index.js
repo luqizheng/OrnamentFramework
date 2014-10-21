@@ -1,46 +1,57 @@
-var msgDao=require("./messageDao");
-var app=require('express')();
-var http = require('http').Server(app),
-io = require('socket.io')(http);
-var path = require('path');
+var messageManager = require("./messageManager"),
+    userManager = require("./userManager"),
+    validation = require("./validRequestData"),
+    onlineUser = require("./onlineUser"),
+    app = require('express')(),
+    http = require('http').Server(app),
+    io = require('socket.io')(http),
+    path = require('path');
 
-var
-
-
-
-app.get("/",function(req,res){
-	 res.sendFile(path.join(__dirname, 'index.html'));
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
-io.on('connection', function(socket){
-  console.log('a user connected');
+io.on('connection', function (socket) {
 
-  socket.on('auth',function(data){
-	console.log(data.key);
-  });
+    console.log('a user connected');
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
 
- socket.on('chat message', function(data){
-    io.emit('chat message', data.msg);
-  });
+    socket.on('reg user', function (data) {
+        userManager.regUser(data, function (result) {
+            if (result.succcess) {
+                onlineUser.addUser(result.loginId);
+            }
+            socket.emit(result);
+        });
+    });
 
- socket.on('reg user',function(data){
+    socket.on('list message', function (data) {
+        messageManager.save(data);
+    });
 
- })
+    socket.on('online', function (data) {
+        if (validation.validOrg(data)) {
+            socket.emit("online", onlineUser.count());
+        }
+    })
 
- socket.on('online',function(data){
-   return
- })
+
+
+    socket.on('new message', function (data) {
+        messageManager.save(data,function(s){
+            if(s.nInserted==1){
+                var user = onlineUser.get(data.to);
+                if(user && user.socket.isConnected) {
+                    user.socket.emit("list message",messageManager.list(data.to))
+                }
+            }
+        });
+    })
 
 });
 
 
-
-http.listen(3000, function(){
-  console.log('listening on *:3000');
-
+http.listen(3000, function () {
+    console.log('listening on *:3000');
 });

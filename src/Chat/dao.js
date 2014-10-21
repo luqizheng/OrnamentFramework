@@ -5,8 +5,8 @@ var  MongoClient  = require('mongodb').MongoClient;
 var provider=function(collectionName){
 
   this.collectionName=collectionName;
-  this.do=function(action){
 
+    this.do=function(action){
     MongoClient.connect(url,function(err,db){
       var collection = db.collection(this.collectionName);
       action(collection);
