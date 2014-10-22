@@ -15,8 +15,9 @@ exports.validUser=function(userRequestData,callback)
 
     dbUser.do(function(collection){
         var user=collection.find({"loginId":userRequestDate.loginId}).toArray();
-        if(user.length==0)
+        if(user.length==0){
             return false;
+        }
         var selfEncrypt=sh1Encrypt(user.loginId+";"+md5Encrypt(user.privateKey)+";"+formatDate(userRequestData.requestDate));
         console.log("validate user result:"+selfEncrypt+"="+userRequestData.userPubKey)
         callback(selfEncrypt==userRequestData.userPubKey)

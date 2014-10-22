@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Ornament;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
-using Ornament.MVCWebFrame.Controllers;
 using Ornament.Web.MemberShips;
 
 namespace WebApplication.Controllers
@@ -19,7 +15,6 @@ namespace WebApplication.Controllers
         public AccountController()
             : this(null, null)
         {
-
         }
 
         // This constructor is not used by the MVC framework but is instead provided for ease
@@ -39,6 +34,7 @@ namespace WebApplication.Controllers
             FormsAuth = formsAuth ?? new FormsAuthenticationService();
             MembershipService = service ?? new AccountMembershipService();
         }
+
         /// <summary>
         ///     Gets FormsAuth.
         /// </summary>
@@ -48,6 +44,7 @@ namespace WebApplication.Controllers
         ///     Gets MembershipService.
         /// </summary>
         public IMembershipService MembershipService { get; private set; }
+
         //
         // GET: /Account/
         public ActionResult Logon()
@@ -79,7 +76,7 @@ namespace WebApplication.Controllers
             }
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                ? (ActionResult)Redirect(model.ReturnUrl)
+                ? (ActionResult) Redirect(model.ReturnUrl)
                 : RedirectToAction("Index", "Home");
         }
 
@@ -87,6 +84,5 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-
     }
 }
