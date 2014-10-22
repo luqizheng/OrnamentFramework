@@ -9,7 +9,7 @@ exports.validUser=function(userRequestData,callback)
   /*{
     loginId:orgName,
     requestDate:"YYYYMMDD HH:mm:ss",
-    pubKey:base64Encode
+    userPubKey:base64Encode
   }
   */
 
@@ -17,9 +17,9 @@ exports.validUser=function(userRequestData,callback)
         var user=collection.find({"loginId":userRequestDate.loginId}).toArray();
         if(user.length==0)
             return false;
-        var selfEncrypt=sh1Encrypt(user.loginId+";"+md5Encrypt(user.privateKey)+";"+userRequestData.requestDate);
-        console.log("validate user result:"+selfEncrypt+"="+userRequestData.pubKey)
-        callback(selfEncrypt==userRequestData.pubKey)
+        var selfEncrypt=sh1Encrypt(user.loginId+";"+md5Encrypt(user.privateKey)+";"+formatDate(userRequestData.requestDate));
+        console.log("validate user result:"+selfEncrypt+"="+userRequestData.userPubKey)
+        callback(selfEncrypt==userRequestData.userPubKey)
     })
 }
 
@@ -43,9 +43,8 @@ var buildKey = function(customName) {
 
 var formatDate = function(date) {
   if(typeof date=="object"){
-    return date.getUTCFullYear() + date.getUTCMonth() + date.getUTCDay() + " " + date.getUTCHours()
-        + date.getUTCMinutes() + date.getUTCSeconds();
-    }
+    return date.getUTCFullYear() + date.getUTCMonth() + date.getUTCDay() + " " + date.getUTCHours()+":"+ date.getUTCMinutes()+":"+ date.getUTCSeconds();
+  }
   return date;
 };
 

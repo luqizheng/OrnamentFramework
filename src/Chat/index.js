@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('list message', function (data) {
-        messageManager.save(data);
+        messageManager.list(data)
     });
 
     socket.on('online', function (data) {

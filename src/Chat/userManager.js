@@ -4,8 +4,15 @@
 var validation = require("./validRequestData");
 var userDao = require("./dao")("user");
 exports.regUser = function (data, callback) {
+    /*{
+        org:"org",
+        requestDate:"yyyyMMdd HH:mm:ss"
+        orgPubKey:"d$#@!@!",
+        loginId:"kdjfkdj",
+        userPubKey:"kdjfkdjf"
+    } */
     var orgName = data.org;
-    var orgReqestDate = data.orgRequestDate;
+    var orgReqestDate = data.requestDate;
     var orgPubKey = data.orgPubKey;
     validation.validOrg(orgName, orgReqestDate, orgPubKey, function (success) {
 
