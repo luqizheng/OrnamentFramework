@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Newses;
 using Ornament.Messages.PersonalMessages;
-using Ornament.Web;
 using Ornament.Web.UI.Paginations;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -17,6 +16,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         public PersonalController(IMessageDaoFactory messageDaoFactory)
         {
             _messageDaoFactory = messageDaoFactory;
+        }
+
+        public ActionResult Index()
+        {
+            return View();
         }
 
         //

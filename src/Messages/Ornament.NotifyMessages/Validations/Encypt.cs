@@ -20,7 +20,7 @@ namespace Ornament.NotifyMessages.Validations
             byte[] a = EncryptHelper.Md5Utf8(_orgPrivateKey);
             string privateKey = Convert.ToBase64String(a);
 
-            string data = _orgName + requestDate.ToString("yyyyMMdd HH:mm:ss") + privateKey;
+            string data = string.Format("{0};{1};{2}", _orgName, requestDate.ToString("yyyyMMdd HH:mm:ss"), privateKey);
             byte[] lastData = EncryptHelper.Sha1Utf8(data);
             return Convert.ToBase64String(lastData);
         }

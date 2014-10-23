@@ -22,7 +22,7 @@ io.on('connection', function (socket) {
             if (result.succcess) {
                 onlineUser.addUser(result.loginId);
             }
-            socket.emit(result);
+            socket.emit("reg user",result);
         });
     });
 

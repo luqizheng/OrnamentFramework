@@ -1,8 +1,8 @@
 /**
  * Created by leo on 2014/10/21.
  */
-var db=require("./dao")("messages");
-var val=require(".validRequestData");
+var db=require("./dao").getProvider("messages");
+var val=require("./validRequestData");
 
 
 exports.save=function(sampleMessage,callback){

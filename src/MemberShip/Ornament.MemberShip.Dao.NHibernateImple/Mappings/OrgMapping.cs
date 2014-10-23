@@ -76,8 +76,8 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
             public override void BeforeInitialize(ICollectionPersister persister, int anticipatedSize)
             {
                 base.BeforeInitialize(persister, anticipatedSize);
-                
-                var d = this as IOrgCollection;
+
+                var d = base.WrappedSet as IOrgCollection;
                 d.Self = Self;
             }
 

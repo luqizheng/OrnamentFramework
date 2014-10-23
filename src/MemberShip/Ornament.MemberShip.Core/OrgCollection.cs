@@ -145,6 +145,11 @@ namespace Ornament.MemberShip
         }
 
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         private void SetOrderId(Org self, Org newChild)
         {
             if (String.IsNullOrEmpty(self.OrderId))
@@ -155,11 +160,6 @@ namespace Ornament.MemberShip
             {
                 newChild.OrderId = self.OrderId + "." + newChild.Id;
             }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

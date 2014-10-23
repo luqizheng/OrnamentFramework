@@ -4,6 +4,29 @@
         <name>Qi.NHibernateExtender</name>
     </assembly>
     <members>
+        <member name="T:Qi.Domain.NHibernates.AbstractDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.AbstractDao.#ctor(Qi.NHibernateExtender.SessionWrapper)">
+            <summary>
+            </summary>
+            <param name="sessionWrapper"></param>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.AbstractDao.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.Domain.NHibernates.AbstractDao.SessionWrapper">
+            <summary>
+                Session Wrapper
+            </summary>
+        </member>
+        <member name="P:Qi.Domain.NHibernates.AbstractDao.CurrentSession">
+            <summary>
+            </summary>
+        </member>
         <member name="T:Qi.Domain.NHibernates.DaoBase`2">
             <summary>
                 Dao base for nhibernate implement
@@ -124,18 +147,46 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="P:Qi.Domain.NHibernates.DaoBase`2.SessionWrapper">
-            <summary>
-                Session Wrapper
-            </summary>
-        </member>
-        <member name="P:Qi.Domain.NHibernates.DaoBase`2.CurrentSession">
-            <summary>
-            </summary>
-        </member>
         <member name="P:Qi.Domain.NHibernates.DaoBase`2.AutoValidation">
             <summary>
-            enabed validation DataAnnotations.
+                enabed validation DataAnnotations.
+            </summary>
+        </member>
+        <member name="T:Qi.Domain.NHibernates.SqlDaobase">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.SqlDaobase.#ctor(Qi.NHibernateExtender.SessionWrapper)">
+            <summary>
+            </summary>
+            <param name="sessionWrapper"></param>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.SqlDaobase.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.SqlDaobase.Insert(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="values"></param>
+            <param name="table"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.SqlDaobase.CreateParameter(System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="parameterName"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Domain.NHibernates.SqlDaobase.CreateCommand">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Qi.Domain.NHibernates.SqlDaobase.CurrentConnection">
+            <summary>
             </summary>
         </member>
         <member name="T:Qi.NHibernateExtender.Criterion.BitwiseFlags">

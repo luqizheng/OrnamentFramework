@@ -11,6 +11,7 @@ namespace Ornament.NotifyMessages
         {
             _requestDate = requestDate;
             Enctypter = new Encypter(org,orgPrivateKey);
+            orgName = org;
         }
 
         public  string orgName { get; set; }
