@@ -21,7 +21,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                 .Table("Msgs_MsgTemplateContent")
                 .Component(x =>
                     {
-                        x.Map(a => a.Value).CustomSqlType("text");
+                        x.Map(a => a.Value).CustomSqlType("ntext");
                         x.Map(a => a.Subject).Length(255);
                         x.Map(a => a.Language, "language2").Length(10);
                     });
