@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
@@ -10,34 +11,34 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
     {
         public string ReturnUrl { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof (Resources))]
-        [Display(Name = "LoginId", ResourceType = typeof (MemberShip.Properties.Resources))]
+        [Required(ErrorMessageResourceName = "error_MissLoginId", ErrorMessageResourceType = typeof(Resources))]
+        [Display(Name = "LoginId", ResourceType = typeof(MemberShip.Properties.Resources))]
         public string User { get; set; }
 
-        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof (Resources))]
-        [Display(Name = "Password", ResourceType = typeof (MemberShip.Properties.Resources))]
+        [Required(ErrorMessageResourceName = "error_MissPassword", ErrorMessageResourceType = typeof(Resources))]
+        [Display(Name = "Password", ResourceType = typeof(MemberShip.Properties.Resources))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe", ResourceType = typeof (Resources))]
+        [Display(Name = "RememberMe", ResourceType = typeof(Resources))]
         public bool RememberMe { get; set; }
 
-        [Display(Name = "VerifyCode", ResourceType = typeof (Resources))]
+        [Display(Name = "VerifyCode", ResourceType = typeof(Resources))]
         [VerifyCodeRequire(ErrorMessageResourceName = "alertMsg_requireVerifyCode",
-            ErrorMessageResourceType = typeof (Resources))]
+            ErrorMessageResourceType = typeof(Resources))]
         [UIHint("VerifyCode")]
-        public string VerifyCodde { get; set; }
+        public string VerifyCode { get; set; }
 
         public bool Validate(out string errorMessage, IUserDao userDao, string expectVerifyCode)
         {
             if (OrnamentContext.Configuration.ApplicationSetting.EnableVerifyCode)
             {
-                if (string.IsNullOrEmpty(expectVerifyCode))
+                if (string.IsNullOrWhiteSpace(expectVerifyCode) || String.IsNullOrEmpty(expectVerifyCode))
                 {
                     errorMessage = Resources.error_expireVerifyCode;
                     return false;
                 }
-                if (expectVerifyCode.ToLower() != VerifyCodde.ToLower())
+                if (expectVerifyCode.ToLower() != VerifyCode.ToLower())
                 {
                     errorMessage = Resources.error_notMatchVerifyCode;
                     return false;

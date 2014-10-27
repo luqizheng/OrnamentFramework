@@ -206,7 +206,7 @@
     <value>请输入密码</value>
   </data>
   <data name="error_notMatchVerifyCode" xml:space="preserve">
-    <value>请输入验证码</value>
+    <value>验证码不正确</value>
   </data>
   <data name="error_UserIsNotApproved" xml:space="preserve">
     <value>用户的安全信息没有被验证</value>
