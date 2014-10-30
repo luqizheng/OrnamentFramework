@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Web.Mvc;
+using System.Web.Security;
 using Ornament;
 
 namespace WebApplication.Controllers
@@ -12,6 +13,8 @@ namespace WebApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            var ad=Request.Cookies[FormsAuthentication.FormsCookieName].Value;
+            var a = FormsAuthentication.Decrypt(ad);
             return View();
         }
        
