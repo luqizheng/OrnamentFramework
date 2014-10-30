@@ -96,17 +96,20 @@ namespace Ornament.Web.PortableAreas
 
         public Stream GetResourceStream(string resourceName)
         {
-            string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(resourceName);
-            string str2 = null;
-            if (_resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
+            for (int i = 0; i < 3; i++)
             {
-                Stream manifestResourceStream = _typeToLocateAssembly.Assembly.GetManifestResourceStream(str2);
-                if ((_map != null) &&
-                    (resourceName.ToLower().EndsWith(".aspx") || resourceName.ToLower().EndsWith(".master")))
+                string fullyQualifiedTypeFromPath = GetFullyQualifiedTypeFromPath(resourceName);
+                string str2 = null;
+                if (_resources.TryGetValue(fullyQualifiedTypeFromPath, out str2))
                 {
-                    return _map.Transform(manifestResourceStream);
+                    Stream manifestResourceStream = _typeToLocateAssembly.Assembly.GetManifestResourceStream(str2);
+                    if ((_map != null) &&
+                        (resourceName.ToLower().EndsWith(".aspx") || resourceName.ToLower().EndsWith(".master")))
+                    {
+                        return _map.Transform(manifestResourceStream);
+                    }
+                    return manifestResourceStream;
                 }
-                return manifestResourceStream;
             }
             return null;
         }
