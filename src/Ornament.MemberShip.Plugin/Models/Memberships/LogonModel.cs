@@ -26,7 +26,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
         [VerifyCodeRequire(ErrorMessageResourceName = "alertMsg_requireVerifyCode",
             ErrorMessageResourceType = typeof (Resources))]
         [UIHint("VerifyCode")]
-        public string VerifyCodde { get; set; }
+        public string VerifyCode { get; set; }
 
         public bool Validate(out string errorMessage, IUserDao userDao, string expectVerifyCode)
         {
@@ -37,7 +37,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
                     errorMessage = Resources.error_expireVerifyCode;
                     return false;
                 }
-                if (expectVerifyCode.ToLower() != VerifyCodde.ToLower())
+                if (expectVerifyCode.ToLower() != VerifyCode.ToLower())
                 {
                     errorMessage = Resources.error_notMatchVerifyCode;
                     return false;

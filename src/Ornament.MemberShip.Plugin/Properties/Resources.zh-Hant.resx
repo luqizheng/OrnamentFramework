@@ -196,4 +196,7 @@
   <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
     <value>再一次密码和新密码不匹配</value>
   </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>驗證碼</value>
+  </data>
 </root>
