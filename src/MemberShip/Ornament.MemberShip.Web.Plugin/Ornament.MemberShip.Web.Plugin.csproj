@@ -294,7 +294,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\MemberShips\Views\Auth\" />
     <Folder Include="Areas\MemberShips\Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>

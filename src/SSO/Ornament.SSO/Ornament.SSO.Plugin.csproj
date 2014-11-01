@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\SSO\Controllers\AuthController.cs" />
+    <Compile Include="Areas\SSO\Controllers\SettingController.cs" />
     <Compile Include="Areas\SSO\SSOAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +96,7 @@
     <Content Include="packages.config" />
     <Content Include="Areas\SSO\Views\web.config" />
     <EmbeddedResource Include="Areas\SSO\Views\Auth\IsAuth.cshtml" />
+    <EmbeddedResource Include="Areas\SSO\Views\Setting\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -107,6 +109,10 @@
     <Folder Include="Areas\SSO\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
+      <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
+      <Name>Ornament.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
       <Project>{5b962996-1d9b-415d-98a7-9001a640c84f}</Project>
       <Name>Ornament.Web.PortableAreas</Name>
