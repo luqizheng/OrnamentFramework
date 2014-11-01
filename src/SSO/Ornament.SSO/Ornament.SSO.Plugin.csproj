@@ -117,6 +117,14 @@
       <Project>{5b962996-1d9b-415d-98a7-9001a640c84f}</Project>
       <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ornament.MemberShips.SSO\Ornament.MemberShips.SSO.csproj">
+      <Project>{FC0E5453-7F7B-486A-8C3C-2EDA5B05B1C8}</Project>
+      <Name>Ornament.MemberShips.SSO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ornament.SSO.Dao.NHImple\Ornament.SSO.Dao.NHImple.csproj">
+      <Project>{69246FCD-F38F-4C29-84B4-31605C800C32}</Project>
+      <Name>Ornament.SSO.Dao.NHImple</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
