@@ -121,16 +121,13 @@
     <value>設置</value>
   </data>
   <data name="alertMsg_requireVerifyCode" xml:space="preserve">
-    <value>請輸入驗證碼</value>
+    <value>驗證碼不正確</value>
   </data>
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>角色名稱已經被佔用，請輸入另外一個</value>
   </data>
   <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
     <value>請輸入電子郵件或者登錄名稱</value>
-  </data>
-  <data name="alertMsg_requireVerifyCode1" xml:space="preserve">
-    <value>請輸入驗證碼</value>
   </data>
   <data name="alertMsg_Require_NewPassword" xml:space="preserve">
     <value>請輸入密碼</value>

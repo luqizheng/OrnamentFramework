@@ -110,6 +110,8 @@ namespace Ornament.Web.PortableAreas
                     }
                     return manifestResourceStream;
                 }
+                Thread.Sleep(100);
+                Initialize(_namespaceName);
             }
             return null;
         }
