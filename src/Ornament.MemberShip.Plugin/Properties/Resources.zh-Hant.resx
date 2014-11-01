@@ -121,7 +121,7 @@
     <value>設置</value>
   </data>
   <data name="alertMsg_requireVerifyCode" xml:space="preserve">
-    <value>驗證碼不正確</value>
+    <value>请输入验证码</value>
   </data>
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>角色名稱已經被佔用，請輸入另外一個</value>
@@ -167,7 +167,7 @@
     <value>請輸入密碼</value>
   </data>
   <data name="error_notMatchVerifyCode" xml:space="preserve">
-    <value>請輸入驗證碼</value>
+    <value>驗證碼不正確</value>
   </data>
   <data name="error_UserIsNotApproved" xml:space="preserve">
     <value>用戶安全信息沒有經過驗證</value>
