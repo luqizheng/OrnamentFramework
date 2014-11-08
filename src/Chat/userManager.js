@@ -1,50 +1,29 @@
 /**
  * Created by leo on 2014/10/21.
  */
-var validation = require("./validRequestData");
-var userDao = require("./dao").getProvider("user");
-exports.regUser = function (data, callback) {
-    /*{
-     org:"org",
-     requestDate:"yyyyMMdd HH:mm:ss"
-     orgPubKey:"d$#@!@!",
-     loginId:"kdjfkdj",
-     userPrivateKey:"kdjfkdjf"
-     } */
-    console.log("inputData:" + JSON.stringify(data));
-    var orgName = data.orgName;
-    var orgReqestDate = data.requestDate;
-    var orgPubKey = data.orgPubKey;
-    validation.validOrg(orgName, orgReqestDate, orgPubKey, function (success) {
+var validation = require("./validRequestData"),
+    sso = require("./sso"),
+    onlineUser = require("./onlineUser");
 
-        var result = {
-            succcess: false,
-            message: "success",
-            loginId: data.loginId
-        };
-
-        if (success) {
-            if (data.loginId && data.privateKey) {
-                console.log("try to find user " + data.loginId);
-                userDao.do(function (collection) {
-                    var result = collection.find({loginId: data.loginId}).toArray();
-                    if (result.length == 0) {
-                        userDao.do(function (collection) {
-                            collection.isnert({loginId: data.loginId, privateKey: data.password})
-                        })
-                    }
-
-                })
-
+exports.regUser = function (data, socket, callback) {
+    /*
+     data.loginId=XXX,
+     data.publicKey=XX,
+     */
+    sso.validatePublicKey(data.publicKey, function (result) {
+        if (result.success) {
+            if (result.loginId == data.loginId) {
+                onlineUser.addUser(data.loginId, data.publicKey, socket)
             }
             else {
-                result.message = "password and loginid do not allow empty.";
+                console.log("loginid not equal")
+                callback(result.success);
+                return;
             }
-            result.regSuccess = true;
         }
-        else {
-            result.message = "org validate fail.";
-        }
-        callback(result)
+        callback(result.success);
     })
+}
+exports.getUser=function(strPublicKey){
+    return onlineUser.get(strPublicKey)
 }

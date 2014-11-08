@@ -23,14 +23,14 @@ namespace Ornament.SSO.Areas.SSO.Controllers
         {
             try
             {
-                FormsAuthenticationTicket a = FormsAuthentication.Decrypt(publicKey);
-                if (a.Expired)
-                    return Json(new {success = false});
-                return Json(new {success = true, loginid = a.Name});
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(publicKey);
+                if (ticket == null || ticket.Expired)
+                    return Json(new { success = false });
+                return Json(new { success = true, loginId = ticket.Name }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return Json(new {success = false});
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
             }
         }
     }
