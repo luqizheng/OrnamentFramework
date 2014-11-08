@@ -13,8 +13,6 @@ namespace WebApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var ad=Request.Cookies[FormsAuthentication.FormsCookieName].Value;
-            var a = FormsAuthentication.Decrypt(ad);
             return View();
         }
        

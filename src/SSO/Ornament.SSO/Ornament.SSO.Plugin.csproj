@@ -117,6 +117,14 @@
       <Project>{5b962996-1d9b-415d-98a7-9001a640c84f}</Project>
       <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web.UI\Ornament.Web.UI.csproj">
+      <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>
+      <Name>Ornament.Web.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
+      <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
+      <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ornament.MemberShips.SSO\Ornament.MemberShips.SSO.csproj">
       <Project>{FC0E5453-7F7B-486A-8C3C-2EDA5B05B1C8}</Project>
       <Name>Ornament.MemberShips.SSO</Name>
