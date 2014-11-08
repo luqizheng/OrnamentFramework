@@ -1,7 +1,5 @@
 var messageManager = require("./messageManager"),
     userManager = require("./userManager"),
-    validation = require("./validRequestData"),
-
     app = require('express')(),
     http = require('http').Server(app),
     io = require('socket.io')(http),
@@ -26,14 +24,6 @@ io.on('connection', function (socket) {
     socket.on('list message', function (data) {
         messageManager.list(data)
     });
-
-    socket.on('online', function (data) {
-        if (validation.validOrg(data)) {
-            socket.emit("online", onlineUser.count());
-        }
-    })
-
-
     socket.on('new message', function (data) {
         messageManager.save(data, function (s) {
             if (s.nInserted == 1) {

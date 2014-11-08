@@ -24,6 +24,6 @@ exports.regUser = function (data, socket, callback) {
         callback(result.success);
     })
 }
-exports.getUser=function(strPublicKey){
+exports.getUser = function (strPublicKey) {
     return onlineUser.get(strPublicKey)
 }

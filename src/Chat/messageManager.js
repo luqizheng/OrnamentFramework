@@ -11,7 +11,7 @@ exports.save = function (sampleMessage, callback) {
      From:"hellen",
      Content:"xkxie",
      CreateTime:"kkkdd",
-     Read:true,
+     Read:false,,
      ReadTime:"createTime"
      _id:build by db
      } */
@@ -25,20 +25,9 @@ exports.save = function (sampleMessage, callback) {
     })
 }
 
-exports.list = function (data, callback) {
-
-    /*{
-     size:40,
-     index:0,
-     loginId:loginid,
-     pubKey:pubKey
-     } */
-    val.validUser(data, function (validateResult) {
-        if (validateResult) {
-            db.do(function (collection) {
-                var result = collection.find({to: data.loginId}).sort({CreateDate: 1}).skip(data.size * data.index).limit(data.size).toArray();
-                callback(result)
-            })
-        }
+exports.list = function (loginId, pageIndex, pageSize, callback) {
+    db.do(function (collection) {
+        var result = collection.find({to: loginId}).sort({CreateDate: 1}).skip(pageSize * pageIndex).limit(pageSize).toArray();
+        callback(result)
     })
 }
