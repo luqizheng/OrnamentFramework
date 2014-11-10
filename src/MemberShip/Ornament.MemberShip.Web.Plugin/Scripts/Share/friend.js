@@ -2,7 +2,7 @@
 /// <reference path="../Share/WebApi.js" />
 
 define(function (require) {
-    var webApi = require("/Scripts/combine/webapi.js");
+    var webApi = require("WebApi");
     var url = "/Api/memberships/Friends";
     var friendApi = new webApi(url);
     

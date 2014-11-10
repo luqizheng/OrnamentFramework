@@ -1,6 +1,6 @@
 ﻿define(function (require) {
     var orgUrl = "/api/memberships/org",
-         api = require("/js/WebApi.js"),
+         api = require("WebApi"),
     webApi = new api(orgUrl);
 
     return {

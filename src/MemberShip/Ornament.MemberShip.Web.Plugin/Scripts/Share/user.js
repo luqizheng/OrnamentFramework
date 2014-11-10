@@ -4,7 +4,7 @@ define(function (require) {
     var userUrl = "/api/memberships/Users",
         memberUrl = "api/memberships/member", //需要登录
         secrityUrl = "/api/memberships/security", //无需登录就可以使用的
-        WebApi = require("/js/WebApi.js");
+        WebApi = require("webApi");
 
 
     function User() {

@@ -1,9 +1,9 @@
 ﻿@using System.Web.Optimization
 
 require.config({
-    baseUrl: "/js",
+    baseUrl: "/scripts",
     paths: {
-        json2: "@Scripts.Url("~/scripts/json2.js")",
+        json2: "@Scripts.Url("~/scripts/json2")",
         form:"@Scripts.Url("~/scripts/plugin/jquery-form/jquery-form.min")",
         bootbox:"@Scripts.Url("~/scripts/plugin/bootbox/bootbox.min")",
         nestable:"@Scripts.Url("~/scripts/plugin/jquery-nestable/jquery.nestable.min")",
@@ -15,7 +15,8 @@ require.config({
 @*
     avalon plugin
 *@
-    pager:"@Scripts.Url("~/scripts/avalons/pager/pager")"
+pager:"@Scripts.Url("~/scripts/avalons/pager/pager")"
+
     },
     waitSeconds: 15
 });

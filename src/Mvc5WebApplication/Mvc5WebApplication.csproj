@@ -414,7 +414,7 @@
     <Content Include="img\vt-menu.png" />
     <Content Include="MvcSiteMapProvider_Temp_ReadMe.txt" />
     <Content Include="Scripts\app.config.js" />
-    <Content Include="Scripts\app.min.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
     <Content Include="Scripts\avalon.modern.js" />
     <Content Include="Scripts\avalons\pager\pager.html" />
