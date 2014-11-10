@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\SSO\Controllers\AuthController.cs" />
-    <Compile Include="Areas\SSO\Controllers\SettingController.cs" />
     <Compile Include="Areas\SSO\SSOAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -101,7 +100,6 @@
     <Content Include="packages.config" />
     <Content Include="Areas\SSO\Views\web.config" />
     <EmbeddedResource Include="Areas\SSO\Views\Auth\IsAuth.cshtml" />
-    <EmbeddedResource Include="Areas\SSO\Views\Setting\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

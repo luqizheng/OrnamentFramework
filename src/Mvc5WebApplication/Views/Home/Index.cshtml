@@ -493,16 +493,14 @@
         @*<script src="/Scripts/app.js"></script>
         <script src="/Scripts/util.js" type="text/javascript"></script>*@
         @{
-            var mesgManager = new MessageManager(OrnamentContext.MemberShip.CurrentUser().LoginId, 
-                OrnamentContext.MemberShip.CurrentUser().Id, "orn", "1234567890");
-            RegUser token = mesgManager.GetRegUserToker();
+            var cookie = ViewData["view"];
         }
-     @*   <script type="text/javascript">
+        <script type="text/javascript">
             require(["@Scripts.Url("/scripts/msg.js")"], function(init) {
-                var currentUser = @Html.Raw(JsonHelper.ToJson(token));
+                var currentUser ='@Html.Raw(cookie)';
                 init("http://localhost:3000", currentUser);
             })
-        </script>*@
+        </script>
     </body>
 
 </html>

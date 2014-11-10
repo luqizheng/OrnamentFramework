@@ -1,32 +1,43 @@
 /**
  * Created by leo on 2014/11/8.
  */
-var http=require('http');
+var http = require('http'),
+    querystring = require('querystring');
 
-var options = {
-    hostname:'localhost:16384',
-    port:19410,
-    path:'/sso/BackendAuth',
-    method:'post'
-}
 
-exports.valdPublicKey=function(publicKey,callback){
+exports.validPublicKey = function (publicKey, callback) {
 
-    var req = http.request(options, function(res) {
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
+    var postData = querystring.stringify({
+        publicKey: publicKey, 'test': 1
+    })
+    var options = {
+        hostname: 'localhost',
+        port: 19410,
+        path: '/sso/auth/BackendAuth',
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': postData.length
+        }
+    }
+
+    console.log(postData.length);
+    var req = http.request(options, function (res) {
+        //console.log('STATUS: ' + res.statusCode);
+        //console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             console.log('BODY: ' + chunk);
-            callback(chunk);
+            callback(JSON.parse(chunk));
         });
     });
 
-    req.on('error', function(e) {
+    req.on('error', function (e) {
         console.log('problem with request: ' + e.message);
     });
     // write data to request body
-    req.write(publicKey+"\n");
+    req.write(postData + "\n");
+    console.log("sendPost:" + postData)
     req.end();
 
 }
