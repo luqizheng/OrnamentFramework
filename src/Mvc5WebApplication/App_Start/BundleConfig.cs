@@ -28,14 +28,14 @@ namespace WebApplication
         {
             var jquery =
                 new ScriptBundle("~/js/jquery", "http://libs.baidu.com/jquery/2.0.2/jquery.js").Include(
-                    "~/js/libs/jquery-{version}.js");
+                    "~/scripts/libs/jquery-{version}.js");
             jquery.CdnFallbackExpression = "window.jQuery";
             bundles.Add(jquery);
 
-            bundles.Add(new ScriptBundle("~/js/jqueryui").Include("~/js/libs/jquery-ui-{version}.js"));
+            bundles.Add(new ScriptBundle("~/js/jqueryui").Include("~/scripts/libs/jquery-ui-{version}.js"));
             bundles.Add(new ScriptBundle("~/js/bootstrap","http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js").Include("~/js/bootstrap/bootstrap.min.js"));
-            bundles.Add(new ScriptBundle("~/js/avalon").Include("~/js/avalon.js"));
-            bundles.Add(new ScriptBundle("~/js/json2.js").Include("~/js/json2.js"));
+            bundles.Add(new ScriptBundle("~/js/avalon").Include("~/scripts/avalon.js"));
+            bundles.Add(new ScriptBundle("~/js/json2.js").Include("~/scripts/json2.js"));
         }
 
 
