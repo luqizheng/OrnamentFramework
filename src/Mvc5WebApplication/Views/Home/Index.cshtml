@@ -496,9 +496,9 @@
             var cookie = ViewData["view"];
         }
         <script type="text/javascript">
-            require(["@Scripts.Url("/scripts/msg.js")"], function(init) {
+            require(['@Scripts.Url("/scripts/msg.js")'], function(init) {
                 var currentUser ='@Html.Raw(cookie)';
-                init("http://localhost:3000", currentUser);
+                init("http://localhost:3000", currentUser,"@User.Identity.Name");
             })
         </script>
     </body>

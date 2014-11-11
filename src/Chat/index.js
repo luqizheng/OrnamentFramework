@@ -13,16 +13,17 @@ app.get("/", function (req, res) {
 io.on('connection', function (socket) {
     console.log('a user connected');
     //从客户端获取一个验证token，由sso生成的。然后再把它通过后台发送给sso验证服务，从而获取
-    socket.on('reg user', function (data) {
-        userManager.regUser(data, socket, function (result) {
-            socket.emit("reg user", {success: result});
+    socket.on('valid', function (data) {
+        userManager.valid(data, socket, function (result) {
+            console.log(JSON.stringify(result))
+            socket.emit("valid-result", result);
         });
     });
 
-    socket.on('list message', function (data) {
+    socket.on('list', function (data) {
         messageManager.list(data)
     });
-    socket.on('new message', function (data) {
+    socket.on('send', function (data) {
         messageManager.save(data, function (s) {
             if (s.nInserted == 1) {
                 var user = onlineUser.get(data.to);

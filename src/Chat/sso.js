@@ -10,7 +10,7 @@ var options = {
     method:'post'
 }
 
-exports.valdPublicKey=function(publicKey,callback){
+exports.validPublicKey=function(publicKey,callback){
 
     var req = http.request(options, function(res) {
         //console.log('STATUS: ' + res.statusCode);

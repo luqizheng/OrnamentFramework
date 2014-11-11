@@ -5,18 +5,20 @@ var validation = require("./validRequestData"),
     sso = require("./sso"),
     onlineUser = require("./onlineUser");
 
-exports.regUser = function (data, socket, callback) {
+exports.valid = function (data, socket, callback) {
     /*
      data.loginId=XXX,
      data.publicKey=XX,
      */
-    sso.validPublicKey(data, function (result) {
+    sso.validPublicKey(data.publicKey, function (result) {
         if (result.success) {
             if (result.loginId == data.loginId) {
+                console.log("valid success.")
                 onlineUser.addUser(data.loginId, data.publicKey, socket)
             }
             else {
                 console.log("loginid not equal")
+                result.error = "loginid not correct";
                 callback(result.success);
                 return;
             }
