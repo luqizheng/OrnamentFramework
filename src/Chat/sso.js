@@ -4,7 +4,7 @@
 var http=require('http');
 
 var options = {
-    hostname:'localhost:16384',
+    hostname:'localhost',
     port:19410,
     path:'/sso/BackendAuth',
     method:'post'

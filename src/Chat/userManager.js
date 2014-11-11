@@ -10,6 +10,7 @@ exports.valid = function (data, socket, callback) {
      data.loginId=XXX,
      data.publicKey=XX,
      */
+    console.log('try to valid.')
     sso.validPublicKey(data.publicKey, function (result) {
         if (result.success) {
             if (result.loginId == data.loginId) {
