@@ -13,6 +13,7 @@ namespace WebApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewData["view"]= Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value;
             return View();
         }
        

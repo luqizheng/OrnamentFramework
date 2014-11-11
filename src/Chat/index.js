@@ -14,8 +14,8 @@ io.on('connection', function (socket) {
     console.log('a user connected');
     //从客户端获取一个验证token，由sso生成的。然后再把它通过后台发送给sso验证服务，从而获取
     socket.on('reg user', function (data) {
-        userManager.regUser(data, function (result) {
-            socket.emit("reg user", result);
+        userManager.regUser(data, socket, function (result) {
+            socket.emit("reg user", {success: result});
         });
     });
 
@@ -32,6 +32,8 @@ io.on('connection', function (socket) {
             }
         });
     })
+
+    socket.emit('valid');
 
 });
 

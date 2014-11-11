@@ -86,3 +86,5 @@ obj
 bin
 /src/Mvc5WebApplication/Mappings
 /src/Mvc5WebApplication/log
+/src/Chat/.idea
+/src/chat/node_modules

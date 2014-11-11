@@ -19,10 +19,16 @@ namespace Ornament.SSO.Areas.SSO.Controllers
             }
         }
 
-        public ActionResult BackendAuth(string publicKey)
+        public class BackendAuthModel
+        {
+            public string publicKey { get; set; }
+        }
+      
+        public ActionResult BackendAuth(BackendAuthModel model)
         {
             try
             {
+                var publicKey = model.publicKey;
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(publicKey);
                 if (ticket == null || ticket.Expired)
                     return Json(new { success = false });

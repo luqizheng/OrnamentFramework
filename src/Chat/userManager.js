@@ -10,7 +10,7 @@ exports.regUser = function (data, socket, callback) {
      data.loginId=XXX,
      data.publicKey=XX,
      */
-    sso.validatePublicKey(data.publicKey, function (result) {
+    sso.validPublicKey(data, function (result) {
         if (result.success) {
             if (result.loginId == data.loginId) {
                 onlineUser.addUser(data.loginId, data.publicKey, socket)
