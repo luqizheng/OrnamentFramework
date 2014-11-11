@@ -21,14 +21,14 @@ namespace Ornament.SSO.Areas.SSO.Controllers
 
         public class BackendAuthModel
         {
-            public string publicKey { get; set; }
+            public string PublicKey { get; set; }
         }
       
         public ActionResult BackendAuth(BackendAuthModel model)
         {
             try
             {
-                var publicKey = model.publicKey;
+                var publicKey = model.PublicKey;
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(publicKey);
                 if (ticket == null || ticket.Expired)
                     return Json(new { success = false });

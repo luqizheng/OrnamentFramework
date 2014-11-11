@@ -10,7 +10,7 @@ exports.valid = function (data, socket, callback) {
      data.loginId=XXX,
      data.publicKey=XX,
      */
-    console.log('try to valid.')
+    console.log('starting to valid publicKey:' + data.publicKey + " loginid:" + data.loginId);
     sso.validPublicKey(data.publicKey, function (result) {
         if (result.success) {
             if (result.loginId == data.loginId) {
@@ -20,11 +20,11 @@ exports.valid = function (data, socket, callback) {
             else {
                 console.log("loginid not equal")
                 result.error = "loginid not correct";
-                callback(result.success);
+                callback(result);
                 return;
             }
         }
-        callback(result.success);
+        callback(result);
     })
 }
 exports.getUser = function (strPublicKey) {
