@@ -34,42 +34,57 @@
 
     }
 
+    Chat.prototype.ListChat = function (friend, pageSize, pageIndex, callback) {
+        this.Socket.emit("list chat", {
+            to: friend,
+            pageIndex: pageIndex,
+            pageSize: pageSize
+        }, function (data) {
+            callback(data);
+        });
+    }
+
     Chat.prototype.send = function (strMsg, strToSomeOne, strMsgType, callback) {
 
         /* {
-     To:"joe",
-     From:"hellen",
-     Content:"xkxie",
-     CreateTime:"kkkdd",
-     Read:false,,
-     ReadTime:"createTime"
-     _id:build by db
+     To:"joe",     
+     Content:"xkxie",     
+     
      } */
         var msg = {
             Content: strMsg,
-            To: strMsgType,
-            Type: strMsgType
+            To: strToSomeOne,
+            Token: this.userObj.publicKey
         };
-        this.Socket.emit("send", msg, function (result) {
+        this.Socket.emit("send chat", msg, function (result) {
             var returnData = {
                 success: result.success,
                 msg: msg
             };
             callback(returnData);
         });
+
     };
+    var defaultOptions = {
+        newChat: function (data) {
+            console.log("Chat " + JSON.stringify(data));
+        }
 
-    return function (host, publicKey, loginId) {
+    }
+    return function (host, publicKey, loginId, options) {
 
+        var socket = io.connect(host),
+            result = new Chat(socket, {
+                publicKey: publicKey,
+                loginId: loginId
+            });
 
-        var socket = io.connect(host);
-        var result = new Chat(socket, {
-            publicKey: publicKey,
-            loginId: loginId
-        });
         socket.on("valid", function () {
             socket.emit("valid", result.userObj);
         });
+
+        socket.on('new chat', options.newChat ? options.newChat : defaultOptions.newChat);
+
         return result;
     };
 })

@@ -27,6 +27,7 @@ exports.valid = function (data, socket, callback) {
         callback(result);
     })
 }
+
 exports.getUser = function (strPublicKey) {
     return onlineUser.get(strPublicKey)
 }

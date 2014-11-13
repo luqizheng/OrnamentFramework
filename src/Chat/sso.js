@@ -10,10 +10,9 @@ var options = {
     method: 'post',
     headers: {
         'content-type': 'application/json',
-        'content-length': 10
+        'content-length': 0
     }
 }
-
 exports.validPublicKey = function (publicKey, callback) {
 
     var postData = JSON.stringify({PublicKey: publicKey});

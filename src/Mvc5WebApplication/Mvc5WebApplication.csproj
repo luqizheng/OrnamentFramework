@@ -223,6 +223,7 @@
     <Content Include="ajax\wizard.html" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\smartadmin-production-plugins.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\fonts.css" />
@@ -1018,6 +1019,8 @@
     <Content Include="Scripts\plugin\ckeditor\README.md" />
     <Content Include="Scripts\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="Scripts\plugin\ckeditor\skins\moono\readme.md" />
+    <Content Include="Views\Shared\Layout\_shotcut.cshtml" />
+    <Content Include="Views\Shared\Layout\_footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

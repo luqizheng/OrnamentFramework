@@ -13,22 +13,22 @@
 -->
   <mvcSiteMapNode  controller="Home" action="Index" title="$Resources:sitemap,homeTitle" imageUrl="icon-home" key="Home">
 
-    <mvcSiteMapNode  action="Index" controller="Account"
+    <!--<mvcSiteMapNode  action="Index" controller="Account"
                      imageUrl="fam-user" title="Personal Center" disabled="disabled">
-    </mvcSiteMapNode>
+    </mvcSiteMapNode>-->
 
     <!--Memberage-->
     <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="fa-group" key="MemberShips"/>
 
     <!-- Begin Message Plugin Parent Key -->
-    <mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>
+    <!--<mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>-->
     <mvcSiteMapNode title="Notify Messages" controller="News" area="Messages" action="Index" imageUrl="fa-comment-o" key="Messages"></mvcSiteMapNode>
     <!-- End Message Plugin Parent Key -->
 
 
     <!-- 系统选项-->
 
-    <mvcSiteMapNode action="Index" controller="Site" area="Information" key="System" title="Information"/>
+    <mvcSiteMapNode action="Index" controller="Site" area="Information" key="System" title="Information" imageUrl="fa-desktop"/>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

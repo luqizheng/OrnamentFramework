@@ -21,17 +21,22 @@ io.on('connection', function (socket) {
         });
     });
 
+    socket.on('list friend', function (loginid, data) {
+
+    })
+
     socket.on('list', function (data) {
         messageManager.list(data)
     });
-    socket.on('send', function (data) {
-        messageManager.save(data, function (s) {
-            if (s.nInserted == 1) {
-                var user = onlineUser.get(data.to);
-                if (user && user.socket.isConnected) {
-                    user.socket.emit("list message", messageManager.list(data.to))
-                }
-            }
+    socket.on('send chat', function (chatMsg) {
+
+        var user = userManager.getUser(data.Token);
+
+        messageManager.saveChat({Content: chatMsg.Content, To: chatMsg.To}, function (s) {
+            var toMessage = s[1];
+            var toUser = userManager.get(data.to);
+            toUser.socket.emit('new chat', toMessage)
+
         });
     })
 
