@@ -418,6 +418,8 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
     <Content Include="Scripts\avalon.modern.js" />
+    <Content Include="Scripts\avalons\chat\chat.js" />
+    <Content Include="Scripts\avalons\chat\chat.html" />
     <Content Include="Scripts\avalons\pager\pager.html" />
     <Content Include="Scripts\avalons\pager\pager.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
@@ -1021,6 +1023,7 @@
     <Content Include="Scripts\plugin\ckeditor\skins\moono\readme.md" />
     <Content Include="Views\Shared\Layout\_shotcut.cshtml" />
     <Content Include="Views\Shared\Layout\_footer.cshtml" />
+    <Content Include="Views\Shared\_chat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

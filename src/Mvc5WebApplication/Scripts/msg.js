@@ -72,7 +72,7 @@
 
     }
     return function (host, publicKey, loginId, options) {
-
+        options = options ? options : {};
         var socket = io.connect(host),
             result = new Chat(socket, {
                 publicKey: publicKey,

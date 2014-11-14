@@ -21,8 +21,10 @@ io.on('connection', function (socket) {
         });
     });
 
-    socket.on('list friend', function (loginid, data) {
-
+    socket.on('list friend', function (loginid) {
+        //暂时列出所有在线用户
+        var users=userManager.list(loginid);
+        socket.emit('list friend', users);
     })
 
     socket.on('list', function (data) {
@@ -40,6 +42,12 @@ io.on('connection', function (socket) {
         });
     })
 
+
+    socket.on('change status',function(data){
+        var user=userManager.getUser(data.loginId)
+        user.status=data.status;
+        socket.emit(data.status);
+    });
     socket.emit('valid');
 
 });

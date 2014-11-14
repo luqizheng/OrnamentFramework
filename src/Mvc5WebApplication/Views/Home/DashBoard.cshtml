@@ -1,4 +1,32 @@
-﻿@{
+﻿@using System.Web.Optimization
+@using Ornament.MemberShip.Dao.NHibernateImple.Mappings
+@{
     Layout = "/Views/Shared/_layout.cshtml";
 }
 
+<div class="row">
+    <article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable" ms-controller="chatbox" ms-widget="chat">
+    </article>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        define('dashboard', function (require) {
+
+            require('chat', function () {
+                avalon.define('chatbox', function (vm) {
+
+                });
+                avalon.scan();
+            });
+
+
+            return {};
+
+        });
+
+        require(['dashboard'], function () {
+
+        });
+    </script>
+}

@@ -5,7 +5,7 @@ using Ornament;
 
 namespace WebApplication.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         //
@@ -13,15 +13,19 @@ namespace WebApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ViewData["view"]= Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value;
+            ViewData["view"] = Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value;
             return View();
         }
-       
+
         public ActionResult Config()
         {
             return View();
         }
 
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
         public ActionResult SwitchLanguage(string id)
         {
             CultureInfo culture = CultureInfo.GetCultureInfo(id);

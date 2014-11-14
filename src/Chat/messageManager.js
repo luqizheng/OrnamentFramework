@@ -1,14 +1,13 @@
 /**
  * Created by leo on 2014/10/21.
  */
-var db = require("./dao").getProvider("messages");
+var db = require("./dao").getProvider("chat");
 
 exports.saveChat = function (chatMessage, callback) {
     var msgs
     [{
         To: data.To,
         From: user.LoginId,
-        Type: 'Chat',
         CreateTime: new Date(),
         Owner: user.loginId,
         Read: true
@@ -16,7 +15,6 @@ exports.saveChat = function (chatMessage, callback) {
         {
             To: data.To,
             From: user.LoginId,
-            Type: 'Chat',
             CreateTime: new Date(),
             Owner: data.To,
             Read: false
@@ -27,11 +25,7 @@ exports.saveChat = function (chatMessage, callback) {
     });
 }
 
-exports.listChat = function (loginId, pageSize, pageIndex, callback) {
-
-}
-
-exports.save = function (sampleMessage, callback) {
+save = function (sampleMessage, callback) {
     /* {
      To:"joe",
      From:"hellen",
