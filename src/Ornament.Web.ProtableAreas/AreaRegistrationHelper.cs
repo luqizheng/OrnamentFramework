@@ -110,7 +110,7 @@ namespace Ornament.Web
                     {
                         string virtualPath = string.Format("~/areas/{0}/{1}/{2}", _context.AreaName, model.FilePath,
                             str2);
-                        bundle.Include(virtualPath);
+                        bundle=(SeajsEmbedBundle)bundle.Include(virtualPath);
                     }
                     var eventMessage = new SeajsModuleBundleEventMessage(bundle);
                     bus.Send(eventMessage);

@@ -16,6 +16,7 @@ namespace Ornament.Web.SeajsModules
 
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
+            
             string currentExecutionFilePath = bundle.Path;
             if (files.Count() != 0)
             {
