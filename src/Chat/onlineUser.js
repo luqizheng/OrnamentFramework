@@ -10,8 +10,16 @@ exports.count = function () {
     return user.length;
 }
 
-exports.addUser = function (loginid, publickey, socket) {
-    user[loginid] = {socket: socket, pubKey: publickey, status: 'normal', loginId: loginid};//status is normal busy,offline
+exports.changeStatus=function(loginid,status){
+    var u=user[loginid]
+    u.status=status;
+}
+exports.changeMsg=function(loginid,msg){
+    user[loginId].msg=msg;
+}
+
+exports.addUser = function (loginid, name, publickey, socket) {
+    user[loginid] = {socket: socket, pubKey: publickey, status: 'normal', loginId: loginid, msg: "", name: ""};//status is normal busy,offline
     pubKeyMap[publickey] = loginid;
 }
 /**
