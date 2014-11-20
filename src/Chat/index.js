@@ -4,7 +4,8 @@ var notifyManager = require("./notifyManager"),
     http = require('http').Server(app),
     io = require('socket.io')(http),
     path = require('path'),
-    chatManager = require('./chatManager');
+    chatManager = require('./chatManager'),
+    friendManager = require('./friendManager');
 
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -16,6 +17,7 @@ io.on('connection', function (socket) {
     userManager.Init(socket);
     notifyManager.Init(socket, userManager);
     chatManager.Init(socket, userManager);
+    friendManager.Init(socket, userManager);
 });
 
 

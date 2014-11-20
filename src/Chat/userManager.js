@@ -48,10 +48,7 @@ exports.Init = function (socket) {
         });
     });
 
-    socket.on('list friend', function (loginid) {
-        //暂时列出所有在线用户
-        socket.emit('list friend', onlineUser.get(strPublicKey));
-    });
+
 
     socket.on('change status', function (data) {
         //改变user的状态

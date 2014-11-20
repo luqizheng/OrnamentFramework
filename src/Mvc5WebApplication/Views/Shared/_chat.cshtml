@@ -1,0 +1,114 @@
+﻿@using Ornament
+<div id="chat-container">
+    <span class="chat-list-open-close"><i class="fa fa-user"></i><b>!</b></span>
+
+    <div class="chat-list-body custom-scroll">
+        <ul id="chat-users">
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/5.png">Robin Berry <span class="badge badge-inverse">23</span><span class="state"><i class="fa fa-circle txt-color-green pull-right"></i></span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/male.png">Mark Zeukartech <span class="state"><i class="last-online pull-right">2hrs</i></span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/male.png">Belmain Dolson <span class="state"><i class="last-online pull-right">45m</i></span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/male.png">Galvitch Drewbery <span class="state"><i class="fa fa-circle txt-color-green pull-right"></i></span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/male.png">Sadi Orlaf <span class="state"><i class="fa fa-circle txt-color-green pull-right"></i></span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/male.png">Markus <span class="state"><i class="last-online pull-right">2m</i></span> </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/sunny.png">Sunny <span class="state"><i class="last-online pull-right">2m</i></span> </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">
+                    <img alt="" src="img/avatars/male.png">Denmark <span class="state"><i class="last-online pull-right">2m</i></span> </a>
+            </li>
+        </ul>
+    </div>
+    <div class="chat-list-footer">
+
+        <div class="control-group">
+
+            <form class="smart-form">
+
+                <section>
+                    <label class="input">
+                        <input type="text" placeholder="Filter" id="filter-chat-list">
+                    </label>
+                </section>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="chat-body custom-scroll" id="chat-body">
+    <ul>
+        <li class="message">
+            <img alt="" class="online" src="img/avatars/5.png">
+            <div class="message-text">
+                <time>2014-01-13
+										</time><a class="username" href="javascript:void(0);">Sadi Orlaf</a> Hey did you meet the new board of director? He's a bit of an arse if you ask me...anyway here is the report you requested. I am off to launch with Lisa and Andrew, you wanna join?
+									
+                <p class="chat-file row">
+                    <b class="pull-left col-sm-6">
+                        <!--<i class="fa fa-spinner fa-spin"></i>-->
+                        <i class="fa fa-file"></i>report-2013-demographic-report-annual-earnings.xls </b>
+                    <span class="col-sm-6 pull-right"><a class="btn btn-xs btn-default" href="javascript:void(0);">cancel</a> <a class="btn btn-xs btn-success" href="javascript:void(0);">save</a> </span>
+                </p>
+                <p class="chat-file row">
+                    <b class="pull-left col-sm-6"><i class="fa fa-ok txt-color-green"></i>tobacco-report-2012.doc </b>
+                    <span class="col-sm-6 pull-right"><a class="btn btn-xs btn-primary" href="javascript:void(0);">open</a> </span>
+                </p>
+            </div>
+        </li>
+        <li class="message">
+            <img alt="" class="online" src="img/avatars/sunny.png">
+            <div class="message-text">
+                <time>2014-01-13
+										</time><a class="username" href="javascript:void(0);">John Doe</a> Haha! Yeah I know what you mean. Thanks for the file Sadi! <i class="fa fa-smile-o txt-color-orange"></i>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<div class="chat-footer">
+
+    <!-- CHAT TEXTAREA -->
+    <div class="textarea-div">
+
+        <div class="typearea">
+            <textarea class="custom-scroll" id="textarea-expand" placeholder="Write a reply..."></textarea>
+        </div>
+
+    </div>
+
+    <!-- CHAT REPLY/SEND -->
+    <span class="textarea-controls">
+        <button class="btn btn-sm btn-primary pull-right">
+            Reply
+							
+        </button>
+        <span style="margin-top: 3px; margin-right: 10px;" class="pull-right smart-form">
+            <label class="checkbox pull-right">
+                <input type="checkbox" id="subscription" name="subscription">
+                <i></i>Press <strong>ENTER </strong>to send
+            </label>
+        </span><a class="pull-left" href="javascript:void(0);"><i class="fa fa-camera fa-fw fa-lg"></i></a></span>
+
+</div>

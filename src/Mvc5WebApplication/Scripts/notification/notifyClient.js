@@ -23,6 +23,14 @@ define(['socketio', 'json2'], function (io) {
                 alert(data.error);
             }
         });
+
+        socket.on("list friend", function (data) {
+
+        })
+    }
+
+    msgClient.prototype.listFriend = function () {
+        this.Socket.emit('list friend')
     }
 
     msgClient.prototype.ListChat = function (friend, pageSize, pageIndex, callback) {
@@ -83,14 +91,17 @@ define(['socketio', 'json2'], function (io) {
     }
 
     var defaultOptions = {
-        recever: {
+        /*receiver: {
             "notify": function () {
 
             },
             "chat": function () {
 
             }
-        }
+        },
+        listFriend: function () {
+
+        }*/
     }
     return function (host, publicKey, loginId, options) {
 
@@ -109,6 +120,8 @@ define(['socketio', 'json2'], function (io) {
         for (var receiver in options.recever) {
             socket.on("new " + receiver, options.recever[receiver])
         }
+
+        socket.on("list friend", options.listFriend)
 
         return result;
     };
