@@ -4,21 +4,22 @@
 var db = require("./dao").getProvider("chat");
 
 saveChat = function (chatMessage, callback) {
-    var msgs
-    [{
-        To: chatMessage.To,
-        From: chatMessage.LoginId,
-        CreateTime: new Date(),
-        Owner: chatMessage.loginId,
-        Read: true
-    },
-        {
+    var msgs =
+
+        [{
             To: chatMessage.To,
             From: chatMessage.LoginId,
             CreateTime: new Date(),
-            Owner: chatMessage.To,
-            Read: false
-        }];
+            Owner: chatMessage.loginId,
+            Read: true
+        },
+            {
+                To: chatMessage.To,
+                From: chatMessage.LoginId,
+                CreateTime: new Date(),
+                Owner: chatMessage.To,
+                Read: false
+            }];
     exports.save(msgs, function (messages) {
         console.log("_id:" + msgs[1]._id);
         callback(msgs[1]);

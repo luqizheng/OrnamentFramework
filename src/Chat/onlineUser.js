@@ -1,8 +1,19 @@
+var map=require("hashmap").HashMap;
 var user = {};
-var pubKeyMap = {};
+/**
+ * Key is publicKey, and the obj is loginId
+ * @type {{}}
+ */
+var pubKeyMap = new map();
 
 exports.get = function (publickey) {
-    var loginid = pubKeyMap[publickey];
+
+    pubKeyMap.forEach(function(value, key) {
+        console.log(key + " : " + value);
+        console.log(key==publickey);
+    });
+    var loginid = pubKeyMap.get(publickey);
+    console.log(loginid);
     return user[loginid];
 }
 
@@ -10,17 +21,26 @@ exports.count = function () {
     return user.length;
 }
 
-exports.changeStatus=function(loginid,status){
-    var u=user[loginid]
-    u.status=status;
+exports.changeStatus = function (loginid, status) {
+    var u = user[loginid]
+    u.status = status;
 }
-exports.changeMsg=function(loginid,msg){
-    user[loginId].msg=msg;
+exports.changeMsg = function (loginid, msg) {
+    user[loginId].msg = msg;
 }
 
-exports.addUser = function (loginid, name, publickey, socket) {
-    user[loginid] = {socket: socket, pubKey: publickey, status: 'normal', loginId: loginid, msg: "", name: ""};//status is normal busy,offline
-    pubKeyMap[publickey] = loginid;
+exports.addUser = function (userInfo, socket) {
+    var d = {
+        socket: socket,
+        publicKey: userInfo.publicKey,
+        status: 'normal',
+        loginId: userInfo.loginId,
+        msg: "", name: userInfo.name};//status is normal busy,offline
+    user[d.loginId] = d;
+
+    pubKeyMap.set(userInfo.publicKey, d.loginId);
+
+    console.log("valid is success,and add user " + d.loginId)
 }
 /**
  * 根据loginid获取user对象

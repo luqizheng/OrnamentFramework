@@ -23,8 +23,8 @@ exports.validPublicKey = function (publicKey, callback) {
 
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
-            console.log('BODY: ' + chunk);
-            callback(chunk);
+            //console.log('BODY: ' + chunk);
+            callback(JSON.parse(chunk));
         });
     });
 
@@ -32,7 +32,7 @@ exports.validPublicKey = function (publicKey, callback) {
         console.log('problem with request: ' + e.message);
     });
     // write data to request body
-    console.log('sending public key ' + publicKey)
+    //console.log('sending public key ' + publicKey)
     req.write(postData);
     req.end();
 

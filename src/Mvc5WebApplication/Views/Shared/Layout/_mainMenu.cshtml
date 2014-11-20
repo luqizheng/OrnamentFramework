@@ -58,11 +58,18 @@
         {
             @RenderTitle(node, true);
         }
+
         @*chat *@
         <li class="chat-users top-menu-invisible" 
-            data-chat-loginId="@OrnamentContext.MemberShip.CurrentUser().LoginId"
-            data-chat-name="@OrnamentContext.MemberShip.CurrentUser().Name"
-            ms-controller="chatList" ms-widget="chat,?,$chatOpts">
+            data-chat-login-id="@OrnamentContext.MemberShip.CurrentUser().LoginId"
+            data-chat-name="@OrnamentContext.MemberShip.CurrentUser().Name",
+            data-chat-public-key="@Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value"
+            ms-controller="chatList" ms-widget="chat,$,$chatOpts">
+            <a href="#">
+                <i class="fa fa-lg fa-fw fa-comment-o"><em class="bg-color-pink flash animated">!</em></i> 
+                <span class="menu-item-parent">Smart Chat API <sup>beta</sup></span>
+            </a>
+
         </li>
     </ul>
 </nav>

@@ -2,7 +2,6 @@
  * Created by leo-home on 2014/11/15.
  */
 var dao = require("./dao").getProvider("friends");
-
 /*
  scheman.
  {
@@ -13,9 +12,22 @@ var dao = require("./dao").getProvider("friends");
  }
 
  */
+
+/**
+ *
+ * @param loginId
+ * @param callback
+ * @
+ */
 var listFriend = function (loginId, callback) {
+
     dao.do(function (collection) {
-        var friends = collection.select({owner: loginId}).toArray();
+        console.log("try to find fridns")
+        /*var friends = collection.find({owner: loginId});*/
+        var friends=[{
+            owner:loginId,
+            target:"oktest"
+        }];
         callback(friends)
     })
 }
@@ -23,15 +35,22 @@ var listFriend = function (loginId, callback) {
 exports.Init = function (socket, userManager) {
 
     socket.on('list friend', function (strPublicKey) {
+
         //暂时列出所有在线用户
-        var loginId = userManager.getUser(strPublicKey).loginiId;
+        var userObj = userManager.getUser(strPublicKey);
+        if (!userObj) {
+            console.log("LIST FRIEND: is failed.")
+            return;
+        }
+
+        var loginId = userObj.loginId;
         listFriend(loginId, function (data) {
-            var resuult = [];
+            var result = [];
             for (var i = 0; i < data.length; i++) {
                 var user = userManager.getUserByLoginId(data[i].target);
                 if (user == null) {
                     user = {
-                        loginId: data[i],
+                        loginId: data[i].target,
                         status: 'offline'
                     }
                 }
@@ -40,7 +59,8 @@ exports.Init = function (socket, userManager) {
                     status: user.status
                 });
             }
-            socket.emit('list friend', resuult);
+            console.log("return friend list to client," + JSON.stringify(result))
+            socket.emit('list friend', {success: true, data: result});
         })
 
     });

@@ -19,6 +19,7 @@ namespace WebApplication.Controllers
 
         public ActionResult Config()
         {
+            Response.ContentType = "text/javascript";
             return View();
         }
 

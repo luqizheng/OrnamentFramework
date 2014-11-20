@@ -1,23 +1,24 @@
 {
-	"name": "ornament-notify",
-	"version": "1.0.0",
-	"description": "OrnamentFramework",
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/luqizheng/ornamentframework.git"
-	},
-	"dependencies": {
-		"mongodb": "~2.0",
-		"express": "4.9.5",
-		"socket.io": "*",
-		"path": "0.4.9",
-		"date":"*"
-	},
-	"author": "Williams huo",
-	"license": "Apache 2.0",
-	"bugs": {
-		"url": "https://github.com/luqizheng/ornamentframework/issues"
-	},
-	"homepage": "https://github.com/luqizheng/ornamentframework"
+  "name": "ornament-notify",
+  "version": "1.0.0",
+  "description": "OrnamentFramework",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/luqizheng/ornamentframework.git"
+  },
+  "dependencies": {
+    "date": "*",
+    "express": "4.9.5",
+    "hashmap": "^1.1.0",
+    "mongodb": "~2.0",
+    "path": "0.4.9",
+    "socket.io": "*"
+  },
+  "author": "Williams huo",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/luqizheng/ornamentframework/issues"
+  },
+  "homepage": "https://github.com/luqizheng/ornamentframework"
 }

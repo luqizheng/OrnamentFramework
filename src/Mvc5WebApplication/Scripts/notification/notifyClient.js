@@ -3,35 +3,35 @@
  */
 define(['socketio', 'json2'], function (io) {
 
-    function msgClient(socket, userObj) {
+    function msgClient(socket, userObj, options) {
 
         this.Socket = socket;
         this.userObj = userObj;
         this.isConnect = false;
         var self = this;
+        
 
         socket.on("valid", function () {
             socket.emit("reg user", self.userObj);
         });
 
-        socket.on("valid-result", function (rdata) {
-            var data = JSON.parse(rdata);
-            if (data.success) {
-
+        socket.on("valid-result", function (rdata) {          
+            if (rdata.success) {
                 self.isConnect = true;
+                options.validSuccess.call(self, rdata);
             } else {
                 alert(data.error);
             }
         });
-
-        socket.on("list friend", function (data) {
-
-        })
     }
 
-    msgClient.prototype.listFriend = function () {
-        this.Socket.emit('list friend')
-    }
+    msgClient.prototype.listFriend = function (callback) {
+        var innerCallback = function(data) {
+            callback(data);
+        };
+        this.Socket.on("list friend", innerCallback);
+        this.Socket.emit('list friend', this.userObj.publicKey);
+    };
 
     msgClient.prototype.ListChat = function (friend, pageSize, pageIndex, callback) {
         this.Socket.emit("list chat", {
@@ -87,7 +87,7 @@ define(['socketio', 'json2'], function (io) {
             Type: type,
             LoginIds: aryStrLoginids,
             IsTemplate: false
-        })
+        });
     }
 
     var defaultOptions = {
@@ -99,29 +99,30 @@ define(['socketio', 'json2'], function (io) {
 
             }
         },
-        listFriend: function () {
+        validSuccess: function () { //服务器能够通过验证之后，会回调这个方法
 
         }*/
     }
-    return function (host, publicKey, loginId, options) {
+    return function (host, publicKey, loginId, name, options) {
 
         options = options || {};
 
         var socket = io.connect(host),
             result = new msgClient(socket, {
                 publicKey: publicKey,
-                loginId: loginId
-            });
+                loginId: loginId,
+                name: name
+            }, options);
 
         socket.on("valid", function () {
             socket.emit("valid", result.userObj);
         });
 
         for (var receiver in options.recever) {
-            socket.on("new " + receiver, options.recever[receiver])
+            socket.on("new " + receiver, options.recever[receiver]);
         }
 
-        socket.on("list friend", options.listFriend)
+
 
         return result;
     };
