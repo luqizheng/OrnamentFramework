@@ -223,6 +223,7 @@
     <Content Include="ajax\wizard.html" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\demo.min.css" />
     <Content Include="css\smartadmin-production-plugins.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
@@ -239,6 +240,7 @@
     <Content Include="css\smartadmin-skins.css" />
     <Content Include="css\smartadmin-skins.min.css" />
     <Content Include="css\Custom\your_style.css" />
+    <Content Include="css\your_style.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -875,8 +877,8 @@
     <Content Include="Scripts\plugin\x-editable\moment.min.js" />
     <Content Include="Scripts\plugin\x-editable\x-editable.min.js" />
     <Content Include="Scripts\require.js" />
-    <Content Include="Scripts\smart-chat-ui\smart.chat.manager.min.js" />
-    <Content Include="Scripts\smart-chat-ui\smart.chat.ui.min.js" />
+    <Content Include="Scripts\smart-chat-ui\smart.chat.manager.js" />
+    <Content Include="Scripts\smart-chat-ui\smart.chat.ui.js" />
     <Content Include="Scripts\smartwidgets\jarvis.widget.js" />
     <Content Include="Scripts\smartwidgets\jarvis.widget.min.js" />
     <Content Include="Scripts\speech\voicecommand.min.js" />

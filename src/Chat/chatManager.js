@@ -3,7 +3,7 @@
  */
 var db = require("./dao").getProvider("chat");
 
-saveChat = function (chatMessage, callback) {
+var saveChat = function (chatMessage, callback) {
     var msgs =
 
         [{
@@ -20,13 +20,13 @@ saveChat = function (chatMessage, callback) {
                 Owner: chatMessage.To,
                 Read: false
             }];
-    exports.save(msgs, function (messages) {
+    save(msgs, function (messages) {
         console.log("_id:" + msgs[1]._id);
         callback(msgs[1]);
     });
 }
 
-save = function (sampleMessage, callback) {
+var save = function (sampleMessage, callback) {
     /* {
      To:"joe",
      From:"hellen",
@@ -40,10 +40,10 @@ save = function (sampleMessage, callback) {
     db.do(function (collection) {
         collection.insert(sampleMessage, function (err, result) {
             if (err) {
-                console.log(err);
+                console.log("Insert chat to mongodb error."+err);
                 return;
             }
-            if (s.nInserted > 1) {
+            if (result.nInserted > 1) {
                 callback(sampleMessage);
             }
 
@@ -74,7 +74,8 @@ exports.Init = function (socket, userManager) {
          }
          * */
         //发送对话给某个user
-        var user = userManager.getUser(data.Token);
+        console.log("RECEIVE client:"+JSON.stringify(chatMsg))
+        var user = userManager.getUser(chatMsg.Token);
         if (user == null) {
             socket.emit("login error");
         }
@@ -83,6 +84,7 @@ exports.Init = function (socket, userManager) {
             if (toUser != null) { //如果user 在线，那么直接发给他。
                 toUser.socket.emit('new chat', toMessage)
             }
+            db.close();
         });
     })
 
@@ -99,6 +101,7 @@ exports.Init = function (socket, userManager) {
         list(user.loginId, search.PageIndex, search.PageSize, function (data) {
             user.socket.emit("list chat", result);
         });
+        db.close();
     });
 
 

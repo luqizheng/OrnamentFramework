@@ -4,21 +4,33 @@ var MongoClient = require('mongodb').MongoClient;
 
 var provider = function (collectionName) {
 
+    this.db = null;
     this.do = function (action) {
 
-        MongoClient.connect(url, function (err, db) {
+        if(this.db==null) {
+            MongoClient.connect(url, function (err, db) {
 
-            console.log("get collection from db name=" + collectionName);
-            var collection = db.collection(collectionName);
-            if (!collection) {
-                console.log("collection is empty, so create a new one for " + collectionName)
-                db.createCollection(collectionName);
-                collection = db.collection(collectionName);
-            }
-            console.log(collectionName+" is exist.")
+                console.log("get collection from db name=" + collectionName);
+                this.db = db;
+
+                var collection = db.collection(collectionName);
+                if (!collection) {
+                    console.log("collection is empty, so create a new one for " + collectionName)
+                    db.createCollection(collectionName);
+                    collection = db.collection(collectionName);
+                }
+                console.log(collectionName + " is exist.")
+                action(collection);
+            });
+        }
+        else{
+            var collection = this.db.collection(collectionName);
             action(collection);
-            db.close();
-        });
+        }
+    }
+
+    this.close = function () {
+        this.db.close();
     }
 }
 

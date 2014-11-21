@@ -61,15 +61,28 @@
 
         @*chat *@
         <li class="chat-users top-menu-invisible" 
-            data-chat-login-id="@OrnamentContext.MemberShip.CurrentUser().LoginId"
-            data-chat-name="@OrnamentContext.MemberShip.CurrentUser().Name",
-            data-chat-public-key="@Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value"
-            ms-controller="chatList" ms-widget="chat,$,$chatOpts">
+           
+            ms-controller="chatList">
+
             <a href="#">
-                <i class="fa fa-lg fa-fw fa-comment-o"><em class="bg-color-pink flash animated">!</em></i> 
+                <i class="fa fa-lg fa-fw fa-comment-o">
+                    <em class="bg-color-pink flash animated">!</em>
+                </i>
                 <span class="menu-item-parent">Smart Chat API <sup>beta</sup></span>
             </a>
 
+            <ul>
+                <li>
+                    <!-- DISPLAY USERS -->
+                    <div class="display-users" ms-widget="chat,$,$chatOpts"  
+                         data-chat-login-id="@OrnamentContext.MemberShip.CurrentUser().LoginId"
+                         data-chat-name="@OrnamentContext.MemberShip.CurrentUser().Name" 
+                        data-chat-public-key="@Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value">
+                        
+                    </div>
+                </li>
+
+            </ul>
         </li>
     </ul>
 </nav>

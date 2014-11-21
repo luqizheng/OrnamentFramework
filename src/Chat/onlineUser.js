@@ -45,7 +45,7 @@ exports.addUser = function (userInfo, socket) {
 /**
  * 根据loginid获取user对象
  * @param loginid
- * @returns {socket:socket,pubKye:publicshKey,status:'normal or busy or offline',loginId:'loginId'}
+ * @returns {socket:socket,pubKye:publicshKey,status:'online or busy or offline',loginId:'loginId'}
  */
 exports.getByLoginId = function (loginid) {
     var result = user[loginid];

@@ -9,8 +9,6 @@ define(["text!avalons/chat/chat.html", 'notification/notifyClient'], function (t
 
         var vmodel = avalon.define(data.chatId, function (vm) {
 
-            avalon.mix(vm, options);
-
             vm.$init = function () {
                 var pageHtml = optionsTemplate;
                 element.style.display = "none";
@@ -25,6 +23,14 @@ define(["text!avalons/chat/chat.html", 'notification/notifyClient'], function (t
                         this.listFriend( //验证成功，获取朋友列表
                             function (friendData) {
                                 if (friendData.success) {
+                                    for (var i = 0; i < friendData.data.length; i++) {
+                                        var item = friendData.data[i];
+                                        switch (item.status) {
+                                            case "offline":
+                                                item.statusStyle = "online";
+                                                break;
+                                        }
+                                    }
                                     vmodel.friends = friendData.data;
                                 }
                             });
@@ -32,50 +38,53 @@ define(["text!avalons/chat/chat.html", 'notification/notifyClient'], function (t
                     }
                 });
                 element.style.display = "";
-                
+
 
 
             };
             vm.$skipArray = ["host", "loginId", "publicKey", "name"];
             vm.host = "";
-            vm.friends = [{loginId:"s"}];
+            vm.friends = [{ loginId: "s" }];
             vm.loginId = "";
             vm.name = "";
             vm.publicKey = "";
-            vm.$watch("friends", function (newValues) {
-                setTimeout(
-                    function () { initUi(newValues); }, 500);
+           
 
-            });
-            
+
+            var dispatchReplace = false;
+            vm.showBox = function (event) {
+                event.preventDefault();
+                var _old = chatboxManager.dispatch;
+                if (!dispatchReplace) {
+                    var aa=function (id, user, msg) { //重写变量
+                        msgClient.sendChat(id.split('_')[1], msg);
+                        _old(id, user, msg);
+                    }
+                    chatboxManager.dispatch = aa;
+                    dispatchReplace = true;
+                }
+
+
+                var friend = this.$vmodel.el;
+                chatboxManager.addBox('chat_'+friend.loginId, {
+                    // dest:"dest" + counter, 
+                    // not used in demo
+                    title: "username" + friend.loginId,
+                    first_name: "",
+                    last_name: friend.loginId,
+                    status: friend.statusStyle,
+                    alertmsg: "",
+                    alertshow: true
+                    //you can add your own options too
+
+
+                });
+            }
+            avalon.mix(vm, options);
         });
 
-        function initUi(friends) {
-            for (var i = 0; i < friends.length; i++) {
 
-                var friend = friends[i], opts = {
-                    id: 'chat_' + friend.loginId,
-                    title: friend.loginId,
-                    user: widget.loginId,
-                    rel: "popover-hover",
-                    placement: "right",
-                    status: friend.status,
-                    hidden: false, // show or hide the chatbox
-                    offset: 0, // relative to right edge of the browser window
-                    width: 230, // width of the chatbox
-                    messageSent:
-                        function (id, user, msg) {
-                            // override this
-                            this.boxManager.addMsg(user.first_name, msg);
-                            msgClient.sendChat(id.split('_')[1], msg);
-                        },
-                    boxClosed: function (id) { }, // called when the close icon is clicked
-
-                };
-
-                $('#' + options.id).chatbox(opts);
-            }
-        }
+     
 
         return vmodel;
     };
@@ -85,5 +94,11 @@ define(["text!avalons/chat/chat.html", 'notification/notifyClient'], function (t
     widget.defaults = {
         host: 'localhost:3000'
     };
+
+    //替换发送信息的蝙蝠恩
+
+   
+        
+    
     return avalon;
 });
