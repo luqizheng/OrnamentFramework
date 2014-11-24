@@ -30,6 +30,9 @@
                 .removeData("validator")
                 .removeData("unobtrusiveValidation"),
             opts = $.extend({}, widget, opt);
+            if (!opts.url) {
+                opts.url = $(this).attr("action");
+            }
             $.validator.unobtrusive.parse(this);
 
             $form.validate().settings.submitHandler = function () {
@@ -60,7 +63,7 @@
         };
 
         var widget = {
-            url: "",
+            url: false,
             before: function () { },
             done: function () { },
             success: function () { },

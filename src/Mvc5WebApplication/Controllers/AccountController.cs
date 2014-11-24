@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Web;
 using System.Web.Mvc;
 using Ornament;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 
 namespace WebApplication.Controllers
 {
@@ -64,6 +66,7 @@ namespace WebApplication.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateAjax]
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
         public ActionResult LogOn(LogonModel model)
@@ -75,14 +78,23 @@ namespace WebApplication.Controllers
             {
                 if (errorMessage != null)
                 {
-                    ModelState.AddModelError("_form", errorMessage);
+                    ModelState.AddModelError("User", errorMessage);
                 }
-                return View(model);
+                if (!Request.IsAjaxRequest())
+                    return View(model);
+                return Json(false);
             }
             FormsAuth.SignIn(model.User, model.RememberMe);
-            return !String.IsNullOrEmpty(model.ReturnUrl)
-                ? (ActionResult)Redirect(model.ReturnUrl)
-                : RedirectToAction("Index", "Home");
+            if (!Request.IsAjaxRequest())
+            {
+                return !String.IsNullOrEmpty(model.ReturnUrl)
+                    ? (ActionResult)Redirect(model.ReturnUrl)
+                    : RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return Json(true);
+            }
         }
 
         public ActionResult Register()

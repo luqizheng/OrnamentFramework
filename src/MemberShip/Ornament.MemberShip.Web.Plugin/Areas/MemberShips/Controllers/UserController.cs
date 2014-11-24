@@ -146,7 +146,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(new EditUserModel(user));
         }
 
-        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax, Session(Transaction = true)]
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), 
+        ValidateAjax, Session(Transaction = true)]
         public ActionResult Save(EditUserModel userBasicInfo)
         {
             if (userBasicInfo == null)

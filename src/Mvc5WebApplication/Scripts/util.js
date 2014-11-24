@@ -6,17 +6,16 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         window.location.replace("/Account/logon");
     }
     if (jqxhr.status == 405) {
-        console.log($("#ajaxlogin").length);
         $("#ajaxlogin").modal('show');
     }
 });
 $(document).ready(function() {
-    console.log("ok" + $("#ajaxlogin").length);
     $("#ajaxlogin").modal({
         remote: "/Account/AjaxLogon",
         show: false
     });
 });
+
 var clearPageVariable = [];
 $(document).off('click', 'nav a[href!="#"]');
 $(document).on('click', 'nav a[href!="#"]', function (e) {
