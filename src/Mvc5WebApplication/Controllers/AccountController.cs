@@ -53,10 +53,14 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public ActionResult AjaxLogon()
+        {
+            return View();
+        }
         public ActionResult Logout()
         {
             FormsAuth.SignOut();
-            return View();
+            return RedirectToAction("Logon");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -77,7 +81,7 @@ namespace WebApplication.Controllers
             }
             FormsAuth.SignIn(model.User, model.RememberMe);
             return !String.IsNullOrEmpty(model.ReturnUrl)
-                ? (ActionResult) Redirect(model.ReturnUrl)
+                ? (ActionResult)Redirect(model.ReturnUrl)
                 : RedirectToAction("Index", "Home");
         }
 

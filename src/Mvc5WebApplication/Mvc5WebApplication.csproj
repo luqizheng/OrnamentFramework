@@ -1021,6 +1021,7 @@
     <Content Include="Scripts\plugin\ckeditor\skins\moono\readme.md" />
     <Content Include="Views\Shared\Layout\_shotcut.cshtml" />
     <Content Include="Views\Shared\Layout\_footer.cshtml" />
+    <Content Include="Views\Account\AjaxLogon.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,14 +1,22 @@
 ﻿/* add by leo*/
+var models = true;
 $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
     if (jqxhr.status == 401) {
         // perform a redirect to the login page since we're no longer authorized
         window.location.replace("/Account/logon");
     }
     if (jqxhr.status == 405) {
-        
+        console.log($("#ajaxlogin").length);
+        $("#ajaxlogin").modal('show');
     }
 });
-
+$(document).ready(function() {
+    console.log("ok" + $("#ajaxlogin").length);
+    $("#ajaxlogin").modal({
+        remote: "/Account/AjaxLogon",
+        show: false
+    });
+});
 var clearPageVariable = [];
 $(document).off('click', 'nav a[href!="#"]');
 $(document).on('click', 'nav a[href!="#"]', function (e) {
@@ -61,13 +69,13 @@ $(document).on('click', 'nav a[href!="#"]', function (e) {
 
 //Chat's
 
-    require(['/Scripts/avalons/chat/chat.js'], function() {
-        avalon.define("chatList", function(vm) {
-            vm.$chatOpts = {
-                host: 'http://location:3000'
-            };
-        });
-        avalon.scan();
+require(['/Scripts/avalons/chat/chat.js'], function () {
+    avalon.define("chatList", function (vm) {
+        vm.$chatOpts = {
+            host: 'http://location:3000'
+        };
     });
+    avalon.scan();
+});
 
 

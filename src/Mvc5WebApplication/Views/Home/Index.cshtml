@@ -11,10 +11,10 @@
     <meta name="author" content="">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        @Scripts.Render("~/js/avalon")
+    @Scripts.Render("~/js/avalon")
     <script type="text/javascript"> avalon.config({ loader: false }) </script>
-      <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
-     <script src="~/Scripts/require.js" data-main="/Home/Config"></script>
+    <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
+    <script src="~/Scripts/require.js" data-main="/Home/Config"></script>
     <!-- #CSS Links -->
     <!-- Basic Styles -->
     @Styles.Render("~/css/bootstrap.min.css")
@@ -54,8 +54,6 @@
     <link rel="apple-touch-startup-image" href="/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
     <link rel="apple-touch-startup-image" href="/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-    
-   
 </head>
 
 <!--
@@ -100,8 +98,9 @@
         * 'fixed-footer'      - Fixes footer
         * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
         -->
-<body class="fixed-header fixed-navigation fixed-ribbon fixed-footer">
 
+<body class="fixed-header fixed-navigation fixed-ribbon fixed-footer">
+   
     <!-- #HEADER -->
     <header id="header">
         <div id="logo-group">
@@ -354,9 +353,9 @@
 
     <!-- avalon-->
 
- 
-  
-   
+
+
+
 
 
     <!-- #PLUGINS -->
@@ -429,13 +428,22 @@
     <!-- Full Calendar -->
     @*<script src="/Scripts/plugin/moment/moment.min.js"></script>
     <script src="/Scripts/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>*@
-    
+
     <!-- MAIN APP JS FILE -->
     @Scripts.Render("/Scripts/app.js", "/Scripts/util.js")
 
-    @{
-        var cookie = ViewData["view"];
-    }
+
+     <div class="modal fade" id="ajaxlogin" tabindex="-1" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
