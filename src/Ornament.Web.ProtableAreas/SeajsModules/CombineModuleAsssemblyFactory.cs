@@ -1,10 +1,9 @@
-﻿namespace Ornament.Web.SeajsModules
-{
-    using SeajsBundles.Seajs;
-    using SeajsBundles.Seajs.Modules;
-    using System;
-    using System.Web.Optimization;
+﻿using System.Web.Optimization;
+using SeajsBundles.Seajs;
+using SeajsBundles.Seajs.Modules;
 
+namespace Ornament.Web.SeajsModules
+{
     public class CombineModuleAsssemblyFactory : IModuleFactory
     {
         public ISeajsModule Build(string requireId, BundleContext context, bool combine, ISeajsModule parent)
@@ -18,4 +17,3 @@
         }
     }
 }
-

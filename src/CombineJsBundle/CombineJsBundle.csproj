@@ -78,9 +78,10 @@
     <Compile Include="Modules\Modules\CombineModuleFactories\GlobalReferenceModuleFactory.cs" />
     <Compile Include="Modules\Modules\CombineModuleFactories\DefaultModuleFactory.cs" />
     <Compile Include="Modules\Modules\IModuleFactory.cs" />
-    <Compile Include="Modules\Modules\SeajsModuleFactory.cs" />
+    <Compile Include="Modules\Modules\ModuleFactory.cs" />
     <Compile Include="Modules\ReferenceModule.cs" />
     <Compile Include="Modules\RootModule.cs" />
+    <Compile Include="RouteUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

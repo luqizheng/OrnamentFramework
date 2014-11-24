@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Optimization;
 using System.Web.UI.WebControls;
-using SeajsBundles.JqueryBundles;
+using CombineJs.JqueryBundles;
 
 namespace Ornament.Web.Bundles.Config
 {

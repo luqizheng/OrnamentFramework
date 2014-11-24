@@ -7,6 +7,7 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using CombineJs.Modules.Modules;
 using log4net;
 using Ornament.Configurations;
 using Ornament.MemberShip;
@@ -60,7 +61,7 @@ namespace Ornament.Web.Cfg
 
 
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
-            SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
+            ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
             SeajsModuleBundleMessageHandle.HandlAllBundle();
         }
 

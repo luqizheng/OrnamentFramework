@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Optimization;
 using System.Web.Routing;
+using CombineJs;
+using CombineJs.Modules;
 using Ornament.Web.PortableAreas;
-using SeajsBundles;
-using SeajsBundles.Seajs;
 
 namespace Ornament.Web.SeajsModules
 {
@@ -27,7 +26,7 @@ namespace Ornament.Web.SeajsModules
                 }
 
 
-                return bundleFor.Builder.BuildBundleContent(bundleFor, this.Context, bundleFor.EnumerateFiles(Context));
+                return bundleFor.Builder.BuildBundleContent(bundleFor, Context, bundleFor.EnumerateFiles(Context));
             }
         }
 
@@ -38,7 +37,7 @@ namespace Ornament.Web.SeajsModules
             {
                 return false;
             }
-            var areaName = (string)routeDataByUrl.DataTokens["area"];
+            var areaName = (string) routeDataByUrl.DataTokens["area"];
             if (areaName == null)
             {
                 return false;

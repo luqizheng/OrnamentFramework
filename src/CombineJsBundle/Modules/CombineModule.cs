@@ -139,7 +139,7 @@ namespace CombineJs.Modules
 
             var result = new List<CombineModule>();
 
-            content = Regex.Replace(content, @"require\((.+?)\)", match =>
+            content = Regex.Replace(content, @"require\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
             {
                 var replcements = match.Groups[1].Value
                     .TrimStart('\"', '\'', '[')
@@ -160,7 +160,9 @@ namespace CombineJs.Modules
                     }
                     output.Add("'" + modual.OutputId + "'");
                 }
-                return string.Format("[{0}]", String.Join(",", output.ToArray()));
+                var outputString = String.Join(",", output.ToArray());
+                var reformat = string.Format("{0}", outputString);
+                return match.ToString().Replace(match.Groups[1].Value, reformat);
             });
 
 

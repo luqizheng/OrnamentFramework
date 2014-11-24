@@ -10,6 +10,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using CombineJs.Modules.Modules;
 using log4net;
 using log4net.Config;
 using Ornament;
@@ -52,7 +53,7 @@ namespace WebApplication
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
-            SeajsModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
+            ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
             SeajsModuleBundleMessageHandle.HandlAllBundle();
 
             NHibernateMvcRegister.Regist();
@@ -62,11 +63,22 @@ namespace WebApplication
         {
             var context = new HttpContextWrapper(Context);
             // If we're an ajax request, and doing a 302, then we actually need to do a 401
+            // 401 means login is timeout when accept  ajax request.
             if (Context.Response.StatusCode == 302 && context.Request.IsAjaxRequest())
             {
                 Context.Response.Clear();
-                Context.Response.StatusCode = 401;
+                if (User.Identity.IsAuthenticated)
+                {
+                    Context.Response.StatusCode = 405;// Not Permissions.
+                }
+                else
+                {
+                    Context.Response.StatusCode = 401;// login timeout
+                }
+                
+                
             }
+
         }
 
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)

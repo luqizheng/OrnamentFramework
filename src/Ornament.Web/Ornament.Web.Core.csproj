@@ -98,9 +98,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
-    <Reference Include="SeajsBundles">
-      <HintPath>..\..\lib\SeajsBundles.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -211,6 +208,10 @@
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CombineJsBundle\CombineJsBundle.csproj">
+      <Project>{30f82ffa-fa21-44d2-bef8-81853c186788}</Project>
+      <Name>CombineJsBundle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
       <Name>Ornament.Messages.Core</Name>

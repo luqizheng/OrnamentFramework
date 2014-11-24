@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web.Optimization;
-using SeajsBundles;
+using CombineJs;
 
 namespace Ornament.Web.Bundles.Config
 {
@@ -24,7 +24,7 @@ namespace Ornament.Web.Bundles.Config
             params string[] includeVirtualPathes)
         {
             logWriter.WriteLine("Directory:{0}:{1}", bundlePath, String.Join(",", includeVirtualPathes));
-            var c = new SeajsBundle(bundlePath, _isCombine);
+            var c = new CombineJsBundle(bundlePath, _isCombine);
             var f = c.Include(includeVirtualPathes);
             bundles.Add(f);
 

@@ -4,6 +4,9 @@ $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         // perform a redirect to the login page since we're no longer authorized
         window.location.replace("/Account/logon");
     }
+    if (jqxhr.status == 405) {
+        
+    }
 });
 
 var clearPageVariable = [];
