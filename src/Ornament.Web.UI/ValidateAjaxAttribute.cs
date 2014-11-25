@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -24,7 +25,14 @@ namespace Ornament.Web.UI
                     {
                         key = x,
                         errors = modelState[x].Errors.
-                            Select(y => y.ErrorMessage).
+                            Select(y =>
+                            {
+                                if (String.IsNullOrEmpty(y.ErrorMessage))
+                                {
+                                    return y.Exception.Message;
+                                }
+                                return y.ErrorMessage;
+                            }).
                             ToArray()
                     };
                 filterContext.Result = new JsonResult
@@ -32,7 +40,7 @@ namespace Ornament.Web.UI
                     Data = errorModel
                 };
                 filterContext.HttpContext.Response.StatusCode =
-                    (int) HttpStatusCode.BadRequest;
+                    (int)HttpStatusCode.BadRequest;
             }
         }
     }

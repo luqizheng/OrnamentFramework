@@ -201,4 +201,7 @@
   <data name="Search_tips" xml:space="preserve">
     <value>Please input email or loginId</value>
   </data>
+  <data name="UserSearchResult" xml:space="preserve">
+    <value>Search Results for</value>
+  </data>
 </root>

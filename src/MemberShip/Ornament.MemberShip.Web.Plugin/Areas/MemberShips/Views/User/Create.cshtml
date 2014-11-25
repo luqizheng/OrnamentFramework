@@ -2,51 +2,77 @@
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
-@model Ornament.MemberShip.Plugin.Models.Memberships.CreateUserModel
+@model Ornament.MemberShip.Web.Plugin.Models.Memberships.EditUserModel
 @{
+    ViewBag.Title = Resources.Edit + " " + Model.LoginId;
     Layout = OrnamentContext.Configuration.Layout();
-}
-@section pageTitle
-{
-    <h3>@Html.GetEmbededResourceString("page_title")</h3>
-}
-@using (var panel = Html.Panel())
-{
-    @panel.Body(@<text>
-    <form method="POST" class="form-horizontal">
-        <div class="well">
-            @Html.ValidationSummary(true)
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab3" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_basicInfo")</a></li>
-                <li><a href="#tab4" data-toggle="tab">@Html.GetEmbededResourceString("Create", "tab_Permission")</a></li>
-            </ul>
+    var basicInfo = new PanelOption
+    {
+        DeleteButton = false,
+        EditButton = false,
+        ToggleButton = true
+    };
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab3">
-                    @Html.EditorFor(s => s, "BasicInfo")
-                </div>
-                <div class="tab-pane" id="tab4">
-                    @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
-                </div>
-            </div>
-            <div class="form-actions">
-                <input type="submit" value="@Ornament.Properties.Resources.Create" class="btn btn-info"/>
-                <a id="cancelButton" class="btn" href="@this.Url.Action("Index", "User", new { area = "MemberShips" })">@Resources.Cancel</a>
+    var classes = new[]
+    {
+        "col-md-6", "col-sm-12", "col-xs-12"
+    };
+}
 
-            </div>
+@* 基本信息 *@
+
+<div class="row">
+    <form action="@Url.Action("Save", "User", "MemberShips")" method="POST" id="editUser" ms-controller="create">
+        <div class="alert alert-block alert-success col-lg-12 col-md-12 col-xs-12 col-sm-12" id="jusTest" style="z-index: 99;">
+            <button class="btn btn-success btn-sm" type="submit"><i class="fa fa-save"></i>&nbsp;@Resources.Save</button>
+            <button class="btn btn-sm btn-default" type="reset"><i class="fa fa-mail-reply"></i>&nbsp;@Resources.Reset</button>
+            <a class="btn btn-sm btn-default" href="#memberships/user/index">&nbsp;@Resources.Cancel</a>
         </div>
+
+        @using (Panel panel = Html.Panel(basicInfo, classes))
+        {
+            @panel.Header(@<text>
+                               <h2><i class="fa fa-desktop"></i>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+                           </text>)
+            @panel.Body(@<text>
+            
+                             @Html.EditorFor(s => s, "BasicInfo")
+            
+                         </text>)
+        }
+
+        @using (Panel panel = Html.Panel(basicInfo, classes))
+        {
+            @panel.Header(@<text>
+                               <h2><i class="fa fa-info-circle"></i>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+                           </text>)
+            @panel.Body(@<text>
+
+                             @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+
+                         </text>)
+        }
+
+        @using (Panel panel = Html.Panel(basicInfo, classes))
+        {
+            @panel.Header(@<text>
+                               <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
+                           </text>)
+            @panel.Body(@<text>
+
+                             @Html.EditorFor(s => s.Permissions, "_PermissionInfo")
+
+                         </text>)
+        }
     </form>
+</div>
 
-    </text>);
-
-}
 
 @section scripts{
     <script type="text/javascript">
-        seajs.use(["/MemberShips/Scripts/User/Create.js"]);
+        require(['@Scripts.Url("~/memberships/Scripts/user/create.js")'], function (main) {
+            main.Init();
+            clearPageVariable.push(main.Clear());
+        });
     </script>
 }
-
-
-
-

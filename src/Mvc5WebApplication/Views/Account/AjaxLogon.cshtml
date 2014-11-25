@@ -1,42 +1,40 @@
 ﻿@using Ornament.Web
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.LogonModel
 
-<div class="well no-padding">
-    <form action="@Url.Action("Logon")" id="login-ajax-form" class="smart-form client-form" method="POST">
-        <header>
-            @Html.GetResourceString("SignIn")
-        </header>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">@Html.GetResourceString("SignIn")</h4>
+</div>
+<div class="modal-body">
 
-        <fieldset>
+    <div class="well no-padding">
+        <form action="@Url.Action("Logon")" id="login-ajax-form" class="smart-form client-form" method="POST">
+            <fieldset>
 
-            <section>
-                <label class="label">@Html.DisplayNameFor(x => x.User)</label>
-                <label class="input">
-                    <i class="icon-append fa fa-user"></i>
-                    @Html.TextBoxFor(x => x.User)
-                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>@Html.GetResourceString("LoginIdTips")</b></label>
-                
+                <section>
+                    <label class="label">@Html.DisplayNameFor(x => x.User)</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-user"></i>
+                        @Html.TextBoxFor(x => x.User)
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>@Html.GetResourceString("LoginIdTips")</b></label>
 
-            </section>
 
-            <section>
-                <label class="label">@Html.DisplayNameFor(x => x.Password)</label>
-                <label class="input">
-                    <i class="icon-append fa fa-lock"></i>
-                    @Html.PasswordFor(x => x.Password)
-                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>@Html.GetResourceString("PasswordTips")</b>
-                </label>
+                </section>
 
-            </section>
-            @Html.HiddenFor(x => x.ReturnUrl)
+                <section>
+                    <label class="label">@Html.DisplayNameFor(x => x.Password)</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-lock"></i>
+                        @Html.PasswordFor(x => x.Password)
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>@Html.GetResourceString("PasswordTips")</b>
+                    </label>
 
-        </fieldset>
-        <footer>
-            <button type="submit" class="btn btn-primary">
-                @Html.GetResourceString("SignInBtn")
-            </button>
-        </footer>
-    </form>
+                </section>
+                @Html.HiddenFor(x => x.ReturnUrl)
+
+            </fieldset>
+        </form>
+    </div>
     <script type="text/javascript">
         require(["vaform"], function (vaform) {
             $("#login-ajax-form").vaform({
@@ -48,7 +46,16 @@
                     }
                 }
             });
+            $("#login-submit").click(function() {
+                $("#login-ajax-form").submit();
+            })
 
         })
     </script>
 </div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="login-submit">
+        @Html.GetResourceString("SignInBtn")
+    </button>
+</div>
+

@@ -57,6 +57,8 @@ namespace WebApplication
             SeajsModuleBundleMessageHandle.HandlAllBundle();
 
             NHibernateMvcRegister.Regist();
+            
+            
         }
 
         protected void Application_EndRequest()

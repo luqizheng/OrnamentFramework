@@ -201,4 +201,7 @@
   <data name="Search_tips" xml:space="preserve">
     <value>請輸入電子郵件或者登錄名</value>
   </data>
+  <data name="UserSearchResult" xml:space="preserve">
+    <value>搜索結果</value>
+  </data>
 </root>

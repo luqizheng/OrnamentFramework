@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Qi.NHibernateExtender;
 
@@ -22,10 +20,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             OtherInfo = new UserOtherInfoModel(user);
         }
 
-        
+
         public UserOtherInfoModel OtherInfo { get; set; }
 
-        
+
         public PermissionInfo Permissions { get; set; }
 
         public User Save(IMemberShipFactory memberShipFactory)

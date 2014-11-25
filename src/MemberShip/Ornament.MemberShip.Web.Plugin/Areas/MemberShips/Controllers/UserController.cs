@@ -61,13 +61,13 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [OutputCache(Duration = 30), Session]
         public ActionResult Index()
         {
-            var statisticsDao
+            IUserStatisticsDao statisticsDao
                 = _memberShipFactory.CreateStatisticsDao();
 
             IList<UserStatistics> data = statisticsDao.FindByDate(DateTime.Today.AddDays(-7), DateTime.Today);
             ViewData["NewRegistry"] = string.Join(",", from a in data select a.Registers);
             ViewData["TotalUser"] = String.Join(",", _memberShipFactory.CreateUserDao().Count());
-            
+
             ViewData["7DayActive"] = String.Join(",", from a in data select a.Actives);
             ViewData["toDayActive"] = data[data.Count - 1].Actives;
 
@@ -146,8 +146,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return View(new EditUserModel(user));
         }
 
-        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), 
-        ValidateAjax, Session(Transaction = true)]
+        [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"),
+         ValidateAjax, Session(Transaction = true)]
         public ActionResult Save(EditUserModel userBasicInfo)
         {
             if (userBasicInfo == null)
@@ -164,74 +164,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return Json(userBasicInfo);
         }
 
-        //[HttpPost, ResourceAuthorize(UserOperator.Modify, "User"), ValidateAjax]
-        //public ActionResult SavePermission(PermissionInfo permissionInfo)
-        //{
-        //    if (permissionInfo == null)
-        //        throw new HttpException(404, "permission can't be null");
-        //    if (this.ModelState.IsValid)
-        //    {
-        //        return Json(new {success = true});
-        //    }
-        //    return View();
-        //}
-
-
-        //public ActionResult Assign(string loginId)
-        //{
-        //    User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
-        //    if (user == null)
-        //    {
-        //        throw new HttpException(404, "Cant' find the user with loginid is " + loginId);
-        //    }
-        //    var userGroupRoleMap = new Dictionary<string, List<string>>();
-        //    var rolePermissionsMap = new Dictionary<string, List<string>>();
-        //    foreach (UserGroup ug in _memberShipFactory.CreateUserGroupDao().GetAll())
-        //    {
-        //        userGroupRoleMap.Add(ug.Id, new List<string>());
-        //        foreach (Role role in ug.GetAllRoles())
-        //        {
-        //            userGroupRoleMap[ug.Id].Add(role.Id);
-        //        }
-        //    }
-        //    foreach (Role role in _memberShipFactory.CreateRoleDao().GetAll())
-        //    {
-        //        rolePermissionsMap.Add(role.Id, new List<string>());
-        //        foreach (Permission permission in role.Permissions)
-        //        {
-        //            rolePermissionsMap[role.Id].Add(permission.Id);
-        //        }
-        //    }
-        //    ViewData["userGroupRoleMap"] = userGroupRoleMap;
-        //    ViewData["rolePermissionMap"] = rolePermissionsMap;
-
-
-        //    return View(user);
-        //}
-
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //public ActionResult Assign(string[] roles, string[] userGroups, string loginId)
-        //{
-        //    IRoleDao roleDao = _memberShipFactory.CreateRoleDao();
-        //    IUserGroupDao userGroupDao =
-        //        _memberShipFactory.CreateUserGroupDao();
-        //    User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
-        //    user.Roles.Clear();
-        //    foreach (Role role in roleDao.GetRolesByIds(roles))
-        //    {
-        //        user.Roles.Add(role);
-        //    }
-        //    user.UserGroups.Clear();
-        //    foreach (UserGroup ug in userGroupDao.GetUserGroups(userGroups))
-        //    {
-        //        user.UserGroups.Add(ug);
-        //    }
-        //    _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
-        //    _memberShipFactory.CreateUserDao().Flush();
-
-        //    return RedirectToAction("Index");
-        //}
-
+       
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userCreateTitle",
             ParentKey = "User",
             Resource = "User", Operator = UserOperator.Modify)
@@ -239,24 +172,10 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [ResourceAuthorize(UserOperator.Modify, "User")]
         public ActionResult Create()
         {
-            return View();
+            return View(new EditUserModel());
         }
 
-        [Session(true, Transaction = true)]
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(CreateUserModel createUser)
-        {
-            if (ModelState.IsValid || true)
-            {
-                string errormessage;
-                if (createUser.Create(_memberShipFactory, out errormessage))
-                {
-                    return RedirectToAction("Index");
-                }
-                ModelState.AddModelError("BasicInfo.LoginId", errormessage);
-            }
-            return View(createUser);
-        }
+       
 
 
         [HttpPost, ResourceAuthorize(UserOperator.Delete, "MessageReader")]
@@ -286,11 +205,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
         public ActionResult Search(int? pageIndex, string loginIdOrEmail)
         {
-            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0) * 30)
-                                               where
-                                                   u.LoginId.Contains(loginIdOrEmail) ||
-                                                   u.Contact.Email.Contains(loginIdOrEmail)
-                                               select new EditUserModel(u);
+            IQueryable<EditUserModel> result = from u in _userDao.Users.Take(30).Skip((pageIndex ?? 0)*30)
+                where
+                    u.LoginId.Contains(loginIdOrEmail) ||
+                    u.Contact.Email.Contains(loginIdOrEmail)
+                select new EditUserModel(u);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

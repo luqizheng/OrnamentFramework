@@ -207,4 +207,7 @@
   <data name="Search_tips" xml:space="preserve">
     <value>请输入电子邮件或者登录名</value>
   </data>
+  <data name="UserSearchResult" xml:space="preserve">
+    <value>搜索结果</value>
+  </data>
 </root>
