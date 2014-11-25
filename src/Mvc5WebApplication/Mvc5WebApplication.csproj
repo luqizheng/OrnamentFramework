@@ -857,7 +857,6 @@
     <Content Include="Scripts\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
     <Content Include="Scripts\plugin\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\plugin\sparkline\jquery.sparkline.js" />
-    <Content Include="Scripts\plugin\sparkline\jquery.sparkline.min.js" />
     <Content Include="Scripts\plugin\summernote\summernote.min.js" />
     <Content Include="Scripts\plugin\superbox\superbox.min.js" />
     <Content Include="Scripts\plugin\throttle-denounce\jquery.ba-throttle-debounce.min.js" />

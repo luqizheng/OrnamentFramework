@@ -15,7 +15,12 @@ $(document).ready(function() {
         show: false
     });
 });
-
+//兼容IE的方法
+if (!console) {
+    document.console={
+        log:function(str) {}
+    }
+}
 var clearPageVariable = [];
 $(document).off('click', 'nav a[href!="#"]');
 $(document).on('click', 'nav a[href!="#"]', function (e) {

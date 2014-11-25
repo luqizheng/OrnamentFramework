@@ -107,8 +107,6 @@ define(function (require) {
 
     return {
         init: function (lang1) {
-            require(["kkk"], function() {});
-            
             lang = lang1;
             require(["pager"],function() {
                 Init();

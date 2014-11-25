@@ -4,7 +4,6 @@
     /**
 	 * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
 	 *
-	 * @version 1.0.3
 	 * @codingstandard ftlabs-jsv2
 	 * @copyright The Financial Times Limited [All Rights Reserved]
 	 * @license MIT License (see LICENSE.txt)
@@ -19,7 +18,7 @@
 	 *
 	 * @constructor
 	 * @param {Element} layer The layer to listen on
-	 * @param {Object} options The options to override the defaults
+	 * @param {Object} [options={}] The options to override the defaults
 	 */
     function FastClick(layer, options) {
         var oldOnClick;
@@ -167,13 +166,19 @@
         }
     }
 
+    /**
+	* Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
+	*
+	* @type boolean
+	*/
+    var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
 
     /**
 	 * Android requires exceptions.
 	 *
 	 * @type boolean
 	 */
-    var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0;
+    var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
 
 
     /**
@@ -181,7 +186,7 @@
 	 *
 	 * @type boolean
 	 */
-    var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
+    var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
 
 
     /**
@@ -233,6 +238,7 @@
 
                 break;
             case 'label':
+            case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
             case 'video':
                 return true;
         }
@@ -312,8 +318,8 @@
     FastClick.prototype.focus = function (targetElement) {
         var length;
 
-        // Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
-        if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
+        // Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+        if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time' && targetElement.type !== 'month') {
             length = targetElement.value.length;
             targetElement.setSelectionRange(length, length);
         } else {
@@ -775,6 +781,12 @@
             return true;
         }
 
+        // IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+        // http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
+        if (layer.style.touchAction === 'none') {
+            return true;
+        }
+
         return false;
     };
 
@@ -783,7 +795,7 @@
 	 * Factory method for creating a FastClick object
 	 *
 	 * @param {Element} layer The layer to listen on
-	 * @param {Object} options The options to override the defaults
+	 * @param {Object} [options={}] The options to override the defaults
 	 */
     FastClick.attach = function (layer, options) {
         return new FastClick(layer, options);
@@ -793,7 +805,7 @@
     if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
 
         // AMD. Register as an anonymous module.
-        define(function () {
+        define('fastclick',[],function () {
             return FastClick;
         });
     } else if (typeof module !== 'undefined' && module.exports) {

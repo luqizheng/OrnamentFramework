@@ -23,7 +23,9 @@
     @RenderBody()
 </section>
 <script type="text/javascript">
-    pageSetUp();
+    require(["fastclick", "sparkline"], function () {
+        pageSetUp();
+    })
 </script>
 
 @RenderSection("scripts", required: false)
