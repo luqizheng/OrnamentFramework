@@ -42,12 +42,12 @@
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\NHibernate.4.0.1.4000\lib\net40\NHibernate.dll</HintPath>
+      <HintPath>..\..\..\packages\NHibernate.4.0.2.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Qi">
       <HintPath>..\..\..\..\lib\Qi.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.NHibernateExtender, Version=1.5.2.24, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qi.NHibernateExtender, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>

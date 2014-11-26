@@ -15,7 +15,6 @@ using log4net;
 using log4net.Config;
 using Ornament;
 using Ornament.Configurations;
-using Ornament.MVCWebFrame;
 using Ornament.Web;
 using Ornament.Web.Cfg;
 using Ornament.Web.IoC;
@@ -25,7 +24,6 @@ using Ornament.Web.PortableAreas;
 using Ornament.Web.PortableAreas.InputBuilder;
 using Ornament.Web.SeajsModules;
 using Qi.Web.Mvc;
-using SeajsBundles.Seajs.Modules;
 using WebApplication.Controllers;
 
 namespace WebApplication
@@ -41,9 +39,9 @@ namespace WebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            
-            LauguageConfig.Register(OrnamentContext.Configuration);//设置语言
-            PermissionConfig.Register();//设置资源选择器等
+
+            LauguageConfig.Register(OrnamentContext.Configuration); //设置语言
+            PermissionConfig.Register(); //设置资源选择器等
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
@@ -57,8 +55,6 @@ namespace WebApplication
             SeajsModuleBundleMessageHandle.HandlAllBundle();
 
             NHibernateMvcRegister.Regist();
-            
-            
         }
 
         protected void Application_EndRequest()
@@ -71,16 +67,13 @@ namespace WebApplication
                 Context.Response.Clear();
                 if (User.Identity.IsAuthenticated)
                 {
-                    Context.Response.StatusCode = 405;// Not Permissions.
+                    Context.Response.StatusCode = 405; // Not Permissions.
                 }
                 else
                 {
-                    Context.Response.StatusCode = 401;// login timeout
+                    Context.Response.StatusCode = 401; // login timeout
                 }
-                
-                
             }
-
         }
 
         private static void ChangeControllerFacotry(Type httpErrorsController, Assembly webAssembly)

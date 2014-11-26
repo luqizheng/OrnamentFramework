@@ -145,9 +145,9 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 throw new MemberShipException("Not found user.");
             return View(new EditUserModel(user));
         }
-
         [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"),
-         ValidateAjax, Session(Transaction = true)]
+         ValidateAjax(Order = 2), Session(Transaction = true)]
+        [JQueryArrayFilter("Permissions.Roles",Order=1)]
         public ActionResult Save(EditUserModel userBasicInfo)
         {
             if (userBasicInfo == null)
