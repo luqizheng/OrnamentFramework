@@ -1235,6 +1235,11 @@
             <param name="controllerContext"></param>
             <returns></returns>
         </member>
+        <member name="T:Qi.Web.Mvc.NHMvcExtender.NHJQueryFormProvider">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Qi.Web.Mvc.NHMvcExtender.NHQueryValueProvider">
             <summary>
             
@@ -1360,6 +1365,14 @@
             <summary>
                 Gets or sets the IsolationLevel, default use the config setting.
             </summary>
+        </member>
+        <member name="M:Qi.Web.Mvc.TypeHelpers.EnsureDebuggableException(System.MissingMethodException,System.String)">
+            <summary>
+            Provide a new <see cref="T:System.MissingMethodException"/> if original Message does not contain given full Type name.
+            </summary>
+            <param name="originalException"><see cref="T:System.MissingMethodException"/> to check.</param>
+            <param name="fullTypeName">Full Type name which Message should contain.</param>
+            <returns>New <see cref="T:System.MissingMethodException"/> if an update is required; null otherwise.</returns>
         </member>
         <member name="T:Qi.Web.NHSessionHttpModule">
             <summary>
