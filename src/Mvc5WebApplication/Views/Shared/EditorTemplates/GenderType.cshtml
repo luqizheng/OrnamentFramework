@@ -1,0 +1,31 @@
+﻿@using Ornament
+@using Ornament.MemberShip
+@model Ornament.MemberShip.GenderType?
+@{
+    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    string inputName = string.Empty; // ViewData.TemplateInfo.HtmlFieldPrefix;    
+    IDictionary<string, object> htmlAttris = new Dictionary<string, object>();
+
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object>;
+        if (htmlAttris == null)
+        {
+            htmlAttris = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        }
+    }
+    if (htmlAttris.ContainsKey("class"))
+    {
+        htmlAttris["class"] = htmlAttris["class"] + " form-control";
+    }
+    else
+    {
+        htmlAttris.Add("class", "form-control");
+    }
+
+    var genderTypes = this.Model != null ?
+        EnumHelper.GetSelectList(typeof(GenderType), this.Model.Value) : EnumHelper.GetSelectList(typeof(GenderType),GenderType.Unknown);
+    
+    
+}
+@Html.DropDownList("", genderTypes, htmlAttris)

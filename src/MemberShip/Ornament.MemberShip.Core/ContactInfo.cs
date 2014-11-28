@@ -23,6 +23,7 @@ namespace Ornament.MemberShip
             protected internal ContactInfo(User user)
             {
                 User = user;
+                Gender=MemberShip.GenderType.Unknown;
             }
 
             public virtual User User { get; protected set; }
@@ -79,6 +80,8 @@ namespace Ornament.MemberShip
 
             public virtual DateTime? Birthday { get; set; }
 
+            public virtual GenderType? Gender { get; set; }
+
             /// <summary>
             ///     Veirfy Email
             /// </summary>
@@ -93,6 +96,17 @@ namespace Ornament.MemberShip
                 EmailVerified = false;
                 return result;
             }
+
+            
         }
+
+
+    }
+
+    public enum GenderType
+    {
+        Unknown,
+        male,
+        female
     }
 }

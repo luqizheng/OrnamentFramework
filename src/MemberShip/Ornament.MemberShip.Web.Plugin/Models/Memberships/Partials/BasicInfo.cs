@@ -37,6 +37,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             FirstName = user.Contact.FirstName;
             LastName = user.Contact.LastName;
             Org = user.Org;
+            this.Gender = user.Contact.Gender;
         }
 
         public bool VerifyEmail { get; set; }
@@ -87,6 +88,8 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
                 _phone = value;
             }
         }
+        [AttributeProvider("Ornament.MemberShip.IContactInfo,Ornament.MemberShip.Core", "Gender")]
+        public GenderType? Gender { get; set; }
 
         /// <summary>
         /// </summary>
@@ -102,7 +105,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             }
         }
 
-        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "Org"),UIHint("Org")]
+        [AttributeProvider("Ornament.MemberShip.IUser,Ornament.MemberShip.Core", "Org"), UIHint("Org")]
         public Org Org { get; set; }
 
         /// <summary>
@@ -150,6 +153,8 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             user.Contact.FirstName = this.FirstName;
             user.Contact.LastName = this.LastName;
 
+            user.Contact.Gender = this.Gender != null ? this.Gender.Value : GenderType.Unknown;
+
             user.Org = this.Org;
 
         }
@@ -159,7 +164,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <param name="user"></param>
         protected virtual void SendVerifyEmail(User user, IMemberShipFactory _daFactory)
         {
-            var model = new VerifyEmailModel {Id = user.Id};
+            var model = new VerifyEmailModel { Id = user.Id };
             model.Send(_daFactory);
         }
     }

@@ -87,6 +87,18 @@
                 </div>
             </div>
         </div>
+        
+        <div class="form-group">
+            <label class="col-md-2">@Html.DisplayNameFor(s => s.Gender)</label>
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-magic"></i></span>
+                    @Html.EditorFor(model => model.Gender, new { HtmlAttributes = new { @class = "form-control style-0" } })
+                    @Html.ValidationMessageFor(model => model.Gender)
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Birthday)</label>
             <div class="col-md-10">
@@ -97,10 +109,10 @@
             </div>
         </div>
     </fieldset>
-    <div class="form-actions">
+  @*  <div class="form-actions">
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
             @Ornament.Properties.Resources.Save
         </button>
-    </div>
+    </div>*@
 </div>

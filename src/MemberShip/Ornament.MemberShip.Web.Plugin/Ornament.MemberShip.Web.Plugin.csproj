@@ -195,7 +195,6 @@
     <Compile Include="Models\AccountOperator.cs" />
     <Compile Include="Models\MembershipsExtensions.cs" />
     <Compile Include="Models\Memberships\ChangePasswordModel.cs" />
-    <Compile Include="Models\Memberships\CreateUserModel.cs" />
     <Compile Include="Models\Memberships\EditUserModel.cs" />
     <Compile Include="Models\Memberships\LogonModel.cs" />
     <Compile Include="Models\Memberships\OrgModel.cs" />

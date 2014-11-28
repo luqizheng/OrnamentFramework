@@ -224,6 +224,9 @@
     <Content Include="ajax\validation.html" />
     <Content Include="ajax\widgets.html" />
     <Content Include="ajax\wizard.html" />
+    <Content Include="Content\images\gender\unknown.png" />
+    <Content Include="Content\images\gender\gender.png" />
+    <Content Include="Content\images\gender\male.png" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\demo.min.css" />
@@ -1027,6 +1030,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GenderType.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1036,7 +1040,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\membership.sitemap.resx">

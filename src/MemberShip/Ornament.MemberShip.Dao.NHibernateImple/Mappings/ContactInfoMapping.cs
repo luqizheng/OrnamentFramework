@@ -17,7 +17,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
 
             Map(s => s.EmailVerified);
             Map(s => s.PhoneVerified);
-
+            Map(s => s.Gender);
             Map(s => s.LastName).Length(64);
             Map(s => s.FirstName).Length(64);
             Map(s => s.Birthday);

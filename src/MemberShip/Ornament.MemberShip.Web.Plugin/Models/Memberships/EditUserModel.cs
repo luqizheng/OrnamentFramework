@@ -29,7 +29,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         public User Save(IMemberShipFactory memberShipFactory)
         {
             if (memberShipFactory == null) throw new ArgumentNullException("memberShipFactory");
-            User user = memberShipFactory.CreateUserDao().Get(Id);
+
+            User user = !String.IsNullOrEmpty(Id)
+                ? memberShipFactory.CreateUserDao().Get(Id)
+                : new User(LoginId, "123456");
             UpdateOn(user);
             Permissions.UpdateOn(user);
             memberShipFactory.CreateUserDao().SaveOrUpdate(user);
