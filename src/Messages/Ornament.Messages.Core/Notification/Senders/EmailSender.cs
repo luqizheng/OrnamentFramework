@@ -1,44 +1,45 @@
 ﻿using System;
 using System.Net.Mail;
-using System.Runtime.Remoting.Messaging;
+using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
+using Ornament.Messages.Dao;
 
 namespace Ornament.Messages.Notification.Senders
 {
-    public class EmailSender : ISender
+    public class EmailSender : Sender
     {
         private readonly SmtpClient _smtpClient;
 
-        public EmailSender(SmtpClient smtpClient, string supportEmail)
+        public EmailSender(string name,SmtpClient smtpClient, string supportEmail, IMemberShipFactory memberShipFactory,
+            IMessageDaoFactory daoFactory)
+            : base(name,memberShipFactory, daoFactory)
         {
             SupportEmail = supportEmail;
-            if (smtpClient == null) throw new ArgumentNullException("smtpClient");
+            if (smtpClient == null)
+            {
+                throw new ArgumentNullException("smtpClient");
+            }
             _smtpClient = smtpClient;
         }
 
-        public string SupportEmail { get; set; }
+        public string SupportEmail { get; private set; }
 
-        public CommunicationType CommunicationType
+        protected override void Send(NotifyMessageTemplate template, User[] performers)
         {
-            get { return CommunicationType.Email; }
-        }
+            foreach (User user in performers)
+            {
+                Content content = template.GetContent(user);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="notifyMessage"></param>
-        public void Send(SimpleMessage notifyMessage)
-        {
-            
-            Content content = notifyMessage.Content;
-            var mailMessage =
-                new MailMessage(new MailAddress(SupportEmail),
-                                new MailAddress(notifyMessage.User.Contact.Email))
+                var mailMessage =
+                    new MailMessage(new MailAddress(SupportEmail),
+                        new MailAddress(user.Contact.Email))
                     {
                         Body = content.Value,
                         Subject = content.Subject,
                         IsBodyHtml = true
                     };
-
-            _smtpClient.Send(mailMessage);
+                _smtpClient.Send(mailMessage);
+            }
         }
     }
 }

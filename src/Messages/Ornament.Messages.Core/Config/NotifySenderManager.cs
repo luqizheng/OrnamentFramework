@@ -16,14 +16,14 @@ namespace Ornament.Messages.Config
     {
         public static readonly NotifySenderManager Instance = new NotifySenderManager();
         public static string StoreFile;
-        private readonly IDictionary<CommunicationType, ISender> _senders;
+        private readonly IDictionary<string, ISender> _senders;
         private Dictionary<string, string> _variables;
 
         private NotifySenderManager()
         {
             var path = ConfigurationManager.AppSettings["MessageVariables"] ?? ("~/messageVariables.xml");
             StoreFile = ApplicationHelper.MapPath(path);
-            _senders = new Dictionary<CommunicationType, ISender>();
+            _senders = new Dictionary<string, ISender>();
             ReloadVariables();
         }
 
@@ -45,7 +45,7 @@ namespace Ornament.Messages.Config
 
             foreach (ISender item in senders)
             {
-                _senders.Add(item.CommunicationType, item);
+                _senders.Add(item.Name, item);
             }
         }
 
@@ -54,9 +54,9 @@ namespace Ornament.Messages.Config
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public ISender[] GetSenders(NotifyType type)
+        public ISender[] GetSenders(params string[] senderNames)
         {
-            return (from a in _senders.Keys where type.CommunicationType.HasFlag(a) select _senders[a]).ToArray();
+            return (from senderName in senderNames where _senders.ContainsKey(senderName) select _senders[senderName]).ToArray();
         }
 
         public void SaveVariable()

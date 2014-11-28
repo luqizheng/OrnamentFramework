@@ -1094,10 +1094,6 @@
       <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
       <Name>Ornament.Messages.Plugin</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Messages\Ornament.NotifyMessages\Ornament.NotifyMessages.csproj">
-      <Project>{da888110-9587-4146-8cd9-b29c66bef7b3}</Project>
-      <Name>Ornament.NotifyMessages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>
       <Name>Ornament.Core</Name>

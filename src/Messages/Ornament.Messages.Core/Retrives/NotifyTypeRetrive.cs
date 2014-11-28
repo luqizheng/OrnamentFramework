@@ -25,7 +25,6 @@ namespace Ornament.Messages.Retrives
             if (name == null) throw new ArgumentNullException("name");
             return new NotifyType
             {
-                CommunicationType = CommunicationType.Email,
                 Name = name
             };
         }

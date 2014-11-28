@@ -4,15 +4,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Notification
 {
-    [Flags]
-    public enum CommunicationType
-    {
-        None,
-        Client = 1,
-        Email = 2,
-        Sms = 4
-    }
-
+  
     /// <summary>
     /// </summary>
     public class NotifyType : DomainObject<NotifyType, string>
@@ -26,18 +18,14 @@ namespace Ornament.Messages.Notification
         public virtual string Remark { get; set; }
 
         /// <summary>
+        ///     Multi for notify
         /// </summary>
-        public virtual CommunicationType CommunicationType { get; set; }
+        public virtual string[] SenderNames { get; set; }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="simpleMessage"></param>
-        public virtual void Send(SimpleMessage simpleMessage)
+
+        public ISender[] Senders
         {
-            foreach (ISender sender in NotifySenderManager.Instance.GetSenders(this))
-            {
-                sender.Send(simpleMessage);
-            }
+            get { return NotifySenderManager.Instance.GetSenders(SenderNames); }
         }
     }
 }

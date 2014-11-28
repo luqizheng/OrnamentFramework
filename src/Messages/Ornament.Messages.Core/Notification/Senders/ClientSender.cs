@@ -1,24 +1,20 @@
-﻿using Ornament.Messages.Dao;
+﻿using System;
+using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
+using Ornament.Messages.Dao;
 
 namespace Ornament.Messages.Notification.Senders
 {
-    public class ClientSender : ISender
+    public class ClientSender : Sender
     {
-        public ClientSender(IMessageDaoFactory daoFactory)
+        public ClientSender(string name, IMemberShipFactory memberShipFactory, IMessageDaoFactory messageDaoFactory)
+            : base(name, memberShipFactory, messageDaoFactory)
         {
-            DaoFactory = daoFactory;
         }
 
-        public IMessageDaoFactory DaoFactory { get; set; }
-
-        public CommunicationType CommunicationType
+        protected override void Send(NotifyMessageTemplate template, User[] performers)
         {
-            get { return CommunicationType.Client; }
-        }
-
-        public void Send(SimpleMessage notifyMessage)
-        {
-            DaoFactory.SimpleMessageDao.SaveOrUpdate(notifyMessage);
+            throw new NotImplementedException();
         }
     }
 }
