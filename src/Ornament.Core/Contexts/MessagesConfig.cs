@@ -26,6 +26,7 @@ namespace Ornament.Contexts
         {
             get { return OrnamentContext.DaoFactory.GetDaoFactory<IMessageDaoFactory>(); }
         }
+
         /// <summary>
         ///     System Notify Type.
         /// </summary>
@@ -43,8 +44,8 @@ namespace Ornament.Contexts
                 if (_registryAccount == null)
                 {
                     _registryAccount = new SimpleMessageFactoryRetrive(
-                        "Regist New User (Template)",
-                        "Regist New user, and verify safe email address.",
+                        "Registry New User (Template)",
+                        "Registry New user, and verify safe email address.",
                         SystemType,
                         DeserializerXml(Resources.registAccount_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.registAccount, "en"),
@@ -64,12 +65,10 @@ namespace Ornament.Contexts
                     _verifyEmailAddress = new SimpleMessageFactoryRetrive(
                         "Verify Email Address (Template)",
                         @"Email has changed, It should verify again.
-inside veriable:
-1) [parameters]: token infomation
+inside variable:
+1) [parameters]: token information
 2) [email]:user name
 3) [loginId]:user loginid",
-                     
-
                         SystemType,
                         DeserializerXml(Resources.verifyEmail_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.verifyEmail_zh, "zh-Hant"),
