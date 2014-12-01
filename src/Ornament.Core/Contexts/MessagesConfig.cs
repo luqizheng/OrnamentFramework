@@ -13,13 +13,13 @@ namespace Ornament.Contexts
     {
         private static SimpleMessageFactoryRetrive _verifyEmailAddress;
         private static SimpleMessageFactoryRetrive _passwordRetrive;
-        private static NotifyTypeRetrive _systemId;
+        //private static NotifyTypeRetrive _systemId;
         private static SimpleMessageFactoryRetrive _registryAccount;
         private static SimpleMessageFactoryRetrive _accountChanged;
 
         public MessagesConfig()
         {
-            _systemId = new NotifyTypeRetrive("System");
+            //_systemId = new NotifyTypeRetrive("System");
         }
 
         private IMessageDaoFactory MessageDaoFactory
@@ -27,13 +27,13 @@ namespace Ornament.Contexts
             get { return OrnamentContext.DaoFactory.GetDaoFactory<IMessageDaoFactory>(); }
         }
 
-        /// <summary>
-        ///     System Notify Type.
-        /// </summary>
-        public NotifyType SystemType
-        {
-            get { return _systemId.Get(MessageDaoFactory); }
-        }
+        ///// <summary>
+        /////     System Notify Type.
+        ///// </summary>
+        //public NotifyType SystemType
+        //{
+        //    get { return _systemId.Get(MessageDaoFactory); }
+        //}
 
         /// <summary>
         /// </summary>
@@ -46,7 +46,7 @@ namespace Ornament.Contexts
                     _registryAccount = new SimpleMessageFactoryRetrive(
                         "Registry New User (Template)",
                         "Registry New user, and verify safe email address.",
-                        SystemType,
+                       
                         DeserializerXml(Resources.registAccount_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.registAccount, "en"),
                         DeserializerXml(Resources.registAccount_zh, "zh-Hant")
@@ -69,7 +69,7 @@ inside variable:
 1) [parameters]: token information
 2) [email]:user name
 3) [loginId]:user loginid",
-                        SystemType,
+                       
                         DeserializerXml(Resources.verifyEmail_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.verifyEmail_zh, "zh-Hant"),
                         DeserializerXml(Resources.verifyEmail, "en")
@@ -89,7 +89,7 @@ inside variable:
                     _passwordRetrive = new SimpleMessageFactoryRetrive(
                         "Retrive Password (Template)",
                         "User forget password and try to use email to retrieve.",
-                        SystemType,
+                       
                         DeserializerXml(Resources.forgetPassword_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.forgetPassword_zh, "zh-Hant"),
                         DeserializerXml(Resources.forgetPassword, "en")
@@ -111,7 +111,7 @@ inside variable:
                     _accountChanged = new SimpleMessageFactoryRetrive(
                         "Account Information changed (Template)",
                         "Account Information Changed for user",
-                        SystemType,
+                       
                         DeserializerXml(Resources.changeAccount_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.changeAccount_zh, "zh-Hant"),
                         DeserializerXml(Resources.changeAccount, "en")
