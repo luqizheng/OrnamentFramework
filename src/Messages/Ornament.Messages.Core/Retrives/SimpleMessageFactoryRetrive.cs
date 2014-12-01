@@ -8,18 +8,17 @@ namespace Ornament.Messages.Retrives
     {
         private readonly Content[] _contents;
 
-        private readonly NotifyType _notifyType;
+       // private readonly NotifyType _notifyType;
         private readonly string _remark;
 
-        public SimpleMessageFactoryRetrive(string name, string remark, NotifyType notifyType, params Content[] contents)
+        public SimpleMessageFactoryRetrive(string name, string remark, params Content[] contents)
             : base(name)
         {
             if (remark == null)
                 throw new ArgumentNullException("remark");
-            if (notifyType == null)
-                throw new ArgumentNullException("notifyType");
+        
             _remark = remark;
-            _notifyType = notifyType;
+         
             _contents = contents;
         }
         /// <summary>
@@ -40,11 +39,11 @@ namespace Ornament.Messages.Retrives
         /// <returns></returns>
         protected override NotifyMessageTemplate CreateInstance(string name, IMessageDaoFactory messageDaoFactory)
         {
-            var result = new NotifyMessageTemplate(_notifyType)
+            var result = new NotifyMessageTemplate()
             {
                 Name = name,
                 Remark = _remark,
-                Type = _notifyType
+                
             };
             foreach (Content content in _contents)
             {

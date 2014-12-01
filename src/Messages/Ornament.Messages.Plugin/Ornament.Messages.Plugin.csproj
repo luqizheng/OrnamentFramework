@@ -125,14 +125,11 @@
     <Compile Include="Areas\Messages\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
-    <Compile Include="Areas\Messages\Controllers\NotifyMessagesController.cs" />
-    <Compile Include="Areas\Messages\Controllers\NotifyTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
     <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Messages\Models\Messages\MessageTemplateModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\NewsTypeModel.cs" />
-    <Compile Include="Areas\Messages\Models\Messages\NotifyTypeModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\PersonalMessageModel.cs" />
     <Compile Include="Models\MessageInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Messages\Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -211,12 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\NewsType\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\NotifyType\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\NotifyType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Shared\resNewsType.cshtml" />

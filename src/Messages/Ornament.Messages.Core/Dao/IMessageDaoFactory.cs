@@ -22,10 +22,7 @@ namespace Ornament.Messages.Dao
         /// 
         /// </summary>
         INewsTypeDao NewsTypeDao { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-        INotifyTypeDao NotifyTypeDao { get; }
+      
         /// <summary>
         /// 
         /// </summary>

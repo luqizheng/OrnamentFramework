@@ -91,7 +91,7 @@ namespace Ornament.MemberShip
             _security = new SecurityInfo(this);
             _contact = new ContactInfo(this);
 
-            _other = new OtherUserInfo {CreateTime = DateTime.Now};
+            _other = new OtherUserInfo { CreateTime = DateTime.Now };
         }
 
         /// <summary>
@@ -268,14 +268,17 @@ namespace Ornament.MemberShip
         }
 
         #endregion
-
+        /// <summary>
+        /// Gets CultureInfo base Languge property. if can't find return CurrentCluture.
+        /// </summary>
+        /// <returns></returns>
         public virtual CultureInfo GetLanguage()
         {
             try
             {
                 if (!String.IsNullOrEmpty(Language))
                     return CultureInfo.GetCultureInfo(Language);
-                return CultureInfo.CurrentCulture;
+                return CultureInfo.CurrentUICulture;
             }
             catch (CultureNotFoundException)
             {
@@ -302,7 +305,7 @@ namespace Ornament.MemberShip
         /// <returns></returns>
         public override IEnumerable<Role> GetAllRoles()
         {
-            ISet < Role > result = new HashSet<Role>(Roles);
+            ISet<Role> result = new HashSet<Role>(Roles);
             foreach (UserGroup ug in UserGroups)
             {
                 foreach (Role role in ug.GetAllRoles())

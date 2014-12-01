@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
 using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
+using Ornament.Messages.Config;
 using Qi.Domain;
 
 namespace Ornament.Messages.Notification
@@ -11,23 +12,8 @@ namespace Ornament.Messages.Notification
     public class NotifyMessageTemplate : DomainObject<NotifyMessageTemplate, string>
     {
         private IDictionary<string, Content> _contents;
+        private IList<ISender> _senders;
 
-
-        /// <summary>
-        ///     jsut for Nhibernate.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">type or publisher are null</exception>
-        protected NotifyMessageTemplate()
-        {
-        }
-
-        public NotifyMessageTemplate(NotifyType notifyType)
-        {
-            if (notifyType == null)
-                throw new ArgumentNullException("notifyType");
-            Type = notifyType;
-            ModifyTime = DateTime.Now;
-        }
 
         /// <summary>
         ///     Gets Notify Message DateTime
@@ -41,10 +27,6 @@ namespace Ornament.Messages.Notification
             get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
         }
 
-        /// <summary>
-        /// </summary>
-        public virtual NotifyType Type { get; set; }
-
 
         /// <summary>
         ///     Gets or sets Name of  message template.
@@ -55,6 +37,13 @@ namespace Ornament.Messages.Notification
         ///     Gets or sets remark
         /// </summary>
         public virtual string Remark { get; set; }
+
+        /// <summary>
+        /// </summary>
+        public IList<ISender> Senders
+        {
+            get { return _senders ?? (_senders = new List<ISender>()); }
+        }
 
         /// <summary>
         /// </summary>
@@ -78,97 +67,87 @@ namespace Ornament.Messages.Notification
             if (Contents.Count == 0)
                 throw new ArgumentOutOfRangeException("Message do not have any content.");
 
-            string lang = user.Language;
-            if (String.IsNullOrEmpty(lang))
-            {
-                lang = Thread.CurrentThread.CurrentUICulture.EnglishName;
-            }
+            CultureInfo lang = user.GetLanguage();
             Content result = Get(lang);
-            if (result == null)
-            {
-                lang = CultureInfo.CurrentUICulture.Name;
-                result = Get(lang);
-            }
             if (result != null)
                 return result;
             return Contents.Values.First();
         }
 
-        private Content Get(string lang)
+        private Content Get(CultureInfo cultureInfo)
         {
-            if (Contents.ContainsKey(lang))
-                return GetContent(lang);
-            if (lang.IndexOf("-", StringComparison.Ordinal) != -1)
+            CultureInfo current = cultureInfo;
+            do
             {
-                lang = lang.Substring(2);
-                if (Contents.ContainsKey(lang))
-                    return GetContent(lang);
-            }
+                if (Contents.ContainsKey(current.Name))
+                    return Contents[current.Name];
+                current = current.Parent;
+            } while (current.Name != "");
             return null;
         }
 
-        ///// <summary>
-        /////     用template生成sinple message
-        ///// </summary>
-        ///// <param name="daoFactory"></param>
-        ///// <param name="replaceVariabled"></param>
-        ///// <param name="performers"></param>
-        //[Obsolete]
-        //public virtual void Publish(
-        //    IMemberShipFactory daoFactory,
-        //    CreateVariablesHandler replaceVariabled,
-        //    params IPerformer[] performers)
-        //{
-        //    if (daoFactory == null)
-        //        throw new ArgumentNullException("daoFactory");
-        //    if (replaceVariabled == null)
-        //        throw new ArgumentNullException("replaceVariabled");
-        //    if (performers == null)
-        //        throw new ArgumentNullException("performers");
+        /// <summary>
+        ///     用template生成sinple message
+        /// </summary>
+        /// <param name="daoFactory"></param>
+        /// <param name="replaceVariabled"></param>
+        /// <param name="performers"></param>
+        public virtual void Publish(
+            IMemberShipFactory daoFactory,
+            CreateVariablesHandler replaceVariabled,
+            params IPerformer[] performers)
+        {
+            if (daoFactory == null)
+                throw new ArgumentNullException("daoFactory");
+            if (replaceVariabled == null)
+                throw new ArgumentNullException("replaceVariabled");
+            if (performers == null)
+                throw new ArgumentNullException("performers");
 
-        //    var targetuser = new HashSet<User>();
-        //    foreach (IPerformer performer in performers)
-        //    {
-        //        foreach (User user in performer.GetUsers(daoFactory))
-        //            targetuser.Add(user);
-        //    }
+            var targetuser = new HashSet<User>();
+            foreach (IPerformer performer in performers)
+            {
+                foreach (User user in performer.GetUsers(daoFactory))
+                    targetuser.Add(user);
+            }
 
 
-        //    foreach (User user in targetuser)
-        //    {
-        //        Dictionary<string, string> data = replaceVariabled(user);
-        //        Publish(daoFactory, data, user);
-        //    }
-        //}
+            foreach (User user in targetuser)
+            {
+                Dictionary<string, string> data = replaceVariabled(user);
+                Publish(daoFactory, data, user);
+            }
+        }
 
-        //[Obsolete]
-        //public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
-        //    User performers)
-        //{
-        //    if (daoFactory == null) throw new ArgumentNullException("daoFactory");
-        //    if (variable == null) throw new ArgumentNullException("variable");
-        //    if (performers == null) throw new ArgumentNullException("performers");
-        //    var helper = new NamedFormatterHelper();
-        //    Content content = GetContent(performers);
+        public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
+            User performers)
+        {
+            if (daoFactory == null)
+            {
+                throw new ArgumentNullException("daoFactory");
+            }
+            if (variable == null)
+            {
+                throw new ArgumentNullException("variable");
+            }
+            if (performers == null)
+            {
+                throw new ArgumentNullException("performers");
+            }
 
-        //    foreach (string key in NotifySenderManager.Instance.Variables.Keys)
-        //    {
-        //        if (!variable.ContainsKey(key))
-        //        {
-        //            variable.Add(key, NotifySenderManager.Instance.Variables[key]);
-        //        }
-        //    }
 
-        //    var simpleMessage = new SimpleMessage(performers)
-        //    {
-        //        Content = new Content
-        //        {
-        //            Language = content.Language,
-        //            Subject = helper.Replace(content.Subject, variable),
-        //            Value = helper.Replace(content.Value, variable)
-        //        }
-        //    };
-        //    Type.Send(simpleMessage);
-        //}
+            foreach (string key in NotifySenderManager.Instance.Variables.Keys)
+            {
+                if (!variable.ContainsKey(key))
+                {
+                    variable.Add(key, NotifySenderManager.Instance.Variables[key]);
+                }
+            }
+
+            foreach (ISender sender in Senders)
+            {
+                sender.Send(this, daoFactory, variable, new IPerformer[] {performers});
+            }
+        }
     }
 }

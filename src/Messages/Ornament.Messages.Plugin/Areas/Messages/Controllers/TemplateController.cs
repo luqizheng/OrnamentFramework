@@ -37,17 +37,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View(result);
         }
 
-        [HttpPost]
-        public ActionResult Index(Pagination pagination)
-        {
-            ViewData["Nav"] = pagination;
-            int total;
-            IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
-                pagination.PageSize, out total);
-            pagination.TotalRows = total;
-            return View(result);
-        }
-
         //
         // GET: /Messages/Template/Create
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateCreateTitle",
