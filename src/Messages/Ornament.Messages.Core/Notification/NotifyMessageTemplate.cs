@@ -40,7 +40,7 @@ namespace Ornament.Messages.Notification
 
         /// <summary>
         /// </summary>
-        public IList<ISender> Senders
+        public virtual IList<ISender> Senders
         {
             get { return _senders ?? (_senders = new List<ISender>()); }
         }
@@ -74,7 +74,7 @@ namespace Ornament.Messages.Notification
             return Contents.Values.First();
         }
 
-        private Content Get(CultureInfo cultureInfo)
+        public virtual Content Get(CultureInfo cultureInfo)
         {
             CultureInfo current = cultureInfo;
             do

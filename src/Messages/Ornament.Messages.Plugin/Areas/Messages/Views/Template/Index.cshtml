@@ -14,70 +14,65 @@
     <h2>Template for Simple Message</h2>
 }
 
-@using (var panel = Html.Panel())
+@using (var panel = Html.Panel(new PanelOption()
+{
+    HtmlAttributes = new Dictionary<string, object>()
+    {
+        {"ms-controller","templateIndex"}
+    }
+}))
 {
     @panel.Header(@<text>
-                      <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
-                  </text>);
+
+
+                   </text>);
+    
     @panel.Body(@<text>
-                    @if (Model.Count() != 0)
-                    {
 
-                        <table class="table table-condensed table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Name)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Remark)
-                                    </th>
-                                    
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var template in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => template.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => template.Remark)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink(@Basic.Edit, "Edit", new {id = template.Id}, new {@class = "btn btn-small"})
-                                            <a data-toggle="popover" data-val="@template.Id" 
-                                               class="btn btn-danger btn-small" href="javascript:void">@Basic.Delete</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                     <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
 
 
-                    }
-                    else
-                    {
-                        <div class="alert">
-                            <h6>No message type found. 
-                            </h6>
-                        </div>
-                    }
-                </text>);
+                     <table class="table table-condensed table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remark)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr ms-repeat="templates">
+                <td ms-text="el.Name"></td>
+                <td ms-text="el.Remarks"></td>
+                <td>
+                    <a href="javascript:;" class="btn btn-primary">
+                        @Basic.Edit
+                    </a>
+                </td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <td colspan="3" ms-widget="pager"></td>
+        </tfoot>
+    </table>
+
+
+
+    </text>);
 }
 
-<div id="warning" class="hide">
-    <p>Do you want to delete this message?</p>
-    <button class="btn btn-danger deleteYes">@Basic.Delete</button>
-    <button class="btn deleteNo">@Basic.Cancel</button>
-</div>
 @section scripts
 {
     <script type="text/javascript">
-        seajs.use("@Scripts.Url("~/Messages/Scripts/Template/Index.js")", function (init) {
-            init("@Url.Action("Delete")");
+        require(["@Scripts.Url("~/Messages/Scripts/Template/Index.js")"], function (init) {
+            init();
         });
     </script>
 }

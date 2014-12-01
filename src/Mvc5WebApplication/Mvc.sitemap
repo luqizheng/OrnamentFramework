@@ -22,7 +22,9 @@
 
     <!-- Begin Message Plugin Parent Key -->
     <!--<mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>-->
-    <mvcSiteMapNode title="Notify Messages" controller="News" area="Messages" action="Index" imageUrl="fa-comment-o" key="Messages"></mvcSiteMapNode>
+    <mvcSiteMapNode title="Notify Messages" controller="News" area="Messages" action="Index" imageUrl="fa-comment-o" key="Messages">
+      <mvcSiteMapNode title="News" controller="News" area="Messages" action="Index" key="news"></mvcSiteMapNode>
+    </mvcSiteMapNode>
     <!-- End Message Plugin Parent Key -->
 
 
