@@ -34,13 +34,13 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         [Editable(false)]
         public string Id { get; set; }
 
-        [UIHint("string"), Required]
-        [DisplayName("Notify Type")]
-        public NotifyType Notify { get; set; }
+        //[UIHint("string"), Required]
+        //[DisplayName("Notify Type")]
+        //public NotifyType Notify { get; set; }
 
         /// <summary>
         /// </summary>
-        [UIHint("string"), Required]
+        [Required]
         [Remote("IsNotDuplicateName", "Template", "Messages", AdditionalFields = "Id")]
         public string Name { get; set; }
 
@@ -67,7 +67,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 
             NotifyMessageTemplate type = Id != null
                 ? dao.Get(Id)
-                : new NotifyMessageTemplate(Notify);
+                : new NotifyMessageTemplate();
             type.Name = Name;
             type.Remark = Remark;
             dao.SaveOrUpdate(type);

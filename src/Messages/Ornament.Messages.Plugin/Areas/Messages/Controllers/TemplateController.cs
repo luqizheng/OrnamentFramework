@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
 using Ornament.Web.MemberShips;
-using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Session]
-    [Authorize(Roles = "admin", Users = "admin")]
     public class TemplateController : Controller
     {
         private readonly IMessageDaoFactory _daoFactory;
@@ -23,29 +22,35 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         //
         // GET: /Messages/Template/
-        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateTitle", ParentKey = "Messages",
+        [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateTitle",
+            ParentKey = "Messages",
             Key = "templates")]
-        [ResourceAuthorize(NotifyTemplateOperator.Read, "NotifyType")]
+        //[ResourceAuthorize(NotifyTemplateOperator.Read, "NotifyType")]
         public ActionResult Index()
         {
-            var pagination = new Pagination();
-            ViewData["Nav"] = pagination;
-            int total;
-            IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
-                pagination.PageSize, out total);
-            pagination.TotalRows = total;
-            return View(result);
+            return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(Pagination pagination)
+        public ActionResult List(int? page, int? size)
         {
-            ViewData["Nav"] = pagination;
             int total;
-            IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pagination.CurrentPage,
-                pagination.PageSize, out total);
-            pagination.TotalRows = total;
-            return View(result);
+            var pageSize = size ?? 40;
+            var pageIndex = page ?? 0;
+            IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pageIndex,
+                pageSize, out total);
+            var array = from temp in result
+                        select new
+                        {
+                            temp.Id,
+                            temp.Name,
+                            temp.Remark
+
+                        };
+            return Json(new
+            {
+                total = total,
+                data = array
+            }, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -118,7 +123,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

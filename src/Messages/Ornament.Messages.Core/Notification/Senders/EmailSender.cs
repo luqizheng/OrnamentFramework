@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
-using Ornament.Messages.Dao;
+using Qi.Text;
 
 namespace Ornament.Messages.Notification.Senders
 {
@@ -10,9 +10,8 @@ namespace Ornament.Messages.Notification.Senders
     {
         private readonly SmtpClient _smtpClient;
 
-        public EmailSender(string name,SmtpClient smtpClient, string supportEmail, IMemberShipFactory memberShipFactory,
-            IMessageDaoFactory daoFactory)
-            : base(name,memberShipFactory, daoFactory)
+        public EmailSender(string name, SmtpClient smtpClient, string supportEmail)
+            : base(name)
         {
             SupportEmail = supportEmail;
             if (smtpClient == null)
@@ -20,22 +19,31 @@ namespace Ornament.Messages.Notification.Senders
                 throw new ArgumentNullException("smtpClient");
             }
             _smtpClient = smtpClient;
+            Port = 25;
         }
 
-        public string SupportEmail { get; private set; }
+        public virtual string Account { get; set; }
+        public virtual string SmtpServer { get; set; }
+        public virtual int Port { get; set; }
 
-        protected override void Send(NotifyMessageTemplate template, User[] performers)
+
+        public virtual string SupportEmail { get; private set; }
+
+
+        public override void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale,
+            User[] performers)
         {
             foreach (User user in performers)
             {
                 Content content = template.GetContent(user);
+                var helper = new NamedFormatterHelper();
 
                 var mailMessage =
                     new MailMessage(new MailAddress(SupportEmail),
                         new MailAddress(user.Contact.Email))
                     {
-                        Body = content.Value,
-                        Subject = content.Subject,
+                        Body = helper.Replace(content.Value, varibale),
+                        Subject = helper.Replace(content.Subject, varibale),
                         IsBodyHtml = true
                     };
                 _smtpClient.Send(mailMessage);

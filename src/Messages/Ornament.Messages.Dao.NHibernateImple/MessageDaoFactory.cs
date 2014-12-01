@@ -27,12 +27,12 @@ namespace Ornament.Messages.Dao.NHibernateImple
             get { return new NewsTypeDao(); }
         }
 
-        /// <summary>
-        /// </summary>
-        public INotifyTypeDao NotifyTypeDao
-        {
-            get { return new NotifyTypeDao(); }
-        }
+        ///// <summary>
+        ///// </summary>
+        //public INotifyTypeDao NotifyTypeDao
+        //{
+        //    get { return new NotifyTypeDao(); }
+        //}
 
         /// <summary>
         /// </summary>

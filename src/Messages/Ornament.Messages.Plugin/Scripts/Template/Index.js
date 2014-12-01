@@ -1,31 +1,40 @@
-﻿define(function (require) {
-    var $ = require("jquery");
-    
-    if (!$.fn.popover) {
-        require('bootstrap')($);
-    }
-    return function (deleteUrl) {
-        var $popver = $("[data-toggle=popover]").popover({ html: true, content: $("#warning").html(), placement: "top", title: "Warning" });
-        $(document)
-            .delegate("button.deleteYes", "click", function (e) {
-                $("[data-toggle=popover]").popover("hide");
-                var $td = $(this).closest("td"),
-                    id = $td.find("a:eq(1)").attr("data-val");
+﻿define(function(require) {
+    function Init() {
+        var model = avalon.define("templateIndex", function(vm) {
+            vm.loading = false;
+            vm.templates = [];
+            vm.total = 0;
+            vm.pager = {
+                pageSize: 50,
+                search: function(pageIndex, pageSize, func) {
+                    find(pageIndex, pageSize, "", func);
+                }
+            };
 
-                $.get(deleteUrl + "/" + id, function (data) {
-                    if (data.success) {
-                        $td.closest("tr").remove();
-                    } else {
-                        alert(data.message);
+            function find(index, page, content, func) {
+                vm.loading = true;
+                $.get("/Messages/Template/List", {
+                    page: page,
+                    search: content,
+                    size: size
+                }, function(d) {
+                    vm.loading = false;
+                    model.users = [];
+                    for (var i = 0; i < d.data.length; i++) {
+                        model.templates.push(d.data[i]);
                     }
+                    model.total = d.total;
+                    func(d.total);
+
                 });
-                return false;
-            })
-            .delegate("button.deleteNo", "click", function () {
-                $popver.popover("hide");
-                return false;
-            });
+            }
+
+        });
+    }
+
+
+    return function() {
+        Init();
+        avalon.scan();
     };
-
-
 })

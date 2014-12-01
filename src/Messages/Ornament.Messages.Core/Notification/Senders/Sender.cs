@@ -2,42 +2,55 @@
 using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.Messages.Dao;
 
 namespace Ornament.Messages.Notification.Senders
 {
     public abstract class Sender : ISender
     {
+        protected Sender()
+        {
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="senderName"></param>
-        /// <param name="memberShipFactory"></param>
-        /// <param name="messageDaoFactory"></param>
-        protected Sender(string senderName, IMemberShipFactory memberShipFactory, IMessageDaoFactory messageDaoFactory)
+        protected Sender(string senderName)
         {
             Name = senderName;
-            MemberShipFactory = memberShipFactory;
-            MessageDaoFactory = messageDaoFactory;
         }
 
+        /// <summary>
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
         public string Remarks { get; set; }
-        public IMemberShipFactory MemberShipFactory { get; set; }
-        public IMessageDaoFactory MessageDaoFactory { get; set; }
 
 
-        public void Send(NotifyMessageTemplate template, IPerformer[] performers)
+        /// <summary>
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="memberShipFactory"></param>
+        /// <param name="variable"></param>
+        /// <param name="performers"></param>
+        public void Send(NotifyMessageTemplate template, IMemberShipFactory memberShipFactory,
+            IDictionary<string, string> variable, IPerformer[] performers)
         {
             var targetuser = new HashSet<User>();
             foreach (IPerformer performer in performers)
             {
-                foreach (User user in performer.GetUsers(MemberShipFactory))
+                foreach (User user in performer.GetUsers(memberShipFactory))
                     targetuser.Add(user);
             }
 
-            Send(template, targetuser.ToArray());
+            Send(template, variable, targetuser.ToArray());
         }
 
-        protected abstract void Send(NotifyMessageTemplate template, User[] performers);
+        public abstract void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale, User[] performers);
+
+
+
+
     }
 }

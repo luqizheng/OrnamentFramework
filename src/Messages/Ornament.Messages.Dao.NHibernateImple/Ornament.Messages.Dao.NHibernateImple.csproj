@@ -87,15 +87,15 @@
     <Compile Include="Mapping\SimpleMessageMapping.cs" />
     <Compile Include="Mapping\NewsMapping.cs" />
     <Compile Include="Mapping\NewsTypeMapping.cs" />
-    <Compile Include="Mapping\NotifyTypeMapping.cs" />
     <Compile Include="Mapping\PermissionMapping.cs" />
     <Compile Include="Mapping\PersonalMessageMapping.cs" />
     <Compile Include="Mapping\NotifyMessageTemplateMapping.cs" />
     <Compile Include="MessageDaoFactory.cs" />
     <Compile Include="NewsDao.cs" />
+    <Compile Include="NewsTypeDao.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SimpleMessageDao.cs" />
-    <Compile Include="NotifyTypeDao.cs" />
-    <Compile Include="NewsTypeDao.cs" />
     <Compile Include="PersonalMessageDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotifyMessageTemplateDao.cs" />

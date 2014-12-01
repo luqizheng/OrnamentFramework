@@ -96,7 +96,6 @@
     <Compile Include="Newses\NewsType.cs" />
     <Compile Include="Notification\NotifyMessageTemplate.cs" />
     <Compile Include="Notification\NotifyTemplateOperator.cs" />
-    <Compile Include="Notification\NotifyType.cs" />
     <Compile Include="Notification\Senders\Sender.cs" />
     <Compile Include="Notification\SimpleMessage.cs" />
     <Compile Include="Notification\CreateVariablesHandler.cs" />

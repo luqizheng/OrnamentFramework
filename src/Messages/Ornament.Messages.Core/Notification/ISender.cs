@@ -1,6 +1,6 @@
-﻿using Ornament.MemberShip;
+﻿using System.Collections.Generic;
+using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.Messages.Dao;
 
 namespace Ornament.Messages.Notification
 {
@@ -8,10 +8,7 @@ namespace Ornament.Messages.Notification
     {
         string Name { get; set; }
         string Remarks { get; set; }
-        IMemberShipFactory MemberShipFactory { get; set; }
-        IMessageDaoFactory MessageDaoFactory { get; set; }
-
-
-        void Send(NotifyMessageTemplate template, IPerformer[] performers);
+        void Send(NotifyMessageTemplate template, IMemberShipFactory memberShipFactory, IDictionary<string, string> variable, IPerformer[] performers);
+        void Send(NotifyMessageTemplate template, IDictionary<string, string> variable, User[] performers);
     }
 }
