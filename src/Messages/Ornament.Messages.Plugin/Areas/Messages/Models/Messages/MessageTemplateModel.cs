@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
@@ -18,7 +17,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 
         public MessageTemplateModel(NotifyMessageTemplate template)
         {
-            if(template==null)
+            if (template == null)
                 throw new ArgumentNullException("template");
             Name = template.Name;
             Remark = template.Remark;
@@ -26,7 +25,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             {
                 Contents.Add(key, template.Contents[key]);
             }
-
         }
 
         /// <summary>
@@ -46,7 +44,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 
         /// <summary>
         /// </summary>
-        [UIHint("Textarea")]
         public string Remark { get; set; }
 
         /// <summary>
@@ -58,6 +55,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             set { _contents = value; }
         }
 
+        [UIHint("Editor")]
+        public virtual string Content
+        {
+            get { return ""; }
+        }
 
 
         public void Save(IMessageTemplateDao dao)
@@ -77,7 +79,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
                     type.Contents[lang] = Contents[lang];
                 else
                     type.Contents.Add(lang, Contents[lang]);
-
             }
             dao.Flush();
         }

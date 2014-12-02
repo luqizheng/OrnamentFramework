@@ -1,0 +1,29 @@
+﻿@model string
+@{
+    var id = Html.Id("");
+    IDictionary<string, object> htmlAttris = new Dictionary<string, object>();
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object>;
+        if (htmlAttris == null)
+        {
+            htmlAttris = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        }
+    }
+
+    if (htmlAttris.ContainsKey("class"))
+    {
+        htmlAttris["class"] = htmlAttris["class"] + " form-control";
+    }
+    
+    
+}
+@Html.TextArea("", this.Model)
+
+<script type="text/javascript">
+    require(["ckeditor"], function (a) {
+        CKEDITOR.replace('@id', { height: '380px', startupFocus: true });
+    });
+
+
+</script>

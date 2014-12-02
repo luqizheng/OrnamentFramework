@@ -11,7 +11,7 @@
                 }
             };
 
-            function find(index, page, content, func) {
+            function find(page,size, content, func) {
                 vm.loading = true;
                 $.get("/Messages/Template/List", {
                     page: page,
@@ -30,11 +30,13 @@
             }
 
         });
+        avalon.scan();
     }
 
 
-    return function() {
-        Init();
-        avalon.scan();
+    return function () {
+        require(["pager"], Init);
+        
+        
     };
 })

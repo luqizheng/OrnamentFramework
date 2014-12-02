@@ -25,7 +25,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,templateTitle",
             ParentKey = "Messages",
             Key = "templates")]
-        //[ResourceAuthorize(NotifyTemplateOperator.Read, "NotifyType")]
+        [ResourceAuthorize(NotifyTemplateOperator.Read, "NotifyType")]
         public ActionResult Index()
         {
             return View();

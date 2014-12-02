@@ -1,5 +1,7 @@
 ﻿@using Ornament
+@using Ornament.Models
 @using Ornament.Web
+@using Ornament.Web.UI.Theme
 @using Qi.Web
 @using Basic = Ornament.Properties.Resources
 @model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.MessageTemplateModel
@@ -21,99 +23,105 @@
                       };
         contents = JsonHelper.ToJson(content.ToDictionary(s => s.language));
     }
-    
 }
 
 @section pageTitle
 {
     <h5>@Html.GetEmbededResourceString("title")</h5>
 }
-@using (Html.BeginForm("Edit", "Template", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Panel panel = Html.Panel())
 {
-    <div class="widget">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <input type="submit" value="@Basic.Save" class="btn btn-info" />
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
-            </div>
-        </div>
-        <div class="body well">
+    @panel.Header(@<text>
 
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab7"><i class="fam-layout-content"></i>@Html.GetEmbededResourceString("Tab_title_Basic")</a></li>
-                <li class=""><a data-toggle="tab" href="#tab8"><i class=" fam-pencil-add"></i>@Html.GetEmbededResourceString("Tab_title_Content")</a></li>
-            </ul>
-            <div class="tab-content">
+    </text>)
+    
+    @panel.Body(@<text>
 
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.Id)
-                @Html.ValidationSummary(true)
-                <div id="tab7" class="tab-pane active">
-                    <div class="row-fluid">
-                        @* 如果是内置，一定是不能呢改名字，因为是有程序初始化生成的 *@
+    <form ms-controller="editTemp" method="POST" action="@Url.Action("Edit")" class="form-horizontal">
 
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#tab7">
+                    <i class="fa-list"></i>@Html.GetEmbededResourceString("Tab_title_Basic")
+                </a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab8"><i class="fa-pencil"></i>@Html.GetEmbededResourceString("Tab_title_Content")</a>
+            </li>
+        </ul>
+        <div class="tab-content">
 
-                        @Html.EditorFor(s => s.Name)
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            @Html.ValidationSummary(true)
+            <div id="tab7" class="tab-pane active">
+                <div class="row-fluid">
+                    @* 如果是内置，一定是不能呢改名字，因为是有程序初始化生成的 *@
+                    <div class="form-group">
+                        @Html.LabelFor(s => s.Name)
+                        @Html.TextBoxFor(s => s.Name, "", new
+                                         {
+                                             @class = "form-control",
+                                             HtmlAttributes = new Dictionary<string, object>
+                                             {
+                                                 {"ms-duplex", "Name"}
+                                             }
+                                         })
 
-
-                        <div class="control-group">
-                            @Html.LabelFor(s => s.Notify, new { @class = "control-label span12" })
-                            <div class="controls">
-                                <select name="Notify" id="Notify">
-                                    @foreach (var item in OrnamentContext.DaoFactory.MessageDaoFactory.NotifyTypeDao.GetAll())
-                                    {
-
-                                        if (this.Model.Notify != null && item.Id == this.Model.Notify.Id)
-                                        {
-                                        <option value="@item.Id" selected="selected">@item.Name</option>
-                                        }
-                                        else
-                                        {
-                                        <option value="@item.Id">@item.Name</option>
-                                        }
-                                    }
-                                </select>
-                                @Html.ValidationMessageFor(s => s.Notify)
-                            </div>
-                        </div>
-                        @Html.EditorFor(model => model.Remark)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(s => s.Remark)
+                        @Html.TextAreaFor(s => s.Remark, 18, 29,
+                                             new
+                                             {
+                                                 @class = "form-control",
+                                                 HtmlAttributes = new Dictionary<string, object>
+                                                 {
+                                                     {"ms-duplex", "Remark"}
+                                                 }
+                                             })
                     </div>
                 </div>
-                <div id="tab8" class="tab-pane">
+            </div>
+            <div id="tab8" class="tab-pane">
 
-                    <div class="control-group">
-                        <label class="control-label">Language:</label>
-                        <div class="controls">
-                            <select id="Language">
-                                @{
-                                    var langs = OrnamentContext.Configuration.Languages;
-                                    foreach (var lang in langs)
-                                    {
-                                    <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">Subject</label>
-                        <div class="controls">
-                            <input id="subject" class="styled" type="text" style="width: 100%" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <textarea name="editor" id="editor"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="Language">语言:</label>
+                    <select id="Language" class="form-control" ms-duplex-text="Language">
+                        @{
+                            LanguageCollection langs = OrnamentContext.Configuration.Languages;
+                            foreach (Language lang in langs)
+                            {
+                            <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
+                            }
+                        }
+                    </select>
 
                 </div>
-                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input id="subject" class="form-control" type="text" style="width: 100%"
+                        ms-duplex="content.Subject" />
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(s => s.Content, new
+                                     {
+                                         HtmlAttributes = new Dictionary<string, object>
+                                         {
+                                             {"ms-duplex", "content.Value"}
+                                         }
+                                     })
+                </div>
+
             </div>
 
         </div>
-    </div>
+    </form>
+    </text>)
+    
 }
+
+
 
 
 @section scripts {
@@ -121,9 +129,15 @@
     <script type="text/javascript">
 
 
-        seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("~/messages/scripts/template/edit.js")", function (init) {
-            var content = @Html.Raw(contents);
-            init(content);
+        require(["@Scripts.Url("~/messages/scripts/template/edit.js")"], function (init) {
+            var contents=@Html.Raw(JsonHelper.ToJson(this.Model.Contents));
+            var template = {
+                Remark:  '@Html.Raw(JsonHelper.ToJson(Model.Remark))',
+                Name: '@this.Model.Name',
+                Contents:contents
+            }
+
+            init(template);
         });
     </script>
 }

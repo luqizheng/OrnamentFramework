@@ -38,10 +38,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Remark)
-                </th>
-
                 <th></th>
             </tr>
         </thead>
@@ -49,9 +45,8 @@
 
             <tr ms-repeat="templates">
                 <td ms-text="el.Name"></td>
-                <td ms-text="el.Remarks"></td>
                 <td>
-                    <a href="javascript:;" class="btn btn-primary">
+                    <a ms-href="#@Url.Action("Edit")/{{el.Id}}" class="btn btn-primary">
                         @Basic.Edit
                     </a>
                 </td>
