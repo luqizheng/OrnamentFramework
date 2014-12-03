@@ -3,78 +3,79 @@ define(function (require) {
 
 
 
-    function Init(template) {
+    function Init(template, editor) {
 
         var model = avalon.define("editTemp", function (vm) {
             vm.Name = "";
             vm.Remark = "";
             vm.Contents = "";
-            vm.content = {
+            vm.content = { //current editing content.
                 Value: "",
                 Subject: "",
                 Language: ""
             };
             vm.Language = "";
-            vm.$watch("Language", function(newValue) {
+            vm.$watch("Language", function (newValue) {
                 var content = model.Contents[newValue];
                 if (!content) {
-                    content= {
+                    content = {
                         Value: "",
                         Subject: "",
-                        Language:newValue
+                        Language: newValue
                     }
+                    model.Contents[newValue] = content;
                 }
                 vm.content = content;
-
+                editor.setData(content.Value);
             });
         });
 
         model.Name = template.Name;
         model.Remark = template.Remark;
         model.Contents = template.Contents;
-        for (var a in template.Contents) {
-            model.Language = a;
+        for (var key in model.Contents) {
+            model.Language = key;
             break;
         }
-        
-        //var editor = CKEDITOR.replace('editor');
-        //editor.on("blur", function () {
-        //    content[$("#Language").val()] = {
-        //        content: editor.getData(),
-        //        subject: $("#subject").val()
-        //    };
-        //});
 
-        //$("#Language").change(function () {
-        //    var cont = content[$(this).val()];
-        //    editor.setData(cont ? cont.content : "");
-        //    $("#subject").val(cont ? cont.subject : "");
-        //}).change().next().click(function () {
-        //    delete content[$("#Language").val()];
-        //});
+        editor.on("blur", function () {
+            if (model.content.Subject != "") {
+                model.content = editor.getData();
+            }
+        });
 
-
-        //$("form").submit(function () {
-        //    //Make sure the editor save to content.
-        //    content[$("#Language").val()] = {
-        //        content: editor.getData(),
-        //        subject: $("#subject").val()
-        //    };
-
-        //    var ary = [];
-        //    for (var key in content) {
-        //        ary.push("<input type='hidden' value='" + content[key].content + "' name='Contents[" + key + "].Value'/>");
-        //        ary.push("<input type='hidden' value='" + content[key].subject + "' name='Contents[" + key + "].Subject'/>");
-        //        ary.push("<input type='hidden' value='" + key + "' name='Contents[" + key + "].Language'/>");
-        //    }
-        //    $("[name=editor]").remove();
-        //    $("form").append(ary.join(""));
-        //});
+        $("#editTemp").vaform({
+            success: function (rdata) {
+                alert(rdata.success ? "Save success." : rdata.message);
+            },
+            before: function (postData) {
+                postData.Contents = [];
+                for (var key in model.Contents) {
+                    var content = model.Contents[key];
+                    if (content && content.Subject != "" && content.Value != "") {
+                        postData.Contents.push(content);
+                    }
+                }
+            }
+        });
+       
     };
 
-    return function (template) {
-        Init(template);
-        avalon.scan();
+    return {
+        init: function (template) {
+
+            require(["vaform"], function () {
+                var editor = CKEDITOR.instances["Content"];
+                Init(template, editor);
+                avalon.scan();
+
+
+            });
+        },
+        clear:function() {
+            delete avalon.vmodels["editTemp"];
+        }
+
     }
 
 })

@@ -6,6 +6,7 @@ using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -98,7 +99,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         //
         // POST: /Messages/Template/Edit/5
 
-        [HttpPost, ValidateAntiForgeryToken, ValidateInput(false)]
+        [HttpPost, ValidateAntiForgeryToken, ValidateInput(false), ValidateAjax]
         public ActionResult Edit(MessageTemplateModel model)
         {
             try
