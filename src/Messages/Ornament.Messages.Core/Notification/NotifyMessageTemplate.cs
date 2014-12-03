@@ -73,7 +73,11 @@ namespace Ornament.Messages.Notification
                 return result;
             return Contents.Values.First();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
         public virtual Content Get(CultureInfo cultureInfo)
         {
             CultureInfo current = cultureInfo;
@@ -118,7 +122,12 @@ namespace Ornament.Messages.Notification
                 Publish(daoFactory, data, user);
             }
         }
-
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <param name="daoFactory"></param>
+        /// <param name="variable"></param>
+        /// <param name="performers"></param>
         public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
             User performers)
         {

@@ -13,20 +13,28 @@ namespace Ornament.Contexts
     {
         private static SimpleMessageFactoryRetrive _verifyEmailAddress;
         private static SimpleMessageFactoryRetrive _passwordRetrive;
-      
+        //private static NotifyTypeRetrive _systemId;
         private static SimpleMessageFactoryRetrive _registryAccount;
         private static SimpleMessageFactoryRetrive _accountChanged;
 
         public MessagesConfig()
         {
-            
+            //_systemId = new NotifyTypeRetrive("System");
         }
 
         private IMessageDaoFactory MessageDaoFactory
         {
             get { return OrnamentContext.DaoFactory.GetDaoFactory<IMessageDaoFactory>(); }
         }
-      
+
+        ///// <summary>
+        /////     System Notify Type.
+        ///// </summary>
+        //public NotifyType SystemType
+        //{
+        //    get { return _systemId.Get(MessageDaoFactory); }
+        //}
+
         /// <summary>
         /// </summary>
         public NotifyMessageTemplate RegistAccount
@@ -36,9 +44,9 @@ namespace Ornament.Contexts
                 if (_registryAccount == null)
                 {
                     _registryAccount = new SimpleMessageFactoryRetrive(
-                        "Regist New User (Template)",
-                        "Regist New user, and verify safe email address.",
-                        
+                        "Registry New User (Template)",
+                        "Registry New user, and verify safe email address.",
+                       
                         DeserializerXml(Resources.registAccount_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.registAccount, "en"),
                         DeserializerXml(Resources.registAccount_zh, "zh-Hant")
@@ -57,13 +65,11 @@ namespace Ornament.Contexts
                     _verifyEmailAddress = new SimpleMessageFactoryRetrive(
                         "Verify Email Address (Template)",
                         @"Email has changed, It should verify again.
-inside veriable:
-1) [parameters]: token infomation
+inside variable:
+1) [parameters]: token information
 2) [email]:user name
 3) [loginId]:user loginid",
-                     
-
-                        
+                       
                         DeserializerXml(Resources.verifyEmail_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.verifyEmail_zh, "zh-Hant"),
                         DeserializerXml(Resources.verifyEmail, "en")
@@ -83,7 +89,7 @@ inside veriable:
                     _passwordRetrive = new SimpleMessageFactoryRetrive(
                         "Retrive Password (Template)",
                         "User forget password and try to use email to retrieve.",
-                        
+                       
                         DeserializerXml(Resources.forgetPassword_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.forgetPassword_zh, "zh-Hant"),
                         DeserializerXml(Resources.forgetPassword, "en")
@@ -105,7 +111,7 @@ inside veriable:
                     _accountChanged = new SimpleMessageFactoryRetrive(
                         "Account Information changed (Template)",
                         "Account Information Changed for user",
-                        
+                       
                         DeserializerXml(Resources.changeAccount_zh_CN, "zh-Hans"),
                         DeserializerXml(Resources.changeAccount_zh, "zh-Hant"),
                         DeserializerXml(Resources.changeAccount, "en")
