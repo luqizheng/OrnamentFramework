@@ -35,8 +35,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         public ActionResult List(int? page, int? size)
         {
             int total;
-            var pageSize = size ?? 40;
-            var pageIndex = page ?? 0;
+            int pageSize = size ?? 40;
+            int pageIndex = page ?? 0;
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pageIndex,
                 pageSize, out total);
             var array = from temp in result
@@ -45,11 +45,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                             temp.Id,
                             temp.Name,
                             temp.Remark
-
                         };
             return Json(new
             {
-                total = total,
+                total,
                 data = array
             }, JsonRequestBehavior.AllowGet);
         }
@@ -100,21 +99,18 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         // POST: /Messages/Template/Edit/5
 
         [HttpPost, ValidateAntiForgeryToken, ValidateInput(false), ValidateAjax]
-        public ActionResult Edit(MessageTemplateModel model)
+        public ActionResult Save(MessageTemplateModel model)
         {
-            try
+            if (ModelState.IsValid && false)
             {
-                if (ModelState.IsValid)
+                model.Save(_daoFactory.MessageTemplateDao);
+                if (Request.IsAjaxRequest())
                 {
-                    model.Save(_daoFactory.MessageTemplateDao);
-                    return RedirectToAction("Index");
+                    return Json(new { success = true });
                 }
-                return View(model);
+                return RedirectToAction("Index", model);
             }
-            catch
-            {
-                return View(model);
-            }
+            return Json(new { success = false });
         }
 
         //

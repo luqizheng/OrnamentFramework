@@ -9,7 +9,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 {
     public class MessageTemplateModel
     {
-        private IDictionary<string, Content> _contents;
+        private List<Content> _contents;
 
         public MessageTemplateModel()
         {
@@ -21,10 +21,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
                 throw new ArgumentNullException("template");
             Name = template.Name;
             Remark = template.Remark;
-            foreach (string key in template.Contents.Keys)
-            {
-                Contents.Add(key, template.Contents[key]);
-            }
+            Contents.AddRange(template.Contents.Values);
         }
 
         /// <summary>
@@ -49,9 +46,9 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         /// <summary>
         /// </summary>
         [AllowHtml]
-        public virtual IDictionary<string, Content> Contents
+        public virtual List<Content> Contents
         {
-            get { return _contents ?? (_contents = new Dictionary<string, Content>()); }
+            get { return _contents ?? (_contents = new List<Content>()); }
             set { _contents = value; }
         }
 
@@ -73,12 +70,19 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             type.Name = Name;
             type.Remark = Remark;
             dao.SaveOrUpdate(type);
-            foreach (string lang in Contents.Keys)
+
+            foreach (var content in Contents)
             {
+
+                if (content == null)
+                    continue;
+                var lang = content.Language;
                 if (type.Contents.ContainsKey(lang))
-                    type.Contents[lang] = Contents[lang];
+                {
+                    type.Contents[lang] = content;
+                }
                 else
-                    type.Contents.Add(lang, Contents[lang]);
+                    type.Contents.Add(lang, content);
             }
             dao.Flush();
         }

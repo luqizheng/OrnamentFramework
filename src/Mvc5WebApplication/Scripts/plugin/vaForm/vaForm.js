@@ -35,7 +35,7 @@
             }
             $.validator.unobtrusive.parse(this);
 
-            $form.validate().settings.submitHandler = function () {
+            $form.validate().settings.submitHandler = function (e) {
                 var data = $form.serializeObject();
                 opts.before.call($form,data);
 
@@ -58,6 +58,7 @@
 
                     }
                 });
+                e.preventDefault();
             };
             return $form;
         };

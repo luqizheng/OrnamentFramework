@@ -139,7 +139,6 @@
     <EmbeddedResource Include="Areas\Messages\Views\News\App_LocalResources\Index.resx" />
     <EmbeddedResource Include="Scripts\NewsType\Index.js" />
     <EmbeddedResource Include="Scripts\News\Index.js" />
-    <EmbeddedResource Include="Scripts\NotifyType\index.js" />
     <EmbeddedResource Include="Scripts\Template\Edit.js" />
     <EmbeddedResource Include="Scripts\Template\Index.js" />
     <EmbeddedResource Include="Scripts\News\Edit.js" />

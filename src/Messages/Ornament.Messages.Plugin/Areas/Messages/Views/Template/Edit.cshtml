@@ -9,19 +9,19 @@
 @{
     ViewBag.Title = Html.GetEmbededResourceString("title");
     Layout = OrnamentContext.Configuration.Layout();
-    string contents = "{}";
+    string outputContents = "{}";
 
 
     if (Model != null)
     {
-        var content = from a in Model.Contents.Values
+        var content = from a in Model.Contents
                       select new
                       {
-                          subject = a.Subject,
-                          content = a.Value,
-                          language = a.Language
+                          a.Subject,
+                          a.Value,
+                          a.Language
                       };
-        contents = JsonHelper.ToJson(content.ToDictionary(s => s.language));
+        outputContents = JsonHelper.ToJson(content.ToDictionary(s => s.Language, s => s));
     }
 }
 
@@ -29,16 +29,16 @@
 {
     <h5>@Html.GetEmbededResourceString("title")</h5>
 }
- <form id="editTemp" ms-controller="editTemp" method="POST" action="@Url.Action("Edit")" class="form-horizontal">
-@using (Panel panel = Html.Panel())
-{
-    @panel.Header(@<text>
-     <button>@Ornament.Properties.Resources.Save</button>
-    </text>)
+<form id="editTemp" ms-controller="editTemp" method="POST" action="@Url.Action("Save")" class="form-horizontal">
+    @using (Panel panel = Html.Panel())
+    {
+        @panel.Header(@<text>
+        <button>@Ornament.Properties.Resources.Save</button>
+        </text>)
     
-    @panel.Body(@<text>
+        @panel.Body(@<text>
 
-   
+
 
         <ul class="nav nav-tabs">
             <li class="active">
@@ -68,7 +68,7 @@
                                 {"ms-duplex", "Name"}
                             }
                         })
-
+                        @Html.ValidationMessageFor(s => s.Name)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(s => s.Remark)
@@ -81,7 +81,7 @@
                                     {"ms-duplex", "Remark"}
                                 }
                             })
-
+                        @Html.ValidationMessageFor(s => s.Remark)
                     </div>
                 </div>
             </div>
@@ -118,10 +118,11 @@
             </div>
 
         </div>
- 
-    </text>)
+
+        </text>)
     
-}   </form>
+    }
+</form>
 
 
 
@@ -132,7 +133,7 @@
 
 
         require(["@Scripts.Url("~/messages/scripts/template/edit.js")"], function (init) {
-            var contents=@Html.Raw(JsonHelper.ToJson(this.Model.Contents));
+            var contents=@Html.Raw(outputContents);
             var template = {
                 Remark:  '@Html.Raw(JsonHelper.ToJson(Model.Remark))',
                 Name: '@this.Model.Name',
