@@ -150,6 +150,9 @@
   <data name="templateEditTitle" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="templateSenderTitle" xml:space="preserve">
+    <value>Notify Senders</value>
+  </data>
   <data name="templateTitle" xml:space="preserve">
     <value>Templates</value>
   </data>

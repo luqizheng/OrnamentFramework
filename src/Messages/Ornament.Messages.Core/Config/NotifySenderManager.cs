@@ -4,27 +4,36 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using Ornament.Messages.Notification;
+using Ornament.Messages.Notification.Senders;
 using Qi;
 using Qi.IO.Serialization;
+using SocketIOClient;
 
 namespace Ornament.Messages.Config
 {
     /// <summary>
-    /// Default is ~/messageVariables.xml or use appSetting Key="MessageVariables"
+    ///     Default is ~/messageVariables.xml or use appSetting Key="MessageVariables"
     /// </summary>
     public class NotifySenderManager
     {
         public static readonly NotifySenderManager Instance = new NotifySenderManager();
         public static string StoreFile;
-        private readonly IDictionary<string, ISender> _senders;
+        private readonly IDictionary<string, Type> _senders;
         private Dictionary<string, string> _variables;
+
 
         private NotifySenderManager()
         {
-            var path = ConfigurationManager.AppSettings["MessageVariables"] ?? ("~/messageVariables.xml");
+            string path = ConfigurationManager.AppSettings["MessageVariables"] ?? ("~/messageVariables.xml");
             StoreFile = ApplicationHelper.MapPath(path);
-            _senders = new Dictionary<string, ISender>();
+            _senders = new Dictionary<string, Type>();
             ReloadVariables();
+
+            _senders = new Dictionary<string, Type>()
+            {
+                {"Email", typeof (EmailSender)},
+                {"Client", typeof (ClientSender)}
+            };
         }
 
         /// <summary>
@@ -38,26 +47,21 @@ namespace Ornament.Messages.Config
         /// <summary>
         ///     添加发送器
         /// </summary>
-        /// <param name="senders"></param>
-        public void Add(params ISender[] senders)
-        {
-            if (senders == null) throw new ArgumentNullException("senders");
 
-            foreach (ISender item in senders)
-            {
-                _senders.Add(item.Name, item);
-            }
+        public void Add(string name, Type senderType)
+        {
+            if (senderType == null) throw new ArgumentNullException("senderType");
+
+
+            _senders.Add(name, senderType);
+
         }
 
-        /// <summary>
-        ///     获取发送器
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public ISender[] GetSenders(params string[] senderNames)
+        public IDictionary<string, Type> SenderTypes
         {
-            return (from senderName in senderNames where _senders.ContainsKey(senderName) select _senders[senderName]).ToArray();
+            get { return _senders; }
         }
+
 
         public void SaveVariable()
         {

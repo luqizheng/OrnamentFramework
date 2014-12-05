@@ -1,0 +1,33 @@
+﻿@using Ornament
+@using Ornament.Web.UI.Theme
+@model IList<Ornament.Messages.Notification.Senders.Sender>
+
+@{
+    ViewBag.Title = "title";
+    Layout = Ornament.OrnamentContext.Configuration.Layout();
+}
+
+@section pageTitle{
+    <h4>Sender setting</h4>
+}
+
+@using (var panel = Html.Panel())
+{
+    @panel.Header(@<text>
+                       
+                   </text>)
+
+    @panel.Body(@<text>
+                     <a class="btn btn-default" href="#@Url.Action("Create")">@Ornament.Properties.Resources.Create</a>
+                     <table class="table">
+                         @foreach (var ak in this.Model)
+                         {
+                             <tr>
+                                 <td><a href="#@Url.Action("Edit",ak.Id)"><i class="fa fa-edit"></i></a></td>
+                                 <td>@ak.Name</td>
+                                 <td>@ak.Remarks</td>
+                             </tr>
+                         }
+                     </table>
+                 </text>)
+}

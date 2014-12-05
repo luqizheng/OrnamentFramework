@@ -2,10 +2,11 @@
 using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Qi.Domain;
 
 namespace Ornament.Messages.Notification.Senders
 {
-    public abstract class Sender : ISender
+    public abstract class Sender : DomainObject<Sender, int>, ISender
     {
         protected Sender()
         {
@@ -21,11 +22,11 @@ namespace Ornament.Messages.Notification.Senders
 
         /// <summary>
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        public string Remarks { get; set; }
+        public virtual string Remarks { get; set; }
 
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace Ornament.Messages.Notification.Senders
         /// <param name="memberShipFactory"></param>
         /// <param name="variable"></param>
         /// <param name="performers"></param>
-        public void Send(NotifyMessageTemplate template, IMemberShipFactory memberShipFactory,
+        public virtual void Send(NotifyMessageTemplate template, IMemberShipFactory memberShipFactory,
             IDictionary<string, string> variable, IPerformer[] performers)
         {
             var targetuser = new HashSet<User>();
@@ -47,10 +48,7 @@ namespace Ornament.Messages.Notification.Senders
             Send(template, variable, targetuser.ToArray());
         }
 
-        public abstract void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale, User[] performers);
-
-
-
-
+        public abstract void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale,
+            User[] performers);
     }
 }

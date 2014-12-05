@@ -21,11 +21,11 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
                 .AsMap(s => s.Language).Cascade.AllDeleteOrphan()
                 .Table("Msgs_NewsContent")
                 .Component(x =>
-                    {
-                        x.Map(a => a.Value).CustomSqlType("text");
-                        x.Map(a => a.Subject).Length(255);
-                        x.Map(a => a.Language, "language2").Length(10);
-                    });
+                {
+                    x.Map(a => a.Value).CustomSqlType("text");
+                    x.Map(a => a.Subject).Length(255);
+                    x.Map(a => a.Language, "language2").Length(10);
+                });
         }
     }
 }

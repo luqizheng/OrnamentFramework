@@ -9,7 +9,10 @@ namespace Ornament.Messages.Notification.Senders
     public class EmailSender : Sender
     {
         private readonly SmtpClient _smtpClient;
-
+        protected EmailSender()
+        {
+            
+        }
         public EmailSender(string name, SmtpClient smtpClient, string supportEmail)
             : base(name)
         {
@@ -27,7 +30,9 @@ namespace Ornament.Messages.Notification.Senders
         public virtual int Port { get; set; }
 
 
-        public virtual string SupportEmail { get; private set; }
+        public virtual string SupportEmail { get; set; }
+        public virtual string UserName { get; set; }
+        public virtual string Password { get; set; }
 
 
         public override void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale,

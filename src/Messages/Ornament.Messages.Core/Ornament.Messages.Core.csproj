@@ -85,6 +85,7 @@
     <Compile Include="Dao\INotifyTypeDao.cs" />
     <Compile Include="Dao\IPersonalMessageDao.cs" />
     <Compile Include="Dao\IMessageTemplateDao.cs" />
+    <Compile Include="Dao\INotifySenderDao.cs" />
     <Compile Include="Dao\PersonalSearcher.cs" />
     <Compile Include="MssageOperator.cs" />
     <Compile Include="Dao\IMessageDaoFactory.cs" />

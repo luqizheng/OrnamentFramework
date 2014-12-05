@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
@@ -22,6 +23,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             Name = template.Name;
             Remark = template.Remark;
             Contents.AddRange(template.Contents.Values);
+            this.Senders = template.Senders.ToArray();
         }
 
         /// <summary>
@@ -57,6 +59,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         {
             get { return ""; }
         }
+
+        public ISender[] Senders { get; set; }
 
 
         public void Save(IMessageTemplateDao dao)

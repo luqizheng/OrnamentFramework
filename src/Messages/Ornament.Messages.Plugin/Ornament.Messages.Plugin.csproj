@@ -126,6 +126,7 @@
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
+    <Compile Include="Areas\Messages\Controllers\SenderController.cs" />
     <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
     <Compile Include="Areas\Messages\Models\Messages\MessageTemplateModel.cs" />
@@ -241,6 +242,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Config\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Sender\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Sender\_email.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Sender\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Sender\_client.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

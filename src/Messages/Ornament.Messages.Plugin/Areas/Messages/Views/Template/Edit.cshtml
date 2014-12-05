@@ -68,6 +68,10 @@
                         @Html.ValidationMessageFor(s => s.Name)
                     </div>
                     <div class="form-group">
+                        @Html.LabelFor(s=>s.Senders)
+                        
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(s => s.Remark)
                         @Html.TextAreaFor(s => s.Remark,5,20,
                             new

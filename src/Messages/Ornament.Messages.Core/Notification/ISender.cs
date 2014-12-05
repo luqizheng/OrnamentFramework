@@ -4,7 +4,7 @@ using Ornament.MemberShip.Dao;
 
 namespace Ornament.Messages.Notification
 {
-    public interface ISender
+    public interface ISender 
     {
         string Name { get; set; }
         string Remarks { get; set; }
