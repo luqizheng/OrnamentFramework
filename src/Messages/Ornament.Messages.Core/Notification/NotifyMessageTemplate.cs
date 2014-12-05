@@ -38,6 +38,7 @@ namespace Ornament.Messages.Notification
         /// </summary>
         public virtual string Remark { get; set; }
 
+
         /// <summary>
         /// </summary>
         public virtual IList<ISender> Senders

@@ -6,24 +6,32 @@ define(function (require) {
         model = avalon.define("editTemp", function (vm) {
             vm.Name = "";
             vm.Remark = "";
-            vm.Contents = {}; //key is language, value please refer vm.content;
+            vm.Contents = [];
             vm.content = { //current editing content.
                 Value: "",
                 Subject: "",
                 Language: ""
             };
+
             vm.Language = "";
             vm.$watch("Language", function (newValue) {
-                var content = model.Contents[newValue];
-                if (!content) {
+                var content = null;
+                for (var i = 0; i < vm.Contents.length; i++) {
+                    if (vm.Contents[i].Language == newValue) {
+                        content = vm.Contents[i];
+                        vm.content = vm.Contents[i];
+                        break;
+                    }
+                }
+                if (content == null) {
                     content = {
                         Value: "",
-                        Subject: "",
+                        Name: "",
                         Language: newValue
-                    }
-                    model.Contents[newValue] = content;
+                    };
+                    vm.Contents.push(content);
                 }
-                vm.content = content;
+
                 editor.setData(content.Value);
             });
         });
@@ -31,15 +39,13 @@ define(function (require) {
     }
     function Init(template, editor) {
 
-     
         model.Name = template.Name;
         model.Remark = template.Remark;
         model.Contents = template.Contents;
-        for (var key in template.Contents) {
-            console.log(key);
-            model.Language = key;
-            break;
+        if (template.Contents.length != 0) {
+            model.Language = template.Contents[0].Language;
         }
+
 
         editor.on("blur", function () {
             if (model.content.Subject != "") {
@@ -51,15 +57,11 @@ define(function (require) {
             success: function (rdata) {
                 alert(rdata.success ? "Save success." : rdata.message);
             },
-            before: function (postData) {
-                postData.Contents = [];
-                for (var language in model.Contents) {
-                    console.log(language);
-                    var content = model.Contents[language];
-                    if (content && content.Subject != "" && content.Value != "") {
-                        postData.Contents.push(content);
-                    }
-                }
+            done: function () {
+                $("#subMitData").prop('disabled', false);
+            },
+            before: function () {
+                $("#subMitData").prop('disabled', true);
             }
         });
 

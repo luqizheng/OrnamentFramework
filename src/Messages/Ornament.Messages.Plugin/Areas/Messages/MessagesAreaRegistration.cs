@@ -30,7 +30,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
             helper.RegistScripts("Scripts/News");
             helper.RegistScripts("Scripts/NewsType");
-            helper.RegistScripts("Scripts/NotifyType");
             helper.RegistScripts("Scripts/Template");
             helper.RegistScripts("Scripts/Config");
 

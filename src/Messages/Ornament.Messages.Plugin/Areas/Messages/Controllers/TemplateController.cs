@@ -40,12 +40,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pageIndex,
                 pageSize, out total);
             var array = from temp in result
-                        select new
-                        {
-                            temp.Id,
-                            temp.Name,
-                            temp.Remark
-                        };
+                select new
+                {
+                    temp.Id,
+                    temp.Name,
+                    temp.Remark
+                };
             return Json(new
             {
                 total,
@@ -59,7 +59,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             ParentKey = "templates")]
         public ActionResult Create()
         {
-            return View();
+            return View("Edit", new MessageTemplateModel());
         }
 
         //
@@ -101,16 +101,20 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         [HttpPost, ValidateAntiForgeryToken, ValidateInput(false), ValidateAjax]
         public ActionResult Save(MessageTemplateModel model)
         {
-            if (ModelState.IsValid && false)
+            if (ModelState.IsValid)
             {
                 model.Save(_daoFactory.MessageTemplateDao);
                 if (Request.IsAjaxRequest())
                 {
-                    return Json(new { success = true });
+                    return Json(new {success = true});
                 }
                 return RedirectToAction("Index", model);
             }
-            return Json(new { success = false });
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new {success = false, message = "Fail to save."});
+            }
+            return View("Edit", model);
         }
 
         //
@@ -120,7 +124,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
