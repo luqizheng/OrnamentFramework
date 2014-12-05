@@ -219,4 +219,7 @@
   <data name="alertPassword_CharError" xml:space="preserve">
     <value>Password must be at Least one letter, number or symbol, and within 8 to 30 characters.</value>
   </data>
+  <data name="phone" xml:space="preserve">
+    <value>Please input phone in correct format</value>
+  </data>
 </root>

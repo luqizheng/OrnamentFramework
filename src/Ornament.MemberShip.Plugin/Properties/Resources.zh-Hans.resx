@@ -244,4 +244,7 @@
   <data name="alertMsg_Confirm_Password_Not_Equal_New_password" xml:space="preserve">
     <value>再一次密码和新密码不一样</value>
   </data>
+  <data name="phone" xml:space="preserve">
+    <value>请输入正确的电话号码</value>
+  </data>
 </root>

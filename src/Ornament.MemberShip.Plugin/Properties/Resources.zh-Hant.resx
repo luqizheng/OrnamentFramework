@@ -196,4 +196,7 @@
   <data name="VerifyCode" xml:space="preserve">
     <value>驗證碼</value>
   </data>
+  <data name="phone" xml:space="preserve">
+    <value>請輸入正確的電話號碼</value>
+  </data>
 </root>
