@@ -87,7 +87,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships.Partials
         /// </summary>
         [UIHint("String")]
         [Display(Name = "Phone", ResourceType = typeof(Resources))]
-        [RegularExpression(@"\d*",ErrorMessageResourceName = "phone",ErrorMessageResourceType = typeof(Resources))]
+        [RegularExpression(@"\d*",ErrorMessageResourceName = "phone",ErrorMessageResourceType = typeof(Ornament.MemberShip.Plugin.Properties.Resources))]
         public string Phone
         {
             get { return _phone; }
