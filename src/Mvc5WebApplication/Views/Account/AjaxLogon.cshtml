@@ -35,23 +35,7 @@
             </fieldset>
         </form>
     </div>
-    <script type="text/javascript">
-        require(["vaform"], function (vaform) {
-            $("#login-ajax-form").vaform({
-                success: function (data) {
-                    if (data) {
-                        location = location;
-                    } else {
-                        alert('login faile');
-                    }
-                }
-            });
-            $("#login-submit").click(function() {
-                $("#login-ajax-form").submit();
-            })
-
-        })
-    </script>
+  
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-primary" id="login-submit">

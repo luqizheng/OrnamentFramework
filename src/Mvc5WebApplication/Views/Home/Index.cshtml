@@ -9,12 +9,12 @@
     <title>SmartAdmin (AJAX)</title>
     <meta name="description" content="">
     <meta name="author" content="">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     @Scripts.Render("~/js/avalon")
     <script type="text/javascript"> avalon.config({ loader: false }) </script>
     <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
-    <script src="~/Scripts/require.js" data-main="/Home/Config"></script>
+    <script src="/Scripts/require.js" data-main="scripts/config.js"></script>
+  
     <!-- #CSS Links -->
     <!-- Basic Styles -->
     @Styles.Render("~/css/bootstrap.min.css")
@@ -446,7 +446,7 @@
     <!-- MAIN APP JS FILE -->
     @Scripts.Render("/Scripts/app.js", "/Scripts/util.js")
 
-
+    
 
 
 </body>

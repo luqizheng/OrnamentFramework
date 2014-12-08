@@ -14,7 +14,7 @@ namespace WebApplication
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
                 name: "Requirejs",
-                url: "Home/config.js",
+                url: "scripts/config.js",
                 defaults: new { controller = "Home", action = "config"}
             );
             routes.MapRoute(

@@ -1,7 +1,7 @@
 ﻿@using System.Web.Optimization
 
 require.config({
-    baseUrl: "/scripts",
+    
     paths: {
         json2: "@Scripts.Url("~/scripts/json2")",
         form:"@Scripts.Url("~/scripts/plugin/jquery-form/jquery-form.min")",
@@ -9,20 +9,45 @@ require.config({
         nestable:"@Scripts.Url("~/scripts/plugin/jquery-nestable/jquery.nestable.min")",
         fastclick:"@Scripts.Url("~/scripts/plugin/fastclick/fastclick")",
         sparkline:"@Scripts.Url("/scripts/plugin/sparkline/jquery.sparkline.min")",
-        vaform:"/scripts/plugin/vaForm/vaForm",
-        wizard:"/scripts/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min",
-socketio:"https://cdn.socket.io/socket.io-1.1.0",
-ckeditor:"/scripts/plugin/ckeditor/ckeditor",
-text:"/scripts/text"
-@*
-    avalon plugin
-*@
-pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
-chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")"
-
-
-    },
-    waitSeconds: 15
+        vaform:"plugin/vaForm/vaForm",
+        wizard:"plugin/bootstrap-wizard/jquery.bootstrap.wizard.min",
+        socketio:"https://cdn.socket.io/socket.io-1.1.0",
+        ckeditor:"/scripts/plugin/ckeditor/ckeditor",
+        @*avalon plugin*@
+        pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
+        chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")"
+    }
+    
 });
+
+//Chat's
+
+require(['/Scripts/avalons/chat/chat.js'], function () {
+    /*avalon.define("chatList", function (vm) {
+        vm.$chatOpts = {
+            host: 'http://location:3000'
+        };
+    });
+    avalon.scan();*/
+});
+
+//ajax login
+require(['vaform'], function () {
+    
+    $("#login-ajax-form").vaform({
+        success: function (data) {
+            if (data) {
+                location = location;
+            } else {
+                alert('login faile');
+            }
+        }
+    });
+    $("#login-submit").click(function () {
+        $("#login-ajax-form").submit();
+    })
+
+})
+
 
 
