@@ -1,26 +1,32 @@
 ﻿@model Ornament.Messages.Notification.Senders.Sender
-<form>
+<form ms-controller="editSender">
     <div class="form-group">
         @Html.LabelFor(s=>s.Name)
-        @Html.EditorFor(s=>s.Name)
+        @Html.TextBoxFor(s=>s.Name,new Dictionary<string, object>()
+        {
+            {"ms-duplex","Name"}
+        })
         @Html.ValidationMessageFor(s=>s.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(s=>s.Remarks)
-        @Html.EditorFor(s=>s.Remarks)
+        @Html.TextBoxFor(s=>s.Remarks,new Dictionary<string, object>()
+        {
+            {"ms-duplex","Remarks"}
+        })
         @Html.ValidationMessageFor(s=>s.Remarks)
     </div>
     <div class="form-group">
         <label for="SenderType">Sender Type:</label>
-        <select id="SenderType" name="SenderType">
-            <option value="Email" selected="selected">Email</option>
-            <option value="Client">Client</option>
+        <select id="SenderType" name="SenderType" ms-duplex="senderType">
+            <option value="email" selected="selected">Email</option>
+            <option value="client">Client</option>
         </select>
     </div>
-    <div id="emailSetting">
+    <div ms-if="email">
         @Html.Partial("_email")
     </div>
-    <div id="clientSetting">
+    <div ms-if="client">
         @Html.Partial("_client")
     </div>
     <div class="form-actions">
@@ -30,3 +36,12 @@
         </button>
     </div>
 </form>
+
+@section scripts{
+    <script type="text/javascript">
+        require("/Messages/Scripts/Sender/Edit.js",function(main) {
+            main.init();
+            clearPageVariable.push(main.clear);
+        })
+    </script>
+}

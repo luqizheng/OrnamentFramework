@@ -145,6 +145,7 @@
     <EmbeddedResource Include="Scripts\News\Edit.js" />
     <EmbeddedResource Include="Scripts\Template\Create.js" />
     <EmbeddedResource Include="Scripts\Config\Index.js" />
+    <EmbeddedResource Include="Scripts\Sender\Edit.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

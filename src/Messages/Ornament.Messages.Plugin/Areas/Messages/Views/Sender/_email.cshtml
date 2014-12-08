@@ -1,2 +1,39 @@
 ﻿
 @model Ornament.Messages.Notification.Senders.EmailSender
+
+<div class="form-group">
+    @Html.LabelFor(s=>s.Account)
+      @Html.TextBoxFor(s=>s.Account,new Dictionary<string, object>()
+        {
+            {"ms-duplex","Email.Account"}
+        })
+    @Html.ValidationMessageFor(s=>s.Account)
+</div>
+    
+<div class="form-group">
+    @Html.LabelFor(s=>s.Password)
+    @Html.TextBoxFor(s=>s.Password,new Dictionary<string, object>()
+        {
+            {"ms-duplex","Email.Password"}
+        })
+    @Html.ValidationMessageFor(s=>s.Password)
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(s=>s.SmtpServer)
+    @Html.TextBoxFor(s=>s.SmtpServer,new Dictionary<string, object>()
+        {
+            {"ms-duplex","Email.SmtpServer"}
+        })
+    @Html.ValidationMessageFor(s=>s.SmtpServer)
+</div>
+
+    
+<div class="form-group">
+    @Html.LabelFor(s=>s.Port)
+    @Html.TextBoxFor(s=>s.Port,new Dictionary<string, object>()
+        {
+            {"ms-duplex","Name"}
+        })
+    @Html.ValidationMessageFor(s=>s.Port)
+</div>

@@ -31,6 +31,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             helper.RegistScripts("Scripts/News");
             helper.RegistScripts("Scripts/NewsType");
             helper.RegistScripts("Scripts/Template");
+            helper.RegistScripts("Scripts/Sender");
             helper.RegistScripts("Scripts/Config");
 
             context.MapRoute(
