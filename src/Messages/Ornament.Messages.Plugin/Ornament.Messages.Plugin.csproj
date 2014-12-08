@@ -171,6 +171,10 @@
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MemberShip\Ornament.MemberShip.Web.Plugin\Ornament.MemberShip.Web.Plugin.csproj">
+      <Project>{89e3b336-7aeb-4804-af20-f6eefac05b8e}</Project>
+      <Name>Ornament.MemberShip.Web.Plugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>

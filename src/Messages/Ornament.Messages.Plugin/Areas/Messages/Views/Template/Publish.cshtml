@@ -1,7 +1,7 @@
 ﻿@using System.Net.Mime
 @using Ornament
 @using Ornament.Web.UI.Theme
-@model dynamic
+@model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.NotifyPublish
 
 @{
     ViewBag.Title = "Publish Notify";
@@ -14,23 +14,36 @@
 @using (var panel = Html.Panel("col-6"))
 {
     @panel.Header(@<text>
-                       <h4>Choice Receiver</h4>
-                   </text>)
+    <h2>Choice Receiver</h2>
+    </text>)
     @panel.Body(@<text>
-                     <form class="form-horizontal">
-                         <div class="form-group">
-                             @Html.LabelFor()
-                         </div>
-                     </form>
-                   </text>)
+    <form class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(s => s.Orgs)
+            @Html.EditorForOrg(s => s.Orgs)
+            @Html.ValidationMessageFor(s => s.Orgs)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.UserGroups)
+            @Html.EditorForUserGroups(s => s.UserGroups)
+            @Html.ValidationMessageFor(s => s.UserGroups)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.Users)
+            @Html.EditorForUserGroups(s => s.Users)
+            @Html.ValidationMessageFor(s => s.Users)
+        </div>
+    </form>
+    </text>)
 }
 @using (var panel = Html.Panel("col-6"))
 {
     @panel.Header(@<text>
-                      <h4>Template Information</h4> 
-                   </text>)
+    <h2>Template Information</h2>
+    </text>)
     @panel.Body(@<text>
-                     
-                 </text>)
+
+    </text>)
     
 }
