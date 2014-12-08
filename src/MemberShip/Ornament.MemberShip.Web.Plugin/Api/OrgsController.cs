@@ -13,11 +13,11 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [Authorize]
     public class OrgsController : ApiController
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public OrgsController(IMemberShipFactory factory)
+        public OrgsController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         // GET api/usersapi
@@ -28,7 +28,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
             
             if (OrnamentContext.MemberShip.HasRight(ResourceSetting.Org, OrgOperator.Read))
             {
-                IOrgDao orgDao = _factory.CreateOrgDao();
+                IOrgDao orgDao = _daoFactory.CreateOrgDao();
                 
                 IEnumerable<Org> result = currentUser.Org == null && currentUser.IsRoot
                     ? orgDao.GetRootOrgs()

@@ -8,18 +8,18 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [Authorize]
     public class UserGroupsController : ApiController
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public UserGroupsController(IMemberShipFactory factory)
+        public UserGroupsController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         // GET api/usersapi
         public IEnumerable<object> Get(string name, int? page)
         {
             int page1 = page ?? 0;
-            IEnumerable<UserGroup> result = _factory.CreateUserGroupDao().Find(name, page1, 10);
+            IEnumerable<UserGroup> result = _daoFactory.CreateUserGroupDao().Find(name, page1, 10);
 
             var c = from user in result
                 select new

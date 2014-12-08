@@ -73,7 +73,7 @@ namespace WebApplication.Controllers
         {
             string errorMessage = null;
             if (!ModelState.IsValid ||
-                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao(),
+                !model.Validate(out errorMessage, OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao(),
                     OrnamentContext.MemberShip.CurrentVerifyCode()))
             {
                 if (errorMessage != null)

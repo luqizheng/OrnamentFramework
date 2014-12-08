@@ -17,11 +17,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
     [Session]
     public class PermissionsController : Controller
     {
-        private readonly IMemberShipFactory _memberShipFactory;
+        private readonly IMemberShipDaoFactory _memberShipDaoFactory;
 
-        public PermissionsController(IMemberShipFactory factory)
+        public PermissionsController(IMemberShipDaoFactory daoFactory)
         {
-            _memberShipFactory = factory;
+            _memberShipDaoFactory = daoFactory;
         }
 
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,permissionListTitle",
@@ -30,7 +30,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
          ResourceAuthorize(PermissionOperator.Read, "Permission")]
         public ActionResult Index()
         {
-            IQueryable<Permission> model = from permission in _memberShipFactory.Permissions
+            IQueryable<Permission> model = from permission in _memberShipDaoFactory.Permissions
                 select permission;
             return View(model);
         }
@@ -42,7 +42,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult Edit(string id)
         {
             //1st step of wizard.
-            Permission permission = _memberShipFactory.CreatePermissionDao().Get(id);
+            Permission permission = _memberShipDaoFactory.CreatePermissionDao().Get(id);
             return View("Permission", permission);
         }
 
@@ -74,16 +74,16 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             Permission permission;
 
             if (!string.IsNullOrEmpty(id))
-                permission = _memberShipFactory.CreatePermissionDao().Get(id);
+                permission = _memberShipDaoFactory.CreatePermissionDao().Get(id);
             else
                 permission = Permission.CreatePermission(resourceDescription.ValueType);
-            IResourceDao dao = _memberShipFactory.CreateResourceDao();
+            IResourceDao dao = _memberShipDaoFactory.CreateResourceDao();
             permission.Name = name;
             permission.Remark = remark;
             permission.Resource = dao.GetResourceByStringId(resourceDescription.ValueType, resourceId);
             permission.Operator = operators;
 
-            _memberShipFactory.CreatePermissionDao().SaveOrUpdate(permission);
+            _memberShipDaoFactory.CreatePermissionDao().SaveOrUpdate(permission);
             return RedirectToAction("Index");
         }
 
@@ -93,7 +93,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
          ResourceAuthorize(PermissionOperator.Delete, "Permission")]
         public ActionResult Delete(string id)
         {
-            IPermissionDao dao = _memberShipFactory.CreatePermissionDao();
+            IPermissionDao dao = _memberShipDaoFactory.CreatePermissionDao();
             Permission permission = dao.Get(id);
             dao.Delete(permission);
             return RedirectToAction("Index");
@@ -112,7 +112,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
             Permission permission =
                 !string.IsNullOrEmpty(permissionId)
-                    ? _memberShipFactory.CreatePermissionDao().Get(permissionId)
+                    ? _memberShipDaoFactory.CreatePermissionDao().Get(permissionId)
                     : Permission.CreatePermission(resourceDescription.ValueType);
             var model = new PermissionResourceSelectModel
             {
@@ -134,7 +134,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             ResourceDescription resourceDescription = OrnamentContext.ResourceManager.Configuration()
                 .Get(id);
-            object res = _memberShipFactory.CreateResourceDao()
+            object res = _memberShipDaoFactory.CreateResourceDao()
                 .GetResourceByStringId(resourceDescription.ValueType, resourceId);
             Type type = OrnamentContext.ResourceManager.GetOperatorType(res);
             SortedDictionary<string, object> operatorKeyMaping = EnumHelper.GetDescriptionList(type);

@@ -8,11 +8,11 @@
 @{
     ViewBag.Title = String.Format(Html.GetEmbededResourceString("AssignTitle"), Model.Name);
     Layout = OrnamentContext.Configuration.Layout();
-    IList<UserGroup> allUserGroups = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao().GetAll();
-    IList<Role> allRoles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
+    IList<UserGroup> allUserGroups = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserGroupDao().GetAll();
+    IList<Role> allRoles = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().GetAll();
 
     IOrderedQueryable<Permission> allPermissions =
-        from a in OrnamentContext.DaoFactory.MemberShipFactory.Permissions
+        from a in OrnamentContext.DaoFactory.MemberShipDaoFactory.Permissions
         orderby a.Name
         select a;
 }

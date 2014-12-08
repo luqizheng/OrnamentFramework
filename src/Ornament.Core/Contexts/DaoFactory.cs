@@ -17,9 +17,9 @@ namespace Ornament.Contexts
             _container = container;
         }
 
-        public IMemberShipFactory MemberShipFactory
+        public IMemberShipDaoFactory MemberShipDaoFactory
         {
-            get { return GetDaoFactory<IMemberShipFactory>(); }
+            get { return GetDaoFactory<IMemberShipDaoFactory>(); }
         }
 
         public IMessageDaoFactory MessageDaoFactory

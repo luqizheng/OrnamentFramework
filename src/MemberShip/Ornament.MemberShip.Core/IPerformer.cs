@@ -33,8 +33,8 @@ namespace Ornament.MemberShip
         /// <summary>
         ///     Gets all users in this Perforomers.
         /// </summary>
-        /// <param name="memberShipFactory"></param>
+        /// <param name="memberShipDaoFactory"></param>
         /// <returns></returns>
-        IList<User> GetUsers(IMemberShipFactory memberShipFactory);
+        IList<User> GetUsers(IMemberShipDaoFactory memberShipDaoFactory);
     }
 }

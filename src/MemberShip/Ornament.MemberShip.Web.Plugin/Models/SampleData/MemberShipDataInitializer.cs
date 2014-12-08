@@ -33,7 +33,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         public static Permission CreatePermission<T>(T resObj, string permisionName, string remark, Enum eEnum)
         {
-            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
+            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreatePermissionDao();
 
             Permission permission = dao.GetPermission(permisionName) ?? new GenericPermission<T>(resObj)
             {
@@ -48,7 +48,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
         public static User CreateUser(string username, string password, string email
            , string question, string answord)
         {
-            IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+            IUserDao userDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao();
             User user = userDao.GetByLoginId(username);
             if (user == null)
             {
@@ -61,7 +61,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         public static UserGroup CreateUserGroup(string name)
         {
-            IUserGroupDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserGroupDao();
+            IUserGroupDao dao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserGroupDao();
             UserGroup ug = dao.GetByName(name);
             if (ug != null)
             {
@@ -72,7 +72,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         public static Role CreateRole(string name, string remark)
         {
-            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao();
 
             Role role = roleDao.GetByName(name) ?? new Role(name) { Remarks = remark };
             roleDao.SaveOrUpdate(role);
@@ -82,7 +82,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         public static Org CreateOrg(string name, string remark, Org parent)
         {
-            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
+            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateOrgDao();
             Org org = orgDao.GetByName(name, parent) ?? new Org(name) { Remarks = remark };
             parent.Childs.Add(org);
             orgDao.SaveOrUpdate(org);
@@ -91,7 +91,7 @@ namespace Ornament.MemberShip.Plugin.Models.SampleData
 
         public static Org CreateRootOrg(string name, string remark)
         {
-            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateOrgDao();
+            IOrgDao orgDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateOrgDao();
             Org org = orgDao.GetRootOrgBy(name) ?? new Org(name) { Remarks = remark };
             orgDao.SaveOrUpdate(org);
             return org;

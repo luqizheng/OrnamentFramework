@@ -39,7 +39,7 @@ namespace Ornament.Web
 
         protected Role GetRole(params Permission[] permissions)
         {
-            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+            IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao();
             Role role = roleDao.GetByName("NotifyTemplateManager") ?? new Role("NotifyTemplateManager");
             if (role.IsTransient())
             {
@@ -54,7 +54,7 @@ namespace Ornament.Web
 
         private Permission CreatePermission<T>(T resObj, string permisionName, string remark, Enum eEnum)
         {
-            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
+            IPermissionDao dao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreatePermissionDao();
 
             Permission permission = dao.GetPermission(permisionName) ?? new GenericPermission<T>(resObj)
             {

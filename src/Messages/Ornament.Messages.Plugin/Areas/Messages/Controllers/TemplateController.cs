@@ -62,26 +62,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return View("Edit", new MessageTemplateModel());
         }
 
-        //
-        // POST: /Messages/Template/Create
-
-        [HttpPost, ValidateAntiForgeryToken, ValidateInput(false)]
-        public ActionResult Create(MessageTemplateModel model)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    model.Save(_daoFactory.MessageTemplateDao);
-                    return RedirectToAction("Index");
-                }
-                return View(model);
-            }
-            catch
-            {
-                return View(model);
-            }
-        }
 
         //
         // GET: /Messages/Template/Edit/5
@@ -115,6 +95,16 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                 return Json(new {success = false, message = "Fail to save."});
             }
             return View("Edit", model);
+        }
+
+        public ActionResult Publish()
+        {
+            return View();
+        }
+
+        public ActionResult Get(string id)
+        {
+            return Json(_daoFactory.MessageTemplateDao.Get(id), JsonRequestBehavior.AllowGet);
         }
 
         //

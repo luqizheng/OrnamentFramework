@@ -45,9 +45,9 @@ namespace Ornament.MemberShip
             return PerformerType.UserGroup.ToString();
         }
 
-        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+        protected override IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            return memberShipFactory.CreateUserDao().GetUsers(this);
+            return memberShipDaoFactory.CreateUserDao().GetUsers(this);
         }
 
         public override IEnumerable<Role> GetAllRoles()

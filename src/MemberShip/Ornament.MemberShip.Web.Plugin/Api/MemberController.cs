@@ -13,17 +13,17 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [ApiSession]
     public class MemberController : ApiController
     {
-        private readonly IMemberShipFactory _memberShipFactory;
+        private readonly IMemberShipDaoFactory _memberShipDaoFactory;
 
-        public MemberController(IMemberShipFactory memberShipFactory)
+        public MemberController(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            _memberShipFactory = memberShipFactory;
+            _memberShipDaoFactory = memberShipDaoFactory;
         }
 
         [HttpPost]
         public bool ChangePassword([FromBody] ChangePasswordModel password)
         {
-            return password.ChangePassword(OrnamentContext.MemberShip.CurrentUser(), _memberShipFactory.CreateUserDao());
+            return password.ChangePassword(OrnamentContext.MemberShip.CurrentUser(), _memberShipDaoFactory.CreateUserDao());
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
             {
                 User user = OrnamentContext.MemberShip.CurrentUser();
                 basicInfo.UpdateOn(user);
-                _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+                _memberShipDaoFactory.CreateUserDao().SaveOrUpdate(user);
                 OrnamentContext.MemberShip.SwitchLanguage(user.GetLanguage());
             }
             else
@@ -60,7 +60,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         {
             var model = new VerifyEmailModel();
             model.Id = OrnamentContext.MemberShip.CurrentUser().Id;
-            model.Send(_memberShipFactory);
+            model.Send(_memberShipDaoFactory);
             return true;
         }
     }

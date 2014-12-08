@@ -13,13 +13,13 @@ namespace Ornament.Files.Plugin.Areas.Files.Controllers
     [Authorize]
     public class FileController : Controller
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
         private Connector _connector;
 
-        public FileController(IMemberShipFactory factory)
+        public FileController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         public Connector Connector

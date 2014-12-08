@@ -18,7 +18,7 @@ namespace Ornament
         {
             return resourceType == typeof (string)
                        ? resourceId
-                       : OrnamentContext.DaoFactory.MemberShipFactory.CreateResourceDao().Get(resourceType, resourceId);
+                       : OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateResourceDao().Get(resourceType, resourceId);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Ornament
         {
             if (resourceType == typeof (string))
                 return resourceId;
-            return OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>().CreateResourceDao().Get(resourceType, resourceId);
+            return OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipDaoFactory>().CreateResourceDao().Get(resourceType, resourceId);
         }
     }
 }

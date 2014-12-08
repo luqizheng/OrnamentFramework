@@ -8,7 +8,7 @@
     
     IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
 
-    IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
+    IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipDaoFactory>()
         .CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
     

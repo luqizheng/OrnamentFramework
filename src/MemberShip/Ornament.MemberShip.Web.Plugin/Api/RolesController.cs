@@ -9,11 +9,11 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [Authorize]
     public class RolesController : ApiController
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public RolesController(IMemberShipFactory factory)
+        public RolesController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         // GET api/usersapi
@@ -22,7 +22,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         {
             int page1 = page ?? 0;
             var user = OrnamentContext.MemberShip.CurrentUser();
-            IList<Role> result = _factory.CreateRoleDao().Find("%" + name + "%", page1, 10, user);
+            IList<Role> result = _daoFactory.CreateRoleDao().Find("%" + name + "%", page1, 10, user);
             var c = from role in result
                     select new
                     {

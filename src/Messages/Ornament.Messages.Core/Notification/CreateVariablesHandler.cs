@@ -5,7 +5,7 @@ using Qi.Text;
 
 namespace Ornament.Messages.Notification
 {
-    public delegate Dictionary<string, string> CreateVariablesHandler(User reader);
+    public delegate IDictionary<string, string> CreateVariablesHandler(User reader);
 
   
 }

@@ -6,7 +6,7 @@
 @model Ornament.MemberShip.UserGroup[]
 @{
     string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    IList<UserGroup> usergroups = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
+    IList<UserGroup> usergroups = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipDaoFactory>()
        .CreateResourceDao()
        .FindResources<UserGroup>(OrnamentContext.MemberShip.CurrentUser(), UserGroupOperator.Assign);
 

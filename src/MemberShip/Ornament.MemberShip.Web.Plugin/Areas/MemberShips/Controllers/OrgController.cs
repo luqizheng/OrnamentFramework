@@ -13,11 +13,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
     [Session]
     public class OrgController : Controller
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public OrgController(IMemberShipFactory factory)
+        public OrgController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         //
@@ -32,8 +32,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 User user = OrnamentContext.MemberShip.CurrentUser();
                 bool isOrgUser = user.LoginId != MemberShip.User.AdminLoginId && user.Org != null;
                 IEnumerable<Org> orgs = isOrgUser
-                    ? _factory.CreateOrgDao().GetSubOrgs(OrnamentContext.MemberShip.CurrentUser().Org)
-                    : _factory.CreateOrgDao().GetRootOrgs();
+                    ? _daoFactory.CreateOrgDao().GetSubOrgs(OrnamentContext.MemberShip.CurrentUser().Org)
+                    : _daoFactory.CreateOrgDao().GetRootOrgs();
                 ViewData["Orgs"] = orgs;
                 if (isOrgUser)
                 {
@@ -42,7 +42,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
                 return View((Org) null);
             }
-            Org org = _factory.CreateOrgDao().Get(id);
+            Org org = _daoFactory.CreateOrgDao().Get(id);
             ViewData["Orgs"] = org.Childs;
             return View(org);
         }
@@ -55,9 +55,9 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             , ParentKey = "Org")]
         public ActionResult Details(string id)
         {
-            IOrgDao orgDao = _factory.CreateOrgDao();
+            IOrgDao orgDao = _daoFactory.CreateOrgDao();
             Org org = orgDao.Get(id);
-            IList<User> users = _factory.CreateUserDao().GetUsers(org);
+            IList<User> users = _daoFactory.CreateUserDao().GetUsers(org);
             ViewData["ParentOrg"] = org.Parent;
             return View(new OrgDetailsModel(org, users));
         }
@@ -68,7 +68,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             , ParentKey = "Org")]
         public ActionResult Edit(string id)
         {
-            IOrgDao orgDao = _factory.CreateOrgDao();
+            IOrgDao orgDao = _daoFactory.CreateOrgDao();
             Org org = orgDao.Get(id);
             ViewData["ParentOrg"] = org.Parent;
             return View(new OrgModel(org));
@@ -84,7 +84,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             var a = new OrgModel();
             if (parentId != null)
             {
-                a.Parent = _factory.CreateOrgDao().Get(parentId);
+                a.Parent = _daoFactory.CreateOrgDao().Get(parentId);
             }
             return View(a);
         }
@@ -92,7 +92,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [ResourceAuthorize(OrgOperator.Delete, "Org")]
         public ActionResult DeleteDetails(string id)
         {
-            IOrgDao orgDao = _factory.CreateOrgDao();
+            IOrgDao orgDao = _daoFactory.CreateOrgDao();
             Org org = orgDao.Get(id);
             return View(org);
         }
@@ -101,7 +101,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [HttpPost]
         public ActionResult Delete(string id, string parentId)
         {
-            IOrgDao orgDao = _factory.CreateOrgDao();
+            IOrgDao orgDao = _daoFactory.CreateOrgDao();
             Org org = orgDao.Get(id);
             orgDao.Delete(org);
             return RedirectToAction("Index", new {id = parentId});
@@ -116,7 +116,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             if (ModelState.IsValid)
             {
-                IOrgDao orgDao = _factory.CreateOrgDao();
+                IOrgDao orgDao = _daoFactory.CreateOrgDao();
                 org.Save(orgDao);
                 if (org.Parent == null)
                 {

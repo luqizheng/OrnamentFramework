@@ -19,20 +19,20 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
     [Session]
     public class RoleController : Controller
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
         private readonly IRoleDao _roleDao;
 
-        public RoleController(IMemberShipFactory factory)
+        public RoleController(IMemberShipDaoFactory daoFactory)
         {
-            _roleDao = factory.CreateRoleDao();
-            _factory = factory;
+            _roleDao = daoFactory.CreateRoleDao();
+            _daoFactory = daoFactory;
         }
 
         [HttpGet]
         public JsonResult NotDuplicate(string name, string id)
         {
             name = Request.QueryString[0];
-            return Json(_factory.CreateRoleDao().Count(name, id) == 0, JsonRequestBehavior.AllowGet);
+            return Json(_daoFactory.CreateRoleDao().Count(name, id) == 0, JsonRequestBehavior.AllowGet);
         }
 
         [ResourceAuthorize(RoleOperator.Read, "Role"),
@@ -71,7 +71,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         ]
         public ActionResult Delete(string id)
         {
-            IList<IPerformer> a = _factory.CreateMemberDao().Find(id);
+            IList<IPerformer> a = _daoFactory.CreateMemberDao().Find(id);
             ViewData["members"] = a;
             return View(_roleDao.Get(id));
         }
@@ -79,7 +79,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [HttpDelete, ResourceAuthorize(RoleOperator.Delete, "Role")]
         public ActionResult Delete(Role role)
         {
-            IList<IPerformer> a = _factory.CreateMemberDao().Find(role.Id);
+            IList<IPerformer> a = _daoFactory.CreateMemberDao().Find(role.Id);
             foreach (IPerformer member in a)
             {
                 member.Roles.Remove(role);
@@ -99,13 +99,13 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
           
 
             IPermissionDao permissionDao =
-                OrnamentContext.DaoFactory.MemberShipFactory.CreatePermissionDao();
+                OrnamentContext.DaoFactory.MemberShipDaoFactory.CreatePermissionDao();
             role.Permissions.Clear();
             foreach (string id in permissionIds)
             {
                 role.Permissions.Add(permissionDao.Load(id));
             }
-            _factory.CreateRoleDao().SaveOrUpdate(role);
+            _daoFactory.CreateRoleDao().SaveOrUpdate(role);
             return Json(new { success = true,Id=role.Id });
         }
     }

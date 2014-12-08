@@ -92,7 +92,7 @@
     <Compile Include="Dao\IUserSecurityTokenDao.cs" />
     <Compile Include="PasswordFormatException.cs" />
     <Compile Include="Dao\IPerformerDao.cs" />
-    <Compile Include="Dao\IMemberShipFactory.cs" />
+    <Compile Include="Dao\IMemberShipDaoFactory.cs" />
     <Compile Include="Dao\IOrgDao.cs" />
     <Compile Include="IPerformer.cs" />
     <Compile Include="Dao\IResourceDao.cs" />

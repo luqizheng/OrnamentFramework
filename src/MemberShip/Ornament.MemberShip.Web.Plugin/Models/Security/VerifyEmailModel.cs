@@ -31,9 +31,9 @@ namespace Ornament.MemberShip.Plugin.Models.Security
         /// </summary>
         /// <param name="loginUser"></param>
         /// <param name="token"></param>
-        /// <param name="daoFactory"></param>
+        /// <param name="daoDaoFactory"></param>
         /// <returns></returns>
-        public VerifyResult Verify(User loginUser, string token, IMemberShipFactory daoFactory)
+        public VerifyResult Verify(User loginUser, string token, IMemberShipDaoFactory daoDaoFactory)
         {
             if (loginUser != _emailVerifier.Account)
             {
@@ -41,9 +41,9 @@ namespace Ornament.MemberShip.Plugin.Models.Security
             }
 
             if (_emailVerifier.Type == VerifyType.Email
-                && _emailVerifier.Verify(token, daoFactory) == VerifyResult.Success)
+                && _emailVerifier.Verify(token, daoDaoFactory) == VerifyResult.Success)
             {
-                daoFactory.CreateUserDao().SaveOrUpdate(loginUser);
+                daoDaoFactory.CreateUserDao().SaveOrUpdate(loginUser);
                 return VerifyResult.Success;
             }
 
@@ -52,28 +52,28 @@ namespace Ornament.MemberShip.Plugin.Models.Security
 
         /// <summary>
         /// </summary>
-        /// <param name="daoFactory"></param>
+        /// <param name="daoDaoFactory"></param>
         /// <returns></returns>
-        public bool Send(IMemberShipFactory daoFactory)
+        public bool Send(IMemberShipDaoFactory daoDaoFactory)
         {
-            if (daoFactory == null) throw new ArgumentNullException("daoFactory");
+            if (daoDaoFactory == null) throw new ArgumentNullException("daoDaoFactory");
             if (String.IsNullOrEmpty(Id))
                 throw new ArgumentException("Id", "Id is empty");
-            User myUsers = daoFactory.CreateUserDao().Get(Id);
+            User myUsers = daoDaoFactory.CreateUserDao().Get(Id);
             if (myUsers == null)
             {
                 throw new ArgumentException("Id", String.Format("can not find any use with id={0}", Id));
             }
-            EmailVerifier token = myUsers.Contact.VerifyEmail(30, daoFactory);
+            EmailVerifier token = myUsers.Contact.VerifyEmail(30, daoDaoFactory);
 
-            var deleage = new CreateVariablesHandler(user => new Dictionary<string, string>
+            var a=new Dictionary<string, string>
             {
-                {"name", user.Name},
+                {"name", myUsers.Name},
                 {"parameters", token.CreateQueryString()}
-            });
-            OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress.Publish(daoFactory, deleage, myUsers);
+            };
+            OrnamentContext.Configuration.MessagesConfig.VerifyEmailAddress.Send(daoDaoFactory, a, myUsers);
 
-            daoFactory.CreateUserDao().SaveOrUpdate(myUsers);
+            daoDaoFactory.CreateUserDao().SaveOrUpdate(myUsers);
             return true;
         }
     }

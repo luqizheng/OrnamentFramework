@@ -10,17 +10,17 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [ApiSession, Authorize]
     public class OrgController : ApiController
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public OrgController(IMemberShipFactory factory)
+        public OrgController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         [HttpGet]
         public object Get(string id)
         {
-            IOrgDao dao = _factory.CreateOrgDao();
+            IOrgDao dao = _daoFactory.CreateOrgDao();
             Org org = dao.Get(id);
             object result;
             if (org.Parent == null)
@@ -60,7 +60,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         [HttpPost]
         public object Save(OrgModel model)
         {
-            Org org = model.Save(_factory.CreateOrgDao());
+            Org org = model.Save(_daoFactory.CreateOrgDao());
             object result;
             if (org.Parent == null)
             {
@@ -97,8 +97,8 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         [HttpDelete]
         public object Delete(string id)
         {
-            var org = _factory.CreateOrgDao().Get(id);
-            _factory.CreateOrgDao().Delete(org);
+            var org = _daoFactory.CreateOrgDao().Get(id);
+            _daoFactory.CreateOrgDao().Delete(org);
             return new
             {
                 Success = true

@@ -86,11 +86,11 @@ namespace Ornament.MemberShip
             ///     Veirfy Email
             /// </summary>
             /// <param name="expireMiniutes"></param>
-            /// <param name="daoFactory"></param>
+            /// <param name="daoDaoFactory"></param>
             /// <returns></returns>
-            public virtual EmailVerifier VerifyEmail(int expireMiniutes, IMemberShipFactory daoFactory)
+            public virtual EmailVerifier VerifyEmail(int expireMiniutes, IMemberShipDaoFactory daoDaoFactory)
             {
-                IUserSecurityTokenDao dao = daoFactory.CreateEmailVerifierDao();
+                IUserSecurityTokenDao dao = daoDaoFactory.CreateEmailVerifierDao();
                 var result = new EmailVerifier(User, expireMiniutes, VerifyType.Email);
                 dao.SaveOrUpdate(result);
                 EmailVerified = false;

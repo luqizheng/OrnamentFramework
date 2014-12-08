@@ -13,17 +13,17 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [ApiSession]
     public class SecurityController : ApiController
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="factory"></param>
-        public SecurityController(IMemberShipFactory factory)
+        /// <param name="daoFactory"></param>
+        public SecurityController(IMemberShipDaoFactory daoFactory)
         {
-            if (factory == null)
-                throw new ArgumentNullException("factory");
-            _factory = factory;
+            if (daoFactory == null)
+                throw new ArgumentNullException("daoFactory");
+            _daoFactory = daoFactory;
         }
 
         // Post: /Secrity/
@@ -33,14 +33,14 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         /// <returns></returns>
         public object RetrievePassword([FromBody] ForgetPasswordModel forgetPasswordModel)
         {
-            forgetPasswordModel.Retrieve(_factory);
+            forgetPasswordModel.Retrieve(_daoFactory);
             return new { success = true };
         }
 
         [HttpGet]
         public bool VerifyEmail(VerifyEmailModel model)
         {
-            model.Send(_factory);
+            model.Send(_daoFactory);
             return true;
         }
 

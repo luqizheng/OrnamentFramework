@@ -1,6 +1,6 @@
 using System;
 
-namespace Ornament.Web.PortableAreas.InputBuilder.ViewEngine
+namespace Ornament.Web.InputBuilder.ViewEngine
 {
     public class RenderInputBuilderException : Exception
     {

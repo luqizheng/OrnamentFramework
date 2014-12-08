@@ -31,24 +31,24 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
 
         /// <summary>
         /// </summary>
-        /// <param name="daoFactory"></param>
-        public RetrievePasswordResult Retrieve(IMemberShipFactory daoFactory)
+        /// <param name="daoDaoFactory"></param>
+        public RetrievePasswordResult Retrieve(IMemberShipDaoFactory daoDaoFactory)
         {
-            User user = daoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
-                        daoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
+            User user = daoDaoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
+                        daoDaoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
             if (user == null)
             {
                 return RetrievePasswordResult.NotExistAccountOrEmail;
             }
 
-            EmailVerifier emailToken = user.Security.ResetPassword(daoFactory, 50);
+            EmailVerifier emailToken = user.Security.ResetPassword(daoDaoFactory, 50);
             var direct = new Dictionary<string, string>
             {
                 {"name", user.Name},
                 {"loginId", user.LoginId},
                 {"parameters", emailToken.CreateQueryString()}
             };
-            OrnamentContext.Configuration.MessagesConfig.RetrivePassword.Publish(daoFactory, direct, user);
+            OrnamentContext.Configuration.MessagesConfig.RetrivePassword.Send(daoDaoFactory, direct, user);
             return RetrievePasswordResult.Success;
         }
     }

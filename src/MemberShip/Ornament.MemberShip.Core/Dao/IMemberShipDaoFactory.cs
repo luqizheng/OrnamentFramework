@@ -4,7 +4,7 @@ using Ornament.MemberShip.Security;
 
 namespace Ornament.MemberShip.Dao
 {
-    public interface IMemberShipFactory
+    public interface IMemberShipDaoFactory
     {
         IQueryable<User> Users { get; }
 

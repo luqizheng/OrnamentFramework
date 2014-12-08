@@ -119,7 +119,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PerformerDao.cs" />
-    <Compile Include="MemberShipFactory.cs" />
+    <Compile Include="MemberShipDaoFactory.cs" />
     <Compile Include="OrgDao.cs" />
     <Compile Include="ProfileDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

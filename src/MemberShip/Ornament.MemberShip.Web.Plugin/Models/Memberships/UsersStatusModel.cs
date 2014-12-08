@@ -6,15 +6,15 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
 {
     public class UsersStatusModel
     {
-        private readonly IMemberShipFactory _daoFactory;
+        private readonly IMemberShipDaoFactory _daoDaoFactory;
         private int _activeDuringTime;
         private int? _onlineUser;
         private int? _totalUsers;
         private int? _totayRegist;
 
-        public UsersStatusModel(IMemberShipFactory daoFactory)
+        public UsersStatusModel(IMemberShipDaoFactory daoDaoFactory)
         {
-            _daoFactory = daoFactory;
+            _daoDaoFactory = daoDaoFactory;
             ActiveDuringTime = 20;
         }
 
@@ -42,7 +42,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
             {
                 if (_totalUsers == null)
                 {
-                    _totalUsers = _daoFactory.CreateUserDao().Count();
+                    _totalUsers = _daoDaoFactory.CreateUserDao().Count();
                 }
                 return _totalUsers.Value;
             }
@@ -58,7 +58,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
                 if (_onlineUser == null)
                 {
                     _onlineUser =
-                        _daoFactory.CreateUserDao()
+                        _daoDaoFactory.CreateUserDao()
                                    .GetActivityDateNumber(DateTime.Now.AddMinutes(ActiveDuringTime * -1));
                 }
                 return _onlineUser.Value;
@@ -88,7 +88,7 @@ namespace Ornament.MemberShip.Plugin.Models.Memberships
                 {
                     DateTime start = DateTime.Today;
                     DateTime end = start.AddDays(1);
-                    var result = _daoFactory.CreateUserDao().CountNewUser(start, end);
+                    var result = _daoDaoFactory.CreateUserDao().CountNewUser(start, end);
                     if (result.Count != 0)
                     {
                         _totayRegist = result.Values.First();

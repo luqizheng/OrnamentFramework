@@ -134,9 +134,9 @@ namespace Ornament.MemberShip
             return PerformerType.Org.ToString();
         }
 
-        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+        protected override IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            IQueryable<User> a = from user in memberShipFactory.Users where user.Org == this select user;
+            IQueryable<User> a = from user in memberShipDaoFactory.Users where user.Org == this select user;
             return a.ToList();
         }
 

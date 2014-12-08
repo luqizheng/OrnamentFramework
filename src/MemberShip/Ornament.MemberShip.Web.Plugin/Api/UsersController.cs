@@ -17,11 +17,11 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [ApiSession, Authorize]
     public class UsersController : ApiController
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public UsersController(IMemberShipFactory factory)
+        public UsersController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
    
@@ -34,7 +34,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
             {
                 search = search ?? new UserSearch();
                 int total;
-                IList<User> result = _factory.CreateUserDao()
+                IList<User> result = _daoFactory.CreateUserDao()
                     .Search(search, 0, 15, out total);
 
                 return from user in result
@@ -66,7 +66,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         [HttpGet]
         public object GetUser(string id)
         {
-            User result = _factory.CreateUserDao().Get(id);
+            User result = _daoFactory.CreateUserDao().Get(id);
             return new BasicInfo(result);
         }
 
@@ -74,7 +74,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         [HttpPost]
         public object VerifyEmail([FromBody] VerifyEmailModel model)
         {
-            if (model.Send(_factory))
+            if (model.Send(_daoFactory))
             {
                 return new
                 {
@@ -92,7 +92,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         [ApiResourceAuthorize(UserOperator.Deny, ResourceSetting.User)]
         public object Deny([FromBody] DenyUser data)
         {
-            return data.Execute(_factory);
+            return data.Execute(_daoFactory);
         }
 
 
@@ -100,7 +100,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         [ApiResourceAuthorize(UserOperator.Lock, ResourceSetting.User)]
         public object Lock(LockoutUser lockUser)
         {
-            return lockUser.Execute(_factory);
+            return lockUser.Execute(_daoFactory);
         }
     }
 
@@ -109,9 +109,9 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         public string[] Ids { get; set; }
         public bool Lockout { get; set; }
 
-        public object Execute(IMemberShipFactory factory)
+        public object Execute(IMemberShipDaoFactory daoFactory)
         {
-            IUserDao dao = factory.CreateUserDao();
+            IUserDao dao = daoFactory.CreateUserDao();
 
             for (int i = 0; i < Ids.Length; i++)
             {
@@ -136,9 +136,9 @@ namespace Ornament.MemberShip.Web.Plugin.Api
         public string[] Ids { get; set; }
         public bool IsDeny { get; set; }
 
-        public object Execute(IMemberShipFactory factory)
+        public object Execute(IMemberShipDaoFactory daoFactory)
         {
-            IUserDao dao = factory.CreateUserDao();
+            IUserDao dao = daoFactory.CreateUserDao();
 
             for (int i = 0; i < Ids.Length; i++)
             {
