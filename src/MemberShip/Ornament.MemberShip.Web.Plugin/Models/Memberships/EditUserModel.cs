@@ -26,20 +26,20 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 
         public PermissionInfo Permissions { get; set; }
 
-        public User Save(IMemberShipFactory memberShipFactory)
+        public User Save(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            if (memberShipFactory == null) throw new ArgumentNullException("memberShipFactory");
+            if (memberShipDaoFactory == null) throw new ArgumentNullException("memberShipDaoFactory");
 
             User user = !String.IsNullOrEmpty(Id)
-                ? memberShipFactory.CreateUserDao().Get(Id)
+                ? memberShipDaoFactory.CreateUserDao().Get(Id)
                 : new User(LoginId, "123456");
             UpdateOn(user);
             Permissions.UpdateOn(user);
-            memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+            memberShipDaoFactory.CreateUserDao().SaveOrUpdate(user);
             SessionManager.GetSessionWrapper().CurrentSession.SaveOrUpdate(user.Contact);
             if (VerifyEmail && EmailHasChanged)
             {
-                SendVerifyEmail(user, memberShipFactory);
+                SendVerifyEmail(user, memberShipDaoFactory);
             }
             return user;
         }

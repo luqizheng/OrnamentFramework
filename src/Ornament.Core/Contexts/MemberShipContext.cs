@@ -10,12 +10,12 @@ namespace Ornament.Contexts
 {
     public class MemberShipContext
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
         private string adminUserId;
         private string adminRoleId;
-        public MemberShipContext(IMemberShipFactory factory)
+        public MemberShipContext(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         public IMemberShipProvider MemberShipProvider { get; set; }
@@ -26,12 +26,12 @@ namespace Ornament.Contexts
                 User admin;
                 if (adminUserId == null)
                 {
-                    admin = _factory.CreateUserDao().GetByLoginId("admin");
+                    admin = _daoFactory.CreateUserDao().GetByLoginId("admin");
                     adminUserId = admin.Id;
                 }
                 else
                 {
-                    admin = _factory.CreateUserDao().Get(adminUserId);
+                    admin = _daoFactory.CreateUserDao().Get(adminUserId);
                     if (admin == null)
                     {
                         adminUserId = null;
@@ -48,12 +48,12 @@ namespace Ornament.Contexts
                 Role role;
                 if (adminRoleId == null)
                 {
-                    role = _factory.CreateRoleDao().GetByName("admin");
+                    role = _daoFactory.CreateRoleDao().GetByName("admin");
                     adminRoleId = role.Id;
                 }
                 else
                 {
-                    role = _factory.CreateRoleDao().Get(adminRoleId);
+                    role = _daoFactory.CreateRoleDao().Get(adminRoleId);
                     if (role == null)
                     {
                         adminRoleId = null;
@@ -79,7 +79,7 @@ namespace Ornament.Contexts
             object res;
             try
             {
-                res = _factory.CreateResourceDao().Load(resType, id);
+                res = _daoFactory.CreateResourceDao().Load(resType, id);
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace Ornament.Contexts
                 return false;
             if (currentUser.LoginId == User.AdminLoginId)
                 return true;
-            IPermissionDao permissionDao = _factory.CreatePermissionDao();
+            IPermissionDao permissionDao = _daoFactory.CreatePermissionDao();
             IList<Permission> permissions = permissionDao.GetUserPermissions(currentUser.LoginId, resource);
             return
                 permissions.Any(permission => permission.Resource.Equals(resource) && permission.HasOperator(operators));
@@ -126,7 +126,7 @@ namespace Ornament.Contexts
             object res;
             try
             {
-                res = _factory.CreateResourceDao().Load(resType, id);
+                res = _daoFactory.CreateResourceDao().Load(resType, id);
             }
             catch (Exception ex)
             {
@@ -152,7 +152,7 @@ namespace Ornament.Contexts
                 throw new MemberShipException("Please login.");
             if (currentUser.LoginId == User.AdminLoginId)
                 return true;
-            IPermissionDao permissionDao = _factory.CreatePermissionDao();
+            IPermissionDao permissionDao = _daoFactory.CreatePermissionDao();
             IList<Permission> permissions = permissionDao.GetUserPermissions(currentUser.LoginId, resourceType);
             return permissions.Any(permission => permission.Resource.Equals(resourceType)
                                                  && permission.HasOperator(operatorVal));

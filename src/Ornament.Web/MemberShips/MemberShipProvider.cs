@@ -17,7 +17,7 @@ namespace Ornament.Web.MemberShips
         private string _applicationName = "application";
         private bool _enablePasswordReset;
         private bool _enablePasswordRetrieval;
-        private IMemberShipFactory _facotry;
+        private IMemberShipDaoFactory _facotry;
 
         private int _maxInvalidPasswordAttempts;
         private int _minRequiredNonAlphanumericCharacters;
@@ -118,12 +118,12 @@ namespace Ornament.Web.MemberShips
             get { return _passwordStrengthRegularExpression; }
         }
 
-        public IMemberShipFactory Facotry
+        public IMemberShipDaoFactory Facotry
         {
             get
             {
                 if (_facotry == null)
-                    _facotry = OrnamentContext.DaoFactory.MemberShipFactory;
+                    _facotry = OrnamentContext.DaoFactory.MemberShipDaoFactory;
                 return _facotry;
             }
             set { _facotry = value; }

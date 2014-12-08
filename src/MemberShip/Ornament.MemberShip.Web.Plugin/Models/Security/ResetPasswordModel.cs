@@ -13,18 +13,18 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
         public string Id { get; set; }
         public PasswordModel PasswordModel { get; set; }
 
-        public VerifyResult Save(IMemberShipFactory factory)
+        public VerifyResult Save(IMemberShipDaoFactory daoFactory)
         {
-            EmailVerifier userToken = factory.CreateEmailVerifierDao().Get(Id);
+            EmailVerifier userToken = daoFactory.CreateEmailVerifierDao().Get(Id);
 
             if (userToken == null)
             {
                 return VerifyResult.NotFoundTokenId;
             }
-            if (userToken.Verify(TokenId, factory) == VerifyResult.Success)
+            if (userToken.Verify(TokenId, daoFactory) == VerifyResult.Success)
             {
                 userToken.Account.Security.ChangePassword(PasswordModel.NewPassword);
-                factory.CreateUserDao().Update(userToken.Account);
+                daoFactory.CreateUserDao().Update(userToken.Account);
                 return VerifyResult.Success;
             }
             return VerifyResult.Failed;

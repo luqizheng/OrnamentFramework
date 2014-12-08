@@ -4,7 +4,7 @@ using Ornament.MemberShip.Security;
 
 namespace Ornament.MemberShip.Dao.NHibernateImple
 {
-    public class MemberShipFactory : IMemberShipFactory
+    public class MemberShipDaoFactory : IMemberShipDaoFactory
     {
         #region IMemberShipFactory Members
 

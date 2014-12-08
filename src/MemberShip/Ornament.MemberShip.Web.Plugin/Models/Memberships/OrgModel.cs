@@ -94,7 +94,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
                 {
                     if (!String.IsNullOrEmpty(ParentId) && ParentId.Length == 32)
                     {
-                        _parent = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipFactory>()
+                        _parent = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipDaoFactory>()
                             .CreateOrgDao().Get(ParentId);
                     }
                 }

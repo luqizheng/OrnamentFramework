@@ -4,11 +4,12 @@ using Ornament.MemberShip.Dao;
 
 namespace Ornament.Messages.Notification
 {
-    public interface ISender 
+    public interface ISender
     {
         string Name { get; set; }
         string Remarks { get; set; }
-        void Send(NotifyMessageTemplate template, IMemberShipFactory memberShipFactory, IDictionary<string, string> variable, IPerformer[] performers);
-        void Send(NotifyMessageTemplate template, IDictionary<string, string> variable, User[] performers);
+
+        void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template, IDictionary<string, string> variable, params User[] performers);
+        void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler,User[] user, IPerformer[] performers);
     }
 }

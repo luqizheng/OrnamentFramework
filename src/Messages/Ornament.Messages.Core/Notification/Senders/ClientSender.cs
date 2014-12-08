@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
 
 namespace Ornament.Messages.Notification.Senders
 {
@@ -10,15 +11,16 @@ namespace Ornament.Messages.Notification.Senders
         {
             
         }
-        public override void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale,
-            User[] performers)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public virtual string Server { get; set; }
         
         public virtual string PrivateCode { get; set; }
-        
+
+        public override void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template,
+            CreateVariablesHandler dynamicCreateVariablesHandler, User[] user, IPerformer[] performers)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

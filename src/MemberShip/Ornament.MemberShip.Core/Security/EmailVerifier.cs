@@ -128,18 +128,18 @@ namespace Ornament.MemberShip.Security
         /// <summary>
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="daoFactory"></param>
+        /// <param name="daoDaoFactory"></param>
         /// <returns></returns>
         /// <exception cref="EmailSecurityTimeoutException">User Token is Timeout</exception>
-        public virtual VerifyResult Verify(string token, IMemberShipFactory daoFactory)
+        public virtual VerifyResult Verify(string token, IMemberShipDaoFactory daoDaoFactory)
         {
             VerifyResult re = Verify(token);
             if (re == VerifyResult.Success)
             {
                 this.Account.Contact.EmailVerified = true;
-                daoFactory.CreateUserDao().SaveOrUpdate(this.Account);
+                daoDaoFactory.CreateUserDao().SaveOrUpdate(this.Account);
             }
-            daoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
+            daoDaoFactory.CreateEmailVerifierDao().SaveOrUpdate(this);
 
             return re;
         }

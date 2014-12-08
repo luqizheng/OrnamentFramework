@@ -37,9 +37,9 @@ namespace Ornament.Web.MemberShips
 
             try
             {
-                User u = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao()
+                User u = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao()
                     .GetByLoginId(username);
-                IQueryable<Role> result = from role in OrnamentContext.DaoFactory.MemberShipFactory.Roles
+                IQueryable<Role> result = from role in OrnamentContext.DaoFactory.MemberShipDaoFactory.Roles
                                           where role.Name == roleName
                                           select role;
                 if (!result.Any())
@@ -64,12 +64,12 @@ namespace Ornament.Web.MemberShips
                 if (username != "admin")
                 {
                     User userInfo =
-                        OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetByLoginId(username);
+                        OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().GetByLoginId(username);
                     roless = userInfo.GetAllRoles();
                 }
                 else
                 {
-                    roless = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
+                    roless = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().GetAll();
                 }
 
                 return (from a in roless select a.Name).ToArray();
@@ -91,7 +91,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 var role = new Role(roleName);
-                OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().Save(role);
+                OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().Save(role);
             }
             catch (MemberShipException ex)
             {
@@ -116,7 +116,7 @@ namespace Ornament.Web.MemberShips
 
             try
             {
-                IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao();
+                IRoleDao roleDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao();
                 if (throwOnPopulatedRole)
                 {
                     if (roleDao.IsUsesInRole(roleName))
@@ -141,7 +141,7 @@ namespace Ornament.Web.MemberShips
             SessionWrapper s = SessionManager.GetSessionWrapper();
             try
             {
-                IQueryable<Role> reuslt = from role in OrnamentContext.DaoFactory.MemberShipFactory.Roles
+                IQueryable<Role> reuslt = from role in OrnamentContext.DaoFactory.MemberShipDaoFactory.Roles
                                           where role.Name == roleName
                                           select role;
                 return reuslt.Count() != 0;
@@ -170,7 +170,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 ReadOnlyCollection<Role> roles =
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
+                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().GetRolesByName(roleNames);
 
                 if (roleNames.Length != roleNames.Length)
                 {
@@ -192,7 +192,7 @@ namespace Ornament.Web.MemberShips
 
                 foreach (
                     User user in
-                        OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetUsers(usernames))
+                        OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().GetUsers(usernames))
                 {
                     foreach (string roleName in roleNames)
                     {
@@ -212,9 +212,9 @@ namespace Ornament.Web.MemberShips
 
             try
             {
-                IUserDao userDao = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+                IUserDao userDao = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao();
                 ReadOnlyCollection<Role> roles =
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetRolesByName(roleNames);
+                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().GetRolesByName(roleNames);
                 IList<User> users = userDao.GetUsers(usernames);
                 foreach (User u in users)
                 {
@@ -239,7 +239,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 IList<User> users =
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().GetUsersInRole(roleName);
+                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().GetUsersInRole(roleName);
                 return UserssToString(users);
             }
             finally
@@ -255,7 +255,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 IList<Role> roles =
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
+                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().GetAll();
                 var result = new string[roles.Count];
                 for (int i = 0; i < result.Length; i++)
                 {
@@ -282,7 +282,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 IList<User> uses =
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().FindUsersInRole(
+                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().FindUsersInRole(
                         roleName,
                         usernameToMatch);
                 var result = new string[uses.Count];

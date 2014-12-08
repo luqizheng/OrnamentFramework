@@ -11,21 +11,21 @@ namespace Ornament.Web.MemberShips
 {
     public class OrnamentProfileProvider : ProfileProvider
     {
-        private IMemberShipFactory _memberShip;
+        private IMemberShipDaoFactory _memberShipDao;
 
-        public OrnamentProfileProvider(IMemberShipFactory memberShip)
+        public OrnamentProfileProvider(IMemberShipDaoFactory memberShipDao)
         {
-            _memberShip = memberShip;
+            _memberShipDao = memberShipDao;
         }
 
         public OrnamentProfileProvider()
         {
         }
 
-        private IMemberShipFactory MemberShipFactory
+        private IMemberShipDaoFactory MemberShipDaoFactory
         {
-            get { return _memberShip ?? (_memberShip = OrnamentContext.DaoFactory.MemberShipFactory); }
-            set { _memberShip = value; }
+            get { return _memberShipDao ?? (_memberShipDao = OrnamentContext.DaoFactory.MemberShipDaoFactory); }
+            set { _memberShipDao = value; }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Ornament.Web.MemberShips
                     userName[i] = info.UserName;
                     i++;
                 }
-                return MemberShipFactory.CreateProfileDao().Delete(userName);
+                return MemberShipDaoFactory.CreateProfileDao().Delete(userName);
             }
             finally
             {
@@ -82,7 +82,7 @@ namespace Ornament.Web.MemberShips
 
             try
             {
-                return MemberShipFactory.CreateProfileDao().Delete(usernames);
+                return MemberShipDaoFactory.CreateProfileDao().Delete(usernames);
             }
 
             finally
@@ -120,14 +120,14 @@ namespace Ornament.Web.MemberShips
                 {
                     case ProfileAuthenticationOption.Anonymous:
                         return
-                            MemberShipFactory.CreateProfileDao().DeleteAnonymous(
+                            MemberShipDaoFactory.CreateProfileDao().DeleteAnonymous(
                                 userInactiveSinceDate);
                     case ProfileAuthenticationOption.Authenticated:
                         return
-                            MemberShipFactory.CreateProfileDao().DeleteAuthenticated(
+                            MemberShipDaoFactory.CreateProfileDao().DeleteAuthenticated(
                                 userInactiveSinceDate);
                     default:
-                        return MemberShipFactory.CreateProfileDao().Delete(userInactiveSinceDate);
+                        return MemberShipDaoFactory.CreateProfileDao().Delete(userInactiveSinceDate);
                 }
             }
             finally
@@ -165,13 +165,13 @@ namespace Ornament.Web.MemberShips
                 {
                     case ProfileAuthenticationOption.Anonymous:
                         return
-                            MemberShipFactory.CreateProfileDao().CountAnonymous(userInactiveSinceDate);
+                            MemberShipDaoFactory.CreateProfileDao().CountAnonymous(userInactiveSinceDate);
                     case ProfileAuthenticationOption.Authenticated:
                         return
-                            MemberShipFactory.CreateProfileDao().CountAuthenticated(
+                            MemberShipDaoFactory.CreateProfileDao().CountAuthenticated(
                                 userInactiveSinceDate);
                     default:
-                        return MemberShipFactory.CreateProfileDao().Count(userInactiveSinceDate);
+                        return MemberShipDaoFactory.CreateProfileDao().Count(userInactiveSinceDate);
                 }
             }
             finally
@@ -206,17 +206,17 @@ namespace Ornament.Web.MemberShips
                 {
                     case ProfileAuthenticationOption.Anonymous:
                         users =
-                            MemberShipFactory.CreateProfileDao().GetAllAnonymous(pageIndex, pageSize,
+                            MemberShipDaoFactory.CreateProfileDao().GetAllAnonymous(pageIndex, pageSize,
                                 out totalRecords);
                         break;
                     case ProfileAuthenticationOption.Authenticated:
                         users =
-                            MemberShipFactory.CreateProfileDao().GetAllAuthenticated(pageIndex,
+                            MemberShipDaoFactory.CreateProfileDao().GetAllAuthenticated(pageIndex,
                                 pageSize,
                                 out totalRecords);
                         break;
                     default:
-                        users = MemberShipFactory.CreateProfileDao().GetAll(pageIndex, pageSize,
+                        users = MemberShipDaoFactory.CreateProfileDao().GetAll(pageIndex, pageSize,
                             out totalRecords);
                         break;
                 }
@@ -284,19 +284,19 @@ namespace Ornament.Web.MemberShips
                 var infos = new ProfileInfoCollection();
                 IQueryable<ProfileValue> profiles =
                     from profile in
-                        MemberShipFactory.Profiles.Take(pageSize).Skip(pageIndex * pageSize)
+                        MemberShipDaoFactory.Profiles.Take(pageSize).Skip(pageIndex * pageSize)
                     where profile.LastActivityDate < userInactiveSinceDate
                     select profile;
                 totalRecords =
                     (from profile in
-                         MemberShipFactory.Profiles.Take(pageSize).Skip(pageIndex * pageSize)
+                         MemberShipDaoFactory.Profiles.Take(pageSize).Skip(pageIndex * pageSize)
                      where profile.LastActivityDate < userInactiveSinceDate
                      select profile).Count();
 
 
                 foreach (ProfileValue prof in profiles)
                 {
-                    User u = MemberShipFactory.CreateUserDao().GetByLoginId(prof.LoginId);
+                    User u = MemberShipDaoFactory.CreateUserDao().GetByLoginId(prof.LoginId);
                     infos.Add(ToProfileInfo(prof));
                 }
                 return infos;
@@ -380,37 +380,37 @@ namespace Ornament.Web.MemberShips
                 switch (authenticationOption)
                 {
                     case ProfileAuthenticationOption.All:
-                        profiles = (from pf in MemberShipFactory.Profiles
+                        profiles = (from pf in MemberShipDaoFactory.Profiles
                                     where
                                         pf.LastActivityDate < userInactiveSinceDate &&
                                         pf.LoginId.StartsWith(usernameToMatch)
                                     select pf);
 
-                        totalRecords = (from pf in MemberShipFactory.Profiles
+                        totalRecords = (from pf in MemberShipDaoFactory.Profiles
                                         where
                                             pf.LastActivityDate < userInactiveSinceDate &&
                                             pf.LoginId.StartsWith(usernameToMatch)
                                         select pf).Count();
                         break;
                     case ProfileAuthenticationOption.Anonymous:
-                        profiles = (from pf in MemberShipFactory.Profiles
+                        profiles = (from pf in MemberShipDaoFactory.Profiles
                                     where
                                         pf.LastActivityDate < userInactiveSinceDate &&
                                         pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous
                                     select pf);
-                        totalRecords = (from pf in MemberShipFactory.Profiles
+                        totalRecords = (from pf in MemberShipDaoFactory.Profiles
                                         where
                                             pf.LastActivityDate < userInactiveSinceDate &&
                                             pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous
                                         select pf).Count();
                         break;
                     default:
-                        profiles = (from pf in MemberShipFactory.Profiles
+                        profiles = (from pf in MemberShipDaoFactory.Profiles
                                     where
                                         pf.LastActivityDate < userInactiveSinceDate &&
                                         pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous == false
                                     select pf);
-                        totalRecords = (from pf in MemberShipFactory.Profiles
+                        totalRecords = (from pf in MemberShipDaoFactory.Profiles
                                         where
                                             pf.LastActivityDate < userInactiveSinceDate &&
                                             pf.LoginId.StartsWith(usernameToMatch) && pf.IsAnonymous == false
@@ -421,7 +421,7 @@ namespace Ornament.Web.MemberShips
 
                 foreach (ProfileValue prof in profiles)
                 {
-                    User u = MemberShipFactory.CreateUserDao().GetByLoginId(prof.LoginId);
+                    User u = MemberShipDaoFactory.CreateUserDao().GetByLoginId(prof.LoginId);
                     infos.Add(new ProfileInfo(u.Name, prof.IsAnonymous, u.Other.LastActivityDate.Value,
                         prof.LastActivityDate.Value, 30));
                 }
@@ -455,7 +455,7 @@ namespace Ornament.Web.MemberShips
         {
             SessionWrapper sessionWrapper = SessionManager.GetSessionWrapper();
 
-            IUserProfileDao profileDao = MemberShipFactory.CreateProfileDao();
+            IUserProfileDao profileDao = MemberShipDaoFactory.CreateProfileDao();
             try
             {
                 var result = new SettingsPropertyValueCollection();
@@ -503,7 +503,7 @@ namespace Ornament.Web.MemberShips
             try
             {
                 string userName = LoginId(context);
-                IUserProfileDao profileDao = MemberShipFactory.CreateProfileDao();
+                IUserProfileDao profileDao = MemberShipDaoFactory.CreateProfileDao();
 
 
                 ProfileValue profileValue = profileDao.FindByLoginId(userName) ??

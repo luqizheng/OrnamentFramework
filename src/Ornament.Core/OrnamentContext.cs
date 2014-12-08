@@ -114,7 +114,7 @@ namespace Ornament
 
             private UserContextInner()
             {
-                _memberShip = new MemberShipContext(DaoFactory.MemberShipFactory);
+                _memberShip = new MemberShipContext(DaoFactory.MemberShipDaoFactory);
             }
 
             public MemberShipContext MemberShipContext

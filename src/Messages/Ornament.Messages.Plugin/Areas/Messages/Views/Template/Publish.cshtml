@@ -1,0 +1,36 @@
+﻿@using System.Net.Mime
+@using Ornament
+@using Ornament.Web.UI.Theme
+@model dynamic
+
+@{
+    ViewBag.Title = "Publish Notify";
+    Layout = OrnamentContext.Configuration.Layout();
+}
+
+@section pageTitle{
+    <h2>Publish Notify</h2>
+}
+@using (var panel = Html.Panel("col-6"))
+{
+    @panel.Header(@<text>
+                       <h4>Choice Receiver</h4>
+                   </text>)
+    @panel.Body(@<text>
+                     <form class="form-horizontal">
+                         <div class="form-group">
+                             @Html.LabelFor()
+                         </div>
+                     </form>
+                   </text>)
+}
+@using (var panel = Html.Panel("col-6"))
+{
+    @panel.Header(@<text>
+                      <h4>Template Information</h4> 
+                   </text>)
+    @panel.Body(@<text>
+                     
+                 </text>)
+    
+}

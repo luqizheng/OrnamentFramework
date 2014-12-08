@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
-using Ornament.Messages.Config;
 using Qi.Domain;
 
 namespace Ornament.Messages.Notification
@@ -74,8 +73,8 @@ namespace Ornament.Messages.Notification
                 return result;
             return Contents.Values.First();
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="cultureInfo"></param>
         /// <returns></returns>
@@ -91,72 +90,19 @@ namespace Ornament.Messages.Notification
             return null;
         }
 
-        /// <summary>
-        ///     ”√template…˙≥…sinple message
-        /// </summary>
-        /// <param name="daoFactory"></param>
-        /// <param name="replaceVariabled"></param>
-        /// <param name="performers"></param>
-        public virtual void Publish(
-            IMemberShipFactory daoFactory,
-            CreateVariablesHandler replaceVariabled,
-            params IPerformer[] performers)
+        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory,
+            IDictionary<string, string> variable, params User[] performers)
         {
-            if (daoFactory == null)
-                throw new ArgumentNullException("daoFactory");
-            if (replaceVariabled == null)
-                throw new ArgumentNullException("replaceVariabled");
-            if (performers == null)
-                throw new ArgumentNullException("performers");
-
-            var targetuser = new HashSet<User>();
-            foreach (IPerformer performer in performers)
+            foreach (var sender in this.Senders)
             {
-                foreach (User user in performer.GetUsers(daoFactory))
-                    targetuser.Add(user);
-            }
-
-
-            foreach (User user in targetuser)
-            {
-                Dictionary<string, string> data = replaceVariabled(user);
-                Publish(daoFactory, data, user);
+                sender.Send(memberShipDaoFactory, this, variable, performers);
             }
         }
-        /// <summary>
-        /// /
-        /// </summary>
-        /// <param name="daoFactory"></param>
-        /// <param name="variable"></param>
-        /// <param name="performers"></param>
-        public virtual void Publish(IMemberShipFactory daoFactory, IDictionary<string, string> variable,
-            User performers)
+        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory, CreateVariablesHandler dynamicCreateVariablesHandler, User[] user, IPerformer[] performers)
         {
-            if (daoFactory == null)
+            foreach (var sender in this.Senders)
             {
-                throw new ArgumentNullException("daoFactory");
-            }
-            if (variable == null)
-            {
-                throw new ArgumentNullException("variable");
-            }
-            if (performers == null)
-            {
-                throw new ArgumentNullException("performers");
-            }
-
-
-            foreach (string key in NotifySenderManager.Instance.Variables.Keys)
-            {
-                if (!variable.ContainsKey(key))
-                {
-                    variable.Add(key, NotifySenderManager.Instance.Variables[key]);
-                }
-            }
-
-            foreach (ISender sender in Senders)
-            {
-                sender.Send(this, daoFactory, variable, new IPerformer[] {performers});
+                sender.Send(memberShipDaoFactory, this, dynamicCreateVariablesHandler, user, performers);
             }
         }
     }

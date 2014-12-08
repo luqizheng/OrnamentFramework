@@ -254,7 +254,7 @@ namespace Ornament.MemberShip
         }
 
 
-        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+        protected override IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipDaoFactory)
         {
             return new List<User>
             {

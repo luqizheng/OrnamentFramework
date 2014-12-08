@@ -57,9 +57,9 @@ namespace Ornament.MemberShip
             set { _roles = value; }
         }
 
-        IList<User> IPerformer.GetUsers(IMemberShipFactory memberShipFactory)
+        IList<User> IPerformer.GetUsers(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            return GetInsideUsers(memberShipFactory);
+            return GetInsideUsers(memberShipDaoFactory);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Ornament.MemberShip
 
         protected abstract string GetPerformerType();
 
-        protected abstract IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory);
+        protected abstract IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipDaoFactory);
 
         public virtual bool OneOf(params
             Role[] roles)

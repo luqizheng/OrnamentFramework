@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -29,26 +30,19 @@ namespace Ornament.Messages.Notification.Senders
         public virtual string Remarks { get; set; }
 
 
-        /// <summary>
-        /// </summary>
-        /// <param name="template"></param>
-        /// <param name="memberShipFactory"></param>
-        /// <param name="variable"></param>
-        /// <param name="performers"></param>
-        public virtual void Send(NotifyMessageTemplate template, IMemberShipFactory memberShipFactory,
-            IDictionary<string, string> variable, IPerformer[] performers)
+        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template, IDictionary<string, string> varibale,
+            User[] performers)
         {
-            var targetuser = new HashSet<User>();
-            foreach (IPerformer performer in performers)
-            {
-                foreach (User user in performer.GetUsers(memberShipFactory))
-                    targetuser.Add(user);
-            }
+            var handler = new CreateVariablesHandler(user => varibale);
 
-            Send(template, variable, targetuser.ToArray());
+            Send(memberShipDaoFactory, template, handler, performers, null);
+
         }
 
-        public abstract void Send(NotifyMessageTemplate template, IDictionary<string, string> varibale,
-            User[] performers);
+        public abstract void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler,
+            User[] user,
+            IPerformer[] performers);
+
+
     }
 }

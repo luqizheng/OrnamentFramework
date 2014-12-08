@@ -10,17 +10,17 @@ namespace WebApplication.Controllers
 {
     public class SecurityController : Controller
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public SecurityController(IMemberShipFactory factory)
+        public SecurityController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         [Authorize, Session]
         public ActionResult VerifyEmail(string id, string token)
         {
-            EmailVerifier userToken = _factory.CreateEmailVerifierDao().Get(id);
+            EmailVerifier userToken = _daoFactory.CreateEmailVerifierDao().Get(id);
             try
             {
                 if (userToken == null)
@@ -28,13 +28,13 @@ namespace WebApplication.Controllers
                     return View("~/Views/HttpErrors/404.cshtml");
                 }
                 var verifyEmailModel = new VerifyEmailModel(userToken);
-                return View(verifyEmailModel.Verify(OrnamentContext.MemberShip.CurrentUser(), token, _factory));
+                return View(verifyEmailModel.Verify(OrnamentContext.MemberShip.CurrentUser(), token, _daoFactory));
             }
             finally
             {
                 if (userToken != null)
                 {
-                    _factory.CreateEmailVerifierDao().SaveOrUpdate(userToken);
+                    _daoFactory.CreateEmailVerifierDao().SaveOrUpdate(userToken);
                 }
             }
         }
@@ -42,7 +42,7 @@ namespace WebApplication.Controllers
         [Session]
         public ActionResult RetrievePassword(string id, string token)
         {
-            EmailVerifier userToken = _factory.CreateEmailVerifierDao().Get(id);
+            EmailVerifier userToken = _daoFactory.CreateEmailVerifierDao().Get(id);
             if (userToken == null)
             {
                 return View("~/Views/HttpErrors/404.cshtml");
@@ -64,7 +64,7 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Save(_factory);
+                model.Save(_daoFactory);
                 return View("RetrievePasswordResult", true);
             }
             return View(model);

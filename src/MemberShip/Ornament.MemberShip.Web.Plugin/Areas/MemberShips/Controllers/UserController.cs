@@ -20,13 +20,13 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
     [Session, HandleError]
     public class UserController : Controller
     {
-        private readonly IMemberShipFactory _memberShipFactory;
+        private readonly IMemberShipDaoFactory _memberShipDaoFactory;
         private readonly IUserDao _userDao;
 
-        public UserController(IMemberShipFactory memberShipFactory)
+        public UserController(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            _memberShipFactory = memberShipFactory;
-            _userDao = _memberShipFactory.CreateUserDao();
+            _memberShipDaoFactory = memberShipDaoFactory;
+            _userDao = _memberShipDaoFactory.CreateUserDao();
         }
 
         #region Validation
@@ -37,7 +37,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             if (loginId == null)
                 throw new ArgumentNullException("loginId");
             loginId = Request.QueryString[0];
-            return Json(_memberShipFactory.CreateUserDao().Count(loginId, id) == 0, JsonRequestBehavior.AllowGet);
+            return Json(_memberShipDaoFactory.CreateUserDao().Count(loginId, id) == 0, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet, Session]
@@ -45,7 +45,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             if (Membership.Provider.RequiresUniqueEmail)
             {
-                return Json(_memberShipFactory.CreateUserDao().CountByEmail(email, id) == 0,
+                return Json(_memberShipDaoFactory.CreateUserDao().CountByEmail(email, id) == 0,
                     JsonRequestBehavior.AllowGet);
             }
             return Json(true, JsonRequestBehavior.AllowGet);
@@ -62,11 +62,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult Index()
         {
             IUserStatisticsDao statisticsDao
-                = _memberShipFactory.CreateStatisticsDao();
+                = _memberShipDaoFactory.CreateStatisticsDao();
 
             IList<UserStatistics> data = statisticsDao.FindByDate(DateTime.Today.AddDays(-7), DateTime.Today);
             ViewData["NewRegistry"] = string.Join(",", from a in data select a.Registers);
-            ViewData["TotalUser"] = String.Join(",", _memberShipFactory.CreateUserDao().Count());
+            ViewData["TotalUser"] = String.Join(",", _memberShipDaoFactory.CreateUserDao().Count());
 
             ViewData["7DayActive"] = String.Join(",", from a in data select a.Actives);
             ViewData["toDayActive"] = data[data.Count - 1].Actives;
@@ -140,7 +140,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             Resource = ResourceSetting.User, Operator = UserOperator.Modify, PreservedRouteParameters = "loginId")]
         public ActionResult Edit(string loginId)
         {
-            User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
+            User user = _memberShipDaoFactory.CreateUserDao().GetByLoginId(loginId);
             if (user == null)
                 throw new MemberShipException("Not found user.");
             return View(new EditUserModel(user));
@@ -155,7 +155,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
 
             if (ModelState.IsValid)
             {
-                userBasicInfo.Save(_memberShipFactory);
+                userBasicInfo.Save(_memberShipDaoFactory);
                 return Json(new
                 {
                     success = true
@@ -181,7 +181,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [HttpPost, ResourceAuthorize(UserOperator.Delete, "MessageReader")]
         public ActionResult Delete(string[] loginIds)
         {
-            IUserDao dao = _memberShipFactory.CreateUserDao();
+            IUserDao dao = _memberShipDaoFactory.CreateUserDao();
             foreach (string loginid in loginIds)
             {
                 User user = dao.GetByLoginId(loginid);
@@ -194,12 +194,12 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult ResetPassword(string loginId)
         {
             var privoder = Membership.Provider as MemberShipProvider;
-            User user = _memberShipFactory.CreateUserDao().GetByLoginId(loginId);
+            User user = _memberShipDaoFactory.CreateUserDao().GetByLoginId(loginId);
             string newpassword = Membership.GeneratePassword(Membership.MinRequiredPasswordLength, 0);
 
             user.Security.ChangePassword(privoder.EncodeString(newpassword, privoder.PasswordFormat));
 
-            _memberShipFactory.CreateUserDao().SaveOrUpdate(user);
+            _memberShipDaoFactory.CreateUserDao().SaveOrUpdate(user);
             return Json(newpassword);
         }
 

@@ -77,7 +77,7 @@ namespace Ornament
             if (HttpContext.Current == null || HttpContext.Current.User == null ||
                 !HttpContext.Current.User.Identity.IsAuthenticated)
                 return null;
-            IUserDao a = OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao();
+            IUserDao a = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao();
 
             User user = a.GetByLoginId(HttpContext.Current.User.Identity.Name);
             if (user == null)
@@ -209,7 +209,7 @@ namespace Ornament
                 if (language.Name != currentUser.GetLanguage().Name)
                 {
                     currentUser.Language = language.Name;
-                    OrnamentContext.DaoFactory.MemberShipFactory.CreateUserDao().SaveOrUpdate(currentUser);
+                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().SaveOrUpdate(currentUser);
                 }
             }
             return true;

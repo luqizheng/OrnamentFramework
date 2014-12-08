@@ -335,13 +335,13 @@ namespace Ornament.MemberShip
                 LastLockoutDate = DateTime.Now;
             }
 
-            public virtual EmailVerifier ResetPassword(IMemberShipFactory daoFactory, int expireMiniutes)
+            public virtual EmailVerifier ResetPassword(IMemberShipDaoFactory daoDaoFactory, int expireMiniutes)
             {
-                if (daoFactory == null) throw new ArgumentNullException("daoFactory");
+                if (daoDaoFactory == null) throw new ArgumentNullException("daoDaoFactory");
                 if (expireMiniutes <= 0)
                     expireMiniutes = 30;
                 var result = new EmailVerifier(User, expireMiniutes, VerifyType.ResetPassword);
-                daoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
+                daoDaoFactory.CreateEmailVerifierDao().SaveOrUpdate(result);
                 return result;
             }
         }

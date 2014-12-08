@@ -88,10 +88,8 @@ namespace Ornament.Web
 
         private static IEnumerable<DictionaryEntry> GetPath(ViewContext page, string filePath, string pageName)
         {
-            IEnumerable<DictionaryEntry> resxs = null;
+            
             string defaultReex = string.Format(@"{0}\{1}.resx", filePath, pageName);
-
-            //string lang = OrnamentContext.MemberShip.CurrentLanguage().Key;
 
             CultureInfo current = Thread.CurrentThread.CurrentUICulture;
             string resxKey = string.Format(@"{0}\{1}.{2}.resx", filePath, pageName, current.Name);

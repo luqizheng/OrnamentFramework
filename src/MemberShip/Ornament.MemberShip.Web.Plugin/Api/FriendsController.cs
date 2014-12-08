@@ -9,9 +9,9 @@ namespace Ornament.MemberShip.Web.Plugin.Api
     [ApiSession]
     public class FriendsController : ApiController
     {
-        private readonly IMemberShipFactory _dao;
+        private readonly IMemberShipDaoFactory _dao;
 
-        public FriendsController(IMemberShipFactory dao)
+        public FriendsController(IMemberShipDaoFactory dao)
         {
             _dao = dao;
         }

@@ -15,11 +15,11 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
     [Session]
     public class UsergroupController : Controller
     {
-        private readonly IMemberShipFactory _factory;
+        private readonly IMemberShipDaoFactory _daoFactory;
 
-        public UsergroupController(IMemberShipFactory factory)
+        public UsergroupController(IMemberShipDaoFactory daoFactory)
         {
-            _factory = factory;
+            _daoFactory = daoFactory;
         }
 
         //
@@ -36,7 +36,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [ResourceAuthorize(UserGroupOperator.Read, ResourceSetting.UserGroup)]
         public ActionResult List(int? index, int? size)
         {
-            IUserGroupDao dao = _factory.CreateUserGroupDao();
+            IUserGroupDao dao = _daoFactory.CreateUserGroupDao();
             int total;
             IList<UserGroup> result = dao.FindAll(index ?? 0, size ?? 30, out total);
 
@@ -57,14 +57,14 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult Save(UserGroup userGroup, string[] roles)
         {
             userGroup.Roles.Clear();
-            IRoleDao roleDao = _factory.CreateRoleDao();
+            IRoleDao roleDao = _daoFactory.CreateRoleDao();
 
             foreach (string role in roles ?? new string[0])
             {
                 userGroup.Roles.Add(roleDao.Get(role));
             }
 
-            _factory.CreateUserGroupDao().SaveOrUpdate(userGroup);
+            _daoFactory.CreateUserGroupDao().SaveOrUpdate(userGroup);
 
             return Json(new { success = true, userGroup.Id }); //返回Id.更新View的时候需要Id
         }
@@ -76,8 +76,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 throw new HttpException(403, "id is not allow empty");
             }
 
-            IUserGroupDao dao = _factory.CreateUserGroupDao();
-            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
+            IUserGroupDao dao = _daoFactory.CreateUserGroupDao();
+            UserGroup ug = _daoFactory.CreateUserGroupDao().Get(id);
             dao.Delete(ug);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
@@ -87,7 +87,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             if (id == null)
                 return Redirect("index");
-            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
+            UserGroup ug = _daoFactory.CreateUserGroupDao().Get(id);
             return View(ug);
         }
 
@@ -95,9 +95,9 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [ResourceAuthorize(UserGroupOperator.Assign, ResourceSetting.UserGroup)]
         public ActionResult AssignRole(string[] roles, string id)
         {
-            IRoleDao roleDao = _factory.CreateRoleDao();
+            IRoleDao roleDao = _daoFactory.CreateRoleDao();
             UserGroup user =
-                _factory.CreateUserGroupDao().Get(id);
+                _daoFactory.CreateUserGroupDao().Get(id);
             user.Roles.Clear();
             foreach (Role role in roleDao.GetRolesByName(roles))
             {
@@ -111,8 +111,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             if (id == null)
                 return RedirectToAction("index");
-            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
-            ViewData["Users"] = _factory.CreateUserDao().GetUsers(ug);
+            UserGroup ug = _daoFactory.CreateUserGroupDao().Get(id);
+            ViewData["Users"] = _daoFactory.CreateUserDao().GetUsers(ug);
             return View(ug);
         }
 
@@ -123,8 +123,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             if (id == null)
                 return RedirectToAction("index");
 
-            UserGroup ug = _factory.CreateUserGroupDao().Get(id);
-            IUserDao dao = _factory.CreateUserDao();
+            UserGroup ug = _daoFactory.CreateUserGroupDao().Get(id);
+            IUserDao dao = _daoFactory.CreateUserDao();
 
             foreach (User user in dao.GetUsers(loginIds))
             {

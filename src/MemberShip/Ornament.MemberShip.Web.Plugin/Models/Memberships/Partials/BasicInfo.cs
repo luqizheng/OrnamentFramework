@@ -162,10 +162,10 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
         /// <summary>
         /// </summary>
         /// <param name="user"></param>
-        protected virtual void SendVerifyEmail(User user, IMemberShipFactory _daFactory)
+        protected virtual void SendVerifyEmail(User user, IMemberShipDaoFactory daDaoFactory)
         {
             var model = new VerifyEmailModel { Id = user.Id };
-            model.Send(_daFactory);
+            model.Send(daDaoFactory);
         }
     }
 }

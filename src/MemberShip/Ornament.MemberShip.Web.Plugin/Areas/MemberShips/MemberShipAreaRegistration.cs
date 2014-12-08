@@ -38,7 +38,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
             RegistApi();
-            bus.Send(new NHRegisterEventMessage(typeof (IMemberShipFactory), typeof (MemberShipFactory)));
+            bus.Send(new NHRegisterEventMessage(typeof (IMemberShipDaoFactory), typeof (MemberShipDaoFactory)));
 
             //send the init data
             bus.Send(new MemberShipData());

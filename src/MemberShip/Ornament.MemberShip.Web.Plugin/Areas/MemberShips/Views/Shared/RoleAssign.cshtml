@@ -5,8 +5,8 @@
 @using Qi.Web
 @model IEnumerable<Ornament.MemberShip.Role>
 @{
-    IList<Role> roles = OrnamentContext.DaoFactory.MemberShipFactory.CreateRoleDao().GetAll();
-    IOrderedQueryable<Permission> permissions = from permission in OrnamentContext.DaoFactory.MemberShipFactory.Permissions
+    IList<Role> roles = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateRoleDao().GetAll();
+    IOrderedQueryable<Permission> permissions = from permission in OrnamentContext.DaoFactory.MemberShipDaoFactory.Permissions
                                                 orderby permission.Name
                                                 select permission;
 

@@ -50,9 +50,9 @@ namespace Ornament.MemberShip
             return PerformerType.Role.ToString();
         }
 
-        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+        protected override IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipDaoFactory)
         {
-            return memberShipFactory.CreateUserDao().GetUsersInRole(Name);
+            return memberShipDaoFactory.CreateUserDao().GetUsersInRole(Name);
         }
     }
 }
