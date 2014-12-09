@@ -34,9 +34,14 @@
     }
 
 
-    return function () {
-        require(["pager"], Init);
-        
-        
+    return{
+        init:
+            function() {
+                require(["pager"], Init);
+            },
+        clear:function() {
+            delete avalonl.vmodels["templateIndex"];
+        }
+
     };
 })

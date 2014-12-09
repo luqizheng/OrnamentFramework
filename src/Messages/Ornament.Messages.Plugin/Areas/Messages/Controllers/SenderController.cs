@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Web.MemberShips;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
@@ -24,18 +25,31 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             Key = "Senders")]
         public ActionResult Index()
         {
-            var data = _messageDaoFactory.NotifySenderDao.GetAll();
-            return View(data);
+           
+            return View();
         }
 
-        public ActionResult Create()
+        public ActionResult List()
         {
-            return View("Edit");
+            var data = _messageDaoFactory.NotifySenderDao.GetAll();
+            var result = from a in data select new SenderModel((a));
+            return Json(result);
         }
-        public ActionResult Edit(int? id)
+    
+        public ActionResult Get(int? id)
         {
             var result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
-            return View(result);
+            return Json(new SenderModel(result));
+        }
+
+        public ActionResult Save(SenderModel model)
+        {
+            var result = new
+            {
+                success = true
+            };
+
+            return Json(result);
         }
     }
 }

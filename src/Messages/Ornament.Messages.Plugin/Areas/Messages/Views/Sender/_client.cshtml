@@ -1,9 +1,9 @@
-﻿@model Ornament.Messages.Notification.Senders.ClientSender
+﻿@model Ornament.Messages.Plugin.Areas.Messages.Models.ClientSenderModel
 <div class="form-group">
     @Html.LabelFor(s => s.Server)
     @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>()
     {
-        {"ms-duplex","Client.Server"}
+        {"ms-duplex","ClientSender.Server"},{"class","form-control"}
     })
     @Html.ValidationMessageFor(s => s.Server)
 </div>
@@ -12,7 +12,7 @@
     @Html.LabelFor(s => s.PrivateCode)
     @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>()
         {
-            {"ms-duplex","Client.PrivateCode"}
+            {"ms-duplex","ClientSender.PrivateCode"},{"class","form-control"}
         })
     @Html.ValidationMessageFor(s => s.PrivateCode)
 </div>

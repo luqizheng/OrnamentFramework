@@ -12,6 +12,7 @@ namespace Ornament.Messages.Notification.Senders
             
         }
       
+        
 
         public virtual string Server { get; set; }
         

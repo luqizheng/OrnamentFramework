@@ -10,7 +10,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             this.DiscriminatorValue("Email");
             this.Map(s => s.Port);
             this.Map(s => s.SmtpServer).Length(64);
-            this.Map(s => s.SupportEmail).Length(64);
+            this.Map(s => s.FromEmail).Length(64);
             this.Map(s => s.UserName).Length(64);
             this.Map(s => s.Password).Length(128);
         }

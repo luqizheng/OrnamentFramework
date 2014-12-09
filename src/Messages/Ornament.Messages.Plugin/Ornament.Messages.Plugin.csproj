@@ -129,9 +129,12 @@
     <Compile Include="Areas\Messages\Controllers\SenderController.cs" />
     <Compile Include="Areas\Messages\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Messages\MessagesAreaRegistration.cs" />
+    <Compile Include="Areas\Messages\Models\ClientSenderModel.cs" />
+    <Compile Include="Areas\Messages\Models\EmailSenderModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\MessageTemplateModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\NewsTypeModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\PersonalMessageModel.cs" />
+    <Compile Include="Areas\Messages\Models\SenderModel.cs" />
     <Compile Include="Models\MessageInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -145,7 +148,7 @@
     <EmbeddedResource Include="Scripts\News\Edit.js" />
     <EmbeddedResource Include="Scripts\Template\Create.js" />
     <EmbeddedResource Include="Scripts\Config\Index.js" />
-    <EmbeddedResource Include="Scripts\Sender\Edit.js" />
+    <EmbeddedResource Include="Scripts\Sender\Index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -251,7 +254,7 @@
     <EmbeddedResource Include="Areas\Messages\Views\Sender\_email.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\Sender\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\Messages\Views\Sender\_edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Sender\_client.cshtml" />

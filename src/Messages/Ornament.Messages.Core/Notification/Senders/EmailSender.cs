@@ -14,10 +14,10 @@ namespace Ornament.Messages.Notification.Senders
         {
         }
 
-        public EmailSender(string name, string server, string supportEmail)
+        public EmailSender(string name, string server, string fromEmail)
             : base(name)
         {
-            SupportEmail = supportEmail;
+            FromEmail = fromEmail;
             SmtpServer = server;
             Port = 25;
         }
@@ -33,13 +33,13 @@ namespace Ornament.Messages.Notification.Senders
                 return _smtpClient;
             }
         }
-
+        
         public virtual string Account { get; set; }
         public virtual string SmtpServer { get; set; }
         public virtual int Port { get; set; }
 
 
-        public virtual string SupportEmail { get; set; }
+        public virtual string FromEmail { get; set; }
         public virtual string UserName { get; set; }
         public virtual string Password { get; set; }
 
@@ -79,7 +79,7 @@ namespace Ornament.Messages.Notification.Senders
                 string subject = helper.Replace(content.Subject, varibale);
                 string body = helper.Replace(content.Subject, varibale);
 
-                Send(subject, body, u.Contact.Email, SupportEmail);
+                Send(subject, body, u.Contact.Email, FromEmail);
             }
         }
     }

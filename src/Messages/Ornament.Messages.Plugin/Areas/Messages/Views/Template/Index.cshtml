@@ -68,7 +68,8 @@
 {
     <script type="text/javascript">
         require(["@Scripts.Url("~/Messages/Scripts/Template/Index.js")"], function (init) {
-            init();
+            init.init();
+            clearPageVariable.push(init.clear);
         });
     </script>
 }

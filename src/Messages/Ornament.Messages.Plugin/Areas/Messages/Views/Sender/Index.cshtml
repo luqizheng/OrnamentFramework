@@ -1,6 +1,6 @@
 ﻿@using Ornament
 @using Ornament.Web.UI.Theme
-@model IList<Ornament.Messages.Notification.Senders.Sender>
+
 
 @{
     ViewBag.Title = "title";
@@ -11,23 +11,46 @@
     <h4>Sender setting</h4>
 }
 
-@using (var panel = Html.Panel())
+@using (var panel = Html.Panel(new PanelOption()
+{
+    HtmlAttributes = new Dictionary<string, object>()
+    {
+        {"ms-controller","index"}
+    }
+}, "col-md-5"))
 {
     @panel.Header(@<text>
-                       
-                   </text>)
+
+    </text>)
 
     @panel.Body(@<text>
-                     <a class="btn btn-default" href="#@Url.Action("Create")">@Ornament.Properties.Resources.Create</a>
-                     <table class="table">
-                         @foreach (var ak in this.Model)
-                         {
-                             <tr>
-                                 <td><a href="#@Url.Action("Edit",ak.Id)"><i class="fa fa-edit"></i></a></td>
-                                 <td>@ak.Name</td>
-                                 <td>@ak.Remarks</td>
-                             </tr>
-                         }
-                     </table>
-                 </text>)
+    <a class="btn btn-default" href="javascript:;" ms-click="Create">@Ornament.Properties.Resources.Create</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Operator</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ms-repeat="Senders">
+                <td ms-title="el.Remarks">{{el.Name}}</td>
+                <td>
+                    <a href="javascript:;" ms-click="Edit">@Ornament.Properties.Resources.Edit</a>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    </text>)
 }
+
+@Html.Partial("_edit")
+
+@section scripts{
+    <script type="text/javascript">
+        require(["/Messages/Scripts/Sender/Index.js"], function (main) {
+            main.init();
+            clearPageVariable.push(main.clear);
+        })
+    </script>}

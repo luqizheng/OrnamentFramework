@@ -1,11 +1,11 @@
 ﻿
-@model Ornament.Messages.Notification.Senders.EmailSender
+@model Ornament.Messages.Plugin.Areas.Messages.Models.EmailSenderModel
 
 <div class="form-group">
     @Html.LabelFor(s=>s.Account)
       @Html.TextBoxFor(s=>s.Account,new Dictionary<string, object>()
         {
-            {"ms-duplex","Email.Account"}
+            {"ms-duplex","EmailSender.Account"},{"class","form-control"}
         })
     @Html.ValidationMessageFor(s=>s.Account)
 </div>
@@ -14,7 +14,7 @@
     @Html.LabelFor(s=>s.Password)
     @Html.TextBoxFor(s=>s.Password,new Dictionary<string, object>()
         {
-            {"ms-duplex","Email.Password"}
+            {"ms-duplex","EmailSender.Password"},{"class","form-control"}
         })
     @Html.ValidationMessageFor(s=>s.Password)
 </div>
@@ -23,7 +23,7 @@
     @Html.LabelFor(s=>s.SmtpServer)
     @Html.TextBoxFor(s=>s.SmtpServer,new Dictionary<string, object>()
         {
-            {"ms-duplex","Email.SmtpServer"}
+            {"ms-duplex","EmailSender.SmtpServer"},{"class","form-control"}
         })
     @Html.ValidationMessageFor(s=>s.SmtpServer)
 </div>
@@ -33,7 +33,7 @@
     @Html.LabelFor(s=>s.Port)
     @Html.TextBoxFor(s=>s.Port,new Dictionary<string, object>()
         {
-            {"ms-duplex","Name"}
+            {"ms-duplex","EmailSender.Port"},{"class","form-control"}
         })
     @Html.ValidationMessageFor(s=>s.Port)
 </div>
