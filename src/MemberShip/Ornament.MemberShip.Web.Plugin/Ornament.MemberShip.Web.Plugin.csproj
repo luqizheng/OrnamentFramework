@@ -175,7 +175,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\FriendsController.cs" />
     <Compile Include="Api\MemberController.cs" />
     <Compile Include="Api\OrgController.cs" />
     <Compile Include="Api\OrgsController.cs" />

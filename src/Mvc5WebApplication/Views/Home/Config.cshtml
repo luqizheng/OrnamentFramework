@@ -14,40 +14,15 @@ require.config({
         socketio:"https://cdn.socket.io/socket.io-1.1.0",
         ckeditor:"/scripts/plugin/ckeditor/ckeditor",
         @*avalon plugin*@
-        pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
-        chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")"
+pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
+chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")",
+main:"@Scripts.Url("~/Scripts/modules/main")"
+
     }
-    
 });
 
-//Chat's
 
-require(['/Scripts/avalons/chat/chat.js'], function () {
-    /*avalon.define("chatList", function (vm) {
-        vm.$chatOpts = {
-            host: 'http://location:3000'
-        };
-    });
-    avalon.scan();*/
-});
-
-//ajax login
-require(['vaform'], function () {
+require(["main"],function(){
     
-    $("#login-ajax-form").vaform({
-        success: function (data) {
-            if (data) {
-                location = location;
-            } else {
-                alert('login faile');
-            }
-        }
-    });
-    $("#login-submit").click(function () {
-        $("#login-ajax-form").submit();
-    })
-
-})
-
-
+});
 

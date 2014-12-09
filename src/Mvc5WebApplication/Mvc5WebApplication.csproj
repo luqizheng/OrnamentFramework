@@ -436,6 +436,9 @@
     <Content Include="Scripts\libs\jquery-2.1.1.min.js" />
     <Content Include="Scripts\libs\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\libs\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\modules\ajaxlogin.js" />
+    <Content Include="Scripts\modules\chat.js" />
+    <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\notification\notifyClient.js" />
     <Content Include="Scripts\notification\SmartNotification.min.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.js" />
