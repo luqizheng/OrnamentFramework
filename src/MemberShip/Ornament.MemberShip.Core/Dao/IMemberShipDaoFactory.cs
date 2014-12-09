@@ -24,7 +24,6 @@ namespace Ornament.MemberShip.Dao
         IQueryable<EmailVerifier> UserSecretTokens { get; }
 
 
-        IFriendGroupDao CreateFriendGroupDao();
 
 
         /// <summary>

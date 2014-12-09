@@ -1,3 +1,0 @@
-﻿namespace Ornament.MemberShip.Dao
-{
-}

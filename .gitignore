@@ -88,6 +88,3 @@ bin
 /src/Mvc5WebApplication/log
 /src/Chat/.idea
 /src/chat/node_modules
-
-src/MemberShip/Ornament.MemberShip.Dao.NHibernateImple/MemberShipDaoFactory.cs
-src/Messages/Ornament.Messages.Plugin/Ornament.Messages.Plugin.csproj
