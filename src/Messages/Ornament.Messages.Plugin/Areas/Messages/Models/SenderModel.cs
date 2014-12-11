@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using NHibernate.Dialect.Function;
+using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Senders;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Models
@@ -11,27 +9,36 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         public SenderModel(Sender sender)
             : this()
         {
-            this.Name = sender.Name;
-            this.Remarks = sender.Remarks;
+            Name = sender.Name;
+            Remarks = sender.Remarks;
             var email = sender as EmailSender;
             if (email != null)
             {
-                this.SenderType = "email";
-                this.EmailSender = new EmailSenderModel(email);
+                SenderType = "email";
+                EmailSender = new EmailSenderModel(email);
             }
             else
             {
-                this.SenderType = "client";
-                this.ClientSender = new ClientSenderModel((ClientSender)sender);
+                SenderType = "client";
+                ClientSender = new ClientSenderModel((ClientSender)sender);
             }
-
+            Id = sender.Id;
         }
-        public virtual string SenderType { get; set; }
+
         public SenderModel()
         {
-            this.EmailSender = new EmailSenderModel();
-            this.ClientSender = new ClientSenderModel();
+            EmailSender = new EmailSenderModel();
+            ClientSender = new ClientSenderModel();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int? Id { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string SenderType { get; set; }
+
         /// <summary>
         /// </summary>
         public virtual string Name { get; set; }
@@ -40,7 +47,33 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         /// </summary>
         public virtual string Remarks { get; set; }
 
+        /// <summary>
+        /// </summary>
         public EmailSenderModel EmailSender { get; set; }
+
+        /// <summary>
+        /// </summary>
         public ClientSenderModel ClientSender { get; set; }
+
+        public void Save(IMessageDaoFactory daoFactory)
+        {
+            Sender sender;
+            switch (SenderType)
+            {
+                case "email":
+                    sender = this.EmailSender.CreateSender(this.Id, daoFactory);
+                    break;
+                case "client":
+                    sender = this.ClientSender.CreateSender(this.Id, daoFactory);
+                    break;
+                default:
+                    throw new NotifySenderException(SenderType + " is not defined");
+
+            }
+            sender.Name = Name;
+            sender.Remarks = Remarks;
+
+            daoFactory.NotifySenderDao.SaveOrUpdate(sender);
+        }
     }
 }

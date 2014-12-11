@@ -34,7 +34,7 @@ namespace Ornament.Messages.Notification.Senders
             }
         }
         
-        public virtual string Account { get; set; }
+        
         public virtual string SmtpServer { get; set; }
         public virtual int Port { get; set; }
 
