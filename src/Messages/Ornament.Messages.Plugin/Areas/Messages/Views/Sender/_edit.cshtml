@@ -1,4 +1,5 @@
 ﻿@using Ornament
+@using Ornament.Web.HtmlExtends
 @using Ornament.Web.UI.Theme
 @model Ornament.Messages.Plugin.Areas.Messages.Models.SenderModel
 
@@ -10,13 +11,13 @@
     </text>)
 
     @panel.Body(@<text>
-    <form ms-controller="editSender">
+    <form ms-controller="editSender" id="editSender" method="post" action="@Url.Action("Save")">
         <div class="form-group">
             @Html.LabelFor(s => s.Name)
 
             @Html.TextBoxFor(s => s.Name, new Dictionary<string, object>()
         {
-            {"ms-duplex","Name"},{"class","form-control"}
+            {"ms-duplex","Name"},{"class","form-control"},{"ms-disabled","disabled"}
         })
             @Html.ValidationMessageFor(s => s.Name)
 
@@ -25,22 +26,22 @@
             @Html.LabelFor(s => s.Remarks)
             @Html.TextBoxFor(s => s.Remarks, new Dictionary<string, object>()
         {
-            {"ms-duplex","Remarks"},{"class","form-control"}
+            {"ms-duplex","Remarks"},{"class","form-control"},{"ms-disabled","disabled"}
         })
             @Html.ValidationMessageFor(s => s.Remarks)
         </div>
         <div class="form-group">
             @Html.LabelFor(s => s.SenderType)
-            <select id="SenderType" name="SenderType" ms-duplex="senderType" class="form-control">
+            <select id="SenderType" name="SenderType" ms-duplex="SenderType" class="form-control" ms-disabled="disabled">
                 <option value="email" selected="selected">Email</option>
                 <option value="client">Client</option>
             </select>
         </div>
-        <div ms-if="senderType=='email'">
-            @Html.EditorFor(s=>s.EmailSender,"_email")
+        <div ms-visible="SenderType=='email'">
+            @Html.PartialFor(s=>s.EmailSender,"_email")
         </div>
-        <div ms-if="senderType=='client'">
-            @Html.EditorFor(_=>_.ClientSender,"_client")
+        <div ms-visible="SenderType=='client'">
+            @Html.PartialFor(_=>_.ClientSender,"_client")
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
+using Ornament.Messages.Notification.Senders;
 using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Web.MemberShips;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
+    [Authorize]
     public class SenderController : Controller
     {
         private readonly IMessageDaoFactory _messageDaoFactory;
@@ -25,20 +25,19 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             Key = "Senders")]
         public ActionResult Index()
         {
-           
             return View();
         }
 
         public ActionResult List()
         {
-            var data = _messageDaoFactory.NotifySenderDao.GetAll();
-            var result = from a in data select new SenderModel((a));
-            return Json(result);
+            IList<Sender> data = _messageDaoFactory.NotifySenderDao.GetAll();
+            IEnumerable<SenderModel> result = from a in data select new SenderModel((a));
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
-    
+
         public ActionResult Get(int? id)
         {
-            var result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
+            Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
             return Json(new SenderModel(result));
         }
 
