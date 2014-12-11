@@ -3,7 +3,7 @@
     @Html.LabelFor(s => s.Server)
     @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>()
     {
-        {"ms-duplex","ClientSender.Server"},{"class","form-control"}
+        {"ms-duplex","ClientSender.Server"},{"class","form-control"},{"ms-disabled","disabled"}
     })
     @Html.ValidationMessageFor(s => s.Server)
 </div>
@@ -12,7 +12,7 @@
     @Html.LabelFor(s => s.PrivateCode)
     @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>()
         {
-            {"ms-duplex","ClientSender.PrivateCode"},{"class","form-control"}
+            {"ms-duplex","ClientSender.PrivateCode"},{"class","form-control"},{"ms-disabled","disabled"}
         })
     @Html.ValidationMessageFor(s => s.PrivateCode)
 </div>

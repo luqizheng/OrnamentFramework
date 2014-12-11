@@ -1,5 +1,5 @@
-﻿(function () {
-    //只对这个项目有效。
+﻿//只对这个项目有效。
+(function () {
     (function (factory) {
         if (typeof define === 'function' && define.amd) {
             //Need ajax form 
@@ -36,15 +36,17 @@
             $.validator.unobtrusive.parse(this);
 
             $form.validate().settings.submitHandler = function (e) {
+               
+
                 var data = $form.serializeObject();
-                opts.before.call($form,data);
+                opts.before.call($form, data);
 
                 $.post(opts.url, data, function (d) {
 
                     opts.success.call($form, d);
 
                 }).done(function () {
-                    
+
                     opts.done.call($form);
 
                 }).fail(function (status) {
@@ -58,7 +60,8 @@
 
                     }
                 });
-                e.preventDefault();
+
+
             };
             return $form;
         };
@@ -69,7 +72,7 @@
             done: function () { },
             success: function () { },
         };
-        
+
         return $;
     });
 
