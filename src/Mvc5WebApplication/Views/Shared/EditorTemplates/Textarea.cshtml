@@ -1,0 +1,29 @@
+﻿@model string
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var htmlAttris = new Dictionary<string, object>
+        {
+            {"class", "styled span12"}
+        };
+    foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
+    {
+        var b = attr as StringLengthAttributeAdapter;
+        if (b != null)
+        {
+            foreach (ModelClientValidationRule mcvr in b.GetClientValidationRules())
+            {
+                var length = mcvr.ValidationParameters["max"];
+                htmlAttris.Add("max", length);
+            }
+            break;
+        }
+
+    }
+}
+<div class="control-group">
+    @Html.Label("", display, new { @class = "control-label" })
+    <div class="controls">
+        @Html.TextArea("", this.Model, 5, 40, htmlAttris)
+        @Html.ValidationMessage("")
+    </div>
+</div>

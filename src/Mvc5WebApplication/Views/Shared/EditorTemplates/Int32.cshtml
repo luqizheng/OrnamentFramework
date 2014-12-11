@@ -1,0 +1,9 @@
+﻿
+@model Int32?
+
+@{
+    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    var id = Html.Id("");
+}
+
+@Html.TextBox("", this.Model)
