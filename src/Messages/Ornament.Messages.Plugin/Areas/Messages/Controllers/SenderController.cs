@@ -5,6 +5,7 @@ using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Senders;
 using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
@@ -32,7 +33,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IList<Sender> data = _messageDaoFactory.NotifySenderDao.GetAll();
             IEnumerable<SenderModel> result = from a in data select new SenderModel((a));
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Get(int? id)
@@ -41,14 +42,29 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return Json(new SenderModel(result));
         }
 
+        [ValidateAjax, HttpPost]
         public ActionResult Save(SenderModel model)
         {
-            var result = new
+            if (ModelState.IsValid)
             {
-                success = true
-            };
+                model.Save(_messageDaoFactory);
+                var result = new
+                {
+                    success = true,
+                    message = ""
+                };
 
-            return Json(result);
+                return Json(result);
+            }
+            else
+            {
+                var result = new
+                {
+                    success = false,
+                    message = "Failed to save Sender."
+                };
+                return Json(result);
+            }
         }
     }
 }

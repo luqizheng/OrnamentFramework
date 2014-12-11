@@ -55,7 +55,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         /// </summary>
         public ClientSenderModel ClientSender { get; set; }
 
-        public void Save(IMessageDaoFactory daoFactory)
+        public Sender Save(IMessageDaoFactory daoFactory)
         {
             Sender sender;
             switch (SenderType)
@@ -74,6 +74,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             sender.Remarks = Remarks;
 
             daoFactory.NotifySenderDao.SaveOrUpdate(sender);
+
+            return sender;
         }
     }
 }

@@ -31,23 +31,20 @@
                     };
                     vm.editing = false;
                 };
-
-                vm.save = function() {
-                    var data = {
-                        Id: vm.Id,
-                        SenderType: vm.SenderType,
-                        EmailSender: this.$vmodel.EmailSender
-                    };
-                    
-                    $.post("/Messages/Sender/Save", data, function(returnValue) {
-                        alert(returnValue.success);
-                    });
-                };
+                
                 vm.cancel = function() {
 
                 };
                 vm.reload = function() {
+                    if (vm.Id != null) {
+                        $.get("/Message/Sender/Get/" + vm.Id, function(d) {
+                            editModel.mix(this, d);
+                        });
+                    }
+                };
 
+                vm.get = function() {
+                    return this.$vmodel;
                 };
 
             });
@@ -64,7 +61,19 @@
             $.get("/Messages/Sender/List", function (d) {
                 listModel.Senders = d;
             });
-            avalon.scan();
+
+
+            $("#editSender").vaform({
+                success: function(d) {
+                    if (d.success) {
+                        editModel.Id = d.SenderId;
+                        listModel.Senders.push(editModel.get());
+                        alert('success to save');
+                    } else {
+                        alert(d.message);
+                    }
+                } 
+            });
         },
         clear: function () {
             delete avalon.vmodels["editSender"];
