@@ -22,6 +22,7 @@ if (!console) {
         log: function (str) { }
     }
 }
+//修改Smart Admin的 导航方式，在切换导航的时候，要能够正确调用清理函数
 var clearPageVariable = [];
 $(document).off('click', 'nav a[href!="#"]')
     .on('click', 'nav a[href!="#"]', function (e) {
@@ -64,11 +65,15 @@ $(document).off('click', 'nav a[href!="#"]')
         function clearup(src, target) {
             if (src != target) {
                 while (clearPageVariable.length != 0) {
+
                     var method = (clearPageVariable.shift());
-                    method();
+                    if (typeof method == "function") {
+                        method();
+                    }
                 }
             }
         }
 
     });
+
 
