@@ -40,6 +40,7 @@ namespace Ornament.MemberShip.Permissions
         /// </summary>
         /// <value>The comment.</value>
         [Display(ResourceType = typeof (Resources), Name = "Remark")]
+
         public virtual string Remark { get; set; }
 
         /// <summary>

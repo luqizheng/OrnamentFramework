@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Iesi.Collections.Generic;
@@ -100,20 +101,14 @@ namespace Ornament.MemberShip
         /// <value>
         ///     The comment.
         /// </value>
-        [Display(Name = "Remark", ResourceType = typeof (Resources)),
-         RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof (Resources))]
-        [UIHint("Textarea")]
+        [AttributeProvider("Ornament.MemberShip.IPerformer,Ornament.MemberShip.Core", "Remarks")]
         public virtual string Remarks { get; set; }
 
 
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Name's length more than 30</exception>
-        [Display(Name = "Name", ResourceType = typeof (Resources)),
-         Required(ErrorMessageResourceName = "RequireName", ErrorMessageResourceType = typeof (Resources)),
-         RegularExpression(".{1,30}", ErrorMessageResourceName = "NameOverMaxLength",
-             ErrorMessageResourceType = typeof (Resources))]
+        [AttributeProvider("Ornament.MemberShip.IPerformer,Ornament.MemberShip.Core", "Name")]
         public virtual string Name
         {
             get { return _name; }

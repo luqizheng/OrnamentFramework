@@ -19,7 +19,7 @@
 </style>
 <script type="text/javascript">
 
-    seajs.use(['jquery'], function() {
+    require(['jquery'], function() {
         var mapping = @Html.Raw(mapping.ToJson());
         $("#roles input").change(function() {
             var permissions = mapping[$(this).val()].join(",#");

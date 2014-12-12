@@ -11,7 +11,6 @@ using CombineJs.Modules.Modules;
 using log4net;
 using Ornament.Configurations;
 using Ornament.MemberShip;
-using Ornament.Validations;
 using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
 using Ornament.Web.MemberShips;
@@ -19,11 +18,9 @@ using Ornament.Web.Messages;
 using Ornament.Web.ModelBinder;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.SeajsModules;
-using Ornament.Web.ValidationAdapter;
 using Qi;
 using Qi.NHibernateExtender;
 using Qi.Web.Mvc;
-using SeajsBundles.Seajs.Modules;
 
 namespace Ornament.Web.Cfg
 {
@@ -50,8 +47,8 @@ namespace Ornament.Web.Cfg
             //
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
             //新的Attribute，用于JquerUI spinner控件一起用
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (JqStepAttribute),
-                typeof (StepAttributeAdapter));
+            //DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (JqStepAttribute),
+            //    typeof (StepAttributeAdapter));
 
             //把ControllerFactory和castle联系起来
             ChangeControllerFacotry(httpErrorControllerType, webAssembly);

@@ -75,5 +75,3 @@ $(document).off('click', 'nav a[href!="#"]')
         }
 
     });
-
-

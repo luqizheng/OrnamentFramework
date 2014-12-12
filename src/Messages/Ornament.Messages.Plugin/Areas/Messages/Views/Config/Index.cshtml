@@ -62,7 +62,7 @@
     </script>
     <script type="text/javascript">
         var js=@Html.Raw(a);
-        seajs.use("/Messages/Scripts/Config/index.js", function(init) {
+        require(["/Messages/Scripts/Config/index.js"], function(init) {
             init(js);
         });
     </script>

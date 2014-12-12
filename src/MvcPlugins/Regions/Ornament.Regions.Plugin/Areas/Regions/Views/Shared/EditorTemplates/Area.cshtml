@@ -74,7 +74,7 @@
 </div>
 
 <script type="text/javascript">
-    seajs.use("@ScriptsSeajs.RenderUrl("~/Regions/Scripts/region.js")", function(region) {
+    require(["@Scripts.Url("~/Regions/Scripts/region.js")"], function(region) {
         region("#province_@inputName", "#city_@inputName", "#@inputName");
     })
 </script>

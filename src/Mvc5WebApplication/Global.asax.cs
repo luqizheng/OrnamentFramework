@@ -45,7 +45,7 @@ namespace WebApplication
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
-            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
@@ -53,7 +53,7 @@ namespace WebApplication
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
             SeajsModuleBundleMessageHandle.HandlAllBundle();
-
+            
             NHibernateMvcRegister.Regist();
         }
 
@@ -97,8 +97,9 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
+
     }
 }

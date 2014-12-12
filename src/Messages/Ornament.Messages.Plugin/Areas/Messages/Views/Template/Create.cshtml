@@ -126,6 +126,6 @@
 
     <script type="text/javascript">
         var content = @Html.Raw(contents)
-    seajs.use("@SeajsBundles.ScriptsSeajs.RenderUrl("/Messages/Scripts/Template/create.js")")
+    require(["@Scripts.Url("/Messages/Scripts/Template/create.js")"])
     </script>
 }

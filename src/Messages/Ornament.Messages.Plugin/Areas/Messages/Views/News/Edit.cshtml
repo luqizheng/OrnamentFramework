@@ -145,7 +145,7 @@
 
     <script type="text/javascript">
         var content = @Html.Raw(contents);
-        seajs.use("@ScriptsSeajs.RenderUrl("~/Messages/Scripts/News/Edit.js")");
+        require(["@Scripts.Url("~/Messages/Scripts/News/Edit.js")"]);
 
     </script>
 }

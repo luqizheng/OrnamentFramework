@@ -439,6 +439,7 @@
     <Content Include="Scripts\modules\ajaxlogin.js" />
     <Content Include="Scripts\modules\chat.js" />
     <Content Include="Scripts\modules\main.js" />
+    <Content Include="Scripts\modules\ui.js" />
     <Content Include="Scripts\notification\notifyClient.js" />
     <Content Include="Scripts\notification\SmartNotification.min.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.js" />
@@ -846,6 +847,7 @@
     <None Include="Scripts\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.min.js" />
+    <Content Include="Scripts\plugin\jquery.validate.extends\DateRange.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.bootstrap\jquery.validate.unobtrusive.bootstrap.js" />
@@ -1035,6 +1037,12 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\GenderType.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Editor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

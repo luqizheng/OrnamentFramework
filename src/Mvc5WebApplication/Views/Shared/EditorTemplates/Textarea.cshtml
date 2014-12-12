@@ -3,7 +3,7 @@
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var htmlAttris = new Dictionary<string, object>
         {
-            {"class", "styled span12"}
+            {"class", "span12"}
         };
     foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
     {
@@ -13,17 +13,12 @@
             foreach (ModelClientValidationRule mcvr in b.GetClientValidationRules())
             {
                 var length = mcvr.ValidationParameters["max"];
-                htmlAttris.Add("max", length);
+                htmlAttris.Add("maxlength", length);
             }
             break;
         }
 
     }
 }
-<div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
-    <div class="controls">
-        @Html.TextArea("", this.Model, 5, 40, htmlAttris)
-        @Html.ValidationMessage("")
-    </div>
-</div>
+
+@Html.TextArea("", this.Model, 5, 40, htmlAttris)

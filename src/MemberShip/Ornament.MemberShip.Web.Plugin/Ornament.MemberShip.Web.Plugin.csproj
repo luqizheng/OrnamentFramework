@@ -243,7 +243,6 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hans.resx" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\App_LocalResources\Edit.zh-Hant.resx" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Role\Delete.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\_Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\Index.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Role\_Permissions.cshtml" />

@@ -171,7 +171,6 @@
     <Compile Include="Bundles\ScriptsFolderManager.cs" />
     <Compile Include="Cfg\MvcWebConfig.cs" />
     <Compile Include="HtmlEmbeddedResource.cs" />
-    <Compile Include="HtmlExtends\DateTimePickerExtender.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
     <Compile Include="IoC\CastleDependcyResolver.cs" />
@@ -204,7 +203,6 @@
     <Compile Include="ResourceDescription.cs" />
     <Compile Include="SiteMapResolveUrl.cs" />
     <Compile Include="TimeZoneHtmlExtender.cs" />
-    <Compile Include="ValidationAdapter\StepAttributeAdapter.cs" />
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>

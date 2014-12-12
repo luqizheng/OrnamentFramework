@@ -39,6 +39,8 @@ namespace Ornament.MemberShip
          RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
              ErrorMessageResourceType = typeof (Resources))]
         [UIHint("Textarea")]
+        [StringLength(200, ErrorMessageResourceName = "RemarkOverMaxLength",
+ErrorMessageResourceType = typeof(Resources))]
         string Remarks { get; set; }
     }
 
@@ -110,6 +112,7 @@ namespace Ornament.MemberShip
         string LastName { get; set; }
 
         [Display(Name = "Birthday", ResourceType = typeof (Resources))]
+        [Qi.Domain.Attributes.DateRange("1940-01-01","2020-12-31","yyyy-MM-dd")]
         DateTime? Birthday { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Ornament.MemberShip.Properties;
@@ -21,10 +22,8 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials
             IsLock = user.Security.IsLocked;
             Remark = user.Remarks;
         }
-        
-        [Display(Name = "Remark", ResourceType = typeof(Resources)),
-         RegularExpression(".{0,200}", ErrorMessageResourceName = "RemarkOverMaxLength",
-             ErrorMessageResourceType = typeof(Resources))]
+
+        [AttributeProvider("Ornament.MemberShip.IPerformer,Ornament.MemberShip.Core", "Remarks")]
         public string Remark { get; set; }
 
 
