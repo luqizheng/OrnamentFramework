@@ -122,6 +122,73 @@
             <param name="binary"></param>
             <returns></returns>
         </member>
+        <member name="T:Qi.Domain.Attributes.DateRangeAttribute">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            </summary>
+            <param name="minDate"></param>
+            <param name="maxDate"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.IsValid(System.Object)">
+            <summary>
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.FormatErrorMessage(System.String)">
+            <summary>
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.ParseDate(System.String)">
+            <summary>
+            </summary>
+            <param name="dateValue"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.DateFormat">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.MinDate">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.MaxDate">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Qi.Domain.Attributes.QiRangeAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Qi.Domain.Attributes.QiRangeAttribute.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <param name="step"></param>
+        </member>
+        <member name="M:Qi.Domain.Attributes.QiRangeAttribute.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="min"></param>
+            <param name="max"></param>
+            <param name="step"></param>
+        </member>
+        <member name="P:Qi.Domain.Attributes.QiRangeAttribute.Step">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Qi.Draw.ResizePic">
             <summary>
             </summary>
@@ -736,6 +803,13 @@
             <summary>
             </summary>
             <param name="t"></param>
+        </member>
+        <member name="M:Qi.Domain.IDao`2.Update(`1,`0)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="id"></param>
         </member>
         <member name="M:Qi.Domain.IDao`2.FindByExample(`1,System.String[])">
             <summary>
