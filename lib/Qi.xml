@@ -126,12 +126,21 @@
             <summary>
             </summary>
         </member>
-        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.#ctor(System.String,System.String,System.String)">
+        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.#ctor(System.String,System.String)">
             <summary>
+            
+            </summary>
+            <param name="minDate">请输入 2014-10-01</param>
+            <param name="maxDate">请输入2014-09-02</param>
+        </member>
+        <member name="M:Qi.Domain.Attributes.DateRangeAttribute.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            初始化DateRange。请与DisplayFormat设置客户端插件接受的日期格式。
             </summary>
             <param name="minDate"></param>
             <param name="maxDate"></param>
-            <param name="format"></param>
+            <param name="dateFromatForTranslate">转换格式</param>
+            <param name="clientDateFormat">客户端的输出格式，改字符会用于客户端日期插件</param>
         </member>
         <member name="M:Qi.Domain.Attributes.DateRangeAttribute.IsValid(System.Object)">
             <summary>
@@ -151,8 +160,13 @@
             <param name="dateValue"></param>
             <returns></returns>
         </member>
-        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.DateFormat">
+        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.DateDateFromatForTranslate">
             <summary>
+            </summary>
+        </member>
+        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.ClientDateFormat">
+            <summary>
+                客户端的日期格式与客户端使用的插件相关，如果使用时jqueryui，请使用jqueryui 的日期格式
             </summary>
         </member>
         <member name="P:Qi.Domain.Attributes.DateRangeAttribute.MinDate">

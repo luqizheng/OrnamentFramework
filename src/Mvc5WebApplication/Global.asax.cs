@@ -24,6 +24,7 @@ using Ornament.Web.PortableAreas;
 using Ornament.Web.PortableAreas.InputBuilder;
 using Ornament.Web.SeajsModules;
 using Qi.Web.Mvc;
+using WebApplication.App_Start;
 using WebApplication.Controllers;
 
 namespace WebApplication
@@ -53,7 +54,7 @@ namespace WebApplication
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
             SeajsModuleBundleMessageHandle.HandlAllBundle();
-            
+            ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
         }
 

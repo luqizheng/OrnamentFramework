@@ -805,7 +805,7 @@
     if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
 
         // AMD. Register as an anonymous module.
-        define('fastclick',[],function () {
+        define([],function () {
             return FastClick;
         });
     } else if (typeof module !== 'undefined' && module.exports) {

@@ -2,12 +2,13 @@
 using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Validations;
 using Qi.Domain.Attributes;
+using Qi.Web.Mvc.ClientValidations.Adapters;
 
-namespace WebApplication
+namespace WebApplication.App_Start
 {
     public class ValidationConfig
     {
-        public void Registry()
+        public static void Registry()
         {
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (PasswordValidationAttribute),
                 typeof (RegularExpressionAttributeAdapter));
@@ -15,7 +16,7 @@ namespace WebApplication
                 typeof (RequiredAttributeAdapter));
             //新的Attribute，用于JquerUI spinner控件一起用
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (DateRangeAttribute),
-                typeof (RangeAttributeAdapter));
+                typeof (DateRangeAdapter));
         }
     }
 }

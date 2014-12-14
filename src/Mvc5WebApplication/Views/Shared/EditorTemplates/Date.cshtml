@@ -1,0 +1,18 @@
+﻿@using System.Text.RegularExpressions
+@using Qi.Web.Mvc.ClientValidations.Adapters
+@using Qi.Web.Mvc.ClientValidations.Rules
+@model DateTime?
+@{
+    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
+    string displayValue = Model != null ? Model.Value.ToString(ViewData.ModelMetadata.DisplayFormatString) : "";
+    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd").ToLower();
+    string inputMask = Regex.Replace(format, @"(\w{2})(\1)+", "$1");
+    var htmlAttris = new Dictionary<string, object>
+    {
+        {"class", "form-control datepicker"},
+        {"data-dateformat", inputMask}
+    };
+}
+
+@Html.TextBox("", displayValue, htmlAttris)
+<span class="input-group-addon"><i class="fa fa-calendar"></i></span>

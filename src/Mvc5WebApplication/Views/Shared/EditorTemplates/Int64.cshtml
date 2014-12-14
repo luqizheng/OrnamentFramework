@@ -1,5 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
-@using Ornament.Web.ValidationAdapter
+@using Qi.Web.Mvc.ClientValidations.Adapters
 @model Int64?
 @{
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
@@ -8,7 +8,7 @@
 
     foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
     {
-        var b = attr as StepAttributeAdapter;
+        var b = attr as DateRangeAdapter;
         if (b != null)
         {
             foreach (ModelClientValidationRule mcvr in b.GetClientValidationRules())

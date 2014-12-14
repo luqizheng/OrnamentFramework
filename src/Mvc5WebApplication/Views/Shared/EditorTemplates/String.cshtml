@@ -10,11 +10,11 @@
     }
     if (htmlAttris.ContainsKey("class"))
     {
-        htmlAttris["class"] = htmlAttris["class"] + " span10";
+        htmlAttris["class"] = htmlAttris["class"] + " col-md-12";
     }
     else
     {
-        htmlAttris.Add("class", "span10");
+        htmlAttris.Add("class", "col-md-12");
     }
     foreach (ModelValidator attr in ViewData.ModelMetadata.GetValidators(ViewContext))
     {
@@ -31,8 +31,3 @@
     }
 }
 @Html.TextBox(inputName, Model, htmlAttris)
-
-@*
-Scripts 定义在
-<script src="~/Scripts/modules/ui.js"></script>
-*@

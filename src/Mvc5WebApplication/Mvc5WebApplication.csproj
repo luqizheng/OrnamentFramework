@@ -436,10 +436,13 @@
     <Content Include="Scripts\libs\jquery-2.1.1.min.js" />
     <Content Include="Scripts\libs\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\libs\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\libs\jquery-ui-1.11.2.js" />
+    <Content Include="Scripts\libs\jquery-ui-1.11.2.min.js" />
     <Content Include="Scripts\modules\ajaxlogin.js" />
     <Content Include="Scripts\modules\chat.js" />
     <Content Include="Scripts\modules\main.js" />
-    <Content Include="Scripts\modules\ui.js" />
+    <Content Include="Scripts\modules\ornamentUi.js" />
+    <Content Include="Scripts\modules\pageMain.js" />
     <Content Include="Scripts\notification\notifyClient.js" />
     <Content Include="Scripts\notification\SmartNotification.min.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.js" />
@@ -1010,7 +1013,7 @@
     <Content Include="Views\Shared\EditorTemplates\VerifyCode.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TimePeriod.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\EditPlace.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Modal\Body.cshtml" />

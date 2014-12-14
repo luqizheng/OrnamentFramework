@@ -3,7 +3,7 @@
     var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var htmlAttris = new Dictionary<string, object>
         {
-            {"class", "span12"}
+            {"class", "col-md-12"}
         };
     foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
     {
