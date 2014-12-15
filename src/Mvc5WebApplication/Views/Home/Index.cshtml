@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    @Scripts.Render("~/js/avalon")
+    @Scripts.Render("~/Scripts/avalon")
     <script type="text/javascript"> avalon.config({ loader: false }) </script>
     <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
     <script src="/Scripts/require.js" data-main="scripts/config.js"></script>
@@ -374,10 +374,10 @@
 
     <!-- #PLUGINS -->
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    @Scripts.Render("~/js/jquery")
-    @Scripts.Render("~/js/jqueryui")
+    @Scripts.Render("~/Scripts/jquery.js")
+    @Scripts.Render("~/Scripts/jqueryui.js")
     <!-- BOOTSTRAP JS -->
-    @Scripts.Render("~/js/bootstrap")
+    @Scripts.Render("~/Scripts/bootstrap.js")
 
     <!-- IMPORTANT: APP CONFIG -->
     <script src="/Scripts/app.config.js"></script>

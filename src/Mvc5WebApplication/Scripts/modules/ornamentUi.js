@@ -13,7 +13,15 @@
 
     function txtMaxLength() {
         
-        $("[maxlength]", $("#content")).maxlength({ alwaysShow: true });
+        var inputMaxLength = $("input[type=text][maxlength],textarea[maxlength]");
+        console.log(inputMaxLength.length + "found in type=text");
+        if (inputMaxLength.length != 0) {
+            require(["maxlength"], function () {
+                inputMaxLength.maxlength({
+                    alwaysShow: true
+                });
+            });
+        }
     }
 
     function dateRange() {

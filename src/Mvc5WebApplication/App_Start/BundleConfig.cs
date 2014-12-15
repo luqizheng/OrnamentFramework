@@ -27,7 +27,7 @@ namespace WebApplication
         private static void Fx(BundleCollection bundles)
         {
             var jquery =
-                new ScriptBundle("~/js/jquery", "http://libs.baidu.com/jquery/2.0.2/jquery.js").Include(
+                new ScriptBundle("~/Scripts/jquery.js", "http://libs.baidu.com/jquery/2.0.2/jquery.js").Include(
                     "~/scripts/libs/jquery-{version}.js");
             jquery.CdnFallbackExpression = "window.jQuery";
             bundles.Add(jquery);
