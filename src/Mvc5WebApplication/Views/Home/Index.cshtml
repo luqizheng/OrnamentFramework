@@ -13,7 +13,7 @@
     @Scripts.Render("~/Scripts/avalon")
     <script type="text/javascript"> avalon.config({ loader: false }) </script>
     <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
-    <script src="/Scripts/require.js" data-main="scripts/config.js"></script>
+   
   
     <!-- #CSS Links -->
     <!-- Basic Styles -->
@@ -360,92 +360,9 @@
 
     @Html.Partial("Layout/_shotcut")
 
-    <!--================================================== -->
-
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
-            <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
-
-    <!-- avalon-->
-
-
-
-
-
-
-    <!-- #PLUGINS -->
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    @Scripts.Render("~/Scripts/jquery.js")
-    @Scripts.Render("~/Scripts/jqueryui.js")
-    <!-- BOOTSTRAP JS -->
-    @Scripts.Render("~/Scripts/bootstrap.js")
-
-    <!-- IMPORTANT: APP CONFIG -->
-    <script src="/Scripts/app.config.js"></script>
-
-
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-    <script src="/Scripts/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
-
-    <!-- CUSTOM NOTIFICATION -->
-    <script src="/Scripts/notification/SmartNotification.min.js"></script>
-
-    <!-- JARVIS WIDGETS -->
-    <script src="/Scripts/smartwidgets/jarvis.widget.min.js"></script>
-
-    @*     <!-- EASY PIE CHARTS -->
-        <script src="/Scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>*@
-
-
-    <!-- JQUERY VALIDATE -->
-    <script src="/Scripts/plugin/jquery-validate/jquery.validate.js"></script>
-    <script src="/Scripts/plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax.js"></script>
-    <script src="/Scripts/plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap.js"></script>
-
-    <!-- JQUERY MASKED INPUT -->
-    <script src="/Scripts/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-    <!-- JQUERY SELECT2 INPUT -->
-    <script src="/Scripts/plugin/select2/select2.min.js"></script>
-
-    <!-- JQUERY UI + Bootstrap Slider -->
-    <script src="/Scripts/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
-
-    <!-- browser msie issue fix -->
-    <script src="/Scripts/plugin/msie-fix/jquery.mb.browser.min.js"></script>
-
-
-
-    <!--[if IE 8]>
-            <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-        <![endif]-->
-     <script type="text/javascript" src="/Scripts/plugin/fastclick/fastclick.js"></script>
-    <script type="text/javascript" src="/Scripts/plugin/sparkline/jquery.sparkline.js"></script>
-
-
-
-    <!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
-    <!-- Voice command : plugin -->
-    <script src="/Scripts/speech/voicecommand.min.js"></script>
-    <!-- SmartChat UI : plugin -->
-    <script src="/Scripts/smart-chat-ui/smart.chat.ui.js"></script>
-    <script src="/Scripts/smart-chat-ui/smart.chat.manager.js"></script>
-
-    <!-- PAGE RELATED PLUGIN(S) -->
-
-    <!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
-    <script src="/Scripts/plugin/flot/jquery.flot.cust.min.js"></script>
-    <script src="/Scripts/plugin/flot/jquery.flot.resize.min.js"></script>
-    <script src="/Scripts/plugin/flot/jquery.flot.time.min.js"></script>
-    <script src="/Scripts/plugin/flot/jquery.flot.tooltip.min.js"></script>
-
-
-    <!-- Full Calendar -->
-    @*<script src="/Scripts/plugin/moment/moment.min.js"></script>
-    <script src="/Scripts/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>*@
-
-    <!-- MAIN APP JS FILE -->
-    @Scripts.Render("/Scripts/app.js", "/Scripts/util.js")
-
+    <script src="/Scripts/plugin/fastclick/fastclick.min.js"></script>
+    
+    <script src="/Scripts/require.js" data-main="scripts/config.js"></script>
     
 
 

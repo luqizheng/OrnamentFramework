@@ -836,6 +836,7 @@
     <Content Include="Scripts\plugin\ie-placeholder\jquery.placeholder.min.js" />
     <Content Include="Scripts\plugin\ie-placeholder_\jquery.placeholder.min.js" />
     <Content Include="Scripts\plugin\ion-slider\ion.rangeSlider.min.js" />
+    <Content Include="Scripts\plugin\jarvismenu\jarvismenu.js" />
     <Content Include="Scripts\plugin\jcrop\jquery.color.min.js" />
     <Content Include="Scripts\plugin\jcrop\jquery.Jcrop.min.js" />
     <Content Include="Scripts\plugin\jqgrid\grid.locale-en.min.js" />

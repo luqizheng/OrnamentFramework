@@ -4,10 +4,7 @@
     return {
         setup: function () {
             dateRange();
-            require(["jquery"],
-
-
-                txtMaxLength);
+            require(["jquery"],txtMaxLength);
         }
     };
 

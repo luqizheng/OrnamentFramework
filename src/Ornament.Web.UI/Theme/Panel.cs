@@ -175,6 +175,19 @@ namespace Ornament.Web.UI.Theme
             return Body(action, new Dictionary<string, object>());
         }
 
+        public MvcHtmlString BodyToolBar(Func<object, HelperResult> action)
+        {
+            TextWriter writer = _context.Writer;
+            var buffer = new RecordWriter(writer);
+            action(null).WriteTo(buffer);
+            MvcHtmlString s = _helper.Partial(PartialViewPath("BodyToolbar"), buffer.Builder);
+            var tag = new TagBuilder("div");
+          
+            return
+                new MvcHtmlString(string.Format("{0}{1}{2}", tag.ToString(TagRenderMode.StartTag), s,
+                    tag.ToString(TagRenderMode.EndTag)));
+        }
+
         public MvcHtmlString Footer(Func<object, HelperResult> action)
         {
             TextWriter writer = _context.Writer;

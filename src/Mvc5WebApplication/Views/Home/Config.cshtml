@@ -1,14 +1,14 @@
 ﻿@using System.Web.Optimization
 
 require.config({
-
+baseUrl:"/Scripts/",
 paths: {
+        jqueryui:"@Scripts.Url("~/Scripts/jqueryui.js")",
         bootstrap:"@Scripts.Url("~/Scripts/bootstrap.js")",
         json2: "@Scripts.Url("~/scripts/json2")",
         form:"@Scripts.Url("~/scripts/plugin/jquery-form/jquery-form.min")",
         bootbox:"@Scripts.Url("~/scripts/plugin/bootbox/bootbox.min")",
         nestable:"@Scripts.Url("~/scripts/plugin/jquery-nestable/jquery.nestable.min")",
-        fastclick:"plugin/fastclick/fastclick",
         sparkline:"@Scripts.Url("/scripts/plugin/sparkline/jquery.sparkline")",
         vaform:"plugin/vaForm/vaForm",
         wizard:"plugin/bootstrap-wizard/jquery.bootstrap.wizard.min",
@@ -18,20 +18,46 @@ paths: {
         validate:'plugin/jquery-validate/jquery.validate',
         unobtrusive:'plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax',
         bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap',
-        floatChat:'float',
+        floatChart:'float',
+        smarkchat:'@Scripts.Url("~/Scripts/smark.chat.js")',
+        touch:"plugin/jquery-touch/jquery.ui.touch-punch.min",
+        "app.config":"app.config",
+        util:"util",
+        app:"app",
+        jarvis:"smartwidgets/jarvis.widget.min",
+        jarvismenu:"plugin/jarvismenu/jarvismenu",
         @*avalon plugin*@
         pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
         chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")",
         main:"@Scripts.Url("~/Scripts/modules/main")",
         ornamentUi:"@Scripts.Url("~/Scripts/modules/ornamentUi")"
-    },
-    shim:{
+},
+shim:{
+
         bsvalid:['validate','unobtrusive'],
         vaform:['bsvalid'],
         bootstrap:['jquery'],
+        touch:['jquery'],
+        "app.config":['jquery'],
+         util:['jquery'],
+        app:['jquery',"jarvis","jarvismenu","sparkline","floatChart"],
+        jarvis:['jquery'],
+        smarkchat:['jqueryui',"smarkchat",],
+        touch:['jqueryui'],
     }
 });
 
 
-require(["main"]);
+require(["jquery","jqueryui","bootstrap","app.config","floatChart",
+"touch",
+"/scripts/notification/SmartNotification.min.js",
+"/scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js",
+"/scripts/plugin/masked-input/jquery.maskedinput.min.js",
+"/scripts/plugin/select2/select2.min.js",
+"/scripts/plugin/bootstrap-slider/bootstrap-slider.min.js",
+"/scripts/plugin/msie-fix/jquery.mb.browser.min.js",
+"/scripts/plugin/moment/moment.min.js",
+"/scripts/plugin/fullcalendar/jquery.fullcalendar.min.js",
+"app","util",
+"main"]);
 

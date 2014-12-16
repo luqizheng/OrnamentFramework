@@ -41,7 +41,14 @@ namespace WebApplication
 
 
             //float chat
-            bundles.Add(new ScriptBundle("~/Scripts/float.js").IncludeDirectory("~/Scripts/plugin/flot", "*./js"));
+            bundles.Add(new ScriptBundle("~/Scripts/float.js").IncludeDirectory("~/Scripts/plugin/flot", "*.js"));
+
+            //smark chai
+            bundles.Add(new ScriptBundle("~/Scripts/smark.chat.js")
+                .Include("~/Scripts/smart-chat-ui/smart.chat.ui.js")
+                .Include("~/Scripts/smart-chat-ui/smart.chat.manager.js")
+                
+                );
         }
 
 

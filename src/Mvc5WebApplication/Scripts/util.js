@@ -1,20 +1,5 @@
 ﻿/* add by leo*/
-define(['jqueryui', 'bootstrap', '/Scripts/app.config.js',
-                '/Scripts/plugin/jquery-touch/jquery.ui.touch-punch.min.js',
-                "/Scripts/notification/SmartNotification.min.js",
-                "/Scripts/smartwidgets/jarvis.widget.min.js",
-                '/Scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js',
-                "/Scripts/plugin/masked-input/jquery.maskedinput.min.js",
-                "/Scripts/plugin/bootstrap-slider/bootstrap-slider.min.js",
-              "/Scripts/plugin/msie-fix/jquery.mb.browser.min.js",
-                "fastclick", "sparkline",
-                "/Scripts/speech/voicecommand.min.js",
-              "/Scripts/smart-chat-ui/smart.chat.ui.js",
-              "/Scripts/smart-chat-ui/smart.chat.manager.js",
-              "floatChat",
-              "/Scripts/plugin/moment/moment.min.js",
-              "/Scripts/plugin/fullcalendar/jquery.fullcalendar.min.js",
-              "/Scripts/app.js"], function () {
+
     var models = true;
     $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
         if (jqxhr.status == 401) {
@@ -92,4 +77,4 @@ define(['jqueryui', 'bootstrap', '/Scripts/app.config.js',
 
         });
 
-})
+
