@@ -1047,6 +1047,7 @@
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Panel\BodyToolbar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

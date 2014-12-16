@@ -4,7 +4,7 @@
 @using Ornament.Web.UI.Theme
 @using SeajsBundles
 @using Basic = Ornament.Properties.Resources
-@model System.Collections.Generic.IEnumerable<Ornament.Messages.Notification.NotifyMessageTemplate>
+@model System.Collections.Generic.IEnumerable<ornament.messages.notification.notifymessagetemplate>
 
 @{
     ViewBag.Title = "Template for Simple Message";
@@ -23,45 +23,45 @@
 }))
 {
     @panel.Header(@<text>
-
+    <h2>Template List</h2>
 
                    </text>);
     
     @panel.Body(@<text>
-
-                     <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>
-
+                     <div class="widget-body-toolbar">
+                            <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>    
+                     </div>
 
                      <table class="table table-condensed table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+                         <thead>
+                             <tr>
+                                 <th>
+                                     @Html.DisplayNameFor(model => model.Name)
+                                 </th>
+                                 <th></th>
+                             </tr>
+                         </thead>
+                         <tbody>
 
-            <tr ms-repeat="templates">
-                <td ms-text="el.Name"></td>
-                <td>
-                    <a ms-href="#@Url.Action("Edit")/{{el.Id}}" class="btn btn-primary">
-                        @Basic.Edit
-                    </a>
-                    <a ms-href="#@Url.Action("Publish")/{{el.Id}}">Notifies</a>
-                </td>
-            </tr>
+                             <tr ms-repeat="templates">
+                                 <td ms-text="el.Name"></td>
+                                 <td>
+                                     <a ms-href="#@Url.Action("Edit")/{{el.Id}}" class="btn btn-primary">
+                                         @Basic.Edit
+                                     </a>
+                                     <a ms-href="#@Url.Action("Publish")/{{el.Id}}" class="btn btn-default">Notifies</a>
+                                 </td>
+                             </tr>
 
-        </tbody>
-        <tfoot>
-            <td colspan="3" ms-widget="pager"></td>
-        </tfoot>
-    </table>
+                         </tbody>
+                         <tfoot>
+                             <td colspan="3" ms-widget="pager"></td>
+                         </tfoot>
+                     </table>
 
 
 
-    </text>);
+                 </text>);
 }
 
 @section scripts
