@@ -34,7 +34,11 @@ namespace Ornament
                 .Register(
                     Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
-
+        public static int GetUtcOffset(this MemberShipContext ocontext)
+        {
+            int? utcOffset = OrnamentModule.GetOffSetHour();
+            return (utcOffset.HasValue ? utcOffset.GetValueOrDefault() : Convert.ToInt32(TimeZoneInfo.Local.BaseUtcOffset.TotalHours));
+        }
         /// <summary>
         ///     gets the TemplateName of setting.
         /// </summary>
