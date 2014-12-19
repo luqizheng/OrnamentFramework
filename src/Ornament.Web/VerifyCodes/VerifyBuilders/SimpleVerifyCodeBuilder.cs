@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Ornament.Web.VerifyCodes.VerifyBuilders
 {
-    internal class SimpleVerifyCodeBuilder : VerifyBuilder
+    public class SimpleVerifyCodeBuilder : VerifyBuilder
     {
         public SimpleVerifyCodeBuilder()
         {
