@@ -155,7 +155,7 @@
     <Compile Include="DataInitializers\GlobalInitializer.cs" />
     <Compile Include="DataInitializers\IDataInitializer.cs" />
     <Compile Include="Models\InitData.cs" />
-    <Compile Include="Models\VerifyCodeBuilder.cs" />
+    <Compile Include="Models\RandomText.cs" />
     <Compile Include="MvcSiteMapHelper.cs" />
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="OrnamentWebApiFactory.cs" />
@@ -170,6 +170,10 @@
     <Compile Include="SiteMapResolveUrl.cs" />
     <Compile Include="TimeZoneHtmlExtender.cs" />
     <Compile Include="ValidationAdapter\StepAttributeAdapter.cs" />
+    <Compile Include="VerifyCodes\RandomText.cs" />
+    <Compile Include="VerifyCodes\VerifyBuilder.cs" />
+    <Compile Include="VerifyCodes\VerifyBuilders\BubbleVerifyCodeBuilder.cs" />
+    <Compile Include="VerifyCodes\VerifyBuilders\SimpleVerifyCodeBuilder.cs" />
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,68 +1,36 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Ornament.Web.Models
+namespace Ornament.Web.VerifyCodes.VerifyBuilders
 {
-    public class VerifyCodeBuilder
+    internal class SimpleVerifyCodeBuilder : VerifyBuilder
     {
-        private const double PI = 3.1415926535897931;
-        private const double PI2 = 6.2831853071795862;
-
-        private string codeSerial =
-            "2,3,4,5,6,7,8,9,a,b,c,d,e,f,g,h,j,k,l,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z";
-
-        private Color[] colors =
+        public SimpleVerifyCodeBuilder()
         {
-            Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan,
-            Color.Purple
-        };
-
-        private string[] fonts = {"Arial", "Georgia"};
-
-        public VerifyCodeBuilder()
-        {
-            Length = 4;
+            Colors = new Color[] {Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan, Color.Purple};
             FontSize = 15;
             Padding = 1;
             EnableNoise = true;
             NoiseColor = Color.LightGray;
             Twist = false;
             BackColor = Color.White;
+
+            Fonts = new[] {"Arial", "Georgia"};
         }
 
+        public Color[] Colors { get; set; }
+
+        public string[] Fonts { get; set; }
+        public Color NoiseColor { get; set; }
+        public bool Twist { get; set; }
         public Color BackColor { get; set; }
 
-        public string CodeSerial
-        {
-            get { return codeSerial; }
-            set { codeSerial = value; }
-        }
-
-        public Color[] Colors
-        {
-            get { return colors; }
-            set { colors = value; }
-        }
-
-        public bool EnableNoise { get; set; }
-
-        public string[] Fonts
-        {
-            get { return fonts; }
-            set { fonts = value; }
-        }
-
         public int FontSize { get; set; }
-
-        public int Length { get; set; }
-
-        public Color NoiseColor { get; set; }
-
+        public Color[] FontColor { get; set; }
+        public bool EnableNoise { get; set; }
         public int Padding { get; set; }
 
-        public bool Twist { get; set; }
-
-        public Bitmap CreateVerifyCodeImage(string code)
+        public override Bitmap Build(string code)
         {
             int num6;
             int fontSize = FontSize;
@@ -76,7 +44,7 @@ namespace Ornament.Web.Models
             if (EnableNoise)
             {
                 var pen = new Pen(NoiseColor, 0f);
-                int num5 = Length*10;
+                int num5 = code.Length*10;
                 for (num6 = 0; num6 < num5; num6++)
                 {
                     int x = random.Next(image.Width);
@@ -118,7 +86,6 @@ namespace Ornament.Web.Models
             return image;
         }
 
-      
 
         private Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
         {
