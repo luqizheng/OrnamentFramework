@@ -1,4 +1,5 @@
-﻿define(["text!./Templates/Org.html"], function (template) {
+﻿/* org tree selector*/
+define(["text!./Templates/Org.html"], function (template) {
 
     var widget = avalon.ui.org = function (element, data, vmodels) {
 
@@ -47,24 +48,17 @@
             };
        
             vm.curOrg = false;//已经选择了的node
-            vm.toggle = function () {
+            vm.toggle = function (el) {
                 
                 if (vm.curOrg) {
                     vm.curOrg.selected = false;
                 }
-                
-                vm.curOrg = this.$vmodel.el;
+
+                vm.curOrg = el;
                 vm.curOrg.selected = true;
-                
-
                 var $childMenu = $(this).closest("li").find("ul:first");
-
-                if (this.$vmodel.el.Hide) {
-                    $childMenu.show('fast');
-                } else {
-                    $childMenu.hide('fast');
-                }
-                this.$vmodel.el.Hide = !this.$vmodel.el.Hide;
+                $childMenu.toggle('fast', vm.curOrg.Hide);
+                vm.curOrg.Hide = !vm.curOrg.Hide;
             };
 
             vm.ok = function () {

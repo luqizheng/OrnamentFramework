@@ -15,8 +15,8 @@
 }
 
 <div ms-widget="org" data-org-id="@Html.Id("")" data-org-selected-id="@value" data-org-selected-name="@orgName">
-    <input type="hidden" ms-value="{{selectedId}}" id="@Html.Id("")" name="@Html.Name("")"/>
-    <a href="javascript:;" id="@Html.Id("")_pop" data-toggle="modal" data-target="#@Html.Id("")_modal">
+    <input type="hidden" ms-attr-value="{{selectedId}}" id="@Html.Id("")" name="@Html.Name("")"/>
+    <a href="#" id="@Html.Id("")_pop" data-toggle="modal" data-target="#@Html.Id("")_modal">
         <i class="fa fa-sitemap"></i> {{selectedName}}
     </a>
 </div>

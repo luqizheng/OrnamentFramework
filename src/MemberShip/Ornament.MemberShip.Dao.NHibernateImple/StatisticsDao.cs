@@ -21,7 +21,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
 
         public IList<UserStatistics> FindByDate(DateTime start, DateTime end)
         {
-            var result = 
+            var result =
                 CreateDetachedCriteria()
                     .Add(Restrictions.Le(CreateTime, end))
                     .Add(Restrictions.Ge(CreateTime, start))
@@ -32,10 +32,11 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
             var list = new List<UserStatistics>();
             var cur = start;
             var curIndex = 0;
-            
+
             while (!(cur > end))
             {
-                if (result[curIndex].CreateDate == cur)
+
+                if (curIndex < result.Count && result[curIndex].CreateDate == cur)
                 {
                     list.Add(result[curIndex]);
                     curIndex++;
@@ -47,6 +48,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                         CreateDate = cur
                     });
                 }
+
 
                 cur = cur.AddDays(1);
             }

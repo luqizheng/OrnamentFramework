@@ -18,7 +18,7 @@ paths: {
         validate:'plugin/jquery-validate/jquery.validate',
         unobtrusive:'plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax',
         bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap',
-        floatChart:'float',
+        floatChart:'/Scripts/float',
         smarkchat:'@Scripts.Url("~/Scripts/smark.chat.js")',
         touch:"plugin/jquery-touch/jquery.ui.touch-punch.min",
         "app.config":"app.config",
@@ -26,6 +26,8 @@ paths: {
         app:"app",
         jarvis:"smartwidgets/jarvis.widget.min",
         jarvismenu:"plugin/jarvismenu/jarvismenu",
+        smarkNotify:"/scripts/notification/SmartNotification.min",
+        select2:"/scripts/plugin/select2/select2.min",
         @*avalon plugin*@
         pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
         chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")",
@@ -42,18 +44,20 @@ shim:{
          util:['jquery'],
         app:['jquery',"jarvis","jarvismenu","sparkline","floatChart"],
         jarvis:['jquery'],
-        smarkchat:['jqueryui',"smarkchat",],
+        smarkchat:['jqueryui'],
         touch:['jqueryui'],
+        smarkNotify:["jquery"],
+        select2:["jquery"]
     }
 });
 
 
 require(["jquery","jqueryui","bootstrap","app.config","floatChart",
 "touch",
-"/scripts/notification/SmartNotification.min.js",
+"smarkNotify",
 "/scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js",
 "/scripts/plugin/masked-input/jquery.maskedinput.min.js",
-"/scripts/plugin/select2/select2.min.js",
+"select2",
 "/scripts/plugin/bootstrap-slider/bootstrap-slider.min.js",
 "/scripts/plugin/msie-fix/jquery.mb.browser.min.js",
 "/scripts/plugin/moment/moment.min.js",
