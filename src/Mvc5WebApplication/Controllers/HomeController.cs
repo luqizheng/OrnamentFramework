@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Security;
 using Ornament;
+using Ornament.MemberShip.Web.Plugin.Models.SampleData;
+using Qi.Web.Mvc;
 
 namespace WebApplication.Controllers
 {
@@ -10,10 +12,12 @@ namespace WebApplication.Controllers
     {
         //
         // GET: /Home/
-        [Authorize]
+        [Authorize,Session]
         public ActionResult Index()
         {
             ViewData["view"] = Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value;
+            MemberShipData d=new MemberShipData();
+            d.CreateData();
             return View();
         }
 
