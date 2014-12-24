@@ -4,7 +4,7 @@
 @using Ornament.Web.UI.Theme
 @using SeajsBundles
 @using Basic = Ornament.Properties.Resources
-@model System.Collections.Generic.IEnumerable<ornament.messages.notification.notifymessagetemplate>
+@model Ornament.Messages.Notification.NotifyMessageTemplate
 
 @{
     ViewBag.Title = "Template for Simple Message";
@@ -29,7 +29,7 @@
     
     @panel.Body(@<text>
                      <div class="widget-body-toolbar">
-                            <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>    
+                            <a class="btn btn-info" href="#@Url.Action("Create")">@Basic.Create</a>    
                      </div>
 
                      <table class="table table-condensed table-striped table-bordered">

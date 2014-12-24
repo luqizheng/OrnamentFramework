@@ -15,24 +15,24 @@ define(function (require) {
 
             vm.Language = "";
             vm.$watch("Language", function (newValue) {
-                var content = null;
+                var findContent = false;
                 for (var i = 0; i < vm.Contents.length; i++) {
                     if (vm.Contents[i].Language == newValue) {
-                        content = vm.Contents[i];
+                        findContent = true;
                         vm.content = vm.Contents[i];
                         break;
                     }
                 }
-                if (content == null) {
-                    content = {
+                if (!findContent) {
+                    vm.content = {
                         Value: "",
-                        Name: "",
-                        Language: newValue
+                        Language: newValue,
+                        Subject:"",
                     };
-                    vm.Contents.push(content);
+                    vm.Contents.push(vm.content);
                 }
 
-                editor.setData(content.Value);
+                editor.setData(vm.content.Value);
             });
         });
 
@@ -42,25 +42,35 @@ define(function (require) {
         model.Name = template.Name;
         model.Remark = template.Remark;
         model.Contents = template.Contents;
-        if (template.Contents.length != 0) {
+        if (template.Contents&&template.Contents[0]) {
             model.Language = template.Contents[0].Language;
         }
 
 
         editor.on("blur", function () {
             if (model.content.Subject != "") {
-                model.content = editor.getData();
+                model.content.Value = editor.getData();
             }
         });
 
         $("#editTemp").vaform({
             success: function (rdata) {
+               
                 alert(rdata.success ? "Save success." : rdata.message);
             },
-            done: function () {
+            done: function (postData) {
+               
                 $("#subMitData").prop('disabled', false);
             },
-            before: function () {
+            before: function (postData) {
+                postData.Contents = [];
+                for (var i = 0; i < model.Contents.length; i++) {
+                    postData.Contents.push({
+                        Subject: model.Contents[i].Subject,
+                        Language: model.Contents[i].Language,
+                        Value: model.Contents[i].Value
+                    });
+                }
                 $("#subMitData").prop('disabled', true);
             }
         });

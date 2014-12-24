@@ -961,6 +961,7 @@
     <Compile Include="Controllers\HttpErrorsController.cs" />
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\VerifyCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1048,6 +1049,7 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\BodyToolbar.cshtml" />
+    <Content Include="Views\Setup\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

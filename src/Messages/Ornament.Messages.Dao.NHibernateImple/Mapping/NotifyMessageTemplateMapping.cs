@@ -11,9 +11,10 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Id(x => x.Id).GeneratedBy.UuidHex("N").Length(36);
             Map(x => x.Name).Length(64);
             Map(x => x.Remark).Length(255);
-            
-            Map(x => x.ModifyTime);
-           
+
+
+
+            Version(x => x.ModifyTime);
 
 
             HasMany(x => x.Contents)

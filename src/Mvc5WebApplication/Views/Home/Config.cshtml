@@ -39,10 +39,10 @@ paths: {
         ornamentUi:"@Scripts.Url("~/Scripts/modules/ornamentUi")"
 },
 shim:{
-
+        validate:["jquery"],maxlength:["jquery"],unobtrusive:["jquery"],
         bsvalid:['validate','unobtrusive'],
         vaform:['bsvalid'],
-        bootstrap:['jquery'],
+        bootstrap:['jquery'],jarvismenu:["jquery"],
         touch:['jquery'],
         "app.config":['jquery'],
         util:['bootstrap'],
