@@ -5,7 +5,7 @@
     @Html.LabelFor(s=>s.Account)
       @Html.TextBoxFor(s=>s.Account,new Dictionary<string, object>()
         {
-            {"ms-duplex","EmailSender.Account"},{"class","form-control"},{"ms-disabled","disabled"}
+            {"ms-duplex","EmailSender.Account"},{"class","form-control"},{"ms-attr-disabled","disabled"}
         })
     @Html.ValidationMessageFor(s=>s.Account)
 </div>
@@ -14,7 +14,7 @@
     @Html.LabelFor(s=>s.Password)
     @Html.TextBoxFor(s=>s.Password,new Dictionary<string, object>()
         {
-            {"ms-duplex","EmailSender.Password"},{"class","form-control"},{"ms-disabled","disabled"}
+            {"ms-duplex","EmailSender.Password"},{"class","form-control"},{"ms-attr-disabled","disabled"}
         })
     @Html.ValidationMessageFor(s=>s.Password)
 </div>
@@ -23,7 +23,7 @@
     @Html.LabelFor(s=>s.SmtpServer)
     @Html.TextBoxFor(s=>s.SmtpServer,new Dictionary<string, object>()
         {
-            {"ms-duplex","EmailSender.SmtpServer"},{"class","form-control"},{"ms-disabled","disabled"}
+            {"ms-duplex","EmailSender.SmtpServer"},{"class","form-control"},{"ms-attr-disabled","disabled"}
         })
     @Html.ValidationMessageFor(s=>s.SmtpServer)
 </div>
@@ -33,7 +33,7 @@
     @Html.LabelFor(s=>s.Port)
     @Html.TextBoxFor(s=>s.Port,new Dictionary<string, object>()
         {
-            {"ms-duplex","EmailSender.Port"},{"class","form-control"},{"ms-disabled","disabled"}
+            {"ms-duplex","EmailSender.Port"},{"class","form-control"},{"ms-attr-disabled","disabled"}
         })
     @Html.ValidationMessageFor(s=>s.Port)
 </div>

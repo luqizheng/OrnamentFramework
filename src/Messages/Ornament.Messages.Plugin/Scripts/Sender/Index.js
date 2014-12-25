@@ -15,7 +15,7 @@
                     SmtpServer: "",
                     Port: 25
                 };
-                vm.editing = false;
+                vm.disabled = false;
                 vm.clear = function() {
                     vm.Id = "";
                     vm.SenderType = "email";
@@ -48,13 +48,13 @@
                 };
 
             });
-            var listModel = avalon.define("index", function (vm) {
+            var listModel = avalon.define("senderList", function (vm) {
                 vm.Senders = [];
                 vm.Edit = function () {
                     avalon.mix(editModel, this.$vmodel.el);
-                    editModel.editing = true;
+                    editModel.disabled = true;
                 };
-                vm.Create = function () {
+                vm.create = function () {
                     editModel.clear();
                 };
             });
@@ -74,6 +74,8 @@
                     }
                 } 
             });
+
+            avalon.scan();
         },
         clear: function () {
             delete avalon.vmodels["editSender"];

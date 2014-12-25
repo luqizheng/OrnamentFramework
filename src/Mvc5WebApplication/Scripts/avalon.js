@@ -1966,7 +1966,7 @@ support IE6+ and other browsers
                         type = "on"
                     } else if (obsoleteAttrs[type]) {
                         log("ms-" + type + "已经被废弃,请使用ms-attr-*代替")
-                        if (type === "enabled") { //吃掉ms-enabled绑定,用ms-disabled代替
+                        if (type === "enabled") { //吃掉ms-enabled绑定,用ms-attr-disabled代替
                             type = "disabled"
                             value = "!(" + value + ")"
                         }

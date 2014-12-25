@@ -82,9 +82,9 @@
 
         <div class="widget-body-toolbar">
 
-            <button class="btn btn-primary" type="submit" ms-disabled="!editing" ms-text="saveBtnText"></button>
-            <button class="btn btn-default" type="button" ms-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Ornament.Properties.Resources.Reset</button>
-            <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
+            <button class="btn btn-primary" type="submit" ms-attr-disabled="!editing" ms-text="saveBtnText"></button>
+            <button class="btn btn-default" type="button" ms-attr-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Ornament.Properties.Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-click="cancel" ms-attr-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
         </div>
         @Html.Partial("_Edit", (UserGroup)null)
     </form>

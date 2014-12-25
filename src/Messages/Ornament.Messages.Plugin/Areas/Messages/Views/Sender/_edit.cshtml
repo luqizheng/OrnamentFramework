@@ -17,7 +17,7 @@
 
             @Html.TextBoxFor(s => s.Name, new Dictionary<string, object>()
         {
-            {"ms-duplex","Name"},{"class","form-control"},{"ms-disabled","disabled"}
+            {"ms-duplex","Name"},{"class","form-control"},{"ms-attr-disabled","disabled"}
         })
             @Html.ValidationMessageFor(s => s.Name)
 
@@ -26,13 +26,13 @@
             @Html.LabelFor(s => s.Remarks)
             @Html.TextBoxFor(s => s.Remarks, new Dictionary<string, object>()
         {
-            {"ms-duplex","Remarks"},{"class","form-control"},{"ms-disabled","disabled"}
+            {"ms-duplex","Remarks"},{"class","form-control"},{"ms-attr-disabled","disabled"}
         })
             @Html.ValidationMessageFor(s => s.Remarks)
         </div>
         <div class="form-group">
             @Html.LabelFor(s => s.SenderType)
-            <select id="SenderType" name="SenderType" ms-duplex="SenderType" class="form-control" ms-disabled="disabled">
+            <select id="SenderType" name="SenderType" ms-duplex="SenderType" class="form-control" ms-attr-disabled="disabled">
                 <option value="email" selected="selected">Email</option>
                 <option value="client">Client</option>
             </select>
