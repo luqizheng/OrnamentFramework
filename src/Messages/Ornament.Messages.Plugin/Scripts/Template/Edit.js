@@ -1,20 +1,22 @@
 ﻿
-define(function (require) {
+define(function(require) {
 
     var model;
+
     function definedAvalon(editor) {
-        model = avalon.define("editTemp", function (vm) {
+        model = avalon.define("editTemp", function(vm) {
             vm.Name = "";
             vm.Remark = "";
             vm.Contents = [];
-            vm.content = { //current editing content.
+            vm.content = {
+//current editing content.
                 Value: "",
                 Subject: "",
                 Language: ""
             };
 
             vm.Language = "";
-            vm.$watch("Language", function (newValue) {
+            vm.$watch("Language", function(newValue) {
                 var findContent = false;
                 for (var i = 0; i < vm.Contents.length; i++) {
                     if (vm.Contents[i].Language == newValue) {
@@ -27,7 +29,7 @@ define(function (require) {
                     vm.content = {
                         Value: "",
                         Language: newValue,
-                        Subject:"",
+                        Subject: "",
                     };
                     vm.Contents.push(vm.content);
                 }
@@ -37,32 +39,31 @@ define(function (require) {
         });
 
     }
+
     function Init(template, editor) {
 
         model.Name = template.Name;
         model.Remark = template.Remark;
         model.Contents = template.Contents;
-        if (template.Contents&&template.Contents[0]) {
+        if (template.Contents && template.Contents[0]) {
             model.Language = template.Contents[0].Language;
         }
 
 
-        editor.on("blur", function () {
+        editor.on("blur", function() {
             if (model.content.Subject != "") {
                 model.content.Value = editor.getData();
             }
         });
 
         $("#editTemp").vaform({
-            success: function (rdata) {
-               
+            success: function(rdata) {
                 alert(rdata.success ? "Save success." : rdata.message);
             },
-            done: function (postData) {
-               
+            done: function() {
                 $("#subMitData").prop('disabled', false);
             },
-            before: function (postData) {
+            before: function(postData) {
                 postData.Contents = [];
                 for (var i = 0; i < model.Contents.length; i++) {
                     postData.Contents.push({
@@ -78,9 +79,9 @@ define(function (require) {
     };
 
     return {
-        init: function (template) {
+        init: function(template) {
 
-            require(["vaform", "ckeditor"], function () {
+            require(["vaform", "ckeditor"], function() {
 
                 var editor = CKEDITOR.instances["Content"];
                 definedAvalon(editor);
@@ -88,10 +89,9 @@ define(function (require) {
                 Init(template, editor);
             });
         },
-        clear: function () {
+        clear: function() {
             delete avalon.vmodels["editTemp"];
         }
 
-    }
-
+    };
 })

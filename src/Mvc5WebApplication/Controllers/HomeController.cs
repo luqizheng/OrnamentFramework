@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Web.Mvc;
 using Ornament;
-using Ornament.MemberShip.Web.Plugin.Models.SampleData;
 using Qi.Web.Mvc;
 
 namespace WebApplication.Controllers
@@ -10,16 +9,14 @@ namespace WebApplication.Controllers
     {
         //
         // GET: /Home/
-        [Session]
+        [Session, Authorize]
         public ActionResult Index()
         {
-            //ViewData["view"] = Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value;
-            var d = new MemberShipData();
-            d.CreateData();
+            ;
             return View();
         }
 
-      
+
         public ActionResult Config()
         {
             Response.ContentType = "text/javascript";
