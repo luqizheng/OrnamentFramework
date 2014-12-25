@@ -40,7 +40,7 @@
                 require(["pager"], Init);
             },
         clear:function() {
-            delete avalonl.vmodels["templateIndex"];
+            delete avalon.vmodels["templateIndex"];
         }
 
     };
