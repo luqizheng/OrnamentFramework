@@ -5,23 +5,20 @@
 @{
     ViewBag.Title = "title";
     Layout = Ornament.OrnamentContext.Configuration.Layout();
-}
-
-@section pageTitle{
-    <h4>Sender setting</h4>
-}
-
-@using (var panel = Html.Panel(new PanelOption()
-{
-    HtmlAttributes = new Dictionary<string, object>()
+    var panelOptions = new PanelOption()
     {
-        {"ms-controller","senderList"}
-    }
-}, "col-md-5"))
-{
-    @panel.Header(@<text>
+        HtmlAttributes = new Dictionary<string, object>()
+        {
+            {"ms-controller", "senderList"}
+        }
+    }; 
+}
 
-    </text>)
+@section pageTitle{<h4>Sender setting</h4>}
+
+@using (var panel = Html.Panel(panelOptions, "col-md-5"))
+{
+    @panel.Header(@<text></text>)
 
     @panel.Body(@<text>
     <a class="btn btn-default" href="javascript:;" ms-click="create">@Ornament.Properties.Resources.Create</a>
@@ -33,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ms-repeat="Senders">
+            <tr ms-repeat-el="Senders">
                 <td ms-title="el.Remarks">{{el.Name}}</td>
                 <td>
                     <a href="javascript:;" ms-click="Edit">@Ornament.Properties.Resources.Edit</a>

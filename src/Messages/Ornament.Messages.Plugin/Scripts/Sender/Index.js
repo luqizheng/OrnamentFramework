@@ -9,13 +9,13 @@
                     Server: "",
                     PrivateCode: ""
                 };
-                vm.EmailSender = {
+                vm.Sender = {
                     Account: "",
                     Password: "",
                     SmtpServer: "",
                     Port: 25
                 };
-                vm.disabled = false;
+                vm.disabled = true;
                 vm.clear = function() {
                     vm.Id = "";
                     vm.SenderType = "email";
@@ -29,9 +29,9 @@
                         SmtpServer: "",
                         Port: 25
                     };
-                    vm.editing = false;
+                    vm.disabled = false;
                 };
-                
+                vm.Name = "";
                 vm.cancel = function() {
 
                 };
@@ -44,15 +44,20 @@
                 };
 
                 vm.get = function() {
-                    return this.$vmodel;
+                    return {
+                        Id: vm.Id,
+                        Name: vm.Name,
+                        Remarks: Remarks
+                    };
                 };
 
             });
             var listModel = avalon.define("senderList", function (vm) {
                 vm.Senders = [];
-                vm.Edit = function () {
-                    avalon.mix(editModel, this.$vmodel.el);
-                    editModel.disabled = true;
+                vm.Edit = function (id) {
+                    editModel.Id = id;
+                    editModel.reload();
+                    editModel.disabled = false;
                 };
                 vm.create = function () {
                     editModel.clear();

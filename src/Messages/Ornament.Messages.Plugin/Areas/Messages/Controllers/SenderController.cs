@@ -6,6 +6,7 @@ using Ornament.Messages.Notification.Senders;
 using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
+using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
@@ -42,7 +43,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             return Json(new SenderModel(result));
         }
 
-        [ValidateAjax, HttpPost]
+        [ValidateAjax, HttpPost, Session(Transaction = true)]
         public ActionResult Save(SenderModel model)
         {
             if (ModelState.IsValid)
