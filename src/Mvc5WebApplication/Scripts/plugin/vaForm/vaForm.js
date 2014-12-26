@@ -33,10 +33,10 @@
             if (!opts.url) {
                 opts.url = $(this).attr("action");
             }
+
             $.validator.unobtrusive.parse(this);
 
-            $form.validate().settings.submitHandler = function (e) {
-               
+            $form.data("validator").settings.submitHandler = function (e) {
 
                 var data = $form.serializeObject();
                 opts.before.call($form, data);

@@ -1,11 +1,8 @@
-﻿@using System.ServiceModel.Security
-@using Ornament
+﻿@using Ornament
 @using Ornament.MemberShip
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
-
-
 @{
     ViewBag.Title = Html.GetEmbededResourceString("page_title");
     Layout = OrnamentContext.Configuration.Layout();
@@ -18,7 +15,6 @@
             {"ms-controller", "index"}
         }
     };
-    
 }
 @section pageTitle{
     <h6>@Html.GetEmbededResourceString("page_title")</h6>
@@ -29,68 +25,69 @@
 @using (Panel panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
 {
     @panel.Header(@<text>
-    <h2>@Html.GetEmbededResourceString("page_title")</h2>
-    <div class="widget-toolbar">
-        <button id="add" class="btn btn-primary" ms-click="create">
-            <i class="fa-plus fa"></i>
-        </button>
-        <button id="refresh" class="btn btn-default" ms-click="refresh">
-            <i class="fa fa-refresh"></i>
-        </button>
-    </div>
-    </text>);
+                       <h2>@Html.GetEmbededResourceString("page_title")</h2>
+                       <div class="widget-toolbar">
+                           <button id="add" class="btn btn-primary" ms-click="create">
+                               <i class="fa-plus fa"></i>
+                           </button>
+                           <button id="refresh" class="btn btn-default" ms-click="refresh">
+                               <i class="fa fa-refresh"></i>
+                           </button>
+                       </div>
+                   </text>)
+    ;
 
-           
+
     @panel.Body(@<text>
 
-    <div id="userGroup" class="dd">
-        <ul class="dd-list">
-            <ol class="dd-item" ms-repeat-el="userGroups">
-                <div class="dd-handle" style="cursor: pointer"
-                     ms-click="edit" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
-                    <button ms-click="del" ms-title="el.Remarks" class="btn btn-xs btn-danger">
-                        <i class="fa-remove fa"></i>
-                    </button>
-                    <span ms-text="el.Name"></span>
-                </div>
-            </ol>
-        </ul>
-    </div>
-    <div ms-widget="pager,ugList">
-    </div>
-    </text>);
+                     <div id="userGroup" class="dd">
+                         <ul class="dd-list">
+                             <ol class="dd-item" ms-repeat-el="userGroups">
+                                 <div class="dd-handle" style="cursor: pointer"
+                                      ms-click="edit" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
+                                     <button ms-click="del" ms-attr-title="el.Remarks" class="btn btn-xs btn-danger">
+                                         <i class="fa-remove fa"></i>
+                                     </button>
+                                     <span ms-text="el.Name"></span>
+                                 </div>
+                             </ol>
+                         </ul>
+                     </div>
+                     <div ms-widget="pager,ugList">
+                     </div>
+                 </text>)
+    ;
 }
 
-@using (Panel panel = Html.Panel(new PanelOption()
+@using (Panel panel = Html.Panel(new PanelOption
 {
-    HtmlAttributes = new Dictionary<string, object>()
+    HtmlAttributes = new Dictionary<string, object>
     {
-        {"ms-controller","edit"},
+        {"ms-controller", "edit"},
     }
 },
-
     "col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
 {
-    @panel.Header(@<text><h2 ms-text="editTitle">编辑</h2></text>, new Dictionary<string, object>()
-                        {
-                             {"ms-class","widget-body-ajax-loading:loading"}
-                        })
+    @panel.Header(@<text><h2 ms-text="editTitle">编辑</h2></text>, new Dictionary<string, object>
+                                                               {
+                                                                   {"ms-class", "widget-body-ajax-loading:loading"}
+                                                               })
 
     @panel.Body(@<text>
 
-    <form class="form-horizontal" method="POST" id="ugEditor">
+                     <form class="form-horizontal" method="POST" id="ugEditor">
 
-        <div class="widget-body-toolbar">
+                         <div class="widget-body-toolbar">
 
-            <button class="btn btn-primary" type="submit" ms-attr-disabled="!editing" ms-text="saveBtnText"></button>
-            <button class="btn btn-default" type="button" ms-attr-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Ornament.Properties.Resources.Reset</button>
-            <button class="btn btn-default" type="button" ms-click="cancel" ms-attr-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
-        </div>
-        @Html.Partial("_Edit", (UserGroup)null)
-    </form>
-    </text>, new Dictionary<string, object>()
+                             <button class="btn btn-primary" type="submit" ms-attr-disabled="!editing" ms-text="saveBtnText"></button>
+                             <button class="btn btn-default" type="button" ms-attr-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Resources.Reset</button>
+                             <button class="btn btn-default" type="button" ms-click="cancel" ms-attr-disabled="!editing">@Resources.Cancel</button>
+                         </div>
+                         @Html.Partial("_Edit", (UserGroup) null)
+                     </form>
+                 </text>, new Dictionary<string, object>
                         {
-                             {"ms-class","widget-body-ajax-loading:loading"}
+                            {"ms-class", "widget-body-ajax-loading:loading"}
                         })
 }
 
@@ -105,11 +102,11 @@
 @section scripts{
 
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function (main) {
+        require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function(main) {
             console.log('usergroup init success.');
             var msg = {
-                saveBtnEdit: "@Ornament.Properties.Resources.Save",
-                saveBtnCreate:"@Ornament.Properties.Resources.Create"
+                saveBtnEdit: "@Resources.Save",
+                saveBtnCreate: "@Resources.Create"
             };
             main.init(msg);
             clearPageVariable.push(main.clear);

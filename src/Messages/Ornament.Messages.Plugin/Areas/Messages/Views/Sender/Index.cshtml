@@ -31,9 +31,9 @@
         </thead>
         <tbody>
             <tr ms-repeat-el="Senders">
-                <td ms-title="el.Remarks">{{el.Name}}</td>
+                <td ms-attr-title="el.Remarks">{{el.Name}}</td>
                 <td>
-                    <a href="javascript:;" ms-click="Edit">@Ornament.Properties.Resources.Edit</a>
+                    <a href="javascript:;" ms-click="Edit(el.Id)">@Ornament.Properties.Resources.Edit</a>
                 </td>
             </tr>
         </tbody>
@@ -47,7 +47,9 @@
 @section scripts{
     <script type="text/javascript">
         require(["/Messages/Scripts/Sender/Index.js"], function (main) {
-            main.init();
+            main.init({
+                get:'@Url.Action("GetSender")'
+            });
             clearPageVariable.push(main.clear);
         })
     </script>}

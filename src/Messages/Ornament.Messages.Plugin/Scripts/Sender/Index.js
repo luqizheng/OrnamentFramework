@@ -1,6 +1,6 @@
 ﻿define(["jquery","vaform"],function () {
     return {
-        init: function () {
+        init: function (config) {
             var editModel = avalon.define("editSender", function (vm) {
                 vm.Id = "";
                 vm.SenderType = "email";
@@ -9,7 +9,7 @@
                     Server: "",
                     PrivateCode: ""
                 };
-                vm.Sender = {
+                vm.EmailSender = {
                     Account: "",
                     Password: "",
                     SmtpServer: "",
@@ -37,8 +37,9 @@
                 };
                 vm.reload = function() {
                     if (vm.Id != null) {
-                        $.get("/Message/Sender/Get/" + vm.Id, function(d) {
-                            editModel.mix(this, d);
+                        $.get(config.get+ "/" + vm.Id, function(d) {
+                            avalon.mix(editModel, d);
+                            editModel.disabled = false;
                         });
                     }
                 };
@@ -57,7 +58,7 @@
                 vm.Edit = function (id) {
                     editModel.Id = id;
                     editModel.reload();
-                    editModel.disabled = false;
+                 
                 };
                 vm.create = function () {
                     editModel.clear();

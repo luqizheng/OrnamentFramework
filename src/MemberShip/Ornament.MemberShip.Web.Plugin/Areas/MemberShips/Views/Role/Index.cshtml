@@ -43,7 +43,7 @@
                 @{
                     string handler = hasModify ? "ms-click=edit" : "";
                 }
-                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
+                <div class="dd-handle" style="cursor: pointer" @handler ms-attr-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
                     @if (hasDelete)
                     {
                         <button ms-click="del" title="@Ornament.Properties.Resources.Delete" class="btn btn-danger btn-xs">

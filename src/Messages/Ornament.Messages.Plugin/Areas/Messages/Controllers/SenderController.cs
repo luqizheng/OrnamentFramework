@@ -36,11 +36,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IEnumerable<SenderModel> result = from a in data select new SenderModel((a));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult Get(int? id)
+       
+        public ActionResult GetSender(int? id)
         {
             Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
-            return Json(new SenderModel(result));
+            return Json(new SenderModel(result), JsonRequestBehavior.AllowGet);
         }
 
         [ValidateAjax, HttpPost, Session(Transaction = true)]
