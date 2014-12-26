@@ -59,6 +59,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             ParentKey = "templates")]
         public ActionResult Create()
         {
+            ViewBag.Senders = _daoFactory.NotifySenderDao.GetAll();
             return View("Edit", new MessageTemplateModel());
         }
 
@@ -71,6 +72,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             if (id == null)
                 throw new HttpException(404, "Template message not found.");
+            ViewBag.Senders = _daoFactory.NotifySenderDao.GetAll();
             NotifyMessageTemplate model = _daoFactory.MessageTemplateDao.Get(id);
             return View(new MessageTemplateModel(model));
         }

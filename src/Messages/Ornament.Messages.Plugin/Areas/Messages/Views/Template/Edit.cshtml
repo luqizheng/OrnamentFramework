@@ -1,5 +1,7 @@
 ﻿@using Ornament
 @using Ornament.MemberShip.Properties
+@using Ornament.Messages.Dao.NHibernateImple
+@using Ornament.Messages.Notification
 @using Ornament.Models
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
@@ -13,7 +15,7 @@
     string outputContents = "[]";
 
 
-    if (Model != null && this.Model.Contents.Count!=0)
+    if (Model != null && this.Model.Contents.Count != 0)
     {
         outputContents = JsonHelper.ToJson(this.Model.Contents);
     }
@@ -23,6 +25,7 @@
 {
     <h2>@Html.GetEmbededResourceString("title")</h2>
 }
+
 <form id="editTemp" ms-controller="editTemp" method="POST" action="@Url.Action("Save")" class="form-horizontal">
     @using (Panel panel = Html.Panel())
     {
@@ -56,8 +59,11 @@
                 <div class="col-lg-12 col-xs-12 col-sm-12">
                     @* 如果是内置，一定是不能呢改名字，因为是有程序初始化生成的 *@
                     <div class="form-group">
-                        @Html.LabelFor(s => s.Name)
-                        @Html.TextBoxFor(s => s.Name, "", new
+                        <div class="col-2">
+                            @Html.LabelFor(s => s.Name, new { @class = "control-label" })
+                        </div>
+                        <div class="col-10">
+                            @Html.TextBoxFor(s => s.Name, "", new
                         {
                             @class = "form-control",
                             HtmlAttributes = new Dictionary<string, object>
@@ -65,15 +71,31 @@
                                 {"ms-duplex", "Name"}
                             }
                         })
-                        @Html.ValidationMessageFor(s => s.Name)
+                            @Html.ValidationMessageFor(s => s.Name)
+                        </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(s=>s.Senders)
-                        
+                        <div class="col-2">
+                            @Html.LabelFor(s => s.Senders, new { @class = "control-label" })
+                        </div>
+                        <div class="col-10">
+                            @foreach (var sender in ViewBag.Senders)
+                            {
+                                var check = (this.Model.Senders ?? new ISender[0]).Any(s => s.Id == sender.Id);
+                                <label class="checkbox-inline" title="@sender.Remarks">
+                                    <input type="checkbox" value="@sender.Id" name="@Html.Name("")" @check />
+                                    @sender.Name
+                                </label>
+                            }
+                        </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(s => s.Remark)
-                        @Html.TextAreaFor(s => s.Remark,5,20,
+                        <div class="col-2">
+                            @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
+                        </div>
+                        <div class="col-10">
+
+                            @Html.TextAreaFor(s => s.Remark, 5, 20,
                             new
                             {
                                 @class = "form-control",
@@ -82,38 +104,46 @@
                                     {"ms-duplex", "Remark"}
                                 }
                             })
-                        @Html.ValidationMessageFor(s => s.Remark)
+                            @Html.ValidationMessageFor(s => s.Remark)
+                        </div>
                     </div>
                 </div>
             </div>
             <div id="tab8" class="tab-pane">
                 <div class="col-lg-12 col-xs-12 col-sm-12">
                     <div class="form-group">
-                        <label for="Language">Language:</label>
-                        <select id="Language" class="form-control" ms-duplex-string="Language">
-                            @{
-                                LanguageCollection langs = OrnamentContext.Configuration.Languages;
-                                foreach (Language lang in langs)
-                                {
-                                <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
+                        <div class="col-2">
+                            <label for="Language" class="control-label">Language:</label>
+                        </div>
+                        <div class="col-10">
+                            <select id="Language" class="form-control" ms-duplex-string="Language">
+                                @{
+                                    LanguageCollection langs = OrnamentContext.Configuration.Languages;
+                                    foreach (Language lang in langs)
+                                    {
+                                    <option value="@lang.Key">@lang.Name ( @lang.Key )</option>
+                                    }
                                 }
-                            }
-                        </select>
-
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input id="subject" class="form-control" type="text" style="width: 100%"
-                            ms-duplex="content.Subject" />
+                        <div class="col-2">
+                            <label for="subject" class="control-label">Subject</label>
+                        </div>
+                        <div class="col-10">
+                            <input id="subject" class="form-control" type="text" style="width: 100%"
+                                ms-duplex="content.Subject" />
+                        </div>
                     </div>
                     <div class="form-group">
                         @Html.EditorFor(s => s.Content, new
-                                     {
-                                         HtmlAttributes = new Dictionary<string, object>
+                   {
+                       HtmlAttributes = new Dictionary<string, object>
                                          {
                                              {"ms-duplex", "content.Value"}
                                          }
-                                     })
+                   })
                     </div>
                 </div>
             </div>
@@ -138,7 +168,7 @@
         require(["@Scripts.Url("~/messages/scripts/template/edit.js")"], function (init) {
             var contents=@Html.Raw(outputContents);
             var template = {
-                Remark:  '@Html.Raw(JsonHelper.ToJson(Model.Remark??""))',
+                Remark:  '@Html.Raw(JsonHelper.ToJson(Model.Remark ?? ""))',
                 Name: '@this.Model.Name',
                 Contents:contents
             }
