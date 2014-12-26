@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Senders;
 
@@ -9,41 +8,55 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
     {
         public EmailSenderModel()
         {
-
         }
 
         public EmailSenderModel(EmailSender sender)
         {
-            
-            this.SmtpServer = sender.SmtpServer;
-            this.Password = sender.Password;
-            this.Port = sender.Port;
-            this.SupportEmail = sender.FromEmail;
-
+            this.Account = sender.Account;
+            SmtpServer = sender.SmtpServer;
+            Password = sender.Password;
+            Port = sender.Port;
+            SupportEmail = sender.FromEmail;
         }
-        public virtual string Account { get; set; }
+
+        /// <summary>
+        ///     smtp服务器地址
+        /// </summary>
         public virtual string SmtpServer { get; set; }
+
+        /// <summary>
+        ///     服务器断开，默认是25
+        /// </summary>
         public virtual int Port { get; set; }
 
-
+        /// <summary>
+        ///     发邮件的默认Eimal地址
+        /// </summary>
         public virtual string SupportEmail { get; set; }
-        public virtual string UserName { get; set; }
+
+        /// <summary>
+        ///     登录账号
+        /// </summary>
+        public virtual string Account { get; set; }
+
+        /// <summary>
+        ///     登录密码
+        /// </summary>
         public virtual string Password { get; set; }
 
 
-        public Sender CreateSender(int? id,IMessageDaoFactory messageDaoFactory)
+        public Sender CreateSender(int? id, IMessageDaoFactory messageDaoFactory)
         {
             Sender sender = id != null
                 ? messageDaoFactory.NotifySenderDao.Get(id.Value)
-                : new EmailSender("", this.SmtpServer, SupportEmail);
+                : new EmailSender("", SmtpServer, SupportEmail);
             var emailSender = sender as EmailSender;
             if (emailSender != null)
             {
-
-                emailSender.FromEmail = String.IsNullOrEmpty(SupportEmail) ? this.Account : this.SupportEmail;
+                emailSender.FromEmail = String.IsNullOrEmpty(SupportEmail) ? Account : SupportEmail;
                 emailSender.Password = Password;
                 emailSender.Port = Port;
-                emailSender.UserName = Account;
+                emailSender.Account = Account;
                 emailSender.SmtpServer = SmtpServer;
             }
             else
@@ -52,14 +65,28 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             }
             return sender;
         }
-        
+
+        public Sender Modify(int? id, IMessageDaoFactory messageDaoFactory)
+        {
+            var result = messageDaoFactory.NotifySenderDao.Get(id.Value);
+            var emailSender = result as EmailSender;
+            if (emailSender != null)
+            {
+                emailSender.FromEmail = String.IsNullOrEmpty(SupportEmail) ? Account : SupportEmail;
+                emailSender.Password = Password;
+                emailSender.Port = Port;
+                emailSender.Account = Account;
+                emailSender.SmtpServer = SmtpServer;
+            }
+            return emailSender;
+
+        }
     }
 
     public class NotifySenderException : ApplicationException
     {
-        public NotifySenderException(string message):base(message)
+        public NotifySenderException(string message) : base(message)
         {
-            
         }
     }
 }

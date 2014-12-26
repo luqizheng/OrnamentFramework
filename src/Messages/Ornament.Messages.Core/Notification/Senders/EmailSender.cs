@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Mail;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -29,18 +31,36 @@ namespace Ornament.Messages.Notification.Senders
                 if (_smtpClient != null)
                 {
                     _smtpClient = new SmtpClient(SmtpServer, Port);
+                    if (!String.IsNullOrEmpty(Account))
+                        _smtpClient.Credentials = new NetworkCredential(this.Account, this.Password);
                 }
                 return _smtpClient;
             }
         }
-        
-        
+
+        /// <summary>
+        ///     smpt服务器地址
+        /// </summary>
         public virtual string SmtpServer { get; set; }
+
+        /// <summary>
+        ///     断开
+        /// </summary>
         public virtual int Port { get; set; }
 
-
+        /// <summary>
+        ///     email
+        /// </summary>
         public virtual string FromEmail { get; set; }
-        public virtual string UserName { get; set; }
+
+        /// <summary>
+        ///     服务器使用的账号
+        /// </summary>
+        public virtual string Account { get; set; }
+
+        /// <summary>
+        ///     服务器使用的密码
+        /// </summary>
         public virtual string Password { get; set; }
 
         public virtual void Send(string subject, string content, string to, string from)

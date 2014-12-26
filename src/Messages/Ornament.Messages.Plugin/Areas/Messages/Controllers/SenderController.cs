@@ -46,13 +46,15 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         [ValidateAjax, HttpPost, Session(Transaction = true)]
         public ActionResult Save(SenderModel model)
         {
+            Sender sender;
             if (ModelState.IsValid)
             {
-                model.Save(_messageDaoFactory);
+                sender=model.Save(_messageDaoFactory);
                 var result = new
                 {
                     success = true,
-                    message = ""
+                    message = "",
+                    Id = sender.Id
                 };
 
                 return Json(result);
@@ -62,7 +64,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                 var result = new
                 {
                     success = false,
-                    message = "Failed to save Sender."
+                    message = "Failed to save Sender.",
                 };
                 return Json(result);
             }

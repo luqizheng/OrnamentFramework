@@ -68,17 +68,33 @@
                 listModel.Senders = d;
             });
 
-
+            //保存Sender的方法用vaform处理
+            
             $("#editSender").vaform({
+                
                 success: function(d) {
                     if (d.success) {
-                        editModel.Id = d.SenderId;
-                        listModel.Senders.push(editModel.get());
+                        editModel.Id = d.Id;//返回的Id
+                        var modifiedSender = editModel.get();
+                        var findIt = false;
+                        for (var i = 0; i < listModel.Senders.length; i++) {
+                            var item = listModel.Senders[i];
+                            if (item.Id == modifiedSender.Id) {
+                                item.Name = modifiedSender.Name;
+                                item.Remarks = modifiedSender.Remarks;
+                                item.Id = modifiedSender.Id;
+                                findIt = true;
+                                break;
+                            }
+                        }
+                        if (!findIt) {
+                            listModel.Senders.push(modifiedSender);
+                        }
                         alert('success to save');
                     } else {
                         alert(d.message);
                     }
-                } 
+                }
             });
 
             avalon.scan();

@@ -38,5 +38,17 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             }
             return sender;
         }
+
+        public Sender Modify(int? id, IMessageDaoFactory messageDaoFactory)
+        {
+            Sender sender = messageDaoFactory.NotifySenderDao.Get(id.Value);
+            var clientSender = sender as ClientSender;
+            if (clientSender != null)
+            {
+                clientSender.Server = Server;
+                clientSender.PrivateCode = PrivateCode;
+            }
+            return clientSender;
+        }
     }
 }

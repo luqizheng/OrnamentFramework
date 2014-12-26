@@ -1,4 +1,5 @@
-﻿using NHibernate.Dialect.Function;
+﻿using System;
+using NHibernate.Dialect.Function;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Senders;
 
@@ -58,18 +59,26 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         public Sender Save(IMessageDaoFactory daoFactory)
         {
             Sender sender;
-            switch (SenderType)
+            if (Id == null) //新增模式
             {
-                case "email":
-                    sender = this.EmailSender.CreateSender(this.Id, daoFactory);
-                    break;
-                case "client":
-                    sender = this.ClientSender.CreateSender(this.Id, daoFactory);
-                    break;
-                default:
-                    throw new NotifySenderException(SenderType + " is not defined");
+                switch (SenderType)
+                {
+                    case "email":
+                        sender = this.EmailSender.CreateSender(this.Id, daoFactory);
+                        break;
+                    case "client":
+                        sender = this.ClientSender.CreateSender(this.Id, daoFactory);
+                        break;
+                    default:
+                        throw new NotifySenderException(SenderType + " is not defined");
 
+                }
             }
+            else
+            {
+                sender = this.EmailSender.Modify(this.Id,daoFactory) ?? this.ClientSender.Modify(this.Id, daoFactory);
+            }
+
             sender.Name = Name;
             sender.Remarks = Remarks;
 

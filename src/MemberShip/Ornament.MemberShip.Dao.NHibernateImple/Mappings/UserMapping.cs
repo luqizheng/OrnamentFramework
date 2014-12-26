@@ -42,7 +42,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple.Mappings
         {
             Table("Mbs_UserStatistics");
             Id(s => s.Id).GeneratedBy.Increment();
-            Map(s => s.CreateDate).CustomSqlType("Date");
+            Map(s => s.CreateDate).CustomSqlType("Date").Unique();
             Map(s => s.MaxActives);
             Map(s => s.Actives);
         }
