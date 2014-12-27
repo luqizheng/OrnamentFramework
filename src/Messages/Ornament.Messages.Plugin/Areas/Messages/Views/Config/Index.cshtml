@@ -55,11 +55,6 @@
 
 }
 @section scripts{
-    @Scripts.Render("~/Scripts/avalon.js")
-    @Scripts.Render("~/Scripts/json2.js")
-    <script type="text/javascript">
-        avalon.config({ loader: false });
-    </script>
     <script type="text/javascript">
         var js=@Html.Raw(a);
         require(["/Messages/Scripts/Config/index.js"], function(init) {

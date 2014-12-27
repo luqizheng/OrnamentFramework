@@ -39,10 +39,13 @@ paths: {
         ornamentUi:"@Scripts.Url("~/Scripts/modules/ornamentUi")"
 },
 shim:{
-        validate:["jquery"],maxlength:["jquery"],unobtrusive:["jquery"],
+validate:["jquery"],
+maxlength:["jquery"],
+unobtrusive:["jquery"],
         bsvalid:['validate','unobtrusive'],
         vaform:['validate','unobtrusive','bsvalid'],
-        bootstrap:['jquery'],jarvismenu:["jquery"],
+bootstrap:['jquery'],
+jarvismenu:["jquery"],
         touch:['jquery'],
         "app.config":['jquery'],
         util:['bootstrap'],
@@ -54,7 +57,7 @@ shim:{
         select2:["jquery"],
         maskedinput:["jquery"],
 mbBrowser:["jquery"],
-bsslider:["jquery"]
+bsslider:["jquery"],bootbox:["bootstrap"]
 
     }
 });

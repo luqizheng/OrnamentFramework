@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ArrayOfMessageVariable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MessageVariable>
+    <Name>7777</Name>
+    <Value>77</Value>
+  </MessageVariable>
+  <MessageVariable>
+    <Name>domain</Name>
+    <Value>my</Value>
+  </MessageVariable>
+  <MessageVariable>
+    <Name>site</Name>
+    <Value>http://localhost:17034</Value>
+  </MessageVariable>
+  <MessageVariable>
+    <Name>siteName</Name>
+    <Value>Ornament测试</Value>
+  </MessageVariable>
+</ArrayOfMessageVariable>

@@ -1,7 +1,4 @@
-﻿define(function (require) {
-    var $ = require("jquery");
-    require('bootstrap')($);
-    require('bootbox')($);
+﻿define(["jquery","bootbox"],function ($,bootbox) {
     var model = avalon.define('index', function (vm) {
         vm.data = [];
         vm.add = function () {

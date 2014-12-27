@@ -137,6 +137,7 @@
     <Compile Include="Areas\Messages\Models\Messages\MessageTemplateModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\NewsTypeModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\PersonalMessageModel.cs" />
+    <Compile Include="Areas\Messages\Models\PublisherTemplate.cs" />
     <Compile Include="Areas\Messages\Models\SenderModel.cs" />
     <Compile Include="Models\MessageInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Sender\_client.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Template\Publish.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
