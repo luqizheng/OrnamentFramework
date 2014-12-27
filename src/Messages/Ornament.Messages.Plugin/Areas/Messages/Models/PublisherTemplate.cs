@@ -8,19 +8,18 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
     {
         public PublisherTemplate()
         {
-            Variables = new Dictionary<string,IDictionary<string, string>>();
-            
+            Variables = new Dictionary<string, IDictionary<string, string>>();
         }
 
         public PublisherTemplate(NotifyMessageTemplate template)
             : this()
         {
-            this.Id = template.Id;
+            Id = template.Id;
             foreach (Content content in template.Contents.Values)
             {
                 var value = new NamedFormatterHelper();
                 var dictionary = new Dictionary<string, string>();
-                Variables.Add(content.Language,dictionary);
+                Variables.Add(content.Language, dictionary);
 
                 foreach (string v in value.CollectVariable(content.Value))
                 {
@@ -32,10 +31,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             }
         }
 
-        
-        
-        public IDictionary<string,IDictionary<string, string>> Variables { get; set; }
-        public string Id
-        { get; set; }
+
+        public IDictionary<string, IDictionary<string, string>> Variables { get; set; }
+        public string Id { get; set; }
     }
 }
