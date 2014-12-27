@@ -44,8 +44,8 @@
                          <ul class="dd-list">
                              <ol class="dd-item" ms-repeat-el="userGroups">
                                  <div class="dd-handle" style="cursor: pointer"
-                                      ms-click="edit" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
-                                     <button ms-click="del" ms-attr-title="el.Remarks" class="btn btn-xs btn-danger">
+                                      ms-click="edit(el)" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
+                                     <button ms-click="del(el)" ms-attr-title="el.Remarks" class="btn btn-xs btn-danger">
                                          <i class="fa-remove fa"></i>
                                      </button>
                                      <span ms-text="el.Name"></span>

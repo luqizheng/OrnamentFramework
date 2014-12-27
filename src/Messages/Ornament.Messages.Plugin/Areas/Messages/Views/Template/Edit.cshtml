@@ -83,7 +83,9 @@
                             {
                                 var check = (this.Model.Senders ?? new ISender[0]).Any(s => s.Id == sender.Id);
                                 <label class="checkbox-inline" title="@sender.Remarks">
-                                    <input type="checkbox" value="@sender.Id" name="@Html.Name("")" @check />
+                                    <input type="checkbox" value="@sender.Id" name="Senders"
+                                        
+                                        @check />
                                     @sender.Name
                                 </label>
                             }

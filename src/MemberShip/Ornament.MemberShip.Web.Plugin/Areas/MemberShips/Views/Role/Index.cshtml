@@ -41,7 +41,7 @@
         <ul class="dd-list">
             <ol ms-repeat-el="roles" class="dd-item">
                 @{
-                    string handler = hasModify ? "ms-click=edit" : "";
+                    string handler = hasModify ? "ms-click=edit(el,$event)" : "";
                 }
                 <div class="dd-handle" style="cursor: pointer" @handler ms-attr-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
                     @if (hasDelete)

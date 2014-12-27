@@ -53,7 +53,7 @@
 
     @panel.Body(@<text>
                      <div ms-controller="index">
-                         <form class="input-group input-group-lg" ms-submit="search">
+                         <form class="input-group input-group-lg" ms-submit="search($event)">
                              <input type="text" ms-class-ui-autocomplete-loading="loading"
                                  placeholder="@Html.GetEmbededResourceString("Search_tips")" class="form-control input-lg" ms-duplex="content">
                                    <div class="input-group-btn">
@@ -110,7 +110,8 @@
                                          <td>
                                  
                                              <span ms-text="el.Email"></span>
-                                             <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
+                                             <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" 
+                                                 ms-click="verifyEmail(el)"
                                                 title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
                                                  <i class="fa  fa-flag-o"></i>
                                                  @Html.GetEmbededResourceString("Verify")
@@ -119,29 +120,29 @@
                                          <td ms-text="el.Phone"></td>
                                          <td>
                                              <div class="btn-group">
-                                                 <a class="btn btn-default btn-xs" ms-click="deny">
+                                                 <a class="btn btn-default btn-xs" ms-click="deny(el)">
                                                      <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
                                                  </a>
                                                  <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
                                                      <i class="caret"></i>
                                                  </a>
                                                  <ul class="dropdown-menu">
-                                                     <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
-                                                     <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
+                                                     <li><a href="#" ms-click="deny(el,true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
+                                                     <li><a href="#" ms-click="deny(el,false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
                                                  </ul>
                                              </div>
                                          </td>
                                          <td>
                                              <div class="btn-group">
-                                                 <a class="btn btn-default btn-xs" ms-click="lock">
+                                                 <a class="btn btn-default btn-xs" ms-click="lock(el)">
                                                      <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
                                                  </a>
                                                  <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
                                                      <i class="caret"></i>
                                                  </a>
                                                  <ul class="dropdown-menu">
-                                                     <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                                     <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                                     <li><a href="#" ms-click="lock(el,true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                                     <li><a href="#" ms-click="lock(el,false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
                                                  </ul>
                                              </div>
                                          </td>

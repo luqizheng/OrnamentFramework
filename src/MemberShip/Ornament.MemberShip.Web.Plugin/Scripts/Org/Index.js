@@ -2,15 +2,15 @@
     var org = require("/MemberShips/Scripts/Share/Org.js");
 
     function Init() {
-        avalon.define('index', function (vm) {
+        indexModel = avalon.define('index', function (vm) {
             vm.treeRender = function () {
                 return arguments[0];
             };
             vm.orgs = [{ Name: "", Id: "", Childs: [] }];
-            vm.addSub = function (e) {
-                var self = this.$vmodel.el || null;
+            vm.addSub = function (el, e) {
+                var self = el || null;
                 var newOrg = {
-                    Name: "New Org",
+                    Name: "The Org",
                     Remarks: "",
                     Parent: self ? self.Id : null,
                     Roles: []
@@ -34,8 +34,8 @@
                 e.preventDefault();
             };
 
-            vm.del = function (e) {
-                var self = this.$vmodel;
+            vm.del = function (el, e) {
+                var self = el;
                 if (confirm("是否删除组织单元" + self.el.Name)) {
                     org.del(self.el.Id, function () {
                         self.$model.$remove();
@@ -45,9 +45,9 @@
             };
 
             vm.editModel = null;
-            vm.edit = function (e) {
-                vm.editModel = this.$vmodel.el;
-                org.get(this.$vmodel.el.Id, function (data) {
+            vm.edit = function (el, e) {
+                vm.editModel = el;
+                org.get(el.Id, function (data) {
                     var model = avalon.vmodels["edit"];
                     model.Id = data.Id;
                     model.Name = data.Name;
@@ -62,13 +62,13 @@
             vm.updateModel = function (name) {
                 vm.editModel.Name = name;
             };
-            vm.toggle = function () {
-                if (this.$vmodel.el.Hide) {
+            vm.toggle = function (el, e) {
+                if (el.Hide) {
                     $(this).closest("li").find("ul:first").show('fast');
                 } else {
                     $(this).closest("li").find("ul:first").hide('fast');
                 }
-                this.$vmodel.el.Hide = !this.$vmodel.el.Hide;
+                el.Hide = !el.Hide;
             };
             vm.$skipArray = ["editModel"];
         });
@@ -96,12 +96,13 @@
 
     return {
         init: function (orgDTO) {
-        Init();
-        avalon.vmodels["index"].orgs = orgDTO;
-        avalon.scan($("#content")[0]);
+            Init();
+            avalon.vmodels["index"].orgs = orgDTO;
+            avalon.scan($("#content")[0]);
 
-    },clear:function() {
-        delete avalon.vmodels["edit"];
-        delete avalon.vmodels["index"];
-    }};
+        }, clear: function () {
+            delete avalon.vmodels["edit"];
+            delete avalon.vmodels["index"];
+        }
+    };
 })

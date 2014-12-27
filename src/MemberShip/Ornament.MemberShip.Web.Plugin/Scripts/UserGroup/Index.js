@@ -74,8 +74,8 @@
         list = avalon.define('index', function (vm) {
             vm.userGroups = [{ "Id": "", "Name": "", "Remarks": "", "Roles": [] }];
             vm.loading = false;
-            vm.del = function () {
-                vm.curUg = this.$vmodel.el;
+            vm.del = function (el) {
+                vm.curUg =el;
                 call();
             };
             vm.delete = function (id) {
@@ -95,8 +95,8 @@
                 editor.editing = true;
                 vm.curUg = null;
             };
-            vm.edit = function () {
-                var ug = this.$vmodel.el;
+            vm.edit = function (ug) {
+                
                 avalon.mix(editor, ug);
                 editor.editing = true;
                 vm.curUg = ug;

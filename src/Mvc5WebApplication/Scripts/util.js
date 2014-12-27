@@ -25,6 +25,15 @@
     }
     //修改Smart Admin的 导航方式，在切换导航的时候，要能够正确调用清理函数
     var clearPageVariable = [];
+    $(window).off('hashchange').on('hashchange', function () {
+        while (clearPageVariable.length != 0) {
+            var method = (clearPageVariable.shift());
+            if (typeof method == "function") {
+                method();
+            }
+        }
+        checkURL();
+    });
     $(document).off('click', 'nav a[href!="#"]')
         .on('click', 'nav a[href!="#"]', function (e) {
 
