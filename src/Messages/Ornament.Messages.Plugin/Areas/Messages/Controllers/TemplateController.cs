@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ornament.Messages.Config;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
+using Ornament.Models;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
 using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
-    [Session]
+    [Session, Authorize]
     public class TemplateController : Controller
     {
         private readonly IMessageDaoFactory _daoFactory;
@@ -53,6 +56,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                 data = array
             }, JsonRequestBehavior.AllowGet);
         }
+
 
         //
         // GET: /Messages/Template/Create
@@ -102,10 +106,47 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
         public ActionResult Publish(string id)
         {
-            var template = _daoFactory.MessageTemplateDao.Get(id);
+            NotifyMessageTemplate template = _daoFactory.MessageTemplateDao.Get(id);
             var item = new PublisherTemplate(template);
-
+            ViewData["temp"] = template;
             return View(item);
+        }
+        [HttpPost]
+        public ActionResult Publish(PublisherTemplate template)
+        {
+            var result = new
+            {
+                success = true,
+                message = "Save success",
+            };
+
+            return Json(result);
+        }
+        /// <summary>
+        ///     获取生成的内容
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetContent(PublisherTemplate template)
+        {
+            NotifyMessageTemplate temp = _daoFactory.MessageTemplateDao.Get(template.Id);
+            var list = new ArrayList();
+
+
+            foreach (string key in temp.Contents.Keys)
+            {
+                IDictionary<string, string> local = template.Variables[key];
+                NotifySenderManager.Instance.MergnGloablVariable(local);
+                list.Add(new
+                {
+                    Subject = temp.Contents[key].GetSubject(local),
+                    Value = temp.Contents[key].GetContent(local),
+                    Language = key,
+
+                });
+            }
+            return Json(list);
         }
 
         public ActionResult Get(string id)

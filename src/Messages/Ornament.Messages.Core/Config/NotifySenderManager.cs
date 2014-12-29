@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Notification.Senders;
 using Qi;
@@ -35,7 +36,21 @@ namespace Ornament.Messages.Config
                 {"Client", typeof (ClientSender)}
             };
         }
+        /// <summary>
+        /// localVariable和GloablVariable进行合并，localVariable优先
+        /// </summary>
+        /// <param name="localVariables"></param>
+        public void MergnGloablVariable(IDictionary<string, string> localVariables)
+        {
+            foreach (var key in this.Variables.Keys)
+            {
+                if (!localVariables.ContainsKey(key))
+                {
+                    localVariables.Add(key,this.Variables[key]);
+                }
+            }
 
+        }
         /// <summary>
         ///     固定变量列表,当遇到的相同的就会替换到
         /// </summary>

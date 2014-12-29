@@ -153,6 +153,7 @@
     <EmbeddedResource Include="Scripts\Template\Create.js" />
     <EmbeddedResource Include="Scripts\Config\Index.js" />
     <EmbeddedResource Include="Scripts\Sender\Index.js" />
+    <EmbeddedResource Include="Scripts\Template\publish.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

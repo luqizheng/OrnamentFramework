@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Qi.Text;
 
 namespace Ornament.Messages
 {
@@ -10,7 +12,7 @@ namespace Ornament.Messages
 
         public Content(string language)
         {
-            if (language == null) 
+            if (language == null)
                 throw new ArgumentNullException("language");
             Language = language;
         }
@@ -20,12 +22,24 @@ namespace Ornament.Messages
         /// <summary>
         /// </summary>
         public virtual string Language { get; set; }
-      
+
         public virtual string Value { get; set; }
 
         public override int GetHashCode()
         {
             return (Value).GetHashCode();
+        }
+
+        public string GetSubject(IDictionary<string, string> variables)
+        {
+            var helper = new NamedFormatterHelper();
+            return helper.Replace(Subject, variables);
+        }
+
+        public String GetContent(IDictionary<string, string> dictionary)
+        {
+            var helper = new NamedFormatterHelper();
+            return helper.Replace(Value, dictionary);
         }
     }
 }

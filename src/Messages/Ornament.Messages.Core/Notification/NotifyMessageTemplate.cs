@@ -93,14 +93,16 @@ namespace Ornament.Messages.Notification
         public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory,
             IDictionary<string, string> variable, params User[] performers)
         {
-            foreach (var sender in this.Senders)
+            foreach (ISender sender in Senders)
             {
                 sender.Send(memberShipDaoFactory, this, variable, performers);
             }
         }
-        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory, CreateVariablesHandler dynamicCreateVariablesHandler, User[] user, IPerformer[] performers)
+
+        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory,
+            CreateVariablesHandler dynamicCreateVariablesHandler, User[] user, IPerformer[] performers)
         {
-            foreach (var sender in this.Senders)
+            foreach (ISender sender in Senders)
             {
                 sender.Send(memberShipDaoFactory, this, dynamicCreateVariablesHandler, user, performers);
             }
