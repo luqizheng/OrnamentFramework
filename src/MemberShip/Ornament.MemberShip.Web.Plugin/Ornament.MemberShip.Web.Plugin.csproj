@@ -289,6 +289,7 @@
     <Content Include="Areas\MemberShips\Views\Web.config" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\OrgTreeView.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Permissions\Operators.cshtml" />
+    <EmbeddedResource Include="Scripts\Share\userSelect2.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,4 @@
-﻿define(["jquery","vaform"],function () {
+﻿define(["jquery","vaform","/MemberShips/Scripts/Org/Org.js"],function (a,b,org) {
     return {
         init: function (config) {
             var editModel = avalon.define("editSender", function (vm) {

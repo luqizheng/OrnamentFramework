@@ -25,7 +25,7 @@
 
     return {
         Init: function () {
-            require(["vaform", "/MemberShips/Scripts/Org/Org.js"], function () {
+            require(["vaform"], function () {
                 init();
                 avalon.scan();
             });

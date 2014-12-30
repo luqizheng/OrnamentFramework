@@ -874,6 +874,7 @@
     <Content Include="Scripts\plugin\noUiSlider\jquery.nouislider.min.js" />
     <Content Include="Scripts\plugin\pace\pace.min.js" />
     <Content Include="Scripts\plugin\select2\readme.txt" />
+    <Content Include="Scripts\plugin\select2\select2.js" />
     <Content Include="Scripts\plugin\select2\select2.min.js" />
     <Content Include="Scripts\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
     <Content Include="Scripts\plugin\slimscroll\jquery.slimscroll.min.js" />
