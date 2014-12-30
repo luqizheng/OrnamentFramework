@@ -25,7 +25,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             //for users
             config.Routes.MapHttpRoute(AreaName + "_user_api", "api/memberships/users/{action}", new
             {
-                controller = "users"
+                controller = "Users"
             });
 
 

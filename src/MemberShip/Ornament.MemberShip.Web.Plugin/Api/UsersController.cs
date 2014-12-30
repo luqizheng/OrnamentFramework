@@ -28,7 +28,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match([FromUri][ModelBinder] UserSearch search)
+        public IEnumerable<object> Match([FromUri] UserSearch search)
         {
             if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Read))
             {
