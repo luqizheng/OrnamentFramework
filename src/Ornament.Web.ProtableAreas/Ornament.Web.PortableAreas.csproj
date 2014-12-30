@@ -88,10 +88,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messages\IocControllerInjectMessageHandler.cs" />
-    <Compile Include="Messages\SeajsModuleBundleMessageHandle.cs" />
-    <Compile Include="AreaRegistrationHelper.cs" />
-    <Compile Include="Controllers\EmbeddedResourceController.cs" />
     <Compile Include="InputBuilder\Attributes\CanDeleteAllAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\DisplayOrderAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\ExampleAttribute.cs" />
@@ -99,6 +95,10 @@
     <Compile Include="InputBuilder\Attributes\NoAddAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\NoDeleteAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\PartialViewAttribute.cs" />
+    <Compile Include="Messages\IocControllerInjectMessageHandler.cs" />
+    <Compile Include="Messages\SeajsModuleBundleMessageHandle.cs" />
+    <Compile Include="AreaRegistrationHelper.cs" />
+    <Compile Include="Controllers\EmbeddedResourceController.cs" />
     <Compile Include="InputBuilder\Conventions\PropertyName\DefaultNameConvention.cs" />
     <Compile Include="InputBuilder\Conventions\PropertyName\IPropertyViewModelNameConvention.cs" />
     <Compile Include="InputBuilder\Conventions\Property\ArrayPropertyConvention.cs" />

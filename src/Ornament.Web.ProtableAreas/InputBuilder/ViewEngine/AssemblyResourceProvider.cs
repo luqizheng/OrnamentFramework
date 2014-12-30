@@ -12,7 +12,7 @@ namespace Ornament.Web.InputBuilder.ViewEngine
     {
         bool IsCrosssAssemblyPath(string virtualPath, out string newPath)
         {
-            var pos = virtualPath.IndexOf("~");
+            var pos = virtualPath.LastIndexOf("~", System.StringComparison.Ordinal);
 
             var result = pos != -1 && pos != 0;
             newPath = result ? virtualPath.Substring(pos) : null;
@@ -20,6 +20,13 @@ namespace Ornament.Web.InputBuilder.ViewEngine
         }
         public override bool FileExists(string virtualPath)
         {
+            string newPath = null;
+            var virpath = IsCrosssAssemblyPath(virtualPath, out newPath);
+            if (virpath)
+            {
+                virtualPath = newPath;
+            }
+            
             bool flag = base.FileExists(virtualPath);
             if (!flag)
             {

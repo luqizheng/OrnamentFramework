@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ornament.MemberShip;
 using Ornament.Messages.Config;
 using Ornament.Messages.Notification;
 using Qi.Text;
@@ -36,7 +37,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
                 }
             }
         }
-
+        public User[] Users { get; set; }
+        public UserGroup[] UserGroups { get; set; }
+        public Org[] Orgs { get; set; }
+        public Role[] Roles { get; set; }
         /// <summary>
         /// key 是 language，value是key-map的 变量已经他们的对应值。
         /// </summary>
