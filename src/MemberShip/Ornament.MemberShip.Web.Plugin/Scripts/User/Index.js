@@ -110,7 +110,7 @@ define(function (require) {
             });
         },
         clear: function () {
-            console.log("clear unser index.");
+            
             delete avalon.vmodels["index"];
         }
     };
