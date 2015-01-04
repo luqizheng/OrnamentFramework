@@ -1,4 +1,4 @@
-﻿define(function (require) {
+﻿define(['pager'], function (require) {
    
 
     var bootbox = require("bootbox");
@@ -71,7 +71,7 @@
     function defineAvalon() {
 
 
-        list = avalon.define('index', function (vm) {
+        list = avalon.define('userGroupIndex', function (vm) {
             vm.userGroups = [{ "Id": "", "Name": "", "Remarks": "", "Roles": [] }];
             vm.loading = false;
             vm.del = function (el) {
@@ -121,7 +121,7 @@
             };
         });
 
-        editor = avalon.define('edit', function (vm) {
+        editor = avalon.define('userGroupEdit', function (vm) {
             var _id;
             vm.Id = {
                 get: function() { return _id },
@@ -178,17 +178,15 @@
             if (message) {
                 avalon.mix(messages,message);
             }
-
-            require(['pager'], function() {
-                changeVal();
-                defineAvalon();
-                avalon.scan();
-            });
+            changeVal();
+            defineAvalon();
+            avalon.scan();
+          
         },
         clear: function () {
-            console.log('clean up');
-            delete avalon.vmodels['index'];
-            delete avalon.vmodels['edit'];
+            delete avalon.vmodels['userGroupIndex'];
+            delete avalon.vmodels['userGroupEdit'];
+
         }
     };
 })

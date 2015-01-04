@@ -107,11 +107,13 @@ namespace Ornament.MemberShip
         [Display(Name = "FirstName", ResourceType = typeof(Resources))]
         [MaxLength(64)]
         string FirstName { get; set; }
-
+        
         [Display(Name = "LastName", ResourceType = typeof(Resources))]
         [MaxLength(64)]
         string LastName { get; set; }
-
+        /// <summary>
+        /// 设置生日日期
+        /// </summary>
         [Display(Name = "Birthday", ResourceType = typeof(Resources))]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "yyyy/MM/dd")]

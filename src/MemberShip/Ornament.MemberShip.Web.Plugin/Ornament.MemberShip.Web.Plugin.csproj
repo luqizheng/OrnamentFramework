@@ -148,7 +148,6 @@
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\Permissions\index.js" />
     <EmbeddedResource Include="Scripts\Permissions\Permission.js" />
     <EmbeddedResource Include="Scripts\Role\Index.js" />
     <EmbeddedResource Include="Scripts\Share\dataTables.js" />
