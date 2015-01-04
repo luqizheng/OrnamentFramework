@@ -285,4 +285,7 @@
   <data name="Roles" xml:space="preserve">
     <value>角色</value>
   </data>
+  <data name="Gender" xml:space="preserve">
+    <value>性別</value>
+  </data>
 </root>

@@ -117,5 +117,11 @@ namespace Ornament.MemberShip
         [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
         [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd","yy/mm/dd")]
         DateTime? Birthday { get; set; }
+        /// <summary>
+        /// 性別，默認是unknow
+        /// 
+        /// </summary>
+        [Display(Name="Gender",ResourceType = typeof(Resources))]
+         GenderType? Gender { get; set; }
     }
 }
