@@ -36,11 +36,10 @@
                 e.preventDefault();
             },
 
-            del :function (el, e) {
-                var self = el;
+            del: function (self, e, removeFunc) {
                 if (confirm("是否删除组织单元" + self.Name)) {
                     org.del(self.Id, function () {
-                        self.$remove();
+                        removeFunc();
                     });
                 }
                 e.preventDefault();
