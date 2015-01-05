@@ -14,11 +14,6 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
             NotExistAccountOrEmail
         }
 
-       
-  
-        public ForgetPasswordModel()
-        {
-        }
 
         /// <summary>
         /// </summary>

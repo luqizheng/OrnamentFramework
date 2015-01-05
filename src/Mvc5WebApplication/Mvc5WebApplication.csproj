@@ -1051,6 +1051,8 @@
     <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\BodyToolbar.cshtml" />
     <Content Include="Views\Setup\Index.cshtml" />
+    <Content Include="Views\Security\VerifyEmail.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

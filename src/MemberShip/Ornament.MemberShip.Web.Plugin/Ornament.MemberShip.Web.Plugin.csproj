@@ -165,6 +165,7 @@
     <EmbeddedResource Include="Scripts\Org\Org.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="Scripts\Permissions\index.js" />
     <Content Include="Scripts\Share\_NewPassword.js" />
     <EmbeddedResource Include="Scripts\User\Assign.js" />
     <EmbeddedResource Include="Scripts\User\Edit.js" />

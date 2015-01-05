@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
-using Ornament.Messages.Notification;
 
-namespace Ornament.MemberShip.Plugin.Models.Security
+namespace Ornament.MemberShip.Web.Plugin.Models.Security
 {
     public class VerifyEmailModel
     {

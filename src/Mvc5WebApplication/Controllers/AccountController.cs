@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ornament;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
+using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
 
@@ -100,6 +101,18 @@ namespace WebApplication.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgetPassword(ForgetPasswordModel model)
+        {
+
+            return RedirectToAction("Logon");
         }
     }
 }

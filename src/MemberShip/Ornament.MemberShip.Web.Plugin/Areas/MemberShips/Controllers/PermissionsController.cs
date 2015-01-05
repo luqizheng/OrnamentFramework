@@ -8,6 +8,7 @@ using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.Web;
 using Ornament.Web.MemberShips;
+using Ornament.Web.UI;
 using Qi;
 using Qi.Web.Mvc;
 
@@ -31,7 +32,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult Index()
         {
             IQueryable<Permission> model = from permission in _memberShipDaoFactory.Permissions
-                select permission;
+                                           select permission;
             return View(model);
         }
 
@@ -90,13 +91,19 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,permissionDeleteTitle",
             ParentKey = "Permission",
             Resource = "Permission", Operator = PermissionOperator.Edit),
-         ResourceAuthorize(PermissionOperator.Delete, "Permission")]
+         ResourceAuthorize(PermissionOperator.Delete, "Permission"),
+        ValidateAjax()
+        ]
         public ActionResult Delete(string id)
         {
             IPermissionDao dao = _memberShipDaoFactory.CreatePermissionDao();
             Permission permission = dao.Get(id);
             dao.Delete(permission);
-            return RedirectToAction("Index");
+            return Json(new
+            {
+                success = true,
+                message = "save success."
+            });
         }
 
         /// <summary>

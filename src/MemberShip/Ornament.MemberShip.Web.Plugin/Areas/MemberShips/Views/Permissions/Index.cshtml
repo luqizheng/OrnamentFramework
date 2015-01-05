@@ -3,7 +3,6 @@
 @using Ornament.Properties
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
-@using SeajsBundles
 @model IEnumerable<Ornament.MemberShip.Permissions.Permission>
 @{
     ViewBag.Title = "Permissions";
@@ -11,7 +10,7 @@
 }
 @section scripts{
     <script type="text/javascript">
-        require(["@Scripts.Url("~/Memberships/scripts/permissions/index.js")"], function (init) {
+        require(["@Scripts.Url("~/Memberships/scripts/permissions/index.js")"], function(init) {
             init({
                 warnDel: '@Html.GetEmbededResourceString("warnning_deleting_msg")',
                 delUrl: '@Url.Action("Delete")'
@@ -30,47 +29,47 @@
 @using (Panel box = Html.Panel())
 {
     @box.Header(@<text>
-    <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
+                     <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Create</a>
 
-    </text>)
+                 </text>)
 
     @box.Body(
         @<text>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th style="width: 100px"></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Remark)
+             <table class="table table-striped">
+                 <thead>
+                     <tr>
+                         <th style="width: 100px"></th>
+                         <th>
+                             @Html.DisplayNameFor(model => model.Name)
+                         </th>
+                         <th>
+                             @Html.DisplayNameFor(model => model.Remark)
 
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Operator)
-                </th>
-            </tr>
-        </thead>
-        @foreach (Permission permission in Model)
-        {
-            <tr>
-                <td style="width:240px">
-                    <a href="#@Url.Action("edit", new { id = permission.Id })" class="btn btn-default btn-sm">@Resources.Edit</a>
-                    <a href="#@Url.Action("delete", new { id = permission.Id })" class="btn btn-danger btn-sm">@Resources.Delete</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => permission.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => permission.Remark)
-                </td>
-                <td>
+                         </th>
+                         <th>
+                             @Html.DisplayNameFor(model => model.Operator)
+                         </th>
+                     </tr>
+                 </thead>
+                 @foreach (Permission permission in Model)
+                 {
+                     <tr>
+                         <td style="width: 240px">
+                             <a href="#@Url.Action("edit", new {id = permission.Id})" class="btn btn-default btn-sm">@Resources.Edit</a>
+                             <a href="#@Url.Action("delete", new {id = permission.Id})" class="btn btn-danger btn-sm">@Resources.Delete</a>
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => permission.Name)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => permission.Remark)
+                         </td>
+                         <td>
                     
-                    @Html.Partial("Operators",permission)
-                </td>
-            </tr>
-        }
-    </table>
-    </text>)
+                             @Html.Partial("Operators", permission)
+                         </td>
+                     </tr>
+                 }
+             </table>
+         </text>)
 }

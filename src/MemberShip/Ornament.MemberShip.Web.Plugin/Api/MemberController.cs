@@ -1,8 +1,8 @@
 ﻿using System.Web.Http;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
+using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Qi.Web.Http;
 
 namespace Ornament.MemberShip.Web.Plugin.Api
