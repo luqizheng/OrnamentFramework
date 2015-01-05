@@ -2,12 +2,14 @@
     var org = require("/MemberShips/Scripts/Share/Org.js");
 
     function Init() {
-        indexModel = avalon.define('index', function (vm) {
-            vm.treeRender = function () {
+        
+        var indexModel=avalon.define({
+            $id:'index',
+            treeRender :function () {
                 return arguments[0];
-            };
-            vm.orgs = [{ Name: "", Id: "", Childs: [] }];
-            vm.addSub = function (el, e) {
+            },
+            orgs :[{ Name: "", Id: "", Childs: [] }],
+            addSub : function (el, e) {
                 var self = el || null;
                 var newOrg = {
                     Name: "The Org",
@@ -24,7 +26,7 @@
                             Childs: []
                         };
                         if (newOrg.Parent == null) {
-                            vm.orgs.push(newItem);
+                            indexModel.orgs.push(newItem);
                         } else {
                             self.Childs.push(newItem);
                         }
@@ -32,21 +34,21 @@
                 });
 
                 e.preventDefault();
-            };
+            },
 
-            vm.del = function (el, e) {
+            del :function (el, e) {
                 var self = el;
-                if (confirm("是否删除组织单元" + self.el.Name)) {
-                    org.del(self.el.Id, function () {
-                        self.$model.$remove();
+                if (confirm("是否删除组织单元" + self.Name)) {
+                    org.del(self.Id, function () {
+                        self.$remove();
                     });
                 }
                 e.preventDefault();
-            };
+            },
 
-            vm.editModel = null;
-            vm.edit = function (el, e) {
-                vm.editModel = el;
+            editModel : null,
+            edit : function (el, e) {
+                indexModel.editModel = el;
                 org.get(el.Id, function (data) {
                     var model = avalon.vmodels["edit"];
                     model.Id = data.Id;
@@ -58,19 +60,20 @@
                 });
 
                 e.preventDefault();
-            };
-            vm.updateModel = function (name) {
-                vm.editModel.Name = name;
-            };
-            vm.toggle = function (el, e) {
+            },
+            updateModel : function (name) {
+                indexModel.editModel.Name = name;
+            },
+            toggle : function (el) {
+                var tagle = $(this).closest("li").find("ul:first");
                 if (el.Hide) {
-                    $(this).closest("li").find("ul:first").show('fast');
+                    tagle.show('fast');
                 } else {
-                    $(this).closest("li").find("ul:first").hide('fast');
+                    tagle.hide('fast');
                 }
                 el.Hide = !el.Hide;
-            };
-            vm.$skipArray = ["editModel"];
+            },
+            $skipArray : ["editModel"],
         });
 
         avalon.define('edit', function (vm) {
