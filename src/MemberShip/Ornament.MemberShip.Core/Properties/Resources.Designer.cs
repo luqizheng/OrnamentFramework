@@ -205,6 +205,33 @@ namespace Ornament.MemberShip.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Female 的本地化字符串。
+        /// </summary>
+        public static string Gender_female {
+            get {
+                return ResourceManager.GetString("Gender_female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Male 的本地化字符串。
+        /// </summary>
+        public static string Gender_male {
+            get {
+                return ResourceManager.GetString("Gender_male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Unknown 的本地化字符串。
+        /// </summary>
+        public static string Gender_Unknown {
+            get {
+                return ResourceManager.GetString("Gender_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Email Approved 的本地化字符串。
         /// </summary>
         public static string IsEmailApproved {

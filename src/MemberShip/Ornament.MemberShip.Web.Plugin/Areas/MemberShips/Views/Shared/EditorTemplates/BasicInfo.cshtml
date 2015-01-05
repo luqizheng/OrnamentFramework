@@ -1,9 +1,4 @@
-﻿@using System.Drawing.Printing
-@using Ornament
-@using Ornament.MemberShip
-@using Ornament.Web
-@using Ornament.Web.UI
-
+﻿@using Ornament.Web.UI
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.BasicInfo
 
 <div class="form-horizontal">
@@ -16,7 +11,7 @@
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.LoginId)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LoginId, new { HtmlAttributes = new Dictionary<string, object> { { "class", "form-control" } } })
+                @Html.EditorFor(model => model.LoginId, new {HtmlAttributes = new Dictionary<string, object> {{"class", "form-control"}}})
                 @Html.ValidationMessageFor(model => model.LoginId)
             </div>
         </div>
@@ -24,7 +19,7 @@
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Email)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Email, new {HtmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
@@ -38,21 +33,21 @@
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new {HtmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Phone)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Phone, new {HtmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.Phone)
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Language)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Language, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Language, new {HtmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.Language)
             </div>
         </div>
@@ -60,7 +55,7 @@
         <div class="form-group">
             <label class="col-md-2">@Html.DisplayNameFor(s => s.TimeZoneId)</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TimeZoneId, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TimeZoneId, new {HtmlAttributes = new {@class = "form-control"}})
                 @Html.ValidationMessageFor(model => model.TimeZoneId)
             </div>
         </div>
@@ -72,7 +67,7 @@
             <div class="col-md-10">
                 <div class="input-group">
                     <span class="input-group-addon"><i class=" fa fa-user"></i></span>
-                    @Html.EditorFor(model => model.FirstName, new { HtmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.FirstName, new {HtmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.FirstName)
                 </div>
             </div>
@@ -82,7 +77,7 @@
             <div class="col-md-10">
                 <div class="input-group">
                     <span class="input-group-addon"><i class=" fa fa-user"></i></span>
-                    @Html.EditorFor(model => model.LastName, new { HtmlAttributes = new { @class = "form-control style-0" } })
+                    @Html.EditorFor(model => model.LastName, new {HtmlAttributes = new {@class = "form-control style-0"}})
                     @Html.ValidationMessageFor(model => model.LastName)
                 </div>
             </div>
@@ -93,7 +88,7 @@
             <div class="col-md-10">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-magic"></i></span>
-                    @Html.EditorFor(model => model.Gender, new { HtmlAttributes = new { @class = "form-control style-0" } })
+                    @Html.EditorFor(model => model.Gender, new {HtmlAttributes = new {@class = "form-control style-0"}})
                     @Html.ValidationMessageFor(model => model.Gender)
                 </div>
             </div>
@@ -103,13 +98,13 @@
             <label class="col-md-2">@Html.DisplayNameFor(s => s.Birthday)</label>
             <div class="col-md-10">
                 <div class="input-group">
-                    @Html.EditorFor(model => model.Birthday, new { HtmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Birthday, new {HtmlAttributes = new {@class = "form-control"}})
                     @Html.ValidationMessageFor(model => model.Birthday)
                 </div>
             </div>
         </div>
     </fieldset>
-  @*  <div class="form-actions">
+    @*  <div class="form-actions">
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i>
             @Ornament.Properties.Resources.Save

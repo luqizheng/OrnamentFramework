@@ -2,8 +2,6 @@
 @using Ornament.MemberShip
 @model Ornament.MemberShip.GenderType?
 @{
-    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    string inputName = string.Empty; // ViewData.TemplateInfo.HtmlFieldPrefix;    
     IDictionary<string, object> htmlAttris = new Dictionary<string, object>();
 
     if (ViewData.ContainsKey("HtmlAttributes"))
@@ -23,8 +21,9 @@
         htmlAttris.Add("class", "form-control");
     }
 
-    var genderTypes = this.Model != null ?
-        EnumHelper.GetSelectList(typeof(GenderType), this.Model.Value) : EnumHelper.GetSelectList(typeof(GenderType),GenderType.Unknown);
+    var genderTypes = this.Model != null 
+        ? EnumHelper.GetSelectList(typeof(GenderType), this.Model.Value)
+        : EnumHelper.GetSelectList(typeof(GenderType),GenderType.Unknown);
     
     
 }

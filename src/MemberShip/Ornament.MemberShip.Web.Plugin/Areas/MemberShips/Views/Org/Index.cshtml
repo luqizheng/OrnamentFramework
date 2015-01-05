@@ -98,7 +98,7 @@
             <div class="col-md-10" id="roleList">
                 @Html.EditorFor(s => s.Roles, new Dictionary<string, object>()
                                {
-                                   {"ms-duplex-text","Roles"}
+                                   {"ms-duplex-string","Roles"}
                                })
                 @Html.ValidationMessageFor(s => s.Roles)
             </div>

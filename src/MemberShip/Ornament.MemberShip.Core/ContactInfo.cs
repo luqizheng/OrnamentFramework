@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using Ornament.MemberShip.Dao;
+using Ornament.MemberShip.Properties;
 using Ornament.MemberShip.Security;
+using Qi;
 using Qi.Domain;
 
 namespace Ornament.MemberShip
@@ -105,8 +107,11 @@ namespace Ornament.MemberShip
 
     public enum GenderType
     {
+        [EnumDescription("Gender_Unknown",ResourceType = typeof(Resources))]
         Unknown,
+        [EnumDescription("Gender_male", ResourceType = typeof(Resources))]
         male,
+        [EnumDescription("Gender_female", ResourceType = typeof(Resources))]
         female
     }
 }

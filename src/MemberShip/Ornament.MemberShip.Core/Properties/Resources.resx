@@ -297,4 +297,13 @@
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
   </data>
+  <data name="Gender_female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Gender_male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Gender_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
 </root>

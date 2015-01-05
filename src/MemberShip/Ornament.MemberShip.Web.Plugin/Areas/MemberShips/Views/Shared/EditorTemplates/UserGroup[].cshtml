@@ -16,7 +16,7 @@
 {
     string check = ids.Contains(a.Id) ? "checked='checked'" : "";
     <label class="checkbox-inline">
-        <input type="checkbox" value="@a.Id" name="@Html.Name("")" @check />
-        @a.Name 
+        <input type="checkbox" value="@a.Id" name="@Html.Name("")" @check class="checkbox" />
+        <span>@a.Name</span>
     </label>
 }

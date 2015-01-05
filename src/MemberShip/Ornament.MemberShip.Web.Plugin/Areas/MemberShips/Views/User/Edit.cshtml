@@ -32,45 +32,45 @@
         @using (Panel panel = Html.Panel(basicInfo, classes))
         {
             @panel.Header(@<text>
-                               <h2><i class="fa fa-desktop"></i>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
-                           </text>)
+            <h2><i class="fa fa-desktop"></i>@Html.GetEmbededResourceString("Create", "tab_basicInfo")</h2>
+            </text>)
             @panel.Body(@<text>
-            
-                             @Html.EditorFor(s => s, "BasicInfo")
-            
-                         </text>)
-        }
 
+            @Html.EditorFor(s => s, "BasicInfo")
+
+            </text>)
+        }
         @using (Panel panel = Html.Panel(basicInfo, classes))
         {
             @panel.Header(@<text>
-                               <h2><i class="fa fa-info-circle"></i>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
-                           </text>)
+            <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
+            </text>)
             @panel.Body(@<text>
 
-                             @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
+            @Html.EditorFor(s => s.Permissions)
 
-                         </text>)
+            </text>)
         }
-
         @using (Panel panel = Html.Panel(basicInfo, classes))
         {
             @panel.Header(@<text>
-                               <h2>@Html.GetEmbededResourceString("Create", "tab_Permission")</h2>
-                           </text>)
+            <h2><i class="fa fa-info-circle"></i>@Html.GetEmbededResourceString("Create", "tab_anotherInfo")</h2>
+            </text>)
             @panel.Body(@<text>
 
-                             @Html.EditorFor(s => s.Permissions)
+            @Html.EditorFor(s => s.OtherInfo, "OtherInfo")
 
-                         </text>)
+            </text>)
         }
+
+
     </form>
 </div>
 
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function(main) {
+        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
             main.Init();
             clearPageVariable.push(main.Clear());
         });

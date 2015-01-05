@@ -1,17 +1,8 @@
-﻿@using Ornament
-@using Ornament.MemberShip
-@using Ornament.MemberShip.Dao
-
-@using Ornament.MemberShip.Plugin.Models
-@using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models
-@using Ornament.MemberShip.Web.Plugin.Models
-@using Ornament.MemberShip.Web.Plugin.Models.Memberships
-@using Qi.Web
-@model Ornament.MemberShip.Org
+﻿@model Ornament.MemberShip.Org
 
 @{
-    var value = Model != null ? Model.Id : "";
-    var orgName = Model != null ? Model.Name : "请选择组织";
+    string value = Model != null ? Model.Id : "";
+    string orgName = Model != null ? Model.Name : "请选择组织";
 }
 
 <div ms-widget="org" data-org-id="@Html.Id("")" data-org-selected-id="@value" data-org-selected-name="@orgName">
