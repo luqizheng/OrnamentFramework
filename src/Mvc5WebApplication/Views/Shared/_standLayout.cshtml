@@ -53,7 +53,7 @@
     <link rel="apple-touch-startup-image" href="/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
     <script src="/Scripts/plugin/fastclick/fastclick.min.js"></script>
-    <script src="/Scripts/require.js" data-main="scripts/config.js"></script>
+    <script src="/Scripts/require.js" data-main="/scripts/config.js"></script>
 </head>
 <body class="animated fadeInDown">
     <header id="header">
@@ -74,7 +74,8 @@
             @RenderBody()
         </div>
     </div>
-    
+    @Scripts.Render("~/Scripts/avalon")
+    <script type="text/javascript"> avalon.config({ loader: false }) </script>
     @RenderSection("scripts", false)
 </body>
 

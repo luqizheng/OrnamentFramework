@@ -17,7 +17,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
 
         /// <summary>
         /// </summary>
-        [Required(ErrorMessageResourceType = typeof (Resources),
+        [Required(ErrorMessageResourceType = typeof(Resources),
             ErrorMessageResourceName = "alertMsg_RequireAccount")]
         public string Account { get; set; }
 
@@ -34,7 +34,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
             {
                 user = daoDaoFactory.CreateUserDao().GetByLoginId(Account);
             }
-            else if (!string.IsNullOrEmpty(Email))
+            if (!string.IsNullOrEmpty(Email) && user == null)
             {
                 user = daoDaoFactory.CreateUserDao().GetUserByEmail(Email);
             }

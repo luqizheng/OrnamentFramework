@@ -36,10 +36,15 @@
 
             $.validator.unobtrusive.parse(this);
 
+
             $form.data("validator").settings.submitHandler = function (e) {
 
                 var data = $form.serializeObject();
-                opts.before.call($form, data);
+                try {
+                    opts.before.call($form, data);
+                } catch (e) {
+                    console.log("before fails.");
+                }
 
                 $.post(opts.url, data, function (d) {
 
@@ -61,8 +66,9 @@
                     }
                 });
 
-
             };
+
+
             return $form;
         };
 

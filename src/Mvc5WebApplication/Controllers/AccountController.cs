@@ -114,13 +114,13 @@ namespace WebApplication.Controllers
                 return Json(new
                 {
                     success = result == ForgetPasswordModel.RetrievePasswordResult.Success,
-                    result,
+                    result=result.ToString(),
                 });
             }
             return Json(new
             {
                 success = false,
-                result = ForgetPasswordModel.RetrievePasswordResult.NotExistAccountOrEmail,
+                result = ForgetPasswordModel.RetrievePasswordResult.NotExistAccountOrEmail.ToString(),
             });
         }
     }
