@@ -17,12 +17,14 @@ using Ornament;
 using Ornament.Configurations;
 using Ornament.Web;
 using Ornament.Web.Cfg;
+using Ornament.Web.DataInitializers;
 using Ornament.Web.IoC;
 using Ornament.Web.MemberShips;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.PortableAreas.InputBuilder;
 using Ornament.Web.SeajsModules;
+using Qi.NHibernateExtender;
 using Qi.Web.Mvc;
 using WebApplication.App_Start;
 using WebApplication.Controllers;
@@ -56,8 +58,28 @@ namespace WebApplication
             RequirejsModuleBundleMessageHandle.HandlAllBundle();
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
-        }
+            InitData();
 
+
+        }
+        public static void InitData()
+        {
+            SessionWrapper wrapper = SessionManager.GetSessionWrapper();
+            try
+            {
+                GlobalInitializer.BuildData();
+                wrapper.Commit();
+            }
+            catch (Exception ex)
+            {
+                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                throw ex;
+            }
+            finally
+            {
+                wrapper.Close();
+            }
+        }
         protected void Application_EndRequest()
         {
             var context = new HttpContextWrapper(Context);

@@ -170,6 +170,8 @@
     <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
     <Compile Include="Bundles\ScriptsFolderManager.cs" />
     <Compile Include="Cfg\MvcWebConfig.cs" />
+    <Compile Include="DataInitializers\GlobalInitializer.cs" />
+    <Compile Include="DataInitializers\IDataInitializer.cs" />
     <Compile Include="HtmlEmbeddedResource.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
@@ -186,8 +188,6 @@
     <Compile Include="MemberShips\WebValidateUserPolicy.cs" />
     <Compile Include="ModelBinder\TimeModelBinder.cs" />
     <Compile Include="Models\ClientModel.cs" />
-    <Compile Include="DataInitializers\GlobalInitializer.cs" />
-    <Compile Include="DataInitializers\IDataInitializer.cs" />
     <Compile Include="Models\InitData.cs" />
     <Compile Include="Models\VerifyCodeBuilder.cs" />
     <Compile Include="MvcSiteMapHelper.cs" />

@@ -1,4 +1,5 @@
 using FluentNHibernate.Mapping;
+using Ornament.Messages.Notification;
 using Ornament.Messages.Notification.Senders;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping

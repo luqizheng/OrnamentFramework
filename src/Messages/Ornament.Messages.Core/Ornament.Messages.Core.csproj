@@ -92,7 +92,6 @@
     <Compile Include="Dao\ISimpleMessageDao.cs" />
     <Compile Include="Dao\INewsTypeDao.cs" />
     <Compile Include="Newses\News.cs" />
-    <Compile Include="Notification\ISender.cs" />
     <Compile Include="EditState.cs" />
     <Compile Include="Newses\NewsType.cs" />
     <Compile Include="Notification\NotifyMessageTemplate.cs" />

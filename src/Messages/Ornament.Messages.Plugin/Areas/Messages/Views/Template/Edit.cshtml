@@ -2,6 +2,7 @@
 @using Ornament.MemberShip.Properties
 @using Ornament.Messages.Dao.NHibernateImple
 @using Ornament.Messages.Notification
+@using Ornament.Messages.Notification.Senders
 @using Ornament.Models
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
@@ -81,12 +82,12 @@
                         <div class="col-10">
                             @foreach (var sender in ViewBag.Senders)
                             {
-                                var check = (this.Model.Senders ?? new ISender[0]).Any(s => s.Id == sender.Id);
+                                var check = (this.Model.Senders ?? new Sender[0]).Any(s => s.Id == sender.Id);
+                                
                                 <label class="checkbox-inline" title="@sender.Remarks">
-                                    <input type="checkbox" value="@sender.Id" name="Senders"
-                                        
-                                        @check />
-                                    @sender.Name
+                                    <input type="checkbox" value="@sender.Id" name="Senders" class="checkbox"
+                                        @(check?"checked='checked'":"") />
+                                    <span>@sender.Name</span>
                                 </label>
                             }
                         </div>

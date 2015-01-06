@@ -7,7 +7,7 @@ using Qi.Domain;
 
 namespace Ornament.Messages.Notification.Senders
 {
-    public abstract class Sender : DomainObject<Sender, int>, ISender
+    public abstract class Sender : DomainObject<Sender, int>
     {
         protected Sender()
         {

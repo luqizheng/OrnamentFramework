@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
+using Ornament.Messages.Notification.Senders;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
 {
@@ -23,7 +24,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             Name = template.Name;
             Remark = template.Remark;
             Contents.AddRange(template.Contents.Values);
-            this.Senders = template.Senders.ToArray();
+            this.Senders=new Sender[template.Senders.Count];
+            for (var i = 0; i < Senders.Length; i++)
+            {
+                this.Senders[i] = (Sender)template.Senders[i];
+            }
+            
         }
 
         /// <summary>
@@ -59,8 +65,14 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         {
             get { return ""; }
         }
-
-        public ISender[] Senders { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <remarks>
+        ///  這裡只能使用 Abstract類型而不能是ISender,因為NH-mapping的是Sender
+        /// 因此NHModelBiner並不知道ISender是NH映射類型，無法從String類型轉換為Sender對象
+        /// </remarks>
+        public  Sender[] Senders { get; set; }
 
 
         public void Save(IMessageTemplateDao dao)
@@ -68,12 +80,17 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             if (dao == null)
                 throw new ArgumentNullException("dao");
 
-            NotifyMessageTemplate type = Id != null
+            NotifyMessageTemplate template = Id != null
                 ? dao.Get(Id)
                 : new NotifyMessageTemplate();
-            type.Name = Name;
-            type.Remark = Remark;
-            dao.SaveOrUpdate(type);
+            template.Name = Name;
+            template.Remark = Remark;
+            template.Senders.Clear();
+            foreach (var sender in this.Senders)
+            {
+                template.Senders.Add(sender);
+            }
+            dao.SaveOrUpdate(template);
 
             foreach (var content in Contents)
             {
@@ -81,12 +98,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
                 if (content == null)
                     continue;
                 var lang = content.Language;
-                if (type.Contents.ContainsKey(lang))
+                if (template.Contents.ContainsKey(lang))
                 {
-                    type.Contents[lang] = content;
+                    template.Contents[lang] = content;
                 }
                 else
-                    type.Contents.Add(lang, content);
+                    template.Contents.Add(lang, content);
             }
             dao.Flush();
         }

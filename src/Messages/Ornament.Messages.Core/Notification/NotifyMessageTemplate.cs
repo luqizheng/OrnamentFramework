@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
+using Ornament.Messages.Notification.Senders;
 using Qi.Domain;
 
 namespace Ornament.Messages.Notification
@@ -11,7 +12,7 @@ namespace Ornament.Messages.Notification
     public class NotifyMessageTemplate : DomainObject<NotifyMessageTemplate, string>
     {
         private IDictionary<string, Content> _contents;
-        private IList<ISender> _senders;
+        private IList<Sender> _senders;
 
 
         /// <summary>
@@ -40,9 +41,9 @@ namespace Ornament.Messages.Notification
 
         /// <summary>
         /// </summary>
-        public virtual IList<ISender> Senders
+        public virtual IList<Sender> Senders
         {
-            get { return _senders ?? (_senders = new List<ISender>()); }
+            get { return _senders ?? (_senders = new List<Sender>()); }
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace Ornament.Messages.Notification
         public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory,
             IDictionary<string, string> variable, params User[] performers)
         {
-            foreach (ISender sender in Senders)
+            foreach (Sender sender in Senders)
             {
                 sender.Send(memberShipDaoFactory, this, variable, performers);
             }
@@ -102,7 +103,7 @@ namespace Ornament.Messages.Notification
         public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory,
             CreateVariablesHandler dynamicCreateVariablesHandler, User[] user, IPerformer[] performers)
         {
-            foreach (ISender sender in Senders)
+            foreach (Sender sender in Senders)
             {
                 sender.Send(memberShipDaoFactory, this, dynamicCreateVariablesHandler, user, performers);
             }
