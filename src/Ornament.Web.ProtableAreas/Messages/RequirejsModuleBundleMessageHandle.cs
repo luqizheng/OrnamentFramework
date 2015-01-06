@@ -4,11 +4,11 @@ using Ornament.Web.PortableAreas;
 
 namespace Ornament.Web.Messages
 {
-    public class SeajsModuleBundleMessageHandle : MessageHandler<SeajsModuleBundleEventMessage>
+    public class RequirejsModuleBundleMessageHandle : MessageHandler<RequireJsModuleBundleEventMessage>
     {
-        private static readonly Queue<SeajsModuleBundleEventMessage> BundleHandlers = new Queue<SeajsModuleBundleEventMessage>();
+        private static readonly Queue<RequireJsModuleBundleEventMessage> BundleHandlers = new Queue<RequireJsModuleBundleEventMessage>();
 
-        public override void Handle(SeajsModuleBundleEventMessage message)
+        public override void Handle(RequireJsModuleBundleEventMessage message)
         {
             BundleHandlers.Enqueue(message);
         }
@@ -23,4 +23,6 @@ namespace Ornament.Web.Messages
             }
         }
     }
+
+    
 }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
-using Ornament;
 using Ornament.Web;
-using Ornament.Web.MessageHandlers;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 
@@ -20,13 +16,13 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
-            bus.Send(new NHRegisterEventMessage(typeof(IMessageDaoFactory), typeof(MessageDaoFactory)));
+            bus.Send(new NHRegisterEventMessage(typeof (IMessageDaoFactory), typeof (MessageDaoFactory)));
             //初始化数据
             bus.Send(new MessageInit());
 
-            OrnamentContext.ResourceManager.Add("Template", typeof(MessageOperator));
+            OrnamentContext.ResourceManager.Add("Template", typeof (MessageOperator));
 
-            var helper = new AreaRegistrationHelper(this,context);
+            var helper = new AreaRegistrationHelper(this, context);
 
             helper.RegistScripts("Scripts/News");
             helper.RegistScripts("Scripts/NewsType");
@@ -51,12 +47,9 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new {action = "Index", id = UrlParameter.Optional}
                 );
             base.RegisterArea(context, bus);
         }
-
-
-
     }
 }

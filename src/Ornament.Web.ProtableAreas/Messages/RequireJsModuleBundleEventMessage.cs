@@ -3,9 +3,9 @@ using Ornament.Web.SeajsModules;
 
 namespace Ornament.Web.Messages
 {
-    public class SeajsModuleBundleEventMessage : IEventMessage
+    public class RequireJsModuleBundleEventMessage : IEventMessage
     {
-        public SeajsModuleBundleEventMessage(SeajsEmbedBundle bundle)
+        public RequireJsModuleBundleEventMessage(SeajsEmbedBundle bundle)
         {
             Bundle = bundle;
         }

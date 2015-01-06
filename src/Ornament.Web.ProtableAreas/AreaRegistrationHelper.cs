@@ -112,7 +112,7 @@ namespace Ornament.Web
                             str2);
                         bundle.Include(virtualPath);
                     }
-                    var eventMessage = new SeajsModuleBundleEventMessage(bundle);
+                    var eventMessage = new RequireJsModuleBundleEventMessage(bundle);
                     bus.Send(eventMessage);
                 }
             }

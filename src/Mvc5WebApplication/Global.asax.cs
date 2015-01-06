@@ -53,7 +53,7 @@ namespace WebApplication
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
-            SeajsModuleBundleMessageHandle.HandlAllBundle();
+            RequirejsModuleBundleMessageHandle.HandlAllBundle();
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
         }

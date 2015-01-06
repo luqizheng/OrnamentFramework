@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Web;
 using System.Web.Mvc;
 using Ornament;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
@@ -36,7 +35,6 @@ namespace WebApplication.Controllers
         {
             FormsAuth = formsAuth ?? new FormsAuthenticationService();
             MembershipService = service ?? new AccountMembershipService();
-
         }
 
         /// <summary>
@@ -60,6 +58,7 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
         public ActionResult Logout()
         {
             FormsAuth.SignOut();
@@ -89,13 +88,10 @@ namespace WebApplication.Controllers
             if (!Request.IsAjaxRequest())
             {
                 return !String.IsNullOrEmpty(model.ReturnUrl)
-                    ? (ActionResult)Redirect(model.ReturnUrl)
+                    ? (ActionResult) Redirect(model.ReturnUrl)
                     : RedirectToAction("Index", "Home");
             }
-            else
-            {
-                return Json(true);
-            }
+            return Json(true);
         }
 
         public ActionResult Register()
@@ -111,15 +107,15 @@ namespace WebApplication.Controllers
         [HttpPost, ValidateAjax]
         public ActionResult ForgetPassword(ForgetPasswordModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var result = model.Retrieve(OrnamentContext.DaoFactory.MemberShipDaoFactory);
+                ForgetPasswordModel.RetrievePasswordResult result =
+                    model.Retrieve(OrnamentContext.DaoFactory.MemberShipDaoFactory);
                 return Json(new
                 {
                     success = result == ForgetPasswordModel.RetrievePasswordResult.Success,
-                    result = result,
+                    result,
                 });
-
             }
             return Json(new
             {

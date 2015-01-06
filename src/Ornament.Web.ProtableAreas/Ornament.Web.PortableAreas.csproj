@@ -96,7 +96,7 @@
     <Compile Include="InputBuilder\Attributes\NoDeleteAttribute.cs" />
     <Compile Include="InputBuilder\Attributes\PartialViewAttribute.cs" />
     <Compile Include="Messages\IocControllerInjectMessageHandler.cs" />
-    <Compile Include="Messages\SeajsModuleBundleMessageHandle.cs" />
+    <Compile Include="Messages\RequirejsModuleBundleMessageHandle.cs" />
     <Compile Include="AreaRegistrationHelper.cs" />
     <Compile Include="Controllers\EmbeddedResourceController.cs" />
     <Compile Include="InputBuilder\Conventions\PropertyName\DefaultNameConvention.cs" />
@@ -156,7 +156,7 @@
     <Compile Include="SeajsModules\CombineModuleAsssemblyFactory.cs" />
     <Compile Include="SeajsModules\EmbeddedBuilder.cs" />
     <Compile Include="SeajsModules\SeajsEmbedBundle.cs" />
-    <Compile Include="Messages\SeajsModuleBundleEventMessage.cs" />
+    <Compile Include="Messages\RequireJsModuleBundleEventMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
