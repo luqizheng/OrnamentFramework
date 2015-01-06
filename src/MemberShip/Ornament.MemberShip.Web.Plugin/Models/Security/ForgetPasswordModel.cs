@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
@@ -14,23 +15,31 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
             NotExistAccountOrEmail
         }
 
-
         /// <summary>
         /// </summary>
-        [Display(Name = "label_AccountOrEmail", ResourceType = typeof (Resources))]
-        [DataType(DataType.Password)]
         [Required(ErrorMessageResourceType = typeof (Resources),
-            ErrorMessageResourceName = "alertMsg_RequireAccountOrEmail")]
-        public string AccountOrEmail { get; set; }
+            ErrorMessageResourceName = "alertMsg_RequireAccount")]
+        public string Account { get; set; }
 
+        [Required]
+        public string Email { get; set; }
 
         /// <summary>
         /// </summary>
         /// <param name="daoDaoFactory"></param>
         public RetrievePasswordResult Retrieve(IMemberShipDaoFactory daoDaoFactory)
         {
-            User user = daoDaoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
-                        daoDaoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
+            User user = null;
+            if (!String.IsNullOrEmpty(Account))
+            {
+                user = daoDaoFactory.CreateUserDao().GetByLoginId(Account);
+            }
+            else if (!string.IsNullOrEmpty(Email))
+            {
+                user = daoDaoFactory.CreateUserDao().GetUserByEmail(Email);
+            }
+
+
             if (user == null)
             {
                 return RetrievePasswordResult.NotExistAccountOrEmail;

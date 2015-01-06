@@ -126,8 +126,8 @@
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>角色名稱已經被佔用，請輸入另外一個</value>
   </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
-    <value>請輸入電子郵件或者登錄名稱</value>
+  <data name="alertMsg_RequireAccount" xml:space="preserve">
+    <value>請輸入電子郵件</value>
   </data>
   <data name="alertMsg_requireVerifyCode1" xml:space="preserve">
     <value>請輸入驗證碼</value>
@@ -178,7 +178,7 @@
   <data name="input_password_again" xml:space="preserve">
     <value>請輸入確認密碼</value>
   </data>
-  <data name="label_AccountOrEmail" xml:space="preserve">
+  <data name="label_Account" xml:space="preserve">
     <value>账号或者安全邮箱</value>
   </data>
   <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">

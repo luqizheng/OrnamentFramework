@@ -108,11 +108,24 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAjax]
         public ActionResult ForgetPassword(ForgetPasswordModel model)
         {
+            if (this.ModelState.IsValid)
+            {
+                var result = model.Retrieve(OrnamentContext.DaoFactory.MemberShipDaoFactory);
+                return Json(new
+                {
+                    success = result == ForgetPasswordModel.RetrievePasswordResult.Success,
+                    result = result,
+                });
 
-            return RedirectToAction("Logon");
+            }
+            return Json(new
+            {
+                success = false,
+                result = ForgetPasswordModel.RetrievePasswordResult.NotExistAccountOrEmail,
+            });
         }
     }
 }
