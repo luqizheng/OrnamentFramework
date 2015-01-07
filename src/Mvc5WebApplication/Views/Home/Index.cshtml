@@ -13,8 +13,8 @@
     @Scripts.Render("~/Scripts/avalon")
     <script type="text/javascript"> avalon.config({ loader: false }) </script>
     <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
-   
-  
+
+
     <!-- #CSS Links -->
     <!-- Basic Styles -->
     @Styles.Render("~/css/bootstrap.min.css")
@@ -361,9 +361,25 @@
     @Html.Partial("Layout/_shotcut")
 
     <script src="/Scripts/plugin/fastclick/fastclick.min.js"></script>
-    
-    <script src="/Scripts/require.js" data-main="scripts/config.js"></script>
-    
+
+    <script src="/Scripts/require.js"></script>
+    <script type="text/javascript">
+        require(["scripts/config.js"], function () {
+            require(["jquery", "jqueryui", "bootstrap", "app.config", "floatChart",
+"touch",
+"smarkNotify",
+"/scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js",
+"maskedinput",
+"select2",
+"bsslider",
+"mbBrowser",
+"moment",
+"/scripts/plugin/fullcalendar/jquery.fullcalendar.min.js",
+"util",
+"main"]);
+        })
+    </script>
+
 
 
 </body>

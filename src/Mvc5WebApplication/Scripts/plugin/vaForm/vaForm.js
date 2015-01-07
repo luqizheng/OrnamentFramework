@@ -34,8 +34,7 @@
                 opts.url = $(this).attr("action");
             }
 
-            $.validator.unobtrusive.parse(this);
-
+            $.validator.unobtrusive.parse($form.parent());
 
             $form.data("validator").settings.submitHandler = function (e) {
 

@@ -1,7 +1,7 @@
 ﻿@using System.Web.Optimization
 
 require.config({
-baseUrl:"/Scripts/",
+        baseUrl:"/Scripts/",
 paths: {
         jqueryui:"@Scripts.Url("~/Scripts/jqueryui.js")",
         bootstrap:"@Scripts.Url("~/Scripts/bootstrap.js")",
@@ -39,13 +39,13 @@ paths: {
         ornamentUi:"@Scripts.Url("~/Scripts/modules/ornamentUi")"
 },
 shim:{
-validate:["jquery"],
-maxlength:["jquery"],
-unobtrusive:["jquery"],
+        validate:["jquery"],
+        maxlength:["jquery"],
+        unobtrusive:["jquery"],
         bsvalid:['validate','unobtrusive'],
-        vaform:['validate','unobtrusive','bsvalid'],
-bootstrap:['jquery'],
-jarvismenu:["jquery"],
+        vaform:['jquery','validate','unobtrusive','bsvalid'],
+        bootstrap:['jquery'],
+        jarvismenu:["jquery"],
         touch:['jquery'],
         "app.config":['jquery'],
         util:['bootstrap','app'],
@@ -56,23 +56,12 @@ jarvismenu:["jquery"],
         smarkNotify:["jquery"],
         select2:["jquery"],
         maskedinput:["jquery"],
-mbBrowser:["jquery"],
-bsslider:["jquery"],bootbox:["bootstrap"]
-
+        mbBrowser:["jquery"],
+        bsslider:["jquery"],
+        bootbox:["bootstrap"]
     }
 });
 
 
-require(["jquery","jqueryui","bootstrap","app.config","floatChart",
-"touch",
-"smarkNotify",
-"/scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js",
-"maskedinput",
-"select2",
-"bsslider",
-"mbBrowser",
-"moment",
-"/scripts/plugin/fullcalendar/jquery.fullcalendar.min.js",
-"util",
-"main"]);
+
 

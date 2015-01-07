@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Qi.Domain;
@@ -30,19 +28,18 @@ namespace Ornament.Messages.Notification.Senders
         public virtual string Remarks { get; set; }
 
 
-        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template, IDictionary<string, string> varibale,
+        public virtual void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template,
+            IDictionary<string, string> varibale,
             User[] performers)
         {
             var handler = new CreateVariablesHandler(user => varibale);
 
             Send(memberShipDaoFactory, template, handler, performers, null);
-
         }
 
-        public abstract void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler,
+        public abstract void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template,
+            CreateVariablesHandler dynamicCreateVariablesHandler,
             User[] user,
             IPerformer[] performers);
-
-
     }
 }
