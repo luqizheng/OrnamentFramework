@@ -20,10 +20,10 @@ namespace Ornament.Messages.Notification.Senders
 
         public virtual string PrivateCode { get; set; }
 
-        public override void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template,
-            CreateVariablesHandler dynamicCreateVariablesHandler, User[] user, IPerformer[] performers)
+
+        public override void Send(NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler, User[] user)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

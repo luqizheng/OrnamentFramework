@@ -5,7 +5,7 @@
     <div class="form-group">
         <label class="col-md-2">@Html.DisplayNameFor(s => s.Deny)</label>
         <div class="col-md-10">
-            @Html.CheckBoxFor(model => model.Deny, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.CheckBoxFor(model => model.Deny, new { HtmlAttributes = new { @class = "form-control checkbox" } })
             @Html.ValidationMessageFor(model => model.Deny)
 
         </div>

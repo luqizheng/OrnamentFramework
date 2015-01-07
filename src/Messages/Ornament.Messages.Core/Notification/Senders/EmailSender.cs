@@ -28,7 +28,7 @@ namespace Ornament.Messages.Notification.Senders
         {
             get
             {
-                if (_smtpClient != null)
+                if (_smtpClient == null)
                 {
                     _smtpClient = new SmtpClient(SmtpServer, Port);
                     if (!String.IsNullOrEmpty(Account))
@@ -76,28 +76,15 @@ namespace Ornament.Messages.Notification.Senders
             Client.Send(mailMessage);
         }
 
-
-        public override void Send(IMemberShipDaoFactory memberShipDaoFactory, NotifyMessageTemplate template,
-            CreateVariablesHandler dynamicCreateVariablesHandler, User[] user,
-            IPerformer[] performers)
+        public override void Send(NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler, User[] users)
         {
-            HashSet<User> users = user != null ? new HashSet<User>(user) : new HashSet<User>();
-            foreach (IPerformer p in performers)
-            {
-                foreach (User u in p.GetUsers(memberShipDaoFactory))
-                {
-                    users.Add(u);
-                }
-            }
-
-
             foreach (User u in users)
             {
                 IDictionary<string, string> varibale = dynamicCreateVariablesHandler(u);
                 Content content = template.GetContent(u);
                 var helper = new NamedFormatterHelper();
                 string subject = helper.Replace(content.Subject, varibale);
-                string body = helper.Replace(content.Subject, varibale);
+                string body = helper.Replace(content.Value, varibale);
 
                 Send(subject, body, u.Contact.Email, FromEmail);
             }
