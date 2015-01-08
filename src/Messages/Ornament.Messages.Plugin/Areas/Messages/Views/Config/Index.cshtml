@@ -12,15 +12,15 @@
 @using (var panel = Html.Panel())
 {
     @panel.Header(@<text>
-    <h4>Global Variable setting</h4>
+    <h2>Global Variable setting</h2>
     </text>);
     @panel.Body(@<text>
 
     <table class="table table-condensed table-bordered" ms-controller="index">
         <thead>
             <tr>
-                <td colspan="2">
-                    <button ms-click="add" class="btn">Add Variables</button>
+                <td colspan="3">
+                    <button ms-click="add" class="btn">Add</button>
                     <button ms-click="reload" class="btn">Reload </button>
                     <button ms-click="save" class="btn">Save</button>
                 </td>
@@ -33,6 +33,11 @@
         <tbody>
             <tr ms-repeat="data">
                 <td>
+                    <button ms-click="del(el,$remove)" class="btn btn-danger">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                </td>
+                <td>
                     <input ms-duplex="el.Name" class="row-fluid" />
                 </td>
                 <td>
@@ -42,8 +47,8 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2">
-                    <button ms-click="add" class="btn">Add Variables</button>
+                <td colspan="3">
+                    <button ms-click="add" class="btn">Add</button>
                     <button ms-click="reload" class="btn">Reload </button>
                     <button ms-click="save" class="btn">Save</button>
                 </td>
@@ -57,7 +62,7 @@
 @section scripts{
     <script type="text/javascript">
         var js=@Html.Raw(a);
-        require(["/Messages/Scripts/Config/index.js"], function(init) {
+        require(['@Scripts.Url("/Messages/Scripts/Config/index.js")'], function(init) {
             init(js);
         });
     </script>

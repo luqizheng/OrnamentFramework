@@ -9,6 +9,9 @@
                 vm.data = data;
             });
         };
+        vm.del = function (el, removeFunc) {
+            removeFunc();
+        }
         vm.save = function () {
 
             var obj = {
