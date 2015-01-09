@@ -27,18 +27,14 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         [HttpPost]
         public ActionResult SaveVariable(VariablesModels models)
         {
+            
+            NotifySenderManager.Instance.Variables.Clear();
+
             foreach (VairableModel variable in models.Variables)
             {
                 string key = variable.Name;
                 string val = variable.Value;
-                if (NotifySenderManager.Instance.Variables.ContainsKey(key))
-                {
-                    NotifySenderManager.Instance.Variables[key] = val;
-                }
-                else
-                {
-                    NotifySenderManager.Instance.Variables.Add(key, val);
-                }
+                NotifySenderManager.Instance.Variables.Add(key, val);
                 NotifySenderManager.Instance.SaveVariable();
             }
             return Json(true);

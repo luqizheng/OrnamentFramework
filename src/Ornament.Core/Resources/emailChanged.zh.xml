@@ -5,10 +5,10 @@
     [name]，您好
 
 	<p>
-    你的安全電子郵件已經被修改了，請點擊下面的url進行確認。
+    你的安全電子郵件已經被修改了，請點擊下面的連接進行確認。
 	</p>
 
-	 <p>[VerifyEmail]?[parameters]
+	 <p>[RetrievePassowrd]/[VerifyEmail]?[parameters]
 
 	<p>
 	請不要回覆此郵件。

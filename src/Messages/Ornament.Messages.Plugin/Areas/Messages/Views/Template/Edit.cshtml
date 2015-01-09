@@ -1,5 +1,6 @@
 ﻿@using Ornament
 @using Ornament.MemberShip.Properties
+@using Ornament.Messages.Config
 @using Ornament.Messages.Dao.NHibernateImple
 @using Ornament.Messages.Notification
 @using Ornament.Messages.Notification.Senders
@@ -27,7 +28,7 @@
     <h2>@Html.GetEmbededResourceString("title")</h2>
 }
 
-<form id="editTemp" ms-controller="editTemp" method="POST" action="@Url.Action("Save")" class="form-horizontal">
+<form id="editTemp" ms-controller="editTemp" method="POST" action="@Url.Action("Save")">
     @using (Panel panel = Html.Panel())
     {
         @panel.Header(@<text>
@@ -60,10 +61,9 @@
                 <div class="col-lg-12 col-xs-12 col-sm-12">
                     @* 如果是内置，一定是不能呢改名字，因为是有程序初始化生成的 *@
                     <div class="form-group">
-                        <div class="col-2">
+                        
                             @Html.LabelFor(s => s.Name, new { @class = "control-label" })
-                        </div>
-                        <div class="col-10">
+                        
                             @Html.TextBoxFor(s => s.Name, "", new
                         {
                             @class = "form-control",
@@ -73,30 +73,28 @@
                             }
                         })
                             @Html.ValidationMessageFor(s => s.Name)
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <div class="col-2">
+                        
                             @Html.LabelFor(s => s.Senders, new { @class = "control-label" })
-                        </div>
-                        <div class="col-10">
+                        
                             @foreach (var sender in ViewBag.Senders)
                             {
                                 var check = (this.Model.Senders ?? new Sender[0]).Any(s => s.Id == sender.Id);
                                 
                                 <label class="checkbox-inline" title="@sender.Remarks">
                                     <input type="checkbox" value="@sender.Id" name="Senders" class="checkbox"
-                                        @(check?"checked='checked'":"") />
+                                        @(check ? "checked='checked'" : "") />
                                     <span>@sender.Name</span>
                                 </label>
                             }
-                        </div>
+                        
                     </div>
                     <div class="form-group">
-                        <div class="col-2">
+                        
                             @Html.LabelFor(s => s.Remark, new { @class = "control-label" })
-                        </div>
-                        <div class="col-10">
+                        
 
                             @Html.TextAreaFor(s => s.Remark, 5, 20,
                             new
@@ -108,17 +106,17 @@
                                 }
                             })
                             @Html.ValidationMessageFor(s => s.Remark)
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             <div id="tab8" class="tab-pane">
-                <div class="col-lg-12 col-xs-12 col-sm-12">
-                    <div class="form-group">
-                        <div class="col-2">
+                <div class="row">
+                    <div class="col-lg-8 col-xs-8 col-sm-8">
+                        <div class="form-group">
+
                             <label for="Language" class="control-label">Language:</label>
-                        </div>
-                        <div class="col-10">
+
                             <select id="Language" class="form-control" ms-duplex-string="Language">
                                 @{
                                     LanguageCollection langs = OrnamentContext.Configuration.Languages;
@@ -128,25 +126,33 @@
                                     }
                                 }
                             </select>
+
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-2">
+                        <div class="form-group">
+
                             <label for="subject" class="control-label">Subject</label>
-                        </div>
-                        <div class="col-10">
+
                             <input id="subject" class="form-control" type="text" style="width: 100%"
                                 ms-duplex="content.Subject" />
+
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(s => s.Content, new
+                        {
+                            HtmlAttributes = new Dictionary<string, object>
+                            {
+                                {"ms-duplex", "content.Value"}
+                            }
+                        })
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.EditorFor(s => s.Content, new
-                   {
-                       HtmlAttributes = new Dictionary<string, object>
-                                         {
-                                             {"ms-duplex", "content.Value"}
-                                         }
-                   })
+                    <div class="col-lg-4 col-xs-4 col-sm-4">
+                        <ul>
+                            @foreach (var key in NotifySenderManager.Instance.Variables.Keys)
+                            {
+                                <li>[@key]-@NotifySenderManager.Instance.Variables[key]</li>
+                            }
+                        </ul>
                     </div>
                 </div>
             </div>

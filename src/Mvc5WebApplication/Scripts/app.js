@@ -1824,7 +1824,11 @@ function loadURL(url, container) {
             container = null;
         },
         error: function (xhr, status, thrownError, error) {
-            container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error requesting <span class="txt-color-red">' + url + '</span>: ' + xhr.status + ' <span style="text-transform: capitalize;">' + thrownError + '</span></h4>');
+            if (xhr.status != 404) {
+                container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error requesting <span class="txt-color-red">' + url + '</span>: ' + xhr.status + ' <span style="text-transform: capitalize;">' + thrownError + '</span></h4>');
+            } else {
+                loadURL("ajax/error404.html", $('#content'));
+            }
         },
         async: true
     });
