@@ -1,5 +1,4 @@
-﻿using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
-using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
+﻿using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 {

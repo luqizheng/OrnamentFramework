@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Ornament;
+using Ornament.MemberShip.Security;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
@@ -88,7 +89,7 @@ namespace WebApplication.Controllers
             if (!Request.IsAjaxRequest())
             {
                 return !String.IsNullOrEmpty(model.ReturnUrl)
-                    ? (ActionResult) Redirect(model.ReturnUrl)
+                    ? (ActionResult)Redirect(model.ReturnUrl)
                     : RedirectToAction("Index", "Home");
             }
             return Json(true);
@@ -114,13 +115,33 @@ namespace WebApplication.Controllers
                 return Json(new
                 {
                     success = result == ForgetPasswordModel.RetrievePasswordResult.Success,
-                    result=result.ToString(),
+                    result = result.ToString(),
                 });
             }
             return Json(new
             {
                 success = false,
                 result = ForgetPasswordModel.RetrievePasswordResult.NotExistAccountOrEmail.ToString(),
+            });
+        }
+
+        public ActionResult RetrievePassword(string id, string token)
+        {
+            VerifyResult result = VerifyResult.NotFoundTokenId;
+            EmailVerifier emailVerifier = null;
+            if (!string.IsNullOrEmpty(id))
+            {
+                emailVerifier = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateEmailVerifierDao().Get(id);
+                if (String.IsNullOrEmpty(token))
+                {
+                    result = emailVerifier.Verify(token);
+                }
+            }
+            ViewData["result"] = result;
+            return View(new ResetPasswordModel()
+            {
+                Id = emailVerifier!=null? emailVerifier.Id:"",
+                TokenId = token,
             });
         }
     }

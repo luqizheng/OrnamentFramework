@@ -1054,6 +1054,7 @@
     <Content Include="Views\Setup\Index.cshtml" />
     <Content Include="Views\Security\VerifyEmail.cshtml" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\RetrievePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1167,6 +1168,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\AjaxLogon.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetrievePassword.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetrievePassword.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\RetrievePassword.zh-Hans.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
