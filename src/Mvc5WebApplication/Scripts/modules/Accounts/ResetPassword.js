@@ -3,11 +3,11 @@
     $("form").vaform({
         success: function (d) {
             if (d.success) {
-                bootbox.confirm(messages.success, function (ok) {
-                    if (ok) {
-                        document.location.href = "/";
-                    }
+                bootbox.alert(messages[d.result], function() {
+                    document.location.href = "/";
                 });
+            } else {
+                bootbox.alert(messages.faile);
             }
         }
     });

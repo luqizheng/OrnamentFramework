@@ -1,6 +1,6 @@
 ﻿/// <reference path="forgetpassword.js" />
 define(["bootbox", "vaform"], function (bootbox) {
-    return function (message, loginUrl) {
+    return function (message) {
         avalon.define({
             $id: "forgetPassword"
         });
@@ -16,9 +16,7 @@ define(["bootbox", "vaform"], function (bootbox) {
                 }
             },
             success: function (d) {
-                if (d.success) {
-                    bootbox.alert(message[d.result]);
-                }
+                bootbox.alert(message[d.result]);
             }
         });
         avalon.scan();

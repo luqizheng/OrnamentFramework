@@ -440,7 +440,7 @@
     <Content Include="Scripts\libs\jquery-ui-1.11.2.min.js" />
     <Content Include="Scripts\modules\ajaxlogin.js" />
     <Content Include="Scripts\modules\chat.js" />
-    <Content Include="Scripts\modules\forgetpassword.js" />
+    <Content Include="Scripts\modules\Accounts\forgetpassword.js" />
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\ornamentUi.js" />
     <Content Include="Scripts\modules\pageMain.js" />

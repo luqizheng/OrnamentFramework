@@ -7,6 +7,7 @@ using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
+using Qi.Web.Mvc;
 
 namespace WebApplication.Controllers
 {
@@ -89,7 +90,7 @@ namespace WebApplication.Controllers
             if (!Request.IsAjaxRequest())
             {
                 return !String.IsNullOrEmpty(model.ReturnUrl)
-                    ? (ActionResult)Redirect(model.ReturnUrl)
+                    ? (ActionResult) Redirect(model.ReturnUrl)
                     : RedirectToAction("Index", "Home");
             }
             return Json(true);
@@ -105,7 +106,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        [HttpPost, ValidateAjax]
+        [HttpPost, ValidateAjax,Session]
         public ActionResult ForgetPassword(ForgetPasswordModel model)
         {
             if (ModelState.IsValid)
@@ -127,39 +128,40 @@ namespace WebApplication.Controllers
 
         public ActionResult ResetPassword(string id, string token)
         {
-            VerifyResult result = VerifyResult.NotFoundTokenId;
+            var result = VerifyResult.NotFoundTokenId;
             EmailVerifier emailVerifier = null;
             if (!string.IsNullOrEmpty(id))
             {
                 emailVerifier = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateEmailVerifierDao().Get(id);
-                if (String.IsNullOrEmpty(token))
+                if (!String.IsNullOrEmpty(token))
                 {
                     result = emailVerifier.TryVerify(token);
                 }
             }
+
             ViewData["result"] = result;
-            return View(new ResetPasswordModel()
+            return View(new ResetPasswordModel
             {
                 Id = emailVerifier != null ? emailVerifier.Id : "",
                 TokenId = token,
             });
         }
-        [HttpPost, ValidateAjax]
+
+        [HttpPost, ValidateAjax,Session]
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
-            VerifyResult result = VerifyResult.NotFoundTokenId;
-            if (this.ModelState.IsValid)
+            var result = VerifyResult.NotFoundTokenId;
+            if (ModelState.IsValid)
             {
                 result = model.Save(OrnamentContext.DaoFactory.MemberShipDaoFactory);
             }
 
             if (Request.IsAjaxRequest())
             {
-                return Json(new { success = true });
+                return Json(new {success = true, result});
             }
             ViewData["result"] = result;
             return View(model);
-
         }
     }
 }

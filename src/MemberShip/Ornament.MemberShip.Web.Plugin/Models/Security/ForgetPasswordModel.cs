@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Security;
@@ -16,13 +15,13 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
         }
 
         /// <summary>
-        /// 
         /// </summary>
         [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "alertMsg_RequireAccount")]
         public string Account { get; set; }
+
         /// <summary>
-        /// Email
+        ///     Email
         /// </summary>
         [Required]
         public string Email { get; set; }
@@ -32,18 +31,8 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
         /// <param name="daoDaoFactory"></param>
         public RetrievePasswordResult Retrieve(IMemberShipDaoFactory daoDaoFactory)
         {
-            User user = null;
-            if (!String.IsNullOrEmpty(Account))
-            {
-                user = daoDaoFactory.CreateUserDao().GetByLoginId(Account);
-            }
-            if (!string.IsNullOrEmpty(Email) && user == null)
-            {
-                user = daoDaoFactory.CreateUserDao().GetUserByEmail(Email);
-            }
-
-
-            if (user == null)
+            User user = daoDaoFactory.CreateUserDao().GetByLoginId(Account);
+            if (user == null || user.Contact.Email.ToLower() != this.Email.ToLower())
             {
                 return RetrievePasswordResult.NotExistAccountOrEmail;
             }
