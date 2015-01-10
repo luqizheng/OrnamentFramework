@@ -12,4 +12,8 @@
     <Name>siteName</Name>
     <Value>Ornament测试</Value>
   </MessageVariable>
+  <MessageVariable>
+    <Name>RetrievePassowrd</Name>
+    <Value>Account/ResetPassword</Value>
+  </MessageVariable>
 </ArrayOfMessageVariable>

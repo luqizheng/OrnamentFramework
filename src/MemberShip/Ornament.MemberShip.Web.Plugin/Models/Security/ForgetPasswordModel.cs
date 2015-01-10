@@ -16,11 +16,14 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
         }
 
         /// <summary>
+        /// 
         /// </summary>
-        [Required(ErrorMessageResourceType = typeof(Resources),
+        [Required(ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "alertMsg_RequireAccount")]
         public string Account { get; set; }
-
+        /// <summary>
+        /// Email
+        /// </summary>
         [Required]
         public string Email { get; set; }
 

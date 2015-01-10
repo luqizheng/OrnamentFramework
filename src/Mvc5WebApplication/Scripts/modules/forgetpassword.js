@@ -16,12 +16,9 @@ define(["bootbox", "vaform"], function (bootbox) {
                 }
             },
             success: function (d) {
-                bootbox.confirm(message[d.result], function (ar) {
-                    if (d.success && ar) {
-                        document.location.href = loginUrl;
-                    }
-                });
-                
+                if (d.success) {
+                    bootbox.alert(message[d.result]);
+                }
             }
         });
         avalon.scan();

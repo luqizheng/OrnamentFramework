@@ -125,7 +125,7 @@ namespace WebApplication.Controllers
             });
         }
 
-        public ActionResult RetrievePassword(string id, string token)
+        public ActionResult ResetPassword(string id, string token)
         {
             VerifyResult result = VerifyResult.NotFoundTokenId;
             EmailVerifier emailVerifier = null;
@@ -134,15 +134,32 @@ namespace WebApplication.Controllers
                 emailVerifier = OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateEmailVerifierDao().Get(id);
                 if (String.IsNullOrEmpty(token))
                 {
-                    result = emailVerifier.Verify(token);
+                    result = emailVerifier.TryVerify(token);
                 }
             }
             ViewData["result"] = result;
             return View(new ResetPasswordModel()
             {
-                Id = emailVerifier!=null? emailVerifier.Id:"",
+                Id = emailVerifier != null ? emailVerifier.Id : "",
                 TokenId = token,
             });
+        }
+        [HttpPost, ValidateAjax]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
+            VerifyResult result = VerifyResult.NotFoundTokenId;
+            if (this.ModelState.IsValid)
+            {
+                result = model.Save(OrnamentContext.DaoFactory.MemberShipDaoFactory);
+            }
+
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new { success = true });
+            }
+            ViewData["result"] = result;
+            return View(model);
+
         }
     }
 }
