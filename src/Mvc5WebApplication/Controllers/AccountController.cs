@@ -158,7 +158,7 @@ namespace WebApplication.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return Json(new {success = true, result});
+                return Json(new {success = true, result=result.ToString()});
             }
             ViewData["result"] = result;
             return View(model);
