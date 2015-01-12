@@ -102,14 +102,16 @@
 @section scripts{
 
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function(main) {
-            console.log('usergroup init success.');
-            var msg = {
-                saveBtnEdit: "@Resources.Save",
-                saveBtnCreate: "@Resources.Create"
-            };
-            main.init(msg);
-            clearPageVariable.push(main.clear);
-        });
+        require(['require', '/scripts/config.js'], function(require) {
+                require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function(main) {
+                    console.log('usergroup init success.');
+                    var msg = {
+                        saveBtnEdit: "@Resources.Save",
+                        saveBtnCreate: "@Resources.Create"
+                    };
+                    main.init(msg);
+                    clearPageVariable.push(main.clear);
+                });
+            });
     </script>
 }

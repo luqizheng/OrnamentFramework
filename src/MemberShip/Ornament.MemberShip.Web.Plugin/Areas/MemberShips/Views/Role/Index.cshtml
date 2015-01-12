@@ -104,15 +104,17 @@
     
     
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Role/index.js")'], function (main) {
-            var message = {
-                createRole: '@Html.GetEmbededResourceString("CreateRole")',
-                editRole: '@Html.GetEmbededResourceString("EditRole")',
-                saveBtnEdit: '@Ornament.Properties.Resources.Save',
-                saveBtnCreate:'@Ornament.Properties.Resources.Create'
-            };
-            main.init(message);
-            clearPageVariable.push(main.clear);
+        require(['require', '/scripts/config.js'], function(require) {
+            require(['@Scripts.Url("/MemberShips/Scripts/Role/index.js")'], function(main) {
+                var message = {
+                    createRole: '@Html.GetEmbededResourceString("CreateRole")',
+                    editRole: '@Html.GetEmbededResourceString("EditRole")',
+                    saveBtnEdit: '@Ornament.Properties.Resources.Save',
+                    saveBtnCreate: '@Ornament.Properties.Resources.Create'
+                };
+                main.init(message);
+                clearPageVariable.push(main.clear);
+            });
         });
     </script>
 }

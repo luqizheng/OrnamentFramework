@@ -281,9 +281,6 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\User\Create.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\User\Index.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignRole.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\AssignUser.cshtml" />
-    <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Create.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\_Edit.cshtml" />
     <EmbeddedResource Include="Areas\MemberShips\Views\Usergroup\Index.cshtml" />
     <Content Include="Areas\MemberShips\Views\Web.config" />

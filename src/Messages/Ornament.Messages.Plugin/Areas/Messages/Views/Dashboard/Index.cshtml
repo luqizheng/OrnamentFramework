@@ -1,0 +1,31 @@
+﻿@using Ornament
+
+@{
+    Layout = OrnamentContext.Configuration.Layout();
+}
+
+  @section sparks{
+          <ul id="sparks">
+            <li class="sparks-info">
+                <h5  title="Templates">Templates: <span class="txt-color-blue"><i class="fa fa-users"></i> @ViewData["TotalUser"]</span></h5>
+                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm" title="最近一星期注册用户数">
+                  @Html.Raw(ViewData["NewRegistry"])
+                </div>
+            </li>
+            <li class="sparks-info">
+                <h5 title="活跃用户数">用户活跃<span class="txt-color-purple">
+                    <i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;@ViewData["toDayActive"]
+                                      </span></h5>
+                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                    @Html.Raw(ViewData["7DayActive"])
+                </div>
+            </li>
+            <li class="sparks-info">
+                <h5>活跃度 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart">
+                                                                  </i>&nbsp;@ViewData["todayMax"]</span></h5>
+                <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                    @Html.Raw(ViewData["7DayMaxActive"])
+                </div>
+            </li>
+        </ul>
+}

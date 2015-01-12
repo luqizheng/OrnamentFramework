@@ -1,6 +1,4 @@
-﻿@using System.Collections.Generic;
-@using System.Security.AccessControl
-@using Ornament
+﻿@using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.MemberShip.Web.Plugin.Models.Memberships
@@ -15,7 +13,7 @@
     string parentId = Model != null ? Model.Id : "";
     IEnumerable<Org> childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
 
-    var childDTO = OrgDto.ToTree(childOrgs);
+    IList<OrgDto> childDTO = OrgDto.ToTree(childOrgs);
 
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
@@ -23,7 +21,8 @@
 {
     @if (Model == null || Model.Parent == null)
     {
-        @Html.GetEmbededResourceString("Page_title");
+        @Html.GetEmbededResourceString("Page_title")
+        ;
     }
     else
     {
@@ -31,7 +30,7 @@
     }
 }
 
-@using (Panel box = Html.Panel(new PanelOption()
+@using (Panel box = Html.Panel(new PanelOption
 {
     Id = "orgPanel",
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
@@ -70,8 +69,8 @@
                                {
                                    HtmlAttributes = new Dictionary<string, object>
                                    {
-                                       { "class","form-control"},
-                                       {"ms-duplex","Name"}
+                                       {"class", "form-control"},
+                                       {"ms-duplex", "Name"}
                                    }
                                })
                 @Html.ValidationMessageFor(model => model.Name)
@@ -85,9 +84,8 @@
                                {
                                    HtmlAttributes = new Dictionary<string, object>
                                    {
-                                       { "class", "form-control" },
-                                       {"ms-duplex","Remarks"}
-                     
+                                       {"class", "form-control"},
+                                       {"ms-duplex", "Remarks"}
                                    }
                                })
                 @Html.ValidationMessageFor(model => model.Remarks)
@@ -96,9 +94,9 @@
         <div class="form-group">
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
             <div class="col-md-10" id="roleList">
-                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>()
+                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>
                                {
-                                   {"ms-duplex-string","Roles"}
+                                   {"ms-duplex-string", "Roles"}
                                })
                 @Html.ValidationMessageFor(s => s.Roles)
             </div>
@@ -108,7 +106,7 @@
                 <div class="col-md-12">
                     <button class="btn btn-primary" type="submit">
                         <i class="fa fa-save"></i>
-                        @Ornament.Properties.Resources.Save
+                        @Resources.Save
                     </button>
                 </div>
             </div>
@@ -116,21 +114,20 @@
     </form>
 
     </text>)
-
-    
-    
 }
 
 
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
-            var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
-            main.init(orgDTO);
-
-            clearPageVariable.push(main.clear);
+        require(['require', '/scripts/config.js'], function(require) {
+            require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
+                var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
+                main.init(orgDTO);
+                clearPageVariable.push(main.clear);
+            });
         });
         
+
     </script>
 }

@@ -70,9 +70,11 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
-            main.Init();
-            clearPageVariable.push(main.Clear());
+        require(['require', '/scripts/config.js'], function(require) {
+            require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function(main) {
+                main.Init();
+                clearPageVariable.push(main.Clear());
+            });
         });
     </script>
 }

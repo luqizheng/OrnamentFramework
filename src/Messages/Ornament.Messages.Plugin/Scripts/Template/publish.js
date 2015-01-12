@@ -1,4 +1,4 @@
-﻿define(["vaform"],function () {
+﻿define(["vaform", "/MemberShips/Scripts/Org/Org.js"], function () {
 
     return {
         init: function (contents) {
@@ -24,7 +24,7 @@
             avalon.scan();
         },
         clear: function() {
-            delete avalon.$vmodels["example"];
+            delete avalon.vmodels["example"];
         }
     }
 });

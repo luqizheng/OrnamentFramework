@@ -108,6 +108,7 @@
                 <div class="form-actions">
                     <button type="submit" class="btn btn-danger">Publish</button>
                     <button type="button" ms-click="getDemo" class="btn btn-primary">Demo</button>
+                    <a href="#@Url.Action("Edit",new{id=this.Model.Id})" class="btn">Edit Templates</a>
                 </div>
             </div>
 
@@ -136,10 +137,13 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("/Messages/Scripts/Template/Publish.js")'], function(main) {
-            var contents = @Html.Raw(JsonHelper.ToJson(template.Contents.Values));
-            main.init(contents);
-            clearPageVariable.push(main.clear);
-        })
+        require(['/Scripts/config.js'], function() {
+            require(['@Scripts.Url("/Messages/Scripts/Template/Publish.js")'], function(main) {
+                var contents = @Html.Raw(JsonHelper.ToJson(template.Contents.Values));
+                main.init(contents);
+                clearPageVariable.push(main.clear);
+            });
+        });
+        
     </script>
 }

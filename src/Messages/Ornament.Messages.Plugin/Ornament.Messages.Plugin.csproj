@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Messages\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Messages\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
@@ -154,6 +155,15 @@
     <EmbeddedResource Include="Scripts\Config\Index.js" />
     <EmbeddedResource Include="Scripts\Sender\Index.js" />
     <EmbeddedResource Include="Scripts\Template\publish.js" />
+    <EmbeddedResource Include="Areas\Messages\Views\Dashboard\Index.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -161,6 +171,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
