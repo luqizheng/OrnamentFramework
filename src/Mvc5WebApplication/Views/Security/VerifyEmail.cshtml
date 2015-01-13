@@ -1,5 +1,31 @@
-﻿@model Ornament.MemberShip.Security.VerifyResult
+﻿@using System.Web.Optimization
+@using Ornament.Web
+@model Ornament.MemberShip.Security.VerifyResult
 @{
     Layout = "~/Views/Shared/_standLayout.cshtml";
 }
 
+@section scripts{
+    <script type="text/javascript">
+        require(["/Scripts/Config.js"], function () {
+            require(['@Scripts.Url("~/Scripts/modules/Security/VerifyEmail.js")'], function (main) {
+                main({
+                    Success: '@Html.GetResourceString("success")',
+                    Failed: '@Html.GetResourceString("Failed")',
+                    Expire: '@Html.GetResourceString("Expire")',
+                    NotFoundTokenId: '@Html.GetResourceString("NotFoundTokenId")'
+
+                });
+            });
+        });
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>
+            @Html.GetResourceString(this.Model.ToString())
+        </h3>
+        <a href="@Url.Action("LogOn","Account")">Login</a>
+    </div>
+</div>

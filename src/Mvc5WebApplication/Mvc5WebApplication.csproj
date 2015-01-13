@@ -445,6 +445,7 @@
     <Content Include="Scripts\modules\ornamentUi.js" />
     <Content Include="Scripts\modules\pageMain.js" />
     <Content Include="Scripts\modules\Accounts\ResetPassword.js" />
+    <Content Include="Scripts\modules\Security\VerifyEmail.js" />
     <Content Include="Scripts\notification\notifyClient.js" />
     <Content Include="Scripts\notification\SmartNotification.min.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.js" />
@@ -1180,6 +1181,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\ResetPassword.zh-Hans.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-Hans.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
