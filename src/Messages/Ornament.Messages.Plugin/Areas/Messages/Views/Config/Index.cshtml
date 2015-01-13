@@ -61,9 +61,12 @@
 }
 @section scripts{
     <script type="text/javascript">
-        var js=@Html.Raw(a);
-        require(['@Scripts.Url("/Messages/Scripts/Config/index.js")'], function(init) {
-            init(js);
+        
+        require(['require', '/scripts/config.js'], function (require) {
+            var js=@Html.Raw(a);
+            require(['@Scripts.Url("/Messages/Scripts/Config/index.js")'], function(init) {
+                init(js);
+            });
         });
     </script>
 }

@@ -8,6 +8,7 @@ using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
 using Qi.Web.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -161,6 +162,12 @@ namespace WebApplication.Controllers
                 return Json(new {success = true, result=result.ToString()});
             }
             ViewData["result"] = result;
+            return View(model);
+        }
+        [Authorize]
+        public ActionResult My()
+        {
+            var model = new ProfileModel(OrnamentContext.MemberShip.CurrentUser());
             return View(model);
         }
     }
