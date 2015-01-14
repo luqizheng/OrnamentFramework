@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web.Mvc;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
@@ -24,12 +23,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             Name = template.Name;
             Remark = template.Remark;
             Contents.AddRange(template.Contents.Values);
-            this.Senders=new Sender[template.Senders.Count];
-            for (var i = 0; i < Senders.Length; i++)
+            Senders = new Sender[template.Senders.Count];
+            for (int i = 0; i < Senders.Length; i++)
             {
-                this.Senders[i] = (Sender)template.Senders[i];
+                Senders[i] = template.Senders[i];
             }
-            
         }
 
         /// <summary>
@@ -65,14 +63,14 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         {
             get { return ""; }
         }
+
         /// <summary>
-        ///
         /// </summary>
         /// <remarks>
-        ///  這裡只能使用 Abstract類型而不能是ISender,因為NH-mapping的是Sender
-        /// 因此NHModelBiner並不知道ISender是NH映射類型，無法從String類型轉換為Sender對象
+        ///     這裡只能使用 Abstract類型而不能是ISender,因為NH-mapping的是Sender
+        ///     因此NHModelBiner並不知道ISender是NH映射類型，無法從String類型轉換為Sender對象
         /// </remarks>
-        public  Sender[] Senders { get; set; }
+        public Sender[] Senders { get; set; }
 
 
         public void Save(IMessageTemplateDao dao)
@@ -86,18 +84,17 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
             template.Name = Name;
             template.Remark = Remark;
             template.Senders.Clear();
-            foreach (var sender in this.Senders)
+            foreach (Sender sender in Senders)
             {
                 template.Senders.Add(sender);
             }
             dao.SaveOrUpdate(template);
 
-            foreach (var content in Contents)
+            foreach (Content content in Contents)
             {
-
                 if (content == null)
                     continue;
-                var lang = content.Language;
+                string lang = content.Language;
                 if (template.Contents.ContainsKey(lang))
                 {
                     template.Contents[lang] = content;

@@ -32,7 +32,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         public string Remark { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="dao"></param>
         /// <exception cref="ArgumentNullException">dao is null</exception>

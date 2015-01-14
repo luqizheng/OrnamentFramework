@@ -1,6 +1,4 @@
-﻿using System;
-using NHibernate.Dialect.Function;
-using Ornament.Messages.Dao;
+﻿using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Senders;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Models
@@ -21,7 +19,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             else
             {
                 SenderType = "client";
-                ClientSender = new ClientSenderModel((ClientSender)sender);
+                ClientSender = new ClientSenderModel((ClientSender) sender);
             }
             Id = sender.Id;
         }
@@ -31,12 +29,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             EmailSender = new EmailSenderModel();
             ClientSender = new ClientSenderModel();
         }
+
         /// <summary>
-        /// 
         /// </summary>
         public int? Id { get; set; }
+
         /// <summary>
-        /// 
         /// </summary>
         public virtual string SenderType { get; set; }
 
@@ -64,19 +62,18 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
                 switch (SenderType)
                 {
                     case "email":
-                        sender = this.EmailSender.CreateSender(this.Id, daoFactory);
+                        sender = EmailSender.CreateSender(Id, daoFactory);
                         break;
                     case "client":
-                        sender = this.ClientSender.CreateSender(this.Id, daoFactory);
+                        sender = ClientSender.CreateSender(Id, daoFactory);
                         break;
                     default:
                         throw new NotifySenderException(SenderType + " is not defined");
-
                 }
             }
             else
             {
-                sender = this.EmailSender.Modify(this.Id,daoFactory) ?? this.ClientSender.Modify(this.Id, daoFactory);
+                sender = EmailSender.Modify(Id, daoFactory) ?? ClientSender.Modify(Id, daoFactory);
             }
 
             sender.Name = Name;

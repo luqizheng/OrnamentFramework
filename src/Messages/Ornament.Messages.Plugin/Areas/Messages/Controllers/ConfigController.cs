@@ -21,13 +21,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         public ActionResult Reload()
         {
             NotifySenderManager.Instance.ReloadVariables();
-            return Json(from a in NotifySenderManager.Instance.Variables select new {Name = a.Key, a.Value});
+            return Json(from a in NotifySenderManager.Instance.Variables select new {Name = a.Key, a.Value},JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult SaveVariable(VariablesModels models)
         {
-            
             NotifySenderManager.Instance.Variables.Clear();
 
             foreach (VairableModel variable in models.Variables)

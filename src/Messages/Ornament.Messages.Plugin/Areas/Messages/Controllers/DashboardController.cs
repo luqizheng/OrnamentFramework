@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
@@ -14,5 +10,5 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             return View();
         }
-	}
+    }
 }

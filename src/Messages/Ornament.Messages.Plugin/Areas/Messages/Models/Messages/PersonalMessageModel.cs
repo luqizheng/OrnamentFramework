@@ -11,10 +11,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models.Messages
         public void Create(IPersonalMessageDao dao, User publisher, User receiver)
         {
             var message = new PersonalMessage(publisher)
-                {
-                    Content = Content,
-                    Receiver = receiver
-                };
+            {
+                Content = Content,
+                Receiver = receiver
+            };
             dao.SaveOrUpdate(message);
         }
     }

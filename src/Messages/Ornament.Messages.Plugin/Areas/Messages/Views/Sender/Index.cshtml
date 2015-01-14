@@ -1,54 +1,58 @@
 ﻿@using Ornament
+@using Ornament.Properties
 @using Ornament.Web.UI.Theme
-
-
 @{
     ViewBag.Title = "title";
-    Layout = Ornament.OrnamentContext.Configuration.Layout();
-    var panelOptions = new PanelOption()
+    Layout = OrnamentContext.Configuration.Layout();
+    var panelOptions = new PanelOption
     {
-        HtmlAttributes = new Dictionary<string, object>()
+        HtmlAttributes = new Dictionary<string, object>
         {
             {"ms-controller", "senderList"}
         }
-    }; 
+    };
 }
 
-@section pageTitle{<h4>Sender setting</h4>}
+@section pageTitle{
+    Sender setting
+}
 
-@using (var panel = Html.Panel(panelOptions, "col-md-5"))
+@using (Panel panel = Html.Panel(panelOptions, "col-md-5"))
 {
     @panel.Header(@<text></text>)
 
     @panel.Body(@<text>
-    <a class="btn btn-default" href="javascript:;" ms-click="create">@Ornament.Properties.Resources.Create</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Operator</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ms-repeat-el="Senders">
-                <td ms-attr-title="el.Remarks">{{el.Name}}</td>
-                <td>
-                    <a href="javascript:;" ms-click="Edit(el.Id)">@Ornament.Properties.Resources.Edit</a>
-                </td>
-            </tr>
-        </tbody>
+                     <div class="widget-body-toolbar">
+                         <a class="btn btn-default" href="javascript:;" ms-click="create">@Resources.Create</a>
+                     </div>
 
-    </table>
-    </text>)
+                     <table class="table">
+                         <thead>
+                             <tr>
+                                 <th>Name</th>
+                                 <th>Operator</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr ms-repeat-el="Senders">
+                                 <td ms-attr-title="el.Remarks">{{el.Name}}</td>
+                                 <td>
+                                     <a class="btn btn-primary" href="javascript:;" ms-click="Edit(el.Id)">@Resources.Edit</a>
+                                 </td>
+                             </tr>
+                         </tbody>
+
+                     </table>
+                 </text>)
 }
 
 @Html.Partial("_edit")
 
 @section scripts{
     <script type="text/javascript">
-        require(["/Messages/Scripts/Sender/Index.js"], function (main) {
+        require(['@Scripts.Url("/Messages/Scripts/Sender/Index.js")'], function(main) {
             main.init({
-                get:'@Url.Action("GetSender")'
+                get: '@Url.Action("GetSender")'
             });
             clearPageVariable.push(main.clear);
         })

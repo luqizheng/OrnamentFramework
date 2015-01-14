@@ -36,7 +36,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IEnumerable<SenderModel> result = from a in data select new SenderModel((a));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-       
+
         public ActionResult GetSender(int? id)
         {
             Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
@@ -49,12 +49,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             Sender sender;
             if (ModelState.IsValid)
             {
-                sender=model.Save(_messageDaoFactory);
+                sender = model.Save(_messageDaoFactory);
                 var result = new
                 {
                     success = true,
                     message = "",
-                    Id = sender.Id
+                    sender.Id
                 };
 
                 return Json(result);

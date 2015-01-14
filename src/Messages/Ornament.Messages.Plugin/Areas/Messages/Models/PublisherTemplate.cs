@@ -37,16 +37,19 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
                 }
             }
         }
+
         public User[] Users { get; set; }
         public UserGroup[] UserGroups { get; set; }
         public Org[] Orgs { get; set; }
         public Role[] Roles { get; set; }
+
         /// <summary>
-        /// key 是 language，value是key-map的 变量已经他们的对应值。
+        ///     key 是 language，value是key-map的 变量已经他们的对应值。
         /// </summary>
         public IDictionary<string, IDictionary<string, string>> Variables { get; set; }
+
         /// <summary>
-        /// template's id
+        ///     template's id
         /// </summary>
         public string Id { get; set; }
     }

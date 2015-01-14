@@ -107,7 +107,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        [HttpPost, ValidateAjax,Session]
+        [HttpPost, ValidateAjax, Session]
         public ActionResult ForgetPassword(ForgetPasswordModel model)
         {
             if (ModelState.IsValid)
@@ -148,7 +148,7 @@ namespace WebApplication.Controllers
             });
         }
 
-        [HttpPost, ValidateAjax,Session]
+        [HttpPost, ValidateAjax, Session]
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
             var result = VerifyResult.NotFoundTokenId;
@@ -159,11 +159,12 @@ namespace WebApplication.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return Json(new {success = true, result=result.ToString()});
+                return Json(new {success = true, result = result.ToString()});
             }
             ViewData["result"] = result;
             return View(model);
         }
+
         [Authorize]
         public ActionResult My()
         {

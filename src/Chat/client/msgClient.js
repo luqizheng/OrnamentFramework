@@ -62,33 +62,8 @@ define(['socketio', 'json2'], function (io) {
             };
             callback(returnData);
         });
-
     };
-    /**
-     * 发送通知信息，如果发送后，请设置options.recever注册监听事件，否则无法处理这个type类型
-     *
-     * @param content
-     * @param type
-     * @param strContent
-     * @param aryStrLoginids
-     * @param callback
-     */
-    msgClient.prototype.sendNotify = function (content, type, strContent, aryStrLoginids) {
-        /* msg={
-         Content:"content",
-         Type="notify",
-         LoginIds=[] //接受者
-         Token:publicKey,
-         TemplateData=[], tempalte data,
-         IsTemplate:false or not defined,
-         */
-        this.Socket.emit("send msg", {
-            Content: content,
-            Type: type,
-            LoginIds: aryStrLoginids,
-            IsTemplate: false
-        })
-    }
+
 
     var defaultOptions = {
         receiver: {

@@ -12,7 +12,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
 
         public EmailSenderModel(EmailSender sender)
         {
-            this.Account = sender.Account;
+            Account = sender.Account;
             SmtpServer = sender.SmtpServer;
             Password = sender.Password;
             Port = sender.Port;
@@ -68,7 +68,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
 
         public Sender Modify(int? id, IMessageDaoFactory messageDaoFactory)
         {
-            var result = messageDaoFactory.NotifySenderDao.Get(id.Value);
+            Sender result = messageDaoFactory.NotifySenderDao.Get(id.Value);
             var emailSender = result as EmailSender;
             if (emailSender != null)
             {
@@ -79,7 +79,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
                 emailSender.SmtpServer = SmtpServer;
             }
             return emailSender;
-
         }
     }
 

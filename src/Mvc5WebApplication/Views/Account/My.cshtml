@@ -48,7 +48,10 @@
                         <div class="col-sm-12">
                             <div id="myCarousel" class="carousel fade profile-carousel">
                                 <div class="air air-bottom-right padding-10">
-                                    <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm"><i class="fa fa-check"></i>Follow</a>&nbsp; <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i>Connect</a>
+                                    <a href="javascript:void(0);" class="btn txt-color-white bg-color-teal btn-sm">
+                                        <i class="fa fa-check"></i>Follow
+                                    </a>&nbsp;
+                                     <a href="javascript:void(0);" class="btn txt-color-white bg-color-pinkDark btn-sm"><i class="fa fa-link"></i>Connect</a>
                                 </div>
                                 <div class="air air-top-left padding-10">
                                     <h4 class="txt-color-white font-md">Jan 1, 2014</h4>
@@ -92,7 +95,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h1>@Model.BasicInfo.FirstName??"" <span class="semi-bold">@Model.BasicInfo.LastName??@Model.BasicInfo.Name</span>
+                                    <h1>@(Model.BasicInfo.FirstName??"") <span class="semi-bold">@(Model.BasicInfo.LastName??Model.BasicInfo.Name)</span>
                                         <br>
                                         @*<small>CEO, SmartAdmin</small>*@
                                     </h1>
@@ -101,7 +104,8 @@
                                         <li>
                                             <p class="text-muted">
                                                 <i class="fa fa-phone"></i>
-                                                &nbsp;&nbsp;(<span class="txt-color-darken">313</span>) <span class="txt-color-darken">464</span> - <span class="txt-color-darken">6473</span>
+                                                &nbsp;&nbsp; @(this.Model.BasicInfo.Phone??N/A)
+                                                @*(<span class="txt-color-darken">313</span>) <span class="txt-color-darken">464</span> - <span class="txt-color-darken">6473</span>*@
                                             </p>
                                         </li>
                                         <li>

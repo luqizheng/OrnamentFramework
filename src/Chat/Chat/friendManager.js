@@ -1,7 +1,7 @@
 /**
  * Created by leo-home on 2014/11/15.
  */
-var dao = require("./dao").getProvider("friends");
+var dao = require("./../dao").getProvider("friends");
 /*
  scheman.
  {

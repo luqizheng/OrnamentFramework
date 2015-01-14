@@ -1,5 +1,4 @@
-﻿using System;
-using Ornament.Messages.Dao;
+﻿using Ornament.Messages.Dao;
 using Ornament.Messages.Notification.Senders;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Models
@@ -8,13 +7,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
     {
         public ClientSenderModel()
         {
-
         }
 
         public ClientSenderModel(ClientSender sender)
         {
-            this.Server = sender.Server;
-            this.PrivateCode = sender.PrivateCode;
+            Server = sender.Server;
+            PrivateCode = sender.PrivateCode;
         }
 
         public virtual string Server { get; set; }
@@ -25,7 +23,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         {
             Sender sender = id != null
                 ? messageDaoFactory.NotifySenderDao.Get(id.Value)
-                : new ClientSender(this.Server);
+                : new ClientSender(Server);
             var clientSender = sender as ClientSender;
             if (clientSender != null)
             {

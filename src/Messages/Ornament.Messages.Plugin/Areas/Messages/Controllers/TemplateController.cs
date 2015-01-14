@@ -8,7 +8,6 @@ using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Messages.Plugin.Areas.Messages.Models.Messages;
-using Ornament.Models;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
 using Qi.Web.Mvc;
@@ -44,12 +43,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pageIndex,
                 pageSize, out total);
             var array = from temp in result
-                        select new
-                        {
-                            temp.Id,
-                            temp.Name,
-                            temp.Remark
-                        };
+                select new
+                {
+                    temp.Id,
+                    temp.Name,
+                    temp.Remark
+                };
             return Json(new
             {
                 total,
@@ -93,13 +92,13 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                 model.Save(_daoFactory.MessageTemplateDao);
                 if (Request.IsAjaxRequest())
                 {
-                    return Json(new { success = true });
+                    return Json(new {success = true});
                 }
                 return RedirectToAction("Index", model);
             }
             if (Request.IsAjaxRequest())
             {
-                return Json(new { success = false, message = "Fail to save." });
+                return Json(new {success = false, message = "Fail to save."});
             }
             return View("Edit", model);
         }
@@ -111,6 +110,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             ViewData["temp"] = template;
             return View(item);
         }
+
         [HttpPost]
         public ActionResult Publish(PublisherTemplate template)
         {
@@ -122,6 +122,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 
             return Json(result);
         }
+
         /// <summary>
         ///     获取生成的内容
         /// </summary>
@@ -143,7 +144,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                     Subject = temp.Contents[key].GetSubject(local),
                     Value = temp.Contents[key].GetContent(local),
                     Language = key,
-
                 });
             }
             return Json(list);
@@ -161,7 +161,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

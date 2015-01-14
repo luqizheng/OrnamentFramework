@@ -1,6 +1,6 @@
-var crypto = require('crypto');
-var orgConfig = require("./orgDao").config;
-var dbUser = require('./dao').getProvider("user");
+
+var orgConfig = require("./../orgDao").config;
+var dbUser = require('./../dao').getProvider("user");
 
 
 exports.validUser = function (userRequestData, callback) {
@@ -36,13 +36,7 @@ function encryptOrg(orgName, createDate, apiKey) {
     return data;
 }
 
-var formatDate = function (date) {
-    if (typeof date == "object") {
-        return date.getUTCFullYear() + date.getUTCMonth() + date.getUTCDay() + " " + date.getUTCHours() + ":" + date.getUTCMinutes() + ":" + date.getUTCSeconds();
-    }
 
-    return date;
-};
 
 
 var sh1Encrypt = function (content) {

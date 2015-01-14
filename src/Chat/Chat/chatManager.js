@@ -1,7 +1,7 @@
 /**
  * Created by leo on 2014/10/21.
  */
-var db = require("./dao").getProvider("chat");
+var db = require("./../dao").getProvider("chat");
 
 var saveChat = function (chatMessage, callback) {
     var msgs =

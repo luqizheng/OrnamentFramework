@@ -18,9 +18,10 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             _messageDao = messageDao;
         }
+
         [Session]
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsTypeIndexTitle", Key = "newsTypeList",
-          ParentKey = "news")]
+            ParentKey = "news")]
         public ActionResult Index()
         {
             IList<NewsType>
@@ -45,11 +46,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             }
             return View(type);
         }
+
         [OrnamentMvcSiteMapNode(Title = "$resources:message.sitemap,newsTypeCreateTitle", Key = "newsCreateList",
-         ParentKey = "newsTypeList")]
+            ParentKey = "newsTypeList")]
         public ActionResult Create()
         {
-            var result = new NewsTypeModel { Name = "new message type" };
+            var result = new NewsTypeModel {Name = "new message type"};
 
             return View(result);
         }
@@ -70,7 +72,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             INewsTypeDao dao = _messageDao.NewsTypeDao;
             dao.Delete(dao.Get(id));
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
         }
     }
 }

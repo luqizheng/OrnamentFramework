@@ -9,11 +9,11 @@
     <Value>Ornament测试</Value>
   </MessageVariable>
   <MessageVariable>
-    <Name>siteName</Name>
-    <Value>Ornament测试</Value>
-  </MessageVariable>
-  <MessageVariable>
     <Name>RetrievePassowrd</Name>
     <Value>Account/ResetPassword</Value>
+  </MessageVariable>
+  <MessageVariable>
+    <Name>VerifyEmail</Name>
+    <Value>Security/VerifyEmail</Value>
   </MessageVariable>
 </ArrayOfMessageVariable>

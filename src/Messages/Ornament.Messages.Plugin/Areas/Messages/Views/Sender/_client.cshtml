@@ -1,20 +1,18 @@
 ﻿@model Ornament.Messages.Plugin.Areas.Messages.Models.ClientSenderModel
 <div class="form-group">
     @Html.LabelFor(s => s.Server)
-    @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>()
+    @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>
     {
-        {"ms-duplex","ClientSender.Server"},{"class","form-control"},{"ms-attr-disabled","disabled|| SenderType!='client'"}
+        {"ms-duplex", "ClientSender.Server"}, {"class", "form-control"}, {"ms-attr-disabled", "disabled|| SenderType!='client'"}
     })
     @Html.ValidationMessageFor(s => s.Server)
 </div>
 
 <div class="form-group">
     @Html.LabelFor(s => s.PrivateCode)
-    @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>()
-        {
-            {"ms-duplex","ClientSender.PrivateCode"},{"class","form-control"},{"ms-attr-disabled","disabled || SenderType!='client'"}
-        })
+    @Html.TextBoxFor(s => s.Server, new Dictionary<string, object>
+    {
+        {"ms-duplex", "ClientSender.PrivateCode"}, {"class", "form-control"}, {"ms-attr-disabled", "disabled || SenderType!='client'"}
+    })
     @Html.ValidationMessageFor(s => s.PrivateCode)
 </div>
-
-
