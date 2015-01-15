@@ -1,7 +1,9 @@
 ﻿@using System.Web.Optimization
 @using Ornament
-
 @using Qi.Web
+@{
+    var user = OrnamentContext.MemberShip.CurrentUser();
+}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -365,7 +367,7 @@
     <script src="/Scripts/require.js"></script>
     <script type="text/javascript">
         require(["scripts/config.js"], function () {
-            require(["jquery", "jqueryui", "bootstrap", "app.config", "floatChart",
+            require(["main","jquery", "jqueryui", "bootstrap", "app.config",
 "touch",
 "smarkNotify",
 "/scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js",
@@ -376,7 +378,11 @@
 "moment",
 "/scripts/plugin/fullcalendar/jquery.fullcalendar.min.js",
 "util",
-"main"]);
+]);
+        },function(main) {
+            main("localhost:3000", "@user.Name", 
+                "@user.LoginId",
+                "@(Request.Cookies[FormsAuthentication.FormsCookieName].Value)");
         })
     </script>
 

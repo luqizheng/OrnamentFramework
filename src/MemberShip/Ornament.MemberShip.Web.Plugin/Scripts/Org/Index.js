@@ -1,5 +1,5 @@
-﻿define(function (require) {
-    var org = require("/MemberShips/Scripts/Share/Org.js");
+﻿define(["require","/MemberShips/Scripts/Share/Org.js"],function (require,org) {
+    
 
     function Init() {
         

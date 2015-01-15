@@ -10,13 +10,7 @@
             $("#ajaxlogin").modal('show');
         }
     });
-    $(document).ready(function () {
-        $("#ajaxlogin").modal({
-            remote: "/Account/AjaxLogon",
-            show: false,
-            backdrop: false
-        });
-    });
+    
     //兼容IE的方法
     if (!console) {
         document.console = {

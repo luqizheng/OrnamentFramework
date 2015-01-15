@@ -1,21 +1,18 @@
-﻿define(function(require) {
+﻿define(function (require) {
     //ajax login
-    require(['vaform'], function() {
 
-        $("#login-ajax-form").vaform({
-            success: function(data) {
-                if (data) {
-                    location = location;
-                } else {
-                    alert('login faile');
-                }
-            }
+
+    $(document).ready(function () {
+        $("#ajaxlogin").modal({
+            remote: "/Account/AjaxLogon",
+            show: false,
+            backdrop: false
         });
-        $("#login-submit").click(function() {
-            $("#login-ajax-form").submit();
-        });
+
+
+
+
 
     });
 
 })
-    

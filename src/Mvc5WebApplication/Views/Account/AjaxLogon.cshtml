@@ -43,3 +43,19 @@
     </button>
 </div>
 
+<script type="text/javascript">
+    require(["vaform"],function() {
+        $("#login-ajax-form").vaform({
+            success: function (data) {
+                if (data) {
+                    location = location;
+                } else {
+                    alert('login faile');
+                }
+            }
+        });
+        $("#login-submit").click(function () {
+            $("#login-ajax-form").submit();
+        });
+    })
+</script>
