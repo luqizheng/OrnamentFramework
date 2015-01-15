@@ -9,11 +9,11 @@ function toContent(strTemplate, variabled, user) {
     var reg = /\[{1}[^[].+?\]{1}/g
     strTemplate.replace(reg, function (word) {
         word = word.replace('[', '').replace(']')
-        if (variabled[word]) {
-            return variabled[word];
-        }
         if (user[word]) {
             return user[word]
+        }
+        if (variabled[word]) {
+            return variabled[word];
         }
         return word;
     })
@@ -38,12 +38,12 @@ function saveMessage(aryMsg, callback) {
     });
 }
 
-function getMessage(loginId, bRead, pageSize, pageIndex,callback) {
+function getMessage(loginId, bRead, pageSize, pageIndex, callback) {
 
     db.do(function (collection) {
-        var codi={Owner: loginId};
-        if(bRead!==undefined){
-            codi.IsRead=bRead;
+        var codi = {Owner: loginId};
+        if (bRead !== undefined) {
+            codi.IsRead = bRead;
         }
         var result = collection.find(codi).sort({CreateDate: 1}).skip(pageSize * pageIndex).limit(pageSize).toArray();
         callback(result)
@@ -101,9 +101,9 @@ exports.Init = function (socket, userManager) {
          pageIndex:0
          }
          */
-        getMessage(user.LoginId,user.Read,40,user.pageIndex||0,function(result){
-            socket.emit('get notify',result);
+        getMessage(user.LoginId, user.Read, 40, user.pageIndex || 0, function (result) {
+            socket.emit('get notify', result);
         })
-    })
+    });
 
 }

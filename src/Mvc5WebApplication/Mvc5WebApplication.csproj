@@ -442,12 +442,14 @@
     <Content Include="Scripts\modules\chat.js" />
     <Content Include="Scripts\modules\Accounts\forgetpassword.js" />
     <Content Include="Scripts\modules\main.js" />
+    <Content Include="Scripts\modules\notifyMsg.js" />
     <Content Include="Scripts\modules\ornamentUi.js" />
     <Content Include="Scripts\modules\pageMain.js" />
     <Content Include="Scripts\modules\Accounts\ResetPassword.js" />
     <Content Include="Scripts\modules\Security\VerifyEmail.js" />
     <Content Include="Scripts\notification\notifyClient.js" />
     <Content Include="Scripts\notification\SmartNotification.min.js" />
+    <Content Include="Scripts\notification\socketClient.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.min.js" />
     <Content Include="Scripts\plugin\bootstrap-duallistbox\jquery.bootstrap-duallistbox.min.js" />
@@ -1059,6 +1061,7 @@
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\My.cshtml" />
+    <Content Include="Views\Shared\Layout\_notifyMsg.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

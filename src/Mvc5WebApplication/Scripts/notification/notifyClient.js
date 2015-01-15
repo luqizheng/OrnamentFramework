@@ -122,8 +122,6 @@ define(['socketio', 'json2'], function (io) {
             socket.on("new " + receiver, options.recever[receiver]);
         }
 
-
-
         return result;
     };
 

@@ -19,6 +19,8 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
 
         public virtual string PrivateCode { get; set; }
 
+        public virtual string ClientName { get; set; }
+
         public Sender CreateSender(int? id, IMessageDaoFactory messageDaoFactory)
         {
             Sender sender = id != null
@@ -28,6 +30,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             if (clientSender != null)
             {
                 clientSender.Server = Server;
+                clientSender.ClientName = ClientName;
                 clientSender.PrivateCode = PrivateCode;
             }
             else

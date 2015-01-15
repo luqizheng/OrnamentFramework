@@ -21,6 +21,7 @@
                     vm.SenderType = "email";
                     vm.ClientSender = {
                         Server: "",
+                        ClientName:"",
                         PrivateCode: ""
                     };
                     vm.EmailSender = {

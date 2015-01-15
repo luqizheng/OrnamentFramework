@@ -65,16 +65,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NHibernate.4.0.2.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Qi, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qi, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\coder-projects\lib\Qi.dll</HintPath>
+      <HintPath>..\..\..\..\lib\Qi.dll</HintPath>
     </Reference>
     <Reference Include="Qi.NHibernateExtender, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
-    <Reference Include="Qi.Web">
-      <HintPath>..\..\..\..\..\coder-projects\lib\Qi.Web.dll</HintPath>
+    <Reference Include="Qi.Web, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Qi.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
