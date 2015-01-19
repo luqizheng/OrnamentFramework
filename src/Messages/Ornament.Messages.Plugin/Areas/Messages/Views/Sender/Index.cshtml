@@ -38,6 +38,7 @@
                                  <td ms-attr-title="el.Remarks">{{el.Name}}</td>
                                  <td>
                                      <a class="btn btn-primary" href="javascript:;" ms-click="Edit(el.Id)">@Resources.Edit</a>
+                                     <a class="btn btn-danger" href="javascript:;" ms-click="del(el,$remove)">@Resources.Delete</a>
                                  </td>
                              </tr>
                          </tbody>
@@ -52,7 +53,9 @@
     <script type="text/javascript">
         require(['@Scripts.Url("/Messages/Scripts/Sender/Index.js")'], function(main) {
             main.init({
-                get: '@Url.Action("GetSender")'
+                get: '@Url.Action("GetSender")',
+                del:'@Url.Action("Delete")'
+
             });
             clearPageVariable.push(main.clear);
         })

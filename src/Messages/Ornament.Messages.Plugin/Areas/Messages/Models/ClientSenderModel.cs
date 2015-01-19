@@ -13,6 +13,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         {
             Server = sender.Server;
             PrivateCode = sender.PrivateCode;
+            this.ClientName = sender.ClientName;
         }
 
         public virtual string Server { get; set; }
@@ -27,16 +28,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
                 ? messageDaoFactory.NotifySenderDao.Get(id.Value)
                 : new ClientSender(Server);
             var clientSender = sender as ClientSender;
-            if (clientSender != null)
-            {
-                clientSender.Server = Server;
-                clientSender.ClientName = ClientName;
-                clientSender.PrivateCode = PrivateCode;
-            }
-            else
-            {
-                throw new NotifySenderException("Can't change the SenderType to other");
-            }
+            Fill(clientSender);
             return sender;
         }
 
@@ -44,12 +36,23 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         {
             Sender sender = messageDaoFactory.NotifySenderDao.Get(id.Value);
             var clientSender = sender as ClientSender;
+            Fill(clientSender);
+            return clientSender;
+        }
+
+        private void Fill(ClientSender clientSender)
+        {
             if (clientSender != null)
             {
                 clientSender.Server = Server;
                 clientSender.PrivateCode = PrivateCode;
+                clientSender.ClientName = this.ClientName;
             }
-            return clientSender;
+            else
+            {
+                throw new NotifySenderException("Can't change the SenderType to other");
+            }
+
         }
     }
 }

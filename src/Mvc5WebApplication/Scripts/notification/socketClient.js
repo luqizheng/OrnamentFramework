@@ -22,22 +22,26 @@
         });
     }
 
-    return function create(host, strLoginId, strName, strPublickKey) {
-        var options = {
-            validSuccess: function (r) {
-                alert(JSON.stringify(r));
-            }
-        };
-        var socket = io.connect(host),
-            userObj = {
-                publicKey: strPublickKey,
-                loginId: strLoginId,
-                name: strName
-            },
-          client = new msgClient(socket, userObj, options);
+    return {
+        create: function (host, strLoginId, strName, strPublickKey) {
+            var options = {
+                validSuccess: function (r) {
+                    console.log("connect:"+host+ " , " +JSON.stringify(r));
+                    //alert(JSON.stringify(r));
+                }
+            };
+            var socket = io.connect(host),
+                userObj = {
+                    publicKey: strPublickKey,
+                    loginId: strLoginId,
+                    name: strName
+                },
+              client = new msgClient(socket, userObj, options);
 
-        socket.on("valid", function () {
-            socket.emit("valid", userObj);
-        });
+            socket.on("valid", function () {
+                socket.emit("valid", userObj);
+            });
+            return client;
+        }
     }
 });

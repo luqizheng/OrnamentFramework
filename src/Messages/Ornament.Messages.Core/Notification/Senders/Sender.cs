@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Messages.Config;
@@ -86,16 +85,17 @@ namespace Ornament.Messages.Notification.Senders
                     }
                 }
             }
-            CreateVariablesHandler global = s =>
+            Queue<IDictionary<string, string>> userData = new Queue<IDictionary<string, string>>();
+            foreach (var user in allUsers)
             {
-                IDictionary<string, string> diect = dynamicCreateVariablesHandler(s);
-                NotifySenderManager.Instance.MergnGloablVariable(diect);
-                return diect;
+                IDictionary<string, string> diect = dynamicCreateVariablesHandler(user);
+                userData.Enqueue(diect);
             };
-            Send(template, global, allUsers.ToArray());
+
+            Send(template, userData, users);
         }
 
-        public abstract void Send(NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler,
-            User[] user);
+        public abstract void Send(NotifyMessageTemplate template, Queue<IDictionary<string, string>> userDatas,
+            User[] users);
     }
 }

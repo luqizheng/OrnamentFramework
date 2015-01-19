@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using NHibernate.Mapping;
 using Ornament.MemberShip;
+using Ornament.MemberShip.Dao;
 using Ornament.Messages.Config;
+using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
 using Qi.Text;
 
@@ -17,7 +20,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             : this()
         {
             Id = template.Id;
-            Dictionary<string, string> globalValir = NotifySenderManager.Instance.Variables;
+            var lobalValir = NotifySenderManager.Instance.Variables;
             foreach (Content content in template.Contents.Values)
             {
                 var value = new NamedFormatterHelper();
@@ -26,7 +29,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
 
                 foreach (string variable in value.CollectVariable(content.Value))
                 {
-                    if (globalValir.ContainsKey(variable))
+                    if (lobalValir.ContainsKey(variable))
                     {
                         continue;
                     }
@@ -52,5 +55,26 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
         ///     template's id
         /// </summary>
         public string Id { get; set; }
+
+        public void Publish(IMemberShipDaoFactory memberShipDaoFactory, IMessageDaoFactory daoFactory)
+        {
+            NotifyMessageTemplate template = daoFactory.MessageTemplateDao.Get(Id);
+            var performers = new List<IPerformer>();
+            if (UserGroups != null)
+            {
+                performers.AddRange(UserGroups);
+            }
+
+            if (Orgs != null)
+            {
+                performers.AddRange(Orgs);
+            }
+            if (Roles != null)
+            {
+                performers.AddRange(Roles);
+            }
+
+            template.Send(memberShipDaoFactory, s => NotifySenderManager.Instance.Variables, Users, performers.ToArray());
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ornament.MemberShip.Dao;
 using Ornament.Messages.Config;
 using Ornament.Messages.Dao;
 using Ornament.Messages.Notification;
@@ -18,10 +19,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
     public class TemplateController : Controller
     {
         private readonly IMessageDaoFactory _daoFactory;
+        private readonly IMemberShipDaoFactory _memberShipDaoFactory;
 
-        public TemplateController(IMessageDaoFactory daoFactory)
+        public TemplateController(IMessageDaoFactory daoFactory, IMemberShipDaoFactory memberShipDaoFactory)
         {
             _daoFactory = daoFactory;
+            _memberShipDaoFactory = memberShipDaoFactory;
         }
 
         //
@@ -43,12 +46,12 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IList<NotifyMessageTemplate> result = _daoFactory.MessageTemplateDao.GetAll(pageIndex,
                 pageSize, out total);
             var array = from temp in result
-                select new
-                {
-                    temp.Id,
-                    temp.Name,
-                    temp.Remark
-                };
+                        select new
+                        {
+                            temp.Id,
+                            temp.Name,
+                            temp.Remark
+                        };
             return Json(new
             {
                 total,
@@ -92,13 +95,13 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                 model.Save(_daoFactory.MessageTemplateDao);
                 if (Request.IsAjaxRequest())
                 {
-                    return Json(new {success = true});
+                    return Json(new { success = true });
                 }
                 return RedirectToAction("Index", model);
             }
             if (Request.IsAjaxRequest())
             {
-                return Json(new {success = false, message = "Fail to save."});
+                return Json(new { success = false, message = "Fail to save." });
             }
             return View("Edit", model);
         }
@@ -114,6 +117,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         [HttpPost]
         public ActionResult Publish(PublisherTemplate template)
         {
+            template.Publish(_memberShipDaoFactory, _daoFactory);
             var result = new
             {
                 success = true,
@@ -161,7 +165,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         {
             IMessageTemplateDao dao = _daoFactory.MessageTemplateDao;
             dao.Delete(dao.Get(id));
-            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

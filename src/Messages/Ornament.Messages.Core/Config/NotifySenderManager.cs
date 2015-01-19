@@ -36,7 +36,7 @@ namespace Ornament.Messages.Config
         /// <summary>
         ///     固定变量列表,当遇到的相同的就会替换到
         /// </summary>
-        public Dictionary<string, string> Variables
+        public IDictionary<string, string> Variables
         {
             get { return _variables ?? (_variables = new Dictionary<string, string>()); }
         }
@@ -50,7 +50,8 @@ namespace Ornament.Messages.Config
         ///     localVariable和GloablVariable进行合并，localVariable优先
         /// </summary>
         /// <param name="localVariables"></param>
-        public void MergnGloablVariable(IDictionary<string, string> localVariables)
+        /// <returns>localVariables</returns>
+        public IDictionary<string,string> MergnGloablVariable(IDictionary<string, string> localVariables)
         {
             foreach (string key in Variables.Keys)
             {
@@ -59,6 +60,7 @@ namespace Ornament.Messages.Config
                     localVariables.Add(key, Variables[key]);
                 }
             }
+            return localVariables;
         }
 
         /// <summary>

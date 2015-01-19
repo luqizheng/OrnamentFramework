@@ -11,24 +11,30 @@ var setting = {
 };
 
 
-    function encryptOrg(orgName, createDate, apiKey) {
-        console.log("encryptOrg orgName:" + orgName + " createDate:" + createDate + ",apiKey:" + apiKey);
-        var data = encryptUtil.sh1Encrypt(orgName + ";" + dateFormat.formatDate(createDate) + ";" + encryptUtil.md5Encrypt(apiKey));
-        return data;
-    }
+function encryptOrg(orgName, createDate, apiKey) {
+    console.log("encryptOrg orgName:" + orgName + " createDate:" + createDate + ",apiKey:" + apiKey);
+    var data = encryptUtil.sh1Encrypt(orgName + ";" + dateFormat.formatDate(createDate) + ";" + encryptUtil.md5Encrypt(apiKey));
+    return data;
+}
 
-    exports.get = function (strName) {
-        if (setting[strName]) {
-            return {
-                valid: function (createDate, token, callback) {
-                    console.log("org:" + org);
-                    console.log(orgConfig[org]);
-                    var selfEncrypt = encryptOrg(org, createDate, orgConfig[org].apiKey);
-                    console.log("validate Org result:" + selfEncrypt + "=" + token)
-                    callback(selfEncrypt == token);
+exports.get = function (strName) {
+    console.log("try to find " + strName + "Name");
+    if (setting[strName]) {
+        return {
+            name: strName,
+            apiKey: setting[strName].apiKey,
+            valid: function (createDate, token, callback) {
+                var selfEncrypt = encryptOrg(this.name.toString(), createDate, this.apiKey.toString());
+                var validateResult = selfEncrypt == token;
+                console.log("validate Org result:" + validateResult)
+                if (!validateResult) {
+                    console.log('input token:' + token)
+                    console.log('self encypt:' + selfEncrypt)
                 }
-
+                callback(validateResult);
             }
         }
-        return false;
     }
+    console.log('orgSetting: cannot find ' + strName + ' in orgSetting.')
+    return false;
+}

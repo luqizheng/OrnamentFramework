@@ -1,4 +1,4 @@
-﻿define(["jquery", "vaform", "/MemberShips/Scripts/Org/Org.js"], function(a, b, org) {
+﻿define(["bootbox", "vaform", "/MemberShips/Scripts/Org/Org.js"], function (bootbox, b, org) {
     return {
         init: function(config) {
             var editModel = avalon.define("editSender", function(vm) {
@@ -61,6 +61,17 @@
                     editModel.reload();
 
                 };
+                vm.del = function (sender, removeFunc) {
+                    var id = sender.Id;
+                    bootbox.confirm("Do you want to delete sender " + sender.Name + " ?", function (re) {
+                        if (re) {
+                            $.get(config.del + "/" + id, function() {
+                                bootbox.alert("Delete successfully");
+                                removeFunc(sender);
+                            });
+                        }
+                    });
+                }
                 vm.create = function() {
                     editModel.clear();
                 };

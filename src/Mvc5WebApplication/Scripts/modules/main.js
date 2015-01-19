@@ -7,7 +7,7 @@
 
     return {
         init:function(server, name, loginId, token) {
-            require("modules/notifyMsg", function(notify) {
+            require(["modules/notifyMsg"], function(notify) {
                 notify.init(server, loginId, name, token);
             });
         }

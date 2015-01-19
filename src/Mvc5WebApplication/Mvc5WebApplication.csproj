@@ -850,6 +850,8 @@
     <Content Include="Scripts\plugin\jquery-nestable\jquery.nestable.min.js" />
     <Content Include="Scripts\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
     <Content Include="css\bootstrap.css.map" />
+    <Content Include="Areas\Communication\Views\web.config" />
+    <Content Include="Areas\Communication\Views\Notify\Index.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -960,6 +962,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ValidationConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Communication\Controllers\NotifyController.cs" />
+    <Compile Include="Areas\Communication\CommunicationAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
@@ -1071,6 +1075,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Communication\Models\" />
+    <Folder Include="Areas\Communication\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\membership.sitemap.resx">
@@ -1207,7 +1213,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>27597</DevelopmentServerPort>
+          <DevelopmentServerPort>23589</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using Ornament.MemberShip;
-using Ornament.MemberShip.Dao;
+using Ornament.Messages.Config;
 using Qi.Text;
 
 namespace Ornament.Messages.Notification.Senders
@@ -32,7 +32,7 @@ namespace Ornament.Messages.Notification.Senders
                 {
                     _smtpClient = new SmtpClient(SmtpServer, Port);
                     if (!String.IsNullOrEmpty(Account))
-                        _smtpClient.Credentials = new NetworkCredential(this.Account, this.Password);
+                        _smtpClient.Credentials = new NetworkCredential(Account, Password);
                 }
                 return _smtpClient;
             }
@@ -76,16 +76,17 @@ namespace Ornament.Messages.Notification.Senders
             Client.Send(mailMessage);
         }
 
-        public override void Send(NotifyMessageTemplate template, CreateVariablesHandler dynamicCreateVariablesHandler, User[] users)
+        public override void Send(NotifyMessageTemplate template, Queue<IDictionary<string, string>> userDatas,
+            User[] users)
         {
             foreach (User u in users)
             {
-                IDictionary<string, string> varibale = dynamicCreateVariablesHandler(u);
+                IDictionary<string, string> variable =
+                    NotifySenderManager.Instance.MergnGloablVariable(userDatas.Dequeue());
                 Content content = template.GetContent(u);
                 var helper = new NamedFormatterHelper();
-                string subject = helper.Replace(content.Subject, varibale);
-                string body = helper.Replace(content.Value, varibale);
-
+                string subject = helper.Replace(content.Subject, variable);
+                string body = helper.Replace(content.Value, variable);
                 Send(subject, body, u.Contact.Email, FromEmail);
             }
         }

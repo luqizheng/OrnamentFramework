@@ -10,7 +10,7 @@ using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
-    [Authorize]
+    [Authorize,Session]
     public class SenderController : Controller
     {
         private readonly IMessageDaoFactory _messageDaoFactory;
@@ -36,7 +36,13 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IEnumerable<SenderModel> result = from a in data select new SenderModel((a));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        [Session(Transaction = true)]
+        public ActionResult Delete(int? id)
+        {
+            Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
+            _messageDaoFactory.NotifySenderDao.Delete(result);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetSender(int? id)
         {
             Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);

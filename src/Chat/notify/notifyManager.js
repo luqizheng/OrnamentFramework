@@ -51,42 +51,76 @@ function getMessage(loginId, bRead, pageSize, pageIndex, callback) {
 
 }
 
+exports.count = function (loginId, bRead, callback) {
+    db.do(function (collection) {
+        var codi = {Owner: loginId};
+        if (bRead !== undefined) {
+            codi.IsRead = bRead;
+        }
+        var result = collection.find(codi).count();
+        callback(result)
+
+    })
+}
 
 exports.Init = function (socket, userManager) {
     socket.on('send notify', function (msg) {
+        //console.log("ON SEND NOTIFY DEBUG " + msg);
         /* msg={
          Content:"content",
          LoginIds=[] //接受者
          Token:publicKey,
-         TemplateData=[], tempalte data,
+         GlobalVariable={}, tempalte data,
+         UserData=[{dictionary}],
          IsTemplate:false or not defined,
-         org=org,
+         Org=org,
          CreateDate,
          */
-        var org = orgSetting.get(msg.org);
+        console.log("-------------------------" + typeof(msg))
+        if (typeof(msg) == 'string') {
+            msg = JSON.parse(msg);
+        }
+        var org = orgSetting.get(msg.Org);
         org.valid(msg.CreateDate, msg.Token, function (result) {
 
             if (result) {
+                console.log("validate notify org setting success")
+                console.log("msg data :" + JSON.stringify(msg))
+
+
                 var messages = []
                 for (var i = 0; i < msg.LoginIds.length; i++) {
                     var receiver = userManager.getUserByLoginId(msg.LoginIds);
                     if (receiver) {
-                        var messageSend = msg.content;
-                        if (msg.IsTemplate) {
-                            messageSend = toContent(messageSend, msg.TemplateData[i], receiver);
+                        var messageSend = {
+                            content: msg.content,
+                            subject: msg.subject
                         }
-                        receiver.socket.emit("new notify", messageSend);
-                    }
 
-                    messages.push({
+                        if (msg.IsTemplate) {
+                            messageSend.content = toContent(messageSend.content, msg.GlobalVariable, UserData[i]);
+                            messageSend.subject = toContent(messageSend.subject, msg.GlobalVariable, UserData[i]);
+                        }
+                        receiver.socket.emit("new notify", {content: messageSend, subject: subjectSend});
+                    }
+                    var dbSaving = {
                         Content: messageSend,
                         Type: "notify",
                         Owner: msg.LoginIds,
                         CreateTime: new Date(),
-                        IsRead: false
-                    });
+                        IsRead: false,
+                        Subject: msg.Subject
+                    }
+                    messages.push(dbSaving);
+
+                    console.log(i + ": msg data :" + JSON.stringify(dbSaving))
                 }
+                console.log("inser new message "+messages.length);
                 saveMessage(messages)
+                socket.emit("send notify", true);
+            }
+            else {
+                socket.emit('send notify', false);
             }
             console.log("validate notify token is " + result);
         });
@@ -98,6 +132,7 @@ exports.Init = function (socket, userManager) {
          LoginId:loginId,
          Token:token,
          read:undfeind means is all,
+         Subject:""
          pageIndex:0
          }
          */
@@ -105,5 +140,6 @@ exports.Init = function (socket, userManager) {
             socket.emit('get notify', result);
         })
     });
+
 
 }
