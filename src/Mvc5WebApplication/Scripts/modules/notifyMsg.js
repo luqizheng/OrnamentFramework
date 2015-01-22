@@ -27,8 +27,8 @@ define(["/Scripts/notification/socketClient.js", "socketio"], function (msgClien
     return {
         init: function (host, strLoginId, strName, strPublickKey) {
             console.log("init " + host + "；" + strLoginId + ";" + strName + ";");
-            defineController();
-            defineSocketIo(host, strLoginId, strName, strPublickKey);
+            //defineController();
+            //defineSocketIo(host, strLoginId, strName, strPublickKey);
         }
     }
 });

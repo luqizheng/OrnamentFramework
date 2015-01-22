@@ -23,8 +23,9 @@
     @RenderBody()
 </section>
 <script type="text/javascript">
-    require(["app"], function () {
+    require(["modules/ornamentUi", "app"], function (ui) {
         pageSetUp();
+        ui.setup();
     })
 </script>
 

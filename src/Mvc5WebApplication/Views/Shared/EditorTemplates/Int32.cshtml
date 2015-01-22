@@ -1,9 +1,29 @@
 ﻿
 @model Int32?
-
 @{
-    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var id = Html.Id("");
+    IDictionary<string, object> htmlAttris = null;
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        if (!htmlAttris.ContainsKey("class"))
+        {
+            htmlAttris.Add("class", "spinner");
+
+        }
+        else
+        {
+            htmlAttris["class"] += " spinner";
+        }
+    }
+    else
+    {
+        htmlAttris = new Dictionary<string, object>()
+        {
+            {"class", "spinner"}
+        };
+    }
 }
 
-@Html.TextBox("", this.Model)
+
+
+@Html.TextBox("", Model ?? 0, htmlAttris)

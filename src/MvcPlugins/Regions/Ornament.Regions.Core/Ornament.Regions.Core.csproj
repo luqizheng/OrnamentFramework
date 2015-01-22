@@ -45,7 +45,7 @@
     <Compile Include="Dao\IProvicenDao.cs" />
     <Compile Include="Dao\IRegionDaoFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Area.cs" />
+    <Compile Include="District.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Province.cs" />
   </ItemGroup>

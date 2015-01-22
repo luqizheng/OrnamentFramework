@@ -1,0 +1,109 @@
+﻿@using System.Web.UI.WebControls
+@using Castle.Windsor.Diagnostics.Extensions
+@using Ornament
+@using Ornament.Web.UI.Theme
+@using Panel = Ornament.Web.UI.Theme.Panel
+@model DeveloperHelperCenter.Areas.Develop.Models.BasicEditors
+@{
+    ViewBag.Title = "Basic Type Html Controls ";
+    Layout = OrnamentContext.Configuration.Layout();
+}
+
+@using (var panel = Html.Panel(new PanelOption
+{
+    Id = "orgPanel",
+}, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
+{
+    @panel.Body(@<text>
+    <form>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Int32)
+            @Html.EditorFor(s => s.Int32, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(s => s.Int32)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.Int64)
+            @Html.EditorFor(s => s.Int64, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(s => s.Int64)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.String)
+            @Html.EditorFor(s => s.String, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(s => s.String)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.Textarea)
+            @Html.EditorFor(s => s.Textarea, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(s => s.Textarea)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.Decimal)
+            @Html.EditorFor(s => s.Decimal, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(s => s.Decimal)
+        </div>
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(s => s.Date)</label>
+
+            <div class="input-group">
+                @Html.EditorFor(model => model.Date, new { HtmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="note">
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+
+        </div>
+        <div class="form-actions">
+            <button>
+                submit
+            </button>
+        </div>
+    </form>
+    </text>)
+}
+@using (var panel = Html.Panel(new PanelOption
+{
+    Id = "orgPanel",
+}, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
+{
+    @panel.Header(@<text>
+    <h2>Code Example</h2>
+    </text>)
+
+    @panel.Body(@<text>
+    <pre>
+        <code>
+             public class BasicEditors
+    {
+        public BasicEditors()
+        {
+            Int32 = 6;
+            this.Int64 = 1800;
+            Date = DateTime.Now;
+        }
+        [Range(5, 20)]
+        public Int32 Int32 { get; set; }
+        [QiRange(900D, 10000d, 100D)]
+        public Int64 Int64 { get; set; }
+        public string String { get; set; }
+        public String Textarea { get; set; }
+        public Decimal Decimal { get; set; }
+        public DateTime DateTime { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
+        [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd", "yy/mm/dd")]
+        public DateTime Date { get; set; }
+    }
+</code>
+</pre>
+    </text>)
+}
+@section scripts
+{
+    <script type="text/javascript">
+        
+    </script>
+}

@@ -432,10 +432,7 @@
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
-    <Content Include="Scripts\libs\jquery-2.0.2.js" />
-    <Content Include="Scripts\libs\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\libs\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\libs\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\libs\jquery-2.1.3.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.min.js" />
     <Content Include="Scripts\modules\ajaxlogin.js" />
@@ -1030,7 +1027,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\EditPlace.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Modal\Body.cshtml" />
-    <Content Include="Scripts\libs\jquery-2.1.1.min.map" />
     <Content Include="Scripts\plugin\ckeditor\CHANGES.md" />
     <Content Include="Scripts\plugin\ckeditor\LICENSE.md" />
     <Content Include="Scripts\plugin\ckeditor\plugins\scayt\LICENSE.md" />
@@ -1114,6 +1110,10 @@
     <ProjectReference Include="..\CombineJsBundle\CombineJsBundle.csproj">
       <Project>{30f82ffa-fa21-44d2-bef8-81853c186788}</Project>
       <Name>CombineJsBundle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Docs\DeveloperHelperCenter\DeveloperHelperCenter.csproj">
+      <Project>{cea24daf-20ee-4764-a123-ed7d680b17bd}</Project>
+      <Name>DeveloperHelperCenter</Name>
     </ProjectReference>
     <ProjectReference Include="..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>

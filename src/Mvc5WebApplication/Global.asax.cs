@@ -48,7 +48,7 @@ namespace WebApplication
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
-            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
@@ -59,9 +59,8 @@ namespace WebApplication
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
             InitData();
-
-
         }
+
         public static void InitData()
         {
             SessionWrapper wrapper = SessionManager.GetSessionWrapper();
@@ -72,7 +71,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate update error.", ex);
                 throw ex;
             }
             finally
@@ -80,6 +79,7 @@ namespace WebApplication
                 wrapper.Close();
             }
         }
+
         protected void Application_EndRequest()
         {
             var context = new HttpContextWrapper(Context);
@@ -120,9 +120,8 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
-
     }
 }

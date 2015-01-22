@@ -7,11 +7,36 @@
     string displayValue = Model != null ? Model.Value.ToString(ViewData.ModelMetadata.DisplayFormatString) : "";
     string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd").ToLower();
     string inputMask = Regex.Replace(format, @"(\w{2})(\1)+", "$1");
-    var htmlAttris = new Dictionary<string, object>
+    @*由app.js直接成成jqueryui控件,so should be added datepicker class*@
+    IDictionary<string, object> htmlAttris = null;
+    if (ViewData.ContainsKey("HtmlAttributes"))
     {
-        {"class", "form-control datepicker"},
-        {"data-dateformat", inputMask}
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        if (!htmlAttris.ContainsKey("class"))
+        {
+            htmlAttris.Add("class", "datepicker");
+        }
+        else
+        {
+            if (!htmlAttris["class"].ToString().Contains("datepicker"))
+            {
+                htmlAttris["class"] += " datepicker";
+            }
+        }
+    }
+    else
+    {
+        htmlAttris = new Dictionary<string, object>
+        {
+            {"data-dateformat", inputMask},
+            {
+                "class","datepicker" 
+            }
+        };
     };
+    
+ 
+        
 }
 
 @Html.TextBox("", displayValue, htmlAttris)
