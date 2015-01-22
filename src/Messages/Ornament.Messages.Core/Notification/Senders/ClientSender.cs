@@ -24,6 +24,9 @@ namespace Ornament.Messages.Notification.Senders
             Server = server;
         }
 
+        /// <summary>
+        ///     客户端名称，对应chat nodejs的orn
+        /// </summary>
         public virtual string ClientName { get; set; }
 
         public virtual string Server { get; set; }
@@ -78,7 +81,7 @@ namespace Ornament.Messages.Notification.Senders
             });
             result.On("valid-result", fn =>
             {
-                var validateResult = (bool)fn;
+                var validateResult = (bool) fn;
                 if (!validateResult)
                 {
                     at.Set(); //如果验证失败，马上跳出。
@@ -88,7 +91,7 @@ namespace Ornament.Messages.Notification.Senders
                 {
                     if (sentMsg.LoginIds.Count == 0)
                         continue;
-                    var serobj = JsonConvert.SerializeObject(new NotifyMessage(PrivateCode, ClientName)
+                    string serobj = JsonConvert.SerializeObject(new NotifyMessage(PrivateCode, ClientName)
                     {
                         Content = sentMsg.Content,
                         Subject = sentMsg.Content,
@@ -99,9 +102,8 @@ namespace Ornament.Messages.Notification.Senders
                     {
                         TypeNameHandling = TypeNameHandling.None,
                         TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple,
-
                     });
-                    result.Emit("send notify",serobj);
+                    result.Emit("send notify", serobj);
                 }
             });
             result.Open();

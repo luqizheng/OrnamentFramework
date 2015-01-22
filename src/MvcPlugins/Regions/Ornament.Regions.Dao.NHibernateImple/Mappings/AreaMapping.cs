@@ -2,7 +2,7 @@
 
 namespace Ornament.Regions.Dao.NHibernateImple.Mappings
 {
-    public class AreaMapping : ClassMap<Area>
+    public class AreaMapping : ClassMap<District>
     {
         public AreaMapping()
         {

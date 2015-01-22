@@ -2,10 +2,10 @@
 @using Ornament.Regions
 @using Qi.Web
 @using SeajsBundles
-@model Ornament.Regions.Area
+@model Ornament.Regions.District
 @{
     IList<Province> privinces = OrnamentContext.DaoFactory.RegionsDaoFactory().CreateProvinceDao().GetAll();
-    IList<Area> areas;
+    IList<District> areas;
     IList<City> cities;
     if (Model != null)
     {
@@ -14,7 +14,7 @@
     }
     else
     {
-        areas = new List<Area>();
+        areas = new List<District>();
         cities = new List<City>();
     }
 
@@ -61,7 +61,7 @@
 
                 @if (Model != null)
                 {
-                    foreach (Area city in areas)
+                    foreach (District city in areas)
                     {
                         <option value="@city.Id">@city.Name</option>
                     }

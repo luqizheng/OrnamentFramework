@@ -7,9 +7,9 @@ using Qi.Domain;
 
 namespace Ornament.Regions
 {
-    public class Area : DomainObject<Area, int>
+    public class District : DomainObject<District, int>
     {
-        protected Area()
+        protected District()
         {
         }
 
@@ -19,9 +19,14 @@ namespace Ornament.Regions
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="city"></param>
-        public Area(int id, string name, City city)
+        public District(int id, string name, City city)
         {
-            if (city == null) throw new ArgumentNullException("city");
+            if (city == null)
+                throw new ArgumentNullException("city");
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
             Id = id;
             Name = name;
             City = city;
@@ -41,14 +46,14 @@ namespace Ornament.Regions
             return City.Province + City.ToString() + Name;
         }
 
-        public static List<Area> CreateData(IList<City> cities)
+        public static List<District> CreateData(IList<City> cities)
         {
             Dictionary<int, City> citiesDiect = cities.ToDictionary(city => city.Id);
 
 
-            var result = new List<Area>();
+            var result = new List<District>();
             var xml = new XmlDocument();
-            Stream stream = typeof (Area).Assembly.GetManifestResourceStream("Ornament.Regions.area.xml");
+            Stream stream = typeof (District).Assembly.GetManifestResourceStream("Ornament.Regions.area.xml");
             xml.Load(stream);
 
             for (int i = 0; i < xml.DocumentElement.ChildNodes.Count; i++)
@@ -56,8 +61,8 @@ namespace Ornament.Regions
                 XmlNode ele = xml.DocumentElement.ChildNodes[i];
                 int id = Convert.ToInt32(ele.Attributes["id"].Value);
                 string name = ele.Attributes["name"].Value;
-                var city = Convert.ToInt32(ele.Attributes["city"].Value);
-                var area = new Area(id, name, citiesDiect[city]);
+                int city = Convert.ToInt32(ele.Attributes["city"].Value);
+                var area = new District(id, name, citiesDiect[city]);
 
                 result.Add(area);
             }
