@@ -15,7 +15,7 @@
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @panel.Body(@<text>
-    <form>
+    <form method="POST">
         <div class="form-group">
             @Html.LabelFor(s => s.Int32)
             @Html.EditorFor(s => s.Int32, new { HtmlAttributes = new { @class = "form-control" } })
@@ -56,6 +56,19 @@
             </div>
 
         </div>
+        
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(s => s.DateTime)</label>
+
+            <div class="input-group">
+                @Html.EditorFor(model => model.DateTime, new { HtmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="note">
+                @Html.ValidationMessageFor(model => model.DateTime)
+            </div>
+
+        </div>
+
         <div class="form-actions">
             <button>
                 submit
@@ -74,36 +87,43 @@
     </text>)
 
     @panel.Body(@<text>
-    <pre>
+    <pre class="prettyprint">
         <code>
-             public class BasicEditors
+public class BasicEditors
+{
+    public BasicEditors()
     {
-        public BasicEditors()
-        {
-            Int32 = 6;
-            this.Int64 = 1800;
-            Date = DateTime.Now;
-        }
-        [Range(5, 20)]
-        public Int32 Int32 { get; set; }
-        [QiRange(900D, 10000d, 100D)]
-        public Int64 Int64 { get; set; }
-        public string String { get; set; }
-        public String Textarea { get; set; }
-        public Decimal Decimal { get; set; }
-        public DateTime DateTime { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
-        [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd", "yy/mm/dd")]
-        public DateTime Date { get; set; }
+        Int32 = 6;
+        Int64 = 1800;
+        Date = DateTime.Now;
     }
+
+    [Range(5, 20)]
+    public Int32 Int32 { get; set; }
+
+    [QiRange(900D, 10000d, 100D)]
+    public Int64 Int64 { get; set; }
+
+    public string String { get; set; }
+    public String Textarea { get; set; }
+
+    [QiRange(10D, 15d, 0.2D)]
+    public Decimal Decimal { get; set; }
+
+    public DateTime DateTime { get; set; }
+
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
+    [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd", "yy/mm/dd")]
+    public DateTime Date { get; set; }
+}
 </code>
 </pre>
     </text>)
 }
 @section scripts
 {
-    <script type="text/javascript">
-        
-    </script>
+    <link href="/Content/Prettify/prettify.css" rel="stylesheet" />
+    <script src="/Scripts/Prettify/run_prettify.js"></script>
+
 }
