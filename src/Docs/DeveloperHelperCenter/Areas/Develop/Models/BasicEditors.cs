@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Qi;
 using Qi.Domain.Attributes;
 
 namespace DeveloperHelperCenter.Areas.Develop.Models
@@ -20,17 +21,24 @@ namespace DeveloperHelperCenter.Areas.Develop.Models
         public Int64 Int64 { get; set; }
 
         public string String { get; set; }
+        [MaxLength(40)]
+        [DataType(DataType.MultilineText)]
         public String Textarea { get; set; }
 
         [QiRange(10D, 15d, 0.2D)]
         public Decimal Decimal { get; set; }
-        
-        [DataType(DataType.DateTime)]
-        public DateTime DateTime { get; set; }
+
+        [QiRange(1D, 100d, 0.5D)]
+        [DataType(DataType.Currency)]
+        [UIHint("Currency")]
+        public Decimal Money { get; set; }
+
+        [DataType(DataType.Time)]
+        public Time Time { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
-        [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd", "yy/mm/dd")]
+        [DisplayFormat(DataFormatString = "yyyy-MM-dd")]
+        [DateRange("-40y", "+10y", "yyyy-MM-dd", "yy-mm-dd")]
         public DateTime? Date { get; set; }
     }
 }

@@ -99,6 +99,7 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <EmbeddedResource Include="Areas\Develop\Views\Html\BasicType.cshtml" />
+    <EmbeddedResource Include="Scripts\Html\BasicType.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

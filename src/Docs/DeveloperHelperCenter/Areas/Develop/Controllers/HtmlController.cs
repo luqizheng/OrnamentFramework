@@ -5,7 +5,12 @@ namespace DeveloperHelperCenter.Areas.Develop.Controllers
 {
     public class HtmlController : Controller
     {
-        
+
+        public ActionResult BasicType()
+        {
+            return View(new BasicEditors());
+        }
+        [HttpPost]
         public ActionResult BasicType(BasicEditors model)
         {
             model = model ?? new BasicEditors();
@@ -17,5 +22,5 @@ namespace DeveloperHelperCenter.Areas.Develop.Controllers
         {
             return View();
         }
-	}
+    }
 }

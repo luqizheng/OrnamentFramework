@@ -1,6 +1,4 @@
-﻿@using System.Text.RegularExpressions
-@using Qi
-@model Qi.Time?
+﻿@model decimal?
 @{
     IDictionary<string, object> htmlAttris = null;
     if (ViewData.ContainsKey("HtmlAttributes"))
@@ -8,23 +6,23 @@
         htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
         if (!htmlAttris.ContainsKey("class"))
         {
-            htmlAttris.Add("class", "time");
+            htmlAttris.Add("class", "money spinner");
 
         }
         else
         {
-            htmlAttris["class"] += " time";
+            htmlAttris["class"] += " money spinner";
         }
     }
     else
     {
         htmlAttris = new Dictionary<string, object>()
         {
-            {"class", "time"}
+            {"class", "money spinner"}
         };
     }
 }
 
 
 
-@Html.TextBox("", Model ?? new Time(9, 0, 0), htmlAttris)
+@Html.TextBox("", Model ?? 0, htmlAttris)

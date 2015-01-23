@@ -1,5 +1,6 @@
 ﻿/*
-Modify by Williams.
+This modify base on 
+\src\Mvc5WebApplication\Scripts\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js
 */
 
 (function ($) {

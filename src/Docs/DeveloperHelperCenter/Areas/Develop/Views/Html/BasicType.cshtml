@@ -15,7 +15,7 @@
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @panel.Body(@<text>
-    <form method="POST">
+    <form method="POST" action="@Url.Action("BasicType")">
         <div class="form-group">
             @Html.LabelFor(s => s.Int32)
             @Html.EditorFor(s => s.Int32, new { HtmlAttributes = new { @class = "form-control" } })
@@ -26,6 +26,11 @@
             @Html.LabelFor(s => s.Int64)
             @Html.EditorFor(s => s.Int64, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(s => s.Int64)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Money)
+            @Html.EditorFor(s => s.Money, new { HtmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(s => s.Money)
         </div>
 
         <div class="form-group">
@@ -56,18 +61,19 @@
             </div>
 
         </div>
-        
+
         <div class="form-group">
-            <label>@Html.DisplayNameFor(s => s.DateTime)</label>
+            <label>@Html.DisplayNameFor(s => s.Time)</label>
 
             <div class="input-group">
-                @Html.EditorFor(model => model.DateTime, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Time, new { HtmlAttributes = new { @class = "form-control" } })
             </div>
             <div class="note">
-                @Html.ValidationMessageFor(model => model.DateTime)
+                @Html.ValidationMessageFor(model => model.Time)
             </div>
-
         </div>
+
+
 
         <div class="form-actions">
             <button>
@@ -79,7 +85,7 @@
 }
 @using (var panel = Html.Panel(new PanelOption
 {
-    Id = "orgPanel",
+    Id = "example",
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @panel.Header(@<text>
@@ -91,31 +97,39 @@
         <code>
 public class BasicEditors
 {
-    public BasicEditors()
-    {
-        Int32 = 6;
-        Int64 = 1800;
-        Date = DateTime.Now;
-    }
+        public BasicEditors()
+        {
+            Int32 = 6;
+            Int64 = 1800;
+            Date = DateTime.Now;
+        }
 
-    [Range(5, 20)]
-    public Int32 Int32 { get; set; }
+        [Range(5, 20)]
+        public Int32 Int32 { get; set; }
 
-    [QiRange(900D, 10000d, 100D)]
-    public Int64 Int64 { get; set; }
+        [QiRange(900D, 10000d, 100D)]
+        public Int64 Int64 { get; set; }
 
-    public string String { get; set; }
-    public String Textarea { get; set; }
+        public string String { get; set; }
+        [MaxLength(40)]
+        [DataType(DataType.MultilineText)]
+        public String Textarea { get; set; }
 
-    [QiRange(10D, 15d, 0.2D)]
-    public Decimal Decimal { get; set; }
+        [QiRange(10D, 15d, 0.2D)]
+        public Decimal Decimal { get; set; }
 
-    public DateTime DateTime { get; set; }
+        [QiRange(1D, 100d, 0.5D)]
+        [DataType(DataType.Currency)]
+        [UIHint("Currency")]
+        public Decimal Money { get; set; }
 
-    [DataType(DataType.Date)]
-    [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
-    [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd", "yy/mm/dd")]
-    public DateTime Date { get; set; }
+        [DataType(DataType.Time)]
+        public Time Time { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "yyyy-MM-dd")]
+        [DateRange("-40y", "+10y", "yyyy-MM-dd", "yy-mm-dd")]
+        public DateTime? Date { get; set; }
 }
 </code>
 </pre>
@@ -125,5 +139,13 @@ public class BasicEditors
 {
     <link href="/Content/Prettify/prettify.css" rel="stylesheet" />
     <script src="/Scripts/Prettify/run_prettify.js"></script>
+    <script type="text/javascript">
+        require(['require', '/scripts/config.js'], function (require) {
+            require(["/Develop/Scripts/Html/BasicType.js"], function (m) {
+                m.Init();
+            });
+        })
+
+    </script>
 
 }

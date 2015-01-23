@@ -3,7 +3,7 @@
 require.config({
         baseUrl:"/Scripts/",
 paths: {
-        jqueryui:"@Scripts.Url("~/Scripts/jqueryui.js")",
+        jqueryui:"/Scripts/libs/jquery-ui-1.11.2",
         bootstrap:"@Scripts.Url("~/Scripts/bootstrap.js")",
         json2: "@Scripts.Url("~/scripts/json2")",
         form:"@Scripts.Url("~/scripts/plugin/jquery-form/jquery-form.min")",
@@ -17,7 +17,7 @@ paths: {
         maxlength:"/Scripts/plugin/maxlength/bootstrap-maxlength.min",
         validate:'plugin/jquery-validate/jquery.validate',
         unobtrusive:'plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax',
-        bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap',
+        bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap', @*replace Scripts\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js*@
         floatChart:'/Scripts/float',
         smarkchat:'@Scripts.Url("~/Scripts/smark.chat.js")',
         touch:"plugin/jquery-touch/jquery.ui.touch-punch.min",

@@ -14,13 +14,13 @@
         htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
         if (!htmlAttris.ContainsKey("class"))
         {
-            htmlAttris.Add("class", "orn-datepicker");
+            htmlAttris.Add("class", "datepicker");
         }
         else
         {
-            if (!htmlAttris["class"].ToString().Contains("orn-datepicker"))
+            if (!htmlAttris["class"].ToString().Contains("datepicker"))
             {
-                htmlAttris["class"] += " orn-datepicker";
+                htmlAttris["class"] += " datepicker";
             }
         }
     }
@@ -30,7 +30,7 @@
         {
             {"data-dateformat", inputMask},
             {
-                "class","orn-datepicker" 
+                "class","datepicker" 
             }
         };
     };
