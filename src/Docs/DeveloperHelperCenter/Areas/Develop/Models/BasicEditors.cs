@@ -15,12 +15,14 @@ namespace DeveloperHelperCenter.Areas.Develop.Models
         }
 
         [Range(5, 20)]
+        [Display(Name = "Int32 for editorTemplates", Description = "Int32 Description.")]
         public Int32 Int32 { get; set; }
 
         [QiRange(900D, 10000d, 100D)]
         public Int64 Int64 { get; set; }
 
         public string String { get; set; }
+
         [MaxLength(40)]
         [DataType(DataType.MultilineText)]
         public String Textarea { get; set; }

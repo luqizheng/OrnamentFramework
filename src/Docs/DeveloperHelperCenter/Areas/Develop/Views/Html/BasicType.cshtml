@@ -1,40 +1,39 @@
-﻿@using System.Web.UI.WebControls
-@using Castle.Windsor.Diagnostics.Extensions
-@using Ornament
+﻿@using Ornament
+@using Ornament.Web
 @using Ornament.Web.UI.Theme
-@using Panel = Ornament.Web.UI.Theme.Panel
 @model DeveloperHelperCenter.Areas.Develop.Models.BasicEditors
 @{
     ViewBag.Title = "Basic Type Html Controls ";
     Layout = OrnamentContext.Configuration.Layout();
 }
 
-@using (var panel = Html.Panel(new PanelOption
+@using (Panel panel = Html.Panel(new PanelOption
 {
     Id = "orgPanel",
-}, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
+}, "col-md-4 col-lg-4 col-xs-4 col-sm-4"))
 {
     @panel.Body(@<text>
     <form method="POST" action="@Url.Action("BasicType")" id="formExample1">
         <div class="form-group">
-            @Html.LabelFor(s => s.Int32)
+            @Html.LabelFor(s => s.Int32, new { @class = "control-label" })
             @Html.EditorFor(s => s.Int32, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(s => s.Int32)
+            @Html.DescriptionFor(s => s.Int32)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(s => s.Int64)
+            @Html.LabelFor(s => s.Int64, new { @class = "control-label" })
             @Html.EditorFor(s => s.Int64, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(s => s.Int64)
         </div>
         <div class="form-group">
-            @Html.LabelFor(s => s.Money)
+            @Html.LabelFor(s => s.Money, new { @class = "control-label" })
             @Html.EditorFor(s => s.Money, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(s => s.Money)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(s => s.String)
+            @Html.LabelFor(s => s.String, new { @class = "control-label" })
             @Html.EditorFor(s => s.String, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(s => s.String)
         </div>
@@ -46,12 +45,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(s => s.Decimal)
+            @Html.LabelFor(s => s.Decimal, new { @class = "control-label" })
             @Html.EditorFor(s => s.Decimal, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(s => s.Decimal)
         </div>
         <div class="form-group">
-            <label>@Html.DisplayNameFor(s => s.Date)</label>
+            @Html.LabelFor(s => s.Date, new { @class = "control-label" })
 
             <div class="input-group">
                 @Html.EditorFor(model => model.Date, new { HtmlAttributes = new { @class = "form-control" } })
@@ -63,7 +62,7 @@
         </div>
 
         <div class="form-group">
-            <label>@Html.DisplayNameFor(s => s.Time)</label>
+            @Html.LabelFor(s => s.Time, new { @class = "control-label" })
 
             <div class="input-group">
                 @Html.EditorFor(model => model.Time, new { HtmlAttributes = new { @class = "form-control" } })
@@ -83,7 +82,7 @@
     </form>
     </text>)
 }
-@using (var panel = Html.Panel(new PanelOption
+@using (Panel panel = Html.Panel(new PanelOption
 {
     Id = "example",
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))

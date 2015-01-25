@@ -40,7 +40,7 @@ This modify base on
             replaceAttrValue = container.attr("data-valmsg-replace"),
             replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) !== false : null;
 
-        container.removeClass("field-validation-valid").addClass("field-validation-error");
+        container.removeClass("field-validation-valid").addClass("field-validation-error help-block");
         error.data("unobtrusiveContainer", container);
 
         if (replace) {
