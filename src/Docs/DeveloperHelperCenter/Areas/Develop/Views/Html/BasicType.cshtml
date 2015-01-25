@@ -15,7 +15,7 @@
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @panel.Body(@<text>
-    <form method="POST" action="@Url.Action("BasicType")">
+    <form method="POST" action="@Url.Action("BasicType")" id="formExample1">
         <div class="form-group">
             @Html.LabelFor(s => s.Int32)
             @Html.EditorFor(s => s.Int32, new { HtmlAttributes = new { @class = "form-control" } })

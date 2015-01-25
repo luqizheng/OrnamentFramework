@@ -860,7 +860,6 @@
     <None Include="Scripts\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.min.js" />
-    <Content Include="Scripts\plugin\jquery.validate.extends\DateRange.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.bootstrap\jquery.validate.unobtrusive.bootstrap.js" />

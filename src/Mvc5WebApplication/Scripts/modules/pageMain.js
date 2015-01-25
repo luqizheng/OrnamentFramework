@@ -3,8 +3,7 @@
 */
 define(["modules/ornamentUi", "app"], function (ui) {
     return function () {
-        $.validator.unobtrusive.parse(document);//重新生成Validate的
-        //$.validator.unobtrusive.parse($form.parent())
+        $.validator.unobtrusive.parse("#content");
         pageSetUp();
         ui.setup();
     }

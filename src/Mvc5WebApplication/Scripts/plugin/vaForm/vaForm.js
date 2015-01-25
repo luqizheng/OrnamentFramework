@@ -26,15 +26,23 @@
         };
 
         $.fn.vaform = function (opt) {
-            var $form = $(this);
-            //.removeData("validator")
-            //.removeData("unobtrusiveValidation"),
+            var $form = $(this);//.removeData("validator").removeData("unobtrusiveValidation");
             var opts = $.extend({}, defaultSetting, opt);
             if (!opts.url) {
                 opts.url = $(this).attr("action");
             }
+            //$.validator.unobtrusive.parse($form.parent());
             var $formSetting = $form.data("validator");
+            /*var current = $form;
+            while (!$formSetting) {
+                current = current.parent();
+                $formSetting = current.data("validator");
+                if (!$formSetting && current.context.nodeName == "#document") {
+                    return $form;
+                }
+            }*/
             //$.validator.unobtrusive.parse(document);
+            
             try {
                 $formSetting.settings.submitHandler = function (e) {
 
@@ -67,7 +75,7 @@
 
                 };
             } catch (e) {
-                console.log($form.html()+ ",error:" + e);
+                console.log($form.attr("id")+" hasn't find validation plugin.error:"+e);
             }
 
 

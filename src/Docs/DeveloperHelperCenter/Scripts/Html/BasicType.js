@@ -2,7 +2,7 @@
     return {
         Init: function () {
             require(["vaform"], function () {
-                $("#example").vaform({
+                $("#formExample1").vaform({
                     success: function () {
                         alert('ok');
                     }
