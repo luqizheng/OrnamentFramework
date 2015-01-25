@@ -1,5 +1,4 @@
-﻿@using System.Text.RegularExpressions
-@using Qi
+﻿@using Qi
 @model Qi.Time?
 @{
     IDictionary<string, object> htmlAttris = null;
@@ -9,7 +8,6 @@
         if (!htmlAttris.ContainsKey("class"))
         {
             htmlAttris.Add("class", "time");
-
         }
         else
         {
@@ -18,11 +16,13 @@
     }
     else
     {
-        htmlAttris = new Dictionary<string, object>()
+        htmlAttris = new Dictionary<string, object>
         {
             {"class", "time"}
         };
     }
+    htmlAttris.Add("data-mask", "99:99:99");
+    htmlAttris.Add("data-mask-placeholder", "_");
 }
 
 

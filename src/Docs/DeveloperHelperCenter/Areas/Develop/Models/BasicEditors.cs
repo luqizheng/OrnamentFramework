@@ -12,6 +12,7 @@ namespace DeveloperHelperCenter.Areas.Develop.Models
             Int32 = 6;
             Int64 = 1800;
             Date = DateTime.Now;
+            Time=new Time(Date.Value.Hour,Date.Value.Minute,Date.Value.Second);
         }
 
         [Range(5, 20)]
