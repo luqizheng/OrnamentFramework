@@ -18,8 +18,11 @@
             });
 
             //init
-
             model.Contents = contents;
+            $("#templateForms").vaform({
+                success: function(d) {
+                    alert(d.message);
+                }});
             avalon.scan();
         },
         clear: function() {

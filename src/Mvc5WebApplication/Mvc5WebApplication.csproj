@@ -234,7 +234,6 @@
     <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\demo.min.css" />
     <Content Include="css\smartadmin-production-plugins.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
@@ -440,9 +439,13 @@
     <Content Include="Scripts\libs\jquery-2.1.3.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\libs\socket.io-1.3.2.js" />
+    <Content Include="Scripts\libs\socket.io-1.3.2.min.js" />
     <Content Include="Scripts\modules\ajaxlogin.js" />
     <Content Include="Scripts\modules\chat.js" />
     <Content Include="Scripts\modules\Accounts\forgetpassword.js" />
+    <Content Include="Scripts\modules\comm\countComm.js" />
+    <Content Include="Scripts\modules\comm\notifyDetails.js" />
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\notifyMsg.js" />
     <Content Include="Scripts\modules\ornamentUi.js" />
@@ -854,6 +857,7 @@
     <Content Include="css\bootstrap.css.map" />
     <Content Include="Areas\Communication\Views\web.config" />
     <Content Include="Areas\Communication\Views\Notify\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\Tasks\Index.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -995,6 +999,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Communication\Controllers\NotifyController.cs" />
     <Compile Include="Areas\Communication\CommunicationAreaRegistration.cs" />
+    <Compile Include="Areas\Communication\Controllers\TasksController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
@@ -1108,6 +1113,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Communication\Models\" />
     <Folder Include="Areas\Communication\Views\Shared\" />
+    <Folder Include="Views\Notify\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\membership.sitemap.resx">
@@ -1248,7 +1254,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23589</DevelopmentServerPort>
+          <DevelopmentServerPort>30732</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

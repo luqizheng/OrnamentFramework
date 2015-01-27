@@ -1,10 +1,10 @@
-﻿<ul class="notification-body" ms-controller="notify" ms-repeat="contents">
+﻿<ul class="notification-body" ms-controller="notifyDetails" ms-repeat="contents" 
+    id='notifyDetails'>
     <li>
         <span class="padding-10 unread">
             <em class="badge padding-5 no-border-radius bg-color-blueLight pull-left margin-right-5">
                 <i class="fa fa-user fa-fw fa-2x"></i>
             </em>
-
             <span>{{el.content|html}}
             </span>
 
@@ -12,10 +12,4 @@
     </li>
 
 </ul>
-<script type="text/javascript">
-    avalon.define({
-        $id: "notifyDetails",
-        contents:[{content:"",date:new Date()}]
-    });
-    
-</script>
+<script type="text/javascript">avalon.scan($("#notifyDetails")[0]);</script>

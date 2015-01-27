@@ -1,0 +1,30 @@
+﻿@using Ornament.Web.UI.Theme
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (var panel = Html.Panel(new PanelOption()
+{
+    HtmlAttributes = new Dictionary<string, object>()
+    {
+        {"class","col-md-6"}
+    }
+
+}))
+{
+    @panel.Header(@<text>
+    <h2>基础类型</h2>
+    </text>)
+    
+    @panel.Header(@<text>
+    <h3>基本类型
+    </h3>
+                       <ul>
+                           <li>Form功能</li>
+
+    </ul>
+    </text>)
+}

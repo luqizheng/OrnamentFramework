@@ -22,6 +22,7 @@ function toContent(strTemplate, variabled, user) {
 function saveMessage(aryMsg, callback) {
 
     db.do(function (collection) {
+        console.log("Insert notify data :" + JSON.stringify(aryMsg))
         collection.insert(aryMsg, function (err, s) {
             if (err) {
                 console.log(err);
@@ -46,6 +47,7 @@ function getMessage(loginId, bRead, pageSize, pageIndex, callback) {
             codi.IsRead = bRead;
         }
         var result = collection.find(codi).sort({CreateDate: 1}).skip(pageSize * pageIndex).limit(pageSize).toArray();
+
         callback(result)
     })
 
@@ -115,7 +117,7 @@ exports.Init = function (socket, userManager) {
 
                     console.log(i + ": msg data :" + JSON.stringify(dbSaving))
                 }
-                console.log("inser new message "+messages.length);
+                console.log("inser new message " + messages.length);
                 saveMessage(messages)
                 socket.emit("send notify", true);
             }

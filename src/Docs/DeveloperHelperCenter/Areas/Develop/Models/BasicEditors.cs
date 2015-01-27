@@ -12,7 +12,7 @@ namespace DeveloperHelperCenter.Areas.Develop.Models
             Int32 = 6;
             Int64 = 1800;
             Date = DateTime.Now;
-            Time=new Time(Date.Value.Hour,Date.Value.Minute,Date.Value.Second);
+            Time = new Time(Date.Value.Hour, Date.Value.Minute, Date.Value.Second);
         }
 
         [Range(5, 20)]
@@ -37,6 +37,7 @@ namespace DeveloperHelperCenter.Areas.Develop.Models
         public Decimal Money { get; set; }
 
         [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "HH:mm")]
         public Time Time { get; set; }
 
         [DataType(DataType.Date)]
