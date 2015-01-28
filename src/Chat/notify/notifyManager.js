@@ -80,6 +80,7 @@ exports.Init = function (socket, userManager) {
          */
         console.log("-------------------------" + typeof(msg))
         if (typeof(msg) == 'string') {
+            console.log("input is string, so translate to object.")
             msg = JSON.parse(msg);
         }
         var org = orgSetting.get(msg.Org);
@@ -95,8 +96,8 @@ exports.Init = function (socket, userManager) {
                     var receiver = userManager.getUserByLoginId(msg.LoginIds);
                     if (receiver) {
                         var messageSend = {
-                            content: msg.content,
-                            subject: msg.subject
+                            content: msg.Content,
+                            subject: msg.Subject
                         }
 
                         if (msg.IsTemplate) {

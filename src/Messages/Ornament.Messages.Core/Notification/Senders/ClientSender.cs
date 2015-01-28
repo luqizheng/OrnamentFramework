@@ -94,7 +94,7 @@ namespace Ornament.Messages.Notification.Senders
                     string serobj = JsonConvert.SerializeObject(new NotifyMessage(PrivateCode, ClientName)
                     {
                         Content = sentMsg.Content,
-                        Subject = sentMsg.Content,
+                        Subject = sentMsg.Subject,
                         LoginIds = sentMsg.LoginIds.ToArray(),
                         GlobalVariable = NotifySenderManager.Instance.Variables,
                         UserDatas = sentMsg.UserDatas,

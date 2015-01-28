@@ -44,6 +44,11 @@
             //$.validator.unobtrusive.parse(document);
             
             try {
+                if (!$formSetting) {
+                    var parent = $form.parent();
+                    $.validator.unobtrusive.parse(document);
+                    $formSetting = $form.data("validator");
+                }
                 $formSetting.settings.submitHandler = function (e) {
 
                     var data = $form.serializeObject();

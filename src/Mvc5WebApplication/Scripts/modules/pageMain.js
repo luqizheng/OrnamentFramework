@@ -3,8 +3,10 @@
 */
 define(["modules/ornamentUi", "app"], function (ui) {
     return function () {
+        console.log("runing pageMian.js");
         $.validator.unobtrusive.parse("#content");
         pageSetUp();
         ui.setup();
+        console.log("runing pageMian.js finish.");
     }
 })

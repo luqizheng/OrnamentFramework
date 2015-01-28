@@ -26,32 +26,33 @@
         languageIndex++;
     }
 }
-<form method="POST" action="@Url.Action("Publish")" id="templateForms"  ms-controller="example" class="form-horizontal">
-    @using (Panel panel = Html.Panel("col-md-6"))
-    {
-        @panel.Header(@<text>
-        <h2>Receiver:</h2>
-        </text>)
 
-        @panel.Body(@<text>
+@using (Panel panel = Html.Panel("col-md-6"))
+{
+    @panel.Header(@<text>
+    <h2>Receiver:</h2>
+    </text>)
 
+    @panel.Body(@<text>
+    <form method="POST" action="@Url.Action("Publish")" id="publish-form"  ms-controller="example" class="form-horizontal">
         <div class="form-group">
-            @Html.LabelFor(s => s.Users, new Dictionary<string, object>() { { "class", "control-label" } })
+            @Html.LabelFor(s => s.Users, new Dictionary<string, object> { { "class", "control-label" } })
             @Html.EditorForUsers(s => s.Users)
+            @Html.ValidationMessageFor(s=>s.Users)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(s => s.UserGroups, new Dictionary<string, object>() { { "class", "control-label" } })
+            @Html.LabelFor(s => s.UserGroups, new Dictionary<string, object> { { "class", "control-label" } })
             @Html.EditorForUserGroups(s => s.UserGroups)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(s => s.Roles, new Dictionary<string, object>() { { "class", "control-label" } })
+            @Html.LabelFor(s => s.Roles, new Dictionary<string, object> { { "class", "control-label" } })
             @Html.EditorForRoles(s => s.Roles)
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(s => s.Orgs, new Dictionary<string, object>() { { "class", "control-label" } })
+            @Html.LabelFor(s => s.Orgs, new Dictionary<string, object> { { "class", "control-label" } })
             @Html.EditorForOrgTree(s => s.Orgs)
         </div>
 
@@ -98,43 +99,43 @@
             <div class="form-actions">
                 <button type="submit" class="btn btn-danger">Publish</button>
                 <button type="button" ms-click="getDemo" class="btn btn-primary">Demo</button>
-                <a href="#@Url.Action("Edit", new { id = Model.Id })" class="btn">Edit Templates</a>
+                <a href="#@Url.Action("Edit", new { id = Model.Id })" class="btn btn-default">Edit Templates</a>
             </div>
         </div>
+    </form>
 
-        </text>)
-    }
+    </text>)
+}
 
-    @Html.HiddenFor(s => s.Id)
-    @using (Panel panel = Html.Panel("col-md-6"))
-    {
-        @panel.Header(@<text>
-        <h2>Variable Setting(Demo only)</h2>
-        </text>)
+@Html.HiddenFor(s => s.Id)
+@using (Panel panel = Html.Panel("col-md-6"))
+{
+    @panel.Header(@<text>
+    <h2>Variable Setting(Demo only)</h2>
+    </text>)
 
-        @panel.Body(@<text>
-        <div class="row">
+    @panel.Body(@<text>
+    <div class="row">
 
 
 
-            <div class="col-md-12">
-                <div ms-repeat="Contents" ms-attr-id="c{{el.Language}}" class="tab-pane well" ms-class-active="$index==0">
-                    <h4 ms-text="el.Language"></h4>
-                    <dl>
-                        <dt ms-text="el.Subject "></dt>
-                        <dd ms-text="el.Value"></dd>
-                    </dl>
-                </div>
-
+        <div class="col-md-12">
+            <div ms-repeat="Contents" ms-attr-id="c{{el.Language}}" class="tab-pane well" ms-class-active="$index==0">
+                <h4 ms-text="el.Language"></h4>
+                <dl>
+                    <dt ms-text="el.Subject "></dt>
+                    <dd ms-text="el.Value"></dd>
+                </dl>
             </div>
+
         </div>
+    </div>
 
-        </text>)
-    }
+    </text>)
+}
 
 
 
-</form>
 
 @section scripts{
     <script type="text/javascript">

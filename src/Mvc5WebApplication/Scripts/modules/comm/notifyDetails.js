@@ -1,19 +1,19 @@
-﻿define(function (msgClient) {
+﻿define(function () {
     return {
-        init: function () {
+        init: function (msgClient) {
             var model = avalon.define({
                 $id: "notifyDetails",
                 contents: [{ content: "", date: new Date() }]
             });
 
-            msgClient.on("new notify", function () {
+            msgClient.Socket.on("new notify", function () {
 
             });
-            msgClient.on("get notify", function (data) {
+            msgClient.Socket.on("get notify", function (data) {
                 console.log(JSON.stringify(data));
             });
-
-            msgClient.emit("get notify",{pageIndex:0,pageSize:10});
+                
+            msgClient.Socket.emit("get notify",{pageIndex:0,pageSize:10});
 
             model.contents = [];
         },
