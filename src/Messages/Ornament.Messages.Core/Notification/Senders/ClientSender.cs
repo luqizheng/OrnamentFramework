@@ -98,6 +98,7 @@ namespace Ornament.Messages.Notification.Senders
                         LoginIds = sentMsg.LoginIds.ToArray(),
                         GlobalVariable = NotifySenderManager.Instance.Variables,
                         UserDatas = sentMsg.UserDatas,
+                        IsTemplate = true,
                     }, new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.None,

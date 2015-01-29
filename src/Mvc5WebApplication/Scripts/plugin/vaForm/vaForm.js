@@ -24,63 +24,55 @@
             });
             return o;
         };
+        var submitAction = function ($form, opts) {
+            var data = $form.serializeObject();
+            try {
+                opts.before.call($form, data);
+            } catch (ex) {
+                console.log("before fails." + ex);
+            }
 
+            $.post(opts.url, data, function (d) {
+
+                opts.success.call($form, d);
+
+            }).done(function () {
+
+                opts.done.call($form);
+
+            }).fail(function (status) {
+                opts.done.call($form);
+                if (status.status == 400) {
+                    var errors = {};
+                    $(status.responseJSON).each(function () {
+                        errors[this.key] = this.errors.join(";");
+                    });
+                    $form.validate().showErrors(errors);
+
+                }
+            });
+        }
         $.fn.vaform = function (opt) {
             var $form = $(this);//.removeData("validator").removeData("unobtrusiveValidation");
             var opts = $.extend({}, defaultSetting, opt);
             if (!opts.url) {
                 opts.url = $(this).attr("action");
             }
-            //$.validator.unobtrusive.parse($form.parent());
             var $formSetting = $form.data("validator");
-            /*var current = $form;
-            while (!$formSetting) {
-                current = current.parent();
-                $formSetting = current.data("validator");
-                if (!$formSetting && current.context.nodeName == "#document") {
-                    return $form;
-                }
-            }*/
-            //$.validator.unobtrusive.parse(document);
-            
             try {
-                if (!$formSetting) {
-                    var parent = $form.parent();
-                    $.validator.unobtrusive.parse(document);
-                    $formSetting = $form.data("validator");
-                }
-                $formSetting.settings.submitHandler = function (e) {
+                if ($formSetting) {
 
-                    var data = $form.serializeObject();
-                    try {
-                        opts.before.call($form, data);
-                    } catch (e) {
-                        console.log("before fails.");
-                    }
-
-                    $.post(opts.url, data, function (d) {
-
-                        opts.success.call($form, d);
-
-                    }).done(function () {
-
-                        opts.done.call($form);
-
-                    }).fail(function (status) {
-                        opts.done.call($form);
-                        if (status.status == 400) {
-                            var errors = {};
-                            $(status.responseJSON).each(function () {
-                                errors[this.key] = this.errors.join(";");
-                            });
-                            $form.validate().showErrors(errors);
-
-                        }
+                    $formSetting.settings.submitHandler = function () {
+                        submitAction($form, opts);
+                    };
+                } else {
+                    $form.submit(function (event) {
+                        submitAction($form, opts);
+                        event.preventDefault();
                     });
-
-                };
+                }
             } catch (e) {
-                console.log($form.attr("id")+" hasn't find validation plugin.error:"+e);
+                console.log($form.attr("id") + " hasn't find validation plugin.error:" + e);
             }
 
 
