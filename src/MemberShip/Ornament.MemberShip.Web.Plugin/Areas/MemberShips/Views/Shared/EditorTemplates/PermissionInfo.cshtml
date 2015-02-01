@@ -1,4 +1,5 @@
-﻿@model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.PermissionInfo
+﻿@using Ornament.Web
+@model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.PermissionInfo
 
 
 <div class="form-horizontal">
@@ -7,7 +8,7 @@
         <div class="col-md-10">
             @Html.CheckBoxFor(model => model.Deny, new { HtmlAttributes = new { @class = "form-control checkbox" } })
             @Html.ValidationMessageFor(model => model.Deny)
-
+            @Html.DescriptionFor(model=>model.Deny)
         </div>
     </div>
 
@@ -16,6 +17,7 @@
         <div class="col-md-10">
             @Html.CheckBoxFor(model => model.IsLock, new { HtmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.IsLock)
+            @Html.DescriptionFor(model=>model.IsLock)
         </div>
     </div>
 

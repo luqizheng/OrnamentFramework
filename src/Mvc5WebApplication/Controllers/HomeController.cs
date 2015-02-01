@@ -28,10 +28,14 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public ActionResult SwitchLanguage(string id)
+        public ActionResult SwitchLanguage(string id,string href)
         {
             CultureInfo culture = CultureInfo.GetCultureInfo(id);
             OrnamentContext.MemberShip.SwitchLanguage(culture);
+            if (!string.IsNullOrEmpty(href))
+            {
+                return Redirect(href);
+            }
             if (Request.UrlReferrer != null)
                 return Redirect(Request.UrlReferrer.ToString());
             return RedirectToAction("Index");

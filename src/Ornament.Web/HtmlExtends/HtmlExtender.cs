@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
 // ReSharper disable once CheckNamespace
+
 namespace Ornament.Web
 {
     public static class HtmlExtender
@@ -26,13 +27,15 @@ namespace Ornament.Web
         }
 
 
-        public static MvcHtmlString DescriptionFor<TModel, TValue>(this HtmlHelper<TModel> self, Expression<Func<TModel, TValue>> expression)
+        public static MvcHtmlString DescriptionFor<TModel, TValue>(this HtmlHelper<TModel> self,
+            Expression<Func<TModel, TValue>> expression)
         {
-            var metadata = ModelMetadata.FromLambdaExpression(expression, self.ViewData);
-            var description = metadata.Description;
-
-            return MvcHtmlString.Create(string.Format(@"<span class='help-block note'>{0}</span>", description));
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, self.ViewData);
+            string description = metadata.Description;
+            return MvcHtmlString.Create(
+                !string.IsNullOrEmpty(description)
+                    ? string.Format(@"<span class='help-block note'>{0}</span>", description)
+                    : "");
         }
-
     }
 }

@@ -5,20 +5,19 @@
 @model Ornament.MemberShip.Role[]
 @{
 
-    
+
     IEnumerable<string> ids = Model != null ? Model.Select(s => s.Id) : new String[0];
 
     IList<Role> roles = OrnamentContext.DaoFactory.GetDaoFactory<IMemberShipDaoFactory>()
         .CreateResourceDao()
         .FindResources<Role>(OrnamentContext.MemberShip.CurrentUser(), RoleOperator.Assign);
-    
 }
 
 @if (roles.Count != 0)
 {
     foreach (Role a in roles)
     {
-        var check = ids.Contains(a.Id) ? "checked='checked'" : "";
+        string check = ids.Contains(a.Id) ? "checked='checked'" : "";
         <label class="checkbox-inline" title="@a.Remarks">
             <input type="checkbox" value="@a.Id" name="@Html.Name("")" @check class="checkbox style-0"/>
             <span>@a.Name</span>

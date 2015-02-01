@@ -13,13 +13,14 @@
             var o = {};
             var a = this.serializeArray();
             $.each(a, function () {
+                var val = this.value || '';
                 if (o[this.name] !== undefined) {
                     if (!o[this.name].push) {
                         o[this.name] = [o[this.name]];
                     }
-                    o[this.name].push(this.value || '');
+                    o[this.name].push(val);
                 } else {
-                    o[this.name] = this.value || '';
+                    o[this.name] = val;
                 }
             });
             return o;

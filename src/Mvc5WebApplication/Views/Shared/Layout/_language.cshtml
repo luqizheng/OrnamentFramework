@@ -39,7 +39,8 @@
                 var clz = currentLanguage == language.CultureInfo ? "class='active'" : "";
                 
                 <li @clz>
-                    <a href="@Url.Action("SwitchLanguage","Home",new{id=language.Key})">
+                    
+                        <a onclick="location='@Url.Action("SwitchLanguage","Home",new{id=language.Key})?href='+location">
                         <img src="/img/blank.gif" class="flag @GetFlagClass(language.CultureInfo.Name)" alt="@language.CultureInfo.EnglishName">
                         @language.CultureInfo.DisplayName
                     </a>

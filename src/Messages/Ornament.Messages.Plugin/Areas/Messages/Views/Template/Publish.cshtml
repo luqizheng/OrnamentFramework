@@ -8,7 +8,7 @@
 @{
     ViewBag.Title = "Publisher notify template";
     Layout = OrnamentContext.Configuration.Layout();
-    var template = (NotifyMessageTemplate)ViewData["temp"];
+    var template = (NotifyMessageTemplate) ViewData["temp"];
 
     var tableList = new Dictionary<string, string[]>();
     //第一个key是variabl，value是变量名字，如果为null，就是这个语言下面并不包括这个变量。
@@ -30,107 +30,107 @@
 @using (Panel panel = Html.Panel("col-md-6"))
 {
     @panel.Header(@<text>
-    <h2>Receiver:</h2>
-    </text>)
+                       <h2>Receiver:</h2>
+                   </text>)
 
     @panel.Body(@<text>
-    <form method="POST" action="@Url.Action("Publish")" id="publish-form"  ms-controller="example" class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(s => s.Users, new Dictionary<string, object> { { "class", "control-label" } })
-            @Html.EditorForUsers(s => s.Users)
-        </div>
+                     <form method="POST" action="@Url.Action("Publish")" id="publish-form"  ms-controller="example">
+                         <div class="form-group">
+                             @Html.LabelFor(s => s.Users, new Dictionary<string, object> {{"class", "control-label"}})
+                             @Html.EditorForUsers(s => s.Users)
+                         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(s => s.UserGroups, new Dictionary<string, object> { { "class", "control-label" } })
-            @Html.EditorForUserGroups(s => s.UserGroups)
-        </div>
+                         <div class="form-group">
+                             @Html.LabelFor(s => s.UserGroups, new Dictionary<string, object> {{"class", "control-label"}})
+                             @Html.EditorForUserGroups(s => s.UserGroups)
+                         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(s => s.Roles, new Dictionary<string, object> { { "class", "control-label" } })
-            @Html.EditorForRoles(s => s.Roles)
-        </div>
+                         <div class="form-group">
+                             @Html.LabelFor(s => s.Roles, new Dictionary<string, object> {{"class", "control-label"}})
+                             @Html.EditorForRoles(s => s.Roles)
+                         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(s => s.Orgs, new Dictionary<string, object> { { "class", "control-label" } })
-            @Html.EditorForOrgTree(s => s.Orgs)
-        </div>
+                         <div class="form-group">
+                             @Html.LabelFor(s => s.Orgs, new Dictionary<string, object> {{"class", "control-label"}})
+                             @Html.EditorForOrgTree(s => s.Orgs)
+                         </div>
 
 
 
-        <div class="col-md-12">
-            @{
-                string[] languages = Model.Variables.Keys.ToArray();
-            }
-            <table class="table table-condensed table-bordered">
-                <thead>
-                    <tr>
-                        <td></td>
-                        @foreach (string language in languages)
-                        {
-                            <td>@language</td>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (string varName in tableList.Keys)
-                    {
-                        languageIndex = 0;
+                         <div class="col-md-12">
+                             @{
+                                 string[] languages = Model.Variables.Keys.ToArray();
+                             }
+                             <table class="table table-condensed table-bordered">
+                                 <thead>
+                                     <tr>
+                                         <td></td>
+                                         @foreach (string language in languages)
+                                         {
+                                             <td>@language</td>
+                                         }
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     @foreach (string varName in tableList.Keys)
+                                     {
+                                         languageIndex = 0;
 
-                        <tr>
-                            <td>
-                                @varName
-                            </td>
-                            @foreach (string setting in tableList[varName])
-                            {
-                                <td>
-                                    @if (setting != null)
-                                    {
-                                        <input name="Variables[@languages[languageIndex]][@varName]" value="" class="form-control"/>
-                                    }
-                                </td>
-                                    languageIndex++;
-                            }
-                        </tr>
-                    }
-                </tbody>
+                                         <tr>
+                                             <td>
+                                                 @varName
+                                             </td>
+                                             @foreach (string setting in tableList[varName])
+                                             {
+                                                 <td>
+                                                     @if (setting != null)
+                                                     {
+                                                         <input name="Variables[@languages[languageIndex]][@varName]" value="" class="form-control"/>
+                                                     }
+                                                 </td>
+                                                 languageIndex++;
+                                             }
+                                         </tr>
+                                     }
+                                 </tbody>
 
-            </table>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-danger">Publish</button>
-                <button type="button" ms-click="getDemo" class="btn btn-primary">Demo</button>
-                <a href="#@Url.Action("Edit", new { id = Model.Id })" class="btn btn-default">Edit Templates</a>
-            </div>
-        </div>
-    </form>
+                             </table>
+                             <div class="form-actions">
+                                 <button type="submit" class="btn btn-danger">Publish</button>
+                                 <button type="button" ms-click="getDemo" class="btn btn-primary">Demo</button>
+                                 <a href="#@Url.Action("Edit", new {id = Model.Id})" class="btn btn-default">Edit Templates</a>
+                             </div>
+                         </div>
+                     </form>
 
-    </text>)
+                 </text>)
 }
 
 @Html.HiddenFor(s => s.Id)
 @using (Panel panel = Html.Panel("col-md-6"))
 {
     @panel.Header(@<text>
-    <h2>Variable Setting(Demo only)</h2>
-    </text>)
+                       <h2>Variable Setting(Demo only)</h2>
+                   </text>)
 
     @panel.Body(@<text>
-    <div class="row">
+                     <div class="row">
 
 
 
-        <div class="col-md-12">
-            <div ms-repeat="Contents" ms-attr-id="c{{el.Language}}" class="tab-pane well" ms-class-active="$index==0">
-                <h4 ms-text="el.Language"></h4>
-                <dl>
-                    <dt ms-text="el.Subject "></dt>
-                    <dd ms-text="el.Value"></dd>
-                </dl>
-            </div>
+                         <div class="col-md-12">
+                             <div ms-repeat="Contents" ms-attr-id="c{{el.Language}}" class="tab-pane well" ms-class-active="$index==0">
+                                 <h4 ms-text="el.Language"></h4>
+                                 <dl>
+                                     <dt ms-text="el.Subject "></dt>
+                                     <dd ms-text="el.Value"></dd>
+                                 </dl>
+                             </div>
 
-        </div>
-    </div>
+                         </div>
+                     </div>
 
-    </text>)
+                 </text>)
 }
 
 
