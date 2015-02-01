@@ -92,7 +92,22 @@
     </text>)
 
     @panel.Body(@<text>
-    <pre class="prettyprint">
+    <div role="tabpanel">
+        <ul class="nav nav-tabs"  role="tablist">
+            <li class="active">
+                <a data-toggle="tab" href="#view">View</a>
+
+            </li>
+            <li>Model
+            </li>
+            <li>Full
+            </li>
+
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="view" class="tab-pane">
+            <pre class="prettyprint">
         <code>
 public class BasicEditors
 {
@@ -132,6 +147,8 @@ public class BasicEditors
 }
 </code>
 </pre>
+        </div>
+    </div>
     </text>)
 }
 @section scripts
