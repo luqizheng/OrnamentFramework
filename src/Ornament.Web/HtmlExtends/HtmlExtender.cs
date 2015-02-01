@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.WebPages;
 
 // ReSharper disable once CheckNamespace
 
@@ -36,6 +38,18 @@ namespace Ornament.Web
                 !string.IsNullOrEmpty(description)
                     ? string.Format(@"<span class='help-block note'>{0}</span>", description)
                     : "");
+        }
+
+        public static MvcHtmlString Code(this HtmlHelper helper,
+            Expression<Func<object, HelperResult>> action)
+        {
+            var exp = action.Body as MemberExpression;
+            string expStr = exp.ToString();
+
+
+
+            return new MvcHtmlString(expStr);
+
         }
     }
 }

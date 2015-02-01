@@ -82,6 +82,17 @@
     </form>
     </text>)
 }
+@helper ViewRender()
+{
+    @Html.Code(@<text>
+    <div class="form-group">
+        @Html.LabelFor(s => s.Int32, new { @class = "control-label" })
+        @Html.EditorFor(s => s.Int32, new { HtmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(s => s.Int32)
+        @Html.DescriptionFor(s => s.Int32)
+    </div>
+    </text>)
+}
 @using (Panel panel = Html.Panel(new PanelOption
 {
     Id = "example",
@@ -93,38 +104,46 @@
 
     @panel.Body(@<text>
     <div role="tabpanel">
-        <ul class="nav nav-tabs"  role="tablist">
+        <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a data-toggle="tab" href="#view">View</a>
-
             </li>
-            <li>Model
+            <li>
+                <a data-toggle="tab" href="#model">Model</a>
             </li>
-            <li>Full
-            </li>
-
         </ul>
     </div>
     <div class="tab-content">
-        <div id="view" class="tab-pane">
-            <pre class="prettyprint">
+        <div id="view" class="tab-pane active">
+            <pre class="prettyprint  lang-html">
+<code lang="html">
+  
+  @ViewRender()
+
+</code>
+</pre>
+        </div>
+        <div id="model" class="tab-pane">
+            <pre class="prettyprint  lang-html">
         <code>
-public class BasicEditors
-{
+
         public BasicEditors()
         {
             Int32 = 6;
             Int64 = 1800;
             Date = DateTime.Now;
+            Time = new Time(Date.Value.Hour, Date.Value.Minute, Date.Value.Second);
         }
 
         [Range(5, 20)]
+        [Display(Name = "Int32 for editorTemplates", Description = "Int32 Description.")]
         public Int32 Int32 { get; set; }
 
         [QiRange(900D, 10000d, 100D)]
         public Int64 Int64 { get; set; }
 
         public string String { get; set; }
+
         [MaxLength(40)]
         [DataType(DataType.MultilineText)]
         public String Textarea { get; set; }
@@ -138,13 +157,13 @@ public class BasicEditors
         public Decimal Money { get; set; }
 
         [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "HH:mm")]
         public Time Time { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "yyyy-MM-dd")]
         [DateRange("-40y", "+10y", "yyyy-MM-dd", "yy-mm-dd")]
         public DateTime? Date { get; set; }
-}
 </code>
 </pre>
         </div>
