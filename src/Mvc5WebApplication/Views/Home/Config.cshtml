@@ -18,7 +18,7 @@ paths: {
         validate:'plugin/jquery-validate/jquery.validate',
         unobtrusive:'plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax',
         bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap', @*replace scripts\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js*@
-        floatChart:'/scripts/float',
+floatChart:'/scripts/float',
         smarkchat:'@Scripts.Url("~/scripts/smark.chat.js")',
         touch:"plugin/jquery-touch/jquery.ui.touch-punch.min",
         "app.config":"app.config",
@@ -37,9 +37,12 @@ paths: {
         chat:"@Scripts.Url("~/scripts/avalons/chat/chat")",
         main:"@Scripts.Url("~/scripts/modules/main")",
         ornamentUi:"@Scripts.Url("~/scripts/modules/ornamentUi")",
-        orgSelect:"/MemberShips/scripts/Org/Org"
+        orgSelect:"/MemberShips/scripts/Org/Org",
+        shCore:"SyntaxHighlighter/scripts/shCore",
+        xregexp:"SyntaxHighlighter/scripts/XRegExp"
 },
 shim:{
+        
         validate:["jquery"],
         maxlength:["jquery"],
         unobtrusive:["jquery"],

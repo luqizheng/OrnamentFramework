@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -40,16 +39,6 @@ namespace Ornament.Web
                     : "");
         }
 
-        public static MvcHtmlString Code(this HtmlHelper helper,
-            Expression<Func<object, HelperResult>> action)
-        {
-            var exp = action.Body as MemberExpression;
-            string expStr = exp.ToString();
-
-
-
-            return new MvcHtmlString(expStr);
-
-        }
+      
     }
 }

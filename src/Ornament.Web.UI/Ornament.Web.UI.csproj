@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeHelper.cs" />
     <Compile Include="OrnamentValidation.cs">
       <SubType>Code</SubType>
     </Compile>
