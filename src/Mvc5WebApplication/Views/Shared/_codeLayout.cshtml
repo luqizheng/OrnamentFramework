@@ -4,20 +4,12 @@
 }
 @RenderBody()
 @section scripts{
-    <link href="/Scripts/SyntaxHighlighter/styles/shCore.css" rel="stylesheet" />
-    <link href="~/Scripts/SyntaxHighlighter/styles/shCoreDefault.css" rel="stylesheet" />
+    <link href="/Scripts/prism/prism.css" rel="stylesheet" />
+    <script src="~/Scripts/prism/prism.js"></script>
 
     @RenderSection("scripts")
     <script type="text/javascript">
-        require(['require', '/scripts/config.js'], function (require) {
-
-
-            require(["/Scripts/SyntaxHighlighter/scripts/shBrushCSharp.js", "/Scripts/SyntaxHighlighter/scripts/shBrushCss.js", "/Scripts/SyntaxHighlighter/scripts/shBrushJScript.js"]
-                , function () {
-                    SyntaxHighlighter.highlight();
-                });
-
-        });
+        Prism.highlightAll();
 
     </script>
 }
