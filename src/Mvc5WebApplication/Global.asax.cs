@@ -18,6 +18,7 @@ using Ornament.Configurations;
 using Ornament.Web;
 using Ornament.Web.Cfg;
 using Ornament.Web.DataInitializers;
+using Ornament.Web.HttpModel;
 using Ornament.Web.IoC;
 using Ornament.Web.MemberShips;
 using Ornament.Web.Messages;
@@ -48,7 +49,7 @@ namespace WebApplication
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
-            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
@@ -58,6 +59,8 @@ namespace WebApplication
             RequirejsModuleBundleMessageHandle.HandlAllBundle();
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
+            GlobalFilters.Filters.Add(new LocalizationFilter());
+            //FilterProviders.Providers.Add(MultiLanguage);
             InitData();
         }
 
@@ -71,7 +74,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
                 throw ex;
             }
             finally
@@ -120,7 +123,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

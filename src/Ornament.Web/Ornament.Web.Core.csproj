@@ -175,6 +175,7 @@
     <Compile Include="HtmlEmbeddedResource.cs" />
     <Compile Include="HtmlExtends\HtmlExtender.cs" />
     <Compile Include="HtmlExtends\TimeInputMaskExtender.cs" />
+    <Compile Include="HttpModel\LocalizationFilter.cs" />
     <Compile Include="IoC\CastleDependcyResolver.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MemberShips\IFormsAuthentication.cs" />

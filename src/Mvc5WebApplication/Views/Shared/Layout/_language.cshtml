@@ -7,7 +7,7 @@
 
     foreach (Language language in OrnamentContext.Configuration.Languages)
     {
-        if (language.CultureInfo == currentLanguage)
+        if (language.CultureInfo.LCID == currentLanguage.LCID)
         {
             showName = language.Name;
         }
@@ -49,7 +49,7 @@
                 
                 <li @clz>
 
-                    <a onclick="location='@Url.Action("SwitchLanguage", "Home", new { id = language.Key })?href='+location">
+                    <a href="@Url.Action("SwitchLanguage", "Home", new { id = language.Key })">
                         <img src="/img/blank.gif" class="flag @GetFlagClass(language.CultureInfo.Name)" alt="@language.CultureInfo.EnglishName">
                         @language.Name
                     </a>
