@@ -423,6 +423,7 @@
     <Content Include="Scripts\app.config.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
+    <Content Include="Scripts\avalon.min.js" />
     <Content Include="Scripts\avalon.modern.js" />
     <Content Include="Scripts\avalons\chat\chat.js" />
     <Content Include="Scripts\avalons\chat\chat.html" />
@@ -441,6 +442,7 @@
     <Content Include="Scripts\modules\Accounts\forgetpassword.js" />
     <Content Include="Scripts\modules\comm\countComm.js" />
     <Content Include="Scripts\modules\comm\notifyDetails.js" />
+    <Content Include="Scripts\modules\comm\utcTime.js" />
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\notifyMsg.js" />
     <Content Include="Scripts\modules\ornamentUi.js" />

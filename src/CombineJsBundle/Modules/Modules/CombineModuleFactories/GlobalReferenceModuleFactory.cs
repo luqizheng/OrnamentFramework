@@ -6,12 +6,12 @@ namespace CombineJs.Modules.Modules.CombineModuleFactories
 {
     internal class GlobalReferenceModuleFactory : IModuleFactory
     {
-        public ISeajsModule Build(string abstractRequirePath, BundleContext context, bool combine, ISeajsModule parent)
+        public IScriptsModule Build(string abstractRequirePath, BundleContext context, bool combine, IScriptsModule parent)
         {
             return new ReferenceModule(abstractRequirePath);
         }
 
-        public bool IsModule(string abstractRequirePath, ISeajsModule parentModule)
+        public bool IsModule(string abstractRequirePath, IScriptsModule parentModule)
         {
             return ModuleFactory.Instance.ReferenceModules.Contains(abstractRequirePath);
         }

@@ -35,11 +35,8 @@ namespace Ornament.Web.Models
             if (user != null)
             {
                 IMessageDaoFactory daoFactory = OrnamentContext.DaoFactory.MessageDaoFactory;
-                int cout = daoFactory.SimpleMessageDao.CountNotifyMsg(user, ReadStatus.UnRead) +
-                           daoFactory.PersonalMessageDao.CountNewMessage(user);
-
+             
                 result.IsLogin = true;
-                result.HasMessage = cout != 0;
             }
             else
             {
@@ -51,10 +48,6 @@ namespace Ornament.Web.Models
 
     public class ClientResult
     {
-        /// <summary>
-        /// </summary>
-        public bool HasMessage { get; internal set; }
-
         /// <summary>
         ///     是否登录了
         /// </summary>

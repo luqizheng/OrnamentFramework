@@ -61,7 +61,7 @@ namespace Ornament.Web.SeajsModules
             {
                 virtualPath = "~" + virtualPath;
             }
-            var bundleFor = BundleTable.Bundles.GetBundleFor(virtualPath) as SeajsEmbedBundle;
+            var bundleFor = BundleTable.Bundles.GetBundleFor(virtualPath) as EmbedBundle;
             if (bundleFor != null)
             {
                 return bundleFor.AreaName;

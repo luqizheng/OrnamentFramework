@@ -63,14 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonJsMinify.cs" />
-    <Compile Include="JqueryBundles\JQueryBundle.cs" />
-    <Compile Include="JqueryBundles\JQueryPluginSeajsBundle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CombineJsBundle.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Modules\CombineModule.cs" />
-    <Compile Include="Modules\ISeajsModule.cs" />
+    <Compile Include="Modules\IScriptsModule.cs" />
     <Compile Include="Modules\ModuleRepository.cs" />
     <Compile Include="Modules\ModuleCollection.cs" />
     <Compile Include="Modules\Modules\BundleFileCombine.cs" />

@@ -48,12 +48,12 @@ namespace CombineJs.Modules.Modules
         /// <param name="combine"></param>
         /// <param name="parentModule"></param>
         /// <returns></returns>
-        public ISeajsModule Create(string refereId,
+        public IScriptModule Create(string refereId,
             BundleContext context, bool combine,
-            ISeajsModule parentModule)
+            IScriptModule parentModule)
         {
 
-            ISeajsModule result = null;
+            IScriptModule result = null;
             if (combine)
             {
                 if (refereId.Contains("/") || refereId.EndsWith(".js"))

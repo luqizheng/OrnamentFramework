@@ -5,11 +5,11 @@ namespace Ornament.Web.Messages
 {
     public class RequireJsModuleBundleEventMessage : IEventMessage
     {
-        public RequireJsModuleBundleEventMessage(SeajsEmbedBundle bundle)
+        public RequireJsModuleBundleEventMessage(EmbedBundle bundle)
         {
             Bundle = bundle;
         }
 
-        public SeajsEmbedBundle Bundle { get; set; }
+        public EmbedBundle Bundle { get; set; }
     }
 }

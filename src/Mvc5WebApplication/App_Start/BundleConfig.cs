@@ -1,4 +1,6 @@
 ﻿using System.Web.Optimization;
+using Ornament;
+using Ornament.Web;
 using Qi;
 
 namespace WebApplication
@@ -8,8 +10,9 @@ namespace WebApplication
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = true;
             BundleTable.Bundles.UseCdn = false;
+            OrnamentContext.Configuration.SetSeajsCombine(true);
             var registryParty = new VoidFunc<BundleCollection>[]
             {
                 GlobalStyle,
@@ -23,10 +26,9 @@ namespace WebApplication
         }
 
 
-
         private static void Fx(BundleCollection bundles)
         {
-            var jquery =
+            Bundle jquery =
                 new ScriptBundle("~/Scripts/jquery.js", "http://libs.baidu.com/jquery/2.1.3/jquery.js").Include(
                     "~/scripts/libs/jquery-{version}.js");
             jquery.CdnFallbackExpression = "window.jQuery";
@@ -47,7 +49,6 @@ namespace WebApplication
             bundles.Add(new ScriptBundle("~/Scripts/smark.chat.js")
                 .Include("~/Scripts/smart-chat-ui/smart.chat.ui.js")
                 .Include("~/Scripts/smart-chat-ui/smart.chat.manager.js")
-                
                 );
         }
 
@@ -57,7 +58,6 @@ namespace WebApplication
             bundles.Add(new StyleBundle("~/css/global.css").IncludeDirectory("~/css/Custom", "*.css", false));
             bundles.Add(new StyleBundle("~/css/bootstrap.css").Include("~/css/bootstrap.min.css"));
             bundles.Add(new StyleBundle("~/css/font-awesome.css").Include("~/css/font-awesome.min.css"));
-
         }
     }
 }
