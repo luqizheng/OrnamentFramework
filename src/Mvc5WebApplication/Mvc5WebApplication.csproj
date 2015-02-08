@@ -424,6 +424,7 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
     <Content Include="Scripts\avalon.modern.js" />
+    <Content Include="Scripts\avalon.shim.js" />
     <Content Include="Scripts\avalons\chat\chat.js" />
     <Content Include="Scripts\avalons\chat\chat.html" />
     <Content Include="Scripts\avalons\pager\pager.html" />
