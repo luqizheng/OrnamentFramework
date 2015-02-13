@@ -71,7 +71,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Qi">
       <HintPath>..\..\lib\Qi.dll</HintPath>
@@ -229,7 +229,6 @@
     <Content Include="Content\images\gender\male.png" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\demo.min.css" />
     <Content Include="css\smartadmin-production-plugins.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
@@ -432,19 +431,25 @@
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
-    <Content Include="Scripts\libs\jquery-2.0.2.js" />
-    <Content Include="Scripts\libs\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\libs\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\libs\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\libs\jquery-2.1.3.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\libs\socket.io-1.3.2.js" />
+    <Content Include="Scripts\libs\socket.io-1.3.2.min.js" />
     <Content Include="Scripts\modules\ajaxlogin.js" />
     <Content Include="Scripts\modules\chat.js" />
+    <Content Include="Scripts\modules\Accounts\forgetpassword.js" />
+    <Content Include="Scripts\modules\comm\countComm.js" />
+    <Content Include="Scripts\modules\comm\notifyDetails.js" />
     <Content Include="Scripts\modules\main.js" />
+    <Content Include="Scripts\modules\notifyMsg.js" />
     <Content Include="Scripts\modules\ornamentUi.js" />
     <Content Include="Scripts\modules\pageMain.js" />
+    <Content Include="Scripts\modules\Accounts\ResetPassword.js" />
+    <Content Include="Scripts\modules\Security\VerifyEmail.js" />
     <Content Include="Scripts\notification\notifyClient.js" />
     <Content Include="Scripts\notification\SmartNotification.min.js" />
+    <Content Include="Scripts\notification\socketClient.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.js" />
     <Content Include="Scripts\plugin\bootbox\bootbox.min.js" />
     <Content Include="Scripts\plugin\bootstrap-duallistbox\jquery.bootstrap-duallistbox.min.js" />
@@ -845,13 +850,15 @@
     <Content Include="Scripts\plugin\jquery-nestable\jquery.nestable.min.js" />
     <Content Include="Scripts\plugin\jquery-touch\jquery.ui.touch-punch.min.js" />
     <Content Include="css\bootstrap.css.map" />
+    <Content Include="Areas\Communication\Views\web.config" />
+    <Content Include="Areas\Communication\Views\Notify\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\Tasks\Index.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.min.js" />
-    <Content Include="Scripts\plugin\jquery.validate.extends\DateRange.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.bootstrap\jquery.validate.unobtrusive.bootstrap.js" />
@@ -874,6 +881,7 @@
     <Content Include="Scripts\plugin\noUiSlider\jquery.nouislider.min.js" />
     <Content Include="Scripts\plugin\pace\pace.min.js" />
     <Content Include="Scripts\plugin\select2\readme.txt" />
+    <Content Include="Scripts\plugin\select2\select2.js" />
     <Content Include="Scripts\plugin\select2\select2.min.js" />
     <Content Include="Scripts\plugin\selectToUISlider\selectToUISlider.jQuery.min.js" />
     <Content Include="Scripts\plugin\slimscroll\jquery.slimscroll.min.js" />
@@ -892,6 +900,8 @@
     <Content Include="Scripts\plugin\x-editable\jquery.mockjax.min.js" />
     <Content Include="Scripts\plugin\x-editable\moment.min.js" />
     <Content Include="Scripts\plugin\x-editable\x-editable.min.js" />
+    <Content Include="Scripts\prism\prism.css" />
+    <Content Include="Scripts\prism\prism.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.manager.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.ui.js" />
@@ -954,6 +964,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ValidationConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Communication\Controllers\NotifyController.cs" />
+    <Compile Include="Areas\Communication\CommunicationAreaRegistration.cs" />
+    <Compile Include="Areas\Communication\Controllers\TasksController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
@@ -961,10 +974,12 @@
     <Compile Include="Controllers\HttpErrorsController.cs" />
     <Compile Include="Controllers\IMembershipService.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\VerifyCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1018,7 +1033,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\EditPlace.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Modal\Body.cshtml" />
-    <Content Include="Scripts\libs\jquery-2.1.1.min.map" />
     <Content Include="Scripts\plugin\ckeditor\CHANGES.md" />
     <Content Include="Scripts\plugin\ckeditor\LICENSE.md" />
     <Content Include="Scripts\plugin\ckeditor\plugins\scayt\LICENSE.md" />
@@ -1046,8 +1060,16 @@
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\BodyToolbar.cshtml" />
+    <Content Include="Views\Setup\Index.cshtml" />
+    <Content Include="Views\Security\VerifyEmail.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\My.cshtml" />
+    <Content Include="Views\Shared\Layout\_notifyMsg.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\_codeLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1057,6 +1079,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Communication\Models\" />
+    <Folder Include="Areas\Communication\Views\Shared\" />
+    <Folder Include="Views\Notify\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\membership.sitemap.resx">
@@ -1094,6 +1119,10 @@
     <ProjectReference Include="..\CombineJsBundle\CombineJsBundle.csproj">
       <Project>{30f82ffa-fa21-44d2-bef8-81853c186788}</Project>
       <Name>CombineJsBundle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Docs\DeveloperHelperCenter\DeveloperHelperCenter.csproj">
+      <Project>{cea24daf-20ee-4764-a123-ed7d680b17bd}</Project>
+      <Name>DeveloperHelperCenter</Name>
     </ProjectReference>
     <ProjectReference Include="..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
@@ -1162,6 +1191,24 @@
   <ItemGroup>
     <Content Include="Views\Account\App_LocalResources\AjaxLogon.zh-Hant.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ResetPassword.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ResetPassword.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\App_LocalResources\ResetPassword.zh-Hans.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-Hant.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\App_LocalResources\VerifyEmail.zh-Hans.resx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1175,7 +1222,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>17034</DevelopmentServerPort>
+          <DevelopmentServerPort>12016</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

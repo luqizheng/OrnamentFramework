@@ -25,7 +25,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             //for users
             config.Routes.MapHttpRoute(AreaName + "_user_api", "api/memberships/users/{action}", new
             {
-                controller = "users"
+                controller = "Users"
             });
 
 
@@ -45,39 +45,47 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
             ResourceSetting.Registry();
 
 
-            OrnamentContext.ResourceManager.Add(typeof(Role), typeof(RoleOperator));
-            OrnamentContext.ResourceManager.Add(typeof(UserGroup), typeof(UserGroupOperator));
+            OrnamentContext.ResourceManager.Add(typeof (Role), typeof (RoleOperator));
+            OrnamentContext.ResourceManager.Add(typeof (UserGroup), typeof (UserGroupOperator));
 
-            OrnamentContext.ResourceManager.Add(ResourceSetting.UserGroup, typeof(UserGroupOperator));
-            OrnamentContext.ResourceManager.Add(ResourceSetting.Role, typeof(RoleOperator));
-            OrnamentContext.ResourceManager.Add(ResourceSetting.User, typeof(UserOperator));
-            OrnamentContext.ResourceManager.Add(ResourceSetting.Permission, typeof(PermissionOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.UserGroup, typeof (UserGroupOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.Role, typeof (RoleOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.User, typeof (UserOperator));
+            OrnamentContext.ResourceManager.Add(ResourceSetting.Permission, typeof (PermissionOperator));
 
             OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
             {
                 Name = "角色资源",
                 Path = "~/Areas/MemberShips/Views/Shared/RoleListRadio.cshtml",
-                ValueType = typeof(Role)
+                ValueType = typeof (Role)
             });
 
             OrnamentContext.ResourceManager.Configuration().AddResourceSetting(new ResourceDescription
             {
                 Name = "用户组资源",
                 Path = "~/Areas/MemberShips/Views/Shared/UserGroupListRadio.cshtml",
-                ValueType = typeof(UserGroup)
+                ValueType = typeof (UserGroup)
             });
 
             //MemberShips/User/Edit/admin
-            context.MapRoute(AreaName + "_EditUser",
-                AreaName + "/User/{action}/{loginId}",
+            context.MapRoute(AreaName + "_EditUser_culture", "{culture}/" + AreaName + "/User/{action}/{loginId}",
                 new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"},
+                new {culture = @"^[a-zA-Z]{2}(-[a-zA-Z]+)?$"},
                 new[] {"Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers"}
                 );
 
-            context.MapRoute(
-                AreaName + "_default",
-                AreaName + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional},
+            context.MapRoute(AreaName + "_EditUser", AreaName + "/User/{action}/{loginId}",
+                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User", culture = "en"},
+                new[] {"Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers"}
+                );
+
+            context.MapRoute(AreaName + "_default_culture", "{culture}/" + AreaName + "/{controller}/{action}/{id}",
+                new {action = "Index", id = UrlParameter.Optional}, new {culture = @"^[a-zA-Z]{2}(-[a-zA-Z]+)?$"},
+                new[] {"Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers"}
+                );
+
+            context.MapRoute(AreaName + "_default", AreaName + "/{controller}/{action}/{id}",
+                new {action = "Index", id = UrlParameter.Optional, culture = "en"},
                 new[] {"Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers"}
                 );
 

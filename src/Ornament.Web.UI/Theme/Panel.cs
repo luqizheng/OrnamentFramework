@@ -157,7 +157,8 @@ namespace Ornament.Web.UI.Theme
             return Header(action, new Dictionary<string, object>());
         }
 
-        public MvcHtmlString Body(Func<object, HelperResult> action, Dictionary<string, object> htmlAttributes)
+        public MvcHtmlString Body(Func<object, HelperResult> action, 
+            Dictionary<string, object> htmlAttributes)
         {
             TextWriter writer = _context.Writer;
             var buffer = new RecordWriter(writer);

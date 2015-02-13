@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 using Ornament.Messages.Notification;
+using Ornament.Messages.Notification.Senders;
 
 namespace Ornament.Messages.Dao.NHibernateImple.Mapping
 {
@@ -11,9 +12,16 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             Id(x => x.Id).GeneratedBy.UuidHex("N").Length(36);
             Map(x => x.Name).Length(64);
             Map(x => x.Remark).Length(255);
-            
-            Map(x => x.ModifyTime);
-           
+
+
+
+            Version(x => x.ModifyTime);
+
+            HasManyToMany(s => s.Senders)
+                .Table("Msgs_MsgTempSenderRel")
+                .ParentKeyColumn("MsgTemplateId")
+                .ChildKeyColumn("SenderId").ForeignKeyConstraintNames("tempSenderRel_TempFK","tempSenderRel_SenderFK")
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
 
             HasMany(x => x.Contents)

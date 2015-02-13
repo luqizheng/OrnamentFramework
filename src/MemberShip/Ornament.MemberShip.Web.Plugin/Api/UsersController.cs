@@ -5,9 +5,9 @@ using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
-using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
+using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.MemberShip.Web.Plugin.Properties;
 using Ornament.Web.MemberShips;
 using Qi.Web.Http;
@@ -28,7 +28,7 @@ namespace Ornament.MemberShip.Web.Plugin.Api
 
         // GET api/usersapi
         [HttpGet]
-        public IEnumerable<object> Match([FromUri][ModelBinder] UserSearch search)
+        public IEnumerable<object> Match([FromUri] UserSearch search)
         {
             if (OrnamentContext.MemberShip.HasRight("User", UserOperator.Read))
             {

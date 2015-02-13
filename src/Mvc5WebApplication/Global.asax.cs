@@ -17,12 +17,15 @@ using Ornament;
 using Ornament.Configurations;
 using Ornament.Web;
 using Ornament.Web.Cfg;
+using Ornament.Web.DataInitializers;
+using Ornament.Web.HttpModel;
 using Ornament.Web.IoC;
 using Ornament.Web.MemberShips;
 using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
 using Ornament.Web.PortableAreas.InputBuilder;
 using Ornament.Web.SeajsModules;
+using Qi.NHibernateExtender;
 using Qi.Web.Mvc;
 using WebApplication.App_Start;
 using WebApplication.Controllers;
@@ -53,9 +56,31 @@ namespace WebApplication
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
             ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
-            SeajsModuleBundleMessageHandle.HandlAllBundle();
+            RequirejsModuleBundleMessageHandle.HandlAllBundle();
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
+            GlobalFilters.Filters.Add(new LocalizationFilter());
+            //FilterProviders.Providers.Add(MultiLanguage);
+            InitData();
+        }
+
+        public static void InitData()
+        {
+            SessionWrapper wrapper = SessionManager.GetSessionWrapper();
+            try
+            {
+                GlobalInitializer.BuildData();
+                wrapper.Commit();
+            }
+            catch (Exception ex)
+            {
+                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                throw ex;
+            }
+            finally
+            {
+                wrapper.Close();
+            }
         }
 
         protected void Application_EndRequest()
@@ -101,6 +126,5 @@ namespace WebApplication
                 LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
-
     }
 }

@@ -14,29 +14,25 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Security
             NotExistAccountOrEmail
         }
 
-       
-  
-        public ForgetPasswordModel()
-        {
-        }
-
         /// <summary>
         /// </summary>
-        [Display(Name = "label_AccountOrEmail", ResourceType = typeof (Resources))]
-        [DataType(DataType.Password)]
         [Required(ErrorMessageResourceType = typeof (Resources),
-            ErrorMessageResourceName = "alertMsg_RequireAccountOrEmail")]
-        public string AccountOrEmail { get; set; }
+            ErrorMessageResourceName = "alertMsg_RequireAccount")]
+        public string Account { get; set; }
 
+        /// <summary>
+        ///     Email
+        /// </summary>
+        [Required]
+        public string Email { get; set; }
 
         /// <summary>
         /// </summary>
         /// <param name="daoDaoFactory"></param>
         public RetrievePasswordResult Retrieve(IMemberShipDaoFactory daoDaoFactory)
         {
-            User user = daoDaoFactory.CreateUserDao().GetByLoginId(AccountOrEmail) ??
-                        daoDaoFactory.CreateUserDao().GetUserByEmail(AccountOrEmail);
-            if (user == null)
+            User user = daoDaoFactory.CreateUserDao().GetByLoginId(Account);
+            if (user == null || user.Contact.Email.ToLower() != this.Email.ToLower())
             {
                 return RetrievePasswordResult.NotExistAccountOrEmail;
             }

@@ -1,7 +1,5 @@
-﻿define(function (require) {
-   
-
-    var bootbox = require("bootbox");
+﻿define(['pager','bootbox'], function (require,bootbox) {
+    
     var messages = {
         success: '保存成功',
         createTitle: "创建新的用户组",
@@ -40,32 +38,32 @@
             });
         });
 
-        function call() {
-            bootbox.dialog({
-                message: messages.deleteWarning,
-                title: "Warning",
-                buttons: {
-                    success: {
-                        label: "否",
-                        className: "btn-success",
-                        callback: function() {
-                            warningDialog.modal("hide");
-                        }
-                    },
-                    danger: {
-                        label: "是",
-                        className: "btn-danger",
-                        callback: function() {
-                            $.get("/memberships/usergroup/delete/" + list.curUg.Id, function(rData) {
-                                bootbox.alert(rData.success ? messages.delSuccess : messages.delFail);
-                                list.delete(list.curUg.Id);
-                            });
-                        }
+    }
+
+    function deleteWarning() {
+        bootbox.dialog({
+            message: messages.deleteWarning,
+            title: "Warning",
+            buttons: {
+                success: {
+                    label: "否",
+                    className: "btn-success",
+                    callback: function () {
+                        warningDialog.modal("hide");
+                    }
+                },
+                danger: {
+                    label: "是",
+                    className: "btn-danger",
+                    callback: function () {
+                        $.get("/memberships/usergroup/delete/" + list.curUg.Id, function (rData) {
+                            bootbox.alert(rData.success ? messages.delSuccess : messages.delFail);
+                            list.delete(list.curUg.Id);
+                        });
                     }
                 }
-            });
-        }
-
+            }
+        });
     }
 
     function defineAvalon() {
@@ -74,9 +72,9 @@
         list = avalon.define('index', function (vm) {
             vm.userGroups = [{ "Id": "", "Name": "", "Remarks": "", "Roles": [] }];
             vm.loading = false;
-            vm.del = function () {
-                vm.curUg = this.$vmodel.el;
-                call();
+            vm.del = function (el) {
+                vm.curUg =el;
+                deleteWarning();
             };
             vm.delete = function (id) {
                 var ary = [];
@@ -95,8 +93,8 @@
                 editor.editing = true;
                 vm.curUg = null;
             };
-            vm.edit = function () {
-                var ug = this.$vmodel.el;
+            vm.edit = function (ug) {
+                
                 avalon.mix(editor, ug);
                 editor.editing = true;
                 vm.curUg = ug;
@@ -178,17 +176,15 @@
             if (message) {
                 avalon.mix(messages,message);
             }
-
-            require(['pager'], function() {
-                changeVal();
-                defineAvalon();
-                avalon.scan();
-            });
+            changeVal();
+            defineAvalon();
+            avalon.scan();
+          
         },
         clear: function () {
-            console.log('clean up');
             delete avalon.vmodels['index'];
             delete avalon.vmodels['edit'];
+
         }
     };
 })

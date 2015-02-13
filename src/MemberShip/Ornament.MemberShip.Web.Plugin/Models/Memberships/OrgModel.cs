@@ -41,24 +41,14 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
         {
             var result = new OrgDto()
             {
-                Name = org.Name,Id=org.Id
+                Name = org.Name,
+                Id = org.Id
             };
 
 
             foreach (var child in org.Childs)
             {
-                var childDTO = new OrgDto()
-                {
-                    Name = child.Name,
-                    Id = child.Id
-                    
-                };
-                result.Childs.Add(childDTO);
-
-                if (child.Childs.Count != 0)
-                {
-                    childDTO.Childs.Add(Make(child));
-                }
+                result.Childs.Add(Make(child));
             }
             return result;
         }
@@ -66,7 +56,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 
     public class OrgModel
     {
-        private readonly Org _org;
+
         private Org _parent;
 
         public OrgModel()
@@ -75,7 +65,6 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
 
         public OrgModel(Org org)
         {
-            _org = org;
             Id = org.Id;
             Name = org.Name;
             Remark = org.Remarks;
@@ -157,8 +146,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.Memberships
             dao.Flush();
             if (Parent != null)
             {
-                IOrgCollection list = Parent.Childs;
-                list.Add(org);
+                Parent.Childs.Add(org);
                 dao.SaveOrUpdate(Parent);
             }
             return org;

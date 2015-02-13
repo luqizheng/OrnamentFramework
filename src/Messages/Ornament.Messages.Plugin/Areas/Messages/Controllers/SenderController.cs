@@ -6,10 +6,11 @@ using Ornament.Messages.Notification.Senders;
 using Ornament.Messages.Plugin.Areas.Messages.Models;
 using Ornament.Web.MemberShips;
 using Ornament.Web.UI;
+using Qi.Web.Mvc;
 
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
-    [Authorize]
+    [Authorize,Session]
     public class SenderController : Controller
     {
         private readonly IMessageDaoFactory _messageDaoFactory;
@@ -35,23 +36,31 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
             IEnumerable<SenderModel> result = from a in data select new SenderModel((a));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult Get(int? id)
+        [Session(Transaction = true)]
+        public ActionResult Delete(int? id)
         {
             Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
-            return Json(new SenderModel(result));
+            _messageDaoFactory.NotifySenderDao.Delete(result);
+            return Json(new {success = true}, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetSender(int? id)
+        {
+            Sender result = _messageDaoFactory.NotifySenderDao.Get(id.Value);
+            return Json(new SenderModel(result), JsonRequestBehavior.AllowGet);
         }
 
-        [ValidateAjax, HttpPost]
+        [ValidateAjax, HttpPost, Session(Transaction = true)]
         public ActionResult Save(SenderModel model)
         {
+            Sender sender;
             if (ModelState.IsValid)
             {
-                model.Save(_messageDaoFactory);
+                sender = model.Save(_messageDaoFactory);
                 var result = new
                 {
                     success = true,
-                    message = ""
+                    message = "",
+                    sender.Id
                 };
 
                 return Json(result);
@@ -61,7 +70,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
                 var result = new
                 {
                     success = false,
-                    message = "Failed to save Sender."
+                    message = "Failed to save Sender.",
                 };
                 return Json(result);
             }

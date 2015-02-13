@@ -1,6 +1,6 @@
 ﻿<div>
     <script type="avalon" id="org_tpl">
-<span style="cursor: pointer" ms-click="toggle" 
+<span style="cursor: pointer" ms-click="toggle(el)" 
         ms-class="label label-success:el.selected">
      <i class="fa fa-lg"   ms-class-1="fa-plus-circle:(el.Childs.length && el.Hide==true)"
                            ms-class-2="fa-minus-circle:(el.Childs.length && el.Hide==false)"
@@ -31,7 +31,7 @@
                                 </span>
                                 <ul ms-visible="orgs.length">
                                     <li ms-repeat-el="orgs">
-                                        <span style="cursor: pointer" ms-click="toggle"
+                                        <span style="cursor: pointer" ms-click="toggle(el)"
                                               ms-class="label label-success:el.selected">
                                             <i class="fa fa-lg"
                                                ms-class-1="fa-plus-circle:(el.Childs.length && el.Hide==true)"

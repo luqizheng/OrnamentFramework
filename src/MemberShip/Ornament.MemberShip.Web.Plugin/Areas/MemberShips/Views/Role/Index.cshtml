@@ -41,9 +41,9 @@
         <ul class="dd-list">
             <ol ms-repeat-el="roles" class="dd-item">
                 @{
-                    string handler = hasModify ? "ms-click=edit" : "";
+                    string handler = hasModify ? "ms-click=edit(el,$event)" : "";
                 }
-                <div class="dd-handle" style="cursor: pointer" @handler ms-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
+                <div class="dd-handle" style="cursor: pointer" @handler ms-attr-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
                     @if (hasDelete)
                     {
                         <button ms-click="del" title="@Ornament.Properties.Resources.Delete" class="btn btn-danger btn-xs">
@@ -85,9 +85,9 @@
 
         <div class="widget-body-toolbar">
 
-            <button class="btn btn-primary" type="submit" ms-disabled="!editing" ms-text="saveBtnText">@Ornament.Properties.Resources.Save</button>
-            <button class="btn btn-default" type="button" ms-click="reset" ms-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
-            <button class="btn btn-default" type="button" ms-click="cancel" ms-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
+            <button class="btn btn-primary" type="submit" ms-attr-disabled="!editing" ms-text="saveBtnText">@Ornament.Properties.Resources.Save</button>
+            <button class="btn btn-default" type="button" ms-click="reset" ms-attr-disabled="!editing" ms-visiable="!IsCreated">@Ornament.Properties.Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-click="cancel" ms-attr-disabled="!editing">@Ornament.Properties.Resources.Cancel</button>
         </div>
         @Html.Partial("_Edit")
     </form>
@@ -104,15 +104,17 @@
     
     
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Role/index.js")'], function (main) {
-            var message = {
-                createRole: '@Html.GetEmbededResourceString("CreateRole")',
-                editRole: '@Html.GetEmbededResourceString("EditRole")',
-                saveBtnEdit: '@Ornament.Properties.Resources.Save',
-                saveBtnCreate:'@Ornament.Properties.Resources.Create'
-            };
-            main.init(message);
-            clearPageVariable.push(main.clear);
+        require(['require', '/scripts/config.js'], function(require) {
+            require(['@Scripts.Url("/MemberShips/Scripts/Role/index.js")'], function(main) {
+                var message = {
+                    createRole: '@Html.GetEmbededResourceString("CreateRole")',
+                    editRole: '@Html.GetEmbededResourceString("EditRole")',
+                    saveBtnEdit: '@Ornament.Properties.Resources.Save',
+                    saveBtnCreate: '@Ornament.Properties.Resources.Create'
+                };
+                main.init(message);
+                clearPageVariable.push(main.clear);
+            });
         });
     </script>
 }

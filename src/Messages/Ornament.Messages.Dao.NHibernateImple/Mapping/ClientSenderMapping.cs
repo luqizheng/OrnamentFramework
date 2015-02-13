@@ -8,6 +8,9 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
         public ClientSenderMapping()
         {
             this.DiscriminatorValue("Client");
+            this.Map(x => x.Server);
+            this.Map(x => x.PrivateCode);
+            this.Map(x => x.ClientName);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.MemberShipProviders;
-using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Web.Plugin.Properties;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships

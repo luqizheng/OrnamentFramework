@@ -1,69 +1,75 @@
 ﻿@using Ornament
 @using Ornament.Web.UI.Theme
 @using Qi.Web
-@model IDictionary<string, string>
+@using System
+
+@model System.Collections.Generic.IDictionary<string, string>
 
 @{
     ViewBag.Title = "Variable Config";
     Layout = OrnamentContext.Configuration.Layout();
-    var a = JsonHelper.ToJson(this.Model.Select(v => new { Name = v.Key, Value = v.Value }));
+    string a = JsonHelper.ToJson(Model.Select(v => new { Name = v.Key, v.Value }));
 }
 
-@using (var panel = Html.Panel())
+@using (Panel panel = Html.Panel())
 {
     @panel.Header(@<text>
-    <h4>Global Variable setting</h4>
-    </text>);
+                       <h2>Global Variable setting</h2>
+                   </text>)
+    ;
     @panel.Body(@<text>
 
-    <table class="table table-condensed table-bordered" ms-controller="index">
-        <thead>
-            <tr>
-                <td colspan="2">
-                    <button ms-click="add" class="btn">Add Variables</button>
-                    <button ms-click="reload" class="btn">Reload </button>
-                    <button ms-click="save" class="btn">Save</button>
-                </td>
-            </tr>
-            <tr>
-                <th>Variable Name</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ms-repeat="data">
-                <td>
-                    <input ms-duplex="el.Name" class="row-fluid" />
-                </td>
-                <td>
-                    <input ms-duplex="el.Value" class="row-fluid" />
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2">
-                    <button ms-click="add" class="btn">Add Variables</button>
-                    <button ms-click="reload" class="btn">Reload </button>
-                    <button ms-click="save" class="btn">Save</button>
-                </td>
-            </tr>
-        </tfoot>
+                     <table class="table table-condensed table-bordered" ms-controller="index">
+                         <thead>
+                             <tr>
+                                 <td colspan="3">
+                                     <button ms-click="add" class="btn">Add</button>
+                                     <button ms-click="reload" class="btn">Reload </button>
+                                     <button ms-click="save" class="btn">Save</button>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <th>Variable Name</th>
+                                 <th>Value</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr ms-repeat="data">
+                                 <td>
+                                     <button ms-click="del(el,$remove)" class="btn btn-danger">
+                                         <i class="fa fa-remove"></i>
+                                     </button>
+                                 </td>
+                                 <td>
+                                     <input ms-duplex="el.Name" class="row-fluid" />
+                                 </td>
+                                 <td>
+                                     <input ms-duplex="el.Value" class="row-fluid" />
+                                 </td>
+                             </tr>
+                         </tbody>
+                         <tfoot>
+                             <tr>
+                                 <td colspan="3">
+                                     <button ms-click="add" class="btn">Add</button>
+                                     <button ms-click="reload" class="btn">Reload </button>
+                                     <button ms-click="save" class="btn">Save</button>
+                                 </td>
+                             </tr>
+                         </tfoot>
 
-    </table>
-    </text>);
-
+                     </table>
+                 </text>)
+    ;
 }
 @section scripts{
-    @Scripts.Render("~/Scripts/avalon.js")
-    @Scripts.Render("~/Scripts/json2.js")
     <script type="text/javascript">
-        avalon.config({ loader: false });
-    </script>
-    <script type="text/javascript">
-        var js=@Html.Raw(a);
-        require(["/Messages/Scripts/Config/index.js"], function(init) {
-            init(js);
+
+        require(['require', '/scripts/config.js'], function(require) {
+            var js = @Html.Raw(a);
+            require(['@Scripts.Url("/Messages/Scripts/Config/index.js")'], function(init) {
+                init(js);
+            });
         });
     </script>
 }

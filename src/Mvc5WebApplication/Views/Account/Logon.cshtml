@@ -10,54 +10,91 @@
     <span id="extr-page-header-space"><span class="hidden-mobile">Need an account?</span> <a href="@Url.Action("Register")" class="btn btn-danger">Create account</a> </span>
 }
 
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+        <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
+        <div class="hero">
 
-
-
-<form action="@Url.Action("Logon")" id="login-form" class="smart-form client-form" method="POST">
-    <header>
-       @Html.GetResourceString("SignIn")
-    </header>
-
-    <fieldset>
-
-        <section>
-            <label class="label">@Html.DisplayNameFor(x => x.User)</label>
-            <label class="input">
-                <i class="icon-append fa fa-user"></i>
-                @Html.TextBoxFor(x => x.User)
-                <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> @Html.GetResourceString("LoginIdTips")</b></label>
-        </section>
-
-        <section>
-            <label class="label">@Html.DisplayNameFor(x => x.Password)</label>
-            <label class="input">
-                <i class="icon-append fa fa-lock"></i>
-                @Html.PasswordFor(x => x.Password)
-                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> @Html.GetResourceString("PasswordTips")</b>
-            </label>
-            <div class="note">
-                <a href="forgotpassword.html">@Html.GetResourceString("ForgetPassword")</a>
+            <div class="pull-left login-desc-box-l">
+                <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin, everywhere you go!</h4>
+                <div class="login-app-icons">
+                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>
+                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>
+                </div>
             </div>
-        </section>
-        @Html.HiddenFor(x => x.ReturnUrl)
-        <section>
-            <label class="checkbox">
-                @Html.CheckBoxFor(x => x.RememberMe)
-                <i></i>@Html.GetResourceString("RemeberMe")
-            </label>
-        </section>
-    </fieldset>
-    <footer>
-        <button type="submit" class="btn btn-primary">
-            @Html.GetResourceString("SignIn")
-        </button>
-    </footer>
-</form>
+
+            <img src="/img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width: 210px">
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <h5 class="about-heading">About SmartAdmin - Are you up to date?</h5>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <h5 class="about-heading">Not just your average template!</h5>
+                <p>
+                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi voluptatem accusantium!
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+        <div class="well no-padding">
+            <form action="@Url.Action("Logon")" id="login-form" class="smart-form client-form" method="POST">
+                <header>
+                    @Html.GetResourceString("SignIn")
+                </header>
+
+                <fieldset>
+
+                    <section>
+                        <label class="label">@Html.DisplayNameFor(x => x.User)</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            @Html.TextBoxFor(x => x.User)
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> @Html.GetResourceString("LoginIdTips")</b></label>
+                    </section>
+
+                    <section>
+                        <label class="label">@Html.DisplayNameFor(x => x.Password)</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            @Html.PasswordFor(x => x.Password)
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> @Html.GetResourceString("PasswordTips")</b>
+                        </label>
+                        <div class="note">
+                            <a href="@Url.Action("forgetPassword","Account")">@Html.GetResourceString("ForgetPassword")</a>
+                        </div>
+                    </section>
+                    @Html.HiddenFor(x => x.ReturnUrl)
+                    <section>
+                        <label class="checkbox">
+                            @Html.CheckBoxFor(x => x.RememberMe)
+                            <i></i>@Html.GetResourceString("RemeberMe")
+                        </label>
+                    </section>
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn btn-primary">
+                        @Html.GetResourceString("SignIn")
+                    </button>
+                </footer>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
 
 
 @section scripts{
     <!-- JQUERY MASKED INPUT -->
-    <script src="/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <script src="/Scripts/plugin/masked-input/jquery.maskedinput.min.js"></script>
     <script type="text/javascript">
     </script>
 }

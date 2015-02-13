@@ -1,6 +1,4 @@
-﻿@using System.Collections.Generic;
-@using System.Security.AccessControl
-@using Ornament
+﻿@using Ornament
 @using Ornament.MemberShip
 @using Ornament.MemberShip.Plugin.Models
 @using Ornament.MemberShip.Web.Plugin.Models.Memberships
@@ -15,15 +13,16 @@
     string parentId = Model != null ? Model.Id : "";
     IEnumerable<Org> childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
 
-    var childDTO = OrgDto.ToTree(childOrgs);
-    
+    IList<OrgDto> childDTO = OrgDto.ToTree(childOrgs);
+
     bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
 @section pageTitle
 {
     @if (Model == null || Model.Parent == null)
     {
-        @Html.GetEmbededResourceString("Page_title");
+        @Html.GetEmbededResourceString("Page_title")
+        ;
     }
     else
     {
@@ -31,24 +30,15 @@
     }
 }
 
-@using (Panel box = Html.Panel(new PanelOption()
+@using (Panel box = Html.Panel(new PanelOption
 {
-    Id = "orgPanel"
+    Id = "orgPanel",
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
-    @box.Header(
-        @<text>
-
-    </text>)
+    @box.Header(@<text><h2>Org Tree</h2></text>)
 
 
     @box.Body(@<text>
-    <div class="widget-body-toolbar">
-        <a class="btn btn-primary" href="@Url.Action("Create", new { parentId })"><i class="icon-white icon-plus"></i>
-            @Resources.Create
-        </a>
-    </div>
-
     <div ms-controller="index" id="orgTreeView">
         @Html.Partial("OrgTreeView")
     </div>
@@ -76,13 +66,13 @@
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new
-                                     {
-                                         HtmlAttributes = new Dictionary<string, object>
-                                         {
-                                             { "class","form-control"},
-                                             {"ms-duplex","Name"}
-                                         }
-                                     })
+                               {
+                                   HtmlAttributes = new Dictionary<string, object>
+                                   {
+                                       {"class", "form-control"},
+                                       {"ms-duplex", "Name"}
+                                   }
+                               })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -91,34 +81,38 @@
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remarks)</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Remarks, new
-                                     {
-                                         HtmlAttributes = new Dictionary<string, object>
-                                         {
-                                             { "class", "form-control" },
-                                             {"ms-duplex","Remarks"}
-                     
-                                         }
-                                     })
+                               {
+                                   HtmlAttributes = new Dictionary<string, object>
+                                   {
+                                       {"class", "form-control"},
+                                       {"ms-duplex", "Remarks"}
+                                   }
+                               })
                 @Html.ValidationMessageFor(model => model.Remarks)
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
             <div class="col-md-10" id="roleList">
-                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>()
-                                     {
-                                         {"ms-duplex-text","Roles"}
-                                     })
+                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>
+                               {
+                                   {"ms-duplex-string", "Roles"}
+                               })
                 @Html.ValidationMessageFor(s => s.Roles)
             </div>
         </div>
         <div class="form-actions">
-            <button class="btn" type="submit">
-                <i class="fa fa-save"></i>
-                @Ornament.Properties.Resources.Save
-            </button>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-save"></i>
+                        @Resources.Save
+                    </button>
+                </div>
+            </div>
         </div>
     </form>
+
     </text>)
 }
 
@@ -126,12 +120,14 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
-            var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
-            main.init(orgDTO);
-
-            clearPageVariable.push(main.clear);
+        require(['require', '/scripts/config.js'], function(require) {
+            require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
+                var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
+                main.init(orgDTO);
+                clearPageVariable.push(main.clear);
+            });
         });
         
+
     </script>
 }

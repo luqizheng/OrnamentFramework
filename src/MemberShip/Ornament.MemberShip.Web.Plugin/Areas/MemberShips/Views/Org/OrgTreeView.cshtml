@@ -5,20 +5,20 @@
 <script type="avalon" id="tpl">          
     
         
-<span style="cursor: pointer" ms-click="toggle">
+<span style="cursor: pointer" ms-click="toggle(el,$event)">
      <i class="fa fa-lg"   ms-class-1="fa-plus-circle:(el.Childs.length && el.Hide==true)"
                            ms-class-2="fa-minus-circle:(el.Childs.length && el.Hide==false)"
                            ms-class-3="fa-users:el.Childs.length==0">                            
                         </i>&nbsp;{{el.Name}}
 </span>
 <div class="btn-group">
-    <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+    <a href="javascript:;" ms-click="edit(el,$event)" class="btn btn-xs btn-info">
         <i class="fa fa-edit"></i>
     </a> 
-    <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+    <a href="javascript:;" ms-click="addSub(el,$event)" class="btn btn-xs btn-info">
         <i class="fa fa-plus "></i>
     </a>
-    <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+    <a href="javascript:;" ms-click="del(el,$event,$remove)" class="btn btn-xs btn-danger">
         <i class="fa fa-remove"></i>
     </a>
 </div>
@@ -34,11 +34,11 @@
                 <i class="fa fa-lg fa-sitemap"></i>&nbsp;组织结构
             </span>
             <div class="btn-group" id="Root">
-                <a href="javascript:;" ms-click="addSub" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
+                <a href="javascript:;" ms-click="addSub(false,$event)" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></a>
             </div>
             <ul ms-visible="orgs.length">
                 <li ms-repeat-el="orgs">
-                    <span style="cursor: pointer" ms-click="toggle">
+                    <span style="cursor: pointer" ms-click="toggle(el)">
                         <i class="fa fa-lg"
                            ms-class-1="fa-plus-circle:(el.Childs.length && el.Hide==true)"
                            ms-class-2="fa-minus-circle:(el.Childs.length && el.Hide==false)"
@@ -47,13 +47,13 @@
                         </i>&nbsp;{{el.Name}}
                     </span>
                     <div ms-attr-id="el.Id" class="btn-group">
-                        <a href="javascript:;" ms-click="edit" class="btn btn-xs btn-info">
+                        <a href="javascript:;" ms-click="edit(el,$event)" class="btn btn-xs btn-info">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="javascript:;" ms-click="addSub" class="btn btn-xs btn-info">
+                        <a href="javascript:;" ms-click="addSub(el,$event)" class="btn btn-xs btn-info">
                             <i class="fa fa-plus "></i>
                         </a>
-                        <a href="javascript:;" ms-click="del" class="btn btn-xs btn-danger">
+                        <a href="javascript:;" ms-click="del(el,$event,$remove)" class="btn btn-xs btn-danger">
                             <i class="fa fa-remove"></i>
                         </a>
                     </div>

@@ -142,10 +142,12 @@
 @section scripts
 {
     <script type="text/javascript">
-        require(["@Scripts.Url("/memberships/scripts/permissions/permission.js")"], function (main) {
+        require(['/scripts/config.js'], function(require) {
+            require(["@Scripts.Url("/memberships/scripts/permissions/permission.js")"], function(main) {
 
-            main(@(jsonObject != null ? Html.Raw(JsonHelper.ToJson(jsonObject)) : new MvcHtmlString("null")));
+                main(@(jsonObject != null ? Html.Raw(JsonHelper.ToJson(jsonObject)) : new MvcHtmlString("null")));
 
+            });
         });
     </script>
 

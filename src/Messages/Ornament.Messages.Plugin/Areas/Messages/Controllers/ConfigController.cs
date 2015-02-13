@@ -7,7 +7,6 @@ using Qi.Web.Mvc;
 namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
 {
     [Session]
-    [Authorize(Roles = "admin")]
     public class ConfigController : Controller
     {
         //
@@ -22,24 +21,19 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Controllers
         public ActionResult Reload()
         {
             NotifySenderManager.Instance.ReloadVariables();
-            return Json(from a in NotifySenderManager.Instance.Variables select new {Name = a.Key, a.Value});
+            return Json(from a in NotifySenderManager.Instance.Variables select new {Name = a.Key, a.Value},JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult SaveVariable(VariablesModels models)
         {
+            NotifySenderManager.Instance.Variables.Clear();
+
             foreach (VairableModel variable in models.Variables)
             {
                 string key = variable.Name;
                 string val = variable.Value;
-                if (NotifySenderManager.Instance.Variables.ContainsKey(key))
-                {
-                    NotifySenderManager.Instance.Variables[key] = val;
-                }
-                else
-                {
-                    NotifySenderManager.Instance.Variables.Add(key, val);
-                }
+                NotifySenderManager.Instance.Variables.Add(key, val);
                 NotifySenderManager.Instance.SaveVariable();
             }
             return Json(true);

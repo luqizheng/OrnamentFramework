@@ -1,16 +1,14 @@
 ﻿@using Ornament
 @using Ornament.Messages.Newses
-@using Ornament.Web
 @using Ornament.Web.UI.Paginations
 @using Ornament.Web.UI.Theme
-@using SeajsBundles
 @using Basic = Ornament.Properties.Resources
 @model IEnumerable<Ornament.Messages.Newses.News>
 
 @{
     ViewBag.Title = Html.GetEmbededResourceString("Page_Title");
     Layout = OrnamentContext.Configuration.Layout();
-    var types = (IList<NewsType>)ViewData["types"];
+    var types = (IList<NewsType>) ViewData["types"];
     var selectedType = ViewData["type"] as NewsType;
     var pae = ViewData["nav"] as Pagination;
 }
@@ -22,84 +20,84 @@
 {
     @panel.Header(@<text>
 
-    <div class="bar-select pull-left">
-        <span>News Type: </span>
-        <select name="Type" id="Type">
-            @foreach (NewsType type in types ?? (new List<NewsType>()))
-            {
-                if (selectedType == type)
-                {
-                <option value="@type.Id" selected="selected">@type.Name</option>
-                }
-                else
-                {
-                <option value="@type.Id" >@type.Name</option>
-                }
-            }
-        </select>
+                       <div class="bar-select pull-left">
+                           <span>News Type: </span>
+                           <select name="Type" id="Type">
+                               @foreach (NewsType type in types ?? (new List<NewsType>()))
+                               {
+                                   if (selectedType == type)
+                                   {
+                                       <option value="@type.Id" selected="selected">@type.Name</option>
+                                   }
+                                   else
+                                   {
+                                       <option value="@type.Id" >@type.Name</option>
+                                   }
+                               }
+                           </select>
 
-    </div>
-    <div class="bar-button">
-        <button type="button" class="btn btn-info">Apply</button>
-    </div>
+                       </div>
+                       <div class="bar-button">
+                           <button type="button" class="btn btn-info">Apply</button>
+                       </div>
 
-    </text>)
+                   </text>)
 
     @panel.Body(@<text>
-    @if (Model.Count() != 0)
-    {
-        <div class="table-overflow">
+                     @if (Model.Count() != 0)
+                     {
+                         <div class="table-overflow">
 
-            <table class="table table-condensed table-striped table-bordered">
-                <tr>
-                    <th>Subject
-                    </th>
-                    <th>Type 
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.State)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreateTime)
-                    </th>
-                    <th></th>
-                </tr>
-                @foreach (News news in Model)
-                {
-                    <tr>
-                        <td>
-                            @if (news.Contents.Count != 0)
-                            {
-                                @Html.DisplayFor(modelItem => news.Show().Subject)
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => news.Type.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modeItem => news.State)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => news.CreateTime)
-                        </td>
-                        <td>
-                            @Html.ActionLink(Basic.Edit, "Edit", new { id = news.Id }, new { @class = "btn" })
-                            <a data-toggle="popover" data-val="@news.Id" class="btn btn-danger" href="#">@Basic.Delete</a>
-                        </td>
-                    </tr>
-                }
-                <tfoot></tfoot>
-            </table>
-        </div>
-    }
-    else
-    {
-        <div class="alert">
-            <h6>No news found. 
-            </h6>
-        </div>
-    }
-    </text>)
+                             <table class="table table-condensed table-striped table-bordered">
+                                 <tr>
+                                     <th>Subject
+                                     </th>
+                                     <th>Type 
+                                     </th>
+                                     <th>
+                                         @Html.DisplayNameFor(model => model.State)
+                                     </th>
+                                     <th>
+                                         @Html.DisplayNameFor(model => model.CreateTime)
+                                     </th>
+                                     <th></th>
+                                 </tr>
+                                 @foreach (News news in Model)
+                                 {
+                                     <tr>
+                                         <td>
+                                             @if (news.Contents.Count != 0)
+                                             {
+                                                 @Html.DisplayFor(modelItem => news.Show().Subject)
+                                             }
+                                         </td>
+                                         <td>
+                                             @Html.DisplayFor(modelItem => news.Type.Name)
+                                         </td>
+                                         <td>
+                                             @Html.DisplayFor(modeItem => news.State)
+                                         </td>
+                                         <td>
+                                             @Html.DisplayFor(modelItem => news.CreateTime)
+                                         </td>
+                                         <td>
+                                             @Html.ActionLink(Basic.Edit, "Edit", new {id = news.Id}, new {@class = "btn"})
+                                             <a data-toggle="popover" data-val="@news.Id" class="btn btn-danger" href="#">@Basic.Delete</a>
+                                         </td>
+                                     </tr>
+                                 }
+                                 <tfoot></tfoot>
+                             </table>
+                         </div>
+                     }
+                     else
+                     {
+                         <div class="alert">
+                             <h6>No news found. 
+                             </h6>
+                         </div>
+                     }
+                 </text>)
 }
 
 

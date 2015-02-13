@@ -1,10 +1,10 @@
 ﻿@using System.Web.Optimization
 
 require.config({
-baseUrl:"/Scripts/",
+        baseUrl:"/scripts/",
 paths: {
-        jqueryui:"@Scripts.Url("~/Scripts/jqueryui.js")",
-        bootstrap:"@Scripts.Url("~/Scripts/bootstrap.js")",
+        jqueryui:"/scripts/libs/jquery-ui-1.11.2",
+        bootstrap:"@Scripts.Url("~/scripts/bootstrap.js")",
         json2: "@Scripts.Url("~/scripts/json2")",
         form:"@Scripts.Url("~/scripts/plugin/jquery-form/jquery-form.min")",
         bootbox:"@Scripts.Url("~/scripts/plugin/bootbox/bootbox.min")",
@@ -12,52 +12,58 @@ paths: {
         sparkline:"@Scripts.Url("/scripts/plugin/sparkline/jquery.sparkline")",
         vaform:"plugin/vaForm/vaForm",
         wizard:"plugin/bootstrap-wizard/jquery.bootstrap.wizard.min",
-        socketio:"https://cdn.socket.io/socket.io-1.1.0",
+        socketio:"/scripts/libs/socket.io-1.3.2",
         ckeditor:"/scripts/plugin/ckeditor/ckeditor",
-        maxlength:"/Scripts/plugin/maxlength/bootstrap-maxlength.min",
+        maxlength:"/scripts/plugin/maxlength/bootstrap-maxlength.min",
         validate:'plugin/jquery-validate/jquery.validate',
         unobtrusive:'plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax',
-        bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap',
-        floatChart:'float',
-        smarkchat:'@Scripts.Url("~/Scripts/smark.chat.js")',
+        bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap', @*replace scripts\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js*@
+floatChart:'/scripts/float',
+        smarkchat:'@Scripts.Url("~/scripts/smark.chat.js")',
         touch:"plugin/jquery-touch/jquery.ui.touch-punch.min",
         "app.config":"app.config",
         util:"util",
         app:"app",
         jarvis:"smartwidgets/jarvis.widget.min",
         jarvismenu:"plugin/jarvismenu/jarvismenu",
+        smarkNotify:"/scripts/notification/SmartNotification.min",
+        select2:"plugin/select2/select2",
+        maskedinput:"plugin/masked-input/jquery.maskedinput.min",
+        mbBrowser:"plugin/msie-fix/jquery.mb.browser.min",
+        moment:"plugin/moment/moment.min",
+        bsslider:"plugin/bootstrap-slider/bootstrap-slider.min",
         @*avalon plugin*@
         pager:"@Scripts.Url("~/scripts/avalons/pager/pager")",
-        chat:"@Scripts.Url("~/Scripts/avalons/chat/chat")",
-        main:"@Scripts.Url("~/Scripts/modules/main")",
-        ornamentUi:"@Scripts.Url("~/Scripts/modules/ornamentUi")"
+        chat:"@Scripts.Url("~/scripts/avalons/chat/chat")",
+        main:"@Scripts.Url("~/scripts/modules/main")",
+        ornamentUi:"@Scripts.Url("~/scripts/modules/ornamentUi")",
+        orgSelect:"/MemberShips/scripts/Org/Org"
 },
 shim:{
-
-        bsvalid:['validate','unobtrusive'],
-        vaform:['bsvalid'],
+        
+        validate:["jquery"],
+        maxlength:["jquery"],
+        unobtrusive:["jquery"],
+        bsvalid:['jquery','validate','unobtrusive'],
+        vaform:['jquery','validate','unobtrusive','bsvalid'],
         bootstrap:['jquery'],
+        jarvismenu:["jquery"],
         touch:['jquery'],
         "app.config":['jquery'],
-         util:['jquery'],
-        app:['jquery',"jarvis","jarvismenu","sparkline","floatChart"],
+        util:['bootstrap','app'],
+        app:['jquery',"jarvis","jarvismenu","sparkline",@*"floatChart"*@],
         jarvis:['jquery'],
-        smarkchat:['jqueryui',"smarkchat",],
+        smarkchat:['jqueryui'],
         touch:['jqueryui'],
+        smarkNotify:["jquery"],
+        select2:["jquery"],
+        maskedinput:["jquery"],
+        mbBrowser:["jquery"],
+        bsslider:["jquery"],
+        bootbox:["bootstrap"]
     }
 });
 
 
-require(["jquery","jqueryui","bootstrap","app.config","floatChart",
-"touch",
-"/scripts/notification/SmartNotification.min.js",
-"/scripts/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js",
-"/scripts/plugin/masked-input/jquery.maskedinput.min.js",
-"/scripts/plugin/select2/select2.min.js",
-"/scripts/plugin/bootstrap-slider/bootstrap-slider.min.js",
-"/scripts/plugin/msie-fix/jquery.mb.browser.min.js",
-"/scripts/plugin/moment/moment.min.js",
-"/scripts/plugin/fullcalendar/jquery.fullcalendar.min.js",
-"app","util",
-"main"]);
+
 

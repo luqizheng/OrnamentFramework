@@ -38,9 +38,8 @@
 
     function init() {
         model = avalon.define('index', function (vm) {
-            vm.edit = function (e) {
-                var m = this.$vmodel.el;
-                vm.curRole = m;
+            vm.edit = function (el,e) {
+                vm.curRole = el;
                 avalon.mix(editable, vm.curRole);
                 editable.editing = true;
                 editable.editTitle = messages.editRole;

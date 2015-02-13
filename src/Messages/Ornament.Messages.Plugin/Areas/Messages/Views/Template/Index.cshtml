@@ -1,10 +1,7 @@
 ﻿@using Ornament
-@using Ornament.Web
-@using Ornament.Web.Bundles
 @using Ornament.Web.UI.Theme
-@using SeajsBundles
 @using Basic = Ornament.Properties.Resources
-@model System.Collections.Generic.IEnumerable<ornament.messages.notification.notifymessagetemplate>
+@model Ornament.Messages.Notification.NotifyMessageTemplate
 
 @{
     ViewBag.Title = "Template for Simple Message";
@@ -14,22 +11,23 @@
     <h2>Template for Simple Message</h2>
 }
 
-@using (var panel = Html.Panel(new PanelOption()
+@using (Panel panel = Html.Panel(new PanelOption
 {
-    HtmlAttributes = new Dictionary<string, object>()
+    HtmlAttributes = new Dictionary<string, object>
     {
-        {"ms-controller","templateIndex"}
+        {"ms-controller", "templateIndex"}
     }
 }))
 {
     @panel.Header(@<text>
-    <h2>Template List</h2>
+                       <h2>Template List</h2>
 
-                   </text>);
-    
+                   </text>)
+    ;
+
     @panel.Body(@<text>
                      <div class="widget-body-toolbar">
-                            <a class="btn btn-info" href="@Url.Action("Create")">@Basic.Create</a>    
+                         <a class="btn btn-info" href="#@Url.Action("Create")">@Basic.Create</a>    
                      </div>
 
                      <table class="table table-condensed table-striped table-bordered">
@@ -61,15 +59,19 @@
 
 
 
-                 </text>);
+                 </text>)
+    ;
 }
 
 @section scripts
 {
     <script type="text/javascript">
-        require(["@Scripts.Url("~/Messages/Scripts/Template/Index.js")"], function (init) {
-            init.init();
-            clearPageVariable.push(init.clear);
+        require(["/Scripts/Config.js"], function() {
+            require(["@Scripts.Url("~/Messages/Scripts/Template/Index.js")"], function(init) {
+                init.init();
+                clearPageVariable.push(init.clear);
+            });
         });
+
     </script>
 }

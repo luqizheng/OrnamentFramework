@@ -1472,7 +1472,7 @@
                     if (events[type]) {
                         param = type
                         type = "on"
-                    } else if (type === "enabled") {//吃掉ms-enabled绑定,用ms-disabled代替
+                    } else if (type === "enabled") {//吃掉ms-enabled绑定,用ms-attr-disabled代替
                         type = "disabled"
                         value = "!(" + value + ")"
                     }

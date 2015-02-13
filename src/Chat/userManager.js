@@ -2,11 +2,12 @@
  * Created by leo on 2014/10/21.
  */
 var sso = require("./sso"),
-    onlineUser = require("./onlineUser");
+    onlineUser = require("./onlineUser"),
+    orgManager = require("./config/orgSetting");
 
 /**
  *
- * @param data{loginId:"",publicKey:"",name:"username},
+ * @param data{loginId:"",publicKey:"",name:"username}, or data{org:''}
  * @param socket
  * @param callback
  */
@@ -15,24 +16,32 @@ var valid = function (data, socket, callback) {
      data.loginId=XXX,
      data.publicKey=XX,
      data.name=""
+     or
+     data.org=XXX;
      */
-    console.log('starting to valid publicKey:' + data.publicKey + " loginid:" + data.loginId);
-    sso.validPublicKey(data.publicKey, function (result) {
-        console.log("sso validate result:" + JSON.stringify(result));
-        if (result.success) {
-            if (result.loginId == data.loginId) {
-                onlineUser.addUser(data,socket)
-                callback(result);
+    if (data.loginId !== undefined) {
+        sso.validPublicKey(data.publicKey, function (result) {
+            console.log("sso validate result:" + JSON.stringify(result));
+            if (result.success) {
+                if (result.loginId == data.loginId) {
+                    onlineUser.addUser(data, socket)
+                    callback(result);
+                }
+                else {
+                    console.log("loginid not equal")
+                    result.error = "loginid not correct";
+                    callback(result);
+                    return;
+                }
             }
-            else {
-                console.log("loginid not equal")
-                result.error = "loginid not correct";
-                callback(result);
-                return;
-            }
-        }
-
-    })
+        })
+    }
+    else {
+        console.log("validate is org info,"+JSON.stringify(data))
+        callback(true);
+        //var org = orgManager.get(data.Org);
+        //org.valid(data.CreateDate, data.PublicKey, callback);
+    }
 }
 /**
  *

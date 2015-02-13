@@ -1,34 +1,30 @@
-﻿@using System.ComponentModel.DataAnnotations
-@using Qi.Web.Mvc.ClientValidations.Adapters
-@model Int64?
+﻿@model Int64?
+
 @{
-    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var inputName = ViewData.TemplateInfo.HtmlFieldPrefix;
-    Int64 step = 1;
-
-    foreach (var attr in ViewData.ModelMetadata.GetValidators(this.ViewContext))
+    IDictionary<string, object> htmlAttris = null;
+    if (ViewData.ContainsKey("HtmlAttributes"))
     {
-        var b = attr as DateRangeAdapter;
-        if (b != null)
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        if (!htmlAttris.ContainsKey("class"))
         {
-            foreach (ModelClientValidationRule mcvr in b.GetClientValidationRules())
-            {
-                step = Convert.ToInt64(mcvr.ValidationParameters["step"]);
-            }
-            break;
-        }
+            htmlAttris.Add("class", "spinner");
 
+        }
+        else
+        {
+            htmlAttris["class"] += " spinner";
+        }
     }
+    else
+    {
+        htmlAttris = new Dictionary<string, object>()
+        {
+            {"class", "spinner"}
+        };
+    }
+    
 }
 
-<div class="control-group">
-    @Html.Label(inputName, display, new { @class = "control-label" })
-    <div class="controls">
-        @Html.TextBox("", this.Model ?? 0, new Dictionary<string, object>(){
-            { "class" , "styled jqui-spinner"},
-            {"jq-step",step }
-        })
-        @Html.ValidationMessage("")
-    </div>
-</div>
-<script type="text/javascript">seajs.use(["formInput"])</script>
+
+
+@Html.TextBox("", Model ?? 0, htmlAttris)

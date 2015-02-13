@@ -162,9 +162,6 @@
   <data name="input_password_again" xml:space="preserve">
     <value>Confirm can't be blank.</value>
   </data>
-  <data name="label_AccountOrEmail" xml:space="preserve">
-    <value>Account Or Email</value>
-  </data>
   <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
     <value>Child Org's Count</value>
   </data>
@@ -183,8 +180,8 @@
   <data name="AccountInfo" xml:space="preserve">
     <value>Setting</value>
   </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
-    <value>Please input login ID or email address.</value>
+  <data name="alertMsg_RequireAccount" xml:space="preserve">
+    <value>Please input login ID.</value>
   </data>
   <data name="alertMsg_requireVerifyCode" xml:space="preserve">
     <value>Please input verify code.</value>
@@ -206,9 +203,6 @@
   </data>
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>Role name is exist, please input another one.</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
   </data>
   <data name="alertMsg_PermissionNotPermintAccessUsers" xml:space="preserve">
     <value>permission denied can not access users</value>

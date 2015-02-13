@@ -17,6 +17,9 @@ namespace WebApplication.App_Start
             //新的Attribute，用于JquerUI spinner控件一起用
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof (DateRangeAttribute),
                 typeof (DateRangeAdapter));
+            
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(QiRangeAttribute),
+                typeof(QiRangeAttributeAdapter));
         }
     }
 }

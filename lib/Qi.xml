@@ -128,14 +128,13 @@
         </member>
         <member name="M:Qi.Domain.Attributes.DateRangeAttribute.#ctor(System.String,System.String)">
             <summary>
-            
             </summary>
             <param name="minDate">请输入 2014-10-01</param>
             <param name="maxDate">请输入2014-09-02</param>
         </member>
         <member name="M:Qi.Domain.Attributes.DateRangeAttribute.#ctor(System.String,System.String,System.String,System.String)">
             <summary>
-            初始化DateRange。请与DisplayFormat设置客户端插件接受的日期格式。
+                初始化DateRange。请与DisplayFormat设置客户端插件接受的日期格式。
             </summary>
             <param name="minDate"></param>
             <param name="maxDate"></param>
@@ -160,7 +159,7 @@
             <param name="dateValue"></param>
             <returns></returns>
         </member>
-        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.DateDateFromatForTranslate">
+        <member name="P:Qi.Domain.Attributes.DateRangeAttribute.DateFromatForTranslate">
             <summary>
             </summary>
         </member>
@@ -179,12 +178,10 @@
         </member>
         <member name="T:Qi.Domain.Attributes.QiRangeAttribute">
             <summary>
-            
             </summary>
         </member>
         <member name="M:Qi.Domain.Attributes.QiRangeAttribute.#ctor(System.Double,System.Double,System.Double)">
             <summary>
-            
             </summary>
             <param name="min"></param>
             <param name="max"></param>
@@ -192,7 +189,6 @@
         </member>
         <member name="M:Qi.Domain.Attributes.QiRangeAttribute.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
-            
             </summary>
             <param name="min"></param>
             <param name="max"></param>
@@ -200,7 +196,6 @@
         </member>
         <member name="P:Qi.Domain.Attributes.QiRangeAttribute.Step">
             <summary>
-            
             </summary>
         </member>
         <member name="T:Qi.Draw.ResizePic">

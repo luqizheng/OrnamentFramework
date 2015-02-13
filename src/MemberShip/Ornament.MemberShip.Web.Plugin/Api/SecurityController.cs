@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Http;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models.Security;
 using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Qi.Web.Http;
 

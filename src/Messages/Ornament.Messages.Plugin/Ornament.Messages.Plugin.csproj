@@ -65,6 +65,9 @@
     <Reference Include="Qi.NHibernateExtender">
       <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
+    <Reference Include="Qi.Web">
+      <HintPath>..\..\..\lib\Qi.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -123,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Messages\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Messages\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsController.cs" />
     <Compile Include="Areas\Messages\Controllers\NewsTypeController.cs" />
     <Compile Include="Areas\Messages\Controllers\PersonalController.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="Areas\Messages\Models\Messages\MessageTemplateModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\NewsTypeModel.cs" />
     <Compile Include="Areas\Messages\Models\Messages\PersonalMessageModel.cs" />
+    <Compile Include="Areas\Messages\Models\PublisherTemplate.cs" />
     <Compile Include="Areas\Messages\Models\SenderModel.cs" />
     <Compile Include="Models\MessageInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +154,8 @@
     <EmbeddedResource Include="Scripts\Template\Create.js" />
     <EmbeddedResource Include="Scripts\Config\Index.js" />
     <EmbeddedResource Include="Scripts\Sender\Index.js" />
+    <EmbeddedResource Include="Scripts\Template\publish.js" />
+    <EmbeddedResource Include="Areas\Messages\Views\Dashboard\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -173,6 +180,10 @@
     <ProjectReference Include="..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MemberShip\Ornament.MemberShip.Web.Plugin\Ornament.MemberShip.Web.Plugin.csproj">
+      <Project>{89e3b336-7aeb-4804-af20-f6eefac05b8e}</Project>
+      <Name>Ornament.MemberShip.Web.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
@@ -236,9 +247,6 @@
     <EmbeddedResource Include="Areas\Messages\Views\Template\App_LocalResources\Edit.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Messages\Views\Template\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Template\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +266,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Messages\Views\Sender\_client.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Messages\Views\Template\Publish.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,16 +1,18 @@
-﻿define(function (require) {
-    var org = require("/MemberShips/Scripts/Share/Org.js");
+﻿define(["require","/MemberShips/Scripts/Share/Org.js"],function (require,org) {
+    
 
     function Init() {
-        avalon.define('index', function (vm) {
-            vm.treeRender = function () {
+        
+        var indexModel=avalon.define({
+            $id:'index',
+            treeRender :function () {
                 return arguments[0];
-            };
-            vm.orgs = [{ Name: "", Id: "", Childs: [] }];
-            vm.addSub = function (e) {
-                var self = this.$vmodel.el || null;
+            },
+            orgs :[{ Name: "", Id: "", Childs: [] }],
+            addSub : function (el, e) {
+                var self = el || null;
                 var newOrg = {
-                    Name: "New Org",
+                    Name: "The Org",
                     Remarks: "",
                     Parent: self ? self.Id : null,
                     Roles: []
@@ -24,7 +26,7 @@
                             Childs: []
                         };
                         if (newOrg.Parent == null) {
-                            vm.orgs.push(newItem);
+                            indexModel.orgs.push(newItem);
                         } else {
                             self.Childs.push(newItem);
                         }
@@ -32,22 +34,21 @@
                 });
 
                 e.preventDefault();
-            };
+            },
 
-            vm.del = function (e) {
-                var self = this.$vmodel;
-                if (confirm("是否删除组织单元" + self.el.Name)) {
-                    org.del(self.el.Id, function () {
-                        self.$model.$remove();
+            del: function (self, e, removeFunc) {
+                if (confirm("是否删除组织单元" + self.Name)) {
+                    org.del(self.Id, function () {
+                        removeFunc();
                     });
                 }
                 e.preventDefault();
-            };
+            },
 
-            vm.editModel = null;
-            vm.edit = function (e) {
-                vm.editModel = this.$vmodel.el;
-                org.get(this.$vmodel.el.Id, function (data) {
+            editModel : null,
+            edit : function (el, e) {
+                indexModel.editModel = el;
+                org.get(el.Id, function (data) {
                     var model = avalon.vmodels["edit"];
                     model.Id = data.Id;
                     model.Name = data.Name;
@@ -58,19 +59,20 @@
                 });
 
                 e.preventDefault();
-            };
-            vm.updateModel = function (name) {
-                vm.editModel.Name = name;
-            };
-            vm.toggle = function () {
-                if (this.$vmodel.el.Hide) {
-                    $(this).closest("li").find("ul:first").show('fast');
+            },
+            updateModel : function (name) {
+                indexModel.editModel.Name = name;
+            },
+            toggle : function (el) {
+                var tagle = $(this).closest("li").find("ul:first");
+                if (el.Hide) {
+                    tagle.show('fast');
                 } else {
-                    $(this).closest("li").find("ul:first").hide('fast');
+                    tagle.hide('fast');
                 }
-                this.$vmodel.el.Hide = !this.$vmodel.el.Hide;
-            };
-            vm.$skipArray = ["editModel"];
+                el.Hide = !el.Hide;
+            },
+            $skipArray : ["editModel"],
         });
 
         avalon.define('edit', function (vm) {
@@ -96,12 +98,13 @@
 
     return {
         init: function (orgDTO) {
-        Init();
-        avalon.vmodels["index"].orgs = orgDTO;
-        avalon.scan($("#content")[0]);
+            Init();
+            avalon.vmodels["index"].orgs = orgDTO;
+            avalon.scan($("#content")[0]);
 
-    },clear:function() {
-        delete avalon.vmodels["edit"];
-        delete avalon.vmodels["index"];
-    }};
+        }, clear: function () {
+            delete avalon.vmodels["edit"];
+            delete avalon.vmodels["index"];
+        }
+    };
 })

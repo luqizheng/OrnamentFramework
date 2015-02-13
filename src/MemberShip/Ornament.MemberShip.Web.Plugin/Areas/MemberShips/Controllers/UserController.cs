@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Ornament.MemberShip.Dao;
 using Ornament.MemberShip.Plugin.Models;
-using Ornament.MemberShip.Plugin.Models.Memberships;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.Memberships;
 using Ornament.Web.MemberShips;
@@ -145,6 +144,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 throw new MemberShipException("Not found user.");
             return View(new EditUserModel(user));
         }
+
         [HttpPost, ResourceAuthorize(UserOperator.Modify, "User"),
          ValidateAjax(Order = 2), Session(Transaction = true)]
         //[JQueryArrayFilter("Permissions.Roles",Order=1)]
@@ -164,7 +164,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             return Json(userBasicInfo);
         }
 
-       
+
         [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,userCreateTitle",
             ParentKey = "User",
             Resource = "User", Operator = UserOperator.Modify)
@@ -174,8 +174,6 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         {
             return View(new EditUserModel());
         }
-
-       
 
 
         [HttpPost, ResourceAuthorize(UserOperator.Delete, "MessageReader")]

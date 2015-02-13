@@ -41,7 +41,7 @@ namespace Ornament.Web
         public static MvcHtmlString EditorForOrgTree<TModel, TValue>(this HtmlHelper<TModel> helper,
                 Expression<Func<TModel, TValue>> func)
         {
-            return helper.MemberShipEditorFor(func, "OrgTree");
+            return helper.MemberShipEditorFor(func, "Org");
         }
 
         /// <summary>

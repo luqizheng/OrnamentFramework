@@ -3,10 +3,10 @@ using Qi.Domain;
 
 namespace Ornament.Regions.Dao
 {
-    public interface IAreaDao : IDao<int, Area>
+    public interface IAreaDao : IDao<int, District>
     {
-        IList<Area> FindByCity(City city);
+        IList<District> FindByCity(City city);
 
-        Area FindByName(string name, City city);
+        District FindByName(string name, City city);
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models.Security;
+using Ornament.MemberShip.Web.Plugin.Models.Security;
 using Ornament.MemberShip.Web.Plugin.Properties;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials

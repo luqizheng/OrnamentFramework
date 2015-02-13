@@ -107,15 +107,23 @@ namespace Ornament.MemberShip
         [Display(Name = "FirstName", ResourceType = typeof(Resources))]
         [MaxLength(64)]
         string FirstName { get; set; }
-
+        
         [Display(Name = "LastName", ResourceType = typeof(Resources))]
         [MaxLength(64)]
         string LastName { get; set; }
-
+        /// <summary>
+        /// 设置生日日期
+        /// </summary>
         [Display(Name = "Birthday", ResourceType = typeof(Resources))]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
         [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd","yy/mm/dd")]
         DateTime? Birthday { get; set; }
+        /// <summary>
+        /// 性別，默認是unknow
+        /// 
+        /// </summary>
+        [Display(Name="Gender",ResourceType = typeof(Resources))]
+         GenderType? Gender { get; set; }
     }
 }

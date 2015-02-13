@@ -1,5 +1,6 @@
 ﻿/*
-Modify by Williams.
+This modify base on 
+\src\Mvc5WebApplication\Scripts\plugin\jquery.validate.unobtrusive\jquery.validate.unobtrusive.js
 */
 
 (function ($) {
@@ -39,7 +40,7 @@ Modify by Williams.
             replaceAttrValue = container.attr("data-valmsg-replace"),
             replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) !== false : null;
 
-        container.removeClass("field-validation-valid").addClass("field-validation-error");
+        container.removeClass("field-validation-valid").addClass("field-validation-error help-block");
         error.data("unobtrusiveContainer", container);
 
         if (replace) {

@@ -16,8 +16,8 @@ define(function (require) {
             //Search content
             vm.content = "";
 
-            vm.retievePwd = function () {
-                var loginId = this.$vmodel.el.LoginId;
+            vm.retievePwd = function (el) {
+                var loginId = el.LoginId;
                 userApi.RetrievePassword(loginId, function (e) {
                     alert(e.success ?
                         lang.retrievePwdMessage.success :
@@ -26,8 +26,8 @@ define(function (require) {
                     //showLoading.call(self, false);
                 });
             };
-            vm.verifyEmail = function () {
-                var model = this.$vmodel.el;
+            vm.verifyEmail = function (model) {
+                
                 userApi.VerifyEmail(model.Id, function (e) {
                     alert(e.success ?
                         lang.verifyEmailMessage.success :
@@ -37,10 +37,7 @@ define(function (require) {
                 });
                 return false;
             };
-            vm.edit = function () {
-                var loginid = this.$vmodel.el.LoginId;
-                loadURL("/MemberShips/User/Edit/" + loginid, $("#content"));
-            };
+            
             vm.search = function (e) {
                 avalon.vmodels.pager.nav(0);
                 e.preventDefault();
@@ -51,32 +48,31 @@ define(function (require) {
                     find(pageIndex, pageSize, model.content, func);
                 }
             };
-            vm.lock = function (bLock) {
-                var user = this.$vmodel.el.$model, self = this;
+            vm.lock = function (user, bLock) {
+                
                 if (typeof bLock !== "boolean") {
                     bLock = !user.IsLocked;
                 };
                 userApi.Lock(user.Id, bLock, function (result) {
                     if (result.success) {
-                        self.$vmodel.el.IsLocked = bLock;
+                        user.IsLocked = bLock;
                     }
                 });
             };
             vm.total =7;
-            vm.deny = function (bDeny) {
+            vm.deny = function (user, bDeny) {
                 /// <summary>
                 ///     锁定用户
                 /// </summary>
                 /// <param name="id"></param>
                 /// <param name="bLock"></param>
                 /// <param name="process"></param>
-                var user = this.$vmodel.el.$model, self = this;
                 if (typeof bDeny !== "boolean") {
                     bDeny = !user.Deny;
                 }
                 userApi.Deny(user.Id, bDeny, function (result) {
                     if (result.success) {
-                        self.$vmodel.el.Deny = bDeny;
+                        user.Deny = bDeny;
                     }
                 });
             };
@@ -113,7 +109,8 @@ define(function (require) {
                 avalon.scan();
             });
         },
-        clear:function() {
+        clear: function () {
+            
             delete avalon.vmodels["index"];
         }
     };

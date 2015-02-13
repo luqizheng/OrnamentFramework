@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using Ornament.Messages.Notification;
 using Ornament.Messages.Notification.Senders;
 using Qi;
 using Qi.IO.Serialization;
-using SocketIOClient;
 
 namespace Ornament.Messages.Config
 {
@@ -29,7 +26,7 @@ namespace Ornament.Messages.Config
             _senders = new Dictionary<string, Type>();
             ReloadVariables();
 
-            _senders = new Dictionary<string, Type>()
+            _senders = new Dictionary<string, Type>
             {
                 {"Email", typeof (EmailSender)},
                 {"Client", typeof (ClientSender)}
@@ -39,27 +36,42 @@ namespace Ornament.Messages.Config
         /// <summary>
         ///     固定变量列表,当遇到的相同的就会替换到
         /// </summary>
-        public Dictionary<string, string> Variables
+        public IDictionary<string, string> Variables
         {
             get { return _variables ?? (_variables = new Dictionary<string, string>()); }
+        }
+
+        public IDictionary<string, Type> SenderTypes
+        {
+            get { return _senders; }
+        }
+
+        /// <summary>
+        ///     localVariable和GloablVariable进行合并，localVariable优先
+        /// </summary>
+        /// <param name="localVariables"></param>
+        /// <returns>localVariables</returns>
+        public IDictionary<string,string> MergnGloablVariable(IDictionary<string, string> localVariables)
+        {
+            foreach (string key in Variables.Keys)
+            {
+                if (!localVariables.ContainsKey(key))
+                {
+                    localVariables.Add(key, Variables[key]);
+                }
+            }
+            return localVariables;
         }
 
         /// <summary>
         ///     添加发送器
         /// </summary>
-
         public void Add(string name, Type senderType)
         {
             if (senderType == null) throw new ArgumentNullException("senderType");
 
 
             _senders.Add(name, senderType);
-
-        }
-
-        public IDictionary<string, Type> SenderTypes
-        {
-            get { return _senders; }
         }
 
 

@@ -11,7 +11,7 @@ namespace Ornament.Messages.Dao.NHibernateImple.Mapping
             this.Map(s => s.Port);
             this.Map(s => s.SmtpServer).Length(64);
             this.Map(s => s.FromEmail).Length(64);
-            this.Map(s => s.UserName).Length(64);
+            this.Map(s => s.Account).Length(64);
             this.Map(s => s.Password).Length(128);
         }
     }

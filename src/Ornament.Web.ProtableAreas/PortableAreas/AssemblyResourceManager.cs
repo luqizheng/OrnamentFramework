@@ -18,7 +18,19 @@ namespace Ornament.Web.PortableAreas
         public static AssemblyResourceStore GetResourceStoreFromVirtualPath(string virtualPath)
         {
             string path = VirtualPathUtility.ToAppRelative(virtualPath).ToLower();
-            return (from pair in AssemblyResourceStores.Reverse() where path.Contains(pair.Key) && pair.Value.IsPathResourceStream(path) select pair.Value).FirstOrDefault();
+#if DEBUG
+            foreach (var key in AssemblyResourceStores.Keys)
+            {
+                if (path.Contains(key) && AssemblyResourceStores[key].IsPathResourceStream(path))
+                {
+                    return AssemblyResourceStores[key];
+                }
+            }
+            return null;
+#else
+                       return (from pair in AssemblyResourceStores.Reverse() where path.Contains(pair.Key) && pair.Value.IsPathResourceStream(path) select pair.Value).FirstOrDefault();
+#endif
+
         }
 
         private static Dictionary<string, AssemblyResourceStore> InitializeAssemblyResourceStores()

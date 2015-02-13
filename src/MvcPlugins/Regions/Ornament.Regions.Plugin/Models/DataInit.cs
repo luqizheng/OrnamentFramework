@@ -40,8 +40,8 @@ namespace Ornament.Regions.Plugin.Models
                 cityDao.Save(city);
             }
             IAreaDao areaDao = factory.CreateAreaDao();
-            var areas = Area.CreateData(cities);
-            foreach (Area city in areas)
+            var areas = District.CreateData(cities);
+            foreach (District city in areas)
             {
                 areaDao.Save(city);
             }

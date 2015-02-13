@@ -1,6 +1,6 @@
 ﻿using Ornament.MemberShip.Dao;
-using Ornament.MemberShip.Plugin.Models.Memberships.Partials;
 using Ornament.MemberShip.Security;
+using Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials;
 
 namespace Ornament.MemberShip.Web.Plugin.Models.Security
 {

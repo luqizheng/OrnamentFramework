@@ -7,7 +7,7 @@ var provider = function (collectionName) {
     this.db = null;
     this.do = function (action) {
 
-        if(this.db==null) {
+        if (this.db == null) {
             MongoClient.connect(url, function (err, db) {
 
                 console.log("get collection from db name=" + collectionName);
@@ -20,10 +20,15 @@ var provider = function (collectionName) {
                     collection = db.collection(collectionName);
                 }
                 console.log(collectionName + " is exist.")
-                action(collection);
+                try {
+                    action(collection);
+                }
+                catch (err) {
+                    console.log("dao.js" + err);
+                }
             });
         }
-        else{
+        else {
             var collection = this.db.collection(collectionName);
             action(collection);
         }

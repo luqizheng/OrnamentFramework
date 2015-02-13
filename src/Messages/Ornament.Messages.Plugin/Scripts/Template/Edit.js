@@ -1,66 +1,77 @@
 ﻿
-define(function (require) {
+define(function(require) {
 
     var model;
+
     function definedAvalon(editor) {
-        model = avalon.define("editTemp", function (vm) {
+        model = avalon.define("editTemp", function(vm) {
             vm.Name = "";
             vm.Remark = "";
             vm.Contents = [];
-            vm.content = { //current editing content.
+            vm.content = {
+//current editing content.
                 Value: "",
                 Subject: "",
                 Language: ""
             };
 
             vm.Language = "";
-            vm.$watch("Language", function (newValue) {
-                var content = null;
+            vm.$watch("Language", function(newValue) {
+                var findContent = false;
                 for (var i = 0; i < vm.Contents.length; i++) {
                     if (vm.Contents[i].Language == newValue) {
-                        content = vm.Contents[i];
+                        findContent = true;
                         vm.content = vm.Contents[i];
                         break;
                     }
                 }
-                if (content == null) {
-                    content = {
+                if (!findContent) {
+                    vm.content = {
                         Value: "",
-                        Name: "",
-                        Language: newValue
+                        Language: newValue,
+                        Subject: "",
                     };
-                    vm.Contents.push(content);
+                    vm.Contents.push(vm.content);
                 }
 
-                editor.setData(content.Value);
+                editor.setData(vm.content.Value);
             });
         });
 
     }
+
     function Init(template, editor) {
 
         model.Name = template.Name;
         model.Remark = template.Remark;
         model.Contents = template.Contents;
-        if (template.Contents.length != 0) {
+        if (template.Contents && template.Contents[0]) {
             model.Language = template.Contents[0].Language;
         }
 
 
-        editor.on("blur", function () {
+        editor.on("blur", function() {
             if (model.content.Subject != "") {
-                model.content = editor.getData();
+                model.content.Value = editor.getData();
             }
         });
 
         $("#editTemp").vaform({
-            success: function (rdata) {
+            success: function(rdata) {
                 alert(rdata.success ? "Save success." : rdata.message);
             },
-            done: function () {
+            done: function() {
                 $("#subMitData").prop('disabled', false);
             },
-            before: function () {
+            before: function(postData) {
+                postData.Contents = [];
+                for (var i = 0; i < model.Contents.length; i++) {
+                    postData.Contents.push({
+                        Subject: model.Contents[i].Subject,
+                        Language: model.Contents[i].Language,
+                        Value: model.Contents[i].Value
+                    });
+                }
                 $("#subMitData").prop('disabled', true);
             }
         });
@@ -68,9 +79,9 @@ define(function (require) {
     };
 
     return {
-        init: function (template) {
+        init: function(template) {
 
-            require(["vaform", "ckeditor"], function () {
+            require(["vaform", "ckeditor"], function() {
 
                 var editor = CKEDITOR.instances["Content"];
                 definedAvalon(editor);
@@ -78,10 +89,9 @@ define(function (require) {
                 Init(template, editor);
             });
         },
-        clear: function () {
+        clear: function() {
             delete avalon.vmodels["editTemp"];
         }
 
-    }
-
+    };
 })

@@ -13,31 +13,34 @@
     Layout = OrnamentContext.Configuration.Layout();
     bool editPermission = OrnamentContext.MemberShip.HasRight(ResourceSetting.User, UserOperator.Modify);
 }
-    
-    @section pageTitle{
-        <i class="fa fa-users"></i>
-        @ViewBag.Title
-    }
+
+@section pageTitle{
+    <i class="fa fa-users"></i>
+    @ViewBag.Title
+}
 
 @section scripts 
 {
     <script type="text/javascript">
-        require(['@Scripts.Url("~/MemberShips/Scripts/User/Index.js")'], function(main) {
-            var multiLanguate = {
-                verifyEmailMessage: {
-                    success: '@Html.GetEmbededResourceString("verify_email_success")',
-                    fail: '@Html.GetEmbededResourceString("verify_email_fail")'
-                },
-                retrievePwdMessage: {
-                    success: '@Html.GetEmbededResourceString("retrieve_pwd_success")',
+        require(['/Scripts/config.js'], function () {
+            require(['@Scripts.Url("~/MemberShips/Scripts/User/Index.js")'], function (main) {
+                var multiLanguate = {
+                    verifyEmailMessage: {
+                        success: '@Html.GetEmbededResourceString("verify_email_success")',
+                        fail: '@Html.GetEmbededResourceString("verify_email_fail")'
+                    },
+                    retrievePwdMessage: {
+                        success: '@Html.GetEmbededResourceString("retrieve_pwd_success")',
                     fail: '@Html.GetEmbededResourceString("retrieve_pwd_fail")'
                 }
-            };
+                };
 
-            main.init(multiLanguate);
-            clearPageVariable.push(main.clear);
-        });
-        
+                main.init(multiLanguate);
+                clearPageVariable.push(main.clear);
+            });
+
+        })
+
     </script>}
 
 @using (var panel = Html.Panel(new PanelOption()
@@ -48,145 +51,144 @@
 }))
 {
     @panel.Header(@<text>
-                      <h2>@Html.GetEmbededResourceString("page_title")</h2>
-                  </text>);
+    <h2>@Html.GetEmbededResourceString("page_title")</h2>
+    </text>);
 
     @panel.Body(@<text>
-                     <div ms-controller="index">
-                         <form class="input-group input-group-lg" ms-submit="search">
-                             <input type="text" ms-class-ui-autocomplete-loading="loading"
+    <div ms-controller="index">
+        <form class="input-group input-group-lg" ms-submit="search($event)">
+            <input type="text" ms-class-ui-autocomplete-loading="loading"
                                  placeholder="@Html.GetEmbededResourceString("Search_tips")" class="form-control input-lg" ms-duplex="content">
-                                   <div class="input-group-btn">
-                                       <button class="btn btn-default" type="submit">
-                                           <i class="fa fa-fw fa-search fa-lg"></i>
-                                       </button>
-                                   </div>
-                               </form>
-                         <h1 class="font-md"> @Html.GetEmbededResourceString("UserSearchResult")<small class="text-danger"> &nbsp;&nbsp;({{total}} users)</small></h1>
-                         <a type="button" class="btn btn-primary" href="#@Url.Action("Create")">
-                             <i class="icon-plus-sign"></i> 
-                             @Ornament.Properties.Resources.Add
-                         </a>
-                         <br />
-                         <div class="table-responsive">
-                    
-                             <table class="table table-striped table-bordered table-hover">
-                                 <thead>
-                                     <tr>
-                                         <th></th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.LoginId)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Name)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Contact.Email)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Contact.Phone)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.IsDeny)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Security.IsLocked)
-                                         </th>
-                                         <th>
-                                             @Html.DisplayNameFor(model => model.Other.LastActivityDate)
-                                         </th>
-                                     </tr>
-                                 </thead>
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="fa fa-fw fa-search fa-lg"></i>
+                </button>
+            </div>
+        </form>
+        <h1 class="font-md">@Html.GetEmbededResourceString("UserSearchResult")<small class="text-danger"> &nbsp;&nbsp;({{total}} users)</small></h1>
+        <a type="button" class="btn btn-primary" href="#@Url.Action("Create")">
+            <i class="icon-plus-sign"></i>
+            @Ornament.Properties.Resources.Add
+        </a>
+        <br />
+        <div class="table-responsive">
 
-                                 <tbody ms-if="users.length!=0">
-                                     <tr ms-repeat-el="users"
-                                         ms-attr-data="{{el.Id}}"
-                                         ms-attr-loginid="{{el.LoginId}}">
-                                         <td>
-                                             <a class="btn btn-default btn-xs" ms-href="#/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
-                                         </td>
-                                         <td ms-text="el.LoginId"></td>
-                                         <td ms-text="el.Name"></td>
-                                         <td>
-                                 
-                                             <span ms-text="el.Email"></span>
-                                             <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" ms-click="verifyEmail"
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LoginId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contact.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contact.Phone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsDeny)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Security.IsLocked)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Other.LastActivityDate)
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody ms-if="users.length!=0">
+                    <tr ms-repeat-el="users"
+                        ms-attr-data="{{el.Id}}"
+                        ms-attr-loginid="{{el.LoginId}}">
+                        <td>
+                            <a class="btn btn-default btn-xs" ms-href="#/MemberShips/User/Edit/{{el.LoginId}}"><i class="fa fa-edit"></i></a>
+                        </td>
+                        <td ms-text="el.LoginId"></td>
+                        <td ms-text="el.Name"></td>
+                        <td>
+
+                            <span ms-text="el.Email"></span>
+                            <a class="btn btn-default btn-xs" ms-if="el.EmailVerified==false && el.Email!='' && el.Email!=null" 
+                                                 ms-click="verifyEmail(el)"
                                                 title="@Ornament.MemberShip.Web.Plugin.Properties.Resources.VerifyEmail">
-                                                 <i class="fa  fa-flag-o"></i>
-                                                 @Html.GetEmbededResourceString("Verify")
-                                             </a>
-                                         </td>
-                                         <td ms-text="el.Phone"></td>
-                                         <td>
-                                             <div class="btn-group">
-                                                 <a class="btn btn-default btn-xs" ms-click="deny">
-                                                     <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
-                                                 </a>
-                                                 <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
-                                                     <i class="caret"></i>
-                                                 </a>
-                                                 <ul class="dropdown-menu">
-                                                     <li><a href="#" ms-click="deny(true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
-                                                     <li><a href="#" ms-click="deny(false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
-                                                 </ul>
-                                             </div>
-                                         </td>
-                                         <td>
-                                             <div class="btn-group">
-                                                 <a class="btn btn-default btn-xs" ms-click="lock">
-                                                     <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
-                                                 </a>
-                                                 <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
-                                                     <i class="caret"></i>
-                                                 </a>
-                                                 <ul class="dropdown-menu">
-                                                     <li><a href="#" ms-click="lock(true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
-                                                     <li><a href="#" ms-click="lock(false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
-                                                 </ul>
-                                             </div>
-                                         </td>
-                                         <td ms-text="el.LastActivityDate"></td>
-                                     </tr>
-                                 </tbody>
-                                 <tbody ms-if="users.length==0">
-                                     <tr>
-                                         <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
-                                     </tr>
-                                 </tbody>
-                                 <tfoot>
-                                     <tr>
-                                         <td colspan="8" ms-widget="pager">
-                                         </td>
-                                     </tr>
-                                 </tfoot>
-                             </table>
-                         </div>
-                     </div>
-</text>);
+                                <i class="fa  fa-flag-o"></i>
+                                @Html.GetEmbededResourceString("Verify")
+                            </a>
+                        </td>
+                        <td ms-text="el.Phone"></td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" ms-click="deny(el)">
+                                    <i class="fa" ms-class="fa-times:el.Deny" ms-class-1="fa-check:el.Deny==false"></i>
+                                </a>
+                                <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="caret"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" ms-click="deny(el,true)"><i class="fa fa-remove"></i>@Html.GetEmbededResourceString("Deny")</a></li>
+                                    <li><a href="#" ms-click="deny(el,false)"><i class="fa fa-ok"></i>@Html.GetEmbededResourceString("Allow")</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-xs" ms-click="lock(el)">
+                                    <i class="fa" ms-class="fa-lock:el.IsLocked" ms-class-1="fa-unlock:!el.IsLocked"></i>
+                                </a>
+                                <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="caret"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" ms-click="lock(el,true)"><i class="fa fa-lock"></i>@Html.GetEmbededResourceString("Lock")</a></li>
+                                    <li><a href="#" ms-click="lock(el,false)"><i class="fa fa-unlock"></i>@Html.GetEmbededResourceString("Unlock")</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td ms-text="el.LastActivityDate"></td>
+                    </tr>
+                </tbody>
+                <tbody ms-if="users.length==0">
+                    <tr>
+                        <td colspan="8">@Html.GetEmbededResourceString("Not_User_Found")</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" ms-widget="pager"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    </text>);
 }
-    
-    @section sparks{
-          <ul id="sparks">
-            <li class="sparks-info">
-                <h5  title="总数量">用户数 <span class="txt-color-blue"><i class="fa fa-users"></i> @ViewData["TotalUser"]</span></h5>
-                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm" title="最近一星期注册用户数">
-                  @Html.Raw(ViewData["NewRegistry"])
-                </div>
-            </li>
-            <li class="sparks-info">
-                <h5 title="活跃用户数">用户活跃<span class="txt-color-purple">
-                    <i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;@ViewData["toDayActive"]
-                                      </span></h5>
-                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
-                    @Html.Raw(ViewData["7DayActive"])
-                </div>
-            </li>
-            <li class="sparks-info">
-                <h5>活跃度 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart">
-                                                                  </i>&nbsp;@ViewData["todayMax"]</span></h5>
-                <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
-                    @Html.Raw(ViewData["7DayMaxActive"])
-                </div>
-            </li>
-        </ul>
+
+@section sparks{
+    <ul id="sparks">
+        <li class="sparks-info">
+            <h5 title="总数量">用户数 <span class="txt-color-blue"><i class="fa fa-users"></i>@ViewData["TotalUser"]</span></h5>
+            <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm" title="最近一星期注册用户数">
+                @Html.Raw(ViewData["NewRegistry"])
+            </div>
+        </li>
+        <li class="sparks-info">
+            <h5 title="活跃用户数">用户活跃<span class="txt-color-purple">
+                <i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;@ViewData["toDayActive"]
+            </span></h5>
+            <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                @Html.Raw(ViewData["7DayActive"])
+            </div>
+        </li>
+        <li class="sparks-info">
+            <h5>活跃度 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;@ViewData["todayMax"]</span></h5>
+            <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                @Html.Raw(ViewData["7DayMaxActive"])
+            </div>
+        </li>
+    </ul>
 }

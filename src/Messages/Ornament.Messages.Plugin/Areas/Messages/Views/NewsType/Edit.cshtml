@@ -1,8 +1,6 @@
-﻿@model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.NewsTypeModel
-@using Ornament
+﻿@using Ornament
 @using Ornament.Properties
-@using Ornament.Web;
-@using Ornament.Web.HtmlExtends
+@model Ornament.Messages.Plugin.Areas.Messages.Models.Messages.NewsTypeModel
 @{
     ViewBag.Title = "Edit";
     Layout = OrnamentContext.Configuration.Layout();
@@ -10,7 +8,7 @@
 
 @section pageTitle
 {
-    <h5>News Type: @this.Model</h5>
+    <h5>News Type: @Model</h5>
 }
 <div class="widget">
     <div class="well body">

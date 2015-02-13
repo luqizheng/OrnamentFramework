@@ -1,7 +1,17 @@
 ﻿@using System.Globalization
 @using Ornament
+@using Ornament.Models
 @{
-    CultureInfo lang = OrnamentContext.MemberShip.CurrentLanguage();
+    CultureInfo currentLanguage = OrnamentContext.MemberShip.CurrentLanguage();
+    string showName = currentLanguage.DisplayName;
+
+    foreach (Language language in OrnamentContext.Configuration.Languages)
+    {
+        if (language.CultureInfo.LCID == currentLanguage.LCID)
+        {
+            showName = language.Name;
+        }
+    }
 }
 
 @helper GetFlagClass(string langName)
@@ -11,16 +21,16 @@
         case "zh-Hans":
         case "zh-CN":
     <text>flag-cn</text>;
-                         break;
+                        break;
         case "zh-Hant":
     <text>flag-hk</text>;
-                         break;
+                        break;
         case "en":
     <text>flag-us</text>;
-                         break;
+                        break;
         default:
     <text>flag-us</text>;
-                         break;
+                        break;
 
     }
     
@@ -28,19 +38,20 @@
 <ul class="header-dropdown-list hidden-xs">
     <li>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="/img/blank.gif" class="flag @GetFlagClass(lang.Name)"alt="United States">
-            <span>@lang.DisplayName</span> <i class="fa fa-angle-down"></i></a>
+            <img src="/img/blank.gif" class="flag @GetFlagClass(currentLanguage.Name)"alt="United States">
+            <span>@showName</span> <i class="fa fa-angle-down"></i></a>
 
         <ul class="dropdown-menu pull-right">
 
-            @foreach (var lan in OrnamentContext.Configuration.Languages)
+            @foreach (Language language in OrnamentContext.Configuration.Languages)
             {
-                var clz = lang.EnglishName == lan.CultureInfo.DisplayName ? "class='active'" : "";
+                var clz = currentLanguage == language.CultureInfo ? "class='active'" : "";
                 
                 <li @clz>
-                    <a href="@Url.Action("SwitchLanguage","Home",new{id=lan.Key})">
-                        <img src="/img/blank.gif" class="flag @GetFlagClass(lan.CultureInfo.Name)" alt="@lan.CultureInfo.EnglishName">
-                        @lan.CultureInfo.DisplayName
+
+                    <a href="@Url.Action("SwitchLanguage", "Home", new { id = language.Key })">
+                        <img src="/img/blank.gif" class="flag @GetFlagClass(language.CultureInfo.Name)" alt="@language.CultureInfo.EnglishName">
+                        @language.Name
                     </a>
                 </li>
             }

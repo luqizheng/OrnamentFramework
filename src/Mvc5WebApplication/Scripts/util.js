@@ -10,13 +10,7 @@
             $("#ajaxlogin").modal('show');
         }
     });
-    $(document).ready(function () {
-        $("#ajaxlogin").modal({
-            remote: "/Account/AjaxLogon",
-            show: false,
-            backdrop: false
-        });
-    });
+    
     //兼容IE的方法
     if (!console) {
         document.console = {
@@ -25,8 +19,18 @@
     }
     //修改Smart Admin的 导航方式，在切换导航的时候，要能够正确调用清理函数
     var clearPageVariable = [];
-    $(document).off('click', 'nav a[href!="#"]')
-        .on('click', 'nav a[href!="#"]', function (e) {
+    $(window).off('hashchange');
+    $(window).on('hashchange', function () {
+        while (clearPageVariable.length != 0) {
+            var method = (clearPageVariable.shift());
+            if (typeof method == "function") {
+                method();
+            }
+        }
+        checkURL();
+    });
+    $(document).off('click', 'nav a[href!="#"]');
+    $(document).on('click', 'nav a[href!="#"]', function (e) {
 
             e.preventDefault();
             var $this = $(e.currentTarget);
@@ -66,8 +70,9 @@
             function clearup(src, target) {
                 if (src != target) {
                     while (clearPageVariable.length != 0) {
-
+                        
                         var method = (clearPageVariable.shift());
+                        
                         if (typeof method == "function") {
                             method();
                         }

@@ -5,25 +5,25 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.Regions.Dao.NHibernateImple
 {
-    public class AreaDao : DaoBase<int, Area>, IAreaDao
+    public class AreaDao : DaoBase<int, District>, IAreaDao
     {
-        public IList<Area> FindByCity(City city)
+        public IList<District> FindByCity(City city)
         {
             if (city == null) throw new ArgumentNullException("city");
             return CreateDetachedCriteria()
-                .Add(Restrictions.Eq(Projections.Property<Area>(s => s.City), city))
+                .Add(Restrictions.Eq(Projections.Property<District>(s => s.City), city))
                 .GetExecutableCriteria(CurrentSession)
-                .List<Area>();
+                .List<District>();
         }
 
-        public Area FindByName(string name,City city)
+        public District FindByName(string name,City city)
         {
             if (name == null) throw new ArgumentNullException("name");
             return CreateDetachedCriteria()
-                .Add(Restrictions.Eq(Projections.Property<Area>(s => s.Name), name))
-                .Add(Restrictions.Eq(Projections.Property<Area>(s => s.City), city))
+                .Add(Restrictions.Eq(Projections.Property<District>(s => s.Name), name))
+                .Add(Restrictions.Eq(Projections.Property<District>(s => s.City), city))
                 .GetExecutableCriteria(CurrentSession)
-                .UniqueResult<Area>();
+                .UniqueResult<District>();
         }
     }
 }

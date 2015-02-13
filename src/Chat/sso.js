@@ -5,7 +5,7 @@ var http = require('http');
 
 var options = {
     hostname: 'localhost',
-    port: 17034,
+    port: 27597,
     path: '/sso/auth/BackendAuth',
     method: 'post',
     headers: {

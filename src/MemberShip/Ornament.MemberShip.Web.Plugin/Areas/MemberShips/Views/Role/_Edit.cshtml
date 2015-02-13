@@ -7,7 +7,7 @@
         @Html.TextBoxFor(model => model.Name, new Dictionary<string, object>
         {
             {"ms-duplex", "Name"}, 
-            {"ms-disabled", "!editing"},
+            {"ms-attr-disabled", "!editing"},
             {"class","form-control"}
         })
     </div>
@@ -20,7 +20,7 @@
         @Html.TextAreaFor(model => model.Remarks, new Dictionary<string, object>
         {
             {"ms-duplex", "Remarks"},
-            {"ms-disabled", "!editing"},  {"class","form-control"}
+            {"ms-attr-disabled", "!editing"},  {"class","form-control"}
         })
     </div>
 </div>

@@ -165,7 +165,7 @@
   <data name="alertMsg_duplicate_roleName" xml:space="preserve">
     <value>角色名称已经被使用，请输入另外一个</value>
   </data>
-  <data name="alertMsg_RequireAccountOrEmail" xml:space="preserve">
+  <data name="alertMsg_RequireAccount" xml:space="preserve">
     <value>请输入登录名或者电子邮件</value>
   </data>
   <data name="alertMsg_requireVerifyCode1" xml:space="preserve">
@@ -179,9 +179,6 @@
   </data>
   <data name="altMessage_EmailFormatNotCorrect" xml:space="preserve">
     <value>请输入正确的邮件地址</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>语言</value>
   </data>
   <data name="alert_Require_ConfirmPassword" xml:space="preserve">
     <value>请输入确认密码</value>
@@ -214,8 +211,8 @@
   <data name="input_password_again" xml:space="preserve">
     <value>请输入确认密码</value>
   </data>
-  <data name="label_AccountOrEmail" xml:space="preserve">
-    <value>账号或者安全邮箱</value>
+  <data name="label_Account" xml:space="preserve">
+    <value>登录名</value>
   </data>
   <data name="Org_OrgCount_Child_Org_s_Count" xml:space="preserve">
     <value>Child Org's Count</value>

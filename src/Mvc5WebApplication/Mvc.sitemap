@@ -22,7 +22,7 @@
 
     <!-- Begin Message Plugin Parent Key -->
     <!--<mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>-->
-    <mvcSiteMapNode title="Notify Messages" controller="News" area="Messages" action="Index" imageUrl="fa-comment-o" key="Messages">
+    <mvcSiteMapNode title="Notify Messages" controller="DashBoard" area="Messages" action="Index" imageUrl="fa-comment-o" key="Messages">
       <mvcSiteMapNode title="News" controller="News" area="Messages" action="Index" key="news"></mvcSiteMapNode>
     </mvcSiteMapNode>
     <!-- End Message Plugin Parent Key -->
@@ -31,6 +31,11 @@
     <!-- 系统选项-->
 
     <mvcSiteMapNode action="Index" controller="Site" area="Information" key="System" title="Information" imageUrl="fa-desktop"/>
+
+    <mvcSiteMapNode action="Index" controller="HtmlControls" area="Develop" key="Docs" title="Document" imageUrl="fa-desktop">
+      <mvcSiteMapNode action="BasicType" controller="Html" area="Develop" title="Basic Type"/>
+    </mvcSiteMapNode>
+
   </mvcSiteMapNode>
 
 </mvcSiteMap>

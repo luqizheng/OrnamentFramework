@@ -1,7 +1,7 @@
-﻿define(["jquery","vaform"],function () {
+﻿define(["bootbox", "vaform", "/MemberShips/Scripts/Org/Org.js"], function (bootbox, b, org) {
     return {
-        init: function () {
-            var editModel = avalon.define("editSender", function (vm) {
+        init: function(config) {
+            var editModel = avalon.define("editSender", function(vm) {
                 vm.Id = "";
                 vm.SenderType = "email";
                 vm.Remarks = "";
@@ -15,12 +15,13 @@
                     SmtpServer: "",
                     Port: 25
                 };
-                vm.editing = false;
+                vm.disabled = true;
                 vm.clear = function() {
                     vm.Id = "";
                     vm.SenderType = "email";
                     vm.ClientSender = {
                         Server: "",
+                        ClientName:"",
                         PrivateCode: ""
                     };
                     vm.EmailSender = {
@@ -29,53 +30,87 @@
                         SmtpServer: "",
                         Port: 25
                     };
-                    vm.editing = false;
+                    vm.disabled = false;
                 };
-                
+                vm.Name = "";
                 vm.cancel = function() {
 
                 };
                 vm.reload = function() {
                     if (vm.Id != null) {
-                        $.get("/Message/Sender/Get/" + vm.Id, function(d) {
-                            editModel.mix(this, d);
+                        $.get(config.get + "/" + vm.Id, function(d) {
+                            avalon.mix(editModel, d);
+                            editModel.disabled = false;
                         });
                     }
                 };
 
                 vm.get = function() {
-                    return this.$vmodel;
+                    return {
+                        Id: vm.Id,
+                        Name: vm.Name,
+                        Remarks: Remarks
+                    };
                 };
 
             });
-            var listModel = avalon.define("index", function (vm) {
+            var listModel = avalon.define("senderList", function(vm) {
                 vm.Senders = [];
-                vm.Edit = function () {
-                    avalon.mix(editModel, this.$vmodel.el);
-                    editModel.editing = true;
+                vm.Edit = function(id) {
+                    editModel.Id = id;
+                    editModel.reload();
+
                 };
-                vm.Create = function () {
+                vm.del = function (sender, removeFunc) {
+                    var id = sender.Id;
+                    bootbox.confirm("Do you want to delete sender " + sender.Name + " ?", function (re) {
+                        if (re) {
+                            $.get(config.del + "/" + id, function() {
+                                bootbox.alert("Delete successfully");
+                                removeFunc(sender);
+                            });
+                        }
+                    });
+                }
+                vm.create = function() {
                     editModel.clear();
                 };
             });
-            $.get("/Messages/Sender/List", function (d) {
+            $.get("/Messages/Sender/List", function(d) {
                 listModel.Senders = d;
             });
 
+            //保存Sender的方法用vaform处理
 
             $("#editSender").vaform({
                 success: function(d) {
                     if (d.success) {
-                        editModel.Id = d.SenderId;
-                        listModel.Senders.push(editModel.get());
+                        editModel.Id = d.Id; //返回的Id
+                        var modifiedSender = editModel.get();
+                        var findIt = false;
+                        for (var i = 0; i < listModel.Senders.length; i++) {
+                            var item = listModel.Senders[i];
+                            if (item.Id == modifiedSender.Id) {
+                                item.Name = modifiedSender.Name;
+                                item.Remarks = modifiedSender.Remarks;
+                                item.Id = modifiedSender.Id;
+                                findIt = true;
+                                break;
+                            }
+                        }
+                        if (!findIt) {
+                            listModel.Senders.push(modifiedSender);
+                        }
                         alert('success to save');
                     } else {
                         alert(d.message);
                     }
-                } 
+                }
             });
+
+            avalon.scan();
         },
-        clear: function () {
+        clear: function() {
             delete avalon.vmodels["editSender"];
             delete avalon.vmodels["senderList"];
         }
