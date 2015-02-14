@@ -39,7 +39,7 @@ namespace WebApplication
             bundles.Add(new ScriptBundle("~/Scripts/json2.js").Include("~/scripts/json2.js"));
             bundles.Add(new ScriptBundle("~/scripts/main.js").IncludeDirectory("~/Scripts/Modules", "*.js"));
 
-
+            bundles.Add(new ScriptBundle("~/scripts/moment").Include("~/scripts/plugin/moment/moment.js"));
             //float chat
             bundles.Add(new ScriptBundle("~/Scripts/float.js").IncludeDirectory("~/Scripts/plugin/flot", "*.js"));
 

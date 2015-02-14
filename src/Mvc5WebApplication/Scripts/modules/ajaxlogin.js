@@ -1,4 +1,4 @@
-﻿define(["bootstrap"],function (require) {
+﻿define(["bootstrap"],function () {
     //ajax login
 
 
