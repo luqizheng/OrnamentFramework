@@ -3,10 +3,11 @@
 @using Qi.Web.Mvc.ClientValidations.Rules
 @model DateTime?
 @{
-    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    string displayValue = Model != null ? Model.Value.ToString(ViewData.ModelMetadata.DisplayFormatString) : "";
-    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd").ToLower();
-    string inputMask = Regex.Replace(format, @"(\w{2})(\1)+", "$1");
+  
+   
+    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd");
+    string displayValue = Model != null ? Model.Value.ToString(format) : "";
+    string inputMask = Regex.Replace(format.ToLower(), @"(\w{2})(\1)+", "$1");
 @*由app.js直接成成jqueryui控件,so should be added datepicker class*@
     IDictionary<string, object> htmlAttris = null;
     if (ViewData.ContainsKey("HtmlAttributes"))
@@ -36,7 +37,7 @@
     };
 @*<input class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" type="text">*@
 
-    htmlAttris.Add("data-mask", Regex.Replace(format, @"[ymdhms]", "9"));
+    htmlAttris.Add("data-mask", Regex.Replace(format, @"[ymdhms]", "9",RegexOptions.IgnoreCase));
     htmlAttris.Add("data-mask-placeholder","_");
         
 }

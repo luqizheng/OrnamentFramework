@@ -15,7 +15,7 @@ namespace WebApplication
                 new {culture = @"^[a-zA-Z]{2}(-[a-zA-Z]+)?$"}
                 );
             routes.MapRoute("Default", "{controller}/{action}/{id}",
-                new {culture = "en", controller = "Home", action = "Index", id = UrlParameter.Optional}
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
                 );
         }
     }

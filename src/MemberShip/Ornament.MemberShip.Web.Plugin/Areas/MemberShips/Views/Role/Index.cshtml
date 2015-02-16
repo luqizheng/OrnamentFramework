@@ -39,14 +39,14 @@
 
     <div id="listRole" class="dd">
         <ul class="dd-list">
-            <ol ms-repeat-el="roles" class="dd-item">
+            <ol ms-repeat="roles" class="dd-item">
                 @{
                     string handler = hasModify ? "ms-click=edit(el,$event)" : "";
                 }
-                <div class="dd-handle" style="cursor: pointer" @handler ms-attr-title="el.Remarks" ms-class-1="selected:curRole!=null && el.Id==curRole.Id">
+                <div class="dd-handle" style="cursor: pointer" @handler ms-attr-title="el.Remarks" ms-class="selected:curRole!=null && el.Id==curRole.Id">
                     @if (hasDelete)
                     {
-                        <button ms-click="del" title="@Ornament.Properties.Resources.Delete" class="btn btn-danger btn-xs">
+                        <button ms-click="del(el,$remove,$event)" title="@Ornament.Properties.Resources.Delete" class="btn btn-danger btn-xs">
                             <i class="fa-remove fa"></i>
                         </button>
                     }
@@ -77,11 +77,11 @@
 
     "col-md-7", "col-lg-8", "col-xs-8", "col-sm-8"))
 {
-    @panel.Header(@<text><h2 ms-text="title">编辑</h2></text>, new Dictionary<string, object>())
+    @panel.Header(@<text><h2 ms-text="title">@Ornament.Properties.Resources.Edit  </h2></text>, new Dictionary<string, object>())
 
     @panel.Body(@<text>
 
-    <form class="form-horizontal" method="POST" id="roleEdit" ms-submit="save">
+    <form class="form-horizontal" method="POST" id="roleEdit">
 
         <div class="widget-body-toolbar">
 
