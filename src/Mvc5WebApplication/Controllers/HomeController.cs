@@ -27,7 +27,7 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-
+        [Session]
         public ActionResult SwitchLanguage(string id)
         {
             CultureInfo culture = CultureInfo.GetCultureInfo(id);
