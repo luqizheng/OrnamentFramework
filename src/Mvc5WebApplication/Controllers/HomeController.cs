@@ -27,14 +27,13 @@ namespace WebApplication.Controllers
         {
             return View();
         }
+
         [Session]
         public ActionResult SwitchLanguage(string id)
         {
             CultureInfo culture = CultureInfo.GetCultureInfo(id);
             OrnamentContext.MemberShip.SwitchLanguage(culture);
             return Redirect("/" + id);
-
-
         }
     }
 }
