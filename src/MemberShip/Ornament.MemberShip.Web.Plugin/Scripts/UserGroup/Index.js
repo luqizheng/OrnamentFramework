@@ -95,7 +95,7 @@
             };
             vm.edit = function (ug) {
                 
-                avalon.mix(editor, ug);
+                avalon.mix(editor, ug.$model);
                 editor.editing = true;
                 vm.curUg = ug;
 
@@ -141,7 +141,7 @@
                 vm.clear();
             };
             vm.reset = function() {
-                avalon.mix(vm, list.curUg);
+                avalon.mix(vm, list.curUg.$model);
             };
             vm.editTitle = messages.editTitle;
             vm.saveBtnText = messages.saveBtnEdit;

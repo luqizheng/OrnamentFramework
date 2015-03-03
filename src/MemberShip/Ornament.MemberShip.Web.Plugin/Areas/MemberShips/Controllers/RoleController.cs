@@ -64,19 +64,9 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        [ResourceAuthorize(RoleOperator.Delete, "Role")]
-        [OrnamentMvcSiteMapNode(Title = "$resources:membership.sitemap,roleDeleteTitle",
-            ParentKey = "Role", PreservedRouteParameters = "id",
-            Resource = "Role", Operator = RoleOperator.Modify)
-        ]
-        public ActionResult Delete(string id)
-        {
-            IList<IPerformer> a = _daoFactory.CreateMemberDao().Find(id);
-            ViewData["members"] = a;
-            return View(_roleDao.Get(id));
-        }
 
-        [HttpDelete, ResourceAuthorize(RoleOperator.Delete, "Role")]
+
+        [HttpPost, ResourceAuthorize(RoleOperator.Delete, "Role"),Session(Transaction = true)]
         public ActionResult Delete(Role role)
         {
             IList<IPerformer> a = _daoFactory.CreateMemberDao().Find(role.Id);
@@ -85,6 +75,8 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
                 member.Roles.Remove(role);
             }
             _roleDao.Delete(role);
+            if (Request.IsAjaxRequest())
+                return Json(new { success = true });
             return RedirectToAction("Index");
         }
 
@@ -94,19 +86,19 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers
         public ActionResult Save(Role role, string[] permissionIds)
         {
 #if DEBUG
-            Thread.Sleep(2*1000);
+            Thread.Sleep(2 * 1000);
 #endif
-          
+
 
             IPermissionDao permissionDao =
                 OrnamentContext.DaoFactory.MemberShipDaoFactory.CreatePermissionDao();
             role.Permissions.Clear();
-            foreach (string id in permissionIds)
+            foreach (string id in permissionIds??(new string[0]))
             {
                 role.Permissions.Add(permissionDao.Load(id));
             }
             _daoFactory.CreateRoleDao().SaveOrUpdate(role);
-            return Json(new { success = true,Id=role.Id });
+            return Json(new { success = true, Id = role.Id });
         }
     }
 }

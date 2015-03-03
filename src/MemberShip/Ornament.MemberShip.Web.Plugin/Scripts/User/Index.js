@@ -1,16 +1,16 @@
 ﻿/// <reference path="../Share/user.js" />
 /// <reference path="../Share/dataTables.js" />
-define(function (require) {
+define(["../Share/user.js", "pager"], function (userApi) {
 
-    
-    
+
+
 
     var lang = {};
-    var userApi = require("/MemberShips/Scripts/Share/user.js"); //Seajs 合并引用不得不使用绝对路径
+
     //require('validate');
 
 
-    function  Init() {
+    function Init() {
         var model = avalon.define("index", function (vm) {
             vm.users = [];
             //Search content
@@ -27,7 +27,7 @@ define(function (require) {
                 });
             };
             vm.verifyEmail = function (model) {
-                
+
                 userApi.VerifyEmail(model.Id, function (e) {
                     alert(e.success ?
                         lang.verifyEmailMessage.success :
@@ -37,7 +37,7 @@ define(function (require) {
                 });
                 return false;
             };
-            
+
             vm.search = function (e) {
                 avalon.vmodels.pager.nav(0);
                 e.preventDefault();
@@ -49,7 +49,7 @@ define(function (require) {
                 }
             };
             vm.lock = function (user, bLock) {
-                
+
                 if (typeof bLock !== "boolean") {
                     bLock = !user.IsLocked;
                 };
@@ -59,7 +59,7 @@ define(function (require) {
                     }
                 });
             };
-            vm.total =7;
+            vm.total = 7;
             vm.deny = function (user, bDeny) {
                 /// <summary>
                 ///     锁定用户
@@ -96,21 +96,20 @@ define(function (require) {
             }
         });
     }
-    
 
 
-   
+
+
 
     return {
         init: function (lang1) {
             lang = lang1;
-            require(["pager"],function() {
-                Init();
-                avalon.scan();
-            });
+            Init();
+            avalon.scan();
+
         },
         clear: function () {
-            
+
             delete avalon.vmodels["index"];
         }
     };

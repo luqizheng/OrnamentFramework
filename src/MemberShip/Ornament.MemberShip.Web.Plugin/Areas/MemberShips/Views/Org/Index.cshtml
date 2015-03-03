@@ -120,13 +120,13 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['require', '/scripts/config.js'], function(require) {
-            require(['@Scripts.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
-                var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
+      
+        require(['@Amd.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
+            var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
                 main.init(orgDTO);
                 clearPageVariable.push(main.clear);
             });
-        });
+        
         
 
     </script>

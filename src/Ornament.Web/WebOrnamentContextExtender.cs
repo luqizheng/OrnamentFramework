@@ -41,14 +41,14 @@ namespace Ornament
 
         public static CultureInfo CurrentLanguage(this MemberShipContext context)
         {
-            CultureInfo lang = UrlCultureInfo(context) ?? CookieRequestLanguage(context);
+            CultureInfo lang = UrlCultureInfo(context);
             if (lang == null)
             {
                 User user = CurrentUser(context);
                 lang = user != null ? user.GetLanguage() : BroswerLanguage(context);
             }
 
-            return lang ?? CultureInfo.GetCultureInfo("en");
+            return lang ?? OrnamentContext.Configuration.DefaultLanguage.CultureInfo;
         }
 
         public static string CurrentVerifyCode(this MemberShipContext context)
