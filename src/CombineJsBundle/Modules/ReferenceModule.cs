@@ -5,7 +5,7 @@ namespace CombineJs.Modules
     /// <summary>
     /// 引用模块
     /// </summary>
-    public class ReferenceModule : IScriptModule
+    public class ReferenceModule : ScriptModule
     {
      
 

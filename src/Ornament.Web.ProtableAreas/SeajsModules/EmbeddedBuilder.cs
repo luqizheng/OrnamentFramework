@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Optimization;
@@ -9,11 +8,6 @@ namespace Ornament.Web.SeajsModules
 {
     public class EmbeddedBuilder : IBundleBuilder
     {
-        public EmbeddedBuilder()
-        {
-        }
-
-
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
         {
             string currentExecutionFilePath = bundle.Path;
@@ -41,7 +35,7 @@ namespace Ornament.Web.SeajsModules
             AssemblyResourceStore resourceStoreForArea = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             if (!filePath.StartsWith("~/areas/"))
             {
-                filePath = "~/areas" + filePath.TrimStart(new[] { '~' });
+                filePath = "~/areas" + filePath.TrimStart(new[] {'~'});
             }
             Stream resourceStream = resourceStoreForArea.GetResourceStream(filePath);
             if (resourceStream == null)

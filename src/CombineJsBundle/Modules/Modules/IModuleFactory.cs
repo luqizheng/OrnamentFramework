@@ -1,12 +1,11 @@
 ﻿using System.Web.Optimization;
-using CombineJs.Modules;
 
-namespace SeajsBundles.Seajs.Modules
+namespace CombineJs.Modules.Modules
 {
     public interface IModuleFactory
     {
-        IScriptsModule Build(string abstractRequirePath, BundleContext context, bool combine, IScriptsModule parent);
+        ScriptModule Build(string abstractRequirePath, BundleContext context, bool combine, ScriptModule parent);
 
-        bool IsModule(string abstractRequirePath,IScriptsModule parentModule);
+        bool IsModule(string abstractRequirePath, ScriptModule parentModule);
     }
 }

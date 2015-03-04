@@ -423,7 +423,6 @@
     <Content Include="Scripts\app.config.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
-    <Content Include="Scripts\avalon.min.js" />
     <Content Include="Scripts\avalon.modern.js" />
     <Content Include="Scripts\avalons\chat\chat.js" />
     <Content Include="Scripts\avalons\chat\chat.html" />

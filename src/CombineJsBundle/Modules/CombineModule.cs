@@ -8,7 +8,7 @@ using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {
-    public abstract class CombineModule : IScriptsModule
+    public abstract class CombineModule : ScriptModule
     {
         private ModuleCollection _modules;
 
@@ -148,7 +148,7 @@ namespace CombineJs.Modules
                 foreach (string replacement in replcements)
                 {
                     string srcRequireModualId = replacement; //.ToLower();
-                    IScriptsModule modual = GetModual(srcRequireModualId, combinedModuleSet);
+                    ScriptModule modual = GetModual(srcRequireModualId, combinedModuleSet);
                     if (!SubModules.Contains(modual))
                     {
                         SubModules.Add(modual);
@@ -176,9 +176,9 @@ namespace CombineJs.Modules
         /// <param name="srcRequireModualId"></param>
         /// <param name="combinedModuleSet"></param>
         /// <returns></returns>
-        protected virtual IScriptsModule GetModual(string srcRequireModualId, ModuleRepository combinedModuleSet)
+        protected virtual ScriptModule GetModual(string srcRequireModualId, ModuleRepository combinedModuleSet)
         {
-            IScriptsModule module = ModuleFactory.Instance.Create(srcRequireModualId, Context, IsCombine, this);
+            ScriptModule module = ModuleFactory.Instance.Create(srcRequireModualId, Context, IsCombine, this);
             if (!combinedModuleSet.Contains(module))
             {
                 combinedModuleSet.Add(module);

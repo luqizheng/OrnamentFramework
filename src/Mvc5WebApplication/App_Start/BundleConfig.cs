@@ -10,7 +10,7 @@ namespace WebApplication
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
             BundleTable.Bundles.UseCdn = false;
             OrnamentContext.Configuration.SetSeajsCombine(true);
             var registryParty = new VoidFunc<BundleCollection>[]
@@ -33,7 +33,9 @@ namespace WebApplication
                     "~/scripts/libs/jquery-{version}.js");
             jquery.CdnFallbackExpression = "window.jQuery";
             bundles.Add(jquery);
-            bundles.Add(new ScriptBundle("~/Scripts/socketio.js", "https://cdn.socket.io/socket.io-1.3.2.js").Include("~/Scripts/libs/socket.io-1.3.2.js"));
+            bundles.Add(
+                new ScriptBundle("~/Scripts/socketio.js", "https://cdn.socket.io/socket.io-1.3.2.js").Include(
+                    "~/Scripts/libs/socket.io-1.3.2.js"));
             bundles.Add(new ScriptBundle("~/Scripts/jqueryui.js").Include("~/scripts/libs/jquery-ui-{version}.js"));
             //bundles.Add(new ScriptBundle("~/Scripts/bootstrap.js", "http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js").Include("~/scripts/bootstrap/bootstrap.min.js"));
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap.js").Include("~/scripts/bootstrap/bootstrap.min.js"));
