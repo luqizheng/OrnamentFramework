@@ -1,6 +1,4 @@
-﻿define(function (require) {
-    require("jquery");
-    
+﻿define(function () {
     return function (userGroupMap, roleGroupMap) {
         $("#UserGroups input").change(function () {
             $("#Roles label").removeClass("active");

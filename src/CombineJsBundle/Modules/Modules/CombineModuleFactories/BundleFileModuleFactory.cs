@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Web.Optimization;
 using SeajsBundles.Seajs;
-using SeajsBundles.Seajs.Modules;
 
 namespace CombineJs.Modules.Modules.CombineModuleFactories
 {
     public class BundleFileModuleFactory : IModuleFactory
     {
-        public ISeajsModule Build(string abstractRequirePath, BundleContext context, bool combine, ISeajsModule parent)
+        public ScriptModule Build(string abstractRequirePath, BundleContext context, bool combine, ScriptModule parent)
         {
             return new BundleFileCombine(abstractRequirePath, context, combine);
         }
 
-        public bool IsModule(string abstractRequirePath, ISeajsModule parentModule)
+        public bool IsModule(string abstractRequirePath, ScriptModule parentModule)
         {
             if (!abstractRequirePath.StartsWith("~"))
             {

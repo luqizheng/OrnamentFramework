@@ -70,11 +70,12 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['require', '/scripts/config.js'], function(require) {
-            require(['@Scripts.Url("~/memberships/Scripts/user/edit.js")'], function(main) {
-                main.Init();
-                clearPageVariable.push(main.Clear());
-            });
+
+        require(['@Amd.Url("~/memberships/Scripts/user/edit.js")'], function (main) {
+            main.Init();
+            clearPageVariable.push(main.Clear());
         });
+
+
     </script>
 }

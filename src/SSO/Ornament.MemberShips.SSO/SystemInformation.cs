@@ -20,10 +20,10 @@ namespace Ornament.MemberShips.SSO
 
         public virtual string EncryptDate(DateTime requestDate, params string[] otherParamers)
         {
-            string encode = Id + ";" + requestDate.ToString("yyyyMMdd HH:mm:ss");
+            string encode = string.Format("{0};{1}", Id, requestDate.ToString("yyyyMMdd HH:mm:ss"));
             if (otherParamers != null && otherParamers.Length != 0)
             {
-                encode += ";" + String.Join(",", otherParamers);
+                encode += string.Format(";{0}", String.Join(",", otherParamers));
             }
             return encode.Sha1Utf8().ToStringEx();
         }

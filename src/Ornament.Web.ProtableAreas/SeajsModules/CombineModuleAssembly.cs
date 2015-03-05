@@ -18,7 +18,7 @@ namespace Ornament.Web.SeajsModules
         {
             get
             {
-                var bundleFor = BundleTable.Bundles.GetBundleFor(base.AbsolutePath) as SeajsEmbedBundle;
+                var bundleFor = BundleTable.Bundles.GetBundleFor(base.AbsolutePath) as EmbedBundle;
                 if (RouteUtils.GetRouteDataByUrl(base.RequireId) == null)
                 {
                     throw new ArgumentOutOfRangeException(base.RequireId +
@@ -46,7 +46,7 @@ namespace Ornament.Web.SeajsModules
             {
                 return false;
             }
-            return (BundleTable.Bundles.GetBundleFor(uniqureId) is SeajsEmbedBundle);
+            return (BundleTable.Bundles.GetBundleFor(uniqureId) is EmbedBundle);
         }
     }
 }

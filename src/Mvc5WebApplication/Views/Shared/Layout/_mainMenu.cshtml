@@ -21,7 +21,7 @@
 @helper RenderTitle(MainMenu node, bool renderSub,string cultur)
 {
     <li>
-        <a href="@cultur/@node.Url.TrimStart('/')" title="@node.Current.Description">
+        <a href="/@node.Url.TrimStart('/')" title="@node.Current.Description">
             @if (renderSub)
             {
                 <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i>

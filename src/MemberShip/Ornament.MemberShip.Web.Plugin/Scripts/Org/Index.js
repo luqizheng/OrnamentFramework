@@ -1,4 +1,4 @@
-﻿define(["require","/MemberShips/Scripts/Share/Org.js"],function (require,org) {
+﻿define(["../Share/Org.js"],function (org) {
     
 
     function Init() {

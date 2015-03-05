@@ -4,7 +4,7 @@ using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {
-    public class ModuleCollection : KeyedCollection<string, ISeajsModule>
+    public class ModuleCollection : KeyedCollection<string, ScriptModule>
     {
         internal string[] RequrestIds(ModuleRepository ids)
         {
@@ -12,23 +12,23 @@ namespace CombineJs.Modules
         }
 
 
-        protected override string GetKeyForItem(ISeajsModule item)
+        protected override string GetKeyForItem(ScriptModule item)
         {
             return item.OutputId;
         }
     }
 
-    public class AbsloutePathModuleCollection : KeyedCollection<string, ISeajsModule>
+    public class AbsloutePathModuleCollection : KeyedCollection<string, ScriptModule>
     {
-        protected override string GetKeyForItem(ISeajsModule item)
+        protected override string GetKeyForItem(ScriptModule item)
         {
             return item.AbsolutePath;
         }
     }
 
-    public class ModuleReferencePathCollection : KeyedCollection<string, ISeajsModule>
+    public class ModuleReferencePathCollection : KeyedCollection<string, ScriptModule>
     {
-        protected override string GetKeyForItem(ISeajsModule item)
+        protected override string GetKeyForItem(ScriptModule item)
         {
             return item.RequireId.ToLower();
         }

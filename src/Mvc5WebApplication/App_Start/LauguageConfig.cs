@@ -11,13 +11,13 @@ namespace WebApplication
             {
                 context.Languages.Add(new Language("English", "en") {IsDefault = true});
             }
-            if (!context.Languages.Contains("zh-Hant"))
+            if (!context.Languages.Contains("zh"))
             {
-                context.Languages.Add(new Language("中文(繁)", "zh-Hant"));
+                context.Languages.Add(new Language("中文(繁)", "zh"));
             }
-            if (!context.Languages.Contains("zh-Hans"))
+            if (!context.Languages.Contains("zh-CN"))
             {
-                context.Languages.Add(new Language("中文(简)", "zh-Hans"));
+                context.Languages.Add(new Language("中文(简)", "zh-CN"));
             }
         }
     }

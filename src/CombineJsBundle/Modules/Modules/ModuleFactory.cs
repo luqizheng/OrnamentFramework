@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.Optimization;
 using CombineJs.Modules.Modules.CombineModuleFactories;
 using SeajsBundles.Seajs;
-using SeajsBundles.Seajs.Modules;
 
 namespace CombineJs.Modules.Modules
 {
@@ -48,12 +47,12 @@ namespace CombineJs.Modules.Modules
         /// <param name="combine"></param>
         /// <param name="parentModule"></param>
         /// <returns></returns>
-        public ISeajsModule Create(string refereId,
+        public ScriptModule Create(string refereId,
             BundleContext context, bool combine,
-            ISeajsModule parentModule)
+            ScriptModule parentModule)
         {
 
-            ISeajsModule result = null;
+            ScriptModule result = null;
             if (combine)
             {
                 if (refereId.Contains("/") || refereId.EndsWith(".js"))

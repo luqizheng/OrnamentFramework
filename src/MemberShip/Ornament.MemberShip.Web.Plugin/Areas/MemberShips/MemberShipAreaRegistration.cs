@@ -75,7 +75,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
                 );
 
             context.MapRoute(AreaName + "_EditUser", AreaName + "/User/{action}/{loginId}",
-                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User", culture = "en"},
+                new {action = "Edit", loginId = UrlParameter.Optional, controller = "User"},
                 new[] {"Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers"}
                 );
 
@@ -85,7 +85,7 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
                 );
 
             context.MapRoute(AreaName + "_default", AreaName + "/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional, culture = "en"},
+                new {action = "Index", id = UrlParameter.Optional},
                 new[] {"Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Controllers"}
                 );
 

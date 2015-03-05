@@ -1,4 +1,5 @@
-﻿define(["vaform", "/MemberShips/Scripts/Org/Org.js"], function () {
+﻿/// <reference path="../Org/Org.js" />
+define(["vaform", "../Org/Org.js"], function () {
     console.log(avalon.ui.org);
     function init() {
 

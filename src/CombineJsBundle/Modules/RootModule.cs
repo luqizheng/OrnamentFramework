@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 using System.Web.Optimization;
-using CombineJs.Modules;
+using SeajsBundles.Seajs;
 
-namespace SeajsBundles.Seajs
+namespace CombineJs.Modules
 {
     /// <summary>
     ///     Module

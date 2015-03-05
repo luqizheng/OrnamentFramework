@@ -1,4 +1,4 @@
-﻿define(["bootbox", "vaform", "/MemberShips/Scripts/Org/Org.js"], function (bootbox, b, org) {
+﻿define(["bootbox", "vaform", "../../../MemberShips/Scripts/Org/Org.js"], function (bootbox, b, org) {
     return {
         init: function(config) {
             var editModel = avalon.define("editSender", function(vm) {

@@ -5,11 +5,11 @@ using SeajsBundles;
 
 namespace Ornament.Web.SeajsModules
 {
-    public class SeajsEmbedBundle : CombineJsBundle
+    public class EmbedBundle : CombineJsBundle
     {
         private readonly IBundleBuilder _bulder;
 
-        public SeajsEmbedBundle(string virtualPath, string areaName, bool combine)
+        public EmbedBundle(string virtualPath, string areaName, bool combine)
             : base(virtualPath, combine)
         {
             AreaName = areaName;

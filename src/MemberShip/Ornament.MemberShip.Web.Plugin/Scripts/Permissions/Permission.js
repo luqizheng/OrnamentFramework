@@ -1,5 +1,5 @@
 ﻿
-define(function (require) {
+define(function () {
     function Permission(operator) {
         this.Operators = operator;
     }

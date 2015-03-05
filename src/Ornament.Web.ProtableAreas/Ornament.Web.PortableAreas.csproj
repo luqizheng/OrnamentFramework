@@ -155,7 +155,7 @@
     <Compile Include="SeajsModules\CombineModuleAssembly.cs" />
     <Compile Include="SeajsModules\CombineModuleAsssemblyFactory.cs" />
     <Compile Include="SeajsModules\EmbeddedBuilder.cs" />
-    <Compile Include="SeajsModules\SeajsEmbedBundle.cs" />
+    <Compile Include="SeajsModules\AmdEmbedBundle.cs" />
     <Compile Include="Messages\RequireJsModuleBundleEventMessage.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -116,8 +116,8 @@ namespace Ornament.MemberShip
         /// </summary>
         [Display(Name = "Birthday", ResourceType = typeof(Resources))]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "yyyy/MM/dd")]
-        [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd","yy/mm/dd")]
+        [DisplayFormat(DataFormatString = "yyyy-MM-dd")]
+        [DateRange("1940-01-01", "2014-12-31", "yyyy-MM-dd","yy-mm-dd")]
         DateTime? Birthday { get; set; }
         /// <summary>
         /// 性別，默認是unknow

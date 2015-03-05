@@ -1,6 +1,4 @@
-﻿define(function (require) {
-    
-    require("json2");
+﻿define(["jquery"], function ($) {
 
     return function (url) {
         /// <summary>
@@ -61,7 +59,7 @@
 
         this.ext = function (method, data, func) {
 
-            var a =$.extend({}, this.opts, {
+            var a = $.extend({}, this.opts, {
                 type: method,
             });
 

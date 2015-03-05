@@ -165,10 +165,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bundles\Config\BaseScriptsManager.cs" />
-    <Compile Include="Bundles\Config\DirectorySingleScriptFileRegistry.cs" />
-    <Compile Include="Bundles\Config\SeajsJqueryPlugin.cs" />
-    <Compile Include="Bundles\ScriptsFolderManager.cs" />
+    <Compile Include="Amd.cs" />
     <Compile Include="Cfg\MvcWebConfig.cs" />
     <Compile Include="DataInitializers\GlobalInitializer.cs" />
     <Compile Include="DataInitializers\IDataInitializer.cs" />
