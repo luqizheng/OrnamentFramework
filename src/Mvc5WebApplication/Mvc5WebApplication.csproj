@@ -424,7 +424,6 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
     <Content Include="Scripts\avalon.modern.js" />
-    <Content Include="Scripts\avalon.shim.js" />
     <Content Include="Scripts\avalons\chat\chat.js" />
     <Content Include="Scripts\avalons\chat\chat.html" />
     <Content Include="Scripts\avalons\pager\pager.html" />
@@ -858,6 +857,7 @@
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Scripts\avalon.min.js" />
     <None Include="Scripts\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.min.js" />
@@ -904,6 +904,7 @@
     <Content Include="Scripts\plugin\x-editable\x-editable.min.js" />
     <Content Include="Scripts\prism\prism.css" />
     <Content Include="Scripts\prism\prism.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.manager.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.ui.js" />
     <Content Include="Scripts\smartwidgets\jarvis.widget.js" />

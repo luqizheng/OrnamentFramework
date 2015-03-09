@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using CombineJs.Modules;
+using System.Text;
 
-namespace SeajsBundles.Seajs
+namespace CombineJs.Modules
 {
     /// <summary>
     ///     所有Module根据Id 保存在这个模块中
@@ -21,7 +22,8 @@ namespace SeajsBundles.Seajs
             if (combineModule != null)
             {
                 var fileInfo = new FileInfo(combineModule.AbsolutePath);
-                string name = fileInfo.Name;
+                string name = fileInfo.Name.Replace(fileInfo.Extension, "");
+
                 string checkName = name;
                 int index = 0;
                 while (_modules.Contains(checkName))
@@ -37,6 +39,13 @@ namespace SeajsBundles.Seajs
             ////}
             _modules.Add(module);
             _pathModule.Add(module);
+        }
+
+        public void Remove(ScriptModule module)
+        {
+            if (module == null) throw new ArgumentNullException("module");
+            _modules.Remove(module);
+            _pathModule.Remove(module);
         }
 
         /// <summary>
@@ -62,6 +71,22 @@ namespace SeajsBundles.Seajs
         public ScriptModule GetByAbsolutePath(string absolutePath)
         {
             return _pathModule[absolutePath];
+        }
+
+        public void Mergn(StringBuilder con)
+        {
+            var queue = new Queue<ScriptModule>(_pathModule);
+            while (queue.Count != 0)
+            {
+                var com = queue.Dequeue() as CombineModule;
+                if (com != null)
+                {
+                    con.Insert(0, com.Content.TrimEnd(';', ',') + ",");
+                    //con.Append(com.Content + ";");
+
+                }
+                this.Remove(com);
+            }
         }
     }
 }

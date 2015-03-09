@@ -63,25 +63,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonJsMinify.cs" />
-    <Compile Include="Modules\Readers\ModuleFactory.cs" />
+    <Compile Include="Modules\CombineModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Readers\CombineModuleReader.cs" />
     <Compile Include="Modules\ScriptModule.cs" />
-    <Compile Include="Modules\IScriptReader.cs" />
-    <Compile Include="Modules\Readers\FileModuleReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CombineJsBundle.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\CombineModule.cs" />
     <Compile Include="Modules\ModuleRepository.cs" />
     <Compile Include="Modules\ModuleCollection.cs" />
-    <Compile Include="Modules\Modules\BundleFileCombine.cs" />
-    <Compile Include="Modules\Modules\CombineModuleFactories\BundleFileModuleFactory.cs" />
-    <Compile Include="Modules\Modules\CombineModuleFactories\GlobalReferenceModuleFactory.cs" />
-    <Compile Include="Modules\Modules\CombineModuleFactories\DefaultModuleFactory.cs" />
-    <Compile Include="Modules\Modules\IModuleFactory.cs" />
-    <Compile Include="Modules\Modules\ModuleFactory.cs" />
-    <Compile Include="Modules\ReferenceModule.cs" />
-    <Compile Include="Modules\RootModule.cs" />
+    <Compile Include="Readers\FileCombineModuleReader.cs" />
+    <Compile Include="Modules\ICombineModuleReader.cs" />
+    <Compile Include="Modules\ModuleFactory.cs" />
     <Compile Include="RouteUtils.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace Ornament.Web.SeajsModules
     public class CombineModuleAssembly : CombineModule
     {
         public CombineModuleAssembly(BundleContext context, string uniquireId, bool combine)
-            : base(uniquireId, context, combine)
+            : base(uniquireId, context)
         {
         }
 

@@ -18,7 +18,6 @@ namespace Ornament.Web.Messages
             while (BundleHandlers.Count != 0)
             {
                 var bundle = BundleHandlers.Dequeue();
-                bundle.Bundle.Combine = OrnamentContext.Configuration.GetSeajsCombine();
                 BundleTable.Bundles.Add(bundle.Bundle);
             }
         }
