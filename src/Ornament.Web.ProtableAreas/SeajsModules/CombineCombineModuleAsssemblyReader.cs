@@ -5,7 +5,7 @@ using SeajsBundles.Seajs;
 
 namespace Ornament.Web.SeajsModules
 {
-    public class CombineModuleAsssemblyFactory : IModuleFactory
+    public class CombineCombineModuleAsssemblyReader : ICombineModuleReader
     {
         public ScriptModule Build(string requireId, BundleContext context, bool combine, ScriptModule parent)
         {

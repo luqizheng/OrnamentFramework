@@ -55,7 +55,7 @@ namespace WebApplication
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
-            ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
+            ModuleFactory.Instance.Add(new CombineCombineModuleAsssemblyReader(), 1);
             RequirejsModuleBundleMessageHandle.HandlAllBundle();
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();

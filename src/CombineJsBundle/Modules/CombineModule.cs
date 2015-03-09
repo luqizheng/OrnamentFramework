@@ -8,7 +8,7 @@ using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {
-    public abstract class CombineModule : ScriptModule
+    public class CombineModule : ScriptModule
     {
         private ModuleCollection _modules;
 
@@ -16,20 +16,11 @@ namespace CombineJs.Modules
         /// </summary>
         /// <param name="referId"></param>
         /// <param name="context"></param>
-        /// <param name="isCombine"></param>
-        protected CombineModule(string referId, BundleContext context, bool isCombine)
+        public CombineModule(string referId)
         {
             RequireId = referId;
-            Context = context;
-            IsCombine = isCombine;
         }
-
-
-        /// <summary>
-        /// </summary>
-        public BundleContext Context { get; set; }
-
-
+       
         /// <summary>
         ///     当前这个Module依赖的子module
         /// </summary>
@@ -41,23 +32,7 @@ namespace CombineJs.Modules
 
         /// <summary>
         /// </summary>
-        public abstract string Content { get; }
-
-
-        public string RequireId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        public string OutputId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        public string AbsolutePath { get; set; }
-
-        /// <summary>
-        ///     是否合并
-        /// </summary>
-        public bool IsCombine { get; protected set; }
+        public string Content { get; set; }
 
 
         public string BuildContent(ModuleRepository moduleIdList)

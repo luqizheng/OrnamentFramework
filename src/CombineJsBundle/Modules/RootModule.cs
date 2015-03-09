@@ -11,7 +11,7 @@ namespace CombineJs.Modules
     public class RootModule : CombineModule
     {
         public RootModule(string uniqureId, BundleContext context, bool isCombine)
-            : base(uniqureId, context, isCombine)
+            : base(uniqureId, context)
         {
             this.AbsolutePath = uniqureId;
         }
