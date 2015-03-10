@@ -1,7 +1,6 @@
 ﻿using System.Web.Optimization;
 using CombineJs.Modules;
 using CombineJs.Modules.Modules;
-using SeajsBundles.Seajs;
 
 namespace Ornament.Web.SeajsModules
 {

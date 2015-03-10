@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Web.Optimization;
 using CombineJs.Modules.Modules.Readers;
 
@@ -31,7 +30,7 @@ namespace CombineJs.Modules.Modules
             get { return _referenceModules ?? (_referenceModules = new ModuleCollection()); }
         }
 
-        public static ModuleFactory Instance(BundleContext context)
+        public static ModuleFactory Create(BundleContext context)
         {
             return new ModuleFactory(context);
         }
@@ -40,11 +39,15 @@ namespace CombineJs.Modules.Modules
         /// </summary>
         /// <param name="facotry"></param>
         /// <param name="index">0 is the best</param>
-        public void Add(ICombineModuleReader facotry, int index)
+        public static void Add(ICombineModuleReader facotry, int index)
         {
             if (facotry == null)
                 throw new ArgumentNullException("facotry");
             List.Insert(index, facotry);
+        }
+
+        public string Build(string path, string content)
+        {
         }
 
         /// <summary>
@@ -76,23 +79,6 @@ namespace CombineJs.Modules.Modules
             }
 
             return null;
-        }
-
-
-        //protected virtual string ToAbstrVirtualPath(string virtualPath, string path)
-        //{
-        //    if (virtualPath.StartsWith("/"))
-        //    {
-        //        return "~" + virtualPath;
-        //    }
-        //    string dir = VirtualPathUtility.GetDirectory(path);
-        //    string result = VirtualPathUtility.Combine(dir, virtualPath);
-
-        //    return result;
-        //}
-        public string TryToGetId(string absolutePath)
-        {
-            throw new NotImplementedException();
         }
     }
 }

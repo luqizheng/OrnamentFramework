@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Web.Optimization;
-using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {

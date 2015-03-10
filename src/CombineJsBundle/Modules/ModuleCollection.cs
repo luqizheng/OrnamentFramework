@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {

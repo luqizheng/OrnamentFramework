@@ -76,7 +76,6 @@
     <Compile Include="Modules\Modules\ICombineModuleReader.cs" />
     <Compile Include="Modules\Modules\ModuleFactory.cs" />
     <Compile Include="Modules\ReferenceModule.cs" />
-    <Compile Include="Modules\RootModule.cs" />
     <Compile Include="RouteUtils.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.Optimization;
 using CombineJs.Modules;
-using SeajsBundles.Seajs;
+using CombineJs.Modules.Modules;
 
 namespace CombineJs
 {
@@ -48,11 +49,12 @@ namespace CombineJs
             {
                 path = enumerable.First().IncludedVirtualPath;
             }
-            var seajs = new RootModule(path, context, Combine)
+            var factory = ModuleFactory.Create(context);
+            /*var seajs = new RootModule(path, context, Combine)
             {
                 AbsolutePath = context.BundleVirtualPath
-            };
-            string subContent = seajs.BuildContent(bundleContent);
+            };*/
+            string subContent = factory.Build(path, bundleContent);
             return base.ApplyTransforms(context, subContent, enumerable);
         }
     }

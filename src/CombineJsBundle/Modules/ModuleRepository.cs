@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using CombineJs.Modules;
 
-namespace SeajsBundles.Seajs
+namespace CombineJs.Modules
 {
     /// <summary>
     ///     所有Module根据Id 保存在这个模块中
@@ -37,6 +36,13 @@ namespace SeajsBundles.Seajs
             ////}
             _modules.Add(module);
             _pathModule.Add(module);
+        }
+
+        public void Remove(ScriptModule module)
+        {
+            if (module == null) throw new ArgumentNullException("module");
+            _modules.Remove(module);
+            _pathModule.Remove(module);
         }
 
         /// <summary>

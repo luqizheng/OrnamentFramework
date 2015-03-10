@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web.Optimization;
 using CombineJs.Modules.Modules;
-using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {
@@ -20,7 +18,7 @@ namespace CombineJs.Modules
         {
             RequireId = referId;
         }
-       
+
         /// <summary>
         ///     当前这个Module依赖的子module
         /// </summary>

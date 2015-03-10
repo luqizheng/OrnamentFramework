@@ -8,41 +8,14 @@ namespace CombineJs.Modules.Modules.Readers
 {
     public class BundleFileCombineModuleReader : ScriptReader
     {
-        //public bool Build(string abstractRequirePath,
-        //    ModuleFactory facoFactory, ScriptModule parent, 
-        //    out CombineModule module)
-        //{
-        //    module = null;
-        //    if (!abstractRequirePath.StartsWith("~"))
-        //    {
-        //        abstractRequirePath = "~" + abstractRequirePath;
-        //    }
-
-        //    try
-        //    {
-        //        Bundle bundle = BundleTable.Bundles.GetBundleFor(abstractRequirePath);
-
-        //        if (bundle != null)
-        //        {
-        //            module = new CombineModule(abstractRequirePath,context);
-                    
-        //            return true;
-        //        }
-
-        //        return false;
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        return false;
-        //    }
-        //}
 
         protected override string GetContent(ScriptModule module, BundleContext context)
         {
            Bundle bundle = BundleTable.Bundles.GetBundleFor(module.RequireId);
             if (bundle == null)
                 return null;
-           var phyPath=GetContent(module.AbsolutePath,)
+            return GetContent(bundle, context, module.AbsolutePath);
+
         }
 
         protected virtual string GetContent(Bundle bundle, BundleContext context,string absolutePath)
@@ -54,33 +27,34 @@ namespace CombineJs.Modules.Modules.Readers
                 throw new ArgumentNullException(absolutePath, absolutePath + " not a bundle file ");
             }
             string file = c.VirtualFile.VirtualPath;
-            file = MapToPhysicPath(file);
+            file = MapToPhysicPath(file,context);
             using (var reader = new StreamReader(file))
             {
                 return reader.ReadToEnd();
             }
         }
         
-        protected virtual string MapToPhysicPath(string virtualPath)
+        protected virtual string MapToPhysicPath(string virtualPath,BundleContext context)
         {
-            return HttpContext.Current.Request.MapPath(virtualPath, VirtualPathUtility.GetDirectory(Path),true);
+            var path = Path(virtualPath, context);
+            return HttpContext.Current.Request.MapPath(virtualPath, VirtualPathUtility.GetDirectory(path),true);
         }
 
         /// <summary>
         /// </summary>
-        public virtual string Path(string AbsolutePath,BundleContext Context,)
+        public virtual string Path(string absolutePath,BundleContext context)
         {
             
 
-                Bundle bundle = BundleTable.Bundles.GetBundleFor(AbsolutePath);
+                Bundle bundle = BundleTable.Bundles.GetBundleFor(absolutePath);
                 if (bundle != null)
                 {
-                    BundleFile a = bundle.EnumerateFiles(Context).First();
+                    BundleFile a = bundle.EnumerateFiles(context).First();
                     return a.IncludedVirtualPath
-                        .Replace(Context.HttpContext.Request.PhysicalApplicationPath ?? "", "~/")
+                        .Replace(context.HttpContext.Request.PhysicalApplicationPath ?? "", "~/")
                         .Replace('\\', '/');
                 }
-                return OutputId;
+                return absolutePath;
             
         }
     }
