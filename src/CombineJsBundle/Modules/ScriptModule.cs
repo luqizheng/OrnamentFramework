@@ -16,8 +16,5 @@
         ///     绝对路径
         /// </summary>
         public virtual string AbsolutePath { get; set; }
-
     }
-
-    
 }

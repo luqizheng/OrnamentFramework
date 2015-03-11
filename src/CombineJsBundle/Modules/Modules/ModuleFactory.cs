@@ -8,19 +8,28 @@ namespace CombineJs.Modules.Modules
     public class ModuleFactory
     {
         private static readonly IList<ICombineModuleReader> List = new List<ICombineModuleReader>();
+        private readonly ModuleRepository _moduleRepository;
         private ModuleCollection _referenceModules;
 
         static ModuleFactory()
         {
-            List.Add(new BundleFileCombineModuleReader());
+            List.Add(new FileCombineModuleReader());
         }
 
-        public ModuleFactory(BundleContext context)
+        public ModuleFactory(BundleContext context, bool combine)
         {
             Context = context;
+            Combine = combine;
+            _moduleRepository = new ModuleRepository();
+        }
+
+        internal ModuleRepository Repository
+        {
+            get { return _moduleRepository; }
         }
 
         public BundleContext Context { get; set; }
+        public bool Combine { get; set; }
 
         /// <summary>
         ///     必须为 reference module 的 module,保存在这里的module会自动跳过过
@@ -30,9 +39,10 @@ namespace CombineJs.Modules.Modules
             get { return _referenceModules ?? (_referenceModules = new ModuleCollection()); }
         }
 
-        public static ModuleFactory Create(BundleContext context)
+        public static ModuleFactory Create(BundleContext context, bool combine)
         {
-            return new ModuleFactory(context);
+            if (context == null) throw new ArgumentNullException("context");
+            return new ModuleFactory(context, combine);
         }
 
         /// <summary>
@@ -48,35 +58,39 @@ namespace CombineJs.Modules.Modules
 
         public string Build(string path, string content)
         {
+            if (Combine)
+            {
+                var script = new ScriptModule();
+                script.RequireId = path;
+                script.AbsolutePath = path;
+                script.OutputId = path;
+
+                return ContentAnalyzer.CreateContent(this, content, script);
+            }
+            return content;
         }
 
         /// <summary>
         /// </summary>
         /// <param name="refereId"></param>
-        /// <param name="context"></param>
-        /// <param name="combine"></param>
         /// <param name="parentModule"></param>
         /// <returns></returns>
-        public ScriptModule Create(string refereId,
-            BundleContext context, bool combine,
-            ScriptModule parentModule)
+        internal ScriptModule Create(string refereId, ScriptModule parentModule)
         {
-            if (combine)
+            if (refereId.Contains("/") || refereId.EndsWith(".js"))
             {
-                if (refereId.Contains("/") || refereId.EndsWith(".js"))
-                {
-                    //string abstrVirtualPath = ToAbstrVirtualPath(refereId, parentModule.AbsolutePath);
+                //string abstrVirtualPath = ToAbstrVirtualPath(refereId, parentModule.AbsolutePath);
 
-                    foreach (ICombineModuleReader item in List)
+                foreach (ICombineModuleReader item in List)
+                {
+                    CombineModule mouModule;
+                    if (item.Build(refereId, this, parentModule, out mouModule))
                     {
-                        CombineModule mouModule;
-                        if (item.Build(refereId, this, parentModule, out mouModule))
-                        {
-                            break;
-                        }
+                        break;
                     }
                 }
             }
+
 
             return null;
         }

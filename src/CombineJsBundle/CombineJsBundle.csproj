@@ -63,8 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonJsMinify.cs" />
+    <Compile Include="Modules\Modules\ContentAnalyzer.cs" />
     <Compile Include="Modules\ScriptModule.cs" />
-    <Compile Include="Modules\Modules\Readers\ScriptReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CombineJsBundle.cs">
       <SubType>Code</SubType>
@@ -72,10 +72,9 @@
     <Compile Include="Modules\CombineModule.cs" />
     <Compile Include="Modules\ModuleRepository.cs" />
     <Compile Include="Modules\ModuleCollection.cs" />
-    <Compile Include="Modules\Modules\Readers\BundleFileCombineModuleReader.cs" />
+    <Compile Include="Modules\Modules\Readers\FileCombineModuleReader.cs" />
     <Compile Include="Modules\Modules\ICombineModuleReader.cs" />
     <Compile Include="Modules\Modules\ModuleFactory.cs" />
-    <Compile Include="Modules\ReferenceModule.cs" />
     <Compile Include="RouteUtils.cs" />
   </ItemGroup>
   <ItemGroup>
