@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace CombineJs.Modules.Modules
 {
     internal class ContentAnalyzer
     {
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="factory"></param>
         /// <param name="content"></param>
         /// <param name="script"></param>
         /// <returns>sub r</returns>
-        public static string CreateContent(ModuleFactory factory, string content,ScriptModule script)
+        public static string CreateContent(ModuleFactory factory, string content, ScriptModule script)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
-
-            var result = new List<CombineModule>();
+            //var result = new List<CombineModule>();
 
             content = Regex.Replace(content, @"require\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
             {
@@ -33,15 +27,10 @@ namespace CombineJs.Modules.Modules
                 foreach (string replacement in replcements)
                 {
                     string srcRequireModualId = replacement; //.ToLower();
-                    ScriptModule modual =factory.Create(srcRequireModualId,);
-                    if (!SubModules.Contains(modual))
+                    ScriptModule modual = factory.Create(srcRequireModualId, script);
+                    if (!factory.Repository.Contains(modual))
                     {
-                        SubModules.Add(modual);
-                    }
-                    var combineModule = modual as CombineModule;
-                    if (combineModule != null)
-                    {
-                        result.Add(combineModule);
+                        factory.Repository.Add(modual);
                     }
                     output.Add("'" + modual.OutputId + "'");
                 }
@@ -51,7 +40,7 @@ namespace CombineJs.Modules.Modules
             });
 
 
-            return result;
+            return content;
         }
     }
 }

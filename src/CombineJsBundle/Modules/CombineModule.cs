@@ -33,20 +33,19 @@ namespace CombineJs.Modules
         public string Content { get; set; }
 
 
-        public string BuildContent(ModuleRepository moduleIdList)
+        /*public string BuildContent(ModuleRepository moduleIdList)
         {
             return BuildContent(Content, moduleIdList);
-        }
+        }*/
 
         /// <summary>
         /// </summary>
         /// <param name="content"></param>
         /// <param name="moduleIdList"></param>
         /// <returns></returns>
-        protected string BuildContent(string content, ModuleRepository moduleIdList)
+        /*protected string BuildContent(string content, ModuleRepository moduleIdList)
         {
             List<CombineModule> combineFiles = CollectRequire(ref content, moduleIdList);
-
 
             //Build Define Header 
             StringBuilder result = RebuildDefinedHeader(content, moduleIdList);
@@ -54,7 +53,7 @@ namespace CombineJs.Modules
             //添加合并文件的内容
             CombineRequirePart(result, combineFiles, moduleIdList);
             return result.ToString();
-        }
+        }*/
 
         /// <summary>
         ///     合并Require部分
@@ -105,7 +104,7 @@ namespace CombineJs.Modules
         /// <param name="content"></param>
         /// <param name="combinedModuleSet">已经被combine的Modules</param>
         /// <returns>返回需要被combie module的Moudle</returns>
-        protected virtual List<CombineModule> CollectRequire(ref string content, ModuleRepository combinedModuleSet)
+        /*protected virtual List<CombineModule> CollectRequire(ref string content, ModuleRepository combinedModuleSet)
         {
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
@@ -140,9 +139,9 @@ namespace CombineJs.Modules
 
 
             return result;
-        }
+        }*/
 
-
+        /*
         /// <summary>
         ///     根据文件内容获取module对象.
         /// </summary>
@@ -167,68 +166,7 @@ namespace CombineJs.Modules
             }
 #endif
             return module;
-            /*srcRequireModualId = ToAbstrVirtualPath(srcRequireModualId);
-                    combinedHere = false;
-                    //检查是否Global
-                    if (SeajsModuleFactory.Instance.ReferenceModules.Contains(srcRequireModualId))
-                    {
-                        ISeajsModule module = SeajsModuleFactory.Instance.ReferenceModules[srcRequireModualId];
-                        if (!combinedModuleSet.Contains(srcRequireModualId))
-                        {
-                            combinedModuleSet.Add(module);
-                        }
-
-                        return module;
-                    }
-
-                    if (combinedModuleSet.Contains(srcRequireModualId))
-                    {
-                        ISeajsModule module = combinedModuleSet[srcRequireModualId];
-                        if (!srcRequireModualId.Contains(module.Id))
-                        {
-                            combinedModuleSet.Add(module);
-                        }
-                    }
-
-                    if (BundleFileCombine.IsInMainFolder(srcRequireModualId))
-                    {
-                        ISeajsModule module = new BundleFileCombine(srcRequireModualId, Context, IsCombine);
-                        combinedModuleSet.Add(module);
-                        combinedHere = true;
-                        return module;
-                    }
-
-                    string physicPath = MapToPhysicPath(srcRequireModualId); //it will be use in physicId
-
-                    if (File.Exists(physicPath))
-                    {
-                        //这是一个物理路径合并模块
-                        if (combinedModuleSet.Contains(physicPath))
-                        {
-                            return combinedModuleSet[physicPath];
-                        }
-                        //创建合并Module js
-                        var module = new FileCombineModule(Context, srcRequireModualId, IsCombine, physicPath);
-                        combinedModuleSet.Add(module);
-                        combinedHere = true;
-                        return module;
-                    }
-                    ISeajsModule anotherModule = SeajsModuleFactory.Instance.Create(srcRequireModualId, Context,
-                        IsCombine, this);
-                    if (anotherModule != null)
-                    {
-                        combinedModuleSet.Add(anotherModule);
-                        combinedHere = true;
-                        return anotherModule;
-                    }
-
-                    /*if (CombineModuleAssembly.IsAssemblyCombineModules(srcRequireModualId))
-                    {
-                        var module = new CombineModuleAssembly(Context, srcRequireModualId, IsCombine);
-                        combinedModuleSet.Add(module);
-                        combinedHere = true;
-                        return module;
-                    }*/
-        }
+         
+        }*/
     }
 }
