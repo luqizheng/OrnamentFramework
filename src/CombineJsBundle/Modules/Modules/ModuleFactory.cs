@@ -66,13 +66,11 @@ namespace CombineJs.Modules.Modules
         {
             if (Combine)
             {
+                var script = new ScriptModule(path) {AbsolutePath = path, OutputId = path};
 
-
-                var script = new ScriptModule(path) { AbsolutePath = path, OutputId = path };
-
-                var main = ContentAnalyzer.CreateContent(this, content, script);
-                StringBuilder result = new StringBuilder(main);
-                this.Repository.Mergn(result);
+                string main = ContentAnalyzer.CreateContent(this, content, script);
+                var result = new StringBuilder(main);
+                Repository.Mergn(result);
                 return result.ToString();
             }
             return content;

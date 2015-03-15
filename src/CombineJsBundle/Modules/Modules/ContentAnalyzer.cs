@@ -17,8 +17,8 @@ namespace CombineJs.Modules.Modules
             //收集所有的Requier，如果属于_combinePath的那么就自动合并。并且重新设置引用
 
             //var result = new List<CombineModule>();
-
-            content = Regex.Replace(content, @"(require|define)\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
+                                             //(define|require)\(\[*([\'\"\\.\/A-z0-9]+?)\]*[\),]
+            content = Regex.Replace(content, @"^(require|define)\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
             {
                 string[] replcements = match.Groups[2].Value
                     .TrimStart('\"', '\'', '[')
@@ -45,5 +45,7 @@ namespace CombineJs.Modules.Modules
 
             return content;
         }
+
+        
     }
 }

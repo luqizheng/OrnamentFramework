@@ -27,7 +27,7 @@ namespace CombineJs.Modules.Modules.Readers
 
         protected override string GetContent(Bundle bundle, BundleContext context, ScriptModule module)
         {
-            var absolutePath = module.AbsolutePath;
+            //var absolutePath = module.AbsolutePath;
             BundleFile c = bundle.EnumerateFiles(context).FirstOrDefault();
             if (c == null)
             {

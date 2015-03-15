@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Optimization;
 
 namespace CombineJs.Modules.Modules.Readers
@@ -9,17 +11,25 @@ namespace CombineJs.Modules.Modules.Readers
         {
             module = Create(scriptPath, context.Context, parent);
             context.Repository.Add(module);
-            module.Content = GetContent(module, context.Context);
+            var content = GetContent(module, context.Context);
 
 
-            if (module.Content != null)
+            if (content != null)
             {
+                var outputId = module.OutputId;
+                content = Regex.Replace(content, @"^define\((.+?)\)", s =>
+                {
+                    return "define('" + outputId + "'," + s.Groups[1].Value + ")";
+                });
+                module.Content = content;
                 return true;
             }
             context.Repository.Remove(module);
             module = null;
             return false;
         }
+
+
 
         protected virtual string GetContent(ScriptModule module, BundleContext context)
         {
