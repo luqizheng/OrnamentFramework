@@ -11,7 +11,7 @@ namespace WebApplication
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
-            BundleTable.Bundles.UseCdn = false;
+            BundleTable.Bundles.UseCdn = true;
             OrnamentContext.Configuration.SetSeajsCombine(true);
             var registryParty = new VoidFunc<BundleCollection>[]
             {

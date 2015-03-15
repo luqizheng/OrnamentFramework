@@ -18,9 +18,9 @@ namespace CombineJs.Modules.Modules
 
             //var result = new List<CombineModule>();
 
-            content = Regex.Replace(content, @"require\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
+            content = Regex.Replace(content, @"(require|define)\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
             {
-                string[] replcements = match.Groups[1].Value
+                string[] replcements = match.Groups[2].Value
                     .TrimStart('\"', '\'', '[')
                     .TrimEnd('\"', '\'', ']').Split(',');
                 var output = new List<string>();
@@ -28,6 +28,9 @@ namespace CombineJs.Modules.Modules
                 {
                     string srcRequireModualId = replacement; //.ToLower();
                     ScriptModule modual = factory.Create(srcRequireModualId, script);
+                    if (modual == null)
+                        return match.Groups[1].Value;
+
                     if (!factory.Repository.Contains(modual))
                     {
                         factory.Repository.Add(modual);
@@ -36,7 +39,7 @@ namespace CombineJs.Modules.Modules
                 }
                 string outputString = String.Join(",", output.ToArray());
                 string reformat = string.Format("{0}", outputString);
-                return match.ToString().Replace(match.Groups[1].Value, reformat);
+                return match.ToString().Replace(match.Groups[2].Value, reformat);
             });
 
 

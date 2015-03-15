@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+using System.Web.ModelBinding;
 
 namespace CombineJs.Modules
 {
@@ -68,6 +70,18 @@ namespace CombineJs.Modules
         public ScriptModule GetByAbsolutePath(string absolutePath)
         {
             return _pathModule[absolutePath];
+        }
+
+        public void Mergn(StringBuilder con)
+        {
+            foreach (var item in _pathModule)
+            {
+                CombineModule com = item as CombineModule;
+                if (com != null)
+                {
+                    con.Append(com.Content);
+                }
+            }
         }
     }
 }

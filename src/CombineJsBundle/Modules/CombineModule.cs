@@ -8,25 +8,29 @@ namespace CombineJs.Modules
 {
     public class CombineModule : ScriptModule
     {
-        private ModuleCollection _modules;
+        //private ModuleCollection _modules;
 
-        /// <summary>
-        /// </summary>
-        /// <param name="referId"></param>
-        /// <param name="context"></param>
-        public CombineModule(string referId)
+        ///// <summary>
+        ///// </summary>
+        ///// <param name="referId"></param>
+        ///// <param name="context"></param>
+        //public CombineModule(string referId)
+        //{
+        //    RequireId = referId;
+        //}
+
+        ///// <summary>
+        /////     当前这个Module依赖的子module
+        ///// </summary>
+        //public ModuleCollection SubModules
+        //{
+        //    get { return _modules ?? (_modules = new ModuleCollection()); }
+        //}
+
+
+        public CombineModule(string requireId) : base(requireId)
         {
-            RequireId = referId;
         }
-
-        /// <summary>
-        ///     当前这个Module依赖的子module
-        /// </summary>
-        public ModuleCollection SubModules
-        {
-            get { return _modules ?? (_modules = new ModuleCollection()); }
-        }
-
 
         /// <summary>
         /// </summary>
@@ -55,48 +59,48 @@ namespace CombineJs.Modules
             return result.ToString();
         }*/
 
-        /// <summary>
-        ///     合并Require部分
-        /// </summary>
-        /// <param name="result"></param>
-        /// <param name="combineFiles"></param>
-        /// <param name="moduleIdList"></param>
-        protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles,
-            ModuleRepository moduleIdList)
-        {
-            foreach (CombineModule combineFile in combineFiles)
-            {
-                string subContent = combineFile.BuildContent(moduleIdList);
-                result.Append(";\r\n")
-                    .Append("//")
-                    .Append(moduleIdList.GetModualId(combineFile))
-                    .Append(";\r\n")
-                    .Append(subContent);
-            }
-        }
+        ///// <summary>
+        /////     合并Require部分
+        ///// </summary>
+        ///// <param name="result"></param>
+        ///// <param name="combineFiles"></param>
+        ///// <param name="moduleIdList"></param>
+        //protected virtual void CombineRequirePart(StringBuilder result, List<CombineModule> combineFiles,
+        //    ModuleRepository moduleIdList)
+        //{
+        //    foreach (CombineModule combineFile in combineFiles)
+        //    {
+        //        string subContent = combineFile.BuildContent(moduleIdList);
+        //        result.Append(";\r\n")
+        //            .Append("//")
+        //            .Append(moduleIdList.GetModualId(combineFile))
+        //            .Append(";\r\n")
+        //            .Append(subContent);
+        //    }
+        //}
 
-        /// <summary>
-        ///     重新整理defined 这一段代码，并且返回defined所包含的所有内容。
-        /// </summary>
-        /// <param name="content"></param>
-        /// <param name="moduleIdList"></param>
-        /// <returns></returns>
-        protected virtual StringBuilder RebuildDefinedHeader(string content, ModuleRepository moduleIdList)
-        {
-            var result = new StringBuilder();
-            string newDefined = BuildDefine(moduleIdList);
-            result.Insert(0,
-                Regex.Replace(content, @"^([ ;}\s]*define).*?\(.*?function", match => newDefined, RegexOptions.Multiline));
-            return result;
-        }
+        ///// <summary>
+        /////     重新整理defined 这一段代码，并且返回defined所包含的所有内容。
+        ///// </summary>
+        ///// <param name="content"></param>
+        ///// <param name="moduleIdList"></param>
+        ///// <returns></returns>
+        //protected virtual StringBuilder RebuildDefinedHeader(string content, ModuleRepository moduleIdList)
+        //{
+        //    var result = new StringBuilder();
+        //    string newDefined = BuildDefine(moduleIdList);
+        //    result.Insert(0,
+        //        Regex.Replace(content, @"^([ ;}\s]*define).*?\(.*?function", match => newDefined, RegexOptions.Multiline));
+        //    return result;
+        //}
 
-        protected virtual string BuildDefine(ModuleRepository moduleIdList)
-        {
-            string id = moduleIdList.GetModualId(this);
-            return String.Format("define(\"{0}\",[\"{1}\"],function",
-                id,
-                String.Join("\",\"", SubModules.RequrestIds(moduleIdList)));
-        }
+        //protected virtual string BuildDefine(ModuleRepository moduleIdList)
+        //{
+        //    string id = moduleIdList.GetModualId(this);
+        //    return String.Format("define(\"{0}\",[\"{1}\"],function",
+        //        id,
+        //        String.Join("\",\"", SubModules.RequrestIds(moduleIdList)));
+        //}
 
         /// <summary>
         ///     查找文件中引用模块和合并模块

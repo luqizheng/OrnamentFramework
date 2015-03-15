@@ -2,10 +2,14 @@
 {
     public class ScriptModule
     {
+        public ScriptModule(string requireId)
+        {
+            this.RequireId = requireId;
+        }
         /// <summary>
         ///     引用Id，写在js文件中require('id')这一部分的
         /// </summary>
-        public virtual string RequireId { get; set; }
+        public string RequireId { get; private set; }
 
         /// <summary>
         ///     SeajsBunlde自己生成的唯一Id

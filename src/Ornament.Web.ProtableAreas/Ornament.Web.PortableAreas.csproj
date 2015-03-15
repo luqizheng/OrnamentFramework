@@ -152,8 +152,7 @@
     <Compile Include="PortableAreas\PortableAreaRegistration.cs" />
     <Compile Include="PortableAreas\PortableAreaStartupMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeajsModules\CombineModuleAssembly.cs" />
-    <Compile Include="SeajsModules\CombineCombineModuleAsssemblyReader.cs" />
+    <Compile Include="SeajsModules\CombineModuleAsssemblyReader.cs" />
     <Compile Include="SeajsModules\EmbeddedBuilder.cs" />
     <Compile Include="SeajsModules\AmdEmbedBundle.cs" />
     <Compile Include="Messages\RequireJsModuleBundleEventMessage.cs" />

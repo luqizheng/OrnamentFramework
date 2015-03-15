@@ -1,7 +1,5 @@
-﻿using System;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 using CombineJs;
-using SeajsBundles;
 
 namespace Ornament.Web.SeajsModules
 {
@@ -9,8 +7,8 @@ namespace Ornament.Web.SeajsModules
     {
         private readonly IBundleBuilder _bulder;
 
-        public EmbedBundle(string virtualPath, string areaName, bool combine)
-            : base(virtualPath, combine)
+        public EmbedBundle(string virtualPath, string areaName)
+            : base(virtualPath)
         {
             AreaName = areaName;
             _bulder = new EmbeddedBuilder();

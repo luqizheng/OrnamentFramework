@@ -6,7 +6,7 @@ using System.Web.Optimization;
 
 namespace CombineJs.Modules.Modules.Readers
 {
-    public class FileCombineModuleReader : ICombineModuleReader
+    public class FileCombineModuleReader : CombineModuleReader
     {
         public bool Build(string scriptPath, ModuleFactory context, ScriptModule parent, out CombineModule module)
         {
@@ -24,20 +24,14 @@ namespace CombineJs.Modules.Modules.Readers
             return false;
         }
 
-        protected virtual string GetContent(ScriptModule module, BundleContext context)
-        {
-            Bundle bundle = BundleTable.Bundles.GetBundleFor(module.RequireId);
-            if (bundle == null)
-                return null;
-            return GetContent(bundle, context, module.AbsolutePath);
-        }
 
-        protected virtual string GetContent(Bundle bundle, BundleContext context, string absolutePath)
+        protected override string GetContent(Bundle bundle, BundleContext context, ScriptModule module)
         {
+            var absolutePath = module.AbsolutePath;
             BundleFile c = bundle.EnumerateFiles(context).FirstOrDefault();
             if (c == null)
             {
-                throw new ArgumentNullException(absolutePath, absolutePath + " not a bundle file ");
+                return null;
             }
             string file = c.VirtualFile.VirtualPath;
             file = MapToPhysicPath(file, context);
@@ -66,27 +60,6 @@ namespace CombineJs.Modules.Modules.Readers
                     .Replace('\\', '/');
             }
             return absolutePath;
-        }
-
-        protected CombineModule Create(string rquireId, BundleContext context, ScriptModule parent)
-        {
-            var result = new CombineModule(rquireId)
-            {
-                AbsolutePath = ToAbstrVirtualPath(rquireId, parent.AbsolutePath)
-            };
-            return result;
-        }
-
-        protected virtual string ToAbstrVirtualPath(string virtualPath, string parentPath)
-        {
-            if (virtualPath.StartsWith("/"))
-            {
-                return "~" + virtualPath;
-            }
-            string dir = VirtualPathUtility.GetDirectory(parentPath);
-            string result = VirtualPathUtility.Combine(dir, virtualPath);
-
-            return result;
         }
     }
 }

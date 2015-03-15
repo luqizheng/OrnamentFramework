@@ -58,7 +58,7 @@ namespace Ornament.Web.Cfg
 
 
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
-            ModuleFactory.Instance.Add(new CombineCombineModuleAsssemblyReader(), 1);
+            ModuleFactory.Add(new CombineModuleAsssemblyReader(), 1);
             RequirejsModuleBundleMessageHandle.HandlAllBundle();
         }
 

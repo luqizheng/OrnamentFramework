@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Web.Optimization;
 using CombineJs.Modules.Modules.Readers;
 
@@ -39,6 +40,11 @@ namespace CombineJs.Modules.Modules
             get { return _referenceModules ?? (_referenceModules = new ModuleCollection()); }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="combine"></param>
+        /// <returns></returns>
         public static ModuleFactory Create(BundleContext context, bool combine)
         {
             if (context == null) throw new ArgumentNullException("context");
@@ -60,12 +66,14 @@ namespace CombineJs.Modules.Modules
         {
             if (Combine)
             {
-                var script = new ScriptModule();
-                script.RequireId = path;
-                script.AbsolutePath = path;
-                script.OutputId = path;
 
-                return ContentAnalyzer.CreateContent(this, content, script);
+
+                var script = new ScriptModule(path) { AbsolutePath = path, OutputId = path };
+
+                var main = ContentAnalyzer.CreateContent(this, content, script);
+                StringBuilder result = new StringBuilder(main);
+                this.Repository.Mergn(result);
+                return result.ToString();
             }
             return content;
         }
@@ -86,12 +94,10 @@ namespace CombineJs.Modules.Modules
                     CombineModule mouModule;
                     if (item.Build(refereId, this, parentModule, out mouModule))
                     {
-                        break;
+                        return mouModule;
                     }
                 }
             }
-
-
             return null;
         }
     }
