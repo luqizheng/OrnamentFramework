@@ -70,7 +70,11 @@ namespace CombineJs.Modules.Modules
                 var script = new ScriptModule(path) {AbsolutePath = path, OutputId = path};
 
                 string main = ContentAnalyzer.CreateContent(this, content, script);
-                main = Regex.Replace(content, @"[^.]\s*define\s*\(\s*", s => string.Format("{0}'{1}',", s.Value,"_main_"));
+                main = Regex.Replace(main, @"[^.]\s*define\s*\(\s*",
+                    delegate(Match s)
+                    {
+                        return string.Format("{0}'{1}',", s.Value, "_main_");
+                    });
                 var result = new StringBuilder(main);
                 Repository.Mergn(result);
                 return result.ToString();

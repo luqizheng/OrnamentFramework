@@ -81,7 +81,8 @@ namespace CombineJs.Modules
                 var com = queue.Dequeue() as CombineModule;
                 if (com != null)
                 {
-                    con.Insert(0, com.Content + ";");
+                    //con.Insert(0, com.Content + ";");
+                    con.Append(com.Content + ";");
 
                 }
                 this.Remove(com);
