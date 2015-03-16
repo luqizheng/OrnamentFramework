@@ -14,13 +14,10 @@ namespace CombineJs.Modules.Modules.Readers
             var content = GetContent(module, context.Context);
 
 
-            if (content != null)
+            if (content != null && !string.IsNullOrEmpty(module.OutputId))
             {
                 var outputId = module.OutputId;
-                content = Regex.Replace(content, @"^define\((.+?)\)", s =>
-                {
-                    return "define('" + outputId + "'," + s.Groups[1].Value + ")";
-                });
+                content = Regex.Replace(content, @"[^.]\s*define\s*\(\s*", s => string.Format("{0}'{1}',", s.Value, outputId));
                 module.Content = content;
                 return true;
             }

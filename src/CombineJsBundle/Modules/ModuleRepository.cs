@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Web.ModelBinding;
 
 namespace CombineJs.Modules
 {
@@ -22,7 +22,8 @@ namespace CombineJs.Modules
             if (combineModule != null)
             {
                 var fileInfo = new FileInfo(combineModule.AbsolutePath);
-                string name = fileInfo.Name;
+                string name = fileInfo.Name.Replace(fileInfo.Extension, "");
+
                 string checkName = name;
                 int index = 0;
                 while (_modules.Contains(checkName))
@@ -74,13 +75,16 @@ namespace CombineJs.Modules
 
         public void Mergn(StringBuilder con)
         {
-            foreach (var item in _pathModule)
+            var queue = new Queue<ScriptModule>(_pathModule);
+            while (queue.Count != 0)
             {
-                CombineModule com = item as CombineModule;
+                var com = queue.Dequeue() as CombineModule;
                 if (com != null)
                 {
-                    con.Append(com.Content);
+                    con.Insert(0, com.Content + ";");
+
                 }
+                this.Remove(com);
             }
         }
     }

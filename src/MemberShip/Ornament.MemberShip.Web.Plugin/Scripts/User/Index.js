@@ -1,8 +1,6 @@
 ﻿/// <reference path="../Share/user.js" />
 /// <reference path="../Share/dataTables.js" />
-define(["../Share/user.js", "pager"], function (userApi) {
-
-
+define(["../Share/user.js", "pager"], function(userApi) {
 
 
     var lang = {};
@@ -11,56 +9,56 @@ define(["../Share/user.js", "pager"], function (userApi) {
 
 
     function Init() {
-        var model = avalon.define("index", function (vm) {
+        var model = avalon.define("index", function(vm) {
             vm.users = [];
             //Search content
             vm.content = "";
 
-            vm.retievePwd = function (el) {
+            vm.retievePwd = function(el) {
                 var loginId = el.LoginId;
-                userApi.RetrievePassword(loginId, function (e) {
+                userApi.RetrievePassword(loginId, function(e) {
                     alert(e.success ?
                         lang.retrievePwdMessage.success :
                         lang.retrievePwdMessage.fail);
-                }, function () {
+                }, function() {
                     //showLoading.call(self, false);
                 });
             };
-            vm.verifyEmail = function (model) {
+            vm.verifyEmail = function(model) {
 
-                userApi.VerifyEmail(model.Id, function (e) {
+                userApi.VerifyEmail(model.Id, function(e) {
                     alert(e.success ?
                         lang.verifyEmailMessage.success :
                         lang.verifyEmailMessage.fail);
-                }, function () {
+                }, function() {
                     showLoading.call(self, false);
                 });
                 return false;
             };
 
-            vm.search = function (e) {
+            vm.search = function(e) {
                 avalon.vmodels.pager.nav(0);
                 e.preventDefault();
             };
             vm.pager = {
                 pageSize: 50,
-                search: function (pageIndex, pageSize, func) {
+                search: function(pageIndex, pageSize, func) {
                     find(pageIndex, pageSize, model.content, func);
                 }
             };
-            vm.lock = function (user, bLock) {
+            vm.lock = function(user, bLock) {
 
                 if (typeof bLock !== "boolean") {
                     bLock = !user.IsLocked;
                 };
-                userApi.Lock(user.Id, bLock, function (result) {
+                userApi.Lock(user.Id, bLock, function(result) {
                     if (result.success) {
                         user.IsLocked = bLock;
                     }
                 });
             };
             vm.total = 7;
-            vm.deny = function (user, bDeny) {
+            vm.deny = function(user, bDeny) {
                 /// <summary>
                 ///     锁定用户
                 /// </summary>
@@ -70,20 +68,21 @@ define(["../Share/user.js", "pager"], function (userApi) {
                 if (typeof bDeny !== "boolean") {
                     bDeny = !user.Deny;
                 }
-                userApi.Deny(user.Id, bDeny, function (result) {
+                userApi.Deny(user.Id, bDeny, function(result) {
                     if (result.success) {
                         user.Deny = bDeny;
                     }
                 });
             };
             vm.loading = false;
+
             function find(page, size, content, func) {
                 vm.loading = true;
                 $.get("/MemberShips/User/List", {
                     page: page,
                     search: content,
                     size: size
-                }, function (d) {
+                }, function(d) {
                     vm.loading = false;
                     model.users = [];
                     for (var i = 0; i < d.data.length; i++) {
@@ -98,17 +97,14 @@ define(["../Share/user.js", "pager"], function (userApi) {
     }
 
 
-
-
-
     return {
-        init: function (lang1) {
+        init: function(lang1) {
             lang = lang1;
             Init();
             avalon.scan();
 
         },
-        clear: function () {
+        clear: function() {
 
             delete avalon.vmodels["index"];
         }
