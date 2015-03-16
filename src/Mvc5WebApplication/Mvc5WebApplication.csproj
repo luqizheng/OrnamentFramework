@@ -903,6 +903,7 @@
     <Content Include="Scripts\plugin\x-editable\x-editable.min.js" />
     <Content Include="Scripts\prism\prism.css" />
     <Content Include="Scripts\prism\prism.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.manager.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.ui.js" />
     <Content Include="Scripts\smartwidgets\jarvis.widget.js" />
