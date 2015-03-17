@@ -14,7 +14,7 @@
         /// <summary>
         ///     SeajsBunlde自己生成的唯一Id
         /// </summary>
-        public virtual string OutputId { get; set; }
+        public virtual string OutputId { get; internal set; }
 
         /// <summary>
         ///     绝对路径

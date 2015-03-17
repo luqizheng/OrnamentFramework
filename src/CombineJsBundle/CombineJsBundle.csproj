@@ -66,8 +66,7 @@
     <Compile Include="Modules\CombineModule.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Modules\Modules\ContentAnalyzer.cs" />
-    <Compile Include="Modules\Modules\Readers\CombineModuleReader.cs" />
+    <Compile Include="Readers\CombineModuleReader.cs" />
     <Compile Include="Modules\ScriptModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CombineJsBundle.cs">
@@ -75,9 +74,9 @@
     </Compile>
     <Compile Include="Modules\ModuleRepository.cs" />
     <Compile Include="Modules\ModuleCollection.cs" />
-    <Compile Include="Modules\Modules\Readers\FileCombineModuleReader.cs" />
-    <Compile Include="Modules\Modules\ICombineModuleReader.cs" />
-    <Compile Include="Modules\Modules\ModuleFactory.cs" />
+    <Compile Include="Readers\FileCombineModuleReader.cs" />
+    <Compile Include="Modules\ICombineModuleReader.cs" />
+    <Compile Include="Modules\ModuleFactory.cs" />
     <Compile Include="RouteUtils.cs" />
   </ItemGroup>
   <ItemGroup>
