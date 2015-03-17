@@ -1,9 +1,7 @@
 ﻿@using Qi.Web
-@using SeajsBundles
+
 @model Ornament.MemberShip.User[]
 @{
-
-    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
     var selected = new object();
     string ids = "";
     if (Model != null && Model.Length != 0)
@@ -19,14 +17,9 @@
 }
 
 @Html.Hidden("", ids)
-<style type="text/css">
-    .select2-container {
-  width: 260px;
-}
-</style>
+<style type="text/css">.select2-container {width: 260px;}</style>
 <script type="text/javascript">
-    require(["@Scripts.Url("/MemberShips/Scripts/Share/userSelect2.js")"], function(main) {
-        var d = @Html.Raw(JsonHelper.ToJson(selected));
-        main.Init("#@Html.Id("")", d);
+    require(["@Scripts.Url("/MemberShips/Scripts/Share/userSelect2.js")"], function(i) {
+        i.Init("#@Html.Id("")", @Html.Raw(JsonHelper.ToJson(selected))d);
     });
 </script>

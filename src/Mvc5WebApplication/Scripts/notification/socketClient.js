@@ -20,6 +20,9 @@
                 alert(data.error);
             }
         });
+        socket.on("connect",function(e) {
+            console.log(JSON.stringify(e));
+        });
     }
 
     return {

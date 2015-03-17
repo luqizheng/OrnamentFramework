@@ -1,10 +1,10 @@
-﻿@using MvcSiteMapProvider
-@using Ornament
+﻿@using Ornament
 @using Ornament.Web
 @using Ornament.Web.MemberShips
 @{
     var site = new SiteMapPermission(OrnamentContext.MemberShip, OrnamentContext.ResourceManager);
-    var nodes = Html.GetUserMenus(site, 3);
+    IList<MainMenu> nodes = Html.GetUserMenus(site, 3);
+    var cultur = OrnamentContext.MemberShip.CurrentLanguage().Name;
 }
 @*
 1) 菜单上面的Operator 操作检查只支持类型Permission。写法是 User:Create,前面一个ResourceDessciption的Id，后面一个UserOperator的值
@@ -18,10 +18,10 @@
 但是使用的ui template有部分不同，因此修改第4）点
 1） 这个节点没有子菜单，那么不会出现。
 *@
-@helper RenderTitle(MainMenu node, bool renderSub)
+@helper RenderTitle(MainMenu node, bool renderSub,string cultur)
 {
     <li>
-        <a href="@node.Url.TrimStart('/')" title="@node.Current.Description">
+        <a href="/@node.Url.TrimStart('/')" title="@node.Current.Description">
             @if (renderSub)
             {
                 <i class="fa fa-fw @node.Current.ImageUrl.TrimStart('/')"></i>
@@ -30,21 +30,22 @@
         </a>
         @if (renderSub)
         {
-            @HelperRenderSub(node)   
+            @HelperRenderSub(node,cultur)
         }
     </li>
 }
 
-@helper HelperRenderSub(MainMenu node)
+@helper HelperRenderSub(MainMenu node, string cultur)
 {
     if (node.SubMenus.Count != 0)
     {
-    <ul>
-        @foreach (var child in node.SubMenus)
-        {
-            @RenderTitle(child, false);
-        }
-    </ul>
+        <ul>
+            @foreach (MainMenu child in node.SubMenus)
+            {
+                @RenderTitle(child, false,cultur)
+                ;
+            }
+        </ul>
     }
 }
 <nav>
@@ -56,7 +57,8 @@
 
         @foreach (MainMenu node in nodes)
         {
-            @RenderTitle(node, true);
+            @RenderTitle(node, true,cultur)
+            ;
         }
 
         @*chat *@
@@ -77,7 +79,7 @@
                     <div class="display-users" ms-widget="chat,$,$chatOpts"  
                          data-chat-login-id="@OrnamentContext.MemberShip.CurrentUser().LoginId"
                          data-chat-name="@OrnamentContext.MemberShip.CurrentUser().Name" 
-                        data-chat-public-key="@Request.Cookies[System.Web.Security.FormsAuthentication.FormsCookieName].Value">
+                         data-chat-public-key="@Request.Cookies[FormsAuthentication.FormsCookieName].Value">
                         
                     </div>
                 </li>

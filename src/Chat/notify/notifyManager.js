@@ -7,7 +7,7 @@ var db = require("../dao").getProvider("sendBox");
 
 function toContent(strTemplate, variabled, user) {
     var reg = /\[{1}[^[].+?\]{1}/g
-    strTemplate.replace(reg, function (word) {
+    var s = strTemplate.replace(reg, function (word) {
         word = word.replace('[', '').replace(']')
         if (user[word]) {
             return user[word]
@@ -17,11 +17,14 @@ function toContent(strTemplate, variabled, user) {
         }
         return word;
     })
+    console.log("toContent:" + s);
+    return s;
 }
 
 function saveMessage(aryMsg, callback) {
 
     db.do(function (collection) {
+        console.log("Insert notify data :" + JSON.stringify(aryMsg))
         collection.insert(aryMsg, function (err, s) {
             if (err) {
                 console.log(err);
@@ -46,6 +49,7 @@ function getMessage(loginId, bRead, pageSize, pageIndex, callback) {
             codi.IsRead = bRead;
         }
         var result = collection.find(codi).sort({CreateDate: 1}).skip(pageSize * pageIndex).limit(pageSize).toArray();
+
         callback(result)
     })
 
@@ -78,6 +82,7 @@ exports.Init = function (socket, userManager) {
          */
         console.log("-------------------------" + typeof(msg))
         if (typeof(msg) == 'string') {
+            console.log("input is string, so translate to object.")
             msg = JSON.parse(msg);
         }
         var org = orgSetting.get(msg.Org);
@@ -86,38 +91,11 @@ exports.Init = function (socket, userManager) {
             if (result) {
                 console.log("validate notify org setting success")
                 console.log("msg data :" + JSON.stringify(msg))
-
-
-                var messages = []
-                for (var i = 0; i < msg.LoginIds.length; i++) {
-                    var receiver = userManager.getUserByLoginId(msg.LoginIds);
-                    if (receiver) {
-                        var messageSend = {
-                            content: msg.content,
-                            subject: msg.subject
-                        }
-
-                        if (msg.IsTemplate) {
-                            messageSend.content = toContent(messageSend.content, msg.GlobalVariable, UserData[i]);
-                            messageSend.subject = toContent(messageSend.subject, msg.GlobalVariable, UserData[i]);
-                        }
-                        receiver.socket.emit("new notify", {content: messageSend, subject: subjectSend});
-                    }
-                    var dbSaving = {
-                        Content: messageSend,
-                        Type: "notify",
-                        Owner: msg.LoginIds,
-                        CreateTime: new Date(),
-                        IsRead: false,
-                        Subject: msg.Subject
-                    }
-                    messages.push(dbSaving);
-
-                    console.log(i + ": msg data :" + JSON.stringify(dbSaving))
-                }
-                console.log("inser new message "+messages.length);
-                saveMessage(messages)
-                socket.emit("send notify", true);
+                var messages = toMessages(msg);
+                console.log("inser new message " + messages.length);
+                saveMessage(messages,function(){
+                    socket.emit("send notify", true);
+                })
             }
             else {
                 socket.emit('send notify', false);
@@ -125,6 +103,23 @@ exports.Init = function (socket, userManager) {
             console.log("validate notify token is " + result);
         });
     });
+
+    function toMessages(msg) {
+        var result = [];
+        for (var i = 0; i < msg.LoginIds.length; i++) {
+
+            var dbSaving = {
+                Content: msg.IsTemplate ? toContent(msg.Content, msg.GlobalVariable, msg.UserData[i]) : msg.Content,
+                Type: "Notify",
+                Owner: msg.LoginIds[i],
+                CreateTime: new Date(),
+                IsRead: false,
+                Subject: msg.IsTemplate ? toContent(msg.Subject, msg.GlobalVariable, msg.UserData[i]) : msg.Subject,
+            }
+            result.push(dbSaving);
+        }
+        return result;
+    }
 
     socket.on('get notify', function (user) {
         /*

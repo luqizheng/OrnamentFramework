@@ -4,8 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using System.Web.Routing;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
+using Microsoft.Ajax.Utilities;
 using Ornament.Contexts;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
@@ -35,27 +37,18 @@ namespace Ornament
                     Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
 
-        /// <summary>
-        ///     gets the TemplateName of setting.
-        /// </summary>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        [System.Obsolete]
-        public static string TemplateName(this OrnamentConfiguration config)
-        {
-            return ConfigurationManager.AppSettings["UITemplate"] ?? "pannonia";
-        }
+
 
         public static CultureInfo CurrentLanguage(this MemberShipContext context)
         {
-            CultureInfo lang = CookieRequestLanguage(context);
+            CultureInfo lang = UrlCultureInfo(context);
             if (lang == null)
             {
                 User user = CurrentUser(context);
                 lang = user != null ? user.GetLanguage() : BroswerLanguage(context);
             }
 
-            return lang ?? CultureInfo.GetCultureInfo("en");
+            return lang ?? OrnamentContext.Configuration.DefaultLanguage.CultureInfo;
         }
 
         public static string CurrentVerifyCode(this MemberShipContext context)
@@ -156,7 +149,9 @@ namespace Ornament
                     try
                     {
                         var culture = CultureInfo.GetCultureInfo(lang);
-                        if (OrnamentContext.Configuration.Languages.Any(language => language.CultureInfo.Name.ToLower() == culture.Name.ToLower()))
+                        if (
+                            OrnamentContext.Configuration.Languages.Any(
+                                language => language.CultureInfo.Name.ToLower() == culture.Name.ToLower()))
                         {
                             return culture;
                         }
@@ -167,6 +162,28 @@ namespace Ornament
                 }
             }
             return CultureInfo.GetCultureInfo("en");
+        }
+
+        public static CultureInfo UrlCultureInfo(this MemberShipContext context)
+        {
+            HttpContextBase contextWrapper = new HttpContextWrapper(HttpContext.Current);
+            RouteData routeData = RouteTable.Routes.GetRouteData(contextWrapper);
+            if (routeData == null)
+                return null;
+            object culture;
+            if (routeData.Values.TryGetValue("culture", out culture))
+            {
+
+                try
+                {
+                    return new CultureInfo(culture.ToString());
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            return null;
         }
 
 
@@ -204,13 +221,11 @@ namespace Ornament
             });
 
             User currentUser = OrnamentContext.MemberShip.CurrentUser();
-            if (currentUser != null)
+            if (currentUser == null) return true;
+            if (language.Name != currentUser.GetLanguage().Name)
             {
-                if (language.Name != currentUser.GetLanguage().Name)
-                {
-                    currentUser.Language = language.Name;
-                    OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().SaveOrUpdate(currentUser);
-                }
+                currentUser.Language = language.Name;
+                OrnamentContext.DaoFactory.MemberShipDaoFactory.CreateUserDao().SaveOrUpdate(currentUser);
             }
             return true;
         }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ornament.Web.Bundles;
 
 namespace Ornament.Test
 {

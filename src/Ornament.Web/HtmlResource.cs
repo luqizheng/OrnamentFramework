@@ -7,7 +7,9 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.Caching;
 using System.Threading;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 
 namespace Ornament.Web
 {
@@ -106,5 +108,7 @@ namespace Ornament.Web
 
             return GetResx(defaultReex);
         }
+
+       
     }
 }

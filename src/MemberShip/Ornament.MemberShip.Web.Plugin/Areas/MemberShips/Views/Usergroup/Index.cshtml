@@ -25,37 +25,37 @@
 @using (Panel panel = Html.Panel(listPanelOptions, "col-md-5 col-lg-4", "col-xs-4", "col-sm-4"))
 {
     @panel.Header(@<text>
-                       <h2>@Html.GetEmbededResourceString("page_title")</h2>
-                       <div class="widget-toolbar">
-                           <button id="add" class="btn btn-primary" ms-click="create">
-                               <i class="fa-plus fa"></i>
-                           </button>
-                           <button id="refresh" class="btn btn-default" ms-click="refresh">
-                               <i class="fa fa-refresh"></i>
-                           </button>
-                       </div>
-                   </text>)
+    <h2>@Html.GetEmbededResourceString("page_title")</h2>
+    <div class="widget-toolbar">
+        <button id="add" class="btn btn-primary" ms-click="create">
+            <i class="fa-plus fa"></i>
+        </button>
+        <button id="refresh" class="btn btn-default" ms-click="refresh">
+            <i class="fa fa-refresh"></i>
+        </button>
+    </div>
+    </text>)
     ;
 
 
     @panel.Body(@<text>
 
-                     <div id="userGroup" class="dd">
-                         <ul class="dd-list">
-                             <ol class="dd-item" ms-repeat-el="userGroups">
-                                 <div class="dd-handle" style="cursor: pointer"
-                                      ms-click="edit(el)" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
-                                     <button ms-click="del(el)" ms-attr-title="el.Remarks" class="btn btn-xs btn-danger">
-                                         <i class="fa-remove fa"></i>
-                                     </button>
-                                     <span ms-text="el.Name"></span>
-                                 </div>
-                             </ol>
-                         </ul>
-                     </div>
-                     <div ms-widget="pager,ugList">
-                     </div>
-                 </text>)
+    <div id="userGroup" class="dd">
+        <ul class="dd-list">
+            <ol class="dd-item" ms-repeat-el="userGroups">
+                <div class="dd-handle" style="cursor: pointer"
+                    ms-click="edit(el)" ms-class-1="selected:curUg!=null && el.Id==curUg.Id">
+                    <button ms-click="del(el)" ms-attr-title="el.Remarks" class="btn btn-xs btn-danger">
+                        <i class="fa-remove fa"></i>
+                    </button>
+                    <span ms-text="el.Name"></span>
+                </div>
+            </ol>
+        </ul>
+    </div>
+    <div ms-widget="pager,ugList">
+    </div>
+    </text>)
     ;
 }
 
@@ -75,17 +75,17 @@
 
     @panel.Body(@<text>
 
-                     <form class="form-horizontal" method="POST" id="ugEditor">
+    <form class="form-horizontal" method="POST" id="ugEditor">
 
-                         <div class="widget-body-toolbar">
+        <div class="widget-body-toolbar">
 
-                             <button class="btn btn-primary" type="submit" ms-attr-disabled="!editing" ms-text="saveBtnText"></button>
-                             <button class="btn btn-default" type="button" ms-attr-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Resources.Reset</button>
-                             <button class="btn btn-default" type="button" ms-click="cancel" ms-attr-disabled="!editing">@Resources.Cancel</button>
-                         </div>
-                         @Html.Partial("_Edit", (UserGroup) null)
-                     </form>
-                 </text>, new Dictionary<string, object>
+            <button class="btn btn-primary" type="submit" ms-attr-disabled="!editing" ms-text="saveBtnText"></button>
+            <button class="btn btn-default" type="button" ms-attr-disabled="!editing" ms-visiable="!IsCreated" ms-click="reset">@Resources.Reset</button>
+            <button class="btn btn-default" type="button" ms-click="cancel" ms-attr-disabled="!editing">@Resources.Cancel</button>
+        </div>
+        @Html.Partial("_Edit", (UserGroup)null)
+    </form>
+    </text>, new Dictionary<string, object>
                         {
                             {"ms-class", "widget-body-ajax-loading:loading"}
                         })
@@ -102,16 +102,16 @@
 @section scripts{
 
     <script type="text/javascript">
-        require(['require', '/scripts/config.js'], function(require) {
-                require(['@Scripts.Url("/MemberShips/Scripts/userGroup/index.js")'], function(main) {
-                    console.log('usergroup init success.');
-                    var msg = {
-                        saveBtnEdit: "@Resources.Save",
+
+        require(['@Amd.Url("/MemberShips/Scripts/userGroup/index.js")'], function (main) {
+            
+            var msg = {
+                saveBtnEdit: "@Resources.Save",
                         saveBtnCreate: "@Resources.Create"
                     };
                     main.init(msg);
                     clearPageVariable.push(main.clear);
                 });
-            });
+
     </script>
 }

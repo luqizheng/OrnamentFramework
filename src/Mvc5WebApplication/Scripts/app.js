@@ -1954,4 +1954,8 @@ function getParam(name) {
     else
         return results[1];
 }
+// mvc return json /Date(87874846)/ to date object;
+function toJsDate() {
+    return new Date(parseInt(jsonDate.substr(6)));
+}
 /* ~ END: HELPFUL FUNCTIONS */

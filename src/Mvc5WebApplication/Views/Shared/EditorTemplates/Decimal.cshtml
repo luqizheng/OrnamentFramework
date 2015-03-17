@@ -1,14 +1,25 @@
 ﻿@model decimal?
-
 @{
     IDictionary<string, object> htmlAttris = null;
     if (ViewData.ContainsKey("HtmlAttributes"))
     {
         htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        if (!htmlAttris.ContainsKey("class"))
+        {
+            htmlAttris.Add("class", "spinner");
+
+        }
+        else
+        {
+            htmlAttris["class"] += " spinner";
+        }
     }
     else
     {
-        htmlAttris = new Dictionary<string, object>();
+        htmlAttris = new Dictionary<string, object>()
+        {
+            {"class", "spinner"}
+        };
     }
 }
 

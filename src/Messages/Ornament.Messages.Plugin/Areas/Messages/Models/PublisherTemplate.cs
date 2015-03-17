@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NHibernate.Mapping;
 using Ornament.MemberShip;
 using Ornament.MemberShip.Dao;
 using Ornament.Messages.Config;
@@ -20,7 +19,7 @@ namespace Ornament.Messages.Plugin.Areas.Messages.Models
             : this()
         {
             Id = template.Id;
-            var lobalValir = NotifySenderManager.Instance.Variables;
+            IDictionary<string, string> lobalValir = NotifySenderManager.Instance.Variables;
             foreach (Content content in template.Contents.Values)
             {
                 var value = new NamedFormatterHelper();

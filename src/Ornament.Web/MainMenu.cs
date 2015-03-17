@@ -28,10 +28,6 @@ namespace Ornament.Web
         {
             get
             {
-                if (!Current.Clickable)
-                {
-                    return "#";
-                }
                 return Current.Url;
             }
         }

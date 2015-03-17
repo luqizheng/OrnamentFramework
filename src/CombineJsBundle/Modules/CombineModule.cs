@@ -8,7 +8,7 @@ using SeajsBundles.Seajs;
 
 namespace CombineJs.Modules
 {
-    public abstract class CombineModule : ISeajsModule
+    public abstract class CombineModule : ScriptModule
     {
         private ModuleCollection _modules;
 
@@ -141,14 +141,14 @@ namespace CombineJs.Modules
 
             content = Regex.Replace(content, @"require\(\[*([\'\""\\.\/A-z0-9]+?)\]*[\),]", match =>
             {
-                var replcements = match.Groups[1].Value
+                string[] replcements = match.Groups[1].Value
                     .TrimStart('\"', '\'', '[')
                     .TrimEnd('\"', '\'', ']').Split(',');
                 var output = new List<string>();
                 foreach (string replacement in replcements)
                 {
                     string srcRequireModualId = replacement; //.ToLower();
-                    ISeajsModule modual = GetModual(srcRequireModualId, combinedModuleSet);
+                    ScriptModule modual = GetModual(srcRequireModualId, combinedModuleSet);
                     if (!SubModules.Contains(modual))
                     {
                         SubModules.Add(modual);
@@ -160,8 +160,8 @@ namespace CombineJs.Modules
                     }
                     output.Add("'" + modual.OutputId + "'");
                 }
-                var outputString = String.Join(",", output.ToArray());
-                var reformat = string.Format("{0}", outputString);
+                string outputString = String.Join(",", output.ToArray());
+                string reformat = string.Format("{0}", outputString);
                 return match.ToString().Replace(match.Groups[1].Value, reformat);
             });
 
@@ -176,9 +176,9 @@ namespace CombineJs.Modules
         /// <param name="srcRequireModualId"></param>
         /// <param name="combinedModuleSet"></param>
         /// <returns></returns>
-        protected virtual ISeajsModule GetModual(string srcRequireModualId, ModuleRepository combinedModuleSet)
+        protected virtual ScriptModule GetModual(string srcRequireModualId, ModuleRepository combinedModuleSet)
         {
-            ISeajsModule module = ModuleFactory.Instance.Create(srcRequireModualId, Context, IsCombine, this);
+            ScriptModule module = ModuleFactory.Instance.Create(srcRequireModualId, Context, IsCombine, this);
             if (!combinedModuleSet.Contains(module))
             {
                 combinedModuleSet.Add(module);

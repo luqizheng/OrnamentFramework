@@ -1,4 +1,5 @@
-﻿@using Ornament.Web.UI
+﻿@using Ornament.Web
+@using Ornament.Web.UI
 @model Ornament.MemberShip.Web.Plugin.Models.Memberships.Partials.BasicInfo
 
 <div class="form-horizontal">
@@ -12,7 +13,9 @@
             <label class="col-md-2">@Html.DisplayNameFor(s => s.LoginId)</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LoginId, new {HtmlAttributes = new Dictionary<string, object> {{"class", "form-control"}}})
+                @Html.DescriptionFor(model=>model.LoginId)
                 @Html.ValidationMessageFor(model => model.LoginId)
+                
             </div>
         </div>
 

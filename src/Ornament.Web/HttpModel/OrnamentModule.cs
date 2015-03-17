@@ -6,6 +6,7 @@ using log4net;
 
 namespace Ornament.Web.HttpModel
 {
+    
     public class OrnamentModule : IHttpModule
     {
         private const string _offsethour = "offsetHour";
@@ -15,7 +16,6 @@ namespace Ornament.Web.HttpModel
         public void Init(HttpApplication context)
         {
             context.BeginRequest += context_BeginRequest;
-
         }
 
         public void Dispose()
@@ -28,7 +28,7 @@ namespace Ornament.Web.HttpModel
         {
             if (HttpContext.Current != null)
             {
-                var strHour = hour.ToString(CultureInfo.InvariantCulture);
+                string strHour = hour.ToString(CultureInfo.InvariantCulture);
                 HttpContext.Current.Response.Cookies.Add(new HttpCookie(_offsethour, strHour)
                 {
                     HttpOnly = true
@@ -57,15 +57,11 @@ namespace Ornament.Web.HttpModel
 
         private void MultiLanguage(HttpApplication context)
         {
-            CultureInfo lang = OrnamentContext.MemberShip.CookieRequestLanguage();
-            if (lang == null)
-            {
-                lang = OrnamentContext.MemberShip.BroswerLanguage();
-            }
-            if (lang == null)
-            {
-                lang = OrnamentContext.Configuration.DefaultLanguage.CultureInfo;
-            }
+            CultureInfo lang = OrnamentContext.MemberShip.UrlCultureInfo()
+                ?? OrnamentContext.MemberShip.CookieRequestLanguage()
+                ?? OrnamentContext.MemberShip.BroswerLanguage()
+                ?? OrnamentContext.Configuration.DefaultLanguage.CultureInfo;
+
             try
             {
                 Thread.CurrentThread.CurrentUICulture = lang;

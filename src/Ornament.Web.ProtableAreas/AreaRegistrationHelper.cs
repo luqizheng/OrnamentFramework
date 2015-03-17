@@ -104,7 +104,7 @@ namespace Ornament.Web
                 }
                 foreach (string str2 in strArray)
                 {
-                    var bundle = new SeajsEmbedBundle(string.Format("~/{0}/{1}", str, str2), _context.AreaName,
+                    var bundle = new EmbedBundle(string.Format("~/{0}/{1}", str, str2), _context.AreaName,
                         OrnamentContext.Configuration.GetSeajsCombine());
                     if (model.BundleNamee != model.FilePath)
                     {

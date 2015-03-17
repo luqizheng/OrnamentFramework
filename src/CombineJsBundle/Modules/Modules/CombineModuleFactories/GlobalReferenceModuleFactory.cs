@@ -1,17 +1,16 @@
 ﻿using System.Web.Optimization;
 using SeajsBundles.Seajs;
-using SeajsBundles.Seajs.Modules;
 
 namespace CombineJs.Modules.Modules.CombineModuleFactories
 {
     internal class GlobalReferenceModuleFactory : IModuleFactory
     {
-        public ISeajsModule Build(string abstractRequirePath, BundleContext context, bool combine, ISeajsModule parent)
+        public ScriptModule Build(string abstractRequirePath, BundleContext context, bool combine, ScriptModule parent)
         {
             return new ReferenceModule(abstractRequirePath);
         }
 
-        public bool IsModule(string abstractRequirePath, ISeajsModule parentModule)
+        public bool IsModule(string abstractRequirePath, ScriptModule parentModule)
         {
             return ModuleFactory.Instance.ReferenceModules.Contains(abstractRequirePath);
         }

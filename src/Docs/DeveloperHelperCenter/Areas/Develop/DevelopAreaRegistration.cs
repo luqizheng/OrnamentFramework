@@ -1,5 +1,8 @@
 ﻿using System.Web.Mvc;
+using Ornament.Web;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.SeajsModules;
 
 namespace DeveloperHelperCenter.Areas.Develop
 {
@@ -15,8 +18,10 @@ namespace DeveloperHelperCenter.Areas.Develop
             context.MapRoute(
                 "Develop_default",
                 "Develop/{controller}/{action}/{id}",
-                new {action = "Index", id = UrlParameter.Optional}
+                new { action = "Index", id = UrlParameter.Optional }
                 );
+            var helper = new AreaRegistrationHelper(this, context);
+            helper.RegistSeajsModule("/Scripts/Html");
             base.RegisterArea(context, bus);
         }
     }

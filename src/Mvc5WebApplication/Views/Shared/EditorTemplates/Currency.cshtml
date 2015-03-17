@@ -1,0 +1,28 @@
+﻿@model decimal?
+@{
+    IDictionary<string, object> htmlAttris = null;
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        if (!htmlAttris.ContainsKey("class"))
+        {
+            htmlAttris.Add("class", "money spinner");
+
+        }
+        else
+        {
+            htmlAttris["class"] += " money spinner";
+        }
+    }
+    else
+    {
+        htmlAttris = new Dictionary<string, object>()
+        {
+            {"class", "money spinner"}
+        };
+    }
+}
+
+
+
+@Html.TextBox("", Model ?? 0, htmlAttris)

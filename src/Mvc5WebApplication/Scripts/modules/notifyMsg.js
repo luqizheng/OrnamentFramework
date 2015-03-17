@@ -1,34 +1,37 @@
 ﻿/// <reference path="../../Views/Shared/Layout/_notifyMsg.cshtml" />
-define(["/Scripts/notification/socketClient.js", "socketio"], function (msgClient) {
+/// <reference path="comm/countComm.js" />
+define([, "notification/socketClient.js"],
 
-    var notifyModel;
-    //View is  /Views/Shared/Layout/_notifyMsg.cshtml
-    function defineController() {
-        notifyModel = avalon.define({
-            $id: "_notifyCount",
-            notifyCount: 0,
-            lastUpdate: new Date()
-        });
+    function (msgClient) {
+        /*用于header的提示，这里并不立刻获取message，而是获取数字。*/
+        
+      
+        function defineController(client) {
 
-        avalon.scan($("#_notify")[0]);
-
-    }
-
-    function defineSocketIo(host, strLoginId, strName, strPublickKey) {
-
-        var client = msgClient.create(host, strLoginId, strName, strPublickKey);
-        client.Socket.on("count", function (d) {
-            notifyModel.notifyCount = d;
-            notifyModel.lastUpdate = new Date();
-            console.log(d);
-        });
-    }
-
-    return {
-        init: function (host, strLoginId, strName, strPublickKey) {
-            console.log("init " + host + "；" + strLoginId + ";" + strName + ";");
-            //defineController();
-            //defineSocketIo(host, strLoginId, strName, strPublickKey);
+            require([
+                'modules/comm/notifyDetails.js',
+                'modules/comm/countComm.js'
+            ], function(notify,count) {
+                count.init(client);
+                notify.init(client);
+            });
         }
-    }
-});
+
+
+
+        function defineSocketIo(host, strLoginId, strName, strPublickKey) {
+
+            var client = msgClient.create(host, strLoginId, strName, strPublickKey);
+          
+            return client;
+        }
+
+        return {
+            init: function (host, strLoginId, strName, strPublickKey) {
+                //console.log("init " + host + "；" + strLoginId + ";" + strName + ";");
+                var client = defineSocketIo(host, strLoginId, strName, strPublickKey);
+                defineController(client);
+
+            }
+        }
+    });

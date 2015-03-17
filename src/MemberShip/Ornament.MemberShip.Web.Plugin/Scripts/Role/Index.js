@@ -1,11 +1,11 @@
-﻿define(function (require) {
+﻿define(["bootbox", "jquery"], function (bootbox, $) {
 
-    var bootbox = require("bootbox"), $form, model, editable
-    , messages = {
+    var $form, model, editable, messages = {
         saveBtnCreate: "添加",
         saveBtnEdit: "保存",
         createTitle: "创建新的角色",
-        editTitle: "编辑角色"
+        editTitle: "编辑角色",
+        saveSuccess: "保存成功"
     };
 
     function changeVal() {
@@ -17,13 +17,13 @@
                     editable.loading = true;
                 },
                 success: function (rData) {
-                    bootbox.alert(rData.success ? "保存成功" : rData.Message);
-                    var isCreated = editable.Id == "";
+                    bootbox.alert(rData.success ? messages.saveSuccess : rData.Message);
+
                     editable.Id = rData.Id;
-                    if (isCreated) {
+                    if (model.curRole==null) {
                         model.AddToCur(editable.getPureModel());
                     } else {
-                        avalon.mix(editable.curUg, editable.getPureModel());
+                        avalon.mix(model.curRole, editable.getPureModel());
                     }
 
                     bootbox.alert(rData.success ? messages.success : rData.Message);
@@ -37,36 +37,39 @@
     }
 
     function init() {
-        model = avalon.define('index', function (vm) {
-            vm.edit = function (el,e) {
-                vm.curRole = el;
-                avalon.mix(editable, vm.curRole);
+        model = avalon.define({
+            $id: 'index',
+            edit: function (el, e) {
+                model.curRole = el;
+                avalon.mix(editable, model.curRole.$model);
                 editable.editing = true;
-                editable.editTitle = messages.editRole;
                 e.preventDefault();
-            };
-            vm.create = function (e) {
-                editable.editTitle = messages.createRole;
+            },
+            create: function (e) {
                 editable.editing = true;
                 editable.clear();
-                vm.curRole = null;
-            };
-            vm.curRole = null;
-            vm.del = function () {
-                var ary = [];
-                for (var i = 0; i < vm.roles.length; i++) {
-                    if (vm.roles[i].Id != id) {
-                        ary.push(vm.roles[i]);
+                model.curRole = null;
+            },
+            curRole: null,
+            del: function (el, $remove, $event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $.post("role/delete", { role: el.Id }, function (r) {
+                    if (r.success) {
+                        editable.clear();
+                        model.curRole = null;
+                        bootbox.alert('Success to delete role.');
+                        $remove(el);
                     }
-                }
-                vm.roles = ary;
-            };
-            vm.AddToCur = function (role) {
-                vm.roles.push(role);
-                vm.curRole = role;
-            };
-            vm.roles = [{ Id: "", Name: "", Remarks: "", Permissions: [] }];
-            vm.pager = {
+                });
+
+            },
+            AddToCur: function (role) {
+                model.roles.push(role);
+                model.curRole = role;
+            },
+            roles: [{ Id: "", Name: "", Remarks: "", Permissions: [] }],
+            pager: {
                 pageSize: 50,
                 search: function (index, maxRecords, func) {
                     $.get("/MemberShips/Role/List", {
@@ -77,60 +80,57 @@
                         func(d.totalRecords);
                     });
                 }
-            };
+            }
         });
 
-        editable = avalon.define('edit', function (vm) {
-            var _id;
-            vm.Id = {
-                get: function () {
-                    return _id;
-                },
-                set: function (v) {
-                    _id = v;
-                    editable.title = _id != "" ? messages.editTitle : messages.createTitle;
-                    editable.saveBtnText = _id != "" ? messages.saveBtnEdit : messages.saveBtnCreate;
-                }
-            };
-            vm.saveBtnText = "";
-            vm.Name = "";
-            vm.Remarks = "";
-            vm.Permissions = [];
-            vm.editing = false;
-            vm.loading = false;
-            vm.title = "";
-            vm.save = function () {
-                model.curRole.Name = vm.Name;
-                model.curRole.Remarks = vm.Remarks;
-                model.curRole.Permissions = vm.Permissions;
+        editable = avalon.define({
+            $id: "edit",
+            Id: "",
 
-            };
-            vm.clear = function () {
+            saveBtnText: {
+                get: function () {
+                    return this.IsCreated ? messages.saveBtnCreate : messages.saveBtnEdit;
+                }
+            },
+            Name: "",
+            Remarks: "",
+            Permissions: [],
+            editing: false,
+            loading: false,
+            title: {
+                get: function () {
+                    return this.IsCreated ? messages.createTitle : messages.editTitle;
+                }
+            },
+
+            clear: function () {
                 avalon.mix(editable, { Name: "", Id: "", Remarks: "", Permissions: [] });
-            };
-            vm.IsCreated = {
+            },
+            IsCreated: {
                 get: function () {
-                    return !vm.Id;
+                    return this.Id=="";
                 }
-            };
-            vm.reset = function () {
-                avalon.mix(editable, model.curRole);
-            };
-            vm.cancel = function () {
-                vm.editing = false;
+            },
+            reset: function () {
+                avalon.mix(editable, model.curRole.$vmodel);
+            },
+            cancel: function () {
+                editable.editing = false;
                 editable.clear();
-            };
-            vm.getPureModel = function () {
+            },
+            getPureModel: function () {
                 return {
-                    Id: vm.Id,
-                    Name: vm.Name,
-                    Remarks: vm.Remarks,
-                    Permissions: vm.Permissions
+                    Id: editable.Id,
+                    Name: editable.Name,
+                    Remarks: editable.Remarks,
+                    Permissions: editable.Permissions
                 };
-            };
+            }
         });
-
     }
+
+
+
 
 
     return {

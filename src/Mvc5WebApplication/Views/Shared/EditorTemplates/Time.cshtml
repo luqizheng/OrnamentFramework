@@ -1,19 +1,34 @@
 ﻿@using System.Text.RegularExpressions
+@using Qi
 @model Qi.Time?
 @{
-    var display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    var timeFormat = ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:ss";
-    var displayValue = this.Model.HasValue ? this.Model.Value.ToString(timeFormat) : "00:00:00";
-    var timePickerFormat = Regex.Replace(timeFormat.Replace("m", "i"), @"(\w)(\1)+", "$1");
-    var inputMask = Regex.Replace(timeFormat.Replace('m', 's').ToLower(), @"(\w)(\1)+", "$1");
+    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "HH:mm:").ToLower();
+
+
+    IDictionary<string, object> htmlAttris = null;
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+        if (!htmlAttris.ContainsKey("class"))
+        {
+            htmlAttris.Add("class", "time");
+        }
+        else
+        {
+            htmlAttris["class"] += " time";
+        }
+    }
+    else
+    {
+        htmlAttris = new Dictionary<string, object>
+        {
+            {"class", "time"}
+        };
+    }
+    htmlAttris.Add("data-mask", Regex.Replace(format, "[hmsHMS]", "9"));
+    htmlAttris.Add("data-mask-placeholder", "_");
 }
-<div class="control-group">
-    @Html.Label("", display, new { @class = "control-label" })
-    <div class="controls">
-        <div class="input-append">
-            <input type="text" value="@displayValue" class="jqui-time styled" timeFormat="@timePickerFormat" inputmask-format="@inputMask" name="@ViewData.TemplateInfo.HtmlFieldPrefix">
-            <span class="add-on"><i class="icon-time"></i></span>
-        </div>
-        @Html.ValidationSummary("")
-    </div>
-</div>
+
+
+
+@Html.TextBox("", Model ?? new Time(9, 0, 0), htmlAttris)

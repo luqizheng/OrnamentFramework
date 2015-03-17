@@ -33,9 +33,9 @@
     <mvcSiteMapNode action="Index" controller="Site" area="Information" key="System" title="Information" imageUrl="fa-desktop"/>
 
     <mvcSiteMapNode action="Index" controller="HtmlControls" area="Develop" key="Docs" title="Document" imageUrl="fa-desktop">
-      <mvcSiteMapNode action="BasicType" controller="Html" area="Develop" title="basicType"/>
-      </mvcSiteMapNode>
-
+      <mvcSiteMapNode action="BasicType" controller="Html" area="Develop" title="Basic Type"/>
     </mvcSiteMapNode>
+
+  </mvcSiteMapNode>
 
 </mvcSiteMap>

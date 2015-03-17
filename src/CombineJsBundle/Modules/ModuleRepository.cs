@@ -12,7 +12,7 @@ namespace SeajsBundles.Seajs
         private readonly ModuleCollection _modules = new ModuleCollection();
         private readonly AbsloutePathModuleCollection _pathModule = new AbsloutePathModuleCollection();
 
-        public void Add(ISeajsModule module)
+        public void Add(ScriptModule module)
         {
             if (module == null)
                 throw new ArgumentNullException("module");
@@ -44,7 +44,7 @@ namespace SeajsBundles.Seajs
         /// </summary>
         /// <param name="module"></param>
         /// <returns></returns>
-        public string GetModualId(ISeajsModule module)
+        public string GetModualId(ScriptModule module)
         {
             if (module == null)
                 throw new ArgumentNullException("module");
@@ -52,14 +52,14 @@ namespace SeajsBundles.Seajs
         }
 
 
-        public bool Contains(ISeajsModule module)
+        public bool Contains(ScriptModule module)
         {
             if (String.IsNullOrEmpty(module.AbsolutePath))
                 throw new ArgumentNullException("module.AbsolutePath.");
             return _pathModule.Contains(module.AbsolutePath);
         }
 
-        public ISeajsModule GetByAbsolutePath(string absolutePath)
+        public ScriptModule GetByAbsolutePath(string absolutePath)
         {
             return _pathModule[absolutePath];
         }

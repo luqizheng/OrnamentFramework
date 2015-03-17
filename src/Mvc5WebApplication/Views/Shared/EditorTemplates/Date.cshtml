@@ -3,24 +3,25 @@
 @using Qi.Web.Mvc.ClientValidations.Rules
 @model DateTime?
 @{
-    string display = ViewData.ModelMetadata.DisplayName ?? ViewData.ModelMetadata.PropertyName;
-    string displayValue = Model != null ? Model.Value.ToString(ViewData.ModelMetadata.DisplayFormatString) : "";
-    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd").ToLower();
-    string inputMask = Regex.Replace(format, @"(\w{2})(\1)+", "$1");
-    @*由app.js直接成成jqueryui控件,so should be added datepicker class*@
+  
+   
+    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd");
+    string displayValue = Model != null ? Model.Value.ToString(format) : "";
+    string inputMask = Regex.Replace(format.ToLower(), @"(\w{2})(\1)+", "$1");
+@*由app.js直接成成jqueryui控件,so should be added datepicker class*@
     IDictionary<string, object> htmlAttris = null;
     if (ViewData.ContainsKey("HtmlAttributes"))
     {
         htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
         if (!htmlAttris.ContainsKey("class"))
         {
-            htmlAttris.Add("class", "datepicker");
+            htmlAttris.Add("class", "orn-datepicker");
         }
         else
         {
-            if (!htmlAttris["class"].ToString().Contains("datepicker"))
+            if (!htmlAttris["class"].ToString().Contains("orn-datepicker"))
             {
-                htmlAttris["class"] += " datepicker";
+                htmlAttris["class"] += " orn-datepicker";
             }
         }
     }
@@ -30,14 +31,18 @@
         {
             {"data-dateformat", inputMask},
             {
-                "class","datepicker" 
+                "class","orn-datepicker" 
             }
         };
     };
-    
- 
+@*<input class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" type="text">*@
+
+    htmlAttris.Add("data-mask", Regex.Replace(format, @"[ymdhms]", "9",RegexOptions.IgnoreCase));
+    htmlAttris.Add("data-mask-placeholder","_");
         
 }
 
 @Html.TextBox("", displayValue, htmlAttris)
-<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+<span class="input-group-addon">
+    <i class="fa fa-calendar"></i>
+</span>

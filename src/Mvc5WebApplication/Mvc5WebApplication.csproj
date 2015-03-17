@@ -71,7 +71,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Qi">
       <HintPath>..\..\lib\Qi.dll</HintPath>
@@ -229,7 +229,6 @@
     <Content Include="Content\images\gender\male.png" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\demo.min.css" />
     <Content Include="css\smartadmin-production-plugins.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
@@ -425,6 +424,7 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\avalon.js" />
     <Content Include="Scripts\avalon.modern.js" />
+    <Content Include="Scripts\avalon.shim.js" />
     <Content Include="Scripts\avalons\chat\chat.js" />
     <Content Include="Scripts\avalons\chat\chat.html" />
     <Content Include="Scripts\avalons\pager\pager.html" />
@@ -435,9 +435,14 @@
     <Content Include="Scripts\libs\jquery-2.1.3.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\libs\jquery-ui-1.11.2.min.js" />
+    <Content Include="Scripts\libs\socket.io-1.3.2.js" />
+    <Content Include="Scripts\libs\socket.io-1.3.2.min.js" />
     <Content Include="Scripts\modules\ajaxlogin.js" />
     <Content Include="Scripts\modules\chat.js" />
     <Content Include="Scripts\modules\Accounts\forgetpassword.js" />
+    <Content Include="Scripts\modules\comm\countComm.js" />
+    <Content Include="Scripts\modules\comm\notifyDetails.js" />
+    <Content Include="Scripts\modules\comm\utcTime.js" />
     <Content Include="Scripts\modules\main.js" />
     <Content Include="Scripts\modules\notifyMsg.js" />
     <Content Include="Scripts\modules\ornamentUi.js" />
@@ -849,13 +854,13 @@
     <Content Include="css\bootstrap.css.map" />
     <Content Include="Areas\Communication\Views\web.config" />
     <Content Include="Areas\Communication\Views\Notify\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\Tasks\Index.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\plugin\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.js" />
     <Content Include="Scripts\plugin\jquery-validate\jquery.validate.min.js" />
-    <Content Include="Scripts\plugin\jquery.validate.extends\DateRange.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.ajax\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\plugin\jquery.validate.unobtrusive.bootstrap\jquery.validate.unobtrusive.bootstrap.js" />
@@ -868,7 +873,7 @@
     <Content Include="Scripts\plugin\markdown\to-markdown.min.js" />
     <Content Include="Scripts\plugin\masked-input\jquery.maskedinput.min.js" />
     <Content Include="Scripts\plugin\maxlength\bootstrap-maxlength.min.js" />
-    <Content Include="Scripts\plugin\moment\moment.min.js" />
+    <Content Include="Scripts\plugin\moment\moment.js" />
     <Content Include="Scripts\plugin\morris\morris-chart-settings.min.js" />
     <Content Include="Scripts\plugin\morris\morris.min.js" />
     <Content Include="Scripts\plugin\morris\raphael.min.js" />
@@ -897,7 +902,8 @@
     <Content Include="Scripts\plugin\x-editable\jquery.mockjax.min.js" />
     <Content Include="Scripts\plugin\x-editable\moment.min.js" />
     <Content Include="Scripts\plugin\x-editable\x-editable.min.js" />
-    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\prism\prism.css" />
+    <Content Include="Scripts\prism\prism.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.manager.js" />
     <Content Include="Scripts\smart-chat-ui\smart.chat.ui.js" />
     <Content Include="Scripts\smartwidgets\jarvis.widget.js" />
@@ -961,6 +967,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Communication\Controllers\NotifyController.cs" />
     <Compile Include="Areas\Communication\CommunicationAreaRegistration.cs" />
+    <Compile Include="Areas\Communication\Controllers\TasksController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountMembershipService.cs" />
     <Compile Include="Controllers\FormsAuthenticationService.cs" />
@@ -1054,7 +1061,6 @@
     <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Int64.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Textarea.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Panel\BodyToolbar.cshtml" />
     <Content Include="Views\Setup\Index.cshtml" />
     <Content Include="Views\Security\VerifyEmail.cshtml" />
@@ -1062,6 +1068,9 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\My.cshtml" />
     <Content Include="Views\Shared\Layout\_notifyMsg.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\_codeLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1073,6 +1082,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Communication\Models\" />
     <Folder Include="Areas\Communication\Views\Shared\" />
+    <Folder Include="Views\Notify\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\membership.sitemap.resx">
@@ -1213,7 +1223,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23589</DevelopmentServerPort>
+          <DevelopmentServerPort>12016</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
