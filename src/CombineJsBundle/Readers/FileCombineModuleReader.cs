@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
+using CombineJs.Modules;
 
-namespace CombineJs.Modules.Modules.Readers
+namespace CombineJs.Readers
 {
     public class FileCombineModuleReader : CombineModuleReader
     {

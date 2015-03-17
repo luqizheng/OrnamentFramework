@@ -1,17 +1,17 @@
 ﻿/// <reference path="../../Views/Shared/Layout/_notifyMsg.cshtml" />
 /// <reference path="comm/countComm.js" />
-define([, "notification/socketClient.js"],
+define(["require", "notification/socketClient"],
 
-    function (msgClient) {
+    function (require, msgClient) {
         /*用于header的提示，这里并不立刻获取message，而是获取数字。*/
-        
-      
+
+
         function defineController(client) {
 
             require([
-                'modules/comm/notifyDetails.js',
-                'modules/comm/countComm.js'
-            ], function(notify,count) {
+                'modules/comm/notifyDetails',
+                'modules/comm/countComm'
+            ], function (notify, count) {
                 count.init(client);
                 notify.init(client);
             });
@@ -22,7 +22,7 @@ define([, "notification/socketClient.js"],
         function defineSocketIo(host, strLoginId, strName, strPublickKey) {
 
             var client = msgClient.create(host, strLoginId, strName, strPublickKey);
-          
+
             return client;
         }
 

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Optimization;
+using CombineJs.Modules;
 
-namespace CombineJs.Modules.Modules.Readers
+namespace CombineJs.Readers
 {
     public abstract class CombineModuleReader : ICombineModuleReader
     {

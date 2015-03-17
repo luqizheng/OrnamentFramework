@@ -3,7 +3,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using CombineJs;
 using CombineJs.Modules;
-using CombineJs.Modules.Modules.Readers;
+using CombineJs.Readers;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Web.SeajsModules

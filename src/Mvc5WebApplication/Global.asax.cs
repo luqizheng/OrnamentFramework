@@ -10,7 +10,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using CombineJs.Modules.Modules;
+using CombineJs.Modules;
 using log4net;
 using log4net.Config;
 using Ornament;
