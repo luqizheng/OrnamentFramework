@@ -2,7 +2,7 @@
 @using Ornament.Web
 
 require.config({
-        baseUrl:"/scripts/",
+        baseUrl:"/scripts",
 paths: {
         jquery:"jquery",
         jqueryui:"libs/jquery-ui-1.11.2",
@@ -42,7 +42,6 @@ paths: {
         orgSelect:"/MemberShips/scripts/Org/Org"
 },
 shim:{
-        
         validate:["jquery"],
         maxlength:["jquery"],
         unobtrusive:["jquery"],
@@ -61,7 +60,7 @@ shim:{
         maskedinput:["jquery"],
         mbBrowser:["jquery"],
         bsslider:["jquery"],
-bootbox:["bootstrap"]
+        bootbox:["bootstrap"]
     }
 });
 

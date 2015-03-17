@@ -1,5 +1,5 @@
 ﻿/* org tree selector*/
-define(["text!./Templates/Org.html"], function (template) {
+define(["text!/MemberShips/Scripts/Org/Templates/Org.html"], function (template) {
 
     var widget = avalon.ui.org = function (element, data, vmodels) {
 

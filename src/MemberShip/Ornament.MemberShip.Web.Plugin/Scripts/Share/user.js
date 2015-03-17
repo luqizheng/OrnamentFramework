@@ -1,5 +1,5 @@
 ﻿
-define(["WebApi.js"], function (WebApi) {
+define(["WebApi"], function (WebApi) {
     var userUrl = "/api/memberships/Users",
         memberUrl = "api/memberships/member", //需要登录
         secrityUrl = "/api/memberships/security"; //无需登录就可以使用的

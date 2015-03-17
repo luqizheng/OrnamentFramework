@@ -1,4 +1,4 @@
-﻿namespace CombineJs.Modules.Modules
+﻿namespace CombineJs.Modules
 {
     public interface ICombineModuleReader
     {

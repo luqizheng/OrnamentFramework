@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Optimization;
-using CombineJs.Modules.Modules.Readers;
+using CombineJs.Readers;
 
-namespace CombineJs.Modules.Modules
+namespace CombineJs.Modules
 {
     public class ModuleFactory
     {
@@ -70,11 +70,11 @@ namespace CombineJs.Modules.Modules
                 var script = new ScriptModule(path) { AbsolutePath = path, OutputId = path };
 
                 string main = CreateContent(this, content, script);
-                main = Regex.Replace(main, @"[^.]\s*define\s*\(\s*",
-                    delegate(Match s)
-                    {
-                        return string.Format("{0}'{1}',", s.Value, "_main_");
-                    });
+                //main = Regex.Replace(main, @"[^.]\s*define\s*\(\s*",
+                //    delegate(Match s)
+                //    {
+                //        return string.Format("{0}'{1}',", s.Value, "_main_");
+                //    });
                 var result = new StringBuilder(main);
                 Repository.Mergn(result);
                 return result.ToString();
@@ -137,7 +137,7 @@ namespace CombineJs.Modules.Modules
                         {
                             factory.Repository.Add(modual);
                         }
-                        output.Add("'./" + modual.OutputId + "'");
+                        output.Add("'" + modual.OutputId + "'");
                     }
                     string outputString = String.Join(",", output.ToArray());
                     string reformat = string.Format("[{0}]", outputString);
