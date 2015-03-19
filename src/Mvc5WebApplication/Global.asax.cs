@@ -10,7 +10,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using CombineJs.Modules.Modules;
+using CombineJs.Modules;
 using log4net;
 using log4net.Config;
 using Ornament;
@@ -55,7 +55,7 @@ namespace WebApplication
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
             InputBuilder.BootStrap();
             //加入Assembly合并模块是,插入到第二为,因为第一位是ReferenceFactory
-            ModuleFactory.Instance.Add(new CombineModuleAsssemblyFactory(), 1);
+            ModuleFactory.Add(new CombineModuleAsssemblyReader(), 1);
             RequirejsModuleBundleMessageHandle.HandlAllBundle();
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();

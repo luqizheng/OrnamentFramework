@@ -2,7 +2,6 @@
 using System.IO;
 using System.Web.Mvc;
 using Ornament.Web.PortableAreas;
-using SeajsBundles;
 
 namespace Ornament.Web.Controllers
 {
@@ -20,7 +19,7 @@ namespace Ornament.Web.Controllers
             // pre-pend "~" so that it will be replaced with assembly namespace
 
             Stream resourceStream = resourceStore.GetResourceStream(resourceName);
-            
+
 
             if (resourceStream == null)
             {

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Optimization;
 using CombineJs.Modules;
-using SeajsBundles.Seajs;
 
 namespace CombineJs
 {
@@ -11,18 +10,16 @@ namespace CombineJs
     /// </summary>
     public class CombineJsBundle : ScriptBundle
     {
-        public CombineJsBundle(string virtualPath, bool combine)
-            : this(virtualPath, combine, null)
+        public CombineJsBundle(string virtualPath)
+            : this(virtualPath, null)
         {
         }
 
-        public CombineJsBundle(string virtualPath, bool combine, string cdnPath)
+        public CombineJsBundle(string virtualPath, string cdnPath)
             : base(virtualPath, cdnPath)
         {
-            Combine = combine;
         }
 
-        public bool Combine { get; set; }
 
         public override BundleResponse ApplyTransforms(BundleContext context, string bundleContent,
             IEnumerable<BundleFile> bundleFiles)
@@ -48,11 +45,12 @@ namespace CombineJs
             {
                 path = enumerable.First().IncludedVirtualPath;
             }
-            var seajs = new RootModule(path, context, Combine)
+            ModuleFactory factory = ModuleFactory.Create(context, true);
+            /*var seajs = new RootModule(path, context, Combine)
             {
                 AbsolutePath = context.BundleVirtualPath
-            };
-            string subContent = seajs.BuildContent(bundleContent);
+            };*/
+            string subContent = factory.Build(path, bundleContent);
             return base.ApplyTransforms(context, subContent, enumerable);
         }
     }

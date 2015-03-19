@@ -13,8 +13,8 @@ namespace CombineJs.Modules.Modules
     {
         private string _physicalApplicationPath;
 
-        public BundleFileCombine(string uniqueId, BundleContext context, bool isCombine)
-            : base(uniqueId, context, isCombine)
+        public BundleFileCombine(string uniqueId)
+            : base(uniqueId, context)
         {
         }
 
