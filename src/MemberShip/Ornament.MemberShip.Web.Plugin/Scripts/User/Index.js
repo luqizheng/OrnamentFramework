@@ -8,7 +8,7 @@ define(["../Share/user.js", "pager"], function(userApi) {
     //require('validate');
 
 
-    function Init() {
+    function init() {
         var model = avalon.define("index", function(vm) {
             vm.users = [];
             //Search content
@@ -50,7 +50,8 @@ define(["../Share/user.js", "pager"], function(userApi) {
 
                 if (typeof bLock !== "boolean") {
                     bLock = !user.IsLocked;
-                };
+                }
+                ;
                 userApi.Lock(user.Id, bLock, function(result) {
                     if (result.success) {
                         user.IsLocked = bLock;
@@ -79,19 +80,19 @@ define(["../Share/user.js", "pager"], function(userApi) {
             function find(page, size, content, func) {
                 vm.loading = true;
                 $.get("/MemberShips/User/List", {
-                    page: page,
-                    search: content,
-                    size: size
-                }, function(d) {
-                    vm.loading = false;
-                    model.users = [];
-                    for (var i = 0; i < d.data.length; i++) {
-                        model.users.push(d.data[i]);
-                    }
-                    model.total = d.TotalRecords;
-                    func(d.TotalRecords);
+                        page: page,
+                        search: content,
+                        size: size
+                    }, function(d) {
+                        vm.loading = false;
+                        model.users = [];
+                        for (var i = 0; i < d.data.length; i++) {
+                            model.users.push(d.data[i]);
+                        }
+                        model.total = d.TotalRecords;
+                        func(d.TotalRecords);
 
-                });
+                    });
             }
         });
     }
@@ -100,7 +101,7 @@ define(["../Share/user.js", "pager"], function(userApi) {
     return {
         init: function(lang1) {
             lang = lang1;
-            Init();
+            init();
             avalon.scan();
 
         },
