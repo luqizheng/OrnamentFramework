@@ -1,4 +1,4 @@
-﻿define(["WebApi"], function(api) {
+﻿define(["/Scripts/WebApi.js"], function(api) {
     var orgUrl = "/api/memberships/org",
         webApi = new api(orgUrl);
 
