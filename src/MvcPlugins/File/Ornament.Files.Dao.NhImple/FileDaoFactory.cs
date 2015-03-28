@@ -11,5 +11,10 @@ namespace Ornament.Files.Dao
         {
             return new FileRecordDao();
         }
+
+        public IFileFormatSettingDao CreateFileFormatSettingDao()
+        {
+            return new FileFormatSettingDao();
+        }
     }
 }

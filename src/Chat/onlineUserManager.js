@@ -1,49 +1,47 @@
-var map=require("hashmap").HashMap;
+/// <reference path='./entities/user.ts' />
+var map = require("hashmap").HashMap;
 var user = {};
 /**
  * Key is publicKey, and the obj is loginId
  * @type {{}}
  */
 var pubKeyMap = new map();
-
-exports.get = function (publickey) {
-
-    pubKeyMap.forEach(function(value, key) {
+function get(publicKey) {
+    pubKeyMap.forEach(function (value, key) {
         console.log(key + " : " + value);
-        console.log(key==publickey);
+        console.log(key == publicKey);
     });
-    var loginid = pubKeyMap.get(publickey);
+    var loginid = pubKeyMap.get(publicKey);
     console.log(loginid);
     return user[loginid];
 }
-
-exports.count = function () {
+exports.get = get;
+function count() {
     return user.length;
 }
-
+exports.count = count;
 exports.changeStatus = function (loginid, status) {
-    var u = user[loginid]
+    var u = user[loginid];
     u.status = status;
-}
+};
 exports.changeMsg = function (loginid, msg) {
     user[loginId].msg = msg;
-}
-
+};
 exports.addUser = function (userInfo, socket) {
     var d = {
         socket: socket,
         publicKey: userInfo.publicKey,
         status: 'normal',
         loginId: userInfo.loginId,
-        msg: "", name: userInfo.name};//status is normal busy,offline
+        msg: "",
+        name: userInfo.name
+    }; //status is normal busy,offline
     user[d.loginId] = d;
-
     pubKeyMap.set(userInfo.publicKey, d.loginId);
-
-    console.log("valid is success,and add user " + d.loginId)
-}
+    console.log("valid is success,and add user " + d.loginId);
+};
 /**
- * 根据loginid获取user对象
+ * 根据loginid获取user对象onlineUserManager.ts:49
  * @param loginid
  * @returns {socket:socket,pubKye:publicshKey,status:'online or busy or offline',loginId:'loginId'}
  */
@@ -52,12 +50,12 @@ exports.getByLoginId = function (loginid) {
     if (!result)
         return null;
     return result;
-}
-
+};
 exports.list = function () {
     var users = [];
     for (var key in user) {
-        users.push({loginId: user[key].loginId, status: user[key]});
+        users.push({ loginId: user[key].loginId, status: user[key] });
     }
     return users;
-}
+};
+//# sourceMappingURL=onlineUserManager.js.map

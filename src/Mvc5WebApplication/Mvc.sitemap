@@ -18,7 +18,9 @@
     </mvcSiteMapNode>-->
 
     <!--Memberage-->
-    <mvcSiteMapNode  action="Index" controller="User" title="$Resources:sitemap,MemberShipsTitle" area="MemberShips" imageUrl="fa-group" key="MemberShips"/>
+    <mvcSiteMapNode  action="Index" controller="User" 
+                     title="$Resources:sitemap,MemberShipsTitle" 
+                     area="MemberShips" imageUrl="fa-group" key="MemberShips"/>
 
     <!-- Begin Message Plugin Parent Key -->
     <!--<mvcSiteMapNode  controller="News" action="Index" area="Messages"  key="news" title="News"></mvcSiteMapNode>-->
@@ -30,7 +32,8 @@
 
     <!-- 系统选项-->
 
-    <mvcSiteMapNode action="Index" controller="Site" area="Information" key="System" title="Information" imageUrl="fa-desktop"/>
+    <mvcSiteMapNode action="Index" controller="Site" area="Information" key="System" 
+                    title="Information" imageUrl="fa-desktop"/>
 
     <mvcSiteMapNode action="Index" controller="HtmlControls" area="Develop" key="Docs" title="Document" imageUrl="fa-desktop">
       <mvcSiteMapNode action="BasicType" controller="Html" area="Develop" title="Basic Type"/>

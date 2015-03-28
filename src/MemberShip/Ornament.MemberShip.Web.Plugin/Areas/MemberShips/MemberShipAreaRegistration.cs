@@ -90,14 +90,14 @@ namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
                 );
 
 
-            var helper = new AreaRegistrationHelper(this, context);
-            helper.RegistyEmbedResouce("Scripts/Org/Templates");
-            helper.RegistSeajsModule("Scripts/User");
-            helper.RegistSeajsModule("Scripts/Org");
-            helper.RegistSeajsModule("Scripts/Role");
-            helper.RegistSeajsModule("Scripts/Share");
-            helper.RegistSeajsModule("Scripts/Permissions");
-            helper.RegistSeajsModule("Scripts/UserGroup");
+            //var helper = new AreaRegistrationHelper(this, context);
+            RegistyEmbedResouce("Scripts/Org/Templates");
+            RegistJsModule("Scripts/User");
+            RegistJsModule("Scripts/Org");
+            RegistJsModule("Scripts/Role");
+            RegistJsModule("Scripts/Share");
+            RegistJsModule("Scripts/Permissions");
+            RegistJsModule("Scripts/UserGroup");
 
             base.RegisterArea(context, bus);
         }

@@ -24,9 +24,9 @@ define(["../Share/user.js", "pager"], function(userApi) {
                     //showLoading.call(self, false);
                 });
             };
-            vm.verifyEmail = function(model) {
+            vm.verifyEmail = function(obj) {
 
-                userApi.VerifyEmail(model.Id, function(e) {
+                userApi.VerifyEmail(obj.Id, function(e) {
                     alert(e.success ?
                         lang.verifyEmailMessage.success :
                         lang.verifyEmailMessage.fail);

@@ -2,7 +2,7 @@
  * Created by leo on 2015/1/14.
  */
 
-var orgSetting = require("../Config/orgSetting.js");
+var orgSetting = require("../Config/orgSetting.ts");
 var db = require("../dao").getProvider("sendBox");
 
 function toContent(strTemplate, variabled, user) {

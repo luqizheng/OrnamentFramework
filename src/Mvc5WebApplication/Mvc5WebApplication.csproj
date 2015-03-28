@@ -1072,6 +1072,7 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Views\Shared\_codeLayout.cshtml" />
+    <Content Include="Views\Shared\Layout\_logo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1141,6 +1142,18 @@
     <ProjectReference Include="..\Messages\Ornament.Messages.Plugin\Ornament.Messages.Plugin.csproj">
       <Project>{d598a731-5cd9-4871-ac80-ee64c949e30d}</Project>
       <Name>Ornament.Messages.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Ornament.Files.Plugin\Ornament.Files.Plugin.csproj">
+      <Project>{8220cf6b-f27f-433e-ad13-a22691d3cf29}</Project>
+      <Name>Ornament.Files.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Ornament.Information.Plugin\Ornament.Information.Plugin.csproj">
+      <Project>{9a7b397f-b083-4af3-8d91-910b7196ab46}</Project>
+      <Name>Ornament.Information.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcPlugins\Regions\Ornament.Regions.Plugin\Ornament.Regions.Plugin.csproj">
+      <Project>{1e9ca889-464f-43f8-b078-5190bf691e88}</Project>
+      <Name>Ornament.Regions.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>

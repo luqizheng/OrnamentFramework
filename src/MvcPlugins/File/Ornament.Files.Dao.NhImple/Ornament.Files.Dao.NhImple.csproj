@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileDaoFactory.cs" />
+    <Compile Include="FileFormatSettingDao.cs" />
     <Compile Include="FileRecordDao.cs" />
     <Compile Include="Mapping\FileRecordMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

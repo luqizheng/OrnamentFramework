@@ -104,27 +104,11 @@
         * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
         -->
 
-<body class="fixed-header fixed-ribbon fixed-footer">
+<body class="fixed-header fixed-ribbon fixed-footer smart-style-4">
 
     <!-- #HEADER -->
     <header id="header">
-        <div id="logo-group">
-
-            <!-- PLACE YOUR LOGO HERE -->
-            <span id="logo">
-                <img src="/img/logo.png" alt="SmartAdmin">
-            </span>
-            <!-- END LOGO PLACEHOLDER -->
-
-            <!-- Note: The activity badge color changes when clicked and resets the number to 0
-                    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
-            <span id="activity" class="activity-dropdown"><i class="fa fa-user"></i><b class="badge">21 </b></span>
-
-            <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
-            @Html.Partial("/Views/Shared/Layout/_notifyMsg.cshtml")
-            <!-- END AJAX-DROPDOWN -->
-        </div>
-
+        @Html.Partial("/Views/Shared/Layout/_logo.cshtml")
         <!-- #PROJECTS: projects dropdown -->
         <div class="project-context hidden-xs">
 
@@ -327,15 +311,15 @@
     @*<script src="/Scripts/config.js" type="text/javascript"></script>*@
     <script type="text/javascript">
 
-        require(["/scripts/config.js"],function(){
-        require(["main", "jquery", "jqueryui", "bootstrap", "app.config",
-"touch",
-"smarkNotify",
-"plugin/easy-pie-chart/jquery.easy-pie-chart.min",
-"maskedinput",
-"select2",
-"bsslider",
-"mbBrowser",
+        require(["/scripts/config.js"], function () {
+            require(["main", "jquery", "jqueryui", "bootstrap", "app.config",
+    "touch",
+    "smarkNotify",
+    "plugin/easy-pie-chart/jquery.easy-pie-chart.min",
+    "maskedinput",
+    "select2",
+    "bsslider",
+    "mbBrowser",
 @*"plugin/fullcalendar/jquery.fullcalendar.min.js",*@
 "util"
         ], function (main) {

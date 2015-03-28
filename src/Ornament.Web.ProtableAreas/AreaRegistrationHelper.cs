@@ -10,43 +10,40 @@ namespace Ornament.Web
 {
     public class AreaRegistrationHelper
     {
-        private readonly AreaRegistrationContext _context;
-        private readonly PortableAreaRegistration _protablAreaRegistration;
-        private readonly IList<SeajsModel> _seajsEmbeddedModulePath = new List<SeajsModel>();
 
-        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration, AreaRegistrationContext context)
+        private readonly PortableAreaRegistration _protablAreaRegistration;
+        private readonly Queue<JsModule> _jsEmbeddedModulePath = new Queue<JsModule>();
+        private readonly Queue<string> _embedPath = new Queue<string>();
+        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration)
         {
             if (protablAreaRegistration == null)
             {
                 throw new ArgumentNullException("protablAreaRegistration");
             }
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+
             _protablAreaRegistration = protablAreaRegistration;
-            _context = context;
-            protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
+
+            //protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
         }
 
-        private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
-        {
-            ResgistSeajsFiles(e.Bus);
-            ((PortableAreaRegistration) sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
-        }
+        //private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
+        //{
+        //    SendAllMessage(e.Context, e.Bus);
+        //    ((PortableAreaRegistration)sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
+        //}
 
         public void RegistryDefault()
         {
-            RegistSeajsModule("Scripts");
+            RegistJsModule("Scripts");
         }
 
-        public void RegistryImages(string imageFolder)
+        public void RegistryImages(AreaRegistrationContext context, string imageFolder)
         {
             if (imageFolder == null)
             {
                 throw new ArgumentNullException("imageFolder");
             }
-            imageFolder = imageFolder.Trim(new[] {'/', ' '});
+            imageFolder = imageFolder.Trim(new[] { '/', ' ' });
             RegistyEmbedResouce(imageFolder);
         }
 
@@ -56,20 +53,19 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("scriptPath");
             }
-            scriptPath = scriptPath.Trim(new[] {'/', ' ', '~'});
+            scriptPath = scriptPath.Trim(new[] { '/', ' ', '~' });
             RegistyEmbedResouce(scriptPath);
         }
 
-        public void RegistSeajsModule(string path)
+        public void RegistJsModule(string path)
         {
-            var item = new SeajsModel(path, path);
-            _seajsEmbeddedModulePath.Add(item);
+            RegistJsModule(path, path);
         }
 
-        public void RegistSeajsModule(string bundlePath, string virtualPath)
+        public void RegistJsModule(string bundlePath, string virtualPath)
         {
-            var item = new SeajsModel(bundlePath, virtualPath);
-            _seajsEmbeddedModulePath.Add(item);
+            var item = new JsModule(bundlePath, virtualPath);
+            _jsEmbeddedModulePath.Enqueue(item);
         }
 
         /// <summary>
@@ -83,20 +79,18 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("path");
             }
-            path = path.Trim(new[] {'/', ' '});
-            _context.MapRoute(_protablAreaRegistration.AreaName + "_" + path.Replace("/", "_") + "_embededResource",
-                string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
-                new {controller = "EmbeddedResource", action = "Index", resourcePath = path},
-                new[] {"Ornament.Web.Controllers"});
+            path = path.Trim(new[] { '/', ' ' });
+            _embedPath.Enqueue(path);
         }
 
-        protected void ResgistSeajsFiles(IApplicationBus bus)
+        public void SendAllMessage(AreaRegistrationContext context, IApplicationBus bus)
         {
-            foreach (SeajsModel model in _seajsEmbeddedModulePath)
+            while (_jsEmbeddedModulePath.Count != 0)
             {
-                string str = string.Format("{0}/{1}", _context.AreaName, model.BundleNamee);
+                var model = _jsEmbeddedModulePath.Dequeue();
+                string str = string.Format("{0}/{1}", context.AreaName, model.BundleNamee);
                 string[] strArray =
-                    AssemblyResourceManager.GetResourceStoreForArea(_context.AreaName)
+                    AssemblyResourceManager.GetResourceStoreForArea(context.AreaName)
                         .MatchPath("~/" + model.FilePath, ".js");
                 if ((strArray == null) || (strArray.Length == 0))
                 {
@@ -104,10 +98,10 @@ namespace Ornament.Web
                 }
                 foreach (string str2 in strArray)
                 {
-                    var bundle = new EmbedBundle(string.Format("~/{0}/{1}", str, str2), _context.AreaName);
+                    var bundle = new EmbedBundle(string.Format("~/{0}/{1}", str, str2), context.AreaName);
                     if (model.BundleNamee != model.FilePath)
                     {
-                        string virtualPath = string.Format("~/areas/{0}/{1}/{2}", _context.AreaName, model.FilePath,
+                        string virtualPath = string.Format("~/areas/{0}/{1}/{2}", context.AreaName, model.FilePath,
                             str2);
                         bundle.Include(virtualPath);
                     }
@@ -115,14 +109,23 @@ namespace Ornament.Web
                     bus.Send(eventMessage);
                 }
             }
+
+            while (_embedPath.Count != 0)
+            {
+                var path = _embedPath.Dequeue();
+                context.MapRoute(_protablAreaRegistration.AreaName + "_" + path.Replace("/", "_") + "_embededResource",
+                string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
+                new { controller = "EmbeddedResource", action = "Index", resourcePath = path },
+                new[] { "Ornament.Web.Controllers" });
+            }
         }
 
-        private class SeajsModel
+        private class JsModule
         {
-            public SeajsModel(string bundleNamee, string filePath)
+            public JsModule(string bundleNamee, string filePath)
             {
-                BundleNamee = bundleNamee.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
-                FilePath = filePath.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
+                BundleNamee = bundleNamee.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
+                FilePath = filePath.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
             }
 
             public string BundleNamee { get; private set; }

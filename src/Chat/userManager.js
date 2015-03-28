@@ -2,8 +2,8 @@
  * Created by leo on 2014/10/21.
  */
 var sso = require("./sso"),
-    onlineUser = require("./onlineUser"),
-    orgManager = require("./config/orgSetting");
+    onlineUser = require("./onlineUserManager"),
+    orgManager = require("./Config/orgSetting");
 
 /**
  *
@@ -24,7 +24,7 @@ var valid = function (data, socket, callback) {
             console.log("sso validate result:" + JSON.stringify(result));
             if (result.success) {
                 if (result.loginId == data.loginId) {
-                    onlineUser.addUser(data, socket)
+                    onlineUserManager.addUser(data, socket)
                     callback(result);
                 }
                 else {
@@ -50,7 +50,7 @@ var valid = function (data, socket, callback) {
  */
 exports.getUser = function (strPublicKey) {
     //根据strPublicKey 获取user 对象。
-    return onlineUser.get(strPublicKey)
+    return onlineUserManager.get(strPublicKey)
 }
 /**
  * 根据Loginid 获取user对象
@@ -58,7 +58,7 @@ exports.getUser = function (strPublicKey) {
  * @returns {socket:socket,pubKye:publicshKey,status:'normal or busy or offline',loginId:'loginId'}
  */
 exports.getUserByLoginId = function (loginid) {
-    return onlineUser.getByLoginId(loginid);
+    return onlineUserManager.getByLoginId(loginid);
 }
 exports.Init = function (socket) {
     socket.on('valid', function (data) {

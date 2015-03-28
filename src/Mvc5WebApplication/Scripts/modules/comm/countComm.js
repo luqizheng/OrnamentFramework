@@ -1,6 +1,6 @@
 ﻿/*
 
-  //View is  /Views/Shared/Layout/_notifyMsg.cshtml 
+  //View is  /Views/Shared/Layout/_logo.cshtml 
 
   */
 define(function () {
@@ -10,10 +10,13 @@ define(function () {
                 $id: "_notifyCount",
                 notifyCount: 0,
                 taskCount: 0,
-                msgsCount:0,
+                msgsCount: 0,
                 lastUpdate: new Date(),
+                notify: function () {
+                    return notifyModel.notifyCount + notifyModel.taskCount + notifyModel.msgsCount;
+                },
                 $init: function () {
-                    console.log("countComm.js init successfuly.");
+                    //console.log("countComm.js init successfuly.");
                     client.Socket.on("count", function (d) {
                         notifyModel.notifyCount = d;
                         notifyModel.lastUpdate = new Date();
@@ -22,12 +25,11 @@ define(function () {
                 }
             });
 
-            avalon.scan($("#_notify")[0]);
+            avalon.scan($("#logo-group")[0]);
             notifyModel.$init();
         },
         clear: function () {
             delete avalon.vmodels['_notifyCount'];
         }
-    }
-
+    };
 })

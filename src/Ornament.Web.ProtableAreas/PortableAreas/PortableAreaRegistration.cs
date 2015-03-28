@@ -10,12 +10,14 @@ namespace Ornament.Web.PortableAreas
 {
     public class RegistedEmbedresourceEventArgs : EventArgs
     {
-        public RegistedEmbedresourceEventArgs(IApplicationBus bus)
+        public RegistedEmbedresourceEventArgs(IApplicationBus bus, AreaRegistrationContext context)
         {
             Bus = bus;
+            Context = context;
         }
 
         public IApplicationBus Bus { get; set; }
+        public AreaRegistrationContext Context { get; set; }
     }
 
     public abstract class PortableAreaRegistration : AreaRegistration
@@ -23,13 +25,40 @@ namespace Ornament.Web.PortableAreas
         public static Action RegisterEmbeddedViewEngine = () => InputBuilder.InputBuilder.BootStrap();
         public static Action CheckAreasWebConfigExists = () => EnsureAreasWebConfigExists();
         private static readonly Dictionary<Assembly, int> ControllerCollection = new Dictionary<Assembly, int>();
+        private readonly AreaRegistrationHelper _helper;
+
+        protected PortableAreaRegistration()
+        {
+            _helper = new AreaRegistrationHelper(this);
+        }
 
         public virtual string AreaRoutePrefix
         {
             get { return AreaName; }
         }
 
-        public event EventHandler<RegistedEmbedresourceEventArgs> EmbedResourceRegisted;
+        public void RegistryImages(AreaRegistrationContext context, string imageFolder)
+        {
+            _helper.RegistryImages(context, imageFolder);
+        }
+
+
+        public void RegistScripts(string scriptPath)
+        {
+            _helper.RegistScripts(scriptPath);
+        }
+
+        public void RegistJsModule(string path)
+        {
+            _helper.RegistJsModule(path);
+        }
+
+        public void RegistyEmbedResouce(string path)
+        {
+            _helper.RegistyEmbedResouce(path);
+        }
+
+        //public event EventHandler<RegistedEmbedresourceEventArgs> EmbedResourceRegisted;
 
         public virtual PortableAreaMap GetMap()
         {
@@ -46,7 +75,7 @@ namespace Ornament.Web.PortableAreas
 
             bus.Send(new PortableAreaStartupMessage(AreaName));
 
-            RegisterAreaEmbeddedResources(bus);
+            RegisterAreaEmbeddedResources(bus, context);
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
@@ -58,17 +87,14 @@ namespace Ornament.Web.PortableAreas
             CheckAreasWebConfigExists();
         }
 
-        public void RegisterAreaEmbeddedResources(IApplicationBus bus)
+        public void RegisterAreaEmbeddedResources(IApplicationBus bus, AreaRegistrationContext context)
         {
             Type areaType = GetType();
             var resourceStore = new AssemblyResourceStore(areaType, "/areas/" + AreaName.ToLower(), areaType.Namespace,
                 GetMap());
             AssemblyResourceManager.RegisterAreaResources(resourceStore);
 
-            if (EmbedResourceRegisted != null)
-            {
-                EmbedResourceRegisted(this, new RegistedEmbedresourceEventArgs(bus));
-            }
+            _helper.SendAllMessage(context, bus);
         }
 
         private static void EnsureAreasWebConfigExists()

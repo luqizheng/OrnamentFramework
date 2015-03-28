@@ -1,0 +1,70 @@
+﻿@using Ornament.Web.UI.Theme
+@model Ornament.Files.IO.FileFormatSetting
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<form class="form-horizontal" ms-controller="edit">
+    @using (var panel = Html.Panel())
+    {
+        @panel.Header(@<text>
+                           <h2>Basic Information</h2>
+                       </text>)
+        @panel.Body(@<text>
+
+                         <div class="form-group">
+                             <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
+                             <div class="col-md-10">
+                                 @Html.EditorFor(model => model.Name, new
+                                 {
+                                     HtmlAttributes = new Dictionary<string, string> { { "class", "form-control" }, { "ms-duplex", "Name" } }
+                                 })
+                                 @Html.ValidationMessageFor(model => model.Name)
+                             </div>
+                         </div>
+
+
+
+
+                     </text>)
+    }
+
+    @using (var panel = Html.Panel(new PanelOption()
+    {
+        HtmlAttributes = new Dictionary<string, object>()
+        {
+            {"ms-controller","column"}
+        }
+    }))
+    {
+        @panel.Header(@<text>
+                           <h2>Field Setting</h2>
+                       </text>)
+
+        @panel.Body(@<text>
+
+                         <table>
+                             <tbody>
+                                 <tr ms-repeat="columns">
+                                 </tr>
+                             </tbody>
+                         </table>
+                         <table>
+                             <tbody>
+                                 <tr ms-repeat="sampleData">
+                                     <td></td>
+                                     <td></td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                     </text>)
+
+        @helper renderBodyToolbar(Panel panel)
+        {
+            
+        }
+    }
+
+</form>
+

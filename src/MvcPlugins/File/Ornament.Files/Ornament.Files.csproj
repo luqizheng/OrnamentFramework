@@ -61,10 +61,13 @@
   <ItemGroup>
     <Compile Include="Dao\IFileDao.cs" />
     <Compile Include="Dao\IFileDaoFactory.cs" />
+    <Compile Include="Dao\IFileFormatSettingDao.cs" />
     <Compile Include="Excels\ExcelFileImport.cs" />
     <Compile Include="Excels\IRowProcess.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="FileRecord.cs" />
+    <Compile Include="IO\FileFormatSetting.cs" />
+    <Compile Include="IO\ImportManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

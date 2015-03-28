@@ -1,0 +1,49 @@
+﻿@using Ornament
+@using Ornament.Files.IO
+@using Ornament.Properties
+@using Ornament.Web.UI.Theme
+@model IEnumerable<Ornament.Files.IO.FileFormatSetting>
+@{
+    ViewBag.Title = "File Format Setting List";
+    Layout = OrnamentContext.Configuration.Layout();
+}
+
+@using (Panel panel = Html.Panel(new PanelOption
+{
+    DeleteButton = false,
+    EditButton = false,
+    ToggleButton = false,
+    Id = "fileSetting"
+}))
+{
+    @panel.Header(@<text>
+    <h2>File Import/Output Setting</h2>
+    </text>)
+    @panel.Body(@<text>
+
+    @bodyToolBar(panel)
+
+    <table>
+        @foreach (FileFormatSetting fileFormatSetting in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("Edit", new { id = fileFormatSetting.Id })">Modify</a></td>
+                <td>@fileFormatSetting.Name</td>
+                <td>@fileFormatSetting.SettingType</td>
+                <td>@fileFormatSetting.Settings.Count</td>
+            </tr>
+        }
+    </table>
+
+    </text>)
+}
+
+@helper bodyToolBar(Panel panel)
+{
+    @panel.BodyToolBar(@<text>
+    <div class="col-md-12">
+        <a class="btn btn-primary" href="#@Url.Action("Edit")">@Resources.Add</a>
+    </div>
+    </text>)
+    
+}

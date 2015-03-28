@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ornament.SSO.Dao.NHImple", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperHelperCenter", "Docs\DeveloperHelperCenter\DeveloperHelperCenter.csproj", "{CEA24DAF-20EE-4764-A123-ED7D680B17BD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{26D23853-9FF0-45CB-A23D-56B886A2323C}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Ornament.vsmdi

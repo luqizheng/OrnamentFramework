@@ -7,5 +7,6 @@ namespace Ornament.Files.Dao
     public interface IFileDaoFactory
     {
         IFileDao CreateFileDao();
+        IFileFormatSettingDao CreateFileFormatSettingDao();
     }
 }
