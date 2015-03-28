@@ -58,6 +58,8 @@
     <Compile Include="FileDaoFactory.cs" />
     <Compile Include="FileFormatSettingDao.cs" />
     <Compile Include="FileRecordDao.cs" />
+    <Compile Include="Mapping\FieldSettingMapping.cs" />
+    <Compile Include="Mapping\FileFormatMapping.cs" />
     <Compile Include="Mapping\FileRecordMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

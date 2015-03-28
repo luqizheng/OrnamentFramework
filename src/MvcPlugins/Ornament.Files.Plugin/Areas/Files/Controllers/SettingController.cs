@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web;
+using System.Web.Mvc;
 using Ornament.Files.Dao;
 using Ornament.Web.MemberShips;
+using Qi.IO;
 using Qi.Web.Mvc;
 
 namespace Ornament.Files.Plugin.Areas.Files.Controllers
@@ -33,6 +36,30 @@ namespace Ornament.Files.Plugin.Areas.Files.Controllers
             if (id == null)
                 return View();
             return View(_daoFactory.CreateFileFormatSettingDao().Get(id.Value));
+        }
+        [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase sampleFile, string id)
+        {
+            if (sampleFile == null)
+                return Json(new { errorMessage = "upload file is null" });
+            FileManager fileManager = new FileManager(_daoFactory);
+            var serverPath = Request.MapPath("/files/sampleFile/") + sampleFile.FileName;
+
+            var file = (new FileInfo(serverPath));
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+            else
+            {
+                file.Directory.CreateEx();
+            }
+
+            sampleFile.SaveAs(serverPath);
+
+            var fileRecor = fileManager.SaveFileRecord(serverPath, sampleFile.FileName, OrnamentContext.MemberShip.CurrentUser(), id);
+            return Json(new { fileName = fileRecor.Name, Id = fileRecor.Id });
+
         }
     }
 }

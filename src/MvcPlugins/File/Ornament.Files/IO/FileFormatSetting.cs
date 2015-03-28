@@ -21,7 +21,7 @@ namespace Ornament.Files.IO
         {
             get { return _settings ?? (_settings = new List<FieldSetting>()); }
         }
-
+        public virtual FileRecord SampleFile { get; set; }
         public virtual string Name { get; set; }
     }
 

@@ -475,6 +475,7 @@ namespace Ornament.MemberShip.Dao.NHibernateImple
                 userStatiuses.Registers += 1;
             }
             dao.SaveOrUpdate(userStatiuses);
+            dao.Flush();
         }
     }
 }

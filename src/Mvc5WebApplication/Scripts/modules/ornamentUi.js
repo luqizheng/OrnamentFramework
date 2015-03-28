@@ -1,4 +1,4 @@
-﻿define(["jquery", "bsvalid", "vaform"], function ($) {
+﻿define(["jquery", "bsvalid", "vaform", "ajaxfileupload"], function ($) {
     //jquery ui datepicket and dateRange 
     return {
         //每次ajax loading page 的时候都会执行，主要是根据attribute 生成控件
@@ -6,6 +6,7 @@
             $("#content input,#content textarea").each(function () {
                 var $this = $(this);
                 dateRange($this) || setupSpinner($this) || txtMaxLength($this);
+                ajaxUpload($this);
             });
 
         },
@@ -13,7 +14,34 @@
             RegistryDate();
         }
     };
+    function ajaxUpload($input) {
+        console.log($input.hasClass("ajaxUpload") + ":has");
+        if ($input.hasClass("ajaxUpload")) {
+            var myId = "#"+$input.attr("id");
+            $(myId+"_btn").click(function () {
+                var $this = $(this);
+                var recordId = $this.data("id");
+                
+                $.ajaxFileUpload({
+                    url: $this.data("url"),
+                    type: 'post',
+                    secureuri: false, //一般设置为false
+                    fileElementId: $this.data("fileId"),
+                    dataType: 'application/json', //返回值类型，一般设置为json、application/json
+                    elementIds: recordId,
+                    success: function (data, status) {
+                        $(myId+"_info").text(data.fileName);
+                    },
+                    error: function (data, status, e) {
+                        $("#content").html(data);
+                    }
+                });
 
+            });
+        }
+        return false;
+
+    }
     function txtMaxLength($this) {
         //console.log("maxlength:" + $this.context.nodeName);
         var maxlength = $this.attr("maxlength");
@@ -31,7 +59,7 @@
                     alwaysShow: true
                 });
             });
-            return true;
+            return false;
         }
         return false;
     }
@@ -110,4 +138,5 @@
                 }
             });
     }
+   
 })

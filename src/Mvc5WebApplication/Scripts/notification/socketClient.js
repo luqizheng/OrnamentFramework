@@ -23,6 +23,10 @@
         socket.on("connect",function(e) {
             console.log(JSON.stringify(e));
         });
+        
+        socket.on("error",function() {
+            socket.disconnect();
+        })
     }
 
     return {

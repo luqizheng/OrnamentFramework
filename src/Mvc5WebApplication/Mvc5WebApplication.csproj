@@ -879,6 +879,7 @@
     <Content Include="Scripts\plugin\morris\raphael.min.js" />
     <Content Include="Scripts\plugin\msie-fix\jquery.mb.browser.min.js" />
     <Content Include="Scripts\plugin\multiselect\bootstrap-multiselect.min.js" />
+    <Content Include="Scripts\plugin\ajaxfileupload\ajaxfileupload.js" />
     <Content Include="Scripts\plugin\noUiSlider\jquery.nouislider.css" />
     <Content Include="Scripts\plugin\noUiSlider\jquery.nouislider.min.js" />
     <Content Include="Scripts\plugin\pace\pace.min.js" />
@@ -1073,6 +1074,7 @@
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Views\Shared\_codeLayout.cshtml" />
     <Content Include="Views\Shared\Layout\_logo.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\FileRecord.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

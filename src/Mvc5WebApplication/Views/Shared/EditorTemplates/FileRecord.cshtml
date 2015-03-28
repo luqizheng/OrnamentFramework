@@ -1,0 +1,31 @@
+﻿@model Ornament.Files.FileRecord
+@{
+    IDictionary<string, object> htmlAttris = null;
+    if (ViewData.ContainsKey("HtmlAttributes"))
+    {
+        htmlAttris = ViewData["HtmlAttributes"] as IDictionary<string, object> ?? HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["HtmlAttributes"]);
+    }
+
+    if (!htmlAttris.ContainsKey("url"))
+    {
+        throw new ArgumentNullException("Please set upload url HtmlAttributes property.");
+    }
+
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="input-group">
+            <input class="ajaxUpload form-control" type="file" id="@Html.Id("")" name="@Html.Name("")"/>
+            <span class="input-group-btn">
+                <button id="@Html.Id("")_btn" class="btn btn-primary"
+                        type="button" 
+                        data-id="@(this.Model != null ? this.Model.Id : "")" 
+                        data-file-id="@Html.Id("")" 
+                    data-url="@htmlAttris["url"]">
+                    Upload</button>
+            </span>
+            <span class="help-block" id="@Html.Id("")_info">@(this.Model != null ? this.Model.Name : "")</span>
+        </div>
+    </div>
+</div>
+

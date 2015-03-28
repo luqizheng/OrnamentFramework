@@ -13,21 +13,22 @@ namespace Ornament.Files
         {
         }
 
-        public FileRecord(string filepath, User creator, string name)
+        public FileRecord(string fileFullPath, User creator, string showName)
         {
-            if (File.Exists(filepath))
+            if (!File.Exists(fileFullPath))
             {
-                throw new FileNotFoundException(filepath);
+                throw new FileNotFoundException(fileFullPath);
             }
 
             Creator = creator;
-            SignCode = Sign(filepath);
+            SignCode = Sign(fileFullPath);
             CreateTime = DateTime.Now;
-            Name = name;
+            Name = showName;
+            this.FullPath = fileFullPath;
         }
 
-        public FileRecord(string filepath, User creator)
-            : this(filepath, creator, (new FileInfo(filepath).Name))
+        public FileRecord(string fileFullPath, User creator)
+            : this(fileFullPath, creator, (new FileInfo(fileFullPath).Name))
         {
         }
 
