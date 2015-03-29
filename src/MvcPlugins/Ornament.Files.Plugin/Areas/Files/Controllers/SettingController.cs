@@ -37,6 +37,12 @@ namespace Ornament.Files.Plugin.Areas.Files.Controllers
                 return View();
             return View(_daoFactory.CreateFileFormatSettingDao().Get(id.Value));
         }
+        /// <summary>
+        /// 上传的文件，其中sampleFile 是和 Dto一样的
+        /// </summary>
+        /// <param name="sampleFile"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UploadFile(HttpPostedFileBase sampleFile, string id)
         {

@@ -14,7 +14,7 @@
             RegistryDate();
         }
     };
-    function ajaxUpload($input) {
+    function ajaxUpload($input) { //file 控件的 使用jquery的 ajaxupload plugin
         console.log($input.hasClass("ajaxUpload") + ":has");
         if ($input.hasClass("ajaxUpload")) {
             var myId = "#"+$input.attr("id");

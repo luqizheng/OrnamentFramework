@@ -2,9 +2,9 @@
 {
     public class RegionDaoFactory : IRegionDaoFactory
     {
-        public IAreaDao CreateAreaDao()
+        public IDistrictDao CreateAreaDao()
         {
-            return new AreaDao();
+            return new DistrictDao();
         }
 
         public ICityDao CreateCityDao()

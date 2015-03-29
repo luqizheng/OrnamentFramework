@@ -8,7 +8,7 @@ namespace CombineJs.Readers
 {
     public class FileCombineModuleReader : CombineModuleReader
     {
-        public bool Build(string scriptPath, ModuleFactory context, ScriptModule parent, out CombineModule module)
+        /*public bool Build(string scriptPath, ModuleFactory context, ScriptModule parent, out CombineModule module)
         {
             module = Create(scriptPath, context.Context, parent);
             context.Repository.Add(module);
@@ -22,7 +22,7 @@ namespace CombineJs.Readers
             context.Repository.Remove(module);
             module = null;
             return false;
-        }
+        }*/
 
 
         protected override string GetContent(Bundle bundle, BundleContext context, ScriptModule module)

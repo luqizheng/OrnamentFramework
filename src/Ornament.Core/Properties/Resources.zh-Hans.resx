@@ -243,4 +243,7 @@
   <data name="Reset" xml:space="preserve">
     <value>恢复</value>
   </data>
+  <data name="Upload" xml:space="preserve">
+    <value>上传</value>
+  </data>
 </root>

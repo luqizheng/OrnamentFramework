@@ -64,10 +64,14 @@
     <Compile Include="Dao\IFileFormatSettingDao.cs" />
     <Compile Include="Excels\ExcelFileImport.cs" />
     <Compile Include="Excels\IRowProcess.cs" />
+    <Compile Include="FieldSettingAttribute.cs" />
+    <Compile Include="FieldSettingManager.cs" />
+    <Compile Include="FieldSettings\CloumnFieldSetting.cs" />
+    <Compile Include="FieldSettings\FieldSetting.cs" />
+    <Compile Include="FieldSettings\FixLengthFieldSetting.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="FileRecord.cs" />
-    <Compile Include="IO\FileFormatSetting.cs" />
-    <Compile Include="IO\ImportManager.cs" />
+    <Compile Include="FieldSettings\FileFormatSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

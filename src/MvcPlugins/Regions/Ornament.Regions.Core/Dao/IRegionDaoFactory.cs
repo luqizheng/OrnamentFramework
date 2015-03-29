@@ -2,7 +2,7 @@
 {
     public interface IRegionDaoFactory
     {
-        IAreaDao CreateAreaDao();
+        IDistrictDao CreateAreaDao();
         ICityDao CreateCityDao();
         IProvicenDao CreateProvinceDao();
     }

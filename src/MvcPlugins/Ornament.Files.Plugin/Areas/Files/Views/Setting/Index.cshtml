@@ -1,8 +1,8 @@
 ﻿@using Ornament
-@using Ornament.Files.IO
+@using Ornament.Files.FieldSettings
 @using Ornament.Properties
 @using Ornament.Web.UI.Theme
-@model IEnumerable<Ornament.Files.IO.FileFormatSetting>
+@model IEnumerable<Ornament.Files.FieldSettings.FileFormatSetting>
 @{
     ViewBag.Title = "File Format Setting List";
     Layout = OrnamentContext.Configuration.Layout();
@@ -21,7 +21,7 @@
     </text>)
     @panel.Body(@<text>
 
-    @bodyToolBar(panel)
+    @BodyToolBar(panel)
 
     <table>
         @foreach (FileFormatSetting fileFormatSetting in Model)
@@ -38,7 +38,7 @@
     </text>)
 }
 
-@helper bodyToolBar(Panel panel)
+@helper BodyToolBar(Panel panel)
 {
     @panel.BodyToolBar(@<text>
     <div class="col-md-12">

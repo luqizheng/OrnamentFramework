@@ -5,7 +5,7 @@ using Qi.Domain.NHibernates;
 
 namespace Ornament.Regions.Dao.NHibernateImple
 {
-    public class AreaDao : DaoBase<int, District>, IAreaDao
+    public class DistrictDao : DaoBase<int, District>, IDistrictDao
     {
         public IList<District> FindByCity(City city)
         {

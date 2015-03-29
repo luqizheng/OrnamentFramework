@@ -56,9 +56,9 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaDao.cs" />
+    <Compile Include="DistrictDao.cs" />
     <Compile Include="CityDao.cs" />
-    <Compile Include="Mappings\AreaMapping.cs" />
+    <Compile Include="Mappings\DistrictMapping.cs" />
     <Compile Include="Mappings\CityMapping.cs" />
     <Compile Include="Mappings\ProvinceMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

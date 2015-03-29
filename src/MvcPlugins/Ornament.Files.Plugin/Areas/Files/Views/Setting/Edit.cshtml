@@ -1,44 +1,48 @@
 ﻿@using Ornament
+@using Ornament.Web
 @using Ornament.Web.UI.Theme
-@model Ornament.Files.IO.FileFormatSetting
+@model Ornament.Files.Plugin.Areas.Files.Models.FileFormatSettingModel
 
 @{
     ViewBag.Title = "Edit";
     Layout = OrnamentContext.Configuration.Layout();
 }
 
-<form class="form-horizontal" ms-controller="edit">
-    @using (var panel = Html.Panel(new PanelOption(),"col-md-6","col-xs-12"))
+<form ms-controller="edit">
+    @using (var panel = Html.Panel(new PanelOption(), "col-md-4", "col-xs-12", "col-sm-12"))
     {
         @panel.Header(@<text>
-                           <h2>Basic Information</h2>
-                       </text>)
+        <h2>Basic Information</h2>
+        </text>)
         @panel.Body(@<text>
+        @Html.HiddenFor(s => s.Id)
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(s => s.Name)</label>
 
-                         <div class="form-group">
-                             <label class="col-md-2">@Html.DisplayNameFor(s => s.Name)</label>
-                             <div class="col-md-10">
-                                 @Html.EditorFor(model => model.Name, new
+            @Html.EditorFor(model => model.Name, new
                                  {
                                      HtmlAttributes = new Dictionary<string, object> { { "class", "form-control" }, { "ms-duplex", "Name" } }
                                  })
-                                 @Html.ValidationMessageFor(model => model.Name)
-                             </div>
-                         </div>
+            @Html.ValidationMessageFor(model => model.Name)
 
-    
-                         <div class="form-group">
-                             <label class="col-md-2">@Html.DisplayNameFor(s => s.SampleFile)</label>
-                             <div class="col-md-10">
-                                 @Html.EditorFor(model => model.SampleFile,new
+        </div>
+
+
+        <div class="form-group">
+            <label>@Html.DisplayNameFor(s => s.SampleFile)</label>
+
+            @Html.EditorFor(model => model.SampleFile, new
                                  {
-                                     HtmlAttributes = new Dictionary<string, object> { { "url", "/Files/Setting/uploadfile" }}
+                                     HtmlAttributes = new Dictionary<string, object>
+                                     {
+                                         { "url", "/Files/Setting/uploadfile" }
+                                     }
                                  })
-                             </div>
-                         </div>
+
+        </div>
 
 
-                     </text>)
+        </text>)
     }
 
     @using (var panel = Html.Panel(new PanelOption()
@@ -47,35 +51,43 @@
         {
             {"ms-controller","column"}
         }
-    },"col-md-6","col-xs-12"))
+    }, "col-md-8", "col-xs-12", "col-sm-12"))
     {
         @panel.Header(@<text>
-                           <h2>Field Setting</h2>
-                       </text>)
+        <h2>Field Setting</h2>
+        </text>)
 
         @panel.Body(@<text>
 
-                         <table>
-                             <tbody>
-                                 <tr ms-repeat="columns">
-                                 </tr>
-                             </tbody>
-                         </table>
-                         <table>
-                             <tbody>
-                                 <tr ms-repeat="sampleData">
-                                     <td></td>
-                                     <td></td>
-                                 </tr>
-                             </tbody>
-                         </table>
-                     </text>)
+        <table>
+            <tbody>
+                <tr ms-repeat="columns">
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr ms-repeat="sampleData">
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        </text>)
 
         @helper renderBodyToolbar(Panel panel)
-        {
+{
             
         }
     }
 
 </form>
+
+@section scripts{
+    <script type="text/javascript">
+        require(['@Amd.Url("~/Files/Scripts/Setting/Edit.js")'], function (main) {
+            main.init();
+        });
+    </script>
+}
 

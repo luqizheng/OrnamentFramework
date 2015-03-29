@@ -1,5 +1,5 @@
 ﻿using NHibernate.Criterion;
-using Ornament.Files.IO;
+using Ornament.Files.FieldSettings;
 using Qi.Domain.NHibernates;
 
 namespace Ornament.Files.Dao

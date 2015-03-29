@@ -39,13 +39,13 @@ namespace Ornament.Regions.Plugin.Models
             {
                 cityDao.Save(city);
             }
-            IAreaDao areaDao = factory.CreateAreaDao();
+            IDistrictDao districtDao = factory.CreateAreaDao();
             var areas = District.CreateData(cities);
             foreach (District city in areas)
             {
-                areaDao.Save(city);
+                districtDao.Save(city);
             }
-            areaDao.Flush();
+            districtDao.Flush();
 
 
         }

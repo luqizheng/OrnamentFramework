@@ -1,5 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
-using Ornament.Files.IO;
+using Ornament.Files.FieldSettings;
 
 namespace Ornament.Files.Dao.Mapping
 {

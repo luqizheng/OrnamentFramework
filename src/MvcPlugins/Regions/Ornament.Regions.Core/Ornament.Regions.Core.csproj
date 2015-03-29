@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dao\IAreaDao.cs" />
+    <Compile Include="Dao\IDistrictDao.cs" />
     <Compile Include="Dao\ICityDao.cs" />
     <Compile Include="Dao\IProvicenDao.cs" />
     <Compile Include="Dao\IRegionDaoFactory.cs" />
