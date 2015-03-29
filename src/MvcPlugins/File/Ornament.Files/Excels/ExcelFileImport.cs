@@ -36,11 +36,12 @@ namespace Ornament.Files.Excels
 
         public void Read(string filePath, int sheetIndex, int skipRow)
         {
-            using (var stream = File.OpenRead(filePath))
+            using (FileStream stream = File.OpenRead(filePath))
             {
                 Read(stream, sheetIndex, skipRow);
             }
         }
+
         /// <summary>
         /// </summary>
         /// <param name="excelFile">文件路径</param>
