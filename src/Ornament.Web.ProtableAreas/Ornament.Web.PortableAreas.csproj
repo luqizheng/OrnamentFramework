@@ -88,51 +88,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InputBuilder\Attributes\CanDeleteAllAttribute.cs" />
-    <Compile Include="InputBuilder\Attributes\DisplayOrderAttribute.cs" />
-    <Compile Include="InputBuilder\Attributes\ExampleAttribute.cs" />
-    <Compile Include="InputBuilder\Attributes\LabelAttribute.cs" />
-    <Compile Include="InputBuilder\Attributes\NoAddAttribute.cs" />
-    <Compile Include="InputBuilder\Attributes\NoDeleteAttribute.cs" />
-    <Compile Include="InputBuilder\Attributes\PartialViewAttribute.cs" />
+    <Compile Include="InputBuilder\InputBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Messages\IocControllerInjectMessageHandler.cs" />
     <Compile Include="Messages\RequirejsModuleBundleMessageHandle.cs" />
     <Compile Include="AreaRegistrationHelper.cs" />
     <Compile Include="Controllers\EmbeddedResourceController.cs" />
-    <Compile Include="InputBuilder\Conventions\PropertyName\DefaultNameConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\PropertyName\IPropertyViewModelNameConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\ArrayPropertyConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\DateTimePropertyConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\DefaultPropertyConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\EnumPropertyConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\GuidPropertyConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\IPropertyViewModelFactory.cs" />
-    <Compile Include="InputBuilder\Conventions\Property\PropertyInfoExtensions.cs" />
-    <Compile Include="InputBuilder\Conventions\Type\DefaultTypeViewModelFactoryConvention.cs" />
-    <Compile Include="InputBuilder\Conventions\Type\ITypeViewModelFactory.cs" />
-    <Compile Include="InputBuilder\DefaultPropertyConventionsFactory.cs" />
-    <Compile Include="InputBuilder\DefaultTypeConventionsFactory.cs" />
-    <Compile Include="InputBuilder\Helpers\DisplayOrderExtensions.cs" />
-    <Compile Include="InputBuilder\Helpers\ExpressionHelper.cs" />
-    <Compile Include="InputBuilder\Helpers\ReflectionHelper.cs" />
-    <Compile Include="InputBuilder\InputBuilder.cs" />
-    <Compile Include="InputBuilder\InputSpecification\IInputSpecification.cs" />
-    <Compile Include="InputBuilder\InputSpecification\Input.cs" />
-    <Compile Include="InputBuilder\InputSpecification\InputPropertySpecification.cs" />
-    <Compile Include="InputBuilder\InputSpecification\InputTypeSpecification.cs" />
-    <Compile Include="InputBuilder\InputSpecification\ViewModelFactory.cs" />
     <Compile Include="InputBuilder\ViewEngine\AssemblyResourceProvider.cs" />
     <Compile Include="InputBuilder\ViewEngine\AssemblyResourceVirtualFile.cs" />
     <Compile Include="InputBuilder\ViewEngine\EmbeddedResourceViewEngine.cs" />
     <Compile Include="InputBuilder\ViewEngine\RenderInputBuilderException.cs" />
-    <Compile Include="InputBuilder\Views\DisplayPartial.cs" />
-    <Compile Include="InputBuilder\Views\HtmlDisplayExtensions.cs" />
-    <Compile Include="InputBuilder\Views\HtmlExtensions.cs" />
-    <Compile Include="InputBuilder\Views\IInputSpecificationExtensions.cs" />
-    <Compile Include="InputBuilder\Views\Partial.cs" />
-    <Compile Include="InputBuilder\Views\PropertyViewModel.cs" />
-    <Compile Include="InputBuilder\Views\TypeViewModel.cs" />
-    <Compile Include="InputBuilder\Views\TypeViewModelExtensions.asax.cs" />
     <Compile Include="Messages\IocControllerInjectMessageEvent.cs" />
     <Compile Include="Messages\NHConfigurationHandler.cs" />
     <Compile Include="Messages\NHRegisterEventMessage.cs" />

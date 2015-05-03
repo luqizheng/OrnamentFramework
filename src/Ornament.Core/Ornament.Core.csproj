@@ -185,7 +185,9 @@
   <ItemGroup>
     <Content Include="Resources\forgetPassword_zh-CN.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PortableAreasExtenders\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\changeAccount.xml" />
   </ItemGroup>
