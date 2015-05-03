@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Messages
+namespace Ornament.Web.PortableAreas.Messages
 {
     /// <summary>
     ///     注册NHibernate的Dao，如果Dao和mapping文件放在一起，那么会自动进行Mapping

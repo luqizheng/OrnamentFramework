@@ -1,7 +1,6 @@
-﻿using Ornament.Web.PortableAreas;
-using Ornament.Web.SeajsModules;
+﻿using Ornament.Web.PortableAreas.SeajsModules;
 
-namespace Ornament.Web.Messages
+namespace Ornament.Web.PortableAreas.Messages
 {
     public class RequireJsModuleBundleEventMessage : IEventMessage
     {

@@ -130,6 +130,10 @@
       <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
       <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ornament.Web\Ornament.Web.Core.csproj">
+      <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
+      <Name>Ornament.Web.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

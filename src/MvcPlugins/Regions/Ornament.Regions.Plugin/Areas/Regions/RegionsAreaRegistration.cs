@@ -2,8 +2,8 @@
 using Ornament.Regions.Dao;
 using Ornament.Regions.Dao.NHibernateImple;
 using Ornament.Regions.Plugin.Models;
-using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.Messages;
 
 namespace Ornament.Regions.Plugin.Areas.Regions
 {

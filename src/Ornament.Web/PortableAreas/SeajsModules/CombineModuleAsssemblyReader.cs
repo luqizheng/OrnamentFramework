@@ -1,12 +1,10 @@
-﻿using System;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 using System.Web.Routing;
 using CombineJs;
 using CombineJs.Modules;
 using CombineJs.Readers;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.SeajsModules
+namespace Ornament.Web.PortableAreas.SeajsModules
 {
     public class CombineModuleAsssemblyReader : CombineModuleReader
     {

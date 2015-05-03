@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using Ornament.Web.Messages;
+﻿using System.Web.Mvc;
 using Ornament.Web.PortableAreas;
 
 namespace Ornament.Information.Plugin.Areas.Information
@@ -21,9 +19,5 @@ namespace Ornament.Information.Plugin.Areas.Information
                 );
             base.RegisterArea(context, bus);
         }
-
-       
-
-     
     }
 }

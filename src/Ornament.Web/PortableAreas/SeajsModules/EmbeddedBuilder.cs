@@ -2,9 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Web.Optimization;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.SeajsModules
+namespace Ornament.Web.PortableAreas.SeajsModules
 {
     public class EmbeddedBuilder : IBundleBuilder
     {

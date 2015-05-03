@@ -196,6 +196,17 @@
     <Compile Include="OrnamentControllerFactory.cs" />
     <Compile Include="OrnamentWebApiFactory.cs" />
     <Compile Include="MessageHandlers\DataInitialateMessageHandler.cs" />
+    <Compile Include="PortableAreas\AreaRegistrationHelper.cs" />
+    <Compile Include="PortableAreas\Messages\IocControllerInjectMessageEvent.cs" />
+    <Compile Include="PortableAreas\Messages\IocControllerInjectMessageHandler.cs" />
+    <Compile Include="PortableAreas\Messages\NHConfigurationHandler.cs" />
+    <Compile Include="PortableAreas\Messages\NHRegisterEventMessage.cs" />
+    <Compile Include="PortableAreas\Messages\RequireJsModuleBundleEventMessage.cs" />
+    <Compile Include="PortableAreas\Messages\RequirejsModuleBundleMessageHandle.cs" />
+    <Compile Include="PortableAreas\PortableAreaRegistrion.cs" />
+    <Compile Include="PortableAreas\SeajsModules\AmdEmbedBundle.cs" />
+    <Compile Include="PortableAreas\SeajsModules\CombineModuleAsssemblyReader.cs" />
+    <Compile Include="PortableAreas\SeajsModules\EmbeddedBuilder.cs" />
     <Compile Include="ResourceDescriptionManager.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="MemberShips\MemberShipProvider.cs" />

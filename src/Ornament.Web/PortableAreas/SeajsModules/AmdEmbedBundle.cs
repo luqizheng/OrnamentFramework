@@ -1,7 +1,7 @@
 ﻿using System.Web.Optimization;
 using CombineJs;
 
-namespace Ornament.Web.SeajsModules
+namespace Ornament.Web.PortableAreas.SeajsModules
 {
     public class EmbedBundle : CombineJsBundle
     {

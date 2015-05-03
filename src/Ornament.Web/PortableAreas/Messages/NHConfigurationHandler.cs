@@ -1,7 +1,6 @@
 ﻿using Ornament.Configurations;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Messages
+namespace Ornament.Web.PortableAreas.Messages
 {
     public class NHConfigurationHandler : MessageHandler<NHRegisterEventMessage>
     {

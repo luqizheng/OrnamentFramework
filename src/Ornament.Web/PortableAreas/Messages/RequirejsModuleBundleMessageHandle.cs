@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Optimization;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Messages
+namespace Ornament.Web.PortableAreas.Messages
 {
     public class RequirejsModuleBundleMessageHandle : MessageHandler<RequireJsModuleBundleEventMessage>
     {

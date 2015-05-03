@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-using Ornament.Web.Messages;
-using Ornament.Web.PortableAreas;
-using Ornament.Web.SeajsModules;
+using Ornament.Web.PortableAreas.Messages;
+using Ornament.Web.PortableAreas.SeajsModules;
 
-namespace Ornament.Web
+namespace Ornament.Web.PortableAreas
 {
     public class AreaRegistrationHelper
     {
-
-        private readonly PortableAreaRegistration _protablAreaRegistration;
-        private readonly Queue<JsModule> _jsEmbeddedModulePath = new Queue<JsModule>();
         private readonly Queue<string> _embedPath = new Queue<string>();
-        public AreaRegistrationHelper(PortableAreaRegistration protablAreaRegistration)
+        private readonly Queue<JsModule> _jsEmbeddedModulePath = new Queue<JsModule>();
+        private readonly BasePortableAreaRegistration _protablAreaRegistration;
+
+        public AreaRegistrationHelper(BasePortableAreaRegistration protablAreaRegistration)
         {
             if (protablAreaRegistration == null)
             {
@@ -43,7 +42,7 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("imageFolder");
             }
-            imageFolder = imageFolder.Trim(new[] { '/', ' ' });
+            imageFolder = imageFolder.Trim(new[] {'/', ' '});
             RegistyEmbedResouce(imageFolder);
         }
 
@@ -53,7 +52,7 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("scriptPath");
             }
-            scriptPath = scriptPath.Trim(new[] { '/', ' ', '~' });
+            scriptPath = scriptPath.Trim(new[] {'/', ' ', '~'});
             RegistyEmbedResouce(scriptPath);
         }
 
@@ -79,7 +78,7 @@ namespace Ornament.Web
             {
                 throw new ArgumentNullException("path");
             }
-            path = path.Trim(new[] { '/', ' ' });
+            path = path.Trim(new[] {'/', ' '});
             _embedPath.Enqueue(path);
         }
 
@@ -87,7 +86,7 @@ namespace Ornament.Web
         {
             while (_jsEmbeddedModulePath.Count != 0)
             {
-                var model = _jsEmbeddedModulePath.Dequeue();
+                JsModule model = _jsEmbeddedModulePath.Dequeue();
                 string str = string.Format("{0}/{1}", context.AreaName, model.BundleNamee);
                 string[] strArray =
                     AssemblyResourceManager.GetResourceStoreForArea(context.AreaName)
@@ -112,11 +111,11 @@ namespace Ornament.Web
 
             while (_embedPath.Count != 0)
             {
-                var path = _embedPath.Dequeue();
+                string path = _embedPath.Dequeue();
                 context.MapRoute(_protablAreaRegistration.AreaName + "_" + path.Replace("/", "_") + "_embededResource",
-                string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
-                new { controller = "EmbeddedResource", action = "Index", resourcePath = path },
-                new[] { "Ornament.Web.Controllers" });
+                    string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
+                    new {controller = "EmbeddedResource", action = "Index", resourcePath = path},
+                    new[] {"Ornament.Web.Controllers"});
             }
         }
 
@@ -124,8 +123,8 @@ namespace Ornament.Web
         {
             public JsModule(string bundleNamee, string filePath)
             {
-                BundleNamee = bundleNamee.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
-                FilePath = filePath.TrimStart(new[] { '/', '~', ' ' }).TrimEnd(new[] { ' ', '/' });
+                BundleNamee = bundleNamee.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
+                FilePath = filePath.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
             }
 
             public string BundleNamee { get; private set; }

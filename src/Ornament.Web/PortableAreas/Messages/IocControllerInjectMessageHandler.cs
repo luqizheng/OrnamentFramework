@@ -1,9 +1,8 @@
 using System;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Messages
+namespace Ornament.Web.PortableAreas.Messages
 {
     public class IocControllerInjectMessageHandler : MessageHandler<IocControllerInjectMessageEvent>,IMessageHandler
     {

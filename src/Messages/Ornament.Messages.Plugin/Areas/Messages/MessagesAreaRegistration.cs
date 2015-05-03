@@ -2,8 +2,8 @@
 using Ornament.Messages.Dao;
 using Ornament.Messages.Dao.NHibernateImple;
 using Ornament.Web;
-using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.Messages;
 
 namespace Ornament.Messages.Plugin.Areas.Messages
 {
@@ -22,7 +22,6 @@ namespace Ornament.Messages.Plugin.Areas.Messages
 
             OrnamentContext.ResourceManager.Add("Template", typeof (MessageOperator));
 
-           
 
             RegistScripts("Scripts/News");
             RegistScripts("Scripts/NewsType");

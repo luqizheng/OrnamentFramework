@@ -6,8 +6,8 @@ using Ornament.MemberShip.Plugin.Models;
 using Ornament.MemberShip.Web.Plugin.Areas.MemberShips.Models;
 using Ornament.MemberShip.Web.Plugin.Models.SampleData;
 using Ornament.Web;
-using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.Messages;
 
 namespace Ornament.MemberShip.Web.Plugin.Areas.MemberShips
 {

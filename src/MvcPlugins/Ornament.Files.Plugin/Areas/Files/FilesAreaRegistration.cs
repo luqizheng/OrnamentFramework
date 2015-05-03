@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using Ornament.Files.Dao;
-using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
+using Ornament.Web.PortableAreas.Messages;
 
 namespace Ornament.Files.Plugin.Areas.Files
 {
@@ -18,11 +18,11 @@ namespace Ornament.Files.Plugin.Areas.Files
             context.MapRoute(
                 AreaName + "_default",
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new {action = "Index", id = UrlParameter.Optional}
                 );
 
-            bus.Send(new NHRegisterEventMessage(typeof(IFileDaoFactory),
-                typeof(FileDaoFactory)));
+            bus.Send(new NHRegisterEventMessage(typeof (IFileDaoFactory),
+                typeof (FileDaoFactory)));
 
             RegistJsModule("Scripts/Setting");
 

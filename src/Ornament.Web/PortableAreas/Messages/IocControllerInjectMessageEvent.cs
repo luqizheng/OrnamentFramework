@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ornament.Web.PortableAreas;
 
-namespace Ornament.Web.Messages
+namespace Ornament.Web.PortableAreas.Messages
 {
     public class IocControllerInjectMessageEvent : IEventMessage
     {
