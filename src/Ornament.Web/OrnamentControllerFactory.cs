@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Ornament.Web.Controllers;
+using Ornament.Web.PortableAreas.Controllers;
 
 namespace Ornament.Web
 {

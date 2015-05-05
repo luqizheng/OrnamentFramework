@@ -27,7 +27,7 @@ namespace Ornament
         private const string LangCookieName = "lang";
         public static readonly string VerifyCodeKey = "VerifyCode";
 
-
+        private static bool SetJsModuleCombine = true;
         /// <summary>
         /// </summary>
         static WebOrnamentContextExtender()
@@ -37,7 +37,15 @@ namespace Ornament
                     Component.For<ResourceDescriptionManager>().Instance(new ResourceDescriptionManager()));
         }
 
+        public static void SetSeajsCombine(this OrnamentConfiguration config,bool combined)
+        {
+            SetJsModuleCombine = combined;
+        }
 
+        public static bool GetSeajsCombine(this OrnamentConfiguration config)
+        {
+            return SetJsModuleCombine;
+        }
 
         public static CultureInfo CurrentLanguage(this MemberShipContext context)
         {

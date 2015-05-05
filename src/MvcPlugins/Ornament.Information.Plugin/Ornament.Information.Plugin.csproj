@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ornament.Web.PortableAreas, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Ornament.Web.PortableAreas.dll</HintPath>
+    </Reference>
     <Reference Include="Qi.NHibernateExtender">
       <HintPath>..\..\..\lib\Qi.NHibernateExtender.dll</HintPath>
     </Reference>
@@ -122,10 +126,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
-      <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
-      <Name>Ornament.Web.PortableAreas</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Ornament.Web.UI\Ornament.Web.UI.csproj">
       <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>
       <Name>Ornament.Web.UI</Name>

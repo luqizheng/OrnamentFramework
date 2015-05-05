@@ -43,8 +43,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -58,9 +58,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcSiteMapProvider, Version=4.6.18.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,6 +70,10 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ornament.Web.PortableAreas, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Ornament.Web.PortableAreas.dll</HintPath>
     </Reference>
     <Reference Include="Qi">
       <HintPath>..\..\lib\Qi.dll</HintPath>
@@ -124,8 +125,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Optimization">
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -154,9 +156,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1161,10 +1163,6 @@
     <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254cd19d-5495-438e-ae5d-110eb32326b7}</Project>
       <Name>Ornament.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
-      <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
-      <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ornament.Web.UI\Ornament.Web.UI.csproj">
       <Project>{50C88067-6EC2-4EF1-A0E5-F88DCA6CCFC8}</Project>

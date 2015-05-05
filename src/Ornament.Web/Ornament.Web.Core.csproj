@@ -94,6 +94,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Ornament.Web.PortableAreas, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Ornament.Web.PortableAreas.dll</HintPath>
+    </Reference>
     <Reference Include="Qi, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Qi.dll</HintPath>
@@ -204,9 +208,9 @@
     <Compile Include="PortableAreas\Messages\RequireJsModuleBundleEventMessage.cs" />
     <Compile Include="PortableAreas\Messages\RequirejsModuleBundleMessageHandle.cs" />
     <Compile Include="PortableAreas\PortableAreaRegistrion.cs" />
-    <Compile Include="PortableAreas\SeajsModules\AmdEmbedBundle.cs" />
-    <Compile Include="PortableAreas\SeajsModules\CombineModuleAsssemblyReader.cs" />
-    <Compile Include="PortableAreas\SeajsModules\EmbeddedBuilder.cs" />
+    <Compile Include="PortableAreas\JsModules\AmdEmbedBundle.cs" />
+    <Compile Include="PortableAreas\JsModules\CombineModuleAsssemblyReader.cs" />
+    <Compile Include="PortableAreas\JsModules\EmbeddedBuilder.cs" />
     <Compile Include="ResourceDescriptionManager.cs" />
     <Compile Include="HtmlResource.cs" />
     <Compile Include="MemberShips\MemberShipProvider.cs" />
@@ -234,10 +238,6 @@
     <ProjectReference Include="..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
       <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
       <Name>Ornament.MemberShip.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
-      <Project>{5b962996-1d9b-415d-98a7-9001a640c84f}</Project>
-      <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

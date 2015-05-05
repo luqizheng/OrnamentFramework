@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
+using Ornament.Web.PortableAreas.JsModules;
 using Ornament.Web.PortableAreas.Messages;
-using Ornament.Web.PortableAreas.SeajsModules;
+using Ornament.Web.PortableAreas.PortableAreas;
 
 namespace Ornament.Web.PortableAreas
 {
@@ -36,25 +37,6 @@ namespace Ornament.Web.PortableAreas
             RegistJsModule("Scripts");
         }
 
-        public void RegistryImages(AreaRegistrationContext context, string imageFolder)
-        {
-            if (imageFolder == null)
-            {
-                throw new ArgumentNullException("imageFolder");
-            }
-            imageFolder = imageFolder.Trim(new[] {'/', ' '});
-            RegistyEmbedResouce(imageFolder);
-        }
-
-        public void RegistScripts(string scriptPath)
-        {
-            if (scriptPath == null)
-            {
-                throw new ArgumentNullException("scriptPath");
-            }
-            scriptPath = scriptPath.Trim(new[] {'/', ' ', '~'});
-            RegistyEmbedResouce(scriptPath);
-        }
 
         public void RegistJsModule(string path)
         {
@@ -67,20 +49,6 @@ namespace Ornament.Web.PortableAreas
             _jsEmbeddedModulePath.Enqueue(item);
         }
 
-        /// <summary>
-        ///     注册内嵌资源，如图片等，请注意，Mapping的时候，
-        ///     要主要必须在其他Route 注册之前，最好是第一个注册项目。
-        /// </summary>
-        /// <param name="path"></param>
-        public void RegistyEmbedResouce(string path)
-        {
-            if (path == null)
-            {
-                throw new ArgumentNullException("path");
-            }
-            path = path.Trim(new[] {'/', ' '});
-            _embedPath.Enqueue(path);
-        }
 
         public void SendAllMessage(AreaRegistrationContext context, IApplicationBus bus)
         {
@@ -107,15 +75,6 @@ namespace Ornament.Web.PortableAreas
                     var eventMessage = new RequireJsModuleBundleEventMessage(bundle);
                     bus.Send(eventMessage);
                 }
-            }
-
-            while (_embedPath.Count != 0)
-            {
-                string path = _embedPath.Dequeue();
-                context.MapRoute(_protablAreaRegistration.AreaName + "_" + path.Replace("/", "_") + "_embededResource",
-                    string.Format("{0}/{1}/{{resourceName}}", _protablAreaRegistration.AreaRoutePrefix, path),
-                    new {controller = "EmbeddedResource", action = "Index", resourcePath = path},
-                    new[] {"Ornament.Web.Controllers"});
             }
         }
 

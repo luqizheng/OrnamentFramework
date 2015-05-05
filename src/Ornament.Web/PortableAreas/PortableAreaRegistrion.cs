@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Ornament.Web.PortableAreas.Messages;
+using Ornament.Web.PortableAreas.PortableAreas;
 
 namespace Ornament.Web.PortableAreas
 {
@@ -16,26 +17,11 @@ namespace Ornament.Web.PortableAreas
         }
 
 
-        public void RegistryImages(AreaRegistrationContext context, string imageFolder)
-        {
-            _helper.RegistryImages(context, imageFolder);
-        }
-
-
-        public void RegistScripts(string scriptPath)
-        {
-            _helper.RegistScripts(scriptPath);
-        }
-
         public void RegistJsModule(string path)
         {
             _helper.RegistJsModule(path);
         }
 
-        public void RegistyEmbedResouce(string path)
-        {
-            _helper.RegistyEmbedResouce(path);
-        }
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
@@ -61,7 +47,6 @@ namespace Ornament.Web.PortableAreas
 
             var ev = new IocControllerInjectMessageEvent(controller, apiController);
             bus.Send(ev);
-
         }
     }
 }

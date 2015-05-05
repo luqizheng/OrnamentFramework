@@ -23,11 +23,11 @@ namespace Ornament.Messages.Plugin.Areas.Messages
             OrnamentContext.ResourceManager.Add("Template", typeof (MessageOperator));
 
 
-            RegistScripts("Scripts/News");
-            RegistScripts("Scripts/NewsType");
-            RegistScripts("Scripts/Template");
-            RegistScripts("Scripts/Sender");
-            RegistScripts("Scripts/Config");
+            RegistScripts("Scripts/News",context);
+            RegistScripts("Scripts/NewsType", context);
+            RegistScripts("Scripts/Template", context);
+            RegistScripts("Scripts/Sender", context);
+            RegistScripts("Scripts/Config", context);
 
             context.MapRoute(
                 AreaName + "_images",

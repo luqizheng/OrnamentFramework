@@ -4,7 +4,7 @@ using CombineJs;
 using CombineJs.Modules;
 using CombineJs.Readers;
 
-namespace Ornament.Web.PortableAreas.SeajsModules
+namespace Ornament.Web.PortableAreas.JsModules
 {
     public class CombineModuleAsssemblyReader : CombineModuleReader
     {

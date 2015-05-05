@@ -1,4 +1,4 @@
-﻿using Ornament.Web.PortableAreas.SeajsModules;
+﻿using Ornament.Web.PortableAreas.JsModules;
 
 namespace Ornament.Web.PortableAreas.Messages
 {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Web.Optimization;
 
-namespace Ornament.Web.PortableAreas.SeajsModules
+namespace Ornament.Web.PortableAreas.JsModules
 {
     public class EmbeddedBuilder : IBundleBuilder
     {

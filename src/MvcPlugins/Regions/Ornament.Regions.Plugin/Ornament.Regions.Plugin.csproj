@@ -69,6 +69,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Ornament.Web.PortableAreas, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Ornament.Web.PortableAreas.dll</HintPath>
+    </Reference>
     <Reference Include="Qi, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\Qi.dll</HintPath>
@@ -171,10 +175,6 @@
     <ProjectReference Include="..\..\..\Ornament.Core\Ornament.Core.csproj">
       <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
       <Name>Ornament.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Ornament.Web.ProtableAreas\Ornament.Web.PortableAreas.csproj">
-      <Project>{5B962996-1D9B-415D-98A7-9001A640C84F}</Project>
-      <Name>Ornament.Web.PortableAreas</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
