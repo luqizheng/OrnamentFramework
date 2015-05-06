@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CombineJs, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\CombineJs.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
@@ -306,10 +310,6 @@
     <EmbeddedResource Include="Areas\MemberShips\Views\Org\App_LocalResources\Index.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CombineJsBundle\CombineJsBundle.csproj">
-      <Project>{30f82ffa-fa21-44d2-bef8-81853c186788}</Project>
-      <Name>CombineJsBundle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
       <Name>Ornament.Messages.Core</Name>

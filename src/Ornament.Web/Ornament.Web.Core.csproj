@@ -70,6 +70,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="CombineJs, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CombineJs.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
@@ -223,10 +227,6 @@
     <Compile Include="WebOrnamentContextExtender.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CombineJsBundle\CombineJsBundle.csproj">
-      <Project>{30f82ffa-fa21-44d2-bef8-81853c186788}</Project>
-      <Name>CombineJsBundle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Messages\Ornament.Messages.Core\Ornament.Messages.Core.csproj">
       <Project>{C8CDAFC3-3071-4246-91EF-C9E8DFBDBAE4}</Project>
       <Name>Ornament.Messages.Core</Name>

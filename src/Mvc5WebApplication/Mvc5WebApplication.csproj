@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="CombineJs, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CombineJs.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -1124,10 +1128,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CombineJsBundle\CombineJsBundle.csproj">
-      <Project>{30f82ffa-fa21-44d2-bef8-81853c186788}</Project>
-      <Name>CombineJsBundle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Docs\DeveloperHelperCenter\DeveloperHelperCenter.csproj">
       <Project>{cea24daf-20ee-4764-a123-ed7d680b17bd}</Project>
       <Name>DeveloperHelperCenter</Name>

@@ -12,6 +12,14 @@ namespace Ornament.MemberShip.Permissions
     /// </summary>
     public abstract class Permission : DomainObject<Permission, string>
     {
+        private static readonly string _ornamentMembershipPermissionsGenericpermissionOrnamentMembershipCore;
+
+        static Permission()
+        {
+            _ornamentMembershipPermissionsGenericpermissionOrnamentMembershipCore =
+                "Ornament.MemberShip.Permissions.GenericPermission`1[[{0}]],Ornament.MemberShip.Core";
+        }
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Permission" /> class.
         /// </summary>
@@ -82,7 +90,7 @@ namespace Ornament.MemberShip.Permissions
         {
             if (resType == null) throw new ArgumentNullException("resType");
             string typeString =
-                String.Format("Ornament.MemberShip.Permissions.GenericPermission`1[[{0}]],Ornament.MemberShip.Core",
+                String.Format(_ornamentMembershipPermissionsGenericpermissionOrnamentMembershipCore,
                     resType.AssemblyQualifiedName);
             Type t = Type.GetType(typeString);
             if (t == null)
@@ -98,7 +106,7 @@ namespace Ornament.MemberShip.Permissions
         public static Permission CreatePermission(Type res)
         {
             string typeString =
-                String.Format("Ornament.MemberShip.Permissions.GenericPermission`1[[{0}]],Ornament.MemberShip.Core",
+                String.Format(_ornamentMembershipPermissionsGenericpermissionOrnamentMembershipCore,
                     res.AssemblyQualifiedName);
             Type t = Type.GetType(typeString);
             if (t == null)
