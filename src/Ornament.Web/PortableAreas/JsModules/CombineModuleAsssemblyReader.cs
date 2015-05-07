@@ -1,8 +1,9 @@
 ﻿using System.Web.Optimization;
 using System.Web.Routing;
-using CombineJs;
-using CombineJs.Modules;
-using CombineJs.Readers;
+using CombineJsBundles;
+using CombineJsBundles.Modules;
+using CombineJsBundles.Readers;
+
 
 namespace Ornament.Web.PortableAreas.JsModules
 {

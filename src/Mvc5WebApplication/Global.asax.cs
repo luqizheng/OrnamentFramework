@@ -10,7 +10,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using CombineJs.Modules;
+using CombineJsBundles.Modules;
 using log4net;
 using log4net.Config;
 using Ornament;
@@ -49,7 +49,7 @@ namespace WebApplication
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
-            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
@@ -74,7 +74,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate update error.", ex);
                 throw ex;
             }
             finally
@@ -123,7 +123,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

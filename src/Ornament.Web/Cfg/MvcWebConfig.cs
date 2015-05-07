@@ -7,7 +7,7 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Security;
 using Castle.MicroKernel.Registration;
-using CombineJs.Modules;
+using CombineJsBundles.Modules;
 using log4net;
 using Ornament.Configurations;
 using Ornament.MemberShip;

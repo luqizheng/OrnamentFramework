@@ -1,5 +1,5 @@
 ﻿using System.Web.Optimization;
-using CombineJs;
+using CombineJsBundles;
 
 namespace Ornament.Web.PortableAreas.JsModules
 {
@@ -20,6 +20,5 @@ namespace Ornament.Web.PortableAreas.JsModules
         {
             get { return _bulder; }
         }
-       
     }
 }
