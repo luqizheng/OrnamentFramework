@@ -29,8 +29,8 @@ define(["require", "notification/socketClient"],
         return {
             init: function (host, strLoginId, strName, strPublickKey) {
                 //console.log("init " + host + "；" + strLoginId + ";" + strName + ";");
-                var client = defineSocketIo(host, strLoginId, strName, strPublickKey);
-                defineController(client);
+                //var client = defineSocketIo(host, strLoginId, strName, strPublickKey);
+                //defineController(client);
 
             }
         }

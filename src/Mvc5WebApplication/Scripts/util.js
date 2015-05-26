@@ -1,4 +1,8 @@
-﻿/* add by leo*/
+﻿/* 
+add by leo
+bug fix or extend smar admin.
+
+*/
 
     var models = true;
     $(document).ajaxError(function (event, jqxhr, settings, thrownError) {

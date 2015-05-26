@@ -40,9 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CombineJs, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CombineJsBundle, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\CombineJs.dll</HintPath>
+      <HintPath>..\..\..\lib\CombineJsBundle.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ornament.Web.PortableAreas, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">

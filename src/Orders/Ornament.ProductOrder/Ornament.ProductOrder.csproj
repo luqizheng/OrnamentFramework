@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Qi">
-      <HintPath>..\..\lib\Qi.dll</HintPath>
+      <HintPath>..\..\..\lib\Qi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -36,7 +36,7 @@ namespace Ornament.MemberShip.Web.Plugin.Models.SampleData
 
         public override bool IsNeedInitialize
         {
-            get { return false; }
+            get { return true; }
         }
 
         public override void CreateData()
