@@ -6,16 +6,16 @@
 @using Ornament.Web
 @using Ornament.Web.UI.Theme
 @using Qi.Web
-@model Ornament.MemberShip.Org
+@model Org
 @{
     ViewBag.Title = Html.GetEmbededResourceString("Page_title");
     Layout = OrnamentContext.Configuration.Layout();
-    string parentId = Model != null ? Model.Id : "";
-    IEnumerable<Org> childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
+    var parentId = Model != null ? Model.Id : "";
+    var childOrgs = ((IEnumerable<Org>) ViewData["Orgs"]) ?? new List<Org>();
 
-    IList<OrgDto> childDTO = OrgDto.ToTree(childOrgs);
+    var childDTO = OrgDto.ToTree(childOrgs);
 
-    bool editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
+    var editPermission = OrnamentContext.MemberShip.HasRight("Org", OrgOperator.Modify);
 }
 @section pageTitle
 {
@@ -30,104 +30,104 @@
     }
 }
 
-@using (Panel box = Html.Panel(new PanelOption
+@using (var box = Html.Panel(new PanelOption
 {
-    Id = "orgPanel",
+    Id = "orgPanel"
 }, "col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
-    @box.Header(@<text><h2>Org Tree</h2></text>)
+    @box.Header(@<text>
+                    <h2>Org Tree</h2></text>)
 
 
     @box.Body(@<text>
-    <div ms-controller="index" id="orgTreeView">
-        @Html.Partial("OrgTreeView")
-    </div>
+                  <div ms-controller="index" id="orgTreeView">
+                      @Html.Partial("OrgTreeView")
+                  </div>
 
 
-    </text>)
+               </text>)
 }
 
-@using (Panel box = Html.Panel("col-md-6 col-lg-6 col-xs-6 col-sm-6"))
+@using (var box = Html.Panel("col-md-6 col-lg-6 col-xs-6 col-sm-6"))
 {
     @box.Header(@<text>
 
-    </text>)
+                 </text>)
     @box.Body(@<text>
-    <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save" action="/MemberShips/Org/Save">
-        <div class="form-group">
-            <label class="col-md-2  control-label">
-                @Html.DisplayNameFor(s => s.Parent)
-            </label>
-            <div class="col-md-10">
-                <p class="form-control-static" ms-text="ParentName"></p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new
-                               {
-                                   HtmlAttributes = new Dictionary<string, object>
-                                   {
-                                       {"class", "form-control"},
-                                       {"ms-duplex", "Name"}
-                                   }
-                               })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
+                  <form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="save" action="/MemberShips/Org/Save">
+                      <div class="form-group">
+                          <label class="col-md-2  control-label">
+                              @Html.DisplayNameFor(s => s.Parent)
+                          </label>
+                          <div class="col-md-10">
+                              <p class="form-control-static" ms-text="ParentName"></p>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
+                          <div class="col-md-10">
+                              @Html.EditorFor(model => model.Name, new
+                              {
+                                  HtmlAttributes = new Dictionary<string, object>
+                                  {
+                                      {"class", "form-control"},
+                                      {"ms-duplex", "Name"}
+                                  }
+                              })
+                              @Html.ValidationMessageFor(model => model.Name)
+                          </div>
+                      </div>
 
-        <div class="form-group">
-            <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remarks)</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Remarks, new
-                               {
-                                   HtmlAttributes = new Dictionary<string, object>
-                                   {
-                                       {"class", "form-control"},
-                                       {"ms-duplex", "Remarks"}
-                                   }
-                               })
-                @Html.ValidationMessageFor(model => model.Remarks)
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
-            <div class="col-md-10" id="roleList">
-                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>
-                               {
-                                   {"ms-duplex-string", "Roles"}
-                               })
-                @Html.ValidationMessageFor(s => s.Roles)
-            </div>
-        </div>
-        <div class="form-actions">
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fa fa-save"></i>
-                        @Resources.Save
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
+                      <div class="form-group">
+                          <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remarks)</label>
+                          <div class="col-md-10">
+                              @Html.EditorFor(model => model.Remarks, new
+                              {
+                                  HtmlAttributes = new Dictionary<string, object>
+                                  {
+                                      {"class", "form-control"},
+                                      {"ms-duplex", "Remarks"}
+                                  }
+                              })
+                              @Html.ValidationMessageFor(model => model.Remarks)
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
+                          <div class="col-md-10" id="roleList">
+                              @Html.EditorFor(s => s.Roles, new Dictionary<string, object>
+                              {
+                                  {"ms-duplex-string", "Roles"}
+                              })
+                              @Html.ValidationMessageFor(s => s.Roles)
+                          </div>
+                      </div>
+                      <div class="form-actions">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <button class="btn btn-primary" type="submit">
+                                      <i class="fa fa-save"></i>
+                                      @Resources.Save
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
 
-    </text>)
+               </text>)
 }
 
 
 
 @section scripts{
     <script type="text/javascript">
-      
-        require(['@Amd.Url("/MemberShips/Scripts/Org/Index.js")'], function(main) {
+
+        require(['@Amd.Url("/MemberShips/Scripts/Org/Index")'], function(main) {
             var orgDTO = @Html.Raw(JsonHelper.ToJson(childDTO));
-                main.init(orgDTO);
-                clearPageVariable.push(main.clear);
-            });
-        
-        
+            main.init(orgDTO);
+            clearPageVariable.push(main.clear);
+        });
+
 
     </script>
 }

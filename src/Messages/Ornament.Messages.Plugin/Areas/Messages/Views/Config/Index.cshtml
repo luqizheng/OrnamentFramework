@@ -67,7 +67,7 @@
 
         require(['require', '/scripts/config.js'], function(require) {
             var js = @Html.Raw(a);
-            require(['@Scripts.Url("/Messages/Scripts/Config/index.js")'], function(init) {
+            require(['@Scripts.Url("/Messages/Scripts/Config/index")'], function(init) {
                 init(js);
             });
         });

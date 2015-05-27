@@ -139,7 +139,7 @@
 @section scripts{
     <script type="text/javascript">
        
-            require(['@Amd.Url("/Messages/Scripts/Template/Publish.js")'], function(main) {
+            require(['@Amd.Url("/Messages/Scripts/Template/Publish")'], function(main) {
                 var contents = @Html.Raw(JsonHelper.ToJson(template.Contents.Values));
                 main.init(contents);
                 clearPageVariable.push(main.clear);

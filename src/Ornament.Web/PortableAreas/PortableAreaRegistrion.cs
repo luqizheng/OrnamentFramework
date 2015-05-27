@@ -16,12 +16,10 @@ namespace Ornament.Web.PortableAreas
             _helper = new AreaRegistrationHelper(this);
         }
 
-
         public void RegistJsModule(string path)
         {
             _helper.RegistJsModule(path);
         }
-
 
         public override void RegisterArea(AreaRegistrationContext context, IApplicationBus bus)
         {
@@ -33,7 +31,6 @@ namespace Ornament.Web.PortableAreas
             }
             _helper.SendAllMessage(context, bus);
         }
-
 
         private void GetInjectControllers(IApplicationBus bus)
         {

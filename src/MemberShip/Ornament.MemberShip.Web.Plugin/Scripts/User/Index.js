@@ -1,6 +1,6 @@
 ﻿/// <reference path="../Share/user.js" />
 /// <reference path="../Share/dataTables.js" />
-define(["../Share/user.js", "pager"], function(userApi) {
+define(["../Share/user", "pager"], function(userApi) {
 
 
     var lang = {};

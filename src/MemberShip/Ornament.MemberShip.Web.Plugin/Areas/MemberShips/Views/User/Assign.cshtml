@@ -98,7 +98,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        require("@Url.Content("~/MemberShips/Scripts/User/Assign.js")", function(main) {
+        require("@Url.Content("~/MemberShips/Scripts/User/Assign")", function(main) {
             var userGroupMap = @MvcHtmlString.Create(JsonHelper.ToJson(ViewData["userGroupRoleMap"]));
             var roleGroupMap = @MvcHtmlString.Create(JsonHelper.ToJson(ViewData["rolePermissionMap"]));
             main(userGroupMap, roleGroupMap);

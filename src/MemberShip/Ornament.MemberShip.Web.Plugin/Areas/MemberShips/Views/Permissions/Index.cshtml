@@ -10,7 +10,7 @@
 }
 @section scripts{
     <script type="text/javascript">
-        require(["@Amd.Url("~/Memberships/scripts/permissions/index.js")"], function(init) {
+        require(["@Amd.Url("~/Memberships/scripts/permissions/index")"], function(init) {
             init({
                 warnDel: '@Html.GetEmbededResourceString("warnning_deleting_msg")',
                 delUrl: '@Url.Action("Delete")'

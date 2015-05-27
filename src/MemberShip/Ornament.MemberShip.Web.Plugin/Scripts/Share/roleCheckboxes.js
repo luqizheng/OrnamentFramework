@@ -1,6 +1,5 @@
 ﻿define(function (require) {
-    var $ = require('jquery'),
-    webApi = new (require("/Scripts/Modules/Combine/WebApi.js"))('/api/memberships/roles/match');
+    webApi = new (require("/Scripts/Modules/Combine/WebApi"))('/api/memberships/roles/match');
     avalon.define('roleCheckboxes', function (vm) {
         vm.roles = [];
         vm.name = '';

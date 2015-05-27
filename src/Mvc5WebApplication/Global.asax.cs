@@ -49,7 +49,7 @@ namespace WebApplication
 
             GlobalConfiguration.Configuration.DependencyResolver = new CastleDependcyResolver();
 
-            ChangeControllerFacotry(typeof (HttpErrorsController), Assembly.GetExecutingAssembly());
+            ChangeControllerFacotry(typeof(HttpErrorsController), Assembly.GetExecutingAssembly());
 
             NHibernateMvcRegister.Regist(); //修改MVC ModelHandler等配置
             Ornament.MemberShip.User.ValidateUserPolicy = new WebValidateUserPolicy(Membership.Provider);
@@ -60,7 +60,7 @@ namespace WebApplication
             ValidationConfig.Registry();
             NHibernateMvcRegister.Regist();
             GlobalFilters.Filters.Add(new LocalizationFilter());
-            //FilterProviders.Providers.Add(MultiLanguage);
+            RequirejsModuleBundleMessageHandle.HandlAllBundle();
             InitData();
         }
 
@@ -74,7 +74,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Fatal("nhibernate update error.", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Fatal("nhibernate update error.", ex);
                 throw ex;
             }
             finally
@@ -123,7 +123,7 @@ namespace WebApplication
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger(typeof (MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
+                LogManager.GetLogger(typeof(MvcWebConfig)).Error("ChangeControllerFacotry fail", ex);
             }
         }
     }

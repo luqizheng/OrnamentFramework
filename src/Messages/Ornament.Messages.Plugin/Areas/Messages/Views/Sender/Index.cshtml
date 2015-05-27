@@ -51,7 +51,7 @@
 
 @section scripts{
     <script type="text/javascript">
-        require(['@Amd.Url("/Messages/Scripts/Sender/Index.js")'], function(main) {
+        require(['@Amd.Url("/Messages/Scripts/Sender/Index")'], function(main) {
             main.init({
                 get: '@Url.Action("GetSender")',
                 del:'@Url.Action("Delete")'

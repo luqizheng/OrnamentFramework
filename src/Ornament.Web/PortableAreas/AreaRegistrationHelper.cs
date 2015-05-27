@@ -10,9 +10,7 @@ namespace Ornament.Web.PortableAreas
 {
     public class AreaRegistrationHelper
     {
-        private readonly Queue<string> _embedPath = new Queue<string>();
         private readonly Queue<JsModule> _jsEmbeddedModulePath = new Queue<JsModule>();
-        private readonly BasePortableAreaRegistration _protablAreaRegistration;
 
         public AreaRegistrationHelper(BasePortableAreaRegistration protablAreaRegistration)
         {
@@ -20,58 +18,30 @@ namespace Ornament.Web.PortableAreas
             {
                 throw new ArgumentNullException("protablAreaRegistration");
             }
-
-            _protablAreaRegistration = protablAreaRegistration;
-
-            //protablAreaRegistration.EmbedResourceRegisted += protablAreaRegistration_RegistedEmbedResource;
         }
-
-        //private void protablAreaRegistration_RegistedEmbedResource(object sender, RegistedEmbedresourceEventArgs e)
-        //{
-        //    SendAllMessage(e.Context, e.Bus);
-        //    ((PortableAreaRegistration)sender).EmbedResourceRegisted -= protablAreaRegistration_RegistedEmbedResource;
-        //}
-
-        public void RegistryDefault()
-        {
-            RegistJsModule("Scripts");
-        }
-
 
         public void RegistJsModule(string path)
         {
-            RegistJsModule(path, path);
-        }
-
-        public void RegistJsModule(string bundlePath, string virtualPath)
-        {
-            var item = new JsModule(bundlePath, virtualPath);
+            var item = new JsModule(path);
             _jsEmbeddedModulePath.Enqueue(item);
         }
-
 
         public void SendAllMessage(AreaRegistrationContext context, IApplicationBus bus)
         {
             while (_jsEmbeddedModulePath.Count != 0)
             {
-                JsModule model = _jsEmbeddedModulePath.Dequeue();
-                string str = string.Format("{0}/{1}", context.AreaName, model.BundleNamee);
-                string[] strArray =
+                var model = _jsEmbeddedModulePath.Dequeue();
+                var bundlePrefix = string.Format("{0}/{1}", context.AreaName, model.BundleName);
+                var jsFiles =
                     AssemblyResourceManager.GetResourceStoreForArea(context.AreaName)
                         .MatchPath("~/" + model.FilePath, ".js");
-                if ((strArray == null) || (strArray.Length == 0))
+                if ((jsFiles == null) || (jsFiles.Length == 0))
                 {
-                    throw new FileNotFoundException(string.Format("Not found an embed js file in {0}", str));
+                    throw new FileNotFoundException(string.Format("Not found an embed js file in {0}", bundlePrefix));
                 }
-                foreach (string str2 in strArray)
+                foreach (var jsFile in jsFiles)
                 {
-                    var bundle = new EmbedBundle(string.Format("~/{0}/{1}", str, str2), context.AreaName);
-                    if (model.BundleNamee != model.FilePath)
-                    {
-                        string virtualPath = string.Format("~/areas/{0}/{1}/{2}", context.AreaName, model.FilePath,
-                            str2);
-                        bundle.Include(virtualPath);
-                    }
+                    var bundle = model.CreateBundle(context, jsFile);
                     var eventMessage = new RequireJsModuleBundleEventMessage(bundle);
                     bus.Send(eventMessage);
                 }
@@ -80,15 +50,37 @@ namespace Ornament.Web.PortableAreas
 
         private class JsModule
         {
-            public JsModule(string bundleNamee, string filePath)
+            public JsModule(string filePath)
             {
-                BundleNamee = bundleNamee.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
-                FilePath = filePath.TrimStart(new[] {'/', '~', ' '}).TrimEnd(new[] {' ', '/'});
+                FilePath = filePath.TrimStart('/', '~', ' ').TrimEnd(' ', '/');
+                BundleName = FilePath.TrimStart('/', '~', ' ').TrimEnd(' ', '/');
+                if (BundleName.EndsWith(".js"))
+                {
+                    BundleName = BundleName.Substring(0, filePath.Length - 3);
+                }
             }
 
-            public string BundleNamee { get; private set; }
+            /// <summary>
+            /// </summary>
+            public string BundleName { get; private set; }
 
             public string FilePath { get; private set; }
+
+            public EmbedBundle CreateBundle(AreaRegistrationContext context, string file)
+            {
+                var bundleFile = file;
+                if (bundleFile.EndsWith(".js"))
+                {
+                    bundleFile = bundleFile.Substring(0, file.Length - 3);
+                }
+
+                var bundleName = string.Format("~/{0}/{1}/{2}", context.AreaName, BundleName, bundleFile);
+                var virtualPath = string.Format("~/areas/{0}/{1}/{2}", context.AreaName, FilePath, file);
+
+                var result = new EmbedBundle(bundleName, context.AreaName);
+                result.Include(virtualPath);
+                return result;
+            }
         }
     }
 }

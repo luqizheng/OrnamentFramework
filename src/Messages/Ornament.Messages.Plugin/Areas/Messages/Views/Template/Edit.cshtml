@@ -169,7 +169,7 @@
     <script type="text/javascript">
 
 
-        require(["@Scripts.Url("~/messages/scripts/template/edit.js")"], function(init) {
+        require(["@Scripts.Url("~/messages/scripts/template/edit")"], function(init) {
             var contents = @Html.Raw(outputContents);
             var template = {
                 Remark: '@Html.Raw(JsonHelper.ToJson(Model.Remark ?? ""))',

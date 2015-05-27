@@ -19,7 +19,7 @@
 @Html.Hidden("", ids)
 <style type="text/css">.select2-container {width: 260px;}</style>
 <script type="text/javascript">
-    require(["@Scripts.Url("/MemberShips/Scripts/Share/userSelect2.js")"], function(i) {
+    require(["@Scripts.Url("/MemberShips/Scripts/Share/userSelect2")"], function(i) {
         i.Init("#@Html.Id("")", @Html.Raw(JsonHelper.ToJson(selected))d);
     });
 </script>

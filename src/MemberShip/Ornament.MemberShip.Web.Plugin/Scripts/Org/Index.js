@@ -1,4 +1,4 @@
-﻿define(["../Share/Org.js"],function (org) {
+﻿define(["../Share/Org"],function (org) {
     
 
     function Init() {
