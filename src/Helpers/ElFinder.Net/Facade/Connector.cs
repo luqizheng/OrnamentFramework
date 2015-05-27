@@ -9,7 +9,7 @@ namespace ElFinder
 {
     /// <summary>
     /// Represents a connector which process elFinder request
-    /// </summary>
+    /// </summary> 
     public class Connector
     {
         private IDriver _driver;
