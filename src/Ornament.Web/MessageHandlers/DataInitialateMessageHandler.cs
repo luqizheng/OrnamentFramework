@@ -13,15 +13,17 @@ namespace Ornament.Web.MessageHandlers
 
         public override bool CanHandle(Type type)
         {
-            bool r = base.CanHandle(type);
-            if (r)
-                return r;
-            foreach (Type a in type.GetInterfaces())
+            var r = base.CanHandle(type);
+            if (!r)
             {
-                if (a == typeof (IDataInitializer))
-                    return true;
+                foreach (Type a in type.GetInterfaces())
+                {
+                    if (a == typeof(IDataInitializer))
+                        return true;
+                }
+                return type.BaseType == type;
             }
-            return type.BaseType == type;
+            return false;
         }
     }
 }

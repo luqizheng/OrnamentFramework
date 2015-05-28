@@ -1,13 +1,11 @@
 ﻿@using System.Text.RegularExpressions
-@using Qi.Web.Mvc.ClientValidations.Adapters
-@using Qi.Web.Mvc.ClientValidations.Rules
 @model DateTime?
 @{
-  
-   
-    string format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd");
-    string displayValue = Model != null ? Model.Value.ToString(format) : "";
-    string inputMask = Regex.Replace(format.ToLower(), @"(\w{2})(\1)+", "$1");
+
+
+    var format = (ViewData.ModelMetadata.DisplayFormatString ?? "yyyy-MM-dd");
+    var displayValue = Model != null ? Model.Value.ToString(format) : "";
+    var inputMask = Regex.Replace(format.ToLower(), @"(\w{2})(\1)+", "$1");
 @*由app.js直接成成jqueryui控件,so should be added datepicker class*@
     IDictionary<string, object> htmlAttris = null;
     if (ViewData.ContainsKey("HtmlAttributes"))
@@ -31,15 +29,15 @@
         {
             {"data-dateformat", inputMask},
             {
-                "class","orn-datepicker" 
+                "class", "orn-datepicker"
             }
         };
-    };
+    }
+    ;
 @*<input class="form-control" data-mask="99/99/9999" data-mask-placeholder="-" type="text">*@
 
-    htmlAttris.Add("data-mask", Regex.Replace(format, @"[ymdhms]", "9",RegexOptions.IgnoreCase));
-    htmlAttris.Add("data-mask-placeholder","_");
-        
+    htmlAttris.Add("data-mask", Regex.Replace(format, @"[ymdhms]", "9", RegexOptions.IgnoreCase));
+    htmlAttris.Add("data-mask-placeholder", "_");
 }
 
 @Html.TextBox("", displayValue, htmlAttris)

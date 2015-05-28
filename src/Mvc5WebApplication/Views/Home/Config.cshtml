@@ -20,12 +20,13 @@ paths: {
         validate:'plugin/jquery-validate/jquery.validate',
         unobtrusive:'plugin/jquery.validate.unobtrusive.ajax/jquery.unobtrusive-ajax',
         bsvalid:'plugin/jquery.validate.unobtrusive.bootstrap/jquery.validate.unobtrusive.bootstrap',
-        floatChart:'/scripts/float', 
+        floatChart:'/scripts/float',
         smarkchat:'@Amd.Url("~/js/smarkchat")',
         touch:"plugin/jquery-touch/jquery.ui.touch-punch.min",
         "app.config":"app.config",
         util:"util",
         app:"app",
+        noext:'noext',
         jarvis:"smartwidgets/jarvis.widget.min",
         jarvismenu:"plugin/jarvismenu/jarvismenu",
         smarkNotify:"notification/SmartNotification.min",
@@ -41,8 +42,8 @@ paths: {
         main:"@Amd.Url("~/scripts/modules/main")",
         ornamentUi:"@Amd.Url("~/scripts/modules/ornamentUi")",
         orgSelect:"/MemberShips/scripts/Org/Org"
-},
-shim:{
+        },
+        shim:{
         validate:["jquery"],
         maxlength:["jquery"],
         unobtrusive:["jquery"],
@@ -62,8 +63,8 @@ shim:{
         mbBrowser:["jquery"],
         bsslider:["jquery"],
         bootbox:["bootstrap"]
-    }
-});
+        }
+        });
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.Optimization;
 
 namespace Ornament.Web.PortableAreas.JsModules
@@ -34,13 +35,25 @@ namespace Ornament.Web.PortableAreas.JsModules
             AssemblyResourceStore resourceStoreForArea = AssemblyResourceManager.GetResourceStoreForArea(areaName);
             if (!filePath.StartsWith("~/areas/"))
             {
-                filePath = "~/areas" + filePath.TrimStart(new[] {'~'});
+                filePath = "~/areas" + filePath.TrimStart(new[] { '~' });
             }
             Stream resourceStream = resourceStoreForArea.GetResourceStream(filePath);
             if (resourceStream == null)
             {
-                return string.Format("console.log('Cannot find embed file {0} in {1} assembly')",
-                    resourceStoreForArea.GetFullyQualifiedTypeFromPath(filePath), areaName);
+                var log = log4net.LogManager.GetLogger(this.GetType());
+                log.ErrorFormat("'Cannot find embed file {0} in {1} assembly')", resourceStoreForArea.GetFullyQualifiedTypeFromPath(filePath), areaName);
+                if (log.IsDebugEnabled)
+                {
+                    StringBuilder builder = new StringBuilder();
+                    foreach (var item in resourceStoreForArea.Resources)
+                    {
+                        builder.Append(item.Key).Append(":").AppendLine(item.Value);
+                    }
+                    log.Debug(builder);
+                }
+
+                return string.Format("console.log('Cannot find embed file {0} in {1} assembly')", resourceStoreForArea.GetFullyQualifiedTypeFromPath(filePath), areaName);
+
             }
             using (var reader = new StreamReader(resourceStream))
             {

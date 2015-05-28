@@ -1,4 +1,4 @@
-﻿define(["../Share/Org"],function (org) {
+﻿define(["noext!../Share/Org"], function (org) {
     
 
     function Init() {

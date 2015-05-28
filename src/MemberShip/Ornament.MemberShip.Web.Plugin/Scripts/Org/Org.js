@@ -65,7 +65,7 @@ define(["text!/MemberShips/Scripts/Org/Templates/Org.html"], function (template)
                 if (vm.curOrg) {
                     vm.selectedId = vm.curOrg.Id;
                     vm.selectedName = vm.curOrg.Name;
-                    console.log(vm.selectedId + ":" + vm.selectedName);
+                   
                 }
             };
             
