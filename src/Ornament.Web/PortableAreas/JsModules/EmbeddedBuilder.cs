@@ -37,6 +37,10 @@ namespace Ornament.Web.PortableAreas.JsModules
             {
                 filePath = "~/areas" + filePath.TrimStart(new[] { '~' });
             }
+            if (!filePath.EndsWith(".js"))
+            {
+                filePath += ".js";
+            }
             Stream resourceStream = resourceStoreForArea.GetResourceStream(filePath);
             if (resourceStream == null)
             {
@@ -49,7 +53,7 @@ namespace Ornament.Web.PortableAreas.JsModules
                     {
                         builder.Append(item.Key).Append(":").AppendLine(item.Value);
                     }
-                    log.Debug(builder);
+                    log.DebugFormat("checkKEY:{0},\r\n{1}", filePath, builder);
                 }
 
                 return string.Format("console.log('Cannot find embed file {0} in {1} assembly')", resourceStoreForArea.GetFullyQualifiedTypeFromPath(filePath), areaName);

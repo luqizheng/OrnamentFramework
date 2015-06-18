@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 @using Ornament
+@using Ornament.Web
 @using Qi.Web
 @{
     var user = OrnamentContext.MemberShip.CurrentUser();
@@ -312,7 +313,7 @@
     <script type="text/javascript">
 
         require(['@Url.Content("~/scripts/config.js")'], function () {
-            require(["main", "jquery", "jqueryui", "bootstrap", "app.config",
+            require(['@Amd.Url("~/scripts/modules/main")', "jquery", "jqueryui", "bootstrap", "app.config",
     "touch",
     "smarkNotify",
     "plugin/easy-pie-chart/jquery.easy-pie-chart.min",
@@ -320,13 +321,15 @@
     "select2",
     "bsslider",
     "mbBrowser",
-@*"plugin/fullcalendar/jquery.fullcalendar.min.js",*@
-"util"
+    @*"plugin/fullcalendar/jquery.fullcalendar.min.js",*@
+    "util"
             ], function (main) {
 
                 main.init("localhost:3000", "@user.Name",
                         "@user.LoginId",
                     "@(Request.Cookies[FormsAuthentication.FormsCookieName].Value)");
+
+
             });
         })
     </script>

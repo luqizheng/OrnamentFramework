@@ -94,6 +94,8 @@
     <Compile Include="OrnamentValidation.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RequireJs.cs" />
+    <Compile Include="Theme\PanelOption.cs" />
     <Compile Include="ValidateAjaxAttribute.cs" />
     <Compile Include="JQuery\Plugins\DataTables\Column.cs" />
     <Compile Include="JQuery\Plugins\DataTables\DataTableResult.cs" />
@@ -112,7 +114,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Theme\BootstrapModel.cs" />
     <Compile Include="Theme\ThemeContext.cs" />
     <Compile Include="Theme\Panel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

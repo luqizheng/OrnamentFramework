@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Optimization;
+using CombineJsBundles;
 using Ornament;
 using Ornament.Web;
 using Qi;
@@ -42,7 +43,7 @@ namespace WebApplication
             bundles.Add(new ScriptBundle("~/js/jqueryui").Include("~/scripts/libs/jquery-ui-{version}.js"));
             bundles.Add(new ScriptBundle("~/js/avalon").Include("~/scripts/avalon.js"));
             bundles.Add(new ScriptBundle("~/js/json2").Include("~/scripts/json2.js"));
-            bundles.Add(new ScriptBundle("~/js/main.js").IncludeDirectory("~/Scripts/Modules", "*.js"));
+            bundles.Add(new CombineJsBundle("~/js/main").Include("~/Scripts/main.js"));
 
             bundles.Add(new ScriptBundle("~/js/moment").Include("~/scripts/plugin/moment/moment.js"));
             //float chat
