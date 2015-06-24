@@ -1,0 +1,11 @@
+{
+  "name": "Ornament 2.0",
+  "version": "0.0.0",
+  "devDependencies": {
+    "gulp": "3.8.11",
+    "rimraf": "2.2.8"
+  },
+  "dependencies": {
+    "gulp": "^3.8.11"
+  }
+}

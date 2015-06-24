@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "Mvc"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=.\\sqlexpress;Database=orn1;Trusted_Connection=True;"
+    }
+  }
+}
