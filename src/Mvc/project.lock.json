@@ -24,8 +24,7 @@
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta4",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta4",
       "FluentNHibernate >= 2.0.1",
-      "NHibernate >= 4.0.3.4000",
-      "MvcSiteMapProvider.MVC5 >= 4.6.18"
+      "NHibernate >= 4.0.3.4000"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []
@@ -2852,53 +2851,6 @@
         "lib/dnxcore50/Microsoft.AspNet.Tooling.Razor.xml"
       ]
     },
-    "Microsoft.AspNet.WebPages/3.0.0": {
-      "serviceable": true,
-      "sha": "wkz/rBJlALE/tVfhVFpadcaBK0oLGOb8AbuyWQ5qr84JPHtqWjsJUe3Lfyzu2ZixdYrQ9NuKMNlKIshaJUsCFA==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {
-            "Microsoft.Web.Infrastructure": "1.0.0.0",
-            "Microsoft.AspNet.Razor": "3.0.0"
-          },
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/System.Web.Helpers.dll",
-            "lib/net45/System.Web.WebPages.Deployment.dll",
-            "lib/net45/System.Web.WebPages.dll",
-            "lib/net45/System.Web.WebPages.Razor.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/System.Web.Helpers.dll",
-            "lib/net45/System.Web.WebPages.Deployment.dll",
-            "lib/net45/System.Web.WebPages.dll",
-            "lib/net45/System.Web.WebPages.Razor.dll"
-          ]
-        },
-        "DNXCore,Version=v5.0": {
-          "dependencies": {
-            "Microsoft.Web.Infrastructure": "1.0.0.0",
-            "Microsoft.AspNet.Razor": "3.0.0"
-          },
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "Microsoft.AspNet.WebPages.3.0.0.nupkg",
-        "Microsoft.AspNet.WebPages.3.0.0.nupkg.sha512",
-        "Microsoft.AspNet.WebPages.nuspec",
-        "lib/net45/System.Web.Helpers.dll",
-        "lib/net45/System.Web.Helpers.xml",
-        "lib/net45/System.Web.WebPages.Deployment.dll",
-        "lib/net45/System.Web.WebPages.Deployment.xml",
-        "lib/net45/System.Web.WebPages.dll",
-        "lib/net45/System.Web.WebPages.Razor.dll",
-        "lib/net45/System.Web.WebPages.Razor.xml",
-        "lib/net45/System.Web.WebPages.xml"
-      ]
-    },
     "Microsoft.AspNet.WebUtilities/1.0.0-beta4": {
       "serviceable": true,
       "sha": "EZJruvBXvVN78gAuL1Ei8HSgBfS9HvU/CiE4MjicXwdzHwyv+HZAvReDmGeWa+UaIW8kmmM4LzNAE8uEBjeQXA==",
@@ -4803,34 +4755,6 @@
         "lib/dnxcore50/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll"
       ]
     },
-    "Microsoft.Web.Infrastructure/1.0.0.0": {
-      "serviceable": false,
-      "sha": "FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net40/Microsoft.Web.Infrastructure.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net40/Microsoft.Web.Infrastructure.dll"
-          ]
-        },
-        "DNXCore,Version=v5.0": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "Microsoft.Web.Infrastructure.1.0.0.0.nupkg",
-        "Microsoft.Web.Infrastructure.1.0.0.0.nupkg.sha512",
-        "Microsoft.Web.Infrastructure.nuspec",
-        "lib/net40/Microsoft.Web.Infrastructure.dll"
-      ]
-    },
     "Microsoft.Win32.Primitives/4.0.0-beta-22816": {
       "serviceable": false,
       "sha": "ldNL3JQPhkj7E/R0uLjsfnBT1ZKA/sUyDyxT4rAMbWvkrOUA9XUSz/HnEQOH2fIZOgAUOLmjUKVD8KoVRiuz5A==",
@@ -4916,117 +4840,6 @@
         "lib/contract/Microsoft.Win32.Registry.dll",
         "lib/net45/Microsoft.Win32.Registry.dll",
         "lib/portable-wpa81+wp80+win80+net45+aspnetcore50/Microsoft.Win32.Registry.dll"
-      ]
-    },
-    "MvcSiteMapProvider.MVC5/4.6.18": {
-      "serviceable": false,
-      "sha": "4nBMdLX0/C3evb1hUBcwXoVu8MQCGpiIWOU1cgl94UhiHgr0uCVBcj/A7iRQA3/BJvKE8pSY5ZTh5KLD5ugvqQ==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {
-            "MvcSiteMapProvider.MVC5.Core": "[4.6.18]",
-            "MvcSiteMapProvider.Web": "4.6",
-            "WebActivatorEx": "2.0.1"
-          },
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/MvcSiteMapProvider.WebActivator.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/MvcSiteMapProvider.WebActivator.dll"
-          ]
-        },
-        "DNXCore,Version=v5.0": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "MvcSiteMapProvider.MVC5.4.6.18.nupkg",
-        "MvcSiteMapProvider.MVC5.4.6.18.nupkg.sha512",
-        "MvcSiteMapProvider.MVC5.nuspec",
-        "lib/net45/MvcSiteMapProvider.WebActivator.dll",
-        "lib/net45/MvcSiteMapProvider.WebActivator.xml",
-        "tools/install.ps1"
-      ]
-    },
-    "MvcSiteMapProvider.MVC5.Core/4.6.18": {
-      "serviceable": false,
-      "sha": "xut2va757yGnirdJdT7lF9XRkmyg15YXXROgXbxPCkFXg2yhyuTB1SyVRCwg7S19AYvYfjm/n3UZEMrm6lLNoQ==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {
-            "Microsoft.AspNet.Razor": "[3.0, 4.0)",
-            "Microsoft.AspNet.WebPages": "[3.0, 4.0)",
-            "Microsoft.AspNet.Mvc": "[5.0, 6.0)"
-          },
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/MvcSiteMapProvider.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/MvcSiteMapProvider.dll"
-          ]
-        },
-        "DNXCore,Version=v5.0": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "MvcSiteMapProvider.MVC5.Core.4.6.18.nupkg",
-        "MvcSiteMapProvider.MVC5.Core.4.6.18.nupkg.sha512",
-        "MvcSiteMapProvider.MVC5.Core.nuspec",
-        "lib/net45/MvcSiteMapProvider.dll",
-        "lib/net45/MvcSiteMapProvider.xml"
-      ]
-    },
-    "MvcSiteMapProvider.Web/4.6.1": {
-      "serviceable": false,
-      "sha": "ciWMoJ1ZmQaGYgUre4XDc34I4zesrcfG9CkXhOJqzlCjnwus/W7wCJcdTYIcijH0d6DONYC3+pHwD/O+EyuYTQ==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        },
-        "DNXCore,Version=v5.0": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "MvcSiteMapProvider.Web.4.6.1.nupkg",
-        "MvcSiteMapProvider.Web.4.6.1.nupkg.sha512",
-        "MvcSiteMapProvider.Web.nuspec",
-        "content/Mvc.sitemap",
-        "content/MvcSiteMapSchema.xsd",
-        "content/web.config.transform",
-        "content/Views/Shared/DisplayTemplates/CanonicalHelperModel.ascx",
-        "content/Views/Shared/DisplayTemplates/CanonicalHelperModel.cshtml",
-        "content/Views/Shared/DisplayTemplates/MenuHelperModel.ascx",
-        "content/Views/Shared/DisplayTemplates/MenuHelperModel.cshtml",
-        "content/Views/Shared/DisplayTemplates/MetaRobotsHelperModel.ascx",
-        "content/Views/Shared/DisplayTemplates/MetaRobotsHelperModel.cshtml",
-        "content/Views/Shared/DisplayTemplates/SiteMapHelperModel.ascx",
-        "content/Views/Shared/DisplayTemplates/SiteMapHelperModel.cshtml",
-        "content/Views/Shared/DisplayTemplates/SiteMapNodeModel.ascx",
-        "content/Views/Shared/DisplayTemplates/SiteMapNodeModel.cshtml",
-        "content/Views/Shared/DisplayTemplates/SiteMapNodeModelList.ascx",
-        "content/Views/Shared/DisplayTemplates/SiteMapNodeModelList.cshtml",
-        "content/Views/Shared/DisplayTemplates/SiteMapPathHelperModel.ascx",
-        "content/Views/Shared/DisplayTemplates/SiteMapPathHelperModel.cshtml",
-        "content/Views/Shared/DisplayTemplates/SiteMapTitleHelperModel.ascx",
-        "content/Views/Shared/DisplayTemplates/SiteMapTitleHelperModel.cshtml",
-        "tools/install.ps1",
-        "tools/uninstall.ps1"
       ]
     },
     "Newtonsoft.Json/6.0.6": {
@@ -8288,38 +8101,6 @@
         "lib/contract/System.Xml.XmlSerializer.dll",
         "lib/net45/System.Xml.XmlSerializer.dll",
         "lib/portable-wpa81+wp80+win80+net45+aspnetcore50/System.Xml.XmlSerializer.dll"
-      ]
-    },
-    "WebActivatorEx/2.0.1": {
-      "serviceable": false,
-      "sha": "JTLut1GxqnnyscJl4duPd8tBRYHRdcn7sk3slx7Iwu+XOktdZQK6XpohMomPf+aXv5LTXu4+p0RercZH9ldKFg==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {
-            "Microsoft.Web.Infrastructure": "1.0.0.0"
-          },
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net40/WebActivatorEx.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net40/WebActivatorEx.dll"
-          ]
-        },
-        "DNXCore,Version=v5.0": {
-          "dependencies": {
-            "Microsoft.Web.Infrastructure": "1.0.0.0"
-          },
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "WebActivatorEx.2.0.1.nupkg",
-        "WebActivatorEx.2.0.1.nupkg.sha512",
-        "WebActivatorEx.nuspec",
-        "lib/net40/WebActivatorEx.dll"
       ]
     }
   }

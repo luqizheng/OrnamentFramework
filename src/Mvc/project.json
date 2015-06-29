@@ -2,6 +2,7 @@
   "webroot": "wwwroot",
   "userSecretsId": "aspnet5-Mvc-dd909a62-e2ba-4d47-b385-903ba924c607",
   "version": "1.0.0-*",
+  "themes": "Themes/SmarkAdmin/",
 
   "dependencies": {
     "Microsoft.AspNet.Mvc": "6.0.0-beta4",
@@ -25,10 +26,9 @@
     "Microsoft.Framework.Logging.Console": "1.0.0-beta4",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta4",
     "FluentNHibernate": "2.0.1",
-    "NHibernate": "4.0.3.4000",
-    "MvcSiteMapProvider.MVC5": "4.6.18"
+    "NHibernate": "4.0.3.4000"
   },
-
+ 
   "commands": {
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000",
     "gen": "Microsoft.Framework.CodeGeneration",
