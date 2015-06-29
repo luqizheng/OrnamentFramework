@@ -2,7 +2,7 @@
   "webroot": "wwwroot",
   "userSecretsId": "aspnet5-Mvc-dd909a62-e2ba-4d47-b385-903ba924c607",
   "version": "1.0.0-*",
-  "themes": "Themes/SmarkAdmin/",
+  "theme": "Themes/SmarkAdmin/",
 
   "dependencies": {
     "Microsoft.AspNet.Mvc": "6.0.0-beta4",

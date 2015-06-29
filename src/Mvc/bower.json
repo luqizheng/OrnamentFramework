@@ -6,7 +6,20 @@
     "jquery": "1.10.2",
     "jquery-validation": "1.11.1",
     "jquery-validation-unobtrusive": "3.2.2",
+    "bootstrap": "*",
     "requirejs": "*",
-    "avalon": "*"
+    "avalon": "*",
+    "bootstrap-duallistbox": "*",
+    "bootstrap-progressbar": "*",
+    "bootstrap-slider": "*",
+    "bootstrap-tag": "*",
+    "bootstrap-3-timepicker": "*",
+    "bootstrap-treeview": "*",
+    "twitter-bootstrap-wizard": "*",
+    "chartjs": "^1.0.2",    
+    
+  },
+  "resolutions": {
+    "jquery": ">= 1.9.1"
   }
 }

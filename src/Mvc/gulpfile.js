@@ -18,21 +18,17 @@ var paths = {
     bower: "./bower_components/",
     lib: "./" + project.webroot + "/lib/",
     theme: "./" + project.themes + "LESS_FILES/",
-    css:"./"+ project.webroot + "/css/"
+    css: "./" + project.webroot + "/css/"
 };
 
 
 
-gulp.task("release", ["copy","less"], function () {
-
-    gulp.src(paths.lib + "**/*.js")
-        .pipe(uglify())
-    .pipe(gulp.dest(paths.lib));
-
-    gulp.src(paths.css + "*.css")
-        .pipe(minifycss()).pipe(gulp.dest(paths.css))
+gulp.task("release", function () {
+    gulp.run(["less-min", "js-min"])
 
 })
+
+
 
 gulp.task("clean", function (cb) {
     rimraf(paths.lib, cb);
@@ -40,7 +36,7 @@ gulp.task("clean", function (cb) {
 
 gulp.task("copy", ["clean"], function () {
     var bower = {
-        "hammer.js": "hammer.js/hammer*.{js,map}",
+        "hammer.js": "hammer.js/hammer*.{map,js}",
         "jquery": "jquery/jquery*.{js,map}",
         "jquery-validation": "jquery-validation/jquery.validate.js",
         "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
@@ -65,10 +61,29 @@ gulp.task("less", function () {
         "custom.css": "custom.less",
     }
     for (var destinationDir in lessFiles) {
-        
+
         gulp.src(paths.theme + lessFiles[destinationDir])
             .pipe(less())
             .pipe(gulp.dest(paths.css))
     }
 
 })
+
+
+gulp.task("less-min", ["less"], function () {
+    return gulp.src(paths.css + "*.css")
+      .pipe(minifycss())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(paths.css))
+});
+
+gulp.task("js-min", ["copy"], function () {
+
+    setTimeout(function () { //不等不 sleep 1秒，等待文件出现之后在出现，因为要等待copy后才能进行min
+        gulp.src([paths.lib + "**/*.js", "!" + paths.lib + "**/*.min.js"])
+            .pipe(uglify())
+            .pipe(rename({ suffix: '.min' }))
+            .pipe(gulp.dest(paths.lib));
+    }, 1000)
+
+});
