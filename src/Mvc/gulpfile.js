@@ -1,5 +1,4 @@
-﻿/// <binding Clean='clean' ProjectOpened='copy' />
-
+/// <binding Clean='clean' />
 var gulp = require("gulp"),
   rimraf = require("rimraf"),
   fs = require("fs"),
@@ -17,51 +16,55 @@ eval("var project = " + fs.readFileSync("./project.json"));
 var paths = {
     bower: "./bower_components/",
     lib: "./" + project.webroot + "/lib/",
-    theme: "./" + project.themes + "LESS_FILES/",
+    theme: "./" + project.theme + "LESS_FILES/",
     css: "./" + project.webroot + "/css/"
 };
 
 
 
-gulp.task("release", function () {
+gulp.task("default", function () {
     gulp.run(["less-min", "js-min"])
-
 })
 
-
-
-gulp.task("clean", function (cb) {
-    rimraf(paths.lib, cb);
+gulp.task("clean-lib", function (cb) {
+    rimraf(paths.lib, cb);    
 });
 
-gulp.task("copy", ["clean"], function () {
+
+
+
+/*gulp.task("copy", ["clean"], function () {
+    task.run(["js"], ["less"]);
+});*/
+
+gulp.task("copy",["clean-lib"], function () {
     var bower = {
         "hammer.js": "hammer.js/hammer*.{map,js}",
         "jquery": "jquery/jquery*.{js,map}",
         "jquery-validation": "jquery-validation/jquery.validate.js",
         "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
         "requirejs": "requirejs/require.js",
-        "avalonjs": "avalon/avalon.js"
+        "avalonjs": "avalon/avalon.js",
+        "font-awesome/font": "font-awesome/fonts/*.*",
+        "font-awesome/css": "font-awesome/css/*.*"
     }
 
     for (var destinationDir in bower) {
         gulp.src(paths.bower + bower[destinationDir])
           .pipe(gulp.dest(paths.lib + destinationDir));
     }
-
-
 });
 
-gulp.task("less", function () {
+gulp.task("less",function () {
 
     var lessFiles = {
         "bootstrap.css": "bootstrap.less",
         "smartadmin-production.css": "smartadmin-production.less",
         "smartadmin-production-plugins.css": "smartadmin-production-plugins.less",
         "custom.css": "custom.less",
+        "smartadmin-skins.css":"smartadmin-skin/smartadmin-skins.less"
     }
-    for (var destinationDir in lessFiles) {
-
+    for (var destinationDir in lessFiles) {        
         gulp.src(paths.theme + lessFiles[destinationDir])
             .pipe(less())
             .pipe(gulp.dest(paths.css))
@@ -71,7 +74,9 @@ gulp.task("less", function () {
 
 
 gulp.task("less-min", ["less"], function () {
-    return gulp.src(paths.css + "*.css")
+    var cssPath = paths.css + "*.css";
+    var cssMinPath = "!" + paths.css + "*.min.css";
+    return gulp.src([cssPath, cssMinPath])
       .pipe(minifycss())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(paths.css))

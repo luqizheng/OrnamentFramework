@@ -16,7 +16,8 @@
     "bootstrap-3-timepicker": "*",
     "bootstrap-treeview": "*",
     "twitter-bootstrap-wizard": "*",
-    "chartjs": "^1.0.2",    
+    "chartjs": "^1.0.2",
+    "font-awesome":"*"
     
   },
   "resolutions": {
