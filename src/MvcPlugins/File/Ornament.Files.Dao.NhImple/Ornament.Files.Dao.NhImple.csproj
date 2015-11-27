@@ -71,10 +71,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MemberShip\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
-      <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
-      <Name>Ornament.MemberShip.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ornament.Files\Ornament.Files.csproj">
       <Project>{EF1E2CF0-F713-4C1C-82EA-68F5E921C184}</Project>
       <Name>Ornament.Files</Name>

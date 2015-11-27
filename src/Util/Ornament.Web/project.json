@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0-*",
+  "description": "Ornament.Web Class Library",
+  "authors": [ "leo" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": {
+     
+    }
+    
+  },
+  "dependencies": {
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "Microsoft.CSharp": "4.0.1-rc2-23513",
+    "Ornament": "1.0.0-*",
+    "System.Collections": "4.0.11-rc2-23513",
+    "System.Linq": "4.0.1-rc2-23513",
+    "System.Runtime": "4.0.21-rc2-23513",
+    "System.Threading": "4.0.11-beta-23510",
+    "System.ComponentModel.Annotations": "4.1.0-rc2-23513",
+    "System.Reflection": "4.1.0-rc2-23513",
+    "System.Reflection.Extensions": "4.0.1-rc2-23512",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final"
+
+
+  }
+
+}

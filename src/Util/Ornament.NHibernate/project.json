@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0-*",
+  "description": "Ornament.NHibernate Class Library",
+  "authors": [ "leo" ],
+  "tags": [ "Ornament", "NHibernate" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0"
+      }
+    }
+  },
+  "dependencies": {
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+    "Ornament": "1.0.0-*",
+    "FluentNHibernate": "2.0.3",
+    "NHibernate": "4.0.4.4000"
+  }
+}

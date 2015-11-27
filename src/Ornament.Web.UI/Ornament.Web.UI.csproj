@@ -125,10 +125,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ornament.Core\Ornament.Core.csproj">
-      <Project>{254CD19D-5495-438E-AE5D-110EB32326B7}</Project>
-      <Name>Ornament.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{f4327637-a4f2-4883-af3c-e3c088c2aefc}</Project>
       <Name>Ornament.Web.Core</Name>

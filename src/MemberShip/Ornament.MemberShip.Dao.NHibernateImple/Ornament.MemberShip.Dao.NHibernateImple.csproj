@@ -131,12 +131,6 @@
     <Compile Include="EmailVerifierDao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ornament.MemberShip.Core\Ornament.MemberShip.Core.csproj">
-      <Project>{F86BA9A8-A466-412E-8D18-2A17452CC348}</Project>
-      <Name>Ornament.MemberShip.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>

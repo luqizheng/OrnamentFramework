@@ -107,10 +107,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ornament.IPLocation\Ornament.IPLocation.csproj">
-      <Project>{a29689c5-405d-4697-9a57-8fc2ac50f3c5}</Project>
-      <Name>Ornament.IPLocation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ornament.Web\Ornament.Web.Core.csproj">
       <Project>{F4327637-A4F2-4883-AF3C-E3C088C2AEFC}</Project>
       <Name>Ornament.Web.Core</Name>
