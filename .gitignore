@@ -88,7 +88,8 @@ bin
 /src/Mvc5WebApplication/log
 /src/Chat/.idea
 /src/chat/node_modules
-/src/Mvc/node_modules
-/Src/Mvc/bower_components
-/src/Mvc/wwwroot/lib
-/src/Mvc/wwwroot/css
+/src/vNext/node_modules
+/Src/vNext/bower_components
+/src/vNext/wwwroot/lib
+/src/vNext/wwwroot/css
+/src/vNext/node_modules
