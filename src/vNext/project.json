@@ -41,7 +41,7 @@
       "dependencies": {
         "Ornament.NHibernate": "1.0.0-*"
       }
-    }  
+    }
   },
 
   "exclude": [
@@ -53,6 +53,8 @@
     "**.vspscc"
   ],
   "scripts": {
-    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
+    "prepare": [ "webpack /wwwroot/js/site.js bundle.js" ],
+    "prebuild": [ "webpack /wwwroot/js/site.js bundle.js" ],
+    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min", "webpack ./js/site.js bundle.js" ]    
   }
 }

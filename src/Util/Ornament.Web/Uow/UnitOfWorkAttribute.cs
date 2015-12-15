@@ -17,29 +17,28 @@ namespace Ornament.Web.Uow
         {
         }
 
-        public IUnitOfWork UnitOfWork(IServiceProvider context)
+        public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
             return ActivatorUtilities.GetServiceOrCreateInstance<IUnitOfWork>(context);
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            UnitOfWork(context.HttpContext.RequestServices).Begin();
+            GetUnitOfWork(context.HttpContext.RequestServices).Begin();
             base.OnActionExecuting(context);
         }
 
         public override void OnResultExecuted(ResultExecutedContext context)
         {
-            base.OnResultExecuted(context);
-
             try
             {
-                UnitOfWork(context.HttpContext.RequestServices).Commit();
+                GetUnitOfWork(context.HttpContext.RequestServices).Commit();
             }
             finally
             {
-                UnitOfWork(context.HttpContext.RequestServices).Close();
+                GetUnitOfWork(context.HttpContext.RequestServices).Close();
             }
+            base.OnResultExecuted(context);
         }
     }
 }

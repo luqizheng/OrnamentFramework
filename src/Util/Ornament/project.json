@@ -20,13 +20,13 @@
   "dependencies": {
 
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.CSharp": "4.0.1-rc2-23513",
-    "System.Collections": "4.0.11-rc2-23513",
-    "System.Linq": "4.0.1-rc2-23513",
-    "System.Runtime": "4.0.21-rc2-23513",
-    "System.Threading": "4.0.11-beta-23510",
-    "System.ComponentModel.Annotations": "4.1.0-rc2-23513",
-    "System.Reflection": "4.1.0-rc2-23513",
-    "System.Reflection.Extensions": "4.0.1-rc2-23512"
+    "Microsoft.CSharp": "4.0.1-rc2-23604",
+    "System.Collections": "4.0.11-rc2-23604",
+    "System.Linq": "4.0.1-rc2-23604",
+    "System.Runtime": "4.0.21-rc2-23604",
+    "System.Threading": "4.0.11-rc2-23516",
+    "System.ComponentModel.Annotations": "4.1.0-rc2-23604",
+    "System.Reflection": "4.1.0-rc2-23604",
+    "System.Reflection.Extensions": "4.0.1-rc2-23604"
   }
 }

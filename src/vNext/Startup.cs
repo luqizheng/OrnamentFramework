@@ -46,9 +46,9 @@ namespace vNext
             NhConfigureBuilder nhBuilder = services.MsSql2012()
                 .Connection(Configuration["Data:DefaultConnection:ConnectionString"]);
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddUserValidator<DuplicateEmailValidator<IdentityUser>>()
-                .AddNhibernateStores(nhBuilder)
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddUserValidator<DuplicateEmailValidator<ApplicationUser, string>>()
+                .AddNhibernateStores(nhBuilder, typeof(string))
                 .AddDefaultTokenProviders();
 
             nhBuilder.Apply();

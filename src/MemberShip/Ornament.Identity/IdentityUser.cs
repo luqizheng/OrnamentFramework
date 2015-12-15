@@ -4,7 +4,7 @@ using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
 {
-    public class IdentityUser : EntityWithTypedId<string>
+    public class IdentityUser<T> : EntityWithTypedId<T>
 
     {
         public IdentityUser()

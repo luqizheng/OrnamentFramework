@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ornament.Identity.Validators
 {
-    public class DuplicateEmailValidator<T> : Microsoft.AspNet.Identity.IUserValidator<T> where T : IdentityUser
+    public class DuplicateEmailValidator<T, TUserId> : Microsoft.AspNet.Identity.IUserValidator<T> where T : IdentityUser<TUserId>
     {
         public Task<IdentityResult> ValidateAsync(UserManager<T> manager, T user)
         {
