@@ -12,7 +12,7 @@ namespace Ornament.Identity.Validators
         {
             return Task<IdentityResult>.Run(() =>
             {
-                var u = manager.Users.FirstOrDefault(dbUser => dbUser.Email == user.Email && dbUser.Id != user.Id);
+                var u = manager.Users.FirstOrDefault(dbUser => dbUser.Email == user.Email && !dbUser.Id.Equals(user.Id));
                 if (u == null)
                     return IdentityResult.Success;
                 else

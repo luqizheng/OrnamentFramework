@@ -24,9 +24,9 @@
     "System.Collections": "4.0.11-rc2-23604",
     "System.Linq": "4.0.1-rc2-23604",
     "System.Runtime": "4.0.21-rc2-23604",
-    "System.Threading": "4.0.11-rc2-23516",
+    "System.Threading": "4.0.11-rc2-23513",
     "System.ComponentModel.Annotations": "4.1.0-rc2-23604",
     "System.Reflection": "4.1.0-rc2-23604",
-    "System.Reflection.Extensions": "4.0.1-rc2-23604"
+    "System.Reflection.Extensions": "4.0.1-rc2-23513"
   }
 }

@@ -315,7 +315,7 @@ namespace Ornament.Identity.Dao
         public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return Task.FromResult(user.Id);
+            return Task.FromResult(user.Id.ToString());
         }
 
         public Task<string> GetUserNameAsync(TUser user, CancellationToken cancellationToken)
@@ -584,7 +584,7 @@ namespace Ornament.Identity.Dao
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             //return Task.FromResult(this.Context.Get<TUser>((object)userId));
-            return GetUserAggregateAsync((TUser u) => u.Id == userId, cancellationToken);
+            return GetUserAggregateAsync((TUser u) => u.Id.Equals(userId), cancellationToken);
         }
     }
 }
