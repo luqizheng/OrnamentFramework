@@ -2,11 +2,11 @@
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public class IdentityUserMaping : ClassMap<IdentityUser>
+    public abstract class IdentityUserMaping : ClassMap<IdentityUser>
     {
-        public IdentityUserMaping()
+        public IdentityUserMaping(string table="orn_mbs_users")
         {
-            Table("orn_AspNetUsers");
+            Table(table);
             Id(x => x.Id).GeneratedBy.UuidHex("N");
 
             Map(x => x.AccessFailedCount);

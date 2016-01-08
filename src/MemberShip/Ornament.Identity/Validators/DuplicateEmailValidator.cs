@@ -1,25 +1,24 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Ornament.Identity.Validators
 {
-    public class DuplicateEmailValidator<T> : Microsoft.AspNet.Identity.IUserValidator<T> where T : IdentityUser
+    /// <summary>
+    /// 检查是否有emial 重复
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class UniqueEmailValidator<T> : IUserValidator<T> where T : IdentityUser
     {
         public Task<IdentityResult> ValidateAsync(UserManager<T> manager, T user)
         {
-            return Task<IdentityResult>.Run(() =>
+            return Task.Run(() =>
             {
                 var u = manager.Users.FirstOrDefault(dbUser => dbUser.Email == user.Email && dbUser.Id != user.Id);
                 if (u == null)
                     return IdentityResult.Success;
-                else
-                {
-                    var error = new[] { new IdentityError() { Description = "Email has been registed,please try another." } };
-                    return IdentityResult.Failed(error);
-                }
+                var error = new[] {new IdentityError {Description = "Email has been registed,please try another."}};
+                return IdentityResult.Failed(error);
             });
         }
     }

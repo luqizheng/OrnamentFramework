@@ -47,7 +47,7 @@ namespace vNext
                 .Connection(Configuration["Data:DefaultConnection:ConnectionString"]);
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddUserValidator<DuplicateEmailValidator<IdentityUser>>()
+                .AddUserValidator<UniqueEmailValidator<IdentityUser>>()
                 .AddNhibernateStores(nhBuilder)
                 .AddDefaultTokenProviders();
 

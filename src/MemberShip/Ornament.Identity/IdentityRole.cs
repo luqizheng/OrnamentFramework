@@ -4,7 +4,7 @@ namespace Ornament.Identity
 {
     /// <summary>
     /// </summary>
-    public class IdentityRole : EntityWithTypedId<string>
+    public class IdentityRole<T> : EntityWithTypedId<T>
     {
         /// <summary>
         /// </summary>

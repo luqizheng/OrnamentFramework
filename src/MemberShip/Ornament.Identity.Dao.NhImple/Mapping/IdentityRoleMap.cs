@@ -4,11 +4,11 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public class IdentityRoleMap : ClassMap<IdentityRole>
+    public class IdentityRoleMap<T,TID> : ClassMap<T> where T:IdentityRole<TID>
     {
-        public IdentityRoleMap()
+        public IdentityRoleMap(string table="orn_mbs_roles")
         {
-            Table("orn_AspNetRoles");
+            Table(table);
             Id(x => x.Id).GeneratedBy.UuidHex("N");
             Map(x => x.Name).Unique().Length(255).Not.Nullable();
         }
