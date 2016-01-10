@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Http;
+using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Ornament.Domain.Uow;
+using System;
+using System.CodeDom;
 
 namespace Ornament.Web.Uow
 {
@@ -10,29 +13,32 @@ namespace Ornament.Web.Uow
     public class UnitOfWorkAttribute : ActionFilterAttribute
 
     {
-        public IUnitOfWork GetUow(IServiceProvider context)
+        public UnitOfWorkAttribute()
+        {
+        }
+
+        public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
             return ActivatorUtilities.GetServiceOrCreateInstance<IUnitOfWork>(context);
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            GetUow(context.HttpContext.RequestServices).Begin();
+            GetUnitOfWork(context.HttpContext.RequestServices).Begin();
             base.OnActionExecuting(context);
         }
 
         public override void OnResultExecuted(ResultExecutedContext context)
         {
-            base.OnResultExecuted(context);
-
             try
             {
-                GetUow(context.HttpContext.RequestServices).Commit();
+                GetUnitOfWork(context.HttpContext.RequestServices).Commit();
             }
             finally
             {
-                GetUow(context.HttpContext.RequestServices).Close();
+                GetUnitOfWork(context.HttpContext.RequestServices).Close();
             }
+            base.OnResultExecuted(context);
         }
     }
 }

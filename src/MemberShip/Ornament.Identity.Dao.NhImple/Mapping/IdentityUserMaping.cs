@@ -1,12 +1,15 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System;
+using FluentNHibernate.Mapping;
+using System.Linq.Expressions;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public abstract class IdentityUserMaping : ClassMap<IdentityUser>
+    public class IdentityUserMaping<T, TRole, TRoleId> : ClassMap<IdentityUser<T, TRole, TRoleId>>
+        where TRole:IdentityRole<TRoleId>
     {
-        public IdentityUserMaping(string table="orn_mbs_users")
+        public IdentityUserMaping(string tableName = "orn_AspNetUsers")
         {
-            Table(table);
+            Table(tableName);
             Id(x => x.Id).GeneratedBy.UuidHex("N");
 
             Map(x => x.AccessFailedCount);
@@ -56,5 +59,8 @@ namespace Ornament.Identity.Dao.Mapping
                 .Table("orn_AspNetUserRoles")
                 .ParentKeyColumn("UserId");
         }
+
+
+
     }
 }

@@ -14,18 +14,20 @@ namespace Ornament.Identity
 {
     public static class NHibernateIdentityExtension
     {
-        public static IdentityBuilder AddNhibernateStores(this IdentityBuilder builder, NhConfigureBuilder nhbuilder)
+        public static IdentityBuilder AddNhibernateStores(this IdentityBuilder builder, NhConfigureBuilder nhbuilder, Type userIdType, Type roleIdType)
         {
-            GetDefaultServices(builder.UserType, builder.RoleType, builder);
-            nhbuilder.AddAssemblyOf<IdentityRoleMap>();
+            var types = builder.UserType.GenericTypeArguments;
+           
+            GetDefaultServices(builder.UserType, builder.RoleType, builder, userIdType, roleIdType);
+            nhbuilder.AddAssemblyOf(builder.UserType);
             return builder;
         }
 
         private static void GetDefaultServices(Type userType,
-            Type roletype, IdentityBuilder builder)
+            Type roletype, IdentityBuilder builder, Type userIdType, Type roleIdType)
         {
-            var userStoreType = typeof(UserStore<>).MakeGenericType(userType);
-            var roleStoreType = typeof(RoleStore<>).MakeGenericType(roletype);
+            var userStoreType = typeof(UserStore<,,,>).MakeGenericType(userType, userIdType, roletype, roleIdType);
+            var roleStoreType = typeof(RoleStore<,>).MakeGenericType(roletype, roleIdType);
 
             var service1 = typeof(IUserStore<>).MakeGenericType(userType);
 

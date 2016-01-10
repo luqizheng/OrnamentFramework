@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Ornament.Identity.Dao
 {
-    public class UserStore<TUser> : Store,
+    public class UserStore<TUser, TUserId,TRole,TRoleId> : Store,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
         IUserClaimStore<TUser>,
@@ -23,7 +23,8 @@ namespace Ornament.Identity.Dao
         IUserSecurityStampStore<TUser>,
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
-        where TUser : IdentityUser
+        where TUser : IdentityUser<TUserId,TRole,TRoleId>
+        where TRole :IdentityRole<TRoleId>
 
     {
         public UserStore(IUnitOfWork session) : base(session)
@@ -315,7 +316,7 @@ namespace Ornament.Identity.Dao
         public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return Task.FromResult(user.Id);
+            return Task.FromResult(user.Id.ToString());
         }
 
         public Task<string> GetUserNameAsync(TUser user, CancellationToken cancellationToken)
@@ -469,7 +470,7 @@ namespace Ornament.Identity.Dao
             return Task.Run(() =>
             {
                 var identityRole =
-                    Context.Query<IdentityRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+                    Context.Query<TRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
                 if (identityRole == null)
                 {
                     throw new InvalidOperationException(string.Format("Can't find the name " + roleName));
@@ -494,7 +495,7 @@ namespace Ornament.Identity.Dao
             return Task.Run(() =>
             {
                 var identityRole =
-                    Context.Query<IdentityRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+                    Context.Query<TRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
                 if (identityRole == null)
                 {
                     throw new InvalidOperationException(string.Format("Can't find the name " + roleName));
@@ -584,7 +585,7 @@ namespace Ornament.Identity.Dao
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             //return Task.FromResult(this.Context.Get<TUser>((object)userId));
-            return GetUserAggregateAsync((TUser u) => u.Id == userId, cancellationToken);
+            return GetUserAggregateAsync((TUser u) => u.Id.Equals(userId), cancellationToken);
         }
     }
 }

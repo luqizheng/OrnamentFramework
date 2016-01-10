@@ -2,31 +2,38 @@
 
 namespace Ornament.Identity
 {
-    public interface IPermission
+    public interface IPermission<TRole, TID> where TRole : IdentityRole<TID>
     {
         string Name { get; set; }
-        IdentityRole Role { get; set; }
+        TRole Role { get; set; }
         object Resource { get; set; }
         int Operator { get; set; }
     }
-    public class Permission<T, TP> : IPermission
-    {
-        public string Name { get; set; }
-        public IdentityRole Role { get; set; }
-        public T Resource { get; set; }
-        public TP Operator { get; set; }
 
-        object IPermission.Resource { get { return Resource; } set { Resource = (T)value; } }
-        int IPermission.Operator
+    public class Permission<TRole, TRoleID, TResource, TOperator> : IPermission<TRole, TRoleID>
+        where TRole : IdentityRole<TRoleID>
+    {
+        public TResource Resource { get; set; }
+        public TOperator Operator { get; set; }
+        public string Name { get; set; }
+
+
+        public TRole Role { get; set; }
+
+        object IPermission<TRole, TRoleID>.Resource
+        {
+            get { return Resource; }
+            set { Resource = (TResource) value; }
+        }
+
+        int IPermission<TRole, TRoleID>.Operator
         {
             get { return Convert.ToInt32(Operator); }
-            set { Operator = (TP)Enum.ToObject(typeof(TP), value); }
+            set { Operator = (TOperator) Enum.ToObject(typeof (TOperator), value); }
         }
     }
 
     public class PermissionStore
     {
-        
     }
-
 }

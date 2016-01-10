@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Hosting.Internal;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,9 +47,9 @@ namespace vNext
             NhConfigureBuilder nhBuilder = services.MsSql2012()
                 .Connection(Configuration["Data:DefaultConnection:ConnectionString"]);
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddUserValidator<UniqueEmailValidator<IdentityUser>>()
-                .AddNhibernateStores(nhBuilder)
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddUserValidator<UniqueEmailValidator<ApplicationUser,string, ApplicationRole, string>>()
+                .AddNhibernateStores(nhBuilder, typeof(string),typeof(string))
                 .AddDefaultTokenProviders();
 
             nhBuilder.Apply();
@@ -91,7 +92,7 @@ namespace vNext
                 }*/
             }
 
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+            app.UseIISPlatformHandler();
 
             app.UseStaticFiles();
 
@@ -103,6 +104,14 @@ namespace vNext
         }
 
         // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        public static void Main(string[] args)
+        {
+            var application = new WebApplicationBuilder()
+                .UseConfiguration(WebApplicationConfiguration.GetDefault(args))
+                .UseStartup<Startup>()
+                .Build();
+
+            application.Run();
+        }
     }
 }

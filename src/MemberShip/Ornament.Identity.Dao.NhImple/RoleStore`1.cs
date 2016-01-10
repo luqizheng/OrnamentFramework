@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 
 namespace Ornament.Identity.Dao
 {
-    public class RoleStore<TRole> : Store, IQueryableRoleStore<TRole>,
-        IRoleStore<TRole> where TRole : IdentityRole
+    public class RoleStore<TRole,TID> : Store, IQueryableRoleStore<TRole>,
+        IRoleStore<TRole> where TRole : IdentityRole<TID>
     {
         public RoleStore(IUnitOfWork context) : base(context)
         {

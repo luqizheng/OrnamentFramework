@@ -4,12 +4,13 @@ using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
 {
-    public class IdentityUser : EntityWithTypedId<string>
 
+
+    public class IdentityUser<T, TRole, TRoleId> : EntityWithTypedId<T>
+        where TRole : IdentityRole<TRoleId>
     {
         public IdentityUser()
         {
-            Roles = new List<IdentityRole>();
             Claims = new List<IdentityUserClaim>();
             Logins = new List<IdentityUserLogin>();
         }
@@ -46,7 +47,7 @@ namespace Ornament.Identity
 
         public virtual string SecurityStamp { get; set; }
 
-        public virtual ICollection<IdentityRole> Roles { get; protected set; }
+        public virtual ICollection<TRole> Roles { get; protected set; }
 
         public virtual ICollection<IdentityUserClaim> Claims { get; protected set; }
 

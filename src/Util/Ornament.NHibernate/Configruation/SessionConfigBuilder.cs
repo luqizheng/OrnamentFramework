@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Tool.hbm2ddl;
 
@@ -21,6 +22,13 @@ namespace Ornament.NHibernate.Configruation
 
             _config.Mappings(m =>
                 m.FluentMappings.AddFromAssemblyOf<T>());
+            return this;
+        }
+        public NhConfigureBuilder AddAssemblyOf(Type typeOfMappingClass)
+        {
+
+            _config.Mappings(m =>
+                m.FluentMappings.AddFromAssembly(typeOfMappingClass.Assembly));
             return this;
         }
 
