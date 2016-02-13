@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace Ornament.Identity
 {
@@ -28,7 +29,7 @@ namespace Ornament.Identity
 
         int IPermission<TRole, TRoleID>.Operator
         {
-            get { return Convert.ToInt32(Operator); }
+            get { return  Convert.ToInt32(Operator); }
             set { Operator = (TOperator) Enum.ToObject(typeof (TOperator), value); }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -9,8 +8,7 @@ namespace Ornament.Domain.Entities
     /// <summary>
     ///     Serves as the base class for objects that are validatable.
     /// </summary>
-#if !DNXCORE50
-
+#if dnx451
     [Serializable]
 #endif
 
@@ -33,7 +31,8 @@ namespace Ornament.Domain.Entities
         public virtual ICollection<ValidationResult> ValidationResults()
         {
             var validationResults = new List<ValidationResult>();
-            Validator.TryValidateObject(this, new ValidationContext(this, null), validationResults, true);
+            Validator.TryValidateObject(this, new ValidationContext(this, null), validationResults);
+            //Validator.TryValidateObject(this, new ValidationContext(this, null), validationResults, true);
             return validationResults;
         }
     }

@@ -14,7 +14,7 @@ namespace Ornament.Domain.Entities
     ///     and http://groups.google.com/group/sharp-architecture/browse_thread/thread/f76d1678e68e3ece?hl=en for
     ///     an in depth and conclusive resolution.
     /// </remarks>
-#if !DNXCORE50
+#if DNX451
 
     [Serializable]
 #endif
@@ -80,7 +80,7 @@ namespace Ornament.Domain.Entities
         /// </summary>
         protected override IEnumerable<PropertyInfo> GetTypeSpecificSignatureProperties()
         {
-#if !DNXCORE50
+#if DNX451
             var invalidlyDecoratedProperties =
                 this.GetType().GetProperties().Where(
                     p => Attribute.IsDefined(p, typeof(DomainSignatureAttribute), true));

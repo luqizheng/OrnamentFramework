@@ -6,19 +6,20 @@
   "projectUrl": "",
   "licenseUrl": "",
   "frameworks": {
-    "dnx451": { },
-  
+    "net451": { },
+    "dotnet5.4": {}
   },
   "dependencies": {
     "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
-    "Microsoft.CSharp": "4.0.1-rc2-23513",
-    "System.Collections": "4.0.11-rc2-23513",
-    "System.Linq": "4.0.1-rc2-23513",
-    "System.Runtime": "4.0.21-rc2-23513",
-    "System.Threading": "4.0.11-beta-23510",
-    "System.ComponentModel.Annotations": "4.1.0-rc2-23513",
-    "System.Reflection": "4.1.0-rc2-23513",
-    "System.Reflection.Extensions": "4.0.1-rc2-23512",
-    "Ornament": "1.0.0-*"
+    "Microsoft.CSharp": "4.0.1-beta-23516",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+    "Ornament": "1.0.0-*",
+    "System.Collections": "4.0.11-beta-23516",  
+    "System.Linq": "4.0.1-beta-23516",
+    "System.Reflection": "4.1.0-beta-23516",
+    "System.Reflection.Extensions": "4.0.1-beta-23516",
+    "System.Runtime": "4.0.21-beta-23516",
+    "System.Runtime.Extensions": "4.0.11-beta-23516",
+    "System.Threading": "4.0.11-beta-23516"
   }
 }

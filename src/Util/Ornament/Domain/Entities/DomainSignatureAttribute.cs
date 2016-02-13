@@ -9,7 +9,7 @@ namespace Ornament.Domain.Entities
     /// <remarks>
     ///     This is intended for use with <see cref="Entity" />. It may NOT be used on a <see cref="ValueObject" />.
     /// </remarks>
-#if !DNXCORE50
+#if DNX451
 
     [Serializable]
 #endif

@@ -1,4 +1,4 @@
-﻿#if !DNXCORE50
+﻿
 
 using Microsoft.AspNet.Identity;
 using NHibernate;
@@ -116,4 +116,3 @@ namespace Ornament.Identity.Dao
     }
 }
 
-#endif

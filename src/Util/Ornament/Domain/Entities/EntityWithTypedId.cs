@@ -134,7 +134,7 @@ namespace Ornament.Domain.Entities
         /// </remarks>
         protected override IEnumerable<PropertyInfo> GetTypeSpecificSignatureProperties()
         {
-#if !DNXCORE50
+#if DNX451
             return
                 this.GetType().GetProperties().Where(
                     p => Attribute.IsDefined(p, typeof(DomainSignatureAttribute), true));

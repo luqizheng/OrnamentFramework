@@ -7,16 +7,18 @@
   "licenseUrl": "",
 
   "frameworks": {
-    "dnx451": {
+    "net451": {
       "frameworkAssemblies": {
         "System.Data": "4.0.0.0"
-      }
+      }      
     }
+    
   },
   "dependencies": {
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
     "Ornament": "1.0.0-*",
     "FluentNHibernate": "2.0.3",
-    "NHibernate": "4.0.4.4000"
+    "NHibernate": "4.0.4.4000",
+    "System.Runtime": "4.0.21-beta-23516"
   }
 }

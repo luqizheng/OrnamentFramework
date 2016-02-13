@@ -12,7 +12,7 @@ namespace Ornament.Domain.Entities
     ///     base class leverages this assumption. If you want an entity with a type other
     ///     than int, such as string, then use <see cref="EntityWithTypedId{IdT}" /> instead.
     /// </remarks>
-#if !DNXCORE50
+#if DNX451
 
     [Serializable]
 #endif
