@@ -1,32 +1,22 @@
-﻿
-
-using Microsoft.AspNet.Identity;
-using NHibernate;
-using NHibernate.Linq;
-using Ornament.Domain.Uow;
-using Ornament.NHibernate;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using NHibernate.Linq;
+using Ornament.Domain.Uow;
+using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class RoleStore<TRole,TID> : Store, IQueryableRoleStore<TRole>,
+    public class RoleStore<TRole, TID> : Store<TRole, TID>, IQueryableRoleStore<TRole>,
         IRoleStore<TRole> where TRole : IdentityRole<TID>
     {
         public RoleStore(IUnitOfWork context) : base(context)
         {
         }
 
-        public IQueryable<TRole> Roles
-        {
-            get
-            {
-                ThrowIfDisposed();
-                return Context.Query<TRole>();
-            }
-        }
+        public IQueryable<TRole> Roles => Entities;
 
         public Task SetNormalizedRoleNameAsync(TRole role, string normalizedName, CancellationToken cancellationToken)
         {
@@ -54,22 +44,22 @@ namespace Ornament.Identity.Dao
 
         public Task<string> GetRoleIdAsync(TRole role, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(role.Id.ToString());
         }
 
         public Task<string> GetRoleNameAsync(TRole role, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(role.Name);
         }
 
         public Task SetRoleNameAsync(TRole role, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => { role.Name = roleName; }, cancellationToken);
         }
 
         public Task<string> GetNormalizedRoleNameAsync(TRole role, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(role.NormalizedName);
         }
 
         public Task<IdentityResult> CreateAsync(TRole role, CancellationToken cancellationToken)
@@ -115,4 +105,3 @@ namespace Ornament.Identity.Dao
         }
     }
 }
-

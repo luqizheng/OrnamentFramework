@@ -1,15 +1,19 @@
-﻿using NHibernate;
+﻿using System;
+using System.Linq;
+using NHibernate;
+using NHibernate.Linq;
+using Ornament.Domain.Entities;
+using Ornament.Domain.Stores;
 using Ornament.Domain.Uow;
 using Ornament.NHibernate.Uow;
-using System;
 
 namespace Ornament.NHibernate
 {
-    public abstract class Store : IDisposable
+    public abstract class Store<T, TId> : IDisposable, IStore<T, TId>
+        where T : EntityWithTypedId<TId>
+
     {
         private bool _disposed;
-
-        private NhSessionUnitOfWork _Uow;
 
         protected Store(IUnitOfWork context)
         {
@@ -17,24 +21,12 @@ namespace Ornament.NHibernate
                 throw new ArgumentNullException(nameof(context));
 
             ShouldDisposeSession = true;
-            _Uow = (NhSessionUnitOfWork)context;
+            Uow = (NhSessionUnitOfWork) context;
         }
 
-        protected NHibernate.Uow.NhSessionUnitOfWork Uow
-        {
-            get
-            {
-                return _Uow;
-            }
-        }
+        protected NhSessionUnitOfWork Uow { get; }
 
-        protected ISession Context
-        {
-            get
-            {
-                return Uow.Session;
-            }
-        }
+        protected ISession Context => Uow.Session;
 
         /// <summary>
         ///     If true then disposing this object will also dispose (close) the session. False means that external code is
@@ -46,6 +38,28 @@ namespace Ornament.NHibernate
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public IQueryable<T> Entities => this.Context.Query<T>();
+
+        public void SaveOrUpdate(T t)
+        {
+            Context.SaveOrUpdate(t);
+        }
+
+        public void Delete(T t)
+        {
+             Context.Delete(t);
+        }
+
+        public T Get(TId id)
+        {
+            return this.Context.Get<T>(id);
+        }
+
+        public T Load(TId id)
+        {
+            return Context.Load<T>(id);
         }
 
         protected void ThrowIfDisposed()

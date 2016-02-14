@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Ornament.Identity.Dao
 {
-    public class UserStore<TUser, TUserId,TRole,TRoleId> : Store,
+    public class UserStore<TUser, TUserId,TRole,TRoleId> : Store<TUser,TUserId>,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
         IUserClaimStore<TUser>,

@@ -33,8 +33,4 @@ namespace Ornament.Identity
             set { Operator = (TOperator) Enum.ToObject(typeof (TOperator), value); }
         }
     }
-
-    public class PermissionStore
-    {
-    }
 }
