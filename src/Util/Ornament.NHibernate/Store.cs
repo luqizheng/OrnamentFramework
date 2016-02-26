@@ -9,7 +9,8 @@ using Ornament.NHibernate.Uow;
 
 namespace Ornament.NHibernate
 {
-    public abstract class Store<T, TId> : IDisposable, IStore<T, TId>
+    public abstract class Store<T, TId> :
+        IDisposable, IStore<T, TId>
         where T : EntityWithTypedId<TId>
 
     {

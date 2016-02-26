@@ -21,6 +21,10 @@ namespace Ornament.Identity
             return true;
         }
 
+        public void SetPermission(object res,Enum enumOperator,TRole r)
+        {
+
+        }
         
     }
 }
