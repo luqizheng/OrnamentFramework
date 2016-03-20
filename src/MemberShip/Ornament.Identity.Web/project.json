@@ -1,0 +1,33 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Ornament.Identity.Web Class Library",
+  "authors": [ "leo" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "FluentNHibernate": "2.0.3"
+      }
+    },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516"
+       
+      }
+    }
+  },
+  "dependencies": {
+    "Ornament.Identity": "1.0.0-*",
+    "Microsoft.AspNet.Mvc.Abstractions": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Authorization": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final"
+
+  }
+}

@@ -1,19 +1,21 @@
 using System.Collections.Generic;
+using Ornament.Domain.Stores;
 
 namespace Ornament.Identity.Stores
 {
-    public interface IPermissionStore<T, TUser, TUserId, TRole, TId>
-        : Ornament.Domain.Stores.IStore<T, int>
-        
-        where T : Permission<TRole, TId>
-        where TRole : IdentityRole<TId>
-        where TUser : IdentityUser<TUserId, TRole, TId>
+    public interface IUserPermissionStore<T, in TUser, TUserId, TRole, TRoleId>
+        : IStore<T, int>
+        where T : Permission<TRole, TRoleId>
+        where TRole : IdentityRole<TRoleId>
+        where TUser : IdentityUser<TUserId, TRole, TRoleId>
 
     {
-        IList<T> GetByUser(TUser user);
+        IList<IPermission> GetByUser(TUser user);
+    }
 
-
-
+    public interface IPermissionStore
+    {
+        IList<IPermission> Find(object userId);
     }
 
 }

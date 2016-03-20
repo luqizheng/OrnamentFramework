@@ -60,9 +60,10 @@ namespace Mvc5
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddUserValidator<UniqueEmailValidator<ApplicationUser, string, ApplicationRole, int>>()
-                .AddNhibernateStores(nhBuilder, typeof(string), typeof(int))
+                .AddNhibernateStores(nhBuilder)
                 .AddDefaultTokenProviders();
 
+            nhBuilder.AddAssemblyOf(typeof (Startup));//scan this assembly which include mapping class of fluentNhibernate
             nhBuilder.Apply();
 
 

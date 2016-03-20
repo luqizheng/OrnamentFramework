@@ -1,9 +1,3 @@
-using Microsoft.AspNet.Identity;
-using NHibernate;
-using NHibernate.Criterion;
-using NHibernate.Linq;
-using Ornament.Domain.Uow;
-using Ornament.NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +5,15 @@ using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using NHibernate.Criterion;
+using NHibernate.Linq;
+using Ornament.Domain.Uow;
+using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class UserStore<TUser, TUserId,TRole,TRoleId> : Store<TUser,TUserId>,
+    public class UserStore<TUser, TUserId, TRole, TRoleId> : Store<TUser, TUserId>,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
         IUserClaimStore<TUser>,
@@ -23,8 +22,8 @@ namespace Ornament.Identity.Dao
         IUserSecurityStampStore<TUser>,
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
-        where TUser : IdentityUser<TUserId,TRole,TRoleId>
-        where TRole :IdentityRole<TRoleId>
+        where TUser : IdentityUser<TUserId, TRole, TRoleId>
+        where TRole : IdentityRole<TRoleId>
 
     {
         public UserStore(IUnitOfWork session) : base(session)
@@ -42,8 +41,8 @@ namespace Ornament.Identity.Dao
             }
             return Task.Run<IList<Claim>>(() =>
             {
-                IEnumerable<Claim> r = user.Claims.Select(v => new Claim(v.ClaimType, v.ClaimValue));
-                return r.ToList<Claim>();
+                var r = user.Claims.Select(v => new Claim(v.ClaimType, v.ClaimValue));
+                return r.ToList();
             });
         }
 
@@ -260,10 +259,10 @@ namespace Ornament.Identity.Dao
             }
 
             var query = from u in Context.Query<TUser>()
-                        from l in u.Logins
-                        where l.LoginProvider == loginProvider
-                              && l.ProviderKey == providerKey
-                        select u;
+                from l in u.Logins
+                where l.LoginProvider == loginProvider
+                      && l.ProviderKey == providerKey
+                select u;
 
             return Task.Run(() => query.SingleOrDefault(), cancellationToken);
         }
@@ -387,6 +386,14 @@ namespace Ornament.Identity.Dao
                 Context.Flush();
                 return IdentityResult.Success;
             }, cancellationToken);
+        }
+
+        public Task<TUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            //return Task.FromResult(this.Context.Get<TUser>((object)userId));
+            return GetUserAggregateAsync((TUser u) => u.Id.Equals(userId), cancellationToken);
         }
 
         public Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken)
@@ -514,7 +521,7 @@ namespace Ornament.Identity.Dao
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return Task.Run(() => (IList<string>)user.Roles.Select(u => u.Name).ToList(), cancellationToken);
+            return Task.Run(() => (IList<string>) user.Roles.Select(u => u.Name).ToList(), cancellationToken);
         }
 
         public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
@@ -578,14 +585,6 @@ namespace Ornament.Identity.Dao
                 query.Fetch(p => p.Logins).ToFuture();
                 return query.ToFuture().FirstOrDefault();
             }, cancellationToken);
-        }
-
-        public Task<TUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            ThrowIfDisposed();
-            //return Task.FromResult(this.Context.Get<TUser>((object)userId));
-            return GetUserAggregateAsync((TUser u) => u.Id.Equals(userId), cancellationToken);
         }
     }
 }

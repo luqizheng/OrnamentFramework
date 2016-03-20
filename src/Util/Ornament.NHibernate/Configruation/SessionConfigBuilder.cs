@@ -29,9 +29,18 @@ namespace Ornament.NHibernate.Configruation
 
             _config.Mappings(m =>
                 m.FluentMappings.AddFromAssembly(typeOfMappingClass.Assembly));
+         
             return this;
         }
 
+        public NhConfigureBuilder AddType(Type t)
+        {
+            _config.Mappings(m =>
+             m.FluentMappings.Add(t));
+
+            return this;
+        }
+    
         public NhConfigureBuilder Connection(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))

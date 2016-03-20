@@ -1,30 +1,58 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
 {
-    public class Permission<TRole, TID>
-        :Ornament.Domain.Entities.EntityWithTypedId<int>
-        where TRole : IdentityRole<TID>
-        
+    public interface IPermission
     {
-        string Name { get; set; }
-        TRole Role { get; set; }
-        object Resource { get; set; }
-        int Operator { get; set; }
+        bool Verify(int v);
     }
 
-    public class PermissionGeneric<TRole, TRoleID, TResource, TOperator> :        
-        Permission<TRole, TRoleID>
-        where TRole : IdentityRole<TRoleID>
+    public class Permission<TRole, TRoleId>
+        : EntityWithTypedId<int>, IPermission
+        where TRole : IdentityRole<TRoleId>
+
     {
-        public TResource Resource { get; set; }
-        public TOperator Operator { get; set; }
         public string Name { get; set; }
-
-
         public TRole Role { get; set; }
+        public object Resource { get; set; }
+        public int Operator { get; set; }
 
-      
+        public bool Verify(int v)
+        {
+            return HasOperator(Operator, Convert.ToInt32(v));
+        }
+
+        public static bool HasOperator(int opVal, int operatorVal)
+        {
+            if (opVal < operatorVal)
+                return false;
+            return (opVal & operatorVal) == operatorVal;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="opVal"></param>
+        /// <param name="operator"></param>
+        /// <returns></returns>
+        public static bool HasOperator(int opVal, Enum @operator)
+        {
+            return HasOperator(opVal, @operator);
+        }
+
+        public static int[] FindValues(int @operator, Type operatorType)
+        {
+            var vals = Enum.GetValues(operatorType);
+            var result = new List<int>();
+            foreach (var val in vals)
+            {
+                if (HasOperator(@operator, (Enum) val))
+                {
+                    result.Add(Convert.ToInt32(val));
+                }
+            }
+            return result.ToArray();
+        }
     }
 }

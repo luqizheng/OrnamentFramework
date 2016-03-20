@@ -4,13 +4,15 @@ using System.Linq.Expressions;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public class IdentityUserMaping<T, TRole, TRoleId> : ClassMap<IdentityUser<T, TRole, TRoleId>>
+    public abstract class IdentityUserMaping<T, TRole, TRoleId> 
+        : ClassMap<IdentityUser<T, TRole, TRoleId>>
         where TRole:IdentityRole<TRoleId>
     {
-        public IdentityUserMaping(string tableName = "orn_AspNetUsers")
+        protected IdentityUserMaping(string tableName = "orn_AspNetUsers")
         {
             Table(tableName);
-            Id(x => x.Id).GeneratedBy.UuidHex("N");
+
+            this.Identity(this.Id);
 
             Map(x => x.AccessFailedCount);
 
@@ -60,6 +62,8 @@ namespace Ornament.Identity.Dao.Mapping
                 .ParentKeyColumn("UserId");
         }
 
+        protected abstract void Identity(Func<Expression<Func<IdentityUser<T, TRole, TRoleId>, object>>, 
+            IdentityPart> id);
 
 
     }

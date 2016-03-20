@@ -13,4 +13,9 @@ namespace Mvc5.Models
     }
 
     public class ApplicationRole : IdentityRole<int> { }
+
+    public class TypePermission : Permission<ApplicationRole, int>
+    {
+        
+    }
 }

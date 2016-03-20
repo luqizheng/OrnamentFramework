@@ -5,7 +5,12 @@ using Ornament.Domain.Entities;
 namespace Ornament.Identity
 {
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">User's Id</typeparam>
+    /// <typeparam name="TRole"></typeparam>
+    /// <typeparam name="TRoleId"></typeparam>
     public class IdentityUser<T, TRole, TRoleId> : EntityWithTypedId<T>
         where TRole : IdentityRole<TRoleId>
     {
@@ -18,6 +23,7 @@ namespace Ornament.Identity
         public IdentityUser(string userName)
             : this()
         {
+            if (userName == null) throw new ArgumentNullException(nameof(userName));
             UserName = userName;
         }
 

@@ -39,7 +39,7 @@ namespace Ornament.MemberShip.Permissions
         ///     Gets or sets permission's name .
         /// </summary>
         /// <value>The name.</value>
-        [Display(ResourceType = typeof (Resources), Name = "PermissionName")]
+        [Display(ResourceType = typeof(Resources), Name = "PermissionName")]
         [Required]
         public virtual string Name { get; set; }
 
@@ -47,7 +47,7 @@ namespace Ornament.MemberShip.Permissions
         ///     Gets or sets the remark.
         /// </summary>
         /// <value>The comment.</value>
-        [Display(ResourceType = typeof (Resources), Name = "Remark")]
+        [Display(ResourceType = typeof(Resources), Name = "Remark")]
         public virtual string Remark { get; set; }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Ornament.MemberShip.Permissions
         /// <value>
         ///     The operator values.
         /// </value>
-        [Display(ResourceType = typeof (Resources), Name = "Operator")]
+        [Display(ResourceType = typeof(Resources), Name = "Operator")]
         public virtual int Operator { get; set; }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Ornament.MemberShip.Permissions
             Type t = CreatePermissionType(res.GetType());
             t.GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                 null, new Type[0], new ParameterModifier[0]);
-            var a = (Permission) Activator.CreateInstance(t);
+            var a = (Permission)Activator.CreateInstance(t);
             a.Resource = res;
             return a;
         }
@@ -111,7 +111,7 @@ namespace Ornament.MemberShip.Permissions
             Type t = Type.GetType(typeString);
             if (t == null)
                 throw new MemberShipPermissionException("Can not find the type with " + typeString);
-            return (Permission) Activator.CreateInstance(t);
+            return (Permission)Activator.CreateInstance(t);
         }
 
 
@@ -122,7 +122,7 @@ namespace Ornament.MemberShip.Permissions
         /// <returns></returns>
         public virtual T ToOperator<T>()
         {
-            return (T) Enum.ToObject(typeof (T), Operator);
+            return (T)Enum.ToObject(typeof(T), Operator);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Ornament.MemberShip.Permissions
         {
             return Name;
         }
-
+      
         public static bool HasOperator(int opVal, Enum @operator)
         {
             int intVal = Convert.ToInt32(@operator);
@@ -156,7 +156,7 @@ namespace Ornament.MemberShip.Permissions
             var result = new List<int>();
             foreach (object val in vals)
             {
-                if (HasOperator(@operator, (Enum) val))
+                if (HasOperator(@operator, (Enum)val))
                 {
                     result.Add(Convert.ToInt32(val));
                 }
