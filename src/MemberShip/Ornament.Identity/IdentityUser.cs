@@ -11,8 +11,8 @@ namespace Ornament.Identity
     /// <typeparam name="T">User's Id</typeparam>
     /// <typeparam name="TRole"></typeparam>
     /// <typeparam name="TRoleId"></typeparam>
-    public class IdentityUser<T, TRole, TRoleId> : EntityWithTypedId<T>
-        where TRole : IdentityRole<TRoleId>
+    public class IdentityUser<T> : EntityWithTypedId<T>
+     
     {
         public IdentityUser()
         {
@@ -53,7 +53,7 @@ namespace Ornament.Identity
 
         public virtual string SecurityStamp { get; set; }
 
-        public virtual ICollection<TRole> Roles { get; protected set; }
+        public virtual ICollection<IdentityRole> Roles { get; protected set; }
 
         public virtual ICollection<IdentityUserClaim> Claims { get; protected set; }
 

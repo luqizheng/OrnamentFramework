@@ -13,7 +13,7 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class UserStore<TUser, TUserId, TRole, TRoleId> : Store<TUser, TUserId>,
+    public class UserStore<TUser, TUserId> : Store<TUser, TUserId>,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
         IUserClaimStore<TUser>,
@@ -22,8 +22,8 @@ namespace Ornament.Identity.Dao
         IUserSecurityStampStore<TUser>,
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
-        where TUser : IdentityUser<TUserId, TRole, TRoleId>
-        where TRole : IdentityRole<TRoleId>
+        where TUser : IdentityUser<TUserId>
+     
 
     {
         public UserStore(IUnitOfWork session) : base(session)
@@ -477,7 +477,7 @@ namespace Ornament.Identity.Dao
             return Task.Run(() =>
             {
                 var identityRole =
-                    Context.Query<TRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+                    Context.Query<IdentityRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
                 if (identityRole == null)
                 {
                     throw new InvalidOperationException(string.Format("Can't find the name " + roleName));
@@ -502,7 +502,7 @@ namespace Ornament.Identity.Dao
             return Task.Run(() =>
             {
                 var identityRole =
-                    Context.Query<TRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+                    Context.Query<IdentityRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
                 if (identityRole == null)
                 {
                     throw new InvalidOperationException(string.Format("Can't find the name " + roleName));

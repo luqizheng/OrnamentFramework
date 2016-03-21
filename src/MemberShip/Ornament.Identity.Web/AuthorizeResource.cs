@@ -34,7 +34,7 @@ namespace Ornament.Identity.Web
 
             IPermissionStore dao =(IPermissionStore)context.HttpContext.RequestServices.GetService(typeof(IPermissionStore));
             var userId = context.HttpContext.User.Identity.Name;
-            IList<IPermission> result = dao.Find(userId);
+            IList<Permission> result = dao.Find(userId);
             //if (ResourceType != typeof(string))
             //{
             //    var res =

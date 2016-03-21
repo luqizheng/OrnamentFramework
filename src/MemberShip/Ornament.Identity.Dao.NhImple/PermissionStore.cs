@@ -6,26 +6,25 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class PermissionStore<T, TUser, TUserId, TRole, TRoleId>
-        : Store<T, int>
-        , IUserPermissionStore<T, TUser, TUserId, TRole, TRoleId>,
+    public class PermissionStore< TUser, TUserId>
+        : Store<Permission, int>
+        , IUserPermissionStore<TUser, TUserId>,
         IPermissionStore
-        where T : Permission<TRole, TRoleId>
-        where TRole : IdentityRole<TRoleId>
-        where TUser : IdentityUser<TUserId, TRole, TRoleId>
+      
+        where TUser : IdentityUser<TUserId>
 
     {
         public PermissionStore(IUnitOfWork context) : base(context)
         {
         }
 
-       
-        IList<IPermission> IUserPermissionStore<T, TUser, TUserId, TRole, TRoleId>.GetByUser(TUser user)
+
+        public IList<Permission> Find(object userId)
         {
             throw new NotImplementedException();
         }
 
-        public IList<IPermission> Find(object userId)
+        public IList<Permission> GetByUser(TUser user)
         {
             throw new NotImplementedException();
         }

@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public abstract class IdentityUserMaping<T, TRole, TRoleId> 
-        : ClassMap<IdentityUser<T, TRole, TRoleId>>
-        where TRole:IdentityRole<TRoleId>
+    public abstract class IdentityUserMaping<T> 
+        : ClassMap<IdentityUser<T>>
+      
     {
         protected IdentityUserMaping(string tableName = "orn_AspNetUsers")
         {
@@ -62,7 +62,7 @@ namespace Ornament.Identity.Dao.Mapping
                 .ParentKeyColumn("UserId");
         }
 
-        protected abstract void Identity(Func<Expression<Func<IdentityUser<T, TRole, TRoleId>, object>>, 
+        protected abstract void Identity(Func<Expression<Func<IdentityUser<T>, object>>, 
             IdentityPart> id);
 
 

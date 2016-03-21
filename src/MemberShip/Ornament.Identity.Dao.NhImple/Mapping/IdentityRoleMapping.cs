@@ -1,25 +1,15 @@
-﻿using System;
-using System.Linq.Expressions;
-using FluentNHibernate.Conventions.Inspections;
-using FluentNHibernate.Mapping;
-using NHibernate.Type;
-using Ornament.NHibernate;
+﻿using FluentNHibernate.Mapping;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public abstract class IdentityRoleMapping<T, TId> : ClassMap<T> where T : IdentityRole<TId>
+    public class IdentityRoleMapping<T, TId> : ClassMap<T> where T : IdentityRole
     {
-        protected IdentityRoleMapping(string table = "orn_mbs_roles")
+        public IdentityRoleMapping(string table = "orn_mbs_roles")
         {
             Table(table);
             Map(x => x.Name).Unique().Length(255).Not.Nullable();
-            Identity(this.Id);
+            Id(s => s.Id).GeneratedBy.SequenceIdentity();
+            Map(x => x.NormalizedName).Length(255);
         }
-
-        protected abstract void Identity(Func<Expression<Func<T, object>>, IdentityPart> id);
-
-
-
-
     }
 }

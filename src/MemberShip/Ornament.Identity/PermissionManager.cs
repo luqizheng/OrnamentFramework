@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ornament.Identity
 {
-    public class PermissionManager<TUser,TUserId,TRole,TRoleId>
-        where TUser: IdentityUser<TUserId,TRole,TRoleId>
-        where TRole :IdentityRole<TRoleId>
+    public class PermissionManager<TUser,TUserId>
+        where TUser: IdentityUser<TUserId>
+      
     {
         private readonly TUser _user;
 
@@ -21,7 +21,7 @@ namespace Ornament.Identity
             return true;
         }
 
-        public void SetPermission(object res,Enum enumOperator,TRole r)
+        public void SetPermission(object res,Enum enumOperator,IdentityRole r)
         {
 
         }   

@@ -2,10 +2,9 @@
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public abstract class PermissionMapping<T, TRole, TRoleId>
+    public class PermissionMapping<T>
         : ClassMap<T>
-        where T : Permission<TRole, TRoleId>
-        where TRole : IdentityRole<TRoleId>
+        where T :Permission
 
     {
         protected PermissionMapping(string table = "orn_permission")
@@ -15,6 +14,9 @@ namespace Ornament.Identity.Dao.Mapping
             DiscriminateSubClassesOnColumn("diff").Length(32).CustomType(typeof (string));
             Map(s => s.Name).Insert();
             Map(s => s.Operator);
+
         }
     }
+
+   
 }

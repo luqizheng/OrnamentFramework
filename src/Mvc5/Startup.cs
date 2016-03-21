@@ -58,8 +58,8 @@ namespace Mvc5
             NhConfigureBuilder nhBuilder = services.MsSql2012()
             .Connection(Configuration["Data:DefaultConnection:ConnectionString"]);
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddUserValidator<UniqueEmailValidator<ApplicationUser, string, ApplicationRole, int>>()
+            services.AddIdentity<ApplicationUser,IdentityRole>()
+                .AddUserValidator<UniqueEmailValidator<ApplicationUser, string>>()
                 .AddNhibernateStores(nhBuilder)
                 .AddDefaultTokenProviders();
 

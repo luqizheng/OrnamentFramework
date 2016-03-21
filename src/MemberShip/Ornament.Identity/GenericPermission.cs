@@ -4,20 +4,16 @@ using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
 {
-    public interface IPermission
-    {
-        bool Verify(int v);
-    }
-
-    public class Permission<TRole, TRoleId>
-        : EntityWithTypedId<int>, IPermission
-        where TRole : IdentityRole<TRoleId>
-
+    public abstract class Permission : EntityWithTypedId<int>
     {
         public string Name { get; set; }
-        public TRole Role { get; set; }
-        public object Resource { get; set; }
+
+
         public int Operator { get; set; }
+
+
+        public IdentityRole Role { get; set; }
+
 
         public bool Verify(int v)
         {
@@ -53,6 +49,17 @@ namespace Ornament.Identity
                 }
             }
             return result.ToArray();
+        }
+    }
+
+    public class GenericPermission<TResourcce, TOperator> : Permission
+    {
+        public TResourcce Resource { get; set; }
+
+        public new TOperator Operator
+        {
+            get { return (TOperator) Enum.ToObject(typeof (TOperator), base.Operator); }
+            set { base.Operator = Convert.ToInt32(value); }
         }
     }
 }

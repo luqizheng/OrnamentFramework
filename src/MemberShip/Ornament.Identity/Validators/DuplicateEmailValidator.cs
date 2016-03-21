@@ -11,9 +11,9 @@ namespace Ornament.Identity.Validators
     /// <typeparam name="TRole"></typeparam>
     /// <typeparam name="TRoleId"></typeparam>
     /// <typeparam name="TUser"></typeparam>
-    public class UniqueEmailValidator<TUser,TUserId, TRole, TRoleId> : IUserValidator<TUser>
-        where TUser : IdentityUser<TUserId, TRole, TRoleId>
-        where TRole : IdentityRole<TRoleId>
+    public class UniqueEmailValidator<TUser,TUserId> : IUserValidator<TUser>
+        where TUser : IdentityUser<TUserId>
+       
     {
         public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user)
         {
