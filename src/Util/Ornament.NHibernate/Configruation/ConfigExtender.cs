@@ -37,9 +37,10 @@ namespace Ornament.NHibernate.Configruation
             config.Database(dbSetting);
             config.CurrentSessionContext(store.ToString());
             //这里需要延迟创建。因为可能还没有build好NH的配置。所以不能用addinstance
-            serviceCollection.AddSingleton<ISessionFactory>(i => config.BuildSessionFactory());
-            serviceCollection.AddScoped<IUnitOfWorkFactory>(i => new NhSessionUowFactory(i.GetService<ISessionFactory>(), serviceCollection));
-            serviceCollection.AddScoped<IUnitOfWork>(i => i.GetService<IUnitOfWorkFactory>().Create());
+            serviceCollection.AddSingleton(i => config.BuildSessionFactory());
+            serviceCollection.AddScoped<IUnitOfWorkFactory>(
+                i => new NhSessionUowFactory(i.GetService<ISessionFactory>(), serviceCollection));
+            serviceCollection.AddScoped(i => i.GetService<IUnitOfWorkFactory>().Create());
 
             return new NhConfigureBuilder(config, dbSetting);
         }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Mvc5.Models;
 using Mvc5.Services;
 using Mvc5.ViewModels.Account;
+using Ornament.Web.Uow;
 
 namespace Mvc5.Controllers
 {
@@ -53,6 +54,7 @@ namespace Mvc5.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [UnitOfWork()]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;

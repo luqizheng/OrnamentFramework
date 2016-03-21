@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet5-Mvc5-cb2179a5-6a4c-44e3-869c-d3881a85c019",
   "version": "1.0.0-*",
   "compilationOptions": {
@@ -6,7 +6,7 @@
   },
 
   "dependencies": {
-    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
+    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1-update2",
     "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",

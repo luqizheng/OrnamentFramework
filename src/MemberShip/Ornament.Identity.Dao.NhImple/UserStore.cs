@@ -23,7 +23,7 @@ namespace Ornament.Identity.Dao
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
         where TUser : IdentityUser<TUserId>
-     
+
 
     {
         public UserStore(IUnitOfWork session) : base(session)
@@ -267,12 +267,20 @@ namespace Ornament.Identity.Dao
             return Task.Run(() => query.SingleOrDefault(), cancellationToken);
         }
 
+
         public Task<TUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             //return Task.FromResult<TUser>(Queryable.FirstOrDefault<TUser>(Queryable.Where<TUser>(this.Context.Query<TUser>(), (Expression<Func<TUser, bool>>)(u => u.UserName.ToUpper() == userName.ToUpper()))));
-            return GetUserAggregateAsync((TUser u) =>
-                u.NormalizedUserName.ToUpper() == normalizedUserName.ToUpper(), cancellationToken);
+            return Task.Run(() =>
+            {
+                var normalUserNameProp = Projections.Property<TUser>(s => s.NormalizedUserName);
+                var user = DetachedCriteria.For<TUser>()
+                    .Add(Restrictions.Eq(normalUserNameProp, normalizedUserName).IgnoreCase())
+                    .GetExecutableCriteria(Uow.Session).UniqueResult<TUser>();
+                return user;
+            });
+          
         }
 
         public Task<IList<UserLoginInfo>>
@@ -580,9 +588,6 @@ namespace Ornament.Identity.Dao
             {
                 // no cartesian product, batch call. Don't know if it's really needed: should we eager load or let lazy loading do its stuff?
                 var query = Context.Query<TUser>().Where(filter);
-                query.Fetch(p => p.Roles).ToFuture();
-                query.Fetch(p => p.Claims).ToFuture();
-                query.Fetch(p => p.Logins).ToFuture();
                 return query.ToFuture().FirstOrDefault();
             }, cancellationToken);
         }

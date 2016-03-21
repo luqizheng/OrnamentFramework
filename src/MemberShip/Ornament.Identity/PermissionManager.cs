@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ornament.Identity
 {
-    public class PermissionManager<TUser,TUserId>
-        where TUser: IdentityUser<TUserId>
-      
+    public class PermissionManager<TUser, TUserId>
+        where TUser : IdentityUser<TUserId>
+
     {
         private readonly TUser _user;
 
@@ -16,15 +13,13 @@ namespace Ornament.Identity
             _user = user;
         }
 
-        public bool HasPermission(object res,Enum enumOperator)
+        public bool HasPermission(object res, Enum enumOperator)
         {
             return true;
         }
 
-        public void SetPermission(object res,Enum enumOperator,IdentityRole r)
+        public void SetPermission(object res, Enum enumOperator, IdentityRole r)
         {
-
-        }   
-        
+        }
     }
 }

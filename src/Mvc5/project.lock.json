@@ -100,7 +100,7 @@
           "lib/net45/System.Interactive.Async.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights/1.1.1-beta": {
+      "Microsoft.ApplicationInsights/2.0.0-beta4": {
         "type": "package",
         "compile": {
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
@@ -109,10 +109,21 @@
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+      "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.1.1-beta",
+          "Microsoft.ApplicationInsights": "2.0.0-beta4",
+          "Microsoft.ApplicationInsights.DependencyCollector": "2.0.0-beta4",
+          "Microsoft.ApplicationInsights.PerfCounterCollector": "2.0.0-beta4",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Features": "1.0.0-rc1-final",
@@ -132,6 +143,31 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.DependencyCollector/2.0.0-beta4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.0.0-beta4]",
+          "Microsoft.ApplicationInsights.Agent.Intercept": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.PerfCounterCollector/2.0.0-beta4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.0.0-beta4]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -2272,7 +2308,7 @@
           "lib/net45/System.Interactive.Async.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights/1.1.1-beta": {
+      "Microsoft.ApplicationInsights/2.0.0-beta4": {
         "type": "package",
         "compile": {
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
@@ -2281,10 +2317,21 @@
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+      "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.1.1-beta",
+          "Microsoft.ApplicationInsights": "2.0.0-beta4",
+          "Microsoft.ApplicationInsights.DependencyCollector": "2.0.0-beta4",
+          "Microsoft.ApplicationInsights.PerfCounterCollector": "2.0.0-beta4",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Features": "1.0.0-rc1-final",
@@ -2304,6 +2351,31 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.DependencyCollector/2.0.0-beta4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.0.0-beta4]",
+          "Microsoft.ApplicationInsights.Agent.Intercept": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.PerfCounterCollector/2.0.0-beta4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.0.0-beta4]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -4459,7 +4531,7 @@
           "lib/net45/System.Interactive.Async.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights/1.1.1-beta": {
+      "Microsoft.ApplicationInsights/2.0.0-beta4": {
         "type": "package",
         "compile": {
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
@@ -4468,10 +4540,21 @@
           "lib/net45/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+      "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.1.1-beta",
+          "Microsoft.ApplicationInsights": "2.0.0-beta4",
+          "Microsoft.ApplicationInsights.DependencyCollector": "2.0.0-beta4",
+          "Microsoft.ApplicationInsights.PerfCounterCollector": "2.0.0-beta4",
           "Microsoft.AspNet.Hosting.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
           "Microsoft.AspNet.Http.Features": "1.0.0-rc1-final",
@@ -4491,6 +4574,31 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.DependencyCollector/2.0.0-beta4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.0.0-beta4]",
+          "Microsoft.ApplicationInsights.Agent.Intercept": "1.2.1"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.DependencyCollector.dll": {}
+        }
+      },
+      "Microsoft.ApplicationInsights.PerfCounterCollector/2.0.0-beta4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "[2.0.0-beta4]"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AI.PerfCounterCollector.dll": {}
         }
       },
       "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -6642,9 +6750,9 @@
         "lib/portable-windows8+net45+wp8/System.Interactive.Async.XML"
       ]
     },
-    "Microsoft.ApplicationInsights/1.1.1-beta": {
+    "Microsoft.ApplicationInsights/2.0.0-beta4": {
       "type": "package",
-      "sha512": "aqtQ8KNFMGBFCmU3kkkEM7PlyPFvfh/1uKTxixD+myMzB9EjYeGOf0LvFnpkT1sp3voXfU8MUN+eYets8TutdQ==",
+      "sha512": "AuyQbBX85vzd/LKW+uvPlqpKMRHUu62zDHPrfuAO+vw6sycFU4bjD2hQLUsFr6qTmlBojZ6Q8yimxETUCZAwig==",
       "files": [
         "lib/dnxcore50/Microsoft.ApplicationInsights.dll",
         "lib/dnxcore50/Microsoft.ApplicationInsights.XML",
@@ -6652,26 +6760,65 @@
         "lib/net40/Microsoft.ApplicationInsights.XML",
         "lib/net45/Microsoft.ApplicationInsights.dll",
         "lib/net45/Microsoft.ApplicationInsights.XML",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.XML",
-        "lib/wp8/Microsoft.ApplicationInsights.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.XML",
-        "Microsoft.ApplicationInsights.1.1.1-beta.nupkg",
-        "Microsoft.ApplicationInsights.1.1.1-beta.nupkg.sha512",
+        "lib/net46/Microsoft.ApplicationInsights.dll",
+        "lib/net46/Microsoft.ApplicationInsights.XML",
+        "Microsoft.ApplicationInsights.2.0.0-beta4.nupkg",
+        "Microsoft.ApplicationInsights.2.0.0-beta4.nupkg.sha512",
         "Microsoft.ApplicationInsights.nuspec"
       ]
     },
-    "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1": {
+    "Microsoft.ApplicationInsights.Agent.Intercept/1.2.1": {
       "type": "package",
-      "sha512": "cFxg3E6Z9otsuBOKhiLqxb5H/B6wbvjvMfu+v3wG8KEJvZ2ZAzNhAXbxE69baweyWzokj5nsI+9YeSXNWacBHA==",
+      "sha512": "nuqnTp+xechqRPBUi7sr4gxhyr+gJwMaxvSrhB4NyK1TbnT3yk1P5giSnaqQVvuIRHAdl9uD7lt2GRx/P/nlrA==",
+      "files": [
+        "lib/net40/Microsoft.AI.Agent.Intercept.dll",
+        "lib/net45/Microsoft.AI.Agent.Intercept.dll",
+        "Microsoft.ApplicationInsights.Agent.Intercept.1.2.1.nupkg",
+        "Microsoft.ApplicationInsights.Agent.Intercept.1.2.1.nupkg.sha512",
+        "Microsoft.ApplicationInsights.Agent.Intercept.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.AspNet/1.0.0-rc1-update2": {
+      "type": "package",
+      "sha512": "0zI8hvc5hgQiU9DIYHjMocCwzgIw9/pH5BcGk0914hN2+CJ5jbZs/++7dXC372tGFwEeq82x0oJlLF18jNazBA==",
       "files": [
         "lib/dnx451/Microsoft.ApplicationInsights.AspNet.dll",
         "lib/dnx451/Microsoft.ApplicationInsights.AspNet.xml",
         "lib/dnxcore50/Microsoft.ApplicationInsights.AspNet.dll",
         "lib/dnxcore50/Microsoft.ApplicationInsights.AspNet.xml",
-        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1.nupkg",
-        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1.nupkg.sha512",
+        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1-update2.nupkg",
+        "Microsoft.ApplicationInsights.AspNet.1.0.0-rc1-update2.nupkg.sha512",
         "Microsoft.ApplicationInsights.AspNet.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.DependencyCollector/2.0.0-beta4": {
+      "type": "package",
+      "sha512": "Cw4Ynf49svrgL/vF5q3VVof4wfZkFwphGiu/Yiw7MPoEYIcxApvVo29KFK4OxE+A6Uhhx80KCTzLiktg+rsrHQ==",
+      "files": [
+        "content/ApplicationInsights.config.install.xdt",
+        "content/ApplicationInsights.config.transform",
+        "content/ApplicationInsights.config.uninstall.xdt",
+        "lib/net40/Microsoft.AI.DependencyCollector.dll",
+        "lib/net40/Microsoft.AI.DependencyCollector.XML",
+        "lib/net45/Microsoft.AI.DependencyCollector.dll",
+        "lib/net45/Microsoft.AI.DependencyCollector.XML",
+        "Microsoft.ApplicationInsights.DependencyCollector.2.0.0-beta4.nupkg",
+        "Microsoft.ApplicationInsights.DependencyCollector.2.0.0-beta4.nupkg.sha512",
+        "Microsoft.ApplicationInsights.DependencyCollector.nuspec"
+      ]
+    },
+    "Microsoft.ApplicationInsights.PerfCounterCollector/2.0.0-beta4": {
+      "type": "package",
+      "sha512": "o1MrEV8DxXw76gfDsP3zDPsin/wWas78V8KVh6i931By2NFBmiZq7pKoTZ0MEBslhB4xFXnN7rBvobIGd9KfIA==",
+      "files": [
+        "content/ApplicationInsights.config.install.xdt",
+        "content/ApplicationInsights.config.transform",
+        "content/ApplicationInsights.config.uninstall.xdt",
+        "lib/net40/Microsoft.AI.PerfCounterCollector.dll",
+        "lib/net45/Microsoft.AI.PerfCounterCollector.dll",
+        "Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0-beta4.nupkg",
+        "Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0-beta4.nupkg.sha512",
+        "Microsoft.ApplicationInsights.PerfCounterCollector.nuspec"
       ]
     },
     "Microsoft.AspNet.Antiforgery/1.0.0-rc1-final": {
@@ -9064,7 +9211,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.ApplicationInsights.AspNet >= 1.0.0-rc1",
+      "Microsoft.ApplicationInsights.AspNet >= 1.0.0-rc1-update2",
       "Microsoft.AspNet.Authentication.Cookies >= 1.0.0-rc1-final",
       "Microsoft.AspNet.Diagnostics.Entity >= 7.0.0-rc1-final",
       "Microsoft.AspNet.IISPlatformHandler >= 1.0.0-rc1-final",
