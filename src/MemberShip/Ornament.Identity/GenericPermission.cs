@@ -6,16 +6,16 @@ namespace Ornament.Identity
 {
     public abstract class Permission : EntityWithTypedId<int>
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
 
-        public int Operator { get; set; }
+        public virtual int Operator { get; set; }
 
 
-        public IdentityRole Role { get; set; }
+        public virtual IdentityRole Role { get; set; }
 
 
-        public bool Verify(int v)
+        public virtual bool Verify(int v)
         {
             return HasOperator(Operator, Convert.ToInt32(v));
         }
@@ -54,7 +54,7 @@ namespace Ornament.Identity
 
     public class GenericPermission<TResourcce, TOperator> : Permission
     {
-        public TResourcce Resource { get; set; }
+        public virtual TResourcce Resource { get; set; }
 
         public new TOperator Operator
         {

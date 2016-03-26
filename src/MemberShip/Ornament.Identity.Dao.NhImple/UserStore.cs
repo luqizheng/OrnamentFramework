@@ -255,14 +255,14 @@ namespace Ornament.Identity.Dao
             ThrowIfDisposed();
             if (loginProvider == null)
             {
-                throw new ArgumentNullException("login");
+                throw new ArgumentNullException(nameof(loginProvider));
             }
 
             var query = from u in Context.Query<TUser>()
-                from l in u.Logins
-                where l.LoginProvider == loginProvider
-                      && l.ProviderKey == providerKey
-                select u;
+                        from l in u.Logins
+                        where l.LoginProvider == loginProvider
+                              && l.ProviderKey == providerKey
+                        select u;
 
             return Task.Run(() => query.SingleOrDefault(), cancellationToken);
         }
@@ -280,7 +280,7 @@ namespace Ornament.Identity.Dao
                     .GetExecutableCriteria(Uow.Session).UniqueResult<TUser>();
                 return user;
             });
-          
+
         }
 
         public Task<IList<UserLoginInfo>>
@@ -289,7 +289,7 @@ namespace Ornament.Identity.Dao
             ThrowIfDisposed();
             if (user == null)
             {
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
             }
 
             return Task.Run(() =>
@@ -323,7 +323,7 @@ namespace Ornament.Identity.Dao
         public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return Task.FromResult(user.Id.ToString());
+            return Task.FromResult(user?.Id.ToString());
         }
 
         public Task<string> GetUserNameAsync(TUser user, CancellationToken cancellationToken)
@@ -529,7 +529,7 @@ namespace Ornament.Identity.Dao
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return Task.Run(() => (IList<string>) user.Roles.Select(u => u.Name).ToList(), cancellationToken);
+            return Task.Run(() => (IList<string>)user.Roles.Select(u => u.Name).ToList(), cancellationToken);
         }
 
         public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)

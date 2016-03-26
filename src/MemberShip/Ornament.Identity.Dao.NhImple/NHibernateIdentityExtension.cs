@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Reflection.Emit;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Ornament.Identity.Dao;
@@ -41,23 +43,12 @@ namespace Ornament.Identity
             builder.Services.AddScoped(service2, roleStoreType);
         }
 
-        //    Type typeofResource,
-
-        //private static void RegistPermissionRelative(NhConfigureBuilder nhBuilder,
-        //    Type roleIdType, Type roleType, Type userType, Type userIdType, IServiceCollection services)
+        //private static void BuildMappingBuilder()
         //{
-        //    var permissionType = typeof(GenericPermission<,,>).MakeGenericType(typeofResource, roleType, roleIdType);
-
-        //    nhBuilder.AddType(typeof(PermissionMapping<,,>).MakeGenericType(permissionType, roleType, roleIdType));
-
-        //    //permission
-        //    var permissionServer1 = typeof(IUserPermissionStore<,,,,,>).MakeGenericType(typeofResource,
-        //        permissionType, userType,
-        //        userIdType, roleType, roleIdType);
-        //    var imple = typeof(PermissionStore<,,,,>).MakeGenericType(permissionType, userType, userIdType, roleType,
-        //        roleIdType);
-
-        //    services.AddScoped(permissionServer1, imple);
-        //}
+        //    var asmName = new AssemblyName("identity");
+        //    var asmBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
+        //    var mdlBldr = asmBuilder.DefineDynamicModule("Main");
+        //    var typeBldr = mdlBldr.DefineType("UserStoreType", TypeAttributes.Public);
+        //} 
     }
 }

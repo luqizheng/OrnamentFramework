@@ -1,4 +1,6 @@
-﻿using Ornament.Identity;
+﻿using System;
+using Ornament.Identity;
+using Ornament.Identity.Dao.Mapping;
 
 namespace Mvc5.Models
 {
@@ -10,5 +12,13 @@ namespace Mvc5.Models
 
     public class TypeGenericPermission : GenericPermission<string, int>
     {
+    }
+
+    public class UserMapping : IdentityUserMaping<ApplicationUser,String>
+    {
+        protected override void IdSetting()
+        {
+            Id(s => s.Id).GeneratedBy.UuidHex("N");
+        }
     }
 }
