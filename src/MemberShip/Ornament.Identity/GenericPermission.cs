@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
@@ -40,15 +40,8 @@ namespace Ornament.Identity
         public static int[] FindValues(int @operator, Type operatorType)
         {
             var vals = Enum.GetValues(operatorType);
-            var result = new List<int>();
-            foreach (var val in vals)
-            {
-                if (HasOperator(@operator, (Enum) val))
-                {
-                    result.Add(Convert.ToInt32(val));
-                }
-            }
-            return result.ToArray();
+            return
+                (from object val in vals where HasOperator(@operator, (Enum) val) select Convert.ToInt32(val)).ToArray();
         }
     }
 

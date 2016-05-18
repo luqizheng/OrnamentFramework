@@ -14,7 +14,7 @@ namespace Mvc5.Models
     {
     }
 
-    public class UserMapping : IdentityUserMaping<ApplicationUser,String>
+    public class UserMapping : IdentityUserMaping<ApplicationUser,string>
     {
         protected override void IdSetting()
         {

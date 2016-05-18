@@ -2,24 +2,15 @@
   "version": "1.0.0-*",
   "description": "Ornament.Identity Class Library",
   "authors": [ "leo" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": {}
+    "netstandard1.5": {
+      "imports": "dnxcore50"
+    }
   },
   "dependencies": {
-    "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
-    "Microsoft.CSharp": "4.0.1-beta-23516",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-    "Ornament": "1.0.0-*",
-    "System.Collections": "4.0.11-beta-23516",  
-    "System.Linq": "4.0.1-beta-23516",
-    "System.Reflection": "4.1.0-beta-23516",
-    "System.Reflection.Extensions": "4.0.1-beta-23516",
-    "System.Runtime": "4.0.21-beta-23516",
-    "System.Runtime.Extensions": "4.0.11-beta-23516",
-    "System.Threading": "4.0.11-beta-23516"
+    "NETStandard.Library": "1.5.0-rc2-24027",
+    "Microsoft.AspNetCore.Identity": "1.0.0-rc2-final",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
+    "Ornament": "1.0.0-*"
   }
 }

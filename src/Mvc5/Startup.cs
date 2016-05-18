@@ -58,13 +58,13 @@ namespace Mvc5
             NhConfigureBuilder nhBuilder = services.MsSql2012()
             .Connection(Configuration["Data:DefaultConnection:ConnectionString"]);
 
-            services.AddIdentity<ApplicationUser,IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddUserValidator<UniqueEmailValidator<ApplicationUser, string>>()
                 .AddNhibernateStores(nhBuilder)
                 .AddDefaultTokenProviders();
 
-            nhBuilder.AddAssemblyOf(typeof (Startup));//scan this assembly which include mapping class of fluentNhibernate
-            nhBuilder.Apply();
+            nhBuilder.AddAssemblyOf(typeof(Startup));//scan this assembly which include mapping class of fluentNhibernate
+            nhBuilder.Apply(true);
 
 
             services.AddMvc();

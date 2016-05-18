@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ornament.Identity.Validators
 {

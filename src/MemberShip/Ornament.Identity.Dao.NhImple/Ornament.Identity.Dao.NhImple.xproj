@@ -9,7 +9,7 @@
     <ProjectGuid>34183751-dc30-45cf-9431-17b78f7018e9</ProjectGuid>
     <RootNamespace>Ornament.Identity.Dao</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
+    <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
