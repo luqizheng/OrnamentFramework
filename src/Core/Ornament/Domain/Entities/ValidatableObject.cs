@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 
 
-
 namespace Ornament.Domain.Entities
 {
     /// <summary>

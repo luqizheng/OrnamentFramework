@@ -8,7 +8,7 @@ namespace Ornament.NHibernate.Uow
 {
     public class NhSessionUnitOfWork : IUnitOfWork
     {
-        private ISessionFactory _sessionFactory;
+        private readonly ISessionFactory _sessionFactory;
         private ISession _session;
         private bool _useTransaction;
 

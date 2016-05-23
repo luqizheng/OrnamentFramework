@@ -37,8 +37,7 @@ namespace Ornament.Domain.Entities
         ///     A description of the very slick ThreadStatic attribute may be found at
         ///     http://www.dotnetjunkies.com/WebLog/chris.taylor/archive/2005/08/18/132026.aspx
         /// </remarks>
-        [ThreadStatic]
-        private static Dictionary<Type, IEnumerable<PropertyInfo>> signaturePropertiesDictionary;
+        [ThreadStatic] private static Dictionary<Type, IEnumerable<PropertyInfo>> signaturePropertiesDictionary;
 
         /// <summary>
         ///     Determines whether the specified <see cref="System.Object" /> is equal to this instance.
@@ -54,7 +53,7 @@ namespace Ornament.Domain.Entities
                 return true;
             }
 
-            return compareTo != null && GetType().Equals(compareTo.GetTypeUnproxied()) &&
+            return compareTo != null && GetType() == compareTo.GetTypeUnproxied() &&
                    HasSameObjectSignatureAs(compareTo);
         }
 
@@ -83,7 +82,7 @@ namespace Ornament.Domain.Entities
 
                 hashCode = signatureProperties.Select(property => property.GetValue(this, null))
                     .Where(value => value != null)
-                    .Aggregate(hashCode, (current, value) => (current * HashMultiplier) ^ value.GetHashCode());
+                    .Aggregate(hashCode, (current, value) => (current*HashMultiplier) ^ value.GetHashCode());
 
                 if (signatureProperties.Any())
                 {
@@ -133,13 +132,13 @@ namespace Ornament.Domain.Entities
             var signatureProperties = GetSignatureProperties();
 
             if ((from property in signatureProperties
-                 let valueOfThisObject = property.GetValue(this, null)
-                 let valueToCompareTo = property.GetValue(compareTo, null)
-                 where valueOfThisObject != null || valueToCompareTo != null
-                 where
-                     (valueOfThisObject == null ^ valueToCompareTo == null) ||
-                     (!valueOfThisObject.Equals(valueToCompareTo))
-                 select valueOfThisObject).Any())
+                let valueOfThisObject = property.GetValue(this, null)
+                let valueToCompareTo = property.GetValue(compareTo, null)
+                where valueOfThisObject != null || valueToCompareTo != null
+                where
+                    (valueOfThisObject == null ^ valueToCompareTo == null) ||
+                    !valueOfThisObject.Equals(valueToCompareTo)
+                select valueOfThisObject).Any())
             {
                 return false;
             }

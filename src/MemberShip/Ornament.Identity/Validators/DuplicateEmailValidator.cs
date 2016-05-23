@@ -8,8 +8,6 @@ namespace Ornament.Identity.Validators
     /// 检查是否有emial 重复
     /// </summary>
     /// <typeparam name="TUserId"></typeparam>
-    /// <typeparam name="TRole"></typeparam>
-    /// <typeparam name="TRoleId"></typeparam>
     /// <typeparam name="TUser"></typeparam>
     public class UniqueEmailValidator<TUser,TUserId> : IUserValidator<TUser>
         where TUser : IdentityUser<TUserId>

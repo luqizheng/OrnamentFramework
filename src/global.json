@@ -1,5 +1,5 @@
 {
-  "projects": [ "Util", "MemberShip" ],
+  "projects": [ "Util", "MemberShip", "Core" ],
   "sdk": {
     "version": "1.0.0-preview1-002702"
   }

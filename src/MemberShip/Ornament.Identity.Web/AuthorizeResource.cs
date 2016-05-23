@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Ornament.Identity.Stores;
 
 namespace Ornament.Identity.Web
@@ -26,13 +27,13 @@ namespace Ornament.Identity.Web
         /// <summary>
         /// </summary>
         public Enum Operator { get; set; }
-        public void OnAuthorization(AuthorizationContext context)
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
             if (context.HttpContext.User == null || !context.HttpContext.User.Identity.IsAuthenticated)
                 // auth failed, redirect to login page
-                context.Result = new HttpUnauthorizedResult();
-
-            IPermissionStore dao =(IPermissionStore)context.HttpContext.RequestServices.GetService(typeof(IPermissionStore));
+                context.Result =new UnauthorizedResult();
+            
+            IPermissionStore dao = (IPermissionStore)context.HttpContext.RequestServices.GetService(typeof(IPermissionStore));
             var userId = context.HttpContext.User.Identity.Name;
             IList<Permission> result = dao.Find(userId);
             //if (ResourceType != typeof(string))
@@ -51,16 +52,16 @@ namespace Ornament.Identity.Web
             //    result = dao.GetUserPermissions(context.User.Identity.Name, ResourceId);
             //}
 
-            var isVerify= result.Any(p => p.Verify(Convert.ToInt32(Operator)));
+            var isVerify = result.Any(p => p.Verify(Convert.ToInt32(Operator)));
             if (isVerify)
             {
                 //May be should be cache it, but I have no any idea for attribute cache.
             }
             else
             {
-                context.Result = new HttpUnauthorizedResult(); ;
+                context.Result = new UnauthorizedResult(); ;
             }
-           
+
         }
 
         //private void CacheValidateHandler(HttpContext context, object data, ref HttpValidationStatus validationStatus)
@@ -79,5 +80,6 @@ namespace Ornament.Identity.Web
         //    bool isAuthorized = AuthorizeCore(httpContext);
         //    return (isAuthorized) ? HttpValidationStatus.Valid : HttpValidationStatus.IgnoreThisRequest;
         //}
+       
     }
 }
