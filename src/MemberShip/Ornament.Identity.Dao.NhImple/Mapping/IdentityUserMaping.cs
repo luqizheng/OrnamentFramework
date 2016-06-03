@@ -1,18 +1,20 @@
 ﻿using System;
 using FluentNHibernate.Mapping;
-using System.Linq.Expressions;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public abstract class IdentityUserMaping<TUser,TId> 
+    public abstract class IdentityUserMaping<TUser, TKey, TUserClaim, TUserRole, TUserLogin>
         : ClassMap<TUser>
-        where TUser:IdentityUser<TId>
-
+        where TUser : IdentityUser<TKey, TUserClaim, TUserRole, TUserLogin>
+        where TKey : IEquatable<TKey>
+        where TUserClaim : IdentityUserClaim<TKey>
+        where TUserRole : IdentityUserRole<TKey>
+        where TUserLogin : IdentityUserLogin<TKey>
     {
         protected IdentityUserMaping()
         {
-            Table("orn_mbs_user");
-           
+            Table("mbs_user");
+
             IdSetting();
 
             Map(x => x.AccessFailedCount);
@@ -25,7 +27,7 @@ namespace Ornament.Identity.Dao.Mapping
 
             Map(x => x.LockoutEnabled);
 
-            Map(x => x.LockoutEndDateUtc);
+            Map(x => x.LockoutEnd);
 
             Map(x => x.PasswordHash);
 
@@ -42,7 +44,7 @@ namespace Ornament.Identity.Dao.Mapping
             Map(x => x.SecurityStamp);
 
             HasMany(x => x.Claims).Cascade.DeleteOrphan().Cascade.All()
-                .Table("orn_AspNetUserClaims")
+                .Table("mbs_user_claims")
                 .Component(x =>
                 {
                     x.Map(_ => _.ClaimType).Length(64);
@@ -50,7 +52,7 @@ namespace Ornament.Identity.Dao.Mapping
                 });
 
             HasMany(x => x.Logins)
-                .Table("orn_AspNetUserLogins")
+                .Table("mbs_user_Logins")
                 .Component(x =>
                 {
                     x.Map(a => a.LoginProvider).Length(64);
@@ -59,11 +61,10 @@ namespace Ornament.Identity.Dao.Mapping
                 });
 
             HasManyToMany(x => x.Roles)
-                .Table("orn_AspNetUserRoles")
+                .Table("mbs_user_roles")
                 .ParentKeyColumn("UserId");
         }
 
         protected abstract void IdSetting();
-
     }
 }

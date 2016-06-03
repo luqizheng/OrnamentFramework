@@ -10,9 +10,10 @@ namespace Ornament.NHibernate.Uow
     {
         private readonly ISessionFactory _sessionFactory;
         private ISession _session;
-        private bool _useTransaction;
+        private bool _disposed = false;
+        private readonly bool _useTransaction;
 
-        public NhSessionUnitOfWork(ISessionFactory sessionFactory, bool useTransaction)
+        public NhSessionUnitOfWork(ISessionFactory sessionFactory, bool useTransaction = false)
         {
             _sessionFactory = sessionFactory;
             _useTransaction = useTransaction;
@@ -20,15 +21,21 @@ namespace Ornament.NHibernate.Uow
 
         public void Begin()
         {
-            _session = _sessionFactory.OpenSession();
+            ThrowIfDisposed();
+
+
+            if (_sessionFactory != null)
+                _session = _sessionFactory.OpenSession();
             if (_useTransaction)
             {
                 _session.BeginTransaction();
             }
+
         }
 
         public void Commit()
         {
+            ThrowIfDisposed();
             if (_session == null)
             {
                 throw new UowExcepton("Uow is not opened.");
@@ -42,6 +49,7 @@ namespace Ornament.NHibernate.Uow
 
         public void Rollback()
         {
+            ThrowIfDisposed();
             if (_session == null)
             {
                 throw new UowExcepton("Uow is not opened.");
@@ -51,6 +59,7 @@ namespace Ornament.NHibernate.Uow
 
         public void Close()
         {
+            ThrowIfDisposed();
             if (_session == null)
             {
                 throw new UowExcepton("Uow is not opened.");
@@ -60,8 +69,10 @@ namespace Ornament.NHibernate.Uow
 
         public void Dispose()
         {
+            ThrowIfDisposed();
+            _disposed = true;
             if (this._session != null)
-                this._session.Dispose();
+                this._session.Close();
         }
 
         public ISession Session
@@ -73,6 +84,14 @@ namespace Ornament.NHibernate.Uow
                     throw new UowExcepton("Uow is not opened.");
                 }
                 return _session;
+            }
+        }
+
+        protected void ThrowIfDisposed()
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(GetType().Name);
             }
         }
     }

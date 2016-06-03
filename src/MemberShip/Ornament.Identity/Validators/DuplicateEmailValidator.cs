@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
@@ -7,11 +8,15 @@ namespace Ornament.Identity.Validators
     /// <summary>
     /// 检查是否有emial 重复
     /// </summary>
-    /// <typeparam name="TUserId"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TUser"></typeparam>
-    public class UniqueEmailValidator<TUser,TUserId> : IUserValidator<TUser>
-        where TUser : IdentityUser<TUserId>
-       
+    /// <typeparam name="TUserRole"></typeparam>
+    /// <typeparam name="TUserClaim"></typeparam>
+    /// <typeparam name="TUserLogin"></typeparam>
+    public class UniqueEmailValidator<TUser, TKey, TUserClaim, TUserRole, TUserLogin> : IUserValidator<TUser>
+        where TUser : IdentityUser<TKey, TUserClaim, TUserRole, TUserLogin>
+        where TKey : IEquatable<TKey>
+
     {
         public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user)
         {

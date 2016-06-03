@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ornament.Domain.Uow
 {
@@ -12,10 +12,5 @@ namespace Ornament.Domain.Uow
         void Commit();
 
         void Close();
-    }
-
-    public interface IUnitOfWorkFactory
-    {
-        IUnitOfWork Create();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Ornament.Domain.Entities
@@ -7,7 +8,8 @@ namespace Ornament.Domain.Entities
     ///     This serves as a base interface for <see cref="EntityWithTypedId{TId}" /> and
     ///     <see cref="Entity" />. It also provides a simple means to develop your own base entity.
     /// </summary>
-    internal interface IEntityWithTypedId<TId>
+    internal interface IEntityWithTypedId<out TId>
+        where TId:IEquatable<TId>
     {
         /// <summary>
         ///     Gets the ID which uniquely identifies the entity instance within its type's bounds.

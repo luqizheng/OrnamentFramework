@@ -56,15 +56,5 @@ namespace Ornament.NHibernate.Configruation
             export.Create(true, true);
             return this;
         }
-
-        //}
-        //    return this;
-        //    a.Execute(true, true);
-        //    global::NHibernate.Tool.hbm2ddl.SchemaUpdate a = new SchemaUpdate(config);
-        //    var config = _config.BuildConfiguration();
-        //    _config.Database(_dbSetting);
-        //{
-
-        //public NhConfigureBuilder BuildTable()
     }
 }

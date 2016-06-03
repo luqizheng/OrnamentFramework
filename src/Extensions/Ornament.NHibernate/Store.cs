@@ -9,25 +9,21 @@ using Ornament.NHibernate.Uow;
 
 namespace Ornament.NHibernate
 {
-    public abstract class Store<T, TId> :
-        IDisposable, IStore<T, TId>
+    public abstract class Store<T, TId> : StoreBase<T, TId>,
+        IDisposable
         where T : EntityWithTypedId<TId>
+        where TId : IEquatable<TId>
 
     {
-        private bool _disposed;
-
-        protected Store(IUnitOfWork context)
+        protected Store(IUnitOfWork context) : base(context)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-
             ShouldDisposeSession = true;
-            Uow = (NhSessionUnitOfWork) context;
+            var nhUow = (NhSessionUnitOfWork) context;
+            Context = nhUow.Session;
         }
 
-        protected NhSessionUnitOfWork Uow { get; }
 
-        protected ISession Context => Uow.Session;
+        protected ISession Context { get; }
 
         /// <summary>
         ///     If true then disposing this object will also dispose (close) the session. False means that external code is
@@ -35,48 +31,32 @@ namespace Ornament.NHibernate
         /// </summary>
         public bool ShouldDisposeSession { get; set; }
 
+        public override IQueryable<T> Entities => Context.Query<T>();
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        public IQueryable<T> Entities => this.Context.Query<T>();
-
-        public void SaveOrUpdate(T t)
+        public override void SaveOrUpdate(T t)
         {
             Context.SaveOrUpdate(t);
         }
 
-        public void Delete(T t)
+        public override void Delete(T t)
         {
-             Context.Delete(t);
+            Context.Delete(t);
         }
 
-        public T Get(TId id)
+        public override T Get(TId id)
         {
-            return this.Context.Get<T>(id);
+            return Context.Get<T>(id);
         }
 
-        public T Load(TId id)
+        public override T Load(TId id)
         {
             return Context.Load<T>(id);
-        }
-
-        protected void ThrowIfDisposed()
-        {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException(GetType().Name);
-            }
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            //if (disposing && Context != null && ShouldDisposeSession)
-            //{
-            //}
-            _disposed = true;
         }
     }
 }

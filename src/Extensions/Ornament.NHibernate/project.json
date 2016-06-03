@@ -8,16 +8,17 @@
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
     "Ornament": "1.0.0-*",
     "FluentNHibernate": "2.0.3"
-
-
+    
   },
-
   "frameworks": {
     //"netstandard1.5": {
-    //  "imports": [ "dnxcore50","net451" ]
+    //  "imports": [ "net462", "net452" ]
     //},
-    "net461": {
-      "imports": [ "dnxcore50", "netstandard1.5" ]
-    }
+    "net451": {
+      "imports": [ "dnxcore50", "netstandard1.5" ],
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0"
+      }
+    } 
   }
 }

@@ -11,7 +11,9 @@ namespace Ornament.Domain.Entities
     ///     For a discussion of this object, see
     ///     http://devlicio.us/blogs/billy_mccafferty/archive/2007/04/25/using-equals-gethashcode-effectively.aspx
     /// </summary>
-    public abstract class EntityWithTypedId<TId> : ValidatableObject, IEntityWithTypedId<TId>
+    public abstract class EntityWithTypedId<TId> : 
+        ValidatableObject, IEntityWithTypedId<TId>
+        where TId:IEquatable<TId>
     {
         /// <summary>
         ///     To help ensure hash code uniqueness, a carefully selected random number multiplier

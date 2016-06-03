@@ -1,30 +1,24 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
 using Ornament.Domain.Uow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ornament.NHibernate.Uow
 {
-    public class NhSessionUowFactory : IUnitOfWorkFactory
+    public class NhSessionUowFactory : UnitOfWorkFactoryBase
     {
-        private ISessionFactory _sessionFactory;
-        private IServiceCollection _services;
+        private readonly ISessionFactory _sessionFactory;
+
 
         public NhSessionUowFactory(ISessionFactory sessionFactory, IServiceCollection services)
+            : base(services)
         {
             _sessionFactory = sessionFactory;
-            _services = services;
+
         }
 
-        public bool UseTransaction
-        {
-            get; set;
-        }
+        public bool UseTransaction { get; set; }
 
-        public IUnitOfWork Create()
+        public override IUnitOfWork Create()
         {
             var result = new NhSessionUnitOfWork(_sessionFactory, UseTransaction);
             return result;

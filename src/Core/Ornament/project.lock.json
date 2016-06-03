@@ -2,6 +2,89 @@
   "locked": false,
   "version": 2,
   "targets": {
+    ".NETFramework,Version=v4.5.1": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc2-final": {
+        "type": "package",
+        "dependencies": {
+          "System.ComponentModel": "4.0.1-rc2-24027",
+          "System.Diagnostics.Debug": "4.0.11-rc2-24027",
+          "System.Globalization": "4.0.11-rc2-24027",
+          "System.Linq": "4.1.0-rc2-24027",
+          "System.Linq.Expressions": "4.0.11-rc2-24027",
+          "System.Reflection": "4.1.0-rc2-24027",
+          "System.Resources.ResourceManager": "4.0.1-rc2-24027"
+        },
+        "compile": {
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "System.ComponentModel/4.0.1-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Diagnostics.Debug/4.0.11-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Globalization/4.0.11-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Linq/4.1.0-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Linq.Expressions/4.0.11-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Reflection/4.1.0-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "System.Resources.ResourceManager/4.0.1-rc2-24027": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
     ".NETStandard,Version=v1.5": {
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc2-final": {
         "type": "package",
@@ -4141,12 +4224,16 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc2-final",
+      "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc2-final"
+    ],
+    ".NETFramework,Version=v4.5.1": [
+      "System.ComponentModel.DataAnnotations >= 4.0.0"
+    ],
+    ".NETStandard,Version=v1.5": [
       "NETStandard.Library >= 1.5.0-rc2-24027",
       "System.ComponentModel.Annotations >= 4.1.0-rc2-24027",
       "System.Linq >= 4.1.0-rc2-24027"
-    ],
-    ".NETStandard,Version=v1.5": []
+    ]
   },
   "tools": {},
   "projectFileToolGroups": {}

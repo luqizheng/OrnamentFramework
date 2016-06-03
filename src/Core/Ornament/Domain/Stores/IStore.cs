@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ornament.Domain.Entities;
 
 namespace Ornament.Domain.Stores
 {
-    public interface IStore<T, in TId>
+    public interface IStore<T, TId>
         where T : EntityWithTypedId<TId>
+        where TId : IEquatable<TId>
     {
         IQueryable<T> Entities { get; }
 

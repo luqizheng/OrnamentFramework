@@ -12,6 +12,8 @@ namespace Ornament.Identity.Dao
     public class RoleStore : Store<IdentityRole, int>, 
         IQueryableRoleStore<IdentityRole>,
         IRoleStore<IdentityRole>
+        
+
     {
         public RoleStore(IUnitOfWork context) : base(context)
         {

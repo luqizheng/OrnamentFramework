@@ -13,7 +13,7 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class UserStore<TUser, TUserId> : Store<TUser, TUserId>,
+    public class UserStore<TUser, TKey, TUserClaim, TUserRole, TUserLogin> : Store<TUser, TKey>,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
         IUserClaimStore<TUser>,
@@ -22,7 +22,10 @@ namespace Ornament.Identity.Dao
         IUserSecurityStampStore<TUser>,
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
-        where TUser : IdentityUser<TUserId>
+        where TUser : IdentityUser<TKey, TUserRole, TUserClaim, TUserLogin>
+        where TKey : IEquatable<TKey>
+        where TUserClaim:IdentityUserClaim<TKey>
+        where TUserRole:IdentityRole<TKey>
 
 
     {
