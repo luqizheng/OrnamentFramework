@@ -17,6 +17,11 @@ namespace Ornament.Identity.Dao
     /// </summary>
     public class UserStore : UserStore<IdentityUser<string>>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="describer"></param>
         public UserStore(DbContext context, IdentityErrorDescriber describer = null) : base(context, describer)
         {
         }
@@ -26,8 +31,8 @@ namespace Ornament.Identity.Dao
     ///     Creates a new instance of a persistence store for the specified user type.
     /// </summary>
     /// <typeparam name="TUser">The type representing a user.</typeparam>
-    public class UserStore<TUser> : UserStore<TUser, IdentityRole, DbContext, string>
-        where TUser : IdentityUser<string>, new()
+    public class UserStore<TUser> : UserStore<TUser, IdentityRole<string>, DbContext, string>
+        where TUser : IdentityUser<string, IdentityRole<string>, IdentityUserClaim<string>, IdentityUserLogin<string>>
     {
         public UserStore(DbContext context, IdentityErrorDescriber describer = null) : base(context, describer)
         {
@@ -41,10 +46,16 @@ namespace Ornament.Identity.Dao
     /// <typeparam name="TRole">The type representing a role.</typeparam>
     /// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
     public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContext, string>
-        where TUser : IdentityUser<string>
-        where TRole : IdentityRole<string>
+
         where TContext : DbContext
+        where TUser : IdentityUser<string, TRole, IdentityUserClaim<string>, IdentityUserLogin<string>>
+        where TRole : IdentityRole<string, IdentityRoleClaim<string>>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="describer"></param>
         public UserStore(TContext context, IdentityErrorDescriber describer = null) : base(context, describer)
         {
         }
@@ -58,26 +69,24 @@ namespace Ornament.Identity.Dao
     /// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
     /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
     public class UserStore<TUser, TRole, TContext, TKey> :
-        UserStore
-            <TUser, TRole, TContext, TKey, IdentityUserClaim<TKey>, IdentityUserLogin<TKey>,
-                IdentityUserToken<TKey>>
-        where TUser : IdentityUser<TKey>
-        where TRole : IdentityRole<TKey>
+        UserStore<TUser, TRole, TContext, TKey,
+            IdentityUserClaim<TKey>, IdentityUserLogin<TKey>, IdentityUserToken<TKey>>
+        where TUser : IdentityUser<TKey, TRole, IdentityUserClaim<TKey>, IdentityUserLogin<TKey>>
+        where TRole : IdentityRole<TKey, IdentityRoleClaim<TKey>>
         where TContext : DbContext
         where TKey : IEquatable<TKey>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="describer"></param>
         public UserStore(TContext context, IdentityErrorDescriber describer = null) : base(context, describer)
         {
         }
 
-        //protected override IdentityUserRole<TKey> CreateUserRole(TUser user, TRole role)
-        //{
-        //    return new IdentityUserRole<TKey>
-        //    {
-        //        UserId = user.Id,
-        //        RoleId = role.Id
-        //    };
-        //}
+
+
 
         protected override IdentityUserClaim<TKey> CreateUserClaim(TUser user, Claim claim)
         {
@@ -120,9 +129,7 @@ namespace Ornament.Identity.Dao
     /// <typeparam name="TUserClaim">The type representing a claim.</typeparam>
     /// <typeparam name="TUserLogin">The type representing a user external login.</typeparam>
     /// <typeparam name="TUserToken">The type representing a user token.</typeparam>
-    public abstract class UserStore<TUser, TRole, TContext, TKey, TUserClaim,
-        //TUserRole, 
-        TUserLogin, TUserToken> :
+    public abstract class UserStore<TUser, TRole, TContext, TKey, TUserClaim, TUserLogin, TUserToken> :
         IUserLoginStore<TUser>,
         IUserRoleStore<TUser>,
         IUserClaimStore<TUser>,
@@ -139,7 +146,6 @@ namespace Ornament.Identity.Dao
         where TContext : DbContext
         where TKey : IEquatable<TKey>
         where TUserClaim : IdentityUserClaim<TKey>
-        //where TUserRole : IdentityUserRole<TKey>
         where TUserLogin : IdentityUserLogin<TKey>
         where TUserToken : IdentityUserToken<TKey>
     {
@@ -1324,7 +1330,7 @@ namespace Ornament.Identity.Dao
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.RoleNotFound,
                     normalizedRoleName));
             }
-            UserRoles.Add(CreateUserRole(user, roleEntity));
+            //UserRoles.Add(CreateUserRole(user, roleEntity));
         }
 
         /// <summary>
@@ -1350,6 +1356,8 @@ namespace Ornament.Identity.Dao
             {
                 throw new ArgumentException(Resources.ValueCannotBeNullOrEmpty, nameof(normalizedRoleName));
             }
+            throw new NotImplementedException("Waiting EF's Many-to-Many");
+            /*
             var roleEntity =
                 await Roles.SingleOrDefaultAsync(r => r.NormalizedName == normalizedRoleName, cancellationToken);
             if (roleEntity != null)
@@ -1362,7 +1370,7 @@ namespace Ornament.Identity.Dao
                 {
                     UserRoles.Remove(userRole);
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -1455,7 +1463,8 @@ namespace Ornament.Identity.Dao
 
             var role =
                 await Roles.Where(x => x.NormalizedName == normalizedRoleName).FirstOrDefaultAsync(cancellationToken);
-            
+            throw new NotImplementedException("wait a ef's Many-to-many");
+            /*
             if (role != null)
             {
                 var query = from userrole in UserRoles
@@ -1465,7 +1474,7 @@ namespace Ornament.Identity.Dao
 
                 return await query.ToListAsync(cancellationToken);
             }
-            return new List<TUser>();
+            return new List<TUser>();*/
         }
 
         /// <summary>
@@ -1575,7 +1584,7 @@ namespace Ornament.Identity.Dao
         /// <param name="user"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        protected abstract TUserRole CreateUserRole(TUser user, TRole role);
+       // protected abstract TUserRole CreateUserRole(TUser user, TRole role);
 
         /// <summary>
         ///     Create a new entity representing a user claim.

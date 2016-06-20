@@ -1293,7 +1293,8 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final"
         },
         "frameworkAssemblies": [
-          "System.ComponentModel.DataAnnotations"
+          "System.ComponentModel.DataAnnotations",
+          "System.Runtime"
         ],
         "compile": {
           "net451/Ornament.dll": {}

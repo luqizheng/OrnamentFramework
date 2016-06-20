@@ -9,27 +9,28 @@ namespace Ornament.NHibernate.Configruation
 {
     public static class ConfigExtender
     {
-        public static NhConfigureBuilder MsSql2012(this IServiceCollection serviceCollection)
+        public static NhUowFactoryProvider MsSql2012(this IServiceCollection serviceCollection, string connectString)
         {
-            return Mssql(serviceCollection, MsSqlConfiguration.MsSql2012);
+            var dbSettining = MsSqlConfiguration.MsSql2012;
+            dbSettining.ConnectionString(connectString);
+            return Mssql(serviceCollection, dbSettining);
         }
 
-        public static NhConfigureBuilder MsSql2008(this IServiceCollection serviceCollection)
+        public static NhUowFactoryProvider MsSql2008(this IServiceCollection serviceCollection, string connectString)
         {
-            return Mssql(serviceCollection, MsSqlConfiguration.MsSql2008);
+            var dbSettining = MsSqlConfiguration.MsSql2008;
+            dbSettining.ConnectionString(connectString);
+            return Mssql(serviceCollection, dbSettining);
         }
 
-        private static NhConfigureBuilder Mssql(IServiceCollection serviceCollection,
+        private static NhUowFactoryProvider Mssql(IServiceCollection serviceCollection,
             MsSqlConfiguration dbSetting)
         {
             var config = Fluently.Configure();
             config.Database(dbSetting);
-            //这里需要延迟创建。因为可能还没有build好NH的配置。所以不能用addinstance
-            serviceCollection.AddSingleton(i => config.BuildSessionFactory());
-            serviceCollection.AddSingleton<IUnitOfWorkFactory>(i => new NhSessionUowFactory(i.GetService<ISessionFactory>(), serviceCollection));
-            serviceCollection.AddScoped(i => i.GetService<IUnitOfWorkFactory>().Create());
-
-            return new NhConfigureBuilder(config, dbSetting);
+            var ins = new NhUowFactoryProvider(config, dbSetting, serviceCollection);
+            serviceCollection.AddSingleton(i => ins.Create());
+            return ins;
         }
     }
 }

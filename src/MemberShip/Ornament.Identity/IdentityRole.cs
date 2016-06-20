@@ -46,9 +46,11 @@ namespace Ornament.Identity
     /// </summary>
     /// <typeparam name="TKey">The type used for the primary key for the role.</typeparam>
     /// <typeparam name="TRoleClaim">The type used for role claims.</typeparam>
-    public class IdentityRole<TKey,  TRoleClaim>
+    public class IdentityRole<TKey, TRoleClaim>
+        : Ornament.Domain.Entities.EntityWithTypedId<TKey>
         where TKey : IEquatable<TKey>
         where TRoleClaim : IdentityRoleClaim<TKey>
+
     {
         /// <summary>
         /// Initializes a new instance of <see cref="IdentityRole{TKey}"/>.
@@ -64,7 +66,7 @@ namespace Ornament.Identity
             Name = roleName;
         }
 
-      
+
         /// <summary>
         /// Navigation property for claims in this role.
         /// </summary>

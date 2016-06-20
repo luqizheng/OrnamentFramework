@@ -6,13 +6,16 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class PermissionStore<TUser, TUserId, TUserClaim, TUserRole, TUserLogin>
+    public class PermissionStore<TUser, TKey, TUserClaim, TRole, TUserLogin>
         : Store<Permission, int>
-        , IUserPermissionStore<TUser, TUserId, TUserClaim, TUserRole, TUserLogin>
-        , IPermissionStore
+            , IUserPermissionStore<TUser, TKey, TUserClaim, TRole, TUserLogin>
+            , IPermissionStore
+        where TUser : IdentityUser<TKey, TRole, TUserClaim, TUserLogin>
+        where TKey : IEquatable<TKey>
+        where TUserClaim : IdentityUserClaim<TKey>
+        where TRole : IdentityRole<TKey>
+        where TUserLogin : IdentityUserLogin<TKey>
 
-        where TUser : IdentityUser<TUserId, TUserClaim, TUserRole, TUserLogin>
-        where TUserId : IEquatable<TUserId>
 
     {
         public PermissionStore(IUnitOfWork context) : base(context)

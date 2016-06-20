@@ -1,7 +1,1 @@
-#:C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.EntityFramework\Ornament.EntityFramework.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.EntityFramework\Ornament.EntityFramework.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
-#:C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.EntityFramework\Ornament.Identity.Dao.EntityFramework.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.EntityFramework\Ornament.Identity.Dao.EntityFramework.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.EntityFramework\Ornament.EntityFramework.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.EntityFramework\Ornament.Identity.Dao.EntityFramework.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity\Ornament.Identity.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.EntityFramework\Ornament.EntityFramework.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity\Ornament.Identity.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
+#:C:\Users\leo\Documents\GitHub\OrnamentFramework\src\WebApplication\WebApi\WebApi.xproj

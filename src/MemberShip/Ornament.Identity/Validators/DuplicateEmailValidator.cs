@@ -14,8 +14,11 @@ namespace Ornament.Identity.Validators
     /// <typeparam name="TUserClaim"></typeparam>
     /// <typeparam name="TUserLogin"></typeparam>
     public class UniqueEmailValidator<TUser, TKey, TUserClaim, TUserRole, TUserLogin> : IUserValidator<TUser>
-        where TUser : IdentityUser<TKey, TUserClaim, TUserRole, TUserLogin>
+        where TUser : IdentityUser<TKey, TUserRole, TUserClaim, TUserLogin>
         where TKey : IEquatable<TKey>
+        where TUserRole : IdentityRole<TKey>
+        where TUserClaim : IdentityUserClaim<TKey>
+        where TUserLogin : IdentityUserLogin<TKey>
 
     {
         public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user)

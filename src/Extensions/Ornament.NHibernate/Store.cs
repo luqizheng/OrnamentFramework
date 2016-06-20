@@ -18,7 +18,7 @@ namespace Ornament.NHibernate
         protected Store(IUnitOfWork context) : base(context)
         {
             ShouldDisposeSession = true;
-            var nhUow = (NhSessionUnitOfWork) context;
+            var nhUow = (NhUow) context;
             Context = nhUow.Session;
         }
 

@@ -9,19 +9,18 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class RoleStore : Store<IdentityRole, int>, 
-        IQueryableRoleStore<IdentityRole>,
-        IRoleStore<IdentityRole>
-        
-
+    public abstract class RoleStore<TKey> :
+        Store<IdentityRole<TKey>, TKey>,
+        IQueryableRoleStore<IdentityRole<TKey>>
+        where TKey : IEquatable<TKey>
     {
-        public RoleStore(IUnitOfWork context) : base(context)
+        protected RoleStore(IUnitOfWork context) : base(context)
         {
         }
 
-        public IQueryable<IdentityRole> Roles => Entities;
+        public IQueryable<IdentityRole<TKey>> Roles => Entities;
 
-        public Task SetNormalizedRoleNameAsync(IdentityRole role, string normalizedName, CancellationToken cancellationToken)
+        public Task SetNormalizedRoleNameAsync(IdentityRole<TKey> role, string normalizedName, CancellationToken cancellationToken)
         {
             if (role == null) throw new ArgumentNullException(nameof(role));
             if (normalizedName == null) throw new ArgumentNullException(nameof(normalizedName));
@@ -30,42 +29,42 @@ namespace Ornament.Identity.Dao
             return Task.FromResult(0);
         }
 
-        public Task<IdentityRole> FindByIdAsync(string roleId, CancellationToken cancellationToken)
+        public Task<IdentityRole<TKey>> FindByIdAsync(string roleId, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return Task.Run(() => Context.Get<IdentityRole>(roleId), cancellationToken);
+            return Task.Run(() => Context.Get<IdentityRole<TKey>>(roleId), cancellationToken);
         }
 
-        public virtual Task<IdentityRole> FindByNameAsync(string roleName, CancellationToken cancellationToken)
+        public virtual Task<IdentityRole<TKey>> FindByNameAsync(string roleName, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             if (string.IsNullOrEmpty(roleName)) throw new ArgumentNullException(nameof(roleName));
             return
-                Task.Run(() => Context.Query<IdentityRole>().FirstOrDefault(u => u.Name.ToUpper() == roleName.ToUpper()),
+                Task.Run(() => Context.Query<IdentityRole<TKey>>().FirstOrDefault(u => u.Name.ToUpper() == roleName.ToUpper()),
                     cancellationToken);
         }
 
-        public Task<string> GetRoleIdAsync(IdentityRole role, CancellationToken cancellationToken)
+        public Task<string> GetRoleIdAsync(IdentityRole<TKey> role, CancellationToken cancellationToken)
         {
             return Task.FromResult(role.Id.ToString());
         }
 
-        public Task<string> GetRoleNameAsync(IdentityRole role, CancellationToken cancellationToken)
+        public Task<string> GetRoleNameAsync(IdentityRole<TKey> role, CancellationToken cancellationToken)
         {
             return Task.FromResult(role.Name);
         }
 
-        public Task SetRoleNameAsync(IdentityRole role, string roleName, CancellationToken cancellationToken)
+        public Task SetRoleNameAsync(IdentityRole<TKey> role, string roleName, CancellationToken cancellationToken)
         {
             return Task.Run(() => { role.Name = roleName; }, cancellationToken);
         }
 
-        public Task<string> GetNormalizedRoleNameAsync(IdentityRole role, CancellationToken cancellationToken)
+        public Task<string> GetNormalizedRoleNameAsync(IdentityRole<TKey> role, CancellationToken cancellationToken)
         {
             return Task.FromResult(role.NormalizedName);
         }
 
-        public Task<IdentityResult> CreateAsync(IdentityRole role, CancellationToken cancellationToken)
+        public Task<IdentityResult> CreateAsync(IdentityRole<TKey> role, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             if (role == null)
@@ -78,7 +77,7 @@ namespace Ornament.Identity.Dao
             }, cancellationToken);
         }
 
-        public virtual Task<IdentityResult> DeleteAsync(IdentityRole role, CancellationToken cancellationToken)
+        public virtual Task<IdentityResult> DeleteAsync(IdentityRole<TKey> role, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             if (role == null)
@@ -93,7 +92,7 @@ namespace Ornament.Identity.Dao
             }, cancellationToken);
         }
 
-        public virtual Task<IdentityResult> UpdateAsync(IdentityRole role, CancellationToken cancellationToken)
+        public virtual Task<IdentityResult> UpdateAsync(IdentityRole<TKey> role, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
             if (role == null)

@@ -5,10 +5,10 @@ namespace Ornament.Identity.Dao.Mapping
 {
     public abstract class IdentityUserMaping<TUser, TKey, TUserClaim, TUserRole, TUserLogin>
         : ClassMap<TUser>
-        where TUser : IdentityUser<TKey, TUserClaim, TUserRole, TUserLogin>
+        where TUser : IdentityUser<TKey, TUserRole, TUserClaim, TUserLogin>
         where TKey : IEquatable<TKey>
         where TUserClaim : IdentityUserClaim<TKey>
-        where TUserRole : IdentityUserRole<TKey>
+        where TUserRole : IdentityRole<TKey>
         where TUserLogin : IdentityUserLogin<TKey>
     {
         protected IdentityUserMaping()

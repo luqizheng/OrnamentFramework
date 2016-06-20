@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Ornament.Domain.Uow;
@@ -7,11 +6,23 @@ using Ornament.Domain.Uow;
 namespace Ornament.Web.Uow
 {
     public class UnitOfWorkAttribute : ActionFilterAttribute
-
     {
+        private readonly string _name;
+
+        public UnitOfWorkAttribute():this("default")
+        {
+        }
+
+        public UnitOfWorkAttribute(string name)
+        {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            _name = name;
+        }
+
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
-            return ActivatorUtilities.GetServiceOrCreateInstance<IUnitOfWork>(context);
+            var provider = ActivatorUtilities.GetServiceOrCreateInstance<IUnitOfWork>(context);
+            return provider;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -32,7 +43,6 @@ namespace Ornament.Web.Uow
                 uow.Close();
             }
             base.OnResultExecuted(context);
-            
         }
     }
 }
