@@ -48,8 +48,10 @@ namespace Ornament.Identity
     /// <typeparam name="TUserClaim">The type representing a claim.</typeparam>
     /// <typeparam name="TRole">The type representing a user role.</typeparam>
     /// <typeparam name="TUserLogin">The type representing a user external login.</typeparam>
-    public class IdentityUser<TKey, TRole, TUserClaim, TUserLogin> 
+    public class IdentityUser<TKey, TRole, TUserClaim, TUserLogin>
+        : Ornament.Domain.Entities.EntityWithTypedId<TKey>
         where TKey : IEquatable<TKey>
+
     {
         /// <summary>
         /// Initializes a new instance of <see cref="IdentityUser{TKey}"/>.

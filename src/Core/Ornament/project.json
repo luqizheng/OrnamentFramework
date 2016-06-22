@@ -2,7 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final"
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final"
   },
 
   "frameworks": {
@@ -12,7 +12,7 @@
         "NETStandard.Library": "1.5.0-rc2-24027",
         "System.ComponentModel.Annotations": "4.1.0-rc2-24027",
         "System.Linq": "4.1.0-rc2-24027"
-        
+
       }
     },
     "net451": {
@@ -22,6 +22,6 @@
         "System.ComponentModel.DataAnnotations": "4.0.0.0",
         "System.Runtime": "4.0.10.0"
       }
-    } 
+    }
   }
 }

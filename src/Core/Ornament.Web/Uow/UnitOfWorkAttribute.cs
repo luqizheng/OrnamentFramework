@@ -9,7 +9,7 @@ namespace Ornament.Web.Uow
     {
         private readonly string _name;
 
-        public UnitOfWorkAttribute():this("default")
+        public UnitOfWorkAttribute()
         {
         }
 
@@ -21,8 +21,16 @@ namespace Ornament.Web.Uow
 
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
-            var provider = ActivatorUtilities.GetServiceOrCreateInstance<IUnitOfWork>(context);
-            return provider;
+            var result = context.GetService<IUnitOfWork>();
+            if (result == null)
+            {
+                var provider = context.GetService<IUnitOfWorkProvider>();
+
+                if (!String.IsNullOrEmpty(_name))
+                    provider.Begin(_name);
+                provider.Begin();
+            }
+            return context.GetService<IUnitOfWork>();
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)

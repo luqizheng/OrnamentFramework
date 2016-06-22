@@ -1,29 +1,77 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Tool.hbm2ddl;
 using Ornament.Domain.Uow;
 
 namespace Ornament.NHibernate.Uow
 {
-    public class NhUowFactory : UnitOfWorkFactoryBase
+    public class NhUowFactory : IUnitOfWorkFactory
     {
-        private readonly ISessionFactory _sessionFactory;
+        private readonly FluentConfiguration _config;
 
-        public NhUowFactory(ISessionFactory sessionFactory, IServiceCollection services)
-            : base(services)
+
+        private readonly object _sessionFactoryLocke = 1;
+        private ISessionFactory _sessionFactory;
+
+        public NhUowFactory(FluentConfiguration config)
         {
-            _sessionFactory = sessionFactory;
+            _config = config;
+        }
+        public bool BeginTransaction { get; set; }
+        public bool OpenStateless { get; set; }
+        /// <summary>
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        public IUnitOfWork Create()
+        {
+            if (_sessionFactory == null)
+            {
+                lock (_sessionFactoryLocke)
+                {
+                    if (_sessionFactory == null)
+                        _sessionFactory = _config.BuildSessionFactory();
+                }
+            }
+            if (OpenStateless)
+                return new NhUowStateless(_sessionFactory, BeginTransaction);
+            return new NhUow(_sessionFactory, BeginTransaction);
         }
 
-        public bool OpenStateLessSession { get; set; }
-
-        public bool UseTransaction { get; set; }
-
-        public override IUnitOfWork Create()
+        public NhUowFactory AddAssemblyOf<T>()
         {
-            var result = new NhUow(_sessionFactory, UseTransaction);
-            return result;
+            _config.Mappings(m =>
+                m.FluentMappings.AddFromAssemblyOf<T>());
+            return this;
+        }
+
+        public NhUowFactory AddAssemblyOf(Type typeOfMappingClass)
+        {
+            _config.Mappings(m =>
+                m.FluentMappings.AddFromAssembly(typeOfMappingClass.Assembly));
+
+            return this;
+        }
+
+        public NhUowFactory AddType(Type t)
+        {
+            _config.Mappings(m =>
+                m.FluentMappings.Add(t));
+
+            return this;
+        }
+
+        public NhUowFactory UpdateSchema(bool updateDbStructure)
+        {
+            var config = _config.BuildConfiguration();
+            var export = new SchemaExport(config);
+            export.Create(true, true);
+            return this;
         }
     }
-
-
 }

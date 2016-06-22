@@ -14,6 +14,7 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
+    
     public abstract class UserStore<TUser, TKey, TUserClaim, TUserRole, TUserLogin> :
         Ornament.NHibernate.Store<TUser, TKey>,
         IUserLoginStore<TUser>,
@@ -49,7 +50,7 @@ namespace Ornament.Identity.Dao
             {
                 var r = user.Claims.Select(v => new Claim(v.ClaimType, v.ClaimValue));
                 return r.ToList();
-            });
+            }, cancellationToken);
         }
 
         public Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
@@ -174,7 +175,7 @@ namespace Ornament.Identity.Dao
             ThrowIfDisposed();
             if (user == null)
             {
-                throw new ArgumentNullException("user");
+                throw new ArgumentNullException(nameof(user));
             }
             user.EmailConfirmed = confirmed;
             return Task.FromResult(0);
@@ -183,7 +184,7 @@ namespace Ornament.Identity.Dao
         public Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return GetUserAggregateAsync((TUser u) => u.NormalizedEmail.ToUpper() == normalizedEmail.ToUpper(),
+            return GetUserAggregateAsync(u => u.NormalizedEmail.ToUpper() == normalizedEmail.ToUpper(),
                 cancellationToken);
         }
 

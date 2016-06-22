@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Reflection;
-using System.Reflection.Emit;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Ornament.Identity.Dao;
-using Ornament.NHibernate.Configruation;
 using Ornament.NHibernate.Uow;
 
-//using Microsoft.Framework.DependencyInjection;
-
-// ReSharper disable CheckNamespace
-
 namespace Ornament.Identity
-// ReSharper restore CheckNamespace
 {
     public static class NHibernateIdentityExtension
     {
         public static IdentityBuilder AddNhibernateStores(this IdentityBuilder builder,
-            NhUowFactoryProvider nhbuilder)
+            NhUowFactory nhbuilder)
         {
             var roleIdType = typeof(IdentityRole);
             var userIdType = builder.UserType.BaseType.GetGenericArguments()[0];

@@ -1,33 +1,26 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
 using NHibernate;
-using NHibernate.Context;
 using Ornament.Domain.Uow;
-using System;
 
 namespace Ornament.NHibernate.Uow
 {
-    public class NhUow : IUnitOfWork
+    public class NhUowStateless : IUnitOfWork
     {
         private readonly ISessionFactory _sessionFactory;
-        private ISession _session;
+        private IStatelessSession _session;
         private bool _disposed = false;
         private readonly bool _useTransaction;
-
-        public NhUow(ISessionFactory sessionFactory, bool useTransaction = false)
+        public NhUowStateless(ISessionFactory sessionFactory, bool useTransaction = true)
         {
-            if (sessionFactory == null)
-                throw new ArgumentNullException(nameof(sessionFactory));
+            if (sessionFactory == null) throw new ArgumentNullException(nameof(sessionFactory));
             _sessionFactory = sessionFactory;
             _useTransaction = useTransaction;
         }
-
         public void Begin()
         {
             ThrowIfDisposed();
-
-
             if (_sessionFactory != null)
-                _session = _sessionFactory.OpenSession();
+                _session = _sessionFactory.OpenStatelessSession();
             if (_useTransaction)
             {
                 _session.BeginTransaction();
@@ -45,7 +38,6 @@ namespace Ornament.NHibernate.Uow
             {
                 _session.Transaction.Commit();
             }
-            _session.Flush();
         }
 
         public void Rollback()
@@ -76,7 +68,7 @@ namespace Ornament.NHibernate.Uow
                 this._session.Close();
         }
 
-        public ISession Session
+        public IStatelessSession Session
         {
             get
             {

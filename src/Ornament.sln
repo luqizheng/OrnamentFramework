@@ -38,8 +38,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Ornament.Identity.Dao.NhImp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassicWebApplication", "WebApplication\ClassicWebApplication\ClassicWebApplication.csproj", "{65D7B7A1-1B33-46C0-8985-415BC7264A10}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wiki", "Wiki", "{076F59B4-F419-48B8-B3EF-3FB5383954A4}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Ornament.Identity.Dao.EntityFramework", "MemberShip\Ornament.Identity.Dao.EntityFramework\Ornament.Identity.Dao.EntityFramework.xproj", "{AD6E4E4F-1218-40B6-B92E-6E1175444B5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{8F284497-F9E4-4657-A3F0-E87ED788B14B}"

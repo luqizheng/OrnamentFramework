@@ -10,5 +10,9 @@ namespace Ornament.EntityFramework.Uow
         {
             throw new NotImplementedException();
         }
+
+        public EfUowFactory(string name) : base(name)
+        {
+        }
     }
 }
