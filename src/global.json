@@ -1,7 +1,0 @@
-{
-  "projects": [ "Util", "MemberShip", "Core", "Extensions" ],
-  "sdk": {
-    "version": "1.0.0-preview1-002702"
-  }
-}
-

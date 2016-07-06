@@ -22,14 +22,14 @@ namespace Ornament.Web.Uow
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
             var result = context.GetService<IUnitOfWork>();
-            if (result == null)
-            {
-                var provider = context.GetService<IUnitOfWorkProvider>();
+            if (result != null)
+                return context.GetService<IUnitOfWork>();
 
-                if (!String.IsNullOrEmpty(_name))
-                    provider.Begin(_name);
+            var provider = context.GetService<IUnitOfWorkProvider>();
+            if (!string.IsNullOrEmpty(_name))
+                provider.Begin(_name);
+            else
                 provider.Begin();
-            }
             return context.GetService<IUnitOfWork>();
         }
 

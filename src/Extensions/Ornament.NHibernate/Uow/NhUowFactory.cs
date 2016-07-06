@@ -17,8 +17,10 @@ namespace Ornament.NHibernate.Uow
 
         public NhUowFactory(FluentConfiguration config)
         {
+            if (config == null) throw new ArgumentNullException(nameof(config));
             _config = config;
         }
+
         public bool BeginTransaction { get; set; }
         public bool OpenStateless { get; set; }
         /// <summary>

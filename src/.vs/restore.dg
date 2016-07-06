@@ -1,10 +1,1 @@
-#:C:\Users\leo\Documents\GitHub\OrnamentFramework\src\WebApplication\WebApi\WebApi.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\WebApplication\WebApi\WebApi.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\WebApplication\WebApi\WebApi.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity\Ornament.Identity.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\WebApplication\WebApi\WebApi.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.NhImple\Ornament.Identity.Dao.NhImple.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\WebApplication\WebApi\WebApi.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.NHibernate\Ornament.NHibernate.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity\Ornament.Identity.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.NhImple\Ornament.Identity.Dao.NhImple.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.NhImple\Ornament.Identity.Dao.NhImple.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity\Ornament.Identity.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\MemberShip\Ornament.Identity.Dao.NhImple\Ornament.Identity.Dao.NhImple.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.NHibernate\Ornament.NHibernate.xproj
-C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Extensions\Ornament.NHibernate\Ornament.NHibernate.xproj|C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Core\Ornament\Ornament.xproj
+#:C:\Users\leo\Documents\GitHub\OrnamentFramework\src\Notify\Ornament.Notify\Ornament.Notify.xproj

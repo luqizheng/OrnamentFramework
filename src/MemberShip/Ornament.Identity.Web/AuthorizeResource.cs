@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.AccessControl;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Ornament.Identity.Stores;
@@ -15,7 +11,6 @@ namespace Ornament.Identity.Web
 
     public class AuthorizeResourceAttribute : ActionFilterAttribute, IAuthorizationFilter
     {
-
         private readonly object _resourceId;
         private readonly Enum _val;
 
@@ -24,18 +19,20 @@ namespace Ornament.Identity.Web
             _resourceId = resourceId;
             _val = val;
         }
+
         /// <summary>
         /// </summary>
         public Enum Operator { get; set; }
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             if (context.HttpContext.User == null || !context.HttpContext.User.Identity.IsAuthenticated)
                 // auth failed, redirect to login page
-                context.Result =new UnauthorizedResult();
-            
-            IPermissionStore dao = (IPermissionStore)context.HttpContext.RequestServices.GetService(typeof(IPermissionStore));
+                context.Result = new UnauthorizedResult();
+
+            var dao = (IPermissionStore) context.HttpContext.RequestServices.GetService(typeof(IPermissionStore));
             var userId = context.HttpContext.User.Identity.Name;
-            IList<Permission> result = dao.Find(userId);
+            var result = dao.Find(userId);
             //if (ResourceType != typeof(string))
             //{
             //    var res =
@@ -59,17 +56,16 @@ namespace Ornament.Identity.Web
             }
             else
             {
-                context.Result = new UnauthorizedResult(); ;
+                context.Result = new UnauthorizedResult();
             }
-
         }
 
-        //private void CacheValidateHandler(HttpContext context, object data, ref HttpValidationStatus validationStatus)
-        //{
-        //    validationStatus = OnCacheAuthorization(new HttpContextWrapper(context));
-        //}
-
         //// This method must be thread-safe since it is called by the caching module.
+        //}
+        //    validationStatus = OnCacheAuthorization(new HttpContextWrapper(context));
+        //{
+
+        //private void CacheValidateHandler(HttpContext context, object data, ref HttpValidationStatus validationStatus)
         //protected virtual HttpValidationStatus OnCacheAuthorization(HttpContextBase httpContext)
         //{
         //    if (httpContext == null)
@@ -80,6 +76,5 @@ namespace Ornament.Identity.Web
         //    bool isAuthorized = AuthorizeCore(httpContext);
         //    return (isAuthorized) ? HttpValidationStatus.Valid : HttpValidationStatus.IgnoreThisRequest;
         //}
-       
     }
 }
