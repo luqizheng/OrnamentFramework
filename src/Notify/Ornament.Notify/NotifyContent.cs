@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using Ornament.Notify.Templates;
 
 namespace Ornament.Notify
 {
     public class NotifyContent
     {
-        private IDictionary<string, Template> _contents;
+        private IDictionary<string, Template.TemplateContent> _contents;
 
         public NotifyContent(string key)
         {
@@ -18,6 +17,7 @@ namespace Ornament.Notify
 
         public virtual string Key { get; private set; }
 
-        public virtual IDictionary<string, Template> Contents => _contents ?? (_contents = new ConcurrentDictionary<string, Template>());
+        public virtual IDictionary<string, Template.TemplateContent> Contents
+            => _contents ?? (_contents = new ConcurrentDictionary<string, Template.TemplateContent>());
     }
 }

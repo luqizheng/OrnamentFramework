@@ -3,8 +3,7 @@
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
-    "System.ComponentModel.Annotations": "4.1.0",
-    "System.Linq": "4.1.0",
+   
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Ornament": "1.0.0-*"
@@ -12,7 +11,17 @@
 
   "frameworks": {
     "netstandard1.6": {
-      "imports": [ "dnxcore50", "net461","net451" ]
+      "imports": [ "dnxcore50", "net461", "net451" ],
+      "dependencies": {
+        "System.ComponentModel.Annotations": "4.1.0",
+        "System.Linq": "4.1.0"
+      }
+    },
+    "net451": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0.0",
+        "System.Linq": "4.0.0"
+      }
     }
   }
 }

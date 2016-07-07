@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "NHibernate": "4.0.4.4000",
+    /*"NETStandard.Library": "1.6.0",*/
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Ornament": "1.0.0-*",
+    "FluentNHibernate": "2.0.3",
+    "System.Data.Common": "4.1.0"
+  },
+  "frameworks": {
+    //"netstandard1.6": {
+    //  "imports": [ "dnxcore50", "net462", "net451" ]
+    //}
+    "net461": {
+      "imports": "dnxcore50",
+      "frameworkAssemblies": {
+        "System": "4.0.0.0"
+      }
+    } 
+  }
+}
+

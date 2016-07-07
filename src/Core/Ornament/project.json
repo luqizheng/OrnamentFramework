@@ -7,11 +7,12 @@
 
   "frameworks": {
     "netstandard1.6": {
-      "imports": [ "dnxcore50" ],
+      "imports": [ "dnxcore50","net451","net461" ],
       "dependencies": {
         "NETStandard.Library": "1.6.0",
         "System.ComponentModel.Annotations": "4.1.0",
-        "System.Linq": "4.1.0"
+        "System.Linq": "4.1.0",
+        "System.Collections.Concurrent": "4.0.12"
 
       }
     },
