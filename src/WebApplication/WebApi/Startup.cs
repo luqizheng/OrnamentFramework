@@ -28,6 +28,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            
             services.AddMvc();
         }
 
@@ -36,7 +37,7 @@ namespace WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+          
             app.UseMvc();
         }
     }
