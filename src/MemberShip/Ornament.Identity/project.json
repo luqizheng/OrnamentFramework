@@ -6,12 +6,12 @@
     "netstandard1.6": {
       "imports": "dnxcore50"
     },
-    "net451": { }
+    "net451": {}
   },
   "dependencies": {
     "NETStandard.Library": "1.6.0",
-    "Microsoft.AspNetCore.Identity": "1.0.0-rc2-final",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Identity": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Ornament": "1.0.0-*"
   }
 }
