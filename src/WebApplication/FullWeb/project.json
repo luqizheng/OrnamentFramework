@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
-    },
+    //"Microsoft.NETCore.App": {
+    //  "version": "1.0.0",
+    //  "type": "platform"
+    //},
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Razor.Tools": {
@@ -19,7 +19,12 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+    "Ornament": "1.0.0-*",
+    "Ornament.Identity": "1.0.0-*",
+    "Ornament.Identity.Dao.NhImple": "1.0.0-*",
+    "Ornament.NHibernate": "1.0.0-*",
+    "Ornament.Web": "1.0.0-*"
   },
 
   "tools": {
@@ -29,12 +34,14 @@
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "dotnet5.6",
-        "portable-net45+win8"
-      ]
-    }
+    "net461": {}
+    //"netcoreapp1.0": {
+    //  "imports": [
+    //    "dotnet5.6",
+    //    "portable-net45+win8"
+    //  ]
+    //}
+
   },
 
   "buildOptions": {

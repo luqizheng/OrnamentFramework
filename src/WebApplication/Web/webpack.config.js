@@ -1,18 +1,16 @@
 ﻿var fs = require("fs");
 var path = require('path');
 var glob = require('glob');
-var BowerWebpackPlugin = require("bower-webpack-plugin");
-
 
 module.exports = {
     entry: './wwwroot/src/main.js',
     devtool: "inline-source-map",
     output: {
-        filename: "[name].js",
-        path: "wwwroot/scripts"
+        filename: "[name].js"
+        //path: "wwwroot/scripts"
     },
     resolve: {
-        extensions: ["", ".ts", ".js", ".css", ".less", ".scss", ".png", ".jpg", ".jpeg"],
+        extensions: ["", ".ts", ".js"],
         alias: {
             'jquery': __dirname + "/Scripts/jquery-2.2.2.min.js",
             'avalon': __dirname + "/Scripts/avalon.mobile.shim.min.js",
@@ -25,29 +23,27 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.ts$/, loader: 'ts-loader' },
-        {
-            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "url-loader?limit=10000&mimetype=application/font-woff"
-        },
-{
-    test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-    loader: "file-loader"
-}
+            {                
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            },           
+            {
+                test: /\.less$/,
+                loader: "style!css!less"
+            }
         ],
         preLoaders: [
-          {
-              test: /\.ts$/,
-              loader: "tslint-loader"
-          }
+            {
+                test: /\.ts$/,
+                loader: "tslint-loader"
+            }
         ]
     },
-    plugins: [new BowerWebpackPlugin({
-        modulesDirectories: ["wwwroot/lib/"],
-        manifestFiles: "bower.json",
-        includes: /.*/,
-        excludes: ["*.scss"],
-        searchResolveModulesDirectories: true
-    })],
+    plugins: [],
     externals: {
         'jquery': 'jQuery',
         '$': 'jquery',

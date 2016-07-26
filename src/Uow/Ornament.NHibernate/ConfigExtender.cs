@@ -36,9 +36,5 @@ namespace Ornament.NHibernate
             return ins;
         }
 
-        public static NhUowFactory Configuration(this IServiceCollection serviceCollection, FluentConfiguration config)
-        {
-            return new NhUowFactory(config);
-        }
     }
 }

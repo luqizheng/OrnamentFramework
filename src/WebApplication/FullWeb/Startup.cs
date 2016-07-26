@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FullWeb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using Ornament.Domain.Uow;
+using Ornament.NHibernate;
+using Ornament.NHibernate.Uow;
+using Ornament.Identity.Dao;
 namespace FullWeb
 {
     public class Startup
@@ -29,6 +33,14 @@ namespace FullWeb
         {
             // Add framework services.
             services.AddMvc();
+
+            var uowFactory = services.AddUnitOfWorkProvider()
+                .MsSql2008(Configuration.GetConnectionString("default"));
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddNhibernateStores(uowFactory);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +67,8 @@ namespace FullWeb
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }

@@ -84,13 +84,7 @@
 /src/Extends/CRM/Qi.CRM/bin
 obj
 bin
-/src/Mvc5WebApplication/Mappings
-/src/Mvc5WebApplication/log
-/src/Chat/.idea
-/src/chat/node_modules
-/src/vNext/node_modules
-/Src/vNext/bower_components
-/src/vNext/wwwroot/lib
-/src/vNext/wwwroot/css
-/src/vNext/node_modules
-/src/Mvc5/node_modules
+
+node_modules
+/src/WebApplication/Web/wwwroot/lib
+/src/WebApplication/Web/wwwroot/scripts

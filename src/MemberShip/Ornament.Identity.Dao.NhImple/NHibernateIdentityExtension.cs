@@ -1,18 +1,17 @@
 ﻿using System;
-using Microsoft.AspNet.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Ornament.Identity.Dao;
+using Microsoft.AspNetCore.Identity;
 using Ornament.NHibernate.Uow;
-
-namespace Ornament.Identity
+using Microsoft.Extensions.DependencyInjection;
+namespace Ornament.Identity.Dao
 {
     public static class NHibernateIdentityExtension
     {
         public static IdentityBuilder AddNhibernateStores(this IdentityBuilder builder,
             NhUowFactory nhbuilder)
         {
-            var roleIdType = typeof(IdentityRole);
+
             var userIdType = builder.UserType.BaseType.GetGenericArguments()[0];
+            var roleIdType = builder.RoleType.BaseType.GetGenericArguments()[0];
             GetDefaultServices(builder.UserType, builder.RoleType, builder, userIdType, roleIdType);
             nhbuilder.AddAssemblyOf(builder.UserType);
             nhbuilder.AddAssemblyOf(typeof(NHibernateIdentityExtension));
@@ -24,10 +23,10 @@ namespace Ornament.Identity
 
 
         private static void GetDefaultServices(Type userType,
-            Type roletype, IdentityBuilder builder, Type userIdType, Type roleIdType)
+            Type roletype, IdentityBuilder builder, Type userIdType,Type roleIdType)
         {
-            var userStoreType = typeof(UserStore<,,,,>).MakeGenericType(userType, userIdType);
-            var roleStoreType = typeof(RoleStore<>).MakeGenericType(userIdType);
+            var userStoreType = typeof(UserStore<,,>).MakeGenericType(userType, roletype, userIdType);
+            var roleStoreType = typeof(RoleStore<,>).MakeGenericType(roletype, roleIdType);
 
             var service1 = typeof(IUserStore<>).MakeGenericType(userType);
 

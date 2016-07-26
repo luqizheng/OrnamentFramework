@@ -14,7 +14,8 @@ namespace Ornament.Domain.Uow
 
         public DefaultUnitOfWorkProvider(IServiceCollection services)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (services == null)
+                throw new ArgumentNullException(nameof(services));
             _services = services;
         }
 

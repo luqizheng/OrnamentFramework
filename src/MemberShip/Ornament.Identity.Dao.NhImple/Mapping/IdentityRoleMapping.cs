@@ -11,8 +11,15 @@ namespace Ornament.Identity.Dao.Mapping
         {
             Table("mbs_roles");
             Map(x => x.Name).Unique().Length(255).Not.Nullable();
-            Id(s => s.Id).GeneratedBy.SequenceIdentity();
+
             Map(x => x.NormalizedName).Length(255);
+
+            ExtendSetting();
+        }
+
+        public virtual void ExtendSetting()
+        {
+
         }
     }
 }

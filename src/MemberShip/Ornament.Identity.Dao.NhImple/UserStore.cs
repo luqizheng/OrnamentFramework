@@ -5,8 +5,7 @@ using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using NHibernate;
+using Microsoft.AspNetCore.Identity;
 using NHibernate.Criterion;
 using NHibernate.Linq;
 using Ornament.Domain.Uow;
@@ -14,9 +13,25 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    
-    public abstract class UserStore<TUser, TKey, TUserClaim, TUserRole, TUserLogin> :
-        Ornament.NHibernate.Store<TUser, TKey>,
+    public class UserStore : UserStore<string, IdentityRole>
+    {
+        public UserStore(IUnitOfWork session) : base(session)
+        {
+        }
+    }
+    public class UserStore<TKey, TRole>
+        : UserStore<IdentityUser<TKey, TRole>, TKey, TRole>
+          where TKey : IEquatable<TKey>
+        where TRole : IdentityRole<TKey>
+    {
+        public UserStore(IUnitOfWork session) : base(session)
+        {
+        }
+    }
+
+
+    public class UserStore<TUser, TKey, TRole> :
+        Store<TUser, TKey>,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
         IUserClaimStore<TUser>,
@@ -25,11 +40,11 @@ namespace Ornament.Identity.Dao
         IUserSecurityStampStore<TUser>,
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
-        where TUser : IdentityUser<TKey, TUserRole, TUserClaim, TUserLogin>
+        where TUser : IdentityUser<TKey, TRole>
         where TKey : IEquatable<TKey>
-        where TUserClaim : IdentityUserClaim<TKey>
-        where TUserRole : IdentityRole<TKey>
-        where TUserLogin : IdentityUserLogin<TKey>
+        // where TUserClaim : IdentityUserClaim
+        where TRole : IdentityRole<TKey>
+        //  where TUserLogin : IdentityUserLogin
 
     {
         protected UserStore(IUnitOfWork session) : base(session)
@@ -74,8 +89,6 @@ namespace Ornament.Identity.Dao
                 }
             }, cancellationToken);
         }
-
-        protected abstract TUserClaim CreateUserClaim(TUser user, Claim claim);
 
         public Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim,
             CancellationToken cancellationToken)
@@ -219,8 +232,6 @@ namespace Ornament.Identity.Dao
             return Task.Run(() => { Context.SaveOrUpdate(user); }, cancellationToken);
         }
 
-        public abstract TUserLogin CreateIdentityUserLogin(string providerKey, string loginProvider);
-
         public Task<IdentityResult> CreateAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
@@ -263,10 +274,10 @@ namespace Ornament.Identity.Dao
             }
 
             var query = from u in Context.Query<TUser>()
-                from l in u.Logins
-                where l.LoginProvider == loginProvider
-                      && l.ProviderKey == providerKey
-                select u;
+                        from l in u.Logins
+                        where l.LoginProvider == loginProvider
+                              && l.ProviderKey == providerKey
+                        select u;
 
             return Task.Run(() => query.SingleOrDefault(), cancellationToken);
         }
@@ -281,7 +292,7 @@ namespace Ornament.Identity.Dao
                 var normalUserNameProp = Projections.Property<TUser>(s => s.NormalizedUserName);
                 var user = DetachedCriteria.For<TUser>()
                     .Add(Restrictions.Eq(normalUserNameProp, normalizedUserName).IgnoreCase())
-                    .GetExecutableCriteria(this.Context).UniqueResult<TUser>();
+                    .GetExecutableCriteria(Context).UniqueResult<TUser>();
                 return user;
             });
         }
@@ -404,7 +415,7 @@ namespace Ornament.Identity.Dao
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             //return Task.FromResult(this.Context.Get<TUser>((object)userId));
-            return GetUserAggregateAsync((TUser u) => u.Id.Equals(userId), cancellationToken);
+            return GetUserAggregateAsync(u => u.Id.Equals(userId), cancellationToken);
         }
 
         public Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken)
@@ -488,7 +499,7 @@ namespace Ornament.Identity.Dao
             return Task.Run(() =>
             {
                 var identityRole =
-                    Context.Query<TUserRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+                    Context.Query<TRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
                 if (identityRole == null)
                 {
                     throw new InvalidOperationException(string.Format("Can't find the name " + roleName));
@@ -513,7 +524,7 @@ namespace Ornament.Identity.Dao
             return Task.Run(() =>
             {
                 var identityRole =
-                    Context.Query<TUserRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+                    Context.Query<TRole>().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
                 if (identityRole == null)
                 {
                     throw new InvalidOperationException(string.Format("Can't find the name " + roleName));
@@ -532,7 +543,7 @@ namespace Ornament.Identity.Dao
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return Task.Run(() => (IList<string>) user.Roles.Select(u => u.Name).ToList(), cancellationToken);
+            return Task.Run(() => (IList<string>)user.Roles.Select(u => u.Name).ToList(), cancellationToken);
         }
 
         public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
@@ -582,6 +593,22 @@ namespace Ornament.Identity.Dao
                 throw new ArgumentNullException(nameof(user));
             }
             return Task.FromResult(user.SecurityStamp);
+        }
+
+        protected IdentityUserClaim CreateUserClaim(TUser user, Claim claim)
+        {
+            var r = new IdentityUserClaim();
+            r.InitializeFromClaim(claim);
+            return r;
+        }
+
+        protected IdentityUserLogin CreateIdentityUserLogin(string providerKey, string loginProvider)
+        {
+            return new IdentityUserLogin()
+            {
+                LoginProvider = loginProvider,
+                ProviderKey = providerKey
+            };
         }
 
         private Task<TUser> GetUserAggregateAsync(Expression<Func<TUser, bool>> filter,

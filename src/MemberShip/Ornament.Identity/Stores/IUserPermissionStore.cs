@@ -4,13 +4,12 @@ using System;
 
 namespace Ornament.Identity.Stores
 {
-    public interface IUserPermissionStore<in TUser, TKey, TUserClaim, TUserRole, TUserLogin>
+    public interface IUserPermissionStore<in TUser, TKey,  TUserRole>
         : IStore<Permission, int>
-        where TUser : IdentityUser<TKey, TUserRole, TUserClaim, TUserLogin>
+        where TUser : IdentityUser<TKey, TUserRole>
         where TKey : IEquatable<TKey>
-        where TUserRole : IdentityRole<TKey>
-        where TUserClaim : IdentityUserClaim<TKey>
-        where TUserLogin : IdentityUserLogin<TKey>
+       
+   
     {
         IList<Permission> GetByUser(TUser user);
     }

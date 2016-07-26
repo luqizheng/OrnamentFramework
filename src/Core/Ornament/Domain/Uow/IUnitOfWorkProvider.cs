@@ -7,7 +7,9 @@ namespace Ornament.Domain.Uow
         /// </summary>
         /// <param name="name"></param>
         void Begin(string name);
+
         void Begin();
+
         void Add(IUnitOfWorkFactory factory);
     }
 }

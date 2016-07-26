@@ -2,12 +2,11 @@
 
 namespace Ornament.Identity
 {
-    public class PermissionManager<TUser, TKey, TUserClaim, TUserRole, TUserLogin>
-        where TUser : IdentityUser<TKey, TUserRole, TUserClaim, TUserLogin>
+    public class PermissionManager<TUser, TKey,  TUserRole>
+        where TUser : IdentityUser<TKey, TUserRole>
         where TKey : IEquatable<TKey>
         where TUserRole : IdentityRole<TKey>
-        where TUserClaim : IdentityUserClaim<TKey>
-        where TUserLogin : IdentityUserLogin<TKey>
+     
         
 
     {
