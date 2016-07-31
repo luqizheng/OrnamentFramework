@@ -11,12 +11,13 @@ namespace Ornament.Domain.Stores
     {
         private bool _disposed;
 
-        protected StoreBase(IUnitOfWork context)
+        protected StoreBase(IUnitOfWorkProvider context)
         {
+            if (context == null) throw new ArgumentNullException(nameof(context));
             Uow = context;
         }
 
-        public IUnitOfWork Uow { get; }
+        public IUnitOfWorkProvider Uow { get; }
 
         public abstract IQueryable<T> Entities { get; }
 

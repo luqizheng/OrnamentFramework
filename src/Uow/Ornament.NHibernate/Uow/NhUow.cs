@@ -21,6 +21,11 @@ namespace Ornament.NHibernate.Uow
             _useTransaction = useTransaction;
         }
 
+        public void Begin(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Begin()
         {
             ThrowIfDisposed();

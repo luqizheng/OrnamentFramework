@@ -1,6 +1,6 @@
 ﻿namespace Ornament.Identity
 {
-    public class TypePermission<TOperator> : GenericPermission<string, TOperator>
+    public class TypePermission<TUserRole,TOperator> : GenericPermission<TUserRole,string, TOperator>
 
     {
     }

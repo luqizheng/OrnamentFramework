@@ -15,22 +15,15 @@ namespace Ornament.Web.Uow
 
         public UnitOfWorkAttribute(string name)
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
             _name = name;
         }
 
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
-            var result = context.GetService<IUnitOfWork>();
-            if (result != null)
-                return context.GetService<IUnitOfWork>();
-
             var provider = context.GetService<IUnitOfWorkProvider>();
-            if (!string.IsNullOrEmpty(_name))
-                provider.Begin(_name);
-            else
-                provider.Begin();
-            return context.GetService<IUnitOfWork>();
+            return provider.Get(_name);
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)

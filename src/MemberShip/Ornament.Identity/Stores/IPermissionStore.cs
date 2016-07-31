@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace Ornament.Identity.Stores
 {
-    public interface IPermissionStore
+    public interface IPermissionStore<TRole>
     {
-        IList<Permission> Find(object userId);
+        IList<Permission<TRole>> Find(object userId);
     }
 
 }

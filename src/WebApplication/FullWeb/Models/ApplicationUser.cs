@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Ornament.Identity;
+﻿using Ornament.Identity;
 using Ornament.Identity.Dao.Mapping;
 
 namespace FullWeb.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<string,ApplicationRole>
     {
     }
 
-   
+    public class ApplicationRole : IdentityRole<int>
+    {
+    }
+
 
     public class ApplicationUserMapping :
-        IdentityUserMapping
+        IdentityUserMapping<ApplicationUser,string,ApplicationRole>
+    {
+    }
+
+    public class ApplicationRoleMapping : IdentityRoleMapping<ApplicationRole,int>
     {
 
     }

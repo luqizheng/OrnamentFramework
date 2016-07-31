@@ -3,18 +3,18 @@ using FluentNHibernate.Mapping;
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public class IdentityUserMapping :
-        IdentityUserMapping<string,IdentityRole>
-    {
+    //public class IdentityUserMapping :
+    //    IdentityUserMapping<string,IdentityRole>
+    //{
 
-    }
+    //}
 
-    public class IdentityUserMapping<TKey,TRole>
-        : IdentityUserMapping<IdentityUser<TKey, TRole>, TKey, TRole>
-        where TKey : IEquatable<TKey>
+    //public class IdentityUserMapping<TKey,TRole>
+    //    : IdentityUserMapping<IdentityUser<TKey, TRole>, TKey, TRole>
+    //    where TKey : IEquatable<TKey>
 
-    {
-    }
+    //{
+    //}
 
 
     public class IdentityUserMapping<TUser, TKey, TRole>

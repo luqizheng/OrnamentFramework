@@ -15,15 +15,24 @@ namespace Ornament.NHibernate
         where TId : IEquatable<TId>
 
     {
-        protected Store(IUnitOfWork context) : base(context)
+        private ISession _session;
+
+        protected Store(IUnitOfWorkProvider context) : base(context)
         {
             ShouldDisposeSession = true;
-            var nhUow = (NhUow) context;
-            Context = nhUow.Session;
         }
 
 
-        protected ISession Context { get; }
+        protected ISession Context
+        {
+            get
+            {
+                if (_session != null)
+                    return _session;
+                var c = (NhUow) Uow.Get();
+                return _session = c.Session;
+            }
+        }
 
         /// <summary>
         ///     If true then disposing this object will also dispose (close) the session. False means that external code is

@@ -13,24 +13,7 @@ using Ornament.NHibernate;
 
 namespace Ornament.Identity.Dao
 {
-    public class UserStore : UserStore<string, IdentityRole>
-    {
-        public UserStore(IUnitOfWork session) : base(session)
-        {
-        }
-    }
-    public class UserStore<TKey, TRole>
-        : UserStore<IdentityUser<TKey, TRole>, TKey, TRole>
-          where TKey : IEquatable<TKey>
-        where TRole : IdentityRole<TKey>
-    {
-        public UserStore(IUnitOfWork session) : base(session)
-        {
-        }
-    }
-
-
-    public class UserStore<TUser, TKey, TRole> :
+    public class UserStore<TUser, TKey, TRole, TRokeKey> :
         Store<TUser, TKey>,
         IUserLoginStore<TUser>,
         IQueryableUserStore<TUser>,
@@ -41,13 +24,14 @@ namespace Ornament.Identity.Dao
         IUserEmailStore<TUser>,
         IUserPhoneNumberStore<TUser>
         where TUser : IdentityUser<TKey, TRole>
+        where TRole : IdentityRole<TRokeKey>
         where TKey : IEquatable<TKey>
-        // where TUserClaim : IdentityUserClaim
-        where TRole : IdentityRole<TKey>
-        //  where TUserLogin : IdentityUserLogin
+        where TRokeKey : IEquatable<TRokeKey>
+
 
     {
-        protected UserStore(IUnitOfWork session) : base(session)
+    
+        public UserStore(IUnitOfWorkProvider provider) : base(provider)
         {
         }
 
@@ -274,10 +258,10 @@ namespace Ornament.Identity.Dao
             }
 
             var query = from u in Context.Query<TUser>()
-                        from l in u.Logins
-                        where l.LoginProvider == loginProvider
-                              && l.ProviderKey == providerKey
-                        select u;
+                from l in u.Logins
+                where l.LoginProvider == loginProvider
+                      && l.ProviderKey == providerKey
+                select u;
 
             return Task.Run(() => query.SingleOrDefault(), cancellationToken);
         }
@@ -543,7 +527,7 @@ namespace Ornament.Identity.Dao
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return Task.Run(() => (IList<string>)user.Roles.Select(u => u.Name).ToList(), cancellationToken);
+            return Task.Run(() => (IList<string>) user.Roles.Select(u => u.Name).ToList(), cancellationToken);
         }
 
         public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)
@@ -604,7 +588,7 @@ namespace Ornament.Identity.Dao
 
         protected IdentityUserLogin CreateIdentityUserLogin(string providerKey, string loginProvider)
         {
-            return new IdentityUserLogin()
+            return new IdentityUserLogin
             {
                 LoginProvider = loginProvider,
                 ProviderKey = providerKey

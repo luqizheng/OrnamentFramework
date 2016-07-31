@@ -3,7 +3,7 @@ using Ornament.Domain.Uow;
 
 namespace Ornament.DbConnection.Uow
 {
-    public class DbUowFactory : UnitOfWorkFactoryBase
+    public class DbUowFactory 
     {
         private readonly IConnectionProvider _provider;
 

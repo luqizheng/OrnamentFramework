@@ -1,15 +1,15 @@
+using System.Collections.Generic;
+
 namespace Ornament.Domain.Uow
 {
     public interface IUnitOfWorkProvider
     {
         /// <summary>
-        /// Begin a UOW
+        ///     Begin a UOW
         /// </summary>
         /// <param name="name"></param>
-        void Begin(string name);
+        IUnitOfWork Get(string name);
 
-        void Begin();
-
-        void Add(IUnitOfWorkFactory factory);
+        IUnitOfWork Get();
     }
 }

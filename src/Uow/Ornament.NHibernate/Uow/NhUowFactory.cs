@@ -1,6 +1,5 @@
 ﻿using System;
 using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using Ornament.Domain.Uow;
@@ -23,6 +22,7 @@ namespace Ornament.NHibernate.Uow
 
         public bool BeginTransaction { get; set; }
         public bool OpenStateless { get; set; }
+
         /// <summary>
         /// </summary>
         public string Name { get; set; }

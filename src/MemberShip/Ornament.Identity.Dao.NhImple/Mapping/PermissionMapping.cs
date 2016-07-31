@@ -2,8 +2,7 @@
 
 namespace Ornament.Identity.Dao.Mapping
 {
-    public class PermissionMapping
-        : ClassMap<Permission>
+    public class PermissionMapping<TRole>: ClassMap<Permission<TRole>>
 
     {
         public PermissionMapping()

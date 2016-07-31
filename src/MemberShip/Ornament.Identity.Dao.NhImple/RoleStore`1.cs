@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Identity;
 using NHibernate.Linq;
 using Ornament.Domain.Uow;
 using Ornament.NHibernate;
-using Microsoft.Extensions.DependencyInjection;
+
 namespace Ornament.Identity.Dao
 {
+    
+
     public class RoleStore<TRole, TKey> :
         Store<TRole, TKey>,
         IQueryableRoleStore<TRole>
         where TKey : IEquatable<TKey>
         where TRole : IdentityRole<TKey>
     {
-        public RoleStore(IUnitOfWork context) : base(context)
+        public RoleStore(IUnitOfWorkProvider context) : base(context)
         {
         }
 

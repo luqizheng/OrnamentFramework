@@ -1,18 +1,17 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
-using Ornament.NHibernate.Uow;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Ornament.NHibernate.Uow;
+
 namespace Ornament.Identity.Dao
 {
     public static class NHibernateIdentityExtension
     {
-        public static IdentityBuilder AddNhibernateStores(this IdentityBuilder builder,
-            NhUowFactory nhbuilder)
+        public static IdentityBuilder AddNhibernateStores(
+            this IdentityBuilder builder,
+            NhUowFactory nhbuilder
+            )
         {
-
-            var userIdType = builder.UserType.BaseType.GetGenericArguments()[0];
-            var roleIdType = builder.RoleType.BaseType.GetGenericArguments()[0];
-            GetDefaultServices(builder.UserType, builder.RoleType, builder, userIdType, roleIdType);
+            GetDefaultServices(builder);
             nhbuilder.AddAssemblyOf(builder.UserType);
             nhbuilder.AddAssemblyOf(typeof(NHibernateIdentityExtension));
 
@@ -22,22 +21,31 @@ namespace Ornament.Identity.Dao
         }
 
 
-        private static void GetDefaultServices(Type userType,
-            Type roletype, IdentityBuilder builder, Type userIdType,Type roleIdType)
+        private static void GetDefaultServices(
+            IdentityBuilder builder)
         {
-            var userStoreType = typeof(UserStore<,,>).MakeGenericType(userType, roletype, userIdType);
-            var roleStoreType = typeof(RoleStore<,>).MakeGenericType(roletype, roleIdType);
+            var userIdType = builder.UserType.BaseType.GetGenericArguments()[0];
+            var roleIdType = builder.RoleType.BaseType.GetGenericArguments()[0];
 
-            var service1 = typeof(IUserStore<>).MakeGenericType(userType);
+            var userStoreType = typeof(UserStore<,,,>)
+                .MakeGenericType(builder.UserType, userIdType, builder.RoleType, roleIdType);
+            var roleStoreType = typeof(RoleStore<,>)
+                .MakeGenericType(builder.RoleType, roleIdType);
 
-            var service2 = typeof(IRoleStore<>).MakeGenericType(roletype);
+            var service1 = typeof(IUserStore<>).MakeGenericType(builder.UserType);
+
+            var service2 = typeof(IRoleStore<>).MakeGenericType(builder.RoleType);
 
             builder.Services.AddScoped(service1, userStoreType);
             builder.Services.AddScoped(service2, roleStoreType);
+
+          
+          
         }
 
-        //private static void BuildMappingBuilder()
         //{
+
+        //private static void BuildMappingBuilder()
         //    var asmName = new AssemblyName("identity");
         //    var asmBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
         //    var mdlBldr = asmBuilder.DefineDynamicModule("Main");

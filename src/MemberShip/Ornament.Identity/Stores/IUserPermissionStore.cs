@@ -5,12 +5,12 @@ using System;
 namespace Ornament.Identity.Stores
 {
     public interface IUserPermissionStore<in TUser, TKey,  TUserRole>
-        : IStore<Permission, int>
+        : IStore<Permission<TUserRole>, int>
         where TUser : IdentityUser<TKey, TUserRole>
         where TKey : IEquatable<TKey>
        
    
     {
-        IList<Permission> GetByUser(TUser user);
+        IList<Permission<TUserRole>> GetByUser(TUser user);
     }
 }

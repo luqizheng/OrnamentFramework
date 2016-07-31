@@ -129,12 +129,12 @@ namespace Ornament.Collecions.Concurrent
             }
         }
 
-        public object SyncRoot
+        public new object SyncRoot
         {
             get { throw new NotSupportedException(""); }
         }
 
-        public bool IsSynchronized
+        public new bool IsSynchronized
         {
             get { return false; }
         }

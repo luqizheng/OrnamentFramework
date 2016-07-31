@@ -4,7 +4,7 @@ using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
 {
-    public abstract class Permission : EntityWithTypedId<int>
+    public abstract class Permission<TRole> : EntityWithTypedId<int>
     {
         public virtual string Name { get; set; }
 
@@ -12,7 +12,7 @@ namespace Ornament.Identity
         public virtual int Operator { get; set; }
 
 
-        public virtual IdentityRole Role { get; set; }
+        public virtual TRole Role { get; set; }
 
 
         public virtual bool Verify(int v)
@@ -45,7 +45,7 @@ namespace Ornament.Identity
         }
     }
 
-    public class GenericPermission<TResourcce, TOperator> : Permission
+    public class GenericPermission<TRole,TResourcce, TOperator> : Permission<TRole>
     {
         public virtual TResourcce Resource { get; set; }
 

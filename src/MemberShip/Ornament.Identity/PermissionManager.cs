@@ -2,12 +2,12 @@
 
 namespace Ornament.Identity
 {
-    public class PermissionManager<TUser, TKey,  TUserRole>
-        where TUser : IdentityUser<TKey, TUserRole>
+    public class PermissionManager<TUser, TKey, TRole, TPermission>
+        where TUser : IdentityUser<TKey, TRole>
         where TKey : IEquatable<TKey>
-        where TUserRole : IdentityRole<TKey>
-     
-        
+        where TRole : IdentityRole<TKey>
+        where TPermission : Permission<TRole>
+
 
     {
         private readonly TUser _user;
@@ -22,7 +22,7 @@ namespace Ornament.Identity
             return true;
         }
 
-        public void SetPermission(object res, Enum enumOperator, IdentityRole r)
+        public void SetPermission(object res, Enum enumOperator, TPermission r)
         {
         }
     }

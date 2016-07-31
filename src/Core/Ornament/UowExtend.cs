@@ -5,19 +5,13 @@ namespace Ornament
 {
     public static class UowExtend
     {
-        public static IUnitOfWorkProvider DefaultUowProvider(this IServiceCollection services)
+        public static IUnitOfWorkFactoryBuilder AddUintOfWork(this IServiceCollection services)
         {
-            var result = new DefaultUnitOfWorkProvider(services);
-            services.AddSingleton<IUnitOfWorkProvider>(i => result);
-            return result;
-        }
+            services.AddScoped<IUnitOfWorkProvider>(i => new UnitOfWorkProvider(i));
 
-        public static IUnitOfWorkProvider UowFactoryProvider(this IServiceCollection services,
-            IUnitOfWorkProvider uowProvider)
-        {
-            services.AddSingleton
-                (i => uowProvider);
-            return uowProvider;
+            var instance = new UnitOfWorkProviderBuilder(services);
+            services.AddSingleton(instance);
+            return instance;
         }
     }
 }
