@@ -16,6 +16,7 @@ namespace FullWeb.Controllers
 
         }
         // GET: home/index
+        [Authorize]
         public ActionResult Index()
         {
             return View();

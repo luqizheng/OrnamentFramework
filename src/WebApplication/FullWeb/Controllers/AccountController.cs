@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using SmartAdmin.ViewModels.Account;
 using Ornament.Web.Uow;
+using SmartAdmin.ViewModels.Account;
 
 #endregion
 
@@ -24,21 +24,20 @@ namespace FullWeb.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, 
+        public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
-          
         }
 
         //
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-        [UnitOfWorkAttribute] 
+       
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             // We do not want to use any existing identity information
@@ -55,6 +54,7 @@ namespace FullWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [UnitOfWork]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;

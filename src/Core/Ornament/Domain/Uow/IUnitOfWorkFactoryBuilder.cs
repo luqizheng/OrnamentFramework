@@ -9,7 +9,6 @@ namespace Ornament.Domain.Uow
         IUnitOfWorkFactoryBuilder Add(IUnitOfWorkFactory unitFactory);
 
         IUnitOfWorkFactory Get(string name);
-
-        IUnitOfWorkFactory Get();
+        string DefaultUowFactoryName { get; }
     }
 }

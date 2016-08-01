@@ -1,4 +1,4 @@
-﻿@model SigninViewModel
+﻿@model LoginViewModel
 @{
     ViewBag.PageId = "extr-page";
     ViewBag.PageClass = "animated fadeInDown";
@@ -10,7 +10,7 @@
 
 <div id="content" class="container">
     <div class="row">
-        @{ await Html.RenderPartialAsync("_SigninText"); }
+        @{ await Html.RenderPartialAsync("_loginText"); }
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
             <div class="well no-padding">
                 <form action="@Url.Action("login", "account")" method="POST" id="login-form" class="smart-form client-form">
@@ -19,7 +19,8 @@
                     </header>
                     @Html.HiddenFor(m => m.ReturnUrl)
                     @Html.AntiForgeryToken()
-                    @Html.ValidationBootstrap()
+                  
+                    
                     <fieldset>
                         <section>
                             <label class="label">E-mail</label>
@@ -34,7 +35,8 @@
                             <label class="label">Password</label>
                             <label class="input">
                                 <i class="icon-append fa fa-lock"></i>
-                                <input type="password" name="password" value="demo">
+                                
+                                <input type="password"  name="password" value="demo">
                                 <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
                             </label>
                             <div class="note">

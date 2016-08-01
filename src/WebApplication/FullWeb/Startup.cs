@@ -47,11 +47,17 @@ namespace FullWeb
             {
                 // We override the default so we can use our demo user
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 4;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                
+
+                options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
+                options.Cookies.ApplicationCookie.CookieName = "Interop";
+               
+              
+                // options.Cookies.ApplicationCookie.DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo("C:\\Github\\Identity\\artifacts"));
+
             })
                 .AddDefaultTokenProviders()
                 .AddNhibernateStores(uowFactory);
@@ -67,7 +73,7 @@ namespace FullWeb
                 EnableTiles = _configurationSection.GetValue<bool>("EnableTiles")
             });
 
-          
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +94,17 @@ namespace FullWeb
 
             app.UseStaticFiles();
 
+            app.UseIdentity()
+            .UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+
+                LoginPath = new PathString("/Account/Login"),
+                CookieSecure = CookieSecurePolicy.None,
+                AutomaticChallenge = true,
+                AutomaticAuthenticate = true,
+                AuthenticationScheme = "CookieAuth"
+
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -95,12 +112,6 @@ namespace FullWeb
                     "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseIdentity();
-            app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            {
-                LoginPath = new PathString("/Account/Login"),
-                CookieSecure = CookieSecurePolicy.Always
-            });
         }
     }
 }

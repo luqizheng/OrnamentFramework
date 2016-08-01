@@ -17,7 +17,7 @@ namespace Ornament.Identity.Dao.Mapping
     //}
 
 
-    public class IdentityUserMapping<TUser, TKey, TRole>
+    public abstract class IdentityUserMapping<TUser, TKey, TRole>
         : ClassMap<TUser>
         where TUser : IdentityUser<TKey, TRole>
         where TKey : IEquatable<TKey>
@@ -78,9 +78,6 @@ namespace Ornament.Identity.Dao.Mapping
                 .ParentKeyColumn("UserId");
         }
 
-        protected virtual void ExtendSetting()
-        {
-
-        }
+        protected abstract void ExtendSetting();
     }
 }

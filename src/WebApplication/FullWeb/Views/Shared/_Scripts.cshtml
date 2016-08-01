@@ -1,6 +1,44 @@
-﻿@using Microsoft.AspNetCore.Mvc.Razor
-<!-- IMPORTANT: SmartAdmin Core -->
-<script src="~/dist/js/main.js" asp-append-version="true"></script>
+﻿
+<environment names="Staging,Production">
+    <script src="http://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery">
+
+    </script>
+    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"
+            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
+            asp-fallback-test="window.jQuery.validate">
+
+    </script>
+
+    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/additional-methods.min.js"
+            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
+            asp-fallback-test="window.jQuery.validate">
+
+    </script>
+</environment>
+<script src="~/js/main.js" asp-append-version="true"></script>
+<environment names="Development">
+    <!-- IMPORTANT: SmartAdmin Core -->
+    <script src="http://cdn.bootcss.com/jquery/2.2.2/jquery.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery">
+
+    </script>
+    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.js"
+            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
+            asp-fallback-test="window.jQuery.validate">
+
+    </script>
+
+    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/additional-methods.js"
+            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
+            asp-fallback-test="window.jQuery.validate">
+
+    </script>
+    <!-- Startup image for web apps -->
+</environment>
+
 
 <!-- DO NOT REMOVE : GLOBAL FUNCTIONS! -->
 <script>

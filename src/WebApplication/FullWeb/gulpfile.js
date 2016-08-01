@@ -11,19 +11,23 @@ var md5 = require("gulp-md5-plus-always");
 var embed = require("gulp-image-embed");
 var rootPath = "./wwwroot/";
 var srcFolder = {
-    css: rootPath + "css/*.css",
-    js: rootPath + "js/*.js"
+    css: rootPath + "_src/css/*.css",
+    js: rootPath + "_src/js/*.js",
+    fonts:rootPath+"_src/fonts/*"
 };
 var distFolder = {
-    css: rootPath + "dist/css/",
-    js: rootPath + "dist/js/",
-    fonts:rootPath+"dist/fonts/"
+    css: rootPath + "css/",
+    js: rootPath + "js/",
+    fonts: [
+        rootPath + "fonts/",
+        rootPath+"lib/"
+    ]
 };
 gulp.task("webpack",
     function(callback) {
 
         return webpack(webpackConfig)
-            .pipe(gulp.dest(rootPath + "dist/js"));
+            .pipe(gulp.dest(distFolder.js));
 
     });
 var md5Sign = [
@@ -56,8 +60,8 @@ gulp.task("css",
             .pipe(gulp.dest(distFolder.css)); //执行压缩
     });
 gulp.task("fonts", function () {
-    gulp.src(rootPath + "fonts/*")
-        .pipe(gulp.dest(distFolder.fonts))
+    gulp.src(srcFolder.fonts)
+        .pipe(gulp.dest(distFolder.fonts));
 })
 gulp.task("watch",
     function() {

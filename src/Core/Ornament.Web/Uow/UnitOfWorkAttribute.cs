@@ -23,12 +23,14 @@ namespace Ornament.Web.Uow
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
             var provider = context.GetService<IUnitOfWorkProvider>();
-            return provider.Get(_name);
+            return _name != null ? provider.Get(_name) : provider.Get();
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            GetUnitOfWork(context.HttpContext.RequestServices).Begin();
+            var uow = GetUnitOfWork(context.HttpContext.RequestServices);
+            if (!uow.HadBegun)
+                uow.Begin();
             base.OnActionExecuting(context);
         }
 

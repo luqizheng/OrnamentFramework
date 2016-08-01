@@ -1,10 +1,10 @@
 ﻿var fs = require("fs");
 var path = require('path');
 var glob = require('glob');
-var rootPath = "./wwwroot/";
+var rootPath = "./wwwroot/_src/";
 var scriptsLib=rootPath+"lib"
 module.exports = {
-    entry: './wwwroot/js/main.js',
+    entry: rootPath+'js/main.js',
     devtool: "inline-source-map",
     output: {
         filename: "[name].js"

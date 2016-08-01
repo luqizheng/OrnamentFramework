@@ -9,8 +9,8 @@ namespace Ornament
         {
             services.AddScoped<IUnitOfWorkProvider>(i => new UnitOfWorkProvider(i));
 
-            var instance = new UnitOfWorkProviderBuilder(services);
-            services.AddSingleton(instance);
+            var instance = new UowFactoryBuilder(services);
+            services.AddSingleton(typeof(IUnitOfWorkFactoryBuilder), instance);
             return instance;
         }
     }

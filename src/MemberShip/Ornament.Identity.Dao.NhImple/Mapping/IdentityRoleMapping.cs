@@ -4,7 +4,7 @@ using FluentNHibernate.Mapping;
 namespace Ornament.Identity.Dao.Mapping
 {
   
-    public class IdentityRoleMapping<TRole, TKey> : ClassMap<TRole>
+    public abstract class IdentityRoleMapping<TRole, TKey> : ClassMap<TRole>
         where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
     {
@@ -18,8 +18,7 @@ namespace Ornament.Identity.Dao.Mapping
             ExtendSetting();
         }
 
-        public virtual void ExtendSetting()
-        {
-        }
+        public abstract void ExtendSetting();
+
     }
 }

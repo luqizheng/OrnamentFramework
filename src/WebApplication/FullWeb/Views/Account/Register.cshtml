@@ -9,7 +9,7 @@
 
 <div id="content" class="container">
     <div class="row">
-        @{ await Html.RenderPartialAsync("_SigninText"); }
+        @{ await Html.RenderPartialAsync("_LoginText"); }
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
             <div class="well no-padding">
                 <form action="@Url.Action("register", "account")" method="POST" id="smart-form-register" class="smart-form client-form">
@@ -17,7 +17,7 @@
                         Registration
                     </header>
                     @Html.AntiForgeryToken()
-                    @Html.ValidationBootstrap()
+                   
                     <fieldset>
                         <section>
                             <label class="input">

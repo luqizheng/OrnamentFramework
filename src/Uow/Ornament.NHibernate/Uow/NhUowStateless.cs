@@ -60,6 +60,8 @@ namespace Ornament.NHibernate.Uow
             _session.Close();
         }
 
+        public bool HadBegun => _session != null;
+
         public void Dispose()
         {
             ThrowIfDisposed();
