@@ -1,6 +1,13 @@
-﻿<!-- collapse menu button -->
+﻿@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<!-- collapse menu button -->
 <div id="hide-menu" class="btn-header pull-right">
-    <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+    <span>
+        <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu">
+            <i class="fa fa-reorder"></i>
+        </a>
+    </span>
 </div>
 <!-- end collapse menu -->
 <!-- #MOBILE -->
@@ -28,7 +35,9 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="@Url.Action("login", "account")" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><>L</>ogout</strong></a>
+                <a href="@Url.Action("login", "account")" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout">
+                    <i class="fa fa-sign-out fa-lg"></i> <strong><>L</>ogout</strong>
+                </a>
             </li>
         </ul>
     </li>
@@ -36,7 +45,7 @@
 
 <!-- logout button -->
 <div id="logout" class="btn-header transparent pull-right">
-    <span> <a href="@Url.Action("login", "account")" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+    <span> <a href="@Url.Action("login", "account")" title="@Localizer["Sign Out"]" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
 </div>
 <!-- end logout button -->
 <!-- search mobile button (this is hidden till mobile view port) -->
@@ -50,7 +59,9 @@
     <button type="submit">
         <i class="fa fa-search"></i>
     </button>
-    <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+    <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search">
+        <i class="fa fa-times"></i>
+    </a>
 </form>
 <!-- end input: search field -->
 <!-- fullscreen button -->
@@ -61,7 +72,9 @@
 <!-- multiple lang dropdown : find all flags in the flags page -->
 <ul class="header-dropdown-list hidden-xs">
     <li>
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="~/img/blank.gif" class="flag flag-us" alt="United States"> <span> English (US) </span> <i class="fa fa-angle-down"></i> </a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="~/img/blank.gif" class="flag flag-us" alt="United States"> <span> English (US) </span> <i class="fa fa-angle-down"></i>
+        </a>
         <ul class="dropdown-menu pull-right">
             <li class="active">
                 <a href="javascript:void(0);"><img src="~/img/blank.gif" class="flag flag-us" alt="United States"> English (US)</a>

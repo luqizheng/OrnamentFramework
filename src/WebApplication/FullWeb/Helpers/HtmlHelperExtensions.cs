@@ -148,7 +148,7 @@ namespace FullWeb.Helpers
             }
 
             var summary = htmlHelper.ValidationSummary();
-
+            
             div.InnerHtml.Append(summary.ToString());
 
             return div;

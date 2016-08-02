@@ -1,4 +1,7 @@
-﻿@model LoginViewModel
+﻿@using System.Threading.Tasks
+@using FullWeb.Helpers
+@using FullWeb.Models
+@model FullWeb.Models.LoginViewModel
 @{
     ViewBag.PageId = "extr-page";
     ViewBag.PageClass = "animated fadeInDown";
@@ -19,15 +22,17 @@
                     </header>
                     @Html.HiddenFor(m => m.ReturnUrl)
                     @Html.AntiForgeryToken()
-                  
-                    
+                    @Html.ValidationSummary()
+
                     <fieldset>
                         <section>
                             <label class="label">E-mail</label>
                             <label class="input">
                                 <i class="icon-append fa fa-user"></i>
-                                <input type="email" name="email" value="demo@email.com">
-                                <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b>
+                                <input type="email" asp-for="Email" value="LUQIZHENG@126.COM">
+                                <b class="tooltip tooltip-top-right">
+                                    <i class="fa fa-user txt-color-teal"></i> Please enter email address/username
+                                </b>
                             </label>
                         </section>
 
@@ -35,19 +40,23 @@
                             <label class="label">Password</label>
                             <label class="input">
                                 <i class="icon-append fa fa-lock"></i>
-                                
-                                <input type="password"  name="password" value="demo">
-                                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+
+                                <input type="password" asp-for="Password" value="123456">
+                                <b class="tooltip tooltip-top-right">
+                                    <i class="fa fa-lock txt-color-teal"></i> Enter your password
+                                </b>
                             </label>
                             <div class="note">
-                                <a href="@Url.Action("forgotpassword", "account")"><i class="fa fa-frown-o"></i> Forgot password?</a>
+                                <a href="@Url.Action("forgotpassword", "account")">
+                                    <i class="fa fa-frown-o"></i> Forgot password?
+                                </a>
                             </div>
                         </section>
 
                         <section>
                             <label class="checkbox">
-                                <input type="checkbox" name="rememberMe" value="true" checked="checked">
-                                <input type="hidden" name="rememberMe" value="false" />
+                                <input type="checkbox" asp-for="RememberMe" value="true" checked="checked">
+                                <input type="hidden" asp-for="RememberMe" value="false" />
                                 <i></i>Stay signed in
                             </label>
                         </section>

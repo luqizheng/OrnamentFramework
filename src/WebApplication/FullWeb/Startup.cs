@@ -11,13 +11,15 @@ using SmartAdmin.Services;
 using Ornament;
 using Ornament.NHibernate;
 using Microsoft.AspNetCore.Identity;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 
 namespace FullWeb
 {
     public class Startup
     {
-        private IConfigurationSection _configurationSection;
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -33,15 +35,45 @@ namespace FullWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //add options from appsettings.
+            services.AddOptions();
+            services.AddLocalization();
             // Add framework services.
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddViewLocalization(options =>
+                {
+                    options.ResourcesPath = "Resources";
+
+                })
+            .AddDataAnnotationsLocalization();
+
+
+            services.Configure<RequestLocalizationOptions>(
+                options =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                        {
+
+                            new CultureInfo("zh-CN"),
+                            new CultureInfo("zh-HK"),
+                            new CultureInfo("zh-TW"),
+                            new CultureInfo("en-US"),
+                        };
+
+                    options.DefaultRequestCulture = new RequestCulture(culture: "zh-CN", uiCulture: "zh-CN");
+                    options.SupportedCultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
+
+                });
 
             var uowFactory = services.AddUintOfWork()
                 .MsSql2008(option =>
                 {
                     option.ConnectionString(Configuration.GetConnectionString("default"));
                 })
-                .AddAssemblyOf(typeof(Startup));
+                .AddAssemblyOf(typeof(Startup))
+                .UpdateSchema(true);
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
@@ -54,24 +86,21 @@ namespace FullWeb
 
                 options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
                 options.Cookies.ApplicationCookie.CookieName = "Interop";
-               
-              
+
+
                 // options.Cookies.ApplicationCookie.DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo("C:\\Github\\Identity\\artifacts"));
 
             })
                 .AddDefaultTokenProviders()
                 .AddNhibernateStores(uowFactory);
+
+            //通信注册。
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            _configurationSection = Configuration.GetSection("Settings");
-            services.AddSingleton(new Settings
-            {
-                Company = _configurationSection.GetValue<string>("Company"),
-                CurrentTheme = _configurationSection.GetValue<string>("CurrentTheme"),
-                EnableLoader = _configurationSection.GetValue<bool>("EnableLoader"),
-                EnableTiles = _configurationSection.GetValue<bool>("EnableTiles")
-            });
+
+            //网站自定义配置
+            services.Configure<Settings>(Configuration);
 
 
         }
@@ -81,6 +110,9 @@ namespace FullWeb
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            //多语言设置
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
 
             if (env.IsDevelopment())
             {
@@ -105,12 +137,15 @@ namespace FullWeb
                 AuthenticationScheme = "CookieAuth"
 
             });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
             });
+
+
 
         }
     }

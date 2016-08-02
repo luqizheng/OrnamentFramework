@@ -71,8 +71,8 @@ namespace Ornament.NHibernate.Uow
         public NhUowFactory UpdateSchema(bool updateDbStructure)
         {
             var config = _config.BuildConfiguration();
-            var export = new SchemaExport(config);
-            export.Create(true, true);
+            var export = new SchemaUpdate(config);
+            export.Execute(true, true);
             return this;
         }
     }

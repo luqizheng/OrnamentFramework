@@ -62,7 +62,8 @@ namespace Ornament.Identity.Dao.Mapping
                 {
                     x.Map(_ => _.ClaimType).Length(64);
                     x.Map(_ => _.ClaimValue).Length(64);
-                });
+                })
+                .ForeignKeyConstraintName("FK_Cliaims_ID");
 
             HasMany(x => x.Logins)
                 .Table("mbs_user_Logins")
@@ -71,11 +72,12 @@ namespace Ornament.Identity.Dao.Mapping
                     x.Map(a => a.LoginProvider).Length(64);
                     x.Map(a => a.ProviderDisplayName).Length(64);
                     x.Map(a => a.ProviderKey).Length(32);
-                });
+                }).ForeignKeyConstraintName("FK_User_Login_ID"); ;
 
             HasManyToMany(x => x.Roles)
                 .Table("mbs_user_roles")
-                .ParentKeyColumn("UserId");
+                .ParentKeyColumn("UserId")
+                .ForeignKeyConstraintNames("FK_user_role_userId","FK_user_role_roleId");
         }
 
         protected abstract void ExtendSetting();

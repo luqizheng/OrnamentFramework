@@ -1,7 +1,7 @@
 ﻿@using FullWeb.Helpers
-@inject Settings Settings
+@inject Microsoft.Extensions.Options.IOptions<Settings>  Settings
 <!DOCTYPE html>
-<html lang="en-us" id="@ViewBag.PageId" class="@Settings.CurrentTheme">
+<html lang="en-us" id="@ViewBag.PageId" class="@Settings.Value.CurrentTheme>
 <head>
     <meta charset=" utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,13 +18,12 @@
     <environment names="Staging,Production">
         <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" 
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
               asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css" 
+        <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css"
               asp-fallback-href="~/lib/font-awsome/css/font-awesome.css"
               asp-fallback-test-class="fa" asp-fallback-test-property="display"
-               asp-fallback-test-value="inline-block"
-              />
+              asp-fallback-test-value="inline-block" />
 
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
@@ -36,11 +35,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 </head>
-<body class="@ViewBag.PageClass @Settings.CurrentTheme">
+<body class="@ViewBag.PageClass @Settings.Value.CurrentTheme">
     <header id="header">
-        @{ 
-            await Html.RenderPartialAsync("_Header"); 
-            }
+        @{
+            await Html.RenderPartialAsync("_Header");
+        }
         <section id="top-right">
             @(IsSectionDefined("topright") ? RenderSection("topright", false) : Html.Partial("_TopRight"))
         </section>
@@ -53,7 +52,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         await Html.RenderPartialAsync("_Footer");
-        Html.RenderPartialIf("_Tiles", Settings.EnableTiles);
+        Html.RenderPartialIf("_Tiles", Settings.Value.EnableTiles);
     }
     @{ await Html.RenderPartialAsync("_Scripts"); }
     @{ RenderSection("scripts", false); }

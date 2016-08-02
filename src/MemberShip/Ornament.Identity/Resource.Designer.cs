@@ -69,15 +69,6 @@ namespace Ornament.Identity {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Re-enter Password.
-        /// </summary>
-        public static string ConfirmPassword {
-            get {
-                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to Create time.
         /// </summary>
         public static string CreateTime {
@@ -110,6 +101,15 @@ namespace Ornament.Identity {
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Confirm Email Address.
+        /// </summary>
+        public static string EmailConfirm {
+            get {
+                return ResourceManager.GetString("EmailConfirm", resourceCulture);
             }
         }
         
@@ -353,6 +353,15 @@ namespace Ornament.Identity {
         public static string PasswordAnswer {
             get {
                 return ResourceManager.GetString("PasswordAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Re-enter Password.
+        /// </summary>
+        public static string PasswordConfirm {
+            get {
+                return ResourceManager.GetString("PasswordConfirm", resourceCulture);
             }
         }
         

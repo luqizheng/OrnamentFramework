@@ -120,7 +120,7 @@
   <data name="alertPassword_CharError" xml:space="preserve">
     <value>Password must be at Least one letter, number or symbol, and within 8 to 30 characters.</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
+  <data name="PasswordConfirm" xml:space="preserve">
     <value>Re-enter Password</value>
   </data>
   <data name="CreateTime" xml:space="preserve">
@@ -275,5 +275,8 @@
   </data>
   <data name="UserGroup" xml:space="preserve">
     <value>User Group</value>
+  </data>
+  <data name="EmailConfirm" xml:space="preserve">
+    <value>Confirm Email Address</value>
   </data>
 </root>

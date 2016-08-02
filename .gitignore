@@ -88,3 +88,9 @@ bin
 node_modules
 /src/WebApplication/Web/wwwroot/lib
 /src/WebApplication/Web/wwwroot/scripts
+/src/WebApplication/FullWeb/wwwroot/lib/animate.css
+/src/WebApplication/FullWeb/wwwroot/lib/moment
+/src/WebApplication/FullWeb/wwwroot/lib/jquery-validation
+/src/WebApplication/FullWeb/wwwroot/lib/jquery
+/src/WebApplication/FullWeb/wwwroot/lib/font-awesome
+/src/WebApplication/FullWeb/wwwroot/lib/bootstrap-duallistbox
