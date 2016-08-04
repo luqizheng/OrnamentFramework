@@ -48,14 +48,14 @@ namespace Ornament.NHibernate.Uow
         ///     Gets the session.
         /// </summary>
         /// <value>The session.</value>
-        /// <exception cref="UowExcepton">Uow is not open.</exception>
+        /// <exception cref="UowExcepton">UowProvider is not open.</exception>
         public ISession Session
         {
             get
             {
                 if (_session == null)
                 {
-                    throw new UowExcepton("Uow is not open.");
+                    throw new UowExcepton("UowProvider is not open.");
                 }
                 return _session;
             }
@@ -80,13 +80,13 @@ namespace Ornament.NHibernate.Uow
         /// <summary>
         ///     Commits this instance.
         /// </summary>
-        /// <exception cref="UowExcepton">Uow is not opened.</exception>
+        /// <exception cref="UowExcepton">UowProvider is not opened.</exception>
         public void Commit()
         {
             ThrowIfDisposed();
             if (_session == null)
             {
-                throw new UowExcepton("Uow is not opened.");
+                throw new UowExcepton("UowProvider is not opened.");
             }
             if (_useTransaction)
             {
@@ -98,13 +98,13 @@ namespace Ornament.NHibernate.Uow
         /// <summary>
         ///     Rollbacks this instance.
         /// </summary>
-        /// <exception cref="UowExcepton">Uow is not opened.</exception>
+        /// <exception cref="UowExcepton">UowProvider is not opened.</exception>
         public void Rollback()
         {
             ThrowIfDisposed();
             if (_session == null)
             {
-                throw new UowExcepton("Uow is not opened.");
+                throw new UowExcepton("UowProvider is not opened.");
             }
             _session.Transaction.Rollback();
         }
@@ -112,13 +112,13 @@ namespace Ornament.NHibernate.Uow
         /// <summary>
         ///     Closes this instance.
         /// </summary>
-        /// <exception cref="UowExcepton">Uow is not opened.</exception>
+        /// <exception cref="UowExcepton">UowProvider is not opened.</exception>
         public void Close()
         {
             ThrowIfDisposed();
             if (_session == null)
             {
-                throw new UowExcepton("Uow is not opened.");
+                throw new UowExcepton("UowProvider is not opened.");
             }
             _session.Close();
         }

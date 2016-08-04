@@ -7,7 +7,7 @@ using NHibernate.Linq;
 using Ornament.Domain.Uow;
 using Ornament.NHibernate;
 
-namespace Ornament.Identity.Dao
+namespace Ornament.Identity.Dao.NhImple
 {
     
 

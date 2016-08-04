@@ -10,15 +10,30 @@ namespace Ornament.Domain.Stores
         where TId : IEquatable<TId>
     {
         private bool _disposed;
-
+        private bool _selfHandlerUow;
         protected StoreBase(IUnitOfWorkProvider context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-            Uow = context;
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            UowProvider = context;
         }
 
-        public IUnitOfWorkProvider Uow { get; }
+        protected IUnitOfWorkProvider UowProvider { get; }
 
+        public IUnitOfWork Current
+        {
+            get
+            {
+                var uow = this.UowProvider.Get();
+                if (!uow.HadBegun)
+                {
+                    _selfHandlerUow = true;
+                    uow.Begin();
+                }
+                return uow;
+
+            }
+        }
         public abstract IQueryable<T> Entities { get; }
 
         public abstract void SaveOrUpdate(T t);
@@ -40,6 +55,11 @@ namespace Ornament.Domain.Stores
 
         protected virtual void Dispose(bool disposing)
         {
+            if (_selfHandlerUow)
+            {
+                this.Current.Commit();
+                this.Current.Close();
+            }
             _disposed = true;
         }
     }

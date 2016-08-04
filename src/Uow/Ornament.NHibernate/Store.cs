@@ -29,7 +29,7 @@ namespace Ornament.NHibernate
             {
                 if (_session != null)
                     return _session;
-                var c = (NhUow) Uow.Get();
+                var c = (NhUow) UowProvider.Get();
                 return _session = c.Session;
             }
         }

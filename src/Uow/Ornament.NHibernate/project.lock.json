@@ -710,19 +710,20 @@
       },
       "Ornament/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "NETStandard.Library": "1.6.0"
         },
         "frameworkAssemblies": [
           "System.ComponentModel.DataAnnotations",
           "System.Runtime"
         ],
         "compile": {
-          "net451/Ornament.dll": {}
+          "net461/Ornament.dll": {}
         },
         "runtime": {
-          "net451/Ornament.dll": {}
+          "net461/Ornament.dll": {}
         }
       }
     }

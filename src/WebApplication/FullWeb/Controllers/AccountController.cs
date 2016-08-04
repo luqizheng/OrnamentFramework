@@ -37,9 +37,10 @@ namespace FullWeb.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-       
+        [UnitOfWork]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
+           
             // We do not want to use any existing identity information
             await EnsureLoggedOut();
 

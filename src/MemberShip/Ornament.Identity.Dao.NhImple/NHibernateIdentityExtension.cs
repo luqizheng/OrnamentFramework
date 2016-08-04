@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Ornament.NHibernate.Uow;
 
-namespace Ornament.Identity.Dao
+namespace Ornament.Identity.Dao.NhImple
 {
     public static class NHibernateIdentityExtension
     {

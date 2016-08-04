@@ -11,7 +11,7 @@ using NHibernate.Linq;
 using Ornament.Domain.Uow;
 using Ornament.NHibernate;
 
-namespace Ornament.Identity.Dao
+namespace Ornament.Identity.Dao.NhImple
 {
     public class UserStore<TUser, TKey, TRole, TRokeKey> :
         Store<TUser, TKey>,

@@ -32,7 +32,7 @@ namespace Ornament.NHibernate.Uow
             ThrowIfDisposed();
             if (_session == null)
             {
-                throw new UowExcepton("Uow is not opened.");
+                throw new UowExcepton("UowProvider is not opened.");
             }
             if (_useTransaction)
             {
@@ -45,7 +45,7 @@ namespace Ornament.NHibernate.Uow
             ThrowIfDisposed();
             if (_session == null)
             {
-                throw new UowExcepton("Uow is not opened.");
+                throw new UowExcepton("UowProvider is not opened.");
             }
             _session.Transaction.Rollback();
         }
@@ -55,7 +55,7 @@ namespace Ornament.NHibernate.Uow
             ThrowIfDisposed();
             if (_session == null)
             {
-                throw new UowExcepton("Uow is not opened.");
+                throw new UowExcepton("UowProvider is not opened.");
             }
             _session.Close();
         }
@@ -76,7 +76,7 @@ namespace Ornament.NHibernate.Uow
             {
                 if (_session == null)
                 {
-                    throw new UowExcepton("Uow is not open.");
+                    throw new UowExcepton("UowProvider is not open.");
                 }
                 return _session;
             }

@@ -2,6 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "NETStandard.Library": "1.6.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
   },
 
@@ -9,19 +10,20 @@
     "netstandard1.6": {
       "imports": [ "dnxcore50","net451","net461" ],
       "dependencies": {
-        "NETStandard.Library": "1.6.0",
+        
         "System.ComponentModel.Annotations": "4.1.0",
         "System.Linq": "4.1.0",
         "System.Collections.Concurrent": "4.0.12"
 
       }
     },
-    "net451": {
+    "net461": {
       "dependencies": {
       },
+      "imports": "dnxcore50",
       "frameworkAssemblies": {
         "System.ComponentModel.DataAnnotations": "4.0.0.0",
-        "System.Runtime": "4.0.10.0"
+        "System.Runtime": "4.0.20.0"
       }
     }
   }

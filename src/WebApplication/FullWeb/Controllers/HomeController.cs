@@ -22,6 +22,7 @@ namespace FullWeb.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.PageClass = "fixed-navigation fixed-header fixed-ribbon";
             return View();
         }
 
