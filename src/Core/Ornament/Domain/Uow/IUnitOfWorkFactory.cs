@@ -1,8 +1,15 @@
 namespace Ornament.Domain.Uow
 {
+    /// <summary>
+    /// Interface IUnitOfWorkFactory
+    /// </summary>
     public interface IUnitOfWorkFactory
     {
-        string Name { get; set; }
+       
+        /// <summary>
+        /// Creates this instance.
+        /// </summary>
+        /// <returns>IUnitOfWork.</returns>
         IUnitOfWork Create();
     }
 }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Ornament.Domain.Uow;
 using Ornament.Identity.Stores;
 using Ornament.NHibernate;
+using Ornament.NHibernate.Uow;
 
-namespace Ornament.Identity.Dao
+namespace Ornament.Identity.Dao.NhImple
 {
     public class PermissionStore<TUser, TKey, TRole>
         : Store<Permission<TRole>, int>
@@ -16,7 +17,7 @@ namespace Ornament.Identity.Dao
 
 
     {
-        public PermissionStore(IUnitOfWorkProvider context) : base(context)
+        public PermissionStore(NhUow context) : base(context)
         {
         }
 

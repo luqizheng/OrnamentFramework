@@ -4,20 +4,29 @@
             asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
             asp-fallback-test="window.jQuery">
 
+
+    
+    </script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery.popover">
+
     </script>
     <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"
             asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
             asp-fallback-test="window.jQuery.validate">
 
+    
     </script>
 
     <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/additional-methods.min.js"
             asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
             asp-fallback-test="window.jQuery.validate">
 
+    
     </script>
 </environment>
-<script src="~/js/main.js" asp-append-version="true"></script>
+
 <environment names="Development">
     <!-- IMPORTANT: SmartAdmin Core -->
     <script src="http://cdn.bootcss.com/jquery/2.2.2/jquery.js"
@@ -30,7 +39,11 @@
             asp-fallback-test="window.jQuery.validate">
 
     </script>
-
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.js"
+            asp-fallback-test="window.jQuery.popover">
+        
+    </script>
     <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/additional-methods.js"
             asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
             asp-fallback-test="window.jQuery.validate">
@@ -39,7 +52,8 @@
     <!-- Startup image for web apps -->
 </environment>
 
-
+<script src="~/js/site.min.js" asp-append-version="true"></script>
+<script src="~/js/main.js" asp-append-version="true"></script>
 <!-- DO NOT REMOVE : GLOBAL FUNCTIONS! -->
 <script>
     $(document).ready(function () {

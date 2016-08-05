@@ -69,7 +69,7 @@ namespace Ornament.NHibernate.Uow
             ThrowIfDisposed();
 
 
-            if (_sessionFactory != null)
+            if (_session == null)
                 _session = _sessionFactory.OpenSession();
             if (_useTransaction)
             {
@@ -130,10 +130,12 @@ namespace Ornament.NHibernate.Uow
         /// </summary>
         public void Dispose()
         {
-            ThrowIfDisposed();
             _disposed = true;
-            if (_session.IsConnected)
+            if (_session != null && _session.IsConnected)
+            {
                 _session.Close();
+                _session.Dispose();
+            }
         }
 
         /// <summary>

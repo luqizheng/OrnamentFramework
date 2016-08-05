@@ -5,27 +5,27 @@ using Ornament.Domain.Uow;
 
 namespace Ornament.Web.Uow
 {
+    /// <summary>
+    ///     Class UnitOfWorkAttribute.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
     public class UnitOfWorkAttribute : ActionFilterAttribute
     {
-        private readonly string _name;
-
-        public UnitOfWorkAttribute()
-        {
-        }
-
-        public UnitOfWorkAttribute(string name)
-        {
-            if (name == null)
-                throw new ArgumentNullException(nameof(name));
-            _name = name;
-        }
-
+        /// <summary>
+        ///     Gets the unit of work.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns>IUnitOfWork.</returns>
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
-            var provider = context.GetService<IUnitOfWorkProvider>();
-            return _name != null ? provider.Get(_name) : provider.Get();
+            return context.GetService<IUnitOfWork>();
         }
 
+        /// <summary>
+        ///     Called when [action executing].
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <inheritdoc />
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var uow = GetUnitOfWork(context.HttpContext.RequestServices);
@@ -34,6 +34,11 @@ namespace Ornament.Web.Uow
             base.OnActionExecuting(context);
         }
 
+        /// <summary>
+        ///     Called when [result executed].
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <inheritdoc />
         public override void OnResultExecuted(ResultExecutedContext context)
         {
             var uow = GetUnitOfWork(context.HttpContext.RequestServices);

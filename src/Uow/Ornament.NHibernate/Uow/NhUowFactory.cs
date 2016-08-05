@@ -6,26 +6,16 @@ using Ornament.Domain.Uow;
 
 namespace Ornament.NHibernate.Uow
 {
-    public class NhUowFactory : IUnitOfWorkFactory
+    public abstract class NhUowFactoryBase : IUnitOfWorkFactory
     {
-        private readonly FluentConfiguration _config;
-
-
-        private readonly object _sessionFactoryLocke = 1;
         private ISessionFactory _sessionFactory;
-
-        public NhUowFactory(FluentConfiguration config)
+        private readonly FluentConfiguration _config;
+        private readonly object _sessionFactoryLocke = 1;
+        public NhUowFactoryBase(FluentConfiguration config)
         {
             if (config == null) throw new ArgumentNullException(nameof(config));
             _config = config;
         }
-
-        public bool BeginTransaction { get; set; }
-        public bool OpenStateless { get; set; }
-
-        /// <summary>
-        /// </summary>
-        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -40,19 +30,17 @@ namespace Ornament.NHibernate.Uow
                         _sessionFactory = _config.BuildSessionFactory();
                 }
             }
-            if (OpenStateless)
-                return new NhUowStateless(_sessionFactory, BeginTransaction);
-            return new NhUow(_sessionFactory, BeginTransaction);
+            return Create(_sessionFactory);
         }
 
-        public NhUowFactory AddAssemblyOf<T>()
+        public NhUowFactoryBase AddAssemblyOf<T>()
         {
             _config.Mappings(m =>
                 m.FluentMappings.AddFromAssemblyOf<T>());
             return this;
         }
 
-        public NhUowFactory AddAssemblyOf(Type typeOfMappingClass)
+        public NhUowFactoryBase AddAssemblyOf(Type typeOfMappingClass)
         {
             _config.Mappings(m =>
                 m.FluentMappings.AddFromAssembly(typeOfMappingClass.Assembly));
@@ -60,7 +48,7 @@ namespace Ornament.NHibernate.Uow
             return this;
         }
 
-        public NhUowFactory AddType(Type t)
+        public NhUowFactoryBase AddType(Type t)
         {
             _config.Mappings(m =>
                 m.FluentMappings.Add(t));
@@ -68,12 +56,41 @@ namespace Ornament.NHibernate.Uow
             return this;
         }
 
-        public NhUowFactory UpdateSchema(bool updateDbStructure)
+        public NhUowFactoryBase UpdateSchema(bool updateDbStructure)
         {
             var config = _config.BuildConfiguration();
             var export = new SchemaUpdate(config);
             export.Execute(true, true);
             return this;
+        }
+
+        protected abstract IUnitOfWork Create(ISessionFactory factory);
+
+
+
+
+    }
+    public class NhUowFactory : NhUowFactoryBase
+    {
+        public NhUowFactory(FluentConfiguration config) : base(config)
+        {
+        }
+
+        protected override IUnitOfWork Create(ISessionFactory factory)
+        {
+            return new NhUow(factory);
+        }
+    }
+
+    public class NhSessionlessFactory : NhUowFactoryBase
+    {
+        public NhSessionlessFactory(FluentConfiguration config) : base(config)
+        {
+        }
+
+        protected override IUnitOfWork Create(ISessionFactory factory)
+        {
+            return new NhUowStateless(factory);
         }
     }
 }

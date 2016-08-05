@@ -15,6 +15,8 @@ using Ornament.NHibernate;
 using Ornament.Web.SiteMap;
 using SmartAdmin.Services;
 using Ornament.Identity.Dao.NhImple;
+using Ornament.NHibernate.Uow;
+
 namespace FullWeb
 {
     public class Startup
@@ -60,7 +62,7 @@ namespace FullWeb
                     options.SupportedUICultures = supportedCultures;
                 });
 
-            var uowFactory = services.AddUintOfWork()
+            NhUowFactoryBase uowFactory = services
                 .MsSql2008(option => { option.ConnectionString(Configuration.GetConnectionString("default")); })
                 .AddAssemblyOf(typeof(Startup))
                 .UpdateSchema(true);
@@ -147,7 +149,10 @@ namespace FullWeb
                 IconClasses = "fa fa-lg fa-fw fa-home"
             };
             root.Add(homePage);
-            var adminNav = new Nav("Admin", "#");
+            var adminNav = new Nav("Admin", "#")
+            {
+                IconClasses = "fa fa-lg fa-fw fa-desktop"
+            };
 
 
             root.Add(adminNav);

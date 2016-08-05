@@ -8,14 +8,6 @@ using Ornament.Domain.Entities;
 namespace Ornament.Identity
 {
 
-    ///// <summary>
-    ///// Class IdentityUser.
-    ///// </summary>
-    ///// <seealso cref="Ornament.Identity.IdentityUser{System.String, Ornament.Identity.IdentityRole}" />
-    //public class IdentityUser : IdentityUser<string, IdentityRole>
-    //{
-    //}
-
     /// <summary>
     /// Represents a user in the identity system
     /// </summary>

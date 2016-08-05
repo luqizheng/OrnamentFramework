@@ -4,7 +4,7 @@ using Ornament.Domain.Entities;
 
 namespace Ornament.Domain.Stores
 {
-    public interface IStore<T, TId>
+    public interface IStore<T, TId>: IDisposable
         where T : EntityWithTypedId<TId>
         where TId : IEquatable<TId>
     {

@@ -10,6 +10,7 @@ using NHibernate.Criterion;
 using NHibernate.Linq;
 using Ornament.Domain.Uow;
 using Ornament.NHibernate;
+using Ornament.NHibernate.Uow;
 
 namespace Ornament.Identity.Dao.NhImple
 {
@@ -30,8 +31,8 @@ namespace Ornament.Identity.Dao.NhImple
 
 
     {
-    
-        public UserStore(IUnitOfWorkProvider provider) : base(provider)
+
+        public UserStore(NhUow provider) : base(provider)
         {
         }
 
@@ -258,10 +259,10 @@ namespace Ornament.Identity.Dao.NhImple
             }
 
             var query = from u in Context.Query<TUser>()
-                from l in u.Logins
-                where l.LoginProvider == loginProvider
-                      && l.ProviderKey == providerKey
-                select u;
+                        from l in u.Logins
+                        where l.LoginProvider == loginProvider
+                              && l.ProviderKey == providerKey
+                        select u;
 
             return Task.Run(() => query.SingleOrDefault(), cancellationToken);
         }
@@ -399,7 +400,17 @@ namespace Ornament.Identity.Dao.NhImple
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             //return Task.FromResult(this.Context.Get<TUser>((object)userId));
-            return GetUserAggregateAsync(u => u.Id.Equals(userId), cancellationToken);
+            //return GetUserAggregateAsync(u => u.Id.Equals(userId), cancellationToken);
+            return Task.Run(() =>
+            {
+
+
+                var id = Restrictions.Eq(Projections.Id(), userId);
+                var c = DetachedCriteria.For<TUser>().Add(id)
+                .GetExecutableCriteria(this.Context);
+                return c.UniqueResult<TUser>();
+            });
+
         }
 
         public Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken)
@@ -527,7 +538,7 @@ namespace Ornament.Identity.Dao.NhImple
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return Task.Run(() => (IList<string>) user.Roles.Select(u => u.Name).ToList(), cancellationToken);
+            return Task.Run(() => (IList<string>)user.Roles.Select(u => u.Name).ToList(), cancellationToken);
         }
 
         public Task<bool> IsInRoleAsync(TUser user, string roleName, CancellationToken cancellationToken)

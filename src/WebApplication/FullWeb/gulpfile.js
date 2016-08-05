@@ -13,18 +13,18 @@ var rootPath = "./wwwroot/";
 var srcFolder = {
     css: rootPath + "_src/css/*.css",
     js: rootPath + "_src/js/*.js",
-    fonts:rootPath+"_src/fonts/*"
+    fonts: rootPath + "_src/fonts/*"
 };
 var distFolder = {
     css: rootPath + "css/",
     js: rootPath + "js/",
     fonts: [
         rootPath + "fonts/",
-        rootPath+"lib/"
+        rootPath + "lib/"
     ]
 };
 gulp.task("webpack",
-    function(callback) {
+    function (callback) {
 
         return webpack(webpackConfig)
             .pipe(gulp.dest(distFolder.js));
@@ -35,23 +35,44 @@ var md5Sign = [
     "./Views/Home/*.cshtml"
 ];
 gulp.task("js:min",
-    ["webpack"],
-    function(callback) {
-        return gulp.src(["./wwwroot/js/pages/!(*.min).js"])
-            .pipe(uglify())
+    ["webpack", "global-js"],
+    function (callback) {
+
+        return gulp.src(
+            [distFolder.js+ "main.js"])
+            //.pipe(uglify())
             .pipe(rename({ suffix: ".min" }))
             .pipe(md5(10, md5Sign))
             .pipe(gulp.dest(distFolder.js));
     });
+
+gulp.task("global-js", function ()
+{
+    //全局js文件。
+    var target = [
+          "./wwwroot/lib/smartAdmin/app.config.js",
+        "./wwwroot/lib/smartAdmin/app.js"
+      
+    ];
+
+    return gulp.src(
+           target)
+           //.pipe(uglify())
+            .pipe(concat("site.js"))
+           .pipe(rename({ suffix: ".min" }))
+           .pipe(md5(10, md5Sign))
+           .pipe(gulp.dest(distFolder.js));
+});
+
 gulp.task("default",
-    ["js:min", "css","fonts"],
-    function(callback) {
+    ["js:min", "css", "fonts"],
+    function (callback) {
 
     });
 
 gulp.task("css",
     ["css:embed"],
-    function(callback) {
+    function (callback) {
         return gulp.src(srcFolder.css)
             .pipe(concat("site.css"))
             .pipe(gulp.dest(distFolder.css))
@@ -64,13 +85,13 @@ gulp.task("fonts", function () {
         .pipe(gulp.dest(distFolder.fonts));
 })
 gulp.task("watch",
-    function() {
+    function () {
         gulp.watch("./wwwroot/js/**/*", ["js:min"]);
         gulp.watch("./wwwroot/css/**/*", ["css"]);
     });
 
 gulp.task("css:embed",
-    function() {
+    function () {
 
         //return gulp.src("./wwwroot/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.css")
         //    .pipe(embed({ asset: './Assets/bootstrap-colorpicker/imag' }))
@@ -79,7 +100,7 @@ gulp.task("css:embed",
     });
 
 function onBuild(done) {
-    return function(err, stats) {
+    return function (err, stats) {
         console.log("---" + err);
         if (err) {
             gutil.log("Error", err);
@@ -89,7 +110,7 @@ function onBuild(done) {
         } else {
 
             Object.keys(stats.compilation.assets)
-                .forEach(function(key) {
+                .forEach(function (key) {
                     gutil.log("Webpack: output ", gutil.colors.green(key));
                 });
             gutil.log("Webpack: ", gutil.colors.blue("finished ", stats.compilation.name));

@@ -8,7 +8,7 @@ namespace Ornament.Identity.Dao.NhImple
     {
         public static IdentityBuilder AddNhibernateStores(
             this IdentityBuilder builder,
-            NhUowFactory nhbuilder
+            NhUowFactoryBase nhbuilder
             )
         {
             GetDefaultServices(builder);

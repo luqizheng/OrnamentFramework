@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using NHibernate.Linq;
 using Ornament.Domain.Uow;
 using Ornament.NHibernate;
+using Ornament.NHibernate.Uow;
 
 namespace Ornament.Identity.Dao.NhImple
 {
@@ -17,7 +18,7 @@ namespace Ornament.Identity.Dao.NhImple
         where TKey : IEquatable<TKey>
         where TRole : IdentityRole<TKey>
     {
-        public RoleStore(IUnitOfWorkProvider context) : base(context)
+        public RoleStore(NhUow context) : base(context)
         {
         }
 

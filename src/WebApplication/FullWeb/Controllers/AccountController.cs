@@ -37,7 +37,7 @@ namespace FullWeb.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-        [UnitOfWork]
+       
         public async Task<IActionResult> Login(string returnUrl = null)
         {
            
@@ -55,7 +55,7 @@ namespace FullWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [UnitOfWork]
+      
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;

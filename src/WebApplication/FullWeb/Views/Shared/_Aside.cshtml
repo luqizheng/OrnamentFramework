@@ -41,7 +41,26 @@
                             <i class="@item.IconClasses"></i>
                         }
                         <span class="menu-item-parent">@item.Name</span> 
+
                     </a>
+
+                    @if (item.ChildNavs.Any())
+                    {
+                        <ul>
+                            @foreach (var childItem in item.ChildNavs)
+                            {
+                                <li>
+                                    <a href="@childItem.Url(Url)">
+                                        @if (childItem.IconClasses != null)
+                                        {
+                                            <i class="fa fa-lg fa-fw fa-gear"></i>
+                                        }
+                                        <span class="menu-item-parent">@childItem.Name</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }
 
                 </li>
             }
