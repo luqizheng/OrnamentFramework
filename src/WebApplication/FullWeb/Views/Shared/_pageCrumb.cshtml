@@ -1,0 +1,18 @@
+﻿@using Ornament.Web.SiteMap
+@using FullWeb.Helpers
+
+@{ 
+    var nav = new Queue<Nav>(Html.GetBreadcrumb(3));
+}
+<h1 class="page-title txt-color-blueDark">
+    <i class="fa-fw fa fa-home"></i>
+    @nav.Dequeue().Name
+    @while (nav.Count != 0)
+    {
+        <span>
+            >
+            @nav.Dequeue().Name
+        </span>
+    }
+</h1>
+

@@ -1,63 +1,47 @@
-﻿
+﻿<script>
+    @Html.Raw(Ornament.Web.SiteMap.NavManager.ToJson(Url))
+</script>
 <environment names="Staging,Production">
-    <script src="http://cdn.bootcss.com/jquery/2.2.2/jquery.min.js"
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"
             asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
             asp-fallback-test="window.jQuery">
 
-
-    
     </script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"
             asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-            asp-fallback-test="window.jQuery.popover">
+            asp-fallback-test="window.jQuery.fn.popover">
 
     </script>
-    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.min.js"
-            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
-            asp-fallback-test="window.jQuery.validate">
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 
     
-    </script>
+   
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    <script src="~/js/main.min.js" asp-append-version="true"></script>
 
-    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/additional-methods.min.js"
-            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
-            asp-fallback-test="window.jQuery.validate">
-
-    
-    </script>
 </environment>
 
 <environment names="Development">
-    <!-- IMPORTANT: SmartAdmin Core -->
-    <script src="http://cdn.bootcss.com/jquery/2.2.2/jquery.js"
-            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-            asp-fallback-test="window.jQuery">
 
-    </script>
-    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/jquery.validate.js"
-            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
-            asp-fallback-test="window.jQuery.validate">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 
-    </script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"
-            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.js"
-            asp-fallback-test="window.jQuery.popover">
-        
-    </script>
-    <script src="http://cdn.bootcss.com/jquery-validate/1.15.1/additional-methods.js"
-            asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.js"
-            asp-fallback-test="window.jQuery.validate">
-
-    </script>
-    <!-- Startup image for web apps -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    <script src="~/lib/avalon/dist/avalon.modern.js"></script>
 </environment>
 
-<script src="~/js/site.min.js" asp-append-version="true"></script>
-<script src="~/js/main.js" asp-append-version="true"></script>
-<!-- DO NOT REMOVE : GLOBAL FUNCTIONS! -->
-<script>
-    $(document).ready(function () {
-        pageSetUp();
-        drawBreadCrumb();
-    });
-</script>
+<environment names="Staging,Production,Development"></environment>
+    <script>
+        $(document).ready(function () {
+            pageSetUp();
+            drawBreadCrumb();
+        });
+    </script>

@@ -35,7 +35,11 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="@Url.Action("login", "account")" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout">
+                @*
+                    use page.js to redirect, so add target attribute to disabled dispatched.
+                *@
+                <a href="@Url.Action("login", "account",new { area = "" })" target="_self" title="@Localizer["Sign Out"]"
+                   class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout">
                     <i class="fa fa-sign-out fa-lg"></i> <strong><>L</>ogout</strong>
                 </a>
             </li>
@@ -45,7 +49,13 @@
 
 <!-- logout button -->
 <div id="logout" class="btn-header transparent pull-right">
-    <span> <a href="@Url.Action("login", "account")" title="@Localizer["Sign Out"]" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+    @*
+        use page.js to redirect, so add target attribute to disabled dispatched.
+    *@
+    <span>
+        <a href="@Url.Action("login", "account")" title="@Localizer["Sign Out"]" target="_self"
+           data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a>
+    </span>
 </div>
 <!-- end logout button -->
 <!-- search mobile button (this is hidden till mobile view port) -->

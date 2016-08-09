@@ -204,8 +204,8 @@
   <data name="PermissionName" xml:space="preserve">
     <value>許可證名稱</value>
   </data>
-  <data name="Phone" xml:space="preserve">
-    <value>電話</value>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>移動電話</value>
   </data>
   <data name="RegistryTime" xml:space="preserve">
     <value>註冊時間</value>

@@ -213,7 +213,7 @@ namespace Ornament.Identity {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to LastUserLockedTime.
+        ///    Looks up a localized string similar to Last User Locked Time.
         /// </summary>
         public static string LastLockTime {
             get {
@@ -402,11 +402,11 @@ namespace Ornament.Identity {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Phone.
+        ///    Looks up a localized string similar to Phone Number.
         /// </summary>
-        public static string Phone {
+        public static string PhoneNumber {
             get {
-                return ResourceManager.GetString("Phone", resourceCulture);
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
             }
         }
         

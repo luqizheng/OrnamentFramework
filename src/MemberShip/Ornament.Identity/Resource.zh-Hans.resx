@@ -198,8 +198,8 @@
   <data name="PermissionName" xml:space="preserve">
     <value>许可证名称</value>
   </data>
-  <data name="Phone" xml:space="preserve">
-    <value>电话</value>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>移动电话</value>
   </data>
   <data name="RegistryTime" xml:space="preserve">
     <value>注册时间</value>

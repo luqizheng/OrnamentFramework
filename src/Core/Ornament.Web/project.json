@@ -1,7 +1,8 @@
 ﻿{
   "version": "1.0.0-*",
 
-  "dependencies": {  
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1", 
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Ornament": "1.0.0-*"

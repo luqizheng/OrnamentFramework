@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using FullWeb.Helpers;
 using FullWeb.Models;
@@ -10,12 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Ornament;
+using Ornament.Identity.Dao.NhImple;
 using Ornament.NHibernate;
 using Ornament.Web.SiteMap;
 using SmartAdmin.Services;
-using Ornament.Identity.Dao.NhImple;
-using Ornament.NHibernate.Uow;
 
 namespace FullWeb
 {
@@ -62,7 +61,7 @@ namespace FullWeb
                     options.SupportedUICultures = supportedCultures;
                 });
 
-            NhUowFactoryBase uowFactory = services
+            var uowFactory = services
                 .MsSql2008(option => { option.ConnectionString(Configuration.GetConnectionString("default")); })
                 .AddAssemblyOf(typeof(Startup))
                 .UpdateSchema(true);
@@ -79,7 +78,9 @@ namespace FullWeb
                     options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
                     options.Cookies.ApplicationCookie.CookieName = "Interop";
 
-
+                    options.SecurityStampValidationInterval = new TimeSpan(0, 3, 0);
+                    options.User.RequireUniqueEmail = true;
+                    options.Lockout.MaxFailedAccessAttempts = 10;
                     // options.Cookies.ApplicationCookie.DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo("C:\\Github\\Identity\\artifacts"));
                 })
                 .AddDefaultTokenProviders()
@@ -110,30 +111,39 @@ namespace FullWeb
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+
+                // Handle unhandled errors
+                app.UseExceptionHandler("/Error/Unhandle");
+                // Display friendly error pages for any non-success case
+                // This will handle any situation where a status code is >= 400
+                // and < 600, so long as no response body has already been
+                // generated.
+                app.UseStatusCodePagesWithReExecute("/Error/Status/{0}");
             }
 
             app.UseStaticFiles();
 
             app.UseIdentity()
-                
+
                 .UseCookieAuthentication(new CookieAuthenticationOptions
                 {
                     LoginPath = new PathString("/Account/Login"),
                     CookieSecure = CookieSecurePolicy.None,
                     AutomaticChallenge = true,
                     AutomaticAuthenticate = true,
-                    AuthenticationScheme = "CookieAuth"
+                    AuthenticationScheme = "CookieAuth",
+
                 });
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
             });
+
 
             InitMenu();
         }
@@ -161,7 +171,15 @@ namespace FullWeb
             {
                 Action = "Index",
                 Controller = "User",
-                Area = "Admin"
+                Area = "Membership",
+                IconClasses = "fa fa-fw fa-user"
+            });
+            adminNav.Add(new MvcNav("角色")
+            {
+                Action = "Index",
+                Controller = "Role",
+                Area = "Membership",
+                IconClasses = "fa fa-fw fa-users"
             });
 
             NavManager.Init(root);

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Net;
-#if NET451
+﻿using System.Net;
+using System.Threading.Tasks;
+#if NET461
 using System.Net.Mail;
 
 #endif
 
 namespace Ornament.Notify.Senders
 {
-    public class EmailSender : ISender
+    public class EmailSender
     {
-#if NET451
+#if NET461
         private SmtpClient _smtpClient;
 #endif
 
@@ -17,18 +17,17 @@ namespace Ornament.Notify.Senders
         {
         }
 
-        public EmailSender(string name, string server, string fromEmail)
+        public EmailSender(string server, string fromEmail)
 
         {
             FromEmail = fromEmail;
             SmtpServer = server;
             Port = 25;
-            Name = name;
+        
         }
 
-        public string Name { get; }
 
-#if NET451
+#if NET461
         public virtual SmtpClient Client
         {
             get
@@ -69,34 +68,9 @@ namespace Ornament.Notify.Senders
         /// </summary>
         public virtual string Password { get; set; }
 
-        public void Send(string content, params object[] sendingParameters)
+        public virtual Task Send(MailMessage mailMessage)
         {
-            if (sendingParameters.Length >= 2)
-            {
-                throw new ArgumentOutOfRangeException(nameof(sendingParameters));
-            }
-            var subject = sendingParameters[0].ToString();
-            var to = sendingParameters[1].ToString();
-
-            var from = sendingParameters.Length == 3 ? sendingParameters[2] as string : null;
-
-            Send(subject, content, to, from);
-        }
-
-        public virtual void Send(string subject, string content, string to, string from)
-        {
-#if NET451
-            var mailMessage =
-                new MailMessage(
-                    new MailAddress(from ?? FromEmail),
-                    new MailAddress(to))
-                {
-                    Body = content,
-                    Subject = subject,
-                    IsBodyHtml = true
-                };
-            Client.Send(mailMessage);
-#endif
+            return Client.SendMailAsync(mailMessage);
         }
     }
 }

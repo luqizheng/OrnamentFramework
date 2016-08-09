@@ -169,7 +169,7 @@
     <value>Last activity time</value>
   </data>
   <data name="LastLockTime" xml:space="preserve">
-    <value>LastUserLockedTime</value>
+    <value>Last User Locked Time</value>
   </data>
   <data name="LastLoginTime" xml:space="preserve">
     <value>Last login time</value>
@@ -228,8 +228,8 @@
   <data name="PermissionName" xml:space="preserve">
     <value>Permission Name</value>
   </data>
-  <data name="Phone" xml:space="preserve">
-    <value>Phone</value>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
   </data>
   <data name="RegistryTime" xml:space="preserve">
     <value>Registry time</value>

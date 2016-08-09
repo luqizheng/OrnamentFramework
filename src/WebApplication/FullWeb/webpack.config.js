@@ -2,7 +2,8 @@
 var path = require('path');
 var glob = require('glob');
 var rootPath = "./wwwroot/_src/";
-var scriptsLib=rootPath+"lib"
+var scriptsLib = rootPath + "lib"
+var requestRoot = './lib/';
 module.exports = {
     entry: rootPath+'js/main.js',
     devtool: "inline-source-map",
@@ -13,12 +14,10 @@ module.exports = {
     resolve: {
         extensions: ["", ".ts", ".js"],
         alias: {
-            'jquery': __dirname + "/Scripts/jquery-2.2.2.min.js",
-            'avalon': __dirname + "/Scripts/avalon.mobile.shim.min.js",
-            'bootstrap': __dirname + "/Scripts/bootstrap.min.js",
-            'signalR': __dirname + "/Scripts/jquery.signalR.js",
-            'bootbox': __dirname + "/Scripts/bootbox.min.js",
-            'monent': __dirname + "/Scripts/moment.js"
+            'jquery': requestRoot + "jquery/dist/jquery.js",
+            'avalon': requestRoot + "avalon/dist/avalon.js",
+            'bootstrap': requestRoot + "bootstrap/dist/js/bootstrap.js",
+            'monent': requestRoot + "moment/moment.js"         
         }
     },
     module: {

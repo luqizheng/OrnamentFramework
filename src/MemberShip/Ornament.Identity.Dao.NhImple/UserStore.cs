@@ -23,7 +23,8 @@ namespace Ornament.Identity.Dao.NhImple
         IUserPasswordStore<TUser>,
         IUserSecurityStampStore<TUser>,
         IUserEmailStore<TUser>,
-        IUserPhoneNumberStore<TUser>
+        IUserPhoneNumberStore<TUser>,
+        IUserLockoutStore<TUser>
         where TUser : IdentityUser<TKey, TRole>
         where TRole : IdentityRole<TRokeKey>
         where TKey : IEquatable<TKey>
@@ -182,21 +183,21 @@ namespace Ornament.Identity.Dao.NhImple
         public Task<TUser> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return GetUserAggregateAsync(u => u.NormalizedEmail.ToUpper() == normalizedEmail.ToUpper(),
+            return GetUserAggregateAsync(u => u.Email.ToUpper() == normalizedEmail.ToUpper(),
                 cancellationToken);
         }
 
         public Task<string> GetNormalizedEmailAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return Task.FromResult(user.NormalizedEmail);
+            return Task.FromResult(user.Email);
         }
 
         public Task SetNormalizedEmailAsync(TUser user, string normalizedEmail, CancellationToken cancellationToken)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
             ThrowIfDisposed();
-            user.NormalizedEmail = normalizedEmail;
+            user.Email = normalizedEmail;
             return Task.FromResult(0);
         }
 
@@ -274,7 +275,7 @@ namespace Ornament.Identity.Dao.NhImple
             //return Task.FromResult<TUser>(Queryable.FirstOrDefault<TUser>(Queryable.Where<TUser>(this.Context.Query<TUser>(), (Expression<Func<TUser, bool>>)(u => u.UserName.ToUpper() == userName.ToUpper()))));
             return Task.Run(() =>
             {
-                var normalUserNameProp = Projections.Property<TUser>(s => s.NormalizedUserName);
+                var normalUserNameProp = Projections.Property<TUser>(s => s.LoginId);
                 var user = DetachedCriteria.For<TUser>()
                     .Add(Restrictions.Eq(normalUserNameProp, normalizedUserName).IgnoreCase())
                     .GetExecutableCriteria(Context).UniqueResult<TUser>();
@@ -296,8 +297,9 @@ namespace Ornament.Identity.Dao.NhImple
                 IList<UserLoginInfo> result = new List<UserLoginInfo>();
                 foreach (var identityUserLogin in user.Logins)
                 {
-                    result.Add(new UserLoginInfo(identityUserLogin.LoginProvider, identityUserLogin.ProviderKey,
-                        user.UserName));
+                    result.Add(new UserLoginInfo(identityUserLogin.LoginProvider, 
+                        identityUserLogin.ProviderKey,
+                        user.LoginId));
                 }
                 return result;
             }, cancellationToken);
@@ -313,7 +315,7 @@ namespace Ornament.Identity.Dao.NhImple
 
             return Task.Run(() =>
             {
-                var result = user.UserName;
+                var result = user.LoginId;
 
                 return result;
             }, cancellationToken);
@@ -328,7 +330,7 @@ namespace Ornament.Identity.Dao.NhImple
         public Task<string> GetUserNameAsync(TUser user, CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
-            return Task.FromResult(user.UserName);
+            return Task.FromResult(user.LoginId);
         }
 
         public Task RemoveLoginAsync(TUser user,
@@ -366,7 +368,7 @@ namespace Ornament.Identity.Dao.NhImple
         {
             ThrowIfDisposed();
             if (user == null) throw new ArgumentNullException(nameof(user));
-            user.NormalizedUserName = normalizedName;
+            user.LoginId = normalizedName;
             return Task.FromResult(0);
         }
 
@@ -375,7 +377,7 @@ namespace Ornament.Identity.Dao.NhImple
         {
             ThrowIfDisposed();
             if (user == null) throw new ArgumentNullException(nameof(user));
-            user.UserName = userName;
+            user.LoginId = userName;
             return Task.FromResult(0);
         }
 
@@ -614,6 +616,64 @@ namespace Ornament.Identity.Dao.NhImple
                 // no cartesian product, batch call. Don't know if it's really needed: should we eager load or let lazy loading do its stuff?
                 var query = Context.Query<TUser>().Where(filter);
                 return query.ToFuture().FirstOrDefault();
+            }, cancellationToken);
+        }
+
+        public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.LockoutEnd);
+        }
+
+        public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)
+        {
+            user.LockoutEnd = lockoutEnd;
+            return Task.Run(() =>
+            {
+                this.SaveOrUpdate(user);
+
+            }, cancellationToken);
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        {
+            user.AccessFailedCount++;
+            return Task.Run(() =>
+            {
+                this.SaveOrUpdate(user);
+                return user.AccessFailedCount;
+            }, cancellationToken);
+        }
+
+        public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        {
+
+
+            user.LockoutEnabled = false;
+            user.AccessFailedCount = 0;
+            return Task.Run(() =>
+            {
+                this.SaveOrUpdate(user);
+            }, cancellationToken);
+        }
+
+        public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.AccessFailedCount);
+
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.LockoutEnabled);
+        }
+
+        public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken)
+        {
+            user.LockoutEnabled = enabled;
+            return Task.Run(() =>
+            {
+                this.SaveOrUpdate(user);
+
             }, cancellationToken);
         }
     }

@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+@section header{
+       @RenderSection("header", false)
+}
+<div id="content">
+    @RenderBody()
+</div>
+
+@section scripts{
+    @RenderSection("scripts", false)
+}
+@section topright{
+    @(IsSectionDefined("topright") ? RenderSection("topright", false) : Html.Partial("_TopRight"))
+}

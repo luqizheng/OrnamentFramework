@@ -1,9 +1,12 @@
 ﻿#region Using
 
 using System;
+using System.IO;
 using System.Reflection;
+using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -15,13 +18,12 @@ namespace FullWeb.Helpers
     {
         private static string _displayVersion;
         private static Assembly _executingAssembly;
-        private static Settings _settings;
 
-        public static Settings Settings => _settings;
+        public static Settings Settings { get; private set; }
 
         public static void EnsureSettings(this IHtmlHelper helper)
         {
-            _settings = helper.ViewContext.HttpContext.RequestServices.GetRequiredService<IOptions<Settings>>().Value;
+            Settings = helper.ViewContext.HttpContext.RequestServices.GetRequiredService<IOptions<Settings>>().Value;
         }
 
         /// <summary>
@@ -56,7 +58,8 @@ namespace FullWeb.Helpers
         /// <returns>A HtmlString containing the given attribute value; otherwise an empty string.</returns>
         public static IHtmlContent RouteIf(this IHtmlHelper helper, string value, string attribute)
         {
-            var currentController = (helper.ViewContext.RouteData.Values["controller"] ?? string.Empty).ToString().UnDash();
+            var currentController =
+                (helper.ViewContext.RouteData.Values["controller"] ?? string.Empty).ToString().UnDash();
             var currentAction = (helper.ViewContext.RouteData.Values["action"] ?? string.Empty).ToString().UnDash();
 
             var hasController = value.Equals(currentController, StringComparison.OrdinalIgnoreCase);
@@ -125,7 +128,7 @@ namespace FullWeb.Helpers
             string heading = "")
         {
             if (htmlHelper.ViewData.ModelState.IsValid)
-                return new HtmlString(string.Empty);
+                return new StringHtmlContent("");
 
             var div = new TagBuilder("div");
             div.AddCssClass($"alert alert-{alertType} alert-block");
@@ -136,7 +139,7 @@ namespace FullWeb.Helpers
             button.Attributes.Add("aria-hidden", "true");
             button.InnerHtml.AppendHtml("&times;");
 
-            div.InnerHtml.Append(button.ToString());
+            div.InnerHtml.AppendHtml(button);
 
             if (!heading.IsEmpty())
             {
@@ -144,14 +147,22 @@ namespace FullWeb.Helpers
                 h4.AddCssClass("alert-heading");
                 h4.InnerHtml.Append($"<h4 class=\"alert-heading\">{heading}</h4>");
 
-                div.InnerHtml.Append(h4.ToString());
+                div.InnerHtml.AppendHtml(h4);
             }
 
             var summary = htmlHelper.ValidationSummary();
-            
-            div.InnerHtml.Append(summary.ToString());
+
+
+            div.InnerHtml.AppendHtml(summary);
 
             return div;
+        }
+
+        public static string GetString(this IHtmlContent content)
+        {
+            var writer = new StringWriter();
+            content.WriteTo(writer, HtmlEncoder.Default);
+            return writer.ToString();
         }
     }
 }

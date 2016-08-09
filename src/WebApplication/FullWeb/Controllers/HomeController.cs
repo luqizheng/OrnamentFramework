@@ -61,5 +61,10 @@ namespace FullWeb.Controllers
 
             return LocalRedirect(returnUrl);
         }
+        public IActionResult Error(int? id)
+        {
+            var a = "~/Views/Shared/Error/" + (id ?? 500) + ".cshtml";
+            return View(a);
+        }
     }
 }

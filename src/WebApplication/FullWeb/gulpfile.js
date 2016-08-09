@@ -18,10 +18,8 @@ var srcFolder = {
 var distFolder = {
     css: rootPath + "css/",
     js: rootPath + "js/",
-    fonts: [
-        rootPath + "fonts/",
-        rootPath + "lib/"
-    ]
+    fonts:rootPath + "fonts/"
+    
 };
 gulp.task("webpack",
     function (callback) {
@@ -38,8 +36,7 @@ gulp.task("js:min",
     ["webpack", "global-js"],
     function (callback) {
 
-        return gulp.src(
-            [distFolder.js+ "main.js"])
+        return gulp.src([distFolder.js+"*.js","!"+distFolder.js+"*.min.js"])
             //.pipe(uglify())
             .pipe(rename({ suffix: ".min" }))
             .pipe(md5(10, md5Sign))
@@ -59,8 +56,6 @@ gulp.task("global-js", function ()
            target)
            //.pipe(uglify())
             .pipe(concat("site.js"))
-           .pipe(rename({ suffix: ".min" }))
-           .pipe(md5(10, md5Sign))
            .pipe(gulp.dest(distFolder.js));
 });
 

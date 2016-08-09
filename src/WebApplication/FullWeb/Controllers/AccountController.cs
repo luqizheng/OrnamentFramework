@@ -37,10 +37,8 @@ namespace FullWeb.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-       
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-           
             // We do not want to use any existing identity information
             await EnsureLoggedOut();
 
@@ -55,7 +53,6 @@ namespace FullWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-      
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -66,7 +63,7 @@ namespace FullWeb.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, set lockoutOnFailure: true
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-
+           
             if (result.Succeeded)
             {
                 _logger.LogInformation(1, "User logged in.");
@@ -74,13 +71,11 @@ namespace FullWeb.Controllers
             }
 
             if (result.RequiresTwoFactor)
-            {
                 return RedirectToAction(nameof(SendCode), new
                 {
                     ReturnUrl = returnUrl,
                     model.RememberMe
                 });
-            }
 
             if (result.IsLockedOut)
             {
@@ -119,7 +114,7 @@ namespace FullWeb.Controllers
 
             var user = new ApplicationUser
             {
-                UserName = model.Email,
+                LoginId = model.Email,
                 Email = model.Email
             };
 
@@ -194,9 +189,7 @@ namespace FullWeb.Controllers
         {
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
-            {
                 return RedirectToAction(nameof(Login));
-            }
 
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
@@ -206,16 +199,12 @@ namespace FullWeb.Controllers
                 return RedirectToLocal(returnUrl);
             }
             if (result.RequiresTwoFactor)
-            {
                 return RedirectToAction(nameof(SendCode), new
                 {
                     ReturnUrl = returnUrl
                 });
-            }
             if (result.IsLockedOut)
-            {
                 return View("Lockout");
-            }
             // If the user does not have an account, then ask the user to create an account.
             ViewData["ReturnUrl"] = returnUrl;
             ViewData["LoginProvider"] = info.LoginProvider;
@@ -235,21 +224,17 @@ namespace FullWeb.Controllers
             string returnUrl = null)
         {
             if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction(nameof(HomeController.Index), "Manage");
-            }
 
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
                 var info = await _signInManager.GetExternalLoginInfoAsync();
                 if (info == null)
-                {
                     return View("ExternalLoginFailure");
-                }
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    LoginId = model.Email,
                     Email = model.Email
                 };
                 var result = await _userManager.CreateAsync(user);
@@ -275,15 +260,11 @@ namespace FullWeb.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
-            {
+            if ((userId == null) || (code == null))
                 return View("Error");
-            }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-            {
                 return View("Error");
-            }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
@@ -310,11 +291,8 @@ namespace FullWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Email);
-                if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
+                if ((user == null) || !await _userManager.IsEmailConfirmedAsync(user))
                     return View("ForgotPasswordConfirmation");
-                }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
@@ -355,20 +333,13 @@ namespace FullWeb.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
-            {
-                // Don't reveal that the user does not exist
                 return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
-            }
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
-            {
                 return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
-            }
             AddErrors(result);
             return View();
         }
@@ -390,9 +361,7 @@ namespace FullWeb.Controllers
         {
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
-            {
                 return View("Error");
-            }
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
             var factorOptions = userFactors.Select(purpose => new SelectListItem
             {
@@ -410,17 +379,13 @@ namespace FullWeb.Controllers
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
-            {
                 ModelState.AddModelError(string.Empty, error.Description);
-            }
         }
 
         private IActionResult RedirectToLocal(string returnUrl = null)
         {
             if (Url.IsLocalUrl(returnUrl))
-            {
                 return Redirect(returnUrl);
-            }
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

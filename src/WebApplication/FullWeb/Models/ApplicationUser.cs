@@ -9,7 +9,7 @@ namespace FullWeb.Models
 
     public class ApplicationRole : IdentityRole<int>
     {
-    } 
+    }
 
 
     public class ApplicationUserMapping :

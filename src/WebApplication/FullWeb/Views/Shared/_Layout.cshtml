@@ -12,11 +12,11 @@
 
     <!-- Startup image for web apps -->
     <environment names="Development">
-        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css"
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
               asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css"
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css"
               asp-fallback-href="~/lib/font-awsome/css/font-awesome.css"
               asp-fallback-test-class="fa" asp-fallback-test-property="display"
               asp-fallback-test-value="inline-block" />
@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="shortcut icon" href="~/img/favicon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="~/img/favicon/favicon.ico" type="image/x-icon" />
@@ -44,8 +44,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
+    @RenderSection("header", false)
 </head>
 <body class="@ViewBag.PageClass @Settings.Value.CurrentTheme">
+
     <header id="header">
         @{
             await Html.RenderPartialAsync("_Header");
@@ -64,6 +66,7 @@
         await Html.RenderPartialAsync("_Footer");
         Html.RenderPartialIf("_Tiles", Settings.Value.EnableTiles);
     }
+
     @{ await Html.RenderPartialAsync("_Scripts"); }
     @{ RenderSection("scripts", false); }
 </body>

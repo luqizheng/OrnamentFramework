@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Ornament.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 /// <summary>
 /// The Identity namespace.
@@ -31,9 +32,9 @@ namespace Ornament.Identity
         /// Initializes a new instance of <see cref="IdentityUser{TKey}" />.
         /// </summary>
         /// <param name="userName">The user name.</param>
-        public IdentityUser(string userName) : this()
+        public IdentityUser(string loginId) : this()
         {
-            UserName = userName;
+            LoginId = loginId;
         }
 
         /// <summary>
@@ -53,30 +54,25 @@ namespace Ornament.Identity
             get { return base.Id; }
             set { base.Id = value; }
         }
+        [Display(Name = "Name", ResourceType = typeof(Resource))]
+        public virtual string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the user name for this user.
-        /// </summary>
-        /// <value>The name of the user.</value>
-        public virtual string UserName { get; set; }
 
         /// <summary>
         /// Gets or sets the normalized user name for this user.
         /// </summary>
         /// <value>The name of the normalized user.</value>
-        public virtual string NormalizedUserName { get; set; }
+        [Display(Name = "LoginId", ResourceType = typeof(Resource))]
+        public virtual string LoginId { get; set; }
 
-        /// <summary>
-        /// Gets or sets the email address for this user.
-        /// </summary>
-        /// <value>The email.</value>
-        public virtual string Email { get; set; }
+
 
         /// <summary>
         /// Gets or sets the normalized email address for this user.
         /// </summary>
         /// <value>The normalized email.</value>
-        public virtual string NormalizedEmail { get; set; }
+        [Display(Name = "Email", ResourceType = typeof(Resource))]
+        public virtual string Email { get; set; }
 
         /// <summary>
         /// Gets or sets a flag indicating if a user has confirmed their email address.
@@ -106,6 +102,8 @@ namespace Ornament.Identity
         /// Gets or sets a telephone number for the user.
         /// </summary>
         /// <value>The phone number.</value>
+        [Display(Name = "PhoneNumber", ResourceType = typeof(Resource))]
+
         public virtual string PhoneNumber { get; set; }
 
         /// <summary>
@@ -125,6 +123,7 @@ namespace Ornament.Identity
         /// </summary>
         /// <value>The lockout end.</value>
         /// <remarks>A value in the past means the user is not locked out.</remarks>
+        [Display(Name = "PhoneNumber", ResourceType = typeof(Resource))]
         public virtual DateTimeOffset? LockoutEnd { get; set; }
 
         /// <summary>
@@ -163,7 +162,7 @@ namespace Ornament.Identity
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return UserName;
+            return LoginId;
         }
     }
 }

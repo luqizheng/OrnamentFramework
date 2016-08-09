@@ -1,13 +1,12 @@
 {
   "dependencies": {
     "NETStandard.Library": "1.6.0",
-    "Ornament.Template": "1.0.0-*"
+    "Ornament.Template": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
   },
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
-    },
-    "net451": {
+   
+    "net461": {
       "dependencies": {
       },
       "frameworkAssemblies": {
