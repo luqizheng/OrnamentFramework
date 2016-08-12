@@ -2110,24 +2110,25 @@
       },
       "Ornament/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "NETStandard.Library": "1.6.0"
         },
         "frameworkAssemblies": [
           "System.ComponentModel.DataAnnotations",
           "System.Runtime"
         ],
         "compile": {
-          "net451/Ornament.dll": {}
+          "net461/Ornament.dll": {}
         },
         "runtime": {
-          "net451/Ornament.dll": {}
+          "net461/Ornament.dll": {}
         }
       },
       "Ornament.Identity/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
@@ -2135,10 +2136,10 @@
           "Ornament": "1.0.0"
         },
         "compile": {
-          "net451/Ornament.Identity.dll": {}
+          "net461/Ornament.Identity.dll": {}
         },
         "runtime": {
-          "net451/Ornament.Identity.dll": {}
+          "net461/Ornament.Identity.dll": {}
         }
       },
       "Ornament.NHibernate/1.0.0": {
@@ -2164,22 +2165,21 @@
       },
       "Ornament.Web/1.0.0": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-          "NETStandard.Library": "1.6.0",
+          "Newtonsoft.Json": "9.0.1",
           "Ornament": "1.0.0"
         },
         "frameworkAssemblies": [
-          "System.ComponentModel.DataAnnotations",
-          "System.Linq"
+          "System.ComponentModel.DataAnnotations"
         ],
         "compile": {
-          "net451/Ornament.Web.dll": {}
+          "net461/Ornament.Web.dll": {}
         },
         "runtime": {
-          "net451/Ornament.Web.dll": {}
+          "net461/Ornament.Web.dll": {}
         }
       }
     }

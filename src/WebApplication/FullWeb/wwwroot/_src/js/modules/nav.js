@@ -1,28 +1,43 @@
-﻿var $ = require('jquery')
+﻿/// <reference path="../views/areas/membership/user/index.js" />
+var $ = require('jquery')
 var page = require("../../../lib/page/page.js");
 
-var nav = {
 
-}
+var navContainser = [];
 
-page('/', contentLoad);
-page('/Membership/User/Index', contentLoad);
-page('/Membership/User', contentLoad);
-page('/membership/user/edit/:id', contentLoad);
-
-page('/Membership/Role', contentLoad);
-page();
-
-function contentLoad(ctx) {
-
+function contentLoad(ctx,onEntry) {
     var strUrl = ctx.path;
     var loading = document.referrer == "" || location.pathname.toUpperCase() != strUrl.toUpperCase();
-    if (loading)
+    if (loading) {
         $("#content").load(strUrl, function (responseText, textStatus, req) {
             if (req.status != 200) {
                 $("#content").html(responseText);
-
             }
-            //return true
+            else if ($.isFunction(onEntry)) {
+                onEntry();
+            }
         });
+    }
+}
+
+
+function addPath(pathes, onEntry) {
+    if (!$.isArray(pathes)) {
+        page(pathes, function (ctx) {
+            contentLoad(ctx,onEntry);
+        });
+    } else {
+        $(pathes).each(function () {
+            page(this, function (ctx) {
+                contentLoad(ctx,onEntry);
+            });
+
+        })
+    }
+}
+addPath("/")
+page();
+
+module.exports = {
+    add: addPath
 }

@@ -8,6 +8,7 @@ var webpackConfig = require("./webpack.config.js"),
     rename = require("gulp-rename");
 
 var md5 = require("gulp-md5-plus-always");
+
 var embed = require("gulp-image-embed");
 var rootPath = "./wwwroot/";
 var srcFolder = {
@@ -23,15 +24,11 @@ var distFolder = {
 };
 gulp.task("webpack",
     function (callback) {
-
         return webpack(webpackConfig)
             .pipe(gulp.dest(distFolder.js));
 
     });
-var md5Sign = [
-    "./Views/Account/*.cshtml",
-    "./Views/Home/*.cshtml"
-];
+
 gulp.task("js:min",
     ["webpack", "global-js"],
     function (callback) {
@@ -39,7 +36,7 @@ gulp.task("js:min",
         return gulp.src([distFolder.js+"*.js","!"+distFolder.js+"*.min.js"])
             //.pipe(uglify())
             .pipe(rename({ suffix: ".min" }))
-            .pipe(md5(10, md5Sign))
+            //.pipe(md5(10, md5Sign))
             .pipe(gulp.dest(distFolder.js));
     });
 
@@ -93,7 +90,7 @@ gulp.task("css:embed",
         //    .pipe(rename({ prefix: 'gulp.' }))
         //    .pipe(gulp.dest("./content/src/css/"));
     });
-
+/*
 function onBuild(done) {
     return function (err, stats) {
         console.log("---" + err);
@@ -114,4 +111,4 @@ function onBuild(done) {
             }
         }
     };
-}
+}*/

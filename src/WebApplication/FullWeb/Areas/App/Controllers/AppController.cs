@@ -6,7 +6,7 @@ namespace FullWeb.Areas.App.Controllers
 {
     [Area("App")]
     [Route("App")]
-    public class AppSettingController : Controller
+    public class AppController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()

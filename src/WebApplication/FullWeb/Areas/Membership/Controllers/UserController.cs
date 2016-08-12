@@ -29,7 +29,10 @@ namespace FullWeb.Areas.Membership.Controllers
             var result =
                 from user in _userManager.Users.Skip(pageIndex.Value * pageSize.Value).Take(pageSize.Value)
                 select UserListItem.CreateFrom<ApplicationUser, string, ApplicationRole>(user);
-
+            this.ViewBag.PageIndex = pageIndex;
+            this.ViewBag.PageSize = pageSize;
+                
+                
             return View(result);
         }
 

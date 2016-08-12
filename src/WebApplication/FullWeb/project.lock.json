@@ -1193,6 +1193,31 @@
           "lib/net451/Microsoft.Extensions.Logging.Debug.dll": {}
         }
       },
+      "Microsoft.Extensions.Logging.Filter/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Filter.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Microsoft.Extensions.Logging.Filter.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Logging.TraceSource/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0"
+        },
+        "compile": {
+          "lib/net451/Microsoft.Extensions.Logging.TraceSource.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Extensions.Logging.TraceSource.dll": {}
+        }
+      },
       "Microsoft.Extensions.ObjectPool/1.0.0": {
         "type": "package",
         "compile": {
@@ -3547,6 +3572,30 @@
         "lib/net451/Microsoft.Extensions.Logging.Debug.xml",
         "lib/netstandard1.3/Microsoft.Extensions.Logging.Debug.dll",
         "lib/netstandard1.3/Microsoft.Extensions.Logging.Debug.xml"
+      ]
+    },
+    "Microsoft.Extensions.Logging.Filter/1.0.0": {
+      "sha512": "kaaLmv27pRZeBcYDiVMBwSz6/iaG9ROk8F6uat1Cs4cxqrahlVgeqnKBP+gANa5hZwgwMQLwaaLUb6qPI/l1Yw==",
+      "type": "package",
+      "path": "Microsoft.Extensions.Logging.Filter/1.0.0",
+      "files": [
+        "Microsoft.Extensions.Logging.Filter.1.0.0.nupkg.sha512",
+        "Microsoft.Extensions.Logging.Filter.nuspec",
+        "lib/netstandard1.1/Microsoft.Extensions.Logging.Filter.dll",
+        "lib/netstandard1.1/Microsoft.Extensions.Logging.Filter.xml"
+      ]
+    },
+    "Microsoft.Extensions.Logging.TraceSource/1.0.0": {
+      "sha512": "j8Ie0CBn3tVFqB2rVeml5lf83PU75PbjKOwUk3IwyJPAVzvvhBLhSufQDq8o+wGdEt7uutdMKBjnKlvXTE7VlA==",
+      "type": "package",
+      "path": "Microsoft.Extensions.Logging.TraceSource/1.0.0",
+      "files": [
+        "Microsoft.Extensions.Logging.TraceSource.1.0.0.nupkg.sha512",
+        "Microsoft.Extensions.Logging.TraceSource.nuspec",
+        "lib/net451/Microsoft.Extensions.Logging.TraceSource.dll",
+        "lib/net451/Microsoft.Extensions.Logging.TraceSource.xml",
+        "lib/netstandard1.3/Microsoft.Extensions.Logging.TraceSource.dll",
+        "lib/netstandard1.3/Microsoft.Extensions.Logging.TraceSource.xml"
       ]
     },
     "Microsoft.Extensions.ObjectPool/1.0.0": {
@@ -7330,6 +7379,8 @@
       "Microsoft.Extensions.Logging >= 1.0.0",
       "Microsoft.Extensions.Logging.Console >= 1.0.0",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
+      "Microsoft.Extensions.Logging.Filter >= 1.0.0",
+      "Microsoft.Extensions.Logging.TraceSource >= 1.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
       "Ornament >= 1.0.0-*",

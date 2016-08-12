@@ -17,25 +17,22 @@
     <div class="well">
 
         <h2>用户查询</h2>
-
-
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th></th>
                     <th>
                         @Html.DisplayNameFor(model => model.LoginId)
-                    </th>                  
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
-                    </th>                 
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.PhoneNumber)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model=>model.Name)
-
-                        </th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.LockoutEnabled)
                     </th>
@@ -43,54 +40,43 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var item in this.Model)
+                @foreach (var item in this.Model)
             {
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Edit", new {id = item.Id})">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                    </td>
-                    <td>
-                        @item.LoginId
-                    </td>               
-                
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.PhoneNumber
-                    </td>
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.LockoutEnabled
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Edit", new {id = item.Id})">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                        <td>
+                            @item.LoginId
+                        </td>
 
-            }
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.PhoneNumber
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.LockoutEnabled
+                        </td>
+                    </tr>
+
+                }
             </tbody>
-          
+
         </table>
+      
         <ul class="pagination">
             <li>
-                <a href="javascript:void(0);"><i class="fa fa-arrow-left"></i></a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">1</a>
+                <a href="@Url.Action("index",new { pageIndex=0 })"><i class="fa fa-arrow-left"></i></a>
             </li>
             <li class="active">
-                <a href="javascript:void(0);">2</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">3</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">4</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);">5</a>
+                <a href="javascript:;">@(this.ViewBag.PageIndex+1)</a>
             </li>
             <li>
                 <a href="javascript:void(0);"><i class="fa fa-arrow-right"></i></a>

@@ -10,13 +10,15 @@
         <div class="panel panel-blue">
             <div class="panel-heading">登陆信息</div>
             <div class="panel-body">
-
-                <form class="form-horizontal" asp-action="RegisterValidation">
+               
+                <form class="form-horizontal" id="user-edit-form">
+                    @Html.ValidationSummary()
+                    @Html.HiddenFor(s=>s.Id)
                     <span asp-validation-for="Email"></span>
                     <div class="form-group">
                         <label class="col-md-2 control-label" asp-for="LoginId"></label>
                         <div class="col-md-10">
-                            <input class="form-control" 
+                            <input class="form-control"
                                    placeholder="@Html.DisplayNameFor(s => s.LoginId)" type="text" asp-for="LoginId">
                             <span asp-validation-for="LoginId" class="text-danger"></span>
                         </div>
@@ -32,7 +34,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">@Html.DisplayNameFor(s => s.PhoneNumber)</label>
                         <div class="col-md-10">
-                            <input class="form-control" placeholder="Default Text Field" type="text" 
+                            <input class="form-control" placeholder="Default Text Field" type="text"
                                    asp-for="PhoneNumber">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
@@ -44,14 +46,21 @@
             </div>
         </div>
     </div>
-    <div class="  col-lg-5 col-md-5 col-xs-12 col-sm-12">
+    <div class=" col-lg-5 col-md-5 col-xs-12 col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading">验证信息</div>
+            <div class="panel-heading">其他信息</div>
             <div class="panel-body">
-              <dl>
-                  <dd>@this.Model.</dd>
-                  <dd></dd>
-                  </dl>
+                <dl>
+                    <dt>
+                        <label asp-for="LockoutEnabled"></label>
+                    </dt>
+                    <dd asp-for="LockoutEnabled">
+                        
+                    </dd>
+                    <dt>
+                        
+                    </dt>
+                </dl>
             </div>
         </div>
     </div>
