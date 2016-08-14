@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Linq.Expressions;
 using FullWeb.Areas.Membership.Models;
+using Ornament.Web.Uow;
+using Ornament.Web;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -31,8 +33,8 @@ namespace FullWeb.Areas.Membership.Controllers
                 select UserListItem.CreateFrom<ApplicationUser, string, ApplicationRole>(user);
             this.ViewBag.PageIndex = pageIndex;
             this.ViewBag.PageSize = pageSize;
-                
-                
+
+
             return View(result);
         }
 
@@ -46,14 +48,29 @@ namespace FullWeb.Areas.Membership.Controllers
         /// </summary>
         /// <param name="userEdit"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, UnitOfWork]
         public IActionResult Edit(UserInfo userEdit)
         {
+            var isAjax = this.Request.IsAjaxRequest();
+            var isSuccess = false;
             if (this.ModelState.IsValid)
             {
+                ApplicationUser userEntity = (from user in _userManager.Users where user.Id.Equals(userEdit.Id) select user).FirstOrDefault();
+                userEdit.SetTo<ApplicationUser, string, ApplicationRole>(userEntity);
 
+                isSuccess = true;
             }
-            return View(userEdit);
+            if (!isAjax)
+            {
+                if (isSuccess)
+                    return View("index");
+                return View(userEdit);
+            }
+            else
+            {
+
+                return Json(this.ModelState.ToJsonResult(isSuccess));
+            }
         }
     }
 

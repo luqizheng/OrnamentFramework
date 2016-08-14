@@ -10,7 +10,7 @@ namespace FullWeb.Areas.Membership.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            throw new System.Exception("");
+         
             return View();
             
         }

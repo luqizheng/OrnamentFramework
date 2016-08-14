@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@inject IViewLocalizer Localizer;
 @{
 }
 @model FullWeb.Areas.Membership.Models.UserInfo
@@ -8,10 +9,10 @@
 
     <div class=" col-lg-7 col-md-7 col-xs-12 col-sm-12">
         <div class="panel panel-blue">
-            <div class="panel-heading">登陆信息</div>
+            <div class="panel-heading">@Localizer["Loing Info"]</div>
             <div class="panel-body">
                
-                <form class="form-horizontal" id="user-edit-form">
+                <form class="form-horizontal" id="user-edit-form" method="post">
                     @Html.ValidationSummary()
                     @Html.HiddenFor(s=>s.Id)
                     <span asp-validation-for="Email"></span>
@@ -27,7 +28,7 @@
                         <label class="col-md-2 control-label">@Html.DisplayNameFor(s => s.Email)</label>
                         <div class="col-md-10">
                             <input class="form-control" placeholder="Default Text Field" type="text" asp-for="Email">
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
                         </div>
                     </div>
 

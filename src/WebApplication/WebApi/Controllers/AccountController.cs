@@ -20,7 +20,7 @@ namespace WebApi.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                model.Login()
+                model.Login();
             }
         }
 

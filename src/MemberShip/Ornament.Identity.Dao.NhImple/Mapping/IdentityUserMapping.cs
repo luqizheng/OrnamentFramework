@@ -32,7 +32,7 @@ namespace Ornament.Identity.Dao.Mapping
 
             Map(x => x.AccessFailedCount);
                     
-            Map(x => x.Email);
+            Map(x => x.Email).Not.Nullable().Length(64);
 
             Map(x => x.EmailConfirmed);
 
@@ -48,9 +48,9 @@ namespace Ornament.Identity.Dao.Mapping
 
             Map(x => x.TwoFactorEnabled);
 
-            Map(x => x.LoginId).Length(64);
+            Map(x => x.LoginId).Not.Nullable().Length(64);
 
-            Map(x => x.Name).Unique().Not.Nullable().Length(64);
+            Map(x => x.Name).Unique().Length(64);
 
             Map(x => x.SecurityStamp);
 

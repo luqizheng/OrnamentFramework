@@ -7,7 +7,7 @@ var navContainser = [];
 
 function contentLoad(ctx,onEntry) {
     var strUrl = ctx.path;
-    var loading = document.referrer == "" || location.pathname.toUpperCase() != strUrl.toUpperCase();
+    var loading = location.pathname.toUpperCase() != strUrl.toUpperCase();
     if (loading) {
         $("#content").load(strUrl, function (responseText, textStatus, req) {
             if (req.status != 200) {
@@ -17,6 +17,8 @@ function contentLoad(ctx,onEntry) {
                 onEntry();
             }
         });
+    } else if ($.isFunction(onEntry)) {
+        onEntry();
     }
 }
 
@@ -35,9 +37,11 @@ function addPath(pathes, onEntry) {
         })
     }
 }
-addPath("/")
-page();
 
 module.exports = {
-    add: addPath
+    add: addPath,//添加nav导航的设置
+    startNav: function () { //开始初始化导航的体系
+        addPath("/")
+        page();
+    }
 }

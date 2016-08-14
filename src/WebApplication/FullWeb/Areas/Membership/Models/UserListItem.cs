@@ -18,24 +18,38 @@ namespace FullWeb.Areas.Membership.Models
             this.PhoneNumber = result.PhoneNumber;
             this.LockoutEnabled = result.LockoutEnabled;
             this.Name = result.Name;
-
+            this.LoginId = result.LoginId;
         }
         public string Id { get; set; }
-        [Display(Name="电子邮件")]
+        [Display(Name = "电子邮件")]
         [DataType(DataType.EmailAddress)]
         [Required]
         public string Email { get; set; }
-        
-       
+
+
         public string PhoneNumber { get; set; }
 
         public string Name { get; set; }
-        [Required]
+        [Required()]
         public string LoginId { get; set; }
         public bool LockoutEnabled { get; set; }
+
+        public void SetTo<TUser, TKey, TRole>(TUser user)
+             where TUser : IdentityUser<TKey, TRole>
+            where TKey : IEquatable<TKey>
+        {
+            if (!user.Id.Equals(this.Id))
+                throw new ArgumentOutOfRangeException("user", "user is not same as user view model.");
+            user.LoginId = this.LoginId;
+            user.Name = this.Name;
+            user.LockoutEnabled = LockoutEnabled;
+            user.PhoneNumber = PhoneNumber;
+            user.Email = Email;          
+
+        }
     }
-    public class UserListItem: UserInfo
-    {      
+    public class UserListItem : UserInfo
+    {
 
         public static UserListItem CreateFrom<TUser, TKey, TRole>(TUser user)
             where TUser : IdentityUser<TKey, TRole>
@@ -47,7 +61,7 @@ namespace FullWeb.Areas.Membership.Models
             result.Id = user.Id.ToString();
             result.LockoutEnabled = user.LockoutEnabled;
             result.Name = user.Name;
-        
+
             result.LoginId = user.LoginId;
 
             return result;
