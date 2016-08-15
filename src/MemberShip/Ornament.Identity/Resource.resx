@@ -279,4 +279,10 @@
   <data name="EmailConfirm" xml:space="preserve">
     <value>Confirm Email Address</value>
   </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Email Confirm</value>
+  </data>
+  <data name="PhoneNumberConfirmed" xml:space="preserve">
+    <value>Phone Number Confirmed</value>
+  </data>
 </root>

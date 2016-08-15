@@ -41,7 +41,7 @@ namespace FullWeb.Areas.Membership.Controllers
         public IActionResult Edit(string id)
         {
             ApplicationUser editUser = (from user in _userManager.Users where user.Id == id select user).FirstOrDefault();
-            return View(new UserInfo(editUser));
+            return View(editUser);
         }
         /// <summary>
         /// 
@@ -49,14 +49,26 @@ namespace FullWeb.Areas.Membership.Controllers
         /// <param name="userEdit"></param>
         /// <returns></returns>
         [HttpPost, UnitOfWork]
-        public IActionResult Edit(UserInfo userEdit)
+        public IActionResult Edit(ApplicationUser userEdit)
         {
             var isAjax = this.Request.IsAjaxRequest();
             var isSuccess = false;
             if (this.ModelState.IsValid)
             {
                 ApplicationUser userEntity = (from user in _userManager.Users where user.Id.Equals(userEdit.Id) select user).FirstOrDefault();
-                userEdit.SetTo<ApplicationUser, string, ApplicationRole>(userEntity);
+
+
+                userEntity.LoginId = userEdit.LoginId;
+                userEntity.Name = userEdit.Name;
+                userEntity.LockoutEnabled = userEdit.LockoutEnabled;
+                userEntity.PhoneNumber = userEdit.PhoneNumber;
+                userEntity.Email = userEdit.Email;
+
+                userEntity.PhoneNumberConfirmed = userEdit.PhoneNumberConfirmed;
+                userEdit.EmailConfirmed = userEdit.EmailConfirmed;
+
+                userEdit.AccessFailedCount = userEdit.AccessFailedCount;
+                userEdit.LockoutEnd = userEdit.LockoutEnd;
 
                 isSuccess = true;
             }

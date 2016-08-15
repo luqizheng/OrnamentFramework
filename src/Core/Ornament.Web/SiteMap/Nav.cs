@@ -14,7 +14,7 @@ namespace Ornament.Web.SiteMap
             Name = name;
             NavUrl = url;
         }
-
+        public IEnumerable<string> Roles { get; set; }
         public string IconClasses { get; set; }
 
         public string Name { get; set; }

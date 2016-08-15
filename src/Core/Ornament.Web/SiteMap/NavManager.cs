@@ -102,7 +102,11 @@ namespace Ornament.Web.SiteMap
         {
             return GetBreadcrumb(helper.ViewContext.RouteData);
         }
-
+        /// <summary>
+        /// json化导航
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns></returns>
         public static string ToJson(IUrlHelper helper)
         {
             var clients = ClientNavItem.InitClient(Root, helper);

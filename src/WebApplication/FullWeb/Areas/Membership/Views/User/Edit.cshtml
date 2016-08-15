@@ -4,17 +4,17 @@
 @inject IViewLocalizer Localizer;
 @{
 }
-@model FullWeb.Areas.Membership.Models.UserInfo
-<div class="row">
+@model ApplicationUser
 
-    <div class=" col-lg-7 col-md-7 col-xs-12 col-sm-12">
-        <div class="panel panel-blue">
+
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+        <div class="panel panel-default">
             <div class="panel-heading">@Localizer["Loing Info"]</div>
             <div class="panel-body">
-               
+
                 <form class="form-horizontal" id="user-edit-form" method="post">
                     @Html.ValidationSummary()
-                    @Html.HiddenFor(s=>s.Id)
+                    @Html.HiddenFor(s => s.Id)
                     <span asp-validation-for="Email"></span>
                     <div class="form-group">
                         <label class="col-md-2 control-label" asp-for="LoginId"></label>
@@ -28,16 +28,36 @@
                         <label class="col-md-2 control-label">@Html.DisplayNameFor(s => s.Email)</label>
                         <div class="col-md-10">
                             <input class="form-control" placeholder="Default Text Field" type="text" asp-for="Email">
-                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="form-group-input" asp-for="EmailConfirmed"></label>
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" asp-for="EmailConfirmed">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">@Html.DisplayNameFor(s => s.PhoneNumber)</label>
                         <div class="col-md-10">
                             <input class="form-control" placeholder="Default Text Field" type="text"
                                    asp-for="PhoneNumber">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="form-group-input" asp-for="PhoneNumberConfirmed"></label>
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" asp-for="PhoneNumberConfirmed">
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div>
@@ -47,22 +67,12 @@
             </div>
         </div>
     </div>
-    <div class=" col-lg-5 col-md-5 col-xs-12 col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">其他信息</div>
-            <div class="panel-body">
-                <dl>
-                    <dt>
-                        <label asp-for="LockoutEnabled"></label>
-                    </dt>
-                    <dd asp-for="LockoutEnabled">
-                        
-                    </dd>
-                    <dt>
-                        
-                    </dt>
-                </dl>
-            </div>
+
+<div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">Panel heading</div>
+        <div class="panel-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </div>
     </div>
 

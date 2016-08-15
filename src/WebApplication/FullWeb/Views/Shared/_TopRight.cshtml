@@ -36,7 +36,7 @@
             <li class="divider"></li>
             <li>
                 @*
-                    use page.js to redirect, so add target attribute to disabled dispatched.
+                use page.js to redirect, so add target attribute to disabled dispatched.
                 *@
                 <a href="@Url.Action("login", "account",new { area = "" })" target="_self" title="@Localizer["Sign Out"]"
                    class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout">
@@ -50,10 +50,10 @@
 <!-- logout button -->
 <div id="logout" class="btn-header transparent pull-right">
     @*
-        use page.js to redirect, so add target attribute to disabled dispatched.
+    use page.js to redirect, so add target attribute to disabled dispatched.
     *@
     <span>
-        <a href="@Url.Action("login", "account")" title="@Localizer["Sign Out"]" target="_self"
+        <a href="@Url.Action("login", "account",new { area = "" })" title="@Localizer["Sign Out"]" target="_self"
            data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a>
     </span>
 </div>

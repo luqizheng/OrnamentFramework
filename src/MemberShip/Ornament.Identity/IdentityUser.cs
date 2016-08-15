@@ -78,6 +78,7 @@ namespace Ornament.Identity
         /// Gets or sets a flag indicating if a user has confirmed their email address.
         /// </summary>
         /// <value>True if the email address has been confirmed, otherwise false.</value>
+        [Display(Name = "EmailConfirmed", ResourceType = typeof(Resource))]
         public virtual bool EmailConfirmed { get; set; }
 
         /// <summary>
@@ -110,6 +111,7 @@ namespace Ornament.Identity
         /// Gets or sets a flag indicating if a user has confirmed their telephone address.
         /// </summary>
         /// <value>True if the telephone number has been confirmed, otherwise false.</value>
+        [Display(Name = "PhoneNumberConfirmed", ResourceType = typeof(Resource))]
         public virtual bool PhoneNumberConfirmed { get; set; }
 
         /// <summary>

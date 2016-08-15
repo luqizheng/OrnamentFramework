@@ -114,6 +114,15 @@ namespace Ornament.Identity {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Email Confirm.
+        /// </summary>
+        public static string EmailConfirmed {
+            get {
+                return ResourceManager.GetString("EmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Please input right format email address.
         /// </summary>
         public static string EmailNotRightFormat {
@@ -407,6 +416,15 @@ namespace Ornament.Identity {
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Phone Number Confirmed.
+        /// </summary>
+        public static string PhoneNumberConfirmed {
+            get {
+                return ResourceManager.GetString("PhoneNumberConfirmed", resourceCulture);
             }
         }
         

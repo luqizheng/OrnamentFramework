@@ -21,16 +21,17 @@ namespace FullWeb.Areas.Membership.Models
             this.LoginId = result.LoginId;
         }
         public string Id { get; set; }
-        [Display(Name = "电子邮件")]
+        [Display(Name = "Email", ResourceType = typeof(Ornament.Identity.Resource))]
         [DataType(DataType.EmailAddress)]
         [Required]
         public string Email { get; set; }
 
-
+        [Display(Name = "PhoneNumber", ResourceType = typeof(Ornament.Identity.Resource))]
         public string PhoneNumber { get; set; }
-
+        [Display(Name = "Name", ResourceType = typeof(Ornament.Identity.Resource))]
         public string Name { get; set; }
         [Required()]
+        [Display(Name="LoginId",ResourceType =typeof(Ornament.Identity.Resource))]
         public string LoginId { get; set; }
         public bool LockoutEnabled { get; set; }
 

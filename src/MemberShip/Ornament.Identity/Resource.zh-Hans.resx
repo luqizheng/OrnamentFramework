@@ -270,4 +270,10 @@
   <data name="EmailConfirm" xml:space="preserve">
     <value>再一次郵件地址</value>
   </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>邮箱是否确认</value>
+  </data>
+  <data name="PhoneNumberConfirmed" xml:space="preserve">
+    <value>电话是否有已经确认</value>
+  </data>
 </root>
