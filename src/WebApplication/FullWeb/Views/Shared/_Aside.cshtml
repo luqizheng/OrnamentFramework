@@ -14,6 +14,7 @@
     (the reference to the nav > ul) after page load. Or the navigation
     will not initialize.
     -->
+
     <nav>
         <!-- NOTE: Notice the gaps after each icon usage <i></i>..
         Please note that these links work a bit different than
@@ -24,10 +25,6 @@
                     <a href="@Url.Action("index", "home")" title="Dashboard">
                         <i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span>
                     </a>
-                </li>
-
-                <li>
-
                 </li>
             </ul>*@
 
@@ -40,7 +37,7 @@
                         {
                             <i class="@item.IconClasses"></i>
                         }
-                        <span class="menu-item-parent">@item.Name</span> 
+                        <span class="menu-item-parent">@item.Name</span>
 
                     </a>
 
@@ -53,7 +50,7 @@
                                     <a href="@childItem.Url(Url)">
                                         @if (childItem.IconClasses != null)
                                         {
-                                            <i class="fa fa-lg fa-fw fa-gear"></i>
+                                            <i class="fa fa-lg fa-fw @childItem.IconClasses"></i>
                                         }
                                         <span class="menu-item-parent">@childItem.Name</span>
                                     </a>

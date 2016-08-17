@@ -7,20 +7,34 @@
 */
 var nav = require("../../../modules/nav.js")
 
-
+// index/
 nav.add(["/Membership/User", "/Membership/User/Index"], function () {
 
     require.ensure(['./user/index.js'],
         function ($index) {
-            console.log("load user index success.")
+            console.log("load user index success.");
         })
 });
 
 
-nav.add("/MemberShip/User/Edit/:id", function () {
+// User editor;
+function callUserEditFunc(funcName) {
     require.ensure(["./user/edit.js"],
         function () {
-            console.log("load user edit success.")
-            require("./user/edit.js")
-        })
-})
+            {
+                var userEditor = require("./user/edit.js");
+                userEditor[funcName]();
+            };
+        });
+}
+
+nav.add("/MemberShip/User/Edit/:id",
+    function () {
+        callUserEditFunc("onEntry");
+    },
+    function () {
+        callUserEditFunc("onLeave");
+
+    });
+
+

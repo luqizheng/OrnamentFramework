@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
@@ -20,7 +19,8 @@ namespace Ornament.Web.SiteMap
 
         public static void Init(Nav root)
         {
-            Root = root;
+            if (Root == null)
+                Root = root;
             var mvcNav = root as MvcNav;
             if (mvcNav != null)
                 InitArea(areas, mvcNav);
@@ -30,6 +30,10 @@ namespace Ornament.Web.SiteMap
                     mvcNav = item as MvcNav;
                     if (mvcNav != null)
                         InitArea(areas, mvcNav);
+                    else
+                    {
+                        Init(item);
+                    }
                 }
         }
 
@@ -107,7 +111,7 @@ namespace Ornament.Web.SiteMap
         /// </summary>
         /// <param name="helper"></param>
         /// <returns></returns>
-        public static string ToJson(IUrlHelper helper)
+        public static string MenusToJson(IUrlHelper helper)
         {
             var clients = ClientNavItem.InitClient(Root, helper);
             return JsonConvert.SerializeObject(clients);
@@ -118,7 +122,7 @@ namespace Ornament.Web.SiteMap
             var result = new Stack<Nav>();
             var current = CurrentPage(route);
             if (current == null)
-                return new[] {Root};
+                return new[] { Root };
             var i = 0;
             result.Push(current);
             while (current.Parent != null)
@@ -139,35 +143,6 @@ namespace Ornament.Web.SiteMap
                 i++;
             }
             return aryResult;
-        }
-    }
-
-
-    public class ClientNavItem
-    {
-        public ClientNavItem(Nav itme, IUrlHelper helper)
-        {
-            Name = itme.Name;
-            Url = itme.Url(helper);
-        }
-
-        public string Name { get; set; }
-        public string Url { get; set; }
-
-        public IList<ClientNavItem> ChildNavs { get; set; }
-
-        public static IList<ClientNavItem> InitClient(Nav nav, IUrlHelper helper)
-        {
-            var result = new List<ClientNavItem>();
-            foreach (var item in nav.ChildNavs)
-            {
-                var client = new ClientNavItem(item, helper);
-                result.Add(client);
-                if (item.ChildNavs.Any())
-                    client.ChildNavs = InitClient(item, helper);
-            }
-
-            return result;
         }
     }
 }

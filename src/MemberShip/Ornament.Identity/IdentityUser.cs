@@ -125,13 +125,14 @@ namespace Ornament.Identity
         /// </summary>
         /// <value>The lockout end.</value>
         /// <remarks>A value in the past means the user is not locked out.</remarks>
-        [Display(Name = "PhoneNumber", ResourceType = typeof(Resource))]
+        [Display(Name = "LastLockTime", ResourceType = typeof(Resource))]
         public virtual DateTimeOffset? LockoutEnd { get; set; }
 
         /// <summary>
         /// Gets or sets a flag indicating if the user could be locked out.
         /// </summary>
         /// <value>True if the user could be locked out, otherwise false.</value>
+        [Display(Name = "IsLockout", ResourceType = typeof(Resource))]
         public virtual bool LockoutEnabled { get; set; }
 
         /// <summary>

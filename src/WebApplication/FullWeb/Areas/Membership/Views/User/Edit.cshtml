@@ -6,74 +6,103 @@
 }
 @model ApplicationUser
 
-
+<div class="row" style="margin-left:-15px">
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading">@Localizer["Loing Info"]</div>
+            <div class="panel-heading">@Localizer["Login Info"]</div>
             <div class="panel-body">
 
-                <form class="form-horizontal" id="user-edit-form" method="post">
+                <form class="form-horizontal" id="user-edit-form" method="post" ms-controller="editUser">
                     @Html.ValidationSummary()
-                    @Html.HiddenFor(s => s.Id)
+                    @Html.HiddenFor(_ => _.Id)
                     <span asp-validation-for="Email"></span>
                     <div class="form-group">
                         <label class="col-md-2 control-label" asp-for="LoginId"></label>
                         <div class="col-md-10">
                             <input class="form-control"
-                                   placeholder="@Html.DisplayNameFor(s => s.LoginId)" type="text" asp-for="LoginId">
+                                   placeholder="@Html.DisplayNameFor(_ => _.LoginId)" type="text" asp-for="LoginId">
                             <span asp-validation-for="LoginId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">@Html.DisplayNameFor(s => s.Email)</label>
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(_ => _.Email)</label>
                         <div class="col-md-10">
-                            <input class="form-control" placeholder="Default Text Field" type="text" asp-for="Email">
+                            <div class="input-group">
+                                <input class="form-control" type="text" asp-for="Email">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button"
+                                            ms-click="@@changeEmailState()">
+                                        <i class="fa" ms-class="@@vm.EmailConfirmed ? 'fa-check' : 'fa-remove'"></i>
+                                    </button>
+
+                                </div>
+                                <input type="hidden" asp-for="EmailConfirmed" ms-duplex="@@vm.EmailConfirmed" />
+                            </div>
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
 
+
                     <div class="form-group">
-                        <label class="col-md-2 control-label" for="form-group-input" asp-for="EmailConfirmed"></label>
+                        <label class="col-md-2 control-label">@Html.DisplayNameFor(_ => _.PhoneNumber)</label>
                         <div class="col-md-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" asp-for="EmailConfirmed">
-                                </label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Default Text Field" type="text"
+                                       asp-for="PhoneNumber">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button"
+                                            ms-click="@@changePhoneState()">
+                                        <i class="fa" ms-class="@@vm.PhoneNumberConfirmed ? 'fa-check' : 'fa-remove'"></i>
+                                    </button>
+
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">@Html.DisplayNameFor(s => s.PhoneNumber)</label>
-                        <div class="col-md-10">
-                            <input class="form-control" placeholder="Default Text Field" type="text"
-                                   asp-for="PhoneNumber">
+                            <input type="hidden" asp-for="PhoneNumberConfirmed" ms-duplex="@@vm.PhoneNumberConfirmed"/>
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label" for="form-group-input" asp-for="PhoneNumberConfirmed"></label>
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" asp-for="PhoneNumberConfirmed">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                 
                     <div>
-                        <button type="submit" class="btn btn-primary">提交</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                            @Localizer["Submit"]
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-<div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">Panel heading</div>
-        <div class="panel-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Panel heading</div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(_ => _.LockoutEnabled)
+                    </dt>
+                    <dd>
+                        @{
+                            var islock = Model.LockoutEnabled ? "fa-lock" : "fa-unlock";
+                        }
+                        <i class="fa @islock"></i>
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(_ => _.LockoutEnd)
+                    </dt>
+                    <dd>
+                        @Model.LockoutEnd
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(_ => _.AccessFailedCount)
+                    </dt>
+                    <dd>
+                        @Model.AccessFailedCount
+                    </dd>
+                </dl>
+            </div>
         </div>
-    </div>
 
+    </div>
 </div>
+

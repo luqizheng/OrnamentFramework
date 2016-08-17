@@ -1,6 +1,4 @@
-﻿<script>
-    @Html.Raw(Ornament.Web.SiteMap.NavManager.ToJson(Url))
-</script>
+﻿
 <environment names="Staging,Production">
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"
             asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
@@ -12,30 +10,22 @@
             asp-fallback-test="window.jQuery.fn.popover">
 
     </script>
-
-    @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
-
-
-    
    
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="~/js/main.min.js" asp-append-version="true"></script>
+    <script src="~/lib/avalon/dist/avalon.js"></script>
 
 </environment>
 
 <environment names="Development">
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    @*<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+  
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>
-    <script src="~/lib/avalon/dist/avalon.modern.js"></script>
+    <script src="~/lib/avalon/dist/avalon.js"></script>
 </environment>
 
 <environment names="Staging,Production,Development"></environment>

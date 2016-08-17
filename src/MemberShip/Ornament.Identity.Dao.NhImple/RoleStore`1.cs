@@ -29,7 +29,7 @@ namespace Ornament.Identity.Dao.NhImple
             if (role == null) throw new ArgumentNullException(nameof(role));
             if (normalizedName == null) throw new ArgumentNullException(nameof(normalizedName));
             ThrowIfDisposed();
-            role.NormalizedName = normalizedName;
+            role.Name = normalizedName;
             return Task.FromResult(0);
         }
 
@@ -65,7 +65,7 @@ namespace Ornament.Identity.Dao.NhImple
 
         public Task<string> GetNormalizedRoleNameAsync(TRole role, CancellationToken cancellationToken)
         {
-            return Task.FromResult(role.NormalizedName);
+            return Task.FromResult(role.Name);
         }
 
         public Task<IdentityResult> CreateAsync(TRole role, CancellationToken cancellationToken)

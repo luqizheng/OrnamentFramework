@@ -1619,313 +1619,313 @@ var calc_navbar_height = function() {
 /*
  * CHECK TO SEE IF URL EXISTS
  */
-	function checkURL() {
+	//function checkURL() {
 	
-		//get the url by removing the hash
-		//var url = location.hash.replace(/^#/, '');
-		var url = location.href.split('#').splice(1).join('#');
-		//BEGIN: IE11 Work Around
-		if (!url) {
+	//	//get the url by removing the hash
+	//	//var url = location.hash.replace(/^#/, '');
+	//	var url = location.href.split('#').splice(1).join('#');
+	//	//BEGIN: IE11 Work Around
+	//	if (!url) {
 		
-			try {
-				var documentUrl = window.document.URL;
-				if (documentUrl) {
-					if (documentUrl.indexOf('#', 0) > 0 && documentUrl.indexOf('#', 0) < (documentUrl.length + 1)) {
-						url = documentUrl.substring(documentUrl.indexOf('#', 0) + 1);
+	//		try {
+	//			var documentUrl = window.document.URL;
+	//			if (documentUrl) {
+	//				if (documentUrl.indexOf('#', 0) > 0 && documentUrl.indexOf('#', 0) < (documentUrl.length + 1)) {
+	//					url = documentUrl.substring(documentUrl.indexOf('#', 0) + 1);
 		
-					}
+	//				}
 		
-				}
+	//			}
 		
-			} catch (err) {}
-		}
-		//END: IE11 Work Around
+	//		} catch (err) {}
+	//	}
+	//	//END: IE11 Work Around
 	
-		container = $('#content');
-		// Do this if url exists (for page refresh, etc...)
-		if (url) {
-			// remove all active class
-			$('nav li.active').removeClass("active");
-			// match the url and add the active class
-			$('nav li:has(a[href="' + url + '"])').addClass("active");
-			var title = ($('nav a[href="' + url + '"]').attr('title'));
+	//	container = $('#content');
+	//	// Do this if url exists (for page refresh, etc...)
+	//	if (url) {
+	//		// remove all active class
+	//		$('nav li.active').removeClass("active");
+	//		// match the url and add the active class
+	//		$('nav li:has(a[href="' + url + '"])').addClass("active");
+	//		var title = ($('nav a[href="' + url + '"]').attr('title'));
 	
-			// change page title from global var
-			document.title = (title || document.title);
+	//		// change page title from global var
+	//		document.title = (title || document.title);
 			
-			// debugState
-			if (debugState){
-				root.console.log("Page title: %c " + document.title, debugStyle_green);
-			}
+	//		// debugState
+	//		if (debugState){
+	//			root.console.log("Page title: %c " + document.title, debugStyle_green);
+	//		}
 			
-			// parse url to jquery
-			loadURL(url + location.search, container);
+	//		// parse url to jquery
+	//		loadURL(url + location.search, container);
 
-		} else {
+	//	} else {
 	
-			// grab the first URL from nav
-			var $this = $('nav > ul > li:first-child > a[href!="#"]');
+	//		// grab the first URL from nav
+	//		var $this = $('nav > ul > li:first-child > a[href!="#"]');
 	
-			//update hash
-			window.location.hash = $this.attr('href');
+	//		//update hash
+	//		window.location.hash = $this.attr('href');
 			
-			//clear dom reference
-			$this = null;
+	//		//clear dom reference
+	//		$this = null;
 	
-		}
+	//	}
 	
-	}
+	//}
 /*
  * LOAD AJAX PAGES
  */ 
-	function loadURL(url, container) {
+	//function loadURL(url, container) {
 
-		// debugState
-		if (debugState){
-			root.root.console.log("Loading URL: %c" + url, debugStyle);
-		}
+	//	// debugState
+	//	if (debugState){
+	//		root.root.console.log("Loading URL: %c" + url, debugStyle);
+	//	}
 
-		$.ajax({
-			type : "GET",
-			url : url,
-			dataType : 'html',
-			cache : true, // (warning: setting it to false will cause a timestamp and will call the request twice)
-			beforeSend : function() {
+	//	$.ajax({
+	//		type : "GET",
+	//		url : url,
+	//		dataType : 'html',
+	//		cache : true, // (warning: setting it to false will cause a timestamp and will call the request twice)
+	//		beforeSend : function() {
 				
-				//IE11 bug fix for googlemaps (delete all google map instances)
-				//check if the page is ajax = true, has google map class and the container is #content
-				if ($.navAsAjax && $(".google_maps")[0] && (container[0] == $("#content")[0]) ) {
+	//			//IE11 bug fix for googlemaps (delete all google map instances)
+	//			//check if the page is ajax = true, has google map class and the container is #content
+	//			if ($.navAsAjax && $(".google_maps")[0] && (container[0] == $("#content")[0]) ) {
 					
-					// target gmaps if any on page
-					var collection = $(".google_maps"),
-						i = 0;
-					// run for each	map
-					collection.each(function() {
-					    i ++;
-					    // get map id from class elements
-					    var divDealerMap = document.getElementById(this.id);
+	//				// target gmaps if any on page
+	//				var collection = $(".google_maps"),
+	//					i = 0;
+	//				// run for each	map
+	//				collection.each(function() {
+	//				    i ++;
+	//				    // get map id from class elements
+	//				    var divDealerMap = document.getElementById(this.id);
 					    
-					    if(i == collection.length + 1) {
-						    // "callback"
-						} else {
-							// destroy every map found
-							if (divDealerMap) divDealerMap.parentNode.removeChild(divDealerMap);
+	//				    if(i == collection.length + 1) {
+	//					    // "callback"
+	//					} else {
+	//						// destroy every map found
+	//						if (divDealerMap) divDealerMap.parentNode.removeChild(divDealerMap);
 
-							// debugState
-							if (debugState){
-								root.console.log("Destroying maps.........%c" + this.id, debugStyle_warning);
-							}
-						}
-					});
+	//						// debugState
+	//						if (debugState){
+	//							root.console.log("Destroying maps.........%c" + this.id, debugStyle_warning);
+	//						}
+	//					}
+	//				});
 
-					// debugState
-					if (debugState){
-						root.console.log("✔ Google map instances nuked!!!");
-					}
+	//				// debugState
+	//				if (debugState){
+	//					root.console.log("✔ Google map instances nuked!!!");
+	//				}
 					
-				} //end fix
+	//			} //end fix
 				
-				// destroy all datatable instances
-				if ( $.navAsAjax && $('.dataTables_wrapper')[0] && (container[0] == $("#content")[0]) ) {
+	//			// destroy all datatable instances
+	//			if ( $.navAsAjax && $('.dataTables_wrapper')[0] && (container[0] == $("#content")[0]) ) {
 					
-					var tables = $.fn.dataTable.fnTables(true);				
-					$(tables).each(function () {
+	//				var tables = $.fn.dataTable.fnTables(true);				
+	//				$(tables).each(function () {
 						
-						if($(this).find('.details-control').length != 0) {
-							$(this).find('*').addBack().off().remove();
-							$(this).dataTable().fnDestroy();
-						} else {
-							$(this).dataTable().fnDestroy();
-						}
+	//					if($(this).find('.details-control').length != 0) {
+	//						$(this).find('*').addBack().off().remove();
+	//						$(this).dataTable().fnDestroy();
+	//					} else {
+	//						$(this).dataTable().fnDestroy();
+	//					}
 					    
-					});
+	//				});
 					
-					// debugState
-					if (debugState){
-						root.console.log("✔ Datatable instances nuked!!!");
-					}
-				}
-				// end destroy
+	//				// debugState
+	//				if (debugState){
+	//					root.console.log("✔ Datatable instances nuked!!!");
+	//				}
+	//			}
+	//			// end destroy
 				
-				// pop intervals (destroys jarviswidget related intervals)
-				if ( $.navAsAjax && $.intervalArr.length > 0 && (container[0] == $("#content")[0]) && enableJarvisWidgets ) {
+	//			// pop intervals (destroys jarviswidget related intervals)
+	//			if ( $.navAsAjax && $.intervalArr.length > 0 && (container[0] == $("#content")[0]) && enableJarvisWidgets ) {
 					
-					while($.intervalArr.length > 0)
-	        			clearInterval($.intervalArr.pop());
-	        			// debugState
-						if (debugState){
-							root.console.log("✔ All JarvisWidget intervals cleared");
-						}
+	//				while($.intervalArr.length > 0)
+	//        			clearInterval($.intervalArr.pop());
+	//        			// debugState
+	//					if (debugState){
+	//						root.console.log("✔ All JarvisWidget intervals cleared");
+	//					}
 	        			
-				}
-				// end pop intervals
+	//			}
+	//			// end pop intervals
 				
-				// destroy all widget instances
-				if ( $.navAsAjax && (container[0] == $("#content")[0]) && enableJarvisWidgets && $("#widget-grid")[0] ) {
+	//			// destroy all widget instances
+	//			if ( $.navAsAjax && (container[0] == $("#content")[0]) && enableJarvisWidgets && $("#widget-grid")[0] ) {
 					
-					$("#widget-grid").jarvisWidgets('destroy');
-					// debugState
-					if (debugState){
-						root.console.log("✔ JarvisWidgets destroyed");
-					} 
+	//				$("#widget-grid").jarvisWidgets('destroy');
+	//				// debugState
+	//				if (debugState){
+	//					root.console.log("✔ JarvisWidgets destroyed");
+	//				} 
 					
-				}
-				// end destroy all widgets 
+	//			}
+	//			// end destroy all widgets 
 				
-				// cluster destroy: destroy other instances that could be on the page 
-				// this runs a script in the current loaded page before fetching the new page
-				if ( $.navAsAjax && (container[0] == $("#content")[0]) ) {
+	//			// cluster destroy: destroy other instances that could be on the page 
+	//			// this runs a script in the current loaded page before fetching the new page
+	//			if ( $.navAsAjax && (container[0] == $("#content")[0]) ) {
 
-					/*
-					 * The following elements should be removed, if they have been created:
-					 *
-					 *	colorList
-					 *	icon
-					 *	picker
-					 *	inline
-					 *	And unbind events from elements:
-					 *	
-					 *	icon
-					 *	picker
-					 *	inline
-					 *	especially $(document).on('mousedown')
-					 *	It will be much easier to add namespace to plugin events and then unbind using selected namespace.
-					 *	
-					 *	See also:
-					 *	
-					 *	http://f6design.com/journal/2012/05/06/a-jquery-plugin-boilerplate/
-					 *	http://keith-wood.name/pluginFramework.html
-					 */
+	//				/*
+	//				 * The following elements should be removed, if they have been created:
+	//				 *
+	//				 *	colorList
+	//				 *	icon
+	//				 *	picker
+	//				 *	inline
+	//				 *	And unbind events from elements:
+	//				 *	
+	//				 *	icon
+	//				 *	picker
+	//				 *	inline
+	//				 *	especially $(document).on('mousedown')
+	//				 *	It will be much easier to add namespace to plugin events and then unbind using selected namespace.
+	//				 *	
+	//				 *	See also:
+	//				 *	
+	//				 *	http://f6design.com/journal/2012/05/06/a-jquery-plugin-boilerplate/
+	//				 *	http://keith-wood.name/pluginFramework.html
+	//				 */
 					
-					// this function is below the pagefunction for all pages that has instances
+	//				// this function is below the pagefunction for all pages that has instances
 
-					if (typeof pagedestroy == 'function') { 
+	//				if (typeof pagedestroy == 'function') { 
 
-					  try {
-						    pagedestroy(); 
+	//				  try {
+	//					    pagedestroy(); 
 
-						    if (debugState){
-								root.console.log("✔ Pagedestroy()");
-						   } 
-						}
-						catch(err) {
-						   pagedestroy = undefined; 
+	//					    if (debugState){
+	//							root.console.log("✔ Pagedestroy()");
+	//					   } 
+	//					}
+	//					catch(err) {
+	//					   pagedestroy = undefined; 
 
-						   if (debugState){
-								root.console.log("! Pagedestroy() Catch Error");
-						   } 
-					  }
+	//					   if (debugState){
+	//							root.console.log("! Pagedestroy() Catch Error");
+	//					   } 
+	//				  }
 
-					} 
+	//				} 
 
-					// destroy all inline charts
+	//				// destroy all inline charts
 					
-					if ( $.fn.sparkline && $("#content .sparkline")[0] ) {
-						$("#content .sparkline").sparkline( 'destroy' );
+	//				if ( $.fn.sparkline && $("#content .sparkline")[0] ) {
+	//					$("#content .sparkline").sparkline( 'destroy' );
 						
-						if (debugState){
-							root.console.log("✔ Sparkline Charts destroyed!");
-						} 
-					}
+	//					if (debugState){
+	//						root.console.log("✔ Sparkline Charts destroyed!");
+	//					} 
+	//				}
 					
-					if ( $.fn.easyPieChart && $("#content .easy-pie-chart")[0] ) {
-						$("#content .easy-pie-chart").easyPieChart( 'destroy' );
+	//				if ( $.fn.easyPieChart && $("#content .easy-pie-chart")[0] ) {
+	//					$("#content .easy-pie-chart").easyPieChart( 'destroy' );
 						
-						if (debugState){
-							root.console.log("✔ EasyPieChart Charts destroyed!");
-						} 
-					}
+	//					if (debugState){
+	//						root.console.log("✔ EasyPieChart Charts destroyed!");
+	//					} 
+	//				}
 
 					
 
-					// end destory all inline charts
+	//				// end destory all inline charts
 					
-					// destroy form controls: Datepicker, select2, autocomplete, mask, bootstrap slider
+	//				// destroy form controls: Datepicker, select2, autocomplete, mask, bootstrap slider
 					
-					if ( $.fn.select2 && $("#content select.select2")[0] ) {
-						$("#content select.select2").select2('destroy');
+	//				if ( $.fn.select2 && $("#content select.select2")[0] ) {
+	//					$("#content select.select2").select2('destroy');
 						
-						if (debugState){
-							root.console.log("✔ Select2 destroyed!");
-						}
-					}
+	//					if (debugState){
+	//						root.console.log("✔ Select2 destroyed!");
+	//					}
+	//				}
 					
-					if ( $.fn.mask && $('#content [data-mask]')[0] ) {
-						$('#content [data-mask]').unmask();
+	//				if ( $.fn.mask && $('#content [data-mask]')[0] ) {
+	//					$('#content [data-mask]').unmask();
 						
-						if (debugState){
-							root.console.log("✔ Input Mask destroyed!");
-						}
-					}
+	//					if (debugState){
+	//						root.console.log("✔ Input Mask destroyed!");
+	//					}
+	//				}
 					
-					if ( $.fn.datepicker && $('#content .datepicker')[0] ) {
-						$('#content .datepicker').off();
-						$('#content .datepicker').remove();
+	//				if ( $.fn.datepicker && $('#content .datepicker')[0] ) {
+	//					$('#content .datepicker').off();
+	//					$('#content .datepicker').remove();
 						
-						if (debugState){
-							root.console.log("✔ Datepicker destroyed!");
-						}
-					}
+	//					if (debugState){
+	//						root.console.log("✔ Datepicker destroyed!");
+	//					}
+	//				}
 					
-					if ( $.fn.slider && $('#content .slider')[0] ) {
-						$('#content .slider').off();
-						$('#content .slider').remove();
+	//				if ( $.fn.slider && $('#content .slider')[0] ) {
+	//					$('#content .slider').off();
+	//					$('#content .slider').remove();
 						
-						if (debugState){
-							root.console.log("✔ Bootstrap Slider destroyed!");
-						}
-					}
+	//					if (debugState){
+	//						root.console.log("✔ Bootstrap Slider destroyed!");
+	//					}
+	//				}
 								
-					// end destroy form controls
+	//				// end destroy form controls
 					
 					
-				}
-				// end cluster destroy
+	//			}
+	//			// end cluster destroy
 				
-				// empty container and var to start garbage collection (frees memory)
-				pagefunction = null;
-				container.removeData().html("");
+	//			// empty container and var to start garbage collection (frees memory)
+	//			pagefunction = null;
+	//			container.removeData().html("");
 				
-				// place cog
-				container.html('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Loading...</h1>');
+	//			// place cog
+	//			container.html('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> Loading...</h1>');
 			
-				// Only draw breadcrumb if it is main content material
-				if (container[0] == $("#content")[0]) {
+	//			// Only draw breadcrumb if it is main content material
+	//			if (container[0] == $("#content")[0]) {
 					
-					// clear everything else except these key DOM elements
-					// we do this because sometime plugins will leave dynamic elements behind
-					$('body').find('> *').filter(':not(' + ignore_key_elms + ')').empty().remove();
+	//				// clear everything else except these key DOM elements
+	//				// we do this because sometime plugins will leave dynamic elements behind
+	//				$('body').find('> *').filter(':not(' + ignore_key_elms + ')').empty().remove();
 					
-					// draw breadcrumb
-					drawBreadCrumb();
+	//				// draw breadcrumb
+	//				drawBreadCrumb();
 					
-					// scroll up
-					$("html").animate({
-						scrollTop : 0
-					}, "fast");
-				} 
-				// end if
-			},
-			success : function(data) {
+	//				// scroll up
+	//				$("html").animate({
+	//					scrollTop : 0
+	//				}, "fast");
+	//			} 
+	//			// end if
+	//		},
+	//		success : function(data) {
 				
-				// dump data to container
-				container.css({
-					opacity : '0.0'
-				}).html(data).delay(50).animate({
-					opacity : '1.0'
-				}, 300);
+	//			// dump data to container
+	//			container.css({
+	//				opacity : '0.0'
+	//			}).html(data).delay(50).animate({
+	//				opacity : '1.0'
+	//			}, 300);
 				
-				// clear data var
-				data = null;
-				container = null;
-			},
-			error : function(xhr, status, thrownError, error) {
-				container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error requesting <span class="txt-color-red">' + url + '</span>: ' + xhr.status + ' <span style="text-transform: capitalize;">'  + thrownError + '</span></h4>');
-			},
-			async : true 
-		});
+	//			// clear data var
+	//			data = null;
+	//			container = null;
+	//		},
+	//		error : function(xhr, status, thrownError, error) {
+	//			container.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error requesting <span class="txt-color-red">' + url + '</span>: ' + xhr.status + ' <span style="text-transform: capitalize;">'  + thrownError + '</span></h4>');
+	//		},
+	//		async : true 
+	//	});
 	
-	}
+	//}
 /*
  * UPDATE BREADCRUMB
  */ 

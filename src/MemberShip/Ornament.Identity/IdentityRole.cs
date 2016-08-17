@@ -4,9 +4,6 @@ using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
 {
-   
-
-
     /// <summary>
     ///     Represents a role in the identity system
     /// </summary>
@@ -15,7 +12,7 @@ namespace Ornament.Identity
     public class IdentityRole<TKey>
         : EntityWithTypedId<TKey>
         where TKey : IEquatable<TKey>
-      
+
 
     {
         /// <summary>
@@ -40,25 +37,18 @@ namespace Ornament.Identity
         /// </summary>
         public virtual ICollection<IdentityRoleClaim> Claims { get; } = new List<IdentityRoleClaim>();
 
-        ///// <summary>
-        /////     Gets or sets the primary key for this role.
-        ///// </summary>
-        //public virtual TKey Id { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the name for this role.
-        /// </summary>
-        public virtual string Name { get; set; }
 
         /// <summary>
         ///     Gets or sets the normalized name for this role.
         /// </summary>
-        public virtual string NormalizedName { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         ///     A random value that should change whenever a role is persisted to the store
         /// </summary>
         public virtual string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
+
+        public virtual string Remark { get; set; }
 
         /// <summary>
         ///     Returns the name of the role.

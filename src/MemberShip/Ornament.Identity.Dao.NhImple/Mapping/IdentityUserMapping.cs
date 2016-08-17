@@ -31,7 +31,7 @@ namespace Ornament.Identity.Dao.Mapping
             ExtendSetting();
 
             Map(x => x.AccessFailedCount);
-                    
+
             Map(x => x.Email).Not.Nullable().Length(64);
 
             Map(x => x.EmailConfirmed);
@@ -54,6 +54,8 @@ namespace Ornament.Identity.Dao.Mapping
 
             Map(x => x.SecurityStamp);
 
+            Map(x => x.ConcurrencyStamp);
+
             HasMany(x => x.Claims).Cascade.DeleteOrphan().Cascade.All()
                 .Table("mbs_user_claims")
                 .Component(x =>
@@ -75,7 +77,7 @@ namespace Ornament.Identity.Dao.Mapping
             HasManyToMany(x => x.Roles)
                 .Table("mbs_user_roles")
                 .ParentKeyColumn("UserId")
-                .ForeignKeyConstraintNames("FK_user_role_userId","FK_user_role_roleId");
+                .ForeignKeyConstraintNames("FK_user_role_userId", "FK_user_role_roleId");
         }
 
         protected abstract void ExtendSetting();

@@ -13,7 +13,7 @@ namespace Ornament.Identity.Dao.Mapping
             Table("mbs_roles");
             Map(x => x.Name).Unique().Length(255).Not.Nullable();
 
-            Map(x => x.NormalizedName).Length(255);
+            Map(x => x.Remark).Length(255);
 
             ExtendSetting();
         }

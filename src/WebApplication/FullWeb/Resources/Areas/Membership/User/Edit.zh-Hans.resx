@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Loing Info" xml:space="preserve">
+  <data name="Login Info" xml:space="preserve">
     <value>登录信息</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>保存</value>
   </data>
 </root>

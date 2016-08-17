@@ -44,18 +44,17 @@ namespace FullWeb
                 .AddViewLocalization(options => { options.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
-
-            services.Configure<RequestLocalizationOptions>(
-                options =>
-                {
-                    var supportedCultures = new List<CultureInfo>
+            var supportedCultures = new List<CultureInfo>
                     {
                         new CultureInfo("zh-CN"),
                         new CultureInfo("zh-HK"),
                         new CultureInfo("zh-TW"),
                         new CultureInfo("en-US")
                     };
-
+            services.AddSingleton<IList<CultureInfo>>(supportedCultures);
+            services.Configure<RequestLocalizationOptions>(
+                options =>
+                {
                     options.DefaultRequestCulture = new RequestCulture("zh-CN", "zh-CN");
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
@@ -137,7 +136,8 @@ namespace FullWeb
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("areaRoute",
+                    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
                     "default",
