@@ -18,11 +18,11 @@ namespace FullWeb.Controllers
                 case 404:
                     return View("404");
                 case 400:
-                    return View("400");
+                    return View("404");
                 case 500:
                     return View("500");
                 default:
-                    return View("501");
+                    return View("500");
             }
         }
 

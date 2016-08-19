@@ -5,11 +5,11 @@
 </div>
 
 <div class="col-sm-12">
-    <div class="well">
+    <div class="well" ms-controller="roleIndex">
         <form class="form-inline" role="form" style="margin-bottom: 15px">
             <div class="btn-group">
-                <button type="button" class="btn btn-default"><i class="fa fa-user-plus"></i>添加</button>
-                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>删除</button>
+                <button type="button" class="btn btn-default" ms-click="@@create"><i class="fa fa-user-plus"></i></button>
+                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
             </div>
         </form>
         <table class="table table-bordered">
@@ -25,24 +25,42 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in this.Model)
-                {
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Edit")">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                        </td>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Remark
-                        </td>
-                    </tr>
-                }
+
+                <tr ms-for="el in @@roles">
+                    <td>
+                        <input type="checkbox" ms-attr-value="@@el.Id" />
+                        <a href="javasript:;" ms-click="@@edit(el)">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                    <td>
+                        {{@@el.Name}}
+                    </td>
+                    <td>
+                        {{@@el.Remark}}
+                    </td>
+                </tr>
+
 
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="role-editor-dialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModal-label" aria-hidden="true">
+    <div class="modal-dialog" ms-controller="roleEditor">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModal-label">Modal title</h4>
+            </div>
+            <div class="modal-body" id="roleEditor">
+                @Html.Partial("_edit")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ms-click="@@save">Save</button>
+            </div>
+        </div>
     </div>
 </div>

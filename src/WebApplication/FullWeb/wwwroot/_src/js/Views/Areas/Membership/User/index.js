@@ -1,2 +1,1 @@
-﻿var avalon = require('avalon');
-
+﻿

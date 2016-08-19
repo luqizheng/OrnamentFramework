@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Ornament.Domain.Entities;
 
 namespace Ornament.Identity
@@ -41,6 +42,7 @@ namespace Ornament.Identity
         /// <summary>
         ///     Gets or sets the normalized name for this role.
         /// </summary>
+        [Required]
         public virtual string Name { get; set; }
 
         /// <summary>

@@ -34,11 +34,11 @@ function InitVaForm() {
 
 
 module.exports = {
-    onEntry: function () {
+    load: function (contentLoading) {
         InitVaForm();
-        avalon.scan($("#content")[0]);
+        avalon.scan(contentLoading);
     },
-    onLeave: function () {
+    unload: function () {
         try {
             model = null;
             delete avalon.vmodels["editUser"];

@@ -1,4 +1,4 @@
-﻿/// <reference path="views/areas/membership/_moduleregister.js" />
+﻿
 /// <reference path="modules/nav.js" />
 /// <reference path="views/shared/_menu.js" />
 

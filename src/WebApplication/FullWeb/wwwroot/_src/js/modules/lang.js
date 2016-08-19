@@ -11,4 +11,3 @@ avalon.define({
         location.href = newUrl;
     }
 });
-

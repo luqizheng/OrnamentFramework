@@ -1,24 +1,24 @@
 ﻿/// <reference path="../views/areas/membership/user/index.js" />
 var $ = require('jquery');
 var page = require("../../../lib/page/page.js");
-
+var $content; //加载element;
 
 
 
 function ContentLoad(ctx, onEntry) {
     var strUrl = ctx.path;
     var loading = location.pathname.toUpperCase() != strUrl.toUpperCase();
+    var bIsFunc = $.isFunction(onEntry);
     if (loading) {
-        $("#content").load(strUrl, function (responseText, textStatus, req) {
+        content.load(strUrl, function (responseText, textStatus, req) {
             if (req.status != 200) {
-                $("#content").html(responseText);
+                content.html(responseText);
+                return;
             }
-            else if ($.isFunction(onEntry)) {
-                onEntry();
-            }
+            bIsFunc && onEntry.calal(this, $content);
         });
     } else if ($.isFunction(onEntry)) {
-        onEntry();
+        bIsFunc && onEntry.calal(this, $content);
     }
 }
 
@@ -44,7 +44,7 @@ function AddSinglePath(pathes, onEntry, onLeave) {
     if ($.isFunction(onLeave)) {
         page.exit(pathes, function (ctx, next) {
             try {
-                onLeave();
+                onLeave($content);
             } catch (e) {
                 console.log('on leavel ', pathes, 'failed.', e);
             }
@@ -55,8 +55,10 @@ function AddSinglePath(pathes, onEntry, onLeave) {
 
 module.exports = {
     add: AddPath,//添加nav导航的设置
-    startNav: function () { //开始初始化导航的体系
+    startNav: function ($ajaxLoadContent) { //开始初始化导航的体系
+        $content = $ajaxLoadContent
         AddPath("/");
         page();
-    }
+    },
+
 }

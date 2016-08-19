@@ -5,12 +5,14 @@
 /*
 这是一个注册过程，注册相关的导航信息以及一切何模块相关的数据。
 */
-var nav = require("../../../modules/nav.js")
+var nav = require("../../../modules/nav.js");
 
+
+// users 相关
 // index/
 nav.add(["/Membership/User", "/Membership/User/Index"], function () {
 
-    require.ensure(['./user/index.js'],
+    require.ensure(['./User/index.js'],
         function ($index) {
             console.log("load user index success.");
         })
@@ -18,23 +20,35 @@ nav.add(["/Membership/User", "/Membership/User/Index"], function () {
 
 
 // User editor;
+//ensure can not be used variabled, because it should compli by webpack
 function callUserEditFunc(funcName) {
-    require.ensure(["./user/edit.js"],
+    require.ensure(["./User/edit.js"],
         function () {
             {
-                var userEditor = require("./user/edit.js");
+                var userEditor = require("./User/edit.js");
+                userEditor[funcName]();
+            };
+        });
+}
+var userEditor=require("./User/edit.js");
+nav.add("/MemberShip/User/Edit/:id",
+    function () {
+        callUserEditFunc("load");
+    },
+    function () {
+        callUserEditFunc("unload");
+    });
+
+
+// role 相关
+function callRoleMethod(funcName) {
+    require.ensure(["./Role/index.js"],
+        function () {
+            {
+                var userEditor = require("./Role/index.js");
                 userEditor[funcName]();
             };
         });
 }
 
-nav.add("/MemberShip/User/Edit/:id",
-    function () {
-        callUserEditFunc("onEntry");
-    },
-    function () {
-        callUserEditFunc("onLeave");
-
-    });
-
-
+nav.add("/MemberShip/Role",function(){callRoleMethod("load")},function(){callRoleMethod("unload")})
