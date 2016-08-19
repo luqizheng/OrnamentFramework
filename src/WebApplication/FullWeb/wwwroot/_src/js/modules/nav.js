@@ -10,15 +10,15 @@ function ContentLoad(ctx, onEntry) {
     var loading = location.pathname.toUpperCase() != strUrl.toUpperCase();
     var bIsFunc = $.isFunction(onEntry);
     if (loading) {
-        content.load(strUrl, function (responseText, textStatus, req) {
+        $content.load(strUrl, function (responseText, textStatus, req) {
             if (req.status != 200) {
-                content.html(responseText);
+                $content.html(responseText);
                 return;
             }
-            bIsFunc && onEntry.calal(this, $content);
+            bIsFunc && onEntry.call(this, $content[0]);
         });
     } else if ($.isFunction(onEntry)) {
-        bIsFunc && onEntry.calal(this, $content);
+        bIsFunc && onEntry.call(this, $content[0]);
     }
 }
 

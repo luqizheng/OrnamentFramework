@@ -10,7 +10,7 @@ var nav = require("../../../modules/nav.js");
 
 // users 相关
 // index/
-nav.add(["/Membership/User", "/Membership/User/Index"], function () {
+nav.add(["/Membership/User", "/Membership/User/Index"], function (content) {
 
     require.ensure(['./User/index.js'],
         function ($index) {
@@ -21,34 +21,34 @@ nav.add(["/Membership/User", "/Membership/User/Index"], function () {
 
 // User editor;
 //ensure can not be used variabled, because it should compli by webpack
-function callUserEditFunc(funcName) {
+function callUserEditFunc(funcName,content) {
     require.ensure(["./User/edit.js"],
         function () {
             {
                 var userEditor = require("./User/edit.js");
-                userEditor[funcName]();
+                userEditor[funcName](content);
             };
         });
 }
 var userEditor=require("./User/edit.js");
 nav.add("/MemberShip/User/Edit/:id",
-    function () {
-        callUserEditFunc("load");
+    function (content) {
+        callUserEditFunc("load",content);
     },
-    function () {
-        callUserEditFunc("unload");
+    function (content) {
+        callUserEditFunc("unload",content);
     });
 
 
 // role 相关
-function callRoleMethod(funcName) {
+function callRoleMethod(funcName,content) {
     require.ensure(["./Role/index.js"],
         function () {
             {
                 var userEditor = require("./Role/index.js");
-                userEditor[funcName]();
+                userEditor[funcName](content);
             };
         });
 }
 
-nav.add("/MemberShip/Role",function(){callRoleMethod("load")},function(){callRoleMethod("unload")})
+nav.add("/MemberShip/Role",function(content){callRoleMethod("load",content)},function(content){callRoleMethod("unload",content)})

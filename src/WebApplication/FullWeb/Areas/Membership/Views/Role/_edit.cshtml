@@ -9,7 +9,7 @@
     @Html.HiddenFor(s => s.Id)
     <div class="form-group">
         <label class="col-md-2 control-label" asp-for="Name"></label><div class="col-md-10">
-            <input type="text" asp-for="Name" ms-duplex="@@role.Name">
+            <input type="text" asp-for="Name" ms-duplex="@@role.name">
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="form-group">
         <label class="col-md-2 control-label" asp-for="Remark"></label>
         <div class="col-md-10">
-            <textarea asp-for="Remark" ms-duplex="@@role.Remark" style="resize:no"></textarea>
+            <textarea asp-for="Remark" ms-duplex="@@role.remark" style="resize:no"></textarea>
             <span asp-validation-for="Remark" class="text-danger"></span>
         </div>
     </div>

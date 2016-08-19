@@ -1,4 +1,8 @@
 
+
+var roleServices = require("../../../../modules/Memberships/RoleService.js")
+var editor = null; //roleEditor;
+var $editorDialog; //dialog of editor
 function createList(listId) {
     var model = avalon.define({
         $id: listId,
@@ -19,23 +23,25 @@ function createList(listId) {
 
         });
 
-    var $editorDialog = $('#role-editor-dialog')
+ $editorDialog = $('#role-editor-dialog')
         .modal({
             keyboard: false,
             show: false
         });
 
 
-  
+
 }
 
-var listId="roleIndex";
-var editorId="roleEditor";
-var RoleEditor=require("./edit.js");
+var listId = "roleIndex";
+var editorId = "roleEditor";
+var RoleEditor = require("./edit.js");
 module.exports = {
     load: function (loadContent) {
         createList(listId);
-        RoleEditor.create(editorId);
+        editor = RoleEditor.create(editorId,function(){
+            $editorDialog.modal('close')
+        });
         avalon.scan(loadContent)
     },
     unload: function () {

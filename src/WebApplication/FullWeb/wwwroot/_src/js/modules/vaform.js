@@ -1,8 +1,4 @@
-﻿/// <reference path="../../../../../../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" />
-/// <reference path="../../../../../../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
-/// <reference path="../../../../../../lib/jquery-validation/dist/jquery.validate.min.js" />
-/// <reference path="../../../../../../lib/jquery-validation/dist/jquery.validate.js" />
-
+﻿
 function build(selector, ajaxFormOptions, fnSuccess) {
     require.ensure(["jquery", "jq-form", "jq-val", "jq-val-uo"],
         function () {
