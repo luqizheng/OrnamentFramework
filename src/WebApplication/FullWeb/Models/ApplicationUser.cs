@@ -1,9 +1,10 @@
 ﻿using Ornament.Identity;
-using Ornament.Identity.Dao.Mapping;
+using Ornament.Identity.Dao.NhImple.Mapping;
+using Ornament.Identity.Enterprise;
 
 namespace FullWeb.Models
 {
-    public class ApplicationUser : IdentityUser<string, ApplicationRole>
+    public class ApplicationUser : User<string, ApplicationRole>
     {
     }
 

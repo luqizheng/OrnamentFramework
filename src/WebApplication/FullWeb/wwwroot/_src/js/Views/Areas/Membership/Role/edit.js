@@ -27,7 +27,8 @@ function CreateEditor(strEditorId) {
         role: { Id: "", Name: "", Remark: "" },
         save: function () {
             getForm(strEditorId).submit();
-        }
+        },
+        title:""
     });
     return editor;
 }

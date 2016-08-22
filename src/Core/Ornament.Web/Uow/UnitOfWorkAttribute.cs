@@ -11,6 +11,15 @@ namespace Ornament.Web.Uow
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
     public class UnitOfWorkAttribute : ActionFilterAttribute
     {
+        Type _uowType = null;
+        public UnitOfWorkAttribute(Type uowType)
+        {
+            _uowType = uowType;
+        }
+        public UnitOfWorkAttribute()
+        {
+
+        }
         /// <summary>
         ///     Gets the unit of work.
         /// </summary>
@@ -18,7 +27,9 @@ namespace Ornament.Web.Uow
         /// <returns>IUnitOfWork.</returns>
         public IUnitOfWork GetUnitOfWork(IServiceProvider context)
         {
-            return context.GetService<IUnitOfWork>();
+            if (_uowType == null)
+                return context.GetService<IUnitOfWork>();
+            return (IUnitOfWork)context.GetService(_uowType);
         }
 
         /// <summary>
@@ -44,7 +55,14 @@ namespace Ornament.Web.Uow
             var uow = GetUnitOfWork(context.HttpContext.RequestServices);
             try
             {
-                uow.Commit();
+                if (context.Exception != null)
+                {
+                    uow.Rollback();
+                }
+                else
+                {
+                    uow.Commit();
+                }
             }
             finally
             {
@@ -52,5 +70,7 @@ namespace Ornament.Web.Uow
             }
             base.OnResultExecuted(context);
         }
+
+
     }
 }

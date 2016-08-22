@@ -1,8 +1,8 @@
-﻿
+﻿   var $ = require("jquery");
 function build(selector, ajaxFormOptions, fnSuccess) {
-    require.ensure(["jquery", "jq-form", "jq-val", "jq-val-uo"],
+    require.ensure(["jq-form", "jq-val", "jq-val-uo"],
         function () {
-            var $ = require("jquery");
+         
             require("jq-form");
             require("jq-val");
             require("jq-val-uo");

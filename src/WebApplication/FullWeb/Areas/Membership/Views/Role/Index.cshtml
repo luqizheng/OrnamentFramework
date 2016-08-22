@@ -28,7 +28,7 @@
 
                 <tr ms-for="el in @@roles">
                     <td>
-                        <input type="checkbox" ms-attr-value="@@el.Id" />
+                        <input type="checkbox" value="{{@@el.Id}}" />
                         <a href="javasript:;" ms-click="@@edit(el)">
                             <i class="fa fa-pencil"></i>
                         </a>
@@ -52,14 +52,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModal-label">Modal title</h4>
+                <h4 class="modal-title" id="myModal-label">{{@@title}}</h4>
             </div>
             <div class="modal-body" id="roleEditor">
                 @Html.Partial("_edit")
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ms-click="@@save">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ms-click="@@save">保存</button>
             </div>
         </div>
     </div>

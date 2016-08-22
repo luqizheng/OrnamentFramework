@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Ornament.Web.Uow;
 using SmartAdmin.ViewModels.Account;
+using Ornament.NHibernate.Uow;
 
 #endregion
 
@@ -37,6 +38,7 @@ namespace FullWeb.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
+       
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             // We do not want to use any existing identity information

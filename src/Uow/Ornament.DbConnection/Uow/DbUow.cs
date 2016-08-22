@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using Ornament.Domain.Uow;
 
 namespace Ornament.DbConnection.Uow
@@ -9,34 +7,40 @@ namespace Ornament.DbConnection.Uow
     {
         private readonly IDbConnection _connection;
         private readonly bool _isTranscation;
-        private readonly IConnectionProvider _provider;
         private IDbTransaction _dbTransaction;
-       
-        public DbUow(IConnectionProvider provider, bool isTranscation)
+        private bool _selfClose = false;
+        public DbUow(IDbConnection connection, bool isTranscation)
         {
-            _connection = provider.CreateConnection();
-            _provider = provider;
+            _connection = connection;
             _isTranscation = isTranscation;
         }
 
         public IsolationLevel? IsolationLevel { get; set; }
 
+        public bool HadBegun => _connection.State == ConnectionState.Open;
+
         public void Dispose()
         {
-            if (_connection.State != ConnectionState.Closed)
-            {
+            if (_connection.State != ConnectionState.Closed && _selfClose)
                 _connection.Close();
-            }
         }
 
         public void Begin()
         {
-            _connection.Open();
-            if (!_isTranscation) return;
-            if (IsolationLevel != null)
-                _dbTransaction = _connection.BeginTransaction(IsolationLevel.Value);
-            _dbTransaction = _connection.BeginTransaction();
+            if (!HadBegun)
+            {
+                _selfClose = true;
+                _connection.Open();
+                if (!_isTranscation) return;
+                _dbTransaction = IsolationLevel != null
+                    ? _connection.BeginTransaction(IsolationLevel.Value)
+                    : _connection.BeginTransaction();
+            }
         }
+
+        public IDbConnection Connection => _connection;
+
+        public IDbTransaction DbTransaction => _dbTransaction;
 
         public void Rollback()
         {
@@ -45,8 +49,6 @@ namespace Ornament.DbConnection.Uow
 
         public void Commit()
         {
-            if (_dbTransaction == null)
-                return;
             _dbTransaction?.Commit();
         }
 
@@ -54,7 +56,5 @@ namespace Ornament.DbConnection.Uow
         {
             _connection.Close();
         }
-
-
     }
 }

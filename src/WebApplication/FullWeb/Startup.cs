@@ -83,7 +83,8 @@ namespace FullWeb
                     // options.Cookies.ApplicationCookie.DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo("C:\\Github\\Identity\\artifacts"));
                 })
                 .AddDefaultTokenProviders()
-                .AddNhibernateStores(uowFactory);
+                .AddNhibernateStores(uowFactory)
+                .AddNhIdentityEnterprise(uowFactory);
 
             //通信注册。
             services.AddTransient<IEmailSender, AuthMessageSender>();

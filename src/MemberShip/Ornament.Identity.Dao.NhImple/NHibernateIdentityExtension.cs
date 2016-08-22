@@ -9,7 +9,7 @@ namespace Ornament.Identity.Dao.NhImple
         public static IdentityBuilder AddNhibernateStores(
             this IdentityBuilder builder,
             NhUowFactoryBase nhbuilder
-            )
+        )
         {
             GetDefaultServices(builder);
             nhbuilder.AddAssemblyOf(builder.UserType);
@@ -38,14 +38,11 @@ namespace Ornament.Identity.Dao.NhImple
 
             builder.Services.AddScoped(service1, userStoreType);
             builder.Services.AddScoped(service2, roleStoreType);
-
-          
-          
         }
 
-        //{
-
         //private static void BuildMappingBuilder()
+
+        //{
         //    var asmName = new AssemblyName("identity");
         //    var asmBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
         //    var mdlBldr = asmBuilder.DefineDynamicModule("Main");

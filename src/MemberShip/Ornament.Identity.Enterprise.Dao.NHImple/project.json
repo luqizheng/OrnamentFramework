@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+  
+    "Ornament.Identity.Dao.NhImple": "1.0.0-*",
+    "Ornament.Identity.Enterprise.Extentions": "1.0.0-*",
+    "Microsoft.AspNetCore.Identity": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+
+    "Ornament": "1.0.0-*",
+    "Ornament.Identity": "1.0.0-*",
+    "FluentNHibernate": "2.0.3",
+    "Ornament.NHibernate": "1.0.0-*"
+  },
+
+   "frameworks": {
+    "net461": {
+      "imports": "dnxcore50",
+      "frameworkAssemblies": {
+        "System": "4.0.0.0"
+      }
+    } 
+  }
+}

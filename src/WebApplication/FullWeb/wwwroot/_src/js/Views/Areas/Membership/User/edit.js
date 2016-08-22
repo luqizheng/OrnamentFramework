@@ -4,7 +4,8 @@
 /// <reference path="../../../../../../lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="../../../../modules/vaform.js" />
 var avalon = require('avalon');
-
+function initEditor()
+{
 var model = avalon.define({
     $id: "editUser",
     vm: {
@@ -18,7 +19,7 @@ var model = avalon.define({
         model.vm.PhoneNumberConfirmed = !model.vm.PhoneNumberConfirmed;
     }
 });
-
+}
 
 function InitVaForm() {
     require.ensure(["../../../../modules/vaform.js"],
@@ -36,6 +37,7 @@ function InitVaForm() {
 module.exports = {
     load: function (contentLoading) {
         InitVaForm();
+		initEditor();
         avalon.scan(contentLoading);
     },
     unload: function () {

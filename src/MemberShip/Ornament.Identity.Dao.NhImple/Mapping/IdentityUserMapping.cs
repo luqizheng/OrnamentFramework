@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentNHibernate.Mapping;
 
-namespace Ornament.Identity.Dao.Mapping
+namespace Ornament.Identity.Dao.NhImple.Mapping
 {
     //public class IdentityUserMapping :
     //    IdentityUserMapping<string,IdentityRole>

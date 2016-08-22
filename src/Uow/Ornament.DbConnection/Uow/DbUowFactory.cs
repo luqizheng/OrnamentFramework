@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Data;
 using Ornament.Domain.Uow;
 
 namespace Ornament.DbConnection.Uow
 {
-    public class DbUowFactory 
+    public class DbUowFactory : IUnitOfWorkFactory
     {
-        private readonly IConnectionProvider _provider;
+        private readonly IDbConnection _dbConnection;
 
-        public DbUowFactory(string name, IConnectionProvider provider) : base(name)
+        public DbUowFactory(System.Data.IDbConnection dbConnection)
         {
-            if (provider == null) throw new ArgumentNullException(nameof(provider));
-            _provider = provider;
+            _dbConnection = dbConnection;
         }
 
         public bool UseTransaction { get; set; }
@@ -18,9 +18,9 @@ namespace Ornament.DbConnection.Uow
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public override IUnitOfWork Create()
+        public IUnitOfWork Create()
         {
-            return new DbUow(_provider, UseTransaction);
+            return new DbUow(_dbConnection, UseTransaction);
         }
     }
 }

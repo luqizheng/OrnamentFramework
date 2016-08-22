@@ -9,9 +9,11 @@ function createList(listId) {
         roles: [],
         edit: function (el) {
             editor.role = el;
+            editor.title="編輯角色"
             $editorDialog.modal('show');
         },
         create: function () {
+            editor.title="新增角色"
             editor.role = { Id: "", Name: "", Remark: "" }
             $editorDialog.modal('show');
         }
