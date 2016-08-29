@@ -126,5 +126,13 @@ namespace Ornament.Domain.Stores
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public abstract void Update(T t);
+
+
+        public abstract T Merge(T t);
+
+        public abstract void Save(T t);
+       
     }
 }

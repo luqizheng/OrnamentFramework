@@ -16,13 +16,12 @@ namespace FullWeb.Controllers
             switch (id)
             {
                 case 404:
-                    return View("404","404");
                 case 400:
-                    return View("404","404");
+                    return View("40X", id);
                 case 500:
-                    return View("500");
+                    return View("500", id);
                 default:
-                    return View("500");
+                    return View("500", 500);
             }
         }
 

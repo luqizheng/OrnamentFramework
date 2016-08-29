@@ -25,15 +25,11 @@ function ContentLoad(ctx, onEntry) {
 
 function AddPath(pathes, onEntry, onLeave) {
 
-    if (!$.isArray(pathes)) {
+    var pa = $.makeArray(pathes);
+    $(pa).each(function () {
+        AddSinglePath(this, onEntry, onLeave);
+    })
 
-        AddSinglePath(pathes, onEntry, onLeave);
-
-    } else {
-        $(pathes).each(function () {
-            AddSinglePath(this, onEntry, onLeave);
-        });
-    }
 }
 
 function AddSinglePath(pathes, onEntry, onLeave) {

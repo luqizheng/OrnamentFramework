@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Ornament.Identity.Enterprise.Stores;
 using Ornament.NHibernate.Uow;
 
 namespace Ornament.Identity.Dao.NhImple
@@ -11,6 +12,13 @@ namespace Ornament.Identity.Dao.NhImple
             NhUowFactoryBase nhbuilder)
         {
             nhbuilder.AddAssemblyOf(typeof(NhIdentityEnterpriseExtension));
+            builder.Services.AddScoped<IOrgStore>(s =>
+            {
+                var unitOfWork = s.GetRequiredService<NhUow>();
+                return new OrgStore(unitOfWork);
+            });
+
+
             return builder;
         }
 

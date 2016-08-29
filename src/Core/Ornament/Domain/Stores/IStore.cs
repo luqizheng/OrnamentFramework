@@ -11,6 +11,11 @@ namespace Ornament.Domain.Stores
         IQueryable<T> Entities { get; }
 
         void SaveOrUpdate(T t);
+        void Update(T t);
+
+        T Merge(T t);
+
+        void Save(T t);
 
         void Delete(T t);
 

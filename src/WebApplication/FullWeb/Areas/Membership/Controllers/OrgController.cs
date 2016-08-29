@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FullWeb.Areas.Membership.Controllers
 {
+    [Area("Membership")]
     public class OrgController: Controller
     {
         // GET: /<controller>/
@@ -15,5 +16,7 @@ namespace FullWeb.Areas.Membership.Controllers
         {
             return View();
         }
+
+        
     }
 }

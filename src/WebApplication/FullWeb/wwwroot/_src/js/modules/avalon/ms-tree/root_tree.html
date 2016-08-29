@@ -1,0 +1,9 @@
+﻿<ul class="tree">
+    <li ms-for="(index, el) in @tree | get(0)">
+        {{el.text}}
+        <span ms-click='@openSubTree(el)' ms-text="@changeIcon(el)"></span>
+        <div ms-visible="el.open" ms-html="@renderSubTree(el)">
+
+        </div>
+    </li>
+</ul>

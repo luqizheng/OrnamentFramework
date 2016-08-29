@@ -182,7 +182,13 @@ namespace FullWeb
                 Area = "Membership",
                 IconClasses = "fa fa-fw fa-users"
             });
-
+            adminNav.Add(new MvcNav("Org")
+            {
+                Action = "Index",
+                Controller = "Org",
+                Area = "Membership",
+                IconClasses = "fa fa-fw fa-users"
+            });
             NavManager.Init(root);
         }
     }

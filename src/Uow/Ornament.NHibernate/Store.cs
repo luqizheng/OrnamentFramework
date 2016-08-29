@@ -27,7 +27,7 @@ namespace Ornament.NHibernate
 
         public override IQueryable<T> Entities => Context.Query<T>();
 
-       
+
 
         public override void SaveOrUpdate(T t)
         {
@@ -47,6 +47,21 @@ namespace Ornament.NHibernate
         public override T Load(TId id)
         {
             return Context.Load<T>(id);
+        }
+
+        public override T Merge(T t)
+        {
+            return Context.Merge(t);
+        }
+
+        public override void Save(T t)
+        {
+            Context.Save(t);
+        }
+
+        public override void Update(T t)
+        {
+            Context.Update(t);
         }
     }
 }

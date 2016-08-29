@@ -16,7 +16,7 @@ namespace WebApi.Controllers
         }
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Login(LoginModel model)
+        public IEnumerable<string> Login(LoginViewModel model)
         {
             if (this.ModelState.IsValid)
             {
