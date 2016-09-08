@@ -1,6 +1,6 @@
 
 
-var roleServices = require("../../../../modules/Memberships/RoleService.js")
+var roleServices = require("../../../../modules/membership/RoleService.js");
 var editor = null; //roleEditor;
 var $editorDialog; //dialog of editor
 function createList(listId) {

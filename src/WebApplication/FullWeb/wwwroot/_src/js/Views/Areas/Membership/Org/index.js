@@ -1,46 +1,45 @@
 ﻿/// <reference path="../../../../modules/avalon/ms-tree/ms-tree.js" />
-var OrgTree = require("../../../../modules/avalon/ms-tree/ms-tree.js")
+/// <reference path="../../../../modules/membership/orgservice.js" />
+/// <reference path="../../../../modules/vaform.js" />
+var OrgTree = require("../../../../modules/avalon/ms-tree/ms-tree.js");
+var OrgService = require("../../../../modules/membership/orgservice.js");
+var avalon = require('avalon');
+
+function InitVaForm(fnSavedCallback) {
+    var strEditorId = "orgEditor";
+    require.ensure(["../../../../modules/vaform.js"],
+        function () {
+            var vaform = require("../../../../modules/vaform.js");
+            var $form = $("#" + strEditorId);
+           
+            vaform.forWebApi($form,
+                function () {
+                    OrgService.save(avalon.vmodels[strEditorId].org.$model).done(function () {
+                        alert("保存成功");
+                        fnSavedCallback && fnSavedCallback();
+                    });
+
+                });
+        });
+}
 
 function init() {
     var result = avalon.define({
         $id: 'orgTree',
-        orgs: [{
-            text: "aaa", open: 1, subtree: [
-                   { text: 1111, open: 1, subtree: [] },
-                   {
-                       text: 2222, open: 1, subtree: [
-                              { text: 777, open: 1, subtree: [] }
-                       ]
-                   },
-                   {
-                       text: 3333, open: 1, subtree: [
-                              { text: 8888, open: 1, subtree: [] },
-                              {
-                                  text: 9999, open: 1, subtree: [
-                                         { text: '司徒正美', open: 1, subtree: [] }
-                                  ]
-                              }
-                       ]
-                   }
-            ]
-        },
-                        {
-                            text: "bbb", open: 1, subtree: [
-                                   { text: 4444, open: 1, subtree: [] },
-                                   { text: 5555, open: 1, subtree: [] },
-                                   { text: 6666, open: 1, subtree: [] }
-                            ]
-                        },
-                        { text: "ccc", open: 1, subtree: [] },
-                        { text: "ddd", open: 1, subtree: [] },
-                        {
-                            text: "eee", open: 1, subtree: [
-                                   { text: 1234, open: 1, subtree: [] }
-                            ]
-                        },
-                        { text: "fff", open: 1, subtree: [] }
-        ]
-    })
+        orgs: []
+    });
+    var editor = avalon.define({
+        $id: 'orgEditor',
+        org: {
+            name: "",
+            remark: "",
+            parentId: ""
+        }
+    });
+
+    InitVaForm(function() {
+        
+    });
     return result;
 }
 
@@ -51,7 +50,7 @@ function onload(contentLoadingArea) {
 }
 
 function unload() {
-
+    delete avalon.vmodels["orgTree"];
 }
 
 module.exports = {

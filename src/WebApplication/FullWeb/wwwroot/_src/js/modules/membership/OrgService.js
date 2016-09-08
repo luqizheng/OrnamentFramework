@@ -1,11 +1,8 @@
 ﻿var url = "/api/orgs";
 var webapi = require("../webapi.js").create(url);
 module.exports = {
-    list: function (pageIndex, pageSize) {
-        return webapi.Get({
-            pageIndex: pageIndex,
-            pageSize: pageSize
-        });
+    list: function (parentId) {
+        return webapi.Get({ parentId: parentId });
     },
     save: function (org,parentOgId) {
         return webapi.Post({

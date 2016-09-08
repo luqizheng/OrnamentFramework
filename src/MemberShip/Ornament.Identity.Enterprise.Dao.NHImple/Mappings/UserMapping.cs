@@ -1,5 +1,4 @@
 ﻿using System;
-using FluentNHibernate.Mapping;
 using Ornament.Identity.Dao.NhImple.Mapping;
 using Ornament.Identity.Enterprise;
 
@@ -12,17 +11,6 @@ namespace Ornament.Identity.Dao.NhImple.Mappings
         protected override void ExtendSetting()
         {
             References(s => s.Org);
-        }
-    }
-
-    public class OrgMapping : ClassMap<Org>
-    {
-        public OrgMapping()
-        {
-            Id(_ => _.Id).GeneratedBy.Increment();
-            Map(_ => _.Name);
-            Map(_ => _.Remark);
-            References(s => s.Parent).Column("OrgParentId").ForeignKey("OrgParentFK");
         }
     }
 }

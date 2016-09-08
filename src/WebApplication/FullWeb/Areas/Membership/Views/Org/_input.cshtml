@@ -1,5 +1,5 @@
 ﻿@model Ornament.Identity.Enterprise.Org
-<form method="POST" ms-controller="edit" class="form-horizontal" ms-submit="@@save">
+<form method="POST" ms-controller="orgEditor" class="form-horizontal" ms-submit="@@save" id="orgEditor">
     <div class="form-group">
         <label class="col-md-2  control-label">
             @this.Model?.Name
@@ -11,30 +11,16 @@
     <div class="form-group">
         <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Name, new
-       {
-           HtmlAttributes = new Dictionary<string, object>
-                                  {
-                                      {"class", "form-control"},
-                                      {"ms-duplex", "@Name"}
-                                  }
-       })
-            @Html.ValidationMessageFor(model => model.Name)
+            <input type="text" asp-for="Name" ms-duplex="@@org.name" class="form-control"/>
+            <span asp-validation-for="Name"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remark)</label>
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Remark, new
-       {
-           HtmlAttributes = new Dictionary<string, object>
-                                  {
-                                      {"class", "form-control"},
-                                      {"ms-duplex", "@Remark"}
-                                  }
-       })
-            @Html.ValidationMessageFor(model => model.Remark)
+            <textarea asp-for="Remark" ms-dulex="@@org.remark"></textarea>
+            <span asp-validation-for="Remark"></span>
         </div>
     </div>
     <div class="form-group">

@@ -1,8 +1,12 @@
-﻿<ul class="tree">
-    <li ms-for="(index, el) in @tree | get(0)">
-        {{el.text}}
-        <span ms-click='@openSubTree(el)' ms-text="@changeIcon(el)"></span>
-        <div ms-visible="el.open" ms-html="@renderSubTree(el)">
+﻿<ul>
+    <li ms-for="(index, el) in @tree | get(0)" ms-click="@openSubTree(el,$event)" 
+        ms-class="@hasSubTree(el)?'parent_li':''">
+
+        <span>
+            <i ms-class="@getChangeIcon(el)"></i>
+            {{@getText(el)}}
+        </span>
+        <div ms-html="@renderSubTree(el)" ms-visible="!!el.open">
 
         </div>
     </li>

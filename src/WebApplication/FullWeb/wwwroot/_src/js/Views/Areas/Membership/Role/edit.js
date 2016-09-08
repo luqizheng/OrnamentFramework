@@ -1,5 +1,6 @@
 
-var roleServices = require("../../../../modules/Memberships/RoleService.js")
+var roleServices = require("../../../../modules/membership/RoleService.js")
+
 function getForm(strEditorId)
 {
     return $("form",$("#"+strEditorId));

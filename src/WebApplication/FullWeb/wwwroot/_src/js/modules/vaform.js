@@ -11,11 +11,17 @@ function build(selector, ajaxFormOptions, fnSuccess) {
             ajaxFormOptions ? $form.ajaxForm(ajaxFormOptions) : $form.ajaxForm();
             $.validator.unobtrusive.parse(selector);
             var $formSetting = $form.data("validator");
+            
             if ($formSetting) {
                 $formSetting.settings.submitHandler = function () {
                     $form.ajaxSubmit(fnSuccess);
                     return false;
                 };
+            }else{
+                $form.submit(function(e){
+                    $form.ajaxSubmit(funSuccess);
+                    e.preventDefault();
+                })
             }
             return $form;
         });
@@ -30,13 +36,21 @@ module.exports = {
         var $ = require("jquery");
         require("jq-val");
         require("jq-val-uo");
+
         var $form = $(selector);
         $.validator.unobtrusive.parse(selector);
         var $formSetting = $form.data("validator");
-        $formSetting.settings.submitHandler = function () {
-            fnSubmit();
-            return false;
-        };
+        if ($formSetting) {
+            $formSetting.settings.submitHandler = function() {
+                fnSubmit();
+                return false;
+            };
+        } else {
+            $form.submit(function(e) {
+                fnSubmit();
+                e.preventDefault();
+            });
+        }
     }
 };
 

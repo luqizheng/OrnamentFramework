@@ -3,14 +3,10 @@
 @using Ornament
 @using Ornament.Identity.Enterprise
 
-@model Ornament.Identity.Enterprise.Org
-@{
 
-    var childOrgs = ((IEnumerable<Org>)ViewData["Orgs"]) ?? new List<Org>();
-}
 
 <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" ms-controller="orgTree">
-    <wbr ms-widget="{is:'tree',tree: @@orgs}" />
+    <div class="tree"><wbr ms-widget="{is:'tree',tree: @@orgs}" /></div>
 </div>
 <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
     @Html.Partial("_input")
