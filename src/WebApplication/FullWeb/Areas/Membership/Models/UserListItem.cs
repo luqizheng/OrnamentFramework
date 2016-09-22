@@ -5,6 +5,13 @@ using FullWeb.Models;
 
 namespace FullWeb.Areas.Membership.Models
 {
+    public class OrgDto
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public string Remark { get; set; }
+        public int? Parent { get; set;}
+    }
     public class UserInfo
     {
         public UserInfo()

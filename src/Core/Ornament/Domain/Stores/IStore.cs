@@ -22,5 +22,7 @@ namespace Ornament.Domain.Stores
         T Get(TId id);
 
         T Load(TId id);
+
+        void SaveChange();
     }
 }

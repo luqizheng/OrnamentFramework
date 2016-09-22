@@ -32,6 +32,7 @@ namespace Ornament.NHibernate
             if (dbSetting == null) throw new ArgumentNullException(nameof(dbSetting));
 
 #endif
+           
             var config = Fluently.Configure();
             config.Database(dbSetting);
             var ins = new NhUowFactory(config);

@@ -18,7 +18,6 @@ namespace Ornament.NHibernate
         {
         }
 
-
         protected ISession Context
         {
             get { return Uow.Session; }
@@ -63,5 +62,11 @@ namespace Ornament.NHibernate
         {
             Context.Update(t);
         }
+
+        public override void SaveChange()
+        {
+            Context.Flush();
+        }
+
     }
 }

@@ -133,6 +133,8 @@ namespace Ornament.Domain.Stores
         public abstract T Merge(T t);
 
         public abstract void Save(T t);
-       
+
+        public abstract void SaveChange();
+      
     }
 }

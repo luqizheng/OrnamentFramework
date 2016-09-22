@@ -10,7 +10,7 @@
                 "${workspaceRoot}\\project.json"
             ],
             "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
+            "problemMatcher": ["$msCompile"]
         }
     ]
 }

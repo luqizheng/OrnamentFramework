@@ -19,7 +19,7 @@
     <div class="form-group">
         <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remark)</label>
         <div class="col-md-10">
-            <textarea asp-for="Remark" ms-dulex="@@org.remark"></textarea>
+            <textarea asp-for="Remark" ms-duplex="@@org.remark"></textarea>
             <span asp-validation-for="Remark"></span>
         </div>
     </div>
@@ -33,6 +33,7 @@
                 @Html.ValidationMessageFor(s => s.Roles)
             </div>*@
     </div>
+    <input type="hidden" asp-for="Id" ms-duplex="@@org.id">
     <div class="form-actions">
         <div class="row">
             <div class="col-md-12">

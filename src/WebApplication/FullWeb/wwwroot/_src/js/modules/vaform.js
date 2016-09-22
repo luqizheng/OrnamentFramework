@@ -1,25 +1,26 @@
-﻿   var $ = require("jquery");
-function build(selector, ajaxFormOptions, fnSuccess) {
+﻿var $ = require("jquery");
+
+
+function build(selector, ajaxFormOptions, fnSubmit) {
     require.ensure(["jq-form", "jq-val", "jq-val-uo"],
         function () {
-         
-            require("jq-form");
             require("jq-val");
             require("jq-val-uo");
+            require("jq-form");
 
             var $form = $(selector);
             ajaxFormOptions ? $form.ajaxForm(ajaxFormOptions) : $form.ajaxForm();
             $.validator.unobtrusive.parse(selector);
             var $formSetting = $form.data("validator");
-            
+
             if ($formSetting) {
                 $formSetting.settings.submitHandler = function () {
-                    $form.ajaxSubmit(fnSuccess);
+                    fnSubmit($form);
                     return false;
                 };
-            }else{
-                $form.submit(function(e){
-                    $form.ajaxSubmit(funSuccess);
+            } else {
+                $form.submit(function (e) {
+                    fnSubmit($form);
                     e.preventDefault();
                 })
             }
@@ -30,27 +31,13 @@ function build(selector, ajaxFormOptions, fnSuccess) {
 
 module.exports = {
     'for': function (selector, fnSuccess) {
-        build(selector, false, fnSuccess);
+        build(selector, false, function ($form) {
+            $form.ajaxSubmit(fnSuccess);
+        }, fnSuccess);
     },
     forWebApi: function (selector, fnSubmit) {
-        var $ = require("jquery");
-        require("jq-val");
-        require("jq-val-uo");
+        build(selector, false, fnSubmit);
 
-        var $form = $(selector);
-        $.validator.unobtrusive.parse(selector);
-        var $formSetting = $form.data("validator");
-        if ($formSetting) {
-            $formSetting.settings.submitHandler = function() {
-                fnSubmit();
-                return false;
-            };
-        } else {
-            $form.submit(function(e) {
-                fnSubmit();
-                e.preventDefault();
-            });
-        }
     }
 };
 

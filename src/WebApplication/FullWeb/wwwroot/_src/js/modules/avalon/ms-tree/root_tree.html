@@ -1,13 +1,11 @@
 ﻿<ul>
     <li ms-for="(index, el) in @tree | get(0)" ms-click="@openSubTree(el,$event)" 
-        ms-class="@hasSubTree(el)?'parent_li':''">
+        ms-class="@hasSubTree(el)?'parent_li':''" style="cursor:pointer">
 
         <span>
             <i ms-class="@getChangeIcon(el)"></i>
             {{@getText(el)}}
         </span>
-        <div ms-html="@renderSubTree(el)" ms-visible="!!el.open">
-
-        </div>
+        <div ms-html="@renderSubTree(el)" ms-visible="!!el.open"></div>
     </li>
-</ul>
+</ul> 

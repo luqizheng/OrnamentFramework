@@ -15,6 +15,7 @@ using Ornament.Identity.Dao.NhImple;
 using Ornament.NHibernate;
 using Ornament.Web.SiteMap;
 using SmartAdmin.Services;
+using Ornament.NHibernate.Uow;
 
 namespace FullWeb
 {
@@ -62,8 +63,8 @@ namespace FullWeb
 
             var uowFactory = services
                 .MsSql2008(option => { option.ConnectionString(Configuration.GetConnectionString("default")); })
-                .AddAssemblyOf(typeof(Startup))
-                .UpdateSchema(true);
+                .AddAssemblyOf(typeof(Startup));
+
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
                 {
@@ -90,9 +91,12 @@ namespace FullWeb
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+            uowFactory.UpdateSchema(true);
 
             //网站自定义配置
             services.Configure<Settings>(Configuration);
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -144,7 +148,8 @@ namespace FullWeb
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
             });
-
+            //更新db结构。
+            app.ApplicationServices.GetService<NhUowFactory>().UpdateSchema(true);
 
             InitMenu();
         }

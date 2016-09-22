@@ -9,17 +9,15 @@
       "frameworkAssemblies": {
         "System": "4.0.0.0"
       }
-    } 
+    }
   },
   "dependencies": {
-  
+    "FluentNHibernate": "2.0.3",
     "Microsoft.AspNetCore.Identity": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-    
     "Ornament": "1.0.0-*",
     "Ornament.Identity": "1.0.0-*",
-    "FluentNHibernate": "2.0.3",
     "Ornament.NHibernate": "1.0.0-*"
   }
-  
+
 }

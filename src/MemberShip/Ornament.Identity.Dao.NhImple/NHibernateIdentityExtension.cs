@@ -40,6 +40,8 @@ namespace Ornament.Identity.Dao.NhImple
             builder.Services.AddScoped(service2, roleStoreType);
         }
 
+        
+
         //private static void BuildMappingBuilder()
 
         //{

@@ -1,4 +1,4 @@
-﻿;var gulp = require("gulp");
+﻿; var gulp = require("gulp");
 var webpack = require("gulp-webpack");
 var webpackConfig = require("./webpack.config.js"),
     minifycss = require("gulp-minify-css"),
@@ -20,8 +20,8 @@ var srcFolder = {
 var distFolder = {
     css: rootPath + "css/",
     js: rootPath + "js/",
-    fonts:rootPath + "fonts/"
-    
+    fonts: rootPath + "fonts/"
+
 };
 
 gulp.task("webpack",
@@ -37,18 +37,17 @@ gulp.task("js:min",
 
         return gulp.src([distFolder.js + "*.js", "!" + distFolder.js + "*.min.js"])
              .pipe(plumber())
-            //.pipe(uglify())
+            .pipe(uglify())
             .pipe(rename({ suffix: ".min" }))
             .pipe(gulp.dest(distFolder.js));
     });
 
-gulp.task("global-js", function ()
-{
+gulp.task("global-js", function () {
     //全局js文件。
     var target = [
           "./wwwroot/lib/smartAdmin/app.config.js",
         "./wwwroot/lib/smartAdmin/app.js"
-      
+
     ];
 
     return gulp.src(
@@ -59,7 +58,7 @@ gulp.task("global-js", function ()
 });
 
 gulp.task("default",
-    ["js:min", "css", "fonts","global-js"],
+    ["js:min", "css", "fonts", "global-js"],
     function (callback) {
 
     });

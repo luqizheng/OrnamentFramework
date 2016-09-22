@@ -13,11 +13,25 @@ namespace Ornament.Identity.Dao.NhImple
         {
         }
 
+        protected IProjection NameProperty
+        {
+            get { return Projections.Property<Org>(s => s.Name); }
+        }
+
+        protected IProjection RemarkProperty
+        {
+            get { return Projections.Property<Org>(s => s.Remark); }
+        }
+
         protected IProjection ParentProperty
         {
             get { return Projections.Property<Org>(s => s.Parent); }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="parentOrg"></param>
+        /// <returns></returns>
         public IEnumerable<Org> GetOrgs(Org parentOrg)
         {
             var criteria = DetachedCriteria.For<Org>()

@@ -4,12 +4,15 @@
 @using Ornament.Identity.Enterprise
 
 
-
-<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" ms-controller="orgTree">
-    <div class="tree"><wbr ms-widget="{is:'tree',tree: @@orgs}" /></div>
+<div ms-controller="orgTree">
+<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" >
+    <div class="tree"><wbr ms-widget="[@@orgConfig, {is:'ms-tree',$id:'orgTree1',tree:@@orgs}]" /></div>
 </div>
 <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
-    @Html.Partial("_input")
+    <ms-panel ms-widget="{$id:'editor'}">
+       <div slot="content">@Html.Partial("_input")</div>     
+    </ms-panel>
+  
 </div>
-
+</div>
 

@@ -1,7 +1,7 @@
 ﻿/// <reference path="../views/areas/membership/user/index.js" />
 var $ = require('jquery');
 var page = require("../../../lib/page/page.js");
-var $content; //加载element;
+var $content; //loading-page-element;
 
 
 
