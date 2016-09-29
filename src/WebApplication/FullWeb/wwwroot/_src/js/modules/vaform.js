@@ -13,18 +13,23 @@ function build(selector, ajaxFormOptions, fnSubmit) {
             $.validator.unobtrusive.parse(selector);
             var $formSetting = $form.data("validator");
 
-            if ($formSetting) {
-                $formSetting.settings.submitHandler = function () {
-                    fnSubmit($form);
-                    return false;
-                };
-            } else {
-                $form.submit(function (e) {
-                    fnSubmit($form);
-                    e.preventDefault();
-                })
+            try {
+                if ($formSetting) {
+                    $formSetting.settings.submitHandler = function () {
+                        fnSubmit($form);
+                        return false;
+                    };
+                } else {
+                    $form.submit(function (e) {
+                        fnSubmit($form);
+                        e.preventDefault();
+                    });
+                }
+                return $form;
             }
-            return $form;
+            catch (e) {
+                console.error(e);
+            }
         });
 }
 

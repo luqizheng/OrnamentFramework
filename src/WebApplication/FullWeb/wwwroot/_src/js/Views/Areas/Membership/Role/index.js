@@ -1,5 +1,4 @@
-
-
+var avalon=require('avalon');
 var roleServices = require("../../../../modules/membership/RoleService.js");
 var editor = null; //roleEditor;
 var $editorDialog; //dialog of editor
@@ -9,11 +8,11 @@ function createList(listId) {
         roles: [],
         edit: function (el) {
             editor.role = el;
-            editor.title="編輯角色"
+            editor.title="編輯角色";
             $editorDialog.modal('show');
         },
         create: function () {
-            editor.title="新增角色"
+            editor.title="新增角色";
             editor.role = { Id: "", Name: "", Remark: "" }
             $editorDialog.modal('show');
         }
@@ -42,12 +41,12 @@ module.exports = {
     load: function (loadContent) {
         createList(listId);
         editor = RoleEditor.create(editorId,function(){
-            $editorDialog.modal('close')
+            $editorDialog.modal('close');
         });
-        avalon.scan(loadContent)
+        avalon.scan(loadContent);
     },
     unload: function () {
         delete avalon.vmodels[listId];
         delete avalon.vmodels[editorId];
     }
-}
+};

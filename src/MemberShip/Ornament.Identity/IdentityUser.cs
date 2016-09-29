@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using Ornament.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-/// <summary>
-/// The Identity namespace.
-/// </summary>
 namespace Ornament.Identity
 {
 
@@ -22,14 +19,20 @@ namespace Ornament.Identity
 
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="IdentityUser{TKey}" />.
+        /// Initializes a new instance of <see>
+        ///         <cref>IdentityUser{TKey}</cref>
+        ///     </see>
+        ///     .
         /// </summary>
         public IdentityUser()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="IdentityUser{TKey}" />.
+        /// Initializes a new instance of <see>
+        ///         <cref>IdentityUser{TKey}</cref>
+        ///     </see>
+        ///     .
         /// </summary>
         /// <param name="userName">The user name.</param>
         public IdentityUser(string loginId) : this()

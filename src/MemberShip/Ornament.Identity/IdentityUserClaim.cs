@@ -47,6 +47,7 @@ namespace Ornament.Identity
         /// <param name="claim"></param>
         public virtual void InitializeFromClaim(Claim claim)
         {
+            if (claim == null) throw new ArgumentNullException(nameof(claim));
             ClaimType = claim.Type;
             ClaimValue = claim.Value;
         }

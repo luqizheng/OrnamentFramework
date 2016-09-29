@@ -1,5 +1,5 @@
 ﻿@model Ornament.Identity.Enterprise.Org
-<form method="POST" ms-controller="orgEditor" class="form-horizontal" ms-submit="@@save" id="orgEditor">
+<form method="POST" ms-controller="orgEditor" class="form-horizontal" id="orgEditor">
     <div class="form-group">
         <label class="col-md-2  control-label">
             @this.Model?.Name
@@ -19,7 +19,7 @@
     <div class="form-group">
         <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remark)</label>
         <div class="col-md-10">
-            <textarea asp-for="Remark" ms-duplex="@@org.remark"></textarea>
+            <textarea asp-for="Remark" ms-duplex="@@org.remark" style="resize:none;"  class="form-control" rows="3"></textarea>
             <span asp-validation-for="Remark"></span>
         </div>
     </div>

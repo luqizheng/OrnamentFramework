@@ -11,11 +11,11 @@ var scriptsLib = __dirname + "/wwwroot/lib/"
 entry = rootPath + 'js/main.js'
 
 module.exports = {
-    entry: entry ,
+    entry: entry,
     devtool: "inline-source-map",
     output: {
         filename: "[name].js",
-        publicPath:"/js/"
+        publicPath: "/js/"
         //path: "wwwroot/scripts" // by gulp so comment this path .
     },
     resolve: {
@@ -27,7 +27,8 @@ module.exports = {
             'monent': scriptsLib + "moment/moment.js",
             "jq-form": scriptsLib + "jquery-form/jquery.form.js",
             "jq-val-uo": scriptsLib + "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-            "jq-val": scriptsLib + "jquery-validation/dist/jquery.validate.js"
+            "jq-val": scriptsLib + "jquery-validation/dist/jquery.validate.js"，
+            "jarvis":scriptsLib+"smartAdmin/smartwidgets/jarvis.widget.js"
         }
     },
     module: {
@@ -50,7 +51,16 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loader: "tslint-loader"
+            },
+
+            {
+                test: /\.js$/,
+                exclude: [/node_modules/,/lib/],
+                loader: 'jshint-loader'
+
             }
+
+
         ]
     },
     plugins: [],
@@ -70,7 +80,7 @@ function getEntry(globPath, pathDir) {
     for (var i = 0; i < files.length; i++) {
 
         entry = files[i]
-       
+
         /*
         dirname = path.dirname(entry).replace(/\//g, "/");;
         extname = path.extname(entry).replace(/\//g, "/");;
@@ -78,11 +88,11 @@ function getEntry(globPath, pathDir) {
         pathname = path.join(dirname, basename).replace(/\//g, "/");;
         pathname = pathDir ? pathname.replace(new RegExp('^' + pathDir), '') : pathname;
         */
-       
+
         var pathname = entry.replace(new RegExp('^' + pathDir), '')
         entries[pathname] = entry;
 
     }
-   
+
     return entries;
 }
