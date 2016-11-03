@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Ornament.Domain.Uow;
 
 namespace Ornament.DbConnection.Uow
@@ -8,7 +7,7 @@ namespace Ornament.DbConnection.Uow
     {
         private readonly IDbConnection _dbConnection;
 
-        public DbUowFactory(System.Data.IDbConnection dbConnection)
+        public DbUowFactory(IDbConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }

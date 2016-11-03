@@ -5,24 +5,27 @@ namespace Ornament.DbConnection.Uow
 {
     public class DbUow : IUnitOfWork
     {
-        private readonly IDbConnection _connection;
         private readonly bool _isTranscation;
-        private IDbTransaction _dbTransaction;
-        private bool _selfClose = false;
+        private bool _selfClose;
+
         public DbUow(IDbConnection connection, bool isTranscation)
         {
-            _connection = connection;
+            Connection = connection;
             _isTranscation = isTranscation;
         }
 
         public IsolationLevel? IsolationLevel { get; set; }
 
-        public bool HadBegun => _connection.State == ConnectionState.Open;
+        public IDbConnection Connection { get; }
+
+        public IDbTransaction DbTransaction { get; private set; }
+
+        public bool HadBegun => Connection.State == ConnectionState.Open;
 
         public void Dispose()
         {
-            if (_connection.State != ConnectionState.Closed && _selfClose)
-                _connection.Close();
+            if ((Connection.State != ConnectionState.Closed) && _selfClose)
+                Connection.Close();
         }
 
         public void Begin()
@@ -30,31 +33,27 @@ namespace Ornament.DbConnection.Uow
             if (!HadBegun)
             {
                 _selfClose = true;
-                _connection.Open();
+                Connection.Open();
                 if (!_isTranscation) return;
-                _dbTransaction = IsolationLevel != null
-                    ? _connection.BeginTransaction(IsolationLevel.Value)
-                    : _connection.BeginTransaction();
+                DbTransaction = IsolationLevel != null
+                    ? Connection.BeginTransaction(IsolationLevel.Value)
+                    : Connection.BeginTransaction();
             }
         }
 
-        public IDbConnection Connection => _connection;
-
-        public IDbTransaction DbTransaction => _dbTransaction;
-
         public void Rollback()
         {
-            _dbTransaction?.Rollback();
+            DbTransaction?.Rollback();
         }
 
         public void Commit()
         {
-            _dbTransaction?.Commit();
+            DbTransaction?.Commit();
         }
 
         public void Close()
         {
-            _connection.Close();
+            Connection.Close();
         }
     }
 }

@@ -2510,20 +2510,6 @@
           "net461/Ornament.Identity.Dao.NhImple.dll": {}
         }
       },
-      "Ornament.Identity.Enterprise/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.6.1",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "Ornament.Identity": "1.0.0"
-        },
-        "compile": {
-          "net461/Ornament.Identity.Enterprise.dll": {}
-        },
-        "runtime": {
-          "net461/Ornament.Identity.Enterprise.dll": {}
-        }
-      },
       "Ornament.Identity.Enterprise.Dao.NHImple/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -2534,7 +2520,6 @@
           "Ornament": "1.0.0",
           "Ornament.Identity": "1.0.0",
           "Ornament.Identity.Dao.NhImple": "1.0.0",
-          "Ornament.Identity.Enterprise": "1.0.0",
           "Ornament.Identity.Enterprise.Extentions": "1.0.0",
           "Ornament.NHibernate": "1.0.0"
         },
@@ -7400,11 +7385,6 @@
       "type": "project",
       "path": "../../MemberShip/Ornament.Identity.Dao.NhImple/project.json",
       "msbuildProject": "../../MemberShip/Ornament.Identity.Dao.NhImple/Ornament.Identity.Dao.NhImple.xproj"
-    },
-    "Ornament.Identity.Enterprise/1.0.0": {
-      "type": "project",
-      "path": "../../MemberShip/Ornament.Identity.Enterprise.Extentions/project.json",
-      "msbuildProject": "../../MemberShip/Ornament.Identity.Enterprise.Extentions/Ornament.Identity.Enterprise.xproj"
     },
     "Ornament.Identity.Enterprise.Dao.NHImple/1.0.0": {
       "type": "project",
