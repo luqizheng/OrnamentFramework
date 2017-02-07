@@ -24,10 +24,10 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Ornament": "1.0.0-*",
     "Ornament.Identity": "1.0.0-*",
-    "Ornament.Identity.Dao.NhImple": "1.0.0-*",
-    "Ornament.Identity.Enterprise.Dao.NHImple": "1.0.0-*",
+    //"Ornament.Identity.Dao.NhImple": "1.0.0-*",
+    //"Ornament.Identity.Enterprise.Dao.NHImple": "1.0.0-*",
     "Ornament.Identity.Enterprise.Extentions": "1.0.0-*", 
-    "Ornament.NHibernate": "1.0.0-*",
+    //"Ornament.NHibernate": "1.0.0-*",
     "Ornament.Web": "1.0.0-*"
   },
 
@@ -37,13 +37,13 @@
   },
 
   "frameworks": {
-    "net461": { "imports": "dnxcore50" }
-    //"netcoreapp1.0": {
-    //  "imports": [
-    //    "dotnet5.6",
-    //    "portable-net45+win8"
-    //  ]
-    //}
+    //"net461": { "imports": "dnxcore50" }
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    }
 
   },
 

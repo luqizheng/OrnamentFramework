@@ -1,0 +1,47 @@
+﻿@model Ornament.Identity.Enterprise.Org
+<form method="POST" ms-controller="orgEditor" class="form-horizontal" id="orgEditor">
+    <div class="form-group">
+        <label class="col-md-2  control-label">
+            @this.Model?.Name
+        </label>
+        <div class="col-md-10">
+            <p class="form-control-static" ms-text="@@ParentName"></p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Name)</label>
+        <div class="col-md-10">
+            <input type="text" asp-for="Name" ms-duplex="@@org.name" class="form-control"/>
+            <span asp-validation-for="Name"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Remark)</label>
+        <div class="col-md-10">
+            <textarea asp-for="Remark" ms-duplex="@@org.remark" style="resize:none;"  class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Remark"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        @*<label class="col-md-2  control-label">@Html.DisplayNameFor(s => s.Roles)</label>
+            <div class="col-md-10" id="roleList">
+                @Html.EditorFor(s => s.Roles, new Dictionary<string, object>
+                                  {
+                                      {"ms-duplex-string", "Roles"}
+                                  })
+                @Html.ValidationMessageFor(s => s.Roles)
+            </div>*@
+    </div>
+    <input type="hidden" asp-for="Id" ms-duplex="@@org.id">
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-save"></i>
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

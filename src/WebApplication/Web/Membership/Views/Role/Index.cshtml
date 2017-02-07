@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ApplicationRole>
+
+<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+    @Html.Partial("_pageCrumb")
+</div>
+
+<div class="col-sm-12">
+    <div class="well" ms-controller="roleIndex">
+        <form class="form-inline" role="form" style="margin-bottom: 15px">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" ms-click="@@create"><i class="fa fa-user-plus"></i></button>
+                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Remark)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ms-for="el in @@roles">
+                    <td>
+                        <input type="checkbox" value="{{@@el.Id}}" />
+                        <a href="javasript:;" ms-click="@@edit(el)">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                    <td>
+                        {{el.name}}
+                    </td>
+                    <td>
+                        {{el.remark}}
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="role-editor-dialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModal-label" aria-hidden="true">
+    <div class="modal-dialog" ms-controller="roleEditor">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModal-label">{{@@title}}</h4>
+            </div>
+            <div class="modal-body" id="roleEditor">
+                @Html.Partial("_edit")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ms-click="@@save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

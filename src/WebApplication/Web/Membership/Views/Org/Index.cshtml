@@ -1,0 +1,28 @@
+﻿@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Ornament
+@using Ornament.Identity.Enterprise
+
+
+<div ms-controller="orgTree">
+<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6" >
+    <ms-panel ms-widget="{$id:'abc'}">
+          <div slot="content">
+            <div class="tree">
+                <wbr ms-widget="[@@orgConfig, {is:'ms-tree',$id:'orgTree1',tree:@@orgs}]" />
+            </div>
+
+        </div>     
+            <h2 slot="title">组织结构</h2>
+        </ms-panel>
+
+</div>
+<div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+    <ms-panel ms-widget="{$id:'editor'}">
+       <div slot="content">@Html.Partial("_input")</div>     
+       <h2 slot="title">编辑</h2>
+    </ms-panel> 
+</div>
+</div>
+
+

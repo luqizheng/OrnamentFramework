@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ApplicationRole
+@{
+}
+<form role="form" method="post" class="form-horizontal" 
+      action="/api/roles">
+    @Html.HiddenFor(s => s.Id)
+    <div class="form-group">
+        <label class="col-md-2 control-label" asp-for="Name"></label><div class="col-md-10">
+            <input type="text" asp-for="Name" ms-duplex="@@role.name">
+            <div asp-validation-for="Name" class="text-danger"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" asp-for="Remark"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Remark" ms-duplex="@@role.remark" style="resize:no"></textarea>
+            <div asp-validation-for="Remark" class="text-danger"></div>
+        </div>
+    </div>
+</form>

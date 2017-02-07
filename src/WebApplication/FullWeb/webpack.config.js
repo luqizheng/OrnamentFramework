@@ -27,7 +27,7 @@ module.exports = {
             'monent': scriptsLib + "moment/moment.js",
             "jq-form": scriptsLib + "jquery-form/jquery.form.js",
             "jq-val-uo": scriptsLib + "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-            "jq-val": scriptsLib + "jquery-validation/dist/jquery.validate.js"，
+            "jq-val": scriptsLib + "jquery-validation/dist/jquery.validate.js",
             "jarvis":scriptsLib+"smartAdmin/smartwidgets/jarvis.widget.js"
         }
     },

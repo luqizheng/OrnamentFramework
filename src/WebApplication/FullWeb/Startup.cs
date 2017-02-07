@@ -15,7 +15,7 @@ using Ornament.Identity.Dao.NhImple;
 using Ornament.NHibernate;
 using Ornament.Web.SiteMap;
 using SmartAdmin.Services;
-using Ornament.NHibernate.Uow;
+using Ornament.Domain.Uow;
 
 namespace FullWeb
 {
