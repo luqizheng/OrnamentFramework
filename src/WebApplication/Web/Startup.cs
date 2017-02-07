@@ -2,15 +2,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ornament;
-using WebApplication.Data;
-using WebApplication.Models;
 using WebApplication.Services;
 
 namespace WebApplication
@@ -36,24 +32,23 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             //add options from appsettings.
             services.AddOptions();
             //设置多语言区域
             services.AddLocalization();
-           
+
             services
                 .AddMvc()
                 .AddViewLocalization(options => { options.ResourcesPath = "Resources"; })
                 .AddDataAnnotationsLocalization();
 
             var supportedCultures = new List<CultureInfo>
-                    {
-                        new CultureInfo("zh-CN"),
-                        new CultureInfo("zh-HK"),
-                        new CultureInfo("zh-TW"),
-                        new CultureInfo("en-US")
-                    };
+            {
+                new CultureInfo("zh-CN"),
+                new CultureInfo("zh-HK"),
+                new CultureInfo("zh-TW"),
+                new CultureInfo("en-US")
+            };
             services.AddSingleton<IList<CultureInfo>>(supportedCultures);
             services.Configure<RequestLocalizationOptions>(
                 options =>
@@ -64,21 +59,18 @@ namespace WebApplication
                 });
 
             //db 设置
-            var uowFactory = services  
-             .MsSql2008(option =>
-                {
-                    option.ConnectionString(Configuration.GetConnectionString("default"));
-                })
-             .AddAssemblyOf(typeof(Startup));
+            var uowFactory = services
+                .MsSql2008(option => { option.ConnectionString(Configuration.GetConnectionString("default")); })
+                .AddAssemblyOf(typeof(Startup));
 
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            //services.AddIdentity<ApplicationUser, ApplicationRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
 
             services.AddMvc();
 
@@ -96,7 +88,8 @@ namespace WebApplication
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+
+
                 app.UseBrowserLink();
             }
             else

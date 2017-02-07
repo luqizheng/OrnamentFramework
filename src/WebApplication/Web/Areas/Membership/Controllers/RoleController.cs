@@ -1,11 +1,12 @@
 ﻿using System.Linq;
-using FullWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Ornament.Identity;
+using WebApplication.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace FullWeb.Areas.Membership.Controllers
+namespace WebApplication.Areas.Membership.Controllers
 {
     [Area("Membership")]
     public class RoleController : Controller

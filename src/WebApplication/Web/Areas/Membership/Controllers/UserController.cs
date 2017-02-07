@@ -1,16 +1,15 @@
-﻿using FullWeb.Models;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Linq.Expressions;
-using FullWeb.Areas.Membership.Models;
-using Microsoft.AspNetCore.Authorization;
-using Ornament.Web.Uow;
 using Ornament.Web;
+using Ornament.Web.Uow;
+using WebApplication.Areas.Membership.Models;
+using WebApplication.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace FullWeb.Areas.Membership.Controllers
+namespace WebApplication.Areas.Membership.Controllers
 {
     [Area("Membership")]
     [Authorize]
@@ -22,18 +21,18 @@ namespace FullWeb.Areas.Membership.Controllers
         {
             _userManager = userManager;
         }
+
         // GET: /<controller>/
         public IActionResult Index(int? pageIndex, int? pageSize)
         {
-
             pageIndex = pageIndex ?? 0;
             pageSize = pageSize ?? 20;
 
             var result =
                 from user in _userManager.Users.Skip(pageIndex.Value * pageSize.Value).Take(pageSize.Value)
                 select UserListItem.CreateFrom<ApplicationUser, string, ApplicationRole>(user);
-            this.ViewBag.PageIndex = pageIndex;
-            this.ViewBag.PageSize = pageSize;
+            ViewBag.PageIndex = pageIndex;
+            ViewBag.PageSize = pageSize;
 
 
             return View(result);
@@ -41,25 +40,27 @@ namespace FullWeb.Areas.Membership.Controllers
 
         public IActionResult Edit(string id)
         {
-            ApplicationUser editUser = (from user in _userManager.Users where user.Id == id select user).FirstOrDefault();
+            var editUser = (from user in _userManager.Users where user.Id == id select user).FirstOrDefault();
             return View(editUser);
         }
+
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="userEdit"></param>
         /// <returns></returns>
-        [HttpPost, UnitOfWork]
+        [HttpPost]
+        [UnitOfWork]
         public IActionResult Edit(ApplicationUser userEdit)
         {
-            var isAjax = this.Request.IsAjaxRequest();
+            var isAjax = Request.IsAjaxRequest();
             var isSuccess = false;
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ApplicationUser userEntity = (from user in _userManager.Users where user.Id.Equals(userEdit.Id) select user).FirstOrDefault();
+                var userEntity =
+                    (from user in _userManager.Users where user.Id.Equals(userEdit.Id) select user).FirstOrDefault();
 
 
-                userEntity.LoginId = userEdit.LoginId;
+                userEntity.UserName = userEdit.UserName;
                 userEntity.Name = userEdit.Name;
                 userEntity.LockoutEnabled = userEdit.LockoutEnabled;
                 userEntity.PhoneNumber = userEdit.PhoneNumber;
@@ -71,8 +72,8 @@ namespace FullWeb.Areas.Membership.Controllers
 
                 //userEdit.AccessFailedCount = userEdit.AccessFailedCount;
                 //userEdit.LockoutEnd = userEdit.LockoutEnd;
-               
-                  isSuccess = true;
+
+                isSuccess = true;
             }
             if (!isAjax)
             {
@@ -80,13 +81,7 @@ namespace FullWeb.Areas.Membership.Controllers
                     return View("index");
                 return View(userEdit);
             }
-            else
-            {
-
-                return Json(this.ModelState.ToJsonResult(isSuccess));
-            }
+            return Json(ModelState.ToJsonResult(isSuccess));
         }
     }
-
-
 }

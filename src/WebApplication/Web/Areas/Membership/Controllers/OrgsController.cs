@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using FullWeb.Areas.Membership.Models;
 using Microsoft.AspNetCore.Mvc;
-using Ornament.Identity.Enterprise;
-using Ornament.Identity.Enterprise.Stores;
+using Ornament.Identity;
+using Ornament.Identity.Stores;
 using Ornament.Web.Uow;
+using WebApplication.Areas.Membership.Models;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace FullWeb.Areas.Membership.Controllers
+namespace WebApplication.Areas.Membership.Controllers
 {
     [Route("api/[controller]")]
     public class OrgsController : Controller
@@ -24,15 +24,17 @@ namespace FullWeb.Areas.Membership.Controllers
         [HttpGet]
         public IEnumerable<Org> Get(int? parentId)
         {
-            var parentorg = parentId != null ? _store.Get(parentId.Value) : null;
-            return _store.GetOrgs(parentorg);
+            //var parentorg = parentId != null ? _store.Get(parentId.Value) : null;
+            //return _store.GetOrgs(parentorg);
+            return null;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public Org Get(int id)
         {
-            return _store.Get(id);
+            //return _store.Get(id);
+            return null;
 
         }
 
@@ -43,25 +45,25 @@ namespace FullWeb.Areas.Membership.Controllers
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            var org = value.Id != null
-                ? _store.Get(value.Id.Value)
-                : new Org();
+            //var org = value.Id != null
+            //    ? _store.Get(value.Id.Value)
+            //    : new Org();
 
-            org.Name = value.Name;
-            org.Remark = value.Remark;
+            //org.Name = value.Name;
+            //org.Remark = value.Remark;
 
-            if (value.Parent != null)
-                org.Parent = _store.Load(value.Parent.Value);
+            //if (value.Parent != null)
+            //    org.Parent = _store.Load(value.Parent.Value);
 
-            _store.SaveOrUpdate(org);
-            return org;
+            //_store.SaveOrUpdate(org);
+            return null;
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _store.Delete(_store.Get(id));
+            //_store.Delete(_store.Get(id));
         }
     }
 }

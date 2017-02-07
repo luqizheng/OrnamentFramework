@@ -1,9 +1,10 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model IEnumerable<FullWeb.Areas.Membership.Models.UserListItem>
+@model IEnumerable<WebApplication.Membership.Models.UserListItem>
 @using Ornament.Web.SiteMap
 @using FullWeb.Helpers
+@using WebApplication.Membership.Models
 @{
     var nav = new Queue<Nav>(Html.GetBreadcrumb(3));
 }
