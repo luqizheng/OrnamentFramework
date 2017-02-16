@@ -1,5 +1,5 @@
 /*!
- * SmartAdmin v1.8.1
+ * SmartAdmin v1.8.2 ()
  * Copyright 2011-2016 
  */
 /*---------------------------------------------------
@@ -20,7 +20,7 @@
 /* the plus & minus icons */
 /* margin top */
 /********************************************************************* STYLE 1 *************************************************************/
-: {
+.smart-style-1 a {
   transition: color 0.1s linear 0s, background-color 0.1s linear 0s !important;
 }
 .smart-style-1 body.container {
@@ -248,7 +248,7 @@
   border-radius: 4px;
   margin: 3px 0;
 }
-:side,
+.smart-style-1 aside,
 .smart-style-1 .superbox-show,
 .smart-style-1 .page-footer {
   background: #1b1e24;
@@ -2538,6 +2538,10 @@ body.smart-style-4 {
   background: rgba(0, 0, 0, 0.5);
 }
 /* end jarvis widget */
+/* dashboard social wall fix*/
+.smart-style-5 .status .links {
+  background: rgba(255, 255, 255, 0.1);
+}
 /* buttons */
 .smart-style-5 .btn-primary,
 .smart-style-5 .btn-primary.active,

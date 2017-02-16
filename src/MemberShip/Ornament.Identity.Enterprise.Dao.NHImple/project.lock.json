@@ -438,18 +438,6 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "NHibernate/4.0.0.4000": {
-        "type": "package",
-        "dependencies": {
-          "Iesi.Collections": "[4.0.0, 5.0.0)"
-        },
-        "compile": {
-          "lib/net40/NHibernate.dll": {}
-        },
-        "runtime": {
-          "lib/net40/NHibernate.dll": {}
-        }
-      },
       "Ornament/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -1441,30 +1429,6 @@
         "NETStandard.Library.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt"
-      ]
-    },
-    "NHibernate/4.0.0.4000": {
-      "sha512": "zHwxTNHQM+ilc6/vKuFYjmRms+Iw6wCL0LsOiR9Imu+Z1sK0MO0gmSlaeR6gTy4cUNjqPZrU8ym5KPBwTp4Ebg==",
-      "type": "package",
-      "path": "NHibernate/4.0.0.4000",
-      "files": [
-        "ConfigurationTemplates/FireBird.cfg.xml",
-        "ConfigurationTemplates/MSSQL.cfg.xml",
-        "ConfigurationTemplates/MySql.cfg.xml",
-        "ConfigurationTemplates/Oracle.cfg.xml",
-        "ConfigurationTemplates/PostgreSQL.cfg.xml",
-        "ConfigurationTemplates/SQLite.cfg.xml",
-        "ConfigurationTemplates/SybaseASE.cfg.xml",
-        "ConfigurationTemplates/SybaseSQLAnywhere.cfg.xml",
-        "NHibernate.4.0.0.4000.nupkg.sha512",
-        "NHibernate.license.txt",
-        "NHibernate.nuspec",
-        "NHibernate.readme.html",
-        "NHibernate.releasenotes.txt",
-        "lib/net40/NHibernate.dll",
-        "lib/net40/NHibernate.xml",
-        "nhibernate-configuration.xsd",
-        "nhibernate-mapping.xsd"
       ]
     },
     "Ornament/1.0.2": {

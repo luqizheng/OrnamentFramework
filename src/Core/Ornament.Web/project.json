@@ -15,13 +15,6 @@
         "NETStandard.Library": "1.6.1",
         "System.ComponentModel.Annotations": "4.3.0"
       }
-    },
-    "net461": {
-      "imports": [ "dnxcore50","net451" ],
-      "frameworkAssemblies": {
-        "System.ComponentModel.DataAnnotations": "4.0.0.0"
-      
-      }
     }
-  }
+   }
 }

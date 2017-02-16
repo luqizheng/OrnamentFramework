@@ -15,8 +15,8 @@ module.exports = {
     devtool: "inline-source-map",
     output: {
         filename: "[name].js",
-        publicPath: "/js/"
-        //path: "wwwroot/scripts" // by gulp so comment this path .
+        publicPath: "/js/",
+        //path: "wwwroot/js" // by gulp so comment this path .
     },
     resolve: {
         extensions: ["", ".ts", ".js"],
@@ -28,7 +28,7 @@ module.exports = {
             "jq-form": scriptsLib + "jquery-form/jquery.form.js",
             "jq-val-uo": scriptsLib + "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
             "jq-val": scriptsLib + "jquery-validation/dist/jquery.validate.js",
-            "jarvis":scriptsLib+"smartAdmin/smartwidgets/jarvis.widget.js"
+            "jarvis": scriptsLib + "smartAdmin/smartwidgets/jarvis.widget.js"
         }
     },
     module: {
@@ -46,22 +46,23 @@ module.exports = {
                 test: /\.less$/,
                 loader: "style!css!less"
             }
-        ],
-        preLoaders: [
-            {
-                test: /\.ts$/,
-                loader: "tslint-loader"
-            },
-
-            {
-                test: /\.js$/,
-                exclude: [/node_modules/,/lib/],
-                loader: 'jshint-loader'
-
-            }
-
-
         ]
+        //,
+        //preLoaders: [
+        //    {
+        //        test: /\.ts$/,
+        //        loader: "tslint-loader"
+        //    },
+
+        //    {
+        //        test: /\.js$/,
+        //        exclude: [/node_modules/,/lib/],
+        //        loader: 'jshint-loader'
+
+        //    }
+
+
+        //]
     },
     plugins: [],
     externals: {

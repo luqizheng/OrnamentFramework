@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Ornament;
+using WebApplication.Data;
+using WebApplication.Models;
 using WebApplication.Services;
 
 namespace WebApplication
@@ -58,25 +61,25 @@ namespace WebApplication
                     options.SupportedUICultures = supportedCultures;
                 });
 
-            //db 设置
-            var uowFactory = services
-                .MsSql2008(option => { option.ConnectionString(Configuration.GetConnectionString("default")); })
-                .AddAssemblyOf(typeof(Startup));
-
             // Add framework services.
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-
-            //services.AddIdentity<ApplicationUser, ApplicationRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            //网站自定义配置
+            services.Configure<ApplicationSettings>((setting) =>
+            {
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,9 +108,13 @@ namespace WebApplication
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: "areaRoute",
+       template: "{area:exists}/{controller=Home}/{action=Index}");
+
+
                 routes.MapRoute(
-                    "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                        "default",
+                        "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

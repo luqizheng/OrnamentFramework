@@ -1,0 +1,20 @@
+﻿@*
+    当使用前端路由的时候，路由路径和后端路由一样的时候，请使用这个layout
+*@
+@{
+    Layout = "_Layout";
+}
+@section header{
+       @RenderSection("header", false)
+}
+<div id="content">
+    @RenderBody()
+</div>
+
+@section scripts{
+    @RenderSection("scripts", false)
+}
+@section topright{
+    @(IsSectionDefined("topright") ? RenderSection("topright", false) : Html.Partial("_TopRight"))
+}
+

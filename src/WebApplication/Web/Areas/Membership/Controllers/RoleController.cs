@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using Ornament.Identity;
+
 using WebApplication.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,9 +12,9 @@ namespace WebApplication.Areas.Membership.Controllers
     [Area("Membership")]
     public class RoleController : Controller
     {
-        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public RoleController(RoleManager<ApplicationRole> roleManager)
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
         }
@@ -24,7 +25,7 @@ namespace WebApplication.Areas.Membership.Controllers
             return View();
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             var role = from
                 item in _roleManager.Roles

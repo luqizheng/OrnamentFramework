@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Ornament.Web;
 using Ornament.Web.Uow;
@@ -30,7 +31,7 @@ namespace WebApplication.Areas.Membership.Controllers
 
             var result =
                 from user in _userManager.Users.Skip(pageIndex.Value * pageSize.Value).Take(pageSize.Value)
-                select UserListItem.CreateFrom<ApplicationUser, string, ApplicationRole>(user);
+                select UserListItem.CreateFrom<ApplicationUser, string, IdentityRole>(user);
             ViewBag.PageIndex = pageIndex;
             ViewBag.PageSize = pageSize;
 
@@ -61,7 +62,7 @@ namespace WebApplication.Areas.Membership.Controllers
 
 
                 userEntity.UserName = userEdit.UserName;
-                userEntity.Name = userEdit.Name;
+                userEntity.NormalizedUserName = userEdit.NormalizedUserName;
                 userEntity.LockoutEnabled = userEdit.LockoutEnabled;
                 userEntity.PhoneNumber = userEdit.PhoneNumber;
 

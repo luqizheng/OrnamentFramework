@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FullWeb.Resources.Views.Account {
+namespace WebApplication.Resources.Views.Account {
     using System;
     using System.Reflection;
     

@@ -11,6 +11,7 @@
     "page": "1.7.1",
     "jquery-validation": "1.15.0",
     "jquery-form": "3.46.0"
+   
   },
   "resolutions": {
     "jquery": "2.2.3"

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Ornament.Identity;
 using WebApplication.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace WebApplication.Areas.Membership.Models
 {
@@ -31,31 +32,31 @@ namespace WebApplication.Areas.Membership.Models
 
         public string Id { get; set; }
 
-        [Display(Name = "Email", ResourceType = typeof(Resource))]
+        //[Display(Name = "Email", ResourceType = typeof(Resource))]
         [DataType(DataType.EmailAddress)]
         [Required]
         public string Email { get; set; }
 
-        [Display(Name = "PhoneNumber", ResourceType = typeof(Resource))]
+        //[Display(Name = "PhoneNumber", ResourceType = typeof(Resource))]
         public string PhoneNumber { get; set; }
 
-        [Display(Name = "Name", ResourceType = typeof(Resource))]
+        //[Display(Name = "Name", ResourceType = typeof(Resource))]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "LoginId", ResourceType = typeof(Resource))]
+        //[Display(Name = "LoginId", ResourceType = typeof(Resource))]
         public string LoginId { get; set; }
 
         public bool LockoutEnabled { get; set; }
 
         public void SetTo<TUser, TKey, TRole>(TUser user)
-            where TUser : IdentityUser<TKey, TRole>
+            where TUser : IdentityUser<TKey>
             where TKey : IEquatable<TKey>
         {
             if (!user.Id.Equals(Id))
                 throw new ArgumentOutOfRangeException("user", "user is not same as user view model.");
             user.UserName = LoginId;
-            user.Name = Name;
+            user.NormalizedUserName = Name;
             user.LockoutEnabled = LockoutEnabled;
             user.PhoneNumber = PhoneNumber;
             user.Email = Email;
@@ -65,7 +66,7 @@ namespace WebApplication.Areas.Membership.Models
     public class UserListItem : UserInfo
     {
         public static UserListItem CreateFrom<TUser, TKey, TRole>(TUser user)
-            where TUser : IdentityUser<TKey, TRole>
+            where TUser : IdentityUser<TKey>
             where TKey : IEquatable<TKey>
         {
             var result = new UserListItem();
@@ -73,7 +74,7 @@ namespace WebApplication.Areas.Membership.Models
             result.PhoneNumber = user.PhoneNumber;
             result.Id = user.Id.ToString();
             result.LockoutEnabled = user.LockoutEnabled;
-            result.Name = user.Name;
+            result.Name = user.NormalizedUserName;
 
             result.LoginId = user.UserName;
 

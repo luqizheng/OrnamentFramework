@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FullWeb.Resources.Views.Sahred {
+namespace WebApplication.Resources.Views.Sahred {
     using System;
     using System.Reflection;
     

@@ -8,7 +8,7 @@ var webpackConfig = require("./webpack.config.js"),
      plumber = require('gulp-plumber'),
     rename = require("gulp-rename");
 
-var md5 = require("gulp-md5-plus-always");
+
 
 var embed = require("gulp-image-embed");
 var rootPath = "./wwwroot/";

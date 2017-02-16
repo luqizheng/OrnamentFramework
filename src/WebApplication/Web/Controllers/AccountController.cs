@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using WebApplication.Controllers;
 using WebApplication.Models;
 using WebApplication.Models.AccountViewModels;
 using WebApplication.Services;
 
-namespace Web.Controllers
+namespace WebApplication.Controllers
 {
-    [Authorize(Roles = "admin,user")]
+    [Authorize( Roles = "admin,user")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
