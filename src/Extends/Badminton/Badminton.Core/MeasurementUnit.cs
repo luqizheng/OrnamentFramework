@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Ornament.Validations;
+
 using Qi.Domain;
 
 namespace Badminton
@@ -48,7 +48,7 @@ namespace Badminton
         /// <summary>
         /// 
         /// </summary>
-        [DisplayName("小数进位整数"), UIHint("Int32"), JqStep(1), Range(1, 100)]
+        [DisplayName("小数进位整数"), UIHint("Int32"), Range(1, 100)]
         public virtual int Adecimal
         {
             get { return _adecimal; }

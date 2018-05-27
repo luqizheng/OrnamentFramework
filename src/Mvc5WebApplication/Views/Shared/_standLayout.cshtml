@@ -75,7 +75,8 @@
         </div>
     </div>
     @Scripts.Render("~/Scripts/avalon")
-    <script type="text/javascript"> avalon.config({ loader: false }) </script>
+    <script src="~/Scripts/libs/jquery-2.1.3.js"></script>
+    <script type="text/javascript">avalon.config({ loader: false })</script>
     @RenderSection("scripts", false)
 </body>
 

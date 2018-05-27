@@ -8,6 +8,7 @@ using System.Xml;
 using FluentNHibernate.Cfg;
 using log4net;
 using NHibernate.Tool.hbm2ddl;
+using Ornament.Properties;
 using Qi;
 using Qi.NHibernateExtender;
 using Configuration = NHibernate.Cfg.Configuration;
@@ -23,7 +24,8 @@ namespace Ornament.Configurations
 
         private NHConfig()
         {
-            BuildHBMFile = true;
+            
+               BuildHBMFile = true;
 
             string[] configFiles = ConfigurationManager.AppSettings["nhConfig"].Split(';');
 

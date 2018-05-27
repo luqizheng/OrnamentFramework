@@ -1,12 +1,15 @@
-﻿@model IEnumerable<Badminton.Gymnasium>
+﻿@using Ornament
+
+@model IEnumerable<Badminton.Gymnasium>
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 
 <p>
-    @Html.ActionLink("新增", "Create")
+    <a href="#@Url.Action("Create")">新增</a>
+  
 </p>
 <table class="table table-bordered table-condensed table-striped">
     <tr>
@@ -40,12 +43,12 @@
                 @Html.DisplayFor(modelItem => item.Remarks)
             </td>
             <td>
-            @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("删除", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 </table>
 <form id="navbar">
-    @Html.Partial("NavPagination", ViewData["Nav"])
+    @*@Html.Partial("NavPagination", ViewData["Nav"])*@
 </form>

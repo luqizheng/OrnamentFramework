@@ -44,7 +44,7 @@ namespace Badminton
         /// </summary>
         /// <param name="memberShipFactory"></param>
         /// <returns></returns>
-        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+        protected override IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipFactory)
         {
             return new List<User>
                 {

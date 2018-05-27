@@ -1,9 +1,10 @@
-﻿@using Resources
+﻿@using Ornament.Properties
+@using Ornament
 @model Badminton.Web.Plugin.Areas.Badminton.Models.GymnasiumViewModel
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 
 
@@ -30,12 +31,12 @@
 
                         @Html.EditorFor(model => model.Gymnasium.Remarks)
                         <div class="form-actions">
-                            <button class="btn btn-primary">@Basic.Edit</button>
-                            <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                            <button class="btn btn-primary">@Resources.Edit</button>
+                            <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane" id="tab2">                   
+                <div class="tab-pane" id="tab2">
                     <a href="#">新增</a>
                     <div id="divEdit">
                         <table class="table table-bordered table-condensed table-striped">

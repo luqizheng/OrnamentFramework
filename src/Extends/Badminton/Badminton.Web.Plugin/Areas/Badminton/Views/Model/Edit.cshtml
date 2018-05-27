@@ -1,59 +1,61 @@
-﻿@using Resources
+﻿@using Ornament.Properties
+@using Ornament
 @model Badminton.Consumableses.Model
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/Backend/_appLayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
-<div class="widget">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <button class="btn btn-primary">@Basic.Save</button>
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+@using (Html.BeginForm())
+{
+    <div class="widget">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <button class="btn btn-primary">@Resources.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
+            </div>
         </div>
-    </div>
 
-    <div class="well form-horizontal">
+        <div class="well form-horizontal">
 
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)    
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-        
-            @Html.EditorFor(model => model.Prefix)        
 
-        
-            @Html.EditorFor(model => model.Suffix)        
+            @Html.EditorFor(model => model.Prefix)
 
-        
-            @Html.EditorFor(model => model.Name)        
 
-        @Html.HiddenFor(model => model.Id)
+            @Html.EditorFor(model => model.Suffix)
 
-        <div class="form-actions">
-           <button class="btn btn-primary">@Basic.Save</button>
-		     <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+
+            @Html.EditorFor(model => model.Name)
+
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-actions">
+                <button class="btn btn-primary">@Resources.Save</button>
+                <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
+            </div>
         </div>
-    </div>
-}
+        }
 
 
-@* 
- 如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
- seajs.use必须是全小写
- please create a js in /Scripts/Module/Views/{Area}/{Controller}/Edit.js
-*@
-@*
+        @*
+            如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
+            seajs.use必须是全小写
+            please create a js in /Scripts/Module/Views/{Area}/{Controller}/Edit.js
+        *@
+        @*
 
-@section Scripts {
-    <script type="text/javascript">
-		seajs.use(["{area}/{controller}/Edit.js"],function(init){
-			inti();
-		});
-	</script>
-}
+            @section Scripts {
+                <script type="text/javascript">
+                    seajs.use(["{area}/{controller}/Edit.js"],function(init){
+                        inti();
+                    });
+                </script>
+            }
 
-*@
+        *@

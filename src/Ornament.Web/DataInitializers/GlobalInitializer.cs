@@ -56,7 +56,7 @@ namespace Ornament.Web.DataInitializers
             {
                 if (init.IsNeedInitialize)
                 {
-                    init.CreateData();
+                  //  init.CreateData();
                 }
             }
         }

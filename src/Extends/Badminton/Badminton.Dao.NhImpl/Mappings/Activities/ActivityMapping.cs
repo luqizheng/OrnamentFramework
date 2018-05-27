@@ -13,13 +13,13 @@ namespace Badminton.Dao.NhImpl.Mappings.Activities
             Map(s => s.StartDateTime);
             Map(s => s.EndDateTime);
 
-            HasMany(s => s.ConsumablesHistories)
-                .Access
-                .ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
+            //HasMany(s => s.ConsumablesHistories)
+            //    .Access
+            //    .ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore);
 
             HasMany(s => s.JoinMembers)
-                .Access
-                .ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+                //.Access
+                //.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
                 .Table("Bad_JoinMember")
                 .Component(s =>
                     {

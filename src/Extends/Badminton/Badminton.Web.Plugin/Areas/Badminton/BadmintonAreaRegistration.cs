@@ -4,8 +4,9 @@ using System.Web.Mvc;
 using Badminton.Dao;
 using Badminton.Dao.NhImpl;
 using Ornament.Web.MessageHandlers;
+using Ornament.Web.Messages;
 using Ornament.Web.PortableAreas;
-using Ornament.Web.ProtableAreas.Messages;
+
 
 namespace Badminton.Web.Plugin.Areas.Badminton
 {
@@ -32,19 +33,23 @@ namespace Badminton.Web.Plugin.Areas.Badminton
                 AreaRoutePrefix + "/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
+
+            bus.Send(new NHRegisterEventMessage(typeof(IBadmintonDaoFactory), typeof(BadmintonDaoFactory)));
+            //初始化数据
+          //  bus.Send(new MessageInit());
         }
 
-        protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
-        {
-            return new[]
-            {
-                new NHRegisterEventMessage(typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)),
-            };
-        }
+        //protected override IEnumerable<NHRegisterEventMessage> RegistDaos()
+        //{
+        //    return new[]
+        //    {
+        //        new NHRegisterEventMessage(typeof (IBadmintonDaoFactory), typeof (BadmintonDaoFactory)),
+        //    };
+      //  }
 
-        protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
-        {
-            throw new NotImplementedException();
-        }
+        //protected override void GetInjectControllers(out IEnumerable<Type> controller, out IEnumerable<Type> apiController)
+        //{
+        //  //  throw new NotImplementedException();
+        //}
     }
 }

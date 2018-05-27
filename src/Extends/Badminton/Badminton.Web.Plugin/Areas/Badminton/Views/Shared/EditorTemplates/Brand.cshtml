@@ -1,6 +1,6 @@
 ﻿@using Badminton.Dao
 @using Ornament
-@using Resources
+@using Ornament.Properties
 @using System.Web.UI.WebControls
 @using Ornament.MemberShip
 @using Qi.Web
@@ -24,8 +24,8 @@
     @Html.Label("", display, new { @class = "control-label" })
     <div class="controls">
         @Html.DropDownList("", listItem, new { style = "display: none" })
-        <a class="btn" style="margin: 0" href="#brandEditor" data-toggle="modal" role="button">@Basic.Create</a>
-        <a class="btn" style="margin: 0" href="#brandEditor" data-toggle="modal" role="button" id="brandEdit">@Basic.Edit</a>
+        <a class="btn" style="margin: 0" href="#brandEditor" data-toggle="modal" role="button">@Resources.Create</a>
+        <a class="btn" style="margin: 0" href="#brandEditor" data-toggle="modal" role="button" id="brandEdit">@Resources.Edit</a>
         @Html.ValidationMessage("")
     </div>
 </div>
@@ -43,8 +43,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">@Basic.Cancel</a>
-        <a href="#" class="btn btn-primary" id="save">@Basic.Save</a>
+        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">@Resources.Cancel</a>
+        <a href="#" class="btn btn-primary" id="save">@Resources.Save</a>
     </div>
 </div>
 

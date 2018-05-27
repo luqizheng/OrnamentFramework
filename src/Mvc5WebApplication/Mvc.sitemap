@@ -36,6 +36,14 @@
       <mvcSiteMapNode action="BasicType" controller="Html" area="Develop" title="Basic Type"/>
     </mvcSiteMapNode>
 
+    <mvcSiteMapNode action="Index" controller="Brand" title="品牌" area="Badminton">
+
+
+    </mvcSiteMapNode>
+    <mvcSiteMapNode action="Index" controller="MeasurementUnit" title="产品单位" area="Badminton"/>
+    <mvcSiteMapNode action="Index" controller="Gymnasium" title="场馆" area="Badminton"/>
+    <mvcSiteMapNode action="Index" controller="Yard" title="场地" area="Badminton"/>
+    <mvcSiteMapNode action="Index" controller="Model" title="型号" area="Badminton"/>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

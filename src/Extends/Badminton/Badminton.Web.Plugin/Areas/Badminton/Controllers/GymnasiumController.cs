@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Badminton.Dao;
 using Badminton.Web.Plugin.Areas.Badminton.Models;
 using Ornament.Web;
+using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Badminton.Web.Plugin.Areas.Badminton.Controllers

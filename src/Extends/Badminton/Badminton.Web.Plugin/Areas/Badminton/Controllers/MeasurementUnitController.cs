@@ -8,7 +8,7 @@ using Qi.Web.Mvc;
 
 namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
-    [Session, Authorize, HandleError]
+    [Session, HandleError]
     public class MeasurementUnitController : Controller
     {
         private readonly IBadmintonDaoFactory _daoFactory;

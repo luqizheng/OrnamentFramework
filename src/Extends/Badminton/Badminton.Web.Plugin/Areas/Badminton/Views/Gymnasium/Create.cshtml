@@ -1,9 +1,10 @@
-﻿@using Resources
+﻿@using Ornament.Properties
+@using Ornament
 @model Badminton.Web.Plugin.Areas.Badminton.Models.GymnasiumViewModel
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 
 
@@ -23,8 +24,8 @@
 
             @Html.EditorFor(model => model.Gymnasium.Remarks)
             <div class="form-actions">
-                <button class="btn btn-primary">@Basic.Create</button>
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                <button class="btn btn-primary">@Resources.Create</button>
+                <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
             </div>
         </form>
     </div>

@@ -1,10 +1,11 @@
-﻿@using Resources
+﻿@using Ornament.Properties
 @using Ornament.Web
+@using Ornament
 @model IEnumerable<Badminton.MeasurementUnit>
 
 @{
     ViewBag.Title = "计量单位";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 @section pageTitle{
     <h5>计量单位列表</h5>
@@ -14,7 +15,7 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+            <a id="add" class="btn btn-primary" href="#@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Resources.Create</a>
         </div>
     </div>
     <div class="body well">
@@ -46,9 +47,9 @@
                             </td>
 
                             <td>
-                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Basic.Edit" class="btn btn-info btn-mini"><i class="icon-edit icon-white"></i></a>
-                                <a href="@Url.Action("Details", new { id = item.Id })" title="@Basic.Details" class="btn btn-danger btn-mini"><i class="icon-share icon-white"></i></a>
-                                <a href="@Url.Action("Delete", new { id = item.Id })" title="@Basic.Delete" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i></a>
+                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Resources.Edit" class="btn btn-info btn-mini"><i class="icon-edit icon-white"></i></a>
+                                <a href="@Url.Action("Details", new { id = item.Id })" title="@Resources.Details" class="btn btn-danger btn-mini"><i class="icon-share icon-white"></i></a>
+                                <a href="@Url.Action("Delete", new { id = item.Id })" title="@Resources.Delete" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i></a>
                             </td>
                         </tr>
                     }
@@ -56,9 +57,9 @@
                 <tfoot>
                     <tr>
                         <td colspan="3">
-                            @*<form>
-                            @Html.Partial("NavPagination", (Pagination)ViewData["Nav"])
-                        </form>*@
+                            @*<form> 
+                                    @Html.Partial("NavPagination", (Pagination)ViewData["Nav"])
+                                </form>*@
                         </td>
                     </tr>
                 </tfoot>
@@ -67,26 +68,27 @@
         else
         {
             <div class="alert">
-                <h6>No Data Found. 
+                <h6>
+                    No Data Found.
                 </h6>
             </div>
         }
     </div>
 </div>
-@* 
- 如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
- seajs.use必须是全小写
- please create a js in /Scripts/Module/Views/{Area}/{Controller}/Index.js
+@*
+    如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
+    seajs.use必须是全小写
+    please create a js in /Scripts/Module/Views/{Area}/{Controller}/Index.js
 *@
 @*
 
-@section Scripts {
-    <script type="text/javascript">
-		seajs.use(["{area}/{controller}/Index.js"],function(init){
-			inti();
-		});
-	</script>
-}
+    @section Scripts {
+        <script type="text/javascript">
+            seajs.use(["{area}/{controller}/Index.js"],function(init){
+                inti();
+            });
+        </script>
+    }
 
 *@
 

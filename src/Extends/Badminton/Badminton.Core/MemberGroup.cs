@@ -49,7 +49,9 @@ namespace Badminton
             return "MemberGroup";
         }
 
-        protected override IList<User> GetInsideUsers(IMemberShipFactory memberShipFactory)
+   
+
+        protected override IList<User> GetInsideUsers(IMemberShipDaoFactory memberShipFactory)
         {
             return memberShipFactory.CreateUserDao().GetUsers(this.UserGroup);
         }

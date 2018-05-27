@@ -1,9 +1,10 @@
-﻿@using Resources
+﻿@using Ornament.Properties
+@using Ornament
 @model Badminton.Consumableses.Model
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 @section pageTitle{
     <h5>Create</h5>
@@ -14,8 +15,8 @@
     <div class="widget">
         <div class="navbar">
             <div class="navbar-inner">
-                <button class="btn btn-primary">@Basic.Create</button>
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                <button class="btn btn-primary">@Resources.Create</button>
+                <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
             </div>
         </div>
 
@@ -27,10 +28,10 @@
             @Html.EditorFor(model => model.Suffix)
             @Html.EditorFor(model => model.Name)
             @Html.EditorFor(model => model.Brand)
-            @Html.EditorFor(model=>model.ConsumablesType)
+            @Html.EditorFor(model => model.ConsumablesType)
             <div class="form-actions">
-                <button class="btn btn-primary">@Basic.Create</button>
-                <a href="@Url.Action("Index")" class="btn">@Basic.Cancel</a>
+                <button class="btn btn-primary">@Resources.Create</button>
+                <a href="@Url.Action("Index")" class="btn">@Resources.Cancel</a>
             </div>
         </div>
     </div>
@@ -38,20 +39,20 @@
 }
 
 
-@* 
- 如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
- seajs.use必须是全小写
- please create a js in /Scripts/Module/Views/{Area}/{Controller}/Create.js
+@*
+    如果想定制新的js，请在创建下列路径，并且删除 @section Scripts的注释
+    seajs.use必须是全小写
+    please create a js in /Scripts/Module/Views/{Area}/{Controller}/Create.js
 *@
 @*
 
-@section Scripts {
-    <script type="text/javascript">
-		seajs.use(["{area}/{controller}/Create.js"],function(init){
-			inti();
-		});
-	</script>
-}
+    @section Scripts {
+        <script type="text/javascript">
+            seajs.use(["{area}/{controller}/Create.js"],function(init){
+                inti();
+            });
+        </script>
+    }
 
 *@
 

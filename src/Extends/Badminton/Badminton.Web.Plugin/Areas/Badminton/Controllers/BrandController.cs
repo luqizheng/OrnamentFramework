@@ -8,7 +8,7 @@ using Qi.Web.Mvc;
 
 namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
-    [Authorize, Session]
+    [ Session]
     public class BrandController : Controller
     {
         private readonly IBadmintonDaoFactory _daoFactory;

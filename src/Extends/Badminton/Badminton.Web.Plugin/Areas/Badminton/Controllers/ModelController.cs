@@ -4,11 +4,12 @@ using System.Web.Mvc;
 using Badminton.Consumableses;
 using Badminton.Dao;
 using Ornament.Web;
+using Ornament.Web.UI.Paginations;
 using Qi.Web.Mvc;
 
 namespace Badminton.Web.Plugin.Areas.Badminton.Controllers
 {
-    [Session, Authorize(Roles = "admin")]
+    [Session,]
     public class ModelController : Controller
     {
         private readonly IBadmintonDaoFactory _daoFactory;

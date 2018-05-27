@@ -1,10 +1,11 @@
-﻿@using Resources
+﻿@using Ornament.Properties
 @using Ornament.Web
+@using Ornament
 @model IEnumerable<Badminton.Consumableses.Model>
 
 @{
     ViewBag.Title = "Model List";
-    Layout = "~/Views/Shared/Backend/_applayout.cshtml";
+    Layout = OrnamentContext.Configuration.Layout();
 }
 @section pageTitle{
     <h5>Model List</h5>
@@ -14,7 +15,7 @@
 <div class="widget">
     <div class="navbar">
         <div class="navbar-inner">
-            <a id="add" class="btn btn-primary" href="@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Basic.Create</a>
+            <a id="add" class="btn btn-primary" href="#@Url.Action("Create")"><i class="icon-plus icon-white"></i>@Resources.Resources.Create</a>
         </div>
     </div>
     <div class="body well">
@@ -50,8 +51,8 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                <a href="@Url.Action("Edit", new { id = item.Id })" title="@Basic.Edit" class="btn btn-info btn-mini"><i class="icon-edit icon-white"></i></a>
-                                <a data-toggle="popover" data-val="@item.Id" class="btn btn-danger btn-small" href="#">@Basic.Delete</a>
+                                <a href="#@Url.Action("Edit", new { id = item.Id })" title="@Resources.Edit" class="btn btn-info btn-mini"><i class="icon-edit icon-white"></i></a>
+                                <a data-toggle="popover" data-val="@item.Id" class="btn btn-danger btn-small" href="#">@Resources.Delete</a>
                             </td>
                         </tr>
                     }
@@ -60,7 +61,7 @@
                     <tr>
                         <td colspan="4">
                             <form>
-                                @Html.Partial("NavPagination", (Pagination)ViewData["Nav"])
+                           
                             </form>
                         </td>
                     </tr>
@@ -70,7 +71,8 @@
         else
         {
             <div class="alert">
-                <h6>No Data Found. 
+                <h6>
+                    No Data Found.
                 </h6>
             </div>
         }
@@ -79,8 +81,8 @@
 <div id="warning" class="hide">
     <p>Do you want to delete this model?</p>
     <p>
-        <button class="btn btn-danger deleteYes">@Basic.Delete</button>
-        <button class="btn deleteNo">@Basic.Cancel</button>
+        <button class="btn btn-danger deleteYes">@Resources.Delete</button>
+        <button class="btn deleteNo">@Resources.Cancel</button>
     </p>
 </div>
 @section scripts

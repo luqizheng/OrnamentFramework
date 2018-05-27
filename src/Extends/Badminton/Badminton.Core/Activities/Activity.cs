@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Iesi.Collections.Generic;
 using Qi.Domain;
 
@@ -9,7 +10,7 @@ namespace Badminton.Activities
     /// </summary>
     public class Activity : DomainObject<Activity, string>
     {
-        private ISet<ConsumablesHistory> _consumablesHistories;
+        private ISet<ConsumablesHistory> _ConsumablesHistories;
         private ISet<MemberJoinStatus> _joinMembers;
 
         /// <summary>
@@ -35,7 +36,8 @@ namespace Badminton.Activities
         /// </summary>
         public virtual ISet<ConsumablesHistory> ConsumablesHistories
         {
-            get { return _consumablesHistories ?? (_consumablesHistories = new HashedSet<ConsumablesHistory>()); }
+            get { return _ConsumablesHistories ?? (_ConsumablesHistories = new HashSet<ConsumablesHistory>()); }
+            set { _ConsumablesHistories = value; }
         }
 
         /// <summary>
@@ -43,7 +45,8 @@ namespace Badminton.Activities
         /// </summary>
         public virtual ISet<MemberJoinStatus> JoinMembers
         {
-            get { return (_joinMembers) ?? (_joinMembers = new HashedSet<MemberJoinStatus>()); }
+            get { return (_joinMembers) ?? (_joinMembers = new HashSet<MemberJoinStatus>()); }
+            set { _joinMembers = value; }
         }
     }
 }
